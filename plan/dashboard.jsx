@@ -730,8 +730,8 @@ function WeddingDashboard() {
   color:var(--clay); font-weight:600; margin-bottom:14px; padding-left:.42em;}
 .wd-names{display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;}
 .wd-name-in{font-family:'Inter',sans-serif; font-size:clamp(34px,7vw,58px); font-weight:500;
-  line-height:1; color:var(--ink); background:transparent; border:none; text-align:center;
-  width:auto; min-width:60px; max-width:42vw; outline:none; padding:2px 4px;
+  line-height:1.25; color:var(--ink); background:transparent; border:none; text-align:center;
+  width:auto; min-width:60px; max-width:42vw; outline:none; padding:6px 4px;
   border-bottom:1.5px solid transparent; transition:border-color .2s;}
 .wd-name-in:focus{border-bottom-color:var(--clay);}
 .wd-amp{font-family:'Inter',sans-serif; font-style:italic; font-size:clamp(26px,5vw,42px);

@@ -6,7 +6,8 @@ const STATE_KEY = "wedding_dashboard_state";
 
 function authorized(request, env) {
   const pass = request.headers.get("x-wedding-pass");
-  return Boolean(env.WEDDING_PASS) && pass === env.WEDDING_PASS;
+  return Boolean(env.WEDDING_PASS) && typeof pass === "string" &&
+    pass.toUpperCase() === env.WEDDING_PASS.toUpperCase();
 }
 
 export async function onRequestGet({ request, env }) {

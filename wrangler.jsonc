@@ -1,0 +1,12 @@
+{
+  "name": "my-website",
+  "main": "worker.js",
+  "compatibility_date": "2025-06-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
+  },
+  "kv_namespaces": [
+    { "binding": "WEDDING_KV", "id": "ec09ed3af965467c8293a93f23569da4" }
+  ]
+}

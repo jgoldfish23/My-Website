@@ -706,12 +706,12 @@ function WeddingDashboard() {
     });
 
   const css = `
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
 .wd-root {
   --paper:#E9F2E6; --paper-2:#FCF6F8; --ink:#33503F; --ink-soft:#6E8676;
   --line:#DBE6DA; --clay:#E07CA3; --clay-deep:#C85F89; --sage:#5FA877; --gold:#86AC82;
-  font-family:'Hanken Grotesk',sans-serif; color:var(--ink);
+  font-family:'Inter',sans-serif; color:var(--ink);
   background:
     radial-gradient(98% 56% at 50% -12%, rgba(245,198,216,.85) 0%, rgba(246,205,222,0) 60%),
     radial-gradient(72% 50% at 14% 12%, rgba(232,150,182,.26) 0%, rgba(232,150,182,0) 58%),
@@ -726,33 +726,33 @@ function WeddingDashboard() {
 .wd-wrap{max-width:840px; margin:0 auto;}
 
 .wd-mast{text-align:center; margin-bottom:38px; position:relative;}
-.wd-kicker{font-family:'Hanken Grotesk'; font-size:11px; letter-spacing:.42em; text-transform:uppercase;
+.wd-kicker{font-family:'Inter'; font-size:11px; letter-spacing:.42em; text-transform:uppercase;
   color:var(--clay); font-weight:600; margin-bottom:14px; padding-left:.42em;}
 .wd-names{display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;}
-.wd-name-in{font-family:'Fraunces',serif; font-size:clamp(34px,7vw,58px); font-weight:500;
+.wd-name-in{font-family:'Inter',sans-serif; font-size:clamp(34px,7vw,58px); font-weight:500;
   line-height:1; color:var(--ink); background:transparent; border:none; text-align:center;
   width:auto; min-width:60px; max-width:42vw; outline:none; padding:2px 4px;
   border-bottom:1.5px solid transparent; transition:border-color .2s;}
 .wd-name-in:focus{border-bottom-color:var(--clay);}
-.wd-amp{font-family:'Fraunces',serif; font-style:italic; font-size:clamp(26px,5vw,42px);
+.wd-amp{font-family:'Inter',sans-serif; font-style:italic; font-size:clamp(26px,5vw,42px);
   color:var(--clay); font-weight:400;}
 .wd-namebox{display:inline-flex; flex-direction:column; align-items:center;}
 .wd-namelabel{font-size:9.5px; letter-spacing:.28em; text-transform:uppercase; color:var(--ink-soft);
   margin-top:6px;}
 
 .wd-daterow{display:flex; align-items:center; justify-content:center; gap:14px; margin-top:24px; flex-wrap:wrap;}
-.wd-date-in{font-family:'Hanken Grotesk'; font-size:14px; color:var(--ink); background:var(--paper-2);
+.wd-date-in{font-family:'Inter'; font-size:14px; color:var(--ink); background:var(--paper-2);
   border:1px solid var(--line); border-radius:999px; padding:9px 16px; outline:none; cursor:pointer;
   font-weight:500; transition:border-color .2s; color-scheme:light;}
 .wd-date-in:focus{border-color:var(--clay);}
-.wd-count{font-family:'Fraunces',serif; font-style:italic; font-size:18px; color:var(--clay-deep);
+.wd-count{font-family:'Inter',sans-serif; font-style:italic; font-size:18px; color:var(--clay-deep);
   display:inline-flex; align-items:center; gap:8px;}
-.wd-venue{margin-top:16px; font-family:'Hanken Grotesk',sans-serif; font-size:11px; font-weight:600;
+.wd-venue{margin-top:16px; font-family:'Inter',sans-serif; font-size:11px; font-weight:600;
   letter-spacing:.22em; text-transform:uppercase; color:var(--ink-soft);}
 .wd-hero{position:relative; border-radius:18px; overflow:hidden; margin:24px 0 36px; line-height:0;
   border:1px solid rgba(255,255,255,.6); box-shadow:0 20px 46px -28px rgba(70,96,76,.6);}
 .wd-hero svg{display:block; width:100%; height:auto;}
-.wd-hero-cap{position:absolute; left:18px; bottom:14px; font-family:'Fraunces',serif; font-style:italic;
+.wd-hero-cap{position:absolute; left:18px; bottom:14px; font-family:'Inter',sans-serif; font-style:italic;
   font-size:15px; color:#fff; text-shadow:0 1px 5px rgba(50,70,55,.55); letter-spacing:.01em; line-height:1;}
 .wd-photo{position:relative; width:470px; max-width:92%; margin:0 auto 40px; background:#fff; padding:13px 13px 0;
   border-radius:5px; box-shadow:0 20px 44px -22px rgba(70,96,76,.65); transform:rotate(-1.8deg);
@@ -762,7 +762,7 @@ function WeddingDashboard() {
   width:96px; height:26px; background:linear-gradient(180deg, rgba(224,124,163,.55), rgba(95,168,119,.5));
   border-radius:2px; box-shadow:0 2px 5px rgba(70,96,76,.18);}
 .wd-photo img{display:block; width:100%; border-radius:2px;}
-.wd-photo-cap{font-family:'Fraunces',serif; font-style:italic; font-size:18px; color:var(--ink); text-align:center;
+.wd-photo-cap{font-family:'Inter',sans-serif; font-style:italic; font-size:18px; color:var(--ink); text-align:center;
   padding:11px 6px 14px; border:none; outline:none; width:100%; background:transparent;}
 .wd-photo-cap::placeholder{color:#C6B2BD;}
 
@@ -770,7 +770,7 @@ function WeddingDashboard() {
   border:1px solid rgba(255,255,255,.65); border-radius:16px;
   padding:22px 26px; margin-bottom:40px; display:flex; align-items:center; gap:26px;
   box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 18px 40px -26px rgba(70,96,76,.55);}
-.wd-pct{font-family:'Fraunces',serif; font-size:46px; font-weight:500; line-height:.9; color:var(--clay);
+.wd-pct{font-family:'Inter',sans-serif; font-size:46px; font-weight:500; line-height:.9; color:var(--clay);
   min-width:96px;}
 .wd-pct small{font-size:18px; color:var(--ink-soft); font-weight:400;}
 .wd-meter-mid{flex:1;}
@@ -781,7 +781,7 @@ function WeddingDashboard() {
   background:linear-gradient(90deg,var(--clay),#9CCBA6 58%,var(--sage)); transition:width .5s cubic-bezier(.4,0,.1,1);}
 
 .wd-filters{display:flex; gap:8px; justify-content:center; margin-bottom:34px;}
-.wd-chip{font-family:'Hanken Grotesk'; font-size:12px; letter-spacing:.04em; font-weight:600;
+.wd-chip{font-family:'Inter'; font-size:12px; letter-spacing:.04em; font-weight:600;
   text-transform:uppercase; padding:7px 16px; border-radius:999px; cursor:pointer;
   border:1px solid var(--line); background:transparent; color:var(--ink-soft); transition:all .18s;}
 .wd-chip:hover{border-color:var(--clay); color:var(--clay);}
@@ -791,10 +791,10 @@ function WeddingDashboard() {
 @keyframes wdUp{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;}}
 .wd-sechead{display:flex; align-items:center; gap:14px; padding-bottom:13px;
   border-bottom:1.5px solid var(--line); margin-bottom:6px;}
-.wd-secnum{font-family:'Fraunces',serif; font-style:italic; font-size:15px; color:var(--gold); font-weight:500;}
+.wd-secnum{font-family:'Inter',sans-serif; font-style:italic; font-size:15px; color:var(--gold); font-weight:500;}
 .wd-secicon{width:34px; height:34px; border-radius:50%; background:var(--paper-2); border:1px solid var(--line);
   display:flex; align-items:center; justify-content:center; color:var(--clay); flex-shrink:0;}
-.wd-sectitle{font-family:'Fraunces',serif; font-size:23px; font-weight:500; flex:1; color:var(--ink);}
+.wd-sectitle{font-family:'Inter',sans-serif; font-size:23px; font-weight:500; flex:1; color:var(--ink);}
 .wd-seccount{font-size:12px; color:var(--ink-soft); font-weight:600; letter-spacing:.03em;}
 
 .wd-task{display:flex; align-items:flex-start; gap:14px; padding:13px 8px 13px 4px;
@@ -809,11 +809,11 @@ function WeddingDashboard() {
 .wd-check svg{opacity:0; transform:scale(.4); transition:all .2s;}
 .wd-check.done svg{opacity:1; transform:scale(1);}
 .wd-tbody{flex:1; min-width:0;}
-.wd-title-in{font-family:'Hanken Grotesk'; font-size:15.5px; font-weight:600; color:var(--ink);
+.wd-title-in{font-family:'Inter'; font-size:15.5px; font-weight:600; color:var(--ink);
   background:transparent; border:none; outline:none; width:100%; padding:0; letter-spacing:.01em;}
 .wd-title-in::placeholder{color:#BBA7B2; font-weight:500; font-style:italic;}
 .wd-title-in.done{text-decoration:line-through; text-decoration-color:#CBBBC6; color:var(--ink-soft); font-weight:500;}
-.wd-note-in{font-family:'Hanken Grotesk'; font-size:12.5px; color:var(--ink-soft); background:transparent;
+.wd-note-in{font-family:'Inter'; font-size:12.5px; color:var(--ink-soft); background:transparent;
   border:none; outline:none; width:100%; padding:2px 0 0; margin-top:2px;}
 .wd-note-in::placeholder{color:#C6B2BD; font-style:italic;}
 .wd-del{opacity:0; background:transparent; border:none; cursor:pointer; color:#C6A9B4; padding:4px;
@@ -821,21 +821,21 @@ function WeddingDashboard() {
 .wd-task:hover .wd-del{opacity:1;}
 .wd-del:hover{color:var(--clay-deep); background:rgba(224,124,163,.14);}
 
-.wd-add{display:inline-flex; align-items:center; gap:7px; margin-top:10px; font-family:'Hanken Grotesk';
+.wd-add{display:inline-flex; align-items:center; gap:7px; margin-top:10px; font-family:'Inter';
   font-size:12.5px; font-weight:600; letter-spacing:.03em; color:var(--clay); background:transparent;
   border:none; cursor:pointer; padding:6px 4px; transition:color .15s;}
 .wd-add:hover{color:var(--clay-deep);}
 
 .wd-foot{text-align:center; margin-top:50px; padding-top:26px; border-top:1.5px solid var(--line);}
-.wd-foot-mark{font-family:'Fraunces',serif; font-style:italic; color:var(--gold); font-size:20px; margin-bottom:12px;
+.wd-foot-mark{font-family:'Inter',sans-serif; font-style:italic; color:var(--gold); font-size:20px; margin-bottom:12px;
   display:inline-block; animation:wdBob 4.8s ease-in-out infinite;}
 @keyframes wdBob{0%,100%{transform:translateY(0) rotate(-6deg);} 50%{transform:translateY(-6px) rotate(8deg);}}
-.wd-reset{font-family:'Hanken Grotesk'; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase;
+.wd-reset{font-family:'Inter'; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase;
   color:var(--ink-soft); background:transparent; border:none; cursor:pointer; transition:color .15s; font-weight:600;}
 .wd-reset:hover{color:var(--clay);}
 
 /* Living progress message */
-.wd-meter-msg{font-family:'Fraunces',serif; font-style:italic; font-size:18px; line-height:1.2;
+.wd-meter-msg{font-family:'Inter',sans-serif; font-style:italic; font-size:18px; line-height:1.2;
   color:var(--clay-deep); margin-bottom:7px; letter-spacing:.01em; transition:color .3s;}
 .wd-meter-msg.full{color:var(--sage);}
 
@@ -874,19 +874,19 @@ function WeddingDashboard() {
   border:1px solid rgba(255,255,255,.6); border-radius:14px; padding:15px 16px;
   box-shadow:0 12px 30px -24px rgba(70,96,76,.6);}
 .wd-cc-tile .k{font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; margin-bottom:8px;}
-.wd-cc-tile .v{font-family:'Fraunces',serif; font-size:27px; font-weight:500; color:var(--ink); line-height:1;}
-.wd-cc-tile .v small{font-size:13px; color:var(--ink-soft); font-weight:400; font-family:'Hanken Grotesk',sans-serif;}
+.wd-cc-tile .v{font-family:'Inter',sans-serif; font-size:27px; font-weight:500; color:var(--ink); line-height:1;}
+.wd-cc-tile .v small{font-size:13px; color:var(--ink-soft); font-weight:400; font-family:'Inter',sans-serif;}
 .wd-cc-tile .v.pink{color:var(--clay-deep);} .wd-cc-tile .v.green{color:var(--sage);}
 .wd-cc-tile .s{font-size:11.5px; color:var(--ink-soft); font-weight:600; margin-top:7px;}
 .wd-cc-tile .s.over{color:var(--clay-deep);} .wd-cc-tile .s.good{color:var(--sage);}
-.wd-next{font-family:'Fraunces',serif; font-style:italic; font-size:15.5px; color:var(--clay-deep);
+.wd-next{font-family:'Inter',sans-serif; font-style:italic; font-size:15.5px; color:var(--clay-deep);
   margin:0 0 30px; text-align:center;}
-.wd-next b{font-style:normal; font-weight:600; font-family:'Hanken Grotesk',sans-serif; font-size:14px;}
+.wd-next b{font-style:normal; font-weight:600; font-family:'Inter',sans-serif; font-size:14px;}
 
 /* Save + backup */
 .wd-save{font-size:11px; letter-spacing:.05em; color:var(--sage); font-weight:700; text-transform:uppercase; margin-bottom:14px;}
 .wd-backup{display:flex; gap:10px; justify-content:center; margin-bottom:18px; flex-wrap:wrap;}
-.wd-bbtn{font-family:'Hanken Grotesk',sans-serif; font-size:11.5px; letter-spacing:.05em; text-transform:uppercase;
+.wd-bbtn{font-family:'Inter',sans-serif; font-size:11.5px; letter-spacing:.05em; text-transform:uppercase;
   font-weight:700; padding:9px 17px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.5);
   color:var(--ink-soft); cursor:pointer; transition:all .15s;}
 .wd-bbtn:hover{border-color:var(--clay); color:var(--clay);}
@@ -968,7 +968,7 @@ function WeddingDashboard() {
 /* Day-of timeline */
 .wd-tl-head{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:14px 0 6px; font-size:13px;
   color:var(--ink-soft); font-weight:600;}
-.wd-tl-head input[type="time"]{font-family:'Fraunces',serif; font-size:21px; font-weight:500; color:var(--ink);
+.wd-tl-head input[type="time"]{font-family:'Inter',sans-serif; font-size:21px; font-weight:500; color:var(--ink);
   background:rgba(255,255,255,.5); border:1px solid var(--line); border-radius:10px; padding:5px 11px;
   outline:none; cursor:pointer; color-scheme:light; transition:border-color .2s;}
 .wd-tl-head input[type="time"]:focus{border-color:var(--clay);}
@@ -981,7 +981,7 @@ function WeddingDashboard() {
 .wd-tl::before{content:''; position:absolute; left:69px; top:6px; bottom:16px; width:2px;
   background:linear-gradient(180deg, var(--clay) 0%, #E8C9A8 55%, #7E93B8 100%); opacity:.45; border-radius:2px;}
 .wd-tlrow{display:flex; align-items:flex-start; gap:0; padding:9px 0; position:relative;}
-.wd-tltime{width:62px; flex-shrink:0; text-align:right; padding-right:0; font-family:'Fraunces',serif;
+.wd-tltime{width:62px; flex-shrink:0; text-align:right; padding-right:0; font-family:'Inter',sans-serif;
   font-size:14px; font-weight:500; color:var(--ink); padding-top:2px; font-variant-numeric:tabular-nums;}
 .wd-tltime.dark{color:#7E93B8;}
 .wd-tldot{width:16px; flex-shrink:0; display:flex; justify-content:center; padding-top:6px; margin:0 8px 0 0;
@@ -990,14 +990,14 @@ function WeddingDashboard() {
   display:block; cursor:pointer; transition:all .2s;}
 .wd-tldot i.done{background:var(--sage); border-color:var(--sage);}
 .wd-tlbody{flex:1; min-width:0; padding-left:4px;}
-.wd-tllabel{font-family:'Hanken Grotesk',sans-serif; font-size:14.5px; font-weight:600; color:var(--ink);
+.wd-tllabel{font-family:'Inter',sans-serif; font-size:14.5px; font-weight:600; color:var(--ink);
   background:transparent; border:none; outline:none; width:100%; padding:1px 0;}
 .wd-tllabel.done{text-decoration:line-through; text-decoration-color:#CBBBC6; color:var(--ink-soft);}
 .wd-tllabel::placeholder{color:#C6B2BD; font-style:italic;}
-.wd-tlnote{font-family:'Hanken Grotesk',sans-serif; font-size:12px; color:var(--ink-soft); background:transparent;
+.wd-tlnote{font-family:'Inter',sans-serif; font-size:12px; color:var(--ink-soft); background:transparent;
   border:none; outline:none; width:100%; padding:2px 0 0;}
 .wd-tlnote::placeholder{color:#CBBBC6; font-style:italic;}
-.wd-tloff{font-family:'Hanken Grotesk',sans-serif; font-size:11px; font-weight:700; color:var(--ink-soft);
+.wd-tloff{font-family:'Inter',sans-serif; font-size:11px; font-weight:700; color:var(--ink-soft);
   background:rgba(255,255,255,.5); border:1px solid var(--line); border-radius:7px; width:56px; text-align:right;
   padding:3px 6px; outline:none; flex-shrink:0; margin-left:8px; transition:border-color .2s;}
 .wd-tloff:focus{border-color:var(--clay);}
@@ -1007,7 +1007,7 @@ function WeddingDashboard() {
 
 /* Due dates */
 .wd-duerow{display:flex; align-items:center; gap:9px; margin-top:6px;}
-.wd-due-in{font-family:'Hanken Grotesk',sans-serif; font-size:11.5px; font-weight:600; color:var(--ink-soft);
+.wd-due-in{font-family:'Inter',sans-serif; font-size:11.5px; font-weight:600; color:var(--ink-soft);
   background:transparent; border:1px solid transparent; border-radius:7px; padding:3px 5px; outline:none;
   cursor:pointer; color-scheme:light; transition:all .15s; opacity:.75;}
 .wd-due-in:hover,.wd-due-in:focus{border-color:var(--line); background:rgba(255,255,255,.5); opacity:1;}
@@ -1018,11 +1018,11 @@ function WeddingDashboard() {
 
 /* RSVP */
 .wd-grsvp{min-width:52px; height:24px; flex-shrink:0; border-radius:7px; border:1px solid var(--line);
-  background:rgba(255,255,255,.5); cursor:pointer; font-family:'Hanken Grotesk',sans-serif; font-size:10.5px;
+  background:rgba(255,255,255,.5); cursor:pointer; font-family:'Inter',sans-serif; font-size:10.5px;
   font-weight:800; letter-spacing:.04em; color:#B6A2AC; transition:all .15s; padding:0 8px; text-transform:uppercase;}
 .wd-grsvp:hover{border-color:var(--clay);}
 .wd-grsvp.set{color:#fff; border-color:transparent;}
-.wd-gmeal{font-family:'Hanken Grotesk',sans-serif; font-size:11.5px; color:var(--ink-soft); background:transparent;
+.wd-gmeal{font-family:'Inter',sans-serif; font-size:11.5px; color:var(--ink-soft); background:transparent;
   border:none; border-bottom:1px solid transparent; outline:none; width:76px; flex-shrink:0; padding:2px 0; transition:border-color .15s;}
 .wd-gmeal:hover,.wd-gmeal:focus{border-bottom-color:var(--line);}
 .wd-gmeal::placeholder{color:#CBBBC6; font-style:italic;}
@@ -1037,26 +1037,26 @@ function WeddingDashboard() {
 .wd-gbar-fill{height:100%; border-radius:99px; background:linear-gradient(90deg,var(--sage),var(--clay)); transition:width .45s cubic-bezier(.4,0,.1,1);}
 .wd-glist{display:grid; grid-template-columns:1fr; gap:0;}
 .wd-grow{display:flex; align-items:center; gap:10px; padding:7px 2px; border-bottom:1px solid #E5DEE2;}
-.wd-gnum{font-family:'Fraunces',serif; font-style:italic; font-size:12px; color:#BBA7B2; width:22px;
+.wd-gnum{font-family:'Inter',sans-serif; font-style:italic; font-size:12px; color:#BBA7B2; width:22px;
   text-align:right; flex-shrink:0; font-variant-numeric:tabular-nums;}
-.wd-gname{font-family:'Hanken Grotesk'; font-size:14px; font-weight:500; color:var(--ink); background:transparent;
+.wd-gname{font-family:'Inter'; font-size:14px; font-weight:500; color:var(--ink); background:transparent;
   border:none; outline:none; flex:1; min-width:0; padding:2px 0;}
 .wd-gname::placeholder{color:#CBBBC6; font-style:italic;}
 .wd-gside{min-width:32px; height:24px; flex-shrink:0; border-radius:7px; border:1px solid var(--line);
-  background:rgba(255,255,255,.5); cursor:pointer; font-family:'Hanken Grotesk'; font-size:11px; font-weight:700;
+  background:rgba(255,255,255,.5); cursor:pointer; font-family:'Inter'; font-size:11px; font-weight:700;
   letter-spacing:.02em; color:#B6A2AC; transition:all .15s; padding:0 7px;}
 .wd-gside:hover{border-color:var(--clay);}
 .wd-gside.set{color:#fff; border-color:transparent;}
 
 /* Budget */
 .wd-budline{display:flex; align-items:center; gap:10px; margin:14px 0 4px; font-size:13px; color:var(--ink-soft); font-weight:600;}
-.wd-budline input{font-family:'Fraunces',serif; font-size:22px; font-weight:500; color:var(--ink); background:transparent;
+.wd-budline input{font-family:'Inter',sans-serif; font-size:22px; font-weight:500; color:var(--ink); background:transparent;
   border:none; border-bottom:1.5px solid var(--line); outline:none; width:130px; padding:2px 2px 3px; transition:border-color .2s;}
 .wd-budline input:focus{border-bottom-color:var(--clay);}
 .wd-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:16px 0 8px;}
 .wd-stat{background:rgba(255,255,255,.45); border:1px solid var(--line); border-radius:12px; padding:11px 13px;}
 .wd-stat span{display:block; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; margin-bottom:4px;}
-.wd-stat b{font-family:'Fraunces',serif; font-size:19px; font-weight:500; color:var(--ink); letter-spacing:.01em;}
+.wd-stat b{font-family:'Inter',sans-serif; font-size:19px; font-weight:500; color:var(--ink); letter-spacing:.01em;}
 .wd-stat.good b{color:var(--sage);} .wd-stat.over b{color:var(--clay-deep);}
 .wd-spend{position:relative; height:12px; border-radius:99px; background:#EAD9E0; overflow:hidden; margin:14px 0 8px; display:flex;}
 .wd-spend-paid{height:100%; background:var(--sage); transition:width .45s cubic-bezier(.4,0,.1,1);}
@@ -1066,10 +1066,10 @@ function WeddingDashboard() {
 .wd-legend i{display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:-1px;}
 .wd-note-line{font-size:11.5px; color:var(--ink-soft); font-style:italic; margin:2px 0 4px;}
 .wd-litem{display:flex; align-items:center; gap:10px; padding:8px 2px; border-bottom:1px solid #E5DEE2;}
-.wd-litem .wd-li-label{font-family:'Hanken Grotesk'; font-size:14px; font-weight:600; color:var(--ink); background:transparent; border:none; outline:none; flex:1; min-width:0; padding:2px 0;}
+.wd-litem .wd-li-label{font-family:'Inter'; font-size:14px; font-weight:600; color:var(--ink); background:transparent; border:none; outline:none; flex:1; min-width:0; padding:2px 0;}
 .wd-litem .wd-li-label::placeholder{color:#C6B2BD; font-style:italic;}
 .wd-mwrap{display:inline-flex; align-items:center; gap:2px; color:var(--ink-soft); font-size:13px; font-weight:600;}
-.wd-mwrap input{font-family:'Hanken Grotesk'; font-size:13.5px; font-weight:600; color:var(--ink); background:rgba(255,255,255,.5);
+.wd-mwrap input{font-family:'Inter'; font-size:13.5px; font-weight:600; color:var(--ink); background:rgba(255,255,255,.5);
   border:1px solid var(--line); border-radius:8px; outline:none; width:72px; padding:5px 8px; text-align:right; transition:border-color .2s;}
 .wd-mwrap input:focus{border-color:var(--clay);}
 .wd-mwrap.est input{width:66px;} .wd-mwrap.paid input{width:66px;}
@@ -1077,19 +1077,19 @@ function WeddingDashboard() {
 /* Vendors */
 .wd-vend{background:rgba(255,255,255,.42); border:1px solid var(--line); border-radius:14px; padding:13px 14px; margin-bottom:12px;}
 .wd-vend-top{display:flex; align-items:center; gap:11px;}
-.wd-vname{font-family:'Fraunces',serif; font-size:16px; font-weight:500; color:var(--ink); background:transparent; border:none; outline:none; flex:1; min-width:0; padding:1px 0;}
-.wd-vname::placeholder{color:#C6B2BD; font-style:italic; font-family:'Hanken Grotesk'; font-size:14px;}
-.wd-vtype{font-family:'Hanken Grotesk'; font-size:11.5px; font-weight:700; letter-spacing:.03em; color:var(--sage);
+.wd-vname{font-family:'Inter',sans-serif; font-size:16px; font-weight:500; color:var(--ink); background:transparent; border:none; outline:none; flex:1; min-width:0; padding:1px 0;}
+.wd-vname::placeholder{color:#C6B2BD; font-style:italic; font-family:'Inter'; font-size:14px;}
+.wd-vtype{font-family:'Inter'; font-size:11.5px; font-weight:700; letter-spacing:.03em; color:var(--sage);
   background:transparent; border:none; outline:none; text-align:right; width:130px; text-transform:uppercase;}
 .wd-vtype::placeholder{color:#B6C6B8; font-style:italic; text-transform:none; letter-spacing:0;}
 .wd-vrow{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:9px; padding-left:34px;}
 .wd-vc{display:inline-flex; align-items:center; gap:6px; color:var(--ink-soft);}
-.wd-vc input{font-family:'Hanken Grotesk'; font-size:13px; color:var(--ink); background:transparent; border:none;
+.wd-vc input{font-family:'Inter'; font-size:13px; color:var(--ink); background:transparent; border:none;
   border-bottom:1px solid var(--line); outline:none; padding:2px 0; min-width:120px; transition:border-color .2s;}
 .wd-vc input:focus{border-bottom-color:var(--clay);}
-.wd-vbal{font-family:'Hanken Grotesk'; font-size:12.5px; font-weight:700; color:var(--clay-deep); letter-spacing:.02em;}
+.wd-vbal{font-family:'Inter'; font-size:12.5px; font-weight:700; color:var(--clay-deep); letter-spacing:.02em;}
 .wd-vbal.clear{color:var(--sage);}
-.wd-vnote{font-family:'Hanken Grotesk'; font-size:12.5px; color:var(--ink-soft); background:transparent; border:none; outline:none;
+.wd-vnote{font-family:'Inter'; font-size:12.5px; color:var(--ink-soft); background:transparent; border:none; outline:none;
   width:100%; margin-top:9px; padding-left:34px;}
 .wd-vnote::placeholder{color:#C6B2BD; font-style:italic;}
 

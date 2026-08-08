@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Wedding Planning</title>
+<style>
+  :root {
+    --bg: #0C2523; --fg: #E9EEE9; --fg-2: #8AA697;
+    --accent: #D2A94E; --line: rgba(138,166,151,.24);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); font-family: Inter, system-ui, sans-serif; }
+  #gate {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 18px; color: var(--fg); padding: 24px;
+  }
+  #gate h1 { font-weight: 300; letter-spacing: .04em; margin: 0; font-size: 1.4rem; }
+  #gate p { color: var(--fg-2); margin: 0; font-size: .9rem; }
+  #gate form { display: flex; gap: 10px; }
+  #gate input {
+    background: rgba(255,255,255,.05); border: 1px solid var(--line); color: var(--fg);
+    padding: 10px 14px; border-radius: 8px; font-size: 1rem; letter-spacing: .2em;
+    outline: none; width: 200px; text-align: center;
+  }
+  #gate input:focus { border-color: var(--accent); }
+  #gate button {
+    background: var(--accent); color: #0C2523; border: 0; border-radius: 8px;
+    padding: 10px 18px; font-size: .95rem; cursor: pointer; font-weight: 500;
+  }
+  #gate .err { color: #E07CA3; font-size: .85rem; min-height: 1.2em; }
+  #loading { color: var(--fg-2); }
+</style>
+</head>
+<body>
+<div id="gate">
+  <h1>J &amp; D</h1>
+  <p>This page is just for us.</p>
+  <form id="passForm">
+    <input id="passInput" type="password" autocomplete="current-password" placeholder="passcode" autofocus>
+    <button type="submit">Enter</button>
+  </form>
+  <div class="err" id="gateErr"></div>
+</div>
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script>window.react = window.React;</script>
+<script crossorigin src="https://unpkg.com/lucide-react@0.263.1/dist/umd/lucide-react.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+
+<script>
+(function () {
+  const PASS_KEY = "wedding_pass";
+  const gate = document.getElementById("gate");
+  const err = document.getElementById("gateErr");
+
+  async function verify(pass) {
+    const res = await fetch("/api/wedding", { headers: { "x-wedding-pass": pass } });
+    if (res.status === 401) return false;
+    if (!res.ok) throw new Error("Server not ready (" + res.status + ")");
+    return true;
+  }
+
+  function installStorage(pass) {
+    window.storage = {
+      async get(key) {
+        const res = await fetch("/api/wedding", { headers: { "x-wedding-pass": pass } });
+        if (!res.ok) throw new Error("load failed");
+        return await res.json(); // { value: string | null }
+      },
+      async set(key, value) {
+        const res = await fetch("/api/wedding", {
+          method: "PUT",
+          headers: { "x-wedding-pass": pass },
+          body: value,
+        });
+        if (!res.ok) throw new Error("save failed");
+        return true;
+      },
+    };
+  }
+
+  async function boot(pass) {
+    installStorage(pass);
+    localStorage.setItem(PASS_KEY, pass);
+    gate.innerHTML = '<p id="loading">Loading the plan…</p>';
+    const src = await (await fetch("dashboard.jsx")).text();
+    const { code } = Babel.transform(src, { presets: ["react"] });
+    gate.remove();
+    new Function(code)();
+  }
+
+  document.getElementById("passForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const pass = document.getElementById("passInput").value.trim();
+    if (!pass) return;
+    err.textContent = "";
+    try {
+      if (await verify(pass)) await boot(pass);
+      else err.textContent = "That's not it — try again.";
+    } catch (ex) {
+      err.textContent = ex.message;
+    }
+  });
+
+  const saved = localStorage.getItem(PASS_KEY);
+  if (saved) {
+    verify(saved).then((ok) => { if (ok) boot(saved); }).catch(() => {});
+  }
+})();
+</script>
+</body>
+</html>

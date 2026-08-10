@@ -57,7 +57,21 @@
   :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px;}
 
   .wrap{max-width:1120px; margin:0 auto; padding:0 var(--gutter);}
-  section{padding:var(--stack) 0;}
+  section{padding:var(--stack) 0; position:relative;}
+
+  /* ============ depth layers ============ */
+  .aura{position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden;}
+  .aura::before{content:""; position:absolute; width:64vw; height:64vw; left:-20vw; top:-24vw;
+    border-radius:50%; background:radial-gradient(circle, var(--accent-soft), transparent 62%);
+    filter:blur(24px); opacity:.8;}
+  .aura::after{content:""; position:absolute; width:56vw; height:56vw; right:-18vw; top:44vh;
+    border-radius:50%; background:radial-gradient(circle, rgba(127,185,142,.09), transparent 62%);
+    filter:blur(24px);}
+  html[data-theme="light"] .aura::before{opacity:.55;}
+  html[data-theme="light"] .aura::after{background:radial-gradient(circle, rgba(14,36,34,.05), transparent 62%);}
+  .grain{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.42; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='140'%20height='140'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='linear'%20slope='0.06'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");}
+  html[data-theme="light"] .grain{opacity:.2;}
 
   /* ============ shell ============ */
   .shell{
@@ -101,7 +115,7 @@
     letter-spacing:.19em; text-transform:uppercase; color:var(--fg-2);
   }
   .sec-head{
-    display:flex; align-items:baseline; gap:20px;
+    display:flex; align-items:baseline; gap:20px; position:relative;
     padding-bottom:16px; margin-bottom:48px; border-bottom:1px solid var(--line);
   }
   .sec-head h2{
@@ -109,6 +123,12 @@
     margin:0; letter-spacing:-.03em;
   }
   .sec-head .eyebrow{margin-left:auto; white-space:nowrap;}
+  .sec-num{
+    position:absolute; right:-6px; bottom:-14px; z-index:-1; line-height:1;
+    font-family:var(--display); font-weight:200; font-size:clamp(88px,13vw,164px);
+    letter-spacing:-.05em; color:transparent; -webkit-text-stroke:1px var(--line-2);
+    pointer-events:none; user-select:none;
+  }
 
   /* ============ hero ============ */
   .hero{
@@ -136,12 +156,23 @@
   }
   .hero-grid{display:grid; grid-template-columns:1.05fr .9fr; gap:clamp(28px,5vw,72px);
     align-items:center; flex:1;}
+  .hero-photo-wrap{position:relative; justify-self:end; width:100%;}
+  .hero-photo-wrap::before{
+    content:""; position:absolute; inset:20px -16px -16px 20px; z-index:-1;
+    border:1px solid var(--accent-soft); border-radius:24px;
+    background:linear-gradient(160deg, var(--accent-soft), transparent 55%);
+    opacity:.7; pointer-events:none;
+  }
   .hero-photo{
     border-radius:20px; overflow:hidden; border:1px solid var(--line);
-    background:var(--bg-3); box-shadow:0 34px 90px -28px rgba(0,0,0,.55);
-    aspect-ratio:4/4.2; max-height:72vh; justify-self:end; width:100%;
+    background:var(--bg-3); box-shadow:0 40px 100px -30px rgba(0,0,0,.6);
+    aspect-ratio:4/4.2; max-height:72vh; width:100%; position:relative;
   }
-  .hero-photo img{width:100%; height:100%; object-fit:cover;}
+  .hero-photo img{width:100%; height:106%; object-fit:cover; will-change:transform;}
+  .hero-photo::after{
+    content:""; position:absolute; inset:0; border-radius:20px; pointer-events:none;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.07), inset 0 -70px 90px -50px rgba(7,26,25,.55);
+  }
 
   .count{margin-top:auto; padding-top:48px; display:flex; align-items:flex-end;
     gap:clamp(16px,3.4vw,36px); flex-wrap:wrap;}
@@ -149,6 +180,7 @@
     font-family:var(--display); font-weight:300; font-size:clamp(54px,9.5vw,104px);
     line-height:.82; letter-spacing:-.04em; color:var(--accent);
     font-variant-numeric:tabular-nums;
+    text-shadow:0 0 44px var(--accent-soft), 0 0 90px var(--accent-soft);
   }
   .count-label{font-family:var(--util); font-size:10.5px; letter-spacing:.18em;
     text-transform:uppercase; color:var(--fg-2); padding-bottom:9px; line-height:1.9;}
@@ -164,11 +196,18 @@
   /* ============ the two ============ */
   .pair{display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3.4vw,40px);}
   .card{
-    border:1px solid var(--line); border-radius:16px; background:var(--bg-3);
+    border:1px solid var(--line); border-radius:16px;
+    background:linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.012) 60%);
+    box-shadow:0 20px 50px -30px rgba(0,0,0,.5);
     padding:clamp(24px,3.2vw,38px);
-    transition:border-color .3s var(--ease), transform .3s var(--ease);
+    transition:border-color .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease);
   }
-  .card:hover{border-color:var(--accent); transform:translateY(-3px);}
+  html[data-theme="light"] .card{
+    background:linear-gradient(160deg, rgba(255,255,255,.75), rgba(255,255,255,.35) 60%);
+    box-shadow:0 20px 50px -34px rgba(14,36,34,.4);
+  }
+  .card:hover{border-color:var(--accent); transform:translateY(-4px);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.6);}
   .card h3{
     font-family:var(--display); font-weight:400; font-size:clamp(21px,2.8vw,27px);
     margin:0 0 6px; letter-spacing:-.03em;
@@ -189,13 +228,18 @@
     position:absolute; left:clamp(6px,2.4vw,30px); top:8px; bottom:8px; width:1px;
     background:linear-gradient(180deg, transparent, var(--line) 10%, var(--accent));
   }
-  .entry{position:relative; padding-bottom:52px;}
+  .entry{position:relative; padding-bottom:52px;
+    transition:transform .35s var(--ease);}
+  .entry:hover{transform:translateX(5px);}
   .entry:last-child{padding-bottom:0;}
   .entry::before{
     content:""; position:absolute; left:calc(-1 * clamp(24px,4.6vw,58px) - 3px);
     top:11px; width:7px; height:7px; border-radius:50%;
     background:var(--bg); border:1px solid var(--fg-2);
+    transition:background .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
   }
+  .entry:hover::before{background:var(--accent); border-color:var(--accent);
+    box-shadow:0 0 0 5px var(--accent-soft);}
   .entry.mark::before{background:var(--accent); border-color:var(--accent);
     box-shadow:0 0 0 5px var(--accent-soft);}
   .entry time{font-family:var(--util); font-size:10.5px; letter-spacing:.16em;
@@ -207,7 +251,11 @@
   /* ============ plate ============ */
   .plate{margin:0; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.82fr);
     gap:clamp(26px,5vw,68px); align-items:center;}
-  .plate-img{border:1px solid var(--line); border-radius:18px; padding:10px; background:var(--bg-3);}
+  .plate-img{border:1px solid var(--line); border-radius:18px; padding:10px;
+    background:linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.012));
+    box-shadow:0 36px 90px -34px rgba(0,0,0,.6); position:relative;}
+  .plate-img::before{content:""; position:absolute; inset:16px -14px -14px 16px; z-index:-1;
+    border:1px solid var(--accent-soft); border-radius:20px; pointer-events:none;}
   .plate-img img{width:100%; height:auto; border-radius:10px;}
   .plate-h{
     font-family:var(--display); font-weight:300; font-size:clamp(26px,4.2vw,42px);
@@ -242,7 +290,13 @@
     color:var(--fg-2); font-family:var(--util); font-size:10px; letter-spacing:.16em;
     text-transform:uppercase; background:var(--bg-3);
   }
-  .frame.filled{border-style:solid; padding:0; overflow:hidden;}
+  .frame{transition:border-color .3s var(--ease), color .3s var(--ease);}
+  .frame:hover{border-color:var(--accent); color:var(--accent);}
+  .frame.filled{border-style:solid; padding:0; overflow:hidden; position:relative;
+    box-shadow:0 22px 55px -28px rgba(0,0,0,.55);}
+  .frame.filled::after{content:""; position:absolute; inset:0; pointer-events:none;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.06), inset 0 -46px 60px -36px rgba(7,26,25,.4);
+    border-radius:inherit;}
   .frame.filled img{width:100%; height:100%; object-fit:cover;
     transition:transform .7s var(--ease);}
   .frame.filled:hover img{transform:scale(1.035);}
@@ -282,6 +336,9 @@
 </style>
 </head>
 <body>
+
+<div class="aura" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 
 <div class="shell">
   <div class="shell-in">
@@ -327,8 +384,10 @@
         </div>
       </div>
 
-      <div class="hero-photo">
-        <img src="/img/hero-collage.jpg" alt="Jameson and Dawsyn — engagement photos" fetchpriority="high">
+      <div class="hero-photo-wrap">
+        <div class="hero-photo">
+          <img src="/img/hero-collage.jpg" alt="Jameson and Dawsyn — engagement photos" fetchpriority="high" id="heroImg">
+        </div>
       </div>
     </div>
   </div>
@@ -339,6 +398,7 @@
   <div class="sec-head rise">
     <h2>The two of us</h2>
     <span class="eyebrow">01 — Who</span>
+    <span class="sec-num" aria-hidden="true">01</span>
   </div>
 
   <div class="pair">
@@ -375,6 +435,7 @@
   <div class="sec-head rise">
     <h2>The record</h2>
     <span class="eyebrow">02 — When</span>
+    <span class="sec-num" aria-hidden="true">02</span>
   </div>
 
   <div class="record">
@@ -430,6 +491,7 @@
     <div class="sec-head rise">
       <h2>The day</h2>
       <span class="eyebrow">03 — Where</span>
+      <span class="sec-num" aria-hidden="true">03</span>
     </div>
 
     <div class="day-grid">
@@ -454,6 +516,7 @@
   <div class="sec-head rise">
     <h2>Field notes</h2>
     <span class="eyebrow">04 — Proof</span>
+    <span class="sec-num" aria-hidden="true">04</span>
   </div>
 
   <div class="frames rise">
@@ -466,6 +529,10 @@
 </section>
 
 <footer>
+  <div class="wrap" style="text-align:center; margin-bottom:34px;">
+    <p style="font-family:var(--display); font-weight:200; font-size:clamp(20px,3.4vw,30px); letter-spacing:-.02em; margin:0; color:var(--fg-3);">See you on the bluff.</p>
+    <p class="eyebrow" style="margin:12px 0 0;">32°50&#8242;N 117°16&#8242;W · Cuvier Park, La Jolla</p>
+  </div>
   <div class="wrap foot">
     <div class="mark">J &amp; D</div>
     <div class="eyebrow" id="foot-count">—</div>
@@ -534,6 +601,16 @@
   var items = document.querySelectorAll('.rise');
   var reduce = window.matchMedia &&
                window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- hero parallax ---- */
+  var heroImg = document.getElementById('heroImg');
+  if (heroImg && !reduce){
+    window.addEventListener('scroll', function(){
+      var y = window.scrollY;
+      if (y < window.innerHeight * 1.5)
+        heroImg.style.transform = 'translateY(' + (y * -0.05) + 'px)';
+    }, { passive:true });
+  }
   if (reduce || typeof IntersectionObserver === 'undefined'){
     Array.prototype.forEach.call(items, function(el){ el.classList.add('in'); });
     return;

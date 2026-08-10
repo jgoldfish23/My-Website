@@ -177,9 +177,13 @@
   .hero-photo-wrap.invite::before{display:none;}
   .hero-photo.invite{border:none; background:transparent; box-shadow:none; aspect-ratio:auto; max-height:none; overflow:visible;}
   .hero-photo.invite::after{display:none;}
-  .hero-photo.invite img{height:auto; opacity:.92;
+  .hero-photo.invite img{height:auto; opacity:.92; transition:opacity .3s var(--ease);
     -webkit-mask-image:radial-gradient(112% 112% at 50% 46%, #000 42%, transparent 88%);
     mask-image:radial-gradient(112% 112% at 50% 46%, #000 42%, transparent 88%);}
+  a.hero-photo.invite{display:block; cursor:pointer;}
+  a.hero-photo.invite:hover img{opacity:1;}
+  .invite-cta{text-align:center; margin:2px 0 0; font-family:var(--util);
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;}
 
   .count{margin-top:auto; padding-top:48px; display:flex; align-items:flex-end;
     gap:clamp(16px,3.4vw,36px); flex-wrap:wrap;}
@@ -393,9 +397,10 @@
       </div>
 
       <div class="hero-photo-wrap invite">
-        <div class="hero-photo invite">
+        <a class="hero-photo invite" href="/guests/" aria-label="Guest details and RSVP">
           <img src="/img/notes-invite.jpg" alt="The wedding invitation — Dawsyn and Jameson, December 30, 2026" fetchpriority="high" id="heroImg">
-        </div>
+        </a>
+        <p class="invite-cta"><a class="lnk" href="/guests/">Details &amp; RSVP →</a></p>
       </div>
     </div>
   </div>

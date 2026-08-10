@@ -257,27 +257,11 @@
     margin:0 0 8px; letter-spacing:-.025em;}
   .entry p{margin:0; color:var(--fg-2); max-width:58ch; font-size:15px;}
 
-  /* ============ plate ============ */
-  .plate{margin:0; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.82fr);
-    gap:clamp(26px,5vw,68px); align-items:center;}
-  #plate{padding-top:calc(var(--stack) * 1.9);}
-  .plate-img{position:relative;}
-  .plate-img img{width:100%; height:auto; display:block;
-    -webkit-mask-image:radial-gradient(115% 115% at 50% 42%, #000 52%, transparent 97%);
-    mask-image:radial-gradient(115% 115% at 50% 42%, #000 52%, transparent 97%);
-    opacity:.94;}
-  .plate-img::after{content:""; position:absolute; inset:0; pointer-events:none;
-    background:
-      linear-gradient(180deg, var(--bg) 0%, transparent 22%),
-      linear-gradient(0deg, var(--bg) 0%, transparent 24%);
-    opacity:.5;}
-  .plate-h{
-    font-family:var(--display); font-weight:300; font-size:clamp(26px,4.2vw,42px);
-    line-height:1.1; letter-spacing:-.035em; margin:18px 0 20px;
-  }
-  .plate-h em{font-style:normal; color:var(--accent);}
-  .plate-sub{font-family:var(--util); font-size:11.5px; letter-spacing:.12em;
-    color:var(--fg-2); line-height:2.1; margin:0;}
+  /* ============ proposal photo in the timeline ============ */
+  .entry-plate{max-width:min(460px, 100%); margin-top:16px; position:relative;}
+  .entry-plate img{width:100%; height:auto; display:block; opacity:.9;
+    -webkit-mask-image:radial-gradient(120% 120% at 50% 45%, #000 32%, transparent 88%);
+    mask-image:radial-gradient(120% 120% at 50% 45%, #000 32%, transparent 88%);}
 
   /* ============ the day ============ */
   .day{background:var(--bg-2); transition:background .45s var(--ease);}
@@ -329,7 +313,7 @@
   .rise.in{opacity:1; transform:none;}
 
   @media (max-width:820px){
-    .pair,.day-grid,.plate,.hero-grid{grid-template-columns:1fr;}
+    .pair,.day-grid,.hero-grid{grid-template-columns:1fr;}
     .hero-photo{max-height:none; aspect-ratio:4/4.4; margin-top:36px;}
     .frame.wide{grid-column:span 1; aspect-ratio:4/5;}
     .nav{display:none;}
@@ -503,7 +487,10 @@
     <div class="entry rise">
       <time>June 10, 2026</time>
       <h4>Fernwood Lookout</h4>
-      <p>Above Layton, with the valley and the lake laid out behind them. He asked. She said yes.</p>
+      <p>Above Layton, with the valley and the lake laid out behind them. He asked. She said <em style="font-style:normal; color:var(--accent);">yes</em>.</p>
+      <div class="entry-plate">
+        <img src="/img/proposal.jpg" alt="Jameson proposing to Dawsyn at Fernwood Lookout above the Layton valley" loading="lazy">
+      </div>
     </div>
 
     <div class="entry rise">
@@ -518,18 +505,6 @@
       <p>Two o'clock in the afternoon, on a bluff above the Pacific. Dinner to follow at six.</p>
     </div>
   </div>
-</section>
-
-<!-- ============ PLATE ============ -->
-<section class="wrap" id="plate">
-  <figure class="plate rise">
-    <div class="plate-img"><img src="/img/proposal.jpg" alt="Jameson proposing to Dawsyn at Fernwood Lookout above the Layton valley" loading="lazy"></div>
-    <figcaption>
-      <span class="eyebrow">Plate 01 — the ask</span>
-      <p class="plate-h">She said <em>yes</em> on a bluff above the valley.</p>
-      <p class="plate-sub">Fernwood Lookout · Layton, Utah<br>June 10, 2026</p>
-    </figcaption>
-  </figure>
 </section>
 
 <!-- ============ THE DAY ============ -->

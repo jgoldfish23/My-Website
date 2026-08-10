@@ -244,6 +244,15 @@
     box-shadow:0 0 0 5px var(--accent-soft);}
   .entry time{font-family:var(--util); font-size:10.5px; letter-spacing:.16em;
     text-transform:uppercase; color:var(--accent); display:block; margin-bottom:7px;}
+  .entry-photos{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .entry-photos a{
+    display:block; width:clamp(64px,9vw,96px); aspect-ratio:1; border-radius:10px;
+    overflow:hidden; border:1px solid var(--line);
+    box-shadow:0 10px 26px -14px rgba(0,0,0,.5);
+    transition:transform .3s var(--ease), border-color .3s var(--ease);
+  }
+  .entry-photos a:hover{transform:translateY(-3px) scale(1.04); border-color:var(--accent);}
+  .entry-photos img{width:100%; height:100%; object-fit:cover;}
   .entry h4{font-family:var(--display); font-weight:400; font-size:clamp(18px,2.3vw,23px);
     margin:0 0 8px; letter-spacing:-.025em;}
   .entry p{margin:0; color:var(--fg-2); max-width:58ch; font-size:15px;}
@@ -411,7 +420,7 @@
         <li><b>Works on</b><span>Commercial estimating, bid management, job costing</span></li>
         <li><b>Studied</b><span>MBA, Western Governors University — 2026</span></li>
         <li><b>Loyal to</b><span>Dawsyn · BYU · Utah Jazz · Eagles · Dodgers</span></li>
-        <li><b>Off hours</b><span>Building web apps, gaming, the markets</span></li>
+        <li><b>Off hours</b><span>Building web apps, gaming, swimming, the markets</span></li>
       </ul>
     </article>
 
@@ -448,9 +457,42 @@
     </div>
 
     <div class="entry rise">
-      <time>June 2026</time>
-      <h4>The Central Coast</h4>
-      <p>A trip out to see Dawsyn in San Luis Obispo.</p>
+      <time>April 17–22, 2026</time>
+      <h4>First trip to Paso</h4>
+      <p>The first flight out to Paso Robles to meet Dawsyn — where "statistically unpromising" stopped being the operative phrase.</p>
+      <div class="entry-photos">
+        <a href="/img/trip1-1.jpg" target="_blank" rel="noopener"><img src="/img/trip1-1-thumb.jpg" alt="First trip to Paso Robles — photo 1" loading="lazy"></a>
+        <a href="/img/trip1-2.jpg" target="_blank" rel="noopener"><img src="/img/trip1-2-thumb.jpg" alt="First trip to Paso Robles — photo 2" loading="lazy"></a>
+        <a href="/img/trip1-3.jpg" target="_blank" rel="noopener"><img src="/img/trip1-3-thumb.jpg" alt="First trip to Paso Robles — photo 3" loading="lazy"></a>
+        <a href="/img/trip1-4.jpg" target="_blank" rel="noopener"><img src="/img/trip1-4-thumb.jpg" alt="First trip to Paso Robles — photo 4" loading="lazy"></a>
+        <a href="/img/trip1-5.jpg" target="_blank" rel="noopener"><img src="/img/trip1-5-thumb.jpg" alt="First trip to Paso Robles — photo 5" loading="lazy"></a>
+      </div>
+    </div>
+
+    <div class="entry rise">
+      <time>May 15–18, 2026</time>
+      <h4>Second Paso trip</h4>
+      <p>Back to the Central Coast — this time it already felt like routine, in the best way.</p>
+      <div class="entry-photos">
+        <a href="/img/trip2-1.jpg" target="_blank" rel="noopener"><img src="/img/trip2-1-thumb.jpg" alt="Second Paso trip — photo 1" loading="lazy"></a>
+        <a href="/img/trip2-2.jpg" target="_blank" rel="noopener"><img src="/img/trip2-2-thumb.jpg" alt="Second Paso trip — photo 2" loading="lazy"></a>
+        <a href="/img/trip2-3.jpg" target="_blank" rel="noopener"><img src="/img/trip2-3-thumb.jpg" alt="Second Paso trip — photo 3" loading="lazy"></a>
+      </div>
+    </div>
+
+    <div class="entry rise">
+      <time>June 7–11, 2026</time>
+      <h4>Third trip — Utah</h4>
+      <p>Dawsyn's turn to fly. Five days in Utah that ended with a question on a bluff.</p>
+      <div class="entry-photos">
+        <a href="/img/trip3-1.jpg" target="_blank" rel="noopener"><img src="/img/trip3-1-thumb.jpg" alt="Utah trip — photo 1" loading="lazy"></a>
+        <a href="/img/trip3-2.jpg" target="_blank" rel="noopener"><img src="/img/trip3-2-thumb.jpg" alt="Utah trip — photo 2" loading="lazy"></a>
+        <a href="/img/trip3-3.jpg" target="_blank" rel="noopener"><img src="/img/trip3-3-thumb.jpg" alt="Utah trip — photo 3" loading="lazy"></a>
+        <a href="/img/trip3-4.jpg" target="_blank" rel="noopener"><img src="/img/trip3-4-thumb.jpg" alt="Utah trip — photo 4" loading="lazy"></a>
+        <a href="/img/trip3-5.jpg" target="_blank" rel="noopener"><img src="/img/trip3-5-thumb.jpg" alt="Engagement photo — Utah" loading="lazy"></a>
+        <a href="/img/trip3-6.jpg" target="_blank" rel="noopener"><img src="/img/trip3-6-thumb.jpg" alt="Engagement photo — Utah" loading="lazy"></a>
+        <a href="/img/trip3-7.jpg" target="_blank" rel="noopener"><img src="/img/trip3-7-thumb.jpg" alt="Engagement photo — Utah" loading="lazy"></a>
+      </div>
     </div>
 
     <div class="entry rise">
@@ -523,7 +565,7 @@
     <div class="frame filled wide"><img src="/img/notes-01.jpg" alt="Jameson and Dawsyn laughing in tall grass at golden hour" loading="lazy"></div>
     <div class="frame filled"><img src="/img/notes-sf.jpg" alt="Dancing above the Golden Gate Bridge, San Francisco" loading="lazy"></div>
     <div class="frame filled"><img src="/img/notes-invite.jpg" alt="The wedding invitation" loading="lazy"></div>
-    <div class="frame">Photo 04</div>
+    <div class="frame filled"><img src="/img/notes-fun.jpg" alt="Jameson and Dawsyn making faces at the camera" loading="lazy"></div>
   </div>
   <p class="frames-note">Send more and they'll drop straight in. Empty frames read as room to grow until then.</p>
 </section>

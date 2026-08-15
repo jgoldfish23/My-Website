@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gifts · Jameson &amp; Dawsyn</title>
+<meta name="description" content="Your presence is the gift — but if you'd like to give something, here's how.">
+<meta name="theme-color" content="#0C2523">
+<meta property="og:title" content="Gifts · Jameson &amp; Dawsyn">
+<meta property="og:description" content="December 30, 2026 · La Jolla, California">
+<meta property="og:image" content="https://djgolding.com/img/hero-collage.jpg">
+<meta property="og:url" content="https://djgolding.com/gifts/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --display:"Inter", system-ui, sans-serif;
+    --body:"Inter", system-ui, sans-serif;
+    --util:"Inter", system-ui, sans-serif;
+    --gutter:clamp(20px, 5vw, 76px);
+    --bar:60px;
+    --ease:cubic-bezier(.22,.68,.32,1);
+  }
+  html[data-theme="dark"]{
+    --bg:#0C2523; --bg-2:#071A19; --bg-3:rgba(255,255,255,.03);
+    --fg:#E9EEE9; --fg-2:#8AA697; --fg-3:#C2D0C6;
+    --accent:#D2A94E; --accent-soft:rgba(210,169,78,.16);
+    --line:rgba(138,166,151,.24); --line-2:rgba(138,166,151,.13);
+    --shell:rgba(12,37,35,.72);
+  }
+  html[data-theme="light"]{
+    --bg:#F3F5F2; --bg-2:#E8ECE7; --bg-3:rgba(14,36,34,.025);
+    --fg:#0E2422; --fg-2:#5C7369; --fg-3:#3A4F49;
+    --accent:#8A6717; --accent-soft:rgba(138,103,23,.12);
+    --line:rgba(14,36,34,.17); --line-2:rgba(14,36,34,.09);
+    --shell:rgba(243,245,242,.78);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--fg); font-family:var(--body);
+    font-weight:300; font-size:16.5px; line-height:1.68; -webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--accent); color:var(--bg);}
+  a{color:inherit;}
+  .wrap{max-width:820px; margin:0 auto; padding:0 var(--gutter);}
+  section{padding:clamp(44px,7vh,72px) 0;}
+
+  .aura{position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden;}
+  .aura::before{content:""; position:absolute; width:64vw; height:64vw; left:-20vw; top:-24vw;
+    border-radius:50%; background:radial-gradient(circle, var(--accent-soft), transparent 62%);
+    filter:blur(24px); opacity:.8;}
+  html[data-theme="light"] .aura::before{opacity:.5;}
+
+  .shell{position:fixed; inset:0 0 auto 0; height:var(--bar); z-index:60;
+    background:var(--shell); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-2);}
+  .shell-in{max-width:820px; margin:0 auto; padding:0 var(--gutter); height:100%;
+    display:flex; align-items:center; gap:12px;}
+  .monogram{font-weight:500; font-size:15px; letter-spacing:.14em; text-decoration:none;}
+  .back{margin-left:auto; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--fg-2); text-decoration:none;}
+  .back:hover{color:var(--accent);}
+
+  .eyebrow{font-size:10.5px; font-weight:500; letter-spacing:.19em; text-transform:uppercase; color:var(--fg-2);}
+  h1{font-weight:200; font-size:clamp(32px,6.4vw,58px); letter-spacing:-.04em; line-height:1.04; margin:14px 0 20px;}
+  h1 em{font-style:normal; color:var(--accent);}
+  .lede{color:var(--fg-2); max-width:52ch; margin:0;}
+
+  h2{font-weight:400; font-size:clamp(20px,3vw,26px); letter-spacing:-.03em; margin:0;}
+  .sec-head{display:flex; align-items:baseline; gap:20px; padding-bottom:14px;
+    margin-bottom:28px; border-bottom:1px solid var(--line);}
+  .sec-head .eyebrow{margin-left:auto; white-space:nowrap;}
+
+  .card{border:1px solid var(--line); border-radius:18px;
+    background:linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.012) 60%);
+    box-shadow:0 24px 60px -34px rgba(0,0,0,.55);
+    padding:clamp(22px,3.4vw,34px);}
+  html[data-theme="light"] .card{background:linear-gradient(160deg, rgba(255,255,255,.8), rgba(255,255,255,.4) 60%);}
+  .card h3{font-weight:400; font-size:19px; margin:0 0 8px; letter-spacing:-.02em;}
+  .card p{margin:0; color:var(--fg-3); font-size:15px;}
+
+  .pay{display:grid; grid-template-columns:1fr auto; gap:clamp(20px,4vw,38px); align-items:center;}
+  .pay-qr{background:#fff; border-radius:14px; padding:12px; line-height:0;
+    box-shadow:0 18px 44px -24px rgba(0,0,0,.6);}
+  .pay-qr svg{width:clamp(128px,26vw,168px); height:auto; display:block;}
+  .btn{display:inline-flex; align-items:center; gap:10px; margin-top:18px;
+    background:var(--accent); color:#0C2523; text-decoration:none;
+    border-radius:999px; padding:13px 26px; font-size:15px; font-weight:500; letter-spacing:.01em;
+    transition:opacity .2s var(--ease), transform .2s var(--ease);}
+  .btn:hover{opacity:.9; transform:translateY(-1px);}
+  .handle{font-family:var(--util); font-size:15px; letter-spacing:.02em; color:var(--accent);}
+  .muted{color:var(--fg-2); font-size:13.5px;}
+
+  .share{display:flex; gap:clamp(20px,4vw,40px); align-items:center; flex-wrap:wrap;}
+  .share-txt{flex:1; min-width:240px;}
+  .copy-row{display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;}
+  .copy-row input{flex:1; min-width:200px; background:var(--bg-3); border:1px solid var(--line);
+    border-radius:10px; color:var(--fg); font-family:var(--body); font-size:14.5px; padding:10px 13px; outline:none;}
+  .copy-row button{background:transparent; border:1px solid var(--line); color:var(--fg-2);
+    border-radius:10px; padding:10px 18px; font-family:var(--body); font-size:14px; cursor:pointer;
+    transition:border-color .2s var(--ease), color .2s var(--ease);}
+  .copy-row button:hover{border-color:var(--accent); color:var(--accent);}
+
+  footer{padding:44px 0 60px; border-top:1px solid var(--line-2); margin-top:30px;}
+  .foot{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; align-items:center;}
+  .mark{font-weight:400; font-size:18px; letter-spacing:.1em;}
+
+  /* printable card: Ctrl+P gives just the QR and the names */
+  .print-card{display:none;}
+  @media print{
+    .shell, .aura, header.page, section#give, footer, .share-txt, .copy-row{display:none !important;}
+    body{background:#fff; color:#0E2422;}
+    .print-card{display:block; text-align:center; padding-top:12mm;}
+    .print-card .pn{font-size:26pt; font-weight:200; letter-spacing:-.02em; margin:0 0 4mm;}
+    .print-card .pd{font-size:10pt; letter-spacing:.22em; text-transform:uppercase; margin:0 0 8mm; color:#5C7369;}
+    .print-card .pq{display:inline-block; padding:6mm; border:1px solid #ddd; border-radius:4mm;}
+    .print-card .pq svg{width:62mm; height:auto;}
+    .print-card .pu{font-size:10pt; letter-spacing:.14em; margin-top:6mm; color:#5C7369;}
+    #share-sec{padding:0; border:none;}
+    #share-sec .sec-head, #share-sec .card{display:none;}
+  }
+  @media (max-width:640px){
+    .pay{grid-template-columns:1fr; justify-items:start;}
+  }
+</style>
+</head>
+<body>
+
+<div class="aura" aria-hidden="true"></div>
+
+<div class="shell">
+  <div class="shell-in">
+    <a class="monogram" href="/">J &amp; D</a>
+    <a class="back" href="/guests/">← Guest details</a>
+  </div>
+</div>
+
+<header class="wrap page" style="padding-top:calc(var(--bar) + 58px);">
+  <span class="eyebrow">Gifts</span>
+  <h1>Your presence is the <em>gift</em>.</h1>
+  <p class="lede">Truly — flying to La Jolla between Christmas and New Year's is no small thing, and having you there is the whole point. If you'd like to give something anyway, there's a way below.</p>
+</header>
+
+<section class="wrap" id="give">
+  <div class="sec-head"><h2>If you'd like to give</h2><span class="eyebrow">Venmo</span></div>
+  <div class="card">
+    <div class="pay">
+      <div>
+        <h3>Toward the honeymoon</h3>
+        <p>We're skipping a registry — we've got the toaster. Anything sent our way goes straight into the trip we're taking after the wedding.</p>
+        <div id="venmo-live" hidden>
+          <a class="btn" id="venmo-btn" href="#">Open Venmo</a>
+          <p class="muted" style="margin-top:10px;">or find us at <span class="handle" id="venmo-handle"></span></p>
+        </div>
+        <p class="muted" id="venmo-soon" style="margin-top:16px;">Venmo details are being added — check back in a day or two.</p>
+      </div>
+      <div class="pay-qr" id="venmo-qr" hidden></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="share-sec">
+  <div class="sec-head"><h2>Scan or share this page</h2><span class="eyebrow">QR code</span></div>
+  <div class="card share">
+    <div class="share-txt">
+      <h3>For cards, signs, and group texts</h3>
+      <p>This code opens this page. Print it on a card for the reception table, or send the link along to anyone who asks.</p>
+      <div class="copy-row">
+        <input id="pageUrl" type="text" readonly value="https://djgolding.com/gifts">
+        <button type="button" id="copyBtn">Copy link</button>
+        <button type="button" id="printBtn">Print card</button>
+      </div>
+    </div>
+    <div class="pay-qr" id="page-qr"></div>
+  </div>
+</section>
+
+<div class="print-card">
+  <p class="pn">Jameson &amp; Dawsyn</p>
+  <p class="pd">December 30, 2026 · La Jolla</p>
+  <div class="pq" id="print-qr"></div>
+  <p class="pu">djgolding.com/gifts</p>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div class="mark">J &amp; D</div>
+    <span class="eyebrow">12.30.2026 · La Jolla, CA</span>
+  </div>
+</footer>
+
+<script src="/js/qrcode.js"></script>
+<script>
+(function(){
+  /* ---------- the only thing to edit ---------- */
+  var VENMO_HANDLE = "Jameson-Golding";
+  /* ------------------------------------------- */
+
+  var PAGE_URL = "https://djgolding.com/gifts";
+
+  try{
+    var t = localStorage.getItem('jd-theme');
+    if (t) document.documentElement.setAttribute('data-theme', t);
+    else if (window.matchMedia('(prefers-color-scheme: light)').matches)
+      document.documentElement.setAttribute('data-theme', 'light');
+  }catch(e){}
+
+  function qrSvg(text, cellSize){
+    var qr = qrcode(0, 'M');
+    qr.addData(text);
+    qr.make();
+    return qr.createSvgTag({ cellSize: cellSize || 4, margin: 0, scalable: true });
+  }
+
+  /* page QR — always available */
+  document.getElementById('page-qr').innerHTML = qrSvg(PAGE_URL);
+  document.getElementById('print-qr').innerHTML = qrSvg(PAGE_URL);
+
+  /* venmo QR + button — only once a handle is set */
+  if (VENMO_HANDLE){
+    var clean = VENMO_HANDLE.replace(/^@/, '');
+    var url = 'https://venmo.com/u/' + encodeURIComponent(clean);
+    var btn = document.getElementById('venmo-btn');
+    btn.href = url;
+    document.getElementById('venmo-handle').textContent = '@' + clean;
+    document.getElementById('venmo-live').hidden = false;
+    document.getElementById('venmo-soon').hidden = true;
+    var vq = document.getElementById('venmo-qr');
+    vq.innerHTML = qrSvg(url);
+    vq.hidden = false;
+  }
+
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var f = document.getElementById('pageUrl');
+    f.select(); f.setSelectionRange(0, 99999);
+    var done = function(){ var b = document.getElementById('copyBtn');
+      b.textContent = 'Copied'; setTimeout(function(){ b.textContent = 'Copy link'; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(f.value).then(done, done);
+    else { try{ document.execCommand('copy'); done(); }catch(e){} }
+  });
+
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+</body>
+</html>

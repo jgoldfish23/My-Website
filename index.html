@@ -18,7 +18,7 @@
 <style>
   /* ============ tokens ============ */
   :root{
-    --display:"Inter", system-ui, sans-serif;
+    --display:Georgia, "Times New Roman", Times, serif;
     --body:"Inter", system-ui, sans-serif;
     --util:"Inter", system-ui, sans-serif;
 
@@ -120,7 +120,7 @@
   }
   .sec-head h2{
     font-family:var(--display); font-weight:400; font-size:clamp(24px,3.6vw,34px);
-    margin:0; letter-spacing:-.03em;
+    margin:0; letter-spacing:-.008em;
   }
   .sec-head .eyebrow{margin-left:auto; white-space:nowrap;}
   .sec-num{
@@ -141,8 +141,8 @@
 
   .names{
     font-family:var(--display); font-weight:300;
-    font-size:clamp(46px, 12.8vw, 140px); line-height:.94; font-weight:200;
-    letter-spacing:-.042em; margin:0;
+    font-size:clamp(44px, 12vw, 132px); line-height:1.02; font-weight:400;
+    letter-spacing:-.014em; margin:0;
   }
   .names .amp{
     display:block; font-family:var(--util); font-weight:400;
@@ -188,7 +188,7 @@
   .count{margin-top:auto; padding-top:48px; display:flex; align-items:flex-end;
     gap:clamp(16px,3.4vw,36px); flex-wrap:wrap;}
   .count-n{
-    font-family:var(--display); font-weight:300; font-size:clamp(54px,9.5vw,104px);
+    font-family:var(--body); font-weight:300; font-size:clamp(54px,9.5vw,104px);
     line-height:.82; letter-spacing:-.04em; color:var(--accent);
     font-variant-numeric:tabular-nums;
     text-shadow:0 0 44px var(--accent-soft), 0 0 90px var(--accent-soft);
@@ -203,6 +203,28 @@
     animation:draw 2.8s var(--ease) .3s forwards;
   }
   @keyframes draw{to{stroke-dashoffset:0;}}
+
+  /* two lights travelling the two lives, meeting where the lines cross */
+  .hero-line .comet{
+    stroke-width:2.4; stroke-linecap:round;
+    stroke-dasharray:58 1700; stroke-dashoffset:1758;
+    animation:comet 9s cubic-bezier(.5,0,.5,1) 2.4s infinite;
+    filter:drop-shadow(0 0 7px var(--accent));
+    opacity:.95;
+  }
+  .hero-line .comet.two{animation-delay:2.9s;}
+  @keyframes comet{
+    0%{stroke-dashoffset:1758;}
+    62%{stroke-dashoffset:280;}
+    72%{stroke-dashoffset:280;}   /* the pause where they meet */
+    100%{stroke-dashoffset:-120;}
+  }
+
+  /* the countdown breathes */
+  .count-n{animation:glow 5s ease-in-out 1s infinite;}
+  @keyframes glow{
+    50%{text-shadow:0 0 58px var(--accent-soft), 0 0 118px var(--accent-soft);}
+  }
 
   /* ============ the two ============ */
   .pair{display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3.4vw,40px);}
@@ -220,8 +242,8 @@
   .card:hover{border-color:var(--accent); transform:translateY(-4px);
     box-shadow:0 30px 70px -30px rgba(0,0,0,.6);}
   .card h3{
-    font-family:var(--display); font-weight:400; font-size:clamp(21px,2.8vw,27px);
-    margin:0 0 6px; letter-spacing:-.03em;
+    font-family:var(--display); font-weight:400; font-size:clamp(20px,2.6vw,25px);
+    margin:0 0 6px; letter-spacing:-.006em;
   }
   .card .role{font-family:var(--util); font-size:10.5px; letter-spacing:.16em;
     text-transform:uppercase; color:var(--accent); margin-bottom:22px;}
@@ -237,7 +259,20 @@
   .record{position:relative; padding-left:clamp(30px,7vw,88px);}
   .spine{
     position:absolute; left:clamp(6px,2.4vw,30px); top:8px; bottom:8px; width:1px;
-    background:linear-gradient(180deg, transparent, var(--line) 10%, var(--accent));
+    background:linear-gradient(180deg, transparent, var(--line-2) 10%, var(--line-2));
+  }
+  /* fills with gold as you read down the record */
+  .spine i{
+    position:absolute; inset:0; display:block;
+    background:linear-gradient(180deg, transparent, var(--accent) 12%, var(--accent));
+    transform:scaleY(var(--spine, 0)); transform-origin:top center;
+    transition:transform .25s linear;
+  }
+  .spine i::after{
+    content:""; position:absolute; left:-2.5px; bottom:0; width:6px; height:6px;
+    border-radius:50%; background:var(--accent);
+    box-shadow:0 0 10px 2px var(--accent-soft);
+    opacity:var(--spine-dot, 0);
   }
   .entry{position:relative; padding-bottom:52px;
     transition:transform .35s var(--ease);}
@@ -253,6 +288,24 @@
     box-shadow:0 0 0 5px var(--accent-soft);}
   .entry.mark::before{background:var(--accent); border-color:var(--accent);
     box-shadow:0 0 0 5px var(--accent-soft);}
+  /* each moment pops in as it scrolls into view */
+  .entry.in::before{animation:dotPop .7s var(--ease) backwards;}
+  @keyframes dotPop{
+    0%{transform:scale(0); opacity:0;}
+    55%{transform:scale(1.85); opacity:1;}
+    100%{transform:scale(1); opacity:1;}
+  }
+  /* the wedding day keeps sending out rings */
+  .entry.mark::after{
+    content:""; position:absolute; left:calc(-1 * clamp(24px,4.6vw,58px) - 3px);
+    top:11px; width:7px; height:7px; border-radius:50%;
+    border:1px solid var(--accent); pointer-events:none;
+    animation:ring 3.4s ease-out 1.4s infinite;
+  }
+  @keyframes ring{
+    0%{transform:scale(1); opacity:.75;}
+    100%{transform:scale(5.5); opacity:0;}
+  }
   .entry time{font-family:var(--util); font-size:10.5px; letter-spacing:.16em;
     text-transform:uppercase; color:var(--accent); display:block; margin-bottom:7px;}
   .entry-photos{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
@@ -264,8 +317,8 @@
   }
   .entry-photos a:hover{transform:translateY(-3px) scale(1.04); border-color:var(--accent);}
   .entry-photos img{width:100%; height:100%; object-fit:cover;}
-  .entry h4{font-family:var(--display); font-weight:400; font-size:clamp(18px,2.3vw,23px);
-    margin:0 0 8px; letter-spacing:-.025em;}
+  .entry h4{font-family:var(--display); font-weight:400; font-size:clamp(17px,2.2vw,21px);
+    margin:0 0 8px; letter-spacing:-.004em;}
   .entry p{margin:0; color:var(--fg-2); max-width:58ch; font-size:15px;}
 
   /* ============ proposal photo in the timeline ============ */
@@ -281,15 +334,15 @@
   .day{background:var(--bg-2); transition:background .45s var(--ease);}
   .day-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(28px,6vw,76px); align-items:center;}
   .day-h{
-    font-family:var(--display); font-weight:300; font-size:clamp(30px,5.6vw,58px);
-    line-height:1.1; letter-spacing:-.035em; margin:0 0 24px;
+    font-family:var(--display); font-weight:400; font-size:clamp(28px,5.2vw,52px);
+    line-height:1.18; letter-spacing:-.01em; margin:0 0 24px;
   }
   .day-h em{font-style:normal; color:var(--accent);}
   .details{list-style:none; margin:0; padding:0;}
   .details li{padding:17px 0; border-bottom:1px solid var(--line-2);}
   .details span{display:block; font-family:var(--util); font-size:10px; letter-spacing:.16em;
     text-transform:uppercase; color:var(--fg-2); margin-bottom:6px;}
-  .details strong{font-weight:400; font-size:16px; font-family:var(--display); letter-spacing:-.02em;}
+  .details strong{font-weight:400; font-size:16.5px; font-family:var(--display); letter-spacing:-.004em;}
   .lnk{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-soft);
     padding-bottom:2px; transition:border-color .2s var(--ease);}
   .lnk:hover{border-bottom-color:var(--accent);}
@@ -315,9 +368,24 @@
   .frame.wide{grid-column:span 2; aspect-ratio:3/2;}
   .frames-note{margin:24px 0 0; color:var(--fg-2); font-size:14px; max-width:60ch;}
 
+  /* ============ waves into the footer ============ */
+  .waves{position:relative; height:clamp(64px,8vw,104px); overflow:hidden;
+    line-height:0; margin-top:clamp(30px,5vw,60px);}
+  .waves svg{position:absolute; left:0; bottom:-1px; width:100%; height:100%;
+    display:block;}
+  .waves path{will-change:transform;}
+  .waves .wA{fill:var(--accent); opacity:.09; animation:drift 26s linear infinite;}
+  .waves .wB{fill:var(--accent); opacity:.06; animation:drift 17s linear infinite reverse;}
+  .waves .wC{fill:var(--bg-2); animation:drift 21s linear infinite;}
+  @keyframes drift{
+    from{transform:translateX(0);}
+    to{transform:translateX(-480px);}
+  }
+
   /* ============ footer ============ */
   footer{background:var(--bg-2); padding:56px 0 68px; border-top:1px solid var(--line-2);
     transition:background .45s var(--ease);}
+  .waves + footer{border-top:none; padding-top:8px;}
   .foot{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:center;}
   .foot .mark{font-family:var(--display); font-weight:400; font-size:20px; letter-spacing:.1em;}
 
@@ -341,6 +409,12 @@
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;}
     .hero-line path{animation:none; stroke-dashoffset:0;}
+    .hero-line .comet{display:none;}
+    .count-n{animation:none;}
+    .entry.in::before{animation:none;}
+    .entry.mark::after{display:none;}
+    .waves path{animation:none;}
+    .spine i{transition:none;}
     .rise{opacity:1; transform:none; transition:none;}
     .card:hover{transform:none;}
     .frame.filled:hover img{transform:none;}
@@ -372,6 +446,8 @@
   <svg class="hero-line" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
     <path d="M-40,250 C 300,250 420,470 700,520 C 900,556 1100,566 1240,568"/>
     <path d="M-40,760 C 320,760 430,600 700,540 C 900,496 1100,478 1240,472"/>
+    <path class="comet" d="M-40,250 C 300,250 420,470 700,520 C 900,556 1100,566 1240,568"/>
+    <path class="comet two" d="M-40,760 C 320,760 430,600 700,540 C 900,496 1100,478 1240,472"/>
   </svg>
 
   <div class="wrap hero-in">
@@ -452,7 +528,7 @@
   </div>
 
   <div class="record">
-    <div class="spine" aria-hidden="true"></div>
+    <div class="spine" aria-hidden="true"><i></i></div>
 
     <div class="entry rise">
       <time>The beginning</time>
@@ -603,6 +679,14 @@
   <p class="frames-note">Send more and they'll drop straight in. Empty frames read as room to grow until then.</p>
 </section>
 
+<div class="waves" aria-hidden="true">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path class="wA" d="M0,64 c120,-34 360,34 480,0 c120,-34 360,34 480,0 c120,-34 360,34 480,0 c120,-34 360,34 480,0 V120 H0 Z"/>
+    <path class="wB" d="M0,78 c150,30 330,-40 480,0 c150,30 330,-40 480,0 c150,30 330,-40 480,0 c150,30 330,-40 480,0 V120 H0 Z"/>
+    <path class="wC" d="M0,92 c130,-26 350,26 480,0 c130,-26 350,26 480,0 c130,-26 350,26 480,0 c130,-26 350,26 480,0 V120 H0 Z"/>
+  </svg>
+</div>
+
 <footer>
   <div class="wrap" style="text-align:center; margin-bottom:34px;">
     <p style="font-family:var(--display); font-weight:200; font-size:clamp(20px,3.4vw,30px); letter-spacing:-.02em; margin:0; color:var(--fg-3);">See you on the bluff.</p>
@@ -656,6 +740,25 @@
   }
   tick(); setInterval(tick, 60000);
 
+  /* ---- the countdown counts itself up on arrival ---- */
+  (function(){
+    var el = document.getElementById('days');
+    if (!el) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var target = parseInt(el.textContent.replace(/[^0-9]/g, ''), 10);
+    if (!target || target > 9999) return;
+    var began = null;
+    (function run(ts){
+      if (ts === undefined) { requestAnimationFrame(run); return; }
+      if (began === null) began = ts;
+      var p = Math.min(1, (ts - began) / 1400);
+      var eased = 1 - Math.pow(1 - p, 4);
+      el.textContent = Math.round(target * eased).toLocaleString();
+      if (p < 1) requestAnimationFrame(run);
+      else el.textContent = target.toLocaleString();
+    })();
+  })();
+
   /* ---- live record entries (added via /admin) ---- */
   fetch('/api/record').then(function(r){ return r.ok ? r.json() : []; }).then(function(entries){
     if (!entries || !entries.length) return;
@@ -686,6 +789,27 @@
         heroImg.style.transform = 'translateY(' + (y * -0.05) + 'px)';
     }, { passive:true });
   }
+
+  /* ---- the record's spine fills with gold as you read down it ---- */
+  var spine = document.querySelector('.spine i');
+  var record = document.querySelector('.record');
+  if (spine && record && !reduce){
+    var fillSpine = function(){
+      var r = record.getBoundingClientRect();
+      var vh = window.innerHeight || 800;
+      var span = r.height - vh * 0.35;
+      var p = span > 0 ? (vh * 0.62 - r.top) / span : (r.top < vh ? 1 : 0);
+      p = Math.max(0, Math.min(1, p));
+      spine.style.setProperty('--spine', p.toFixed(4));
+      spine.style.setProperty('--spine-dot', (p > 0.015 && p < 0.99) ? '1' : '0');
+    };
+    fillSpine();
+    window.addEventListener('scroll', fillSpine, { passive:true });
+    window.addEventListener('resize', fillSpine);
+  } else if (spine){
+    spine.style.setProperty('--spine', '1');
+  }
+
   if (reduce || typeof IntersectionObserver === 'undefined'){
     Array.prototype.forEach.call(items, function(el){ el.classList.add('in'); });
     return;

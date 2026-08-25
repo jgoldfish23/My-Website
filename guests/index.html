@@ -238,7 +238,13 @@
       <label for="rParty">How many in your party (including you)?</label>
       <select id="rParty" name="partySize">
         <option>1</option><option>2</option><option>3</option><option>4</option>
+        <option>5</option><option>6</option><option>7</option><option>8</option>
+        <option>9</option><option>10</option>
       </select>
+    </div>
+    <div>
+      <label for="rGuests">Who's coming with you? <span style="text-transform:none;letter-spacing:0;">(first names are fine)</span></label>
+      <input type="text" id="rGuests" name="guestNames" placeholder="e.g. Sara, Mike, and the kids">
     </div>
     <div>
       <label for="rNote">Anything we should know?</label>
@@ -305,6 +311,7 @@
         email: fd.get('email'),
         attending: fd.get('attending') === 'yes',
         partySize: fd.get('partySize'),
+        guestNames: fd.get('guestNames'),
         note: fd.get('note'),
         website: fd.get('website')
       })

@@ -225,9 +225,48 @@
       items.forEach(function(en){
         var tr = document.createElement('tr');
         function td(txt, cls){ var c = document.createElement('td'); c.textContent = txt; if (cls) c.className = cls; return c; }
-        tr.appendChild(td(en.name + (en.email ? '\n' + en.email : '')));
+
+        var nameCell = document.createElement('td');
+        var nm = document.createElement('div'); nm.textContent = en.name;
+        nameCell.appendChild(nm);
+        if (en.guestNames){
+          var gn = document.createElement('div'); gn.className = 'muted';
+          gn.style.fontSize = '12.5px'; gn.textContent = 'with ' + en.guestNames;
+          nameCell.appendChild(gn);
+        }
+        if (en.email){
+          var em = document.createElement('div'); em.className = 'muted';
+          em.style.fontSize = '12.5px'; em.textContent = en.email;
+          nameCell.appendChild(em);
+        }
+        tr.appendChild(nameCell);
+
         tr.appendChild(td(en.attending ? 'Yes' : 'No', en.attending ? 'yes' : 'no'));
-        tr.appendChild(td(en.partySize || 1));
+
+        /* party size is editable — guests often add people in the note */
+        var partyCell = document.createElement('td');
+        var num = document.createElement('input');
+        num.type = 'number'; num.min = '1'; num.max = '12';
+        num.value = en.partySize || 1;
+        num.style.cssText = 'width:58px; padding:5px 7px; font-size:14px; text-align:center;';
+        num.title = 'Edit if they mentioned extra people in their note';
+        num.addEventListener('change', function(){
+          num.disabled = true;
+          api('/api/rsvp', { method:'PUT',
+            headers:{'content-type':'application/json'},
+            body: JSON.stringify({ id: en.id, partySize: num.value })
+          }).then(function(r){
+            if (!r.ok) throw new Error();
+            loadRsvps();
+          }).catch(function(){
+            num.disabled = false;
+            num.value = en.partySize || 1;
+            alert('Could not save that change.');
+          });
+        });
+        partyCell.appendChild(num);
+        tr.appendChild(partyCell);
+
         tr.appendChild(td(en.note || '', 'muted'));
         tr.appendChild(td(new Date(en.ts).toLocaleDateString(), 'muted'));
         tb.appendChild(tr);

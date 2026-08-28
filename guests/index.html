@@ -372,12 +372,17 @@
         website: fd.get('website')
       })
     }).then(function(r){
-      if (!r.ok) throw new Error();
+      if (!r.ok) {
+        return r.json().catch(function(){ return {}; }).then(function(d){
+          throw new Error((d && d.message) || '');
+        });
+      }
       form.reset();
       msg.textContent = 'Got it — thank you! We can’t wait.';
       celebrate();
-    }).catch(function(){
-      msg.textContent = 'Hmm, that didn’t go through. Try again, or just text us.';
+    }).catch(function(err){
+      msg.textContent = (err && err.message) ||
+        'Hmm, that didn’t go through. Try again, or just text us.';
       btn.disabled = false;
     });
   });
@@ -403,18 +408,29 @@
     bubble(q, 'user');
     history.push({ role:'user', content:q });
     var thinking = bubble('…', 'bot');
+    // The server caps how long a conversation can get, so keep only recent
+    // turns — a guest who keeps chatting should never hit that wall.
+    if (history.length > 20) history = history.slice(-20);
     fetch('/api/chat', {
       method:'POST',
       headers:{'content-type':'application/json'},
       body: JSON.stringify({ messages: history })
-    }).then(function(r){ return r.json(); }).then(function(data){
-      var text = (data && data.content && data.content[0] && data.content[0].text) || null;
+    }).then(function(r){
+      return r.json().then(function(data){ return { ok:r.ok, data:data }; });
+    }).then(function(res){
+      if (!res.ok) {
+        // Being throttled isn't a breakage — say what actually happened.
+        throw new Error((res.data && res.data.message) || '');
+      }
+      var d = res.data;
+      var text = (d && d.content && d.content[0] && d.content[0].text) || null;
       if (!text) throw new Error();
       thinking.textContent = text;
       history.push({ role:'assistant', content:text });
       log.scrollTop = log.scrollHeight;
-    }).catch(function(){
-      thinking.textContent = 'The assistant isn’t available right now — but Jameson and Dawsyn will know the answer!';
+    }).catch(function(err){
+      thinking.textContent = (err && err.message) ||
+        'The assistant isn’t available right now — but Jameson and Dawsyn will know the answer!';
     });
   });
 })();

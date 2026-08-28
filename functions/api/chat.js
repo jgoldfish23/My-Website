@@ -13,8 +13,44 @@ const SYSTEM = `You are the friendly assistant on djgolding.com, the wedding web
 
 If you don't know an answer (registry, dress code specifics, parking details), say you're not sure and suggest asking Jameson or Dawsyn directly. Keep answers to a few sentences. Never invent details.`;
 
+
+// Guests send their whole conversation back each turn, so cap both the
+// number of turns and their size. Anything past these limits is a script,
+// not somebody asking where to park.
+const MAX_MESSAGES = 24;
+const MAX_CHARS_PER_MESSAGE = 2000;
+const MAX_CHARS_TOTAL = 12000;
+
+function validate(messages) {
+  if (!Array.isArray(messages) || messages.length === 0) return "messages must be a non-empty array";
+  if (messages.length > MAX_MESSAGES) return "conversation too long";
+
+  let total = 0;
+  for (const m of messages) {
+    if (!m || typeof m !== "object") return "malformed message";
+    if (m.role !== "user" && m.role !== "assistant") return "bad role";
+    if (typeof m.content !== "string") return "content must be a string";
+    if (m.content.length > MAX_CHARS_PER_MESSAGE) return "message too long";
+    total += m.content.length;
+  }
+  if (total > MAX_CHARS_TOTAL) return "conversation too long";
+  return null;
+}
+
+const fail = (message, status) =>
+  new Response(JSON.stringify({ error: "bad_request", message }), {
+    status,
+    headers: { "content-type": "application/json", "cache-control": "no-store" },
+  });
+
 export async function onRequestPost({ request, env }) {
-  const { messages } = await request.json();
+  if (!env.ANTHROPIC_API_KEY) return fail("assistant not configured", 503);
+
+  const body = await request.json().catch(() => null);
+  const messages = body && body.messages;
+
+  const problem = validate(messages);
+  if (problem) return fail(problem, 400);
 
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -31,7 +67,12 @@ export async function onRequestPost({ request, env }) {
     }),
   });
 
+  // Don't hand an upstream failure back as a 200 — the page can't tell the
+  // difference, and it shouldn't see our error detail either.
+  if (!res.ok) return fail("assistant unavailable", 502);
+
   return new Response(await res.text(), {
-    headers: { "content-type": "application/json" },
+    status: 200,
+    headers: { "content-type": "application/json", "cache-control": "no-store" },
   });
 }

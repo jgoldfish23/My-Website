@@ -1,5 +1,14 @@
 import * as chat from "./functions/api/chat.js";
 import * as wedding from "./functions/api/wedding.js";
+import { clientIp, originOk, rateLimit, tooMany, forbidden } from "./functions/api/_guard.js";
+
+// A guest asking a handful of questions stays well under these; a script
+// does not. The daily cap is the backstop that bounds a bad day's bill.
+const CHAT_PER_IP = 10;
+const CHAT_WINDOW = 300;
+const CHAT_PER_DAY = 500;
+const RSVP_PER_IP = 5;
+const RSVP_WINDOW = 3600;
 
 const RECORD_KEY = "record_entries";
 
@@ -106,6 +115,13 @@ async function notifyRsvp(entry, env) {
 
 async function handleRsvp(request, env, ctx) {
   if (request.method === "POST") {
+    // Anyone can RSVP, by design — but each submission pings our phones,
+    // so cap how fast one source can fire them.
+    if (!originOk(request)) return forbidden();
+    const mine = await rateLimit(env, "rsvp", clientIp(request), RSVP_PER_IP, RSVP_WINDOW);
+    if (!mine.ok) {
+      return tooMany(mine.retryAfter, "You've already sent a few — text us if something's wrong.");
+    }
     const body = await request.json().catch(() => null);
     if (!body) return json({ error: "bad request" }, 400);
     if (body.website) return json({ ok: true }); // honeypot: pretend success
@@ -195,8 +211,18 @@ export default {
     const { pathname } = new URL(request.url);
 
     if (pathname === "/api/chat") {
-      if (request.method === "POST") return chat.onRequestPost({ request, env });
-      return new Response("Method not allowed", { status: 405 });
+      if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
+      if (!originOk(request)) return forbidden();
+
+      const day = await rateLimit(env, "chat_day", "all", CHAT_PER_DAY, 86400);
+      if (!day.ok) {
+        return tooMany(day.retryAfter, "The assistant has taken enough questions for today.");
+      }
+      const mine = await rateLimit(env, "chat", clientIp(request), CHAT_PER_IP, CHAT_WINDOW);
+      if (!mine.ok) {
+        return tooMany(mine.retryAfter, "That's a lot of questions! Give it a few minutes.");
+      }
+      return chat.onRequestPost({ request, env });
     }
 
     if (pathname === "/api/wedding") {

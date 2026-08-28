@@ -1,6 +1,16 @@
 const { useState, useEffect, useRef } = React;
 const { Plane, Heart, UtensilsCrossed, Users, Shirt, ClipboardCheck, Plus, Trash2, Check, CalendarDays, Wallet, Briefcase, Phone, Mail, Clock, Sun, Moon } = LucideReact;
 
+// Timeline row controls. Fall back to a no-op rather than crashing the whole
+// dashboard if a build of lucide ever drops one of these.
+const Blank = () => null;
+const ChevronUp = LucideReact.ChevronUp || Blank;
+const ChevronDown = LucideReact.ChevronDown || Blank;
+const CopyIcon = LucideReact.Copy || Blank;
+const PinIcon = LucideReact.Pin || Blank;
+const MapPinIcon = LucideReact.MapPin || Blank;
+const RotateIcon = LucideReact.RotateCcw || Blank;
+
 const STORAGE_KEY = "wedding_dashboard_state";
 const uid = () => Math.random().toString(36).slice(2, 9);
 
@@ -25,6 +35,26 @@ const GUEST_CAP = 40;
 
 // Jameson & Dawsyn at sunset (uploaded photo, optimized + embedded).
 const COUPLE_PHOTO = "/img/couple.jpg";
+
+// The suggested day-of schedule. Shared by the first-run seed and the
+// "start over" button so both produce exactly the same thing.
+const makeDefaultTimeline = () => ({
+  ceremony: "15:00",
+  permitMin: 240,
+  items: [
+    { id: uid(), offset: -120, label: "Permit window opens — setup begins", note: "Chairs, arch, florals; nothing may be left overnight", done: false, offsite: false, pinned: false },
+    { id: uid(), offset: -90, label: "Florist & photographer arrive", note: "Set up before guests start showing", done: false, offsite: false, pinned: false },
+    { id: uid(), offset: -60, label: "Guests begin arriving", note: "Street parking in La Jolla is tight — tell people to come early", done: false, offsite: false, pinned: false },
+    { id: uid(), offset: -10, label: "Seat the families", note: "", done: false, offsite: false, pinned: false },
+    { id: uid(), offset: 0, label: "Ceremony begins", note: "Processional", done: false, offsite: false, pinned: false },
+    { id: uid(), offset: 25, label: "Vows, rings & pronouncement", note: "", done: false, offsite: false, pinned: false },
+    { id: uid(), offset: 30, label: "Sign the license", note: "Officiant + at least one witness", done: false, offsite: false, pinned: false },
+    { id: uid(), offset: 35, label: "Group photos at the bowl", note: "", done: false, offsite: false, pinned: false },
+    { id: uid(), offset: 60, label: "Couple's portraits — golden hour", note: "Best light is the half hour before sunset", done: false, offsite: false, pinned: false },
+    { id: uid(), offset: 100, label: "Breakdown & clear the park", note: "Everything out before the permit window closes", done: false, offsite: false, pinned: false },
+    { id: uid(), offset: 180, label: "Dinner at Piazza Cucina Italiana", note: "6:00pm · 7731 Fay Ave, La Jolla · 858-412-3108 — confirm reservation name & headcount", done: false, offsite: true, pinned: true },
+  ].map((it) => ({ subs: [], collapsed: false, ...it })),
+});
 
 const DEFAULT_STATE = {
   partnerA: "Jameson",
@@ -135,22 +165,8 @@ const DEFAULT_STATE = {
     { id: uid(), name: "", type: "Music / DJ", phone: "", email: "", cost: "", deposit: "", booked: false, note: "" },
     { id: uid(), name: "", type: "Hair & makeup", phone: "", email: "", cost: "", deposit: "", booked: false, note: "" },
   ],
-  timeline: {
-    ceremony: "15:00",
-    items: [
-      { id: uid(), offset: -120, label: "Permit window opens — setup begins", note: "Chairs, arch, florals; nothing may be left overnight", done: false },
-      { id: uid(), offset: -90, label: "Florist & photographer arrive", note: "Set up before guests start showing", done: false },
-      { id: uid(), offset: -60, label: "Guests begin arriving", note: "Street parking in La Jolla is tight — tell people to come early", done: false },
-      { id: uid(), offset: -10, label: "Seat the families", note: "", done: false },
-      { id: uid(), offset: 0, label: "Ceremony begins", note: "Processional", done: false },
-      { id: uid(), offset: 25, label: "Vows, rings & pronouncement", note: "", done: false },
-      { id: uid(), offset: 30, label: "Sign the license", note: "Officiant + at least one witness", done: false },
-      { id: uid(), offset: 35, label: "Group photos at the bowl", note: "", done: false },
-      { id: uid(), offset: 60, label: "Couple's portraits — golden hour", note: "Best light is the half hour before sunset", done: false },
-      { id: uid(), offset: 100, label: "Breakdown & clear the park", note: "Everything out before the permit window closes", done: false },
-      { id: uid(), offset: 180, label: "Dinner at Piazza Cucina Italiana", note: "6:00pm · 7731 Fay Ave, La Jolla · 858-412-3108 — confirm reservation name & headcount", done: false },
-    ],
-  },
+  timeline: makeDefaultTimeline(),
+  timelineRetimed: true,
 };
 
 const hasStorage = () =>
@@ -278,27 +294,29 @@ const migrateState = (raw) => {
 
   // Ensure the day-of timeline exists.
   if (!s.timeline || typeof s.timeline !== "object" || !Array.isArray(s.timeline.items)) {
-    s.timeline = {
-      ceremony: "15:00",
-      items: [
-        { id: uid(), offset: -120, label: "Permit window opens — setup begins", note: "Chairs, arch, florals; nothing may be left overnight", done: false },
-        { id: uid(), offset: -90, label: "Florist & photographer arrive", note: "Set up before guests start showing", done: false },
-        { id: uid(), offset: -60, label: "Guests begin arriving", note: "Street parking in La Jolla is tight — tell people to come early", done: false },
-        { id: uid(), offset: -10, label: "Seat the families", note: "", done: false },
-        { id: uid(), offset: 0, label: "Ceremony begins", note: "Processional", done: false },
-        { id: uid(), offset: 25, label: "Vows, rings & pronouncement", note: "", done: false },
-        { id: uid(), offset: 30, label: "Sign the license", note: "Officiant + at least one witness", done: false },
-        { id: uid(), offset: 35, label: "Group photos at the bowl", note: "", done: false },
-        { id: uid(), offset: 60, label: "Couple's portraits — golden hour", note: "Best light is the half hour before sunset", done: false },
-        { id: uid(), offset: 100, label: "Breakdown & clear the park", note: "Everything out before the permit window closes", done: false },
-        { id: uid(), offset: 180, label: "Dinner at Piazza Cucina Italiana", note: "6:00pm · 7731 Fay Ave, La Jolla · 858-412-3108 — confirm reservation name & headcount", done: false },
-      ],
-    };
+    s.timeline = makeDefaultTimeline();
+    s.timelineRetimed = true; // freshly seeded — nothing to migrate
   }
 
-  // Apply the confirmed day-of timings to an existing saved timeline (matched by label,
-  // so any other edits the couple made are left alone).
+  // Per-item flags added later. Default them from what the old hardcoded rules
+  // assumed: the dinner is the one thing that isn't at the park, and a booked
+  // restaurant doesn't move just because the ceremony time does.
   if (s.timeline && Array.isArray(s.timeline.items)) {
+    if (typeof s.timeline.permitMin !== "number") s.timeline.permitMin = 240;
+    s.timeline.items.forEach((it) => {
+      if (typeof it.offsite !== "boolean") it.offsite = /celebration dinner|dinner at/i.test(it.label || "");
+      if (typeof it.pinned !== "boolean") it.pinned = it.offsite;
+      if (!Array.isArray(it.subs)) it.subs = [];
+      if (typeof it.collapsed !== "boolean") it.collapsed = false;
+    });
+  }
+
+  // Apply the confirmed day-of timings to an existing saved timeline — ONCE.
+  // This used to run on every load, which meant any time change made here was
+  // silently reverted the next time the page opened. The flag makes it a real
+  // one-time migration; after it runs, the schedule belongs to the couple.
+  if (s.timeline && Array.isArray(s.timeline.items) && !s.timelineRetimed) {
+    s.timelineRetimed = true;
     const retime = (match, offset, patch) => {
       const it = s.timeline.items.find((x) => x.label && match.test(x.label));
       if (it) {
@@ -321,6 +339,8 @@ const migrateState = (raw) => {
         label: "Dinner at Piazza Cucina Italiana",
         note: "6:00pm · 7731 Fay Ave, La Jolla · 858-412-3108 — confirm reservation name & headcount",
         done: false,
+        offsite: true,
+        pinned: true,
       });
     }
   }
@@ -651,9 +671,9 @@ function WeddingDashboard() {
     });
 
   // ---- Day-of timeline ----
-  const SUNSET_MIN = 16 * 60 + 50; // ~4:50pm on Dec 30 in San Diego
-  const PERMIT_MIN = 240; // 4-hour permit window incl. setup & breakdown
-  const timeline = state.timeline || { ceremony: "15:00", items: [] };
+  const SUNSET_MIN = 16 * 60 + 50; // ~4:50pm on Dec 30 in San Diego — an astronomical fact, not a setting
+  const timeline = state.timeline || { ceremony: "15:00", permitMin: 240, items: [] };
+  const PERMIT_MIN = typeof timeline.permitMin === "number" ? timeline.permitMin : 240;
   const tItems = (timeline.items || []).slice().sort((a, b) => a.offset - b.offset);
   const ceremonyMin = (() => {
     const [h, m] = String(timeline.ceremony || "15:00").split(":").map(Number);
@@ -667,20 +687,169 @@ function WeddingDashboard() {
     const h12 = h % 12 === 0 ? 12 : h % 12;
     return h12 + ":" + String(m).padStart(2, "0") + ampm;
   };
-  const parkItems = tItems.filter((i) => i.label !== "Celebration dinner");
+  // Permit math covers whatever is actually at the park. This used to be a
+  // hardcoded label check, so renaming the dinner row quietly broke it.
+  const parkItems = tItems.filter((i) => !i.offsite);
   const parkStart = parkItems.length ? ceremonyMin + parkItems[0].offset : ceremonyMin;
   const parkEnd = parkItems.length ? ceremonyMin + parkItems[parkItems.length - 1].offset : ceremonyMin;
   const parkUsed = Math.max(parkEnd - parkStart, 0);
   const permitOver = parkUsed > PERMIT_MIN;
-  const darkItems = tItems.filter((i) => ceremonyMin + i.offset > SUNSET_MIN && i.label !== "Celebration dinner");
+  const darkItems = tItems.filter((i) => ceremonyMin + i.offset > SUNSET_MIN && !i.offsite);
   const goldenStart = SUNSET_MIN - 30;
 
+  const minsOf = (hhmm, fallback) => {
+    const [h, m] = String(hhmm || "").split(":").map(Number);
+    return isNaN(h) || isNaN(m) ? fallback : h * 60 + m;
+  };
+  // 24h "HH:MM" for <input type="time">, wrapping across midnight.
+  const toField = (mins) => {
+    const v = ((mins % 1440) + 1440) % 1440;
+    return String(Math.floor(v / 60)).padStart(2, "0") + ":" + String(v % 60).padStart(2, "0");
+  };
+  // A clock time is ambiguous about which day it means. Read it as the nearest
+  // interpretation to the ceremony, so 6pm after a 3pm ceremony is +3h, not -21h.
+  const nearestOffset = (abs, base) => {
+    let off = abs - base;
+    if (off > 720) off -= 1440;
+    if (off < -720) off += 1440;
+    return off;
+  };
+  const relLabel = (mins) => {
+    if (mins === 0) return "ceremony";
+    const sign = mins < 0 ? "−" : "+";
+    const a = Math.abs(mins);
+    const h = Math.floor(a / 60);
+    const m = a % 60;
+    return sign + (h ? h + "h" + (m ? " " + m + "m" : "") : m + "m");
+  };
+
+  // Moving the ceremony drags the day with it, except for anything pinned —
+  // a booked restaurant doesn't move because the ceremony did. Pinned rows
+  // keep their clock time by absorbing the shift into their offset.
   const setCeremony = (val) =>
     update((s) => {
-      if (!s.timeline) s.timeline = { ceremony: "15:00", items: [] };
+      if (!s.timeline) s.timeline = { ceremony: "15:00", permitMin: 240, items: [] };
+      const before = minsOf(s.timeline.ceremony, 15 * 60);
+      const after = minsOf(val, before);
+      const delta = after - before;
+      if (delta) {
+        s.timeline.items.forEach((it) => {
+          if (it.pinned) it.offset -= delta;
+        });
+      }
       s.timeline.ceremony = val;
       return s;
     });
+  const setPermit = (val) =>
+    update((s) => {
+      const n = parseInt(val, 10);
+      s.timeline.permitMin = isNaN(n) ? 240 : Math.max(0, Math.min(n, 1440));
+      return s;
+    });
+  // Set a row by the clock time shown, rather than by minutes-from-ceremony.
+  const setTItemTime = (id, val) =>
+    update((s) => {
+      const it = s.timeline.items.find((x) => x.id === id);
+      const abs = minsOf(val, null);
+      if (it && abs !== null) it.offset = nearestOffset(abs, minsOf(s.timeline.ceremony, 15 * 60));
+      return s;
+    });
+  const nudgeTItem = (id, mins) =>
+    update((s) => {
+      const it = s.timeline.items.find((x) => x.id === id);
+      if (it) it.offset += mins;
+      return s;
+    });
+  const toggleTFlag = (id, key) =>
+    update((s) => {
+      const it = s.timeline.items.find((x) => x.id === id);
+      if (it) it[key] = !it[key];
+      return s;
+    });
+  // Rows render in time order, so "move" means trading places on the clock.
+  const moveTItem = (id, dir) =>
+    update((s) => {
+      const sorted = s.timeline.items.slice().sort((a, b) => a.offset - b.offset);
+      const i = sorted.findIndex((x) => x.id === id);
+      const j = i + dir;
+      if (i < 0 || j < 0 || j >= sorted.length) return s;
+      const a = s.timeline.items.find((x) => x.id === sorted[i].id);
+      const b = s.timeline.items.find((x) => x.id === sorted[j].id);
+      // Equal offsets would leave the pair stuck; nudge past instead.
+      if (a.offset === b.offset) a.offset += dir * 5;
+      else { const t = a.offset; a.offset = b.offset; b.offset = t; }
+      return s;
+    });
+  const duplicateTItem = (id) =>
+    update((s) => {
+      const it = s.timeline.items.find((x) => x.id === id);
+      // Deep-copy the steps — a spread would share the same array, so editing
+      // one copy's steps would silently edit the other's.
+      if (it) s.timeline.items.push({
+        ...it,
+        id: uid(),
+        done: false,
+        offset: it.offset + 15,
+        subs: (it.subs || []).map((sb) => ({ ...sb, id: uid(), done: false })),
+      });
+      return s;
+    });
+
+  // ---- Steps inside a moment ----
+  // Sub-offsets are minutes from their parent, so dragging the parent around
+  // (or moving the ceremony) carries its whole run-of-show with it.
+  const withItem = (id, fn) =>
+    update((s) => {
+      const it = s.timeline.items.find((x) => x.id === id);
+      if (it) {
+        if (!Array.isArray(it.subs)) it.subs = [];
+        fn(it);
+      }
+      return s;
+    });
+  const addSub = (id) =>
+    withItem(id, (it) => {
+      const last = it.subs.reduce((a, x) => Math.max(a, x.offset || 0), 0);
+      it.subs.push({ id: uid(), offset: it.subs.length ? last + 5 : 0, label: "", note: "", done: false });
+      it.collapsed = false;
+    });
+  const setSub = (id, subId, key, val) =>
+    withItem(id, (it) => {
+      const sb = it.subs.find((x) => x.id === subId);
+      if (sb) sb[key] = val;
+    });
+  const setSubTime = (id, subId, val) =>
+    withItem(id, (it) => {
+      const sb = it.subs.find((x) => x.id === subId);
+      const abs = minsOf(val, null);
+      if (sb && abs !== null) {
+        const parentAbs = minsOf(timeline.ceremony, 15 * 60) + it.offset;
+        sb.offset = nearestOffset(abs, parentAbs);
+      }
+    });
+  const nudgeSub = (id, subId, mins) =>
+    withItem(id, (it) => {
+      const sb = it.subs.find((x) => x.id === subId);
+      if (sb) sb.offset = (sb.offset || 0) + mins;
+    });
+  const toggleSub = (id, subId) =>
+    withItem(id, (it) => {
+      const sb = it.subs.find((x) => x.id === subId);
+      if (sb) sb.done = !sb.done;
+    });
+  const removeSub = (id, subId) =>
+    withItem(id, (it) => {
+      it.subs = it.subs.filter((x) => x.id !== subId);
+    });
+  const toggleCollapse = (id) => withItem(id, (it) => { it.collapsed = !it.collapsed; });
+  const resetTimeline = () => {
+    if (!window.confirm("Replace the whole day-of timeline with the suggested schedule? Your current one will be lost.")) return;
+    update((s) => {
+      s.timeline = makeDefaultTimeline();
+      s.timelineRetimed = true;
+      return s;
+    });
+  };
   const setTItem = (id, key, val) =>
     update((s) => {
       const it = s.timeline.items.find((x) => x.id === id);
@@ -696,7 +865,7 @@ function WeddingDashboard() {
   const addTItem = () =>
     update((s) => {
       const last = s.timeline.items.reduce((a, i) => Math.max(a, i.offset), 0);
-      s.timeline.items.push({ id: uid(), offset: last + 15, label: "", note: "", done: false });
+      s.timeline.items.push({ id: uid(), offset: last + 15, label: "", note: "", done: false, offsite: false, pinned: false });
       return s;
     });
   const removeTItem = (id) =>
@@ -924,12 +1093,24 @@ function WeddingDashboard() {
 .wd-root.dark .wd-gnum{color:#6E8478;}
 .wd-root.dark .wd-gpill,.wd-root.dark .wd-stat,
 .wd-root.dark .wd-vend,.wd-root.dark .wd-gside,.wd-root.dark .wd-grsvp,
-.wd-root.dark .wd-mwrap input,.wd-root.dark .wd-tloff,.wd-root.dark .wd-bbtn{
+.wd-root.dark .wd-mwrap input,.wd-root.dark .wd-tl-permit input,.wd-root.dark .wd-bbtn,
+.wd-root.dark .wd-tl-reset{
   background:rgba(255,255,255,.045); border-color:var(--line);}
 .wd-root.dark .wd-cc-tile{background:linear-gradient(135deg, rgba(255,255,255,.05), rgba(120,200,150,.08));
   border-color:rgba(255,255,255,.09); box-shadow:0 14px 32px -26px #000;}
 .wd-root.dark .wd-gside,.wd-root.dark .wd-grsvp{color:#7E9488;}
 .wd-root.dark .wd-tl-head input[type="time"]{background:rgba(255,255,255,.05); border-color:var(--line); color-scheme:dark;}
+/* Editable row/step times and the nested-step rail in dark mode. */
+.wd-root.dark .wd-tltime,.wd-root.dark .wd-subtime{color-scheme:dark;}
+.wd-root.dark .wd-tltime:hover,.wd-root.dark .wd-tltime:focus,
+.wd-root.dark .wd-subtime:hover,.wd-root.dark .wd-subtime:focus{
+  background:rgba(255,255,255,.05); border-color:var(--line);}
+.wd-root.dark .wd-tlnudge:hover,.wd-root.dark .wd-tlflag:hover,
+.wd-root.dark .wd-tlmove:hover:not(:disabled){background:rgba(255,255,255,.05); border-color:var(--line); color:var(--ink);}
+.wd-root.dark .wd-sub{border-left-color:#3A4A42;}
+.wd-root.dark .wd-tlrel,.wd-root.dark .wd-subtoggle,.wd-root.dark .wd-subadd,
+.wd-root.dark .wd-subcount{color:#6E8478;}
+.wd-root.dark .wd-subdot i{border-color:#8A6C7A;}
 .wd-root.dark .wd-date-in{background:rgba(255,255,255,.05); border-color:var(--line); color-scheme:dark;}
 .wd-root.dark .wd-due-in{color-scheme:dark;}
 .wd-root.dark .wd-due-in:hover,.wd-root.dark .wd-due-in:focus{background:rgba(255,255,255,.05);}
@@ -997,10 +1178,79 @@ function WeddingDashboard() {
 .wd-tlnote{font-family:'Inter',sans-serif; font-size:12px; color:var(--ink-soft); background:transparent;
   border:none; outline:none; width:100%; padding:2px 0 0;}
 .wd-tlnote::placeholder{color:#CBBBC6; font-style:italic;}
-.wd-tloff{font-family:'Inter',sans-serif; font-size:11px; font-weight:700; color:var(--ink-soft);
-  background:rgba(255,255,255,.5); border:1px solid var(--line); border-radius:7px; width:56px; text-align:right;
-  padding:3px 6px; outline:none; flex-shrink:0; margin-left:8px; transition:border-color .2s;}
-.wd-tloff:focus{border-color:var(--clay);}
+.wd-tl-permit{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:var(--ink-soft);}
+.wd-tl-permit input{font-family:'Inter',sans-serif; font-size:12px; font-weight:700; color:var(--ink); width:58px;
+  background:rgba(255,255,255,.5); border:1px solid var(--line); border-radius:7px; padding:4px 6px;
+  text-align:right; outline:none; transition:border-color .2s;}
+.wd-tl-permit input:focus{border-color:var(--clay);}
+.wd-tl-reset{margin-left:auto; display:inline-flex; align-items:center; gap:5px; font-family:'Inter',sans-serif;
+  font-size:11.5px; font-weight:700; color:var(--ink-soft); background:rgba(255,255,255,.5);
+  border:1px solid var(--line); border-radius:8px; padding:5px 10px; cursor:pointer; transition:all .15s;}
+.wd-tl-reset:hover{border-color:var(--clay); color:var(--clay-deep);}
+
+/* Editable row time + relative readout */
+.wd-tltimewrap{width:62px; flex-shrink:0; display:flex; flex-direction:column; align-items:flex-end; padding-top:1px;}
+.wd-tltime{font-family:'Inter',sans-serif; font-size:13.5px; font-weight:500; color:var(--ink);
+  font-variant-numeric:tabular-nums; background:transparent; border:1px solid transparent; border-radius:6px;
+  outline:none; cursor:pointer; color-scheme:light; padding:1px 3px; width:100%; text-align:right; transition:all .15s;}
+.wd-tltime:hover,.wd-tltime:focus{border-color:var(--line); background:rgba(255,255,255,.6);}
+.wd-tltime.dark{color:#7E93B8;}
+.wd-tltime::-webkit-calendar-picker-indicator{display:none;}
+.wd-tlrel{font-size:9.5px; font-weight:700; letter-spacing:.04em; color:#BBA7B2; padding-right:3px;
+  font-variant-numeric:tabular-nums;}
+
+/* Row controls */
+.wd-tlacts{display:flex; align-items:center; gap:2px; flex-shrink:0; margin-left:8px; opacity:.45; transition:opacity .15s;}
+.wd-tlrow:hover .wd-tlacts,.wd-tlacts:focus-within{opacity:1;}
+.wd-tlnudge{font-family:'Inter',sans-serif; font-size:10.5px; font-weight:800; color:var(--ink-soft);
+  background:transparent; border:1px solid transparent; border-radius:6px; padding:3px 5px; cursor:pointer;
+  font-variant-numeric:tabular-nums; transition:all .15s;}
+.wd-tlnudge:hover{border-color:var(--line); background:rgba(255,255,255,.6); color:var(--ink);}
+.wd-tlflag,.wd-tlmove{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px;
+  border-radius:6px; border:1px solid transparent; background:transparent; color:#BBA7B2; cursor:pointer;
+  transition:all .15s; padding:0;}
+.wd-tlflag:hover,.wd-tlmove:hover:not(:disabled){border-color:var(--line); background:rgba(255,255,255,.6); color:var(--ink);}
+.wd-tlflag.on{color:var(--clay-deep);}
+.wd-tlmove:disabled{opacity:.25; cursor:default;}
+
+/* Steps nested inside a moment */
+.wd-sub{margin:0 0 2px 86px; padding-left:14px; border-left:1.5px dashed #DCC9D4;}
+.wd-subtoggle{display:inline-flex; align-items:center; gap:5px; font-family:'Inter',sans-serif; font-size:10.5px;
+  font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#B29FAA; background:transparent;
+  border:0; padding:3px 0; cursor:pointer; transition:color .15s;}
+.wd-subtoggle:hover{color:var(--clay-deep);}
+.wd-subcount{font-variant-numeric:tabular-nums; color:#C9B7C1; text-transform:none; letter-spacing:0;}
+.wd-subrow{display:flex; align-items:flex-start; gap:0; padding:4px 0;}
+.wd-subtime{font-family:'Inter',sans-serif; font-size:11.5px; font-weight:500; color:var(--ink-soft);
+  font-variant-numeric:tabular-nums; background:transparent; border:1px solid transparent; border-radius:5px;
+  outline:none; cursor:pointer; color-scheme:light; padding:1px 3px; width:56px; flex-shrink:0;
+  text-align:right; transition:all .15s;}
+.wd-subtime:hover,.wd-subtime:focus{border-color:var(--line); background:rgba(255,255,255,.6);}
+.wd-subtime::-webkit-calendar-picker-indicator{display:none;}
+.wd-subdot{width:12px; flex-shrink:0; display:flex; justify-content:center; padding-top:5px; margin:0 7px;}
+.wd-subdot i{width:7px; height:7px; border-radius:50%; background:var(--paper-2); border:2px solid #D3A7BD;
+  display:block; cursor:pointer; transition:all .2s;}
+.wd-subdot i.done{background:var(--sage); border-color:var(--sage);}
+.wd-subbody{flex:1; min-width:0;}
+.wd-sublabel{font-family:'Inter',sans-serif; font-size:12.5px; font-weight:500; color:var(--ink);
+  background:transparent; border:none; outline:none; width:100%; padding:1px 0;}
+.wd-sublabel.done{text-decoration:line-through; text-decoration-color:#CBBBC6; color:var(--ink-soft);}
+.wd-sublabel::placeholder,.wd-subnote::placeholder{color:#CBBBC6; font-style:italic;}
+.wd-subnote{font-family:'Inter',sans-serif; font-size:11px; color:var(--ink-soft); background:transparent;
+  border:none; outline:none; width:100%; padding:1px 0 0;}
+.wd-subacts{display:flex; align-items:center; gap:2px; flex-shrink:0; opacity:.4; transition:opacity .15s;}
+.wd-subrow:hover .wd-subacts,.wd-subacts:focus-within{opacity:1;}
+.wd-subadd{display:inline-flex; align-items:center; gap:4px; font-family:'Inter',sans-serif; font-size:10.5px;
+  font-weight:700; color:#B29FAA; background:transparent; border:0; padding:3px 0 5px; cursor:pointer;
+  transition:color .15s;}
+.wd-subadd:hover{color:var(--clay-deep);}
+
+@media (max-width:640px){
+  /* Controls stay reachable on a phone instead of hiding behind :hover. */
+  .wd-tlacts,.wd-subacts{opacity:1;}
+  .wd-tlacts{flex-wrap:wrap; justify-content:flex-end; max-width:112px;}
+  .wd-sub{margin-left:40px;}
+}
 .wd-tlmark{display:flex; align-items:center; gap:10px; margin:6px 0 6px 78px; font-size:11px; font-weight:800;
   letter-spacing:.08em; text-transform:uppercase; color:#96682A;}
 .wd-tlmark::before{content:''; flex:1; height:1px; background:linear-gradient(90deg,#E8D2A8,transparent); max-width:120px;}
@@ -1626,14 +1876,22 @@ function WeddingDashboard() {
             <div className="wd-tl-head">
               Ceremony starts at
               <input type="time" value={timeline.ceremony || "15:00"} onChange={(e) => setCeremony(e.target.value)} />
-              <span>everything below shifts with it</span>
+              <span>unpinned rows shift with it</span>
+              <span className="wd-tl-permit">
+                permit window
+                <input type="number" min="0" step="30" value={PERMIT_MIN} onChange={(e) => setPermit(e.target.value)} />
+                min
+              </span>
+              <button className="wd-tl-reset" onClick={resetTimeline} title="Replace with the suggested schedule">
+                <RotateIcon size={13} strokeWidth={2} /> Start over
+              </button>
             </div>
 
             <div className={"wd-warn " + (permitOver ? "bad" : "ok")}>
               <span>
                 {permitOver
-                  ? "Over the permit window — your park schedule runs " + Math.round(parkUsed / 60 * 10) / 10 + " hours (" + toClock(parkStart) + "–" + toClock(parkEnd) + "). The Wedding Bowl permit allows 4 hours including setup and breakdown."
-                  : "Fits the permit — park time runs " + toClock(parkStart) + "–" + toClock(parkEnd) + " (" + Math.round(parkUsed / 60 * 10) / 10 + " of 4 hours, setup and breakdown included)."}
+                  ? "Over the permit window — your park schedule runs " + Math.round(parkUsed / 60 * 10) / 10 + " hours (" + toClock(parkStart) + "–" + toClock(parkEnd) + "). The Wedding Bowl permit allows " + Math.round(PERMIT_MIN / 60 * 10) / 10 + " hours including setup and breakdown."
+                  : "Fits the permit — park time runs " + toClock(parkStart) + "–" + toClock(parkEnd) + " (" + Math.round(parkUsed / 60 * 10) / 10 + " of " + Math.round(PERMIT_MIN / 60 * 10) / 10 + " hours, setup and breakdown included)."}
               </span>
             </div>
 
@@ -1654,7 +1912,16 @@ function WeddingDashboard() {
                   <React.Fragment key={it.id}>
                     {crossesSunset && <div className="wd-tlmark">sunset {toClock(SUNSET_MIN)}</div>}
                     <div className="wd-tlrow">
-                      <span className={"wd-tltime" + (abs > SUNSET_MIN ? " dark" : "")}>{toClock(abs)}</span>
+                      <span className="wd-tltimewrap">
+                        <input
+                          className={"wd-tltime" + (abs > SUNSET_MIN ? " dark" : "")}
+                          type="time"
+                          value={toField(abs)}
+                          aria-label={"Time for " + (it.label || "this moment")}
+                          onChange={(e) => setTItemTime(it.id, e.target.value)}
+                        />
+                        <span className="wd-tlrel">{relLabel(it.offset)}</span>
+                      </span>
                       <span className="wd-tldot">
                         <i className={it.done ? "done" : ""} onClick={() => toggleTItem(it.id)} role="checkbox" aria-checked={it.done} />
                       </span>
@@ -1672,18 +1939,95 @@ function WeddingDashboard() {
                           onChange={(e) => setTItem(it.id, "note", e.target.value)}
                         />
                       </span>
-                      <input
-                        className="wd-tloff"
-                        type="number"
-                        step="5"
-                        value={it.offset}
-                        title="Minutes relative to the ceremony start"
-                        onChange={(e) => setTItem(it.id, "offset", e.target.value)}
-                      />
-                      <button className="wd-del" onClick={() => removeTItem(it.id)} aria-label="Delete">
-                        <Trash2 size={16} strokeWidth={1.8} />
-                      </button>
+                      <span className="wd-tlacts">
+                        <button className="wd-tlnudge" onClick={() => nudgeTItem(it.id, -5)} title="5 minutes earlier" aria-label="5 minutes earlier">−5</button>
+                        <button className="wd-tlnudge" onClick={() => nudgeTItem(it.id, 5)} title="5 minutes later" aria-label="5 minutes later">+5</button>
+                        <button
+                          className={"wd-tlflag" + (it.pinned ? " on" : "")}
+                          onClick={() => toggleTFlag(it.id, "pinned")}
+                          title={it.pinned ? "Pinned — keeps this clock time when the ceremony moves" : "Shifts with the ceremony time"}
+                          aria-pressed={!!it.pinned}
+                        >
+                          <PinIcon size={13} strokeWidth={2} />
+                        </button>
+                        <button
+                          className={"wd-tlflag" + (it.offsite ? "" : " on")}
+                          onClick={() => toggleTFlag(it.id, "offsite")}
+                          title={it.offsite ? "Away from the park — not counted against the permit" : "At the park — counts toward the permit window"}
+                          aria-pressed={!it.offsite}
+                        >
+                          <MapPinIcon size={13} strokeWidth={2} />
+                        </button>
+                        <button className="wd-tlmove" onClick={() => moveTItem(it.id, -1)} disabled={i === 0} title="Move earlier" aria-label="Move earlier">
+                          <ChevronUp size={14} strokeWidth={2.2} />
+                        </button>
+                        <button className="wd-tlmove" onClick={() => moveTItem(it.id, 1)} disabled={i === tItems.length - 1} title="Move later" aria-label="Move later">
+                          <ChevronDown size={14} strokeWidth={2.2} />
+                        </button>
+                        <button className="wd-tlmove" onClick={() => duplicateTItem(it.id)} title="Duplicate" aria-label="Duplicate">
+                          <CopyIcon size={13} strokeWidth={2} />
+                        </button>
+                        <button className="wd-del" onClick={() => removeTItem(it.id)} aria-label="Delete">
+                          <Trash2 size={16} strokeWidth={1.8} />
+                        </button>
+                      </span>
                     </div>
+
+                    {(() => {
+                      const subs = (it.subs || []).slice().sort((a, b) => (a.offset || 0) - (b.offset || 0));
+                      const doneSubs = subs.filter((x) => x.done).length;
+                      return (
+                        <div className="wd-sub">
+                          {subs.length > 0 && (
+                            <button className="wd-subtoggle" onClick={() => toggleCollapse(it.id)} aria-expanded={!it.collapsed}>
+                              {it.collapsed ? <ChevronDown size={13} strokeWidth={2.2} /> : <ChevronUp size={13} strokeWidth={2.2} />}
+                              {subs.length} step{subs.length === 1 ? "" : "s"}
+                              <span className="wd-subcount">{doneSubs}/{subs.length}</span>
+                            </button>
+                          )}
+                          {!it.collapsed && subs.map((sb) => (
+                            <div className="wd-subrow" key={sb.id}>
+                              <input
+                                className="wd-subtime"
+                                type="time"
+                                value={toField(abs + (sb.offset || 0))}
+                                aria-label={"Time for " + (sb.label || "this step")}
+                                onChange={(e) => setSubTime(it.id, sb.id, e.target.value)}
+                              />
+                              <span className="wd-subdot">
+                                <i className={sb.done ? "done" : ""} onClick={() => toggleSub(it.id, sb.id)} role="checkbox" aria-checked={sb.done} />
+                              </span>
+                              <span className="wd-subbody">
+                                <input
+                                  className={"wd-sublabel" + (sb.done ? " done" : "")}
+                                  value={sb.label}
+                                  placeholder="Step…"
+                                  onChange={(e) => setSub(it.id, sb.id, "label", e.target.value)}
+                                />
+                                <input
+                                  className="wd-subnote"
+                                  value={sb.note || ""}
+                                  placeholder="note…"
+                                  onChange={(e) => setSub(it.id, sb.id, "note", e.target.value)}
+                                />
+                              </span>
+                              <span className="wd-subacts">
+                                <button className="wd-tlnudge" onClick={() => nudgeSub(it.id, sb.id, -5)} title="5 minutes earlier" aria-label="5 minutes earlier">−5</button>
+                                <button className="wd-tlnudge" onClick={() => nudgeSub(it.id, sb.id, 5)} title="5 minutes later" aria-label="5 minutes later">+5</button>
+                                <button className="wd-del" onClick={() => removeSub(it.id, sb.id)} aria-label="Delete step">
+                                  <Trash2 size={14} strokeWidth={1.8} />
+                                </button>
+                              </span>
+                            </div>
+                          ))}
+                          {!it.collapsed && (
+                            <button className="wd-subadd" onClick={() => addSub(it.id)}>
+                              <Plus size={12} strokeWidth={2.6} /> Add a step
+                            </button>
+                          )}
+                        </div>
+                      );
+                    })()}
                   </React.Fragment>
                 );
               })}

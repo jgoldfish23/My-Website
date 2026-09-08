@@ -1,7 +1,8 @@
 // Live college football scores for djgolding.com/cfb.
 // Proxies ESPN's public scoreboard/summary feeds (which browsers cannot call directly),
 // trims them to what the page needs, and caches each upstream response at the edge for 30s.
-const ESPN = "https://site.api.espn.com/apis/site/v2/sports/football/college-football";
+// site.api.espn.com refuses server-side callers; the site.web.api host serves the same paths.
+const ESPN = "https://site.web.api.espn.com/apis/site/v2/sports/football/college-football";
 const ALLOWED_ORIGINS = ["djgolding.com", "www.djgolding.com", "localhost", "127.0.0.1"];
 const TTL = 30;
 

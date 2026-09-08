@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#0f1720">
+<meta name="apple-mobile-web-app-title" content="CFB for Dum Dums">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -392,6 +394,83 @@ footer{max-width:1240px;margin:0 auto;padding:18px 20px 40px;color:var(--ink-3);
 .pcard .wh{font-size:13.5px;color:var(--ink-2);line-height:1.45;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .tbl td.nw{white-space:nowrap}
 .tbl td.one{max-width:36ch}
+
+/* ---------- phones (Safari / Chrome) ---------- */
+@media (max-width:720px){
+  .top-in{padding:8px 12px 0;gap:8px}
+  .brand{width:100%;justify-content:space-between}
+  .wordmark{font-size:22px}
+  .season{font-size:12.5px}
+  .search{width:100%}
+  .search input{width:100%;font-size:16px;padding:9px 12px}
+  .search-res{left:0;right:0;width:auto;top:44px}
+  .nav{gap:0;margin:0 -12px;padding:0 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{padding:9px 10px 9px;font-size:15.5px;scroll-snap-align:start}
+  .asof{padding:6px 12px 0;gap:4px 10px;font-size:12px}
+  main{padding:12px 12px 48px}
+  .page-head{margin:4px 0 10px;gap:10px}
+  .page-head h1{font-size:28px}
+  .page-head .sub{font-size:14px}
+  .wk{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .wk::-webkit-scrollbar{display:none}
+  .wk a,.wk button.jump{flex:none}
+  .seg{max-width:100%;overflow-x:auto;white-space:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .seg::-webkit-scrollbar{display:none}
+  .seg a,.seg button{flex:none;padding:7px 11px}
+  .toolbar{gap:6px;margin-bottom:10px}
+  .toolbar .mini{display:none}
+  .toolbar[style*="sticky"]{position:static!important;padding:0!important}
+  .sec{margin:18px 0 8px}
+  .sec h2{font-size:21px}
+  .tile{padding:9px 10px 8px}
+  .tile .val{font-size:22px}
+  .tile .val.sm{font-size:18px}
+  .card .hd{padding:10px 12px 6px}
+  .card .hd h3{font-size:17px}
+  .card .bd{padding:0 12px 12px}
+  table.tbl{font-size:13px}
+  .tbl th{padding:8px 8px}
+  .tbl td{padding:7px 8px}
+  .thead{padding:12px 12px;gap:12px}
+  .thead .mono{width:52px;height:52px;font-size:22px}
+  .thead .ttl h1{font-size:26px}
+  .thead .ranks{margin-left:0;width:100%;gap:6px}
+  .thead .ranks .rb{min-width:56px;padding:5px 8px;flex:1}
+  .thead .ranks .rb .v{font-size:20px}
+  .ghead{padding:12px;gap:10px}
+  .ghead .mono{width:44px;height:44px;font-size:18px}
+  .ghead .nm{font-size:22px}
+  .ghead .mid .sc{font-size:34px}
+  .cmp{grid-template-columns:1fr 78px 1fr;gap:6px 8px;font-size:12.5px}
+  .cmp .b{height:18px}
+  .pick{padding:10px 12px;gap:10px}
+  .scoreproj{font-size:20px}
+  .pcard .wm{font-size:18px}
+  .slider{grid-template-columns:110px 1fr 32px}
+  .dc{grid-template-columns:1fr}
+  .teamgrid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .gm{padding:9px 10px}
+  .gm .sc{font-size:20px}
+  .watchgrid{grid-template-columns:1fr 1fr}
+  .g6,.g5,.g4{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .grid{gap:10px}
+  .btn{min-height:40px}
+  .pvgrid{gap:0}
+}
+@media (max-width:460px){
+  .watchgrid{grid-template-columns:1fr}
+  .gm .tm .row .nm{font-size:14px}
+  .cmp{grid-template-columns:1fr 66px 1fr}
+  .thead .ttl h1{font-size:23px}
+}
+@media (hover:none){
+  .pcard:hover{transform:none}
+  a,button,.click{-webkit-tap-highlight-color:rgba(255,255,255,.06)}
+}
+@media (max-width:720px){ @supports (padding:max(0px)){
+  .top-in,main,.asof{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+} }
 </style>
 
 <header class="top">
@@ -865,20 +944,20 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 2|2026-09-10|Florida A&M|Miami|||SCHEDULED|8:00 PM||-55.5|61.5|||ACC Network|
 2|2026-09-11|Villanova|Louisville|||SCHEDULED|7:00 PM||-36.5|55.5|||ACC Network|
 2|2026-09-11|Norfolk State|Virginia|||SCHEDULED|7:00 PM||-44.5|54.5|||ACCNX|
-2|2026-09-11|Richmond|NC State|||SCHEDULED|7:00 PM||-30.5|48.5|||ESPNU|
-2|2026-09-11|Rutgers|Boston College|||SCHEDULED|7:30 PM||-3.5|54.5|||ESPN2|
-2|2026-09-11|Missouri|Kansas|||SCHEDULED|8:00 PM||5.5|50.5|||FOX|
-2|2026-09-12|Oregon|Oklahoma State|||SCHEDULED|12:00 PM||22.5|57.5|||ESPN/Disney+|
+2|2026-09-11|Richmond|NC State|||SCHEDULED|7:00 PM||-30.5|48.5|3000|-10000|ESPNU|
+2|2026-09-11|Rutgers|Boston College|||SCHEDULED|7:30 PM||-3.5|54.5|145|-175|ESPN2|
+2|2026-09-11|Missouri|Kansas|||SCHEDULED|8:00 PM||5.5|50.5|-218|180|FOX|
+2|2026-09-12|Oregon|Oklahoma State|||SCHEDULED|12:00 PM||22.5|57.5|-2100|1100|ESPN/Disney+|
 2|2026-09-12|Howard|Indiana|||SCHEDULED|12:00 PM||||||BTN|
-2|2026-09-12|Arizona State|Texas A&M|||SCHEDULED|12:00 PM||-14.5|51.5|||ABC|
-2|2026-09-12|Oklahoma|Michigan|||SCHEDULED|12:00 PM||5.5|43.5|||FOX|
-2|2026-09-12|Penn State|Temple|||SCHEDULED|12:00 PM||23.5|49.5|||ESPN2|
-2|2026-09-12|Washington State|Kansas State|||SCHEDULED|12:00 PM||-18.5|49.5|||TNT|
+2|2026-09-12|Arizona State|Texas A&M|||SCHEDULED|12:00 PM||-14.5|51.5|455|-625|ABC|
+2|2026-09-12|Oklahoma|Michigan|||SCHEDULED|12:00 PM||5.5|43.5|-218|180|FOX|
+2|2026-09-12|Penn State|Temple|||SCHEDULED|12:00 PM||23.5|49.5|-3200|1400|ESPN2|
+2|2026-09-12|Washington State|Kansas State|||SCHEDULED|12:00 PM||-18.5|49.5|750|-1200|TNT|
 2|2026-09-12|East Tennessee State|North Carolina|||SCHEDULED|12:00 PM||||||ACC Network|
-2|2026-09-12|Old Dominion|Virginia Tech|||SCHEDULED|12:00 PM||-18.5|51.5|||CW|
-2|2026-09-12|Wake Forest|Purdue|||SCHEDULED|12:00 PM||4|49.5|||FS1|
-2|2026-09-12|South Florida|Army|||SCHEDULED|12:00 PM||-3.5|47.5|||CBSSN|
-2|2026-09-12|App State|East Carolina|||SCHEDULED|12:00 PM||-8.5|56.5|||ESPNU|
+2|2026-09-12|Old Dominion|Virginia Tech|||SCHEDULED|12:00 PM||-18.5|51.5|750|-1200|CW|
+2|2026-09-12|Wake Forest|Purdue|||SCHEDULED|12:00 PM||4|49.5|-185|154|FS1|
+2|2026-09-12|South Florida|Army|||SCHEDULED|12:00 PM||-3.5|47.5|154|-185|CBSSN|
+2|2026-09-12|App State|East Carolina|||SCHEDULED|12:00 PM||-8.5|56.5|260|-325|ESPNU|
 2|2026-09-12|Wofford|Kent State|||SCHEDULED|12:00 PM||||||ESPN+|
 2|2026-09-12|Western Kentucky|Georgia|||SCHEDULED|12:45 PM||-40.5|54.5|||SEC Network|
 2|2026-09-12|UT Martin|West Virginia|||SCHEDULED|1:00 PM||||||ESPN+|
@@ -886,68 +965,68 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 2|2026-09-12|Holy Cross|Miami (OH)|||SCHEDULED|1:00 PM||||||ESPN+|
 2|2026-09-12|Stony Brook|Ball State|||SCHEDULED|2:00 PM||||||ESPN+|
 2|2026-09-12|Rice|Notre Dame|||SCHEDULED|3:30 PM||-44.5|54.5|||NBC|
-2|2026-09-12|Alabama|Kentucky|||SCHEDULED|3:30 PM||10.5|49.5|||ABC/Disney+|
-2|2026-09-12|Arizona|BYU|||SCHEDULED|3:30 PM||-7.5|50.5|||FOX|
-2|2026-09-12|Utah State|Washington|||SCHEDULED|3:30 PM||-26.5|55.5|||BTN|
-2|2026-09-12|Mississippi State|Minnesota|||SCHEDULED|3:30 PM||1.5|55.5|||CBS|
+2|2026-09-12|Alabama|Kentucky|||SCHEDULED|3:30 PM||10.5|49.5|-410|320|ABC/Disney+|
+2|2026-09-12|Arizona|BYU|||SCHEDULED|3:30 PM||-7.5|50.5|230|-285|FOX|
+2|2026-09-12|Utah State|Washington|||SCHEDULED|3:30 PM||-26.5|55.5|1600|-4000|BTN|
+2|2026-09-12|Mississippi State|Minnesota|||SCHEDULED|3:30 PM||1.5|55.5|-120|100|CBS|
 2|2026-09-12|Weber State|Colorado|||SCHEDULED|3:30 PM||||||ESPN+|
-2|2026-09-12|UCF|Pittsburgh|||SCHEDULED|3:30 PM||-7|57.5|||ESPN2|
-2|2026-09-12|California|Syracuse|||SCHEDULED|3:30 PM||-3.5|56.5|||ACC Network|
-2|2026-09-12|Duke|Illinois|||SCHEDULED|3:30 PM||-6|53.5|||FS1|
-2|2026-09-12|Eastern Michigan|Michigan State|||SCHEDULED|3:30 PM||-17.5|50.5|||BTN|
-2|2026-09-12|Maryland|UConn|||SCHEDULED|3:30 PM||12.5|52.5|||CBSSN|
-2|2026-09-12|UTSA|Texas State|||SCHEDULED|3:30 PM||-1.5|64.5|||CW|
-2|2026-09-12|UL Monroe|UAB|||SCHEDULED|3:30 PM||-10.5|55.5|||ESPN+|
+2|2026-09-12|UCF|Pittsburgh|||SCHEDULED|3:30 PM||-7|57.5|220|-270|ESPN2|
+2|2026-09-12|California|Syracuse|||SCHEDULED|3:30 PM||-3.5|56.5|140|-166|ACC Network|
+2|2026-09-12|Duke|Illinois|||SCHEDULED|3:30 PM||-6|53.5|190|-230|FS1|
+2|2026-09-12|Eastern Michigan|Michigan State|||SCHEDULED|3:30 PM||-17.5|50.5|575|-850|BTN|
+2|2026-09-12|Maryland|UConn|||SCHEDULED|3:30 PM||12.5|52.5|-470|360|CBSSN|
+2|2026-09-12|UTSA|Texas State|||SCHEDULED|3:30 PM||-1.5|64.5|-102|-118|CW|
+2|2026-09-12|UL Monroe|UAB|||SCHEDULED|3:30 PM||-10.5|55.5|320|-410|ESPN+|
 2|2026-09-12|Robert Morris|Akron|||SCHEDULED|3:30 PM||||||ESPN+|
 2|2026-09-12|Central Connecticut|Toledo|||SCHEDULED|3:30 PM||||||ESPN+|
 2|2026-09-12|Sacred Heart|Massachusetts|||SCHEDULED|3:30 PM||||||ESPN+|
 2|2026-09-12|Wagner|James Madison|||SCHEDULED|3:30 PM||||||ESPN+|
-2|2026-09-12|UNLV|North Texas|||SCHEDULED|3:45 PM||3.5|57.5|||ESPNU|
+2|2026-09-12|UNLV|North Texas|||SCHEDULED|3:45 PM||3.5|57.5|-185|154|ESPNU|
 2|2026-09-12|UC Davis|SMU|||SCHEDULED|4:00 PM||||||ACCNX|
 2|2026-09-12|Northern Colorado|Wyoming|||SCHEDULED|4:00 PM||||||MW+|
 2|2026-09-12|Mercyhurst|New Mexico|||SCHEDULED|4:00 PM||||||MW+|
 2|2026-09-12|Alabama State|Troy|||SCHEDULED|4:00 PM||||||ESPN+|
-2|2026-09-12|Delaware|Vanderbilt|||SCHEDULED|4:15 PM||-20.5|53.5|||SEC Network|
+2|2026-09-12|Delaware|Vanderbilt|||SCHEDULED|4:15 PM||-20.5|53.5|900|-1600|SEC Network|
 2|2026-09-12|Campbell|Florida|||SCHEDULED|5:30 PM||||||SECN+|
-2|2026-09-12|Memphis|Boise State|||SCHEDULED|6:00 PM||-8.5|54.5|||USA Net|
-2|2026-09-12|Buffalo|Florida International|||SCHEDULED|6:00 PM||-10.5|47.5|||ESPN+|
-2|2026-09-12|Jacksonville State|Ohio|||SCHEDULED|6:00 PM||-2.5|51.5|||ESPN+|
+2|2026-09-12|Memphis|Boise State|||SCHEDULED|6:00 PM||-8.5|54.5|280|-355|USA Net|
+2|2026-09-12|Buffalo|Florida International|||SCHEDULED|6:00 PM||-10.5|47.5|340|-440|ESPN+|
+2|2026-09-12|Jacksonville State|Ohio|||SCHEDULED|6:00 PM||-2.5|51.5|114|-135|ESPN+|
 2|2026-09-12|Gardner-Webb|Liberty|||SCHEDULED|6:00 PM||||||ESPN+|
 2|2026-09-12|Monmouth|Western Michigan|||SCHEDULED|6:30 PM||||||ESPN+|
-2|2026-09-12|Tennessee|Georgia Tech|||SCHEDULED|7:00 PM||12.5|55.5|||ESPN|
+2|2026-09-12|Tennessee|Georgia Tech|||SCHEDULED|7:00 PM||12.5|55.5|-535|400|ESPN|
 2|2026-09-12|Southern|Houston|||SCHEDULED|7:00 PM||||||ESPN+|
 2|2026-09-12|Towson|South Carolina|||SCHEDULED|7:00 PM||||||SECN+|
 2|2026-09-12|Western Carolina|Cincinnati|||SCHEDULED|7:00 PM||||||ESPN+|
-2|2026-09-12|Bowling Green|Nebraska|||SCHEDULED|7:00 PM||-28.5|51.5|||FS1|
+2|2026-09-12|Bowling Green|Nebraska|||SCHEDULED|7:00 PM||-28.5|51.5|2200|-8000|FS1|
 2|2026-09-12|Southern Utah|Colorado State|||SCHEDULED|7:00 PM||||||CBSSN|
-2|2026-09-12|Tulsa|Sam Houston|||SCHEDULED|7:00 PM||13.5|51.5|||ESPN+|
+2|2026-09-12|Tulsa|Sam Houston|||SCHEDULED|7:00 PM||13.5|51.5|-600|440|ESPN+|
 2|2026-09-12|Illinois State|Northern Illinois|||SCHEDULED|7:00 PM||||||MW+|
-2|2026-09-12|South Alabama|Tulane|||SCHEDULED|7:00 PM||-9.5|49.5|||ESPN+|
+2|2026-09-12|South Alabama|Tulane|||SCHEDULED|7:00 PM||-9.5|49.5|295|-375|ESPN+|
 2|2026-09-12|West Georgia|Arkansas State|||SCHEDULED|7:00 PM||||||ESPN+|
-2|2026-09-12|Georgia State|Kennesaw State|||SCHEDULED|7:00 PM||-9.5|54.5|||ESPN+|
-2|2026-09-12|Middle Tennessee|Marshall|||SCHEDULED|7:00 PM||-14|58.5|||ESPN+|
+2|2026-09-12|Georgia State|Kennesaw State|||SCHEDULED|7:00 PM||-9.5|54.5|270|-340|ESPN+|
+2|2026-09-12|Middle Tennessee|Marshall|||SCHEDULED|7:00 PM||-14|58.5|440|-600|ESPN+|
 2|2026-09-12|Lindenwood|Missouri State|||SCHEDULED|7:00 PM||||||ESPN+|
-2|2026-09-12|San Diego State|UCLA|||SCHEDULED|7:15 PM||-11.5|53.5|||BTN|
+2|2026-09-12|San Diego State|UCLA|||SCHEDULED|7:15 PM||-11.5|53.5|360|-470|BTN|
 2|2026-09-12|Western Illinois|Wisconsin|||SCHEDULED|7:15 PM||||||BTN|
-2|2026-09-12|Ohio State|Texas|||SCHEDULED|7:30 PM||-1.5|48.5|||ABC|
-2|2026-09-12|Louisiana Tech|LSU|||SCHEDULED|7:30 PM||-35.5|55.5|||SECN+|
-2|2026-09-12|Texas Tech|Oregon State|||SCHEDULED|7:30 PM||26.5|51.5|||CBS|
-2|2026-09-12|Iowa State|Iowa|||SCHEDULED|7:30 PM||-14.5|41.5|||NBC|
-2|2026-09-12|Georgia Southern|Clemson|||SCHEDULED|7:30 PM||-20.5|55.5|||ACC Network|
-2|2026-09-12|Navy|Florida Atlantic|||SCHEDULED|7:30 PM||4.5|59.5|||ESPNU|
+2|2026-09-12|Ohio State|Texas|||SCHEDULED|7:30 PM||-1.5|48.5|100|-120|ABC|
+2|2026-09-12|Louisiana Tech|LSU|||SCHEDULED|7:30 PM||-35.5|55.5|3500|-20000|SECN+|
+2|2026-09-12|Texas Tech|Oregon State|||SCHEDULED|7:30 PM||26.5|51.5|-3600|1500|CBS|
+2|2026-09-12|Iowa State|Iowa|||SCHEDULED|7:30 PM||-14.5|41.5|470|-650|NBC|
+2|2026-09-12|Georgia Southern|Clemson|||SCHEDULED|7:30 PM||-20.5|55.5|800|-1350|ACC Network|
+2|2026-09-12|Navy|Florida Atlantic|||SCHEDULED|7:30 PM||4.5|59.5|-218|180|ESPNU|
 2|2026-09-12|Fordham|Coastal Carolina|||SCHEDULED|7:30 PM||||||ESPN+|
 2|2026-09-12|Charlotte|Ole Miss|||SCHEDULED|7:45 PM||-47.5|61.5|||ESPN2|
-2|2026-09-12|Southern Miss|Auburn|||SCHEDULED|7:45 PM||-32.5|54.5|||SEC Network|
+2|2026-09-12|Southern Miss|Auburn|||SCHEDULED|7:45 PM||-32.5|54.5|2500|-9000|SEC Network|
 2|2026-09-12|Prairie View A&M|Baylor|||SCHEDULED|8:00 PM||||||ESPN+|
 2|2026-09-12|Grambling|TCU|||SCHEDULED|8:00 PM||||||ESPN+|
 2|2026-09-12|Cal Poly|San José State|||SCHEDULED|9:00 PM||||||MW+|
 2|2026-09-12|Texas Southern|UTEP|||SCHEDULED|9:00 PM||||||MW+|
-2|2026-09-12|North Dakota State|Air Force|||SCHEDULED|10:00 PM||3|47.5|||FS1|
-2|2026-09-12|Arkansas|Utah|||SCHEDULED|10:15 PM||-13.5|56.5|||ESPN|
-2|2026-09-12|Sacramento State|Fresno State|||SCHEDULED|10:30 PM||-18.5|45.5|||CBSSN|
+2|2026-09-12|North Dakota State|Air Force|||SCHEDULED|10:00 PM||3|47.5|-142|120|FS1|
+2|2026-09-12|Arkansas|Utah|||SCHEDULED|10:15 PM||-13.5|56.5|400|-535|ESPN|
+2|2026-09-12|Sacramento State|Fresno State|||SCHEDULED|10:30 PM||-18.5|45.5|625|-950|CBSSN|
 2|2026-09-12|Montana State|Nevada|||SCHEDULED|10:30 PM||||||CW|
-2|2026-09-12|Louisiana|USC|||SCHEDULED|11:00 PM||-31.5|60.5|||BTN|
-2|2026-09-12|New Mexico State|Hawai'i|||SCHEDULED|11:59 PM||-9.5|50.5|||MW+|
+2|2026-09-12|Louisiana|USC|||SCHEDULED|11:00 PM||-31.5|60.5|3500|-20000|BTN|
+2|2026-09-12|New Mexico State|Hawai'i|||SCHEDULED|11:59 PM||-9.5|50.5|300|-380|MW+|
 3|2026-09-17|Syracuse|Pittsburgh|||SCHEDULED|7:30 PM||||||ESPN|
 3|2026-09-18|Miami|Wake Forest|||SCHEDULED|7:30 PM||||||ESPN|
 3|2026-09-18|Houston|Texas Tech|||SCHEDULED|8:00 PM||-13.5||||FOX|
@@ -970,10 +1049,10 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 3|2026-09-19|Southern Illinois|Illinois|||SCHEDULED|2:00 PM||||||Peacock|
 3|2026-09-19|Temple|Toledo|||SCHEDULED|3:00 PM||||||CBSSN|
 3|2026-09-19|Kentucky|Texas A&M|||SCHEDULED|3:30 PM|||||||
-3|2026-09-19|Florida State|Alabama|||SCHEDULED|3:30 PM||-15.5|52.5|||ABC|
+3|2026-09-19|Florida State|Alabama|||SCHEDULED|3:30 PM||-15.5|52.5|440|-600|ABC|
 3|2026-09-19|USC|Rutgers|||SCHEDULED|3:30 PM||||||CBS|
 3|2026-09-19|UTEP|Michigan|||SCHEDULED|3:30 PM||||||BTN|
-3|2026-09-19|SMU|Louisville|||SCHEDULED|3:30 PM||-1.5|56.5||||
+3|2026-09-19|SMU|Louisville|||SCHEDULED|3:30 PM||-1.5|56.5|-105|-115||
 3|2026-09-19|Utah State|Utah|||SCHEDULED|3:30 PM||||||FOX|
 3|2026-09-19|Miami (OH)|Cincinnati|||SCHEDULED|3:30 PM||||||ESPN+|
 3|2026-09-19|Wagner|California|||SCHEDULED|3:30 PM||||||ACC Network|
@@ -991,7 +1070,7 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 3|2026-09-19|Charlotte|App State|||SCHEDULED|6:00 PM||||||ESPN+|
 3|2026-09-19|Marshall|Missouri State|||SCHEDULED|6:30 PM||||||CBSSN|
 3|2026-09-19|Troy|Missouri|||SCHEDULED|7:00 PM||||||SECN+|
-3|2026-09-19|Florida|Auburn|||SCHEDULED|7:00 PM||1.5|53.5|||ESPN|
+3|2026-09-19|Florida|Auburn|||SCHEDULED|7:00 PM||1.5|53.5|-112|-108|ESPN|
 3|2026-09-19|Georgia State|UCF|||SCHEDULED|7:00 PM||||||ESPN+|
 3|2026-09-19|Murray State|Oklahoma State|||SCHEDULED|7:00 PM||||||ESPN+|
 3|2026-09-19|UConn|Southern Miss|||SCHEDULED|7:00 PM||||||ESPN+|
@@ -1005,7 +1084,7 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 3|2026-09-19|Eastern Washington|Washington|||SCHEDULED|7:15 PM||||||BTN|
 3|2026-09-19|North Dakota|Nebraska|||SCHEDULED|7:15 PM||||||BTN|
 3|2026-09-19|Michigan State|Notre Dame|||SCHEDULED|7:30 PM||||||NBC|
-3|2026-09-19|LSU|Ole Miss|||SCHEDULED|7:30 PM||-1.5|57.5|||ABC|
+3|2026-09-19|LSU|Ole Miss|||SCHEDULED|7:30 PM||-1.5|57.5|110|-130|ABC|
 3|2026-09-19|New Mexico|Oklahoma|||SCHEDULED|7:30 PM||||||ESPN2|
 3|2026-09-19|BYU|Colorado State|||SCHEDULED|7:30 PM||||||CBS|
 3|2026-09-19|Colorado|Northwestern|||SCHEDULED|7:30 PM|||||||
@@ -1030,10 +1109,10 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 4|2026-09-25|Northwestern|Indiana|||SCHEDULED|8:00 PM||||||FOX|
 4|2026-09-25|Clemson|California|||SCHEDULED|10:30 PM||||||ESPN|
 4|2026-09-26|Illinois|Ohio State|||SCHEDULED|TBD|||||||
-4|2026-09-26|Oregon|USC|||SCHEDULED|TBD||5.5|58.5||||
-4|2026-09-26|Oklahoma|Georgia|||SCHEDULED|TBD||-10|52.5||||
+4|2026-09-26|Oregon|USC|||SCHEDULED|TBD||5.5|58.5|-238|195||
+4|2026-09-26|Oklahoma|Georgia|||SCHEDULED|TBD||-10|52.5|310|-395||
 4|2026-09-26|Notre Dame|Purdue|||SCHEDULED|TBD|||||||
-4|2026-09-26|Texas A&M|LSU|||SCHEDULED|TBD||-3|56.5||||
+4|2026-09-26|Texas A&M|LSU|||SCHEDULED|TBD||-3|56.5|130|-155||
 4|2026-09-26|Ole Miss|Florida|||SCHEDULED|TBD|||||||
 4|2026-09-26|Sam Houston|Texas Tech|||SCHEDULED|TBD|||||||
 4|2026-09-26|South Carolina|Alabama|||SCHEDULED|TBD|||||||
@@ -1070,7 +1149,7 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 4|2026-09-26|Ball State|Kent State|||SCHEDULED|TBD|||||||
 4|2026-09-26|Massachusetts|Sacramento State|||SCHEDULED|TBD|||||||
 4|2026-09-26|James Madison|Old Dominion|||SCHEDULED|TBD|||||||
-4|2026-09-26|Texas|Tennessee|||SCHEDULED|12:00 PM||6.5|56.5||||
+4|2026-09-26|Texas|Tennessee|||SCHEDULED|12:00 PM||6.5|56.5|-270|220||
 4|2026-09-26|Bucknell|Pittsburgh|||SCHEDULED|12:00 PM||||||ACCNX|
 4|2026-09-26|South Alabama|Kentucky|||SCHEDULED|12:45 PM||||||SEC Network|
 4|2026-09-26|Lindenwood|Eastern Michigan|||SCHEDULED|1:00 PM||||||ESPN+|
@@ -1101,8 +1180,8 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 5|2026-10-02|Penn State|Northwestern|||SCHEDULED|8:00 PM||||||FOX|
 5|2026-10-03|Ohio State|Iowa|||SCHEDULED|TBD|||||||
 5|2026-10-03|Vanderbilt|Georgia|||SCHEDULED|TBD|||||||
-5|2026-10-03|Notre Dame|North Carolina|||SCHEDULED|TBD||23.5|55.5||||
-5|2026-10-03|Miami|Clemson|||SCHEDULED|TBD||7|55.5||||
+5|2026-10-03|Notre Dame|North Carolina|||SCHEDULED|TBD||23.5|55.5|-2100|1100||
+5|2026-10-03|Miami|Clemson|||SCHEDULED|TBD||7|55.5|-325|260||
 5|2026-10-03|Arkansas|Texas A&M|||SCHEDULED|TBD|||||||
 5|2026-10-03|Texas Tech|Colorado|||SCHEDULED|TBD|||||||
 5|2026-10-03|Alabama|Mississippi State|||SCHEDULED|TBD|||||||
@@ -1167,12 +1246,12 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 6|2026-10-09|Iowa State|BYU|||SCHEDULED|10:15 PM||||||ESPN|
 6|2026-10-10|Maryland|Ohio State|||SCHEDULED|TBD|||||||
 6|2026-10-10|UCLA|Oregon|||SCHEDULED|TBD|||||||
-6|2026-10-10|Georgia|Alabama|||SCHEDULED|TBD||3|50.5||||
+6|2026-10-10|Georgia|Alabama|||SCHEDULED|TBD||3|50.5|-162|136||
 6|2026-10-10|Indiana|Nebraska|||SCHEDULED|TBD|||||||
 6|2026-10-10|Texas A&M|Missouri|||SCHEDULED|TBD|||||||
 6|2026-10-10|Ole Miss|Vanderbilt|||SCHEDULED|TBD|||||||
 6|2026-10-10|LSU|Kentucky|||SCHEDULED|TBD|||||||
-6|2026-10-10|USC|Penn State|||SCHEDULED|TBD||-1.5|56.5||||
+6|2026-10-10|USC|Penn State|||SCHEDULED|TBD||-1.5|56.5|105|-125||
 6|2026-10-10|Tennessee|Arkansas|||SCHEDULED|TBD|||||||
 6|2026-10-10|Kansas|Utah|||SCHEDULED|TBD|||||||
 6|2026-10-10|Houston|Kansas State|||SCHEDULED|TBD|||||||
@@ -1204,7 +1283,7 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 6|2026-10-10|Louisiana|Louisiana Tech|||SCHEDULED|TBD|||||||
 6|2026-10-10|Tulane|Army|||SCHEDULED|12:00 PM||||||CBSSN|
 6|2026-10-10|Stanford|Notre Dame|||SCHEDULED|3:30 PM||||||NBC|
-6|2026-10-10|Texas|Oklahoma|||SCHEDULED|3:30 PM|N|6|48.5||||Cotton Bowl, Dallas
+6|2026-10-10|Texas|Oklahoma|||SCHEDULED|3:30 PM|N|6|48.5|-218|180||Cotton Bowl, Dallas
 6|2026-10-10|Tulsa|Navy|||SCHEDULED|3:30 PM||||||CBSSN|
 6|2026-10-10|Eastern Michigan|Akron|||SCHEDULED|3:30 PM|||||||
 6|2026-10-10|San Diego State|Oregon State|||SCHEDULED|6:00 PM||||||USA Net|
@@ -1221,29 +1300,29 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 7|2026-10-16|Memphis|Tulane|||SCHEDULED|7:30 PM||||||ESPN|
 7|2026-10-16|Washington|Purdue|||SCHEDULED|8:00 PM||||||FOX|
 7|2026-10-16|App State|Coastal Carolina|||SCHEDULED|8:00 PM||||||ESPN2|
-7|2026-10-17|Ohio State|Indiana|||SCHEDULED|TBD||-1.5|48.5||||
-7|2026-10-17|Nebraska|Oregon|||SCHEDULED|TBD||-21.5|51.5||||
-7|2026-10-17|Auburn|Georgia|||SCHEDULED|TBD||-16.5|54.5||||
-7|2026-10-17|Notre Dame|BYU|||SCHEDULED|TBD||10|54.5||||
+7|2026-10-17|Ohio State|Indiana|||SCHEDULED|TBD||-1.5|48.5|-110|-110||
+7|2026-10-17|Nebraska|Oregon|||SCHEDULED|TBD||-21.5|51.5|1500|-3600||
+7|2026-10-17|Auburn|Georgia|||SCHEDULED|TBD||-16.5|54.5|750|-1200||
+7|2026-10-17|Notre Dame|BYU|||SCHEDULED|TBD||10|54.5|-440|340||
 7|2026-10-17|Florida|Texas|||SCHEDULED|TBD|||||||
-7|2026-10-17|Florida State|Miami|||SCHEDULED|TBD||-16.5|53.5||||
+7|2026-10-17|Florida State|Miami|||SCHEDULED|TBD||-16.5|53.5|750|-1200||
 7|2026-10-17|Missouri|Ole Miss|||SCHEDULED|TBD|||||||
 7|2026-10-17|Kentucky|Oklahoma|||SCHEDULED|TBD|||||||
 7|2026-10-17|Mississippi State|LSU|||SCHEDULED|TBD|||||||
 7|2026-10-17|Arizona State|Texas Tech|||SCHEDULED|TBD|||||||
-7|2026-10-17|Alabama|Tennessee|||SCHEDULED|TBD||1.5|56.5||||
-7|2026-10-17|Penn State|Michigan|||SCHEDULED|TBD||-6.5|51.5||||
+7|2026-10-17|Alabama|Tennessee|||SCHEDULED|TBD||1.5|56.5|-120|100||
+7|2026-10-17|Penn State|Michigan|||SCHEDULED|TBD||-6.5|51.5|220|-270||
 7|2026-10-17|Virginia|SMU|||SCHEDULED|TBD|||||||
 7|2026-10-17|Utah|Colorado|||SCHEDULED|TBD|||||||
 7|2026-10-17|Oklahoma State|Houston|||SCHEDULED|TBD|||||||
 7|2026-10-17|Louisville|Syracuse|||SCHEDULED|TBD|||||||
 7|2026-10-17|Arkansas|Vanderbilt|||SCHEDULED|TBD|||||||
 7|2026-10-17|Cincinnati|West Virginia|||SCHEDULED|TBD|||||||
-7|2026-10-17|Kansas|Kansas State|||SCHEDULED|TBD||-7.5|54.5||||
+7|2026-10-17|Kansas|Kansas State|||SCHEDULED|TBD||-7.5|54.5|235|-290||
 7|2026-10-17|TCU|Baylor|||SCHEDULED|TBD|||||||
 7|2026-10-17|Charleston Southern|Clemson|||SCHEDULED|TBD|||||||
 7|2026-10-17|Georgia Tech|Virginia Tech|||SCHEDULED|TBD|||||||
-7|2026-10-17|North Carolina|Duke|||SCHEDULED|TBD||-4.5|54.5||||
+7|2026-10-17|North Carolina|Duke|||SCHEDULED|TBD||-4.5|54.5|185|-225||
 7|2026-10-17|Pittsburgh|Boston College|||SCHEDULED|TBD|||||||
 7|2026-10-17|Wake Forest|California|||SCHEDULED|TBD|||||||
 7|2026-10-17|Rutgers|Maryland|||SCHEDULED|TBD|||||||
@@ -1280,23 +1359,23 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 8|2026-10-22|James Madison|App State|||SCHEDULED|7:00 PM||||||ESPNU|
 8|2026-10-22|Liberty|Kennesaw State|||SCHEDULED|7:00 PM||||||CBSSN|
 8|2026-10-22|East Carolina|Memphis|||SCHEDULED|7:30 PM||||||ESPN2|
-8|2026-10-23|Duke|Virginia|||SCHEDULED|7:00 PM||-6.5|53.5|||ESPN|
+8|2026-10-23|Duke|Virginia|||SCHEDULED|7:00 PM||-6.5|53.5|225|-278|ESPN|
 8|2026-10-23|Massachusetts|UConn|||SCHEDULED|7:00 PM||||||CBSSN|
 8|2026-10-23|Army|Tulsa|||SCHEDULED|8:30 PM||||||ESPN2|
 8|2026-10-23|Air Force|Wyoming|||SCHEDULED|9:00 PM||||||CW|
 8|2026-10-23|NC State|Stanford|||SCHEDULED|10:30 PM||||||ESPN|
 8|2026-10-24|Oregon|Illinois|||SCHEDULED|TBD|||||||
-8|2026-10-24|Ole Miss|Texas|||SCHEDULED|TBD||-8.5|54.5||||
-8|2026-10-24|Indiana|Michigan|||SCHEDULED|TBD||6|52.5||||
+8|2026-10-24|Ole Miss|Texas|||SCHEDULED|TBD||-8.5|54.5|250|-310||
+8|2026-10-24|Indiana|Michigan|||SCHEDULED|TBD||6|52.5|-258|210||
 8|2026-10-24|Pittsburgh|Miami|||SCHEDULED|TBD|||||||
-8|2026-10-24|Texas A&M|Alabama|||SCHEDULED|TBD||-2.5|54.5||||
+8|2026-10-24|Texas A&M|Alabama|||SCHEDULED|TBD||-2.5|54.5|120|-142||
 8|2026-10-24|Oklahoma|Mississippi State|||SCHEDULED|TBD|||||||
 8|2026-10-24|Texas Tech|Cincinnati|||SCHEDULED|TBD|||||||
 8|2026-10-24|BYU|UCF|||SCHEDULED|TBD|||||||
 8|2026-10-24|USC|Wisconsin|||SCHEDULED|TBD|||||||
 8|2026-10-24|California|SMU|||SCHEDULED|TBD|||||||
 8|2026-10-24|Tennessee|South Carolina|||SCHEDULED|TBD|||||||
-8|2026-10-24|Houston|Utah|||SCHEDULED|TBD||-6.5|50.5||||
+8|2026-10-24|Houston|Utah|||SCHEDULED|TBD||-6.5|50.5|210|-258||
 8|2026-10-24|Iowa|Minnesota|||SCHEDULED|TBD|||||||
 8|2026-10-24|Vanderbilt|Kentucky|||SCHEDULED|TBD|||||||
 8|2026-10-24|Baylor|Kansas|||SCHEDULED|TBD|||||||
@@ -1338,7 +1417,7 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 9|2026-10-30|Tulane|Charlotte|||SCHEDULED|7:00 PM||||||ESPN2|
 9|2026-10-30|Baylor|UCF|||SCHEDULED|7:30 PM||||||ESPN|
 9|2026-10-30|Kent State|Sacramento State|||SCHEDULED|10:30 PM||||||ESPN2|
-9|2026-10-31|Ohio State|USC|||SCHEDULED|TBD||7.5|54.5||||
+9|2026-10-31|Ohio State|USC|||SCHEDULED|TBD||7.5|54.5|-325|260||
 9|2026-10-31|Northwestern|Oregon|||SCHEDULED|TBD|||||||
 9|2026-10-31|Mississippi State|Texas|||SCHEDULED|TBD|||||||
 9|2026-10-31|Minnesota|Indiana|||SCHEDULED|TBD|||||||
@@ -1360,7 +1439,7 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 9|2026-10-31|Oklahoma State|Iowa State|||SCHEDULED|TBD|||||||
 9|2026-10-31|California|NC State|||SCHEDULED|TBD|||||||
 9|2026-10-31|Boston College|Duke|||SCHEDULED|TBD|||||||
-9|2026-10-31|Clemson|Florida State|||SCHEDULED|TBD||1.5|51.5||||
+9|2026-10-31|Clemson|Florida State|||SCHEDULED|TBD||1.5|51.5|-112|-108||
 9|2026-10-31|Georgia Tech|Pittsburgh|||SCHEDULED|TBD|||||||
 9|2026-10-31|Virginia|Wake Forest|||SCHEDULED|TBD|||||||
 9|2026-10-31|Illinois|Maryland|||SCHEDULED|TBD|||||||
@@ -1378,7 +1457,7 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 9|2026-10-31|Notre Dame|Navy|||SCHEDULED|12:00 PM|N||||||Gillette Stadium, Foxborough
 9|2026-10-31|Bowling Green|Western Michigan|||SCHEDULED|12:00 PM||||||CBSSN|
 9|2026-10-31|UConn|Air Force|||SCHEDULED|3:00 PM||||||MW+|
-9|2026-10-31|Florida|Georgia|||SCHEDULED|3:30 PM|N|-12.5|53.5|||ABC|Mercedes-Benz Stadium, Atlanta
+9|2026-10-31|Florida|Georgia|||SCHEDULED|3:30 PM|N|-12.5|53.5|410|-550|ABC|Mercedes-Benz Stadium, Atlanta
 9|2026-10-31|Colorado State|Utah State|||SCHEDULED|3:30 PM||||||USA Net|
 9|2026-10-31|UTEP|North Dakota State|||SCHEDULED|3:30 PM||||||MW+|
 9|2026-10-31|Florida International|Liberty|||SCHEDULED|3:30 PM||||||CBSSN|
@@ -1397,15 +1476,15 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 10|2026-11-06|Nebraska|Illinois|||SCHEDULED|8:00 PM||||||FOX|
 10|2026-11-06|New Mexico|Nevada|||SCHEDULED|9:00 PM||||||CBSSN|
 10|2026-11-06|TCU|Arizona|||SCHEDULED|10:15 PM||||||ESPN|
-10|2026-11-07|Oregon|Ohio State|||SCHEDULED|TBD||-6|52.5||||
-10|2026-11-07|Georgia|Ole Miss|||SCHEDULED|TBD||4.5|55.5||||
+10|2026-11-07|Oregon|Ohio State|||SCHEDULED|TBD||-6|52.5|210|-258||
+10|2026-11-07|Georgia|Ole Miss|||SCHEDULED|TBD||4.5|55.5|-218|180||
 10|2026-11-07|Texas|Missouri|||SCHEDULED|TBD|||||||
 10|2026-11-07|Texas A&M|South Carolina|||SCHEDULED|TBD|||||||
 10|2026-11-07|Oklahoma|Florida|||SCHEDULED|TBD|||||||
-10|2026-11-07|Alabama|LSU|||SCHEDULED|TBD||-3.5|54.5||||
+10|2026-11-07|Alabama|LSU|||SCHEDULED|TBD||-3.5|54.5|154|-185||
 10|2026-11-07|West Virginia|Texas Tech|||SCHEDULED|TBD|||||||
-10|2026-11-07|BYU|Utah|||SCHEDULED|TBD||-3|51.5||||
-10|2026-11-07|Michigan State|Michigan|||SCHEDULED|TBD||-16.5|50.5||||
+10|2026-11-07|BYU|Utah|||SCHEDULED|TBD||-3|51.5|120|-142||
+10|2026-11-07|Michigan State|Michigan|||SCHEDULED|TBD||-16.5|50.5|625|-950||
 10|2026-11-07|Penn State|Washington|||SCHEDULED|TBD|||||||
 10|2026-11-07|Kentucky|Tennessee|||SCHEDULED|TBD|||||||
 10|2026-11-07|Iowa|Northwestern|||SCHEDULED|TBD|||||||
@@ -1443,7 +1522,7 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 10|2026-11-07|Liberty|New Mexico State|||SCHEDULED|5:00 PM|||||||
 10|2026-11-07|Boise State|Colorado State|||SCHEDULED|6:00 PM||||||USA Net|
 10|2026-11-07|Sam Houston|Jacksonville State|||SCHEDULED|7:00 PM||||||CBSSN|
-10|2026-11-07|Miami|Notre Dame|||SCHEDULED|7:30 PM||-6.5|54.5|||NBC|
+10|2026-11-07|Miami|Notre Dame|||SCHEDULED|7:30 PM||-6.5|54.5|195|-238|NBC|
 10|2026-11-07|Air Force|Army|||SCHEDULED|7:30 PM||||||CBS|
 10|2026-11-07|Fresno State|Utah State|||SCHEDULED|9:30 PM||||||USA Net|
 10|2026-11-07|Texas State|Oregon State|||SCHEDULED|10:30 PM||||||CW|
@@ -1460,14 +1539,14 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 11|2026-11-13|Illinois|UCLA|||SCHEDULED|9:00 PM||||||FOX|
 11|2026-11-13|Houston|Colorado|||SCHEDULED|10:15 PM||||||ESPN|
 11|2026-11-14|Northwestern|Ohio State|||SCHEDULED|TBD|||||||
-11|2026-11-14|Michigan|Oregon|||SCHEDULED|TBD||-13.5|53.5||||
+11|2026-11-14|Michigan|Oregon|||SCHEDULED|TBD||-13.5|53.5|440|-600||
 11|2026-11-14|Missouri|Georgia|||SCHEDULED|TBD|||||||
-11|2026-11-14|Texas|LSU|||SCHEDULED|TBD||2.5|54.5||||
-11|2026-11-14|USC|Indiana|||SCHEDULED|TBD||-10|58.5||||
-11|2026-11-14|Duke|Miami|||SCHEDULED|TBD||-21|55.5||||
-11|2026-11-14|Tennessee|Texas A&M|||SCHEDULED|TBD||-8.5|55.5||||
-11|2026-11-14|Ole Miss|Oklahoma|||SCHEDULED|TBD||-4|53.5||||
-11|2026-11-14|Texas Tech|Oklahoma State|||SCHEDULED|TBD||15.5|61.5||||
+11|2026-11-14|Texas|LSU|||SCHEDULED|TBD||2.5|54.5|-142|120||
+11|2026-11-14|USC|Indiana|||SCHEDULED|TBD||-10|58.5|350|-455||
+11|2026-11-14|Duke|Miami|||SCHEDULED|TBD||-21|55.5|1000|-1800||
+11|2026-11-14|Tennessee|Texas A&M|||SCHEDULED|TBD||-8.5|55.5|285|-360||
+11|2026-11-14|Ole Miss|Oklahoma|||SCHEDULED|TBD||-4|53.5|164|-198||
+11|2026-11-14|Texas Tech|Oklahoma State|||SCHEDULED|TBD||15.5|61.5|-700|500||
 11|2026-11-14|Alabama|Vanderbilt|||SCHEDULED|TBD|||||||
 11|2026-11-14|Baylor|BYU|||SCHEDULED|TBD|||||||
 11|2026-11-14|Washington|Michigan State|||SCHEDULED|TBD|||||||
@@ -1530,9 +1609,9 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 12|2026-11-21|Georgia|South Carolina|||SCHEDULED|TBD|||||||
 12|2026-11-21|Arkansas|Texas|||SCHEDULED|TBD|||||||
 12|2026-11-21|Indiana|Washington|||SCHEDULED|TBD|||||||
-12|2026-11-21|Virginia Tech|Miami|||SCHEDULED|TBD||-16.5|56.5||||
-12|2026-11-21|Texas A&M|Oklahoma|||SCHEDULED|TBD||-2.5|51.5||||
-12|2026-11-21|LSU|Tennessee|||SCHEDULED|TBD||1.5|57.5||||
+12|2026-11-21|Virginia Tech|Miami|||SCHEDULED|TBD||-16.5|56.5|675|-1050||
+12|2026-11-21|Texas A&M|Oklahoma|||SCHEDULED|TBD||-2.5|51.5|120|-142||
+12|2026-11-21|LSU|Tennessee|||SCHEDULED|TBD||1.5|57.5|-120|100||
 12|2026-11-21|Texas Tech|Baylor|||SCHEDULED|TBD|||||||
 12|2026-11-21|BYU|Kansas|||SCHEDULED|TBD|||||||
 12|2026-11-21|Maryland|USC|||SCHEDULED|TBD|||||||
@@ -1580,52 +1659,52 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 12|2026-11-21|Northern Illinois|North Dakota State|||SCHEDULED|4:00 PM||||||CW|
 12|2026-11-21|Washington State|Texas State|||SCHEDULED|6:00 PM||||||USA Net|
 12|2026-11-21|UNLV|San José State|||SCHEDULED|7:00 PM||||||CBSSN|
-12|2026-11-21|SMU|Notre Dame|||SCHEDULED|7:30 PM||-17.5|56.5|||NBC|
+12|2026-11-21|SMU|Notre Dame|||SCHEDULED|7:30 PM||-17.5|56.5|750|-1200|NBC|
 12|2026-11-21|Colorado State|Fresno State|||SCHEDULED|7:30 PM||||||CW|
 12|2026-11-21|New Mexico|Wyoming|||SCHEDULED|9:00 PM||||||FS1|
 12|2026-11-21|San Diego State|Boise State|||SCHEDULED|9:30 PM||||||USA Net|
 12|2026-11-21|Utah State|Oregon State|||SCHEDULED|10:30 PM||||||CBSSN|
 13|2026-11-24|Miami (OH)|Western Michigan|||SCHEDULED|TBD|||||||
 13|2026-11-24|Kent State|Eastern Michigan|||SCHEDULED|7:00 PM|||||||
-13|2026-11-26|TCU|Texas Tech|||SCHEDULED|8:00 PM||-16.5|55.5|||ESPN|
+13|2026-11-26|TCU|Texas Tech|||SCHEDULED|8:00 PM||-16.5|55.5|625|-950|ESPN|
 13|2026-11-27|Florida Atlantic|East Carolina|||SCHEDULED|TBD|||||||
 13|2026-11-27|Temple|Memphis|||SCHEDULED|TBD|||||||
 13|2026-11-27|Tulane|South Florida|||SCHEDULED|TBD|||||||
-13|2026-11-27|Mississippi State|Ole Miss|||SCHEDULED|12:00 PM||-14.5|57.5|||ABC|
+13|2026-11-27|Mississippi State|Ole Miss|||SCHEDULED|12:00 PM||-14.5|57.5|440|-600|ABC|
 13|2026-11-27|Nebraska|Iowa|||SCHEDULED|12:00 PM||||||CBS|
 13|2026-11-27|Buffalo|Akron|||SCHEDULED|12:00 PM|||||||
 13|2026-11-27|Toledo|Ohio|||SCHEDULED|12:00 PM|||||||
 13|2026-11-27|App State|South Alabama|||SCHEDULED|3:00 PM||||||ESPN+|
-13|2026-11-27|Florida|Florida State|||SCHEDULED|3:30 PM||4.5|52.5|||ABC|
+13|2026-11-27|Florida|Florida State|||SCHEDULED|3:30 PM||4.5|52.5|-205|170|ABC|
 13|2026-11-27|North Dakota State|San José State|||SCHEDULED|3:30 PM||||||CBSSN|
-13|2026-11-27|Texas|Texas A&M|||SCHEDULED|7:30 PM||2.5|53.5|||ABC|
+13|2026-11-27|Texas|Texas A&M|||SCHEDULED|7:30 PM||2.5|53.5|-142|120|ABC|
 13|2026-11-27|Minnesota|Wisconsin|||SCHEDULED|7:30 PM||||||NBC|
 13|2026-11-27|West Virginia|Utah|||SCHEDULED|9:00 PM||||||FOX|
-13|2026-11-28|Washington|Oregon|||SCHEDULED|TBD||-15.5|54.5||||
+13|2026-11-28|Washington|Oregon|||SCHEDULED|TBD||-15.5|54.5|500|-700||
 13|2026-11-28|Georgia Tech|Georgia|||SCHEDULED|TBD|||||||
 13|2026-11-28|Notre Dame|Syracuse|||SCHEDULED|TBD|||||||
 13|2026-11-28|Purdue|Indiana|||SCHEDULED|TBD|||||||
 13|2026-11-28|Boston College|Miami|||SCHEDULED|TBD|||||||
 13|2026-11-28|Oklahoma|Missouri|||SCHEDULED|TBD|||||||
 13|2026-11-28|LSU|Arkansas|||SCHEDULED|TBD|||||||
-13|2026-11-28|Auburn|Alabama|||SCHEDULED|TBD||-10|52.5||||
+13|2026-11-28|Auburn|Alabama|||SCHEDULED|TBD||-10|52.5|330|-425||
 13|2026-11-28|Cincinnati|BYU|||SCHEDULED|TBD|||||||
-13|2026-11-28|USC|UCLA|||SCHEDULED|TBD||10.5|55.5||||
+13|2026-11-28|USC|UCLA|||SCHEDULED|TBD||10.5|55.5|-470|360||
 13|2026-11-28|Penn State|Maryland|||SCHEDULED|TBD|||||||
 13|2026-11-28|SMU|Stanford|||SCHEDULED|TBD|||||||
-13|2026-11-28|Tennessee|Vanderbilt|||SCHEDULED|TBD||3|57.5||||
+13|2026-11-28|Tennessee|Vanderbilt|||SCHEDULED|TBD||3|57.5|-162|136||
 13|2026-11-28|Baylor|Houston|||SCHEDULED|TBD|||||||
 13|2026-11-28|Louisville|Kentucky|||SCHEDULED|TBD|||||||
-13|2026-11-28|South Carolina|Clemson|||SCHEDULED|TBD||-3|53.5||||
-13|2026-11-28|Arizona State|Arizona|||SCHEDULED|TBD||-4.5|52.5||||
+13|2026-11-28|South Carolina|Clemson|||SCHEDULED|TBD||-3|53.5|136|-162||
+13|2026-11-28|Arizona State|Arizona|||SCHEDULED|TBD||-4.5|52.5|180|-218||
 13|2026-11-28|UCF|Colorado|||SCHEDULED|TBD|||||||
 13|2026-11-28|Kansas|Oklahoma State|||SCHEDULED|TBD|||||||
 13|2026-11-28|Kansas State|Iowa State|||SCHEDULED|TBD|||||||
 13|2026-11-28|Duke|Wake Forest|||SCHEDULED|TBD|||||||
-13|2026-11-28|NC State|North Carolina|||SCHEDULED|TBD||1.5|55.5||||
+13|2026-11-28|NC State|North Carolina|||SCHEDULED|TBD||1.5|55.5|-118|-102||
 13|2026-11-28|Pittsburgh|California|||SCHEDULED|TBD|||||||
-13|2026-11-28|Virginia|Virginia Tech|||SCHEDULED|TBD||-1.5|53.5||||
-13|2026-11-28|Illinois|Northwestern|||SCHEDULED|TBD||3.5|52.5||||
+13|2026-11-28|Virginia|Virginia Tech|||SCHEDULED|TBD||-1.5|53.5|105|-125||
+13|2026-11-28|Illinois|Northwestern|||SCHEDULED|TBD||3.5|52.5|-175|145||
 13|2026-11-28|Michigan State|Rutgers|||SCHEDULED|TBD|||||||
 13|2026-11-28|TBD|Colorado State|||SCHEDULED|TBD|||||||
 13|2026-11-28|TBD|Fresno State|||SCHEDULED|TBD|||||||
@@ -1642,7 +1721,7 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 13|2026-11-28|Louisiana|Georgia State|||SCHEDULED|TBD|||||||
 13|2026-11-28|Marshall|UL Monroe|||SCHEDULED|TBD|||||||
 13|2026-11-28|Southern Miss|Old Dominion|||SCHEDULED|TBD|||||||
-13|2026-11-28|Michigan|Ohio State|||SCHEDULED|12:00 PM||-13.5|46.5|||FOX|
+13|2026-11-28|Michigan|Ohio State|||SCHEDULED|12:00 PM||-13.5|46.5|425|-575|FOX|
 13|2026-11-28|Central Michigan|Ball State|||SCHEDULED|12:00 PM|||||||
 13|2026-11-28|Massachusetts|Bowling Green|||SCHEDULED|12:00 PM|||||||
 13|2026-11-28|Kennesaw State|Western Kentucky|||SCHEDULED|1:00 PM|||||||
@@ -1664,7 +1743,7 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 14|2026-12-05|TBD|TBD|||SCHEDULED|4:00 PM|N|||||ABC|Mercedes-Benz Stadium, Atlanta
 14|2026-12-05|TBD|TBD|||SCHEDULED|8:00 PM||||||ABC|
 14|2026-12-05|TBD|TBD|||SCHEDULED|8:00 PM|N|||||FOX|Lucas Oil Stadium, Indianapolis
-15|2026-12-12|Navy|Army|||SCHEDULED|3:00 PM|N|2.5|37.5|||CBS|MetLife Stadium, East Rutherford
+15|2026-12-12|Navy|Army|||SCHEDULED|3:00 PM|N|2.5|37.5|-142|120|CBS|MetLife Stadium, East Rutherford
 
 </script>
 <script type="text/plain" id="d-fcssched">1|2026-08-27|Maine|Towson|21|18|FINAL|6:00 PM||||||MNMT/FloSports|
@@ -1829,7 +1908,7 @@ ORV|Louisville 153, Florida 147, TCU 63, Illinois 62, South Carolina 50, Arizona
 2|2026-09-10|Florida A&M|Miami|||SCHEDULED|8:00 PM||-55.5|61.5|||ACC Network|
 2|2026-09-11|Villanova|Louisville|||SCHEDULED|7:00 PM||-36.5|55.5|||ACC Network|
 2|2026-09-11|Norfolk State|Virginia|||SCHEDULED|7:00 PM||-44.5|54.5|||ACCNX|
-2|2026-09-11|Richmond|NC State|||SCHEDULED|7:00 PM||-30.5|48.5|||ESPNU|
+2|2026-09-11|Richmond|NC State|||SCHEDULED|7:00 PM||-30.5|48.5|3000|-10000|ESPNU|
 2|2026-09-12|Howard|Indiana|||SCHEDULED|12:00 PM||||||BTN|
 2|2026-09-12|East Tennessee State|North Carolina|||SCHEDULED|12:00 PM||||||ACC Network|
 2|2026-09-12|Wofford|Kent State|||SCHEDULED|12:00 PM||||||ESPN+|

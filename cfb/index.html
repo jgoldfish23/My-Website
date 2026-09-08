@@ -471,6 +471,18 @@ footer{max-width:1240px;margin:0 auto;padding:18px 20px 40px;color:var(--ink-3);
 @media (max-width:720px){ @supports (padding:max(0px)){
   .top-in,main,.asof{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
 } }
+
+/* draft stock */
+.dpl{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-top:1px solid var(--line-2);font-size:14px}
+.dpl:first-of-type{border-top:0}
+.dpl .rk{font-family:var(--disp);font-size:16px;color:var(--ink-2)}
+.dpl .who .mini{margin-top:1px}
+.dteam{margin:8px 0 2px;font-weight:600}
+.dteam + .dpl{border-top:0}
+.dgame .hd h3 a{color:inherit}
+.pcard .wd{margin-top:8px;font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.pcard .wd .pill{margin-right:2px}
+@media (max-width:720px){.dpl{grid-template-columns:54px minmax(0,1fr) auto;font-size:13px}.subnav{position:static}}
 </style>
 
 <header class="top">
@@ -486,6 +498,7 @@ footer{max-width:1240px;margin:0 auto;padding:18px 20px 40px;color:var(--ink-3);
       <a href="#/standings" data-r="standings">Standings</a>
       <a href="#/teams" data-r="teams">Teams</a>
       <a href="#/transfers" data-r="transfers">Transfers</a>
+      <a href="#/draft" data-r="draft">NFL Draft</a>
       <a href="#/my" data-r="my">My Rankings</a>
     </nav>
   </div>
@@ -5095,6 +5108,660 @@ Yale|Ivy
 "2026-09-10-florida-a-m-miami": {"angle": "Thursday night filler with a 55.5-point line. Miami's Mensah threw five touchdown passes at Stanford in a 45-6 win and this is a tune-up before the ACC schedule. For Florida A&M it is a paycheck game and a chance to see an FBS defense up close. The only question is the total (61.5) and how long Miami leaves its starters on the field.", "pick": "The model has Miami by more than 60, but a 55.5-point spread is a question about starters' minutes, not football. Pass."}
 }
 </script>
+<script type="text/plain" id="d-draftbb">1|Arch Manning|QB|Texas
+2|Dante Moore|QB|Oregon
+3|Jeremiah Smith|WR|Ohio State
+4|Leonard Moore|CB|Notre Dame
+5|Colin Simmons|EDGE|Texas
+6|Dylan Stewart|EDGE|South Carolina
+7|Cam Coleman|WR|Texas
+8|CJ Carr|QB|Notre Dame
+9|Trevor Goosby|OT|Texas
+10|Darian Mensah|QB|Miami (FL)
+11|Jordan Seaton|OT|LSU
+12|David Stone|DL|Oklahoma
+13|Will Echoles|DL|Mississippi
+14|Ellis Robinson IV|CB|Georgia
+15|Charlie Becker|WR|Indiana
+16|KJ Bolden|S|Georgia
+17|Trey'Dez Green|TE|LSU
+18|Jamari Johnson|TE|Oregon
+19|Brauntae Johnson|S|Notre Dame
+20|A'Mauri Washington|DL|Oregon
+21|Julian Sayin|QB|Ohio State
+22|Drew Mestemaker|QB|Oklahoma State
+23|Justin Scott|DL|Miami (FL)
+24|Ashton Hampton|CB|Clemson
+25|Kelley Jones|CB|Mississippi State
+26|LaNorris Sellers|QB|South Carolina
+27|Yhonzae Pierre|EDGE|Alabama
+28|Jadan Baugh|RB|Florida
+29|Trevor Lauck|OT|Iowa
+30|Nick Marsh|WR|Indiana
+31|Sammy Brown|LB|Clemson
+32|Kade Pieper|IOL|Iowa
+33|Kewan Lacy|RB|Mississippi
+34|Greg Johnson|IOL|Minnesota
+35|Matayo Uiagalelei|EDGE|Oregon
+36|Carter Smith|OT|Indiana
+37|Ryan Coleman-Williams|WR|Alabama
+38|Kyngstonn Viliamu-Asa|LB|Notre Dame
+39|Ahmad Moten Sr.|DL|Miami (FL)
+40|Cayden Green|OT|Missouri
+41|Zabien Brown|CB|Alabama
+42|Will Heldt|EDGE|Clemson
+43|Chris Cole|LB|Georgia
+44|Omarion Miller|WR|Arizona State
+45|Austin Siereveld|OT|Ohio State
+46|Quincy Rhodes Jr.|EDGE|Arkansas
+47|Duce Robinson|WR|Florida State
+48|Melvin Siani|OT|Texas
+49|Jayden Maiava|QB|USC
+50|Damon Wilson Jr.|EDGE|Miami (FL)
+51|Mario Craver|WR|Texas A&M
+52|KJ Duff|WR|Rutgers
+53|Ahmad Hardy|RB|Missouri
+54|Kenyatta Jackson|EDGE|Ohio State
+55|Bryant Wesco|WR|Clemson
+56|Jacarrius Peak|OT|South Carolina
+57|Zach Lutmer|S|Iowa
+58|Jordan Ross|EDGE|LSU
+59|A.J. Holmes Jr|DL|Texas Tech
+60|Brice Pollock|CB|Texas Tech
+61|OJ Frederique Jr.|CB|Miami (FL)
+62|Drake Lindsey|QB|Minnesota
+63|Anthonie Knapp|OT|Notre Dame
+64|Vicari Swain|CB|South Carolina
+65|Niki Prongos|OT|Stanford
+66|Jelani McDonald|S|Texas
+67|Jaylen McClain|S|Ohio State
+68|Tavion Gadson|DL|Kentucky
+69|Anto Saka|EDGE|Texas A&M
+70|Ryan Wingo|WR|Texas
+71|John Henry Daley|EDGE|Michigan
+72|Evan Tengesdahl|IOL|Cincinnati
+73|Rasheem Biles|LB|Texas
+74|Koi Perich|S|Oregon
+75|Boubacar Traore|EDGE|Notre Dame
+76|Clev Lubin|EDGE|Louisville
+77|Ty Benefield|S|LSU
+78|Lance Heard|OT|Kentucky
+79|Anthony Smith|DL|Minnesota
+80|Iapani Laloulu|IOL|Oregon
+81|Andrew Rappleyea|TE|Penn State
+82|PJ Williams|OT|SMU
+83|Bear Alexander|DL|Oregon
+84|Chris Peal|CB|Syracuse
+85|Bray Hubbard|S|Alabama
+86|Nyck Harbor|WR|South Carolina
+87|Trinidad Chambliss|QB|Mississippi
+88|Jalen Mayo|CB|Utah
+89|Jyaire Hill|CB|Michigan
+90|Nico Iamaleava|QB|UCLA
+91|Sahir West|EDGE|UCLA
+92|Isaac Brown|RB|Louisville
+93|Teitum Tuioti|EDGE|Oregon
+94|Jamari Sharpe|CB|Indiana
+95|Taylor Wein|EDGE|Oklahoma
+96|Dashawn Spears|S|LSU
+97|Wyatt Young|WR|Oklahoma State
+98|Ben Roberts|LB|Texas Tech
+99|Jackson Bennee|S|Utah
+100|Sam Leavitt|QB|LSU
+</script>
+<script type="text/plain" id="d-drafttank">1|Arch Manning|QB|Texas|6'4"222 lbs
+2|Dante Moore|QB|Oregon|6'3"220 lbs
+3|CJ Carr|QB|Notre Dame|6'2"215 lbs
+4|Jeremiah Smith|WR|Ohio State|6'4"222 lbs
+5|Colin Simmons|EDGE|Texas|6'3"246 lbs
+6|Trevor Goosby|OT|Texas|6'7"325 lbs
+7|Cam Coleman|WR|Texas|6'3"204 lbs
+8|Leonard Moore|CB|Notre Dame|6'2"197 lbs
+9|Dylan Stewart|EDGE|South Carolina|6'5"250 lbs
+10|Julian Sayin|QB|Ohio State|6'1"214 lbs
+11|Ellis Robinson IV|CB|Georgia|6'0"180 lbs
+12|David Stone|DL|Oklahoma|6'3"315 lbs
+13|Jordan Seaton|OT|LSU|6'5"307 lbs
+14|Darian Mensah|QB|Miami|6'3"205 lbs
+15|KJ Bolden|S|Georgia|6'0"195 lbs
+16|A'Mauri Washington|DL|Oregon|6'3"325 lbs
+17|Charlie Becker|WR|Indiana|6'4"207 lbs
+18|Jamari Johnson|TE|Oregon|6'5"255 lbs
+19|Trey'Dez Green|TE|LSU|6'7"237 lbs
+20|Will Echoles|DL|Ole Miss|6'3"315 lbs
+21|Ryan Coleman-Williams|WR|Alabama|6'0"182 lbs
+22|Justin Scott|DL|Miami|6'4"303 lbs
+23|Tae Johnson|S|Notre Dame|6'2"200 lbs
+24|Kelley Jones|CB|Mississippi State|6'4"195 lbs
+25|Ahmad Hardy|RB|Missouri|5'10"210 lbs
+26|Kewan Lacy|RB|Ole Miss|5'11"205 lbs
+27|Ashton Hampton|CB|Clemson|6'2"200 lbs
+28|Ahmad Moten Sr.|DL|Miami|6'3"300 lbs
+29|Trevor Lauck|OT|Iowa|6'5"310 lbs
+30|Sammy Brown|LB|Clemson|6'2"235 lbs
+31|Nick Marsh|WR|Indiana|6'3"213 lbs
+32|Drew Mestemaker|QB|Oklahoma State|6'3"211 lbs
+33|Zabien Brown|CB|Alabama|6'0"194 lbs
+34|Cayden Green|OT/IOL|Missouri|6'5"324 lbs
+35|Kade Pieper|IOL|Iowa|6'4"290 lbs
+36|Matayo Uiagalelei|EDGE|Oregon|6'5"265 lbs
+37|Carter Smith|OT|Indiana|6'5"313 lbs
+38|Jadan Baugh|RB|Florida|6'1"225 lbs
+39|Yhonzae Pierre|EDGE|Alabama|6'3"253 lbs
+40|Quincy Rhodes Jr.|EDGE|Arkansas|6'6"277 lbs
+41|Kyngstonn Viliamu-Asa|LB|Notre Dame|6'3"234 lbs
+42|Greg Johnson|IOL|Minnesota|6'6"325 lbs
+43|Mario Craver|WR|Texas A&M|5'9"165 lbs
+44|Austin Siereveld|OT|Ohio State|6'5"327 lbs
+45|Melvin Siani|OT|Texas|6'6"317 lbs
+46|OJ Frederique Jr.|CB|Miami|6'0"185 lbs
+47|Chris Cole|LB|Georgia|6'3"235 lbs
+48|Kenyatta Jackson Jr.|EDGE|Ohio State|6'6"263 lbs
+49|Jacarrius Peak|OT|South Carolina|6'4"305 lbs
+50|Koi Perich|S|Oregon|6'1"202 lbs
+51|Will Heldt|EDGE|Clemson|6'6"260 lbs
+52|Damon Wilson II|EDGE|Miami|6'4"250 lbs
+53|Jordan Ross|EDGE|LSU|6'5"246 lbs
+54|Omarion Miller|WR|Arizona State|6'2"210 lbs
+55|KJ Duff|WR|Rutgers|6'6"225 lbs
+56|A.J. Holmes Jr.|DL|Texas Tech|6'3"300 lbs
+57|Rasheem Biles|LB|Texas|6'1"222 lbs
+58|PJ Williams|OT|SMU|6'5"313 lbs
+59|Jelani McDonald|S|Texas|6'2"200 lbs
+60|Clev Lubin|EDGE|Louisville|6'3"260 lbs
+61|Bray Hubbard|S|Alabama|6'2"217 lbs
+62|Brice Pollock|CB|Texas Tech|6'0"195 lbs
+63|Jaylen McClain|S|Ohio State|6'0"203 lbs
+64|Zach Lutmer|S/CB|Iowa|6'0"205 lbs
+65|Tavion Gadson|DL|Kentucky|6'5"303 lbs
+66|Wyatt Young|WR|Oklahoma State|6'0"199 lbs
+67|Jamari Sharpe|CB|Indiana|6'1"188 lbs
+68|Vicari Swain|CB|South Carolina|6'0"193 lbs
+69|Chris Peal|CB|Syracuse|6'1"200 lbs
+70|Jayden Maiava|QB|USC|6'4"230 lbs
+71|Ryan Wingo|WR|Texas|6'2"214 lbs
+72|Iapani Laloulu|IOL|Oregon|6'2"325 lbs
+73|Terrance Carter Jr.|TE|Texas Tech|6'2"245 lbs
+74|Dashawn Spears|S|LSU|6'3"209 lbs
+75|Boubacar Traore|EDGE|Notre Dame|6'5"253 lbs
+76|Bryant Wesco Jr.|WR|Clemson|6'2"190 lbs
+77|Brendan Sorsby|QB|Texas Tech|6'3"235 lbs
+78|Nate Frazier|RB|Georgia|5'10"205 lbs
+79|Isaac Brown|RB|Louisville|5'9"190 lbs
+80|Evan Tengesdahl|IOL|Cincinnati|6'3"323 lbs
+81|Jyaire Hill|CB|Michigan|6'2"190 lbs
+82|Mark Fletcher Jr.|RB|Miami|6'2"225 lbs
+83|LaNorris Sellers|QB|South Carolina|6'3"238 lbs
+84|Teitum Tuioti|EDGE|Oregon|6'3"263 lbs
+85|Whit Weeks|LB|LSU|6'3"223 lbs
+86|Ben Roberts|LB|Texas Tech|6'3"245 lbs
+87|Lance Heard|OT|Kentucky|6'6"325 lbs
+88|Duce Robinson|WR|Florida State|6'6"230 lbs
+89|Anthonie Knapp|IOL|Notre Dame|6'5"305 lbs
+90|T.J. Moore|WR|Clemson|6'3"205 lbs
+91|Niki Prongos|OT|Stanford|6'7"315 lbs
+92|Luke Montgomery|IOL|Ohio State|6'5"312 lbs
+93|Anthony Smith|EDGE|Minnesota|6'6"285 lbs
+94|Bear Alexander|DL|Oregon|6'3"316 lbs
+95|Suntarine Perkins|LB/EDGE|Ole Miss|6'2"220 lbs
+96|Benjamin Brahmer|TE|Penn State|6'7"250 lbs
+97|Brandon Baker|OT|Texas|6'4"305 lbs
+98|John Henry Daley|EDGE|Michigan|6'4"255 lbs
+99|DJ McKinney|CB|Notre Dame|6'2"180 lbs
+100|Nyck Harbor|WR|South Carolina|6'5"239 lbs
+101|Peter Clarke|TE|Temple|6'6"265 lbs
+</script>
+<script type="text/plain" id="d-draftdt">1|Arch Manning|QB|Texas|RJR|6'4"|219
+2|Jeremiah Smith|WR|Ohio State|JR|6'3"|223
+3|Colin Simmons|EDGE|Texas|JR|6'3"|240
+4|Leonard Moore|CB|Notre Dame|JR|6'1"|195
+5|Dylan Stewart|EDGE|South Carolina|JR|6'5"|245
+6|Dante Moore|QB|Oregon|RJR|6'3"|206
+7|Jordan Seaton|OT|LSU|JR|6'5"|330
+8|Julian Sayin|QB|Ohio State|RSO|6'1"|208
+9|Cam Coleman|WR|Texas|JR|6'3"|201
+10|David Stone|DL3T|Oklahoma|JR|6'3"|310
+11|Trevor Goosby|OT|Texas|RJR|6'7"|312
+12|K.J. Bolden|S|Georgia|JR|6'0"|185
+13|Ellis Robinson IV|CB|Georgia|RSO|6'0"|180
+14|A'Mauri Washington|DL1T|Oregon|SR|6'3"|330
+15|Carter Smith|OT|Indiana|RSR|6'5"|313
+16|Jamari Johnson|TE|Oregon|RJR|6'5"|257
+17|A.J. Holmes Jr.|DL3T|Texas Tech|RSR|6'2"|300
+18|Tae Johnson|S|Notre Dame|RSO|6'2"|195
+19|Cayden Green|OT|Missouri|SR|6'5"|324
+20|Zabien Brown|CB|Alabama|JR|6'0"|192
+21|Darian Mensah|QB|Miami|RJR|6'3"|205
+22|Matayo Uiagalelei|EDGE|Oregon|SR|6'4"|272
+23|Damon Wilson II|EDGE|Miami|SR|6'4"|250
+24|C.J. Carr|QB|Notre Dame|RSO|6'2"|210
+25|Ahmad Moten Sr.|DL3T|Miami|RSR|6'3"|300
+26|Drew Mestemaker|QB|Oklahoma State|RSO|6'4"|211
+27|Kelley Jones|CB|Mississippi State|RJR|6'3"|195
+28|Charlie Becker|WR|Indiana|JR|6'3"|209
+29|Ryan Coleman-Williams|WR|Alabama|JR|6'0"|178
+30|Will Heldt|EDGE|Clemson|SR|6'5"|260
+31|Jadan Baugh|RB|Florida|JR|6'1"|230
+32|Will Echoles|DL3T|Ole Miss|JR|6'3"|310
+33|Jacarrius Peak|OT|South Carolina|RSR|6'4"|308
+34|Ryan Wingo|WR|Texas|JR|6'2"|214
+35|Rasheem Biles|OLB|Texas|SR|6'1"|220
+36|Nick Marsh|WR|Indiana|JR|6'3"|203
+37|Chris Peal|CB|Syracuse|RJR|6'1"|200
+38|Trey'Dez Green|TE|LSU|JR|6'6"|240
+39|Omarion Miller|WR|Arizona State|SR|6'2"|210
+40|Trevor Lauck|OT|Iowa|RJR|6'5"|310
+41|Kewan Lacy|RB|Ole Miss|JR|5'10"|210
+42|Chris Cole|OLB|Georgia|JR|6'3"|235
+43|O.J. Frederique Jr.|CB|Miami|JR|6'0"|185
+44|Austin Siereveld|OG|Ohio State|RJR|6'5"|325
+45|Christian Alliegro|ILB|Ohio State|SR|6'4"|240
+46|Mario Craver|WRS|Texas A&M|JR|5'9"|165
+47|Greg Johnson|OG|Minnesota|SR|6'5"|325
+48|Sammy Brown|ILB|Clemson|JR|6'2"|235
+49|Koi Perich|S|Oregon|JR|6'1"|200
+50|Iapani Laloulu|OC|Oregon|SR|6'2"|329
+51|Yhonzae Pierre|EDGE|Alabama|RJR|6'3"|248
+52|Quincy Rhodes Jr.|EDGE|Arkansas|SR|6'5"|275
+53|Ahmad Hardy|RB|Missouri|JR|5'9"|210
+54|Justin Scott|DL3T|Miami|JR|6'3"|304
+55|Bryant Wesco Jr.|WR|Clemson|JR|6'2"|190
+56|Jelani McDonald|S|Texas|SR|6'2"|199
+57|Isaac Brown|RB|Louisville|JR|5'9"|190
+58|Kyngstonn Viliamu-Asa|ILB|Notre Dame|JR|6'3"|230
+59|Trinidad Chambliss|QB|Ole Miss|RSR|6'0"|200
+60|Terrance Carter Jr.|TE|Texas Tech|RSR|6'2"|245
+61|Clev Lubin|EDGE|Louisville|RSR|6'3"|255
+62|John Henry Daley|EDGE|Michigan|RJR|6'4"|255
+63|Ty Benefield|S|LSU|SR|6'2"|204
+64|Kade Pieper|OG|Iowa|RJR|6'3"|300
+65|Jamari Sharpe|CB|Indiana|RSR|6'1"|187
+66|LaNorris Sellers|QB|South Carolina|RJR|6'3"|240
+67|Kenyatta Jackson Jr.|EDGE|Ohio State|RSR|6'5"|265
+68|Elijah Green|CB|Tulsa|JR|6'1"|195
+69|Melvin Siani|OT|Texas|RJR|6'6"|313
+70|Ashton Hampton|CB|Clemson|JR|6'1"|200
+71|Anthony Smith|EDGE|Minnesota|RSR|6'6"|285
+72|Nyck Harbor|WR|South Carolina|SR|6'5"|235
+73|Brice Pollock|CB|Texas Tech|SR|6'0"|195
+74|K.J. Duff|WR|Rutgers|JR|6'5"|219
+75|Sam Leavitt|QB|LSU|RJR|6'2"|205
+76|Suntarine Perkins|OLB|Ole Miss|SR|6'1"|220
+77|Nate Frazier|RB|Georgia|JR|5'10"|205
+78|Jackson Bennee|S|Utah|JR|6'0"|190
+79|Anthonie Knapp|OT|Notre Dame|JR|6'4"|300
+80|Wendell Gregory|EDGE|Kansas State|RSO|6'3"|245
+81|Teitum Tuioti|EDGE|Oregon|SR|6'2"|263
+82|Jordan Ross|EDGE|LSU|JR|6'4"|245
+83|Bray Hubbard|S|Alabama|SR|6'2"|213
+84|Luke Montgomery|OG|Ohio State|SR|6'4"|312
+85|Zach Lutmer|S|Iowa|RJR|6'0"|205
+86|Evan Tengesdahl|OG|Cincinnati|RJR|6'3"|320
+87|Ben Roberts|ILB|Texas Tech|RSR|6'3"|240
+88|Peter Clarke|TE|Temple|SR|6'6"|272
+89|Wyatt Young|WR|Oklahoma State|JR|6'0"|195
+90|Whit Weeks|ILB|LSU|SR|6'2"|225
+91|Braelin Moore|OC|LSU|RSR|6'2"|300
+92|Justice Haynes|RB|Georgia Tech|SR|5'10"|210
+93|Blake Frazier|OT|Michigan|RSO|6'5"|295
+94|Brandon Baker|OG|Texas|JR|6'4"|308
+95|Jaylen McClain|S|Ohio State|JR|6'0"|201
+96|Keon Sabb|S|Alabama|RSR|6'1"|204
+97|Drake Lindsey|QB|Minnesota|RSO|6'4"|230
+98|Corey Myrick|S|Clemson|JR|6'2"|200
+99|Eli Bowen|CBN|Oklahoma|JR|5'9"|183
+100|Jayden Jackson|DL1T|Oklahoma|JR|6'2"|322
+101|Francis Brewu|DL5T|Notre Dame|JR|6'2"|280
+102|Ezra Christensen|DL5T|Colorado|RSR|6'2"|280
+103|P.J. Williams|OT|SMU|RSR|6'5"|313
+104|Eric Singleton Jr.|WRS|Florida|SR|5'10"|180
+105|Junior Sherrill|WR|Vanderbilt|SR|5'11"|203
+106|Bear Alexander|DL3T|Oregon|RSR|6'3"|302
+107|T.J. Moore|WR|Clemson|JR|6'3"|205
+108|Adam Trick|EDGE|Texas Tech|RSR|6'4"|249
+109|Princewill Umanmielen|EDGE|LSU|SR|6'4"|245
+110|Samson Okunlola|OG|Miami|RJR|6'6"|330
+111|Mario Landino|DL5T|Indiana|JR|6'4"|284
+112|Andrew Sprague|OT|Michigan|RSO|6'7"|315
+113|Duce Robinson|WR|Florida State|SR|6'5"|223
+114|Niki Prongos|OT|Stanford|RSR|6'7"|315
+115|Mark Fletcher Jr.|RB|Miami|SR|6'1"|225
+116|Xavier Scott|CB|Illinois|RSR|5'11"|195
+117|Payton Pierce|OLB|Ohio State|JR|6'1"|223
+118|Boo Carter|CBN|Colorado|JR|5'10"|200
+119|Jayden Maiava|QB|USC|RSR|6'4"|230
+120|Boubacar Traore|EDGE|Notre Dame|RJR|6'4"|250
+121|Marcus Neal Jr.|S|Penn State|JR|6'1"|215
+122|Jay Crawford|CB|Ole Miss|JR|5'11"|181
+123|Mateen Ibirogba|DL3T|Texas Tech|RSR|6'3"|296
+124|Ian Strong|WR|California|SR|6'3"|211
+125|Evan Johnson|CB|BYU|RSR|6'0"|185
+126|Amare Ferrell|S|Indiana|SR|6'2"|202
+127|Lawson Luckie|TE|Georgia|SR|6'3"|240
+128|L.J. Martin|RB|BYU|SR|6'2"|220
+129|Kip Lewis|OLB|Oklahoma|RSR|6'1"|227
+130|D.J. Lagway|QB|Baylor|JR|6'3"|241
+131|Drayk Bowen|ILB|Notre Dame|SR|6'2"|235
+132|John Nestor|CB|Minnesota|SR|6'0"|205
+133|A.J. Harris|CB|Indiana|SR|6'1"|186
+134|Taylor Wein|DL5T|Oklahoma|RJR|6'4"|276
+135|Tyrique Tucker|DL3T|Indiana|RSR|6'0"|302
+136|Anto Saka|EDGE|Texas A&M|RSR|6'3"|255
+137|Drew Azzopardi|OT|Washington|RSR|6'6"|315
+138|D.J. McKinney|CB|Notre Dame|RSR|6'2"|180
+139|Isaiah Sategna III|WRS|Oklahoma|RSR|5'10"|182
+140|Cooper Barkate|WR|Miami|RSR|6'0"|195
+141|Raylen Wilson|ILB|Georgia|SR|6'1"|235
+142|Christian Gray|CB|Notre Dame|SR|6'0"|190
+143|McKale Boley|OG|Virginia|RSR|6'4"|316
+144|Brett Norfleet|TE|Missouri|SR|6'5"|263
+145|Jay'Vion Cole|CBN|Arizona|RSR|5'10"|189
+146|Adon Shuler|S|Notre Dame|RJR|6'0"|205
+147|C.J. Fite|DL3T|Arizona State|SR|6'2"|305
+148|Hollywood Smothers|RB|Texas|RJR|5'11"|195
+149|John Mateer|QB|Oklahoma|RSR|6'1"|224
+150|Alani Noa|OG|USC|SR|6'3"|315
+151|Dashawn Spears|S|LSU|JR|6'3"|208
+152|Tony Rojas|OLB|Penn State|RSR|6'2"|230
+153|Raleek Brown|RB|Texas|RSR|5'8"|195
+154|Maraad Watson|DL1T|Texas|JR|6'3"|327
+155|Tayon Holloway|CB|Louisville|SR|6'1"|190
+156|Benjamin Brahmer|TE|Penn State|SR|6'6"|255
+157|Rod Moore|S|Michigan|RSR|5'11"|198
+158|Earnest Greene III|OT|Georgia|RSR|6'4"|320
+159|Justin Evans|OC|Nebraska|RSR|6'1"|315
+160|Anthony Donkoh|OG|Penn State|RJR|6'5"|323
+161|Samuel Omosigho|ILB|UCLA|SR|6'1"|235
+162|Mike Matthews|WR|Tennessee|JR|6'1"|200
+163|Xavier Chaplin|OT|Florida State|RSR|6'6"|348
+164|Xavier Atkins|OLB|Auburn|JR|6'0"|210
+165|Ian Foster|S|Memphis|RJR|5'10"|195
+166|Jyaire Hill|CB|Michigan|RJR|6'1"|190
+167|Theo Melin Ohrstrom|TE|SMU|JR|6'6"|257
+168|Bryce Thornton|S|Florida|SR|5'10"|212
+169|James Smith|DL3T|Ohio State|SR|6'3"|297
+170|Michael Masunas|TE|Texas|RSR|6'4"|259
+171|Decker DeGraaf|TE|Washington|JR|6'3"|245
+172|Marcel Reed|QB|Texas A&M|RJR|6'1"|185
+173|Darius Taylor|RB|Minnesota|SR|5'11"|215
+174|Cam Calhoun|CB|Ohio State|RJR|6'0"|180
+175|Amare Campbell|ILB|Tennessee|SR|6'0"|230
+176|P.J. Woodland|CBN|LSU|JR|5'11"|175
+177|Amare Thomas|WR|Houston|SR|6'0"|205
+178|Dominick McKinley|DL3T|LSU|JR|6'5"|308
+179|Terry Moore|S|Ohio State|RSR|6'1"|200
+180|Josh Hoover|QB|Indiana|RSR|6'1"|200
+181|Davaughn Patterson|S|Wake Forest|RJR|6'0"|217
+182|Carson Hinzman|OC|Ohio State|RSR|6'4"|300
+183|Nyziah Hunter|WR|Nebraska|RJR|6'1"|205
+184|Tao Johnson|S|UCLA|RSR|6'1"|200
+185|Parker Livingstone|WR|Oklahoma|RSO|6'3"|191
+186|Andrew Rappleyea|TE|Penn State|RJR|6'4"|242
+187|Tyree Adams|OT|Texas A&M|RJR|6'6"|310
+188|Qua Russaw|EDGE|Ohio State|RJR|6'2"|243
+189|Shadre Hurst|OG|Houston|RSR|6'2"|299
+190|Jermaine Mathews Jr.|CB|Ohio State|SR|5'11"|190
+191|Austin Romaine|ILB|Texas Tech|SR|6'2"|245
+192|Noah Fifita|QB|Arizona|RSR|5'10"|195
+193|Devon Jackson|ILB|Oregon|RSR|6'2"|234
+194|Earl Little Jr.|S|Ohio State|RSR|6'1"|199
+195|Marcus Ratcliffe|S|Texas A&M|SR|6'2"|209
+196|Malachi Breland|OG|Arkansas|RJR|6'5"|340
+197|Toby Anene|EDGE|Colorado|RSR|6'3"|259
+198|Arion Carter|OLB|Tennessee|SR|6'1"|235
+199|Nicholas Rodriguez|OLB|Missouri|JR|6'0"|215
+200|Deshaun Lee|CBN|Iowa|SR|5'10"|189
+201|Lance Heard|OT|Kentucky|SR|6'5"|330
+202|Antwan Peek Jr.|S|Cincinnati|RSR|6'1"|214
+203|Demond Williams Jr.|QB|Washington|JR|5'11"|190
+204|Isaac Smith|S|Mississippi State|SR|6'0"|205
+205|Braylan Shelby|EDGE|USC|SR|6'5"|265
+206|Fluff Bothwell|RB|Mississippi State|JR|5'10"|230
+207|Jayce Brown|WRS|LSU|SR|5'11"|179
+208|Tree Babalade|OT|Nebraska|RJR|6'5"|330
+209|Gabe Harris Jr.|EDGE|Georgia|SR|6'4"|260
+210|Ethan O'Connor|CB|Miami|RJR|6'0"|180
+211|Bo Mascoe|CBN|Texas|RJR|5'10"|185
+212|Charles Jagusah|OG|Notre Dame|RJR|6'6"|320
+213|Nick Del Grande|OG|Duke|RSR|6'4"|296
+214|Elija Lofton|TE|Miami|JR|6'3"|242
+215|Bruce Mitchell|OC|BYU|RSR|6'3"|305
+216|Johntay Cook|WR|Ole Miss|SR|6'0"|198
+217|Jayden Bellamy|CB|UCF|SR|6'1"|180
+218|Bryson Washington|RB|Auburn|RJR|6'0"|203
+219|Antonio Kite|CB|Ole Miss|RSR|6'0"|180
+220|Howard Sampson|OT|Texas Tech|RSR|6'8"|340
+221|Jeremiah Hasley|TE|Duke|RSR|6'3"|245
+222|Antwan Raymond|RB|Rutgers|JR|5'10"|205
+223|Jordan Matthews|CB|Vanderbilt|RJR|6'1"|192
+224|Drew Evans|OG|Indiana|RSR|6'3"|309
+225|Caleb Woodson|ILB|Alabama|SR|6'3"|230
+226|Hero Kanu|DL3T|Texas|RSR|6'4"|299
+227|Daniel Harris|CB|California|SR|6'2"|195
+228|Drew Bobo|OC|Georgia|RSR|6'5"|305
+229|Evan Stewart|WR|Oregon|RSR|6'0"|170
+230|Garrett Oakley|TE|Kansas State|RSR|6'5"|248
+231|Peyton Bowen|S|Oklahoma|SR|6'0"|201
+232|Kayin Lee|CBN|Tennessee|SR|5'10"|180
+233|Coleton Price|OC|Kentucky|RSR|6'2"|314
+234|C.J. Baxter|RB|Kentucky|RJR|6'1"|227
+235|Smith Snowden|CBN|Michigan|SR|5'9"|185
+236|Gunner Stockton|QB|Georgia|RSR|6'1"|215
+237|Kenny Johnson|WR|Texas Tech|SR|6'1"|205
+238|Myles Graham|ILB|Florida|JR|6'1"|227
+239|Phillip Daniels|OT|Ohio State|RJR|6'5"|315
+240|Brody Foley|TE|Louisville|RSR|6'5"|260
+241|K.P. Price|S|Boston College|SR|6'1"|200
+242|Eugene Wilson III|WRS|LSU|RJR|5'10"|183
+243|Jeremiah Cooper|S|Penn State|SR|6'0"|190
+244|Wendell Moe Jr.|OG|Tennessee|RSR|6'2"|330
+245|D.J. Barksdale|CBN|UCLA|SR|5'9"|181
+246|Quintrevion Wisner|RB|Florida State|SR|5'11"|194
+247|Brendan Jordan|S|Texas Tech|SR|6'0"|205
+248|Luke Hasz|TE|Ole Miss|SR|6'3"|250
+249|Trey White|EDGE|Texas Tech|RSR|6'2"|255
+250|Ty Morris|ILB|Rutgers|SR|6'2"|229
+251|Cody Sigler|DL3T|Auburn|RSR|6'2"|297
+252|Will Whitson|DL5T|Mississippi State|SR|6'5"|295
+253|Robert Woodyard Jr.|LB|Missouri|RJR|6'0"|241
+254|Isaiah Horton|WR|Texas A&M|RSR|6'4"|208
+255|Rocco Becht|QB|Penn State|RSR|6'1"|210
+256|Griffin Wilde|WR|Northwestern|SR|6'2"|200
+257|Ty Bryant|S|Kentucky|SR|6'0"|198
+258|Emmanuel Oyebadejo|DL5T|Florida|RSR|6'5"|295
+259|Daniel Hill|RB|Alabama|JR|6'1"|236
+260|Kylan Fox|TE|Purdue|JR|6'4"|229
+261|D.J. Hicks|DL5T|Texas A&M|SR|6'3"|295
+262|Wes King|OG|West Virginia|RSR|6'5"|313
+263|Luke Reynolds|TE|Virginia Tech|JR|6'4"|250
+264|T.J. Searcy|EDGE|Texas A&M|SR|6'5"|255
+265|Byrum Brown|QB|Auburn|RSR|6'3"|232
+266|Addison Nichols|OG|SMU|RSR|6'5"|320
+267|Cam Cook|RB|West Virginia|SR|5'10"|200
+268|Jaden Greathouse|WR|Notre Dame|SR|6'1"|215
+269|Qua Moss|S|Tennessee|JR|5'10"|187
+270|Isaiah Jones|ILB|Indiana|RSR|6'2"|229
+271|Jordan Lyle|RB|Miami (FL)|JR|6'0"|205
+272|Dante Dowdell|RB|Georgia|SR|6'2"|227
+273|Nico Iamaleava|QB|UCLA|RJR|6'5"|215
+274|Kemari Copeland|DL5T|Virginia Tech|SR|6'2"|280
+275|Michael Bennett III|OT|Oregon|RSR|6'5"|310
+276|Lendon Phillips Jr.|RB|Iowa|RJR|5'9"|225
+277|Jeremy Payne|RB|TCU|JR|5'10"|180
+278|Quay'sheed Scott|CB|South Carolina|JR|6'0"|196
+279|Sheridan Wilson|OC|Texas Tech|RSR|6'5"|300
+280|King Mack|S|NC State|RJR|5'10"|184
+281|Ben Murawski|OT|Michigan State|RJR|6'6"|337
+282|Melkart Abou-Jaoude|EDGE|North Carolina|RSR|6'4"|260
+283|Aidan Chiles|QB|Northwestern|SR|6'3"|225
+284|Trell Harris|WR|Oklahoma|RSR|6'0"|200
+285|Jontez Williams|CB|USC|RSR|5'11"|200
+286|Dezz Ricks|CB|Texas A&M|RJR|6'1"|188
+287|Kameryn Crawford|EDGE|USC|JR|6'5"|260
+288|Matt Rose|ILB|Stanford|RSR|6'2"|230
+289|Rodrick Pleasant|CBN|UCLA|JR|5'10"|175
+290|Cayden Lee|WRS|Missouri|SR|5'11"|180
+291|Dwight Phillips Jr.|RB|Georgia|JR|5'10"|185
+292|Caleb Bacon|OLB|Penn State|SR|6'4"|242
+293|Chris Corbo|TE|Georgia Tech|RSR|6'5"|245
+294|Tavion Gadson|DL3T|Kentucky|RJR|6'5"|298
+295|Faletau Satuala|S|BYU|JR|6'3"|210
+296|Keanu Tanuvasa|DL3T|BYU|RSR|6'3"|300
+297|Jordan Hall|DL1T|Georgia|SR|6'3"|320
+298|Khalil Barnes|S|Georgia|SR|6'0"|200
+299|Kelby Collins|DL5T|South Carolina|SR|6'4"|285
+300|Jayden Virgin-Morgan|EDGE|Boise State|RSR|6'3"|253
+301|Luke Lindenmeyer|TE|Nebraska|RSR|6'3"|250
+302|Brendan Sorsby|QB|Texas Tech|RSR|6'3"|235
+303|Jaquez White|CB|Virginia Tech|SR|6'0"|190
+304|DeSean Bishop|RB|Tennessee|RJR|5'9"|208
+305|Joe Brunner|OG|Indiana|RSR|6'5"|317
+306|Wayshawn Parker|RB|Utah|JR|5'10"|205
+307|Tobi Osunsanmi|EDGE|Indiana|RSR|6'3"|250
+308|Knijeah Harris|OG|Florida|SR|6'2"|316
+309|Dallas Afalava|DL5T|Wake Forest|RSR|6'1"|291
+310|C.J. Mims|DL3T|Texas A&M|RSR|6'1"|300
+311|Santana Hopper|EDGE|Colorado|RSR|6'2"|265
+312|Devin McCuin|WR|Ohio State|SR|5'11"|195
+313|M.J. Cannon|CB|Cincinnati|SR|6'3"|210
+314|DeAndre Moore Jr.|WR|Colorado|SR|6'0"|192
+315|Ray Coney|ILB|Texas A&M|SR|6'2"|240
+316|Dean Miller|EDGE|Transfer|RSR|6'5"|240
+317|Adepoju Adebawore|EDGE|Oklahoma|SR|6'4"|260
+318|Iverson Hooks|WRS|Oregon|RSR|5'10"|175
+319|Jonathan Maldonado|EDGE|Ole Miss|RSR|6'6"|233
+320|Dorian Thomas|TE|California|RJR|6'4"|239
+321|Alex McLaughlin|S|Washington|SR|6'1"|200
+322|Ashton Craig|OC|Notre Dame|RSR|6'4"|310
+323|Jordan Hall|OLB|Michigan State|SR|6'3"|238
+324|Davion Weatherspoon|OG|Arkansas|RSR|6'0"|311
+325|Jeremiah Cobb|RB|Auburn|SR|5'10"|200
+326|James Peoples|RB|Penn State|JR|5'10"|214
+327|Antonio Watts|ILB|Louisville|RSR|6'2"|225
+328|Wilkin Formby|OT|Texas A&M|RJR|6'6"|324
+329|Jaden Platt|TE|Arkansas|RJR|6'5"|265
+330|Marquis Gracial|DL1T|Missouri|RSR|6'3"|322
+331|J'Mond Tapp|EDGE|Memphis|RSR|6'3"|275
+332|Mason Curtis|S|Michigan|JR|6'4"|211
+333|Kerry Brown|S|Minnesota|RJR|5'10"|190
+334|Aaron Scott Jr.|CB|Oregon|JR|6'0"|195
+335|Avery Johnson|QB|Kansas State|SR|6'2"|196
+336|Jason Onye|DL3T|Notre Dame|RSR|6'5"|302
+337|Markis Deal|DL1T|TCU|RJR|6'4"|325
+338|Ethan Wesloski|OLB|Oklahoma State|SR|6'1"|234
+339|Racin Delgatty|OC|Alabama|RJR|6'2"|301
+340|Edrees Farooq|S|Tennessee|JR|5'11"|200
+341|La'Khi Roland|CB|Arkansas|JR|6'1"|196
+342|Frederick Williams III|OT|California|RJR|6'5"|310
+343|Joe Hjelle|DL3T|Indiana|RSR|6'2"|300
+344|Trent Walker|WR|Houston|RSR|6'2"|194
+345|Joshua Dye|RB|Ole Miss|RJR|5'11"|205
+346|Zechariah Poyser|S|Miami|RJR|6'1"|201
+347|Daniel Wingate|ILB|Maryland|SR|6'5"|230
+348|Conner Weigman|QB|Houston|RSR|6'3"|210
+349|Brandon Inniss|WR|Ohio State|SR|6'0"|199
+350|Kwabena Asamoah|OG|Rutgers|RSR|6'2"|311
+351|Gabriel Brownlow-Dindy|DL1T|South Carolina|RSR|6'3"|315
+352|Patrick Kutas|OG|Ole Miss|RSR|6'4"|315
+353|Connor Robertson|OC|Texas|RSR|6'4"|317
+354|Emmett Mosley V|WR|Texas|JR|6'1"|190
+355|Tellek Lockette|OG|Maryland|RSR|6'3"|327
+356|Jackson Arnold|QB|UNLV|SR|6'1"|219
+357|Ryan Baer|OT|Pitt|RSR|6'7"|325
+358|Jaden Craig|QB|TCU|RSR|6'2"|230
+359|Jaxton Eck|ILB|New Mexico|SR|6'1"|224
+360|Waymond Jordan|RB|USC|SR|5'9"|210
+361|Isaiah Glasker|EDGE|BYU|RSR|6'4"|235
+362|Malachi Nelson|QB|Syracuse|RJR|6'3"|193
+363|Jaylen Brown|EDGE|LSU|JR|6'5"|265
+364|Marques White|EDGE|SMU|SR|6'2"|250
+365|Kalen Carroll|CB|TCU|SR|6'1"|185
+366|Preston Zachman|S|Indiana|RSR|6'1"|212
+367|Jordan Sanders|DL3T|Florida State|RSR|6'3"|306
+368|Dominick Giudice|OG|Missouri|RSR|6'4"|312
+369|Dylan Wade|FB|UCF|SR|6'2"|240
+370|Micah Hudson|WR|Texas Tech|JR|6'0"|200
+371|Jake Renfro|OC|Illinois|RSR|6'3"|313
+372|J'Koby Williams|RB|Texas Tech|JR|5'10"|185
+373|Da'Shawn Womack|EDGE|Auburn|SR|6'5"|265
+374|Zeke Berry|CB|Michigan|RSR|5'11"|196
+375|Raion Strader|CB|Pitt|SR|6'0"|185
+376|Elijah Pritchett|OT|Nebraska|RSR|6'5"|325
+377|Hunter Green|P|Washington|SR|6'4"|220
+378|Ja'son Prevard|CB|Kansas State|SR|6'2"|199
+379|Chance Robinson|WR|NC State|JR|6'1"|205
+380|Joshua Bates|OC|SMU|RJR|6'3"|315
+381|Rylan Kennedy|EDGE|Florida State|SR|6'3"|239
+382|Anthony Evans III|WRS|Mississippi State|SR|5'11"|180
+383|Alex Birchmeier|OG|Liberty|RJR|6'5"|312
+384|Jah-Marien Latham|EDGE|Alabama|RSR|6'3"|262
+385|Nic Anderson|WR|Kentucky|RSR|6'4"|208
+386|Aiden Sullivan|ILB|Oregon State|SR|6'1"|229
+387|Jalen Thompson|EDGE|Arizona State|SR|6'3|260
+388|Damari Brown|CB|Miami (FL)|JR|6'1"|190
+389|Matthew Jung|S|Wisconsin|RSR|6'2"|213
+390|Ben Taylor-Whitfield|OT|TCU|SR|6'5"|315
+391|Jordan Faison|WRS|Notre Dame|SR|5'10"|185
+392|Jared Richardson|WR|Duke|RSR|6'2"|215
+393|Deuce Alexander|WR|Ole Miss|RJR|6'0"|180
+394|Evan Crenshaw|P|Troy|RSR|6'4"|192
+395|Evan Pryor|RB|Florida|RSR|5'10"|198
+396|A.J. Green|EDGE|Louisville|RJR|6'6"|250
+397|Maverick Baranowski|ILB|Minnesota|RSR|6'2"|230
+398|Brady Small|OC|Army|SR|6'0"|315
+399|Marquis Johnson|WRS|Mississippi State|SR|5'10"|185
+400|Paul Oyewale|EDGE|TCU|RSR|6'4"|270
+401|Jaheim Singletary|CB|Iowa State|RSR|6'1"|201
+402|Simeon Harris|CB|Fresno State|SR|5'11"|185
+403|Keon Wylie|OLB|Virginia Tech|RSR|6'2"|225
+404|Lewis Carter|ILB|UCF|SR|6'0"|225
+405|Mohamed Toure|ILB|Miami|RSR|6'1"|235
+406|Tate Sandell|PK|Oklahoma|RSR|5'9"|182
+407|Walker Lyons|TE|BYU|JR|6'4"|245
+408|Joe Otting|OC|Notre Dame|RJR|6'3"|308
+409|Monroe Mills|OT|Virginia|RSR|6'6"|320
+410|Chimdia Nwaiwu|OT|Florida State|RJR|6'5"|296
+411|Alexander Doost|OG|Arizona|RJR|6'6"|330
+412|Beau Pribula|QB|Virginia|RSR|6'2"|212
+413|Desmeal Leigh|OT|Youngstown State|RSR|6'6"|325
+414|JoJo Johnson|CB|Bowling Green|RSR|6'0"|180
+415|Dylan Edwards|RB|Kansas|SR|5'9"|167
+416|Jayven Williams|CB|BYU|RSR|6'1"|185
+417|Nico Brown|WR|Stanford|RSR|6'0"|185
+418|Sullivan Absher|OG|Notre Dame|RJR|6'7"|327
+419|B.J. Williams|OG|Pitt|SR|6'3"|315
+420|Kanye Udoh|RB|Liberty|SR|6'0"|220
+421|Gentry Williams|CB|Georgia|SR|6'0"|187
+422|Kawika Rogers|OG|Oregon|RSR|6'5"|320
+423|Nathan Efobi|OG|Michigan|RJR|6'3"|312
+424|Jaylen Early|OG|Texas State|RSR|6'4"|297
+425|Jeremiah Alexander|OLB|Clemson|RSR|6'2"|232
+426|Jake Taylor|OT|Iowa State|RSR|6'5"|313
+427|Desman Hearns|CB|Wyoming|SR|6'0"|190
+428|Braden Turner|CB|Northwestern|SR|5'11"|195
+429|Cash Cleveland|OC|Texas Tech|JR|6'2"|305
+430|Gideon ESPN Lampron|ILB|Colorado|SR|6'0"|220
+431|Jackson Harris|WR|LSU|RJR|6'2"|202
+432|Charles Brantley|CB|Michigan State|RSR|6'0"|170
+433|Brian Blades II|CBN|Wake Forest|RSR|5'10"|172
+434|Jaleel Skinner|TE|Louisville|SR|6'5"|225
+435|Laurence Seymore III|OG|Texas|RSR|6'2"|320
+436|Caleb Wheatland|ILB|Michigan State|SR|6'1"|231
+437|Denver Harris|CB|UNLV|SR|6'0"|190
+438|C.J. Bailey|QB|NC State|JR|6'5"|213
+439|Jimarion McCrimon|OT|NC State|RJR|6'5"|307
+440|Jake Johnson|TE|Auburn|RSR|6'6"|240
+441|Jacob Sexton|OT|Oklahoma State|SR|6'6"|323
+442|Ja'Bril Rawls|CB|Florida State|RJR|6'1"|185
+443|Kevin Jennings|QB|SMU|RSR|6'0"|192
+444|Jahiem White|RB|North Texas|RSR|5'7"|190
+445|Dylan Lonergan|QB|Rutgers|RJR|6'2"|215
+446|Jahiem Johnson|CB|Arkansas|RJR|6'0"|189
+447|Dontay Joyner|CBN|Maryland|SR|5'11"|180
+448|Jake Maikkula|OC|Oklahoma|RSR|6'5"|300
+449|Mark Nabou Jr.|OC|Texas A&M|RSR|6'3"|330
+450|Ikenna Ezeogu|DL5T|Penn State|RSR|6'5"|285
+</script>
 <script type="application/json" id="d-watch">{
 "coaches": {
  "LSU": {"name":"Lane Kiffin","from":"Ole Miss","note":"left Ole Miss for LSU after the 2025 season"},
@@ -6374,7 +7041,7 @@ function renderStandings(conf){ setNav('standings'); conf = (conf && (CONF_LONG[
 
 function renderTeams(level){ setNav('teams'); level = level==='fcs'?'fcs':'fbs'; const confs = level==='fbs'?CONF_ORDER:FCS_ORDER; const cid = c => 'c-'+c.replace(/[^A-Za-z0-9]+/g,'-'); let html='<div class="page-head"><div><div class="eyebrow">Teams</div><h1>'+(level==='fbs'?FBS.length+' FBS programs':FCSD1.length+' FCS programs')+'</h1><div class="sub">Grouped by 2026 conference; the chips jump straight to a league. Every team page has the schedule, results against the line, projections, the two-deep depth chart, and recruiting and portal class ranks.</div></div></div>'; html+='<div class="toolbar" style="position:sticky;top:96px;z-index:5;background:var(--bg);padding:6px 0"><div class="seg"><a href="#/teams" class="'+(level==='fbs'?'on':'')+'">FBS ('+FBS.length+')</a><a href="#/teams/fcs" class="'+(level==='fcs'?'on':'')+'">FCS ('+FCSD1.length+')</a></div><div class="wk">'+confs.map(c=>'<button class="jump" data-target="'+cid(c)+'">'+esc(c)+'</button>').join('')+'</div></div>'; if(level==='fbs') CONF_ORDER.forEach(c=>{ const ts=Object.values(T).filter(t=>t.conf===c).sort((a,b)=>a.disp.localeCompare(b.disp)); html+='<div class="confhead" id="'+cid(c)+'"><h3>'+esc(CONF_LONG[c])+'</h3><span class="muted">'+ts.length+'</span></div><div class="teamgrid">'+ts.map(t=>'<a href="#/team/'+enc(t.name)+'"><span class="sw" style="background:'+esc(t.color)+'"></span><span><div class="n">'+(t.ap?'<span class="apr" style="color:var(--ink-3);font-size:12px">#'+t.ap+' </span>':'')+esc(t.disp)+'</div><div class="m">'+esc(t.mascot)+' · '+recStr(t.name)+' · rating '+num1(t.rating)+(DEPTH[t.name]&&DEPTH[t.name].depth&&DEPTH[t.name].depth.length?' · depth chart':'')+'</div></span></a>').join('')+'</div>'; }); const feat=Object.values(T).filter(t=>t.featured); if(level==='fcs'&&feat.length){ html+='<div class="confhead"><h3>Featured FCS program</h3><span class="muted">full team page, schedule, roster and projected two-deep</span></div><div class="teamgrid">'+feat.map(t=>'<a href="#/team/'+enc(t.name)+'"><span class="sw" style="background:'+esc(t.color)+'"></span><span><div class="n">'+esc(t.disp)+'</div><div class="m">'+esc(t.mascot)+' · '+esc(t.conf)+' · '+recStr(t.name)+' · rating '+num1(t.rating)+'</div></span></a>').join('')+'</div>'; } if(level==='fcs') FCS_ORDER.forEach(c=>{ const ts=Object.values(T).filter(t=>t.conf===c&&t.level==='FCS').sort((a,b)=>a.disp.localeCompare(b.disp)); if(!ts.length) return; html+='<div class="confhead" id="'+cid(c)+'"><h3>'+esc(CONF_LONG[c]||c)+' <span class="tag">FCS</span></h3><span class="muted">'+ts.length+'</span></div><div class="teamgrid">'+ts.map(t=>'<a href="#/team/'+enc(t.name)+'"><span class="sw" style="background:'+esc(t.color)+'"></span><span><div class="n">'+esc(t.disp)+'</div><div class="m">'+esc(t.mascot)+' · '+recStr(t.name)+' · rating '+num1(t.rating)+'</div></span></a>').join('')+'</div>'; }); const oth=Object.keys(OTHER).length; if(level==='fcs'&&oth) html+='<div class="note" style="margin-top:14px">'+oth+' Division II and NAIA opponents also appear on schedules. They carry a placeholder rating of '+num1(OTHER_R)+' and have no team page.</div>'; view.innerHTML=html; }
 
-function renderTeam(name){ setNav('teams'); name=norm(name); const t=T[name]; if(!t){ view.innerHTML='<div class="note">No FBS team called "'+esc(name)+'". <a href="#/teams">See all teams.</a></div>'; return; } const s=stats(name); const d=DEPTH[name]; const mine=myRankOf(name); let html=backBar('#/teams'+(t.level==='FCS'?'/fcs':''), '<a href="#/teams'+(t.level==='FCS'?'/fcs':'')+'">'+(t.level==='FCS'?'FCS teams':'FBS teams')+'</a><span class="dim"> &rsaquo; </span><a href="#/standings/'+enc(t.conf)+'">'+esc(CONF_LONG[t.conf]||t.conf)+'</a>')+'<div class="thead"><div class="bar" style="background:'+esc(t.color)+'"></div>'+mono(t)+'<div class="ttl"><div class="eyebrow">'+esc(CONF_LONG[t.conf]||t.conf)+(t.fcs?' (FCS)':'')+(t.div?' · '+esc(t.div):'')+'</div><h1>'+esc(t.disp)+' '+esc(t.mascot)+'</h1><div class="meta"><span>'+esc(t.coach)+', head coach'+(t.coachNote?' ('+esc(t.coachNote)+')':'')+'</span><span>'+esc(t.stadium)+' · '+esc(t.city)+'</span><span>2025: '+esc(t.rec2025)+(t.confRec2025?' ('+esc(t.confRec2025)+')':'')+'</span></div></div><div class="ranks">'+(t.featured ? (t.polls||[]).map(p=>'<div class="rb"><div class="v">'+ordinal(p.rank)+'</div><div class="k">'+esc(p.name.replace(' preseason','').replace(t.conf+' ',''))+'</div></div>').join('')+'<div class="rb"><div class="v">'+t.frank+'</div><div class="k">FCS rank</div></div><div class="rb"><div class="v">'+num1(t.rating)+'</div><div class="k">Rating</div></div>' : t.fcs ? '<div class="rb"><div class="v">'+t.frank+'</div><div class="k">FCS rank</div></div><div class="rb"><div class="v">'+num1(t.rating)+'</div><div class="k">Rating</div></div>' : '<div class="rb"><div class="v">'+(t.ap||'NR')+'</div><div class="k">AP</div></div><div class="rb"><div class="v">'+(t.coaches||'NR')+'</div><div class="k">Coaches</div></div><div class="rb"><div class="v">'+t.prank+'</div><div class="k">Power</div></div><div class="rb"><div class="v">'+FPI_RANK[name]+'</div><div class="k">FPI</div></div>')+(mine?'<div class="rb" style="border-color:var(--gold);background:var(--gold-soft)"><div class="v">'+mine.rank+'</div><div class="k">'+esc(mine.name.slice(0,12))+'</div></div>':'')+'</div></div>'; html+='<div class="subnav"><a href="#s-over">Overview</a><a href="#s-sched">Schedule</a><a href="#s-analytics">Analytics</a><a href="#s-depth">Depth chart</a></div>'; /* tiles */ html+='<div id="s-over" class="grid g6" style="margin-top:8px">'+tile('Record',s.w+'-'+s.l, s.cw+'-'+s.cl+' in conference')+tile('Against the spread',(s.ats.w+s.ats.l+s.ats.p)?s.ats.w+'-'+s.ats.l+(s.ats.p?'-'+s.ats.p:''):'—', (s.ats.w+s.ats.l)?'covering '+pct(s.ats.w/(s.ats.w+s.ats.l)):'no closing lines yet')+tile('Over / under',(s.ou.o+s.ou.u+s.ou.p)?s.ou.o+'-'+s.ou.u+(s.ou.p?'-'+s.ou.p:''):'—', (s.ou.o+s.ou.u)?'overs to unders':'no totals posted yet')+tile('Points',s.gp?num1(s.pf/s.gp)+' / '+num1(s.pa/s.gp):'—','scored / allowed per game')+tile('Power rating',num1(t.rating), t.fcs ? ('FCS #'+t.frank+' of '+FCSD1.length+' · '+(t.basis==='2025'?'from 2025 results':'league estimate')) : ('#'+t.prank+' of '+FBS.length+' · FPI '+num1(t.fpi)))+tile('Projected finish',num1(s.projW)+'-'+num1(s.projL),(t.fcs?'6+ wins ':'bowl eligible ')+pct(s.bowl))+'</div>'; html+='<div class="grid g6" style="margin-top:10px">'+tile('Schedule strength',s.sosAll!=null?num1(s.sosAll):'—',(SOS_RANK[name]?'#'+SOS_RANK[name]+' hardest · ':'')+'avg opp rating')+tile('Remaining',s.upcoming.length+' games',s.sosRemain!=null?'avg opp '+num1(s.sosRemain):'')+tile('Home / away',s.hw+'-'+s.hl+' / '+s.aw+'-'+s.al,'home record / road record')+tile('vs ranked',s.rw+'-'+s.rl,'AP top 25 at kickoff')+tile('Streak',s.streak,s.last?('last: '+(s.last.home===name?'vs ':'at ')+tshort(s.last.home===name?s.last.away:s.last.home)):'')+(t.fcs ? (t.polls ? tile('Preseason poll', ordinal(t.polls[0].rank), esc(t.conf)+' coaches · media '+ordinal(t.polls[1].rank)) : tile('2025 rating', num1(t.r2025), 'end of last season'+(t.rec2025?' · went '+esc(t.rec2025):''))) : tile('ESPN playoff odds',num1(t.fpiPO)+'%','FPI projects '+num1(t.fpiW)+'-'+num1(t.fpiL)))+'</div>'; if(t.featured&&t.s2025){ html+='<div class="sec"><h2>2025 season</h2><span class="muted">'+esc(t.rec2025)+(t.confRec2025?' · '+esc(t.confRec2025):'')+'</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th></tr></thead><tbody>'+t.s2025.map(r=>'<tr><td>'+esc(fmtDate(r[0]))+'</td><td>'+(r[2]?'vs ':'at ')+esc(r[1])+'</td><td>'+(r[3]>r[4]?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+r[3]+'-'+r[4]+'</td></tr>').join('')+'</tbody></table></div>'+(t.pollNote?'<div class="note" style="margin-top:10px">'+esc(t.pollNote)+'</div>':''); } /* next game */ const nxt=s.upcoming[0]; if(nxt){ const g=nxt.g; const p=proj(g); html+='<div class="sec"><h2>Next up</h2></div><div class="gmlist">'+gameRow(g)+'</div>'; } html+='<div id="s-sched" class="sec"><h2>2026 schedule</h2><span class="muted">Click a game for the full breakdown.</span></div>'+teamSchedule(name,false); html+='<div id="s-analytics" class="sec"><h2>Analytics</h2><span class="muted">Projections use this page\'s power ratings, not the sportsbook.</span></div>'; html+='<div class="grid g2"><div class="card"><div class="hd"><h3>Where the season lands</h3><span class="mini">chance of each final win total</span></div><div class="bd">'+winDistChart(s)+'<div class="mini" style="margin-top:6px">Expected wins: <b>'+num1(s.projW)+'</b>. Most likely finish is highlighted in gold.</div></div></div><div class="card"><div class="hd"><h3>Scoring margin by game</h3><span class="mini">green = win, red = loss</span></div><div class="bd">'+marginChart(name)+'</div></div></div>'; html+='<div class="grid g2" style="margin-top:14px"><div class="card"><div class="hd"><h3>Rating vs. the '+esc(t.conf)+'</h3><span class="mini">each dot is a conference team</span></div><div class="bd">'+confStrip(t)+'</div></div><div class="card"><div class="hd"><h3>Schedule difficulty</h3><span class="mini">bar height = opponent rating · hover for detail</span></div><div class="bd">'+remainStrip(name)+'<div class="legend" style="margin-top:8px"><span><i style="background:var(--good)"></i>Win</span><span><i style="background:var(--bad)"></i>Loss</span><span><i style="background:var(--s1);opacity:.55"></i>Upcoming D1</span><span><i style="background:var(--ink-3);opacity:.4"></i>Upcoming non-D1</span></div></div></div></div>'; /* game log with model */ if(s.played.length){ html+='<div class="card" style="margin-top:14px"><div class="hd"><h3>Results vs. expectations</h3><span class="mini">what the market and the model expected before kickoff</span></div><div class="bd"><div class="tblwrap"><table class="tbl"><thead><tr><th>Game</th><th>Score</th><th class="r">Margin</th><th class="r">Closing line</th><th class="r">vs line</th><th class="r">Total</th><th class="r">Opp rating</th></tr></thead><tbody>'; s.played.forEach(g=>{ const home=g.home===name; const opp=team(home?g.away:g.home); const pf=home?g.hs:g.as, pa=home?g.as:g.hs; const m=pf-pa; const lineTeam = g.spread==null?null:(home?g.spread:-g.spread); const vsLine = lineTeam==null?null: m+lineTeam; html+='<tr class="click" data-href="#/game/'+g.id+'"><td>'+(home?'vs ':'at ')+chip(opp.name,{short:true})+'</td><td>'+(m>0?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+pf+'-'+pa+'</td><td class="r '+(m>0?'pos':'neg')+'">'+(m>0?'+':'')+m+'</td><td class="r">'+(lineTeam==null?'—':(lineTeam>0?'+':'')+lineTeam)+'</td><td class="r">'+(vsLine==null?'—':'<span class="'+(vsLine>0?'pos':vsLine<0?'neg':'zero')+'">'+(vsLine>0?'+':'')+num1(vsLine)+'</span>')+'</td><td class="r">'+(g.total!=null?(pf+pa)+' <span class="dim">/ '+g.total+'</span>':'—')+'</td><td class="r">'+num1(opp.rating)+'</td></tr>'; }); html+='</tbody></table></div></div></div>'; } /* depth */ html+='<div id="s-depth" class="sec"><h2>Depth chart</h2><span class="muted">2-deep from ESPN, with class, size, hometown, prior school, recruiting stars and 2025 stats where available.</span></div>'; html+=depthChartHTML(name); view.innerHTML=html; }
+function renderTeam(name){ setNav('teams'); name=norm(name); const t=T[name]; if(!t){ view.innerHTML='<div class="note">No FBS team called "'+esc(name)+'". <a href="#/teams">See all teams.</a></div>'; return; } const s=stats(name); const d=DEPTH[name]; const mine=myRankOf(name); let html=backBar('#/teams'+(t.level==='FCS'?'/fcs':''), '<a href="#/teams'+(t.level==='FCS'?'/fcs':'')+'">'+(t.level==='FCS'?'FCS teams':'FBS teams')+'</a><span class="dim"> &rsaquo; </span><a href="#/standings/'+enc(t.conf)+'">'+esc(CONF_LONG[t.conf]||t.conf)+'</a>')+'<div class="thead"><div class="bar" style="background:'+esc(t.color)+'"></div>'+mono(t)+'<div class="ttl"><div class="eyebrow">'+esc(CONF_LONG[t.conf]||t.conf)+(t.fcs?' (FCS)':'')+(t.div?' · '+esc(t.div):'')+'</div><h1>'+esc(t.disp)+' '+esc(t.mascot)+'</h1><div class="meta"><span>'+esc(t.coach)+', head coach'+(t.coachNote?' ('+esc(t.coachNote)+')':'')+'</span><span>'+esc(t.stadium)+' · '+esc(t.city)+'</span><span>2025: '+esc(t.rec2025)+(t.confRec2025?' ('+esc(t.confRec2025)+')':'')+'</span></div></div><div class="ranks">'+(t.featured ? (t.polls||[]).map(p=>'<div class="rb"><div class="v">'+ordinal(p.rank)+'</div><div class="k">'+esc(p.name.replace(' preseason','').replace(t.conf+' ',''))+'</div></div>').join('')+'<div class="rb"><div class="v">'+t.frank+'</div><div class="k">FCS rank</div></div><div class="rb"><div class="v">'+num1(t.rating)+'</div><div class="k">Rating</div></div>' : t.fcs ? '<div class="rb"><div class="v">'+t.frank+'</div><div class="k">FCS rank</div></div><div class="rb"><div class="v">'+num1(t.rating)+'</div><div class="k">Rating</div></div>' : '<div class="rb"><div class="v">'+(t.ap||'NR')+'</div><div class="k">AP</div></div><div class="rb"><div class="v">'+(t.coaches||'NR')+'</div><div class="k">Coaches</div></div><div class="rb"><div class="v">'+t.prank+'</div><div class="k">Power</div></div><div class="rb"><div class="v">'+FPI_RANK[name]+'</div><div class="k">FPI</div></div>')+(mine?'<div class="rb" style="border-color:var(--gold);background:var(--gold-soft)"><div class="v">'+mine.rank+'</div><div class="k">'+esc(mine.name.slice(0,12))+'</div></div>':'')+'</div></div>'; html+='<div class="subnav"><a href="#s-over">Overview</a><a href="#s-sched">Schedule</a><a href="#s-analytics">Analytics</a><a href="#s-depth">Depth chart</a><a href="#s-draft">Draft</a></div>'; /* tiles */ html+='<div id="s-over" class="grid g6" style="margin-top:8px">'+tile('Record',s.w+'-'+s.l, s.cw+'-'+s.cl+' in conference')+tile('Against the spread',(s.ats.w+s.ats.l+s.ats.p)?s.ats.w+'-'+s.ats.l+(s.ats.p?'-'+s.ats.p:''):'—', (s.ats.w+s.ats.l)?'covering '+pct(s.ats.w/(s.ats.w+s.ats.l)):'no closing lines yet')+tile('Over / under',(s.ou.o+s.ou.u+s.ou.p)?s.ou.o+'-'+s.ou.u+(s.ou.p?'-'+s.ou.p:''):'—', (s.ou.o+s.ou.u)?'overs to unders':'no totals posted yet')+tile('Points',s.gp?num1(s.pf/s.gp)+' / '+num1(s.pa/s.gp):'—','scored / allowed per game')+tile('Power rating',num1(t.rating), t.fcs ? ('FCS #'+t.frank+' of '+FCSD1.length+' · '+(t.basis==='2025'?'from 2025 results':'league estimate')) : ('#'+t.prank+' of '+FBS.length+' · FPI '+num1(t.fpi)))+tile('Projected finish',num1(s.projW)+'-'+num1(s.projL),(t.fcs?'6+ wins ':'bowl eligible ')+pct(s.bowl))+'</div>'; html+='<div class="grid g6" style="margin-top:10px">'+tile('Schedule strength',s.sosAll!=null?num1(s.sosAll):'—',(SOS_RANK[name]?'#'+SOS_RANK[name]+' hardest · ':'')+'avg opp rating')+tile('Remaining',s.upcoming.length+' games',s.sosRemain!=null?'avg opp '+num1(s.sosRemain):'')+tile('Home / away',s.hw+'-'+s.hl+' / '+s.aw+'-'+s.al,'home record / road record')+tile('vs ranked',s.rw+'-'+s.rl,'AP top 25 at kickoff')+tile('Streak',s.streak,s.last?('last: '+(s.last.home===name?'vs ':'at ')+tshort(s.last.home===name?s.last.away:s.last.home)):'')+(t.fcs ? (t.polls ? tile('Preseason poll', ordinal(t.polls[0].rank), esc(t.conf)+' coaches · media '+ordinal(t.polls[1].rank)) : tile('2025 rating', num1(t.r2025), 'end of last season'+(t.rec2025?' · went '+esc(t.rec2025):''))) : tile('ESPN playoff odds',num1(t.fpiPO)+'%','FPI projects '+num1(t.fpiW)+'-'+num1(t.fpiL)))+'</div>'; if(t.featured&&t.s2025){ html+='<div class="sec"><h2>2025 season</h2><span class="muted">'+esc(t.rec2025)+(t.confRec2025?' · '+esc(t.confRec2025):'')+'</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th></tr></thead><tbody>'+t.s2025.map(r=>'<tr><td>'+esc(fmtDate(r[0]))+'</td><td>'+(r[2]?'vs ':'at ')+esc(r[1])+'</td><td>'+(r[3]>r[4]?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+r[3]+'-'+r[4]+'</td></tr>').join('')+'</tbody></table></div>'+(t.pollNote?'<div class="note" style="margin-top:10px">'+esc(t.pollNote)+'</div>':''); } /* next game */ const nxt=s.upcoming[0]; if(nxt){ const g=nxt.g; const p=proj(g); html+='<div class="sec"><h2>Next up</h2></div><div class="gmlist">'+gameRow(g)+'</div>'; } html+='<div id="s-sched" class="sec"><h2>2026 schedule</h2><span class="muted">Click a game for the full breakdown.</span></div>'+teamSchedule(name,false); html+='<div id="s-analytics" class="sec"><h2>Analytics</h2><span class="muted">Projections use this page\'s power ratings, not the sportsbook.</span></div>'; html+='<div class="grid g2"><div class="card"><div class="hd"><h3>Where the season lands</h3><span class="mini">chance of each final win total</span></div><div class="bd">'+winDistChart(s)+'<div class="mini" style="margin-top:6px">Expected wins: <b>'+num1(s.projW)+'</b>. Most likely finish is highlighted in gold.</div></div></div><div class="card"><div class="hd"><h3>Scoring margin by game</h3><span class="mini">green = win, red = loss</span></div><div class="bd">'+marginChart(name)+'</div></div></div>'; html+='<div class="grid g2" style="margin-top:14px"><div class="card"><div class="hd"><h3>Rating vs. the '+esc(t.conf)+'</h3><span class="mini">each dot is a conference team</span></div><div class="bd">'+confStrip(t)+'</div></div><div class="card"><div class="hd"><h3>Schedule difficulty</h3><span class="mini">bar height = opponent rating · hover for detail</span></div><div class="bd">'+remainStrip(name)+'<div class="legend" style="margin-top:8px"><span><i style="background:var(--good)"></i>Win</span><span><i style="background:var(--bad)"></i>Loss</span><span><i style="background:var(--s1);opacity:.55"></i>Upcoming D1</span><span><i style="background:var(--ink-3);opacity:.4"></i>Upcoming non-D1</span></div></div></div></div>'; /* game log with model */ if(s.played.length){ html+='<div class="card" style="margin-top:14px"><div class="hd"><h3>Results vs. expectations</h3><span class="mini">what the market and the model expected before kickoff</span></div><div class="bd"><div class="tblwrap"><table class="tbl"><thead><tr><th>Game</th><th>Score</th><th class="r">Margin</th><th class="r">Closing line</th><th class="r">vs line</th><th class="r">Total</th><th class="r">Opp rating</th></tr></thead><tbody>'; s.played.forEach(g=>{ const home=g.home===name; const opp=team(home?g.away:g.home); const pf=home?g.hs:g.as, pa=home?g.as:g.hs; const m=pf-pa; const lineTeam = g.spread==null?null:(home?g.spread:-g.spread); const vsLine = lineTeam==null?null: m+lineTeam; html+='<tr class="click" data-href="#/game/'+g.id+'"><td>'+(home?'vs ':'at ')+chip(opp.name,{short:true})+'</td><td>'+(m>0?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+pf+'-'+pa+'</td><td class="r '+(m>0?'pos':'neg')+'">'+(m>0?'+':'')+m+'</td><td class="r">'+(lineTeam==null?'—':(lineTeam>0?'+':'')+lineTeam)+'</td><td class="r">'+(vsLine==null?'—':'<span class="'+(vsLine>0?'pos':vsLine<0?'neg':'zero')+'">'+(vsLine>0?'+':'')+num1(vsLine)+'</span>')+'</td><td class="r">'+(g.total!=null?(pf+pa)+' <span class="dim">/ '+g.total+'</span>':'—')+'</td><td class="r">'+num1(opp.rating)+'</td></tr>'; }); html+='</tbody></table></div></div></div>'; } html+=teamDraftHTML(name); /* depth */ html+='<div id="s-depth" class="sec"><h2>Depth chart</h2><span class="muted">2-deep from ESPN, with class, size, hometown, prior school, recruiting stars and 2025 stats where available.</span></div>'; html+=depthChartHTML(name); view.innerHTML=html; }
 function tile(l,v,sub){ return '<div class="tile"><div class="lbl">'+esc(l)+'</div><div class="val'+(String(v).length>9?' sm':'')+'">'+esc(v)+'</div><div class="sub">'+esc(sub||'')+'</div></div>'; }
 
 const RECRUIT = {}; // team -> {cls:{rank,commits,avg,s5,s4,s3}, portal:{...}}
@@ -6401,6 +7068,38 @@ function interest(g){ const a=team(g.away), h=team(g.home); let s=0; if(WATCH.st
 function hook(g){ if(g.played){ const a=team(g.away), h=team(g.home); const w=g.hs>g.as?h:a; const c=covered(g,'home'); return esc(w.disp)+' won by '+Math.abs(g.hs-g.as)+(c?', and '+(c==='P'?'the line pushed':(c==='W'?tshort(g.home):tshort(g.away))+' covered'):'')+'.'; } const st=WATCH.stories[g.id]; if(st) return st.split(/(?<=\.)\s/)[0]; const it=watchItems(g).filter(x=>x.tag!=='Player'&&x.tag!=='Stakes')[0]; if(it) return it.text.replace(/<[^>]+>/g,'').replace(/&#39;/g,"'").replace(/&amp;/g,'&'); const pj=proj(g); return pj.edge!=null ? 'Model: '+modelStr(g,{short:true})+' vs market '+spreadStr(g,{short:true}) : ''; }
 function watchStrip(gs){ const top=gs.filter(g=>g.fbs||team(g.away).featured||team(g.home).featured).map(g=>({g,s:interest(g)})).sort((x,y)=>y.s-x.s).slice(0,5); if(!top.length) return ''; return '<div class="sec" style="margin-top:4px"><h2>Games to watch</h2><span class="muted">the week\'s best angles'+(gs[0]&&gs.some(g=>!g.played)?' &middot; <a href="#/previews/'+gs[0].week+'">all Week '+gs[0].week+' previews &rsaquo;</a>':'')+'</span></div><div class="grid g5 watchgrid">'+top.map(({g})=>{ const a=team(g.away),h=team(g.home); return '<a class="card wcard" href="#/game/'+g.id+'" style="border-top:3px solid '+esc(h.color)+'"><div class="wm">'+(a.ap?'<span class="dim">#'+a.ap+' </span>':'')+esc(tshort(a.name))+' <span class="dim">'+(g.neutral?'vs':'at')+'</span> '+(h.ap?'<span class="dim">#'+h.ap+' </span>':'')+esc(tshort(h.name))+'</div><div class="wt">'+(g.played?'Final '+g.as+'-'+g.hs:g.live?'Live '+g.as+'-'+g.hs:esc(fmtDate(g.date,true).slice(0,3))+' '+esc(g.time)+(g.tv?' · '+esc(g.tv):''))+(g.spread!=null&&!g.played?' · '+esc(spreadStr(g,{short:true})):'')+'</div><div class="wh">'+esc(hook(g))+'</div></a>'; }).join('')+'</div>'; }
 
+/* ---------- NFL draft stock (2027 class) ---------- */
+const DRAFT=[]; const DMAP={}; const DRAFT_BY_TEAM={};
+const dkey = n => String(n||'').toLowerCase().replace(/\b(jr|sr|ii|iii|iv|v)\b\.?/g,'').replace(/[^a-z]/g,'');
+const DPOS = {DL3T:'DT',DL5T:'DE',DL1T:'NT',OC:'C',OG:'G',CBN:'CB',WRS:'WR',ILB:'LB',OLB:'LB','OT/IOL':'OL',IOL:'G',PK:'K'};
+const dpos = p => DPOS[p] || p;
+function draftTeam(school){ if(!school||/transfer/i.test(school)) return null; const n=norm(school); if(T[n]) return n; const n2=norm(school.replace(/\s+St\.?$/,' State').replace(/^Miami$/,'Miami')); return T[n2]?n2:null; }
+function dadd(src, n, pos, school, val, extra){ if(!n) return; const k=dkey(n); let d=DMAP[k]; if(!d){ d={n, key:k, pos:dpos(pos), rawpos:pos, school, team:draftTeam(school), bb:null, pick:null, dt:null, cls:'', ht:'', wt:''}; DMAP[k]=d; DRAFT.push(d); } if(!d.team) d.team=draftTeam(school); if(src==='bb') d.bb=val; if(src==='tank') d.pick=val; if(src==='dt') d.dt=val; if(extra) Object.keys(extra).forEach(x=>{ if(extra[x]&&!d[x]) d[x]=extra[x]; }); }
+loadText('d-draftbb').split('\n').forEach(l=>{ const p=l.trim().split('|'); if(p.length<4||!+p[0]) return; dadd('bb',p[1],p[2],p[3],+p[0]); });
+loadText('d-drafttank').split('\n').forEach(l=>{ const p=l.trim().split('|'); if(p.length<4||!+p[0]) return; const m=(p[4]||'').match(/^(\S+")\s*(\d+)/); dadd('tank',p[1],p[2],p[3],+p[0],{ht:m?m[1]:'',wt:m?m[2]:''}); });
+loadText('d-draftdt').split('\n').forEach(l=>{ const p=l.trim().split('|'); if(p.length<7||!+p[0]) return; dadd('dt',p[1],p[2],p[3],+p[0],{cls:p[4],ht:p[5],wt:p[6]}); });
+DRAFT.forEach(d=>{ d.rank = d.bb!=null ? d.bb : (d.dt!=null ? Math.max(d.dt, 101) : (d.pick!=null ? d.pick : 999)); const r = d.pick!=null ? (d.pick<=32?1:d.pick<=64?2:3) : (d.rank<=32?1:d.rank<=64?2:d.rank<=100?3:d.rank<=140?4:d.rank<=180?5:d.rank<=220?6:d.rank<=260?7:8); d.round=r; if(d.team){ (DRAFT_BY_TEAM[d.team]=DRAFT_BY_TEAM[d.team]||[]).push(d); const dd=DEPTH[d.team]; if(dd&&dd.depth){ dd.depth.forEach(p=>(p.players||[]).forEach((pl,i)=>{ if(!d.dp && dkey(pl.n)===d.key){ d.dp=pl; d.dpos=String(p.pos).replace(/\d+$/,''); d.string=i; } })); } if(!d.cls&&d.dp&&d.dp.cls) d.cls=d.dp.cls; } });
+DRAFT.sort((a,b)=>a.rank-b.rank||(a.dt||999)-(b.dt||999)); DRAFT.forEach((d,i)=>d.ov=i+1);
+Object.values(DRAFT_BY_TEAM).forEach(a=>a.sort((x,y)=>x.rank-y.rank));
+const RLBL = {1:'Round 1',2:'Round 2',3:'Round 3',4:'Round 4',5:'Round 5',6:'Round 6',7:'Round 7',8:'Late / UDFA'};
+function roundPill(d, opts={}){ const cls = d.round===1?'gold':d.round<=3?'acc':'line'; const t = d.pick!=null ? 'Pick '+d.pick : (d.round<=7?'Rd '+d.round:'Late'); return '<span class="pill '+cls+'"'+(opts.title!==false?' title="'+esc(draftWhy(d))+'"':'')+'>'+esc(t)+'</span>'; }
+function draftWhy(d){ const bits=[]; if(d.bb!=null) bits.push('#'+d.bb+' on the consensus big board'); if(d.pick!=null) bits.push('pick '+d.pick+' in the Tankathon mock'); if(d.dt!=null) bits.push('#'+d.dt+' at Drafttek'); return bits.join(' · '); }
+function draftRankStr(d){ return d.bb!=null ? '#'+d.bb : (d.dt!=null ? '#'+d.dt+' (Drafttek)' : (d.pick!=null?'pick '+d.pick:'—')); }
+function teamProspects(name){ return DRAFT_BY_TEAM[norm(name)] || []; }
+function draftScore(list){ return list.reduce((s,d)=>s+Math.max(0, 300-d.rank), 0); }
+function gameProspects(g){ return teamProspects(g.away).concat(teamProspects(g.home)).sort((a,b)=>a.rank-b.rank); }
+function prospectLine(d, opts={}){ const t=d.team?T[d.team]:null; return '<div class="dpl"><span class="rk">'+(d.round<=3?'<b>'+esc(draftRankStr(d))+'</b>':esc(draftRankStr(d)))+'</span><span class="who"><b>'+esc(d.n)+'</b> <span class="dim">'+esc(d.pos)+(d.cls?' · '+esc(d.cls):'')+'</span>'+(opts.team&&t?' <span class="dim">'+esc(tshort(t.name))+'</span>':'')+(d.dp&&d.dp.s25?'<div class="mini">2025: '+esc(fmtStat(d.dp.s25))+'</div>':'')+'</span>'+roundPill(d)+'</div>'; }
+function draftCardHTML(g){ const a=team(g.away), h=team(g.home); const pa=teamProspects(a.name), ph=teamProspects(h.name); if(!pa.length&&!ph.length) return ''; const all=pa.concat(ph); const r1=all.filter(d=>d.round===1).length; let html='<div class="card"><div class="hd"><h3>Draft stock</h3><span class="mini">'+all.length+' prospect'+(all.length>1?'s':'')+(r1?' · '+r1+' first-round':'')+'</span></div><div class="bd">'; [[a,pa],[h,ph]].forEach(([t,list])=>{ html+='<div class="dteam">'+chip(t.name,{norank:true})+(list.length?'':' <span class="mini">no one on the 2027 boards yet</span>')+'</div>'; list.slice(0,6).forEach(d=>{ html+=prospectLine(d); }); if(list.length>6) html+='<div class="mini" style="margin:2px 0 6px"><a href="#/team/'+enc(t.name)+'#s-draft">'+(list.length-6)+' more on the team page &rsaquo;</a></div>'; }); html+='<div class="mini" style="margin-top:8px">Consensus big board (100 deep), the Tankathon 2027 mock and Drafttek\'s 450-man board. <a href="#/draft">Full big board &rsaquo;</a></div></div></div>'; return html; }
+function draftKey(g){ const a=team(g.away), h=team(g.home); const pa=teamProspects(a.name).slice(0,3), ph=teamProspects(h.name).slice(0,3); if(!pa.length&&!ph.length) return null; const f=list=>list.map(d=>esc(d.pos+' '+d.n)+' ('+esc(draftRankStr(d))+')').join(', '); const parts=[]; if(pa.length) parts.push('<b>'+esc(tshort(a.name))+'</b>: '+f(pa)); if(ph.length) parts.push('<b>'+esc(tshort(h.name))+'</b>: '+f(ph)); const r1=pa.concat(ph).filter(d=>d.round===1).length; return (r1?r1+' projected first-rounder'+(r1>1?'s':'')+' on the field. ':'NFL scouts will be watching ')+parts.join(' · '); }
+function teamDraftHTML(name){ const list=teamProspects(name); let html='<div id="s-draft" class="sec"><h2>NFL draft stock</h2><span class="muted">2027 class, from the consensus big board, the Tankathon mock and Drafttek</span></div>'; if(!list.length) return html+'<div class="note">No '+esc(tshort(name))+' players on the 2027 boards yet.</div>'; html+='<div class="card"><div class="bd" style="padding-top:8px">'+list.map(d=>prospectLine(d)).join('')+'</div></div>'; return html; }
+function renderDraft(view_, arg){ setNav('draft'); const mode = view_==='board' ? 'board' : 'week'; let html='<div class="page-head"><div><div class="eyebrow">NFL Draft</div><h1>'+(mode==='week'?'Draft stock, Week '+CUR_WEEK:'2027 big board')+'</h1><div class="sub">'+(mode==='week'?'Every Week '+CUR_WEEK+' game with a projected 2027 draft pick on the field, ranked by how much draft talent is playing. The rank is the consensus big board (#1 to #100) or Drafttek beyond that; the pill is the projected pick from the Tankathon mock, or the projected round.':DRAFT.length+' prospects for the 2027 NFL Draft. Consensus big board top 100 first, then Drafttek\'s board, with the Tankathon mock pick where one exists. Click a school for its team page.')+'</div></div><div class="seg"><a href="#/draft" class="'+(mode==='week'?'on':'')+'">This week\'s games</a><a href="#/draft/board" class="'+(mode==='board'?'on':'')+'">Big board</a></div></div>';
+  const r1=DRAFT.filter(d=>d.round===1).length; const schools=Object.keys(DRAFT_BY_TEAM).length; const top=Object.entries(DRAFT_BY_TEAM).map(([t,l])=>({t,n:l.length,r1:l.filter(d=>d.round===1).length,sc:draftScore(l)})).sort((a,b)=>b.sc-a.sc);
+  html+='<div class="grid g4" style="margin-bottom:14px">'+tile('Prospects tracked',String(DRAFT.length),'2027 class')+tile('Projected first-rounders',String(r1),'consensus board / mock')+tile('Schools represented',String(schools),'of '+FBS.length+' FBS')+tile('Deepest roster',top[0]?T[top[0].t].disp:'—',top[0]?top[0].n+' prospects, '+top[0].r1+' in Round 1':'')+'</div>';
+  if(mode==='week'){ const gs=G.filter(g=>g.week===CUR_WEEK&&!g.fcsOnly).map(g=>({g,list:gameProspects(g)})).filter(x=>x.list.length).map(x=>Object.assign(x,{sc:draftScore(x.list)})).sort((a,b)=>b.sc-a.sc); if(!gs.length) html+='<div class="note">No games this week.</div>'; html+='<div class="grid g2">'+gs.map(({g,list})=>{ const a=team(g.away),h=team(g.home); const r1=list.filter(d=>d.round===1).length; return '<div class="card dgame" style="border-top:3px solid '+esc(h.color)+'"><div class="hd"><h3><a href="#/game/'+g.id+'">'+(a.ap?'#'+a.ap+' ':'')+esc(tshort(a.name))+' '+(g.neutral?'vs':'at')+' '+(h.ap?'#'+h.ap+' ':'')+esc(tshort(h.name))+'</a></h3><span class="mini">'+(g.played?'Final '+g.as+'-'+g.hs:esc(fmtDate(g.date,true).slice(0,3))+' '+esc(g.time)+(g.tv?' · '+esc(tvShort(g.tv)):''))+' · '+list.length+' prospect'+(list.length>1?'s':'')+(r1?' · '+r1+' Rd 1':'')+'</span></div><div class="bd">'+list.slice(0,6).map(d=>prospectLine(d,{team:true})).join('')+(list.length>6?'<div class="mini" style="margin-top:4px"><a href="#/game/'+g.id+'">'+(list.length-6)+' more on the game page &rsaquo;</a></div>':'')+'</div></div>'; }).join('')+'</div>'; view.innerHTML=html; return; }
+  const posList=[...new Set(DRAFT.map(d=>d.pos))].sort(); const f=arg||'all'; let list=DRAFT.slice(); if(/^r\d$/.test(f)) list=list.filter(d=>d.round===+f.slice(1)); else if(f==='day2') list=list.filter(d=>d.round===2||d.round===3); else if(f==='day3') list=list.filter(d=>d.round>=4); else if(f.startsWith('pos-')) list=list.filter(d=>d.pos===f.slice(4)); else if(f.startsWith('conf-')) list=list.filter(d=>d.team&&T[d.team].conf===f.slice(5));
+  html+='<div class="toolbar"><div class="seg">'+[['all','All'],['r1','Round 1'],['day2','Day 2'],['day3','Day 3']].map(x=>'<a href="#/draft/board/'+x[0]+'" class="'+(f===x[0]?'on':'')+'">'+x[1]+'</a>').join('')+'</div><select id="dpos" style="padding:6px 8px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--ink)"><option value="">All positions</option>'+posList.map(p=>'<option value="pos-'+p+'"'+(f==='pos-'+p?' selected':'')+'>'+p+'</option>').join('')+'</select><select id="dconf" style="padding:6px 8px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--ink)"><option value="">All conferences</option>'+CONF_ORDER.map(c=>'<option value="conf-'+c+'"'+(f==='conf-'+c?' selected':'')+'>'+esc(CONF_LONG[c]||c)+'</option>').join('')+'</select><span class="mini">'+list.length+' players</span></div>';
+  html+='<div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>Player</th><th>Pos</th><th>School</th><th>Class</th><th>Projection</th><th>Size</th><th>2025</th><th>This week</th></tr></thead><tbody>'+list.map(d=>{ const t=d.team?T[d.team]:null; let wk='<span class="dim">—</span>'; if(t){ const g=(teamGames[t.name]||[]).find(x=>x.week===CUR_WEEK); if(g){ const home=g.home===t.name; const o=team(home?g.away:g.home); wk='<a href="#/game/'+g.id+'">'+(home?'vs ':'at ')+esc(tshort(o.name))+'</a>'+(g.played?' <span class="dim">'+(home?g.hs:g.as)+'-'+(home?g.as:g.hs)+'</span>':''); } else wk='<span class="dim">bye</span>'; } return '<tr'+(t?' class="click" data-href="#/team/'+enc(t.name)+'#s-draft"':'')+'><td class="rk num">'+d.ov+'</td><td><b>'+esc(d.n)+'</b>'+(d.dp&&d.dp.tr?' <span class="pill acc">Transfer</span>':'')+'</td><td>'+esc(d.pos)+'</td><td>'+(t?chip(t.name,{short:true,norank:true}):'<span class="dim">'+esc(d.school)+'</span>')+'</td><td>'+esc(d.cls||'—')+'</td><td>'+roundPill(d)+' <span class="mini">'+esc(draftWhy(d))+'</span></td><td class="small nw">'+esc([d.ht,d.wt?d.wt+' lb':''].filter(Boolean).join(' · ')||'—')+'</td><td class="small">'+(d.dp&&d.dp.s25?esc(fmtStat(d.dp.s25)):'<span class="dim">—</span>')+'</td><td class="small nw">'+wk+'</td></tr>'; }).join('')+'</tbody></table></div><div class="mini" style="margin-top:10px">Sources: NFL Mock Draft Database consensus big board (top 100), Tankathon 2027 mock draft (101 picks) and Drafttek big board (450), pulled '+AS_OF.split(' ·')[0]+'. Round projections beyond the mock are a rough conversion from board rank.</div>';
+  view.innerHTML=html; const sel=id=>{ const el=document.getElementById(id); if(el) el.onchange=()=>{ location.hash='#/draft/board/'+(el.value||'all'); }; }; sel('dpos'); sel('dconf'); }
 /* ---------- recaps & previews ---------- */
 const HEADLINES={}, LEADERS={};
 loadText('d-headlines').split('\n').forEach(l=>{ const p=l.trim().split('|'); if(p.length<6||p[3]!=='HEADLINE') return; HEADLINES[p[0]+'|'+norm(p[1])+'|'+norm(p[2])]=p[5]; });
@@ -6427,6 +7126,7 @@ function previewKeys(g){ const a=team(g.away), h=team(g.home); const keys=[]; co
   [a,h].forEach(t=>{ if(t.other) return; const lg=lastGameBefore(t.name,g.date); if(!lg||!lg.played) return; const o=t.name===a.name?h:a; const L=leadersFor(lg,t.name); const ru=L.find(x=>x.cat==='rushingYards'), pa=L.find(x=>x.cat==='passingYards'); if(ru&&ydsIn(ru.v)>=150) add('Ground game', esc(t.disp)+' leaned on '+esc(ru.n)+' ('+esc(statLine(ru.v))+') last week. The '+esc(tshort(o.name))+' run defense is the matchup to watch.'); else if(pa&&ydsIn(pa.v)>=300) add('Passing game', esc(pa.n)+' threw for '+ydsIn(pa.v)+' yards last week; the '+esc(tshort(o.name))+' secondary gets the test.'); });
   const sa=a.other?null:stats(a.name), sh=h.other?null:stats(h.name); if(sa&&sh&&sa.gp&&sh.gp){ const aa=sa.pa/sa.gp, ha=sh.pa/sh.gp; if(aa<=10||ha<=10){ const d=aa<=ha?a:h; const s=d===a?sa:sh; add('Defense', esc(d.disp)+' has allowed '+num1(s.pa/s.gp)+' points per game so far'+(s.gp===1?' (one game)':'')+'.'); } }
   [[a,h],[h,a]].forEach(([t,o])=>{ if(t.level==='FCS'&&o.level==='FBS') add('FCS factor', esc(t.disp)+' is rated '+num1(t.rating)+' against '+esc(o.disp)+'\'s '+num1(o.rating)+', a '+num1(Math.abs(o.rating-t.rating))+'-point gap before home field. FCS teams have beaten FBS teams '+FCS_WINS.length+' time'+(FCS_WINS.length===1?'':'s')+' this season'+(FCS_WINS.length?' ('+FCS_WINS.slice(0,3).map(x=>esc(tshort(team(x.home).level==='FCS'?x.home:x.away))).join(', ')+')':'')+'.'); });
+  const dk=draftKey(g); if(dk) add('Draft', dk);
   const im=implied(g); const ps=projScore(g); if(im) add('Market', 'The line implies roughly '+esc(tshort(g.home))+' '+num1(im.home)+', '+esc(tshort(g.away))+' '+num1(im.away)+'. This page\'s model has it '+esc(tshort(g.home))+' '+ps.h+', '+esc(tshort(g.away))+' '+ps.a+(p.edge!=null&&Math.abs(p.edge)>=1.5?', leaning '+esc(tshort(p.edge>0?g.home:g.away))+' by '+num1(Math.abs(p.edge))+' against the number':', in line with the market')+'.'); else add('Market', 'No line posted yet. The model projects '+esc(tshort(g.home))+' '+ps.h+', '+esc(tshort(g.away))+' '+ps.a+'.');
   if(ps.pace!=null&&g.total!=null&&Math.abs(ps.pace-g.total)>=8) add('Pace', 'Against FBS opponents these two have played in games averaging '+num1(ps.pace)+' total points, against a posted total of '+g.total+'. Small sample, but the early scoring points to the '+(ps.pace>g.total?'over':'under')+'.');
   return keys; }
@@ -6434,12 +7134,12 @@ function pickHTML(g){ const p=proj(g); const ps=projScore(g); const hand=PREVIEW
   return '<div class="pick"><div><div class="eyebrow">Projected score</div><div class="scoreproj">'+esc(tshort(g.away))+' '+ps.a+' <span class="dim">&middot;</span> '+esc(tshort(g.home))+' '+ps.h+'</div><div class="mini">'+pct(Math.max(p.pHome,p.pAway))+' '+esc(tshort(p.diff>0?g.home:g.away))+' to win</div></div><div><div class="eyebrow">Against the spread</div><div class="big"><span class="pill '+cls+'">'+esc(side)+'</span></div><div class="mini">'+esc(conf)+'</div></div>'+(hand&&hand.pick?'<div class="pnote"><div class="eyebrow">The call</div>'+esc(hand.pick)+'</div>':'')+'</div>'; }
 function previewHTML(g){ const a=team(g.away), h=team(g.home); const hand=PREVIEWS[g.id]; const keys=previewKeys(g); return '<div class="card pv"><div class="hd"><h3>Game preview</h3><span class="mini">'+esc(fmtDate(g.date))+' &middot; '+esc(g.time||'TBD')+(g.tv?' &middot; '+esc(tvShort(g.tv)):'')+'</span></div><div class="bd">'+(hand&&hand.angle?'<div class="angle">'+esc(hand.angle)+'</div>':'')+'<div class="pvgrid">'+lastOutHTML(a,g)+lastOutHTML(h,g)+'</div>'+(keys.length?'<div class="eyebrow" style="margin-top:14px">Keys to the game</div><ul class="keys">'+keys.map(k=>'<li><span class="pill line">'+esc(k.tag)+'</span> '+k.text+'</li>').join('')+'</ul>':'')+pickHTML(g)+'</div></div>'; }
 function recapHTML(g){ const a=team(g.away), h=team(g.home); const hl=headlineFor(g); const la=leadersHTML(g,a.name), lh=leadersHTML(g,h.name); if(!hl&&!la&&!lh) return ''; return '<div class="card pv"><div class="hd"><h3>How it went</h3><span class="mini">final '+g.as+'-'+g.hs+(g.spread!=null?' &middot; '+esc(spreadStr(g,{short:true})):'')+'</span></div><div class="bd">'+(hl?'<div class="angle">'+esc(hl)+'</div>':'')+'<div class="pvgrid">'+[a,h].map(t=>{ const L=t===a?la:lh; return '<div class="lo"><div class="lo-t">'+chip(t.name,{norank:true})+'<span class="mini"> '+(t===a?g.as:g.hs)+' points</span></div>'+(L||'<div class="mini">No stat leaders recorded.</div>')+'</div>'; }).join('')+'</div></div></div>'; }
-function pcard(g){ const a=team(g.away), h=team(g.home); const p=proj(g); const ps=projScore(g); const hand=PREVIEWS[g.id]; const k=previewKeys(g); const blurb = hand&&hand.angle ? hand.angle : unesc((k.filter(x=>x.tag!=='Market'&&x.tag!=='QBs')[0]||k[0]||{text:hook(g)}).text); const e=p.edge; return '<a class="card pcard" href="#/game/'+g.id+'" style="border-top-color:'+esc(h.color)+'"><div class="bd"><div class="wm">'+(a.ap?'<span class="dim">#'+a.ap+' </span>':'')+esc(tshort(a.name))+' <span class="dim">'+(g.neutral?'vs':'at')+'</span> '+(h.ap?'<span class="dim">#'+h.ap+' </span>':'')+esc(tshort(h.name))+'</div><div class="wt">'+esc(fmtDate(g.date,true).slice(0,3))+' '+esc(g.time)+(g.tv?' &middot; '+esc(tvShort(g.tv)):'')+(g.spread!=null?' &middot; '+esc(spreadStr(g,{short:true}))+(g.total!=null?' &middot; o/u '+g.total:''):' &middot; no line')+'</div><div class="pc-row"><span><span class="eyebrow">Model</span> '+esc(tshort(a.name))+' '+ps.a+', '+esc(tshort(h.name))+' '+ps.h+'</span>'+(e!=null?(Math.abs(e)>=3?'<span class="pill gold">':Math.abs(e)>=1.5?'<span class="pill acc">':'<span class="pill line">')+(Math.abs(e)<1.5?'Priced right':'Lean '+esc(tshort(e>0?g.home:g.away))+' '+sgn(Math.abs(e)))+'</span>':'')+'</div><div class="wh">'+esc(blurb)+'</div></div></a>'; }
+function pcard(g){ const a=team(g.away), h=team(g.home); const p=proj(g); const ps=projScore(g); const hand=PREVIEWS[g.id]; const k=previewKeys(g); const blurb = hand&&hand.angle ? hand.angle : unesc((k.filter(x=>x.tag!=='Market'&&x.tag!=='QBs')[0]||k[0]||{text:hook(g)}).text); const e=p.edge; return '<a class="card pcard" href="#/game/'+g.id+'" style="border-top-color:'+esc(h.color)+'"><div class="bd"><div class="wm">'+(a.ap?'<span class="dim">#'+a.ap+' </span>':'')+esc(tshort(a.name))+' <span class="dim">'+(g.neutral?'vs':'at')+'</span> '+(h.ap?'<span class="dim">#'+h.ap+' </span>':'')+esc(tshort(h.name))+'</div><div class="wt">'+esc(fmtDate(g.date,true).slice(0,3))+' '+esc(g.time)+(g.tv?' &middot; '+esc(tvShort(g.tv)):'')+(g.spread!=null?' &middot; '+esc(spreadStr(g,{short:true}))+(g.total!=null?' &middot; o/u '+g.total:''):' &middot; no line')+'</div><div class="pc-row"><span><span class="eyebrow">Model</span> '+esc(tshort(a.name))+' '+ps.a+', '+esc(tshort(h.name))+' '+ps.h+'</span>'+(e!=null?(Math.abs(e)>=3?'<span class="pill gold">':Math.abs(e)>=1.5?'<span class="pill acc">':'<span class="pill line">')+(Math.abs(e)<1.5?'Priced right':'Lean '+esc(tshort(e>0?g.home:g.away))+' '+sgn(Math.abs(e)))+'</span>':'')+'</div><div class="wh">'+esc(blurb)+'</div>'+(function(){ const l=gameProspects(g).slice(0,3); return l.length?'<div class="wd">'+l.map(d=>roundPill(d,{title:false})+' '+esc(d.n)+' <span class="dim">'+esc(d.pos+' · '+tshort(d.team))+'</span>').join('<span class="dim"> · </span>'):''; })()+'</div></a>'; }
 function renderPreviews(w){ setNav('previews'); w = WEEKS.includes(w)? w : CUR_WEEK; const gs=G.filter(g=>g.week===w&&(!g.fcsOnly||team(g.away).featured||team(g.home).featured)).map(g=>({g,s:interest(g)+(g.spread!=null?0.5:0)})).sort((x,y)=>y.s-x.s).map(x=>x.g); const upcoming=gs.filter(g=>!g.played); const done=gs.filter(g=>g.played); const lines=upcoming.filter(g=>g.spread!=null).length; let html='<div class="page-head"><div><div class="eyebrow">Previews</div><h1>Week '+w+' '+(upcoming.length?'previews':'recaps')+'</h1><div class="sub">'+(upcoming.length? upcoming.length+' games still to play, '+lines+' with a posted line. Ranked by how interesting they look: stakes, closeness, storylines and ratings. Each card opens the full preview with last week\'s film, keys to the game and the model\'s call.' : 'Every game is final. Headlines and stat leaders from each one.')+'</div></div>'+weekPills(w,'#/previews/')+'</div>';
   if(upcoming.length){ const top=upcoming.slice(0,8); html+='<div class="sec"><h2>Marquee</h2><span class="muted">the eight to plan the weekend around</span></div><div class="grid g2">'+top.map(g=>pcard(g)).join('')+'</div>'; const rest=upcoming.slice(8); if(rest.length){ html+='<div class="sec"><h2>The rest of the board</h2><span class="muted">'+rest.length+' more, most interesting first</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Matchup</th><th>Kick</th><th>Line</th><th class="r">Model</th><th class="r">Edge</th><th>Projected</th><th>One thing</th></tr></thead><tbody>'+rest.map(g=>{ const ps=projScore(g); const k=previewKeys(g); const one=(PREVIEWS[g.id]&&PREVIEWS[g.id].angle)?PREVIEWS[g.id].angle.split(/(?<=\.)\s/)[0]:unesc((k.filter(x=>x.tag!=='Market'&&x.tag!=='QBs')[0]||k[0]||{text:hook(g)}).text); return '<tr class="click" data-href="#/game/'+g.id+'"><td>'+chip(g.away,{short:true})+' <span class="dim">'+(g.neutral?'vs':'at')+'</span> '+chip(g.home,{short:true})+'</td><td class="small nw">'+esc(fmtDate(g.date,true).slice(0,3))+' '+esc(g.time)+(g.tv?' <span class="dim">'+esc(tvShort(g.tv))+'</span>':'')+'</td><td class="nw">'+esc(spreadStr(g,{short:true}))+(g.total!=null?' <span class="dim">o/u '+g.total+'</span>':'')+'</td><td class="r nw">'+esc(modelStr(g,{short:true}))+'</td><td class="r">'+edgeCell(g)+'</td><td class="small nw">'+esc(tshort(g.away))+' '+ps.a+', '+esc(tshort(g.home))+' '+ps.h+'</td><td class="small one">'+esc(one)+'</td></tr>'; }).join('')+'</tbody></table></div>'; } }
   if(done.length){ html+='<div class="sec"><h2>'+(upcoming.length?'Already played this week':'Results')+'</h2><span class="muted">'+done.length+' final'+(done.length>1?'s':'')+'</span></div><div class="grid g2">'+done.map(g=>{ const hl=headlineFor(g); const c=covered(g,'home'); return '<a class="card pcard" href="#/game/'+g.id+'" style="border-top-color:'+esc(team(g.home).color)+'"><div class="bd"><div class="wm">'+esc(tshort(g.away))+' '+g.as+' <span class="dim">'+(g.neutral?'vs':'at')+'</span> '+esc(tshort(g.home))+' '+g.hs+'</div><div class="wt">'+(g.spread!=null?esc(spreadStr(g,{short:true}))+' &middot; '+(c==='P'?'push':(c==='W'?esc(tshort(g.home)):esc(tshort(g.away)))+' covered'):'no line')+'</div><div class="wh">'+esc(hl||unesc(hook(g)))+'</div></div></a>'; }).join('')+'</div>'; }
   view.innerHTML=html; }
-function renderGame(id){ const g=GI[id]; if(!g){ view.innerHTML='<div class="note">Game not found. <a href="#/week">Back to the scoreboard.</a></div>'; return; } setNav('week'); const a=team(g.away), h=team(g.home); const p=proj(g); const sa=a.other?null:stats(a.name), sh=h.other?null:stats(h.name); let html=backBar('#/week/'+g.week, '<a href="#/week/'+g.week+'">Week '+g.week+'</a> · '+esc(fmtDateLong(g.date))+(g.conf?' · '+esc(h.conf)+' game':'')); html+='<div class="ghead"><div class="side">'+(a.other?mono(a):'<a class="monolink" href="#/team/'+enc(a.name)+'" title="'+esc(a.disp)+' team page">'+mono(a)+'</a>')+'<div><div class="nm">'+(a.ap?'<span class="dim" style="font-size:20px">#'+a.ap+' </span>':'')+(a.fcs?esc(a.disp):'<a href="#/team/'+enc(a.name)+'">'+esc(a.disp)+'</a>')+'</div><div class="rec">'+(a.other?'Non-D1 opponent · rating '+num1(a.rating):recStr(a.name)+' · '+esc(a.conf)+(a.fcs?' (FCS)':'')+' · rating '+num1(a.rating))+'</div>'+(a.other?'':'<div class="mini"><a href="#/team/'+enc(a.name)+'">Team page &rsaquo;</a></div>')+'</div></div><div class="mid">'+(g.played?'<div class="sc">'+g.as+' – '+g.hs+'</div><div class="when">Final</div>':g.live?'<div class="sc">'+g.as+' - '+g.hs+'</div><div class="when">In progress at data snapshot</div>':'<div class="sc" style="font-size:30px">'+esc(g.time||'TBD')+'</div><div class="when">'+esc(g.tv||'TV TBD')+'</div>')+'<div class="when">'+esc(venue(g))+'</div></div><div class="side home">'+(h.other?mono(h):'<a class="monolink" href="#/team/'+enc(h.name)+'" title="'+esc(h.disp)+' team page">'+mono(h)+'</a>')+'<div><div class="nm">'+(h.ap?'<span class="dim" style="font-size:20px">#'+h.ap+' </span>':'')+(h.fcs?esc(h.disp):'<a href="#/team/'+enc(h.name)+'">'+esc(h.disp)+'</a>')+'</div><div class="rec">'+(h.other?'Non-D1 opponent · rating '+num1(h.rating):recStr(h.name)+' · '+esc(h.conf)+(h.fcs?' (FCS)':'')+' · rating '+num1(h.rating))+'</div>'+(h.other?'':'<div class="mini"><a href="#/team/'+enc(h.name)+'">Team page &rsaquo;</a></div>')+'</div></div></div>'; /* line tiles */ const fav = p.diff>0?h:a; html+='<div class="grid g6" style="margin-top:14px">'+tile(g.played?'Closing spread':'Spread', spreadStr(g,{short:true}), g.src?('source: '+g.src):'no line posted')+tile('Total', g.total??'—', g.played?((g.as+g.hs)+' scored → '+(ouResult(g)==='O'?'over':ouResult(g)==='U'?'under':'push')):'over / under')+tile('Moneyline', g.mlA!=null?mlStr(g.mlA)+' / '+mlStr(g.mlH):'—', tshort(g.away)+' / '+tshort(g.home))+tile('Model line', modelStr(g,{short:true}), 'ratings + '+(g.neutral?'no home field':HFA+' pts home field'))+tile(g.played?'Pregame win prob.':'Win probability', pct(Math.max(p.pHome,p.pAway))+' '+tshort(fav.name), g.spread!=null?'market implied '+pct(Math.max(p.mktPHome,1-p.mktPHome)):'')+(g.live? tile('Live score', g.as+'-'+g.hs, 'when this page was built') : tile('Edge', p.edge!=null? (Math.abs(p.edge)<0.05?'None':tshort(p.edge>0?g.home:g.away)+' '+sgn(Math.abs(p.edge))) : '—', p.edge!=null?(g.played?'model vs closing line':Math.abs(p.edge)>=3?'strong lean':Math.abs(p.edge)>=1.5?'slight lean':'model agrees with market'):'needs a posted line'))+'</div>'; html+='<div class="grid gside" style="margin-top:14px"><div class="gmain">'+(g.played?recapHTML(g):(g.live?'':previewHTML(g)))+watchHTML(g)+'<div class="card" style="margin-top:14px"><div class="hd"><h3>The read</h3></div><div class="bd">'+narrative(g)+'</div></div></div><div class="gaside"><div class="card"><div class="hd"><h3>Head to head</h3><div class="legend"><span><i style="background:var(--s2)"></i>'+esc(a.disp)+'</span><span><i style="background:var(--s1)"></i>'+esc(h.disp)+'</span></div></div><div class="bd">'+compareHTML(a,h,sa,sh)+'</div></div><div class="card"><div class="hd"><h3>Form</h3><span class="mini">each team\'s season so far</span></div><div class="bd">'+formHTML(a)+formHTML(h)+'</div></div></div></div>'; /* lineups */ const qa=starterAt(a.name,['QB']), qh=starterAt(h.name,['QB']); if(qa||qh){ html+='<div class="sec"><h2>Projected starters</h2><span class="muted">from each depth chart</span></div><div class="grid g2">'+lineupCard(a)+lineupCard(h)+'</div>'; } view.innerHTML=html; }
+function renderGame(id){ const g=GI[id]; if(!g){ view.innerHTML='<div class="note">Game not found. <a href="#/week">Back to the scoreboard.</a></div>'; return; } setNav('week'); const a=team(g.away), h=team(g.home); const p=proj(g); const sa=a.other?null:stats(a.name), sh=h.other?null:stats(h.name); let html=backBar('#/week/'+g.week, '<a href="#/week/'+g.week+'">Week '+g.week+'</a> · '+esc(fmtDateLong(g.date))+(g.conf?' · '+esc(h.conf)+' game':'')); html+='<div class="ghead"><div class="side">'+(a.other?mono(a):'<a class="monolink" href="#/team/'+enc(a.name)+'" title="'+esc(a.disp)+' team page">'+mono(a)+'</a>')+'<div><div class="nm">'+(a.ap?'<span class="dim" style="font-size:20px">#'+a.ap+' </span>':'')+(a.fcs?esc(a.disp):'<a href="#/team/'+enc(a.name)+'">'+esc(a.disp)+'</a>')+'</div><div class="rec">'+(a.other?'Non-D1 opponent · rating '+num1(a.rating):recStr(a.name)+' · '+esc(a.conf)+(a.fcs?' (FCS)':'')+' · rating '+num1(a.rating))+'</div>'+(a.other?'':'<div class="mini"><a href="#/team/'+enc(a.name)+'">Team page &rsaquo;</a></div>')+'</div></div><div class="mid">'+(g.played?'<div class="sc">'+g.as+' – '+g.hs+'</div><div class="when">Final</div>':g.live?'<div class="sc">'+g.as+' - '+g.hs+'</div><div class="when">In progress at data snapshot</div>':'<div class="sc" style="font-size:30px">'+esc(g.time||'TBD')+'</div><div class="when">'+esc(g.tv||'TV TBD')+'</div>')+'<div class="when">'+esc(venue(g))+'</div></div><div class="side home">'+(h.other?mono(h):'<a class="monolink" href="#/team/'+enc(h.name)+'" title="'+esc(h.disp)+' team page">'+mono(h)+'</a>')+'<div><div class="nm">'+(h.ap?'<span class="dim" style="font-size:20px">#'+h.ap+' </span>':'')+(h.fcs?esc(h.disp):'<a href="#/team/'+enc(h.name)+'">'+esc(h.disp)+'</a>')+'</div><div class="rec">'+(h.other?'Non-D1 opponent · rating '+num1(h.rating):recStr(h.name)+' · '+esc(h.conf)+(h.fcs?' (FCS)':'')+' · rating '+num1(h.rating))+'</div>'+(h.other?'':'<div class="mini"><a href="#/team/'+enc(h.name)+'">Team page &rsaquo;</a></div>')+'</div></div></div>'; /* line tiles */ const fav = p.diff>0?h:a; html+='<div class="grid g6" style="margin-top:14px">'+tile(g.played?'Closing spread':'Spread', spreadStr(g,{short:true}), g.src?('source: '+g.src):'no line posted')+tile('Total', g.total??'—', g.played?((g.as+g.hs)+' scored → '+(ouResult(g)==='O'?'over':ouResult(g)==='U'?'under':'push')):'over / under')+tile('Moneyline', g.mlA!=null?mlStr(g.mlA)+' / '+mlStr(g.mlH):'—', tshort(g.away)+' / '+tshort(g.home))+tile('Model line', modelStr(g,{short:true}), 'ratings + '+(g.neutral?'no home field':HFA+' pts home field'))+tile(g.played?'Pregame win prob.':'Win probability', pct(Math.max(p.pHome,p.pAway))+' '+tshort(fav.name), g.spread!=null?'market implied '+pct(Math.max(p.mktPHome,1-p.mktPHome)):'')+(g.live? tile('Live score', g.as+'-'+g.hs, 'when this page was built') : tile('Edge', p.edge!=null? (Math.abs(p.edge)<0.05?'None':tshort(p.edge>0?g.home:g.away)+' '+sgn(Math.abs(p.edge))) : '—', p.edge!=null?(g.played?'model vs closing line':Math.abs(p.edge)>=3?'strong lean':Math.abs(p.edge)>=1.5?'slight lean':'model agrees with market'):'needs a posted line'))+'</div>'; html+='<div class="grid gside" style="margin-top:14px"><div class="gmain">'+(g.played?recapHTML(g):(g.live?'':previewHTML(g)))+watchHTML(g)+'<div class="card" style="margin-top:14px"><div class="hd"><h3>The read</h3></div><div class="bd">'+narrative(g)+'</div></div></div><div class="gaside">'+draftCardHTML(g)+'<div class="card"><div class="hd"><h3>Head to head</h3><div class="legend"><span><i style="background:var(--s2)"></i>'+esc(a.disp)+'</span><span><i style="background:var(--s1)"></i>'+esc(h.disp)+'</span></div></div><div class="bd">'+compareHTML(a,h,sa,sh)+'</div></div><div class="card"><div class="hd"><h3>Form</h3><span class="mini">each team\'s season so far</span></div><div class="bd">'+formHTML(a)+formHTML(h)+'</div></div></div></div>'; /* lineups */ const qa=starterAt(a.name,['QB']), qh=starterAt(h.name,['QB']); if(qa||qh){ html+='<div class="sec"><h2>Projected starters</h2><span class="muted">from each depth chart</span></div><div class="grid g2">'+lineupCard(a)+lineupCard(h)+'</div>'; } view.innerHTML=html; }
 function narrative(g){ const a=team(g.away), h=team(g.home); const p=proj(g); const parts=[]; const fav=p.diff>0?h:a, dog=p.diff>0?a:h; parts.push('<p>On ratings alone, <b>'+esc(fav.disp)+'</b> is '+num1(Math.abs(p.diff))+' points better here'+(g.neutral?' on a neutral field':(fav===h?' with home field counted':' even after giving '+esc(h.disp)+' '+HFA+' points for home field'))+', which works out to a '+pct(Math.max(p.pHome,p.pAway))+' chance to win.</p>'); if(g.live) parts.unshift('<p><b>This game is underway.</b> It stood '+g.as+'-'+g.hs+' when the page was last built, so the numbers below are the pregame picture.</p>'); if(g.spread!=null && !g.played && !g.live){ const e=p.edge; const who=e>0?h:a; if(Math.abs(e)<1.5) parts.push('<p>The market has it about the same ('+esc(spreadStr(g))+'). No real disagreement.</p>'); else parts.push('<p>The market says '+esc(spreadStr(g))+'. This page\'s model leans <b>'+esc(who.disp)+'</b> by '+num1(Math.abs(e))+' points relative to that number'+(Math.abs(e)>=3?', which is a meaningful gap':', a modest gap')+'. '+(g.src==='opener'||g.src==='look-ahead'?'That is an early number and will move.':'')+'</p>'); } if(g.played){ const m=g.hs-g.as; const w=m>0?h:a; const l=m>0?a:h; parts.push('<p><b>'+esc(w.disp)+'</b> won by '+Math.abs(m)+'. '+(g.spread!=null?('Against the closing line ('+esc(spreadStr(g))+'), '+(covered(g,'home')==='P'?'it was a push':(covered(g,'home')==='W'?esc(h.disp):esc(a.disp))+' covered')+'. '):'')+(p.diff!==0?'The model had '+esc(modelStr(g))+', so it '+((p.diff>0)===(m>0)?'picked the winner':'was on the wrong side')+'.':'')+'</p>'); } const sa=a.other?null:stats(a.name), sh=h.other?null:stats(h.name); if(sa&&sh){ const bits=[]; if(sa.gp&&sh.gp){ bits.push(esc(a.disp)+' is scoring '+num1(sa.pf/sa.gp)+' and allowing '+num1(sa.pa/sa.gp)+'; '+esc(h.disp)+' is scoring '+num1(sh.pf/sh.gp)+' and allowing '+num1(sh.pa/sh.gp)+'.'); } const sosA=SOS_RANK[a.name], sosH=SOS_RANK[h.name]; if(sosA&&sosH) bits.push('Schedule strength: '+esc(a.disp)+' #'+sosA+', '+esc(h.disp)+' #'+sosH+' (of '+FBS.length+').'); parts.push('<p>'+bits.join(' ')+'</p>'); } [a,h].filter(x=>x.level!=='FBS').forEach(x=>{ parts.push('<p class="muted">'+esc(x.disp)+(x.other ? ' is a non-Division I opponent, carried at a placeholder rating of '+num1(x.rating)+'.' : ' is an FCS program from the '+esc(CONF_LONG[x.conf]||x.conf)+'. Its rating of '+num1(x.rating)+(x.basis==='2025' ? ' starts from last season\'s results'+(x.rec2025?' ('+esc(x.rec2025)+')':'')+' and moves with this year\'s games.' : ' is a league-level estimate until it plays.'))+'</p>'); }); return parts.join(''); }
 function compareHTML(a,h,sa,sh){ const rows=[]; const add=(k,va,vh,fmt,hi)=>rows.push({k,va,vh,fmt:fmt||(x=>x==null?'—':String(x)),hi:hi!==false}); add('Power rating',a.rating,h.rating,x=>num1(x)); add('FPI',a.fpi,h.fpi,x=>x==null?'—':num1(x)); add('Record',sa?sa.w:null,sh?sh.w:null,(x,t)=>t?t.w+'-'+t.l:'—'); add('Points / game',sa&&sa.gp?sa.pf/sa.gp:null,sh&&sh.gp?sh.pf/sh.gp:null,x=>x==null?'—':num1(x)); add('Allowed / game',sa&&sa.gp?sa.pa/sa.gp:null,sh&&sh.gp?sh.pa/sh.gp:null,x=>x==null?'—':num1(x),false); add('Avg margin',sa?sa.margin:null,sh?sh.margin:null,x=>x==null?'—':sgn(x)); add('ATS',sa?sa.ats.w:null,sh?sh.ats.w:null,(x,t)=>t?t.ats.w+'-'+t.ats.l:'—'); add('Sched. strength',sa?sa.sosAll:null,sh?sh.sosAll:null,x=>x==null?'—':num1(x)); add('Proj. record',sa?sa.projW:null,sh?sh.projW:null,(x,t)=>t?num1(t.projW)+'-'+num1(t.projL):'—'); let html='<div class="cmp">'; rows.forEach(r=>{ const va=r.va, vh=r.vh; const both = va!=null && vh!=null; let wa=0,wh=0; if(both){ const lo=Math.min(va,vh), span=Math.max(Math.abs(va),Math.abs(vh),1e-6); const norm=v=>{ const base = (r.k==='Power rating'||r.k==='FPI'||r.k==='Avg margin'||r.k==='Sched. strength') ? (v+30)/60 : (v/(Math.max(va,vh)||1)); return Math.max(0.06,Math.min(1,base)); }; wa=norm(va); wh=norm(vh); } html+='<div class="rowv a"><span class="v">'+esc(r.fmt(va,sa))+'</span><div class="b a" style="flex:1"><span style="width:'+(wa*100)+'%"></span></div></div><div class="k">'+esc(r.k)+'</div><div class="rowv h"><div class="b h" style="flex:1"><span style="width:'+(wh*100)+'%"></span></div><span class="v">'+esc(r.fmt(vh,sh))+'</span></div>'; }); html+='</div>'; return html; }
 function formHTML(t){ if(t.other) return '<div class="mini" style="margin:6px 0"><b>'+esc(t.disp)+'</b>: non-Division I opponent, results not tracked here.</div>'; const s=stats(t.name); let html='<div style="margin:6px 0 12px"><div><b>'+esc(t.disp)+'</b> <span class="muted">'+s.w+'-'+s.l+' · '+s.ats.w+'-'+s.ats.l+' ATS</span></div>'; if(!s.played.length) html+='<div class="mini">No games played yet. Opens '+(s.upcoming[0]?(s.upcoming[0].g.home===t.name?'vs ':'at ')+esc(tshort(s.upcoming[0].g.home===t.name?s.upcoming[0].g.away:s.upcoming[0].g.home)):'')+'.</div>'; s.played.slice(-5).forEach(g=>{ const home=g.home===t.name; const opp=team(home?g.away:g.home); const pf=home?g.hs:g.as, pa=home?g.as:g.hs; html+='<div class="mini"><a href="#/game/'+g.id+'">'+(pf>pa?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+pf+'-'+pa+' '+(home?'vs':'at')+' '+esc(tshort(opp.name))+'</a> '+(g.spread!=null?'<span class="dim">('+esc(spreadStr(g,{short:true}))+')</span> ':'')+pillATS(covered(g,home?'home':'away'))+'</div>'; }); return html+'</div>'; }
@@ -6476,7 +7176,7 @@ function aboutHTML(){ return '<h2>How the numbers work</h2><p><b>Power rating</b
 
 /* ---------- routing ---------- */
 function route(){ view.classList.remove('in'); void view.offsetWidth; routeInner(); setTimeout(()=>view.classList.add('in'),0); }
-function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('/').map(dec); const r=parts[0]||''; window.scrollTo(0,0); if(r===''||r==='week'){ renderWeek(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='lines'){ renderLines(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='rankings'){ renderRankings(parts[1]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='teams'){ renderTeams(parts[1]); } else if(r==='team'){ renderTeam(parts[1]||''); const anchor=h.split('#').slice(2)[0]; if(anchor){ const el=document.getElementById(anchor); if(el) setTimeout(()=>el.scrollIntoView({block:'start'}),0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='transfers'){ renderTransfers(parts[1]); } else if(r==='previews'){ renderPreviews(+parts[1]||CUR_WEEK); } else if(r==='my'){ renderMy(parts[1]); } else renderHome(); }
+function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('/').map(dec); const r=parts[0]||''; window.scrollTo(0,0); if(r===''||r==='week'){ renderWeek(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='lines'){ renderLines(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='rankings'){ renderRankings(parts[1]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='teams'){ renderTeams(parts[1]); } else if(r==='team'){ renderTeam(parts[1]||''); const anchor=h.split('#').slice(2)[0]; if(anchor){ const el=document.getElementById(anchor); if(el) setTimeout(()=>el.scrollIntoView({block:'start'}),0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='transfers'){ renderTransfers(parts[1]); } else if(r==='previews'){ renderPreviews(+parts[1]||CUR_WEEK); } else if(r==='draft'){ renderDraft(parts[1], parts[2]); } else if(r==='my'){ renderMy(parts[1]); } else renderHome(); }
 window.addEventListener('hashchange', route);
 document.addEventListener('click', e=>{ const tr=e.target.closest('tr.click, .gm.click'); if(tr && !e.target.closest('a') && !e.target.closest('button')){ location.hash=tr.dataset.href; } });
 document.addEventListener('keydown', e=>{ if(e.key!=='Enter') return; const el=e.target.closest && e.target.closest('.gm.click'); if(el){ location.hash=el.dataset.href; } });

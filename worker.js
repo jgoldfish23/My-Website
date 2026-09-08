@@ -1,7 +1,16 @@
 import * as chat from "./functions/api/chat.js";
 import * as wedding from "./functions/api/wedding.js";
+import * as cfb from "./functions/api/cfb.js";
+import { clientIp, originOk, rateLimit, tooMany, forbidden } from "./functions/api/_guard.js";
 
 const RECORD_KEY = "record_entries";
+
+// Chat goes to a paid API, so keep it same-site and rate-limited.
+const CHAT_PER_IP = 10;      // per 5 minutes
+const CHAT_WINDOW = 300;
+const CHAT_PER_DAY = 500;    // site-wide
+const RSVP_PER_IP = 5;       // per hour
+const RSVP_WINDOW = 3600;
 
 function authorized(request, env) {
   const pass = request.headers.get("x-wedding-pass");
@@ -106,6 +115,9 @@ async function notifyRsvp(entry, env) {
 
 async function handleRsvp(request, env, ctx) {
   if (request.method === "POST") {
+    if (!originOk(request)) return forbidden();
+    const mine = await rateLimit(env, "rsvp", clientIp(request), RSVP_PER_IP, RSVP_WINDOW);
+    if (!mine.ok) return tooMany(mine.retryAfter, "You've already sent a few — text us if something's wrong.");
     const body = await request.json().catch(() => null);
     if (!body) return json({ error: "bad request" }, 400);
     if (body.website) return json({ ok: true }); // honeypot: pretend success
@@ -195,8 +207,13 @@ export default {
     const { pathname } = new URL(request.url);
 
     if (pathname === "/api/chat") {
-      if (request.method === "POST") return chat.onRequestPost({ request, env });
-      return new Response("Method not allowed", { status: 405 });
+      if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
+      if (!originOk(request)) return forbidden();
+      const day = await rateLimit(env, "chat_day", "all", CHAT_PER_DAY, 86400);
+      if (!day.ok) return tooMany(day.retryAfter, "The assistant has taken enough questions for today.");
+      const mine = await rateLimit(env, "chat", clientIp(request), CHAT_PER_IP, CHAT_WINDOW);
+      if (!mine.ok) return tooMany(mine.retryAfter, "That's a lot of questions! Give it a few minutes.");
+      return chat.onRequestPost({ request, env });
     }
 
     if (pathname === "/api/wedding") {
@@ -207,6 +224,12 @@ export default {
 
     if (pathname === "/api/rsvp") return handleRsvp(request, env, ctx);
     if (pathname === "/api/record") return handleRecord(request, env);
+
+    // Live college football scores for /cfb (read-only, edge-cached, same-site CORS)
+    if (pathname.startsWith("/api/cfb/")) {
+      if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
+      return cfb.onRequestGet({ request, env, ctx });
+    }
 
     return env.ASSETS.fetch(request);
   },

@@ -702,6 +702,38 @@ body.boardmode main{max-width:none;padding:0}
 .pal-sub{margin-left:auto;color:var(--ink-3);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%}
 .pal-foot{padding:8px 16px;border-top:1px solid var(--line);font-size:12px}
 @media (max-width:720px){.pal-kind{width:58px;font-size:9.5px}#palette{padding:6vh 10px 10px}}
+
+/* College Football Playoff projection */
+.cfp-br{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.cfp-col{display:flex;flex-direction:column;min-width:0}
+.cfp-rh{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin-bottom:8px;min-height:34px}
+.cfp-rh span{display:block;text-transform:none;letter-spacing:0;font-weight:400;font-size:12px;margin-top:1px}
+.cfp-stack{flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:10px}
+.cfp-m{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.cfp-t{display:flex;align-items:center;gap:8px;padding:7px 10px;font-size:14px;color:var(--ink-2);min-width:0}
+.cfp-t:hover{background:var(--surface-2);text-decoration:none;color:var(--ink)}
+.cfp-t+.cfp-t{border-top:1px solid var(--line-2)}
+.cfp-t.w{color:var(--ink);font-weight:600}
+.cfp-t .sd{width:18px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-3);font-size:12px;font-weight:600;flex:none}
+.cfp-t img,.cfp-t .sw{width:20px;height:20px;object-fit:contain;flex:none;border-radius:3px}
+.cfp-t .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cfp-t .nm .dim{font-weight:400;font-size:12px;margin-left:2px}
+.cfp-t .pw{font-variant-numeric:tabular-nums;font-size:12.5px;color:var(--ink-3);flex:none}
+.cfp-t.w .pw{color:var(--good)}
+.cfp-t.fav{box-shadow:inset 3px 0 0 var(--gold)}
+.cfp-mf{font-size:11.5px;color:var(--ink-3);padding:5px 10px;border-top:1px solid var(--line-2);background:var(--surface-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cfp-final{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.cfp-race .row{display:flex;align-items:center;gap:12px;padding:7px 0}
+.cfp-race .row+.row{border-top:1px solid var(--line-2)}
+.cfp-race .row .who{flex:1;min-width:0}
+.cfp-race .row b{font-variant-numeric:tabular-nums;min-width:44px;text-align:right}
+.cfp-race .row.fav{box-shadow:inset 3px 0 0 var(--gold);padding-left:9px}
+.cfp-bar{height:5px;border-radius:3px;background:var(--surface-3);overflow:hidden;margin-top:6px}
+.cfp-bar i{display:block;height:100%;border-radius:3px}
+.tile-link{display:block;color:inherit}
+.tile-link:hover{text-decoration:none;border-color:var(--accent)}
+@media (max-width:980px){.cfp-br{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.cfp-br{grid-template-columns:1fr}.cfp-rh{min-height:0}}
 </style>
 
 <header class="top">
@@ -715,7 +747,7 @@ body.boardmode main{max-width:none;padding:0}
       <a href="#/digest" data-r="digest">Digest</a>
       <a href="#/rankings" data-r="rankings">Rankings/Conference Standings</a>
       <a href="#/transfers" data-r="transfers">Transfers</a>
-      <a href="#/playoff" data-r="playoff">FCS Playoff</a>
+      <a href="#/playoff" data-r="playoff">Playoffs</a>
       <a href="#/draft" data-r="draft">NFL Draft</a>
       <a href="#/my" data-r="my">My Rankings</a>
       <a href="#/settings" data-r="settings" title="Theme and favorite team">&#9881; Settings</a>
@@ -881,144 +913,144 @@ body.boardmode main{max-width:none;padding:0}
 {"name":"UConn","conf":"Ind","div":null,"coach":"Jason Candle","rec2025":"9-4","color":"#000E2F","alt":"#FFFFFF","mascot":"Huskies","stadium":"Pratt & Whitney Stadium at Rentschler Field","city":"East Hartford, CT"}
 ]
 </script>
-<script type="text/plain" id="d-fpi">Texas|30.264|10.163|2.369|78.8
-Ohio State|29.99|10.412|2.207|77.8
-Notre Dame|26.978|10.76|1.24|76.7
-Miami|25.44|11.17|1.688|78
-Georgia|24.907|9.893|2.482|61.4
-Indiana|24.291|10.39|2.029|58.5
-LSU|24.116|9.389|2.889|58.1
-Oregon|22.689|9.816|2.51|53.7
-Alabama|22.472|8.993|3.258|49.4
-Texas A&M|21.248|8.293|3.855|39.7
-Oklahoma|19.212|7.694|4.43|31
-Texas Tech|18.363|10.548|2.029|48.4
-USC|17.541|8.457|3.667|26.6
-Penn State|17.167|9.838|2.429|31.9
-South Carolina|15.831|7.389|4.681|20
-Ole Miss|15.548|7.323|4.731|20.3
-Florida|15.48|7.15|4.905|17.8
-Tennessee|15.313|7.132|4.929|17.7
-BYU|14.126|8.65|3.698|25.8
-SMU|12.092|8.835|3.485|21
-Michigan|11.815|6.989|5.059|10.4
-Pittsburgh|11.535|8.266|3.871|13.2
-Nebraska|11.324|7.498|4.542|9.9
-Utah|11.15|8.554|3.666|16.4
-Virginia|11.072|8.731|3.454|14.8
-Iowa|11.038|7.883|4.177|10.7
-Auburn|10.827|6.403|5.614|8.1
-Louisville|10.808|7.507|4.684|8.8
-Missouri|10.189|5.949|6.065|5.9
-Washington|9.515|6.902|5.127|7
-Virginia Tech|9.346|7.559|4.534|8.1
-Kansas State|8.773|8.128|4.038|10.7
-Mississippi State|8.619|5.389|6.618|3.7
-Boise State|7.782|8.536|3.242|17
-Vanderbilt|7.761|5.859|6.151|4
-Arizona State|7.517|6.542|5.544|5.9
-Florida State|7.326|5.77|6.242|1.3
-Baylor|7.142|6.243|5.841|4.2
-Arizona|6.872|7.088|4.995|5.9
-Kentucky|6.519|4.67|7.334|1.9
-Houston|6.487|7.215|4.86|5.4
-Clemson|6.388|6.014|6.029|3.1
-Cincinnati|6.285|7.023|5.044|5
-North Carolina|6.262|6.413|5.625|4.2
-Illinois|5.697|6.357|5.657|3
-UCLA|5.067|6.541|5.476|2.9
-Colorado|4.948|6.472|5.588|3.9
-TCU|4.85|5.719|6.336|2.4
-UCF|4.84|6.751|5.332|4.4
-Duke|4.709|6.898|5.136|3.3
-Kansas|4.008|6.319|5.734|2.9
-Wake Forest|3.848|6.53|5.495|2.3
-Wisconsin|3.767|6.018|5.998|1.2
-Syracuse|3.509|5.938|6.094|2
-Georgia Tech|3.5|4.971|7.055|1
-Maryland|2.925|5.637|6.369|1.3
-Northwestern|2.521|5.316|6.687|1
-UNLV|2.348|8.579|3.98|3.1
-Minnesota|2.335|5.45|6.555|1
-Arkansas|2.257|3.624|8.376|0.4
-Memphis|2.063|8.927|3.433|11.5
-Michigan State|1.276|5.327|6.681|0.9
-San Diego State|1.226|7.422|4.058|6.5
-New Mexico|0.854|8.494|3.929|6.4
-North Dakota State|0.207|9.017|3.387|6.3
-Tulane|-0.477|6.677|5.542|1.6
-Navy|-0.606|7.667|4.664|4.4
-Iowa State|-0.795|5.106|6.91|0.8
-West Virginia|-0.831|5.278|6.736|0.7
-Western Michigan|-0.911|8.738|3.853|3
-NC State|-1.088|5.054|6.949|0.2
-Oklahoma State|-1.59|3.998|8.015|0.4
-Purdue|-1.61|3.929|8.072|0.2
-Army|-1.881|7.417|4.784|3.1
-South Florida|-2.302|8.268|3.906|3.9
-James Madison|-2.539|8.161|4.127|3.6
-Southern Miss|-2.981|7.605|4.702|2.8
-California|-3.038|4.05|7.953|0.1
-Nevada|-3.063|7.396|4.86|2.6
-East Carolina|-3.18|7.136|5.047|2
-Tulsa|-3.362|7.855|4.321|3.1
-UTSA|-3.764|6.973|5.196|2.2
-Toledo|-4.041|7.945|4.495|0.7
-Washington State|-4.348|4.963|6.231|0.6
-Boston College|-4.574|3.251|8.75|0
-Delaware|-4.583|7.576|4.869|2
-Stanford|-4.65|4.073|7.928|0
-App State|-5.245|7.706|4.546|1.8
-Kennesaw State|-5.465|7.819|4.607|1.8
-Air Force|-5.83|6.845|5.336|1.3
-Louisiana Tech|-5.961|6.443|5.755|1.1
-Old Dominion|-6.075|6.487|5.668|1.1
-North Texas|-6.659|6.12|5.97|0.7
-Louisiana|-6.675|7.379|4.825|1.4
-Hawai'i|-6.893|5.512|6.553|0
-Rutgers|-6.911|2.762|9.238|0
-Fresno State|-7.002|5.068|6.06|0.6
-Oregon State|-7.211|4.598|6.544|0.3
-Temple|-7.253|5.825|6.237|0.5
-UConn|-7.486|5.684|6.316|0.2
-Liberty|-7.618|7.205|5.1|0.3
-Colorado State|-7.872|5.06|6.055|0.5
-Texas State|-7.911|4.722|6.387|0.6
-Georgia Southern|-7.956|6.04|6.096|0.7
-Troy|-9.049|6.391|5.714|0.6
-South Alabama|-9.556|5.949|6.154|0.4
-Ohio|-9.946|7.16|5.086|0.3
-Jacksonville State|-10.007|6.409|5.793|0.1
-San José State|-10.122|6.355|6.727|0.2
-Utah State|-10.439|3.108|7.947|0
-Arkansas State|-10.745|5.319|6.762|0.1
-UMass|-10.997|7.913|4.266|1
-Coastal Carolina|-11.055|5.154|6.916|0
-Western Kentucky|-11.636|4.913|7.254|0
-FIU|-12.115|5.697|6.421|0.1
-Rice|-12.143|4.236|7.783|0.1
-Miami (OH)|-12.222|5.748|6.386|0.1
-Buffalo|-12.571|6.369|5.742|0.3
-Georgia State|-12.613|5.198|6.851|0.1
-New Mexico State|-13.02|5.374|6.763|0.1
-Marshall|-13.483|5.284|6.767|0.1
-UAB|-14.484|4.22|7.789|0
-Bowling Green|-14.761|4.151|7.914|0
-Florida Atlantic|-15.318|4.028|7.978|0
-Middle Tennessee|-15.365|4.796|7.276|0.1
-Eastern Michigan|-15.538|4.959|7.11|0
-Missouri State|-15.897|4.38|7.688|0
-Sam Houston|-16.554|4.107|7.953|0
-Akron|-16.841|4.401|7.651|0
-Central Michigan|-17.084|4.709|7.341|0
-Charlotte|-17.165|2.191|9.813|0
-Wyoming|-17.555|3.827|8.183|0
-Northern Illinois|-17.717|3.157|8.856|0
-Sacramento State|-18.394|4.406|7.613|0
-Ball State|-19.01|4.183|7.852|0
-UTEP|-19.092|3.295|8.714|0
-Kent State|-23.591|2.879|9.131|0
-UL Monroe|-24.273|2.373|9.629|0
+<script type="text/plain" id="d-fpi">Texas|30.231|10.181|2.354|79.5
+Ohio State|29.996|10.421|2.201|77.8
+Notre Dame|26.976|10.785|1.215|77.6
+Miami|25.446|11.205|1.667|79.2
+Georgia|24.907|9.879|2.494|60.8
+Indiana|24.29|10.39|2.026|58.7
+LSU|24.13|9.374|2.904|57.5
+Oregon|22.688|9.786|2.539|53.3
+Alabama|22.473|9.012|3.239|50.1
+Texas A&M|21.268|8.275|3.872|39.1
+Oklahoma|19.228|7.685|4.435|30.8
+Texas Tech|18.363|10.539|2.036|48.3
+USC|17.546|8.472|3.652|26.9
+Penn State|17.167|9.87|2.403|32.5
+South Carolina|15.828|7.374|4.692|19.6
+Ole Miss|15.547|7.352|4.709|20.5
+Florida|15.477|7.152|4.905|18
+Tennessee|15.314|7.079|4.977|16.9
+BYU|14.125|8.668|3.684|26.2
+SMU|12.092|8.847|3.472|20.4
+Michigan|11.795|6.982|5.063|10.1
+Pittsburgh|11.533|8.28|3.854|13.3
+Nebraska|11.323|7.47|4.569|9.8
+Utah|11.15|8.572|3.65|16.1
+Iowa|11.054|7.854|4.206|10.7
+Virginia|10.996|8.714|3.47|14.5
+Auburn|10.827|6.447|5.572|8.5
+Louisville|10.807|7.476|4.715|8.6
+Missouri|10.189|5.971|6.044|6.2
+Washington|9.514|6.927|5.103|7.2
+Virginia Tech|9.358|7.543|4.545|7.9
+Kansas State|8.777|8.119|4.046|10.6
+Mississippi State|8.616|5.392|6.616|3.7
+Boise State|7.782|8.549|3.233|16.8
+Vanderbilt|7.753|5.844|6.166|3.8
+Arizona State|7.516|6.52|5.563|5.7
+Florida State|7.323|5.778|6.235|1.3
+Baylor|7.141|6.257|5.827|4.3
+Arizona|6.871|7.09|4.991|5.7
+Kentucky|6.519|4.675|7.33|1.9
+Houston|6.487|7.233|4.843|5.6
+Clemson|6.391|5.983|6.057|2.7
+Cincinnati|6.284|7.06|5.014|5.3
+North Carolina|6.261|6.404|5.632|4
+Illinois|5.696|6.407|5.607|2.9
+UCLA|5.067|6.529|5.486|3
+Colorado|4.861|6.473|5.588|4.2
+TCU|4.849|5.701|6.352|2.3
+UCF|4.839|6.718|5.36|4.4
+Duke|4.692|6.875|5.156|3.2
+Kansas|4.008|6.314|5.741|3
+Wake Forest|3.848|6.511|5.514|2.2
+Wisconsin|3.766|6.014|6|1.2
+Georgia Tech|3.562|4.991|7.036|1
+Syracuse|3.517|5.957|6.076|1.9
+Maryland|2.926|5.602|6.403|1.3
+Northwestern|2.559|5.312|6.691|1
+UNLV|2.345|8.541|4.012|2.8
+Minnesota|2.334|5.445|6.56|1.1
+Arkansas|2.257|3.636|8.365|0.5
+Memphis|2.061|8.933|3.43|11.4
+Michigan State|1.276|5.31|6.698|0.8
+San Diego State|1.187|7.425|4.047|6.5
+New Mexico|0.854|8.484|3.937|6.4
+North Dakota State|0.201|9.026|3.379|6.3
+Tulane|-0.486|6.627|5.585|1.7
+Navy|-0.607|7.671|4.662|4.5
+Iowa State|-0.795|5.075|6.939|0.6
+West Virginia|-0.832|5.282|6.734|0.9
+Western Michigan|-0.893|8.722|3.87|3
+NC State|-1.154|5.035|6.969|0.2
+Oklahoma State|-1.59|3.993|8.019|0.3
+Purdue|-1.61|3.958|8.043|0.2
+Army|-1.883|7.415|4.788|3.1
+South Florida|-2.303|8.27|3.902|4
+James Madison|-2.54|8.206|4.092|4
+Southern Miss|-2.98|7.592|4.714|2.7
+California|-3.038|4.096|7.907|0.1
+Nevada|-3.064|7.403|4.851|2.7
+East Carolina|-3.18|7.145|5.041|1.9
+Tulsa|-3.399|7.843|4.33|3.1
+UTSA|-3.759|6.982|5.185|2.3
+Toledo|-4.041|7.937|4.499|0.8
+Washington State|-4.348|4.954|6.242|0.5
+Boston College|-4.574|3.258|8.742|0
+Delaware|-4.586|7.566|4.883|2
+Stanford|-4.652|4.077|7.923|0
+App State|-5.246|7.692|4.559|1.9
+Kennesaw State|-5.468|7.851|4.585|2
+Air Force|-5.83|6.88|5.304|1.3
+Louisiana Tech|-5.962|6.438|5.762|1.1
+Old Dominion|-6.074|6.488|5.665|1.2
+North Texas|-6.66|6.134|5.956|0.6
+Louisiana|-6.675|7.383|4.821|1.4
+Rutgers|-6.905|2.777|9.223|0
+Hawai'i|-6.909|5.526|6.542|0
+Fresno State|-6.994|5.071|6.058|0.5
+Oregon State|-7.211|4.612|6.526|0.2
+Temple|-7.253|5.845|6.218|0.5
+UConn|-7.486|5.685|6.315|0.1
+Liberty|-7.619|7.153|5.136|0.2
+Colorado State|-7.872|5.064|6.052|0.6
+Texas State|-7.936|4.708|6.403|0.5
+Georgia Southern|-7.959|6.026|6.109|0.7
+Troy|-9.05|6.363|5.741|0.6
+South Alabama|-9.556|5.954|6.147|0.3
+Ohio|-9.947|7.191|5.063|0.4
+Jacksonville State|-10.01|6.403|5.801|0.1
+San José State|-10.147|6.373|6.711|0.2
+Utah State|-10.454|3.111|7.947|0
+Arkansas State|-10.745|5.331|6.754|0.1
+UMass|-11.002|7.899|4.278|1
+Coastal Carolina|-11.056|5.163|6.905|0.1
+Western Kentucky|-11.636|4.938|7.23|0
+FIU|-12.116|5.7|6.42|0.1
+Rice|-12.148|4.24|7.78|0.1
+Miami (OH)|-12.223|5.747|6.386|0.1
+Buffalo|-12.571|6.368|5.741|0.2
+Georgia State|-12.609|5.2|6.845|0.1
+New Mexico State|-13.02|5.379|6.758|0.1
+Marshall|-13.483|5.26|6.79|0.1
+UAB|-14.485|4.191|7.817|0
+Bowling Green|-14.56|4.195|7.872|0
+Florida Atlantic|-15.321|4.043|7.965|0
+Middle Tennessee|-15.365|4.783|7.289|0.1
+Eastern Michigan|-15.597|4.965|7.1|0
+Missouri State|-15.892|4.394|7.675|0
+Sam Houston|-16.556|4.116|7.94|0
+Akron|-16.842|4.403|7.651|0
+Central Michigan|-17.087|4.732|7.32|0
+Charlotte|-17.165|2.2|9.802|0
+Wyoming|-17.555|3.834|8.179|0
+Northern Illinois|-17.714|3.124|8.888|0
+Sacramento State|-18.672|4.332|7.685|0
+Ball State|-19.009|4.216|7.82|0
+UTEP|-19.085|3.269|8.739|0
+Kent State|-23.593|2.864|9.145|0
+UL Monroe|-24.274|2.375|9.627|0
 </script>
 <script type="text/plain" id="d-pollsfcs">FCSCOACHES|Week 2
 1|Montana State|648
@@ -1230,95 +1262,95 @@ ORV|Louisville 125, Illinois 45, Boise State 43, Arizona 42, South Carolina 36, 
 1|2026-09-06|Washington State|Washington|10|24|FINAL|4:00 PM||-23.5|51.5|||NBC|
 1|2026-09-06|Wisconsin|Notre Dame|13|41|FINAL|7:30 PM|N|-20.5|46.5|||NBC|Lambeau Field, Green Bay
 1|2026-09-07|SMU|Florida State|27|24|FINAL|7:30 PM||3|53.5|||ESPN|
-2|2026-09-10|Florida A&M|Miami|||SCHEDULED|8:00 PM||-56.5|62.5|||ACC Network|
-2|2026-09-11|Missouri|Kansas|||SCHEDULED|8:00 PM||5.5|50.5|-218|180|FOX|
+2|2026-09-10|Florida A&M|Miami|||SCHEDULED|8:00 PM||-59.5|65.5|||ACC Network|
+2|2026-09-11|Missouri|Kansas|||SCHEDULED|8:00 PM||5.5|51.5|-218|180|FOX|
 2|2026-09-11|Norfolk State|Virginia|||SCHEDULED|7:00 PM||-44.5|54.5|||ACCNX|
-2|2026-09-11|Richmond|NC State|||SCHEDULED|7:00 PM||-30.5|48.5|2200|-8000|ESPNU|
-2|2026-09-11|Rutgers|Boston College|||SCHEDULED|7:30 PM||-3|54.5|130|-155|ESPN2|
+2|2026-09-11|Richmond|NC State|||SCHEDULED|7:00 PM||-32.5|49.5|2000|-6500|ESPNU|
+2|2026-09-11|Rutgers|Boston College|||SCHEDULED|7:30 PM||-3.5|54.5|145|-175|ESPN2|
 2|2026-09-11|Villanova|Louisville|||SCHEDULED|7:00 PM||-36.5|56.5|||ACC Network|
-2|2026-09-12|Alabama State|Troy|||SCHEDULED|4:00 PM||||||ESPN+|
-2|2026-09-12|Alabama|Kentucky|||SCHEDULED|3:30 PM||10.5|49.5|-425|330|ABC/Disney+|
+2|2026-09-12|Alabama State|Troy|||SCHEDULED|4:00 PM|||51.5|950|-1650|ESPN+|
+2|2026-09-12|Alabama|Kentucky|||SCHEDULED|3:30 PM||10.5|49.5|-395|310|ABC/Disney+|
 2|2026-09-12|App State|East Carolina|||SCHEDULED|12:00 PM||-7|56.5|235|-290|ESPNU|
-2|2026-09-12|Arizona State|Texas A&M|||SCHEDULED|12:00 PM||-14.5|50.5|455|-625|ABC|
-2|2026-09-12|Arizona|BYU|||SCHEDULED|3:30 PM||-7.5|47.5|235|-290|FOX|
-2|2026-09-12|Arkansas|Utah|||SCHEDULED|10:15 PM||-12.5|54.5|370|-485|ESPN|
-2|2026-09-12|Bowling Green|Nebraska|||SCHEDULED|7:00 PM||-28.5|51.5|2200|-8000|FS1|
+2|2026-09-12|Arizona State|Texas A&M|||SCHEDULED|12:00 PM||-14.5|50.5|500|-700|ABC|
+2|2026-09-12|Arizona|BYU|||SCHEDULED|3:30 PM||-7.5|47.5|245|-305|FOX|
+2|2026-09-12|Arkansas|Utah|||SCHEDULED|10:15 PM||-12.5|54.5|390|-520|ESPN|
+2|2026-09-12|Bowling Green|Nebraska|||SCHEDULED|7:00 PM||-30.5|51.5|2000|-6500|FS1|
 2|2026-09-12|Buffalo|Florida International|||SCHEDULED|6:00 PM||-10.5|47.5|340|-440|ESPN+|
-2|2026-09-12|Cal Poly|San José State|||SCHEDULED|9:00 PM||||||MW+|
+2|2026-09-12|Cal Poly|San José State|||SCHEDULED|9:00 PM||-20.5|56.5|1100|-2100|MW+|
 2|2026-09-12|California|Syracuse|||SCHEDULED|3:30 PM||-3.5|56.5|140|-166|ACC Network|
-2|2026-09-12|Campbell|Florida|||SCHEDULED|5:30 PM||||||SECN+|
-2|2026-09-12|Central Connecticut|Toledo|||SCHEDULED|3:30 PM||||||ESPN+|
-2|2026-09-12|Charlotte|Ole Miss|||SCHEDULED|7:45 PM||-47.5|61.5|||ESPN2|
-2|2026-09-12|Colgate|Central Michigan|||SCHEDULED|1:00 PM||||||ESPN+|
-2|2026-09-12|Delaware|Vanderbilt|||SCHEDULED|4:15 PM||-20.5|54.5|850|-1450|SEC Network|
-2|2026-09-12|Duke|Illinois|||SCHEDULED|3:30 PM||-6|51.5|190|-230|FS1|
-2|2026-09-12|East Tennessee State|North Carolina|||SCHEDULED|12:00 PM||||||ACC Network|
-2|2026-09-12|Eastern Michigan|Michigan State|||SCHEDULED|3:30 PM||-17.5|49.5|575|-850|BTN|
-2|2026-09-12|Fordham|Coastal Carolina|||SCHEDULED|7:30 PM||||||ESPN+|
-2|2026-09-12|Gardner-Webb|Liberty|||SCHEDULED|6:00 PM||||||ESPN+|
-2|2026-09-12|Georgia Southern|Clemson|||SCHEDULED|7:30 PM||-20.5|55.5|800|-1350|ACC Network|
-2|2026-09-12|Georgia State|Kennesaw State|||SCHEDULED|7:00 PM||-9.5|54.5|270|-340|ESPN+|
-2|2026-09-12|Grambling|TCU|||SCHEDULED|8:00 PM||||||ESPN+|
-2|2026-09-12|Holy Cross|Miami (OH)|||SCHEDULED|1:00 PM||||||ESPN+|
+2|2026-09-12|Campbell|Florida|||SCHEDULED|5:30 PM||-49.5|65.5|||SECN+|
+2|2026-09-12|Central Connecticut|Toledo|||SCHEDULED|3:30 PM||-33.5|55.5|2500|-9000|ESPN+|
+2|2026-09-12|Charlotte|Ole Miss|||SCHEDULED|7:45 PM||-47.5|60.5|||ESPN2|
+2|2026-09-12|Colgate|Central Michigan|||SCHEDULED|1:00 PM||-23.5|49.5|1300|-2800|ESPN+|
+2|2026-09-12|Delaware|Vanderbilt|||SCHEDULED|4:15 PM||-21|54.5|800|-1350|SEC Network|
+2|2026-09-12|Duke|Illinois|||SCHEDULED|3:30 PM||-6|51.5|180|-218|FS1|
+2|2026-09-12|East Tennessee State|North Carolina|||SCHEDULED|12:00 PM||-35.5|54.5|||ACC Network|
+2|2026-09-12|Eastern Michigan|Michigan State|||SCHEDULED|3:30 PM||-17.5|49.5|600|-900|BTN|
+2|2026-09-12|Fordham|Coastal Carolina|||SCHEDULED|7:30 PM||-34.5|52.5|2500|-9000|ESPN+|
+2|2026-09-12|Gardner-Webb|Liberty|||SCHEDULED|6:00 PM||-27.5|55.5|1800|-5000|ESPN+|
+2|2026-09-12|Georgia Southern|Clemson|||SCHEDULED|7:30 PM||-20.5|55.5|750|-1200|ACC Network|
+2|2026-09-12|Georgia State|Kennesaw State|||SCHEDULED|7:00 PM||-8.5|54.5|270|-340|ESPN+|
+2|2026-09-12|Grambling|TCU|||SCHEDULED|8:00 PM||-43.5|54.5|||ESPN+|
+2|2026-09-12|Holy Cross|Miami (OH)|||SCHEDULED|1:00 PM||-30.5|49.5|2200|-8000|ESPN+|
 2|2026-09-12|Howard|Indiana|||SCHEDULED|12:00 PM||-56.5|64.5|||BTN|
-2|2026-09-12|Illinois State|Northern Illinois|||SCHEDULED|7:00 PM||||||MW+|
-2|2026-09-12|Iowa State|Iowa|||SCHEDULED|7:30 PM||-14|40.5|440|-600|NBC|
-2|2026-09-12|Jacksonville State|Ohio|||SCHEDULED|6:00 PM||-3|50.5|114|-135|ESPN+|
-2|2026-09-12|Lindenwood|Missouri State|||SCHEDULED|7:00 PM||||||ESPN+|
+2|2026-09-12|Illinois State|Northern Illinois|||SCHEDULED|7:00 PM||4.5|48.5|-175|145|MW+|
+2|2026-09-12|Iowa State|Iowa|||SCHEDULED|7:30 PM||-14|40.5|470|-650|NBC|
+2|2026-09-12|Jacksonville State|Ohio|||SCHEDULED|6:00 PM||-2.5|50.5|114|-135|ESPN+|
+2|2026-09-12|Lindenwood|Missouri State|||SCHEDULED|7:00 PM||-19.5|52.5|950|-1650|ESPN+|
 2|2026-09-12|Louisiana Tech|LSU|||SCHEDULED|7:30 PM||-35.5|55.5|4000|-50000|SECN+|
-2|2026-09-12|Louisiana|USC|||SCHEDULED|11:00 PM||-30.5|59.5|3000|-10000|BTN|
-2|2026-09-12|Maryland|UConn|||SCHEDULED|3:30 PM||12.5|52.5|-470|360|CBSSN|
-2|2026-09-12|Memphis|Boise State|||SCHEDULED|6:00 PM||-8.5|54.5|280|-355|USA Net|
-2|2026-09-12|Mercyhurst|New Mexico|||SCHEDULED|4:00 PM||||||MW+|
-2|2026-09-12|Middle Tennessee|Marshall|||SCHEDULED|7:00 PM||-13.5|57.5|410|-550|ESPN+|
-2|2026-09-12|Mississippi State|Minnesota|||SCHEDULED|3:30 PM||1.5|55.5|-115|-105|CBS|
-2|2026-09-12|Monmouth|Western Michigan|||SCHEDULED|6:30 PM||||||ESPN+|
-2|2026-09-12|Montana State|Nevada|||SCHEDULED|10:30 PM||4.5|49.5|-198|164|CW|
+2|2026-09-12|Louisiana|USC|||SCHEDULED|11:00 PM||-30.5|59.5|2500|-9000|BTN|
+2|2026-09-12|Maryland|UConn|||SCHEDULED|3:30 PM||13.5|52.5|-485|370|CBSSN|
+2|2026-09-12|Memphis|Boise State|||SCHEDULED|6:00 PM||-8.5|55.5|260|-325|USA Net|
+2|2026-09-12|Mercyhurst|New Mexico|||SCHEDULED|4:00 PM||-41.5|51.5|||MW+|
+2|2026-09-12|Middle Tennessee|Marshall|||SCHEDULED|7:00 PM||-13.5|56.5|410|-550|ESPN+|
+2|2026-09-12|Mississippi State|Minnesota|||SCHEDULED|3:30 PM||-1.5|55.5|-108|-112|CBS|
+2|2026-09-12|Monmouth|Western Michigan|||SCHEDULED|6:30 PM||-25.5|52.5|1500|-3600|ESPN+|
+2|2026-09-12|Montana State|Nevada|||SCHEDULED|10:30 PM||3.5|49.5|-166|140|CW|
 2|2026-09-12|Navy|Florida Atlantic|||SCHEDULED|7:30 PM||4.5|58.5|-218|180|ESPNU|
-2|2026-09-12|New Mexico State|Hawai'i|||SCHEDULED|11:59 PM||-7|49.5|220|-270|MW+|
+2|2026-09-12|New Mexico State|Hawai'i|||SCHEDULED|11:59 PM||-7|50.5|250|-310|MW+|
 2|2026-09-12|North Dakota State|Air Force|||SCHEDULED|10:00 PM||2.5|47.5|-130|110|FS1|
-2|2026-09-12|Northern Colorado|Wyoming|||SCHEDULED|4:00 PM||||||MW+|
+2|2026-09-12|Northern Colorado|Wyoming|||SCHEDULED|4:00 PM||-22.5|47.5|1400|-3200|MW+|
 2|2026-09-12|Ohio State|Texas|||SCHEDULED|7:30 PM||-1.5|49.5|102|-122|ABC|
-2|2026-09-12|Oklahoma|Michigan|||SCHEDULED|12:00 PM||5.5|43.5|-230|190|FOX|
-2|2026-09-12|Old Dominion|Virginia Tech|||SCHEDULED|12:00 PM||-19.5|50.5|800|-1350|CW|
-2|2026-09-12|Oregon|Oklahoma State|||SCHEDULED|12:00 PM||22.5|57.5|-2100|1100|ESPN/Disney+|
-2|2026-09-12|Penn State|Temple|||SCHEDULED|12:00 PM||23.5|49.5|-3200|1400|ESPN2|
-2|2026-09-12|Prairie View A&M|Baylor|||SCHEDULED|8:08 PM||||||ESPN+|
+2|2026-09-12|Oklahoma|Michigan|||SCHEDULED|12:00 PM||5.5|43.5|-218|180|FOX|
+2|2026-09-12|Old Dominion|Virginia Tech|||SCHEDULED|12:00 PM||-19.5|50.5|700|-1100|CW|
+2|2026-09-12|Oregon|Oklahoma State|||SCHEDULED|12:00 PM||23.5|57.5|-2100|1100|ESPN/Disney+|
+2|2026-09-12|Penn State|Temple|||SCHEDULED|12:00 PM||23.5|49.5|-2400|1200|ESPN2|
+2|2026-09-12|Prairie View A&M|Baylor|||SCHEDULED|8:08 PM||-39.5|56.5|||ESPN+|
 2|2026-09-12|Rice|Notre Dame|||SCHEDULED|3:30 PM||-44.5|55.5|||NBC|
-2|2026-09-12|Robert Morris|Akron|||SCHEDULED|3:30 PM||||||ESPN+|
+2|2026-09-12|Robert Morris|Akron|||SCHEDULED|3:30 PM||-27.5|41.5|1800|-5000|ESPN+|
 2|2026-09-12|Sacramento State|Fresno State|||SCHEDULED|10:30 PM||-18.5|45.5|650|-1000|CBSSN|
-2|2026-09-12|Sacred Heart|Massachusetts|||SCHEDULED|3:30 PM||||||ESPN+|
-2|2026-09-12|San Diego State|UCLA|||SCHEDULED|7:15 PM||-11.5|54.5|360|-470|BTN|
-2|2026-09-12|South Alabama|Tulane|||SCHEDULED|7:00 PM||-9.5|49.5|295|-375|ESPN+|
-2|2026-09-12|South Florida|Army|||SCHEDULED|12:00 PM||-3.5|46.5|154|-185|CBSSN|
-2|2026-09-12|Southern Miss|Auburn|||SCHEDULED|7:45 PM||-33.5|56.5|2500|-9000|SEC Network|
-2|2026-09-12|Southern Utah|Colorado State|||SCHEDULED|7:00 PM||||||CBSSN|
+2|2026-09-12|Sacred Heart|Massachusetts|||SCHEDULED|3:30 PM||-23.5|53.5|1200|-2400|ESPN+|
+2|2026-09-12|San Diego State|UCLA|||SCHEDULED|7:15 PM||-12.5|54.5|380|-500|BTN|
+2|2026-09-12|South Alabama|Tulane|||SCHEDULED|7:00 PM||-9.5|49.5|310|-395|ESPN+|
+2|2026-09-12|South Florida|Army|||SCHEDULED|12:00 PM||-3.5|46.5|136|-162|CBSSN|
+2|2026-09-12|Southern Miss|Auburn|||SCHEDULED|7:45 PM||-32.5|56.5|2500|-9000|SEC Network|
+2|2026-09-12|Southern Utah|Colorado State|||SCHEDULED|7:00 PM||-20.5|56.5|1100|-2100|CBSSN|
 2|2026-09-12|Southern|Houston|||SCHEDULED|7:00 PM||-51.5|60.5|||ESPN+|
-2|2026-09-12|Stony Brook|Ball State|||SCHEDULED|2:00 PM||||||ESPN+|
-2|2026-09-12|Tennessee|Georgia Tech|||SCHEDULED|7:00 PM||12.5|55.5|-500|380|ESPN|
-2|2026-09-12|Texas Southern|UTEP|||SCHEDULED|9:00 PM||||||MW+|
-2|2026-09-12|Texas Tech|Oregon State|||SCHEDULED|7:30 PM||26.5|53.5|-4500|1700|CBS|
-2|2026-09-12|Towson|South Carolina|||SCHEDULED|7:00 PM||||||SECN+|
-2|2026-09-12|Tulsa|Sam Houston|||SCHEDULED|7:00 PM||14|51.5|-600|440|ESPN+|
-2|2026-09-12|UC Davis|SMU|||SCHEDULED|4:00 PM||-24.5|58.5|1200|-2400|ACCNX|
-2|2026-09-12|UCF|Pittsburgh|||SCHEDULED|3:30 PM||-7|56.5|210|-258|ESPN2|
+2|2026-09-12|Stony Brook|Ball State|||SCHEDULED|2:00 PM||-14.5|57.5|575|-850|ESPN+|
+2|2026-09-12|Tennessee|Georgia Tech|||SCHEDULED|7:00 PM||12.5|55.5|-470|360|ESPN|
+2|2026-09-12|Texas Southern|UTEP|||SCHEDULED|9:00 PM||-25.5|52.5|2000|-6500|MW+|
+2|2026-09-12|Texas Tech|Oregon State|||SCHEDULED|7:30 PM||26.5|53.5|-4000|1600|CBS|
+2|2026-09-12|Towson|South Carolina|||SCHEDULED|7:00 PM||-43.5|54.5|||SECN+|
+2|2026-09-12|Tulsa|Sam Houston|||SCHEDULED|7:00 PM||13.5|51.5|-535|400|ESPN+|
+2|2026-09-12|UC Davis|SMU|||SCHEDULED|4:00 PM||-25.5|58.5|1300|-2800|ACCNX|
+2|2026-09-12|UCF|Pittsburgh|||SCHEDULED|3:30 PM||-7|56.5|225|-278|ESPN2|
 2|2026-09-12|UL Monroe|UAB|||SCHEDULED|3:30 PM||-10|55.5|295|-375|ESPN+|
-2|2026-09-12|UNLV|North Texas|||SCHEDULED|3:45 PM||3.5|56.5|-175|145|ESPNU|
-2|2026-09-12|UT Martin|West Virginia|||SCHEDULED|1:00 PM||||||ESPN+|
-2|2026-09-12|UTSA|Texas State|||SCHEDULED|3:30 PM||-1.5|66.5|-102|-118|CW|
-2|2026-09-12|Utah State|Washington|||SCHEDULED|3:30 PM||-26.5|55.5|1600|-4500|BTN|
-2|2026-09-12|Wagner|James Madison|||SCHEDULED|3:30 PM||||||ESPN+|
-2|2026-09-12|Wake Forest|Purdue|||SCHEDULED|12:00 PM||3|49.5|-148|124|FS1|
-2|2026-09-12|Washington State|Kansas State|||SCHEDULED|12:00 PM||-19.5|48.5|700|-1100|TNT|
-2|2026-09-12|Weber State|Colorado|||SCHEDULED|3:30 PM||||||ESPN+|
+2|2026-09-12|UNLV|North Texas|||SCHEDULED|3:45 PM||3|56.5|-162|136|ESPNU|
+2|2026-09-12|UT Martin|West Virginia|||SCHEDULED|1:00 PM||-41.5|55.5|||ESPN+|
+2|2026-09-12|UTSA|Texas State|||SCHEDULED|3:30 PM||-1.5|66.5|102|-122|CW|
+2|2026-09-12|Utah State|Washington|||SCHEDULED|3:30 PM||-26.5|55.5|1700|-4500|BTN|
+2|2026-09-12|Wagner|James Madison|||SCHEDULED|3:30 PM||-45.5|54.5|||ESPN+|
+2|2026-09-12|Wake Forest|Purdue|||SCHEDULED|12:00 PM||3|49.5|-155|130|FS1|
+2|2026-09-12|Washington State|Kansas State|||SCHEDULED|12:00 PM||-17.5|48.5|575|-850|TNT|
+2|2026-09-12|Weber State|Colorado|||SCHEDULED|3:30 PM||-33.5|53.5|2500|-9000|ESPN+|
 2|2026-09-12|West Georgia|Arkansas State|||SCHEDULED|7:00 PM||||||ESPN+|
 2|2026-09-12|Western Carolina|Cincinnati|||SCHEDULED|7:00 PM||-36.5|60.5|||ESPN+|
-2|2026-09-12|Western Illinois|Wisconsin|||SCHEDULED|7:15 PM||||||BTN|
+2|2026-09-12|Western Illinois|Wisconsin|||SCHEDULED|7:15 PM||-38.5|48.5|||BTN|
 2|2026-09-12|Western Kentucky|Georgia|||SCHEDULED|12:45 PM||-40.5|55.5|||SEC Network|
-2|2026-09-12|Wofford|Kent State|||SCHEDULED|12:00 PM||||||ESPN+|
-3|2026-09-17|Syracuse|Pittsburgh|||SCHEDULED|7:30 PM||||||ESPN|
-3|2026-09-18|Houston|Texas Tech|||SCHEDULED|8:00 PM||-13.5||||FOX|
-3|2026-09-18|Miami|Wake Forest|||SCHEDULED|7:30 PM||||||ESPN|
+2|2026-09-12|Wofford|Kent State|||SCHEDULED|12:00 PM||-11.5|47.5|410|-550|ESPN+|
+3|2026-09-17|Syracuse|Pittsburgh|||SCHEDULED|7:30 PM||-10.5|59.5|295|-375|ESPN|
+3|2026-09-18|Houston|Texas Tech|||SCHEDULED|8:00 PM||-14||||FOX|
+3|2026-09-18|Miami|Wake Forest|||SCHEDULED|7:30 PM||19.5|51.5|-1350|800|ESPN|
 3|2026-09-18|Portland State|Oregon|||SCHEDULED|10:30 PM||||||BTN|
 3|2026-09-19|Akron|Minnesota|||SCHEDULED|12:00 PM||||||BTN|
 3|2026-09-19|Arizona State|Kansas|||SCHEDULED|12:00 PM|N|||||FS1|Wembley Stadium, London
@@ -1337,31 +1369,31 @@ ORV|Louisville 125, Illinois 45, Boise State 43, Arizona 42, South Carolina 36, 
 3|2026-09-19|Eastern Michigan|Wisconsin|||SCHEDULED|12:30 PM||||||Peacock|
 3|2026-09-19|Eastern Washington|Washington|||SCHEDULED|7:15 PM||||||BTN|
 3|2026-09-19|Florida International|Florida Atlantic|||SCHEDULED|6:00 PM||||||ESPN+|
-3|2026-09-19|Florida State|Alabama|||SCHEDULED|3:30 PM||-15.5|52.5|440|-600|ABC|
-3|2026-09-19|Florida|Auburn|||SCHEDULED|7:00 PM||1.5|53.5|-112|-108|ESPN|
+3|2026-09-19|Florida State|Alabama|||SCHEDULED|3:30 PM||-17.5|50.5|625|-950|ABC|
+3|2026-09-19|Florida|Auburn|||SCHEDULED|7:00 PM||2.5|49.5|-130|110|ESPN|
 3|2026-09-19|Fresno State|San José State|||SCHEDULED|11:00 PM||||||FS1|
 3|2026-09-19|Georgia Southern|Jacksonville State|||SCHEDULED|7:00 PM||||||ESPN+|
 3|2026-09-19|Georgia State|UCF|||SCHEDULED|7:00 PM||||||ESPN+|
-3|2026-09-19|Georgia|Arkansas|||SCHEDULED|12:00 PM||||||ABC|
+3|2026-09-19|Georgia|Arkansas|||SCHEDULED|12:00 PM||17.5|52.5|-900|600|ABC|
 3|2026-09-19|James Madison|San Diego State|||SCHEDULED|10:00 PM||||||CW|
 3|2026-09-19|Kennesaw State|Tennessee|||SCHEDULED|7:45 PM||||||SEC Network|
 3|2026-09-19|Kent State|Ohio State|||SCHEDULED|12:00 PM||||||FOX|
 3|2026-09-19|Kentucky|Texas A&M|||SCHEDULED|3:30 PM|||||||
-3|2026-09-19|LSU|Ole Miss|||SCHEDULED|7:30 PM||-1.5|57.5|110|-130|ABC|
+3|2026-09-19|LSU|Ole Miss|||SCHEDULED|7:30 PM||2.5|58.5|-125|105|ABC|
 3|2026-09-19|Louisiana Tech|Baylor|||SCHEDULED|4:00 PM||||||ESPNU|
 3|2026-09-19|Maine|Boston College|||SCHEDULED|2:00 PM||||||ACCNX|
 3|2026-09-19|Marshall|Missouri State|||SCHEDULED|6:30 PM||||||CBSSN|
 3|2026-09-19|Mercer|Georgia Tech|||SCHEDULED|12:00 PM||||||ACC Network|
 3|2026-09-19|Miami (OH)|Cincinnati|||SCHEDULED|3:30 PM||||||ESPN+|
 3|2026-09-19|Michigan State|Notre Dame|||SCHEDULED|7:30 PM||||||NBC|
-3|2026-09-19|Mississippi State|South Carolina|||SCHEDULED|4:15 PM||||||SEC Network|
+3|2026-09-19|Mississippi State|South Carolina|||SCHEDULED|4:15 PM||-7.5|54.5|240|-298|SEC Network|
 3|2026-09-19|Montana|Oregon State|||SCHEDULED|11:00 PM||||||USA Net|
 3|2026-09-19|Murray State|Oklahoma State|||SCHEDULED|7:00 PM||||||ESPN+|
 3|2026-09-19|NC State|Vanderbilt|||SCHEDULED|12:45 PM||||||SEC Network|
 3|2026-09-19|Nevada|Middle Tennessee|||SCHEDULED|7:00 PM||||||ESPN+|
 3|2026-09-19|New Mexico|Oklahoma|||SCHEDULED|7:30 PM||||||ESPN2|
 3|2026-09-19|Nicholls|Sam Houston|||SCHEDULED|7:00 PM||||||ESPN+|
-3|2026-09-19|North Carolina|Clemson|||SCHEDULED|12:00 PM||||||ESPN/Disney+|
+3|2026-09-19|North Carolina|Clemson|||SCHEDULED|12:00 PM||-9.5|44.5|320|-410|ESPN/Disney+|
 3|2026-09-19|North Dakota State|Sacramento State|||SCHEDULED|10:30 PM||||||ESPN|
 3|2026-09-19|North Dakota|Nebraska|||SCHEDULED|7:15 PM||||||BTN|
 3|2026-09-19|North Texas|Texas State|||SCHEDULED|12:00 PM||||||USA Net|
@@ -1370,7 +1402,7 @@ ORV|Louisville 125, Illinois 45, Boise State 43, Arizona 42, South Carolina 36, 
 3|2026-09-19|Ohio|South Alabama|||SCHEDULED|7:00 PM||||||ESPN+|
 3|2026-09-19|Purdue|UCLA|||SCHEDULED|11:00 PM||||||BTN|
 3|2026-09-19|SE Louisiana|UL Monroe|||SCHEDULED|4:30 PM||||||ESPN+|
-3|2026-09-19|SMU|Louisville|||SCHEDULED|3:30 PM||-1.5|56.5|-105|-115||
+3|2026-09-19|SMU|Louisville|||SCHEDULED|3:30 PM||-1.5|58.5|-108|-112||
 3|2026-09-19|South Dakota|Boise State|||SCHEDULED|10:00 PM||||||CBSSN|
 3|2026-09-19|Southern Illinois|Illinois|||SCHEDULED|2:00 PM||||||Peacock|
 3|2026-09-19|Stanford|Duke|||SCHEDULED|4:00 PM||||||CW|
@@ -1385,9 +1417,9 @@ ORV|Louisville 125, Illinois 45, Boise State 43, Arizona 42, South Carolina 36, 
 3|2026-09-19|UTEP|Michigan|||SCHEDULED|3:30 PM||||||BTN|
 3|2026-09-19|UTSA|Texas|||SCHEDULED|8:00 PM||||||SECN+|
 3|2026-09-19|Utah State|Utah|||SCHEDULED|3:30 PM||||||FOX|
-3|2026-09-19|Virginia Tech|Maryland|||SCHEDULED|7:30 PM|||||||
+3|2026-09-19|Virginia Tech|Maryland|||SCHEDULED|7:30 PM||1.5|53.5|-115|-105||
 3|2026-09-19|Wagner|California|||SCHEDULED|3:30 PM||||||ACC Network|
-3|2026-09-19|West Virginia|Virginia|||SCHEDULED|7:30 PM|N|||||ACC Network|Bank of America Stadium, Charlotte
+3|2026-09-19|West Virginia|Virginia|||SCHEDULED|7:30 PM|N|-8.5|50.5|240|-298|ACC Network|Bank of America Stadium, Charlotte
 3|2026-09-19|Western Kentucky|Indiana|||SCHEDULED|4:00 PM||||||Peacock|
 3|2026-09-19|Western Michigan|Rice|||SCHEDULED|7:00 PM||||||ESPN+|
 3|2026-09-19|Wyoming|Central Michigan|||SCHEDULED|1:00 PM||||||ESPN+|
@@ -1789,7 +1821,7 @@ ORV|Louisville 125, Illinois 45, Boise State 43, Arizona 42, South Carolina 36, 
 10|2026-11-07|Louisville|Georgia Tech|||SCHEDULED|TBD|||||||
 10|2026-11-07|Marshall|Georgia Southern|||SCHEDULED|TBD|||||||
 10|2026-11-07|Maryland|Purdue|||SCHEDULED|TBD|||||||
-10|2026-11-07|Merrimack|Wake Forest|||SCHEDULED|12:00 PM|||||||
+10|2026-11-07|Merrimack|Wake Forest|||SCHEDULED|TBD|||||||
 10|2026-11-07|Miami|Notre Dame|||SCHEDULED|7:30 PM||-6.5|54.5|195|-238|NBC|
 10|2026-11-07|Michigan State|Michigan|||SCHEDULED|TBD||-16.5|50.5|625|-950||
 10|2026-11-07|Missouri State|Florida International|||SCHEDULED|4:00 PM|||||||
@@ -2194,88 +2226,88 @@ ORV|Louisville 125, Illinois 45, Boise State 43, Arizona 42, South Carolina 36, 
 1|2026-09-06|South Carolina State|Florida A&M|31|13|FINAL|3:00 PM|N|||||ESPN2|Hard Rock Stadium, Miami Gardens
 1|2026-09-06|Texas Southern|Prairie View A&M|14|52|FINAL|12:00 PM||||||ESPNEWS|
 1|2026-09-06|Western Carolina|Campbell|19|28|FINAL|11:00 AM|||||||
-2|2026-09-10|Florida A&M|Miami|||SCHEDULED|8:00 PM||-56.5|62.5|||ACC Network|
+2|2026-09-10|Florida A&M|Miami|||SCHEDULED|8:00 PM||-59.5|65.5|||ACC Network|
 2|2026-09-11|Norfolk State|Virginia|||SCHEDULED|7:00 PM||-44.5|54.5|||ACCNX|
-2|2026-09-11|Richmond|NC State|||SCHEDULED|7:00 PM||-30.5|48.5|2200|-8000|ESPNU|
+2|2026-09-11|Richmond|NC State|||SCHEDULED|7:00 PM||-32.5|49.5|2000|-6500|ESPNU|
 2|2026-09-11|Villanova|Louisville|||SCHEDULED|7:00 PM||-36.5|56.5|||ACC Network|
-2|2026-09-12|Alabama State|Troy|||SCHEDULED|4:00 PM||||||ESPN+|
+2|2026-09-12|Alabama State|Troy|||SCHEDULED|4:00 PM|||51.5|950|-1650|ESPN+|
 2|2026-09-12|Arkansas Baptist|Houston Christian|||SCHEDULED|7:00 PM||||||ESPN+|
 2|2026-09-12|Arkansas-Pine Bluff|Alcorn State|||SCHEDULED|7:00 PM|N||||||Simmons Bank Liberty Stadium, Memphis
 2|2026-09-12|Bowie State|Delaware State|||SCHEDULED|3:00 PM|||||||
 2|2026-09-12|Bryant|Hampton|||SCHEDULED|6:00 PM||||||FloSports|
 2|2026-09-12|Bucknell|VMI|||SCHEDULED|1:30 PM||||||ESPN+|
-2|2026-09-12|Cal Poly|San José State|||SCHEDULED|9:00 PM||||||MW+|
-2|2026-09-12|Campbell|Florida|||SCHEDULED|5:30 PM||||||SECN+|
-2|2026-09-12|Central Connecticut|Toledo|||SCHEDULED|3:30 PM||||||ESPN+|
+2|2026-09-12|Cal Poly|San José State|||SCHEDULED|9:00 PM||-20.5|56.5|1100|-2100|MW+|
+2|2026-09-12|Campbell|Florida|||SCHEDULED|5:30 PM||-49.5|65.5|||SECN+|
+2|2026-09-12|Central Connecticut|Toledo|||SCHEDULED|3:30 PM||-33.5|55.5|2500|-9000|ESPN+|
 2|2026-09-12|Central Oklahoma|Central Arkansas|||SCHEDULED|7:00 PM||||||ESPN+|
 2|2026-09-12|Charleston Southern|The Citadel|||SCHEDULED|6:00 PM||||||ESPN+|
 2|2026-09-12|Chattanooga|Eastern Kentucky|||SCHEDULED|6:00 PM||||||ESPN+|
-2|2026-09-12|Colgate|Central Michigan|||SCHEDULED|1:00 PM||||||ESPN+|
+2|2026-09-12|Colgate|Central Michigan|||SCHEDULED|1:00 PM||-23.5|49.5|1300|-2800|ESPN+|
 2|2026-09-12|Dickinson (PA)|Davidson|||SCHEDULED|12:00 PM||||||ESPN+|
 2|2026-09-12|Drake|Northern Iowa|||SCHEDULED|2:00 PM||||||ESPN+|
 2|2026-09-12|Duquesne|Youngstown State|||SCHEDULED|2:00 PM||||||ESPN+|
-2|2026-09-12|East Tennessee State|North Carolina|||SCHEDULED|12:00 PM||||||ACC Network|
+2|2026-09-12|East Tennessee State|North Carolina|||SCHEDULED|12:00 PM||-35.5|54.5|||ACC Network|
 2|2026-09-12|Eastern Washington|South Dakota|||SCHEDULED|2:00 PM||||||ESPN+/Midco Sports Net|
 2|2026-09-12|Elon|Rhode Island|||SCHEDULED|12:00 PM||||||FloSports|
-2|2026-09-12|Fordham|Coastal Carolina|||SCHEDULED|7:30 PM||||||ESPN+|
+2|2026-09-12|Fordham|Coastal Carolina|||SCHEDULED|7:30 PM||-34.5|52.5|2500|-9000|ESPN+|
 2|2026-09-12|Franklin|Butler|||SCHEDULED|6:00 PM||||||ESPN+|
 2|2026-09-12|Furman|Mercer|||SCHEDULED|6:00 PM||||||ESPN+|
-2|2026-09-12|Gardner-Webb|Liberty|||SCHEDULED|6:00 PM||||||ESPN+|
-2|2026-09-12|Grambling|TCU|||SCHEDULED|8:00 PM||||||ESPN+|
-2|2026-09-12|Holy Cross|Miami (OH)|||SCHEDULED|1:00 PM||||||ESPN+|
+2|2026-09-12|Gardner-Webb|Liberty|||SCHEDULED|6:00 PM||-27.5|55.5|1800|-5000|ESPN+|
+2|2026-09-12|Grambling|TCU|||SCHEDULED|8:00 PM||-43.5|54.5|||ESPN+|
+2|2026-09-12|Holy Cross|Miami (OH)|||SCHEDULED|1:00 PM||-30.5|49.5|2200|-8000|ESPN+|
 2|2026-09-12|Howard|Indiana|||SCHEDULED|12:00 PM||-56.5|64.5|||BTN|
-2|2026-09-12|Illinois State|Northern Illinois|||SCHEDULED|7:00 PM||||||MW+|
+2|2026-09-12|Illinois State|Northern Illinois|||SCHEDULED|7:00 PM||4.5|48.5|-175|145|MW+|
 2|2026-09-12|Incarnate Word|Northern Arizona|||SCHEDULED|5:00 PM||||||ESPN+|
 2|2026-09-12|Indiana State|Eastern Illinois|||SCHEDULED|7:00 PM||||||ESPN+|
 2|2026-09-12|Kentucky Christian|Chicago State|||SCHEDULED|1:00 PM|||||||
 2|2026-09-12|Lamar|Idaho|||SCHEDULED|4:00 PM||||||ESPN+|
 2|2026-09-12|Lincoln (PA)|Mississippi Valley State|||SCHEDULED|4:00 PM|N||||||Soldier Field, Chicago
-2|2026-09-12|Lindenwood|Missouri State|||SCHEDULED|7:00 PM||||||ESPN+|
+2|2026-09-12|Lindenwood|Missouri State|||SCHEDULED|7:00 PM||-19.5|52.5|950|-1650|ESPN+|
 2|2026-09-12|Marist|Lafayette|||SCHEDULED|12:30 PM||||||ESPN+|
-2|2026-09-12|Mercyhurst|New Mexico|||SCHEDULED|4:00 PM||||||MW+|
+2|2026-09-12|Mercyhurst|New Mexico|||SCHEDULED|4:00 PM||-41.5|51.5|||MW+|
 2|2026-09-12|Merrimack|Maine|||SCHEDULED|5:00 PM||||||FloSports|
-2|2026-09-12|Monmouth|Western Michigan|||SCHEDULED|6:30 PM||||||ESPN+|
-2|2026-09-12|Montana State|Nevada|||SCHEDULED|10:30 PM||4.5|49.5|-198|164|CW|
+2|2026-09-12|Monmouth|Western Michigan|||SCHEDULED|6:30 PM||-25.5|52.5|1500|-3600|ESPN+|
+2|2026-09-12|Montana State|Nevada|||SCHEDULED|10:30 PM||3.5|49.5|-166|140|CW|
 2|2026-09-12|Morehead State|Austin Peay|||SCHEDULED|5:00 PM||||||ESPN+|
 2|2026-09-12|New Haven|South Dakota State|||SCHEDULED|7:00 PM||||||ESPN+/Midco Sports Net/KELO-TV|
 2|2026-09-12|North Alabama|SE Louisiana|||SCHEDULED|7:00 PM||||||ESPN+|
 2|2026-09-12|North Carolina A&T|North Carolina Central|||SCHEDULED|6:00 PM||||||ESPN+|
 2|2026-09-12|North Dakota|Portland State|||SCHEDULED|10:00 PM||||||ESPN+|
-2|2026-09-12|Northern Colorado|Wyoming|||SCHEDULED|4:00 PM||||||MW+|
+2|2026-09-12|Northern Colorado|Wyoming|||SCHEDULED|4:00 PM||-22.5|47.5|1400|-3200|MW+|
 2|2026-09-12|Northern Michigan|St. Thomas|||SCHEDULED|2:00 PM||||||Midco Sports Plus|
 2|2026-09-12|Northwestern State|East Texas A&M|||SCHEDULED|7:00 PM||||||ESPN+|
-2|2026-09-12|Prairie View A&M|Baylor|||SCHEDULED|8:08 PM||||||ESPN+|
-2|2026-09-12|Robert Morris|Akron|||SCHEDULED|3:30 PM||||||ESPN+|
-2|2026-09-12|Sacred Heart|Massachusetts|||SCHEDULED|3:30 PM||||||ESPN+|
+2|2026-09-12|Prairie View A&M|Baylor|||SCHEDULED|8:08 PM||-39.5|56.5|||ESPN+|
+2|2026-09-12|Robert Morris|Akron|||SCHEDULED|3:30 PM||-27.5|41.5|1800|-5000|ESPN+|
+2|2026-09-12|Sacred Heart|Massachusetts|||SCHEDULED|3:30 PM||-23.5|53.5|1200|-2400|ESPN+|
 2|2026-09-12|Samford|Tennessee Tech|||SCHEDULED|7:00 PM||||||ESPN+|
 2|2026-09-12|San Diego|Idaho State|||SCHEDULED|6:00 PM||||||ESPN+|
 2|2026-09-12|Southeast Missouri State|Southern Illinois|||SCHEDULED|7:00 PM||||||ESPN+|
-2|2026-09-12|Southern Utah|Colorado State|||SCHEDULED|7:00 PM||||||CBSSN|
+2|2026-09-12|Southern Utah|Colorado State|||SCHEDULED|7:00 PM||-20.5|56.5|1100|-2100|CBSSN|
 2|2026-09-12|Southern|Houston|||SCHEDULED|7:00 PM||-51.5|60.5|||ESPN+|
 2|2026-09-12|Stephen F. Austin|Abilene Christian|||SCHEDULED|8:00 PM||||||ESPN+|
 2|2026-09-12|Stetson|Bethune-Cookman|||SCHEDULED|4:00 PM||||||SWAC TV|
 2|2026-09-12|Stonehill|New Hampshire|||SCHEDULED|6:00 PM||||||FloSports|
-2|2026-09-12|Stony Brook|Ball State|||SCHEDULED|2:00 PM||||||ESPN+|
+2|2026-09-12|Stony Brook|Ball State|||SCHEDULED|2:00 PM||-14.5|57.5|575|-850|ESPN+|
 2|2026-09-12|Tarleton State|McNeese|||SCHEDULED|7:00 PM||||||ESPN+|
 2|2026-09-12|Tennessee State|Alabama A&M|||SCHEDULED|7:00 PM||||||SWAC TV|
-2|2026-09-12|Texas Southern|UTEP|||SCHEDULED|9:00 PM||||||MW+|
+2|2026-09-12|Texas Southern|UTEP|||SCHEDULED|9:00 PM||-25.5|52.5|2000|-6500|MW+|
 2|2026-09-12|Thomas More College|Dayton|||SCHEDULED|12:00 PM||||||YouTube|
-2|2026-09-12|Towson|South Carolina|||SCHEDULED|7:00 PM||||||SECN+|
+2|2026-09-12|Towson|South Carolina|||SCHEDULED|7:00 PM||-43.5|54.5|||SECN+|
 2|2026-09-12|UAlbany|Long Island University|||SCHEDULED|12:00 PM||||||NEC Front Row|
-2|2026-09-12|UC Davis|SMU|||SCHEDULED|4:00 PM||-24.5|58.5|1200|-2400|ACCNX|
-2|2026-09-12|UT Martin|West Virginia|||SCHEDULED|1:00 PM||||||ESPN+|
+2|2026-09-12|UC Davis|SMU|||SCHEDULED|4:00 PM||-25.5|58.5|1300|-2800|ACCNX|
+2|2026-09-12|UT Martin|West Virginia|||SCHEDULED|1:00 PM||-41.5|55.5|||ESPN+|
 2|2026-09-12|UT Rio Grande Valley|Nicholls|||SCHEDULED|7:00 PM||||||ESPN+|
 2|2026-09-12|Utah Tech|Montana|||SCHEDULED|3:00 PM||||||ESPN+|
 2|2026-09-12|Valparaiso|Murray State|||SCHEDULED|7:00 PM||||||ESPN+|
 2|2026-09-12|Virginia Lynchburg|Morgan State|||SCHEDULED|6:00 PM|||||||
 2|2026-09-12|Virginia State|South Carolina State|||SCHEDULED|6:00 PM|||||||
-2|2026-09-12|Wagner|James Madison|||SCHEDULED|3:30 PM||||||ESPN+|
-2|2026-09-12|Weber State|Colorado|||SCHEDULED|3:30 PM||||||ESPN+|
+2|2026-09-12|Wagner|James Madison|||SCHEDULED|3:30 PM||-45.5|54.5|||ESPN+|
+2|2026-09-12|Weber State|Colorado|||SCHEDULED|3:30 PM||-33.5|53.5|2500|-9000|ESPN+|
 2|2026-09-12|West Georgia|Arkansas State|||SCHEDULED|7:00 PM||||||ESPN+|
 2|2026-09-12|Western Carolina|Cincinnati|||SCHEDULED|7:00 PM||-36.5|60.5|||ESPN+|
-2|2026-09-12|Western Illinois|Wisconsin|||SCHEDULED|7:15 PM||||||BTN|
+2|2026-09-12|Western Illinois|Wisconsin|||SCHEDULED|7:15 PM||-38.5|48.5|||BTN|
 2|2026-09-12|William & Mary|Lehigh|||SCHEDULED|2:00 PM||||||ESPN+|
-2|2026-09-12|Wofford|Kent State|||SCHEDULED|12:00 PM||||||ESPN+|
+2|2026-09-12|Wofford|Kent State|||SCHEDULED|12:00 PM||-11.5|47.5|410|-550|ESPN+|
 3|2026-09-18|Portland State|Oregon|||SCHEDULED|10:30 PM||||||BTN|
 3|2026-09-19|Abilene Christian|Idaho|||SCHEDULED|4:00 PM||||||ESPN+|
 3|2026-09-19|Alcorn State|North Alabama|||SCHEDULED|7:00 PM||||||ESPN+|
@@ -2582,6 +2614,7 @@ ORV|Louisville 125, Illinois 45, Boise State 43, Arizona 42, South Carolina 36, 
 7|2026-10-17|Western Illinois|Southeast Missouri State|||SCHEDULED|3:00 PM||||||ESPN+|
 8|2026-10-23|North Carolina Central|Delaware State|||SCHEDULED|5:00 PM||||||ESPN2|
 8|2026-10-23|Yale|Pennsylvania|||SCHEDULED|7:00 PM||||||ESPNU|
+8|2026-10-24|Arkansas-Pine Bluff|Florida A&M|||SCHEDULED|3:00 PM|||||||
 8|2026-10-24|Austin Peay|North Alabama|||SCHEDULED|7:00 PM||||||ESPN+|
 8|2026-10-24|Bucknell|Holy Cross|||SCHEDULED|1:00 PM||||||ESPN+|
 8|2026-10-24|Butler|Drake|||SCHEDULED|1:00 PM||||||ESPN+|
@@ -2719,7 +2752,7 @@ ORV|Louisville 125, Illinois 45, Boise State 43, Arizona 42, South Carolina 36, 
 10|2026-11-07|Long Island University|New Haven|||SCHEDULED|12:00 PM|||||||
 10|2026-11-07|McNeese|Houston Christian|||SCHEDULED|5:00 PM||||||ESPN+|
 10|2026-11-07|Mercer|Chattanooga|||SCHEDULED|1:00 PM||||||ESPN+|
-10|2026-11-07|Merrimack|Wake Forest|||SCHEDULED|12:00 PM|||||||
+10|2026-11-07|Merrimack|Wake Forest|||SCHEDULED|TBD|||||||
 10|2026-11-07|Mississippi Valley State|Jackson State|||SCHEDULED|3:00 PM|||||||
 10|2026-11-07|Montana State|Idaho State|||SCHEDULED|6:00 PM||||||ESPN+|
 10|2026-11-07|Morehead State|Marist|||SCHEDULED|12:00 PM||||||ESPN+|
@@ -4584,7 +4617,7 @@ Yale|Ivy
 2026-09-03|Merrimack|Delaware|Delaware|passingYards|Nick Minicucci|QB|20/36, 330 YDS, 2 TD, 1 INT
 2026-09-03|Merrimack|Delaware|Merrimack|rushingYards|Galamama Mulbah|RB|7 CAR, 41 YDS, 1 TD
 2026-09-03|Merrimack|Delaware|Delaware|receivingYards|Kaderris Roberts|RB|2 REC, 80 YDS, 1 TD
-2026-09-03|West Georgia|Kennesaw State|Kennesaw State|passingYards|Rickie Collins|QB|18/23, 156 YDS, 1 TD
+2026-09-03|West Georgia|Kennesaw State|Kennesaw State|passingYards|Rickie Collins|QB|18/23, 171 YDS, 1 TD
 2026-09-03|West Georgia|Kennesaw State|Kennesaw State|rushingYards|Latrelle Murrell|RB|9 CAR, 88 YDS, 2 TD
 2026-09-03|West Georgia|Kennesaw State|Kennesaw State|receivingYards|Javon Rogers|WR|2 REC, 55 YDS
 2026-09-03|UAlbany|Buffalo|UAlbany|passingYards|Kai Colon|QB|16/36, 191 YDS, 2 TD, 1 INT
@@ -4743,9 +4776,9 @@ Yale|Ivy
 2026-09-05|Wyoming|Colorado State|Colorado State|passingYards|Hauss Hejny|QB|23/33, 214 YDS, 5 TD
 2026-09-05|Wyoming|Colorado State|Wyoming|rushingYards|Samuel Harris|RB|16 CAR, 63 YDS
 2026-09-05|Wyoming|Colorado State|Colorado State|receivingYards|RJ Vick|WR|6 REC, 75 YDS, 3 TD
-2026-09-05|Norfolk State|Old Dominion|Old Dominion|passingYards|Quinn Henicle|QB|9/12, 137 YDS, 2 TD, 1 INT
+2026-09-05|Norfolk State|Old Dominion|Old Dominion|passingYards|Quinn Henicle|QB|9/12, 143 YDS, 2 TD, 1 INT
 2026-09-05|Norfolk State|Old Dominion|Norfolk State|rushingYards|Jalyn Daniels|RB|11 CAR, 84 YDS
-2026-09-05|Norfolk State|Old Dominion|Norfolk State|receivingYards|Paul Billups II|WR|7 REC, 49 YDS
+2026-09-05|Norfolk State|Old Dominion|Old Dominion|receivingYards|JJ Harrell|WR|3 REC, 51 YDS
 2026-09-05|Austin Peay|Vanderbilt|Vanderbilt|passingYards|Blaze Berlowitz|QB|11/16, 149 YDS
 2026-09-05|Austin Peay|Vanderbilt|Vanderbilt|rushingYards|Sedrick Alexander|RB|10 CAR, 60 YDS, 1 TD
 2026-09-05|Austin Peay|Vanderbilt|Vanderbilt|receivingYards|Junior Sherrill|WR|4 REC, 70 YDS
@@ -4758,7 +4791,7 @@ Yale|Ivy
 2026-09-05|Arkansas State|Memphis|Arkansas State|passingYards|Trey Owens|QB|21/30, 325 YDS, 1 TD, 4 INT
 2026-09-05|Arkansas State|Memphis|Memphis|rushingYards|Jaylin Carter|RB|19 CAR, 183 YDS, 4 TD
 2026-09-05|Arkansas State|Memphis|Arkansas State|receivingYards|Hunter Summers|WR|5 REC, 98 YDS
-2026-09-05|Houston Christian|Rice|Houston Christian|passingYards|Cutter Stewart|QB|6/17, 61 YDS, 1 INT
+2026-09-05|Houston Christian|Rice|Houston Christian|passingYards|Cutter Stewart|QB|6/17, 63 YDS, 1 INT
 2026-09-05|Houston Christian|Rice|Rice|rushingYards|Tyvonn Byars|RB|16 CAR, 104 YDS
 2026-09-05|Houston Christian|Rice|Houston Christian|receivingYards|Jamaal Hall II|WR|2 REC, 27 YDS
 2026-09-05|Florida International|South Florida|Florida International|passingYards|JJ Kohl|QB|31/50, 301 YDS, 1 TD, 2 INT
@@ -4797,7 +4830,7 @@ Yale|Ivy
 2026-09-05|South Dakota State|Northwestern|South Dakota State|passingYards|Chase Mason|QB|23/48, 285 YDS, 1 INT
 2026-09-05|South Dakota State|Northwestern|Northwestern|rushingYards|Joseph Himon II|RB|4 CAR, 87 YDS, 1 TD
 2026-09-05|South Dakota State|Northwestern|South Dakota State|receivingYards|Grahm Goering|WR|9 REC, 117 YDS
-2026-09-05|Lamar|Louisiana|Louisiana|passingYards|Lunch Winfield|QB|15/21, 189 YDS, 2 INT
+2026-09-05|Lamar|Louisiana|Louisiana|passingYards|Lunch Winfield|QB|16/22, 189 YDS, 2 INT
 2026-09-05|Lamar|Louisiana|Louisiana|rushingYards|Darrell Smith|RB|10 CAR, 84 YDS, 2 TD
 2026-09-05|Lamar|Louisiana|Louisiana|receivingYards|Caden Jensen|TE|5 REC, 77 YDS
 2026-09-05|Mercyhurst|New Mexico State|New Mexico State|passingYards|Trey Hedden|QB|11/20, 253 YDS, 2 TD
@@ -5024,7 +5057,7 @@ Yale|Ivy
 2026-08-29|Miles College|Alcorn State|Alcorn State|receivingYards|Jamarr Ebron|WR|6 REC, 63 YDS, 2 TD
 2026-08-29|Oklahoma Panhandle State|Incarnate Word|Incarnate Word|passingYards|Emmett Brown|QB|5/7, 127 YDS, 3 TD, 1 INT
 2026-08-29|Oklahoma Panhandle State|Incarnate Word|Incarnate Word|rushingYards|Lontrell Turner|RB|9 CAR, 81 YDS, 2 TD
-2026-08-29|Oklahoma Panhandle State|Incarnate Word|Incarnate Word|receivingYards|Jamir Roberts|WR|3 REC, 67 YDS, 1 TD
+2026-08-29|Oklahoma Panhandle State|Incarnate Word|Oklahoma Panhandle State|receivingYards|Elijah Crook|WR|5 REC, 89 YDS, 1 TD
 2026-08-29|Howard|Alabama A&M|Howard|passingYards|Ja'Shawn Scroggins|QB|19/36, 315 YDS, 3 TD
 2026-08-29|Howard|Alabama A&M|Alabama A&M|rushingYards|Maurice Edwards IV|RB|7 CAR, 57 YDS
 2026-08-29|Howard|Alabama A&M|Alabama A&M|receivingYards|Jarel Williams|WR|4 REC, 72 YDS, 1 TD
@@ -5205,9 +5238,9 @@ Yale|Ivy
 5|Colin Simmons|EDGE|Texas
 6|Dylan Stewart|EDGE|South Carolina
 7|Cam Coleman|WR|Texas
-8|CJ Carr|QB|Notre Dame
+8|Darian Mensah|QB|Miami (FL)
 9|Trevor Goosby|OT|Texas
-10|Darian Mensah|QB|Miami (FL)
+10|CJ Carr|QB|Notre Dame
 11|Jordan Seaton|OT|LSU
 12|David Stone|DL|Oklahoma
 13|Will Echoles|DL|Mississippi
@@ -5215,191 +5248,191 @@ Yale|Ivy
 15|Charlie Becker|WR|Indiana
 16|KJ Bolden|S|Georgia
 17|Trey'Dez Green|TE|LSU
-18|Jamari Johnson|TE|Oregon
-19|Brauntae Johnson|S|Notre Dame
+18|Brauntae Johnson|S|Notre Dame
+19|LaNorris Sellers|QB|South Carolina
 20|A'Mauri Washington|DL|Oregon
-21|Julian Sayin|QB|Ohio State
-22|Drew Mestemaker|QB|Oklahoma State
-23|Justin Scott|DL|Miami (FL)
-24|Ashton Hampton|CB|Clemson
-25|Kelley Jones|CB|Mississippi State
-26|LaNorris Sellers|QB|South Carolina
-27|Yhonzae Pierre|EDGE|Alabama
+21|Jamari Johnson|TE|Oregon
+22|Justin Scott|DL|Miami (FL)
+23|Ashton Hampton|CB|Clemson
+24|Trevor Lauck|OT|Iowa
+25|Yhonzae Pierre|EDGE|Alabama
+26|Julian Sayin|QB|Ohio State
+27|Kelley Jones|CB|Mississippi State
 28|Jadan Baugh|RB|Florida
-29|Trevor Lauck|OT|Iowa
+29|Drew Mestemaker|QB|Oklahoma State
 30|Nick Marsh|WR|Indiana
 31|Sammy Brown|LB|Clemson
-32|Kade Pieper|IOL|Iowa
-33|Kewan Lacy|RB|Mississippi
-34|Greg Johnson|IOL|Minnesota
-35|Matayo Uiagalelei|EDGE|Oregon
-36|Carter Smith|OT|Indiana
+32|Greg Johnson|IOL|Minnesota
+33|Kade Pieper|IOL|Iowa
+34|Kewan Lacy|RB|Mississippi
+35|Carter Smith|OT|Indiana
+36|Matayo Uiagalelei|EDGE|Oregon
 37|Ryan Coleman-Williams|WR|Alabama
 38|Kyngstonn Viliamu-Asa|LB|Notre Dame
-39|Ahmad Moten Sr.|DL|Miami (FL)
-40|Cayden Green|OT|Missouri
-41|Zabien Brown|CB|Alabama
-42|Will Heldt|EDGE|Clemson
-43|Chris Cole|LB|Georgia
-44|Omarion Miller|WR|Arizona State
-45|Austin Siereveld|OT|Ohio State
-46|Quincy Rhodes Jr.|EDGE|Arkansas
-47|Duce Robinson|WR|Florida State
-48|Melvin Siani|OT|Texas
-49|Jayden Maiava|QB|USC
-50|Damon Wilson Jr.|EDGE|Miami (FL)
-51|Mario Craver|WR|Texas A&M
-52|KJ Duff|WR|Rutgers
-53|Ahmad Hardy|RB|Missouri
+39|Zabien Brown|CB|Alabama
+40|Ahmad Moten Sr.|DL|Miami (FL)
+41|Will Heldt|EDGE|Clemson
+42|Cayden Green|OT|Missouri
+43|Omarion Miller|WR|Arizona State
+44|Chris Cole|LB|Georgia
+45|Melvin Siani|OT|Texas
+46|Austin Siereveld|OT|Ohio State
+47|Jayden Maiava|QB|USC
+48|Quincy Rhodes Jr.|EDGE|Arkansas
+49|Duce Robinson|WR|Florida State
+50|KJ Duff|WR|Rutgers
+51|Damon Wilson Jr.|EDGE|Miami (FL)
+52|Ahmad Hardy|RB|Missouri
+53|Trinidad Chambliss|QB|Mississippi
 54|Kenyatta Jackson|EDGE|Ohio State
-55|Bryant Wesco|WR|Clemson
-56|Jacarrius Peak|OT|South Carolina
-57|Zach Lutmer|S|Iowa
-58|Jordan Ross|EDGE|LSU
-59|A.J. Holmes Jr|DL|Texas Tech
-60|Brice Pollock|CB|Texas Tech
-61|OJ Frederique Jr.|CB|Miami (FL)
-62|Drake Lindsey|QB|Minnesota
-63|Anthonie Knapp|OT|Notre Dame
-64|Vicari Swain|CB|South Carolina
-65|Niki Prongos|OT|Stanford
-66|Jelani McDonald|S|Texas
-67|Jaylen McClain|S|Ohio State
-68|Tavion Gadson|DL|Kentucky
-69|Anto Saka|EDGE|Texas A&M
-70|Ryan Wingo|WR|Texas
-71|John Henry Daley|EDGE|Michigan
-72|Evan Tengesdahl|IOL|Cincinnati
-73|Rasheem Biles|LB|Texas
-74|Koi Perich|S|Oregon
-75|Boubacar Traore|EDGE|Notre Dame
-76|Clev Lubin|EDGE|Louisville
-77|Ty Benefield|S|LSU
-78|Lance Heard|OT|Kentucky
-79|Anthony Smith|DL|Minnesota
-80|Iapani Laloulu|IOL|Oregon
-81|Andrew Rappleyea|TE|Penn State
-82|PJ Williams|OT|SMU
-83|Bear Alexander|DL|Oregon
-84|Chris Peal|CB|Syracuse
-85|Bray Hubbard|S|Alabama
-86|Nyck Harbor|WR|South Carolina
-87|Trinidad Chambliss|QB|Mississippi
-88|Jalen Mayo|CB|Utah
-89|Jyaire Hill|CB|Michigan
+55|Mario Craver|WR|Texas A&M
+56|Jordan Ross|EDGE|LSU
+57|Bryant Wesco|WR|Clemson
+58|Zach Lutmer|S|Iowa
+59|Anthonie Knapp|OT|Notre Dame
+60|Clev Lubin|EDGE|Louisville
+61|A.J. Holmes Jr|DL|Texas Tech
+62|OJ Frederique Jr.|CB|Miami (FL)
+63|Jacarrius Peak|OT|South Carolina
+64|Ty Benefield|S|LSU
+65|Jaylen McClain|S|Ohio State
+66|Ryan Wingo|WR|Texas
+67|Tavion Gadson|DL|Kentucky
+68|Niki Prongos|OT|Stanford
+69|John Henry Daley|EDGE|Michigan
+70|Evan Tengesdahl|IOL|Cincinnati
+71|Vicari Swain|CB|South Carolina
+72|Anto Saka|EDGE|Texas A&M
+73|Koi Perich|S|Oregon
+74|Brice Pollock|CB|Texas Tech
+75|Jelani McDonald|S|Texas
+76|Boubacar Traore|EDGE|Notre Dame
+77|Rasheem Biles|LB|Texas
+78|Iapani Laloulu|IOL|Oregon
+79|Andrew Rappleyea|TE|Penn State
+80|PJ Williams|OT|SMU
+81|Drake Lindsey|QB|Minnesota
+82|Anthony Smith|DL|Minnesota
+83|Nyck Harbor|WR|South Carolina
+84|Jyaire Hill|CB|Michigan
+85|Bear Alexander|DL|Oregon
+86|Lance Heard|OT|Kentucky
+87|Mike Matthews|WR|Tennessee
+88|Bray Hubbard|S|Alabama
+89|Chris Peal|CB|Syracuse
 90|Nico Iamaleava|QB|UCLA
-91|Sahir West|EDGE|UCLA
+91|Taylor Wein|EDGE|Oklahoma
 92|Isaac Brown|RB|Louisville
-93|Teitum Tuioti|EDGE|Oregon
-94|Jamari Sharpe|CB|Indiana
-95|Taylor Wein|EDGE|Oklahoma
-96|Dashawn Spears|S|LSU
+93|Jalen Mayo|CB|Utah
+94|Jackson Bennee|S|Utah
+95|Dashawn Spears|S|LSU
+96|Jamari Sharpe|CB|Indiana
 97|Wyatt Young|WR|Oklahoma State
-98|Ben Roberts|LB|Texas Tech
-99|Jackson Bennee|S|Utah
-100|Sam Leavitt|QB|LSU
+98|Sam Leavitt|QB|LSU
+99|Nate Frazier|RB|Georgia
+100|Ben Roberts|LB|Texas Tech
 </script>
-<script type="text/plain" id="d-drafttank">1|Arch Manning|QB|Texas|6'4"222 lbs
-2|Dante Moore|QB|Oregon|6'3"220 lbs
-3|CJ Carr|QB|Notre Dame|6'2"215 lbs
-4|Jeremiah Smith|WR|Ohio State|6'4"222 lbs
+<script type="text/plain" id="d-drafttank">1|Jeremiah Smith|WR|Ohio State|6'4"222 lbs
+2|Arch Manning|QB|Texas|6'4"222 lbs
+3|Dante Moore|QB|Oregon|6'3"220 lbs
+4|CJ Carr|QB|Notre Dame|6'2"215 lbs
 5|Colin Simmons|EDGE|Texas|6'3"246 lbs
 6|Trevor Goosby|OT|Texas|6'7"325 lbs
-7|Cam Coleman|WR|Texas|6'3"204 lbs
-8|Leonard Moore|CB|Notre Dame|6'2"197 lbs
+7|Leonard Moore|CB|Notre Dame|6'2"197 lbs
+8|Julian Sayin|QB|Ohio State|6'1"214 lbs
 9|Dylan Stewart|EDGE|South Carolina|6'5"250 lbs
-10|Julian Sayin|QB|Ohio State|6'1"214 lbs
+10|Cam Coleman|WR|Texas|6'3"204 lbs
 11|Ellis Robinson IV|CB|Georgia|6'0"180 lbs
-12|David Stone|DL|Oklahoma|6'3"315 lbs
-13|Jordan Seaton|OT|LSU|6'5"307 lbs
-14|Darian Mensah|QB|Miami|6'3"205 lbs
-15|KJ Bolden|S|Georgia|6'0"195 lbs
+12|Jordan Seaton|OT|LSU|6'5"307 lbs
+13|David Stone|DL|Oklahoma|6'3"315 lbs
+14|KJ Bolden|S|Georgia|6'0"195 lbs
+15|Will Echoles|DL|Ole Miss|6'3"315 lbs
 16|A'Mauri Washington|DL|Oregon|6'3"325 lbs
 17|Charlie Becker|WR|Indiana|6'4"207 lbs
 18|Jamari Johnson|TE|Oregon|6'5"255 lbs
-19|Trey'Dez Green|TE|LSU|6'7"237 lbs
-20|Will Echoles|DL|Ole Miss|6'3"315 lbs
-21|Ryan Coleman-Williams|WR|Alabama|6'0"182 lbs
-22|Justin Scott|DL|Miami|6'4"303 lbs
-23|Tae Johnson|S|Notre Dame|6'2"200 lbs
-24|Kelley Jones|CB|Mississippi State|6'4"195 lbs
-25|Ahmad Hardy|RB|Missouri|5'10"210 lbs
+19|Justin Scott|DL|Miami|6'4"303 lbs
+20|Ahmad Hardy|RB|Missouri|5'10"210 lbs
+21|Trey'Dez Green|TE|LSU|6'7"237 lbs
+22|Tae Johnson|S|Notre Dame|6'2"200 lbs
+23|Ashton Hampton|CB|Clemson|6'2"200 lbs
+24|Ryan Coleman-Williams|WR|Alabama|6'0"182 lbs
+25|Jadan Baugh|RB|Florida|6'1"225 lbs
 26|Kewan Lacy|RB|Ole Miss|5'11"205 lbs
-27|Ashton Hampton|CB|Clemson|6'2"200 lbs
-28|Ahmad Moten Sr.|DL|Miami|6'3"300 lbs
+27|Kade Pieper|IOL|Iowa|6'4"290 lbs
+28|Nick Marsh|WR|Indiana|6'3"213 lbs
 29|Trevor Lauck|OT|Iowa|6'5"310 lbs
-30|Sammy Brown|LB|Clemson|6'2"235 lbs
-31|Nick Marsh|WR|Indiana|6'3"213 lbs
-32|Drew Mestemaker|QB|Oklahoma State|6'3"211 lbs
-33|Zabien Brown|CB|Alabama|6'0"194 lbs
-34|Cayden Green|OT/IOL|Missouri|6'5"324 lbs
-35|Kade Pieper|IOL|Iowa|6'4"290 lbs
-36|Matayo Uiagalelei|EDGE|Oregon|6'5"265 lbs
-37|Carter Smith|OT|Indiana|6'5"313 lbs
-38|Jadan Baugh|RB|Florida|6'1"225 lbs
-39|Yhonzae Pierre|EDGE|Alabama|6'3"253 lbs
-40|Quincy Rhodes Jr.|EDGE|Arkansas|6'6"277 lbs
-41|Kyngstonn Viliamu-Asa|LB|Notre Dame|6'3"234 lbs
-42|Greg Johnson|IOL|Minnesota|6'6"325 lbs
+30|Yhonzae Pierre|EDGE|Alabama|6'4"251 lbs
+31|Sammy Brown|LB|Clemson|6'2"235 lbs
+32|Greg Johnson|IOL|Minnesota|6'6"325 lbs
+33|Matayo Uiagalelei|EDGE|Oregon|6'5"265 lbs
+34|Kelley Jones|CB|Mississippi State|6'4"195 lbs
+35|Cayden Green|OT/IOL|Missouri|6'5"324 lbs
+36|Zabien Brown|CB|Alabama|6'0"194 lbs
+37|Darian Mensah|QB|Miami|6'3"205 lbs
+38|Ahmad Moten Sr.|DL|Miami|6'3"300 lbs
+39|Kyngstonn Viliamu-Asa|LB|Notre Dame|6'3"234 lbs
+40|Carter Smith|OT|Indiana|6'5"313 lbs
+41|Will Heldt|EDGE|Clemson|6'6"260 lbs
+42|Chris Cole|LB|Georgia|6'3"235 lbs
 43|Mario Craver|WR|Texas A&M|5'9"165 lbs
-44|Austin Siereveld|OT|Ohio State|6'5"327 lbs
+44|KJ Duff|WR|Rutgers|6'6"225 lbs
 45|Melvin Siani|OT|Texas|6'6"317 lbs
 46|OJ Frederique Jr.|CB|Miami|6'0"185 lbs
-47|Chris Cole|LB|Georgia|6'3"235 lbs
-48|Kenyatta Jackson Jr.|EDGE|Ohio State|6'6"263 lbs
-49|Jacarrius Peak|OT|South Carolina|6'4"305 lbs
-50|Koi Perich|S|Oregon|6'1"202 lbs
-51|Will Heldt|EDGE|Clemson|6'6"260 lbs
-52|Damon Wilson II|EDGE|Miami|6'4"250 lbs
-53|Jordan Ross|EDGE|LSU|6'5"246 lbs
-54|Omarion Miller|WR|Arizona State|6'2"210 lbs
-55|KJ Duff|WR|Rutgers|6'6"225 lbs
-56|A.J. Holmes Jr.|DL|Texas Tech|6'3"300 lbs
-57|Rasheem Biles|LB|Texas|6'1"222 lbs
-58|PJ Williams|OT|SMU|6'5"313 lbs
-59|Jelani McDonald|S|Texas|6'2"200 lbs
-60|Clev Lubin|EDGE|Louisville|6'3"260 lbs
-61|Bray Hubbard|S|Alabama|6'2"217 lbs
-62|Brice Pollock|CB|Texas Tech|6'0"195 lbs
-63|Jaylen McClain|S|Ohio State|6'0"203 lbs
-64|Zach Lutmer|S/CB|Iowa|6'0"205 lbs
+47|Drew Mestemaker|QB|Oklahoma State|6'3"211 lbs
+48|Quincy Rhodes Jr.|EDGE|Arkansas|6'6"273 lbs
+49|Omarion Miller|WR|Arizona State|6'2"210 lbs
+50|Austin Siereveld|OT|Ohio State|6'5"327 lbs
+51|Kenyatta Jackson Jr.|EDGE|Ohio State|6'6"263 lbs
+52|Zach Lutmer|S/CB|Iowa|6'0"205 lbs
+53|A.J. Holmes Jr.|DL|Texas Tech|6'3"300 lbs
+54|Jordan Ross|EDGE|LSU|6'5"254 lbs
+55|Brice Pollock|CB|Texas Tech|6'0"195 lbs
+56|Jacarrius Peak|OT|South Carolina|6'4"305 lbs
+57|Chris Peal|CB|Syracuse|6'1"200 lbs
+58|Jelani McDonald|S|Texas|6'2"200 lbs
+59|Jaylen McClain|S|Ohio State|6'0"203 lbs
+60|PJ Williams|OT|SMU|6'5"313 lbs
+61|Vicari Swain|CB|South Carolina|6'0"193 lbs
+62|Koi Perich|S|Oregon|6'1"202 lbs
+63|Bray Hubbard|S|Alabama|6'2"217 lbs
+64|Damon Wilson II|EDGE|Miami|6'4"250 lbs
 65|Tavion Gadson|DL|Kentucky|6'5"303 lbs
-66|Wyatt Young|WR|Oklahoma State|6'0"199 lbs
-67|Jamari Sharpe|CB|Indiana|6'1"188 lbs
-68|Vicari Swain|CB|South Carolina|6'0"193 lbs
-69|Chris Peal|CB|Syracuse|6'1"200 lbs
-70|Jayden Maiava|QB|USC|6'4"230 lbs
-71|Ryan Wingo|WR|Texas|6'2"214 lbs
+66|Rasheem Biles|LB|Texas|6'1"222 lbs
+67|Nate Frazier|RB|Georgia|5'10"205 lbs
+68|Clev Lubin|EDGE|Louisville|6'3"260 lbs
+69|Boubacar Traore|EDGE|Notre Dame|6'5"253 lbs
+70|Jyaire Hill|CB|Michigan|6'2"190 lbs
+71|Jayden Maiava|QB|USC|6'4"230 lbs
 72|Iapani Laloulu|IOL|Oregon|6'2"325 lbs
-73|Terrance Carter Jr.|TE|Texas Tech|6'2"245 lbs
-74|Dashawn Spears|S|LSU|6'3"209 lbs
-75|Boubacar Traore|EDGE|Notre Dame|6'5"253 lbs
-76|Bryant Wesco Jr.|WR|Clemson|6'2"190 lbs
-77|Brendan Sorsby|QB|Texas Tech|6'3"235 lbs
-78|Nate Frazier|RB|Georgia|5'10"205 lbs
-79|Isaac Brown|RB|Louisville|5'9"190 lbs
-80|Evan Tengesdahl|IOL|Cincinnati|6'3"323 lbs
-81|Jyaire Hill|CB|Michigan|6'2"190 lbs
-82|Mark Fletcher Jr.|RB|Miami|6'2"225 lbs
-83|LaNorris Sellers|QB|South Carolina|6'3"238 lbs
-84|Teitum Tuioti|EDGE|Oregon|6'3"263 lbs
-85|Whit Weeks|LB|LSU|6'3"223 lbs
-86|Ben Roberts|LB|Texas Tech|6'3"245 lbs
-87|Lance Heard|OT|Kentucky|6'6"325 lbs
-88|Duce Robinson|WR|Florida State|6'6"230 lbs
-89|Anthonie Knapp|IOL|Notre Dame|6'5"305 lbs
-90|T.J. Moore|WR|Clemson|6'3"205 lbs
-91|Niki Prongos|OT|Stanford|6'7"315 lbs
-92|Luke Montgomery|IOL|Ohio State|6'5"312 lbs
-93|Anthony Smith|EDGE|Minnesota|6'6"285 lbs
-94|Bear Alexander|DL|Oregon|6'3"316 lbs
-95|Suntarine Perkins|LB/EDGE|Ole Miss|6'2"220 lbs
-96|Benjamin Brahmer|TE|Penn State|6'7"250 lbs
-97|Brandon Baker|OT|Texas|6'4"305 lbs
-98|John Henry Daley|EDGE|Michigan|6'4"255 lbs
-99|DJ McKinney|CB|Notre Dame|6'2"180 lbs
-100|Nyck Harbor|WR|South Carolina|6'5"239 lbs
-101|Peter Clarke|TE|Temple|6'6"265 lbs
+73|LaNorris Sellers|QB|South Carolina|6'3"238 lbs
+74|Anthonie Knapp|IOL|Notre Dame|6'5"305 lbs
+75|Jamari Sharpe|CB|Indiana|6'1"188 lbs
+76|Terrance Carter Jr.|TE|Texas Tech|6'2"245 lbs
+77|Duce Robinson|WR|Florida State|6'6"230 lbs
+78|Bryant Wesco Jr.|WR|Clemson|6'2"190 lbs
+79|Dashawn Spears|S|LSU|6'3"209 lbs
+80|Bear Alexander|DL|Oregon|6'3"316 lbs
+81|Ryan Wingo|WR|Texas|6'2"214 lbs
+82|Junior Sherrill|WR|Vanderbilt|5'11"200 lbs
+83|Whit Weeks|LB|LSU|6'3"223 lbs
+84|Wyatt Young|WR|Oklahoma State|6'0"199 lbs
+85|Mateen Ibirogba|DL|Texas Tech|6'4"300 lbs
+86|Ty Benefield|S|LSU|6'3"208 lbs
+87|Jordan Faison|WR|Notre Dame|5'11"185 lbs
+88|Niki Prongos|OT|Stanford|6'7"315 lbs
+89|Lance Heard|OT|Kentucky|6'6"325 lbs
+90|Mark Fletcher Jr.|RB|Miami|6'2"225 lbs
+91|Evan Tengesdahl|IOL|Cincinnati|6'3"323 lbs
+92|T.J. Moore|WR|Clemson|6'3"205 lbs
+93|Mike Matthews|WR|Tennessee|6'1"200 lbs
+94|LJ Martin|RB|BYU|6'2"225 lbs
+95|Isaac Brown|RB|Louisville|5'9"190 lbs
+96|Nyck Harbor|WR|South Carolina|6'5"239 lbs
+97|Ben Roberts|LB|Texas Tech|6'3"245 lbs
+98|John Henry Daley|EDGE|Michigan|6'5"252 lbs
+99|Anthony Smith|EDGE|Minnesota|6'6"280 lbs
+100|Brandon Baker|OT|Texas|6'4"305 lbs
+101|Luke Montgomery|IOL|Ohio State|6'5"312 lbs
 </script>
 <script type="text/plain" id="d-draftdt">1|Arch Manning|QB|Texas|RJR|6'4"|219
 2|Jeremiah Smith|WR|Ohio State|JR|6'3"|223
@@ -24977,166 +25010,176 @@ Wyoming|2751
 Yale|43
 Youngstown State|2754
 </script>
-<script type="text/plain" id="d-gameinfo">M|2026-09-10|Florida A&M|Miami|-55.5|-56.5|62.5|62.5|||||100|84|34|Draft Kings
-M|2026-09-11|Villanova|Louisville|-36.5|-36.5|55.5|56.5|||||98.3|81|5|Draft Kings
-M|2026-09-11|Missouri|Kansas|7|5.5|53.5|50.5|-238|-218|195|180|36.8|82|2|Draft Kings
-M|2026-09-11|Richmond|NC State|-30.5|-30.5|48.5|48.5|3000|2200|-10000|-8000|95.9|81|51|Draft Kings
-M|2026-09-11|Norfolk State|Virginia|-44.5|-44.5|54.5|54.5|||||99.8|78|15|Draft Kings
-M|2026-09-11|Rutgers|Boston College|-3.5|-3|55.5|54.5|140|130|-180|-155|62.2|70|0|Draft Kings
-M|2026-09-12|Illinois State|Northern Illinois|||||||||41|76|25|
-M|2026-09-12|Montana State|Nevada|4.5|4.5|49.5|49.5|-198|-198|164|164|58.6|67|0|Draft Kings
-M|2026-09-12|New Haven|South Dakota State||||||||||71|1|
-M|2026-09-12|Eastern Washington|South Dakota||||||||||71|40|
-M|2026-09-12|Elon|Rhode Island||||||||||||
-M|2026-09-12|Bowling Green|Nebraska|-25.5|-28.5|48.5|51.5|1700|2200|-4500|-8000|97.2|77|47|Draft Kings
-M|2026-09-12|Kentucky Christian|Chicago State||||||||||84|30|
-M|2026-09-12|Bryant|Hampton||||||||||81|47|
-M|2026-09-12|Stony Brook|Ball State|||||||||84.9|81|7|
-M|2026-09-12|Franklin|Butler||||||||||85|33|
-M|2026-09-12|California|Syracuse|1.5|-3.5|52.5|56.5|-120|140|100|-166|79.6|78|3|Draft Kings
-M|2026-09-12|UTSA|Texas State|-1.5|-1.5|64.5|66.5|-102|-102|-118|-118|43.3|97|1|Draft Kings
-M|2026-09-12|Indiana State|Eastern Illinois||||||||||82|34|
-M|2026-09-12|Memphis|Boise State|-6.5|-8.5|52.5|54.5|220|280|-270|-355|75.7|79|37|Draft Kings
-M|2026-09-12|Texas Southern|UTEP|||||||||91.8|96|3|
-M|2026-09-12|Lamar|Idaho||||||||||64|51|
-M|2026-09-12|Wofford|Kent State|||||||||66.8|74|6|
-M|2026-09-12|North Dakota State|Air Force|6.5|2.5|49.5|47.5|-245|-130|200|110|39.4|68|17|Draft Kings
-M|2026-09-12|Bucknell|VMI||||||||||78|34|
-M|2026-09-12|Tarleton State|McNeese||||||||||84|47|
-M|2026-09-12|Western Illinois|Wisconsin|||||||||99.2|74|20|
-M|2026-09-12|UT Martin|West Virginia|||||||||97.1|80|47|
-M|2026-09-12|Maryland|UConn|12.5|12.5|53.5|52.5|-410|-470|320|360|26.4|78|1|Draft Kings
-M|2026-09-12|Colgate|Central Michigan|||||||||83.2|77|51|
-M|2026-09-12|North Dakota|Portland State||||||||||58|37|
-M|2026-09-12|Drake|Northern Iowa||||||||||75|25|
-M|2026-09-12|Northern Colorado|Wyoming|||||||||86.4|77|74|
-M|2026-09-12|Robert Morris|Akron|||||||||94|81|7|
-M|2026-09-12|Valparaiso|Murray State||||||||||85|34|
-M|2026-09-12|South Alabama|Tulane|-10|-9.5|55.5|49.5|300|295|-380|-375|79.6|84|34|Draft Kings
-M|2026-09-12|Utah Tech|Montana||||||||||59|43|
-M|2026-09-12|Fordham|Coastal Carolina|||||||||96.6|79|39|
-M|2026-09-12|Campbell|Florida|||||||||99.5|86|34|
-M|2026-09-12|Wake Forest|Purdue|3.5|3|49.5|49.5|-155|-148|130|124|39.9|79|6|Draft Kings
-M|2026-09-12|Monmouth|Western Michigan|||||||||96.1|79|47|
-M|2026-09-12|Rice|Notre Dame|-44.5|-44.5|52.5|55.5|||||99.4|83|7|Draft Kings
-M|2026-09-12|Washington State|Kansas State|-16.5|-19.5|51.5|48.5|650|700|-1000|-1100|88.3|78|39|Draft Kings
-M|2026-09-12|Lindenwood|Missouri State|||||||||89|85|34|
-M|2026-09-12|Virginia State|South Carolina State||||||||||84|34|
-M|2026-09-12|Howard|Indiana|-56.5|-56.5|64.5|64.5|||||99.9|78|47|Draft Kings
-M|2026-09-12|Charlotte|Ole Miss|-46.5|-47.5|61.5|61.5|||||98.7|87|34|Draft Kings
-M|2026-09-12|Northwestern State|East Texas A&M||||||||||95|3|
-M|2026-09-12|Gardner-Webb|Liberty|||||||||92.5|76|34|
-M|2026-09-12|South Florida|Army|-1.5|-3.5|52.5|46.5|-102|150|-118|-180|60.3|72|1|Draft Kings
-M|2026-09-12|Arkansas Baptist|Houston Christian||||||||||89|15|
-M|2026-09-12|Middle Tennessee|Marshall|-17.5|-13.5|57.5|57.5|650|410|-1000|-550|62.1|80|51|Draft Kings
-M|2026-09-12|Arkansas-Pine Bluff|Alcorn State||||||||||90|51|
-M|2026-09-12|Virginia Lynchburg|Morgan State||||||||||77|7|
-M|2026-09-12|UT Rio Grande Valley|Nicholls||||||||||82|34|
-M|2026-09-12|UAlbany|Long Island University||||||||||||
-M|2026-09-12|UNLV|North Texas|6.5|3.5|61.5|56.5|-225|-175|185|145|32.1|100|1|Draft Kings
-M|2026-09-12|Tennessee|Georgia Tech|8.5|12.5|56.5|55.5|-455|-500|350|380|23.5|80|29|Draft Kings
-M|2026-09-12|Delaware|Vanderbilt|-21.5|-20.5|55.5|54.5|1000|850|-1800|-1450|85.8|90|34|Draft Kings
-M|2026-09-12|Arkansas|Utah|-11.5|-12.5|53.5|54.5|310|370|-395|-485|81.8|79|3|Draft Kings
-M|2026-09-12|North Alabama|SE Louisiana||||||||||83|47|
-M|2026-09-12|Western Kentucky|Georgia|-35.5|-40.5|52.5|55.5|||||99.2|81|47|Draft Kings
-M|2026-09-12|Thomas More College|Dayton||||||||||79|15|
-M|2026-09-12|Louisiana Tech|LSU|-31.5|-35.5|55.5|55.5|3000|4000|-10000|-50000|98.1|84|47|Draft Kings
-M|2026-09-12|Iowa State|Iowa|-11.5|-14|41.5|40.5|470|440|-650|-600|84.5|77|47|Draft Kings
-M|2026-09-12|Southern|Houston|-51.5|-51.5|60.5|60.5|||||99.7|86|47|Draft Kings
-M|2026-09-12|San Diego|Idaho State||||||||||87|1|
-M|2026-09-12|Prairie View A&M|Baylor|||||||||98.4|96|1|
-M|2026-09-12|North Carolina A&T|North Carolina Central||||||||||80|47|
-M|2026-09-12|Old Dominion|Virginia Tech|-14|-19.5|51.5|50.5|380|800|-500|-1350|89.6|73|19|Draft Kings
-M|2026-09-12|Merrimack|Maine||||||||||71|0|
-M|2026-09-12|Navy|Florida Atlantic|6.5|4.5|57.5|58.5|-250|-218|205|180|18.6|86|51|Draft Kings
-M|2026-09-12|Grambling|TCU|||||||||99.4|98|0|
-M|2026-09-12|Lincoln (PA)|Mississippi Valley State||||||||||83|25|
-M|2026-09-12|Charleston Southern|The Citadel||||||||||83|33|
-M|2026-09-12|Texas Tech|Oregon State|27.5|26.5|49.5|53.5|-5000|-4500|1800|1700|6|64|42|Draft Kings
-M|2026-09-12|Mississippi State|Minnesota|-2.5|1.5|53.5|55.5|110|-115|-130|-105|40.1|72|1|Draft Kings
-M|2026-09-12|Sacred Heart|Massachusetts|||||||||94.8|75|1|
-M|2026-09-12|Arizona|BYU|-6.5|-7.5|51.5|47.5|240|235|-298|-290|76.8|84|7|Draft Kings
-M|2026-09-12|Tulsa|Sam Houston|10.5|14|53.5|51.5|-425|-600|330|440|20.4|90|12|Draft Kings
-M|2026-09-12|Central Oklahoma|Central Arkansas||||||||||92|19|
-M|2026-09-12|Alabama|Kentucky|10.5|10.5|48.5|49.5|-410|-425|320|330|15.4|84|51|Draft Kings
-M|2026-09-12|Southeast Missouri State|Southern Illinois||||||||||84|47|
-M|2026-09-12|Samford|Tennessee Tech||||||||||77|47|
-M|2026-09-12|Bowie State|Delaware State||||||||||81|7|
-M|2026-09-12|William & Mary|Lehigh||||||||||76|4|
-M|2026-09-12|UL Monroe|UAB|-7.5|-10|54.5|55.5|235|295|-290|-375|82|89|47|Draft Kings
-M|2026-09-12|Arizona State|Texas A&M|-14.5|-14.5|51.5|50.5|470|500|-650|-700|88.6|87|6|Draft Kings
-M|2026-09-12|Towson|South Carolina|||||||||99.6|81|33|
-M|2026-09-12|Stephen F. Austin|Abilene Christian||||||||||99|0|
-M|2026-09-12|Oklahoma|Michigan|-2.5|5.5|45.5|43.5|120|-230|-142|190|35.6|73|3|Draft Kings
-M|2026-09-12|Georgia State|Kennesaw State|-9.5|-9.5|50.5|54.5|270|270|-340|-340|75.6|79|55|Draft Kings
-M|2026-09-12|West Georgia|Arkansas State|||||||||91.4|90|34|
-M|2026-09-12|Furman|Mercer||||||||||84|47|
-M|2026-09-12|Weber State|Colorado|||||||||98|75|7|
-M|2026-09-12|Oregon|Oklahoma State|20.5|22.5|60.5|57.5|-900|-2100|600|1100|7|86|19|Draft Kings
-M|2026-09-12|Southern Miss|Auburn|-29.5|-33.5|52.5|56.5|1800|2500|-5000|-9000|87.7|78|33|Draft Kings
-M|2026-09-12|Morehead State|Austin Peay||||||||||90|37|
-M|2026-09-12|Ohio State|Texas|0|-1.5|47.5|49.5|-102|102|-118|-122|59.9|98|1|Draft Kings
-M|2026-09-12|UC Davis|SMU|-24.5|-24.5|57.5|58.5|1200|1200|-2400|-2400|97.1|101|2|Draft Kings
-M|2026-09-12|Duquesne|Youngstown State||||||||||82|7|
-M|2026-09-12|Stonehill|New Hampshire||||||||||67|1|
-M|2026-09-12|Western Carolina|Cincinnati|-36.5|-36.5|60.5|60.5|||||97.4|82|28|Draft Kings
-M|2026-09-12|Duke|Illinois|-8.5|-6|56.5|51.5|250|190|-310|-230|61.4|82|43|Draft Kings
-M|2026-09-12|Eastern Michigan|Michigan State|-15.5|-17.5|51.5|49.5|550|575|-800|-850|91|81|4|Draft Kings
-M|2026-09-12|East Tennessee State|North Carolina|||||||||98.5|78|19|
-M|2026-09-12|San Diego State|UCLA|-8.5|-11.5|48.5|54.5|285|360|-360|-470|67.1|84|0|Draft Kings
-M|2026-09-12|Northern Michigan|St. Thomas||||||||||71|5|
-M|2026-09-12|Southern Utah|Colorado State|||||||||82.3|79|7|
-M|2026-09-12|Alabama State|Troy|||||||||93|88|47|
-M|2026-09-12|Georgia Southern|Clemson|-26.5|-20.5|57.5|55.5|1700|800|-4500|-1350|88.3|78|39|Draft Kings
-M|2026-09-12|Chattanooga|Eastern Kentucky||||||||||80|34|
-M|2026-09-12|App State|East Carolina|-11.5|-7|56.5|56.5|350|225|-455|-278|62.5|83|47|Draft Kings
-M|2026-09-12|Mercyhurst|New Mexico|||||||||99.3|88|51|
-M|2026-09-12|Dickinson (PA)|Davidson||||||||||79|15|
-M|2026-09-12|Penn State|Temple|21.5|23.5|51.5|49.5|-2100|-3200|1100|1400|5.9|78|1|Draft Kings
-M|2026-09-12|Louisiana|USC|-28.5|-30.5|63.5|59.5|2200|3000|-8000|-10000|96.9|75|0|Draft Kings
+<script type="text/plain" id="d-gameinfo">M|2026-09-10|Florida A&M|Miami|-55.5|-59.5|62.5|65.5|||||100|83|47|Draft Kings
+M|2026-09-11|Rutgers|Boston College|-3.5|-3.5|55.5|54.5|140|145|-180|-175|62.2|71|0|Draft Kings
+M|2026-09-11|Missouri|Kansas|7|5.5|53.5|51.5|-238|-218|195|180|36.8|80|0|Draft Kings
+M|2026-09-11|Norfolk State|Virginia|-44.5|-44.5|54.5|54.5|||||99.8|73|40|Draft Kings
+M|2026-09-11|Richmond|NC State|-30.5|-32.5|48.5|49.5|3000|2000|-10000|-6500|96|87|51|Draft Kings
+M|2026-09-11|Villanova|Louisville|-36.5|-36.5|55.5|56.5|||||98.3|80|49|Draft Kings
+M|2026-09-12|Stony Brook|Ball State|-14.5|-14.5|57.5|57.5|575|575|-850|-850|84.9|82|7|Draft Kings
+M|2026-09-12|Tennessee State|Alabama A&M||||||||||84|70|
+M|2026-09-12|Mississippi State|Minnesota|-2.5|-1.5|53.5|55.5|110|-108|-130|-112|40.1|73|0|Draft Kings
+M|2026-09-12|North Carolina A&T|North Carolina Central||||||||||81|51|
+M|2026-09-12|Wofford|Kent State|-11.5|-11.5|47.5|47.5|340|410|-440|-550|66.8|74|19|Draft Kings
+M|2026-09-12|Tennessee|Georgia Tech|8.5|12.5|56.5|55.5|-455|-470|350|360|23.7|79|37|Draft Kings
+M|2026-09-12|Robert Morris|Akron|-27.5|-27.5|41.5|41.5|1800|1800|-5000|-5000|94|82|47|Draft Kings
+M|2026-09-12|California|Syracuse|1.5|-3.5|52.5|56.5|-120|140|100|-166|79.6|81|3|Draft Kings
+M|2026-09-12|William & Mary|Lehigh||||||||||79|7|
 M|2026-09-12|Buffalo|Florida International|-10.5|-10.5|51.5|47.5|310|340|-395|-440|55.5|91|55|Draft Kings
-M|2026-09-12|UCF|Pittsburgh|-8.5|-7|51.5|56.5|230|210|-285|-258|75.4|84|47|Draft Kings
-M|2026-09-12|Stetson|Bethune-Cookman||||||||||85|51|
-M|2026-09-12|Sacramento State|Fresno State|-18.5|-18.5|48.5|45.5|675|650|-1050|-1000|84.2|87|0|Draft Kings
-M|2026-09-12|Marist|Lafayette||||||||||72|2|
-M|2026-09-12|Central Connecticut|Toledo|||||||||98.4|84|5|
-M|2026-09-12|Utah State|Washington|-24.5|-26.5|56.5|55.5|1200|1600|-2400|-4500|94|63|47|Draft Kings
-M|2026-09-12|Wagner|James Madison|||||||||99.2|76|34|
-M|2026-09-12|New Mexico State|Hawai'i|-11.5|-7|51.5|49.5|310|220|-395|-270|80.5|83|0|Draft Kings
-M|2026-09-12|Cal Poly|San José State|||||||||91.4|70|0|
-M|2026-09-12|Incarnate Word|Northern Arizona||||||||||77|47|
-M|2026-09-12|Jacksonville State|Ohio|-2.5|-3|48.5|50.5|105|114|-125|-135|57.1|80|34|Draft Kings
-M|2026-09-12|Tennessee State|Alabama A&M||||||||||89|55|
-M|2026-09-12|Holy Cross|Miami (OH)|||||||||93.2|82|51|
-M|2026-09-17|Syracuse|Pittsburgh|||||||||77.7|74|48|
-M|2026-09-18|Houston|Texas Tech|-12.5|-13.5|||||||85.2|80|29|Draft Kings
-M|2026-09-18|Miami|Wake Forest|||||||||8.4|74|0|
-M|2026-09-18|Portland State|Oregon|||||||||99.8|72|0|
-M|2026-09-19|Virginia Tech|Maryland|||||||||36.8|||
-M|2026-09-19|Fresno State|San José State|||||||||46.3|||
-M|2026-09-19|Kentucky|Texas A&M|||||||||89.6|||
-M|2026-09-19|Morehead State|Western Illinois||||||||||||
-M|2026-09-19|Yale|Holy Cross||||||||||||
-M|2026-09-19|James Madison|San Diego State|||||||||72.8|||
-M|2026-09-19|Miami (OH)|Cincinnati|||||||||92.5|||
-M|2026-09-19|Bowling Green|Iowa State|||||||||88.3|||
-M|2026-09-19|Northern Arizona|Utah Tech||||||||||||
-M|2026-09-19|Morgan State|Towson||||||||||||
-M|2026-09-19|North Texas|Texas State|||||||||52.4|||
-M|2026-09-19|Arkansas State|TCU|||||||||90.1|||
-M|2026-09-19|Chicago State|Butler||||||||||||
-M|2026-09-19|Presbyterian|Western Carolina||||||||||||
-M|2026-09-19|SMU|Louisville|-1.5|-1.5|56.5|56.5|-108|-105|-112|-115|54.5|||Draft Kings
-M|2026-09-19|Wagner|California|||||||||99.4|||
-M|2026-09-19|Georgia Southern|Jacksonville State|||||||||50|||
-M|2026-09-19|VMI|Davidson||||||||||||
-M|2026-09-19|Southern Illinois|Illinois|||||||||97.5|||
-M|2026-09-19|Brown|New Haven||||||||||||
-M|2026-09-19|Mississippi State|South Carolina|||||||||76.4|||
-M|2026-09-19|Western Kentucky|Indiana|||||||||99.1|||
-M|2026-09-19|Dayton|Eastern Kentucky||||||||||||
-M|2026-09-19|North Carolina Central|Gardner-Webb||||||||||||
-M|2026-09-19|Austin Peay|West Florida||||||||||||
+M|2026-09-12|UAlbany|Long Island University||||||||||||
+M|2026-09-12|Arizona|BYU|-6.5|-7.5|51.5|47.5|240|245|-298|-305|76.8|85|0|Draft Kings
+M|2026-09-12|Bowling Green|Nebraska|-25.5|-30.5|48.5|51.5|1700|2000|-4500|-6500|97.1|74|3|Draft Kings
+M|2026-09-12|Arkansas|Utah|-11.5|-12.5|53.5|54.5|310|390|-395|-520|81.8|85|0|Draft Kings
+M|2026-09-12|Maryland|UConn|12.5|13.5|53.5|52.5|-410|-485|320|370|26.4|80|0|Draft Kings
+M|2026-09-12|Penn State|Temple|21.5|23.5|51.5|49.5|-2100|-2400|1100|1200|5.9|80|1|Draft Kings
+M|2026-09-12|Stonehill|New Hampshire||||||||||69|0|
+M|2026-09-12|Rice|Notre Dame|-44.5|-44.5|52.5|55.5|||||99.4|83|1|Draft Kings
+M|2026-09-12|Mercyhurst|New Mexico|-40.5|-41.5|51.5|51.5|||||99.3|88|51|Draft Kings
+M|2026-09-12|Arkansas-Pine Bluff|Alcorn State||||||||||88|34|
+M|2026-09-12|Arizona State|Texas A&M|-14.5|-14.5|51.5|50.5|470|500|-650|-700|88.6|89|6|Draft Kings
+M|2026-09-12|Delaware|Vanderbilt|-21.5|-21|55.5|54.5|1000|800|-1800|-1350|85.8|83|51|Draft Kings
+M|2026-09-12|Montana State|Nevada|4.5|3.5|49.5|49.5|-198|-166|164|140|58.6|74|0|Draft Kings
+M|2026-09-12|Ohio State|Texas|0|-1.5|47.5|49.5|-102|102|-118|-122|59.8|99|7|Draft Kings
+M|2026-09-12|UNLV|North Texas|6.5|3|61.5|56.5|-225|-162|185|136|32.1|100|0|Draft Kings
+M|2026-09-12|Utah Tech|Montana||||||||||62|44|
+M|2026-09-12|Utah State|Washington|-24.5|-26.5|56.5|55.5|1200|1700|-2400|-4500|94|63|5|Draft Kings
+M|2026-09-12|Oklahoma|Michigan|-2.5|5.5|45.5|43.5|120|-218|-142|180|35.5|76|7|Draft Kings
+M|2026-09-12|New Mexico State|Hawai'i|-11.5|-7|51.5|50.5|310|250|-395|-310|80.5|83|1|Draft Kings
+M|2026-09-12|San Diego State|UCLA|-8.5|-12.5|48.5|54.5|285|380|-360|-500|67.2|85|0|Draft Kings
+M|2026-09-12|Marist|Lafayette||||||||||74|2|
+M|2026-09-12|Arkansas Baptist|Houston Christian||||||||||88|51|
+M|2026-09-12|Stephen F. Austin|Abilene Christian||||||||||99|0|
+M|2026-09-12|Memphis|Boise State|-6.5|-8.5|52.5|55.5|220|260|-270|-325|75.7|88|37|Draft Kings
+M|2026-09-12|Eastern Washington|South Dakota||||||||||72|0|
+M|2026-09-12|Chattanooga|Eastern Kentucky||||||||||81|47|
+M|2026-09-12|Bucknell|VMI||||||||||80|47|
+M|2026-09-12|Sacred Heart|Massachusetts|-23.5|-23.5|53.5|53.5|1200|1200|-2400|-2400|94.8|77|0|Draft Kings
+M|2026-09-12|Washington State|Kansas State|-16.5|-17.5|51.5|48.5|650|575|-1000|-850|88.3|80|34|Draft Kings
+M|2026-09-12|Georgia State|Kennesaw State|-9.5|-8.5|50.5|54.5|270|270|-340|-340|75.6|79|69|Draft Kings
+M|2026-09-12|Texas Southern|UTEP|-25.5|-25.5|52.5|52.5|2000|2000|-6500|-6500|91.8|97|0|Draft Kings
+M|2026-09-12|Indiana State|Eastern Illinois||||||||||82|15|
+M|2026-09-12|Wagner|James Madison|-45.5|-45.5|54.5|54.5|||||99.2|78|47|Draft Kings
+M|2026-09-12|Central Oklahoma|Central Arkansas||||||||||92|19|
+M|2026-09-12|Furman|Mercer||||||||||83|51|
+M|2026-09-12|Elon|Rhode Island||||||||||||
+M|2026-09-12|North Alabama|SE Louisiana||||||||||81|51|
+M|2026-09-12|South Alabama|Tulane|-10|-9.5|55.5|49.5|300|310|-380|-395|79.6|83|34|Draft Kings
+M|2026-09-12|Sacramento State|Fresno State|-18.5|-18.5|48.5|45.5|675|650|-1050|-1000|84.6|87|0|Draft Kings
+M|2026-09-12|Louisiana Tech|LSU|-31.5|-35.5|55.5|55.5|3000|4000|-10000|-50000|98.1|81|33|Draft Kings
+M|2026-09-12|Western Carolina|Cincinnati|-36.5|-36.5|60.5|60.5|||||97.4|78|39|Draft Kings
+M|2026-09-12|Franklin|Butler||||||||||83|4|
+M|2026-09-12|UL Monroe|UAB|-7.5|-10|54.5|55.5|235|295|-290|-375|82|85|47|Draft Kings
+M|2026-09-12|Texas Tech|Oregon State|27.5|26.5|49.5|53.5|-5000|-4000|1800|1600|6|65|49|Draft Kings
+M|2026-09-12|Prairie View A&M|Baylor|-37.5|-39.5|56.5|56.5|||||98.4|95|0|Draft Kings
+M|2026-09-12|Dickinson (PA)|Davidson||||||||||83|47|
+M|2026-09-12|UT Martin|West Virginia|-40.5|-41.5|55.5|55.5|||||97.1|80|34|Draft Kings
+M|2026-09-12|Tulsa|Sam Houston|10.5|13.5|53.5|51.5|-425|-535|330|400|20.5|89|47|Draft Kings
+M|2026-09-12|Charleston Southern|The Citadel||||||||||82|51|
+M|2026-09-12|Oregon|Oklahoma State|20.5|23.5|60.5|57.5|-900|-2100|600|1100|7|85|47|Draft Kings
+M|2026-09-12|Bryant|Hampton||||||||||81|34|
+M|2026-09-12|San Diego|Idaho State||||||||||87|0|
+M|2026-09-12|UTSA|Texas State|-1.5|-1.5|64.5|66.5|-102|102|-118|-122|43.2|98|0|Draft Kings
+M|2026-09-12|Middle Tennessee|Marshall|-17.5|-13.5|57.5|56.5|650|410|-1000|-550|62.1|79|43|Draft Kings
+M|2026-09-12|Southern Utah|Colorado State|-20.5|-20.5|56.5|56.5|1100|1100|-2100|-2100|82.3|80|34|Draft Kings
+M|2026-09-12|Gardner-Webb|Liberty|-25.5|-27.5|55.5|55.5|1500|1800|-3600|-5000|92.5|78|33|Draft Kings
+M|2026-09-12|Iowa State|Iowa|-11.5|-14|41.5|40.5|470|470|-650|-650|84.6|79|47|Draft Kings
+M|2026-09-12|Navy|Florida Atlantic|6.5|4.5|57.5|58.5|-250|-218|205|180|18.6|85|39|Draft Kings
+M|2026-09-12|Morehead State|Austin Peay||||||||||86|47|
+M|2026-09-12|UC Davis|SMU|-24.5|-25.5|57.5|58.5|1200|1300|-2400|-2800|97.1|100|0|Draft Kings
+M|2026-09-12|UCF|Pittsburgh|-8.5|-7|51.5|56.5|230|225|-285|-278|75.4|79|47|Draft Kings
+M|2026-09-12|North Dakota|Portland State||||||||||60|43|
+M|2026-09-12|Louisiana|USC|-28.5|-30.5|63.5|59.5|2200|2500|-8000|-9000|96.9|75|0|Draft Kings
+M|2026-09-12|Valparaiso|Murray State||||||||||83|34|
+M|2026-09-12|Tarleton State|McNeese||||||||||84|34|
+M|2026-09-12|Virginia Lynchburg|Morgan State||||||||||77|42|
+M|2026-09-12|Fordham|Coastal Carolina|-31.5|-34.5|52.5|52.5|2000|2500|-6500|-9000|96.6|80|36|Draft Kings
+M|2026-09-12|South Florida|Army|-1.5|-3.5|52.5|46.5|-102|136|-118|-162|60.2|73|0|Draft Kings
+M|2026-09-12|Samford|Tennessee Tech||||||||||78|33|
+M|2026-09-12|Wake Forest|Purdue|3.5|3|49.5|49.5|-155|-155|130|130|39.9|79|4|Draft Kings
+M|2026-09-12|Howard|Indiana|-56.5|-56.5|64.5|64.5|||||99.9|80|20|Draft Kings
+M|2026-09-12|Southern|Houston|-51.5|-51.5|60.5|60.5|||||99.7|89|47|Draft Kings
+M|2026-09-12|Bowie State|Delaware State||||||||||81|37|
+M|2026-09-12|Alabama State|Troy|||51.5|51.5|950|950|-1650|-1650|93|87|47|Draft Kings
+M|2026-09-12|Kentucky Christian|Chicago State||||||||||82|55|
+M|2026-09-12|Old Dominion|Virginia Tech|-14|-19.5|51.5|50.5|380|700|-500|-1100|89.7|76|34|Draft Kings
+M|2026-09-12|Grambling|TCU|-43.5|-43.5|53.5|54.5|||||99.4|98|0|Draft Kings
+M|2026-09-12|Virginia State|South Carolina State||||||||||83|34|
+M|2026-09-12|Lamar|Idaho||||||||||72|51|
+M|2026-09-12|Drake|Northern Iowa||||||||||76|34|
+M|2026-09-12|Stetson|Bethune-Cookman||||||||||86|40|
+M|2026-09-12|Colgate|Central Michigan|-23.5|-23.5|49.5|49.5|1300|1300|-2800|-2800|83.2|78|51|Draft Kings
+M|2026-09-12|Incarnate Word|Northern Arizona||||||||||79|47|
+M|2026-09-12|Monmouth|Western Michigan|-25.5|-25.5|52.5|52.5|1500|1500|-3600|-3600|96.1|80|47|Draft Kings
+M|2026-09-12|New Haven|South Dakota State||||||||||70|0|
+M|2026-09-12|Southeast Missouri State|Southern Illinois||||||||||84|47|
+M|2026-09-12|Lindenwood|Missouri State|-19.5|-19.5|52.5|52.5|950|950|-1650|-1650|89|88|34|Draft Kings
+M|2026-09-12|Northwestern State|East Texas A&M||||||||||96|0|
+M|2026-09-12|Central Connecticut|Toledo|-33.5|-33.5|55.5|55.5|2500|2500|-9000|-9000|98.4|85|6|Draft Kings
+M|2026-09-12|Western Illinois|Wisconsin|-38.5|-38.5|48.5|48.5|||||99.2|78|47|Draft Kings
+M|2026-09-12|Northern Michigan|St. Thomas||||||||||72|2|
+M|2026-09-12|Thomas More College|Dayton||||||||||77|5|
+M|2026-09-12|Merrimack|Maine||||||||||71|0|
+M|2026-09-12|Southern Miss|Auburn|-29.5|-32.5|52.5|56.5|1800|2500|-5000|-9000|87.7|79|51|Draft Kings
+M|2026-09-12|Georgia Southern|Clemson|-26.5|-20.5|57.5|55.5|1700|750|-4500|-1200|88.3|78|44|Draft Kings
+M|2026-09-12|Lincoln (PA)|Mississippi Valley State||||||||||83|47|
+M|2026-09-12|Weber State|Colorado|-33.5|-33.5|53.5|53.5|2500|2500|-9000|-9000|97.9|79|3|Draft Kings
+M|2026-09-12|Duquesne|Youngstown State||||||||||80|43|
+M|2026-09-12|West Georgia|Arkansas State|||||||||91.4|91|34|
+M|2026-09-12|Northern Colorado|Wyoming|-22.5|-22.5|47.5|47.5|1400|1400|-3200|-3200|86.4|79|17|Draft Kings
+M|2026-09-12|Illinois State|Northern Illinois|4.5|4.5|48.5|48.5|-175|-175|145|145|41|76|15|Draft Kings
+M|2026-09-12|Eastern Michigan|Michigan State|-15.5|-17.5|51.5|49.5|550|600|-800|-900|91|81|1|Draft Kings
+M|2026-09-12|Alabama|Kentucky|10.5|10.5|48.5|49.5|-410|-395|320|310|15.4|81|47|Draft Kings
+M|2026-09-12|Duke|Illinois|-8.5|-6|56.5|51.5|250|180|-310|-218|61.4|87|7|Draft Kings
+M|2026-09-12|Campbell|Florida|-49.5|-49.5|65.5|65.5|||||99.5|86|51|Draft Kings
+M|2026-09-12|Jacksonville State|Ohio|-2.5|-2.5|48.5|50.5|105|114|-125|-135|57.1|80|34|Draft Kings
+M|2026-09-12|Charlotte|Ole Miss|-46.5|-47.5|61.5|60.5|||||98.7|85|34|Draft Kings
+M|2026-09-12|East Tennessee State|North Carolina|-34.5|-35.5|54.5|54.5|||||98.5|80|64|Draft Kings
+M|2026-09-12|App State|East Carolina|-11.5|-7|56.5|56.5|350|235|-455|-290|62.5|85|19|Draft Kings
+M|2026-09-12|Holy Cross|Miami (OH)|-30.5|-30.5|49.5|49.5|2200|2200|-8000|-8000|93.2|79|8|Draft Kings
+M|2026-09-12|Western Kentucky|Georgia|-35.5|-40.5|52.5|55.5|||||99.2|81|47|Draft Kings
+M|2026-09-12|UT Rio Grande Valley|Nicholls||||||||||83|34|
+M|2026-09-12|Cal Poly|San José State|-20.5|-20.5|56.5|56.5|1100|1100|-2100|-2100|91.3|70|0|Draft Kings
+M|2026-09-12|Towson|South Carolina|-43.5|-43.5|54.5|54.5|||||99.6|80|36|Draft Kings
+M|2026-09-12|North Dakota State|Air Force|6.5|2.5|49.5|47.5|-245|-130|200|110|39.4|69|20|Draft Kings
+M|2026-09-17|Syracuse|Pittsburgh|-10.5|-10.5|59.5|59.5|295|295|-375|-375|77.7|76|71|Draft Kings
+M|2026-09-18|Portland State|Oregon|||||||||99.8|73|0|
+M|2026-09-18|Miami|Wake Forest|19.5|19.5|50.5|51.5|-1200|-1350|750|800|8.4|77|55|Draft Kings
+M|2026-09-18|Houston|Texas Tech|-12.5|-14|||||||85.2|83|15|Draft Kings
+M|2026-09-19|Glenville State|Mercyhurst||||||||||65|0|
+M|2026-09-19|North Carolina A&T|Campbell||||||||||72|49|
+M|2026-09-19|East Texas A&M|Tulsa|||||||||97.8|81|0|
+M|2026-09-19|Central Arkansas|Southeast Missouri State||||||||||74|0|
+M|2026-09-19|Lafayette|Columbia||||||||||69|0|
+M|2026-09-19|UTEP|Michigan|||||||||98.6|68|0|
+M|2026-09-19|Wyoming|Central Michigan|||||||||60.5|66|0|
+M|2026-09-19|Kennesaw State|Tennessee|||||||||94.3|77|21|
+M|2026-09-19|Brown|New Haven||||||||||68|0|
+M|2026-09-19|Kentucky|Texas A&M|||||||||89.7|92|0|
+M|2026-09-19|McNeese|UT Rio Grande Valley||||||||||||
+M|2026-09-19|Stanford|Duke|||||||||82.3|73|48|
+M|2026-09-19|UTSA|Texas|||||||||98.8|88|25|
+M|2026-09-19|Eastern Washington|Washington|||||||||98.7|71|20|
+M|2026-09-19|North Dakota State|Sacramento State|||||||||12.7|85|0|
+M|2026-09-19|Chicago State|Butler||||||||||67|0|
+M|2026-09-19|East Carolina|Old Dominion|||||||||46.9|75|7|
+M|2026-09-19|Rhode Island|Stony Brook||||||||||72|0|
+M|2026-09-19|Louisiana Christian|Southern||||||||||85|0|
+M|2026-09-19|Virginia Lynchburg|Bethune-Cookman||||||||||86|38|
+M|2026-09-19|Northern Iowa|Iowa|||||||||98.7|72|0|
+M|2026-09-19|Nevada|Middle Tennessee|||||||||25.9|79|1|
+M|2026-09-19|Virginia Tech|Maryland|1.5|1.5|53.5|53.5|-115|-115|-105|-105|36.7|73|0|Draft Kings
+M|2026-09-19|Georgia|Arkansas|17.5|17.5|52.5|52.5|-900|-900|600|600|7.6|68|0|Draft Kings
+M|2026-09-19|USC|Rutgers|||||||||4.2|75|0|
+M|2026-09-19|Tuskegee|Jackson State||||||||||81|0|
+M|2026-09-19|Purdue|UCLA|||||||||78.4|88|0|
+M|2026-09-19|Mississippi State|South Carolina|-7.5|-7.5|54.5|54.5|240|240|-298|-298|76.4|78|54|Draft Kings
+M|2026-09-19|Wagner|California|||||||||99.4|67|0|
+M|2026-09-19|Eastern Michigan|Wisconsin|||||||||93.4|60|0|
+M|2026-09-19|Marshall|Missouri State|||||||||50.1|76|0|
+M|2026-09-19|Morehead State|Western Illinois||||||||||72|0|
+M|2026-09-19|Southern Utah|St. Thomas||||||||||65|0|
+M|2026-09-19|Delaware State|South Florida|||||||||98.3|86|47|
+M|2026-09-19|Tulane|Kansas State|||||||||81.3|69|0|
 </script>
 <script type="text/plain" id="d-history">2021|2021-08-28|Alcorn State|North Carolina Central|14|23|N|Cricket MEAC/SWAC Challenge
 2021|2021-08-28|Eastern Illinois|Indiana State|21|26||
@@ -34375,8 +34418,8 @@ M|2026-09-19|Austin Peay|West Florida||||||||||||
 /* =========================================================
    Kramerica Industries — 2026 college football hub
    ========================================================= */
-const AS_OF = 'Tue Sep 8, 2026 · 5:50 PM ET';
-const AS_OF_DATE = '2026-09-08';
+const AS_OF = 'Thu Sep 10, 2026 · 6:02 PM ET';
+const AS_OF_DATE = '2026-09-10';
 const HFA = 2.5;          // home-field points
 const SD = 16;            // std dev of margin vs projection
 const PRIOR_W = 4;        // preseason rating counts as this many games
@@ -34535,7 +34578,7 @@ function renderStandings(conf){ location.replace('#/rankings/ap/'+enc(conf||'all
 
 function renderTeams(level){ setNav('teams'); level = level==='fcs'?'fcs':'fbs'; const confs = level==='fbs'?CONF_ORDER:FCS_ORDER; const cid = c => 'c-'+c.replace(/[^A-Za-z0-9]+/g,'-'); let html='<div class="page-head"><div><div class="eyebrow">Teams</div><h1>'+(level==='fbs'?FBS.length+' FBS programs':FCSD1.length+' FCS programs')+'</h1><div class="sub">Grouped by 2026 conference and listed in power-rating order within each league; the chips jump straight to a league. Every team page has the schedule, results against the line, projections, the two-deep depth chart, and recruiting and portal class ranks.</div></div></div>'; html+='<div class="toolbar" style="position:sticky;top:96px;z-index:5;background:var(--bg);padding:6px 0"><div class="seg"><a href="#/teams" class="'+(level==='fbs'?'on':'')+'">FBS ('+FBS.length+')</a><a href="#/teams/fcs" class="'+(level==='fcs'?'on':'')+'">FCS ('+FCSD1.length+')</a></div><div class="wk">'+confs.map(c=>'<button class="jump" data-target="'+cid(c)+'">'+esc(c)+'</button>').join('')+'</div></div>'; if(level==='fbs') CONF_ORDER.forEach(c=>{ const ts=Object.values(T).filter(t=>t.conf===c).sort((a,b)=>b.rating-a.rating); html+='<div class="confhead" id="'+cid(c)+'"><h3>'+esc(CONF_LONG[c])+'</h3><span class="muted">'+ts.length+'</span></div><div class="teamgrid">'+ts.map((t,i)=>'<a href="#/team/'+enc(t.name)+'"><span class="trk">'+(i+1)+'</span>'+(logoOf(t)?'<img class="sw sw-logo" src="'+logoOf(t).icon+'" alt="">':'<span class="sw" style="background:'+uiColor(t)+'"></span>')+'<span><div class="n">'+(t.ap?'<span class="apr" style="color:var(--ink-3);font-size:12px">#'+t.ap+' </span>':'')+esc(t.disp)+'</div><div class="m">'+esc(t.mascot)+' · '+recStr(t.name)+' · rating '+num1(t.rating)+(DEPTH[t.name]&&DEPTH[t.name].depth&&DEPTH[t.name].depth.length?' · depth chart':'')+'</div></span></a>').join('')+'</div>'; }); const feat=Object.values(T).filter(t=>t.featured); if(level==='fcs'&&feat.length){ html+='<div class="confhead"><h3>Featured FCS program</h3><span class="muted">full team page, schedule, roster and projected two-deep</span></div><div class="teamgrid">'+feat.map(t=>'<a href="#/team/'+enc(t.name)+'"><span class="sw" style="background:'+uiColor(t)+'"></span><span><div class="n">'+esc(t.disp)+'</div><div class="m">'+esc(t.mascot)+' · '+esc(t.conf)+' · '+recStr(t.name)+' · rating '+num1(t.rating)+'</div></span></a>').join('')+'</div>'; } if(level==='fcs') FCS_ORDER.forEach(c=>{ const ts=Object.values(T).filter(t=>t.conf===c&&t.level==='FCS').sort((a,b)=>b.rating-a.rating); if(!ts.length) return; html+='<div class="confhead" id="'+cid(c)+'"><h3>'+esc(CONF_LONG[c]||c)+' <span class="tag">FCS</span></h3><span class="muted">'+ts.length+'</span></div><div class="teamgrid">'+ts.map((t,i)=>'<a href="#/team/'+enc(t.name)+'"><span class="trk">'+(i+1)+'</span>'+(logoOf(t)?'<img class="sw sw-logo" src="'+logoOf(t).icon+'" alt="">':'<span class="sw" style="background:'+uiColor(t)+'"></span>')+'<span><div class="n">'+esc(t.disp)+'</div><div class="m">'+esc(t.mascot)+' · '+recStr(t.name)+' · rating '+num1(t.rating)+'</div></span></a>').join('')+'</div>'; }); const oth=Object.keys(OTHER).length; if(level==='fcs'&&oth) html+='<div class="note" style="margin-top:14px">'+oth+' Division II and NAIA opponents also appear on schedules. They carry a placeholder rating of '+num1(OTHER_R)+' and have no team page.</div>'; view.innerHTML=html; }
 
-function renderTeam(name){ setNav('teams'); name=norm(name); const t=T[name]; if(!t){ view.innerHTML='<div class="note">No FBS team called "'+esc(name)+'". <a href="#/teams">See all teams.</a></div>'; return; } const s=stats(name); const d=DEPTH[name]; const mine=myRankOf(name); let html=backBar('#/teams'+(t.level==='FCS'?'/fcs':''), '<a href="#/teams'+(t.level==='FCS'?'/fcs':'')+'">'+(t.level==='FCS'?'FCS teams':'FBS teams')+'</a><span class="dim"> &rsaquo; </span><a href="#/standings/'+enc(t.conf)+'">'+esc(CONF_LONG[t.conf]||t.conf)+'</a>')+'<div class="thead"><div class="bar" style="background:'+uiColor(t)+'"></div>'+(customLogo(t)?'<img class="thead-wm" src="'+customLogo(t).wm+'" alt="">':'')+mono(t)+'<div class="ttl"><div class="eyebrow">'+esc(CONF_LONG[t.conf]||t.conf)+(t.fcs?' (FCS)':'')+(t.div?' · '+esc(t.div):'')+'</div><h1>'+esc(t.disp)+' '+esc(t.mascot)+'</h1><div class="meta"><span>'+esc(t.coach)+', head coach'+(t.coachNote?' ('+esc(t.coachNote)+')':'')+'</span><span>'+esc(t.stadium)+' · '+esc(t.city)+'</span><span>2025: '+esc(t.rec2025)+(t.confRec2025?' ('+esc(t.confRec2025)+')':'')+'</span></div></div><div class="ranks">'+(t.featured ? (t.polls||[]).map(p=>'<div class="rb"><div class="v">'+ordinal(p.rank)+'</div><div class="k">'+esc(t.conf+' '+p.name.replace(' preseason','').replace(t.conf+' ','')+' pre')+'</div></div>').join('')+fcsPollBoxes(t)+'<div class="rb"><div class="v">'+t.frank+'</div><div class="k">FCS rank</div></div><div class="rb"><div class="v">'+num1(t.rating)+'</div><div class="k">Rating</div></div>' : t.fcs ? fcsPollBoxes(t)+'<div class="rb"><div class="v">'+t.frank+'</div><div class="k">FCS rank</div></div><div class="rb"><div class="v">'+num1(t.rating)+'</div><div class="k">Rating</div></div>' : '<div class="rb"><div class="v">'+(t.ap||'NR')+'</div><div class="k">AP</div></div><div class="rb"><div class="v">'+(t.coaches||'NR')+'</div><div class="k">Coaches</div></div><div class="rb"><div class="v">'+t.prank+'</div><div class="k">Power</div></div><div class="rb"><div class="v">'+FPI_RANK[name]+'</div><div class="k">FPI</div></div>')+(mine?'<div class="rb" style="border-color:var(--gold);background:var(--gold-soft)"><div class="v">'+mine.rank+'</div><div class="k">'+esc(mine.name.slice(0,12))+'</div></div>':'')+'</div></div>'; html+='<div class="subnav"><a href="#s-over">Overview</a><a href="#s-sched">Schedule</a><a href="#s-analytics">Analytics</a><a href="#s-stats">Stats</a><a href="#s-draft">Draft</a><a href="#/compare/'+enc(name)+'">Compare</a><a href="#s-depth">Depth chart</a></div>'; /* tiles */ html+='<div id="s-over" class="grid g6" style="margin-top:8px">'+tile('Record',s.w+'-'+s.l, s.cw+'-'+s.cl+' in conference')+tile('Against the spread',(s.ats.w+s.ats.l+s.ats.p)?s.ats.w+'-'+s.ats.l+(s.ats.p?'-'+s.ats.p:''):'—', (s.ats.w+s.ats.l)?'covering '+pct(s.ats.w/(s.ats.w+s.ats.l)):'no closing lines yet')+tile('Over / under',(s.ou.o+s.ou.u+s.ou.p)?s.ou.o+'-'+s.ou.u+(s.ou.p?'-'+s.ou.p:''):'—', (s.ou.o+s.ou.u)?'overs to unders':'no totals posted yet')+tile('Points',s.gp?num1(s.pf/s.gp)+' / '+num1(s.pa/s.gp):'—','scored / allowed per game')+tile('Power rating',num1(t.rating), t.fcs ? ('FCS #'+t.frank+' of '+FCSD1.length+' · '+(t.basis==='2025'?'from 2025 results':'league estimate')) : ('#'+t.prank+' of '+FBS.length+' · FPI '+num1(t.fpi)))+tile('Projected finish',num1(s.projW)+'-'+num1(s.projL),(t.fcs?'6+ wins ':'bowl eligible ')+pct(s.bowl))+'</div>'; html+='<div class="grid g6" style="margin-top:10px">'+tile('Schedule strength',s.sosAll!=null?num1(s.sosAll):'—',(SOS_RANK[name]?'#'+SOS_RANK[name]+' hardest · ':'')+'avg opp rating')+tile('Remaining',s.upcoming.length+' games',s.sosRemain!=null?'avg opp '+num1(s.sosRemain):'')+tile('Home / away',s.hw+'-'+s.hl+' / '+s.aw+'-'+s.al,'home record / road record')+tile('vs ranked',s.rw+'-'+s.rl,'AP top 25 at kickoff')+tile('Streak',s.streak,s.last?('last: '+(s.last.home===name?'vs ':'at ')+tshort(s.last.home===name?s.last.away:s.last.home)):'')+(t.fcs ? (t.polls ? tile('Preseason poll', ordinal(t.polls[0].rank), esc(t.conf)+' coaches · media '+ordinal(t.polls[1].rank)) : tile('2025 rating', num1(t.r2025), 'end of last season'+(t.rec2025?' · went '+esc(t.rec2025):''))) : tile('ESPN playoff odds',num1(t.fpiPO)+'%','FPI projects '+num1(t.fpiW)+'-'+num1(t.fpiL)))+'</div>'; if(t.featured&&t.s2025){ html+='<div class="sec"><h2>2025 season</h2><span class="muted">'+esc(t.rec2025)+(t.confRec2025?' · '+esc(t.confRec2025):'')+'</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th></tr></thead><tbody>'+t.s2025.map(r=>'<tr><td>'+esc(fmtDate(r[0]))+'</td><td>'+(r[2]?'vs ':'at ')+esc(r[1])+'</td><td>'+(r[3]>r[4]?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+r[3]+'-'+r[4]+'</td></tr>').join('')+'</tbody></table></div>'+(t.pollNote?'<div class="note" style="margin-top:10px">'+esc(t.pollNote)+'</div>':''); } /* next game */ const nxt=s.upcoming[0]; if(nxt){ const g=nxt.g; const p=proj(g); html+='<div class="sec"><h2>Next up</h2></div><div class="gmlist">'+gameRow(g)+'</div>'; } html+='<div id="s-sched" class="sec"><h2>2026 schedule</h2><span class="muted">Click a game for the full breakdown.</span></div>'+teamSchedule(name,false); html+='<div id="s-analytics" class="sec"><h2>Analytics</h2><span class="muted">Projections use this page\'s power ratings, not the sportsbook.</span></div>'; html+='<div class="grid g2"><div class="card"><div class="hd"><h3>Where the season lands</h3><span class="mini">chance of each final win total</span></div><div class="bd">'+winDistChart(s)+'<div class="mini" style="margin-top:6px">Expected wins: <b>'+num1(s.projW)+'</b>. Most likely finish is highlighted in gold.</div></div></div><div class="card"><div class="hd"><h3>Scoring margin by game</h3><span class="mini">green = win, red = loss</span></div><div class="bd">'+marginChart(name)+'</div></div></div>'; html+='<div class="grid g2" style="margin-top:14px"><div class="card"><div class="hd"><h3>Rating vs. the '+esc(t.conf)+'</h3><span class="mini">each dot is a conference team</span></div><div class="bd">'+confStrip(t)+'</div></div><div class="card"><div class="hd"><h3>Schedule difficulty</h3><span class="mini">bar height = opponent rating · hover for detail</span></div><div class="bd">'+remainStrip(name)+'<div class="legend" style="margin-top:8px"><span><i style="background:var(--good)"></i>Win</span><span><i style="background:var(--bad)"></i>Loss</span><span><i style="background:var(--s1);opacity:.55"></i>Upcoming D1</span><span><i style="background:var(--ink-3);opacity:.4"></i>Upcoming non-D1</span></div></div></div></div>'; /* game log with model */ if(s.played.length){ html+='<div class="card" style="margin-top:14px"><div class="hd"><h3>Results vs. expectations</h3><span class="mini">what the market and the model expected before kickoff</span></div><div class="bd"><div class="tblwrap"><table class="tbl"><thead><tr><th>Game</th><th>Score</th><th class="r">Margin</th><th class="r">Closing line</th><th class="r">vs line</th><th class="r">Total</th><th class="r">Opp rating</th></tr></thead><tbody>'; s.played.forEach(g=>{ const home=g.home===name; const opp=team(home?g.away:g.home); const pf=home?g.hs:g.as, pa=home?g.as:g.hs; const m=pf-pa; const lineTeam = g.spread==null?null:(home?g.spread:-g.spread); const vsLine = lineTeam==null?null: m+lineTeam; html+='<tr class="click" data-href="#/game/'+g.id+'"><td>'+(home?'vs ':'at ')+chip(opp.name,{short:true})+'</td><td>'+(m>0?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+pf+'-'+pa+'</td><td class="r '+(m>0?'pos':'neg')+'">'+(m>0?'+':'')+m+'</td><td class="r">'+(lineTeam==null?'—':(lineTeam>0?'+':'')+lineTeam)+'</td><td class="r">'+(vsLine==null?'—':'<span class="'+(vsLine>0?'pos':vsLine<0?'neg':'zero')+'">'+(vsLine>0?'+':'')+num1(vsLine)+'</span>')+'</td><td class="r">'+(g.total!=null?(pf+pa)+' <span class="dim">/ '+g.total+'</span>':'—')+'</td><td class="r">'+num1(opp.rating)+'</td></tr>'; }); html+='</tbody></table></div></div></div>'; } html+=ratingChartHTML(name); html+=teamStatsHTML(name); html+=teamDraftHTML(name); /* depth */ html+='<div id="s-depth" class="sec"><h2>Depth chart</h2><span class="muted">2-deep from ESPN, with class, size, hometown, prior school, recruiting stars and 2025 stats where available.</span></div>'; html+=depthChartHTML(name); view.innerHTML=html; }
+function renderTeam(name){ setNav('teams'); name=norm(name); const t=T[name]; if(!t){ view.innerHTML='<div class="note">No FBS team called "'+esc(name)+'". <a href="#/teams">See all teams.</a></div>'; return; } const s=stats(name); const d=DEPTH[name]; const mine=myRankOf(name); let html=backBar('#/teams'+(t.level==='FCS'?'/fcs':''), '<a href="#/teams'+(t.level==='FCS'?'/fcs':'')+'">'+(t.level==='FCS'?'FCS teams':'FBS teams')+'</a><span class="dim"> &rsaquo; </span><a href="#/standings/'+enc(t.conf)+'">'+esc(CONF_LONG[t.conf]||t.conf)+'</a>')+'<div class="thead"><div class="bar" style="background:'+uiColor(t)+'"></div>'+(customLogo(t)?'<img class="thead-wm" src="'+customLogo(t).wm+'" alt="">':'')+mono(t)+'<div class="ttl"><div class="eyebrow">'+esc(CONF_LONG[t.conf]||t.conf)+(t.fcs?' (FCS)':'')+(t.div?' · '+esc(t.div):'')+'</div><h1>'+esc(t.disp)+' '+esc(t.mascot)+'</h1><div class="meta"><span>'+esc(t.coach)+', head coach'+(t.coachNote?' ('+esc(t.coachNote)+')':'')+'</span><span>'+esc(t.stadium)+' · '+esc(t.city)+'</span><span>2025: '+esc(t.rec2025)+(t.confRec2025?' ('+esc(t.confRec2025)+')':'')+'</span></div></div><div class="ranks">'+(t.featured ? (t.polls||[]).map(p=>'<div class="rb"><div class="v">'+ordinal(p.rank)+'</div><div class="k">'+esc(t.conf+' '+p.name.replace(' preseason','').replace(t.conf+' ','')+' pre')+'</div></div>').join('')+fcsPollBoxes(t)+'<div class="rb"><div class="v">'+t.frank+'</div><div class="k">FCS rank</div></div><div class="rb"><div class="v">'+num1(t.rating)+'</div><div class="k">Rating</div></div>' : t.fcs ? fcsPollBoxes(t)+'<div class="rb"><div class="v">'+t.frank+'</div><div class="k">FCS rank</div></div><div class="rb"><div class="v">'+num1(t.rating)+'</div><div class="k">Rating</div></div>' : '<div class="rb"><div class="v">'+(t.ap||'NR')+'</div><div class="k">AP</div></div><div class="rb"><div class="v">'+(t.coaches||'NR')+'</div><div class="k">Coaches</div></div><div class="rb"><div class="v">'+t.prank+'</div><div class="k">Power</div></div><div class="rb"><div class="v">'+FPI_RANK[name]+'</div><div class="k">FPI</div></div>')+(mine?'<div class="rb" style="border-color:var(--gold);background:var(--gold-soft)"><div class="v">'+mine.rank+'</div><div class="k">'+esc(mine.name.slice(0,12))+'</div></div>':'')+'</div></div>'; html+='<div class="subnav"><a href="#s-over">Overview</a><a href="#s-sched">Schedule</a><a href="#s-analytics">Analytics</a><a href="#s-stats">Stats</a><a href="#s-draft">Draft</a><a href="#/compare/'+enc(name)+'">Compare</a><a href="#s-depth">Depth chart</a></div>'; /* tiles */ html+='<div id="s-over" class="grid g6" style="margin-top:8px">'+tile('Record',s.w+'-'+s.l, s.cw+'-'+s.cl+' in conference')+tile('Against the spread',(s.ats.w+s.ats.l+s.ats.p)?s.ats.w+'-'+s.ats.l+(s.ats.p?'-'+s.ats.p:''):'—', (s.ats.w+s.ats.l)?'covering '+pct(s.ats.w/(s.ats.w+s.ats.l)):'no closing lines yet')+tile('Over / under',(s.ou.o+s.ou.u+s.ou.p)?s.ou.o+'-'+s.ou.u+(s.ou.p?'-'+s.ou.p:''):'—', (s.ou.o+s.ou.u)?'overs to unders':'no totals posted yet')+tile('Points',s.gp?num1(s.pf/s.gp)+' / '+num1(s.pa/s.gp):'—','scored / allowed per game')+tile('Power rating',num1(t.rating), t.fcs ? ('FCS #'+t.frank+' of '+FCSD1.length+' · '+(t.basis==='2025'?'from 2025 results':'league estimate')) : ('#'+t.prank+' of '+FBS.length+' · FPI '+num1(t.fpi)))+tile('Projected finish',num1(s.projW)+'-'+num1(s.projL),(t.fcs?'6+ wins ':'bowl eligible ')+pct(s.bowl))+'</div>'; html+='<div class="grid g6" style="margin-top:10px">'+tile('Schedule strength',s.sosAll!=null?num1(s.sosAll):'—',(SOS_RANK[name]?'#'+SOS_RANK[name]+' hardest · ':'')+'avg opp rating')+tile('Remaining',s.upcoming.length+' games',s.sosRemain!=null?'avg opp '+num1(s.sosRemain):'')+tile('Home / away',s.hw+'-'+s.hl+' / '+s.aw+'-'+s.al,'home record / road record')+tile('vs ranked',s.rw+'-'+s.rl,'AP top 25 at kickoff')+tile('Streak',s.streak,s.last?('last: '+(s.last.home===name?'vs ':'at ')+tshort(s.last.home===name?s.last.away:s.last.home)):'')+(t.fcs ? (t.polls ? tile('Preseason poll', ordinal(t.polls[0].rank), esc(t.conf)+' coaches · media '+ordinal(t.polls[1].rank)) : tile('2025 rating', num1(t.r2025), 'end of last season'+(t.rec2025?' · went '+esc(t.rec2025):''))) : cfpTile(t))+'</div>'; if(t.featured&&t.s2025){ html+='<div class="sec"><h2>2025 season</h2><span class="muted">'+esc(t.rec2025)+(t.confRec2025?' · '+esc(t.confRec2025):'')+'</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th></tr></thead><tbody>'+t.s2025.map(r=>'<tr><td>'+esc(fmtDate(r[0]))+'</td><td>'+(r[2]?'vs ':'at ')+esc(r[1])+'</td><td>'+(r[3]>r[4]?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+r[3]+'-'+r[4]+'</td></tr>').join('')+'</tbody></table></div>'+(t.pollNote?'<div class="note" style="margin-top:10px">'+esc(t.pollNote)+'</div>':''); } /* next game */ const nxt=s.upcoming[0]; if(nxt){ const g=nxt.g; const p=proj(g); html+='<div class="sec"><h2>Next up</h2></div><div class="gmlist">'+gameRow(g)+'</div>'; } html+='<div id="s-sched" class="sec"><h2>2026 schedule</h2><span class="muted">Click a game for the full breakdown.</span></div>'+teamSchedule(name,false); html+='<div id="s-analytics" class="sec"><h2>Analytics</h2><span class="muted">Projections use this page\'s power ratings, not the sportsbook.</span></div>'; html+='<div class="grid g2"><div class="card"><div class="hd"><h3>Where the season lands</h3><span class="mini">chance of each final win total</span></div><div class="bd">'+winDistChart(s)+'<div class="mini" style="margin-top:6px">Expected wins: <b>'+num1(s.projW)+'</b>. Most likely finish is highlighted in gold.</div></div></div><div class="card"><div class="hd"><h3>Scoring margin by game</h3><span class="mini">green = win, red = loss</span></div><div class="bd">'+marginChart(name)+'</div></div></div>'; html+='<div class="grid g2" style="margin-top:14px"><div class="card"><div class="hd"><h3>Rating vs. the '+esc(t.conf)+'</h3><span class="mini">each dot is a conference team</span></div><div class="bd">'+confStrip(t)+'</div></div><div class="card"><div class="hd"><h3>Schedule difficulty</h3><span class="mini">bar height = opponent rating · hover for detail</span></div><div class="bd">'+remainStrip(name)+'<div class="legend" style="margin-top:8px"><span><i style="background:var(--good)"></i>Win</span><span><i style="background:var(--bad)"></i>Loss</span><span><i style="background:var(--s1);opacity:.55"></i>Upcoming D1</span><span><i style="background:var(--ink-3);opacity:.4"></i>Upcoming non-D1</span></div></div></div></div>'; /* game log with model */ if(s.played.length){ html+='<div class="card" style="margin-top:14px"><div class="hd"><h3>Results vs. expectations</h3><span class="mini">what the market and the model expected before kickoff</span></div><div class="bd"><div class="tblwrap"><table class="tbl"><thead><tr><th>Game</th><th>Score</th><th class="r">Margin</th><th class="r">Closing line</th><th class="r">vs line</th><th class="r">Total</th><th class="r">Opp rating</th></tr></thead><tbody>'; s.played.forEach(g=>{ const home=g.home===name; const opp=team(home?g.away:g.home); const pf=home?g.hs:g.as, pa=home?g.as:g.hs; const m=pf-pa; const lineTeam = g.spread==null?null:(home?g.spread:-g.spread); const vsLine = lineTeam==null?null: m+lineTeam; html+='<tr class="click" data-href="#/game/'+g.id+'"><td>'+(home?'vs ':'at ')+chip(opp.name,{short:true})+'</td><td>'+(m>0?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+pf+'-'+pa+'</td><td class="r '+(m>0?'pos':'neg')+'">'+(m>0?'+':'')+m+'</td><td class="r">'+(lineTeam==null?'—':(lineTeam>0?'+':'')+lineTeam)+'</td><td class="r">'+(vsLine==null?'—':'<span class="'+(vsLine>0?'pos':vsLine<0?'neg':'zero')+'">'+(vsLine>0?'+':'')+num1(vsLine)+'</span>')+'</td><td class="r">'+(g.total!=null?(pf+pa)+' <span class="dim">/ '+g.total+'</span>':'—')+'</td><td class="r">'+num1(opp.rating)+'</td></tr>'; }); html+='</tbody></table></div></div></div>'; } html+=ratingChartHTML(name); html+=teamStatsHTML(name); html+=teamDraftHTML(name); /* depth */ html+='<div id="s-depth" class="sec"><h2>Depth chart</h2><span class="muted">2-deep from ESPN, with class, size, hometown, prior school, recruiting stars and 2025 stats where available.</span></div>'; html+=depthChartHTML(name); view.innerHTML=html; }
 /* FCS teams show their coaches and media poll spots when either poll ranks them */
 function fcsPollBoxes(t){ let h=''; if(t.fcsC) h+='<div class="rb"><div class="v">'+t.fcsC+'</div><div class="k">Coaches</div></div>'; if(t.fcsM) h+='<div class="rb"><div class="v">'+t.fcsM+'</div><div class="k">Media</div></div>'; return h; }
 function tile(l,v,sub){ return '<div class="tile"><div class="lbl">'+esc(l)+'</div><div class="val'+(String(v).length>9?' sm':'')+'">'+esc(v)+'</div><div class="sub">'+esc(sub||'')+'</div></div>'; }
@@ -34662,8 +34705,8 @@ function h2hHistoryHTML(g){ const a=team(g.away), h=team(g.home); if(a.other||h.
 const FCS_AUTO=['Big Sky','CAA','MVFC','OVC','Patriot','Pioneer','Southern','Southland','UAC','NEC'];   // leagues with an automatic bid
 const FCS_OUT=['Ivy','SWAC','MEAC'];                                                                     // leagues that do not take part
 function playoffField(){ const elig=FCSD1.filter(t=>FCS_OUT.indexOf(t.conf)<0); const autos=[]; FCS_AUTO.forEach(c=>{ const best=elig.filter(t=>t.conf===c).sort((x,y)=>y.rating-x.rating)[0]; if(best) autos.push({t:best,how:'auto',conf:c}); }); const taken=new Set(autos.map(x=>x.t.name)); const at=elig.filter(t=>!taken.has(t.name)).sort((a,b)=>b.rating-a.rating).slice(0,24-autos.length).map(t=>({t,how:'at-large',conf:t.conf})); const field=autos.concat(at).sort((a,b)=>b.t.rating-a.t.rating); field.forEach((x,i)=>x.seed=i+1); const next=elig.filter(t=>!field.some(x=>x.t.name===t.name)).sort((a,b)=>b.rating-a.rating).slice(0,6); return {field, next, elig}; }
-function renderPlayoff(){ setNav('playoff'); const {field,next}=playoffField(); const fav=SETTINGS.fav&&T[SETTINGS.fav]; const me=field.find(x=>x.t.featured)||field.find(x=>fav&&x.t.name===fav.name);
-  let html='<div class="page-head"><div><div class="eyebrow">FCS playoff</div><h1>Projected 24-team bracket</h1><div class="sub">Ten conference champions take an automatic bid, the other fourteen spots go to the best teams left, and the top eight seeds sit out the first round. Champions and at-large picks are projected from this page\'s power ratings, not from any committee.</div></div></div>';
+function renderPlayoffFCS(){ setNav('playoff'); const {field,next}=playoffField(); const fav=SETTINGS.fav&&T[SETTINGS.fav]; const me=field.find(x=>x.t.featured)||field.find(x=>fav&&x.t.name===fav.name);
+  let html='<div class="page-head"><div><div class="eyebrow">FCS playoff</div><h1>Projected 24-team bracket</h1><div class="sub">Ten conference champions take an automatic bid, the other fourteen spots go to the best teams left, and the top eight seeds sit out the first round. Champions and at-large picks are projected from this page\'s power ratings, not from any committee.</div></div></div>'; html+=playoffSeg('fcs');
   const seeds=field.slice(0,8), rest=field.slice(8);
   html+='<div class="grid g4" style="margin-bottom:14px">'+tile('Field', '24', '10 automatic, 14 at-large')+tile('Top seed', seeds[0]?seeds[0].t.disp:'—', seeds[0]?'rating '+num1(seeds[0].t.rating):'')+tile('Leagues represented', String(new Set(field.map(x=>x.t.conf)).size), 'of '+new Set(FCSD1.map(t=>t.conf)).size)+tile(me?'Weber State':'First team out', me?'Seed '+me.seed:(next[0]?next[0].disp:'—'), me?(me.how==='auto'?'projected Big Sky champion':'at-large'):'next in line')+'</div>';
   html+='<div class="sec"><h2>Seeds 1-8</h2><span class="muted">first-round bye, then host the winners</span></div><div class="grid g4">'+seeds.map(x=>'<a class="card wcard'+(x.t.featured?' hl':'')+'" href="#/team/'+enc(x.t.name)+'"><div class="wm">'+x.seed+'. '+(logoOf(x.t)?'<img class="sw sw-logo" src="'+logoOf(x.t).icon+'" alt="">':'')+' '+esc(tshort(x.t.name))+'</div><div class="wt">'+esc(x.t.conf)+' · '+recStr(x.t.name)+' · rating '+num1(x.t.rating)+'</div><div class="wh">'+(x.how==='auto'?'projected '+esc(x.conf)+' champion':'at-large')+'</div></a>').join('')+'</div>';
@@ -35038,7 +35081,7 @@ function renderDigest(wk){ setNav('previews'); const weeks=[...new Set(G.filter(
 /* ---------- command palette ---------- */
 let PAL_IDX=null, PAL_SEL=0;
 function palIndex(){ if(PAL_IDX) return PAL_IDX; const out=[];
-  [['Scoreboard','#/week'],['Schedule','#/schedule'],['Previews','#/previews'],['Rankings','#/rankings'],['Conference standings','#/rankings/ap/all'],['Transfers','#/transfers'],['FCS playoff','#/playoff'],['NFL draft board','#/draft/board'],['Draft by game','#/draft'],['My rankings','#/my'],['Bet tracker','#/my/bets'],['Weekly digest','#/digest'],['Compare teams','#/compare'],['Big board','#/board'],['Settings','#/settings']].forEach(p=>out.push({kind:'Page',label:p[0],href:p[1],score:0}));
+  [['Scoreboard','#/week'],['Schedule','#/schedule'],['Previews','#/previews'],['Rankings','#/rankings'],['Conference standings','#/rankings/ap/all'],['Transfers','#/transfers'],['College Football Playoff','#/playoff/fbs'],['FCS playoff','#/playoff/fcs'],['NFL draft board','#/draft/board'],['Draft by game','#/draft'],['My rankings','#/my'],['Bet tracker','#/my/bets'],['Weekly digest','#/digest'],['Compare teams','#/compare'],['Big board','#/board'],['Settings','#/settings']].forEach(p=>out.push({kind:'Page',label:p[0],href:p[1],score:0}));
   Object.values(T).forEach(t=>out.push({kind:t.level==='FCS'?'FCS team':'Team',label:t.disp,sub:t.conf+(t.mascot?' · '+t.mascot:''),href:'#/team/'+enc(t.name),name:t.name}));
   G.filter(g=>!g.fcsOnly||team(g.away).featured||team(g.home).featured).forEach(g=>{ const a=team(g.away), h=team(g.home); out.push({kind:'Game',label:tshort(a.name)+' at '+tshort(h.name),sub:'Week '+g.week+' · '+fmtDate(g.date,false)+(g.played?' · final '+g.as+'-'+g.hs:''),href:'#/game/'+g.id}); });
   const seen=new Set(); Object.keys(BOX_BY_TEAM).forEach(tn=>{ (BOX_BY_TEAM[tn]||[]).forEach(b=>{ const side=boxSide(b,tn); if(!side) return; Object.keys(b.players[side]||{}).forEach(cat=>{ (b.players[side][cat]||[]).forEach(p=>{ const k=tn+'|'+dkey(p.n); if(seen.has(k)) return; seen.add(k); out.push({kind:'Player',label:p.n,sub:tshort(tn),href:'#/player/'+enc(tn)+'/'+enc(p.n)}); }); }); }); });
@@ -35058,13 +35101,133 @@ function palClose(){ const el=document.getElementById('palette'); if(el) el.clas
 document.addEventListener('keydown', e=>{ const tag=(e.target.tagName||'').toLowerCase(); const typing = tag==='input'||tag==='textarea'||tag==='select'||e.target.isContentEditable;
   if(((e.key==='/'&&!typing)||((e.key==='k'||e.key==='K')&&(e.metaKey||e.ctrlKey)))){ e.preventDefault(); palOpen(); }
   else if(e.key==='Escape') palClose(); });
+/* ---------- FBS playoff: College Football Playoff projection ---------- */
+/* 2026-27 rules: the SEC, Big Ten, Big 12 and ACC champions get automatic bids, so does the highest-ranked team
+   from the other six leagues (champion or not), and Notre Dame is in if it ranks in the top 12. The highest-ranked
+   teams left fill the 12 spots. Seeds follow the ranking straight down: 1-4 get byes, 5-8 host 12-9 on campus,
+   the quarterfinals and semifinals are bowls and the final is in Las Vegas on Jan 25. */
+const CFP_P4=['SEC','Big Ten','Big 12','ACC'];
+const CFP_G6=['AAC','CUSA','MAC','MW','Pac-12','Sun Belt'];
+const CFP_SIMS=4000;
+const CFP_SEL='2026-12-06';   // Selection Day; later games (Army-Navy) do not count
+let CFP_CACHE=null;
+function cfpKey(){ let k=0; G.forEach(g=>{ if(g.played) k+=1+((g.hs*31+g.as*7)%97); }); return k; }
+function cfpReady(){ return !!CFP_CACHE && CFP_CACHE.key===cfpKey(); }
+function cfpRng(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function cfpSim(){
+  const key=cfpKey(); if(CFP_CACHE&&CFP_CACHE.key===key) return CFP_CACHE;
+  const t0=performance.now();
+  const CT=new Float64Array(12001); for(let i=0;i<=12000;i++) CT[i]=cdf((i-6000)/1000);
+  const pw=d=>{ let i=Math.round(d/SD*1000)+6000; return CT[i<0?0:i>12000?12000:i]; };
+  const teams=FBS.slice(), n=teams.length, idx={}; teams.forEach((t,i)=>idx[t.name]=i);
+  const ext=[]; const slot=nm=>{ if(idx[nm]==null){ idx[nm]=n+ext.length; ext.push(team(nm)); } return idx[nm]; };
+  const list=G.filter(g=>g.level==='FBS'&&g.status!=='CANCELED'&&g.date<=CFP_SEL);
+  const NG=list.length, H=new Int32Array(NG), A=new Int32Array(NG), NEU=new Uint8Array(NG), CONF=new Uint8Array(NG), RES=new Int8Array(NG);
+  const pair=new Map();
+  list.forEach((g,k)=>{ H[k]=slot(g.home); A[k]=slot(g.away); NEU[k]=g.neutral?1:0; CONF[k]=g.conf?1:0; RES[k]=g.played?(g.hs>g.as?1:-1):0; if(g.conf){ pair.set(H[k]*4096+A[k],k); pair.set(A[k]*4096+H[k],k); } });
+  const m=n+ext.length, base=new Float64Array(m); teams.forEach((t,i)=>base[i]=t.rating); ext.forEach((t,j)=>base[n+j]=t.rating);
+  /* how many games a playoff-level team (the 12th best rating) would expect to lose against each schedule */
+  const B=teams[Math.min(11,n-1)].rating, EL=new Float64Array(n);
+  for(let k=0;k<NG;k++){ const h=H[k], a=A[k], hfa=NEU[k]?0:HFA; if(h<n) EL[h]+=1-pw(B-base[a]+hfa); if(a<n) EL[a]+=1-pw(B-base[h]-hfa); }
+  const CONFS=CFP_P4.concat(CFP_G6), mem={}; CONFS.forEach(c=>mem[c]=[]); teams.forEach((t,i)=>{ if(mem[t.conf]) mem[t.conf].push(i); });
+  const sbE=mem['Sun Belt'].filter(i=>teams[i].div==='East'), sbW=mem['Sun Belt'].filter(i=>teams[i].div==='West');
+  const isG6=new Uint8Array(n); teams.forEach((t,i)=>{ if(CFP_G6.indexOf(t.conf)>=0) isG6[i]=1; });
+  const ND=idx['Notre Dame']!=null&&idx['Notre Dame']<n?idx['Notre Dame']:-1;
+  const unplayed=list.filter(g=>!g.played).length, SIG=2+6*(NG?unplayed/NG:0);
+  const W=new Int16Array(n), L=new Int16Array(n), CW=new Int16Array(n), CL=new Int16Array(n), win=new Int8Array(NG), r=new Float64Array(m), sc=new Float64Array(n), elx=new Float64Array(n), inF=new Uint8Array(n), isCh=new Uint8Array(n), K=18, top=new Int32Array(K), chIdx=new Int32Array(CFP_P4.length+CFP_G6.length);
+  const Z=()=>new Float64Array(n);
+  const make=Z(), bye=Z(), host=Z(), champ=Z(), tg=Z(), g6=Z(), qf=Z(), sf=Z(), fin=Z(), title=Z(), seedSum=Z(), scoreSum=Z(), wSum=Z(), lSum=Z(), makeCh=Z();
+  const LB=6, byL=new Float64Array(n*LB), inL=new Float64Array(n*LB);
+  const rnd=cfpRng(20260910^key);
+  /* a fixed table of normal draws, indexed at random, is far cheaper than fresh Box-Muller draws */
+  const NT=new Float64Array(8192); for(let i=0;i<8192;i+=2){ let u=0; while(u===0) u=rnd(); const v=rnd(), R=Math.sqrt(-2*Math.log(u)); NT[i]=R*Math.cos(2*Math.PI*v); NT[i+1]=R*Math.sin(2*Math.PI*v); }
+  const g6idx=[]; for(let i=0;i<n;i++) if(isG6[i]) g6idx.push(i);
+  const pctC=i=>{ const d=CW[i]+CL[i]; return d?CW[i]/d:0; };
+  const better=(x,y)=>{ const d=pctC(y)-pctC(x); if(Math.abs(d)>1e-9) return d; const k=pair.get(x*4096+y); if(k!=null){ return (win[k]>0?H[k]:A[k])===x?-1:1; } const o=(W[y]-L[y])-(W[x]-L[x]); if(o) return o; return r[y]-r[x]; };
+  const top2=ms=>{ let a=-1,b=-1; for(const i of ms){ if(a<0||better(i,a)<0){ b=a; a=i; } else if(b<0||better(i,b)<0) b=i; } return [a,b]; };
+  const game=(x,y,adv)=>rnd()<pw(r[x]-r[y]+(adv?HFA:0))?x:y;
+  const fld=[]; const add=i=>{ if(i>=0&&!inF[i]){ inF[i]=1; fld.push(i); } };
+  for(let s=0;s<CFP_SIMS;s++){
+    for(let i=0;i<m;i++) r[i]=base[i]+SIG*NT[(rnd()*8192)|0];
+    W.fill(0); L.fill(0); CW.fill(0); CL.fill(0); elx.fill(0); isCh.fill(0); chIdx.fill(-1);
+    for(let k=0;k<NG;k++){ const h=H[k], a=A[k]; const hw = RES[k] ? RES[k]>0 : rnd()<pw(r[h]-r[a]+(NEU[k]?0:HFA)); win[k]=hw?1:-1; const wi=hw?h:a, lo=hw?a:h; if(wi<n){ W[wi]++; if(CONF[k]) CW[wi]++; } if(lo<n){ L[lo]++; if(CONF[k]) CL[lo]++; } }
+    for(let ci=0;ci<CONFS.length;ci++){ const c=CONFS[ci]; let p1,p2; if(c==='Sun Belt'&&sbE.length&&sbW.length){ p1=top2(sbE)[0]; p2=top2(sbW)[0]; if(better(p2,p1)<0){ const t=p1; p1=p2; p2=t; } } else { [p1,p2]=top2(mem[c]); } if(p1<0||p2<0) continue;
+      const neu=CFP_P4.indexOf(c)>=0; const w1=rnd()<pw(r[p1]-r[p2]+(neu?0:HFA)); const wi=w1?p1:p2, lo=w1?p2:p1; W[wi]++; L[lo]++; tg[p1]++; tg[p2]++; champ[wi]++; chIdx[ci]=wi; isCh[wi]=1;
+      elx[p1]+=1-pw(B-base[p2]+(neu?0:HFA)); elx[p2]+=1-pw(B-base[p1]-(neu?0:HFA)); }
+    /* committee stand-in: record against the schedule, plus how good the team is */
+    for(let i=0;i<n;i++) sc[i]=(EL[i]+elx[i]-L[i])+(r[i]-B)/9;
+    /* only the top 18 need an order: that always covers the 12 spots once the automatic bids are placed */
+    let cnt=0; for(let i=0;i<n;i++){ const v=sc[i]; if(cnt<K||v>sc[top[K-1]]){ let j=cnt<K?cnt++:K-1; while(j>0&&sc[top[j-1]]<v){ top[j]=top[j-1]; j--; } top[j]=i; } }
+    inF.fill(0); fld.length=0;
+    for(let ci=0;ci<CFP_P4.length;ci++) add(chIdx[ci]);
+    let gb=-1; for(const i of g6idx) if(gb<0||sc[i]>sc[gb]) gb=i; if(gb>=0){ g6[gb]++; add(gb); }
+    if(ND>=0) for(let p=0;p<12;p++) if(top[p]===ND){ add(ND); break; }
+    for(let p=0;p<K&&fld.length<12;p++) add(top[p]);
+    fld.sort((x,y)=>sc[y]-sc[x]);
+    fld.forEach((i,j)=>{ make[i]++; seedSum[i]+=j+1; if(j<4) bye[i]++; else if(j<8) host[i]++; if(isCh[i]) makeCh[i]++; });
+    for(let i=0;i<n;i++){ scoreSum[i]+=sc[i]; wSum[i]+=W[i]; lSum[i]+=L[i]; const b=i*LB+Math.min(L[i],LB-1); byL[b]++; if(inF[i]) inL[b]++; }
+    if(fld.length===12){ const f=fld;
+      const r1=[game(f[7],f[8],1), game(f[4],f[11],1), game(f[6],f[9],1), game(f[5],f[10],1)];
+      const q=[game(f[0],r1[0]), game(f[3],r1[1]), game(f[1],r1[2]), game(f[2],r1[3])];
+      f.slice(0,4).forEach(i=>qf[i]++); r1.forEach(i=>qf[i]++); q.forEach(i=>sf[i]++);
+      const s1=game(q[0],q[1]), s2=game(q[2],q[3]); fin[s1]++; fin[s2]++; title[game(s1,s2)]++; }
+  }
+  const S=CFP_SIMS, rows=teams.map((t,i)=>({t,i,make:make[i]/S,bye:bye[i]/S,host:host[i]/S,champ:champ[i]/S,tg:tg[i]/S,g6:g6[i]/S,qf:qf[i]/S,sf:sf[i]/S,fin:fin[i]/S,title:title[i]/S,seed:make[i]?seedSum[i]/make[i]:null,score:scoreSum[i]/S,w:wSum[i]/S,l:lSum[i]/S,via:make[i]?makeCh[i]/make[i]:0,byL:Array.from(byL.slice(i*LB,i*LB+LB)),inL:Array.from(inL.slice(i*LB,i*LB+LB))}));
+  const by={}; rows.forEach(x=>by[x.t.name]=x);
+  /* the single most likely field: projected champions, the likeliest Group of 6 team, then the best odds left */
+  const field=[], used=new Set(); const put=(x,how,bid)=>{ if(!x||used.has(x.i)) return; used.add(x.i); field.push(Object.assign({},x,{how,bid})); };
+  CFP_P4.forEach(c=>{ const b=rows.filter(x=>x.t.conf===c).sort((a,b)=>b.champ-a.champ)[0]; put(b,'auto',c+' champion'); });
+  const gb=rows.slice().sort((a,b)=>b.g6-a.g6)[0]; if(gb) put(gb,'auto',gb.champ>=Math.max(0.2,gb.g6*0.5)?gb.t.conf+' champion':'top Group of 6');
+  rows.slice().sort((a,b)=>b.make-a.make).forEach(x=>{ if(field.length<12) put(x,'at-large','at-large'); });
+  field.sort((a,b)=>b.score-a.score); field.forEach((x,j)=>x.seed=j+1);
+  const out=rows.filter(x=>!used.has(x.i)).sort((a,b)=>b.make-a.make);
+  CFP_CACHE={key,rows,by,field,out,sims:S,sig:SIG,ms:Math.round(performance.now()-t0),unplayed};
+  return CFP_CACHE; }
+function cfpPct(x){ if(!x) return '<span class="dim">—</span>'; if(x<0.005) return '&lt;1%'; if(x>0.995&&x<1) return '&gt;99%'; return Math.round(x*100)+'%'; }
+function playoffSeg(kind){ return '<div class="toolbar"><div class="seg"><a href="#/playoff/fbs" class="'+(kind==='fbs'?'on':'')+'">FBS · College Football Playoff</a><a href="#/playoff/fcs" class="'+(kind==='fcs'?'on':'')+'">FCS · 24-team bracket</a></div></div>'; }
+function renderPlayoff(kind){ if(kind!=='fbs'&&kind!=='fcs'){ const f=SETTINGS.fav&&T[SETTINGS.fav]; kind=f&&f.level==='FCS'?'fcs':'fbs'; } if(kind==='fcs') renderPlayoffFCS(); else renderCFP(); }
+function cfpTeamRow(x, p, won){ const t=x.t, lg=logoOf(t), fav=SETTINGS.fav===t.name; return '<a class="cfp-t'+(won?' w':'')+(fav?' fav':'')+'" href="#/team/'+enc(t.name)+'"><span class="sd">'+x.seed+'</span>'+(lg?'<img src="'+lg.icon+'" alt="" loading="lazy">':'<span class="sw" style="background:'+uiColor(t)+'"></span>')+'<span class="nm">'+esc(tshort(t.name))+' <span class="dim">'+recStr(t.name)+'</span></span><span class="pw">'+Math.round(p*100)+'%</span></a>'; }
+function cfpMatch(x, y, adv, foot, cls){ const p=cdf((x.t.rating-y.t.rating+(adv?HFA:0))/SD); const xw=p>=0.5; return {html:'<div class="cfp-m'+(cls?' '+cls:'')+'">'+cfpTeamRow(x,p,xw)+cfpTeamRow(y,1-p,!xw)+(foot?'<div class="cfp-mf">'+foot+'</div>':'')+'</div>', w:xw?x:y}; }
+function cfpBracketHTML(F){ const s=k=>F[k-1]; const home=x=>'at '+esc(x.t.stadium||(tshort(x.t.name)+' home'));
+  const r1=[cfpMatch(s(8),s(9),1,home(s(8))), cfpMatch(s(5),s(12),1,home(s(5))), cfpMatch(s(7),s(10),1,home(s(7))), cfpMatch(s(6),s(11),1,home(s(6)))];
+  const q=[cfpMatch(s(1),r1[0].w,0,'Quarterfinal bowl'), cfpMatch(s(4),r1[1].w,0,'Quarterfinal bowl'), cfpMatch(s(2),r1[2].w,0,'Quarterfinal bowl'), cfpMatch(s(3),r1[3].w,0,'Quarterfinal bowl')];
+  const sf=[cfpMatch(q[0].w,q[1].w,0,'Semifinal'), cfpMatch(q[2].w,q[3].w,0,'Semifinal')];
+  const fin=cfpMatch(sf[0].w,sf[1].w,0,'Allegiant Stadium · Las Vegas','cfp-final');
+  const col=(h,sub,ms)=>'<div class="cfp-col"><div class="cfp-rh">'+h+'<span>'+sub+'</span></div><div class="cfp-stack">'+ms.map(x=>x.html).join('')+'</div></div>';
+  return '<div class="cfp-br">'+col('First round','Dec 18-19 · higher seed hosts',r1)+col('Quarterfinals','Dec 30 - Jan 1 · Fiesta, Cotton, Rose, Peach',q)+col('Semifinals','Jan 14-15 · Orange, Sugar',sf)+col('Championship','Mon, Jan 25 · Las Vegas',[fin])+'</div><div class="mini" style="margin-top:8px">Projected winner of each game in bold with its chance to win that one game. The committee decides which bowl hosts which quarterfinal and semifinal, so those are left open.</div>'; }
+function cfpMeCard(R, t){ if(!t) return ''; const x=R.by[t.name]; if(!x) return ''; const nm=esc(t.disp);
+  const path = x.make<0.005 ? nm+' is a long shot in these simulations. It would take a run nobody is projecting yet.' : x.via>=0.6 ? 'Most of '+nm+'’s way in is winning the '+esc(t.conf)+': '+pct(x.via)+' of its playoff trips come as league champion.' : x.via<=0.25 ? nm+' mostly gets in as an at-large team, so the overall record matters more than the league title.' : 'It is a mix: '+pct(x.via)+' of '+nm+'’s playoff trips come as '+esc(t.conf)+' champion, the rest at-large.';
+  const tot=x.byL.reduce((a,b)=>a+b,0)||1; const lrows=x.byL.map((c,k)=>({k,c,in:x.inL[k]})).filter(o=>o.c/tot>=0.01);
+  const tbl='<div class="tblwrap" style="margin-top:8px"><table class="tbl"><thead><tr><th>Losses by Dec 6</th><th class="r">How often</th><th class="r">Gets in</th></tr></thead><tbody>'+lrows.map(o=>'<tr><td>'+(o.k===5?'5 or more':o.k)+'</td><td class="r">'+cfpPct(o.c/tot)+'</td><td class="r"><b>'+cfpPct(o.in/o.c)+'</b></td></tr>').join('')+'</tbody></table></div>';
+  return '<div class="card" style="margin-top:14px"><div class="hd"><h3>'+chip(t.name,{norank:true})+' and the playoff</h3><span class="mini">'+(SETTINGS.fav===t.name?'your team':'pick your own team in Settings')+'</span></div><div class="bd"><div class="grid g4">'+tile('Makes the field',x.make<0.005&&x.make>0?'<1%':pct(x.make),x.seed?'average seed '+num1(x.seed):'')+tile(t.conf+' title',x.champ<0.005&&x.champ>0?'<1%':pct(x.champ),'in the title game '+pct(x.tg))+tile('First-round bye',x.bye<0.005&&x.bye>0?'<1%':pct(x.bye),'hosts a game '+pct(x.host))+tile('Wins it all',x.title<0.005&&x.title>0?'<1%':pct(x.title),'reaches the final '+pct(x.fin))+'</div><div class="lo-r" style="margin-top:10px">'+path+' Projected finish: '+num1(x.w)+'-'+num1(x.l)+(x.tg>=0.05?' counting a title game when it gets there':'')+'.</div>'+tbl+'</div></div>'; }
+function cfpRaceCard(title, sub, list, key){ return '<div class="card cfp-race"><div class="hd"><h3>'+title+'</h3><span class="mini">'+sub+'</span></div><div class="bd">'+list.map(x=>'<div class="row'+(SETTINGS.fav===x.t.name?' fav':'')+'"><div class="who">'+chip(x.t.name,{short:true,norank:true})+'<div class="cfp-bar"><i style="width:'+Math.max(1,Math.round(x[key]*100))+'%;background:'+uiColor(x.t)+'"></i></div></div><b>'+cfpPct(x[key])+'</b></div>').join('')+'</div></div>'; }
+function renderCFP(){ setNav('playoff');
+  const head='<div class="page-head"><div><div class="eyebrow">College Football Playoff</div><h1>Projected 12-team bracket</h1><div class="sub">The 2026 rules: the SEC, Big Ten, Big 12 and ACC champions are in automatically, so is the highest-ranked team from the other six leagues, and Notre Dame is in if it finishes in the top 12. The highest-ranked teams left fill out the 12, and seeds follow the ranking straight down. Built from '+CFP_SIMS.toLocaleString()+' simulations of the rest of the season using this page’s power ratings.</div></div></div>'+playoffSeg('fbs');
+  if(!cfpReady()){ view.innerHTML=head+'<div class="note">Playing out the rest of the season '+CFP_SIMS.toLocaleString()+' times…</div><div class="skel-grid" style="margin-top:12px"><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div></div><div class="skel skel-row"></div><div class="skel skel-row"></div>'; const h=location.hash; setTimeout(()=>{ if(location.hash!==h) return; cfpSim(); renderCFP(); }, 30); return; }
+  const R=cfpSim(), F=R.field; const fav=SETTINGS.fav&&T[SETTINGS.fav]; const me=(fav&&fav.level==='FBS')?fav:T['BYU'];
+  const fave=R.rows.slice().sort((a,b)=>b.title-a.title)[0]; const g6=R.rows.slice().sort((a,b)=>b.g6-a.g6)[0]; const mx=me&&R.by[me.name];
+  let html=head+'<div class="grid g4" style="margin-bottom:14px">'+tile('Title favorite',fave.t.disp,pct(fave.title)+' to win it all')+tile('Projected No. 1 seed',F[0].t.disp,'first-round bye '+pct(F[0].bye))+(mx?tile(me.disp,mx.make<0.005&&mx.make>0?'<1%':pct(mx.make),'makes the field · '+pct(mx.champ)+' '+me.conf+' title'):'')+tile('Group of 6 bid',g6.t.disp,pct(g6.g6)+' to be the top-ranked team')+'</div>';
+  html+='<div class="sec"><h2>The bracket</h2><span class="muted">most likely field, seeded by where each team ranks on average</span></div>'+cfpBracketHTML(F);
+  html+='<div class="sec"><h2>The field</h2><span class="muted">how each team gets in</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">Seed</th><th>Team</th><th>Conf</th><th>Record</th><th>Bid</th><th class="r">Playoff</th><th class="r">Title</th></tr></thead><tbody>'+F.map(x=>'<tr class="click'+(SETTINGS.fav===x.t.name?' hl':'')+'" data-href="#/team/'+enc(x.t.name)+'"><td class="rk num">'+x.seed+'</td><td>'+chip(x.t.name,{norank:true})+'</td><td class="muted">'+esc(x.t.conf)+'</td><td>'+recStr(x.t.name)+'</td><td class="small">'+(x.how==='auto'?'<span class="pill acc">Auto</span>':'')+esc(x.bid)+'</td><td class="r">'+cfpPct(x.make)+'</td><td class="r">'+cfpPct(x.title)+'</td></tr>').join('')+'</tbody></table></div>';
+  const lastIn=F.filter(x=>x.how==='at-large').sort((a,b)=>a.make-b.make).slice(0,4), firstOut=R.out.slice(0,4);
+  const bub=(x,lbl)=>'<div class="row'+(SETTINGS.fav===x.t.name?' fav':'')+'"><div class="who">'+chip(x.t.name,{norank:true})+'<div class="mini">'+recStr(x.t.name)+' · '+esc(x.t.conf)+' · '+lbl+'</div></div><b>'+cfpPct(x.make)+'</b></div>';
+  html+='<div class="grid g2" style="margin-top:14px"><div class="card cfp-race"><div class="hd"><h3>Last four in</h3><span class="mini">lowest odds in the projected field</span></div><div class="bd">'+lastIn.map(x=>bub(x,'seed '+x.seed)).join('')+'</div></div><div class="card cfp-race"><div class="hd"><h3>First four out</h3><span class="mini">best odds outside it</span></div><div class="bd">'+firstOut.map(x=>bub(x,'projects '+num1(x.w)+'-'+num1(x.l))).join('')+'</div></div></div>';
+  if(me) html+=cfpMeCard(R, me);
+  const odds=R.rows.filter(x=>x.make>=0.005).sort((a,b)=>b.make-a.make||b.title-a.title).slice(0,40);
+  html+='<div class="sec"><h2>Playoff odds</h2><span class="muted">every team with at least a 1-in-200 shot</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>Team</th><th>Conf</th><th>Record</th><th class="r">Proj.</th><th class="r">Rating</th><th class="r">Conf title</th><th class="r">Playoff</th><th class="r">Bye</th><th class="r">Semis</th><th class="r">Final</th><th class="r">Title</th></tr></thead><tbody>'+odds.map((x,i)=>'<tr class="click'+(SETTINGS.fav===x.t.name?' hl':'')+'" data-href="#/team/'+enc(x.t.name)+'"><td class="rk num">'+(i+1)+'</td><td>'+chip(x.t.name,{norank:true})+'</td><td class="muted">'+esc(x.t.conf)+'</td><td>'+recStr(x.t.name)+'</td><td class="r muted">'+num1(x.w)+'-'+num1(x.l)+'</td><td class="r">'+num1(x.t.rating)+'</td><td class="r">'+(x.t.conf==='Ind'?'<span class="dim">n/a</span>':cfpPct(x.champ))+'</td><td class="r"><b>'+cfpPct(x.make)+'</b></td><td class="r">'+cfpPct(x.bye)+'</td><td class="r">'+cfpPct(x.sf)+'</td><td class="r">'+cfpPct(x.fin)+'</td><td class="r">'+cfpPct(x.title)+'</td></tr>').join('')+'</tbody></table></div><div class="mini" style="margin-top:8px">Proj. is the average final record at Selection Day, a conference title game included when a team plays in one.</div>';
+  const races=CFP_P4.concat(CFP_G6).map(c=>{ const l=R.rows.filter(x=>x.t.conf===c).sort((a,b)=>b.champ-a.champ); return cfpRaceCard(esc(CONF_LONG[c]||c), 'chance to win the league', l.slice(0,5), 'champ'); });
+  const g6l=R.rows.filter(x=>x.g6>0).sort((a,b)=>b.g6-a.g6).slice(0,6);
+  html+='<div class="sec"><h2>Conference races</h2><span class="muted">each league crowns its champion in a title game on Dec 4-5</span></div><div class="grid g3 cfp-races">'+cfpRaceCard('Group of 6 bid','top-ranked team from the other six leagues',g6l,'g6')+races.join('')+'</div>';
+  html+='<div class="note" data-sim-ms="'+R.ms+'" style="margin-top:14px"><b>How this works.</b> Each simulation plays every remaining game with this page’s win probabilities, and lets each team’s strength drift a little (about '+num1(R.sig)+' points), since early-season ratings can be off. The top two in each league standings meet for the title (division winners in the Sun Belt). Then every team is ranked the way a committee roughly does it: its record against what a playoff-level team would expect from the same schedule, plus how good the team is. The 12 are picked under the 2026 rules and the bracket is played out, the first round on the higher seed’s field. Army-Navy is Dec 12, after Selection Day on Dec 6, so it does not count. '+R.unplayed+' games are left to play before then.</div>';
+  view.innerHTML=html; }
+function cfpTile(t){ if(!t||t.level!=='FBS') return ''; if(!cfpReady()){ setTimeout(()=>{ const el=document.getElementById('cfp-tile'); if(!el||el.dataset.team!==t.name) return; cfpSim(); const e2=document.getElementById('cfp-tile'); if(e2&&e2.dataset.team===t.name) e2.outerHTML=cfpTile(t); }, 60); return '<a class="tile tile-link" id="cfp-tile" data-team="'+esc(t.name)+'" href="#/playoff/fbs"><div class="lbl">Playoff odds</div><div class="val">…</div><div class="sub">simulating the season · ESPN '+num1(t.fpiPO)+'%</div></a>'; } const x=cfpSim().by[t.name]; if(!x) return ''; return '<a class="tile tile-link" id="cfp-tile" data-team="'+esc(t.name)+'" href="#/playoff/fbs"><div class="lbl">Playoff odds</div><div class="val">'+(x.make<0.005&&x.make>0?'&lt;1%':Math.round(x.make*100)+'%')+'</div><div class="sub">'+(t.conf==='Ind'?'':pct(x.champ)+' league title · ')+'ESPN '+num1(t.fpiPO)+'%</div></a>'; }
 /* ---------- home / about ---------- */
 function renderHome(){ renderWeek(CUR_WEEK); }
 function aboutHTML(){ return '<h2>How the numbers work</h2><p><b>Power rating</b> starts from ESPN\'s preseason FPI, then blends in each 2026 result. Each game is worth one "vote": the scoring margin (capped at 28, home field of 2.5 removed) plus the opponent\'s rating. The preseason number counts as four games, so early-season results move things but don\'t swing them wildly. The whole league is re-solved 20 times so opponent strength settles.</p><p><b>Model line</b> is the rating gap plus 2.5 for the home team. <b>Win probability</b> assumes results scatter around that line with a 16-point standard deviation, which is about what college football produces.</p><p><b>Edge</b> is the model line minus the market line. It is a lean, not a pick: 3+ points is worth a look, under 1.5 is noise.</p><p><b>Projected record</b> adds up win probabilities for the games left. <b>Bowl %</b> is the chance of reaching 6 wins.</p><p><b>Schedule strength</b> is the average power rating of all opponents on the schedule. <b>FCS teams</b> are rated the same way. Their preseason number comes from every 2025 FCS result, playoffs included, pulled a quarter of the way back toward their league\'s typical level for roster turnover. Division II and NAIA opponents carry a fixed placeholder.</p><p>Scores, schedule, and lines are a snapshot from '+asOfDisp()+'. Ask for a refresh after the weekend and the whole page updates.</p><p style="text-align:right"><button class="btn" id="dlg-close">Close</button></p>'; }
 
 /* ---------- routing ---------- */
 function route(){ view.classList.remove('in'); void view.offsetWidth; routeInner(); applyPageTheme(); renderTicker(); animateScores(view); if(LIVE.on&&!LIVE.busy&&liveGameId()) liveGameRefresh(); setTimeout(()=>view.classList.add('in'),0); }
-function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('/').map(dec); const r=parts[0]||''; window.scrollTo(0,0); if(r===''||r==='week'){ renderWeek(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='lines'){ renderLines(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='rankings'){ renderRankings(parts[1], parts[2]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='teams'){ renderTeams(parts[1]); } else if(r==='team'){ renderTeam(parts[1]||''); const anchor=h.split('#').slice(2)[0]; if(anchor){ const el=document.getElementById(anchor); if(el) setTimeout(()=>el.scrollIntoView({block:'start'}),0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='transfers'){ renderTransfers(parts[1]); } else if(r==='previews'){ renderPreviews(+parts[1]||CUR_WEEK); } else if(r==='draft'){ renderDraft(parts[1], parts[2]); } else if(r==='settings'){ renderSettings(); } else if(r==='playoff'){ renderPlayoff(); } else if(r==='board'){ renderBoard(); } else if(r==='player'){ renderPlayer(parts[1], parts[2]); } else if(r==='compare'){ renderCompare(parts[1], parts[2]); } else if(r==='digest'){ renderDigest(parts[1]); } else if(r==='my'){ if(parts[1]==='bets') renderBets(); else renderMy(parts[1]); } else renderHome(); }
+function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('/').map(dec); const r=parts[0]||''; window.scrollTo(0,0); if(r===''||r==='week'){ renderWeek(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='lines'){ renderLines(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='rankings'){ renderRankings(parts[1], parts[2]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='teams'){ renderTeams(parts[1]); } else if(r==='team'){ renderTeam(parts[1]||''); const anchor=h.split('#').slice(2)[0]; if(anchor){ const el=document.getElementById(anchor); if(el) setTimeout(()=>el.scrollIntoView({block:'start'}),0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='transfers'){ renderTransfers(parts[1]); } else if(r==='previews'){ renderPreviews(+parts[1]||CUR_WEEK); } else if(r==='draft'){ renderDraft(parts[1], parts[2]); } else if(r==='settings'){ renderSettings(); } else if(r==='playoff'){ renderPlayoff(parts[1]); } else if(r==='board'){ renderBoard(); } else if(r==='player'){ renderPlayer(parts[1], parts[2]); } else if(r==='compare'){ renderCompare(parts[1], parts[2]); } else if(r==='digest'){ renderDigest(parts[1]); } else if(r==='my'){ if(parts[1]==='bets') renderBets(); else renderMy(parts[1]); } else renderHome(); }
 window.addEventListener('hashchange', route);
 document.addEventListener('click', e=>{ const tr=e.target.closest('tr.click, .gm.click'); if(tr && !e.target.closest('a') && !e.target.closest('button')){ location.hash=tr.dataset.href; } });
 document.addEventListener('keydown', e=>{ if(e.key!=='Enter') return; const el=e.target.closest && e.target.closest('.gm.click'); if(el){ location.hash=el.dataset.href; } });

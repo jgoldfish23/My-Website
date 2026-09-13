@@ -4,16 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>The Sons of San Diego</title>
+<title>NFL Gameday Zone</title>
 <meta name="description" content="NFL scores, lines, standings, playoff odds and projections for the 2026 season.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#EFF1F4">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
-<meta name="apple-mobile-web-app-title" content="Sons of San Diego">
-<link rel="icon" href="/nfl/img/logos/LAC.png">
+<meta name="apple-mobile-web-app-title" content="NFL Gameday Zone">
+<link rel="icon" type="image/svg+xml" href="/nfl/img/football.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/nfl/img/football-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/nfl/img/football-192.png">
+<link rel="apple-touch-icon" href="/nfl/img/football-180.png">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<title>The Sons of San Diego</title>
+<title>NFL Gameday Zone</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
@@ -816,7 +819,7 @@ body.boardmode main{max-width:none;padding:0}
 
 <header class="top">
   <div class="top-in">
-    <div class="brand"><a class="wordmark" href="#/">The Sons of <b>San Diego</b></a><span class="season">NFL · 2026</span></div>
+    <div class="brand"><a class="wordmark" href="#/">NFL Gameday <b>Zone</b></a><span class="season">NFL · 2026</span></div>
     <div class="search"><input id="q" type="search" placeholder="Find a team…" autocomplete="off" aria-label="Find a team"><div id="qres" class="search-res" hidden></div></div>
     <nav class="nav" id="nav">
       <a href="#/week" data-r="week">Scoreboard</a>
@@ -3974,9 +3977,9 @@ M|401872947|-8.5|-9.5|47.5|48.5|295|370|-375|-485|71.8|79|0|20|Draft Kings
 (function(){
 'use strict';
 /* =========================================================
-   The Sons of San Diego — 2026 NFL hub
+   NFL Gameday Zone — 2026 NFL hub
    ========================================================= */
-const AS_OF = 'Sun Sep 13, 2026 · 1:51 PM ET';
+const AS_OF = 'Sun Sep 13, 2026 · 2:06 PM ET';
 const AS_OF_DATE = '2026-09-13';
 const SEASON = 2026;
 const HFA = 1.6;          // home-field points
@@ -4696,7 +4699,7 @@ function renderTicker(){ const el=document.getElementById('ticker'); if(!el) ret
 let BOARD_PAGE=0, BOARD_TIMER=null;
 function boardGames(){ const ws=liveWeeks(); const gs=G.filter(g=>ws.includes(g.week)); const rank=g=>g.live?0:(isFav(g)?1:(!g.played?2:3)); return gs.map(g=>({g,r:rank(g)})).sort((a,b)=>a.r-b.r||interest(b.g)-interest(a.g)).map(x=>x.g); }
 function boardCard(g){ const a=team(g.away), h=team(g.home); const lead=(x)=>((g.played||g.live)&&((x==='a'&&g.as>g.hs)||(x==='h'&&g.hs>g.as)))?' w':''; const row=(t,x,val)=>'<div class="bl'+lead(x)+'">'+(logoOf(t)?'<img src="'+logoOf(t).icon+'" alt="">':'<span class="tk-sw" style="background:'+uiColor(t)+'"></span>')+'<span class="bn">'+esc(t.disp)+'</span>'+((g.played||g.live)?'<span class="bs">'+scoreSpan(g,x,val)+'</span>':'')+'</div>'; const status = g.live ? '<span class="livedot"></span> '+esc(g.clk||'In progress')+(g.dd?' · '+esc(g.dd):'') : g.played ? (g.as!==g.hs?tshort(g.as>g.hs?g.away:g.home)+' win':'Final · tie')+(g.ot?' in OT':'')+(g.spread!=null?' · '+(covered(g,'home')==='P'?'push':(covered(g,'home')==='W'?tshort(g.home):tshort(g.away))+' covered'):'') : esc(fmtDate(g.date,true).slice(0,3))+' '+esc(kick(g))+(g.tv?' · '+esc(tvShort(g.tv)):''); return '<a class="bcard'+(g.live?' islive':'')+(isFav(g)?' fav':'')+'" href="#/game/'+g.id+'">'+row(a,'a',g.as)+row(h,'h',g.hs)+'<div class="bst">'+status+(g.spread!=null&&!g.played?' · '+esc(spreadStr(g,{short:true})):'')+'</div></a>'; }
-function renderBoard(){ setNav('week'); document.body.classList.add('boardmode'); const gs=boardGames(); const per=12; const pages=Math.max(1,Math.ceil(gs.length/per)); if(BOARD_PAGE>=pages) BOARD_PAGE=0; const slice=gs.slice(BOARD_PAGE*per,(BOARD_PAGE+1)*per); const liveN=gs.filter(g=>g.live).length; view.innerHTML='<div class="board"><div class="bhead"><div><span class="wordmark">The Sons of <b>San Diego</b></span> <span class="dim">'+esc(weekLabel(CUR_WEEK))+'</span></div><div class="dim bmeta">'+(liveN?'<span class="livedot"></span> '+liveN+' in progress · ':'')+gs.length+' games'+(pages>1?' · page '+(BOARD_PAGE+1)+' of '+pages:'')+(LIVE.last?' · updated '+new Date(LIVE.last).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'')+'</div><a class="btn sm" href="#/week" id="board-exit">Exit</a></div><div class="bgrid">'+slice.map(boardCard).join('')+'</div></div>'; animateScores(view); clearTimeout(BOARD_TIMER); if(pages>1) BOARD_TIMER=setTimeout(()=>{ BOARD_PAGE=(BOARD_PAGE+1)%pages; if(location.hash.startsWith('#/board')) renderBoard(); }, 14000); }
+function renderBoard(){ setNav('week'); document.body.classList.add('boardmode'); const gs=boardGames(); const per=12; const pages=Math.max(1,Math.ceil(gs.length/per)); if(BOARD_PAGE>=pages) BOARD_PAGE=0; const slice=gs.slice(BOARD_PAGE*per,(BOARD_PAGE+1)*per); const liveN=gs.filter(g=>g.live).length; view.innerHTML='<div class="board"><div class="bhead"><div><span class="wordmark">NFL Gameday <b>Zone</b></span> <span class="dim">'+esc(weekLabel(CUR_WEEK))+'</span></div><div class="dim bmeta">'+(liveN?'<span class="livedot"></span> '+liveN+' in progress · ':'')+gs.length+' games'+(pages>1?' · page '+(BOARD_PAGE+1)+' of '+pages:'')+(LIVE.last?' · updated '+new Date(LIVE.last).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'')+'</div><a class="btn sm" href="#/week" id="board-exit">Exit</a></div><div class="bgrid">'+slice.map(boardCard).join('')+'</div></div>'; animateScores(view); clearTimeout(BOARD_TIMER); if(pages>1) BOARD_TIMER=setTimeout(()=>{ BOARD_PAGE=(BOARD_PAGE+1)%pages; if(location.hash.startsWith('#/board')) renderBoard(); }, 14000); }
 window.addEventListener('hashchange', ()=>{ if(!location.hash.startsWith('#/board')){ document.body.classList.remove('boardmode'); clearTimeout(BOARD_TIMER); } });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape'&&location.hash.startsWith('#/board')) location.hash='#/week'; });
 

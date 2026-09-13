@@ -1,4 +1,4 @@
-// Live NFL scores for /nfl (The Sons of San Diego): a read-only, edge-cached proxy of ESPN's public feeds.
+// Live NFL scores for /nfl (NFL Gameday Zone): a read-only, edge-cached proxy of ESPN's public feeds.
 // GET /api/nfl/scoreboard?week=N&stype=2|3  -> slimmed events for one week (2 = regular season, 3 = playoffs)
 // GET /api/nfl/game?event=ID               -> slimmed summary: linescore, team + player stats, scoring, current drive
 const ESPN = "https://site.web.api.espn.com/apis/site/v2/sports/football/nfl";

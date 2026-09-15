@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>For our guests · Jameson &amp; Dawsyn</title>
-<meta name="description" content="Everything you need for December 30, 2026 in La Jolla — schedule, travel, and RSVP.">
+<meta name="description" content="Everything you need for December 30, 2026 in La Jolla — schedule, travel, and where to stay.">
 <meta name="theme-color" content="#0C2523">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,31 +78,13 @@
   .card h3{font-family:var(--display); font-weight:400; font-size:18px; margin:0 0 8px; letter-spacing:-.004em;}
   .card p{margin:0; color:var(--fg-3); font-size:14.5px;}
 
-  /* RSVP form */
+  /* form basics — the chat below still leans on these */
   form{display:grid; gap:16px; max-width:560px;}
-  label{display:block; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--fg-2); margin-bottom:7px;}
-  input[type=text], input[type=email], textarea, select{
+  input[type=text]{
     width:100%; background:var(--bg-3); border:1px solid var(--line); border-radius:10px;
     color:var(--fg); font-family:var(--body); font-size:15.5px; padding:12px 14px; outline:none;
     transition:border-color .2s var(--ease);}
-  input:focus, textarea:focus, select:focus{border-color:var(--accent);}
-  textarea{min-height:90px; resize:vertical;}
-  .radio-row{display:flex; gap:12px;}
-  .radio-row input{position:absolute; opacity:0; pointer-events:none;}
-  .radio-row span{display:inline-block; padding:11px 22px; border:1px solid var(--line);
-    border-radius:999px; cursor:pointer; font-size:14.5px; color:var(--fg-2);
-    transition:all .2s var(--ease);}
-  .radio-row input:checked + span{border-color:var(--accent); color:var(--accent); background:var(--accent-soft);}
-  .radio-row input:focus-visible + span{outline:2px solid var(--accent); outline-offset:2px;}
-  .hp{position:absolute; left:-9999px; opacity:0;}
-  button.primary{
-    justify-self:start; background:var(--accent); color:var(--bg); border:none; border-radius:999px;
-    font-family:var(--body); font-size:14.5px; font-weight:500; letter-spacing:.03em;
-    padding:13px 30px; cursor:pointer; transition:opacity .2s var(--ease);}
-  button.primary:hover{opacity:.88;}
-  button.primary:disabled{opacity:.5; cursor:default;}
-  .form-msg{font-size:14.5px; color:var(--accent); min-height:1.4em;}
+  input:focus{border-color:var(--accent);}
 
   /* chat */
   .chat{border:1px solid var(--line); border-radius:16px; background:var(--bg-3); overflow:hidden; max-width:640px;}
@@ -117,15 +99,6 @@
   .chat-row button{background:var(--accent); color:var(--bg); border:none; border-radius:999px;
     padding:10px 20px; font-size:14px; font-weight:500; cursor:pointer;}
 
-  /* petals for a fresh RSVP */
-  .petal{position:fixed; top:-8vh; z-index:90; pointer-events:none; user-select:none;
-    animation-name:fall; animation-timing-function:linear; animation-fill-mode:forwards;}
-  @keyframes fall{
-    0%{transform:translate3d(0,0,0) rotate(0deg); opacity:0;}
-    12%{opacity:1;}
-    100%{transform:translate3d(var(--sway,0px),114vh,0) rotate(var(--spin,540deg)); opacity:0;}
-  }
-
   /* the Pacific, rising into the footer */
   .waves{position:relative; height:clamp(56px,7vw,88px); overflow:hidden;
     line-height:0; margin-top:clamp(26px,4vw,50px);}
@@ -138,7 +111,6 @@
   footer{padding:48px 0 60px; border-top:1px solid var(--line-2); margin-top:40px;}
   .waves + footer{border-top:none; margin-top:0; padding-top:10px; background:var(--bg-2);}
   @media (prefers-reduced-motion:reduce){
-    .petal{display:none;}
     .waves path{animation:none;}
   }
 
@@ -158,7 +130,7 @@
   <span class="eyebrow">For our guests</span>
   <h1>December 30, 2026 · <em>La Jolla</em></h1>
   <p class="lede">Everything you need for the day — where to be, when to be there, and where to sleep it off. If something's missing, ask us near the bottom of this page.</p>
-  <p class="note" style="margin-top:14px;"><a class="lnk" href="/gifts/">Registry →</a> &nbsp;·&nbsp; <a class="lnk" href="#stay">Book a room →</a> &nbsp;·&nbsp; <a class="lnk" href="#rsvp">Jump to the RSVP ↓</a></p>
+  <p class="note" style="margin-top:14px;"><a class="lnk" href="/gifts/">Registry →</a> &nbsp;·&nbsp; <a class="lnk" href="#stay">Book a room →</a></p>
 </header>
 
 <section class="wrap" id="schedule">
@@ -264,46 +236,6 @@
   </div>
 </section>
 
-<section class="wrap" id="rsvp">
-  <div class="sec-head"><h2>RSVP</h2><span class="eyebrow">Please reply</span></div>
-  <form id="rsvpForm">
-    <div>
-      <label for="rName">Your name</label>
-      <input type="text" id="rName" name="name" required autocomplete="name">
-    </div>
-    <div>
-      <label for="rEmail">Email <span style="text-transform:none;letter-spacing:0;">(optional)</span></label>
-      <input type="email" id="rEmail" name="email" autocomplete="email">
-    </div>
-    <div>
-      <label>Will you be there?</label>
-      <div class="radio-row">
-        <label style="margin:0;"><input type="radio" name="attending" value="yes" checked><span>Wouldn't miss it</span></label>
-        <label style="margin:0;"><input type="radio" name="attending" value="no"><span>Sadly, no</span></label>
-      </div>
-    </div>
-    <div>
-      <label for="rParty">How many in your party (including you)?</label>
-      <select id="rParty" name="partySize">
-        <option>1</option><option>2</option><option>3</option><option>4</option>
-        <option>5</option><option>6</option><option>7</option><option>8</option>
-        <option>9</option><option>10</option>
-      </select>
-    </div>
-    <div>
-      <label for="rGuests">Who's coming with you? <span style="text-transform:none;letter-spacing:0;">(first names are fine)</span></label>
-      <input type="text" id="rGuests" name="guestNames" placeholder="e.g. Sara, Mike, and the kids">
-    </div>
-    <div>
-      <label for="rNote">Anything we should know?</label>
-      <textarea id="rNote" name="note" placeholder="Dietary needs, song requests, general enthusiasm…"></textarea>
-    </div>
-    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <button class="primary" type="submit">Send RSVP</button>
-    <div class="form-msg" id="rsvpMsg" role="status"></div>
-  </form>
-</section>
-
 <div class="waves" aria-hidden="true">
   <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
     <path class="wA" d="M0,64 c120,-34 360,34 480,0 c120,-34 360,34 480,0 c120,-34 360,34 480,0 c120,-34 360,34 480,0 V120 H0 Z"/>
@@ -328,60 +260,6 @@
     else if (window.matchMedia('(prefers-color-scheme: light)').matches)
       document.documentElement.setAttribute('data-theme', 'light');
   }catch(e){}
-
-  /* a small shower of petals when someone says yes */
-  function celebrate(){
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var glyphs = ['❀', '✿', '❁', '✽', '❃'];
-    var colors = ['#D2A94E', '#E9EEE9', '#7FB98E', '#C2D0C6', '#EBD9A5'];
-    for (var i = 0; i < 30; i++){
-      (function(){
-        var el = document.createElement('span');
-        el.className = 'petal';
-        el.textContent = glyphs[i % glyphs.length];
-        el.style.left = (Math.random() * 98).toFixed(2) + 'vw';
-        el.style.color = colors[i % colors.length];
-        el.style.fontSize = (11 + Math.random() * 17).toFixed(1) + 'px';
-        el.style.setProperty('--sway', ((Math.random() * 170) - 85).toFixed(0) + 'px');
-        el.style.setProperty('--spin', ((Math.random() * 700) + 260).toFixed(0) + 'deg');
-        el.style.animationDelay = (Math.random() * 0.9).toFixed(2) + 's';
-        el.style.animationDuration = (3.4 + Math.random() * 2.6).toFixed(2) + 's';
-        document.body.appendChild(el);
-        setTimeout(function(){ if (el.parentNode) el.parentNode.removeChild(el); }, 8200);
-      })();
-    }
-  }
-
-  /* RSVP */
-  var form = document.getElementById('rsvpForm');
-  var msg = document.getElementById('rsvpMsg');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var btn = form.querySelector('button.primary');
-    btn.disabled = true; msg.textContent = 'Sending…';
-    var fd = new FormData(form);
-    fetch('/api/rsvp', {
-      method:'POST',
-      headers:{'content-type':'application/json'},
-      body: JSON.stringify({
-        name: fd.get('name'),
-        email: fd.get('email'),
-        attending: fd.get('attending') === 'yes',
-        partySize: fd.get('partySize'),
-        guestNames: fd.get('guestNames'),
-        note: fd.get('note'),
-        website: fd.get('website')
-      })
-    }).then(function(r){
-      if (!r.ok) throw new Error();
-      form.reset();
-      msg.textContent = 'Got it — thank you! We can’t wait.';
-      celebrate();
-    }).catch(function(){
-      msg.textContent = 'Hmm, that didn’t go through. Try again, or just text us.';
-      btn.disabled = false;
-    });
-  });
 
   /* chat */
   var chatForm = document.getElementById('chatForm');

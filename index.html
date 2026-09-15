@@ -177,12 +177,14 @@
   .hero-photo-wrap.invite::before{display:none;}
   .hero-photo.invite{border:none; background:transparent; box-shadow:none; aspect-ratio:auto; max-height:none; overflow:visible;}
   .hero-photo.invite::after{display:none;}
-  .hero-photo.invite img{height:auto; opacity:.92; transition:opacity .3s var(--ease);
-    -webkit-mask-image:radial-gradient(112% 112% at 50% 46%, #000 42%, transparent 88%);
-    mask-image:radial-gradient(112% 112% at 50% 46%, #000 42%, transparent 88%);}
+  /* The invitation carries text right to its edges (attire, contact), so it
+     sits as a card rather than fading out under a mask. */
+  .hero-photo.invite img{height:auto; border-radius:14px; opacity:.96;
+    box-shadow:0 36px 90px -34px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06);
+    transition:opacity .3s var(--ease);}
   a.hero-photo.invite{display:block; cursor:pointer;}
   a.hero-photo.invite:hover img{opacity:1;}
-  .invite-cta{text-align:center; margin:2px 0 0; font-family:var(--util);
+  .invite-cta{text-align:center; margin:16px 0 0; font-family:var(--util);
     font-size:12px; letter-spacing:.14em; text-transform:uppercase;}
 
   .count{margin-top:auto; padding-top:48px; display:flex; align-items:flex-end;
@@ -434,7 +436,6 @@
       <a href="#record">Record</a>
       <a href="#day">The day</a>
       <a href="/gifts/">Registry</a>
-      <a href="/guests/#rsvp">RSVP</a>
     </nav>
     <button class="toggle" id="themeBtn" type="button" aria-label="Switch to light mode">
       <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M4.2 12H2M22 12h-2.2M5.6 5.6 7.2 7.2M16.8 16.8l1.6 1.6M18.4 5.6 16.8 7.2M7.2 16.8l-1.6 1.6"/></svg>
@@ -475,10 +476,10 @@
       </div>
 
       <div class="hero-photo-wrap invite">
-        <a class="hero-photo invite" href="/guests/" aria-label="Guest details and RSVP">
-          <img src="/img/notes-invite.jpg" alt="The wedding invitation — Dawsyn and Jameson, December 30, 2026" fetchpriority="high" id="heroImg">
+        <a class="hero-photo invite" href="/guests/" aria-label="Guest details">
+          <img src="/img/invitation.jpg" width="1056" height="1489" alt="Wedding invitation: join us in celebration for the wedding of Dawsyn and Jameson — December 30, 2026 at 2:00 PM, The Wedding Bowl, Cuvier Park, 590 Coast S Blvd, La Jolla, CA. Attire: formal." fetchpriority="high" id="heroImg">
         </a>
-        <p class="invite-cta"><a class="lnk" href="/gifts/">Registry →</a> &nbsp;·&nbsp; <a class="lnk" href="/guests/">Details →</a> &nbsp;·&nbsp; <a class="lnk" href="/guests/#rsvp">RSVP →</a></p>
+        <p class="invite-cta"><a class="lnk" href="/gifts/">Registry →</a> &nbsp;·&nbsp; <a class="lnk" href="https://venmo.com/u/Jameson-Golding" target="_blank" rel="noopener">Venmo →</a> &nbsp;·&nbsp; <a class="lnk" href="/guests/">Details →</a></p>
       </div>
     </div>
   </div>
@@ -658,7 +659,7 @@
         <li><span>City</span><strong>La Jolla, California</strong></li>
         <li><span>Reception</span><strong>6:00 in the evening</strong></li>
         <li><span>Everything else</span><strong><a class="lnk" href="/guests/">Full details for guests →</a></strong></li>
-        <li><span>Gifts</span><strong><a class="lnk" href="/gifts/">Your presence is the gift →</a></strong></li>
+        <li><span>Gifts</span><strong><a class="lnk" href="/gifts/">Registry &amp; Venmo →</a></strong></li>
       </ul>
     </div>
   </div>

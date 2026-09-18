@@ -2,7 +2,8 @@
 // GET /api/nba/scoreboard?date=YYYYMMDD -> slimmed events for one day
 // GET /api/nba/game?event=ID            -> slimmed summary: linescore, team + player box score, latest plays, win probability
 // GET /api/nba/player?id=ATHLETE_ID     -> a player's game log for the current season (last season until it starts)
-const ESPN = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba";
+// site.web.api answers requests from Cloudflare's network; site.api refuses them (403)
+const ESPN = "https://site.web.api.espn.com/apis/site/v2/sports/basketball/nba";
 const GAMELOG = "https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/";
 const SEASON = 2027; // ESPN names a season by the year it ends: 2027 is 2026-27
 const ALLOWED_ORIGINS = ["djgolding.com", "www.djgolding.com", "localhost", "127.0.0.1"];

@@ -2,6 +2,7 @@ import * as chat from "./functions/api/chat.js";
 import * as wedding from "./functions/api/wedding.js";
 import * as cfb from "./functions/api/cfb.js";
 import * as nfl from "./functions/api/nfl.js";
+import * as nba from "./functions/api/nba.js";
 import { clientIp, originOk, rateLimit, tooMany, forbidden } from "./functions/api/_guard.js";
 
 const RECORD_KEY = "record_entries";
@@ -236,6 +237,12 @@ export default {
     if (pathname.startsWith("/api/nfl/")) {
       if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
       return nfl.onRequestGet({ request, env, ctx });
+    }
+
+    // Live NBA scores, box scores and player game logs for /nba (same shape as the other proxies)
+    if (pathname.startsWith("/api/nba/")) {
+      if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
+      return nba.onRequestGet({ request, env, ctx });
     }
 
     return env.ASSETS.fetch(request);

@@ -1,6 +1,7 @@
 // Live NBA scores for /nba (NBA Courtside Zone): a read-only, edge-cached proxy of ESPN's public feeds.
 // GET /api/nba/scoreboard?date=YYYYMMDD -> slimmed events for one day
-// GET /api/nba/game?event=ID            -> slimmed summary: linescore, team + player box score, latest plays, win probability
+// GET /api/nba/game?event=ID            -> slimmed summary: linescore, team + player box score, latest plays, win probability,
+//                                          every field-goal attempt with its court location, and the score by game time
 // GET /api/nba/player?id=ATHLETE_ID     -> a player's game log for the current season (last season until it starts)
 // site.web.api answers requests from Cloudflare's network; site.api refuses them (403)
 const ESPN = "https://site.web.api.espn.com/apis/site/v2/sports/basketball/nba";
@@ -9,6 +10,7 @@ const SEASON = 2027; // ESPN names a season by the year it ends: 2027 is 2026-27
 const ALLOWED_ORIGINS = ["djgolding.com", "www.djgolding.com", "localhost", "127.0.0.1"];
 const TTL = 30; // seconds at the edge; the page polls every 30s during games
 const LOG_TTL = 900; // game logs change once a night
+const FINAL_TTL = 600; // a finished game's summary only changes if the league corrects a stat
 
 function corsHeaders(request) {
   const origin = request.headers.get("origin");
@@ -63,6 +65,41 @@ function slimEvent(e) {
 // team stat names -> the short keys the page's box scores use (same as the nightly data file)
 const TK = { "fieldGoalsMade-fieldGoalsAttempted": "fg", fieldGoalPct: "fgp", "threePointFieldGoalsMade-threePointFieldGoalsAttempted": "tp", threePointFieldGoalPct: "tpp", "freeThrowsMade-freeThrowsAttempted": "ft", freeThrowPct: "ftp", totalRebounds: "reb", offensiveRebounds: "oreb", defensiveRebounds: "dreb", assists: "ast", steals: "stl", blocks: "blk", turnovers: "to", totalTurnovers: "tto", fouls: "pf", turnoverPoints: "topts", fastBreakPoints: "fbp", pointsInPaint: "pip", largestLead: "lead", leadChanges: "lc", leadPercentage: "leadpct", technicalFouls: "tech", flagrantFouls: "flag" };
 
+// seconds of game time elapsed at a period and clock ("11:49", or "45.2" in the last minute): 12-minute quarters, 5-minute OTs
+function gameSecs(per, clk) {
+  const len = per <= 4 ? 720 : 300, start = per <= 4 ? (per - 1) * 720 : 2880 + (per - 5) * 300;
+  const m = String(clk || "").match(/^(\d+):(\d+)/);
+  const left = m ? (+m[1]) * 60 + (+m[2]) : (parseFloat(clk) || 0);
+  return Math.round(start + Math.max(0, Math.min(len, len - left)));
+}
+
+// Field-goal attempts for the shot charts, [side, athleteId, x, y, made, points, period, secs], and the score after every
+// scoring play for the game-flow chart, [secs, away, home]. ESPN puts every shot on one half court with the rim at (25, 0),
+// in feet: x across the court (0-50), y out from the rim. Free throws carry junk coordinates and are left out; the odd
+// field goal logged at (0, 0) keeps its row with no location.
+function shotsAndFlow(j, homeId) {
+  const shots = [], flow = [[0, 0, 0]];
+  let a = 0, h = 0, t = 0, per = 0;
+  (j.plays || []).forEach((p) => {
+    const pn = (p.period && p.period.number) || 0;
+    if (!pn) return;
+    per = Math.max(per, pn);
+    t = gameSecs(pn, p.clock && p.clock.displayValue);
+    const pts = +p.pointsAttempted || 0;
+    if (p.shootingPlay && (pts === 2 || pts === 3)) {
+      const c = p.coordinate || {};
+      const ok = Number.isFinite(c.x) && Number.isFinite(c.y) && Math.abs(c.x) <= 60 && c.y >= -10 && c.y <= 100 && !(c.x === 0 && c.y === 0);
+      const who = (p.participants || [])[0];
+      shots.push([p.team && String(p.team.id) === String(homeId) ? "h" : "a", (who && who.athlete && who.athlete.id) || "", ok ? c.x : null, ok ? c.y : null, p.scoringPlay ? 1 : 0, pts, pn, t]);
+    }
+    if (p.awayScore != null && p.homeScore != null && (+p.awayScore !== a || +p.homeScore !== h)) {
+      a = +p.awayScore; h = +p.homeScore; flow.push([t, a, h]);
+    }
+  });
+  if (flow.length > 1 && flow[flow.length - 1][0] < t) flow.push([t, a, h]);
+  return { shots, flow, per };
+}
+
 function slimSummary(j) {
   const bs = j.boxscore || {};
   const haOf = {};
@@ -93,6 +130,8 @@ function slimSummary(j) {
   }));
   const wp = j.winprobability || [];
   const step = Math.max(1, Math.floor(wp.length / 48));
+  const home = (hdr.competitors || []).find((c) => c.homeAway === "home");
+  const sf = shotsAndFlow(j, home && home.id);
   return {
     t: Date.now(),
     st: (st.type && st.type.name || "").replace("STATUS_", "").replace("FINAL_OT", "FINAL"),
@@ -103,6 +142,9 @@ function slimSummary(j) {
     plays,
     wp: wp.length ? Math.round((wp[wp.length - 1].homeWinPercentage || 0) * 100) : null,
     wpSeries: wp.length > 2 ? wp.filter((x, i) => i % step === 0 || i === wp.length - 1).map((x) => Math.round((x.homeWinPercentage || 0) * 100)) : null,
+    shots: sf.shots,
+    flow: sf.flow,
+    per: sf.per,
   };
 }
 
@@ -145,7 +187,8 @@ export async function onRequestGet({ request }) {
       const id = url.searchParams.get("event") || "";
       if (!/^\d{6,12}$/.test(id)) return json(request, { error: "event id" }, 400);
       const j = await upstream(ESPN + "/summary?event=" + id);
-      return json(request, slimSummary(j), 200, TTL);
+      const s = slimSummary(j);
+      return json(request, s, 200, s.st === "FINAL" ? FINAL_TTL : TTL);
     }
     if (p === "/api/nba/player") {
       const id = url.searchParams.get("id") || "";

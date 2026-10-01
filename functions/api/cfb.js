@@ -86,7 +86,57 @@ function slimSummary(j) {
     det: (st.type && st.type.shortDetail) || "",
     ls: (hdr.competitors || []).map((c) => ({ id: c.id, ha: c.homeAway, s: c.score, ls: (c.linescores || []).map((l) => l.displayValue) })),
     teams, players, scoring, drive,
+    wp: slimWP(j, hdr),
   };
+}
+
+// ESPN's play-by-play win probability, placed on a game clock for the chart on game pages.
+// p = [[seconds elapsed, home win %]] (overtime periods get 300 s each, plays spread evenly),
+// sw = the biggest single-play swings (d = change in home win %), sc = [[point index, "h"|"a"]] for scores.
+function slimWP(j, hdr) {
+  const wp = j.winprobability || [];
+  if (wp.length < 2) return null;
+  const plays = {};
+  const dr = j.drives || {};
+  (dr.previous || []).concat(dr.current ? [dr.current] : []).forEach((d) => (d.plays || []).forEach((p) => { plays[p.id] = p; }));
+  const ot = {};
+  const at = (p) => {
+    const per = (p.period && p.period.number) || 1;
+    if (per > 4) { ot[per] = (ot[per] || 0) + 1; return 3600 + (per - 5) * 300 + Math.min(290, ot[per] * 12); }
+    const m = /^(\d+):(\d+)/.exec((p.clock && p.clock.displayValue) || "");
+    const left = m ? Math.min(900, +m[1] * 60 + +m[2]) : 0;
+    return (per - 1) * 900 + (900 - left);
+  };
+  let t = 0;
+  const p = [], meta = [], idx = {};
+  wp.forEach((w, i) => {
+    const pl = plays[w.playId];
+    if (pl) t = Math.max(t, at(pl));
+    p.push([t, Math.round((w.homeWinPercentage || 0) * 1000) / 10]);
+    meta.push(pl);
+    idx[w.playId] = i;
+  });
+  // ESPN's feed has one-play glitches (a 15-20 point dip that snaps straight back); flatten them
+  for (let i = 1; i < p.length - 1; i++) {
+    const a = p[i][1] - p[i - 1][1], b = p[i + 1][1] - p[i][1];
+    if (Math.abs(a) >= 6 && Math.abs(b) >= 6 && Math.sign(a) !== Math.sign(b) && Math.abs(p[i + 1][1] - p[i - 1][1]) < Math.min(Math.abs(a), Math.abs(b)) * 0.5) {
+      p[i][1] = Math.round((p[i - 1][1] + p[i + 1][1]) * 5) / 10;
+    }
+  }
+  const sw = [];
+  for (let i = 1; i < p.length; i++) {
+    const pl = meta[i];
+    const d = Math.round((p[i][1] - p[i - 1][1]) * 10) / 10;
+    if (!pl || Math.abs(d) < 8) continue;
+    if (/timeout|end of|end period|coin toss/i.test((pl.type && pl.type.text) || "") || /^\s*timeout/i.test(pl.text || "")) continue;
+    sw.push({ i, d, per: (pl.period && pl.period.number) || 0, clk: (pl.clock && pl.clock.displayValue) || "", txt: String(pl.text || "").slice(0, 170) });
+  }
+  sw.sort((x, y) => Math.abs(y.d) - Math.abs(x.d));
+  const home = ((hdr.competitors || []).find((c) => c.homeAway === "home") || {}).id;
+  const sc = (j.scoringPlays || [])
+    .filter((s) => idx[s.id] != null)
+    .map((s) => [idx[s.id], s.team && s.team.id === home ? "h" : "a"]);
+  return { p, sw: sw.slice(0, 3), sc };
 }
 
 async function upstream(url) {

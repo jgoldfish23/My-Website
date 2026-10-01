@@ -13,7 +13,7 @@
 <title>Kramerica Industries</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#EEF1F5; --surface:#FFFFFF; --surface-2:#F4F6F9; --surface-3:#E6EAEF;
@@ -1726,6 +1726,98 @@ footer{padding:22px 20px 44px;border-top:1px solid var(--line-2);font-size:12px;
 /* conference race table */
 .confrace td.crodds{white-space:nowrap}
 .confrace td.crodds b{font-variant-numeric:tabular-nums}
+/* ===== TV guide: neon control room (2026-09-30). Everything is scoped to body.tvmode, set only on #/tv. ===== */
+body.tvmode{background:#04060c;background-image:radial-gradient(1100px 620px at 10% -10%,rgba(34,227,255,.11),transparent 62%),radial-gradient(900px 720px at 100% 0%,rgba(255,43,214,.10),transparent 60%),linear-gradient(rgba(120,170,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,255,.045) 1px,transparent 1px);background-size:auto,auto,46px 46px,46px 46px;background-attachment:fixed}
+body.tvmode #view,body.tvmode .asof{--bg:#04060c;--surface:rgba(11,16,30,.84);--surface-2:rgba(255,255,255,.035);--surface-3:rgba(255,255,255,.07);--ink:#eef4ff;--ink-2:#a9b8d6;--ink-3:#7f8fb0;--line:rgba(120,170,255,.18);--line-2:rgba(120,170,255,.09);--accent:#22e3ff;--accent-soft:rgba(34,227,255,.13);--accent-text:#6deeff;--accent-ink:#04060c;--gold:#ffc53d;--gold-text:#ffd166;--gold-soft:rgba(255,197,61,.13);--good:#5dff8a;--good-soft:rgba(93,255,138,.12);--bad:#ff5d7a;--bad-soft:rgba(255,93,122,.12);--seg-track:rgba(255,255,255,.05);--seg-thumb:rgba(34,227,255,.22);--shadow:0 10px 40px rgba(0,0,0,.55);color:var(--ink)}
+body.tvmode .asof a{color:#6deeff}
+
+/* hero: dark glass, a slow aurora behind it, scan lines over it, neon wordmark */
+body.tvmode .tvhero{background:linear-gradient(135deg,rgba(14,22,44,.94),rgba(7,9,20,.94));border:1px solid rgba(34,227,255,.3);border-radius:18px;box-shadow:0 0 0 1px rgba(255,43,214,.08),0 24px 70px rgba(0,0,0,.6),inset 0 0 90px rgba(34,227,255,.06);overflow:hidden;isolation:isolate}
+body.tvmode .tvhero::before{content:"";position:absolute;inset:-60%;z-index:-1;background:conic-gradient(from 0deg,rgba(34,227,255,0),rgba(34,227,255,.24),rgba(255,43,214,.22),rgba(124,77,255,.2),rgba(34,227,255,0));filter:blur(60px);opacity:.75;animation:tvx-aurora 22s linear infinite;pointer-events:none}
+body.tvmode .tvhero::after{inset:0;right:auto;bottom:auto;width:100%;height:100%;border-radius:inherit;background:repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);z-index:0}
+body.tvmode .tvhero>*{position:relative;z-index:1}
+body.tvmode .tvhero .eyebrow{color:#ff8ff0;letter-spacing:.2em}
+body.tvmode .tvlogo{background:rgba(255,43,214,.06);border:2px solid #ff2bd6;color:#fff;font-family:"Orbitron",var(--disp);font-weight:800;letter-spacing:.13em;padding:9px 20px 7px;border-radius:12px;text-shadow:0 0 4px #fff,0 0 10px #ff2bd6,0 0 22px #ff2bd6,0 0 44px rgba(255,43,214,.7);box-shadow:0 0 12px rgba(255,43,214,.65),0 0 36px rgba(255,43,214,.32),inset 0 0 16px rgba(255,43,214,.42);animation:tvx-flicker 8s infinite}
+body.tvmode .tvlogo span:last-child{color:#e6fcff;text-shadow:0 0 4px #fff,0 0 10px #22e3ff,0 0 22px #22e3ff,0 0 44px rgba(34,227,255,.7)}
+/* Frank's set becomes a holographic monitor: cyan rim, rolling scan lines, an on-air bug */
+body.tvmode .tvset{background:linear-gradient(155deg,#1b2440,#070a14);box-shadow:0 0 0 1px rgba(34,227,255,.5),0 0 26px rgba(34,227,255,.32),0 18px 40px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.12)}
+body.tvmode .tvset img{filter:saturate(1.12) contrast(1.06)}
+body.tvmode .tvset::after{background:repeating-linear-gradient(0deg,rgba(0,0,0,.26) 0 1px,transparent 1px 3px),linear-gradient(150deg,rgba(255,255,255,.18),rgba(255,255,255,0) 42%);background-size:100% 3px,100% 100%;box-shadow:inset 0 0 26px rgba(0,0,0,.55),inset 0 0 0 1px rgba(34,227,255,.35);animation:tvx-roll 1.2s linear infinite}
+body.tvmode .tvset::before{content:"\25CF  ON AIR";position:absolute;top:15px;left:15px;z-index:2;padding:3px 7px;border-radius:4px;background:rgba(255,43,214,.88);color:#fff;font:800 9px/1 var(--body);letter-spacing:.16em;box-shadow:0 0 12px rgba(255,43,214,.85)}
+
+/* the countdown deck */
+.tvx-deck{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px;margin:0 0 16px}
+.tvx-deck.solo{grid-template-columns:1fr}
+.tvx-next{position:relative;display:block;padding:15px 18px 14px;border-radius:16px;color:var(--ink);overflow:hidden;background:linear-gradient(120deg,rgba(255,43,214,.17),rgba(34,227,255,.10) 58%,rgba(11,16,30,.88));border:1px solid rgba(255,43,214,.38);box-shadow:0 0 28px rgba(255,43,214,.16),inset 0 0 44px rgba(34,227,255,.05);transition:box-shadow .2s ease,border-color .2s ease}
+.tvx-next::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.07),transparent);animation:tvx-sweep 5.5s ease-in-out infinite;pointer-events:none}
+a.tvx-next:hover{text-decoration:none;border-color:rgba(34,227,255,.65);box-shadow:0 0 34px rgba(34,227,255,.28),inset 0 0 44px rgba(34,227,255,.07)}
+.tvx-lbl{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#ff8ff0}
+.tvx-count{margin-top:6px;font-family:"Orbitron",var(--num,var(--disp));font-size:42px;font-weight:800;letter-spacing:.05em;line-height:1.05;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 0 8px rgba(34,227,255,.95),0 0 26px rgba(34,227,255,.5)}
+.tvx-count>i{font-style:normal;color:#ff2bd6;text-shadow:0 0 10px #ff2bd6;margin:0 3px;animation:tvx-blink 1s steps(2,start) infinite}
+.tvx-count .d i{font-style:normal;font-size:.48em;color:var(--ink-3);text-shadow:none;margin:0 12px 0 3px}
+.tvx-count small{font-size:.45em;letter-spacing:.08em;color:var(--ink-2);text-shadow:none}
+.tvx-next.live{border-color:rgba(93,255,138,.45);background:linear-gradient(120deg,rgba(93,255,138,.16),rgba(34,227,255,.08) 60%,rgba(11,16,30,.88));box-shadow:0 0 30px rgba(93,255,138,.2)}
+.tvx-next.live .tvx-lbl{color:#8dffad}
+.tvx-next.live .tvx-count{text-shadow:0 0 10px rgba(93,255,138,.9),0 0 28px rgba(93,255,138,.45)}
+.tvx-next.kicked .tvx-count{color:#5dff8a}
+.tvx-game{margin-top:9px;display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:14px;color:var(--ink-2)}
+.tvx-game b{color:var(--ink);font-weight:700}
+.tvx-rk{font-size:12px;font-weight:700;color:var(--ink-3)}
+.tvx-at{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 2px}
+.tvx-lg{width:24px;height:24px;object-fit:contain;flex:none;background:#fff;border-radius:50%;padding:2px;box-shadow:0 0 10px rgba(255,255,255,.18)}
+.tvx-lg.wsw{width:8px;height:16px;border-radius:2px;padding:0;box-shadow:none}
+.tvx-meta{margin-left:4px;padding:3px 9px;border-radius:999px;border:1px solid rgba(34,227,255,.38);background:rgba(34,227,255,.08);color:#a6f5ff;font-size:12px;font-weight:700;white-space:nowrap}
+.tvx-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tvx-stat{position:relative;padding:12px 14px;border-radius:14px;background:rgba(11,16,30,.84);border:1px solid rgba(120,170,255,.18);box-shadow:inset 0 0 30px rgba(34,227,255,.04);overflow:hidden}
+.tvx-stat::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:#22e3ff;box-shadow:0 0 10px #22e3ff}
+.tvx-stat b{display:block;font-family:"Orbitron",var(--num,var(--disp));font-size:28px;font-weight:800;line-height:1;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 0 12px rgba(34,227,255,.6)}
+.tvx-stat span{display:block;margin-top:7px;font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.tvx-stat:nth-child(2)::before{background:#ff2bd6;box-shadow:0 0 10px #ff2bd6}.tvx-stat:nth-child(2) b{text-shadow:0 0 12px rgba(255,43,214,.65)}
+.tvx-stat:nth-child(3)::before{background:#ffc53d;box-shadow:0 0 10px #ffc53d}.tvx-stat:nth-child(3) b{text-shadow:0 0 12px rgba(255,197,61,.6)}
+.tvx-stat:nth-child(4)::before{background:#5dff8a;box-shadow:0 0 10px #5dff8a}.tvx-stat:nth-child(4) b{text-shadow:0 0 12px rgba(93,255,138,.55)}
+
+/* toolbar */
+body.tvmode .tvbar .seg{background:rgba(11,16,30,.84);border-color:rgba(120,170,255,.2)}
+body.tvmode .tvbar .seg a.on,body.tvmode .tvbar .seg button.on{background:linear-gradient(120deg,rgba(34,227,255,.28),rgba(255,43,214,.22));color:#fff;box-shadow:0 0 16px rgba(34,227,255,.3)}
+
+/* the grid: dark glass, cyan time rails, a laser for "now" */
+body.tvmode .tvframe{background:rgba(7,11,22,.9);border:1px solid rgba(34,227,255,.24);border-radius:16px;box-shadow:0 0 0 1px rgba(255,43,214,.06),0 30px 80px rgba(0,0,0,.55),inset 0 0 120px rgba(34,227,255,.04)}
+body.tvmode .tvhead{background:rgba(5,8,17,.97);border-bottom:1px solid rgba(34,227,255,.28);box-shadow:0 6px 20px rgba(0,0,0,.45)}
+body.tvmode .tvcorner{background:rgba(5,8,17,.99);border-right-color:rgba(34,227,255,.2);font-family:"Orbitron",var(--disp);font-size:13px;letter-spacing:.12em;color:#a6f5ff}
+body.tvmode .tvax{border-left-color:rgba(34,227,255,.22);color:#8fe6ff;font-family:"Orbitron",var(--disp);font-size:11.5px;font-weight:600;letter-spacing:.05em;text-shadow:0 0 8px rgba(34,227,255,.45)}
+body.tvmode .tvl{border-left-color:rgba(34,227,255,.09)}
+body.tvmode .tvl.half{border-left-style:dashed;border-left-color:rgba(34,227,255,.05)}
+body.tvmode .tvrow{border-bottom-color:rgba(120,170,255,.08)}
+body.tvmode .tvrow.alt{background:rgba(255,255,255,.02)}
+body.tvmode .tvnet,body.tvmode .tvrow.alt .tvnet{background:rgba(5,8,17,.97);border-right-color:rgba(34,227,255,.2)}
+body.tvmode .nwt{border-radius:10px;box-shadow:0 0 0 1px rgba(34,227,255,.4),0 0 16px rgba(34,227,255,.2)}
+body.tvmode #tvnow{width:2px;margin-left:-1px;background:linear-gradient(180deg,#ff2bd6,#22e3ff);box-shadow:0 0 6px #ff2bd6,0 0 16px rgba(255,43,214,.8),0 0 32px rgba(34,227,255,.5)}
+body.tvmode .tvnowlab{background:#ff2bd6;color:#fff;font-family:"Orbitron",var(--body);letter-spacing:.14em;box-shadow:0 0 12px #ff2bd6,0 0 26px rgba(255,43,214,.6);animation:tvx-pulse 1.6s ease-in-out infinite}
+
+/* game blocks: glass, a gloss over the team bars, neon outline on hover, live games breathe */
+body.tvmode .tvg{background:rgba(255,255,255,.05);color:#fff;border-radius:10px;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 6px 18px rgba(0,0,0,.45);transition:transform .15s ease,box-shadow .15s ease}
+body.tvmode .tvg:hover,body.tvmode .tvg:focus-visible{transform:translateY(-2px) scale(1.02);box-shadow:0 0 0 2px #22e3ff,0 0 24px rgba(34,227,255,.55),0 16px 32px rgba(0,0,0,.55)}
+body.tvmode .tvg-lg{background:rgba(6,9,19,.94)}
+body.tvmode .tvg-lg img{width:28px;height:28px;background:#fff;border-radius:50%;padding:3px;box-shadow:0 0 10px rgba(255,255,255,.2)}
+body.tvmode .tvg-bar{position:relative}
+body.tvmode .tvg-bar::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0) 52%,rgba(0,0,0,.16));pointer-events:none}
+body.tvmode .tvg-bar>*{position:relative}
+body.tvmode .tvg.fav{box-shadow:0 0 0 2px #ffc53d,0 0 20px rgba(255,197,61,.5)}
+body.tvmode .tvg.live{animation:tvx-live 1.8s ease-in-out infinite}
+body.tvmode .tvg-strip{background:rgba(4,6,12,.94);color:#a6f5ff;letter-spacing:.15em}
+body.tvmode .tvg-strip.live{color:#5dff8a}
+body.tvmode .tvfoot{color:var(--ink-3)}
+
+@keyframes tvx-aurora{to{transform:rotate(360deg)}}
+@keyframes tvx-flicker{0%,17%,21%,61%,64%,100%{opacity:1}19%,62.5%{opacity:.6}}
+@keyframes tvx-roll{to{background-position:0 3px,0 0}}
+@keyframes tvx-sweep{0%,55%{left:-45%}100%{left:110%}}
+@keyframes tvx-blink{to{visibility:hidden}}
+@keyframes tvx-pulse{50%{box-shadow:0 0 4px #ff2bd6,0 0 10px rgba(255,43,214,.4)}}
+@keyframes tvx-live{0%,100%{box-shadow:0 0 0 2px #5dff8a,0 0 10px rgba(93,255,138,.45)}50%{box-shadow:0 0 0 2px #5dff8a,0 0 28px rgba(93,255,138,.85)}}
+@media (max-width:720px){.tvx-deck{grid-template-columns:1fr}.tvx-count{font-size:31px}.tvx-stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.tvx-stat{padding:10px 6px 9px;text-align:center}.tvx-stat::before{display:none}.tvx-stat b{font-size:20px}.tvx-stat span{font-size:9px;letter-spacing:.05em}body.tvmode .tvlogo{letter-spacing:.08em;padding:7px 14px 5px}}
+@media (prefers-reduced-motion:reduce){body.tvmode .tvhero::before,body.tvmode .tvlogo,body.tvmode .tvset::after,body.tvmode .tvnowlab,body.tvmode .tvg.live,.tvx-next::after,.tvx-count>i{animation:none}}
+@media (max-width:720px){body.tvmode .tvlogo{font-size:22px;letter-spacing:.045em;padding:6px 10px 5px;border-width:1.5px;border-radius:9px}body.tvmode .tvhero .eyebrow{font-size:10px;letter-spacing:.1em}body.tvmode .tvset img{width:104px;height:78px}body.tvmode .tvset::before{top:10px;left:10px;padding:2px 5px;font-size:7.5px;letter-spacing:.12em}}
 </style>
 
 <header class="top">
@@ -71561,7 +71653,7 @@ M|2026-10-03|Prairie View A&M|Mississippi Valley State||||||||||81|49|
 /* =========================================================
    Kramerica Industries — 2026 college football hub
    ========================================================= */
-const AS_OF = 'Thu Oct 1, 2026 · 12:15 AM ET';
+const AS_OF = 'Thu Oct 1, 2026 · 12:28 AM ET';
 const AS_OF_DATE = '2026-10-01';
 const HFA = 2.5;          // home-field points
 const SD = 16;            // std dev of margin vs projection
@@ -72538,6 +72630,22 @@ function confRaceHTML(name){ const t=T[name]; if(!t||t.other||!t.conf) return ''
     +R.rows.map((x,i)=>'<tr class="click'+(x.t.name===name?' hl':'')+'" data-href="#/team/'+enc(x.t.name)+'"><td class="rk num">'+(i+1)+'</td><td>'+chip(x.t.name,{norank:true})+'</td><td class="r">'+rec(x)+'</td><td class="r muted">'+proj(x)+'</td><td class="r">'+cfpPct(fbs?x.tg:x.outright)+'</td><td class="crodds"><span class="rbar"><i style="width:'+Math.max(2,Math.round(100*odds(x)/maxO))+'%;background:'+uiColor(x.t)+'"></i></span><b>'+cfpPct(odds(x))+'</b></td></tr>').join('')
     +'</tbody></table></div><div class="mini" style="margin-top:6px">'+(fbs?'From '+CFP_SIMS.toLocaleString()+' simulations of the rest of the season, the same run behind the playoff odds: the top two in the standings meet for the title.':'From 4,000 simulations of the '+R.left+' '+esc(t.conf)+' games left, using this page\'s ratings. Conference tiebreakers for the playoff auto bid are not modeled.')+'</div></div>';
   return html; }
+/* ---------- TV guide, control-room deck: next-kickoff countdown and the day's counters ---------- */
+let TVX_TIMER=null;
+/* the next televised kickoff from now (FBS games and the featured FCS team); ties go to the bigger game */
+function tvxNext(){ const now=Date.now(); let best=null; G.forEach(g=>{ if(g.played||g.live||g.tbd||!g.tv) return; if(g.status==='CANCELED'||g.status==='POSTPONED') return; if(g.fcsOnly&&!team(g.away).featured&&!team(g.home).featured) return; const k=kickMs(g); if(k==null||k<now) return; if(!best||k<best.k||(k===best.k&&interest(g)>interest(best.g))) best={g,k}; }); return best; }
+function tvxFmt(ms){ if(!(ms>0)) ms=0; const s=Math.floor(ms/1000); const d=Math.floor(s/86400), h=Math.floor(s%86400/3600), m=Math.floor(s%3600/60), x=s%60; const p=n=>String(n).padStart(2,'0'); return (d?'<span class="d">'+d+'<i>d</i></span>':'')+'<span>'+p(h)+'</span><i>:</i><span>'+p(m)+'</span><i>:</i><span>'+p(x)+'</span>'; }
+function tvxTick(){ const el=document.getElementById('tvx-count'); if(!el){ if(!(location.hash||'').startsWith('#/tv')){ clearInterval(TVX_TIMER); TVX_TIMER=null; } return; } const left=+el.dataset.t-Date.now(); el.innerHTML=tvxFmt(left); if(left<=0) el.closest('.tvx-next')?.classList.add('kicked'); }
+function tvDeckHTML(grid, stream, rows){ const liveN=G.filter(g=>g.live&&(!g.fcsOnly||team(g.away).featured||team(g.home).featured)).length; const nx=tvxNext();
+  const ranked=grid.concat(stream).filter(x=>x.g&&team(x.g.away).ap&&team(x.g.home).ap).length;
+  const stat=(n,l)=>'<div class="tvx-stat"><b>'+n+'</b><span>'+l+'</span></div>';
+  let next='';
+  if(liveN){ next='<div class="tvx-next live"><div class="tvx-lbl"><span class="livedot"></span>Live now</div><div class="tvx-count">'+liveN+'<small> game'+(liveN===1?'':'s')+'</small></div><div class="tvx-game">scores move on their own &middot; tap a game on the grid</div></div>'; }
+  else if(nx){ const g=nx.g, a=team(g.away), h=team(g.home);
+    next='<a class="tvx-next" href="#/game/'+g.id+'"><div class="tvx-lbl">Next kickoff</div><div class="tvx-count" id="tvx-count" data-t="'+nx.k+'">'+tvxFmt(nx.k-Date.now())+'</div><div class="tvx-game">'+tlogo(a,'tvx-lg')+(a.ap?'<span class="tvx-rk">#'+a.ap+'</span>':'')+'<b>'+esc(tshort(a.name))+'</b><span class="tvx-at">'+(g.neutral?'vs':'at')+'</span>'+tlogo(h,'tvx-lg')+(h.ap?'<span class="tvx-rk">#'+h.ap+'</span>':'')+'<b>'+esc(tshort(h.name))+'</b><span class="tvx-meta">'+esc(fmtDate(g.date,true).slice(0,3))+' '+esc(kick(g))+' &middot; '+esc(tvShort(g.tv))+'</span></div></a>'; }
+  return '<div class="tvx-deck'+(next?'':' solo')+'">'+next+'<div class="tvx-stats">'+stat(grid.length,'on TV')+stat(stream.length,'streaming')+stat(ranked,'top-25 clashes')+stat(rows.length,'networks')+'</div></div>'; }
+/* the control-room look belongs to the TV page only */
+window.addEventListener('hashchange', ()=>{ if(!(location.hash||'').startsWith('#/tv')) document.body.classList.remove('tvmode'); });
 /* ---------- home / about ---------- */
 function renderHome(){ renderWeek(CUR_WEEK); }
 function aboutHTML(){ return '<h2>How the numbers work</h2><p><b>Power rating</b> starts from ESPN\'s preseason FPI, then blends in each 2026 result. Each game is worth one "vote": the scoring margin (capped at 28, home field of 2.5 removed) plus the opponent\'s rating. The preseason number counts as four games, so early-season results move things but don\'t swing them wildly. The whole league is re-solved 20 times so opponent strength settles.</p><p><b>Model line</b> is the rating gap plus 2.5 for the home team. <b>Win probability</b> assumes results scatter around that line with a 16-point standard deviation, which is about what college football produces.</p><p><b>Edge</b> is the model line minus the market line. It is a lean, not a pick, and so far this season the model has not beaten closing lines (the odds board keeps its running record), so treat an edge as a second opinion rather than a reason to bet. For a finished game, "Model had", the pregame win chance and the edge come from the ratings as they stood before kickoff.</p><p><b>Projected record</b> adds up win probabilities for the games left. <b>Bowl %</b> is the chance of reaching 6 wins.</p><p><b>Schedule strength</b> is the average power rating of all opponents on the schedule. <b>FCS teams</b> are rated the same way. Their preseason number comes from every 2025 FCS result, playoffs included, pulled a quarter of the way back toward their league\'s typical level for roster turnover. Division II and NAIA opponents carry a fixed placeholder.</p><p>Scores, schedule, and lines are a snapshot from '+asOfDisp()+'. The site refreshes itself every morning and night, Saturday afternoon and evening, and Sunday after the AP poll comes out; live scores move on their own during games.</p><p style="text-align:right"><button class="btn" id="dlg-close">Close</button></p>'; }
@@ -72671,7 +72779,7 @@ setInterval(tvNowTick, 30000);
 /* keep the selected pill of a sideways-scrolling strip in view without moving the page */
 function tvCenter(sel){ const on=document.querySelector(sel); if(!on) return; const s=on.parentElement; if(s.scrollWidth<=s.clientWidth) return; s.scrollLeft += on.getBoundingClientRect().left - s.getBoundingClientRect().left - (s.clientWidth-on.offsetWidth)/2; }
 
-function renderTV(key, scope){ setNav('tv');
+function renderTV(key, scope){ setNav('tv'); document.body.classList.add('tvmode');
   scope = (scope==='all'||scope==='fbs') ? scope : TV_SCOPE; TV_SCOPE=scope;
   const items=tvGames(scope); let day=null, w=null;
   if(/^\d{4}-\d{2}-\d{2}$/.test(key||'')) day=key;
@@ -72698,7 +72806,7 @@ function renderTV(key, scope){ setNav('tv');
   let html='<div class="tvhero">'+(FRANK?'<div class="tvset"><img src="'+FRANK+'" alt="Frank Costanza pointing at the camera" width="360" height="271"></div>':'')
     +'<div class="tvhero-txt"><div class="eyebrow">College football on TV</div><h1 class="tvlogo"><span>TV</span><span>Guide</span></h1>'
     +'<div class="sub"><b>'+esc(fmtDateLong(day))+'</b> · Week&nbsp;'+w+'<br>'+(tally.length?tally.join(' · ')+' · ':'')+'times in '+esc(tz.name)+' <a href="#/settings">change</a></div></div>'
-    +weekPills(w,'#/tv/')+'</div>';
+    +weekPills(w,'#/tv/')+'</div>'; html+=tvDeckHTML(grid, stream, rows);
   const days=tvDays(items, w);
   html+='<div class="toolbar tvbar">'+(days.length?'<div class="seg tvdays">'+days.map(d=>'<a href="#/tv/'+d.d+'" class="'+(d.d===day?'on':'')+'">'+esc(tvDayLabel(d.d))+'<span class="n">'+d.n+'</span></a>').join('')+'</div>':'')
     +'<div class="seg">'+[['fbs','FBS'],['all','FBS + FCS']].map(s=>'<a href="#/tv/'+day+'/'+s[0]+'" class="'+(scope===s[0]?'on':'')+'" title="'+(s[0]==='fbs'?'Games with an FBS team, plus featured FCS teams':'Every Division I game')+'">'+s[1]+'</a>').join('')+'</div>'
@@ -72722,7 +72830,7 @@ function renderTV(key, scope){ setNav('tv');
 
   const vkey=day+'|'+scope; const prev=document.getElementById('tvwrap');
   if(prev&&TV_VIEW.key===vkey) TV_VIEW.left=prev.scrollLeft;
-  view.innerHTML=html; TV_LAST={hash:location.hash, day};
+  view.innerHTML=html; TV_LAST={hash:location.hash, day}; if(!TVX_TIMER) TVX_TIMER=setInterval(tvxTick,1000);
   tvCenter('.tvdays .on'); tvCenter('.tvhero .wk .on');
   const wrap=document.getElementById('tvwrap'), head=document.getElementById('tvhead');
   if(wrap&&head){

@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>Jamo Sports Hub</title>
-<meta name="description" content="College football, the NFL and the NBA in one place: your teams, live scores and what is next.">
-<meta name="theme-color" content="#070a12">
+<meta name="description" content="College football, the NFL and the NBA in one place: your teams, live scores and what is on TV.">
+<meta name="theme-color" content="#05070d">
 <meta name="apple-mobile-web-app-title" content="Jamo Sports">
 <link rel="icon" type="image/svg+xml" href="/sports/icons/jsh.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/sports/icons/jsh-32.png">
@@ -14,91 +14,185 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-180.png">
 <link rel="manifest" href="/sports/icons/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&family=Orbitron:wght@600;800&display=swap">
 <style>
-:root{--bg:#eef1f6;--surface:#fff;--surface-2:#f5f7fb;--ink:#0d1220;--ink-2:#465166;--ink-3:#7b8598;--line:#dfe4ec;--line-2:#ebeef4;--good:#11804a;--bad:#c8283c;--live:#e0193a;--plate:#fff;--sh:0 1px 2px rgba(15,23,42,.05),0 8px 24px -12px rgba(15,23,42,.18);--disp:"Inter Tight","Inter",system-ui,sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--surface:#101217;--surface-2:#16191f;--ink:#eef2f8;--ink-2:#a7b0c0;--ink-3:#77808f;--line:#262a33;--line-2:#1c1f26;--good:#3ddc84;--bad:#ff5d73;--live:#ff4d6a;--plate:#f4f6fa;--sh:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#000;--surface:#101217;--surface-2:#16191f;--ink:#eef2f8;--ink-2:#a7b0c0;--ink-3:#77808f;--line:#262a33;--line-2:#1c1f26;--good:#3ddc84;--bad:#ff5d73;--live:#ff4d6a;--plate:#f4f6fa;--sh:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);color-scheme:dark}
+/* ===== Jamo Sports Hub home (2026-10-04 redesign): your teams first, then what is live, what is on TV today, and each sport ===== */
+:root{
+  --bg:#05070d; --surface:rgba(255,255,255,.035); --surface-2:rgba(255,255,255,.06); --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.05);
+  --ink:#eef2f8; --ink-2:#a9b3c4; --ink-3:#6f7a8c; --live:#ff4d6a; --gold:#fbbf24;
+  --cfb:#3b7bff; --nfl:#ff3b5c; --nba:#a45bff;
+  --plate:#fff; --sh:0 18px 40px -22px rgba(0,0,0,.85); --r:20px;
+  --disp:"Inter Tight","Inter",system-ui,sans-serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --num:"Orbitron","Inter Tight",system-ui,sans-serif;
+  color-scheme:dark;
+}
+:root.light{--bg:#eef1f6;--surface:#fff;--surface-2:#f4f6fa;--line:#dde2ea;--line-2:#e9edf3;--ink:#0d1220;--ink-2:#465166;--ink-3:#7b8598;--live:#e0193a;--sh:0 1px 2px rgba(15,23,42,.05),0 14px 30px -18px rgba(15,23,42,.25);--cfb:#1d5fd8;--nfl:#d0103a;--nba:#7c3aed;color-scheme:light}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(900px 520px at 8% -6%,rgba(79,140,255,.16),transparent 60%),radial-gradient(800px 560px at 96% -8%,rgba(160,91,255,.14),transparent 62%),radial-gradient(700px 420px at 50% 112%,rgba(251,191,36,.07),transparent 60%)}
+:root.light body::before{background:radial-gradient(900px 520px at 8% -6%,rgba(79,140,255,.12),transparent 60%),radial-gradient(800px 560px at 96% -8%,rgba(160,91,255,.10),transparent 62%)}
 a{color:inherit;text-decoration:none}
 img{max-width:100%}
 [hidden]{display:none!important}
-.fd{max-width:1240px;margin:0 auto;padding:0 16px 40px}
-.fd-hero{position:relative;margin:18px 0 18px;padding:26px 26px 22px;border-radius:22px;color:#fff;background:#070a12;background-image:radial-gradient(700px 300px at 0% 0%,rgba(29,95,216,.55),transparent 60%),radial-gradient(600px 320px at 100% 0%,rgba(109,40,217,.5),transparent 62%),radial-gradient(500px 260px at 50% 120%,rgba(200,16,46,.28),transparent 60%);overflow:hidden;box-shadow:0 18px 50px -24px rgba(7,10,18,.8)}
-.fd-hero::after{content:"";position:absolute;right:-90px;top:-150px;width:320px;height:320px;border-radius:50%;border:18px solid rgba(251,191,36,.16);border-bottom-color:transparent;transform:rotate(-20deg);pointer-events:none}
-.fd-hero>*{position:relative;z-index:1}
-.fd-eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9fb4d9}
-.fd-hero h1{margin:6px 0 6px;font-family:var(--disp);font-size:clamp(30px,6vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.02}
-.fd-hero h1 b{background:linear-gradient(90deg,#8cc2ff,#c9adff 60%,#fbbf24);-webkit-background-clip:text;background-clip:text;color:transparent}
-.fd-sub{margin:0;color:#c7d2e6;font-size:15px;max-width:620px}
-.fd-pulse{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.fd-chip{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:12.5px;font-weight:600;color:#e6ecf7;white-space:nowrap}
-.fd-chip i{width:7px;height:7px;border-radius:50%;background:var(--c,#fff)}
-.fd-chip.live i{background:#ff4d6a;box-shadow:0 0 0 0 rgba(255,77,106,.7);animation:fd-ping 1.6s infinite}
-@keyframes fd-ping{70%{box-shadow:0 0 0 7px rgba(255,77,106,0)}100%{box-shadow:0 0 0 0 rgba(255,77,106,0)}}
-.fd-sec{display:flex;align-items:baseline;gap:10px;margin:22px 2px 10px}
-.fd-sec h2{margin:0;font-family:var(--disp);font-size:19px;font-weight:800;letter-spacing:-.02em}
-.fd-sec span{color:var(--ink-3);font-size:12.5px;margin-left:auto;white-space:nowrap}
-.fd-live{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,330px);gap:10px;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x proximity}
-.fd-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
-.sp{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh);overflow:hidden;min-width:0}
-.sp-head{display:flex;align-items:center;gap:10px;padding:14px 16px 12px;border-bottom:1px solid var(--line-2);background:linear-gradient(180deg,color-mix(in srgb,var(--c) 10%,transparent),transparent)}
-.sp-head:hover .sp-go{color:var(--c)}
-.sp-dot{width:10px;height:10px;border-radius:3px;background:var(--c);flex:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 22%,transparent)}
-.sp-name{font-family:var(--disp);font-size:18px;font-weight:800;letter-spacing:-.02em}
-.sp-ctx{font-size:12.5px;color:var(--ink-3);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fd{max-width:1240px;margin:0 auto;padding:18px 16px 44px}
+/* ---------- hero ---------- */
+.hero{position:relative;display:grid;grid-template-columns:1.25fr 1fr;gap:22px;align-items:stretch;padding:28px 28px 26px;border-radius:26px;color:#fff;background:#070a14;background-image:radial-gradient(780px 380px at 0% 0%,rgba(79,140,255,.42),transparent 62%),radial-gradient(640px 380px at 100% 0%,rgba(160,91,255,.38),transparent 64%),radial-gradient(560px 300px at 60% 130%,rgba(251,191,36,.16),transparent 62%);border:1px solid rgba(255,255,255,.08);box-shadow:0 30px 70px -40px rgba(0,0,0,.9);overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(120% 90% at 30% 0%,#000 30%,transparent 75%);mask-image:radial-gradient(120% 90% at 30% 0%,#000 30%,transparent 75%)}
+.hero::after{content:"";position:absolute;left:-150px;bottom:-250px;width:400px;height:400px;border-radius:50%;border:16px solid rgba(251,191,36,.16);border-bottom-color:transparent;transform:rotate(18deg);z-index:-1}
+.hi-l{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#a9bde2}
+.hero h1{margin:8px 0 6px;font-family:var(--disp);font-size:clamp(30px,4.6vw,48px);font-weight:800;letter-spacing:-.035em;line-height:1.02}
+.hero h1 b{background:linear-gradient(90deg,#9cc6ff,#cdb2ff 55%,#fcd56b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{margin:0;color:#c6d0e3;font-size:15.5px;max-width:560px}
+.pulse{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);font-size:12.5px;font-weight:600;color:#e6ecf7;white-space:nowrap}
+.chip i{width:7px;height:7px;border-radius:50%;background:var(--c,#fff);flex:none}
+.chip.live i{background:#ff4d6a;animation:ping 1.6s infinite}
+a.chip:hover{background:rgba(255,255,255,.12)}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,77,106,.65)}70%{box-shadow:0 0 0 8px rgba(255,77,106,0)}100%{box-shadow:0 0 0 0 rgba(255,77,106,0)}}
+/* next up: a countdown to the next game for one of your teams */
+.nu{position:relative;display:flex;flex-direction:column;justify-content:center;gap:10px;height:100%;padding:18px 20px;border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.13);min-width:0;color:#fff}
+a.nu:hover{border-color:rgba(255,255,255,.28)}
+.nu-l{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fcd56b}
+.nu-l span:last-child{color:#a9bde2;letter-spacing:.06em}
+.nu-m{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-size:20px;font-weight:800;letter-spacing:-.02em;min-width:0}
+.nu-m .at{font-family:var(--body);font-size:12px;font-weight:600;color:#a9bde2;letter-spacing:.04em}
+.nu-m .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cd{display:flex;align-items:baseline;gap:2px;font-family:var(--num);font-weight:800;font-size:34px;line-height:1;letter-spacing:.02em;color:#eaf6ff;text-shadow:0 0 18px rgba(120,180,255,.45);font-variant-numeric:tabular-nums}
+.cd i{font-style:normal;opacity:.45;margin:0 1px}
+.cd .u{font-family:var(--body);font-size:12px;font-weight:700;color:#a9bde2;margin:0 6px 0 2px;text-shadow:none;letter-spacing:.04em}
+.nu-s{font-size:13px;color:#c6d0e3}
+.nu.live .cd{color:#fff;text-shadow:0 0 18px rgba(255,77,106,.5)}
+.sm-plate{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--plate);box-shadow:0 4px 12px rgba(0,0,0,.35)}
+.sm-plate img{width:26px;height:26px;object-fit:contain;display:block}
+.sm-plate .sw{width:18px;height:18px;border-radius:5px}
+/* ---------- sections ---------- */
+.sec{display:flex;align-items:baseline;gap:10px;margin:30px 2px 12px}
+.sec h2{margin:0;font-family:var(--disp);font-size:21px;font-weight:800;letter-spacing:-.025em}
+.sec .note{color:var(--ink-3);font-size:13px}
+.sec .more{margin-left:auto;font-size:13px;font-weight:700;color:var(--ink-2);white-space:nowrap}
+a.more:hover{color:var(--ink)}
+/* ---------- your teams ---------- */
+.teams{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.tc{position:relative;display:flex;flex-direction:column;gap:12px;min-height:236px;padding:16px 16px 14px;border-radius:var(--r);color:#fff;background:linear-gradient(150deg,var(--tc) 0%,var(--tc2) 78%);box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.14);overflow:hidden;isolation:isolate;transition:transform .2s,box-shadow .2s}
+.tc::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.18),transparent 55%),linear-gradient(180deg,transparent 40%,rgba(0,0,0,.28))}
+.tc .wm{position:absolute;right:-26px;bottom:-30px;width:150px;height:150px;object-fit:contain;opacity:.13;z-index:-1;filter:grayscale(1) brightness(3);pointer-events:none}
+a.tc:hover{transform:translateY(-3px);box-shadow:0 26px 50px -24px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.18)}
+.tc-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tc-sport{display:inline-flex;align-items:center;gap:6px;padding:4px 9px 4px 7px;border-radius:999px;background:rgba(0,0,0,.24);font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.tc-sport svg{width:13px;height:13px}
+.tc-rank{font-family:var(--num);font-size:13px;font-weight:800;padding:3px 8px;border-radius:8px;background:rgba(255,255,255,.18)}
+.tc-id{display:flex;align-items:center;gap:12px;min-width:0}
+.plate{flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:var(--plate);box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.plate img{width:44px;height:44px;object-fit:contain;display:block}
+.plate .sw{width:28px;height:28px;border-radius:8px}
+.tc-name{font-family:var(--disp);font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.05;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tc-meta{margin-top:3px;font-size:12.5px;color:rgba(255,255,255,.82);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc-meta b{color:#fff;font-weight:700}
+.tc-next{margin-top:auto;padding:11px 12px;border-radius:14px;background:rgba(0,0,0,.26);border:1px solid rgba(255,255,255,.12)}
+.tc-k{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.tc-g{margin-top:4px;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc-g .dim{font-weight:500;color:rgba(255,255,255,.72)}
+.tc-cd{display:flex;align-items:baseline;margin-top:6px;font-family:var(--num);font-size:19px;font-weight:800;letter-spacing:.02em;font-variant-numeric:tabular-nums;color:#fff;text-shadow:0 0 14px rgba(255,255,255,.25)}
+.tc-cd i{font-style:normal;opacity:.5;margin:0 1px}
+.tc-cd .u{font-family:var(--body);font-size:10.5px;font-weight:700;opacity:.75;margin:0 6px 0 1px;letter-spacing:.04em}
+.tc-sc{display:flex;align-items:baseline;gap:8px;margin-top:4px;font-family:var(--num);font-size:24px;font-weight:800}
+.tc-sc .dim{font-family:var(--body);font-size:12.5px;font-weight:600;color:rgba(255,255,255,.75)}
+.tc-last{font-size:12.5px;color:rgba(255,255,255,.82)}
+.tc-last b{font-weight:800}
+.tc-last .w{color:#9df5c1}.tc-last .l{color:#ffb3bf}
+.tc.pick{align-items:center;justify-content:center;text-align:center;background:var(--surface);border:1.5px dashed var(--line);color:var(--ink);box-shadow:none}
+.tc.pick::before{display:none}
+.tc.pick b{color:var(--nfl)}
+.tc.pick .tc-sport{background:var(--surface-2);color:var(--ink-2)}
+.tc.pick .big{font-family:var(--disp);font-size:20px;font-weight:800;letter-spacing:-.02em;margin:12px 0 4px}
+.tc.pick .small{font-size:13px;color:var(--ink-2);max-width:220px;margin:0 auto}
+.pill-live{display:inline-flex;align-items:center;gap:5px;padding:2px 7px;border-radius:5px;background:var(--live);color:#fff;font-size:10px;font-weight:800;letter-spacing:.1em}
+.pill-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+/* ---------- live now ---------- */
+.lrow{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(250px,300px);gap:12px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x proximity;scrollbar-width:thin}
+.lc{display:block;padding:12px 14px;border-radius:16px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh);scroll-snap-align:start;border-top:3px solid var(--c);transition:transform .15s}
+.lc:hover{transform:translateY(-2px)}
+.lc-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
+.lc-h span:last-child{color:var(--live);letter-spacing:.04em}
+.tl{display:flex;align-items:center;gap:9px;padding:3px 0;font-weight:700;font-size:15px;color:var(--ink-2)}
+.tl.w{color:var(--ink)}
+.tl img,.tl .sw{width:22px;height:22px;object-fit:contain;flex:none;border-radius:5px}
+.tl .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tl .rk{font-size:11px;color:var(--ink-3);margin-right:3px}
+.tl .sc{font-family:var(--num);font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}
+/* ---------- on TV today: one timeline across the three sports ---------- */
+.tv{border-radius:var(--r);background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh);overflow:hidden}
+.tv-slot{display:grid;grid-template-columns:96px 1fr;border-top:1px solid var(--line-2)}
+.tv-slot:first-child{border-top:0}
+.tv-t{padding:14px 0 14px 18px;font-family:var(--num);font-size:13px;font-weight:800;letter-spacing:.02em;color:var(--ink-2);white-space:nowrap}
+.tv-t small{display:block;margin-top:3px;font-family:var(--body);font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--ink-3)}
+.tv-gs{display:flex;flex-direction:column;border-left:1px solid var(--line-2);min-width:0}
+.tv-g{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:11px 16px;border-top:1px solid var(--line-2);transition:background .15s}
+.tv-g:first-child{border-top:0}
+a.tv-g:hover{background:var(--surface-2)}
+.sp-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);white-space:nowrap}
+.sp-tag svg{width:12px;height:12px}
+.tv-m{display:flex;align-items:center;gap:8px;min-width:0;font-weight:700;font-size:14.5px}
+.tv-m img,.tv-m .sw{width:22px;height:22px;object-fit:contain;flex:none;border-radius:5px}
+.tv-m .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tv-m .at{font-weight:500;color:var(--ink-3);font-size:12.5px}
+.tv-m .rk{font-size:11px;color:var(--ink-3);margin-right:2px}
+.tv-m .fav{color:var(--gold)}
+.net{padding:4px 9px;border-radius:8px;background:var(--surface-2);border:1px solid var(--line);font-size:11.5px;font-weight:800;letter-spacing:.03em;color:var(--ink-2);white-space:nowrap}
+.tv-st{min-width:86px;text-align:right;font-size:12.5px;color:var(--ink-3);font-weight:600;white-space:nowrap}
+.tv-st b{font-family:var(--num);font-size:14px;color:var(--ink)}
+.tv-st.live{color:var(--live)}
+.tv-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 16px;border-top:1px solid var(--line);background:var(--surface-2);font-size:13px;color:var(--ink-3)}
+.tv-foot a{font-weight:700;color:var(--ink);padding:5px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.tv-foot a:hover{border-color:var(--ink-3)}
+.empty{padding:16px;border:1px dashed var(--line);border-radius:14px;color:var(--ink-3);font-size:14px;text-align:center}
+/* ---------- each sport ---------- */
+.sports{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+.sp{border-radius:var(--r);background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh);overflow:hidden;min-width:0}
+.sp-h{position:relative;display:flex;align-items:center;gap:12px;padding:16px 16px 12px;background:linear-gradient(180deg,color-mix(in srgb,var(--c) 16%,transparent),transparent)}
+.sp-ic{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--c);color:#fff;box-shadow:0 8px 18px -8px var(--c)}
+.sp-ic svg{width:21px;height:21px}
+.sp-n{font-family:var(--disp);font-size:18px;font-weight:800;letter-spacing:-.02em}
+.sp-x{font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sp-go{margin-left:auto;font-size:13px;font-weight:700;color:var(--ink-2);white-space:nowrap}
-.sp-bd{padding:12px 14px 14px}
-.lab{margin:14px 2px 8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
-.lab:first-child{margin-top:2px}
-.fav{display:block;padding:12px 13px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);margin-bottom:8px;transition:border-color .15s,transform .15s}
-.fav:hover{border-color:var(--c);transform:translateY(-1px)}
-.fav-top{display:flex;align-items:center;gap:10px}
-.plate{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--plate);box-shadow:0 0 0 1px rgba(0,0,0,.06)}
-.plate img{width:30px;height:30px;object-fit:contain;display:block}
-.plate .sw{width:22px;height:22px;border-radius:6px}
-.fav-n{font-family:var(--disp);font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
-.fav-n .rk{font-family:var(--body);font-size:12px;font-weight:700;color:var(--ink-3);margin-right:3px}
-.fav-rec{font-size:12.5px;color:var(--ink-3);font-weight:500}
-.fav-rec b{color:var(--ink-2);font-variant-numeric:tabular-nums}
-.fav-g{display:grid;grid-template-columns:44px 1fr;gap:6px 8px;margin-top:10px;font-size:13.5px;line-height:1.4}
-.fav-g .k{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
-.fav-g .v{min-width:0;color:var(--ink)}
-.fav-g .v .dim,.dim{color:var(--ink-3)}
-.res-w{color:var(--good);font-weight:800}
-.res-l{color:var(--bad);font-weight:800}
-.livetag{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--live);padding:2px 7px 2px 6px;border-radius:5px;vertical-align:1px}
-.livetag::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:fd-blink 1.2s infinite}
-@keyframes fd-blink{50%{opacity:.25}}
-.gm{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:9px 4px;border-top:1px solid var(--line-2);border-radius:8px}
+a.sp-h:hover .sp-go{color:var(--c)}
+.ql{display:flex;gap:6px;padding:0 16px 12px;overflow-x:auto;scrollbar-width:none}
+.ql::-webkit-scrollbar{display:none}
+.ql a{flex:none;padding:6px 11px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line)}
+.ql a:hover{color:var(--ink);border-color:color-mix(in srgb,var(--c) 60%,var(--line))}
+.sp-b{padding:2px 12px 12px}
+.sp-lab{margin:6px 4px 6px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.gm{display:block;padding:9px 6px;border-top:1px solid var(--line-2);border-radius:10px}
 .gm:first-of-type{border-top:0}
 a.gm:hover{background:var(--surface-2)}
-.gm-t{display:flex;align-items:center;gap:8px;min-width:0;font-size:14px;font-weight:600;color:var(--ink-2)}
-.gm-t img,.gm-t .sw{width:20px;height:20px;object-fit:contain;flex:none;border-radius:4px}
-.gm-t .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.gm-t .rk{font-size:11px;color:var(--ink-3);font-weight:700;margin-right:2px}
-.gm-t.w{color:var(--ink)}
-.gm-s{grid-column:2;font-family:var(--disp);font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;text-align:right;color:var(--ink-2)}
-.gm-s.w{color:var(--ink)}
-.gm-st{grid-column:1/-1;font-size:12px;color:var(--ink-3);font-weight:500;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.gm.live{background:color-mix(in srgb,var(--live) 6%,transparent)}
-.more{display:block;margin-top:10px;padding:9px 12px;border-radius:10px;text-align:center;font-size:13px;font-weight:700;color:var(--c);background:color-mix(in srgb,var(--c) 9%,transparent)}
-.more:hover{background:color-mix(in srgb,var(--c) 15%,transparent)}
-.lc{display:block;padding:11px 13px;border-radius:14px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh);scroll-snap-align:start;border-top:3px solid var(--c)}
-.lc .tg{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--c);margin-bottom:6px;display:flex;justify-content:space-between}
-.lc .tg span:last-child{color:var(--live)}
-.lc .gm{padding:2px 0 0;border:0;background:none}
-.lc .gm-st{display:none}
-.empty{padding:12px;border:1px dashed var(--line);border-radius:12px;color:var(--ink-3);font-size:13.5px;text-align:center}
-.pick{display:block;padding:12px;border:1px dashed var(--line);border-radius:14px;text-align:center;font-size:13.5px;color:var(--ink-2);margin-bottom:8px}
-.pick b{color:var(--c)}
-.fd-foot{margin-top:28px;display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between;color:var(--ink-3);font-size:12.5px}
-.fd-foot i{font-style:normal;color:var(--ink-2)}
-@media (max-width:1020px){.fd-grid{grid-template-columns:1fr 1fr}.sp.nba{grid-column:1/-1}}
-@media (max-width:720px){.fd{padding:0 12px 32px}.fd-hero{margin-top:12px;padding:20px 18px 18px;border-radius:18px}.fd-hero::after{width:190px;height:190px;right:-80px;top:-95px;border-width:14px}.fd-grid{grid-template-columns:1fr}.sp.nba{grid-column:auto}.fd-live{grid-auto-columns:82%}}
-@media (prefers-reduced-motion:reduce){.fd-chip.live i,.livetag::before{animation:none}.fav{transition:none}}
+.gm .tl{font-size:14px;padding:2px 0}
+.gm .tl img,.gm .tl .sw{width:20px;height:20px}
+.gm .tl .sc{font-size:15px}
+.gm-st{margin-top:3px;font-size:12px;color:var(--ink-3);font-weight:500;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin-top:30px;padding:0 2px;color:var(--ink-3);font-size:12.5px}
+.foot i{font-style:normal;color:var(--ink-2)}
+/* entrance, on the first draw only (the 30-second live redraws skip it) */
+.anim .rise{animation:rise .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 55ms)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* ---------- widths ---------- */
+@media (max-width:1100px){.teams{grid-template-columns:repeat(2,minmax(0,1fr))}.sports{grid-template-columns:1fr 1fr}.sp.nba{grid-column:1/-1}}
+@media (max-width:820px){.hero{grid-template-columns:1fr;padding:22px 18px 18px;border-radius:22px}.hero::after{display:none}}
+@media (max-width:720px){
+  .fd{padding:12px 12px 36px}
+  .sec{margin-top:26px}.sec h2{font-size:19px}
+  .teams{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -12px;padding:2px 12px 10px;scroll-padding-left:12px;scrollbar-width:none}
+  .teams::-webkit-scrollbar{display:none}
+  .tc{scroll-snap-align:start;min-height:220px}
+  .sports{grid-template-columns:1fr}.sp.nba{grid-column:auto}
+  .tv-slot{grid-template-columns:1fr}.tv-t{padding:12px 16px 2px}.tv-t small{display:inline;margin-left:6px}.tv-gs{border-left:0}
+  .tv-g{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"m st" "tag net";row-gap:6px;padding:10px 16px}
+  .tv-g .sp-tag{grid-area:tag;justify-self:start}.tv-g .tv-m{grid-area:m}.tv-g .net{grid-area:net;justify-self:end}.tv-g .tv-st{grid-area:st;min-width:0}
+  .lrow{grid-auto-columns:82%}
+  .cd{font-size:29px}
+}
+@media (prefers-reduced-motion:reduce){.anim .rise,.chip.live i,.pill-live::before{animation:none}a.tc:hover,.lc:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -150,17 +244,29 @@ body.boardmode .jsh{display:none}
 } catch (e) {} })();
 </script>
 
-<main class="fd">
-  <header class="fd-hero">
-    <div class="fd-eyebrow" id="fd-date">&nbsp;</div>
-    <h1>Jamo <b>Sports Hub</b></h1>
-    <p class="fd-sub">College football, the NFL and the NBA in one place: your teams first, live scores as they happen, and what is next.</p>
-    <div class="fd-pulse" id="fd-pulse"></div>
-  </header>
-  <div id="fd-livewrap" hidden><div class="fd-sec"><h2>Live now</h2><span id="fd-livecount"></span></div><div class="fd-live" id="fd-live"></div></div>
-  <div class="fd-sec"><h2>Your teams and this week</h2><span id="fd-upd"></span></div>
-  <section class="fd-grid" id="fd-grid"></section>
-  <footer class="fd-foot"><span id="fd-asof"></span><span>A <i>Kramerica Industries</i> production</span></footer>
+<main class="fd anim" id="fd">
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hi-l">
+      <div class="eyebrow" id="h-date">Jamo Sports Hub</div>
+      <h1 id="hero-h"><span id="h-greet">Welcome back</span>, <b>Jamo</b></h1>
+      <p class="lead" id="h-lead">College football, the NFL and the NBA in one place.</p>
+      <div class="pulse" id="h-pulse"></div>
+    </div>
+    <div id="h-next"></div>
+  </section>
+
+  <div class="sec"><h2>Your teams</h2><span class="note" id="t-note"></span></div>
+  <section class="teams" id="teams" aria-label="Your teams"></section>
+
+  <div id="live-wrap" hidden><div class="sec"><h2>Live now</h2><span class="note" id="live-n"></span></div><div class="lrow" id="live"></div></div>
+
+  <div class="sec"><h2 id="tv-h">On TV today</h2><span class="note" id="tv-note"></span><span class="more" id="upd"></span></div>
+  <section class="tv" id="tv" aria-labelledby="tv-h"></section>
+
+  <div class="sec"><h2>Around the leagues</h2></div>
+  <section class="sports" id="sports"></section>
+
+  <footer class="foot"><span id="asof"></span><span>A <i>Kramerica Industries</i> production</span></footer>
 </main>
 <script type="application/json" id="d-meta">{"cfb":"Sun Oct 4, 2026 · 11:32 AM ET","nfl":"Sun Oct 4, 2026 · 1:26 PM ET","nba":"Sun Oct 4, 2026 · 11:42 AM ET"}</script>
 <script type="text/plain" id="d-cfb">1|2026-08-29|Hawai'i|Stanford|27|37|FINAL|7:00 PM||-4.5|48.5|170|-205|ACC Network||
@@ -3806,8 +3912,275 @@ Youngstown State|2754
 2|2027-04-11|8:30 PM|401910950|SAC|LAC|||SCHEDULED||
 2|2027-04-11|8:30 PM|401910951|PHX|LAL|||SCHEDULED||
 </script>
-<script type="application/json" id="d-nflteams">{"ARI":{"color":"#a40227","full":"Arizona Cardinals","nick":"Cardinals"},"ATL":{"color":"#a71930","full":"Atlanta Falcons","nick":"Falcons"},"BAL":{"color":"#29126f","full":"Baltimore Ravens","nick":"Ravens"},"BUF":{"color":"#00338d","full":"Buffalo Bills","nick":"Bills"},"CAR":{"color":"#0085ca","full":"Carolina Panthers","nick":"Panthers"},"CHI":{"color":"#0b1c3a","full":"Chicago Bears","nick":"Bears"},"CIN":{"color":"#fb4f14","full":"Cincinnati Bengals","nick":"Bengals"},"CLE":{"color":"#472a08","full":"Cleveland Browns","nick":"Browns"},"DAL":{"color":"#002a5c","full":"Dallas Cowboys","nick":"Cowboys"},"DEN":{"color":"#0a2343","full":"Denver Broncos","nick":"Broncos"},"DET":{"color":"#0076b6","full":"Detroit Lions","nick":"Lions"},"GB":{"color":"#204e32","full":"Green Bay Packers","nick":"Packers"},"HOU":{"color":"#021018","full":"Houston Texans","nick":"Texans"},"IND":{"color":"#003b75","full":"Indianapolis Colts","nick":"Colts"},"JAX":{"color":"#007487","full":"Jacksonville Jaguars","nick":"Jaguars"},"KC":{"color":"#e31837","full":"Kansas City Chiefs","nick":"Chiefs"},"LAC":{"color":"#0080c6","full":"Los Angeles Chargers","nick":"Chargers"},"LAR":{"color":"#003594","full":"Los Angeles Rams","nick":"Rams"},"LV":{"color":"#000000","full":"Las Vegas Raiders","nick":"Raiders"},"MIA":{"color":"#008e97","full":"Miami Dolphins","nick":"Dolphins"},"MIN":{"color":"#4f2683","full":"Minnesota Vikings","nick":"Vikings"},"NE":{"color":"#002a5c","full":"New England Patriots","nick":"Patriots"},"NO":{"color":"#d3bc8d","full":"New Orleans Saints","nick":"Saints"},"NYG":{"color":"#003c7f","full":"New York Giants","nick":"Giants"},"NYJ":{"color":"#115740","full":"New York Jets","nick":"Jets"},"PHI":{"color":"#06424d","full":"Philadelphia Eagles","nick":"Eagles"},"PIT":{"color":"#000000","full":"Pittsburgh Steelers","nick":"Steelers"},"SEA":{"color":"#002a5c","full":"Seattle Seahawks","nick":"Seahawks"},"SF":{"color":"#aa0000","full":"San Francisco 49ers","nick":"49ers"},"TB":{"color":"#bd1c36","full":"Tampa Bay Buccaneers","nick":"Buccaneers"},"TEN":{"color":"#4495d2","full":"Tennessee Titans","nick":"Titans"},"WSH":{"color":"#5a1414","full":"Washington Commanders","nick":"Commanders"}}</script>
-<script type="application/json" id="d-nbateams">{"ATL":{"color":"#c8102e","full":"Atlanta Hawks","nick":"Hawks"},"BKN":{"color":"#000000","full":"Brooklyn Nets","nick":"Nets"},"BOS":{"color":"#008348","full":"Boston Celtics","nick":"Celtics"},"CHA":{"color":"#008ca8","full":"Charlotte Hornets","nick":"Hornets"},"CHI":{"color":"#ce1141","full":"Chicago Bulls","nick":"Bulls"},"CLE":{"color":"#860038","full":"Cleveland Cavaliers","nick":"Cavaliers"},"DAL":{"color":"#0064b1","full":"Dallas Mavericks","nick":"Mavericks"},"DEN":{"color":"#0e2240","full":"Denver Nuggets","nick":"Nuggets"},"DET":{"color":"#1d428a","full":"Detroit Pistons","nick":"Pistons"},"GS":{"color":"#fdb927","full":"Golden State Warriors","nick":"Warriors"},"HOU":{"color":"#ce0e2d","full":"Houston Rockets","nick":"Rockets"},"IND":{"color":"#0c2340","full":"Indiana Pacers","nick":"Pacers"},"LAC":{"color":"#12173f","full":"LA Clippers","nick":"Clippers"},"LAL":{"color":"#552583","full":"Los Angeles Lakers","nick":"Lakers"},"MEM":{"color":"#5d76a9","full":"Memphis Grizzlies","nick":"Grizzlies"},"MIA":{"color":"#98002e","full":"Miami Heat","nick":"Heat"},"MIL":{"color":"#00471b","full":"Milwaukee Bucks","nick":"Bucks"},"MIN":{"color":"#266092","full":"Minnesota Timberwolves","nick":"Timberwolves"},"NO":{"color":"#0a2240","full":"New Orleans Pelicans","nick":"Pelicans"},"NY":{"color":"#1d428a","full":"New York Knicks","nick":"Knicks"},"OKC":{"color":"#007ac1","full":"Oklahoma City Thunder","nick":"Thunder"},"ORL":{"color":"#0150b5","full":"Orlando Magic","nick":"Magic"},"PHI":{"color":"#1d428a","full":"Philadelphia 76ers","nick":"76ers"},"PHX":{"color":"#29127a","full":"Phoenix Suns","nick":"Suns"},"POR":{"color":"#e03a3e","full":"Portland Trail Blazers","nick":"Trail Blazers"},"SA":{"color":"#000000","full":"San Antonio Spurs","nick":"Spurs"},"SAC":{"color":"#5a2d81","full":"Sacramento Kings","nick":"Kings"},"TOR":{"color":"#d91244","full":"Toronto Raptors","nick":"Raptors"},"UTAH":{"color":"#4e008e","full":"Utah Jazz","nick":"Jazz"},"WSH":{"color":"#e31837","full":"Washington Wizards","nick":"Wizards"}}</script>
+<script type="application/json" id="d-nflteams">{"ARI":{"alt":"#ffffff","color":"#a40227","conf":"NFC","div":"West","full":"Arizona Cardinals","nick":"Cardinals"},"ATL":{"alt":"#000000","color":"#a71930","conf":"NFC","div":"South","full":"Atlanta Falcons","nick":"Falcons"},"BAL":{"alt":"#000000","color":"#29126f","conf":"AFC","div":"North","full":"Baltimore Ravens","nick":"Ravens"},"BUF":{"alt":"#d50a0a","color":"#00338d","conf":"AFC","div":"East","full":"Buffalo Bills","nick":"Bills"},"CAR":{"alt":"#000000","color":"#0085ca","conf":"NFC","div":"South","full":"Carolina Panthers","nick":"Panthers"},"CHI":{"alt":"#e64100","color":"#0b1c3a","conf":"NFC","div":"North","full":"Chicago Bears","nick":"Bears"},"CIN":{"alt":"#000000","color":"#fb4f14","conf":"AFC","div":"North","full":"Cincinnati Bengals","nick":"Bengals"},"CLE":{"alt":"#ff3c00","color":"#472a08","conf":"AFC","div":"North","full":"Cleveland Browns","nick":"Browns"},"DAL":{"alt":"#b0b7bc","color":"#002a5c","conf":"NFC","div":"East","full":"Dallas Cowboys","nick":"Cowboys"},"DEN":{"alt":"#fc4c02","color":"#0a2343","conf":"AFC","div":"West","full":"Denver Broncos","nick":"Broncos"},"DET":{"alt":"#bbbbbb","color":"#0076b6","conf":"NFC","div":"North","full":"Detroit Lions","nick":"Lions"},"GB":{"alt":"#ffb612","color":"#204e32","conf":"NFC","div":"North","full":"Green Bay Packers","nick":"Packers"},"HOU":{"alt":"#eb0028","color":"#021018","conf":"AFC","div":"South","full":"Houston Texans","nick":"Texans"},"IND":{"alt":"#ffffff","color":"#003b75","conf":"AFC","div":"South","full":"Indianapolis Colts","nick":"Colts"},"JAX":{"alt":"#d7a22a","color":"#007487","conf":"AFC","div":"South","full":"Jacksonville Jaguars","nick":"Jaguars"},"KC":{"alt":"#ffb612","color":"#e31837","conf":"AFC","div":"West","full":"Kansas City Chiefs","nick":"Chiefs"},"LAC":{"alt":"#ffc20e","color":"#0080c6","conf":"AFC","div":"West","full":"Los Angeles Chargers","nick":"Chargers"},"LAR":{"alt":"#ffd100","color":"#003594","conf":"NFC","div":"West","full":"Los Angeles Rams","nick":"Rams"},"LV":{"alt":"#a5acaf","color":"#000000","conf":"AFC","div":"West","full":"Las Vegas Raiders","nick":"Raiders"},"MIA":{"alt":"#fc4c02","color":"#008e97","conf":"AFC","div":"East","full":"Miami Dolphins","nick":"Dolphins"},"MIN":{"alt":"#ffc62f","color":"#4f2683","conf":"NFC","div":"North","full":"Minnesota Vikings","nick":"Vikings"},"NE":{"alt":"#c60c30","color":"#002a5c","conf":"AFC","div":"East","full":"New England Patriots","nick":"Patriots"},"NO":{"alt":"#000000","color":"#d3bc8d","conf":"NFC","div":"South","full":"New Orleans Saints","nick":"Saints"},"NYG":{"alt":"#c9243f","color":"#003c7f","conf":"NFC","div":"East","full":"New York Giants","nick":"Giants"},"NYJ":{"alt":"#ffffff","color":"#115740","conf":"AFC","div":"East","full":"New York Jets","nick":"Jets"},"PHI":{"alt":"#000000","color":"#06424d","conf":"NFC","div":"East","full":"Philadelphia Eagles","nick":"Eagles"},"PIT":{"alt":"#ffb612","color":"#000000","conf":"AFC","div":"North","full":"Pittsburgh Steelers","nick":"Steelers"},"SEA":{"alt":"#69be28","color":"#002a5c","conf":"NFC","div":"West","full":"Seattle Seahawks","nick":"Seahawks"},"SF":{"alt":"#b3995d","color":"#aa0000","conf":"NFC","div":"West","full":"San Francisco 49ers","nick":"49ers"},"TB":{"alt":"#3e3a35","color":"#bd1c36","conf":"NFC","div":"South","full":"Tampa Bay Buccaneers","nick":"Buccaneers"},"TEN":{"alt":"#001532","color":"#4495d2","conf":"AFC","div":"South","full":"Tennessee Titans","nick":"Titans"},"WSH":{"alt":"#ffb612","color":"#5a1414","conf":"NFC","div":"East","full":"Washington Commanders","nick":"Commanders"}}</script>
+<script type="application/json" id="d-nbateams">{"ATL":{"alt":"#fdb927","color":"#c8102e","conf":"East","div":"Southeast","full":"Atlanta Hawks","nick":"Hawks"},"BKN":{"alt":"#ffffff","color":"#000000","conf":"East","div":"Atlantic","full":"Brooklyn Nets","nick":"Nets"},"BOS":{"alt":"#ffffff","color":"#008348","conf":"East","div":"Atlantic","full":"Boston Celtics","nick":"Celtics"},"CHA":{"alt":"#1d1060","color":"#008ca8","conf":"East","div":"Southeast","full":"Charlotte Hornets","nick":"Hornets"},"CHI":{"alt":"#000000","color":"#ce1141","conf":"East","div":"Central","full":"Chicago Bulls","nick":"Bulls"},"CLE":{"alt":"#bc945c","color":"#860038","conf":"East","div":"Central","full":"Cleveland Cavaliers","nick":"Cavaliers"},"DAL":{"alt":"#bbc4ca","color":"#0064b1","conf":"West","div":"Southwest","full":"Dallas Mavericks","nick":"Mavericks"},"DEN":{"alt":"#fec524","color":"#0e2240","conf":"West","div":"Northwest","full":"Denver Nuggets","nick":"Nuggets"},"DET":{"alt":"#c8102e","color":"#1d428a","conf":"East","div":"Central","full":"Detroit Pistons","nick":"Pistons"},"GS":{"alt":"#1d428a","color":"#fdb927","conf":"West","div":"Pacific","full":"Golden State Warriors","nick":"Warriors"},"HOU":{"alt":"#000000","color":"#ce0e2d","conf":"West","div":"Southwest","full":"Houston Rockets","nick":"Rockets"},"IND":{"alt":"#ffd520","color":"#0c2340","conf":"East","div":"Central","full":"Indiana Pacers","nick":"Pacers"},"LAC":{"alt":"#c8102e","color":"#12173f","conf":"West","div":"Pacific","full":"LA Clippers","nick":"Clippers"},"LAL":{"alt":"#fdb927","color":"#552583","conf":"West","div":"Pacific","full":"Los Angeles Lakers","nick":"Lakers"},"MEM":{"alt":"#12173f","color":"#5d76a9","conf":"West","div":"Southwest","full":"Memphis Grizzlies","nick":"Grizzlies"},"MIA":{"alt":"#000000","color":"#98002e","conf":"East","div":"Southeast","full":"Miami Heat","nick":"Heat"},"MIL":{"alt":"#eee1c6","color":"#00471b","conf":"East","div":"Central","full":"Milwaukee Bucks","nick":"Bucks"},"MIN":{"alt":"#79bc43","color":"#266092","conf":"West","div":"Northwest","full":"Minnesota Timberwolves","nick":"Timberwolves"},"NO":{"alt":"#b4975a","color":"#0a2240","conf":"West","div":"Southwest","full":"New Orleans Pelicans","nick":"Pelicans"},"NY":{"alt":"#f58426","color":"#1d428a","conf":"East","div":"Atlantic","full":"New York Knicks","nick":"Knicks"},"OKC":{"alt":"#ef3b24","color":"#007ac1","conf":"West","div":"Northwest","full":"Oklahoma City Thunder","nick":"Thunder"},"ORL":{"alt":"#9ca0a3","color":"#0150b5","conf":"East","div":"Southeast","full":"Orlando Magic","nick":"Magic"},"PHI":{"alt":"#e01234","color":"#1d428a","conf":"East","div":"Atlantic","full":"Philadelphia 76ers","nick":"76ers"},"PHX":{"alt":"#e56020","color":"#29127a","conf":"West","div":"Pacific","full":"Phoenix Suns","nick":"Suns"},"POR":{"alt":"#000000","color":"#e03a3e","conf":"West","div":"Northwest","full":"Portland Trail Blazers","nick":"Trail Blazers"},"SA":{"alt":"#c4ced4","color":"#000000","conf":"West","div":"Southwest","full":"San Antonio Spurs","nick":"Spurs"},"SAC":{"alt":"#6a7a82","color":"#5a2d81","conf":"West","div":"Pacific","full":"Sacramento Kings","nick":"Kings"},"TOR":{"alt":"#000000","color":"#d91244","conf":"East","div":"Atlantic","full":"Toronto Raptors","nick":"Raptors"},"UTAH":{"alt":"#79a3dc","color":"#4e008e","conf":"West","div":"Northwest","full":"Utah Jazz","nick":"Jazz"},"WSH":{"alt":"#002b5c","color":"#e31837","conf":"East","div":"Southeast","full":"Washington Wizards","nick":"Wizards"}}</script>
+<script type="text/plain" id="d-cfbteams">Boston College|#98002E|#BC9B6A|Eagles|ACC
+California|#003262|#FDB515|Golden Bears|ACC
+Clemson|#F56600|#522D80|Tigers|ACC
+Duke|#003087|#FFFFFF|Blue Devils|ACC
+Florida State|#782F40|#CEB888|Seminoles|ACC
+Georgia Tech|#B3A369|#003057|Yellow Jackets|ACC
+Louisville|#AD0000|#000000|Cardinals|ACC
+Miami|#F47321|#005030|Hurricanes|ACC
+North Carolina|#7BAFD4|#13294B|Tar Heels|ACC
+NC State|#CC0000|#000000|Wolfpack|ACC
+Pittsburgh|#003594|#FFB81C|Panthers|ACC
+SMU|#0033A0|#C8102E|Mustangs|ACC
+Stanford|#8C1515|#FFFFFF|Cardinal|ACC
+Syracuse|#F76900|#000E54|Orange|ACC
+Virginia|#232D4B|#F84C1E|Cavaliers|ACC
+Virginia Tech|#630031|#CF4420|Hokies|ACC
+Wake Forest|#9E7E38|#000000|Demon Deacons|ACC
+Arizona|#CC0033|#003366|Wildcats|Big 12
+Arizona State|#8C1D40|#FFC627|Sun Devils|Big 12
+Baylor|#154734|#FFB81C|Bears|Big 12
+BYU|#0062B8|#FFFFFF|Cougars|Big 12
+Cincinnati|#E00122|#000000|Bearcats|Big 12
+Colorado|#CFB87C|#000000|Buffaloes|Big 12
+Houston|#C8102E|#FFFFFF|Cougars|Big 12
+Iowa State|#C8102E|#F1BE48|Cyclones|Big 12
+Kansas|#0051BA|#E8000D|Jayhawks|Big 12
+Kansas State|#512888|#FFFFFF|Wildcats|Big 12
+Oklahoma State|#FF7300|#000000|Cowboys|Big 12
+TCU|#4D1979|#FFFFFF|Horned Frogs|Big 12
+Texas Tech|#CC0000|#000000|Red Raiders|Big 12
+UCF|#000000|#BA9B37|Knights|Big 12
+Utah|#CC0000|#FFFFFF|Utes|Big 12
+West Virginia|#002855|#EAAA00|Mountaineers|Big 12
+Illinois|#E84A27|#13294B|Fighting Illini|Big Ten
+Indiana|#990000|#FFFFFF|Hoosiers|Big Ten
+Iowa|#FFCD00|#000000|Hawkeyes|Big Ten
+Maryland|#E03A3E|#FFD520|Terrapins|Big Ten
+Michigan|#00274C|#FFCB05|Wolverines|Big Ten
+Michigan State|#18453B|#FFFFFF|Spartans|Big Ten
+Minnesota|#7A0019|#FFCC33|Golden Gophers|Big Ten
+Nebraska|#E41C38|#FFFFFF|Cornhuskers|Big Ten
+Northwestern|#4E2A84|#FFFFFF|Wildcats|Big Ten
+Ohio State|#BB0000|#666666|Buckeyes|Big Ten
+Oregon|#154733|#FEE123|Ducks|Big Ten
+Penn State|#041E42|#FFFFFF|Nittany Lions|Big Ten
+Purdue|#CEB888|#000000|Boilermakers|Big Ten
+Rutgers|#CC0033|#000000|Scarlet Knights|Big Ten
+UCLA|#2D68C4|#F2A900|Bruins|Big Ten
+USC|#990000|#FFC72C|Trojans|Big Ten
+Washington|#4B2E83|#B7A57A|Huskies|Big Ten
+Wisconsin|#C5050C|#FFFFFF|Badgers|Big Ten
+Alabama|#9E1B32|#828A8F|Crimson Tide|SEC
+Arkansas|#9D2235|#FFFFFF|Razorbacks|SEC
+Auburn|#0C2340|#E87722|Tigers|SEC
+Florida|#0021A5|#FA4616|Gators|SEC
+Georgia|#BA0C2F|#000000|Bulldogs|SEC
+Kentucky|#0033A0|#FFFFFF|Wildcats|SEC
+LSU|#461D7C|#FDD023|Tigers|SEC
+Mississippi State|#660000|#FFFFFF|Bulldogs|SEC
+Missouri|#F1B82D|#000000|Tigers|SEC
+Oklahoma|#841617|#FDF9D8|Sooners|SEC
+Ole Miss|#CE1126|#14213D|Rebels|SEC
+South Carolina|#73000A|#000000|Gamecocks|SEC
+Tennessee|#FF8200|#FFFFFF|Volunteers|SEC
+Texas|#BF5700|#FFFFFF|Longhorns|SEC
+Texas A&M|#500000|#FFFFFF|Aggies|SEC
+Vanderbilt|#866D4B|#000000|Commodores|SEC
+Army|#000000|#D4BF91|Black Knights|AAC
+Charlotte|#046A38|#B9975B|49ers|AAC
+East Carolina|#592A8A|#FDC82F|Pirates|AAC
+Florida Atlantic|#003366|#CC0000|Owls|AAC
+Memphis|#003087|#898D8D|Tigers|AAC
+Navy|#00205B|#C5B783|Midshipmen|AAC
+North Texas|#00853E|#000000|Mean Green|AAC
+Rice|#00205B|#C1C6C8|Owls|AAC
+South Florida|#006747|#CFC493|Bulls|AAC
+Temple|#9D2235|#FFFFFF|Owls|AAC
+Tulane|#006747|#418FDE|Green Wave|AAC
+Tulsa|#002D72|#C5B358|Golden Hurricane|AAC
+UAB|#1E6B52|#F4C300|Blazers|AAC
+UTSA|#0C2340|#F15A22|Roadrunners|AAC
+Delaware|#00539F|#FFD200|Fightin' Blue Hens|CUSA
+FIU|#081E3F|#B6862C|Panthers|CUSA
+Jacksonville State|#CC0000|#000000|Gamecocks|CUSA
+Kennesaw State|#FFC423|#000000|Owls|CUSA
+Liberty|#002D62|#C41230|Flames|CUSA
+Middle Tennessee|#0066CC|#FFFFFF|Blue Raiders|CUSA
+Missouri State|#5E0009|#FFFFFF|Bears|CUSA
+New Mexico State|#8C0B42|#FFFFFF|Aggies|CUSA
+Sam Houston|#F56F1A|#FFFFFF|Bearkats|CUSA
+Western Kentucky|#C60C30|#FFFFFF|Hilltoppers|CUSA
+Akron|#041E42|#A89968|Zips|MAC
+Ball State|#BA0C2F|#000000|Cardinals|MAC
+Bowling Green|#FE5000|#4F2C1D|Falcons|MAC
+Buffalo|#005BBB|#FFFFFF|Bulls|MAC
+Central Michigan|#6A0032|#FFC82E|Chippewas|MAC
+Eastern Michigan|#006633|#FFFFFF|Eagles|MAC
+Kent State|#002664|#EAAB00|Golden Flashes|MAC
+Miami (OH)|#B61E2E|#000000|RedHawks|MAC
+Ohio|#00694E|#CDA077|Bobcats|MAC
+Sacramento State|#043927|#C4B581|Hornets|MAC
+Toledo|#15397F|#FFD200|Rockets|MAC
+UMass|#881C1C|#000000|Minutemen|MAC
+Western Michigan|#6C4023|#B5A167|Broncos|MAC
+Air Force|#003087|#B2B4B2|Falcons|MW
+Hawai'i|#024731|#FFFFFF|Rainbow Warriors|MW
+Nevada|#003366|#807F84|Wolf Pack|MW
+New Mexico|#BA0C2F|#A7A8AA|Lobos|MW
+North Dakota State|#0A5640|#FFC82E|Bison|MW
+Northern Illinois|#BA0C2F|#000000|Huskies|MW
+San Jos� State|#0055A2|#E5A823|Spartans|MW
+UNLV|#CF0A2C|#666666|Rebels|MW
+UTEP|#FF8200|#041E42|Miners|MW
+Wyoming|#492F24|#FFC425|Cowboys|MW
+Boise State|#0033A0|#D64309|Broncos|Pac-12
+Colorado State|#1E4D2B|#C8C372|Rams|Pac-12
+Fresno State|#DB0032|#002E6D|Bulldogs|Pac-12
+Oregon State|#DC4405|#000000|Beavers|Pac-12
+San Diego State|#A6192E|#000000|Aztecs|Pac-12
+Texas State|#501214|#AC9155|Bobcats|Pac-12
+Utah State|#0F2439|#FFFFFF|Aggies|Pac-12
+Washington State|#981E32|#5E6A71|Cougars|Pac-12
+App State|#222222|#FFCC00|Mountaineers|Sun Belt
+Coastal Carolina|#006F71|#A27752|Chanticleers|Sun Belt
+Georgia Southern|#041E42|#A28D5B|Eagles|Sun Belt
+Georgia State|#0039A6|#C60C30|Panthers|Sun Belt
+James Madison|#450084|#CBB677|Dukes|Sun Belt
+Marshall|#00B140|#000000|Thundering Herd|Sun Belt
+Old Dominion|#003057|#7C878E|Monarchs|Sun Belt
+Arkansas State|#CC092F|#000000|Red Wolves|Sun Belt
+Louisiana|#CE181E|#FFFFFF|Ragin' Cajuns|Sun Belt
+Louisiana Tech|#002F8B|#E31B23|Bulldogs|Sun Belt
+UL Monroe|#800029|#FFC72C|Warhawks|Sun Belt
+South Alabama|#00205B|#BF0D3E|Jaguars|Sun Belt
+Southern Miss|#FFAB00|#000000|Golden Eagles|Sun Belt
+Troy|#8A2432|#C4C6C8|Trojans|Sun Belt
+Notre Dame|#0C2340|#C99700|Fighting Irish|Ind
+UConn|#000E2F|#FFFFFF|Huskies|Ind
+Cal Poly|#1E4D2B|#eed897|Mustangs|Big Sky
+Idaho|#000000|#8c6e4a|Vandals|Big Sky
+Montana State|#00205c|#bc955c|Bobcats|Big Sky
+Montana|#751D4A|#666666|Grizzlies|Big Sky
+Southern Utah|#c72026|#000000|Thunderbirds|Big Sky
+UC Davis|#002855|#c3c4c6|Aggies|Big Sky
+Idaho State|#ef8c00|#e9a126|Bengals|Big Sky
+Eastern Washington|#a10022|#abb4bc|Eagles|Big Sky
+Northern Colorado|#13558D|#ffc533|Bears|Big Sky
+Northern Arizona|#003976|#1b3069|Lumberjacks|Big Sky
+Portland State|#00311e|#ebebeb|Vikings|Big Sky
+Weber State|#18005a|#ebebeb|Wildcats|Big Sky
+Utah Tech|#000000|#c8102e|Trailblazers|Big Sky
+Towson|#FFC229|#000000|Tigers|CAA
+New Hampshire|#004990|#c3c4c6|Wildcats|CAA
+Rhode Island|#091f3f|#5ab3e8|Rams|CAA
+Maine|#127dbe|#003263|Black Bears|CAA
+UAlbany|#3D2777|#ffffff|Great Danes|CAA
+Campbell|#000000|#f47321|Fighting Camels|CAA
+Elon|#020303|#b59a57|Phoenix|CAA
+Hampton|#0067AC|#002d62|Pirates|CAA
+Monmouth|#051844|#8c8b8b|Hawks|CAA
+North Carolina A&T|#0505aa|#004684|Aggies|CAA
+Sacred Heart|#a40012|#c29472|Pioneers|CAA
+Stony Brook|#990000|#1b1b1b|Seawolves|CAA
+Bryant|#000000|#9f8343|Bulldogs|CAA
+Chicago State|#009639|#000000|Cougars|FCS Indep.
+Merrimack|#000000|#f2a900|Warriors|FCS Indep.
+Yale|#004a81|#286dc0|Bulldogs|Ivy
+Harvard|#990000|#dbdbdb|Crimson|Ivy
+Dartmouth|#005730|#000000|Big Green|Ivy
+Princeton|#000000|#ff6000|Tigers|Ivy
+Columbia|#7ba4db|#183863|Lions|Ivy
+Cornell|#b31b1b|#ffffff|Big Red|Ivy
+Pennsylvania|#082A74|#a6163d|Quakers|Ivy
+Brown|#411e09|#949300|Bears|Ivy
+Howard|#003a63|#e51937|Bison|MEAC
+Delaware State|#009cdb|#d51c28|Hornets|MEAC
+Morgan State|#014786|#f47937|Bears|MEAC
+North Carolina Central|#880023|#c2c3c0|Eagles|MEAC
+Norfolk State|#0c8968|#fdb813|Spartans|MEAC
+South Carolina State|#7d1315|#104897|Bulldogs|MEAC
+Southern Illinois|#85283D|#c2c3c0|Salukis|MVFC
+Murray State|#002148|#f8c300|Racers|MVFC
+North Dakota|#00A26B|#c2c3c0|Fighting Hawks|MVFC
+South Dakota|#CD1241|#f0f0f0|Coyotes|MVFC
+Indiana State|#00669a|#f0f0f0|Sycamores|MVFC
+Illinois State|#CE1126|#ffe716|Redbirds|MVFC
+Northern Iowa|#473282|#ffffff|Panthers|MVFC
+South Dakota State|#0033a0|#ffd100|Jackrabbits|MVFC
+Youngstown State|#E51936|#690717|Penguins|MVFC
+Stonehill|#000000|#582c83|Skyhawks|NEC
+Central Connecticut|#1B49A2|#d1d5d8|Blue Devils|NEC
+Duquesne|#002D62|#b90b2e|Dukes|NEC
+Long Island University|#00693e|#c1c6c8|Sharks|NEC
+Mercyhurst|#000000|#046a38|Lakers|NEC
+New Haven|#041e42|#ffc425|Chargers|NEC
+Robert Morris|#00214D|#a21d2b|Colonials|NEC
+Wagner|#00483A|#ffffff|Seahawks|NEC
+Charleston Southern|#2e3192|#ded090|Buccaneers|OVC
+Eastern Illinois|#000000|#bebab9|Panthers|OVC
+Gardner-Webb|#c12535|#909090|Runnin' Bulldogs|OVC
+Southeast Missouri State|#c8102e|#000000|Redhawks|OVC
+UT Martin|#FF6700|#102a5c|Skyhawks|OVC
+Tennessee State|#171796|#f0f0f0|Tigers|OVC
+Western Illinois|#4e1e8a|#ffc90a|Leathernecks|OVC
+Lindenwood|#000000|#c8102e|Lions|OVC
+Georgetown|#110E42|#001c58|Hoyas|Patriot
+Holy Cross|#582c83|#ffffff|Crusaders|Patriot
+Villanova|#00205b|#13b5ea|Wildcats|Patriot
+Richmond|#9e0712|#b90b2e|Spiders|Patriot
+Lafayette|#790000|#a59474|Leopards|Patriot
+Bucknell|#000060|#00316e|Bison|Patriot
+Colgate|#821019|#ffffff|Raiders|Patriot
+Fordham|#830032|#909090|Rams|Patriot
+Lehigh|#6c2b2a|#b69e70|Mountain Hawks|Patriot
+William & Mary|#115740|#f0b323|Tribe|Patriot
+Stetson|#0a5640|#56854e|Hatters|Pioneer
+San Diego|#2f99d4|#00629b|Toreros|Pioneer
+Butler|#0d1361|#00a3e0|Bulldogs|Pioneer
+Davidson|#000000|#e51837|Wildcats|Pioneer
+Dayton|#004B8D|#ffffff|Flyers|Pioneer
+Drake|#005596|#bec0c2|Bulldogs|Pioneer
+Marist|#e53730|#f0f0f0|Red Foxes|Pioneer
+Morehead State|#094FA3|#fed91a|Eagles|Pioneer
+Presbyterian|#194896|#990134|Blue Hose|Pioneer
+Valparaiso|#794500|#c8b273|Beacons|Pioneer
+St. Thomas-Minnesota|#582c83|#ffffff|Tommies|Pioneer
+Furman|#582c83|#ffffff|Paladins|Southern
+Chattanooga|#00386b|#dca71d|Mocs|Southern
+East Tennessee State|#002d61|#ffc423|Buccaneers|Southern
+Mercer|#ff7f29|#080808|Bears|Southern
+Samford|#005485|#bc0023|Bulldogs|Southern
+Tennessee Tech|#5A4099|#ffde00|Golden Eagles|Southern
+The Citadel|#7badd3|#002856|Bulldogs|Southern
+VMI|#ae122a|#000000|Keydets|Southern
+Western Carolina|#492F91|#bf9e70|Catamounts|Southern
+Wofford|#533B23|#f0f0f0|Terriers|Southern
+UT Rio Grande Valley|#f47321|#005f43|Vaqueros|Southland
+Houston Christian|#00539c|#f0f0f0|Huskies|Southland
+Lamar|#000000|#ebebeb|Cardinals|Southland
+McNeese|#00529C|#f0f0f0|Cowboys|Southland
+Nicholls|#C41230|#f0f0f0|Colonels|Southland
+Northwestern State|#492F91|#ed6118|Demons|Southland
+SE Louisiana|#215732|#ffc72c|Lions|Southland
+Stephen F. Austin|#393996|#bec0c2|Lumberjacks|Southland
+East Texas A&M|#00427e|#f0f0f0|Lions|Southland
+Incarnate Word|#c8102e|#000000|Cardinals|Southland
+Florida A&M|#F89728|#00843d|Rattlers|SWAC
+Alabama A&M|#790000|#ffffff|Bulldogs|SWAC
+Alabama State|#e9a900|#0a0a0a|Hornets|SWAC
+Alcorn State|#4b0058|#46166a|Braves|SWAC
+Arkansas-Pine Bluff|#e0aa0f|#000000|Golden Lions|SWAC
+Bethune-Cookman|#7b1831|#e9aa12|Wildcats|SWAC
+Jackson State|#123297|#b5b7ba|Tigers|SWAC
+Mississippi Valley State|#005328|#cf2d34|Delta Devils|SWAC
+Prairie View A&M|#582c83|#eaaa00|Panthers|SWAC
+Southern|#004B97|#ffc82d|Jaguars|SWAC
+Texas Southern|#860038|#ffffff|Tigers|SWAC
+Grambling|#ee8601|#000000|Tigers|SWAC
+Abilene Christian|#592d82|#b1b3b3|Wildcats|UAC
+Austin Peay|#8e0b0b|#000000|Governors|UAC
+Central Arkansas|#582c83|#8e959a|Bears|UAC
+Eastern Kentucky|#660819|#f0f0f0|Colonels|UAC
+North Alabama|#4b2e83|#c5b358|Lions|UAC
+Tarleton State|#582c83|#ffffff|Texans|UAC
+West Georgia|#0033a1|#db1a21|Wolves|UAC
+West Florida|#00543c|#006ba6|Argonauts|UAC
+</script>
 
 <script>
 (function(){
@@ -3816,149 +4189,203 @@ const $ = s => document.querySelector(s);
 const txt = id => { const el = document.getElementById(id); return el ? el.textContent : ''; };
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ls = k => { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } };
-/* settings shared with the hubs: theme and time zone (jsh-shared), favourites from each hub's own settings */
+
+/* ---------- theme and time zone, shared with the three hubs (jsh-shared) ---------- */
 const shared = ls('jsh-shared') || ls('cfb-settings') || {};
-if (shared.theme === 'dark' || shared.theme === 'light') document.documentElement.dataset.theme = shared.theme;
-const TZS = {ET:{off:0,z:'America/New_York'},CT:{off:-1,z:'America/Chicago'},MT:{off:-2,z:'America/Denver'},PT:{off:-3,z:'America/Los_Angeles'}};
+const lightMode = shared.theme === 'light' || (shared.theme !== 'dark' && matchMedia('(prefers-color-scheme: light)').matches);
+if (lightMode) document.documentElement.classList.add('light');
+const TZS = {ET:'America/New_York', CT:'America/Chicago', MT:'America/Denver', PT:'America/Los_Angeles'};
 const TZ = TZS[shared.tz] ? shared.tz : 'MT';
-const etDate = (d) => new Intl.DateTimeFormat('en-CA', {timeZone:'America/New_York', year:'numeric', month:'2-digit', day:'2-digit'}).format(d || new Date());
+const fmt = (o, d) => new Intl.DateTimeFormat('en-US', Object.assign({timeZone: TZS[TZ]}, o)).format(d || new Date());
+const etDate = d => new Intl.DateTimeFormat('en-CA', {timeZone:'America/New_York', year:'numeric', month:'2-digit', day:'2-digit'}).format(d || new Date());
 const TODAY = etDate();
+const addDay = (d, n) => { const p = d.split('-').map(Number); return new Date(Date.UTC(p[0], p[1] - 1, p[2] + n)).toISOString().slice(0, 10); };
 const kickMs = (date, time) => { const m = /^(\d{1,2}):(\d{2}) (AM|PM)$/.exec(time || ''); const h = m ? (+m[1]) % 12 + (m[3] === 'PM' ? 12 : 0) : 12; const off = date >= '2026-11-01' && date < '2027-03-14' ? '-05:00' : '-04:00'; return Date.parse(date + 'T' + String(h).padStart(2, '0') + ':' + (m ? m[2] : '00') + ':00' + off); };
-const fmtKick = (date, time) => { const ms = kickMs(date, time); if (!/^\d/.test(time || '')) return dayName(date) + ' · TBD'; const d = new Date(ms); const day = new Intl.DateTimeFormat('en-US', {timeZone: TZS[TZ].z, weekday:'short'}).format(d); const t = new Intl.DateTimeFormat('en-US', {timeZone: TZS[TZ].z, hour:'numeric', minute:'2-digit'}).format(d); return day + ' ' + t + ' ' + TZ; };
-const dayName = (date) => new Intl.DateTimeFormat('en-US', {timeZone:'UTC', weekday:'short'}).format(new Date(date + 'T12:00:00Z'));
-const md = (date) => new Intl.DateTimeFormat('en-US', {timeZone:'UTC', month:'short', day:'numeric'}).format(new Date(date + 'T12:00:00Z'));
+const timed = g => /^\d/.test(g.time || '');
+const kickStr = g => timed(g) ? fmt({hour:'numeric', minute:'2-digit'}, new Date(kickMs(g.date, g.time))) : 'TBD';
+const dayStr = g => { const d = new Date(kickMs(g.date, g.time || '12:00 PM')); const local = new Intl.DateTimeFormat('en-CA', {timeZone: TZS[TZ], year:'numeric', month:'2-digit', day:'2-digit'}); const day = local.format(d), now = local.format(new Date()); return day === now ? 'Today' : (day === addDay(now, 1) ? 'Tomorrow' : fmt({weekday:'short'}, d)); };
+const md = date => new Intl.DateTimeFormat('en-US', {timeZone:'UTC', month:'short', day:'numeric'}).format(new Date(date + 'T12:00:00Z'));
 const range = (a, b) => { const A = md(a), B = md(b); return A === B ? A : (A.split(' ')[0] === B.split(' ')[0] ? A + '–' + B.split(' ')[1] : A + ' – ' + B); };
 const isLiveSt = st => !!st && !/^(SCHEDULED|FINAL|POSTPONED|CANCELED|CANCELLED|DELAYED)$/.test(st);
-const plate = (src, color) => '<span class="plate">' + (src ? '<img src="' + src + '" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'sw\',style:\'background:' + (color || '#94a3b8') + '\'}))">' : '<span class="sw" style="background:' + (color || '#94a3b8') + '"></span>') + '</span>';
-const small = (src, color) => src ? '<img src="' + src + '" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">' : '<span class="sw" style="background:' + (color || '#94a3b8') + '"></span>';
-const dark = () => document.documentElement.dataset.theme === 'dark' || (document.documentElement.dataset.theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+const hexRgb = h => { const m = /^#?([0-9a-f]{6})$/i.exec(h || ''); return m ? [0, 2, 4].map(i => parseInt(m[1].slice(i, i + 2), 16)) : null; };
+const lum = c => { const f = v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }; return .2126 * f(c[0]) + .7152 * f(c[1]) + .0722 * f(c[2]); };
+const mixHex = (h, t, k) => { const a = hexRgb(h), b = hexRgb(t); if (!a || !b) return h; return '#' + a.map((v, i) => Math.round(v + (b[i] - v) * k).toString(16).padStart(2, '0')).join(''); };
+/* a card color that carries white type: a pale primary gives way to the alternate, and anything still light is deepened */
+const cardColor = (c, alt) => { let x = hexRgb(c) ? '#' + c.replace('#', '') : '#334155'; if (lum(hexRgb(x)) > .5 && hexRgb(alt) && lum(hexRgb(alt)) < .3) x = '#' + alt.replace('#', ''); let n = 0; while (lum(hexRgb(x)) > .2 && n < 8) { x = mixHex(x, '#000000', .16); n++; } return x; };
 
 /* ---------- data ---------- */
 const META = JSON.parse(txt('d-meta') || '{}');
-/* college: week|date|away|home|as|hs|status|time|neutral|spread|total|mlA|mlH|tv|awayRank|homeRank (FBS and FCS files; shared games deduped) */
-const CFB = []; { const seen = {}; txt('d-cfb').split('\n').forEach(l => { const p = l.split('|'); if (p.length < 14) return; const k = p[1] + '|' + p[2] + '|' + p[3]; const g = {sport:'cfb', week:+p[0], date:p[1], away:p[2], home:p[3], as:p[4] === '' ? null : +p[4], hs:p[5] === '' ? null : +p[5], st:p[6], time:p[7], neutral:p[8] === 'N', spread:p[9] === '' ? null : +p[9], tv:p[13], ar:+p[14] || 0, hr:+p[15] || 0}; if (seen[k]) { const o = seen[k]; if (o.spread == null && g.spread != null) o.spread = g.spread; if (!o.ar && g.ar) o.ar = g.ar; if (!o.hr && g.hr) o.hr = g.hr; return; } seen[k] = g; CFB.push(g); }); }
+const CFB = []; { const seen = {}; txt('d-cfb').split('\n').forEach(l => { const p = l.split('|'); if (p.length < 14) return; const k = p[1] + '|' + p[2] + '|' + p[3]; const g = {sport:'cfb', week:+p[0], date:p[1], away:p[2], home:p[3], as:p[4] === '' ? null : +p[4], hs:p[5] === '' ? null : +p[5], st:p[6], time:p[7], neutral:p[8] === 'N', spread:p[9] === '' ? null : +p[9], tv:p[13], ar:+p[14] || 0, hr:+p[15] || 0}; if (seen[k]) { const o = seen[k]; if (o.spread == null && g.spread != null) o.spread = g.spread; if (!o.ar && g.ar) o.ar = g.ar; if (!o.hr && g.hr) o.hr = g.hr; return; } seen[k] = g; g.id = k; CFB.push(g); }); }
 const CFBLOGO = {}; txt('d-cfblogos').split('\n').forEach(l => { const p = l.split('|'); if (p[1]) CFBLOGO[p[0]] = p[1]; });
-const cfbLogo = n => CFBLOGO[n] ? '/cfb/img/logos/' + CFBLOGO[n] + '.png' : null;
-/* NFL: stype|week|date|time|id|away|home|as|hs|status|neutral|tv|spread|total ; weeks: stype|week|label|label|start|end */
+const CFBT = {}; txt('d-cfbteams').split('\n').forEach(l => { const p = l.split('|'); if (p[0]) CFBT[p[0]] = {color:p[1], alt:p[2], mascot:p[3], conf:p[4]}; });
 const NFL = txt('d-nfl').split('\n').map(l => l.split('|')).filter(p => p.length >= 12).map(p => ({sport:'nfl', stype:+p[0], week:+p[1], date:p[2], time:p[3], id:p[4], away:p[5], home:p[6], as:p[7] === '' ? null : +p[7], hs:p[8] === '' ? null : +p[8], st:p[9], neutral:p[10] === 'N', tv:p[11], spread:p[12] === '' || p[12] == null ? null : +p[12]}));
 const NFLW = txt('d-nflweeks').split('\n').map(l => l.split('|')).filter(p => p.length >= 6).map(p => ({stype:+p[0], week:+p[1], label:p[2], start:p[4], end:p[5]}));
 const NFLT = JSON.parse(txt('d-nflteams') || '{}');
-/* NBA: stype|date|time|id|away|home|as|hs|status|neutral|tv */
 const NBA = txt('d-nba').split('\n').map(l => l.split('|')).filter(p => p.length >= 10).map(p => ({sport:'nba', stype:+p[0], date:p[1], time:p[2], id:p[3], away:p[4], home:p[5], as:p[6] === '' ? null : +p[6], hs:p[7] === '' ? null : +p[7], st:p[8], neutral:p[9] === 'N', tv:p[10] || ''}));
 const NBAT = JSON.parse(txt('d-nbateams') || '{}');
-/* the "-dark" art is light-coloured for dark backgrounds; logos on a white plate always use the regular art */
-const proLogo = (sp, ab, onPlate) => '/' + sp + '/img/logos/' + ab + (dark() && !onPlate ? '-dark' : '') + '.png';
-const SPORT = {cfb:{name:'College Football', short:'College', c:'#1d5fd8', url:'/cfb/'}, nfl:{name:'NFL', short:'NFL', c:'#c8102e', url:'/nfl/'}, nba:{name:'NBA', short:'NBA', c:'#6d28d9', url:'/nba/'}};
 
-/* ---------- favourites ---------- */
-const cfbSet = ls('cfb-settings') || {}, nflSet = ls('nfl-settings') || {}, nbaSet = ls('nba-settings') || {};
-const CFB_FAVS = [...new Set([cfbSet.fav || 'BYU', 'Weber State'])];
-const NFL_FAV = nflSet.fav || null;
-const NBA_FAV = nbaSet.fav || 'UTAH';
-
-/* ---------- helpers per sport ---------- */
+/* ---------- each sport answers the same few questions ---------- */
+const ICON = {
+  fb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><ellipse cx="12" cy="12" rx="10" ry="6" transform="rotate(-35 12 12)"/><path d="M9 15l6-6M10.5 11.5l2 2M12.5 9.5l2 2M8.5 13.5l2 2"/></svg>',
+  bb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2v20M5 5c3 3 3 11 0 14M19 5c-3 3-3 11 0 14"/></svg>'
+};
+const SPORT = {
+  cfb: {name:'College Football', short:'College', c:'var(--cfb)', icon:ICON.fb, url:'/cfb/'},
+  nfl: {name:'NFL', short:'NFL', c:'var(--nfl)', icon:ICON.fb, url:'/nfl/'},
+  nba: {name:'NBA', short:'NBA', c:'var(--nba)', icon:ICON.bb, url:'/nba/'}
+};
 const played = g => g.st === 'FINAL' && g.as != null && g.hs != null;
-function record(list, team, keyFn){ let w = 0, l = 0, t = 0; list.forEach(g => { if (!played(g)) return; if (g.away !== team && g.home !== team) return; const mine = g.home === team ? g.hs : g.as, theirs = g.home === team ? g.as : g.hs; if (mine > theirs) w++; else if (mine < theirs) l++; else t++; }); return w + '-' + l + (t ? '-' + t : ''); }
-function teamGames(list, team){ return list.filter(g => g.away === team || g.home === team).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time) || kickMs(a.date, a.time) - kickMs(b.date, b.time)); }
-function resultStr(g, team, nameOf){ const home = g.home === team; const mine = home ? g.hs : g.as, theirs = home ? g.as : g.hs; const opp = home ? g.away : g.home; const r = mine > theirs ? '<span class="res-w">W</span>' : (mine < theirs ? '<span class="res-l">L</span>' : '<b>T</b>'); return r + ' ' + mine + '-' + theirs + ' ' + (g.neutral ? 'vs' : (home ? 'vs' : 'at')) + ' ' + esc(nameOf(opp)); }
-function lineStr(g, nameOf){ if (g.spread == null || isNaN(g.spread)) return ''; if (g.spread === 0) return 'pick \'em'; const fav = g.spread < 0 ? g.home : g.away; return esc(nameOf(fav)) + ' -' + Math.abs(g.spread); }
-function liveStr(g){ const L = LIVE[g.sport][g.id || g.key]; return L ? (L.clk && L.per ? (g.sport === 'nba' ? 'Q' + L.per : (L.per > 4 ? 'OT' : 'Q' + L.per)) + ' ' + L.clk : L.det) : 'In progress'; }
-/* live overlay from the hubs' proxies, keyed by game */
-const LIVE = {cfb:{}, nfl:{}, nba:{}};
-function applyLive(g){ const L = LIVE[g.sport][g.id || g.key]; if (!L) return g; const out = Object.assign({}, g); if (L.as !== '' && L.as != null) out.as = +L.as; if (L.hs !== '' && L.hs != null) out.hs = +L.hs; out.st = L.st; out.live = isLiveSt(L.st); return out; }
-CFB.forEach(g => { g.key = g.date + '|' + g.away + '|' + g.home; g.id = g.key; });
-
-/* current college week: the first week whose last game is today or later */
-const cfbWeeks = {}; CFB.forEach(g => { const w = cfbWeeks[g.week] || (cfbWeeks[g.week] = {lo:g.date, hi:g.date}); if (g.date < w.lo) w.lo = g.date; if (g.date > w.hi) w.hi = g.date; });
-const CFB_WEEK = +(Object.keys(cfbWeeks).map(Number).sort((a, b) => a - b).find(w => cfbWeeks[w].hi >= TODAY) || Math.max(...Object.keys(cfbWeeks).map(Number)));
-const nflWeek = NFLW.find(w => w.end >= TODAY) || NFLW[NFLW.length - 1] || {stype:2, week:1, label:'Week 1'};
-const cfbSlug = g => (g.date + '-' + g.away + '-' + g.home).toLowerCase().replace(/[^a-z0-9]+/g, '-');
-const nflName = ab => (NFLT[ab] && NFLT[ab].nick) || ab;
-const nbaName = ab => (NBAT[ab] && NBAT[ab].nick) || ab;
 const cfbShort = n => n.replace(/ State$/, ' St').replace(/^North Carolina$/, 'N Carolina');
-
-/* ---------- rendering ---------- */
-function gameRow(g0, o){ const g = applyLive(g0); const on = played(g) || g.live; const aw = on && g.as > g.hs, hw = on && g.hs > g.as;
-  const t = (side) => { const n = side === 'a' ? g.away : g.home; const rk = g.sport === 'cfb' ? (side === 'a' ? g.ar : g.hr) : 0; return '<div class="gm-t' + ((side === 'a' ? aw : hw) ? ' w' : '') + '">' + small(o.logo(n), o.color(n)) + '<span class="nm">' + (rk ? '<span class="rk">' + rk + '</span>' : '') + esc(o.name(n)) + '</span></div>' + (on ? '<div class="gm-s' + ((side === 'a' ? aw : hw) ? ' w' : '') + '">' + (side === 'a' ? g.as : g.hs) + '</div>' : '<div></div>'); };
-  const st = g.live ? '<span class="livetag">Live</span> ' + esc(liveStr(g)) : played(g) ? 'Final' + (g.as !== g.hs ? ' · ' + esc(o.name(g.as > g.hs ? g.away : g.home)) + ' by ' + Math.abs(g.as - g.hs) : '') : esc(fmtKick(g.date, g.time)) + (g.tv ? ' · ' + esc(g.tv) : '') + (lineStr(g, o.name) ? ' · ' + lineStr(g, o.name) : '');
-  return '<a class="gm' + (g.live ? ' live' : '') + '" href="' + o.href(g) + '">' + t('a') + t('h') + '<div class="gm-st">' + st + '</div></a>'; }
-function favCard(team, list, o){ const gs = teamGames(list, team).map(applyLive); if (!gs.length) return '';
-  const live = gs.find(g => g.live); const last = gs.filter(played).pop(); const next = gs.find(g => !played(g) && !g.live && g.st !== 'CANCELED' && g.st !== 'POSTPONED');
-  const rk = o.rank ? o.rank(team, gs) : 0; let rows = '';
-  if (live) { const home = live.home === team; rows += '<div class="k">Now</div><div class="v"><span class="livetag">Live</span> ' + esc(o.name(team)) + ' ' + (home ? live.hs : live.as) + ', ' + esc(o.name(home ? live.away : live.home)) + ' ' + (home ? live.as : live.hs) + ' <span class="dim">· ' + esc(liveStr(live)) + '</span></div>'; }
-  if (last) rows += '<div class="k">Last</div><div class="v">' + resultStr(last, team, o.name) + ' <span class="dim">· ' + esc(md(last.date)) + '</span></div>';
-  if (next) rows += '<div class="k">Next</div><div class="v">' + (next.neutral ? 'vs' : (next.home === team ? 'vs' : 'at')) + ' <b>' + esc(o.name(next.home === team ? next.away : next.home)) + '</b> <span class="dim">· ' + esc(fmtKick(next.date, next.time)) + (next.tv ? ' · ' + esc(next.tv) : '') + (lineStr(next, o.name) ? ' · ' + lineStr(next, o.name) : '') + '</span></div>';
-  return '<a class="fav" href="' + o.teamHref(team) + '"><div class="fav-top">' + plate(o.logo(team, true), o.color(team)) + '<div><div class="fav-n">' + (rk ? '<span class="rk">#' + rk + '</span>' : '') + esc(o.full(team)) + '</div><div class="fav-rec">' + (gs.some(played) ? '<b>' + record(o.recList ? o.recList(list) : list, team) + '</b>' + (o.recNote ? ' ' + o.recNote(team, list) : '') : 'no games played yet') + '</div></div></div>' + (rows ? '<div class="fav-g">' + rows + '</div>' : '') + '</a>'; }
-
+const cfbSlug = g => (g.date + '-' + g.away + '-' + g.home).toLowerCase().replace(/[^a-z0-9]+/g, '-');
 const O = {
-  cfb: { name: n => cfbShort(n), full: n => n, logo: n => cfbLogo(n), color: () => '#94a3b8', href: g => '/cfb/#/game/' + cfbSlug(g), teamHref: n => '/cfb/#/team/' + encodeURIComponent(n),
-    rank: (team, gs) => { const g = gs.filter(x => !played(x)).concat(gs.slice().reverse())[0]; return g ? (g.home === team ? g.hr : g.ar) : 0; } },
-  nfl: { name: nflName, full: ab => (NFLT[ab] && NFLT[ab].full) || ab, logo: (ab, onPlate) => proLogo('nfl', ab, onPlate), color: ab => (NFLT[ab] && NFLT[ab].color) || '#94a3b8', href: g => '/nfl/#/game/' + g.id, teamHref: ab => '/nfl/#/team/' + encodeURIComponent(ab), recList: l => l.filter(g => g.stype === 2) },
-  nba: { name: nbaName, full: ab => (NBAT[ab] && NBAT[ab].full) || ab, logo: (ab, onPlate) => proLogo('nba', ab, onPlate), color: ab => (NBAT[ab] && NBAT[ab].color) || '#94a3b8', href: g => '/nba/#/game/' + g.id, teamHref: ab => '/nba/#/team/' + encodeURIComponent(ab),
-    recList: l => { const reg = l.filter(g => g.stype === 2 && played(g)); return reg.length ? l.filter(g => g.stype === 2) : l.filter(g => g.stype === 1); },
-    recNote: (ab, l) => l.some(g => g.stype === 2 && played(g)) ? '' : '<span class="dim">preseason</span>' }
+  cfb: { name: cfbShort, full: n => n, nick: n => (CFBT[n] && CFBT[n].mascot) || '', logo: n => CFBLOGO[n] ? '/cfb/img/logos/' + CFBLOGO[n] + '.png' : null, color: n => (CFBT[n] && CFBT[n].color) || '#334155', alt: n => (CFBT[n] && CFBT[n].alt) || '', group: n => (CFBT[n] && CFBT[n].conf) || '',
+    href: g => '/cfb/#/game/' + cfbSlug(g), teamHref: n => '/cfb/#/team/' + encodeURIComponent(n), list: () => CFB,
+    rank: (n, gs) => { const g = gs.filter(x => !played(x)).concat(gs.slice().reverse())[0]; return g ? (g.home === n ? g.hr : g.ar) : 0; } },
+  nfl: { name: ab => (NFLT[ab] && NFLT[ab].nick) || ab, full: ab => (NFLT[ab] && NFLT[ab].full) || ab, nick: ab => (NFLT[ab] && NFLT[ab].nick) || '', logo: ab => '/nfl/img/logos/' + ab + '.png', color: ab => (NFLT[ab] && NFLT[ab].color) || '#334155', alt: ab => (NFLT[ab] && NFLT[ab].alt) || '', group: ab => NFLT[ab] ? NFLT[ab].conf + ' ' + NFLT[ab].div : '',
+    href: g => '/nfl/#/game/' + g.id, teamHref: ab => '/nfl/#/team/' + encodeURIComponent(ab), list: () => NFL, recOnly: g => g.stype === 2 },
+  nba: { name: ab => (NBAT[ab] && NBAT[ab].nick) || ab, full: ab => (NBAT[ab] && NBAT[ab].full) || ab, nick: ab => (NBAT[ab] && NBAT[ab].nick) || '', logo: ab => '/nba/img/logos/' + ab + '.png', color: ab => (NBAT[ab] && NBAT[ab].color) || '#334155', alt: ab => (NBAT[ab] && NBAT[ab].alt) || '', group: ab => NBAT[ab] ? NBAT[ab].conf + ' · ' + NBAT[ab].div : '',
+    href: g => '/nba/#/game/' + g.id, teamHref: ab => '/nba/#/team/' + encodeURIComponent(ab), list: () => NBA, recOnly: g => g.stype !== 1 || !NBA.some(x => x.stype === 2 && played(x)) }
 };
 
-function panel(key, ctx, body, moreHref, moreLabel){ const s = SPORT[key]; return '<article class="sp ' + key + '" style="--c:' + s.c + '"><a class="sp-head" href="' + s.url + '"><span class="sp-dot"></span><div style="min-width:0"><div class="sp-name">' + s.name + '</div><div class="sp-ctx">' + ctx + '</div></div><span class="sp-go">Open &rsaquo;</span></a><div class="sp-bd">' + body + (moreHref ? '<a class="more" href="' + moreHref + '">' + moreLabel + '</a>' : '') + '</div></article>'; }
+/* ---------- live scores overlay, filled by the hubs' proxies ---------- */
+const LIVE = {cfb:{}, nfl:{}, nba:{}};
+const applyLive = g => { const L = LIVE[g.sport][g.id]; if (!L) return g; const o = Object.assign({}, g); if (L.as !== '' && L.as != null) o.as = +L.as; if (L.hs !== '' && L.hs != null) o.hs = +L.hs; o.st = L.st; o.live = isLiveSt(L.st); return o; };
+const liveClock = g => { const L = LIVE[g.sport][g.id]; if (!L) return 'In progress'; if (L.per && L.clk) return (g.sport !== 'nba' && L.per > 4 ? 'OT' : 'Q' + L.per) + ' ' + L.clk; return L.det || 'In progress'; };
 
-function cfbPanel(){ const w = CFB_WEEK, ww = cfbWeeks[w]; const wk = CFB.filter(g => g.week === w).map(applyLive);
-  const score = g => (g.live ? 1000 : 0) + (CFB_FAVS.includes(g.away) || CFB_FAVS.includes(g.home) ? 500 : 0) + (g.ar && g.hr ? 200 - g.ar - g.hr : (g.ar || g.hr ? 60 - (g.ar || g.hr) : 0));
-  const top = wk.filter(g => g.ar || g.hr || g.live || CFB_FAVS.includes(g.away) || CFB_FAVS.includes(g.home)).sort((a, b) => score(b) - score(a) || kickMs(a.date, a.time) - kickMs(b.date, b.time)).slice(0, 5);
-  const favs = CFB_FAVS.map(n => favCard(n, CFB, O.cfb)).join('');
-  const body = '<div class="lab">Your teams</div>' + (favs || '<div class="empty">No games found for your teams.</div>') + '<div class="lab">Week ' + w + ' marquee</div>' + (top.length ? top.map(g => gameRow(g, O.cfb)).join('') : '<div class="empty">No ranked games this week.</div>');
-  return panel('cfb', 'Week ' + w + (ww ? ' · ' + range(ww.lo, ww.hi) : '') + ' · ' + wk.length + ' games', body, '/cfb/#/week/' + w, 'Full Week ' + w + ' scoreboard &rsaquo;'); }
-function nflPanel(){ const W = nflWeek; const wk = NFL.filter(g => g.stype === W.stype && g.week === W.week).map(applyLive);
-  const order = g => g.live ? 0 : (!played(g) ? 1 : 2); const list = wk.slice().sort((a, b) => order(a) - order(b) || (order(a) === 2 ? kickMs(b.date, b.time) - kickMs(a.date, a.time) : kickMs(a.date, a.time) - kickMs(b.date, b.time))).slice(0, 5);
-  const fav = NFL_FAV ? favCard(NFL_FAV, NFL, O.nfl) : '<a class="pick" href="/nfl/#/settings">No NFL team picked yet. <b>Choose one in NFL settings</b> and it shows up here.</a>';
-  const body = '<div class="lab">Your team</div>' + fav + '<div class="lab">' + esc(W.label) + (list.some(g => g.live) ? ' · live first' : ' · next up') + '</div>' + (list.length ? list.map(g => gameRow(g, O.nfl)).join('') : '<div class="empty">No games this week.</div>');
-  return panel('nfl', esc(W.label) + ' · ' + range(W.start, W.end) + ' · ' + wk.length + ' games', body, '/nfl/#/week/' + W.week, 'All ' + wk.length + ' ' + esc(W.label) + ' games &rsaquo;'); }
-function nbaPanel(){ const dates = [...new Set(NBA.map(g => g.date))].sort(); const day = dates.find(d => d >= TODAY) || dates[dates.length - 1];
-  const games = NBA.filter(g => g.date === day).map(applyLive).sort((a, b) => (a.live ? 0 : 1) - (b.live ? 0 : 1) || kickMs(a.date, a.time) - kickMs(b.date, b.time));
-  const reg = NBA.filter(g => g.stype === 2).map(g => g.date).sort(); const opener = reg[0]; const pre = TODAY < (opener || '9999');
-  const ctx = pre ? 'Preseason' + (opener ? ' · season tips off ' + md(opener) : '') : 'Regular season';
-  const body = '<div class="lab">Your team</div>' + (favCard(NBA_FAV, NBA, O.nba) || '<div class="empty">No games found.</div>') + '<div class="lab">' + (day === TODAY ? 'Today' : dayName(day) + ', ' + md(day)) + ' · ' + games.length + ' game' + (games.length === 1 ? '' : 's') + '</div>' + (games.length ? games.slice(0, 5).map(g => gameRow(g, O.nba)).join('') : '<div class="empty">No games.</div>');
-  return panel('nba', ctx, body, '/nba/#/scores', 'NBA scoreboard &rsaquo;'); }
+/* ---------- favorites, from each hub's own settings ---------- */
+const cfbSet = ls('cfb-settings') || {}, nflSet = ls('nfl-settings') || {}, nbaSet = ls('nba-settings') || {};
+const FAVS = [...new Set([cfbSet.fav || 'BYU', 'Weber State'])].map(n => ({sport:'cfb', team:n})).concat(nflSet.fav ? [{sport:'nfl', team:nflSet.fav}] : [], [{sport:'nba', team:nbaSet.fav || 'UTAH'}]);
+const isFavTeam = (sport, t) => FAVS.some(f => f.sport === sport && f.team === t);
+const favGame = g => isFavTeam(g.sport, g.away) || isFavTeam(g.sport, g.home);
 
-function liveCards(){ const out = []; const add = (list, o, key) => list.map(applyLive).filter(g => g.live).forEach(g => out.push({g, o, key}));
-  add(CFB.filter(g => g.week === CFB_WEEK), O.cfb, 'cfb'); add(NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype), O.nfl, 'nfl'); add(NBA.filter(g => g.date === TODAY), O.nba, 'nba');
-  return out; }
-function render(){
-  $('#fd-date').textContent = new Intl.DateTimeFormat('en-US', {timeZone: TZS[TZ].z, weekday:'long', month:'long', day:'numeric'}).format(new Date());
-  $('#fd-grid').innerHTML = cfbPanel() + nflPanel() + nbaPanel();
-  const lv = liveCards(); $('#fd-livewrap').hidden = !lv.length; $('#fd-livecount').textContent = lv.length ? lv.length + ' game' + (lv.length === 1 ? '' : 's') : '';
-  $('#fd-live').innerHTML = lv.map(x => '<div class="lc" style="--c:' + SPORT[x.key].c + '"><div class="tg"><span>' + SPORT[x.key].short + '</span><span>' + esc(liveStr(x.g)) + '</span></div>' + gameRow(x.g, x.o).replace('class="gm live"', 'class="gm"') + '</div>').join('');
-  /* the hero chips: what is on across the three sports */
-  const chips = []; const live = lv.length;
-  if (live) chips.push('<span class="fd-chip live"><i></i>' + live + ' live now</span>');
-  const upNext = [].concat(CFB.filter(g => g.week === CFB_WEEK).map(g => ({g, k:'cfb'})), NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype).map(g => ({g, k:'nfl'})), NBA.filter(g => g.date >= TODAY).map(g => ({g, k:'nba'})))
-    .map(x => ({x, ms: kickMs(x.g.date, x.g.time)})).filter(y => !played(y.x.g) && y.ms > Date.now() && /^\d/.test(y.x.g.time)).sort((a, b) => a.ms - b.ms)[0];
-  if (upNext) { const g = upNext.x.g, o = O[upNext.x.k]; chips.push('<span class="fd-chip" style="--c:' + SPORT[upNext.x.k].c + '"><i></i>Next up: ' + esc(o.name(g.away)) + ' at ' + esc(o.name(g.home)) + ', ' + esc(fmtKick(g.date, g.time)) + '</span>'); }
-  chips.push('<span class="fd-chip" style="--c:' + SPORT.cfb.c + '"><i></i>College Week ' + CFB_WEEK + '</span>', '<span class="fd-chip" style="--c:' + SPORT.nfl.c + '"><i></i>NFL ' + esc(nflWeek.label) + '</span>', '<span class="fd-chip" style="--c:' + SPORT.nba.c + '"><i></i>NBA ' + (TODAY < (NBA.filter(g => g.stype === 2).map(g => g.date).sort()[0] || '9999') ? 'preseason' : 'season') + '</span>');
-  $('#fd-pulse').innerHTML = chips.join('');
-  const when = s => { const m = /^[A-Z][a-z]{2} ([A-Z][a-z]{2} \d+), \d{4} · (.*)$/.exec(s || ''); return m ? (m[1] === md(TODAY) ? '' : m[1] + ', ') + m[2] : (s || '?'); };
-  $('#fd-asof').textContent = 'Updated: ' + ['cfb', 'nfl', 'nba'].map(k => SPORT[k].short + ' ' + when(META[k])).join(' · ');
-  $('#fd-upd').textContent = LAST ? 'live scores checked ' + new Intl.DateTimeFormat('en-US', {timeZone: TZS[TZ].z, hour:'numeric', minute:'2-digit'}).format(new Date(LAST)) : '';
+/* ---------- the current week in each league ---------- */
+const cfbWeeks = {}; CFB.forEach(g => { const w = cfbWeeks[g.week] || (cfbWeeks[g.week] = {lo:g.date, hi:g.date}); if (g.date < w.lo) w.lo = g.date; if (g.date > w.hi) w.hi = g.date; });
+const CFB_WEEK = +(Object.keys(cfbWeeks).map(Number).sort((a, b) => a - b).find(w => cfbWeeks[w].hi >= TODAY) || Math.max(...Object.keys(cfbWeeks).map(Number)));
+const nflWeek = NFLW.find(w => w.end >= TODAY) || NFLW[NFLW.length - 1] || {stype:2, week:1, label:'Week 1', start:TODAY, end:TODAY};
+const nbaOpener = NBA.filter(g => g.stype === 2).map(g => g.date).sort()[0];
+const nbaPre = TODAY < (nbaOpener || '9999');
+
+/* ---------- small pieces ---------- */
+const logoImg = src => src ? '<img src="' + src + '" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">' : '<span class="sw" style="background:#64748b"></span>';
+const plate = (src, cls) => '<span class="' + (cls || 'plate') + '">' + logoImg(src) + '</span>';
+const teamGames = (sport, t) => O[sport].list().filter(g => g.away === t || g.home === t).map(applyLive).sort((a, b) => (kickMs(a.date, a.time) || 0) - (kickMs(b.date, b.time) || 0));
+const record = (sport, t, gs) => { let w = 0, l = 0, tie = 0; gs.forEach(g => { if (!played(g)) return; if (O[sport].recOnly && !O[sport].recOnly(g)) return; const mine = g.home === t ? g.hs : g.as, them = g.home === t ? g.as : g.hs; if (mine > them) w++; else if (mine < them) l++; else tie++; }); return w + '-' + l + (tie ? '-' + tie : ''); };
+const lineStr = (g, o) => { if (g.spread == null || isNaN(g.spread)) return ''; if (g.spread === 0) return 'pick \'em'; const f = g.spread < 0 ? g.home : g.away; return o.name(f) + ' -' + Math.abs(g.spread); };
+const net = g => (g.tv || '').split('/')[0].trim();
+const cdHTML = ms => { let s = Math.max(0, Math.floor((ms - Date.now()) / 1000)); const d = Math.floor(s / 86400); s %= 86400; const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60; const p = n => String(n).padStart(2, '0'); return (d ? d + '<span class="u">d</span>' : '') + p(h) + '<i>:</i>' + p(m) + '<i>:</i>' + p(x); };
+function teamRow(g, side, o){ const t = side === 'a' ? g.away : g.home; const on = played(g) || g.live; const win = on && (side === 'a' ? g.as > g.hs : g.hs > g.as); const rk = g.sport === 'cfb' ? (side === 'a' ? g.ar : g.hr) : 0;
+  return '<div class="tl' + (win ? ' w' : '') + '">' + logoImg(o.logo(t)) + '<span class="nm">' + (rk ? '<span class="rk">' + rk + '</span>' : '') + esc(o.name(t)) + '</span>' + (on ? '<span class="sc">' + (side === 'a' ? g.as : g.hs) + '</span>' : '') + '</div>'; }
+function statusStr(g, o){ if (g.live) return '<span class="pill-live">LIVE</span> ' + esc(liveClock(g)); if (played(g)) return 'Final' + (g.as !== g.hs ? ' · ' + esc(o.name(g.as > g.hs ? g.away : g.home)) + ' by ' + Math.abs(g.as - g.hs) : ''); return esc(dayStr(g) + ' ' + kickStr(g)) + (net(g) ? ' · ' + esc(net(g)) : '') + (lineStr(g, o) ? ' · ' + esc(lineStr(g, o)) : ''); }
+
+/* ---------- hero: a greeting, today in one line, and a countdown to your next game ---------- */
+function heroHTML(){
+  const now = new Date(); const h = +fmt({hour:'numeric', hourCycle:'h23'}, now) % 24;
+  $('#h-greet').textContent = h < 5 ? 'Up late' : h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+  $('#h-date').textContent = fmt({weekday:'long', month:'long', day:'numeric'}, now);
+  const lv = liveAll().length;
+  $('#h-lead').textContent = lv ? lv + ' game' + (lv === 1 ? ' is' : 's are') + ' live right now. Your teams come first, then everything on TV today.' : 'College football, the NFL and the NBA in one place: your teams first, then everything on TV today.';
+  const chips = [];
+  if (lv) chips.push('<a class="chip live" href="#live-wrap"><i></i>' + lv + ' live now</a>');
+  chips.push('<a class="chip" style="--c:var(--cfb)" href="/cfb/#/week/' + CFB_WEEK + '"><i></i>College · Week ' + CFB_WEEK + '</a>', '<a class="chip" style="--c:var(--nfl)" href="/nfl/#/week/' + nflWeek.week + '"><i></i>NFL · ' + esc(nflWeek.label) + '</a>', '<a class="chip" style="--c:var(--nba)" href="/nba/#/scores"><i></i>NBA · ' + (nbaPre ? 'preseason' : 'regular season') + '</a>');
+  $('#h-pulse').innerHTML = chips.join('');
+  /* a favorite playing now wins; otherwise the soonest favorite game */
+  let best = null;
+  FAVS.forEach(f => teamGames(f.sport, f.team).forEach(g => { if (g.st === 'CANCELED' || g.st === 'POSTPONED') return; const k = kickMs(g.date, g.time); if (g.live) { if (!best || !best.g.live) best = {f, g, k}; return; } if (played(g) || !timed(g) || k < Date.now()) return; if (!best || (!best.g.live && k < best.k)) best = {f, g, k}; }));
+  const el = $('#h-next'); if (!best) { el.innerHTML = ''; return; }
+  const {f, g} = best, o = O[f.sport]; const home = g.home === f.team; const opp = home ? g.away : g.home; const at = g.neutral ? 'vs' : (home ? 'vs' : 'at');
+  const mine = home ? g.hs : g.as, them = home ? g.as : g.hs;
+  const lbl = g.live ? '<span><span class="pill-live">LIVE</span></span><span>' + esc(liveClock(g)) + '</span>' : '<span>Next up for your teams</span><span>' + esc(SPORT[f.sport].short) + '</span>';
+  const main = '<div class="nu-m">' + plate(o.logo(f.team), 'sm-plate') + '<span class="nm">' + esc(o.name(f.team)) + '</span><span class="at">' + at + '</span>' + plate(o.logo(opp), 'sm-plate') + '<span class="nm">' + esc(o.name(opp)) + '</span></div>';
+  const big = g.live ? '<div class="cd">' + mine + '<i>–</i>' + them + '</div>' : '<div class="cd" data-cd="' + best.k + '">' + cdHTML(best.k) + '</div>';
+  const sub = g.live ? esc(o.name(f.team)) + ' ' + (mine > them ? 'lead' : mine === them ? 'are tied' : 'trail') + (net(g) ? ' · on ' + esc(net(g)) : '') : esc(dayStr(g) + ' ' + kickStr(g) + ' ' + TZ) + (net(g) ? ' · ' + esc(net(g)) : '') + (lineStr(g, o) ? ' · ' + esc(lineStr(g, o)) : '');
+  el.innerHTML = '<a class="nu' + (g.live ? ' live' : '') + '" href="' + o.href(g) + '"><div class="nu-l">' + lbl + '</div>' + main + big + '<div class="nu-s">' + sub + '</div></a>';
 }
 
-/* ---------- live scores through the hubs' proxies ---------- */
+/* ---------- your teams: a card per favorite, in its colors ---------- */
+function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(f.sport, t); if (!gs.length) return '';
+  const live = gs.find(g => g.live), last = gs.filter(played).pop(), next = gs.find(g => !played(g) && !g.live && g.st !== 'CANCELED' && g.st !== 'POSTPONED');
+  const c1 = cardColor(o.color(t), o.alt(t)); const c2 = mixHex(c1, '#000000', .55);
+  const rk = o.rank ? o.rank(t, gs) : 0; const counted = gs.filter(g => played(g) && (!o.recOnly || o.recOnly(g)));
+  const preseason = f.sport === 'nba' && nbaPre;
+  const meta = (f.sport === 'cfb' && o.nick(t) ? esc(o.nick(t)) + ' · ' : '') + (counted.length ? '<b>' + record(f.sport, t, gs) + '</b>' + (preseason ? ' preseason' : '') : (preseason ? 'Preseason' : 'No games yet')) + (o.group(t) ? ' · ' + esc(o.group(t)) : '');
+  let nx;
+  if (live) { const mine = live.home === t ? live.hs : live.as, them = live.home === t ? live.as : live.hs; nx = '<div class="tc-next"><div class="tc-k"><span class="pill-live">LIVE</span><span>' + esc(liveClock(live)) + '</span></div><div class="tc-sc">' + mine + '<span class="dim">–</span>' + them + '<span class="dim">' + (live.home === t ? 'vs ' : 'at ') + esc(o.name(live.home === t ? live.away : live.home)) + '</span></div></div>'; }
+  else if (next) { const opp = next.home === t ? next.away : next.home; const k = kickMs(next.date, next.time); nx = '<div class="tc-next"><div class="tc-k"><span>Next</span><span>' + esc(dayStr(next)) + (timed(next) ? ' · ' + esc(kickStr(next)) : '') + '</span></div><div class="tc-g">' + (next.neutral ? 'vs' : (next.home === t ? 'vs' : 'at')) + ' ' + esc(o.full(opp)) + ' <span class="dim">' + (net(next) ? '· ' + esc(net(next)) : '') + (lineStr(next, o) ? ' · ' + esc(lineStr(next, o)) : '') + '</span></div>' + (timed(next) ? '<div class="tc-cd" data-cd="' + k + '">' + cdHTML(k) + '</div>' : '') + '</div>'; }
+  else nx = '<div class="tc-next"><div class="tc-k"><span>Season</span></div><div class="tc-g">Nothing left on the schedule</div></div>';
+  let lastLine = '';
+  if (last) { const mine = last.home === t ? last.hs : last.as, them = last.home === t ? last.as : last.hs; const opp = last.home === t ? last.away : last.home; lastLine = '<div class="tc-last">Last: <b class="' + (mine > them ? 'w' : mine < them ? 'l' : '') + '">' + (mine > them ? 'W' : mine < them ? 'L' : 'T') + ' ' + mine + '-' + them + '</b> ' + (last.neutral ? 'vs' : (last.home === t ? 'vs' : 'at')) + ' ' + esc(o.name(opp)) + '</div>'; }
+  const logo = o.logo(t);
+  return '<a class="tc rise" style="--i:' + i + ';--tc:' + c1 + ';--tc2:' + c2 + '" href="' + o.teamHref(t) + '" aria-label="' + esc(o.full(t)) + ' team page">' + (logo ? '<img class="wm" src="' + logo + '" alt="" loading="lazy">' : '')
+    + '<div class="tc-top"><span class="tc-sport">' + SPORT[f.sport].icon + esc(SPORT[f.sport].short) + '</span>' + (rk ? '<span class="tc-rank">#' + rk + '</span>' : '') + '</div>'
+    + '<div class="tc-id">' + plate(logo) + '<div style="min-width:0"><div class="tc-name">' + esc(f.sport === 'cfb' ? t : o.full(t)) + '</div><div class="tc-meta">' + meta + '</div></div></div>'
+    + nx + lastLine + '</a>'; }
+function teamsHTML(){ const cards = FAVS.map((f, i) => teamCard(f, i)).filter(Boolean);
+  if (!nflSet.fav) cards.splice(Math.min(2, cards.length), 0, '<a class="tc pick rise" style="--i:2" href="/nfl/#/settings"><div><span class="tc-sport">' + ICON.fb + 'NFL</span><div class="big">Pick your NFL team</div><div class="small">Choose one in <b>NFL settings</b> and its next game shows up here with a countdown.</div></div></a>');
+  $('#teams').innerHTML = cards.join('');
+  $('#t-note').textContent = 'tap a card for the team page'; }
+
+/* ---------- live now ---------- */
+function liveAll(){ const out = []; [CFB.filter(g => g.week === CFB_WEEK), NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype), NBA.filter(g => g.date === TODAY || g.date === addDay(TODAY, -1))].forEach(list => list.map(applyLive).filter(g => g.live).forEach(g => out.push(g))); return out; }
+function liveHTML(){ const lv = liveAll(); $('#live-wrap').hidden = !lv.length; if (!lv.length) return; $('#live-n').textContent = lv.length + ' game' + (lv.length === 1 ? '' : 's');
+  lv.sort((a, b) => (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0));
+  $('#live').innerHTML = lv.map(g => { const o = O[g.sport]; return '<a class="lc" style="--c:' + SPORT[g.sport].c + '" href="' + o.href(g) + '"><div class="lc-h"><span>' + SPORT[g.sport].short + '</span><span>' + esc(liveClock(g)) + '</span></div>' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + '</a>'; }).join(''); }
+
+/* ---------- on TV: one timeline across the three sports ---------- */
+const NAT = /^(ABC|CBS|FOX|NBC|ESPN|ESPN2|ESPNU|FS1|FS2|BTN|Big Ten Network|SECN|SEC Network|ACCN|ACC Network|CW|The CW|Peacock|Prime Video|NFL Net|NFL Network|Netflix|YouTube|TNT|truTV|NBA TV|NBCSN|CBSSN|CBS Sports Network)$/i;
+function tvDay(){ for (let i = 0; i < 8; i++) { const d = addDay(TODAY, i); if (CFB.some(g => g.date === d && g.tv) || NFL.some(g => g.date === d) || NBA.some(g => g.date === d)) return d; } return TODAY; }
+function tvItems(day){
+  const cfb = CFB.filter(g => g.date === day && g.tv && (NAT.test(net(g)) || favGame(g))).map(applyLive).map(g => ({g, s:(favGame(g) ? 1000 : 0) + (g.ar && g.hr ? 200 - g.ar - g.hr : (g.ar || g.hr) ? 80 - (g.ar || g.hr) : 0)})).sort((a, b) => b.s - a.s).slice(0, 10).map(x => x.g);
+  const nfl = NFL.filter(g => g.date === day).map(applyLive);
+  const nba = NBA.filter(g => g.date === day).map(applyLive).sort((a, b) => (favGame(b) ? 2 : b.tv ? 1 : 0) - (favGame(a) ? 2 : a.tv ? 1 : 0)).slice(0, 8);
+  const total = CFB.filter(g => g.date === day && g.tv).length + NFL.filter(g => g.date === day).length + NBA.filter(g => g.date === day).length;
+  return {all: cfb.concat(nfl, nba).sort((a, b) => (kickMs(a.date, a.time) || 0) - (kickMs(b.date, b.time) || 0) || (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0)), total}; }
+function tvHTML(){ const day = tvDay(); const {all, total} = tvItems(day);
+  $('#tv-h').textContent = day === TODAY ? 'On TV today' : (day === addDay(TODAY, 1) ? 'On TV tomorrow' : 'Next on TV · ' + fmt({weekday:'long'}, new Date(kickMs(day, '12:00 PM'))));
+  $('#tv-note').textContent = all.length ? (all.length < total ? all.length + ' of ' + total + ' games' : total + ' game' + (total === 1 ? '' : 's')) : '';
+  if (!all.length) { $('#tv').innerHTML = '<div class="empty">Nothing on the schedule this week.</div>'; return; }
+  const slots = []; all.forEach(g => { const k = timed(g) ? kickStr(g) : 'TBA'; let s = slots.find(x => x.k === k); if (!s) slots.push(s = {k, gs:[]}); s.gs.push(g); });
+  const side = (g, t) => { const rk = g.sport === 'cfb' ? (t === g.away ? g.ar : g.hr) : 0; return (rk ? '<span class="rk">' + rk + '</span>' : '') + '<span class="' + (isFavTeam(g.sport, t) ? 'fav' : '') + '">' + esc(O[g.sport].name(t)) + '</span>'; };
+  const rows = slots.map(s => '<div class="tv-slot"><div class="tv-t">' + esc(s.k) + '<small>' + TZ + '</small></div><div class="tv-gs">' + s.gs.map(g => { const o = O[g.sport], sp = SPORT[g.sport];
+      const st = g.live ? '<span class="tv-st live"><b>' + g.as + '-' + g.hs + '</b> ' + esc(liveClock(g)) + '</span>' : played(g) ? '<span class="tv-st"><b>' + g.as + '-' + g.hs + '</b> Final</span>' : '<span class="tv-st">' + esc(lineStr(g, o)) + '</span>';
+      return '<a class="tv-g" href="' + o.href(g) + '"><span class="sp-tag" style="--c:' + sp.c + '">' + sp.icon + sp.short + '</span><span class="tv-m">' + logoImg(o.logo(g.away)) + '<span class="nm">' + side(g, g.away) + ' <span class="at">' + (g.neutral ? 'vs' : 'at') + '</span> ' + side(g, g.home) + '</span>' + logoImg(o.logo(g.home)) + '</span><span class="net">' + esc(net(g) || (g.sport === 'nba' ? 'League Pass' : 'TV TBA')) + '</span>' + st + '</a>'; }).join('') + '</div></div>').join('');
+  $('#tv').innerHTML = rows + '<div class="tv-foot">Full grids, network by network:<a href="/cfb/#/tv">College TV guide</a><a href="/nfl/#/tv">NFL TV guide</a><a href="/nba/#/tv">NBA TV guide</a></div>'; }
+
+/* ---------- around the leagues ---------- */
+function gameRow(g, o){ return '<a class="gm" href="' + o.href(g) + '">' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + '<div class="gm-st">' + statusStr(g, o) + '</div></a>'; }
+function sportPanel(k, i, ctx, links, label, games){ const s = SPORT[k]; return '<article class="sp ' + k + ' rise" style="--c:' + s.c + ';--i:' + i + '"><a class="sp-h" href="' + s.url + '"><span class="sp-ic">' + s.icon + '</span><div style="min-width:0"><div class="sp-n">' + s.name + '</div><div class="sp-x">' + ctx + '</div></div><span class="sp-go">Open &rsaquo;</span></a><nav class="ql" aria-label="' + s.name + ' pages">' + links.map(l => '<a href="' + s.url + l[1] + '">' + l[0] + '</a>').join('') + '</nav><div class="sp-b"><div class="sp-lab">' + label + '</div>' + (games.length ? games.map(g => gameRow(g, O[k])).join('') : '<div class="empty">Nothing scheduled.</div>') + '</div></article>'; }
+function sportsHTML(){
+  const ww = cfbWeeks[CFB_WEEK]; const cfbWk = CFB.filter(g => g.week === CFB_WEEK).map(applyLive);
+  const sc = g => (g.live ? 1000 : 0) + (favGame(g) ? 500 : 0) + (g.ar && g.hr ? 200 - g.ar - g.hr : (g.ar || g.hr ? 60 - (g.ar || g.hr) : 0));
+  const cfbTop = cfbWk.filter(g => g.ar || g.hr || g.live || favGame(g)).sort((a, b) => sc(b) - sc(a) || kickMs(a.date, a.time) - kickMs(b.date, b.time)).slice(0, 4);
+  const nflWk = NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype).map(applyLive); const ord = g => g.live ? 0 : (!played(g) ? 1 : 2);
+  const nflTop = nflWk.slice().sort((a, b) => ord(a) - ord(b) || (ord(a) === 2 ? kickMs(b.date, b.time) - kickMs(a.date, a.time) : kickMs(a.date, a.time) - kickMs(b.date, b.time))).slice(0, 4);
+  const days = [...new Set(NBA.map(g => g.date))].sort(); const nd = days.find(d => d >= TODAY) || days[days.length - 1];
+  const nbaTop = NBA.filter(g => g.date === nd).map(applyLive).sort((a, b) => (b.live ? 1 : 0) - (a.live ? 1 : 0) || (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0) || kickMs(a.date, a.time) - kickMs(b.date, b.time)).slice(0, 4);
+  $('#sports').innerHTML =
+    sportPanel('cfb', 0, 'Week ' + CFB_WEEK + (ww ? ' · ' + range(ww.lo, ww.hi) : ''), [['Gameday', '#/week'], ['TV guide', '#/tv'], ['Rankings', '#/rankings'], ['Playoffs', '#/playoff'], ['Big board', '#/board']], 'Week ' + CFB_WEEK + ' marquee', cfbTop)
+    + sportPanel('nfl', 1, esc(nflWeek.label) + ' · ' + range(nflWeek.start, nflWeek.end), [['Scoreboard', '#/week'], ['TV guide', '#/tv'], ['Standings', '#/standings'], ['Playoffs', '#/playoffs'], ['Big board', '#/board']], esc(nflWeek.label) + (nflTop.some(g => g.live) ? ' · live first' : ' · next up'), nflTop)
+    + sportPanel('nba', 2, nbaPre ? 'Preseason · tips off ' + (nbaOpener ? md(nbaOpener) : '') : 'Regular season', [['Scoreboard', '#/scores'], ['TV guide', '#/tv'], ['Standings', '#/standings'], ['Predictor', '#/predict'], ['Big board', '#/board']], (nd === TODAY ? 'Today' : md(nd)) + ' · ' + NBA.filter(g => g.date === nd).length + ' games', nbaTop);
+}
+
+/* ---------- draw, tick and poll ---------- */
 let LAST = 0, TIMER = null;
+function render(){ heroHTML(); teamsHTML(); liveHTML(); tvHTML(); sportsHTML();
+  const when = s => { const m = /^[A-Z][a-z]{2} ([A-Z][a-z]{2} \d+), \d{4} · (.*)$/.exec(s || ''); return m ? (m[1] === md(TODAY) ? '' : m[1] + ', ') + m[2] : (s || '?'); };
+  $('#asof').textContent = 'Updated: College ' + when(META.cfb) + ' · NFL ' + when(META.nfl) + ' · NBA ' + when(META.nba);
+  $('#upd').textContent = LAST ? 'live scores ' + fmt({hour:'numeric', minute:'2-digit'}, new Date(LAST)) : ''; }
+function tick(){ document.querySelectorAll('[data-cd]').forEach(el => { const k = +el.dataset.cd; el.innerHTML = k - Date.now() <= 0 ? 'Starting now' : cdHTML(k); }); }
 const API = /(^|\.)djgolding\.com$/.test(location.hostname) ? '/api' : 'https://djgolding.com/api';
-const slimLive = e => ({st:e.st, det:e.det, per:e.per, clk:e.clk, as:e.away && e.away.s, hs:e.home && e.home.s});
+const slim = e => ({st:e.st, det:e.det, per:e.per, clk:e.clk, as:e.away && e.away.s, hs:e.home && e.home.s});
 async function getJ(u){ try { const r = await fetch(u, {cache:'no-store'}); return r.ok ? await r.json() : null; } catch (e) { return null; } }
-async function poll(){
-  const jobs = [];
-  /* college: only weeks with something live or about to start; the FCS feed too when a favourite plays there */
-  const nearCfb = CFB.filter(g => g.week === CFB_WEEK && !played(g)).some(g => Math.abs(kickMs(g.date, g.time) - Date.now()) < 5 * 3600e3);
-  if (nearCfb) for (const grp of ['80', '81']) jobs.push(getJ(API + '/cfb/scoreboard?week=' + CFB_WEEK + '&groups=' + grp).then(j => { (j && j.games || []).forEach(e => { LIVE.cfb[e.date + '|' + e.away.n + '|' + e.home.n] = slimLive(e); }); }));
-  const nearNfl = NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype && !played(g)).some(g => Math.abs(kickMs(g.date, g.time) - Date.now()) < 5 * 3600e3);
-  if (nearNfl) jobs.push(getJ(API + '/nfl/scoreboard?week=' + nflWeek.week + '&stype=' + nflWeek.stype).then(j => { (j && j.games || []).forEach(e => { LIVE.nfl[e.id] = slimLive(e); }); }));
-  const nearNba = NBA.filter(g => g.date === TODAY && !played(g)).some(g => Math.abs(kickMs(g.date, g.time) - Date.now()) < 4 * 3600e3);
-  if (nearNba) jobs.push(getJ(API + '/nba/scoreboard?date=' + TODAY.replace(/-/g, '')).then(j => { (j && j.games || []).forEach(e => { LIVE.nba[e.id] = slimLive(e); }); }));
-  if (jobs.length) { await Promise.all(jobs); LAST = Date.now(); render(); }
+const near = (list, hrs) => list.some(g => !played(g) && Math.abs(kickMs(g.date, g.time) - Date.now()) < hrs * 3600e3);
+async function poll(){ const jobs = [];
+  if (near(CFB.filter(g => g.week === CFB_WEEK), 5)) for (const grp of ['80', '81']) jobs.push(getJ(API + '/cfb/scoreboard?week=' + CFB_WEEK + '&groups=' + grp).then(j => { (j && j.games || []).forEach(e => { LIVE.cfb[e.date + '|' + e.away.n + '|' + e.home.n] = slim(e); }); }));
+  if (near(NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype), 5)) jobs.push(getJ(API + '/nfl/scoreboard?week=' + nflWeek.week + '&stype=' + nflWeek.stype).then(j => { (j && j.games || []).forEach(e => { LIVE.nfl[e.id] = slim(e); }); }));
+  for (const d of [TODAY, addDay(TODAY, -1)]) if (near(NBA.filter(g => g.date === d), 4)) jobs.push(getJ(API + '/nba/scoreboard?date=' + d.replace(/-/g, '')).then(j => { (j && j.games || []).forEach(e => { LIVE.nba[e.id] = slim(e); }); }));
+  if (jobs.length) { await Promise.all(jobs); LAST = Date.now(); $('#fd').classList.remove('anim'); render(); }
   const anyLive = Object.values(LIVE).some(m => Object.values(m).some(x => isLiveSt(x.st)));
-  clearTimeout(TIMER); TIMER = setTimeout(poll, anyLive ? 30e3 : (jobs.length ? 120e3 : 600e3));
-}
-render(); poll();
+  clearTimeout(TIMER); TIMER = setTimeout(poll, anyLive ? 30e3 : (jobs.length ? 120e3 : 600e3)); }
+render(); setInterval(tick, 1000); setTimeout(poll, 900);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
 })();
 </script>

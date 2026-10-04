@@ -1811,6 +1811,128 @@ body.boardmode .ticker{display:none}
 @media (prefers-reduced-motion:reduce){.bx-sign,.bx .bcard,.bx .bcard.islive,.bx.anim .bcard,.bx.anim .bcard.islive,.bx .bcard.islive::after,.bx-clock i,.bx-tag.rz,.bx .bl .sc-num.tick{animation:none}.bx-prog{display:none}}
 /* the big board keeps its own dark backdrop too (team themes paint full-page layers behind everything) */
 body.boardmode::before,body.boardmode::after{display:none!important}
+/* sb:start */
+/* ===== scoreboard top, Jamo Sports Hub look (2026-10-04): a dark hero with the week or night at a glance, the next game
+   counting down and your team as a card in its colors, like the hub's home page. Source: sports-hub/sb/sb.css;
+   sports-hub/sb/apply.sh copies it into nfl-hub/p1.html and nba-hub/p1.html between the sb:start and sb:end markers. ===== */
+#view .sbh{--sb-a:rgba(255,59,92,.40);--sb-b:rgba(59,123,255,.36);position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px 26px;align-items:stretch;margin:6px 0 16px;padding:24px 24px 14px;border-radius:22px;color:#fff;background:#070a14;background-image:radial-gradient(720px 360px at 0% 0%,var(--sb-a),transparent 62%),radial-gradient(620px 360px at 100% 0%,var(--sb-b),transparent 64%),radial-gradient(520px 280px at 55% 135%,rgba(251,191,36,.14),transparent 62%);border:1px solid rgba(255,255,255,.08);box-shadow:0 26px 60px -38px rgba(0,0,0,.85);overflow:hidden;isolation:isolate}
+#view .sbh.nba{--sb-a:rgba(164,91,255,.44);--sb-b:rgba(255,128,48,.30)}
+#view .sbh::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(120% 90% at 30% 0%,#000 30%,transparent 75%);mask-image:radial-gradient(120% 90% at 30% 0%,#000 30%,transparent 75%);pointer-events:none}
+#view .sbh.solo{grid-template-columns:minmax(0,1fr)}
+.sbh-l{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.sbh-eb{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#a9bde2}
+#view .sbh h1{margin:6px 0 4px;font-family:var(--disp);font-size:clamp(36px,5vw,54px);font-weight:700;letter-spacing:-.005em;line-height:1;color:#fff}
+.sbh-sub{color:#c6d0e3;font-size:14.5px;line-height:1.5}
+.sbh-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+#view .sb-chip{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);font-size:12.5px;font-weight:600;color:#e6ecf7;white-space:nowrap;text-decoration:none}
+.sb-chip i{width:7px;height:7px;border-radius:50%;background:var(--c,#fff);flex:none}
+.sb-chip.live i{background:#ff4d6a;animation:sbping 1.6s infinite}
+#view a.sb-chip:hover{background:rgba(255,255,255,.14);color:#fff}
+@keyframes sbping{0%{box-shadow:0 0 0 0 rgba(255,77,106,.65)}70%{box-shadow:0 0 0 8px rgba(255,77,106,0)}100%{box-shadow:0 0 0 0 rgba(255,77,106,0)}}
+.sbh-r{display:flex;min-width:0}
+/* next up: your team's game, a live game, or the next start counting down */
+#view .sb-nu{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;gap:9px;padding:16px 18px;border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);min-width:0;color:#fff;text-decoration:none;transition:border-color .2s}
+#view a.sb-nu:hover{border-color:rgba(255,255,255,.32);color:#fff}
+.sb-l{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fcd56b}
+.sb-l>span:last-child{color:#a9bde2;letter-spacing:.06em;white-space:nowrap}
+.sb-m{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-size:23px;font-weight:700;line-height:1.1;min-width:0}
+.sb-m .at{font-family:var(--body);font-size:12px;font-weight:600;color:#a9bde2;letter-spacing:.04em}
+.sb-m .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-plate{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.35)}
+.sb-plate img{width:26px;height:26px;object-fit:contain;display:block}
+.sb-plate .sw{width:18px;height:18px;border-radius:5px}
+.sb-cd{display:flex;align-items:baseline;gap:2px;font-family:"Orbitron",var(--disp);font-weight:800;font-size:32px;line-height:1;letter-spacing:.02em;color:#eaf6ff;text-shadow:0 0 18px rgba(120,180,255,.45);font-variant-numeric:tabular-nums}
+.sb-cd i{font-style:normal;opacity:.45;margin:0 1px}
+.sb-cd .u{font-family:var(--body);font-size:12px;font-weight:700;color:#a9bde2;margin:0 6px 0 2px;text-shadow:none;letter-spacing:.04em}
+.sb-cd.tba{font-size:22px}
+.sb-nu.live .sb-cd{color:#fff;text-shadow:0 0 18px rgba(255,77,106,.55)}
+.sb-s{font-size:13px;color:#c6d0e3;line-height:1.45}
+.sb-live{display:inline-flex;align-items:center;gap:5px;padding:2px 7px;border-radius:5px;background:#ff3b5c;color:#fff;font-size:10px;font-weight:800;letter-spacing:.1em;line-height:1.4}
+.sb-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:sbblink 1.2s infinite}
+@keyframes sbblink{50%{opacity:.25}}
+/* the week pills or the date strip, along the bottom of the hero */
+.sbh-nav{grid-column:1/-1;min-width:0;padding-top:12px;border-top:1px solid rgba(255,255,255,.08)}
+#view .sbh .wk,#view .sbh .days{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;width:100%;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+#view .sbh .wk::-webkit-scrollbar,#view .sbh .days::-webkit-scrollbar{display:none}
+#view .sbh .wk>*,#view .sbh .days>*{flex:none}
+#view .sbh .wk a,#view .sbh .days a,#view .sbh .days label{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#c9d3e6;border-radius:8px}
+#view .sbh .days a .d1,#view .sbh .days a .d3{color:#93a0b8}
+#view .sbh .wk a:hover,#view .sbh .days a:hover,#view .sbh .days label:hover{background:rgba(255,255,255,.14);color:#fff}
+#view .sbh .wk a.on,#view .sbh .days a.on{background:#fff;border-color:#fff;color:#0a0f1c}
+#view .sbh .days a.on .d1,#view .sbh .days a.on .d3{color:#3d4658;opacity:1}
+#view .sbh .days a.today:not(.on){box-shadow:inset 0 -3px 0 #fbbf24}
+/* your team, in its colors */
+.sbt{position:relative;display:flex;flex-direction:column;gap:12px;padding:16px 16px 14px;border-radius:18px;color:#fff;background:linear-gradient(150deg,var(--tc) 0%,var(--tc2) 80%);box-shadow:0 18px 40px -24px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.14);overflow:hidden;isolation:isolate}
+.sbt::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.18),transparent 55%),linear-gradient(180deg,transparent 40%,rgba(0,0,0,.28));pointer-events:none}
+#view .sbt a{color:#fff;text-decoration:none}
+.sbt-wm{position:absolute;right:-26px;bottom:-30px;width:160px;height:160px;object-fit:contain;opacity:.13;z-index:-1;filter:grayscale(1) brightness(3);pointer-events:none}
+.sbt-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.sbt-tag{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.24);font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+#view .sbt .sbt-ch{font-size:12px;font-weight:700;color:rgba(255,255,255,.85);padding:3px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.28)}
+#view .sbt .sbt-ch:hover{background:rgba(255,255,255,.16);color:#fff}
+.sbt-id{display:flex;align-items:center;gap:12px;min-width:0}
+.sbt-plate{flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.sbt-plate img{width:44px;height:44px;object-fit:contain;display:block}
+.sbt-plate .sw{width:28px;height:28px;border-radius:8px}
+.sbt-name{font-family:var(--disp);font-size:27px;font-weight:700;line-height:1.05;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sbt-meta{margin-top:3px;font-size:13px;color:rgba(255,255,255,.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sbt-meta b{color:#fff;font-weight:700}
+.sbt-next{padding:11px 12px;border-radius:14px;background:rgba(0,0,0,.26);border:1px solid rgba(255,255,255,.12)}
+.sbt-k{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.sbt-k>span:last-child{white-space:nowrap}
+.sbt-g{display:block;margin-top:4px;font-size:15.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sbt-g .dim,.sbt .dim{font-weight:500;color:rgba(255,255,255,.72)}
+.sbt-cd{display:flex;align-items:baseline;margin-top:6px;font-family:"Orbitron",var(--disp);font-size:21px;font-weight:800;line-height:1.1;letter-spacing:.02em;font-variant-numeric:tabular-nums;text-shadow:0 0 14px rgba(255,255,255,.25)}
+.sbt-cd i{font-style:normal;opacity:.5;margin:0 1px}
+.sbt-cd .u{font-family:var(--body);font-size:10.5px;font-weight:700;opacity:.75;margin:0 6px 0 1px;letter-spacing:.04em}
+.sbt-cd.tba{font-size:15px}
+.sbt-sc{display:flex;align-items:baseline;gap:4px;margin-top:4px;font-family:"Orbitron",var(--disp);font-size:27px;font-weight:800;line-height:1.1}
+.sbt-sc i{font-style:normal;opacity:.6}
+.sbt-sc .dim{margin-left:8px;font-family:var(--body);font-size:13px;font-weight:600;color:rgba(255,255,255,.78)}
+.sbt-wp{height:5px;margin-top:10px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.sbt-wp i{display:block;height:100%;border-radius:inherit;background:#fff}
+.sbt-wpl{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font-size:12px;color:rgba(255,255,255,.82)}
+.sbt-wpl a{font-weight:700;white-space:nowrap}
+.sbt-last{font-size:13px;color:rgba(255,255,255,.85)}
+.sbt-last b{font-weight:800}
+.sbt .w{color:#9df5c1}.sbt .l{color:#ffb3bf}
+/* no team picked yet */
+#view .sbt.pick{align-items:center;justify-content:center;gap:0;min-height:210px;text-align:center;color:var(--ink);background:var(--surface);border:1.5px dashed var(--line);box-shadow:none}
+.sbt.pick::before{display:none}
+.sbt.pick .sbt-tag{background:var(--surface-2);color:var(--ink-2)}
+.sbt.pick .big{font-family:var(--disp);font-size:23px;font-weight:700;margin:12px 0 4px;color:var(--ink)}
+.sbt.pick .small{font-size:13.5px;color:var(--ink-2);max-width:270px;margin:0 auto;line-height:1.45}
+.sbt.pick b{color:var(--accent-text)}
+#view a.sbt.pick:hover{border-color:var(--ink-3)}
+/* the band under the hero: live games or the next starts beside your team */
+#view .homeband.one .hb-side{max-width:440px}
+#view .homeband .livegrid .card{border-radius:14px;margin-top:0}
+#view .homeband .livecard{border-left:1px solid var(--line)!important;border-top:3px solid #ff3b5c!important}
+#view .homeband .livegrid .lrow .sc{font-family:"Orbitron",var(--disp);font-size:19px;font-weight:800}
+#view .homeband .livegrid .wcard:not(.livecard){border-top:3px solid color-mix(in srgb,var(--accent-text) 55%,var(--line))}
+/* day headings under the hero */
+#view .sbh~.daygrp h3{align-items:center;padding-bottom:9px;border-bottom:2px solid var(--line-2);font-family:var(--disp);font-size:22px;font-weight:700;color:var(--ink)}
+#view .sbh~.daygrp h3 .cnt{margin-left:auto;padding:3px 10px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);font-family:var(--body);font-size:12px;font-weight:600;color:var(--ink-2);white-space:nowrap}
+#view .sbh~.daygrp.today h3{border-bottom-color:#fbbf24}
+@media (max-width:720px){
+  #view .sbh{grid-template-columns:minmax(0,1fr);gap:14px;margin:4px 0 12px;padding:18px 14px 10px;border-radius:18px}
+  #view .sbh h1{font-size:36px}
+  .sbh-sub{font-size:13.5px}
+  .sbh-chips{margin-top:10px;gap:6px}
+  #view .sb-nu{padding:14px 14px}
+  .sb-m{font-size:20px}
+  .sb-cd{font-size:28px}
+  .sbt-name{font-size:24px}
+  #view .sbh~.daygrp h3{font-size:19px}
+  /* phones: your team before the live games, and the live cards swipe sideways like the home page */
+  #view .homeband .hb-side:has(.sbt:not(.pick)){order:-1}
+  #view .sbt.pick{min-height:0;padding:18px 16px}
+  #view .homeband .livegrid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:80%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -12px;padding:2px 12px 8px;scroll-padding-left:12px;scrollbar-width:none}
+  #view .homeband .livegrid::-webkit-scrollbar{display:none}
+  #view .homeband .livegrid>*{scroll-snap-align:start}
+}
+@media (prefers-reduced-motion:reduce){.sb-chip.live i,.sb-live::before{animation:none}}
+/* sb:end */
 </style>
 
 <header class="top">
@@ -7741,9 +7863,9 @@ const SCORE_FILTERS=[['all','All games'],['national','National TV'],['close','Cl
 function scoreFilter(filter){ return g=>{ if(filter==='national') return isNational(g); if(filter==='lines') return g.spread!=null; if(filter==='close') return g.spread!=null&&Math.abs(g.spread)<=4; if(filter==='east') return team(g.home).conf==='East'||team(g.away).conf==='East'; if(filter==='west') return team(g.home).conf==='West'||team(g.away).conf==='West'; if(filter==='cup') return /^cup/.test(g.kind); if(filter==='b2b') return g.b2bA||g.b2bH; return true; }; }
 function renderScores(d, filter){ setNav('scores'); d = nearestDate(d); filter = SCORE_FILTERS.some(f=>f[0]===filter)?filter:'all'; const gs = G.filter(g=>g.date===d).sort((a,b)=>timeMins(a)-timeMins(b)||interest(b)-interest(a)); const played=gs.filter(g=>g.played).length; const liveN=gs.filter(g=>g.live).length; const natN=gs.filter(isNational).length; const pre=gs.length&&gs.every(g=>g.pre);
   const shown=gs.filter(scoreFilter(filter)); const avail=SCORE_FILTERS.filter(f=>f[0]==='all'||gs.some(scoreFilter(f[0])));
-  let html='<div class="page-head"><div><div class="eyebrow">Scoreboard'+(pre?' · preseason':'')+'</div><h1>'+esc(d===todayStr?'Today, '+fmtDate(d,false):fmtDateLong(d))+'</h1><div class="sub">'+gs.length+' game'+(gs.length===1?'':'s')+(played?' · '+played+' final':'')+(liveN?' · '+liveN+' in progress':'')+(natN?' · '+natN+' on national TV':'')+(PLACEHOLDERS.some(p=>p.date===d)?' · plus '+PLACEHOLDERS.filter(p=>p.date===d).length+' still to be set':'')+'</div></div>'+dateStrip(d,'#/scores/')+'</div>';
+  let html=sbHeroHTML(d, gs);
   html+='<div class="toolbar"><div class="seg">'+avail.map(x=>'<a href="#/scores/'+d+'/'+x[0]+'" class="'+(filter===x[0]?'on':'')+'">'+x[1]+'</a>').join('')+'</div><button class="btn sm" id="dense-btn" type="button" title="Switch between compact one-line rows and full rows">'+(isDense()?'Full rows':'Compact')+'</button><a class="btn sm" href="#/board" title="Full-screen board for a TV or second screen">Big board</a>'+'<a class="btn sm" href="#/tv/'+d+'" title="Tonight\'s national TV games, network by network">TV guide</a>'+(gs.some(g=>!g.played&&!g.pre)?'<a class="btn sm" href="#/previews/'+d+'">Previews</a>':'')+(played>=2?'<a class="btn sm" href="#/digest/'+d+'">Night in review</a>':'')+'<span class="mini">Lines are home-team spreads from DraftKings via ESPN; "Model" is this page\'s projection with home court and back-to-backs counted. "Edge" is where the model disagrees with the market.</span></div>';
-  if(filter==='all'){ html+=seasonBandHTML(d)+homeBandHTML(d); if(gs.some(rootPlayable)) html+=rootBlockHTML(favAb(), d, 'compact'); else if(!SEASON_ON&&d<OPENER&&rootFirstOwn(favAb())) html+=rootBlockHTML(favAb(), rootFirstOwn(favAb()), 'compact'); html+=watchStrip(gs); }
+  if(filter==='all'){ html+=homeBandHTML(d)+seasonBandHTML(d); if(gs.some(rootPlayable)) html+=rootBlockHTML(favAb(), d, 'compact'); else if(!SEASON_ON&&d<OPENER&&rootFirstOwn(favAb())) html+=rootBlockHTML(favAb(), rootFirstOwn(favAb()), 'compact'); html+=watchStrip(gs); }
   const ph=PLACEHOLDERS.filter(p=>p.date===d); if(ph.length) html+='<div class="note" style="margin-bottom:10px">'+ph.map(p=>esc(p.note||'Game')+(p.venue?' at '+esc(p.venue)+(p.city?', '+esc(p.city):''):'')+(p.tv?' · '+esc(tvShort(p.tv)):'')).join('; ')+'. Matchups are set when the earlier rounds finish.</div>';
   if(!gs.length) html+='<div class="note">No games on '+esc(fmtDateLong(d))+'.</div>';
   else html+='<div class="daygrp'+(d===todayStr?' today':'')+'"><h3>'+esc(fmtDateLong(d))+(d===todayStr?' <span class="pill gold" style="margin-left:4px">Today</span>':'')+' <span class="cnt">'+shown.length+' game'+(shown.length===1?'':'s')+(filter!=='all'?' · filtered':'')+'</span></h3><div class="gmlist">'+shown.map(gameRowAny).join('')+'</div></div>';
@@ -9081,6 +9203,68 @@ function renderTV(key){ setNav('tv'); document.body.classList.add('tvmode');
   }
   const jb=document.getElementById('tv-now'); if(jb) jb.onclick=()=>{ const m=tvNowMins(day); if(m!=null) tvScrollTo(m-40, true); }; }
 window.addEventListener('hashchange', ()=>{ if(!(location.hash||'').startsWith('#/tv')) document.body.classList.remove('tvmode'); });
+/* ---------- scoreboard top, Jamo Sports Hub look (2026-10-04): the night in a dark hero (counts, the next tip-off counting
+   down, your team's game first) and your team as a card in its colors, as on the hub's home page (sports-hub/front.html).
+   Styles: sports-hub/sb/sb.css, copied into p1.html between the sb:start and sb:end markers. ---------- */
+let SB_TIMER = null;
+const SB_GO = 'Tip-off';
+function sbCd(ms){ let s=Math.max(0,Math.floor((ms-Date.now())/1000)); const d=Math.floor(s/86400); s%=86400; const h=Math.floor(s/3600), m=Math.floor(s%3600/60), x=s%60; const p=n=>String(n).padStart(2,'0'); return (d?d+'<span class="u">d</span>':'')+p(h)+'<i>:</i>'+p(m)+'<i>:</i>'+p(x); }
+function sbTick(){ const els=document.querySelectorAll('[data-sbcd]'); if(!els.length){ clearInterval(SB_TIMER); SB_TIMER=null; return; } els.forEach(el=>{ const k=+el.dataset.sbcd; el.innerHTML = k-Date.now()<=0 ? SB_GO : sbCd(k); }); }
+function sbStart(){ if(!SB_TIMER&&document.querySelector('[data-sbcd]')) SB_TIMER=setInterval(sbTick,1000); tvCenter('.sbh .days a.on'); }
+/* a countdown that ticks, or plain words when the start time is not set yet or has passed */
+function sbClock(k, cls){ if(k==null) return '<div class="'+cls+' tba">Time TBA</div>'; if(k<=Date.now()) return '<div class="'+cls+' tba">'+SB_GO+'</div>'; return '<div class="'+cls+'" data-sbcd="'+k+'">'+sbCd(k)+'</div>'; }
+/* a team color that carries white type: a pale primary gives way to the alternate, anything still light is deepened */
+function sbCardColor(t){ let rgb=hexRgb(t&&t.color)||[51,65,85]; if(lum(rgb)>0.5){ const alt=hexRgb(t.alt); if(alt&&lum(alt)<0.3) rgb=alt; } let n=0; while(lum(rgb)>0.2&&n<8){ rgb=mix(rgb,[0,0,0],0.16); n++; } return rgbHex(rgb); }
+function sbPlate(t, cls){ const ok=t&&T[t.ab]; return '<span class="'+(cls||'sb-plate')+'">'+(ok?'<img src="'+LOGO_BASE+'/'+t.ab+'.png" alt="">':'<span class="sw" style="background:'+uiColor(t)+'"></span>')+'</span>'; }
+const sbOff = g => g.status==='CANCELED'||g.status==='POSTPONED';
+function sbDay(d){ return d===todayStr?'Today, '+fmtDate(d,false):d===addDays(todayStr,1)?'Tomorrow, '+fmtDate(d,false):d===addDays(todayStr,-1)?'Yesterday, '+fmtDate(d,false):DOWL[dowOf(d)]+', '+fmtDate(d,false); }
+/* start order, with games whose time is not set yet last on their day; and the most watchable final: interesting and close */
+const sbKey = g => kickMs(g) ?? Date.parse(g.date+'T23:59:00Z');
+const sbBest = g => interest(g) - Math.abs(g.as-g.hs)/4 + (g.ot?2:0);
+/* next up: your team's game that night, else a game in progress, else the next tip-off, else your team's final or the
+   night's best one; on a night without games, your team's next one */
+function sbNextHTML(d, gs){ const fav=team(favAb()); const now=Date.now(); let fg=gs.find(g=>g.home===fav.ab||g.away===fav.ab)||null;
+  let g=null, kind='';
+  if(fg&&fg.live){ g=fg; kind='live'; } else if(fg&&!fg.played&&!sbOff(fg)){ g=fg; kind='fav'; }
+  if(!g){ const lv=gs.filter(x=>x.live).sort((a,b)=>interest(b)-interest(a)); if(lv.length){ g=lv[0]; kind='live'; } }
+  if(!g){ const up=gs.filter(x=>!x.played&&!x.live&&!sbOff(x)&&(kickMs(x)==null||kickMs(x)>now-3*3600e3)).sort((a,b)=>sbKey(a)-sbKey(b)||interest(b)-interest(a)); if(up.length){ g=up[0]; kind='next'; } }
+  if(!g){ const done=gs.filter(x=>x.played); if(done.length){ g=(fg&&fg.played)?fg:done.sort((a,b)=>sbBest(b)-sbBest(a))[0]; kind='done'; } }
+  if(!g){ const nx=favGame(d); if(nx&&!nx.played&&!sbOff(nx)){ g=fg=nx; kind=nx.live?'live':'fav'; } }
+  if(!g) return '';
+  const a=team(g.away), h=team(g.home); const p=proj(g); const fv=p.diff>0?g.home:g.away; const k=kickMs(g);
+  const net=tvFor(g, g===fg?fav.ab:null);
+  const lbl = kind==='live' ? '<span><span class="sb-live">LIVE</span>'+(g===fg?' your team':'')+'</span><span>'+esc(g.clk||'In progress')+'</span>'
+    : kind==='fav' ? '<span>Next up for the '+esc(fav.disp)+'</span><span>'+esc(net)+'</span>'
+    : kind==='next' ? '<span>Next tip-off</span><span>'+esc(net)+'</span>'
+    : '<span>Night complete</span><span>'+(g===fg?'your team':'game of the night')+'</span>';
+  const teams='<div class="sb-m">'+sbPlate(a)+'<span class="nm">'+esc(a.disp)+'</span><span class="at">'+(g.neutral?'vs':'at')+'</span>'+sbPlate(h)+'<span class="nm">'+esc(h.disp)+'</span></div>';
+  const big = (kind==='live'||kind==='done') ? '<div class="sb-cd">'+g.as+'<i>&ndash;</i>'+g.hs+'</div>' : sbClock(k,'sb-cd');
+  const sub = kind==='live' ? (g.last?esc(g.last):'tap for the live game page')
+    : kind==='done' ? 'Final'+(g.ot?' &middot; '+(g.ot>1?g.ot+'OT':'OT'):'')+' &middot; '+esc(tshort(g.as>g.hs?g.away:g.home))+' by '+Math.abs(g.as-g.hs)
+    : esc(g.date===todayStr?'Tonight':fmtDate(g.date,true))+(k!=null?' &middot; '+esc(kick(g)):'')+(g.pre?' &middot; preseason':(g.spread!=null?' &middot; '+esc(spreadStr(g,{short:true})):'')+' &middot; model '+pct(Math.max(p.pHome,p.pAway))+' '+esc(tshort(fv)));
+  return '<a class="sb-nu'+(kind==='live'?' live':'')+'" href="#/game/'+g.id+'"><div class="sb-l">'+lbl+'</div>'+teams+big+'<div class="sb-s">'+sub+'</div></a>'; }
+function sbHeroHTML(d, gs){ const played=gs.filter(g=>g.played).length, liveN=gs.filter(g=>g.live).length, left=gs.filter(g=>!g.played&&!g.live&&!sbOff(g)).length; const natN=gs.filter(isNational).length; const pre=gs.length&&gs.every(g=>g.pre); const ph=PLACEHOLDERS.filter(p=>p.date===d).length;
+  const chips=[]; if(liveN) chips.push('<span class="sb-chip live"><i></i>'+liveN+' live</span>'); if(played) chips.push('<span class="sb-chip" style="--c:#3ddc84"><i></i>'+played+' final</span>'); if(left) chips.push('<span class="sb-chip" style="--c:#7fb2ff"><i></i>'+left+' to tip</span>'); if(natN) chips.push('<a class="sb-chip" style="--c:#fbbf24" href="#/tv/'+d+'"><i></i>'+natN+' on national TV</a>');
+  if(!SEASON_ON&&todayStr<OPENER&&d<=OPENER){ const n=daysBetween(todayStr,OPENER); chips.push('<a class="sb-chip" style="--c:#c084fc" href="#/scores/'+OPENER+'"><i></i>Opening night '+(n===1?'tomorrow':'in '+n+' days')+'</a>'); }
+  const nu=sbNextHTML(d, gs); setTimeout(sbStart,0);
+  return '<section class="sbh nba'+(nu?'':' solo')+'"><div class="sbh-l"><div class="sbh-eb">NBA &middot; Scoreboard'+(pre?' &middot; Preseason':'')+'</div><h1>'+esc(sbDay(d))+'</h1><div class="sbh-sub">'+(gs.length?gs.length+' game'+(gs.length===1?'':'s'):'No games')+(ph?' &middot; plus '+ph+' still to be set':'')+(d===OPENER?' &middot; opening night':'')+'</div>'+(chips.length?'<div class="sbh-chips">'+chips.join('')+'</div>':'')+'</div>'+(nu?'<div class="sbh-r">'+nu+'</div>':'')+'<div class="sbh-nav">'+dateStrip(d,'#/scores/')+'</div></section>'; }
+/* your team, in its colors: record and playoff odds, then its game that night or next (countdown, live score or final) and the last result */
+function sbTeamCardHTML(d){ const t=team(favAb()); if(!t||t.other) return ''; const g=favGame(d); const o=simOf(t.ab)||{}; const c1=sbCardColor(t); const c2=rgbHex(mix(hexRgb(c1),[0,0,0],0.55));
+  const all=(teamGames[t.ab]||[]).concat(G.filter(x=>x.pre&&(x.home===t.ab||x.away===t.ab)));
+  const last=all.filter(x=>x.played&&x!==g&&(!g||byTip(x,g)<0)).sort(byTip).pop();
+  let blk;
+  if(!g) blk='<div class="sbt-k"><span>Season</span></div><div class="sbt-g">No games left &middot; finished '+recStr(t.ab)+'</div>';
+  else { const home=g.home===t.ab; const oo=team(home?g.away:g.home); const vs=(g.neutral||home)?'vs ':'at '; const tv=tvFor(g,t.ab); const when=g.date===todayStr?'Tonight':g.date===addDays(todayStr,1)?'Tomorrow':'Next';
+    if(g.live){ blk='<div class="sbt-k"><span class="sb-live">LIVE</span><span>'+esc(g.clk||'')+'</span></div><a class="sbt-sc" href="#/game/'+g.id+'">'+(home?g.hs:g.as)+'<i>&ndash;</i>'+(home?g.as:g.hs)+'<span class="dim">'+vs+esc(oo.disp)+'</span></a>'; }
+    else if(g.played){ const mine=home?g.hs:g.as, th=home?g.as:g.hs; blk='<div class="sbt-k"><span>Final'+(g.ot?' &middot; OT':'')+'</span><span>'+esc(fmtDate(g.date,true))+(g.pre?' &middot; preseason':'')+'</span></div><a class="sbt-g" href="#/game/'+g.id+'"><b class="'+(mine>th?'w':mine<th?'l':'')+'">'+(mine>th?'W':'L')+' '+mine+'-'+th+'</b> '+vs+esc(oo.disp)+'</a>'; }
+    else if(sbOff(g)){ blk='<div class="sbt-k"><span>'+esc(fmtDate(g.date,true))+'</span></div><div class="sbt-g">'+vs+esc(oo.disp)+' <span class="dim">&middot; '+esc(g.status.toLowerCase())+'</span></div>'; }
+    else { const p=proj(g); const pw=home?p.pHome:p.pAway;
+      blk='<div class="sbt-k"><span>'+esc(when)+(g.pre?' &middot; preseason':'')+'</span><span>'+(g.date===todayStr?'':esc(fmtDate(g.date,true).slice(0,3))+' &middot; ')+esc(kick(g))+(tv?' &middot; '+esc(tv):'')+'</span></div><a class="sbt-g" href="#/game/'+g.id+'">'+vs+esc(oo.full||oo.disp)+(g.spread!=null?' <span class="dim">&middot; '+esc(spreadStr(g,{short:true}))+'</span>':'')+'</a>'+sbClock(kickMs(g),'sbt-cd')
+        +(g.pre?'<div class="sbt-wpl"><span>preseason &middot; no model pick</span><a href="#/game/'+g.id+'">game &rsaquo;</a></div>':'<div class="sbt-wp"><i style="width:'+Math.round(pw*100)+'%"></i></div><div class="sbt-wpl"><span>'+pct(pw)+' to win (model)</span><a href="#/game/'+g.id+'">preview &rsaquo;</a></div>'); } }
+  let lastLine=''; if(last&&!(g&&g.played)){ const home=last.home===t.ab; const mine=home?last.hs:last.as, th=home?last.as:last.hs; lastLine='<a class="sbt-last" href="#/game/'+last.id+'">Last: <b class="'+(mine>th?'w':mine<th?'l':'')+'">'+(mine>th?'W':'L')+' '+mine+'-'+th+'</b> '+((last.neutral||home)?'vs ':'at ')+esc(team(home?last.away:last.home).disp)+(last.pre?' <span class="dim">(preseason)</span>':'')+'</a>'; }
+  const rec=SEASON_ON?'<b>'+recStr(t.ab)+'</b>':(t.rec26?'last season <b>'+esc(t.rec26)+'</b>':'');
+  setTimeout(sbStart,0);
+  return '<div class="sbt" style="--tc:'+c1+';--tc2:'+c2+'"><img class="sbt-wm" src="'+LOGO_BASE+'/'+t.ab+'.png" alt=""><div class="sbt-top"><span class="sbt-tag">'+esc(t.conf)+' &middot; '+esc(t.div)+'</span><a class="sbt-ch" href="#/settings">change</a></div><a class="sbt-id" href="#/team/'+enc(t.ab)+'">'+sbPlate(t,'sbt-plate')+'<div style="min-width:0"><div class="sbt-name">'+esc(t.full||t.disp)+'</div><div class="sbt-meta">'+rec+(o.po!=null?(rec?' &middot; ':'')+'playoffs '+pct1(o.po):'')+'</div></div></a><div class="sbt-next">'+blk+'</div>'+lastLine+'</div>'; }
 
 /* ---------- logos & team themes ---------- */
 const LOGO_BASE = (/(^|\.)djgolding\.com$/.test(location.hostname) || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) ? '/nba/img/logos' : 'https://djgolding.com/nba/img/logos';
@@ -9123,7 +9307,7 @@ document.addEventListener('visibilitychange', ()=>{ if(!document.hidden&&LIVE.on
 function liveTeamRow(g, side){ const t=team(side==='home'?g.home:g.away); const pts=side==='home'?g.hs:g.as, opp=side==='home'?g.as:g.hs; return '<div class="lrow'+(pts>opp?' w':'')+'">'+(logoOf(t)?'<img class="sw sw-logo" src="'+logoOf(t).icon+'" alt="">':'<span class="sw" style="background:'+uiColor(t)+'"></span>')+'<span class="nm">'+esc(t.disp)+'</span><span class="sc">'+scoreSpan(g,side==='home'?'h':'a',pts)+'</span></div>'; }
 function liveStripHTML(d){ if(!LIVE.on||d!==todayStr&&d!==addDays(todayStr,-1)) return ''; if(!LIVE.last&&!LIVE.err&&liveDates().length) return '<div class="sec" style="margin-top:4px"><h2><span class="livedot"></span> Live scores</h2><span class="muted">checking for games in progress…</span></div><div class="livewait"></div>'; const live=G.filter(g=>g.live).sort((a,b)=>interest(b)-interest(a)); let html=''; if(live.length){ html+='<div class="sec" style="margin-top:4px"><h2><span class="livedot"></span> Live now</h2><span class="muted">'+live.length+' game'+(live.length>1?'s':'')+' in progress · updates every 30 seconds</span></div><div class="grid g4 livegrid">'+live.map(g=>'<a class="card wcard livecard" href="#/game/'+g.id+'">'+liveTeamRow(g,'away')+liveTeamRow(g,'home')+'<div class="lst"><b>'+esc(g.clk||'In progress')+'</b>'+(g.spread!=null?' · <span class="dim">'+esc(spreadStr(g,{short:true}))+'</span>':'')+'</div>'+(g.last?'<div class="wh">'+esc(g.last)+'</div>':'')+'</a>').join('')+'</div>'; return html; } const now=Date.now(); const up=G.filter(g=>!g.played&&!g.live&&g.date===d).map(g=>({g,k:kickMs(g)})).filter(x=>x.k!=null&&x.k>now-20*60e3).sort((a,b)=>a.k-b.k).slice(0,4); if(!up.length) return ''; html+='<div class="sec" style="margin-top:4px"><h2>Next tip-offs</h2><span class="muted">nothing in progress right now · scores appear here live once games start</span></div><div class="grid g4 livegrid">'+up.map(({g,k})=>{ const mins=Math.round((k-now)/60e3); const when = mins<=0?'tipping off now':mins<60?'in '+mins+' min':'in '+Math.round(mins/60)+' hours'; return '<a class="card wcard" href="#/game/'+g.id+'"><div class="wm">'+esc(tshort(g.away))+' <span class="dim">'+(g.neutral?'vs':'at')+'</span> '+esc(tshort(g.home))+'</div><div class="wt">'+esc(kick(g))+(g.tv?' · '+esc(tvShort(g.tv)):'')+'</div><div class="wh">'+esc(when)+(g.spread!=null?' · '+esc(spreadStr(g,{short:true})):'')+'</div></a>'; }).join('')+'</div>'; return html; }
 function liveFlash(ids){ if(!ids||!ids.length) return; ids.forEach(id=>{ document.querySelectorAll('[data-href="#/game/'+id+'"], a[href="#/game/'+id+'"]').forEach(el=>{ el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'), 2000); }); }); }
-function homeBandHTML(d){ const live=liveStripHTML(d); const fav=favCardHTML(d); const favSec='<div class="sec"><h2>My team</h2><span class="muted">'+esc(team(favAb()).disp)+'</span></div>'; if(live&&fav) return '<div class="homeband"><div class="hb-main">'+live+'</div><div class="hb-side">'+favSec+fav+'</div></div>'; if(live) return '<div class="homeband one">'+live+'</div>'; if(fav) return '<div class="homeband one"><div class="hb-side">'+favSec+fav+'</div></div>'; return ''; }
+function homeBandHTML(d){ const live=liveStripHTML(d); const fav=sbTeamCardHTML(d); const favSec='<div class="sec"><h2>Your team</h2><span class="muted">'+esc(SEASON_LABEL+(G.some(g=>g.date===d&&g.pre)?' preseason':' season'))+'</span></div>'; if(live&&fav) return '<div class="homeband"><div class="hb-main">'+live+'</div><div class="hb-side">'+favSec+fav+'</div></div>'; if(live) return '<div class="homeband one">'+live+'</div>'; if(fav) return '<div class="homeband one"><div class="hb-side">'+favSec+fav+'</div></div>'; return ''; }
 function liveWarm(){ if(!LIVE.on) return; try{ const raw=sessionStorage.getItem('nba-live'); if(!raw) return; const c=JSON.parse(raw); if(!c||!c.snap||Date.now()-c.t>3*60e3) return; c.snap.forEach(e=>applyLiveEvent(e)); LIVE.last=c.t; clearStats(); }catch(e){} }
 liveWarm();
 

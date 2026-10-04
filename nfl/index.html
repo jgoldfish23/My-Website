@@ -1373,6 +1373,149 @@ body.boardmode::before,body.boardmode::after{display:none!important}
 }
 @media (prefers-reduced-motion:reduce){.sb-chip.live i,.sb-live::before{animation:none}}
 /* sb:end */
+/* pl:start */
+/* ===== player analytics (2026-10-04): position leaderboards, the compare tool and the Analytics section on player pages.
+   Source: sports-hub/pl/pl.css; sports-hub/pl/apply.sh copies it into nfl-hub/p1.html between the pl:start and pl:end
+   markers. Percentile colors: blue low, gray average, orange high (set inline by plHeat in p2pl.js). ===== */
+.pl-seg{display:flex;flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none;margin:0 0 12px;width:max-content}
+.pl-seg::-webkit-scrollbar{display:none}
+.pl-seg>*{flex:none}
+.pl-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}
+.pl-tools input[type=search]{width:210px}
+.pl-chk{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);cursor:pointer;user-select:none}
+/* the leaderboard table: the player column stays put while the numbers scroll sideways */
+.pl-tbl{border-collapse:separate;border-spacing:0;min-width:100%}
+.pl-tbl th.sort{user-select:none}
+.pl-tbl th.sorted.asc::after{content:" \25B4"}
+.pl-tbl td,.pl-tbl th{padding-left:9px;padding-right:9px}
+.pl-tbl td.r{font-variant-numeric:tabular-nums}
+.pl-tbl td.srt{font-weight:700;color:var(--ink)}
+.pl-tbl .pl-nm{position:sticky;left:0;z-index:1;background:var(--surface);min-width:210px;max-width:250px;box-shadow:1px 0 0 var(--line-2)}
+.pl-tbl th.pl-nm{background:var(--surface-2);z-index:2}
+.pl-tbl tr.click:hover td.pl-nm{background:var(--surface-2)}
+.pl-tbl tr.pl-on td{background:color-mix(in srgb,var(--accent) 8%,var(--surface))}
+.pl-nmw{display:flex;align-items:center;gap:8px;min-width:0}
+.pl-rk{flex:none;width:20px;text-align:right;color:var(--ink-3);font-size:12px;font-variant-numeric:tabular-nums}
+.pl-face{position:relative;flex:none;width:30px;height:30px;border-radius:50%;overflow:hidden;background:color-mix(in srgb,var(--tc) 20%,var(--surface-2));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--tc) 55%,transparent)}
+.pl-face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%}
+.pl-face img.lg{object-fit:contain;padding:18%}
+.pl-face.sm{width:24px;height:24px}
+.pl-face.lg{width:62px;height:62px;box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--tc) 60%,transparent)}
+.pl-who{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+.pl-who b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.pl-ns{display:none}
+.pl-sub{display:flex;align-items:center;gap:4px;margin-top:1px;font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+.pl-sub i{font-style:normal;color:var(--gold-text)}
+.pl-tl{width:14px;height:14px;object-fit:contain;flex:none}
+.pl-ck{position:relative;flex:none;width:18px;height:18px;padding:0;border:1.5px solid var(--line);border-radius:5px;background:var(--surface);cursor:pointer}
+.pl-ck:hover{border-color:var(--ink-3)}
+.pl-ck.on{background:var(--accent);border-color:var(--accent)}
+.pl-ck.on::after{content:"";position:absolute;left:4.5px;top:1px;width:5px;height:10px;border:solid var(--accent-ink);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.pl-note{margin:10px 2px 0;font-size:12.5px;line-height:1.55;color:var(--ink-3)}
+.pl-legend{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.pl-legend i{display:inline-block;width:58px;height:8px;border-radius:4px;background:linear-gradient(90deg,rgb(47,111,214),rgb(150,156,166),rgb(232,89,12))}
+.pl-pad{height:84px}
+/* the compare tray that follows you down the leaderboard */
+#pl-cbar:empty{display:none}
+.pl-cbar{position:fixed;z-index:40;left:0;right:0;bottom:16px;margin:0 auto;width:max-content;display:flex;flex-wrap:wrap;align-items:center;gap:8px;max-width:calc(100vw - 24px);padding:10px 12px;border-radius:14px;background:var(--surface);border:1px solid var(--line);box-shadow:0 14px 34px -12px rgba(0,0,0,.45)}
+.pl-cbar-l{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.pl-cbar-h{font-size:12.5px;color:var(--ink-3)}
+.pl-cchip{display:inline-flex;align-items:center;gap:3px;padding:3px 3px 3px 10px;border-radius:999px;font-size:13px;font-weight:600;color:var(--ink);background:color-mix(in srgb,var(--pc) 13%,var(--surface));border:1.5px solid color-mix(in srgb,var(--pc) 55%,transparent)}
+.pl-cchip button{padding:0 6px;border:0;background:none;color:var(--ink-3);font-size:17px;line-height:1;cursor:pointer}
+.pl-cchip button:hover{color:var(--ink)}
+/* compare page */
+.pl-pick{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 16px}
+.pl-add{position:relative}
+.pl-add input{width:250px}
+.pl-addres{position:absolute;z-index:30;top:calc(100% + 4px);left:0;min-width:290px;max-height:350px;overflow:auto;padding:4px;border-radius:12px;background:var(--surface);border:1px solid var(--line);box-shadow:0 16px 36px -14px rgba(0,0,0,.45)}
+.pl-opt{display:flex;align-items:center;gap:8px;width:100%;padding:7px 8px;border:0;border-radius:8px;background:none;color:var(--ink);font:inherit;font-size:13.5px;text-align:left;cursor:pointer}
+.pl-opt:hover{background:var(--surface-2)}
+.pl-opt b{font-weight:600}
+.pl-none{padding:8px 10px;font-size:12.5px;color:var(--ink-3)}
+.pl-sugg{display:flex;flex-wrap:wrap;gap:8px}
+.pl-sugg .pl-opt{width:auto;padding:5px 12px 5px 5px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.pl-sugg .pl-opt:hover{border-color:var(--ink-3)}
+.pl-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0 0 6px}
+.pl-card{position:relative;min-width:0;padding:14px 14px 12px;border-radius:16px;background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--pc);box-shadow:var(--shadow)}
+.pl-card-top{display:flex;align-items:center;gap:12px;min-width:0;padding-right:18px}
+.pl-card-id{flex:1;min-width:0}
+.pl-card-n{display:block;font-family:var(--disp);font-size:22px;font-weight:700;line-height:1.1;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-card-n:hover{color:var(--accent-text)}
+.pl-card-m{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-top:4px;font-size:12.5px;color:var(--ink-3)}
+.pl-x{position:absolute;top:6px;right:8px;padding:2px 4px;border:0;background:none;color:var(--ink-3);font-size:19px;line-height:1;cursor:pointer}
+.pl-x:hover{color:var(--ink)}
+.pl-card-st{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:12px}
+.pl-card-st div{display:flex;flex-direction:column;align-items:center;min-width:0;padding:7px 2px 6px;border-radius:10px;background:var(--surface-2)}
+.pl-card-st b{font-family:"Orbitron",var(--disp);font-size:15px;font-weight:800;line-height:1.2;white-space:nowrap}
+.pl-card-st span{margin-top:2px;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.pl-card-f{margin-top:9px;font-size:12px;color:var(--ink-3)}
+.pl-card-f b{color:var(--ink-2);font-weight:600}
+.pl-warn{color:var(--gold-text)}
+.pl-warnbox{margin:0 0 12px;padding:8px 10px;border-radius:8px;font-size:13px;color:var(--gold-text);background:var(--gold-soft)}
+.pl-acard{padding:14px 16px 16px}
+.pl-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pl-h3{margin:0 0 10px;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+/* percentile bars: the bubble sits at the percentile, colored blue (low) to orange (high) */
+.pl-pr{display:flex;flex-direction:column;gap:13px}
+.pl-pr-row{display:grid;grid-template-columns:minmax(150px,230px) minmax(0,1fr);gap:6px 16px;align-items:center}
+.pl-pr-k{font-size:13.5px;font-weight:500;color:var(--ink-2);line-height:1.3}
+.pl-i{display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;border:1px solid var(--line);font-size:9.5px;font-style:italic;font-weight:600;color:var(--ink-3);vertical-align:1px;cursor:help}
+.pl-pr-bars{display:flex;flex-direction:column;gap:7px;min-width:0}
+.pl-pr-b{display:grid;grid-template-columns:auto minmax(0,1fr) 68px;align-items:center;gap:8px}
+.pl-dot{display:inline-block;flex:none;width:9px;height:9px;border-radius:50%;background:var(--pc)}
+.pl-track{position:relative;height:8px;margin:0 14px;border-radius:4px;background:var(--surface-3)}
+.pl-track i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;opacity:.55}
+.pl-track b{position:absolute;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;min-width:27px;height:23px;padding:0 4px;border-radius:12px;font-size:11.5px;font-weight:700;color:#fff;box-shadow:0 0 0 2px var(--surface)}
+.pl-pr-v{font-size:13px;font-weight:600;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.pl-pr-b.best .pl-pr-v{color:var(--ink);font-weight:800}
+.pl-solo .pl-dot{display:none}
+.pl-solo .pl-pr-b{grid-template-columns:minmax(0,1fr) 68px}
+/* radar and the game-by-game chart */
+.pl-viz{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:14px;align-items:start;margin:16px 0 0}
+.pl-viz.one{grid-template-columns:minmax(0,1fr)}
+.pl-radar{display:block;width:100%;height:auto;max-width:380px;margin:0 auto}
+.pl-radar .ring{fill:none;stroke:var(--line);stroke-width:1}
+.pl-radar .ring.mid{stroke-dasharray:3 3;stroke:var(--ink-3);opacity:.6}
+.pl-radar .ax{stroke:var(--line-2)}
+.pl-radar text{font-size:10.5px;font-weight:700;fill:var(--ink-3)}
+.pl-poly{fill:var(--pc);fill-opacity:.13;stroke:var(--pc);stroke-width:2.2;stroke-linejoin:round}
+.pl-legend2{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-top:8px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.pl-legend2>span{display:inline-flex;align-items:center;gap:6px}
+.pl-legend2 .dim{font-weight:400;font-size:12px}
+.pl-trseg{display:flex;flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none;margin-bottom:10px;width:max-content}
+.pl-trseg::-webkit-scrollbar{display:none}
+.pl-trseg>*{flex:none}
+.pl-trend svg{display:block;width:100%;height:auto}
+.pl-trend .grid line{stroke:var(--line-2)}
+.pl-trend .grid line.zero{stroke:var(--ink-3);opacity:.5}
+.pl-trend text{font-size:11px;fill:var(--ink-3)}
+.pl-trend .ln{fill:none;stroke:var(--pc);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.pl-trend .pt{fill:var(--pc);stroke:var(--surface);stroke-width:2}
+/* every-number table */
+.pl-ctbl{min-width:100%}
+.pl-ctbl th .pl-dot{margin-right:6px;vertical-align:0}
+.pl-ctbl td{font-variant-numeric:tabular-nums}
+.pl-ctbl td.pl-best{font-weight:800;color:var(--ink);background:color-mix(in srgb,var(--good) 11%,transparent)}
+.pl-pcs{display:inline-block;min-width:22px;margin-left:6px;font-size:10.5px;font-weight:700;text-align:right}
+/* the Players tab made the top nav one tab longer: tighter tabs up to 1200px, and no scrollbar under it (it still scrolls) */
+.nav{scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+@media (min-width:1001px) and (max-width:1200px){.nav a{padding-left:8px;padding-right:8px}}
+@media (max-width:820px){.pl-viz{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:720px){
+  .pl-nf{display:none}.pl-ns{display:block}
+  .pl-face{width:26px;height:26px}.pl-nmw{gap:6px}
+  .pl-tools input[type=search]{flex:1 1 100%;width:auto}
+  .pl-tbl .pl-nm{min-width:170px;max-width:178px}
+  .pl-pr-row{grid-template-columns:minmax(0,1fr);gap:5px}
+  .pl-cbar{left:8px;right:8px;bottom:10px;width:auto;max-width:none}
+  .pl-add{flex:1 1 100%}
+  .pl-add input{width:100%}
+  .pl-addres{right:0;min-width:0}
+  .pl-card-n{font-size:20px}
+  .pl-card-st b{font-size:14px}
+}
+/* pl:end */
 </style>
 
 <header class="top">
@@ -1387,6 +1530,7 @@ body.boardmode::before,body.boardmode::after{display:none!important}
       <a href="#/playoffs" data-r="playoffs">Playoff Picture</a>
       <a href="#/draft" data-r="draft">Draft</a>
       <a href="#/teams" data-r="teams">Teams</a>
+      <a href="#/players" data-r="players">Players</a>
       <a href="#/my" data-r="my">My Rankings</a>
       <a href="#/settings" data-r="settings" title="Theme and favorite team">&#9881; Settings</a>
     </nav>
@@ -9738,10 +9882,11 @@ function renderPlayer(ab, name){ setNav('teams'); ab=norm(ab||''); const t=T[ab]
   let html=backBar('#/team/'+enc(ab), '<a href="#/team/'+enc(ab)+'">'+esc(t.disp)+'</a><span class="dim"> &rsaquo; </span>roster');
   html+='<div class="thead"><div class="bar" style="background:'+uiColor(t)+'"></div>'+shot+'<div class="ttl"><div class="eyebrow">'+esc(t.full)+(info?' · '+esc(info.pos):'')+(depthPos?' · '+esc(POS_LONG[depthPos]||depthPos)+' '+(string===0?'starter':string===1?'backup':'third string'):'')+'</div><h1>'+(info&&info.no?'<span class="dim">#'+esc(info.no)+'</span> ':'')+esc(info?info.n:name)+'</h1><div class="meta">'+[info&&info.age?'Age '+info.age:'', info&&info.ht?esc(info.ht):'', info&&info.wt?info.wt+' lb':'', info?(info.exp===0?'Rookie':info.exp+' season'+(info.exp===1?'':'s')):'', info&&info.col?esc(info.col):'', pk?'Round '+pk.r+', pick '+pk.ov+' in 2026':'', info&&info.grp==='IR'?'Injured reserve':info&&info.grp==='PS'?'Practice squad':''].filter(Boolean).map(x=>'<span>'+x+'</span>').join('')+'</div></div><div class="ranks">'+(inj?'<div class="rb" style="'+(badStatus(inj.status)?'border-color:var(--bad)':'')+'"><div class="v" style="font-size:16px">'+esc(inj.status)+'</div><div class="k">'+esc(inj.type||'injury')+'</div></div>':'')+(log.length?'<div class="rb"><div class="v">'+log.length+'</div><div class="k">Games</div></div>':'')+'</div></div>';
   if(inj&&(inj.note||inj.ret)) html+='<div class="note" style="margin-top:10px">'+esc(inj.note||'')+(inj.ret?' <span class="dim">Expected back '+esc(fmtDate(inj.ret,false))+'.</span>':'')+'</div>';
+  html+=plSlotHTML(ab, info?info.n:name, info&&info.id);   /* percentile ranks vs his position (p2pl.js), filled in once players.json loads */
   if(season.length){ html+='<div class="sec"><h2>Season</h2><span class="muted">totals from every box score</span></div><div class="ldgrid">'+season.map(e=>'<div class="ldr-row"><span class="k">'+esc((CATV[e.cat]||{t:e.cat}).t)+'</span><div class="mini">'+esc(seasonStatLine(e))+'</div></div>').join('')+'</div>'; }
   if(log.length){ const cats=PLAYER_CATS.filter(c=>log.some(x=>x.cats[c])); html+='<div class="sec"><h2>Game log</h2><span class="muted">'+log.length+' game'+(log.length>1?'s':'')+'</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th>'+cats.map(c=>{ const v=CATV[c]||{t:c,c:[]}; return v.c.map(x=>'<th class="r">'+esc(x)+'</th>').join(''); }).join('')+'</tr></thead><tbody>'+log.map(x=>{ const g=x.g; const home=g&&g.home===ab; const opp=g?team(home?g.away:g.home):null; const pf=g?(home?g.hs:g.as):null, pa=g?(home?g.as:g.hs):null; return '<tr'+(g?' class="click" data-href="#/game/'+g.id+'"':'')+'><td class="small nw">'+esc(fmtDate(x.b.date,false))+'</td><td>'+(opp?(home?'vs ':'at ')+chip(opp.ab,{short:true}):'—')+'</td><td class="small nw">'+(pf!=null?(pf>pa?'<span class="pos">W</span>':pf<pa?'<span class="neg">L</span>':'T')+' '+pf+'-'+pa:'—')+'</td>'+cats.map(c=>{ const v=CATV[c]||{c:[]}; const s=x.cats[c]; return v.c.map(lab=>'<td class="r">'+(s?esc(statCell(c,s,lab)):'')+'</td>').join(''); }).join('')+'</tr>'; }).join('')+'</tbody></table></div>'; }
   if(info) html+='<div class="sec"><h2>Roster entry</h2></div><div class="card"><div class="bd" style="padding-top:8px">'+playerLine(info,{label:depthPos||info.pos,prod:seasonProd(ab,info.n,info.pos)})+'</div></div>';
-  view.innerHTML=html; }
+  view.innerHTML=html; plSlotFill(); }
 
 /* ---------- line movement, weather, series ---------- */
 function moveArrow(open, cur, favLabel){ if(open==null||cur==null||open===cur) return ''; const d=Math.abs(cur-open); const dir = cur<open ? 'toward '+favLabel[0] : 'toward '+favLabel[1]; return '<span class="mv '+(cur<open?'dn':'up')+'">'+(cur<open?'▼':'▲')+' '+num1(d)+'</span> <span class="dim">'+esc(dir)+'</span>'; }
@@ -10214,6 +10359,331 @@ function sbTeamCardHTML(w){ const t=SETTINGS.fav&&T[SETTINGS.fav];
   let lastLine=''; if(last&&!(g&&g.played)){ const home=last.home===t.ab; const mine=home?last.hs:last.as, th=home?last.as:last.hs; lastLine='<a class="sbt-last" href="#/game/'+last.id+'">Last: <b class="'+(mine>th?'w':mine<th?'l':'')+'">'+(mine>th?'W':mine<th?'L':'T')+' '+mine+'-'+th+'</b> '+((last.neutral||home)?'vs ':'at ')+esc(team(home?last.away:last.home).disp)+'</a>'; }
   setTimeout(sbStart,0);
   return '<div class="sbt" style="--tc:'+c1+';--tc2:'+c2+'"><img class="sbt-wm" src="'+LOGO_BASE+'/'+t.ab+'.png" alt=""><div class="sbt-top"><span class="sbt-tag">'+esc(t.conf+' '+t.div)+'</span><a class="sbt-ch" href="#/settings">change</a></div><a class="sbt-id" href="#/team/'+enc(t.ab)+'">'+sbPlate(t,'sbt-plate')+'<div style="min-width:0"><div class="sbt-name">'+esc(t.full||t.disp)+'</div><div class="sbt-meta"><b>'+recStr(t.ab)+'</b>'+(o.po!=null?' &middot; playoffs '+pct1(o.po):'')+(o.div!=null?' &middot; division '+pct1(o.div):'')+'</div></div></a><div class="sbt-next">'+blk+'</div>'+lastLine+'</div>'; }
+/* ---------- player analytics (2026-10-04): leaderboards by position (#/players/<group>), a compare tool for up to four
+   players (#/players/compare/<id>,<id>,...) and an Analytics section on player pages. Data: players.json, built from
+   nflverse by fetch_players.mjs and fetched on first use from /nfl/data/players.json, so the main page stays light.
+   Percentiles rank a player against the qualified players at his position. Styles: ../sports-hub/pl/pl.css ---------- */
+const PL_GROUPS=[['QB','QB','Quarterbacks','quarterbacks','quarterback'],['RB','RB','Running backs','running backs','running back'],['WR','WR','Wide receivers','wide receivers','wide receiver'],['TE','TE','Tight ends','tight ends','tight end'],['EDGE','Edge','Edge rushers','edge rushers','edge rusher'],['DL','DL','Interior linemen','interior linemen','interior lineman'],['LB','LB','Linebackers','linebackers','linebacker'],['CB','CB','Cornerbacks','cornerbacks','cornerback'],['S','S','Safeties','safeties','safety'],['K','K','Kickers','kickers','kicker'],['P','P','Punters','punters','punter']];
+const PL_COLORS=['#2f7cf6','#f2711c','#16a571','#d6336c'];
+let PL=null, PL_P=null, PL_ERR='';
+const PLS={g:'QB', per:false, all:false, adv:false, team:'', q:'', sort:{}, dir:{}, sel:[], tr:{}};
+try{ const o=JSON.parse(localStorage.getItem('nfl-players')||'{}'); if(PL_GROUPS.some(x=>x[0]===o.g)) PLS.g=o.g; PLS.per=!!o.per; PLS.all=!!o.all; PLS.adv=!!o.adv; }catch(e){}
+function plSave(){ try{ localStorage.setItem('nfl-players', JSON.stringify({g:PLS.g, per:PLS.per, all:PLS.all, adv:PLS.adv})); }catch(e){} }
+const plA=w=>(/^[aeiou]/i.test(w)?'an ':'a ')+esc(w);
+const plGrp=g=>PL_GROUPS.find(x=>x[0]===g)||PL_GROUPS[0];
+const plDv=(a,b)=>b?(a||0)/b:null;
+function plRating(c,a,y,t,i){ if(!a) return null; const cl=x=>Math.max(0,Math.min(2.375,x)); return (cl(((c||0)/a-.3)*5)+cl(((y||0)/a-3)*.25)+cl((t||0)/a*20)+cl(2.375-(i||0)/a*25))/6*100; }
+const plNgs=(p,k,f)=>(p.ngs&&p.ngs[k]&&p.ngs[k][f]!=null)?p.ngs[k][f]:null;
+
+/* every stat the pages can show: l = name, s = column header, f = value from the season totals, fmt = how it prints,
+   per = a count that can be shown per game, lo = lower is better (percentiles flip), neu = no better or worse (gray) */
+const PL_M={
+  gp:{l:'Games played',s:'G',f:(s,p)=>p.gp,fmt:'i',neu:1},
+  pc:{l:'Completions',s:'Cmp',f:s=>s.pc||0,fmt:'i',per:1},
+  pa:{l:'Pass attempts',s:'Att',f:s=>s.pa||0,fmt:'i',per:1},
+  cmpp:{l:'Completion rate',s:'Cmp%',f:s=>plDv(s.pc,s.pa),fmt:'p1'},
+  py:{l:'Passing yards',s:'Yds',f:s=>s.py||0,fmt:'i',per:1},
+  ptd:{l:'Passing touchdowns',s:'TD',f:s=>s.ptd||0,fmt:'i',per:1},
+  pi:{l:'Interceptions thrown',s:'INT',f:s=>s.pi||0,fmt:'i',per:1,lo:1},
+  ypa:{l:'Yards per attempt',s:'Y/A',f:s=>plDv(s.py,s.pa),fmt:'1'},
+  anya:{l:'Adjusted net yards per attempt',s:'ANY/A',f:s=>plDv((s.py||0)+20*(s.ptd||0)-45*(s.pi||0)-Math.abs(s.sky||0),(s.pa||0)+(s.sk||0)),fmt:'2',tip:'Yards per dropback with sacks counted, a 20-yard bonus for each touchdown and a 45-yard penalty for each interception'},
+  rate:{l:'Passer rating',s:'Rate',f:s=>plRating(s.pc,s.pa,s.py,s.ptd,s.pi),fmt:'1'},
+  tdp:{l:'Touchdown rate',s:'TD%',f:s=>plDv(s.ptd,s.pa),fmt:'p1',tip:'Touchdown passes per attempt'},
+  intp:{l:'Interception rate',s:'INT%',f:s=>plDv(s.pi,s.pa),fmt:'p1',lo:1,tip:'Interceptions per attempt'},
+  sk:{l:'Sacks taken',s:'Sk',f:s=>s.sk||0,fmt:'i',per:1,lo:1},
+  skp:{l:'Sack rate',s:'Sack%',f:s=>plDv(s.sk,(s.pa||0)+(s.sk||0)),fmt:'p1',lo:1,tip:'Sacks per dropback'},
+  epadb:{l:'EPA per dropback',s:'EPA/db',f:s=>plDv(s.pep,(s.pa||0)+(s.sk||0)),fmt:'e',tip:'Expected points added per pass or sack: how much each dropback changed his team\'s chances of scoring, given the down, distance and field position. Zero is average, +0.20 is elite'},
+  cpoe:{l:'Completion rate over expected',s:'CPOE',f:s=>plDv(s.cpw,s.cpa),fmt:'s1',tip:'Percentage points above the completion rate an average quarterback would have on the same throws (depth, coverage, pressure)'},
+  adot:{l:'Average depth of throw',s:'aDOT',f:s=>plDv(s.pay,s.pa),fmt:'1',neu:1,tip:'Air yards per attempt: how far downfield he throws'},
+  p20:{l:'Completions of 20+ yards',s:'20+',f:s=>s.p20||0,fmt:'i',per:1},
+  prsp:{l:'Pressure rate',s:'Pres%',f:s=>plDv(s.prs,s.prdb),fmt:'p1',lo:1,tip:'Share of dropbacks under pressure (Pro Football Reference charting). Partly his line, partly how long he holds the ball'},
+  badp:{l:'Bad-throw rate',s:'Bad%',f:s=>plDv(s.bad,s.pa),fmt:'p1',lo:1,tip:'Throws charted as off target (Pro Football Reference)'},
+  ttt:{l:'Time to throw',s:'TTT',f:(s,p)=>plNgs(p,'p','ttt'),fmt:'sec',neu:1,tip:'Seconds from snap to throw (NFL Next Gen Stats; qualified passers only)'},
+  agg:{l:'Tight-window throws',s:'Tight%',f:(s,p)=>plNgs(p,'p','agg'),fmt:'r1',neu:1,tip:'Share of throws with a defender within a yard of the receiver (Next Gen Stats aggressiveness)'},
+  totepa:{l:'Total EPA (pass and run)',s:'EPA',f:s=>(s.pep||0)+(s.rep||0),fmt:'s1',per:1},
+  rc:{l:'Carries',s:'Car',f:s=>s.rc||0,fmt:'i',per:1},
+  ry:{l:'Rushing yards',s:'Rush',f:s=>s.ry||0,fmt:'i',per:1},
+  ryg:{l:'Rushing yards per game',s:'Rush/G',f:(s,p)=>plDv(s.ry,p.gp),fmt:'1'},
+  ypc:{l:'Yards per carry',s:'YPC',f:s=>plDv(s.ry,s.rc),fmt:'1'},
+  rtd:{l:'Rushing touchdowns',s:'Rush TD',f:s=>s.rtd||0,fmt:'i',per:1},
+  repc:{l:'EPA per carry',s:'EPA/car',f:s=>plDv(s.rep,s.rc),fmt:'e',tip:'Expected points added per carry. Most backs are below zero; anything positive is very good'},
+  r1d:{l:'First-down rate',s:'1D%',f:s=>plDv(s.rfd,s.rc),fmt:'p1',tip:'Share of carries that moved the chains'},
+  r10p:{l:'Explosive-run rate',s:'10+%',f:s=>plDv(s.r10,s.rc),fmt:'p1',tip:'Share of carries that gained 10 yards or more'},
+  rsh:{l:'Carry share',s:'Car%',f:s=>plDv(s.rc,s.tc),fmt:'p',tip:'His share of the team\'s carries in the games he played'},
+  ybc:{l:'Yards before contact per carry',s:'YBC',f:s=>plDv(s.ybc,s.rc),fmt:'1',tip:'Mostly the blocking (Pro Football Reference)'},
+  yaco:{l:'Yards after contact per carry',s:'YACo',f:s=>plDv(s.yaco,s.rc),fmt:'1',tip:'What he adds once he is hit (Pro Football Reference)'},
+  brk:{l:'Broken tackles',s:'Brk',f:s=>(s.rbt||0)+(s.xbt||0),fmt:'i',per:1},
+  ryoe:{l:'Rush yards over expected per carry',s:'RYOE',f:(s,p)=>plNgs(p,'r','ryoea'),fmt:'s2',tip:'Yards per carry beyond what an average back would gain with the same blockers and defenders around him (Next Gen Stats; qualified runners only)'},
+  box8:{l:'Carries into 8+ defenders',s:'8+ box',f:(s,p)=>plNgs(p,'r','box8'),fmt:'r1',neu:1,tip:'Share of carries against eight or more men in the box (Next Gen Stats)'},
+  scrim:{l:'Yards from scrimmage',s:'Scrim',f:s=>(s.ry||0)+(s.xy||0),fmt:'i',per:1},
+  scrimg:{l:'Scrimmage yards per game',s:'Scr/G',f:(s,p)=>plDv((s.ry||0)+(s.xy||0),p.gp),fmt:'1'},
+  touch:{l:'Touches',s:'Tch',f:s=>(s.rc||0)+(s.xr||0),fmt:'i',per:1},
+  ttd:{l:'Total touchdowns',s:'TD',f:s=>(s.rtd||0)+(s.xtd||0),fmt:'i',per:1},
+  fl:{l:'Fumbles lost',s:'FL',f:s=>s.fl||0,fmt:'i',per:1,lo:1},
+  xt:{l:'Targets',s:'Tgt',f:s=>s.xt||0,fmt:'i',per:1},
+  xr:{l:'Receptions',s:'Rec',f:s=>s.xr||0,fmt:'i',per:1},
+  xy:{l:'Receiving yards',s:'Yds',f:s=>s.xy||0,fmt:'i',per:1},
+  xyg:{l:'Receiving yards per game',s:'Yds/G',f:(s,p)=>plDv(s.xy,p.gp),fmt:'1'},
+  xtd:{l:'Receiving touchdowns',s:'TD',f:s=>s.xtd||0,fmt:'i',per:1},
+  catchp:{l:'Catch rate',s:'Catch%',f:s=>plDv(s.xr,s.xt),fmt:'p'},
+  ypr:{l:'Yards per catch',s:'Y/R',f:s=>plDv(s.xy,s.xr),fmt:'1'},
+  ypt:{l:'Yards per target',s:'Y/Tgt',f:s=>plDv(s.xy,s.xt),fmt:'1'},
+  x1d:{l:'Receiving first downs',s:'1D',f:s=>s.xfd||0,fmt:'i',per:1},
+  x20:{l:'Catches of 20+ yards',s:'20+',f:s=>s.x20||0,fmt:'i',per:1},
+  tsh:{l:'Target share',s:'Tgt%',f:s=>plDv(s.xt,s.tt),fmt:'p',tip:'His share of the team\'s targets in the games he played'},
+  aysh:{l:'Air-yards share',s:'Air%',f:s=>plDv(s.xay,s.tay),fmt:'p',tip:'His share of the team\'s air yards (how far the ball traveled in the air on throws to him)'},
+  wopr:{l:'Weighted opportunity (WOPR)',s:'WOPR',f:s=>(s.tt&&s.tay)?1.5*(s.xt||0)/s.tt+0.7*(s.xay||0)/s.tay:null,fmt:'2',tip:'1.5 x target share + 0.7 x air-yards share: one number for how big his role is. Around 0.70 and up is a true number one'},
+  xadot:{l:'Average depth of target',s:'aDOT',f:s=>plDv(s.xay,s.xt),fmt:'1',neu:1,tip:'Air yards per target: how far downfield he is used'},
+  yacr:{l:'Yards after catch per catch',s:'YAC/R',f:s=>plDv(s.xyac,s.xr),fmt:'1'},
+  racr:{l:'Air-yards conversion',s:'RACR',f:s=>s.xay>0?(s.xy||0)/s.xay:null,fmt:'2',tip:'Receiving yards per air yard thrown his way'},
+  xept:{l:'EPA per target',s:'EPA/tgt',f:s=>plDv(s.xep,s.xt),fmt:'e',tip:'Expected points added per target'},
+  drp:{l:'Drop rate',s:'Drop%',f:s=>plDv(s.xdrp,s.xt),fmt:'p1',lo:1,tip:'Drops per target (Pro Football Reference)'},
+  rtgt:{l:'Passer rating when targeted',s:'Rtg',f:s=>plRating(s.xr,s.xt,s.xy,s.xtd,s.xint),fmt:'1'},
+  sep:{l:'Separation at the catch point',s:'Sep',f:(s,p)=>plNgs(p,'c','sep'),fmt:'1',tip:'Yards between him and the nearest defender when the ball arrives (Next Gen Stats; qualified receivers only)'},
+  yacoe:{l:'YAC over expected per catch',s:'YACOE',f:(s,p)=>plNgs(p,'c','yacoe'),fmt:'s1',tip:'Yards after the catch beyond what was expected (Next Gen Stats)'},
+  snap:{l:'Snap share',s:'Snap%',f:s=>plDv(s.os,s.tos),fmt:'p',tip:'Share of his team\'s offensive snaps in the games he played'},
+  tkl:{l:'Tackles',s:'Tkl',f:s=>(s.dts||0)+(s.dta||0),fmt:'i',per:1},
+  tklg:{l:'Tackles per game',s:'Tkl/G',f:(s,p)=>plDv((s.dts||0)+(s.dta||0),p.gp),fmt:'1'},
+  solo:{l:'Solo tackles',s:'Solo',f:s=>s.dts||0,fmt:'i',per:1},
+  dtfl:{l:'Tackles for loss',s:'TFL',f:s=>s.dtfl||0,fmt:'i',per:1},
+  tflg:{l:'Tackles for loss per game',s:'TFL/G',f:(s,p)=>plDv(s.dtfl,p.gp),fmt:'2'},
+  dsk:{l:'Sacks',s:'Sk',f:s=>s.dsk||0,fmt:'h',per:1},
+  dskg:{l:'Sacks per game',s:'Sk/G',f:(s,p)=>plDv(s.dsk,p.gp),fmt:'2'},
+  dqh:{l:'QB hits',s:'Hits',f:s=>s.dqh||0,fmt:'i',per:1},
+  dprs:{l:'Pressures',s:'Prs',f:s=>s.dprs||0,fmt:'i',per:1,tip:'Sacks, hits and hurries (Pro Football Reference)'},
+  prsg:{l:'Pressures per game',s:'Prs/G',f:(s,p)=>plDv(s.dprs,p.gp),fmt:'1',tip:'Sacks, hits and hurries per game (Pro Football Reference)'},
+  dhur:{l:'Hurries',s:'Hur',f:s=>s.dhur||0,fmt:'i',per:1},
+  dint:{l:'Interceptions',s:'INT',f:s=>s.dint||0,fmt:'i',per:1},
+  dpd:{l:'Passes defended',s:'PD',f:s=>s.dpd||0,fmt:'i',per:1},
+  dpdg:{l:'Passes defended per game',s:'PD/G',f:(s,p)=>plDv(s.dpd,p.gp),fmt:'2'},
+  dff:{l:'Forced fumbles',s:'FF',f:s=>s.dff||0,fmt:'i',per:1},
+  mtp:{l:'Missed-tackle rate',s:'Miss%',f:s=>plDv(s.dmt,(s.dmt||0)+(s.dtkc||0)),fmt:'p1',lo:1,tip:'Missed tackles per tackle attempt (Pro Football Reference)'},
+  ctg:{l:'Targets in coverage',s:'Tgt',f:s=>s.ctg||0,fmt:'i',per:1,neu:1},
+  ccmp:{l:'Completion rate allowed',s:'Cmp%',f:s=>plDv(s.cca,s.ctg),fmt:'p',lo:1},
+  cypt:{l:'Yards allowed per target',s:'Y/Tgt',f:s=>plDv(s.cya,s.ctg),fmt:'1',lo:1},
+  crtg:{l:'Passer rating allowed',s:'Rtg',f:s=>plRating(s.cca,s.ctg,s.cya,s.ctda,s.cint),fmt:'1',lo:1,tip:'Passer rating on throws into his coverage (Pro Football Reference)'},
+  ctda:{l:'Touchdowns allowed',s:'TD',f:s=>s.ctda||0,fmt:'i',per:1,lo:1},
+  dsnap:{l:'Snap share',s:'Snap%',f:s=>plDv(s.ds,s.tds),fmt:'p',tip:'Share of his team\'s defensive snaps in the games he played'},
+  fgm:{l:'Field goals made',s:'FGM',f:s=>s.fgm||0,fmt:'i',per:1},
+  fga:{l:'Field goal attempts',s:'FGA',f:s=>s.fga||0,fmt:'i',per:1,neu:1},
+  fgp:{l:'Field goal rate',s:'FG%',f:s=>plDv(s.fgm,s.fga),fmt:'p'},
+  f40p:{l:'Field goal rate from 40-49',s:'40-49',f:s=>plDv(s.f40m,s.f40a),fmt:'p'},
+  f50m:{l:'Field goals made from 50+',s:'50+',f:s=>s.f50m||0,fmt:'i',per:1},
+  f50p:{l:'Field goal rate from 50+',s:'50+%',f:s=>plDv(s.f50m,s.f50a),fmt:'p'},
+  fgl:{l:'Longest field goal',s:'Long',f:s=>s.fgl||null,fmt:'i'},
+  xpp:{l:'Extra point rate',s:'XP%',f:s=>plDv(s.xpm,s.xpa),fmt:'p'},
+  kpts:{l:'Points',s:'Pts',f:s=>3*(s.fgm||0)+(s.xpm||0),fmt:'i',per:1},
+  kptsg:{l:'Points per game',s:'Pts/G',f:(s,p)=>plDv(3*(s.fgm||0)+(s.xpm||0),p.gp),fmt:'1'},
+  ptn:{l:'Punts',s:'Punts',f:s=>s.ptn||0,fmt:'i',per:1,neu:1},
+  pavg:{l:'Gross average',s:'Avg',f:s=>plDv(s.pty,s.ptn),fmt:'1'},
+  pnet:{l:'Net average',s:'Net',f:s=>plDv(s.ptnet,s.ptn),fmt:'1',tip:'Average after returns and touchbacks'},
+  pt20:{l:'Punts inside the 20',s:'In20',f:s=>s.pt20||0,fmt:'i',per:1},
+  pt20p:{l:'Inside-the-20 rate',s:'In20%',f:s=>plDv(s.pt20,s.ptn),fmt:'p'},
+  pttb:{l:'Touchbacks',s:'TB',f:s=>s.pttb||0,fmt:'i',per:1,lo:1},
+  fpg:{l:'Fantasy points per game (PPR)',s:'FP/G',f:(s,p)=>plDv(s.fpp,p.gp),fmt:'1',tip:'PPR scoring: 1 per catch, 0.1 per rushing or receiving yard, 0.04 per passing yard, 6 per touchdown (4 for a passing touchdown), minus 2 per interception or lost fumble'},
+};
+/* each position: who qualifies, default sort, the standard and advanced columns, the percentile list (key), the radar axes,
+   the four numbers on a compare card (head) and the weekly charts (trend) */
+const PL_DEFX={std:['gp','tkl','dtfl','dsk','dqh','dprs','dhur','dff','dpd'], adv:['gp','dsnap','prsg','dskg','tflg','tklg','mtp'], key:['prsg','dskg','tflg','tklg','mtp','dsnap'], radar:['prsg','dskg','tflg','tklg','mtp','dsnap'], head:['dsk','dprs','dtfl','tkl'], trend:['dprs','tkl','dsk','dsnap']};
+const PL_REC={std:['gp','xt','xr','catchp','xy','ypr','xtd','x1d','x20','xyg','fpg'], adv:['gp','snap','tsh','aysh','wopr','xadot','yacr','ypt','racr','xept','drp','rtgt','sep','yacoe'], key:['xyg','tsh','wopr','ypt','catchp','xept','yacr','sep','drp','fpg'], radar:['xyg','tsh','wopr','ypt','catchp','xept','yacr','fpg'], head:['xr','xy','xtd','tsh'], trend:['xy','xt','tsh','snap','xay','fp']};
+const PL_DB={std:['gp','tkl','solo','dint','dpd','dff','dtfl','dsk'], adv:['gp','dsnap','ctg','ccmp','cypt','crtg','ctda','mtp','dpdg'], key:['crtg','cypt','ccmp','dpdg','mtp','tklg','dsnap'], radar:['crtg','cypt','ccmp','dpdg','mtp','tklg'], head:['dint','dpd','tkl','crtg'], trend:['ctg','cya','tkl','dsnap']};
+const PL_CFG={
+  QB:{q:p=>(p.s.pa||0)+(p.s.sk||0)>=14*p.tg, qtxt:'14 dropbacks per team game', sort:'py', asort:'epadb', std:['gp','pc','pa','cmpp','py','ptd','pi','ypa','rate','sk','ry','rtd','fpg'], adv:['gp','epadb','cpoe','anya','tdp','intp','skp','adot','p20','prsp','badp','ttt','agg','totepa'], key:['epadb','cpoe','anya','ypa','rate','tdp','intp','skp','badp','ryg','fpg'], radar:['epadb','cpoe','anya','tdp','intp','skp','ryg','fpg'], head:['py','ptd','pi','rate'], trend:['epadb','py','rate','cpoe','ry','fp']},
+  RB:{q:p=>(p.s.rc||0)>=6.25*p.tg, qtxt:'6.25 carries per team game', sort:'scrim', asort:'yaco', std:['gp','rc','ry','ypc','rtd','xt','xr','xy','xtd','scrim','touch','fl','fpg'], adv:['gp','snap','rsh','tsh','repc','r1d','r10p','ybc','yaco','brk','ryoe','box8','ypt'], key:['scrimg','ypc','repc','r1d','r10p','yaco','ryoe','rsh','tsh','fpg'], radar:['scrimg','ypc','repc','r10p','yaco','rsh','tsh','fpg'], head:['ry','ypc','ttd','xy'], trend:['scrim','ry','touch','snap','xt','fp']},
+  WR:Object.assign({q:p=>(p.s.xt||0)>=3*p.tg, qtxt:'3 targets per team game', sort:'xy', asort:'wopr'}, PL_REC),
+  TE:Object.assign({q:p=>(p.s.xt||0)>=2*p.tg, qtxt:'2 targets per team game', sort:'xy', asort:'wopr'}, PL_REC),
+  EDGE:Object.assign({q:p=>(p.s.ds||0)>=20*p.tg, qtxt:'20 defensive snaps per team game', sort:'dprs', asort:'prsg'}, PL_DEFX),
+  DL:Object.assign({q:p=>(p.s.ds||0)>=20*p.tg, qtxt:'20 defensive snaps per team game', sort:'dprs', asort:'prsg'}, PL_DEFX),
+  LB:{q:p=>(p.s.ds||0)>=20*p.tg, qtxt:'20 defensive snaps per team game', sort:'tkl', asort:'tklg', std:['gp','tkl','solo','dtfl','dsk','dprs','dint','dpd','dff'], adv:['gp','dsnap','tklg','tflg','prsg','mtp','ctg','ccmp','cypt','crtg','ctda'], key:['tklg','tflg','prsg','dskg','mtp','crtg','cypt','dsnap'], radar:['tklg','tflg','prsg','mtp','crtg','cypt','dsnap'], head:['tkl','dtfl','dsk','dprs'], trend:['tkl','dprs','dsnap','ctg']},
+  CB:Object.assign({q:p=>(p.s.ds||0)>=20*p.tg, qtxt:'20 defensive snaps per team game', sort:'dpd', asort:'crtg'}, PL_DB),
+  S:Object.assign({q:p=>(p.s.ds||0)>=20*p.tg, qtxt:'20 defensive snaps per team game', sort:'tkl', asort:'crtg'}, PL_DB),
+  K:{q:p=>(p.s.fga||0)+(p.s.xpa||0)>=2*p.tg, qtxt:'2 kicks per team game', sort:'fgm', std:['gp','fgm','fga','fgp','f40p','f50m','f50p','fgl','xpp','kpts'], adv:null, key:['fgp','f40p','f50p','xpp','kptsg'], radar:['fgp','f40p','f50p','xpp','kptsg'], head:['fgm','fgp','fgl','kpts'], trend:['kpts','fgm','fga']},
+  P:{q:p=>(p.s.ptn||0)>=2*p.tg, qtxt:'2 punts per team game', sort:'pnet', std:['gp','ptn','pavg','pnet','pt20','pt20p','pttb'], adv:null, key:['pavg','pnet','pt20p','pttb'], radar:[], head:['ptn','pavg','pnet','pt20'], trend:['pnet','pavg','ptn']},
+};
+/* the same ideas game by game, for the trend chart */
+const PL_TR={
+  epadb:{l:'EPA per dropback',f:e=>plDv(e.pep,(e.pa||0)+(e.sk||0)),fmt:'e'},
+  py:{l:'Passing yards',f:e=>e.pa?e.py||0:null,fmt:'i'},
+  rate:{l:'Passer rating',f:e=>plRating(e.pc,e.pa,e.py,e.ptd,e.pi),fmt:'1'},
+  cpoe:{l:'CPOE',f:e=>plDv(e.cpw,e.cpa),fmt:'s1'},
+  ry:{l:'Rushing yards',f:e=>e.ry||0,fmt:'i'},
+  scrim:{l:'Scrimmage yards',f:e=>(e.ry||0)+(e.xy||0),fmt:'i'},
+  touch:{l:'Touches',f:e=>(e.rc||0)+(e.xr||0),fmt:'i'},
+  snap:{l:'Snap share',f:e=>plDv(e.os,e.tos),fmt:'p'},
+  xt:{l:'Targets',f:e=>e.xt||0,fmt:'i'},
+  xy:{l:'Receiving yards',f:e=>e.xy||0,fmt:'i'},
+  tsh:{l:'Target share',f:e=>plDv(e.xt,e.tt),fmt:'p'},
+  xay:{l:'Air yards',f:e=>e.xay||0,fmt:'i'},
+  fp:{l:'Fantasy points (PPR)',f:e=>e.fpp||0,fmt:'1'},
+  tkl:{l:'Tackles',f:e=>(e.dts||0)+(e.dta||0),fmt:'i'},
+  dprs:{l:'Pressures',f:e=>e.dprs||0,fmt:'i'},
+  dsk:{l:'Sacks',f:e=>e.dsk||0,fmt:'h'},
+  dsnap:{l:'Snap share',f:e=>plDv(e.ds,e.tds),fmt:'p'},
+  ctg:{l:'Targets in coverage',f:e=>e.ctg||0,fmt:'i'},
+  cya:{l:'Yards allowed in coverage',f:e=>e.cya||0,fmt:'i'},
+  kpts:{l:'Points',f:e=>3*(e.fgm||0)+(e.xpm||0),fmt:'i'},
+  fgm:{l:'Field goals made',f:e=>e.fgm||0,fmt:'i'},
+  fga:{l:'Field goal attempts',f:e=>e.fga||0,fmt:'i'},
+  pnet:{l:'Net average',f:e=>plDv(e.ptnet,e.ptn),fmt:'1'},
+  pavg:{l:'Gross average',f:e=>plDv(e.pty,e.ptn),fmt:'1'},
+  ptn:{l:'Punts',f:e=>e.ptn||0,fmt:'i'},
+};
+function plFmt(v, f){ if(v==null||!isFinite(v)) return '—'; const sg=x=>(x>0?'+':x<0?'−':'');
+  switch(f){ case 'i': return Math.round(v).toLocaleString('en-US'); case '1': return v.toFixed(1); case '2': return v.toFixed(2);
+    case 'e': return sg(v)+Math.abs(v).toFixed(2); case 's1': return sg(v)+Math.abs(v).toFixed(1); case 's2': return sg(v)+Math.abs(v).toFixed(2);
+    case 'p': return Math.round(v*100)+'%'; case 'p1': return (v*100).toFixed(1)+'%'; case 'r1': return v.toFixed(1)+'%';
+    case 'sec': return v.toFixed(2)+'s'; case 'h': return Number.isInteger(v)?String(v):v.toFixed(1); default: return String(v); } }
+/* percentile colors: blue is low, gray is average, orange is high (flipped for lower-is-better stats, so orange is always good) */
+function plHeat(pc){ if(pc==null) return 'var(--line)'; const t=Math.max(0,Math.min(100,pc))/100; const A=[47,111,214], M=[150,156,166], B=[232,89,12]; const mx=(x,y,k)=>x.map((v,i)=>Math.round(v+(y[i]-v)*k)); return 'rgb('+(t<.5?mx(A,M,t*2):mx(M,B,(t-.5)*2)).join(',')+')'; }
+
+/* ---------- data ---------- */
+function plURL(){ const here=/(^|\.)djgolding\.com$/.test(location.hostname)||/^(localhost|127\.0\.0\.1)$/.test(location.hostname); return (here?'':'https://djgolding.com')+'/nfl/data/players.json?v='+encodeURIComponent(AS_OF); }
+function plLoad(){ if(PL) return Promise.resolve(PL); if(!PL_P) PL_P=fetch(plURL()).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(d=>(PL=plPrep(d))).catch(e=>{ PL_P=null; PL_ERR=String((e&&e.message)||e); throw e; }); return PL_P; }
+function plKeys(g){ const c=PL_CFG[g]; return [...new Set([].concat(c.std, c.adv||[], c.key, c.radar, c.head, [c.sort]))]; }
+function plPrep(d){ const wfOf=g=>g==='TE'?'WR':['EDGE','DL','LB','CB','S'].includes(g)?'DEF':g; const D={raw:d, byId:{}, byE:{}, byKey:{}, byG:{}, n:{}, rn:{}};
+  Object.keys(ROST).forEach(ab=>(ROST[ab]||[]).forEach(r=>{ D.rn[String(r.id)]=[ab, r.n]; }));
+  d.players.forEach(p=>{ const f=d.wf[wfOf(p.g)]||[]; p.wk=p.w.map(a=>{ const o={k:a[0], o:a[1], t:a[2]||p.t}; f.forEach((k,i)=>{ o[k]=a[3+i]||0; }); return o; });
+    p.tg=Math.max(p.gp, (d.tg||{})[p.t]||0); p.m={}; p.pc={};
+    D.byId[p.id]=p; if(p.e&&!D.byE[p.e]) D.byE[p.e]=p; [p.t].concat(p.tms||[]).forEach(t=>{ const k=t+'|'+dkey(p.n); if(!D.byKey[k]) D.byKey[k]=p; }); (D.byG[p.g]||(D.byG[p.g]=[])).push(p); });
+  Object.keys(D.byG).forEach(g=>{ const c=PL_CFG[g]; if(!c) return; const list=D.byG[g], keys=plKeys(g);
+    list.forEach(p=>{ p.q=!!c.q(p); keys.forEach(k=>{ const v=PL_M[k].f(p.s,p); p.m[k]=(v==null||!isFinite(v))?null:v; }); });
+    const qs=list.filter(p=>p.q); D.n[g]=qs.length;
+    keys.forEach(k=>{ const m=PL_M[k], arr=qs.map(p=>p.m[k]).filter(v=>v!=null).sort((a,b)=>a-b);
+      list.forEach(p=>{ const v=p.m[k]; if(v==null||!arr.length){ p.pc[k]=null; return; } let lo=0, hi=arr.length; while(lo<hi){ const md=(lo+hi)>>1; if(arr[md]<v) lo=md+1; else hi=md; } let eq=0; while(lo+eq<arr.length&&arr[lo+eq]===v) eq++; const pr=(lo+eq/2)/arr.length*100; p.pc[k]=Math.round(m.lo?100-pr:pr); }); }); });
+  return D; }
+/* how far the numbers go: complete weeks, plus any games of a week still being played */
+function plThru(){ const w=PL.raw.weeks||{}, last=PL.raw.last||0; const sched=k=>G.filter(g=>g.week===k&&g.status!=='CANCELED'&&g.status!=='POSTPONED').length*2; let thru=0; Object.keys(w).map(Number).sort((a,b)=>a-b).forEach(k=>{ if(w[k]>=sched(k)-1) thru=k; }); return {thru, last, extra:last>thru?Math.round((w[last]||0)/2):0}; }
+function plThruText(){ const t=plThru(); return (t.thru?'through Week '+t.thru:'Week '+t.last+' so far')+(t.extra&&t.thru?' plus '+t.extra+' Week '+t.last+' game'+(t.extra>1?'s':''):''); }
+function plVal(p,k,per){ const v=p.m[k]; return (per&&PL_M[k].per&&v!=null&&p.gp)?v/p.gp:v; }
+function plHref(p){ const r=p.e&&PL.rn[p.e]; return '#/player/'+enc(r?r[0]:p.t)+'/'+enc(r?r[1]:p.n); }
+function plShot(p){ return p.hs?(/^https?:/.test(p.hs)?p.hs:PL.raw.hs+p.hs):p.e?'https://a.espncdn.com/i/headshots/nfl/players/full/'+p.e+'.png':''; }
+function plFace(p, cls){ const t=team(p.t), lg=logoOf(t), src=plShot(p); const fb=lg?lg.icon:''; return '<span class="'+(cls||'pl-face')+'" style="--tc:'+uiColor(t)+'">'+(src?'<img src="'+esc(src)+'" alt="" loading="lazy"'+(fb?' onerror="this.onerror=null;this.className=\'lg\';this.src=\''+esc(fb)+'\'"':' onerror="this.remove()"')+'>':fb?'<img class="lg" src="'+esc(fb)+'" alt="">':'')+'</span>'; }
+function plTeamTag(p){ const t=team(p.t), lg=logoOf(t); return (lg?'<img class="pl-tl" src="'+lg.icon+'" alt="">':'')+esc(t.ab); }
+const plShort=n=>{ const a=String(n).split(' '); return a.length>1?a[0][0]+'. '+a.slice(1).join(' '):n; };
+function plBest(sel,k){ const m=PL_M[k]; if(m.neu||sel.length<2) return null; let b=null, bv=null; sel.forEach(p=>{ const v=p.m[k]; if(v==null) return; if(bv==null||(m.lo?v<bv:v>bv)){ b=p; bv=v; } }); const tie=sel.filter(p=>p.m[k]===bv).length>1; return tie?null:b; }
+function plWait(){ const h0=location.hash; view.innerHTML='<div class="page-head"><div><div class="eyebrow">Players</div><h1>Player stats</h1><div class="sub">Loading every player\'s season numbers&hellip;</div></div></div><div class="skel-wrap"><div class="skel skel-sub"></div><div class="skel" style="height:420px"></div></div>';
+  plLoad().then(()=>{ if(location.hash===h0) routeInner(); }).catch(()=>{ if(location.hash===h0) view.innerHTML='<div class="page-head"><div><div class="eyebrow">Players</div><h1>Player stats</h1></div></div><div class="note">The player numbers could not be loaded ('+esc(PL_ERR)+'). Check the connection and <a href="#" onclick="location.reload();return false">try again</a>.</div>'; }); }
+
+/* ---------- leaderboards: #/players/<group> ---------- */
+function renderPlayers(a, b){ setNav('players'); if(String(a||'').toLowerCase()==='compare') return renderPlayerCompare(b);
+  const gr=PL_GROUPS.find(x=>x[0]===String(a||'').toUpperCase()); if(gr&&gr[0]!==PLS.g){ PLS.g=gr[0]; PLS.q=''; plSave(); }
+  if(!PL) return plWait();
+  const g=PLS.g, c=PL_CFG[g], gi=plGrp(g);
+  let html='<div class="page-head"><div><div class="eyebrow">Player stats &middot; '+esc(plThruText())+'</div><h1>'+esc(gi[2])+'</h1><div class="sub">Season numbers for every '+esc(gi[4])+', the box-score kind and the advanced kind. Tap a column to sort it; tick up to four players to compare them side by side.</div></div></div>';
+  html+='<div class="seg pl-seg">'+PL_GROUPS.map(x=>'<a href="#/players/'+x[0].toLowerCase()+'" class="'+(x[0]===g?'on':'')+'">'+esc(x[1])+'</a>').join('')+'</div>';
+  const teams=TEAMS.slice().sort((x,y)=>x.full.localeCompare(y.full));
+  html+='<div class="pl-tools"><input type="search" id="pl-q" placeholder="Find '+plA(gi[4])+'" value="'+esc(PLS.q)+'" autocomplete="off"><select id="pl-team" aria-label="Team"><option value="">All teams</option>'+teams.map(t=>'<option value="'+t.ab+'"'+(PLS.team===t.ab?' selected':'')+'>'+esc(t.full)+'</option>').join('')+'</select>'
+    +(c.adv?'<div class="seg"><button type="button" data-plv="adv:0" class="'+(PLS.adv?'':'on')+'">Standard</button><button type="button" data-plv="adv:1" class="'+(PLS.adv?'on':'')+'">Advanced</button></div>':'')
+    +'<div class="seg"><button type="button" data-plv="per:0" class="'+(PLS.per?'':'on')+'">Totals</button><button type="button" data-plv="per:1" class="'+(PLS.per?'on':'')+'">Per game</button></div>'
+    +'<label class="pl-chk"><input type="checkbox" id="pl-all"'+(PLS.all?' checked':'')+'> Include small samples</label><a class="btn sm" href="#/players/compare">Compare players</a></div>';
+  html+='<div id="pl-tbl">'+plTableHTML(g)+'</div>';
+  html+='<div class="pl-note">Qualified: at least '+esc(c.qtxt)+' ('+PL.n[g]+' '+esc(gi[3])+'). <span class="pl-legend">Percentile shading: low <i></i> high</span> &middot; flipped for stats where lower is better, so orange always means good. Stats from nflverse (play-by-play EPA and CPOE, Pro Football Reference charting, NFL Next Gen Stats), updated each morning. Fantasy points use PPR scoring.</div>';
+  html+='<div id="pl-cbar">'+plBarHTML()+'</div><div class="pl-pad"></div>';
+  view.innerHTML=html; }
+function plTableHTML(g){ const c=PL_CFG[g], cols=(PLS.adv&&c.adv)?c.adv:c.std; const def0=(PLS.adv&&c.asort)?c.asort:c.sort; const sk=(PLS.sort[g]&&cols.includes(PLS.sort[g]))?PLS.sort[g]:(cols.includes(def0)?def0:cols[1]); const dir=PLS.dir[g]&&PLS.sort[g]===sk?PLS.dir[g]:(PL_M[sk].lo?1:-1);
+  let list=PL.byG[g]||[]; if(!PLS.all) list=list.filter(p=>p.q); if(PLS.team) list=list.filter(p=>p.t===PLS.team||(p.tms||[]).includes(PLS.team)); if(PLS.q){ const q=dkey(PLS.q); if(q) list=list.filter(p=>dkey(p.n).includes(q)); }
+  list=list.slice().sort((x,y)=>{ const a=plVal(x,sk,PLS.per), b=plVal(y,sk,PLS.per); if(a==null&&b==null) return x.n.localeCompare(y.n); if(a==null) return 1; if(b==null) return -1; return (a-b)*dir||x.n.localeCompare(y.n); });
+  if(!list.length) return '<div class="note">No '+esc(plGrp(g)[3])+' match'+(PLS.all?'':'. Small samples are hidden; tick "Include small samples" to see everyone')+'.</div>';
+  const def=['EDGE','DL','LB','CB','S'].includes(g);
+  const head='<tr><th class="pl-nm">Player</th>'+cols.map(k=>{ const m=PL_M[k]; return '<th class="r sort'+(k===sk?' sorted'+(dir>0?' asc':''):'')+'" data-plk="'+k+'" title="'+esc(m.l+(m.tip?': '+m.tip:''))+'">'+esc(m.s)+'</th>'; }).join('')+'</tr>';
+  const rows=list.map((p,i)=>{ const on=PLS.sel.includes(p.id);
+    return '<tr class="click'+(on?' pl-on':'')+'" data-href="'+plHref(p)+'"><td class="pl-nm"><div class="pl-nmw"><button type="button" class="pl-ck'+(on?' on':'')+'" data-pl="'+p.id+'" aria-pressed="'+on+'" title="'+(on?'Remove from':'Add to')+' compare"></button><span class="pl-rk">'+(i+1)+'</span>'+plFace(p)+'<span class="pl-who"><b class="pl-nf">'+esc(p.n)+'</b><b class="pl-ns">'+esc(plShort(p.n))+'</b><span class="pl-sub">'+plTeamTag(p)+(def||g==='RB'?' &middot; '+esc(p.pos):'')+(p.q?'':' &middot; <i>small sample</i>')+'</span></span></div></td>'
+      +cols.map(k=>{ const m=PL_M[k], v=plVal(p,k,PLS.per), per=PLS.per&&m.per; const pc=p.pc[k]; const shade=!m.per&&!m.neu&&pc!=null&&k!=='gp'; return '<td class="r'+(k===sk?' srt':'')+'"'+(shade?' style="background:color-mix(in srgb,'+plHeat(pc)+' 22%,transparent)" title="'+pc+'th percentile"':'')+'>'+plFmt(v, per?'1':m.fmt)+'</td>'; }).join('')+'</tr>'; }).join('');
+  return '<div class="tblwrap pl-wrap"><table class="tbl pl-tbl"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table></div>'; }
+function plBarHTML(){ const sel=PLS.sel.map(id=>PL&&PL.byId[id]).filter(Boolean); if(!sel.length) return '';
+  return '<div class="pl-cbar"><span class="pl-cbar-l">Compare</span>'+sel.map((p,i)=>'<span class="pl-cchip" style="--pc:'+PL_COLORS[i]+'">'+esc(plShort(p.n))+'<button type="button" data-plx="'+p.id+'" aria-label="Remove '+esc(p.n)+'">&times;</button></span>').join('')
+    +(sel.length>=2?'<a class="btn primary sm" href="#/players/compare/'+sel.map(p=>p.id).join(',')+'">Compare '+sel.length+'</a>':'<span class="pl-cbar-h">tick one more</span>')+'<button type="button" class="btn sm" data-plclear="1">Clear</button></div>'; }
+function plRefreshBoard(full){ if(!PL) return; if(full||!document.getElementById('pl-tbl')){ if(/^#\/players\/?(\w+)?$/.test(location.hash||'')&&!/compare/.test(location.hash)) renderPlayers(); return; } document.getElementById('pl-tbl').innerHTML=plTableHTML(PLS.g); const b=document.getElementById('pl-cbar'); if(b) b.innerHTML=plBarHTML(); }
+function plToggle(id){ const p=PL&&PL.byId[id]; if(!p) return; if(PLS.sel.includes(id)) PLS.sel=PLS.sel.filter(x=>x!==id); else { const g0=PLS.sel.length&&PL.byId[PLS.sel[0]]?PL.byId[PLS.sel[0]].g:p.g; if(g0!==p.g) PLS.sel=[]; if(PLS.sel.length>=4) PLS.sel.shift(); PLS.sel.push(id); } plRefreshBoard(); }
+
+/* ---------- compare: #/players/compare/<id>,<id>,... ---------- */
+function renderPlayerCompare(ids){ setNav('players'); if(!PL) return plWait();
+  let sel=(ids?String(ids).split(','):PLS.sel.slice()).map(x=>PL.byId[String(x).trim()]).filter(Boolean); const g=sel.length?sel[0].g:PLS.g; const other=sel.filter(p=>p.g!==g); sel=sel.filter(p=>p.g===g).slice(0,4);
+  PLS.g=g; PLS.sel=sel.map(p=>p.id); const c=PL_CFG[g], gi=plGrp(g);
+  let html='<div class="page-head"><div><div class="eyebrow">Compare players &middot; '+esc(gi[2])+'</div><h1>'+(sel.length>=2?sel.map(p=>esc(p.n)).join(' <span class="dim">vs</span> '):'Compare '+esc(gi[3]))+'</h1><div class="sub">Season to date, '+esc(plThruText())+'. Percentiles rank each player against the '+PL.n[g]+' qualified '+esc(gi[3])+' (at least '+esc(c.qtxt)+'); 50 is average, and higher is always better.</div></div></div>';
+  html+='<div class="seg pl-seg">'+PL_GROUPS.map(x=>'<button type="button" data-plg="'+x[0]+'" class="'+(x[0]===g?'on':'')+'">'+esc(x[1])+'</button>').join('')+'</div>';
+  html+='<div class="pl-pick">'+sel.map((p,i)=>'<span class="pl-cchip" style="--pc:'+PL_COLORS[i]+'">'+esc(p.n)+'<button type="button" data-rm="'+p.id+'" aria-label="Remove '+esc(p.n)+'">&times;</button></span>').join('')
+    +(sel.length<4?'<div class="pl-add"><input type="search" id="pl-add" placeholder="'+(sel.length?'Add another '+esc(gi[4]):'Find '+plA(gi[4]))+'" autocomplete="off"><div class="pl-addres" id="pl-addres" hidden></div></div>':'<span class="dim" style="font-size:13px">four is the limit</span>')
+    +'<a class="btn sm" href="#/players/'+g.toLowerCase()+'">All '+esc(gi[3])+'</a></div>';
+  if(other.length) html+='<div class="note" style="margin-bottom:12px">Left out '+other.map(p=>esc(p.n)).join(', ')+': a comparison stays within one position.</div>';
+  if(sel.length<2){ const sug=plSuggest(g, PLS.sel, 10);
+    if(sel.length===1) html+='<div class="pl-cards">'+plCardHTML(sel[0],0)+'</div><div class="sec"><h2>How he ranks</h2><span class="muted">percentile among qualified '+esc(gi[3])+'</span></div><div class="card pl-acard">'+plPctRows(sel, c.key)+'</div>';
+    html+='<div class="sec"><h2>'+(sel.length?'Pick someone to compare with':'Pick two to four '+esc(gi[3]))+'</h2><span class="muted">or search above</span></div><div class="pl-sugg">'+sug.map(p=>'<button type="button" class="pl-opt" data-add="'+p.id+'">'+plFace(p,'pl-face sm')+'<span><b>'+esc(p.n)+'</b> <span class="dim">'+esc(team(p.t).ab)+'</span></span></button>').join('')+'</div><div class="pl-pad"></div>';
+    view.innerHTML=html; return; }
+  /* who leads the most of the key numbers */
+  const lead=sel.map(p=>c.key.filter(k=>plBest(sel,k)===p).length); const counted=c.key.filter(k=>plBest(sel,k)).length;
+  html+='<div class="pl-cards">'+sel.map((p,i)=>plCardHTML(p,i,lead[i],counted)).join('')+'</div>';
+  html+='<div class="sec"><h2>Percentile rankings</h2><span class="muted">'+esc(gi[2])+', '+esc(plThruText())+'</span></div><div class="card pl-acard">'+plPctRows(sel, c.key)+'</div>';
+  const radar=c.radar&&c.radar.length>=5?plRadar(sel, c.radar):'';
+  html+='<div class="pl-viz'+(radar?'':' one')+'">'+(radar?'<div class="card pl-acard"><div class="pl-h3">Profile</div>'+radar+'<div class="pl-legend2">'+sel.map((p,i)=>'<span style="--pc:'+PL_COLORS[i]+'"><span class="pl-dot"></span>'+esc(plShort(p.n))+'</span>').join('')+'</div></div>':'')+plTrendBlock(sel,g)+'</div>';
+  html+='<div class="sec"><h2>Every number</h2><span class="muted">best in each row highlighted &middot; small figure is the percentile</span></div>'+plCmpTable(sel,g)+'<div class="pl-note">Stats from nflverse (play-by-play EPA and CPOE, Pro Football Reference charting, NFL Next Gen Stats), updated each morning. Next Gen numbers exist only for qualified players.</div>';
+  view.innerHTML=html; }
+function plSuggest(g, excl, n){ const c=PL_CFG[g]; return (PL.byG[g]||[]).filter(p=>p.q&&!excl.includes(p.id)).sort((a,b)=>(b.m[c.sort]||0)-(a.m[c.sort]||0)).slice(0,n); }
+function plCardHTML(p,i,lead,of){ const c=PL_CFG[p.g];
+  return '<div class="pl-card" style="--pc:'+PL_COLORS[i]+'"><button type="button" class="pl-x" data-rm="'+p.id+'" aria-label="Remove '+esc(p.n)+'">&times;</button><div class="pl-card-top">'+plFace(p,'pl-face lg')+'<div class="pl-card-id"><a class="pl-card-n" href="'+plHref(p)+'">'+esc(p.n)+'</a><div class="pl-card-m">'+plTeamTag(p)+' &middot; '+esc(p.pos)+(p.no?' #'+esc(p.no):'')+(p.age?' &middot; age '+p.age:'')+'</div></div></div>'
+    +'<div class="pl-card-st">'+c.head.map(k=>'<div><b>'+plFmt(p.m[k],PL_M[k].fmt)+'</b><span>'+esc(PL_M[k].s)+'</span></div>').join('')+'</div>'
+    +'<div class="pl-card-f">'+p.gp+' game'+(p.gp===1?'':'s')+(p.q?'':' &middot; <span class="pl-warn">small sample</span>')+(lead!=null&&of?' &middot; <b>leads '+lead+' of '+of+'</b> key numbers':'')+'</div></div>'; }
+/* percentile bars, one line per player under each stat (a single player on his own page) */
+function plPctRows(sel, keys){ const solo=sel.length===1;
+  return '<div class="pl-pr'+(solo?' pl-solo':'')+'">'+keys.map(k=>{ const m=PL_M[k]; const best=plBest(sel,k);
+    return '<div class="pl-pr-row"><div class="pl-pr-k"'+(m.tip?' title="'+esc(m.tip)+'"':'')+'>'+esc(m.l)+(m.tip?' <span class="pl-i">i</span>':'')+'</div><div class="pl-pr-bars">'+sel.map((p,i)=>{ const pc=p.pc[k]; const col=m.neu?'var(--ink-3)':plHeat(pc); const w=pc==null?0:pc;
+      return '<div class="pl-pr-b'+(best===p?' best':'')+'" style="--pc:'+PL_COLORS[i]+'"><span class="pl-dot"></span><div class="pl-track">'+(pc==null?'':'<i style="width:'+w+'%;background:'+col+'"></i><b style="left:'+w+'%;background:'+col+'">'+pc+'</b>')+'</div><span class="pl-pr-v">'+plFmt(p.m[k],m.fmt)+'</span></div>'; }).join('')+'</div></div>'; }).join('')+'</div>'; }
+function plRadar(sel, keys){ const N=keys.length, R=104, cx=180, cy=150; const pt=(i,r)=>{ const a=-Math.PI/2+i*2*Math.PI/N; return [cx+r*Math.cos(a), cy+r*Math.sin(a)]; }; const P2=a=>a.map(x=>x.toFixed(1)).join(',');
+  let s='<svg class="pl-radar" viewBox="0 0 360 300" role="img" aria-label="Percentile profile">';
+  [25,50,75,100].forEach(v=>{ s+='<polygon class="ring'+(v===50?' mid':'')+'" points="'+keys.map((k,i)=>P2(pt(i,R*v/100))).join(' ')+'"/>'; });
+  keys.forEach((k,i)=>{ const e=pt(i,R), l=pt(i,R+14); const an=Math.abs(l[0]-cx)<10?'middle':l[0]>cx?'start':'end'; s+='<line class="ax" x1="'+cx+'" y1="'+cy+'" x2="'+e[0].toFixed(1)+'" y2="'+e[1].toFixed(1)+'"/><text x="'+l[0].toFixed(1)+'" y="'+(l[1]+(l[1]>cy+4?9:l[1]<cy-4?-1:4)).toFixed(1)+'" text-anchor="'+an+'"><title>'+esc(PL_M[k].l)+'</title>'+esc(PL_M[k].s)+'</text>'; });
+  sel.forEach((p,j)=>{ s+='<polygon class="pl-poly" style="--pc:'+PL_COLORS[j]+'" points="'+keys.map((k,i)=>P2(pt(i,R*Math.max(3,p.pc[k]||0)/100))).join(' ')+'"><title>'+esc(p.n)+'</title></polygon>'; });
+  return s+'</svg>'; }
+function plTicks(lo,hi,n){ const st0=(hi-lo)/n||1; const mag=Math.pow(10,Math.floor(Math.log10(st0))); const st=[1,2,2.5,5,10].map(m=>m*mag).find(x=>x>=st0-1e-12)||10*mag; const out=[]; for(let v=Math.ceil(lo/st-1e-9)*st; v<=hi+1e-9; v+=st) out.push(+v.toFixed(6)); return out; }
+function plTrendBlock(sel,g){ const c=PL_CFG[g]; const tk=(PLS.tr[g]&&c.trend.includes(PLS.tr[g]))?PLS.tr[g]:c.trend[0];
+  return '<div class="card pl-acard pl-trend" id="pl-trend"><div class="pl-h3">Game by game</div><div class="seg pl-trseg">'+c.trend.map(k=>'<button type="button" data-pltr="'+k+'" class="'+(k===tk?'on':'')+'">'+esc(PL_TR[k].l)+'</button>').join('')+'</div>'+plTrendSVG(sel,tk)+'</div>'; }
+function plTrendSVG(sel,tk){ const tr=PL_TR[tk]; /* the axis runs to the last week any of them has played, not into a week still in progress */ const last=Math.max(1, plThru().thru||0, ...sel.map(p=>p.wk.length?p.wk[p.wk.length-1].k:0)); const wks=[]; for(let w=1; w<=last; w++) wks.push(w);
+  const ser=sel.map(p=>wks.map(w=>{ const e=p.wk.find(x=>x.k===w); if(!e) return null; const v=tr.f(e); return v==null||!isFinite(v)?null:v; }));
+  const vals=ser.flat().filter(v=>v!=null); if(!vals.length) return '<div class="note">No game-by-game numbers for this yet.</div>';
+  const W=640, H=250, L=46, Rr=14, T=12, B=28; let lo=Math.min(0,...vals), hi=Math.max(...vals); if(hi===lo) hi=lo+1; hi+=(hi-lo)*.08; if(lo<0) lo-=(hi-lo)*.06;
+  const ticks=plTicks(lo,hi,4); lo=Math.min(lo,ticks[0]); hi=Math.max(hi,ticks[ticks.length-1]);
+  const x=i=>wks.length===1?(L+W-Rr)/2:L+i*(W-L-Rr)/(wks.length-1), y=v=>T+(hi-v)*(H-T-B)/(hi-lo);
+  const tf=tr.fmt==='p'?(v=>Math.round(v*100)+'%'):tr.fmt==='e'||tr.fmt==='s1'?(v=>plFmt(v,tr.fmt)):(v=>String(+v.toFixed(2)));
+  let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(tr.l)+' by week"><g class="grid">'+ticks.map(v=>'<line x1="'+L+'" x2="'+(W-Rr)+'" y1="'+y(v).toFixed(1)+'" y2="'+y(v).toFixed(1)+'"'+(v===0?' class="zero"':'')+'/><text x="'+(L-8)+'" y="'+(y(v)+4).toFixed(1)+'" text-anchor="end">'+esc(tf(v))+'</text>').join('')+'</g>';
+  s+=wks.map((w,i)=>'<text x="'+x(i).toFixed(1)+'" y="'+(H-8)+'" text-anchor="middle">Wk '+w+'</text>').join('');
+  ser.forEach((vs,j)=>{ let d='', pen=false; vs.forEach((v,i)=>{ if(v==null){ pen=false; return; } d+=(pen?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)+' '; pen=true; });
+    s+='<g style="--pc:'+PL_COLORS[j]+'"><path class="ln" d="'+d.trim()+'"/>'+vs.map((v,i)=>v==null?'':'<circle class="pt" cx="'+x(i).toFixed(1)+'" cy="'+y(v).toFixed(1)+'" r="4.5"><title>'+esc(sel[j].n+' · Week '+wks[i]+': '+plFmt(v,tr.fmt))+'</title></circle>').join('')+'</g>'; });
+  s+='</svg><div class="pl-legend2">'+sel.map((p,i)=>'<span style="--pc:'+PL_COLORS[i]+'"><span class="pl-dot"></span>'+esc(plShort(p.n))+'</span>').join('')+'<span class="dim">a gap means he did not play</span></div>';
+  return s; }
+function plCmpTable(sel,g){ const c=PL_CFG[g]; const keys=[...new Set(c.std.concat(c.adv||[]))];
+  return '<div class="tblwrap"><table class="tbl pl-ctbl"><thead><tr><th>Stat</th>'+sel.map((p,i)=>'<th class="r" style="--pc:'+PL_COLORS[i]+'"><span class="pl-dot"></span>'+esc(plShort(p.n))+'</th>').join('')+'</tr></thead><tbody>'
+    +keys.map(k=>{ const m=PL_M[k], best=plBest(sel,k); return '<tr><td'+(m.tip?' title="'+esc(m.tip)+'"':'')+'>'+esc(m.l)+'</td>'+sel.map(p=>{ const pc=p.pc[k]; return '<td class="r'+(best===p?' pl-best':'')+'">'+plFmt(p.m[k],m.fmt)+(pc!=null&&!m.per&&!m.neu&&k!=='gp'?'<span class="pl-pcs" style="color:'+plHeat(pc)+'">'+pc+'</span>':'')+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table></div>'; }
+function plAddSearch(q){ const r=document.getElementById('pl-addres'); if(!r||!PL) return; const k=dkey(q); if(!k){ r.hidden=true; return; } const g=PLS.g;
+  const hit=p=>!PLS.sel.includes(p.id)&&dkey(p.n).includes(k); const rank=(a,b)=>(b.q-a.q)||((b.s.fpp||0)-(a.s.fpp||0));
+  let list=(PL.byG[g]||[]).filter(hit).sort(rank).slice(0,8); let elsewhere=false;
+  if(!list.length){ list=Object.values(PL.byId).filter(hit).sort(rank).slice(0,6); elsewhere=list.length>0; }
+  r.innerHTML=list.length?(elsewhere?'<div class="pl-none">No '+esc(plGrp(g)[3])+' by that name. Other positions (starts a new comparison):</div>':'')+list.map(p=>'<button type="button" class="pl-opt" data-add="'+p.id+'">'+plFace(p,'pl-face sm')+'<span><b>'+esc(p.n)+'</b> <span class="dim">'+esc(team(p.t).ab)+' &middot; '+esc(p.pos)+'</span></span></button>').join(''):'<div class="pl-none">Nobody by that name</div>';
+  r.hidden=false; }
+
+/* ---------- the Analytics section on a player page ---------- */
+function plFind(ab,name,eid){ return (eid&&PL.byE[String(eid)])||PL.byKey[norm(ab||'')+'|'+dkey(name)]||null; }
+function plSlotHTML(ab,name,eid){ if(PL){ const p=plFind(ab,name,eid); return p?plAnalyticsHTML(p):''; } return '<div id="pl-slot" data-ab="'+esc(ab)+'" data-n="'+esc(name)+'" data-e="'+esc(eid||'')+'"><div class="sec"><h2>Analytics</h2><span class="muted">loading&hellip;</span></div><div class="skel" style="height:220px"></div></div>'; }
+function plSlotFill(){ if(PL||!document.getElementById('pl-slot')) return; plLoad().then(()=>{ const el=document.getElementById('pl-slot'); if(!el) return; const p=plFind(el.dataset.ab, el.dataset.n, el.dataset.e); el.outerHTML=p?plAnalyticsHTML(p):''; }).catch(()=>{ const el=document.getElementById('pl-slot'); if(el) el.remove(); }); }
+function plAnalyticsHTML(p){ const c=PL_CFG[p.g]; if(!c) return ''; const gi=plGrp(p.g);
+  return '<div class="sec" id="s-analytics"><h2>Analytics</h2><span class="muted">percentile among '+PL.n[p.g]+' qualified '+esc(gi[3])+' &middot; '+esc(plThruText())+'</span></div><div class="card pl-acard">'
+    +(p.q?'':'<div class="pl-warnbox">Small sample: under the qualifying line ('+esc(c.qtxt)+'), so read these as early signs.</div>')
+    +plPctRows([p], c.key)+'<div class="pl-acts"><a class="btn sm primary" href="#/players/compare/'+p.id+'">Compare with another '+esc(gi[4])+'</a><a class="btn sm" href="#/players/'+p.g.toLowerCase()+'">All '+esc(gi[3])+'</a></div></div>'; }
+
+/* ---------- controls ---------- */
+addEventListener('click', e=>{ const t=e.target;
+  const ck=t.closest('[data-pl]'); if(ck){ e.preventDefault(); plToggle(ck.dataset.pl); return; }
+  const x=t.closest('[data-plx]'); if(x){ e.preventDefault(); PLS.sel=PLS.sel.filter(i=>i!==x.dataset.plx); plRefreshBoard(); return; }
+  if(t.closest('[data-plclear]')){ PLS.sel=[]; plRefreshBoard(); return; }
+  const th=t.closest('th[data-plk]'); if(th&&PL){ const g=PLS.g, k=th.dataset.plk; if(PLS.sort[g]===k) PLS.dir[g]=-(PLS.dir[g]||(PL_M[k].lo?1:-1)); else { PLS.sort[g]=k; PLS.dir[g]=PL_M[k].lo?1:-1; } plRefreshBoard(); return; }
+  const v=t.closest('[data-plv]'); if(v){ const [k,val]=v.dataset.plv.split(':'); PLS[k]=val==='1'; plSave(); plRefreshBoard(true); return; }
+  const ad=t.closest('[data-add]'); if(ad&&PL){ e.preventDefault(); const p=PL.byId[ad.dataset.add]; if(!p) return; const ids=(p.g===PLS.g?PLS.sel.filter(i=>i!==p.id):[]).concat(p.id).slice(-4); location.hash='#/players/compare/'+ids.join(','); return; }
+  const rm=t.closest('[data-rm]'); if(rm){ e.preventDefault(); const ids=PLS.sel.filter(i=>i!==rm.dataset.rm); PLS.sel=ids; location.hash='#/players/compare'+(ids.length?'/'+ids.join(','):''); return; }
+  const gb=t.closest('[data-plg]'); if(gb){ e.preventDefault(); PLS.g=gb.dataset.plg; PLS.sel=[]; plSave(); if(location.hash==='#/players/compare') renderPlayerCompare(''); else location.hash='#/players/compare'; return; }
+  const trb=t.closest('[data-pltr]'); if(trb&&PL){ PLS.tr[PLS.g]=trb.dataset.pltr; const box=document.getElementById('pl-trend'); if(box) box.outerHTML=plTrendBlock(PLS.sel.map(i=>PL.byId[i]).filter(Boolean), PLS.g); return; }
+  if(!t.closest('.pl-add')){ const r=document.getElementById('pl-addres'); if(r) r.hidden=true; } });
+addEventListener('input', e=>{ if(e.target.id==='pl-q'){ PLS.q=e.target.value; const b=document.getElementById('pl-tbl'); if(b&&PL) b.innerHTML=plTableHTML(PLS.g); } else if(e.target.id==='pl-add') plAddSearch(e.target.value); });
+addEventListener('change', e=>{ if(e.target.id==='pl-team'){ PLS.team=e.target.value; plRefreshBoard(); } else if(e.target.id==='pl-all'){ PLS.all=e.target.checked; plSave(); plRefreshBoard(); } });
+addEventListener('keydown', e=>{ if(e.target.id==='pl-add'&&e.key==='Enter'){ const b=document.querySelector('#pl-addres [data-add]'); if(b){ e.preventDefault(); b.click(); } } else if(e.target.id==='pl-add'&&e.key==='Escape'){ const r=document.getElementById('pl-addres'); if(r) r.hidden=true; } });
 
 /* ---------- logos & team themes ---------- */
 const LOGO_BASE = (/(^|\.)djgolding\.com$/.test(location.hostname) || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) ? '/nfl/img/logos' : 'https://djgolding.com/nfl/img/logos';
@@ -10240,7 +10710,7 @@ function kickMs(g){ const m=String(g.time||'').match(/^(\d{1,2}):(\d{2}) (AM|PM)
 function liveWeeks(){ const ws=[CUR_WEEK]; const i=WEEKS.indexOf(CUR_WEEK); const prev=WEEKS[i-1]; if(prev!=null&&G.some(g=>g.week===prev&&!g.played&&g.time!=='Canceled'&&g.time!=='Postponed')) ws.push(prev); return ws; }
 function applyLiveEvent(e, w){ const g=GI[e.id]; if(!g) return null; const as=+e.away.s, hs=+e.home.s; let changed=false; if(e.st==='FINAL'){ if(!g.played||g.as!==as||g.hs!==hs||g.live){ g.as=as; g.hs=hs; g.played=true; g.live=false; g.status='FINAL'; g.als=(e.away.ls||[]).map(Number); g.hls=(e.home.ls||[]).map(Number); g.ot=g.als.length>4; changed=true; STANDINGS=null; } g.clk=''; } else if(LIVE_ST[e.st]||(e.st==='DELAYED'&&e.per>0)){ if(!g.live||g.as!==as||g.hs!==hs||g.clk!==e.det||g.last!==e.last){ changed=true; } g.as=as; g.hs=hs; g.live=true; g.played=false; g.status=e.st; g.clk=e.det||''; g.per=e.per; g.pos=e.pos&&e.pos===e.home.id?'home':(e.pos&&e.pos===e.away.id?'away':''); g.dd=e.dd||''; g.last=e.last||''; g.rz=!!e.rz; g.als=(e.away.ls||[]).map(Number); g.hls=(e.home.ls||[]).map(Number); } else if(e.st==='SCHEDULED'||e.st==='DELAYED'||e.st==='POSTPONED'){ if(g.live){ g.live=false; changed=true; } if(e.st==='DELAYED'&&g.time!=='Delayed'){ g.time='Delayed'; changed=true; } if(e.odds&&e.odds.det&&g.spread==null){ const m=String(e.odds.det).match(/^(\S+)\s+(-?[\d.]+)/); if(m){ g.spread = m[1]===g.home ? +m[2] : (m[1]===g.away ? -m[2] : null); g.src='DraftKings'; } if(e.odds.ou!=null) g.total=+e.odds.ou; changed=true; } } return changed?g:null; }
 async function livePoll(force){ if(!LIVE.on||LIVE.busy) return; if(document.hidden&&!force) return; LIVE.busy=true; let changed=false, ok=false; const changedIds=[]; const snap=[]; for(const w of liveWeeks()){ const wi=WEEKINFO[w]||{}; const stype=w>18?3:2, wk=w>18?(w===22?5:w-18):w; try{ const r=await fetch(LIVE_API+'/scoreboard?week='+wk+'&stype='+stype, {cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); const j=await r.json(); (j.games||[]).forEach(e=>{ snap.push(Object.assign({w},e)); const cg=applyLiveEvent(e, w); if(cg){ changed=true; changedIds.push(cg.id); } }); ok=true; }catch(err){ LIVE.err++; } } if(ok){ LIVE.last=Date.now(); LIVE.err=0; try{ sessionStorage.setItem('nfl-live', JSON.stringify({t:LIVE.last, snap})); }catch(e){} } LIVE.busy=false; if(changed){ clearStats(); rerenderQuiet(); liveFlash(changedIds); } await liveGameRefresh(); liveStamp(); }
-function rerenderQuiet(){ const h=location.hash||'#/'; if(/^#\/(my|settings)/.test(h)){ renderTicker(); return; } const y=window.scrollY; const lock=view.offsetHeight; view.style.minHeight=lock+'px'; QUIET=true; routeInner(); QUIET=false; applyPageTheme(); if(Math.abs(window.scrollY-y)>1){ try{ window.scrollTo({top:y,behavior:'instant'}); }catch(e){ window.scrollTo(0,y); } } view.style.minHeight=''; renderTicker(); animateScores(view); initSubnav(); }
+function rerenderQuiet(){ const h=location.hash||'#/'; if(/^#\/(my|settings|players)/.test(h)){ renderTicker(); return; } const y=window.scrollY; const lock=view.offsetHeight; view.style.minHeight=lock+'px'; QUIET=true; routeInner(); QUIET=false; applyPageTheme(); if(Math.abs(window.scrollY-y)>1){ try{ window.scrollTo({top:y,behavior:'instant'}); }catch(e){ window.scrollTo(0,y); } } view.style.minHeight=''; renderTicker(); animateScores(view); initSubnav(); }
 function liveNext(){ const now=Date.now(); const ws=liveWeeks(); const gs=G.filter(g=>ws.includes(g.week)); const anyLive=gs.some(g=>g.live); const soon=gs.some(g=>{ if(g.played||g.live) return false; const k=kickMs(g); return k!=null && k-now<45*60e3 && now-k<4.5*3600e3; }); const wk=WEEKRANGE[CUR_WEEK]; const inWindow = wk && todayStr>=wk.min && todayStr<=wk.max; return anyLive?30e3 : soon?90e3 : inWindow?5*60e3 : 20*60e3; }
 function liveSchedule(){ clearTimeout(LIVE.timer); if(!LIVE.on) return; LIVE.timer=setTimeout(async()=>{ await livePoll(); liveSchedule(); }, liveNext()); }
 function liveStamp(){ const el=document.getElementById('livestamp'); if(!el) return; if(!LIVE.on){ el.innerHTML=''; return; } const ws=liveWeeks(); const anyLive=G.some(g=>ws.includes(g.week)&&g.live); if(!LIVE.last){ el.innerHTML=LIVE.err?'<span class="dim">live scores unavailable</span>':''; return; } const d=new Date(LIVE.last); el.innerHTML=(anyLive?'<i class="dot ok livedot"></i>':'')+'<span class="dim">live scores '+(anyLive?'on · ':'checked ')+d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+'</span>'; }
@@ -10303,7 +10773,7 @@ document.addEventListener('keydown', e=>{ if(!(location.hash||'').startsWith('#/
 
 /* ---------- command palette ---------- */
 let PAL_IDX=null, PAL_SEL=0;
-function palIndex(){ if(PAL_IDX) return PAL_IDX; const out=[]; [['Scoreboard','#/week'],['Schedule','#/schedule'],['Previews','#/previews'],['Weekly digest','#/digest'],['Standings','#/standings'],['Power rankings','#/rankings'],['ESPN FPI','#/rankings/fpi'],['Title odds','#/rankings/odds'],['Playoff picture','#/playoffs'],['Draft order','#/draft'],['2027 big board','#/draft/board'],['Rookie class','#/draft/rookies'],['Teams','#/teams'],['My rankings','#/my'],['Bet tracker','#/my/bets'],['Compare teams','#/compare'],['TV guide','#/tv'],['Big board','#/board'],['Settings','#/settings']].forEach(p=>out.push({kind:'Page',label:p[0],href:p[1]})); TEAMS.forEach(t=>out.push({kind:'Team',label:t.full,sub:divKey(t),href:'#/team/'+enc(t.ab)})); G.forEach(g=>{ const a=team(g.away), h=team(g.home); out.push({kind:'Game',label:a.disp+' at '+h.disp,sub:weekLabel(g.week)+' · '+fmtDate(g.date,false)+(g.played?' · final '+g.as+'-'+g.hs:''),href:'#/game/'+g.id}); }); Object.keys(ROST).forEach(ab=>ROST[ab].forEach(p=>{ if(p.grp==='PS') return; out.push({kind:'Player',label:p.n,sub:tshort(ab)+' · '+p.pos,href:'#/player/'+enc(ab)+'/'+enc(p.n)}); })); return PAL_IDX=out; }
+function palIndex(){ if(PAL_IDX) return PAL_IDX; const out=[]; [['Scoreboard','#/week'],['Schedule','#/schedule'],['Previews','#/previews'],['Weekly digest','#/digest'],['Standings','#/standings'],['Power rankings','#/rankings'],['ESPN FPI','#/rankings/fpi'],['Title odds','#/rankings/odds'],['Playoff picture','#/playoffs'],['Draft order','#/draft'],['2027 big board','#/draft/board'],['Rookie class','#/draft/rookies'],['Teams','#/teams'],['Player stats','#/players'],['Compare players','#/players/compare'],['My rankings','#/my'],['Bet tracker','#/my/bets'],['Compare teams','#/compare'],['TV guide','#/tv'],['Big board','#/board'],['Settings','#/settings']].forEach(p=>out.push({kind:'Page',label:p[0],href:p[1]})); TEAMS.forEach(t=>out.push({kind:'Team',label:t.full,sub:divKey(t),href:'#/team/'+enc(t.ab)})); G.forEach(g=>{ const a=team(g.away), h=team(g.home); out.push({kind:'Game',label:a.disp+' at '+h.disp,sub:weekLabel(g.week)+' · '+fmtDate(g.date,false)+(g.played?' · final '+g.as+'-'+g.hs:''),href:'#/game/'+g.id}); }); Object.keys(ROST).forEach(ab=>ROST[ab].forEach(p=>{ if(p.grp==='PS') return; out.push({kind:'Player',label:p.n,sub:tshort(ab)+' · '+p.pos,href:'#/player/'+enc(ab)+'/'+enc(p.n)}); })); return PAL_IDX=out; }
 function palSearch(q){ q=q.trim().toLowerCase(); if(!q) return palIndex().filter(x=>x.kind==='Page').slice(0,12); const rank=x=>{ const l=x.label.toLowerCase(); if(l===q) return 0; if(l.startsWith(q)) return 1; if(l.includes(q)) return 2; const s=(x.sub||'').toLowerCase(); if(s.includes(q)) return 4; return 9; }; const kindBias={Page:0,Team:0.2,Game:0.5,Player:0.8}; return palIndex().map(x=>({x,r:rank(x)+ (kindBias[x.kind]||0)})).filter(o=>o.r<5).sort((a,b)=>a.r-b.r||a.x.label.length-b.x.label.length).slice(0,20).map(o=>o.x); }
 function palOpen(){ let el=document.getElementById('palette'); if(!el){ el=document.createElement('div'); el.id='palette'; el.innerHTML='<div class="pal-box"><input id="pal-q" type="search" placeholder="Jump to a team, game, player or page…" autocomplete="off"><div id="pal-res" class="pal-res"></div><div class="pal-foot"><span class="dim">↑↓ to move · Enter to open · Esc to close</span></div></div>'; document.body.appendChild(el); el.addEventListener('click', e=>{ if(e.target===el) palClose(); }); } el.classList.add('on'); PAL_SEL=0; const q=document.getElementById('pal-q'); q.value=''; palDraw(); setTimeout(()=>q.focus(),10); q.oninput=()=>{ PAL_SEL=0; palDraw(); }; q.onkeydown=e=>{ const rows=[...document.querySelectorAll('#pal-res .pal-row')]; if(e.key==='ArrowDown'){ e.preventDefault(); PAL_SEL=Math.min(rows.length-1,PAL_SEL+1); palMark(); } else if(e.key==='ArrowUp'){ e.preventDefault(); PAL_SEL=Math.max(0,PAL_SEL-1); palMark(); } else if(e.key==='Enter'){ const r=rows[PAL_SEL]; if(r){ location.hash=r.dataset.href; palClose(); } } else if(e.key==='Escape'){ palClose(); } }; }
 function palDraw(){ const q=(document.getElementById('pal-q')||{}).value||''; const res=palSearch(q); const box=document.getElementById('pal-res'); box.innerHTML=res.length?res.map((x,i)=>'<button class="pal-row'+(i===PAL_SEL?' on':'')+'" data-href="'+esc(x.href)+'"><span class="pal-kind">'+esc(x.kind)+'</span><span class="pal-label">'+esc(x.label)+'</span>'+(x.sub?'<span class="pal-sub">'+esc(x.sub)+'</span>':'')+'</button>').join(''):'<div class="mini" style="padding:12px">Nothing matches.</div>'; box.querySelectorAll('.pal-row').forEach(b=>b.onclick=()=>{ location.hash=b.dataset.href; palClose(); }); }
@@ -10326,7 +10796,7 @@ document.addEventListener('click', e=>{ const a=e.target.closest('a[data-sec]');
 /* ---------- about, routing, boot ---------- */
 function aboutHTML(){ return '<h2>How the numbers work</h2><p><b>Power rating</b> starts from ESPN\'s preseason FPI, then blends in each 2026 result. Each game is worth one "vote": the scoring margin (capped at '+CAP+', home field of '+HFA+' removed) plus the opponent\'s rating. The preseason number counts as '+PRIOR_W+' games, so early results move things without swinging them wildly. The whole league is re-solved 20 times so opponent strength settles.</p><p><b>Model line</b> is the rating gap plus '+HFA+' for the home team. <b>Win probability</b> assumes results scatter around that line with a '+SD+'-point standard deviation, which is about what the NFL produces.</p><p><b>Edge</b> is the model line minus the market line. It is a lean, not a pick: 3+ points is worth a look, under 1.5 is noise.</p><p><b>Playoff odds</b> come from playing out every remaining game '+SIMS.toLocaleString()+' times with those win probabilities, sorting the standings with the league\'s tiebreakers each time, then playing the bracket with home field. The same runs give division odds, seed odds, Super Bowl odds and the average draft slot.</p><p><b>Schedule strength</b> is the average power rating of all opponents on the schedule.</p><p>Scores, schedule, and lines are a snapshot from '+asOfDisp()+'; live scores update on top of it while games are on.</p><p style="text-align:right"><button class="btn" id="dlg-close">Close</button></p>'; }
 function route(){ view.classList.remove('in'); void view.offsetWidth; routeInner(); applyPageTheme(); renderTicker(); animateScores(view); initSubnav(); if(LIVE.on&&!LIVE.busy&&liveGameId()) liveGameRefresh(); setTimeout(()=>view.classList.add('in'),0); }
-function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('/').map(dec); const r=parts[0]||''; if(!QUIET) window.scrollTo(0,0); try{ if(r===''||r==='week'){ renderWeek(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='rankings'){ renderRankings(parts[1]); } else if(r==='playoffs'){ renderPlayoffs(parts[1]); } else if(r==='draft'){ renderDraft(parts[1], parts[2]); } else if(r==='teams'){ renderTeams(parts[1]); } else if(r==='team'){ renderTeam((parts[1]||'').split('#')[0]); const anchor=h.split('#').slice(2)[0]; if(anchor&&!QUIET){ const el=document.getElementById(anchor); if(el) setTimeout(()=>{ gotoSection(el,true); initSubnav(); },0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='previews'){ renderPreviews(+parts[1]||CUR_WEEK); } else if(r==='digest'){ renderDigest(parts[1]); } else if(r==='player'){ renderPlayer(parts[1], parts[2]); } else if(r==='compare'){ renderCompare(parts[1], parts[2]); } else if(r==='tv'){ renderTV(parts[1]); } else if(r==='board'){ renderBoard(); } else if(r==='settings'){ renderSettings(); } else if(r==='my'){ if(parts[1]==='bets') renderBets(); else renderMy(parts[1]); } else renderWeek(CUR_WEEK); }catch(e){ console.error(e); view.innerHTML='<div class="note">Something went wrong drawing this page ('+esc(e.message||e)+'). <a href="#/week">Back to the scoreboard.</a></div>'; } }
+function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('/').map(dec); const r=parts[0]||''; if(!QUIET) window.scrollTo(0,0); try{ if(r===''||r==='week'){ renderWeek(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='rankings'){ renderRankings(parts[1]); } else if(r==='playoffs'){ renderPlayoffs(parts[1]); } else if(r==='draft'){ renderDraft(parts[1], parts[2]); } else if(r==='teams'){ renderTeams(parts[1]); } else if(r==='team'){ renderTeam((parts[1]||'').split('#')[0]); const anchor=h.split('#').slice(2)[0]; if(anchor&&!QUIET){ const el=document.getElementById(anchor); if(el) setTimeout(()=>{ gotoSection(el,true); initSubnav(); },0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='previews'){ renderPreviews(+parts[1]||CUR_WEEK); } else if(r==='digest'){ renderDigest(parts[1]); } else if(r==='player'){ renderPlayer(parts[1], parts[2]); } else if(r==='players'){ renderPlayers(parts[1], parts[2]); } else if(r==='compare'){ renderCompare(parts[1], parts[2]); } else if(r==='tv'){ renderTV(parts[1]); } else if(r==='board'){ renderBoard(); } else if(r==='settings'){ renderSettings(); } else if(r==='my'){ if(parts[1]==='bets') renderBets(); else renderMy(parts[1]); } else renderWeek(CUR_WEEK); }catch(e){ console.error(e); view.innerHTML='<div class="note">Something went wrong drawing this page ('+esc(e.message||e)+'). <a href="#/week">Back to the scoreboard.</a></div>'; } }
 window.addEventListener('hashchange', route);
 document.addEventListener('click', e=>{ const tr=e.target.closest('tr.click, .gm.click, .dgr.click'); if(tr && !e.target.closest('a') && !e.target.closest('button')){ location.hash=tr.dataset.href; } });
 document.addEventListener('keydown', e=>{ if(e.key!=='Enter') return; const el=e.target.closest && e.target.closest('.gm.click'); if(el){ location.hash=el.dataset.href; } });

@@ -6,16 +6,63 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#EFF1F4">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
-<meta name="apple-mobile-web-app-title" content="Kramerica Industries">
-<link rel="icon" type="image/svg+xml" href="/cfb/icons/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/cfb/icons/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/cfb/icons/favicon-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/cfb/icons/apple-touch-icon.png">
-<link rel="manifest" href="/cfb/icons/site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Jamo CFB">
+<link rel="icon" type="image/svg+xml" href="/sports/icons/jsh.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/sports/icons/jsh-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/sports/icons/jsh-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-180.png">
+<link rel="manifest" href="/sports/icons/site.webmanifest">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<title>Kramerica Industries</title>
+<!-- Jamo Sports Hub top bar: added by each hub's deploy_public.sh right after <body> (never inside the claude.ai artifact) -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&display=swap">
+<style>
+.jsh{position:relative;z-index:60;display:flex;align-items:center;gap:14px;height:44px;padding:0 max(16px,env(safe-area-inset-left));background:#070a12;background-image:linear-gradient(90deg,rgba(29,78,216,.22),rgba(7,10,18,0) 35%,rgba(7,10,18,0) 65%,rgba(109,40,217,.2));border-bottom:1px solid rgba(255,255,255,.08);font-family:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1;box-sizing:border-box}
+.jsh *,.jsh *::before,.jsh *::after{box-sizing:border-box}
+.jsh a{text-decoration:none!important}
+.jsh-brand{display:flex;align-items:center;gap:9px;color:#fff!important;font-size:15.5px;font-weight:800;letter-spacing:-.015em;white-space:nowrap;flex:none}
+.jsh-brand img{width:26px;height:26px;border-radius:7px;display:block;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.jsh-brand b{font-weight:800;background:linear-gradient(90deg,#7cb6ff,#c4a6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.jsh-nav{display:flex;align-items:center;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.jsh-nav::-webkit-scrollbar{display:none}
+.jsh-nav a{display:flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:999px;color:#b4bfd3!important;font-size:13.5px;font-weight:700;letter-spacing:.005em;white-space:nowrap;transition:background-color .15s,color .15s,box-shadow .15s}
+.jsh-nav a i{flex:none;width:7px;height:7px;border-radius:50%;background:var(--c)}
+.jsh-nav a:hover{color:#fff!important;background:rgba(255,255,255,.08)}
+.jsh-nav a.on{color:#fff!important;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 4px 14px -4px var(--c)}
+.jsh-nav a.on i{background:#fff}
+.jsh-nav a:focus-visible{outline:2px solid #7cb6ff;outline-offset:2px}
+body.boardmode .jsh{display:none}
+@media (max-width:560px){.jsh{gap:8px;padding:0 12px}.jsh-brand span{display:none}.jsh-nav{gap:2px}.jsh-nav a{padding:0 10px;font-size:13px;gap:6px}}
+@media (max-width:360px){.jsh-nav a i{display:none}.jsh-nav a{padding:0 9px}}
+@media print{.jsh{display:none}}
+</style>
+<div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
+  <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
+  <nav class="jsh-nav">
+    <a href="/sports/" data-s="sports" style="--c:#475569"><i></i>Home</a>
+    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>College</a>
+    <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><i></i>NFL</a>
+    <a href="/nba/" data-s="nba" style="--c:#6d28d9"><i></i>NBA</a>
+  </nav>
+</div>
+<script>
+/* Jamo Sports Hub: light/dark and the time zone follow you between College, NFL and NBA (each keeps its own favourite team).
+   Runs before the hub's own script, so a choice made in one hub is in place before the next one reads its settings. */
+(function(){ try {
+  var s = (location.pathname.split('/')[1] || 'sports').toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
+  if (a) { a.className = 'on'; a.setAttribute('aria-current', 'page'); }
+  if (s === 'sports') return;
+  var key = s + '-settings', sh = JSON.parse(localStorage.getItem('jsh-shared') || 'null');
+  if (sh) { var own = JSON.parse(localStorage.getItem(key) || '{}'), ch = false;
+    ['theme', 'tz'].forEach(function (k) { if (sh[k] && own[k] !== sh[k]) { own[k] = sh[k]; ch = true; } });
+    if (ch) localStorage.setItem(key, JSON.stringify(own)); }
+  var save = function () { try { var o = JSON.parse(localStorage.getItem(key) || '{}'); if (o.theme || o.tz) localStorage.setItem('jsh-shared', JSON.stringify({ theme: o.theme || 'auto', tz: o.tz || 'MT' })); } catch (e) {} };
+  addEventListener('pagehide', save); document.addEventListener('visibilitychange', function () { if (document.hidden) save(); });
+} catch (e) {} })();
+</script>
+<title>College Football · Jamo Sports Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
@@ -2013,7 +2060,7 @@ a.ss:hover{text-decoration:none;transform:translateY(-2px);border-color:var(--ac
 
 <header class="top">
   <div class="top-in">
-    <div class="brand"><a class="wordmark" href="#/">Kramerica <b>Industries</b></a><span class="season">College football · 2026</span></div>
+    <div class="brand"><a class="wordmark" href="#/">College <b>Football</b></a><span class="season">Jamo Sports Hub · 2026</span></div>
     <div class="search"><input id="q" type="search" placeholder="Find a team…" autocomplete="off" aria-label="Find a team"><div id="qres" class="search-res" hidden></div></div>
     <nav class="nav" id="nav">
       <a href="#/week" data-r="week">Gameday</a>
@@ -73197,7 +73244,6 @@ App State|2026
 Arizona|12
 Arizona State|9
 Arkansas|8
-Arkansas Baptist|124386
 Arkansas State|2032
 Arkansas-Pine Bluff|2029
 Army|349
@@ -73304,20 +73350,17 @@ Kansas State|2306
 Kennesaw State|338
 Kent State|2309
 Kentucky|96
-Kentucky Christian|3077
 Kentucky State|2310
 LSU|99
 Lafayette|322
 Lamar|2320
 Lane|2323
-Lawrence Tech|102071
 Lehigh|2329
 Liberty|2335
 Lincoln (PA)|2339
 Lindenwood|2815
 Long Island University|2341
 Louisiana|309
-Louisiana Christian|2347
 Louisiana Tech|2348
 Louisville|97
 Maine|311
@@ -73372,14 +73415,12 @@ Northern Illinois|2459
 Northern Iowa|2460
 Northern Michigan|128
 Northwestern|77
-Northwestern (IA)|2471
 Northwestern State|2466
 Notre Dame|87
 Ohio|195
 Ohio Dominican|2477
 Ohio State|194
 Oklahoma|201
-Oklahoma Panhandle|2824
 Oklahoma State|197
 Old Dominion|295
 Ole Miss|145
@@ -73388,7 +73429,6 @@ Oregon State|204
 Penn State|213
 Pennsylvania|219
 Pittsburgh|221
-Point University|3179
 Portland State|2502
 Prairie View A&M|2504
 Presbyterian|2506
@@ -73397,9 +73437,7 @@ Purdue|2509
 Rhode Island|227
 Rice|242
 Richmond|257
-Rio Grande|131239
 Robert Morris|2523
-Roosevelt|127991
 Rutgers|164
 SE Louisiana|2545
 SMU|2567
@@ -73424,7 +73462,6 @@ Southern Connecticut State|2583
 Southern Illinois|79
 Southern Miss|2572
 Southern Utah|253
-St. Francis (IL)|2595
 St. Thomas|2900
 Stanford|24
 Stephen F. Austin|2617
@@ -73432,8 +73469,6 @@ Stetson|56
 Stonehill|284
 Stony Brook|2619
 Syracuse|183
-TBA|112350
-TBD|-2
 TCU|2628
 Tarleton State|2627
 Temple|218
@@ -73445,9 +73480,7 @@ Texas A&M|245
 Texas Southern|2640
 Texas State|326
 Texas Tech|2641
-Texas Wesleyan|102626
 The Citadel|2643
-Thomas More College|2646
 Toledo|2649
 Towson|119
 Troy|2653
@@ -73479,14 +73512,12 @@ Valparaiso|2674
 Vanderbilt|238
 Villanova|222
 Virginia|258
-Virginia Lynchburg|2355
 Virginia State|330
 Virginia Tech|259
 Wagner|2681
 Wake Forest|154
 Washington|264
 Washington State|265
-Webber International|2691
 Weber State|2692
 West Alabama|2695
 West Florida|110242
@@ -82912,7 +82943,7 @@ M|2026-10-10|Incarnate Word|Lamar||||||||||81|7|
 (function(){
 'use strict';
 /* =========================================================
-   Kramerica Industries — 2026 college football hub
+   Jamo Sports Hub · College Football — 2026 college football hub (formerly Kramerica Industries)
    ========================================================= */
 const AS_OF = 'Sun Oct 4, 2026 · 11:32 AM ET';
 const AS_OF_DATE = '2026-10-04';
@@ -83533,7 +83564,7 @@ function renderBoard(){ setNav('week'); document.body.classList.add('boardmode')
   if(pages>1&&!BOARD_TIMER){ BOARD_DUE=Date.now()+BOARD_MS; BOARD_TIMER=setTimeout(()=>{ BOARD_TIMER=null; BOARD_PAGE=(BOARD_PAGE+1)%pages; if((location.hash||'').startsWith('#/board')) renderBoard(); }, BOARD_MS); }
   const left=pages>1?Math.max(0,BOARD_DUE-Date.now()):0;
   const dots=pages>1?'<div class="bx-dots">'+Array.from({length:pages},(_,k)=>'<i class="'+(k===BOARD_PAGE?'on':'')+'"></i>').join('')+'</div>':'';
-  view.innerHTML='<div class="board bx'+(QUIET?'':' anim')+'"><div class="bhead"><div class="bx-sign"><span>Big</span><span>Board</span></div><div class="bx-id"><span class="wordmark">Kramerica <b>Industries</b></span><span class="bx-wk">Week '+CUR_WEEK+(LIVE.last?' &middot; scores '+new Date(LIVE.last).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'')+'</span></div>'
+  view.innerHTML='<div class="board bx'+(QUIET?'':' anim')+'"><div class="bhead"><div class="bx-sign"><span>Big</span><span>Board</span></div><div class="bx-id"><span class="wordmark">Jamo <b>Sports Hub</b></span><span class="bx-wk">Week '+CUR_WEEK+(LIVE.last?' &middot; scores '+new Date(LIVE.last).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'')+'</span></div>'
     +'<div class="bx-stats">'+stat(liveN,'live','lv')+stat(finN,'final','fn')+stat(upN,'to play','up')+'</div><div class="bx-clock" id="bx-clock">'+boardClockHTML()+'</div><a class="btn sm" href="#/week" id="board-exit" title="Esc">Exit</a>'
     +(pages>1?'<div class="bx-prog"><i style="animation-duration:'+BOARD_MS+'ms;animation-delay:-'+(BOARD_MS-left)+'ms"></i></div>':'')+'</div>'
     +'<div class="bgrid">'+slice.map(boardCard).join('')+'</div>'+(pages>1?'<div class="bx-foot2">'+dots+'<span>page '+(BOARD_PAGE+1)+' of '+pages+' &middot; turns every '+(BOARD_MS/1000)+' s &middot; arrow keys flip</span></div>':'')+'</div>';

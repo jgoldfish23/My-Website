@@ -84243,7 +84243,7 @@ function renderTV(key, scope){ setNav('tv'); document.body.classList.add('tvmode
 
   if(grid.length){
     let axis='', lines='';
-    for(let i=0;i<hours;i++){ const pc=(i/hours*100).toFixed(3); axis+='<span class="tvax" style="left:'+pc+'%">'+esc(tvClock(start+i*60))+'</span>'; lines+=(i?'<i class="tvl" style="left:'+pc+'%"></i>':'')+'<i class="tvl half" style="left:'+((i+0.5)/hours*100).toFixed(3)+'%"></i>'; }
+    for(let i=0;i<hours;i++){ const pc=(i/hours*100).toFixed(3); axis+='<span class="tvax" style="left:'+pc+'%">'+esc(tvClock(start+i*60).replace(':00 ',' '))+'</span>'; lines+=(i?'<i class="tvl" style="left:'+pc+'%"></i>':'')+'<i class="tvl half" style="left:'+((i+0.5)/hours*100).toFixed(3)+'%"></i>'; }
     html+='<div class="tvframe" id="tvframe" style="--hours:'+hours+'" data-day="'+day+'" data-start="'+start+'" data-span="'+span+'">';
     html+='<div class="tvhead" id="tvhead" aria-hidden="true"><div class="tvhead-in"><div class="tvcorner"><span>'+esc(tvDayLabel(day).split(' ')[0])+'</span><span class="dim">'+esc(tz.lbl)+'</span></div><div class="tvaxis">'+axis+'<span class="tvnowlab" id="tvnowlab" style="left:'+nowPc+'%"'+(nowIn?'':' hidden')+'>Now</span></div></div></div>';
     html+='<div class="tvwrap" id="tvwrap" tabindex="0" role="region" aria-label="TV grid for '+esc(fmtDateLong(day))+', networks down the side and kickoff times across"><div class="tvgrid">';

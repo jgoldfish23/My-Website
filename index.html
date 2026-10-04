@@ -8,10 +8,17 @@
 <meta name="theme-color" content="#0C2523">
 <meta property="og:title" content="Jameson &amp; Dawsyn · 12.30.2026">
 <meta property="og:description" content="The Wedding Bowl at Cuvier Park · La Jolla, California">
-<meta property="og:image" content="https://djgolding.com/img/hero-collage.jpg">
+<meta property="og:image" content="https://djgolding.com/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jameson and Dawsyn dancing in the surf at sunset. December 30, 2026, La Jolla, California.">
 <meta property="og:url" content="https://djgolding.com/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -33,17 +40,20 @@
     --fg:#E9EEE9;  --fg-2:#8AA697;  --fg-3:#C2D0C6;
     --accent:#D2A94E; --accent-soft:rgba(210,169,78,.16);
     --line:rgba(138,166,151,.24); --line-2:rgba(138,166,151,.13);
-    --shell:rgba(12,37,35,.72);
+    --shell:rgba(12,37,35,.72); --shell-solid:#0C2523;
   }
   html[data-theme="light"]{
     --bg:#F3F5F2;  --bg-2:#E8ECE7;  --bg-3:rgba(14,36,34,.025);
     --fg:#0E2422;  --fg-2:#5C7369;  --fg-3:#3A4F49;
     --accent:#8A6717; --accent-soft:rgba(138,103,23,.12);
     --line:rgba(14,36,34,.17); --line-2:rgba(14,36,34,.09);
-    --shell:rgba(243,245,242,.78);
+    --shell:rgba(243,245,242,.78); --shell-solid:#F3F5F2;
   }
 
   *{box-sizing:border-box;}
+  /* `hidden` must always win: the photo viewer and menu set their own display,
+     which would otherwise override it and leave an invisible layer over the page. */
+  [hidden]{display:none !important;}
   html{scroll-behavior:smooth; scroll-padding-top:calc(var(--bar) + 24px);}
   body{
     margin:0; background:var(--bg); color:var(--fg);
@@ -60,25 +70,32 @@
   section{padding:var(--stack) 0; position:relative;}
 
   /* ============ depth layers ============ */
+  /* The glows are already soft radial gradients, and the grain blends normally:
+     a blur filter or blend mode here makes the GPU redo the whole screen on
+     every scroll frame, which is what made phones stutter. */
   .aura{position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden;}
   .aura::before{content:""; position:absolute; width:64vw; height:64vw; left:-20vw; top:-24vw;
     border-radius:50%; background:radial-gradient(circle, var(--accent-soft), transparent 62%);
-    filter:blur(24px); opacity:.8;}
+    opacity:.8;}
   .aura::after{content:""; position:absolute; width:56vw; height:56vw; right:-18vw; top:44vh;
-    border-radius:50%; background:radial-gradient(circle, rgba(127,185,142,.09), transparent 62%);
-    filter:blur(24px);}
+    border-radius:50%; background:radial-gradient(circle, rgba(127,185,142,.09), transparent 62%);}
   html[data-theme="light"] .aura::before{opacity:.55;}
   html[data-theme="light"] .aura::after{background:radial-gradient(circle, rgba(14,36,34,.05), transparent 62%);}
-  .grain{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.42; mix-blend-mode:overlay;
+  .grain{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.42;
     background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='140'%20height='140'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='linear'%20slope='0.06'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");}
   html[data-theme="light"] .grain{opacity:.2;}
 
   /* ============ shell ============ */
   .shell{
     position:fixed; inset:0 0 auto 0; height:var(--bar); z-index:60;
-    background:var(--shell); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    background:var(--shell-solid);
     border-bottom:1px solid var(--line-2);
     transition:background .45s var(--ease), border-color .45s var(--ease);
+  }
+  /* Frosted glass re-blurs everything behind the bar on every scroll frame:
+     fine on a desktop GPU, a stutter on a phone, which gets a solid bar. */
+  @media (hover:hover) and (pointer:fine){
+    .shell{background:var(--shell); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);}
   }
   .shell-in{
     max-width:1120px; margin:0 auto; padding:0 var(--gutter); height:100%;
@@ -168,7 +185,7 @@
     background:var(--bg-3); box-shadow:0 40px 100px -30px rgba(0,0,0,.6);
     aspect-ratio:4/4.2; max-height:72vh; width:100%; position:relative;
   }
-  .hero-photo img{width:100%; height:106%; object-fit:cover; will-change:transform;}
+  .hero-photo img{width:100%; height:106%; object-fit:cover;}
   .hero-photo::after{
     content:""; position:absolute; inset:0; border-radius:20px; pointer-events:none;
     box-shadow:inset 0 0 0 1px rgba(255,255,255,.07), inset 0 -70px 90px -50px rgba(7,26,25,.55);
@@ -184,8 +201,6 @@
     transition:opacity .3s var(--ease);}
   a.hero-photo.invite{display:block; cursor:pointer;}
   a.hero-photo.invite:hover img{opacity:1;}
-  .invite-cta{text-align:center; margin:16px 0 0; font-family:var(--util);
-    font-size:12px; letter-spacing:.14em; text-transform:uppercase;}
 
   .count{margin-top:auto; padding-top:48px; display:flex; align-items:flex-end;
     gap:clamp(16px,3.4vw,36px); flex-wrap:wrap;}
@@ -206,11 +221,14 @@
   }
   @keyframes draw{to{stroke-dashoffset:0;}}
 
-  /* two lights travelling the two lives, meeting where the lines cross */
+  /* two lights travelling the two lives, meeting where the lines cross.
+     They make the trip twice when someone arrives, then rest: a moving dash
+     repaints the whole hero drawing every frame, and looping it forever kept
+     a phone's processor busy for as long as the page sat open. */
   .hero-line .comet{
     stroke-width:2.4; stroke-linecap:round;
     stroke-dasharray:58 1700; stroke-dashoffset:1758;
-    animation:comet 9s cubic-bezier(.5,0,.5,1) 2.4s infinite;
+    animation:comet 9s cubic-bezier(.5,0,.5,1) 2.4s 2;
     filter:drop-shadow(0 0 7px var(--accent));
     opacity:.95;
   }
@@ -222,11 +240,19 @@
     100%{stroke-dashoffset:-120;}
   }
 
-  /* the countdown breathes */
-  .count-n{animation:glow 5s ease-in-out 1s infinite;}
-  @keyframes glow{
-    50%{text-shadow:0 0 58px var(--accent-soft), 0 0 118px var(--accent-soft);}
-  }
+  /* The countdown breathes. This used to animate the text-shadow itself, which
+     repainted a 118px blur every frame, the single biggest cost on the page.
+     Now a soft glow layer behind the number fades in and out instead, which the
+     GPU handles without repainting anything. */
+  .count-n{position:relative; isolation:isolate;}
+  .count-n::before{content:""; position:absolute; inset:-55% -35%; z-index:-1; pointer-events:none;
+    background:radial-gradient(closest-side, var(--accent-soft), transparent 78%);
+    opacity:.3; animation:breathe 5s ease-in-out 1s infinite;}
+  @keyframes breathe{50%{opacity:1;}}
+
+  /* infinite animations rest while they're off screen (toggled from the script) */
+  .paused, .paused *, .paused::before, .paused::after,
+  .paused *::before, .paused *::after{animation-play-state:paused !important;}
 
   /* ============ the two ============ */
   .pair{display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3.4vw,40px);}
@@ -241,8 +267,10 @@
     background:linear-gradient(160deg, rgba(255,255,255,.75), rgba(255,255,255,.35) 60%);
     box-shadow:0 20px 50px -34px rgba(14,36,34,.4);
   }
-  .card:hover{border-color:var(--accent); transform:translateY(-4px);
-    box-shadow:0 30px 70px -30px rgba(0,0,0,.6);}
+  @media (hover:hover){
+    .card:hover{border-color:var(--accent); transform:translateY(-4px);
+      box-shadow:0 30px 70px -30px rgba(0,0,0,.6);}
+  }
   .card h3{
     font-family:var(--display); font-weight:400; font-size:clamp(20px,2.6vw,25px);
     margin:0 0 6px; letter-spacing:-.006em;
@@ -268,7 +296,6 @@
     position:absolute; inset:0; display:block;
     background:linear-gradient(180deg, transparent, var(--accent) 12%, var(--accent));
     transform:scaleY(var(--spine, 0)); transform-origin:top center;
-    transition:transform .25s linear;
   }
   .spine i::after{
     content:""; position:absolute; left:-2.5px; bottom:0; width:6px; height:6px;
@@ -278,7 +305,7 @@
   }
   .entry{position:relative; padding-bottom:52px;
     transition:transform .35s var(--ease);}
-  .entry:hover{transform:translateX(5px);}
+  @media (hover:hover){ .entry:hover{transform:translateX(5px);} }
   .entry:last-child{padding-bottom:0;}
   .entry::before{
     content:""; position:absolute; left:calc(-1 * clamp(24px,4.6vw,58px) - 3px);
@@ -286,8 +313,10 @@
     background:var(--bg); border:1px solid var(--fg-2);
     transition:background .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
   }
-  .entry:hover::before{background:var(--accent); border-color:var(--accent);
-    box-shadow:0 0 0 5px var(--accent-soft);}
+  @media (hover:hover){
+    .entry:hover::before{background:var(--accent); border-color:var(--accent);
+      box-shadow:0 0 0 5px var(--accent-soft);}
+  }
   .entry.mark::before{background:var(--accent); border-color:var(--accent);
     box-shadow:0 0 0 5px var(--accent-soft);}
   /* each moment pops in as it scrolls into view */
@@ -317,7 +346,7 @@
     box-shadow:0 10px 26px -14px rgba(0,0,0,.5);
     transition:transform .3s var(--ease), border-color .3s var(--ease);
   }
-  .entry-photos a:hover{transform:translateY(-3px) scale(1.04); border-color:var(--accent);}
+  @media (hover:hover){ .entry-photos a:hover{transform:translateY(-3px) scale(1.04); border-color:var(--accent);} }
   .entry-photos img{width:100%; height:100%; object-fit:cover;}
   .entry h4{font-family:var(--display); font-weight:400; font-size:clamp(17px,2.2vw,21px);
     margin:0 0 8px; letter-spacing:-.004em;}
@@ -325,7 +354,7 @@
 
   /* ============ proposal photo in the timeline ============ */
   .entry-video{max-width:min(340px, 100%); margin-top:14px;}
-  .entry-video video{width:100%; display:block; border-radius:12px;
+  .entry-video video{width:100%; height:auto; display:block; border-radius:12px;
     border:1px solid var(--line); box-shadow:0 16px 40px -20px rgba(0,0,0,.55);}
   .entry-plate{max-width:min(460px, 100%); margin-top:16px; position:relative;}
   .entry-plate img{width:100%; height:auto; display:block; opacity:.9;
@@ -358,7 +387,7 @@
     text-transform:uppercase; background:var(--bg-3);
   }
   .frame{transition:border-color .3s var(--ease), color .3s var(--ease);}
-  .frame:hover{border-color:var(--accent); color:var(--accent);}
+  @media (hover:hover){ .frame:hover{border-color:var(--accent); color:var(--accent);} }
   .frame.filled{border-style:solid; padding:0; overflow:hidden; position:relative;
     box-shadow:0 22px 55px -28px rgba(0,0,0,.55);}
   .frame.filled::after{content:""; position:absolute; inset:0; pointer-events:none;
@@ -366,7 +395,8 @@
     border-radius:inherit;}
   .frame.filled img{width:100%; height:100%; object-fit:cover;
     transition:transform .7s var(--ease);}
-  .frame.filled:hover img{transform:scale(1.035);}
+  @media (hover:hover){ .frame.filled:hover img{transform:scale(1.035);} }
+  .frame.filled img, .entry-plate img{cursor:zoom-in;}
   .frame.wide{grid-column:span 2; aspect-ratio:3/2;}
   .frames-note{margin:24px 0 0; color:var(--fg-2); font-size:14px; max-width:60ch;}
 
@@ -391,6 +421,76 @@
   .foot{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:center;}
   .foot .mark{font-family:var(--display); font-weight:400; font-size:20px; letter-spacing:.1em;}
 
+  /* ============ buttons ============ */
+  .btns{display:flex; flex-wrap:wrap; gap:10px;}
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px;
+    padding:0 20px; border-radius:999px; border:1px solid var(--line); background:var(--bg-3);
+    color:var(--fg); font-family:var(--util); font-size:11.5px; font-weight:500; letter-spacing:.13em;
+    text-transform:uppercase; text-decoration:none; white-space:nowrap;
+    transition:border-color .2s var(--ease), color .2s var(--ease), background .2s var(--ease);}
+  .btn svg{width:15px; height:15px; flex:0 0 15px; fill:none; stroke:currentColor; stroke-width:1.7;
+    stroke-linecap:round; stroke-linejoin:round;}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:var(--bg);}
+  @media (hover:hover){
+    .btn:hover{border-color:var(--accent); color:var(--accent);}
+    .btn.primary:hover{color:var(--bg); background:var(--fg); border-color:var(--fg);}
+  }
+  /* main action full width, the other two side by side beneath it, at any screen size */
+  .btns.pair{display:grid; grid-template-columns:1fr 1fr; max-width:400px;}
+  .btns.pair .btn.primary{grid-column:1 / -1;}
+  .btns.pair .btn{padding:0 12px;}
+  .hero-ctas{margin:22px auto 0;}
+  .day-actions{margin-top:30px;}
+
+  /* ============ phone menu ============ */
+  .menu-btn{display:none; margin-left:10px; width:38px; height:38px; flex:0 0 38px; border-radius:50%;
+    place-items:center; cursor:pointer; background:transparent; border:1px solid var(--line); color:var(--fg);}
+  .menu-btn svg{width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; overflow:visible;}
+  .menu-btn path{transform-box:fill-box; transform-origin:center; transition:transform .25s var(--ease);}
+  .menu-btn[aria-expanded="true"] .l1{transform:translateY(4px) rotate(45deg);}
+  .menu-btn[aria-expanded="true"] .l2{transform:translateY(-4px) rotate(-45deg);}
+  .menu{position:fixed; inset:var(--bar) 0 0 0; z-index:55; overflow-y:auto; background:var(--bg);
+    padding:18px var(--gutter) 40px; opacity:0; transform:translateY(-6px);
+    transition:opacity .22s var(--ease), transform .22s var(--ease);}
+  .menu.open{opacity:1; transform:none;}
+  .menu nav a{display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:15px 0;
+    border-bottom:1px solid var(--line-2); color:var(--fg); text-decoration:none;
+    font-family:var(--display); font-size:27px; letter-spacing:-.006em;}
+  .menu nav a span{font-family:var(--util); font-size:10.5px; letter-spacing:.18em; color:var(--fg-2);}
+  .menu .btns{margin-top:28px;}
+  .menu .btn{flex:1 1 140px;}
+  html.menu-lock, html.lb-lock{overflow:hidden;}
+
+  /* ============ photo viewer ============ */
+  .lb{position:fixed; inset:0; z-index:100; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; padding:64px 14px 22px; background:rgba(4,14,13,.95);
+    opacity:0; transition:opacity .22s var(--ease); -webkit-tap-highlight-color:transparent;}
+  .lb.open{opacity:1;}
+  .lb-stage{flex:1; min-height:0; width:100%; display:flex; align-items:center; justify-content:center;}
+  .lb-stage img{max-width:min(100%, 1180px); max-height:100%; width:auto; height:auto; object-fit:contain;
+    border-radius:10px; box-shadow:0 30px 80px -30px #000; transition:opacity .18s var(--ease);}
+  .lb-cap{margin:16px 0 0; max-width:60ch; min-height:2.8em; text-align:center;
+    color:#C2D0C6; font-size:14.5px; line-height:1.5;}
+  .lb-cap b{display:block; margin-bottom:4px; font-family:var(--util); font-weight:500; font-size:10.5px;
+    letter-spacing:.16em; text-transform:uppercase; color:#D2A94E;}
+  .lb-count{position:absolute; top:26px; left:22px; font-family:var(--util); font-size:11px;
+    letter-spacing:.16em; color:#8AA697;}
+  .lb-btn{position:absolute; width:46px; height:46px; border-radius:50%; display:grid; place-items:center;
+    cursor:pointer; color:#E9EEE9; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16);
+    transition:background .2s var(--ease), border-color .2s var(--ease);}
+  .lb-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.8;
+    stroke-linecap:round; stroke-linejoin:round;}
+  .lb-close{top:12px; right:14px;}
+  .lb-prev{left:16px; top:50%; transform:translateY(-50%);}
+  .lb-next{right:16px; top:50%; transform:translateY(-50%);}
+  .lb[data-single] .lb-prev, .lb[data-single] .lb-next, .lb[data-single] .lb-count{display:none;}
+  @media (hover:hover){ .lb-btn:hover{background:rgba(210,169,78,.18); border-color:#D2A94E;} }
+  @media (max-width:640px){
+    .lb{padding-bottom:86px;}
+    .lb-prev, .lb-next{top:auto; bottom:20px; transform:none;}
+    .lb-prev{left:calc(50% - 58px);} .lb-next{right:calc(50% - 58px);}
+  }
+
   /* ============ reveal ============ */
   .rise{opacity:0; transform:translateY(20px);
     transition:opacity .75s var(--ease), transform .75s var(--ease);}
@@ -402,6 +502,10 @@
     .frame.wide{grid-column:span 1; aspect-ratio:4/5;}
     .nav{display:none;}
     .toggle{margin-left:auto;}
+    .menu-btn{display:grid;}
+    /* bigger timeline photos on phones: three across instead of a row of 64px chips */
+    .entry-photos{display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; max-width:420px;}
+    .entry-photos a{width:auto;}
     .names .two{padding-left:0;}
     .hero{min-height:auto; padding-top:calc(var(--bar) + 52px);}
     .count{padding-top:64px;}
@@ -412,14 +516,13 @@
     html{scroll-behavior:auto;}
     .hero-line path{animation:none; stroke-dashoffset:0;}
     .hero-line .comet{display:none;}
-    .count-n{animation:none;}
+    .count-n::before{animation:none;}
+    .menu, .lb, .lb-stage img{transition:none;}
     .entry.in::before{animation:none;}
     .entry.mark::after{display:none;}
     .waves path{animation:none;}
-    .spine i{transition:none;}
     .rise{opacity:1; transform:none; transition:none;}
-    .card:hover{transform:none;}
-    .frame.filled:hover img{transform:none;}
+    .frame.filled img{transition:none;}
   }
 </style>
 </head>
@@ -435,12 +538,29 @@
       <a href="#two">Us</a>
       <a href="#record">Record</a>
       <a href="#day">The day</a>
+      <a href="/guests/">Guests</a>
       <a href="/gifts/">Registry</a>
     </nav>
     <button class="toggle" id="themeBtn" type="button" aria-label="Switch to light mode">
       <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M4.2 12H2M22 12h-2.2M5.6 5.6 7.2 7.2M16.8 16.8l1.6 1.6M18.4 5.6 16.8 7.2M7.2 16.8l-1.6 1.6"/></svg>
       <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 1 1 9.4 3.5a6.9 6.9 0 0 0 11.1 11.1Z"/></svg>
     </button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="l1" d="M4 8h16"/><path class="l2" d="M4 16h16"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Sections">
+    <a href="#two">The two of us <span>01</span></a>
+    <a href="#record">The record <span>02</span></a>
+    <a href="#day">The day <span>03</span></a>
+    <a href="#notes">Behind the Scenes <span>04</span></a>
+  </nav>
+  <div class="btns">
+    <a class="btn primary" href="/guests/">Guest info</a>
+    <a class="btn" href="/gifts/">Registry</a>
   </div>
 </div>
 
@@ -479,7 +599,11 @@
         <a class="hero-photo invite" href="/guests/" aria-label="Guest details">
           <img src="/img/invitation.jpg" width="1122" height="1402" alt="Wedding invitation: join us in celebration for the wedding of Dawsyn and Jameson — December 30, 2026 at 2:00 PM, The Wedding Bowl, Cuvier Park, 590 Coast S Blvd, La Jolla, CA. Attire: formal. Registry and more wedding info at djgolding.com." fetchpriority="high" id="heroImg">
         </a>
-        <p class="invite-cta"><a class="lnk" href="/gifts/">Registry →</a> &nbsp;·&nbsp; <a class="lnk" href="https://venmo.com/u/Jameson-Golding" target="_blank" rel="noopener">Venmo →</a> &nbsp;·&nbsp; <a class="lnk" href="/guests/">Details →</a></p>
+        <div class="btns pair hero-ctas">
+          <a class="btn primary" href="/guests/">Guest info</a>
+          <a class="btn" href="/gifts/">Registry</a>
+          <a class="btn" href="https://venmo.com/u/Jameson-Golding" target="_blank" rel="noopener">Venmo</a>
+        </div>
       </div>
     </div>
   </div>
@@ -583,7 +707,7 @@
       <h4>Fernwood Lookout</h4>
       <p>Above Layton, with the valley and the lake laid out behind them. He asked. She said <em style="font-style:normal; color:var(--accent);">yes</em>.</p>
       <div class="entry-plate">
-        <img src="/img/proposal.jpg" alt="Jameson proposing to Dawsyn at Fernwood Lookout above the Layton valley" loading="lazy">
+        <img src="/img/proposal.jpg" width="920" height="1605" alt="Jameson proposing to Dawsyn at Fernwood Lookout above the Layton valley" loading="lazy" decoding="async">
       </div>
     </div>
 
@@ -596,7 +720,7 @@
         <a href="/img/trip4-2.jpg" target="_blank" rel="noopener"><img src="/img/trip4-2-thumb.jpg" alt="At Ryan's wedding — photo 2" loading="lazy"></a>
       </div>
       <div class="entry-video">
-        <video src="/img/trip4-video.mp4" poster="/img/trip4-poster.jpg" controls preload="none" playsinline></video>
+        <video src="/img/trip4-video.mp4" poster="/img/trip4-poster.jpg" width="960" height="657" controls preload="none" playsinline></video>
       </div>
     </div>
 
@@ -686,7 +810,18 @@
     <div class="day-grid">
       <div class="rise">
         <p class="day-h">Wednesday, the thirtieth of December, <em>two thousand twenty-six</em></p>
-        <p style="color:var(--fg-2); max-width:40ch; margin:0;">On the bluff at Cuvier Park, above the water. Details for guests will land here as they're locked in.</p>
+        <p style="color:var(--fg-2); max-width:40ch; margin:0;">On the bluff at Cuvier Park, above the water. Travel, the hotel block, and everything else guests need is on the guest page.</p>
+        <div class="btns pair day-actions">
+          <a class="btn primary" href="/wedding.ics">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg>
+            Add to calendar
+          </a>
+          <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Jameson+%26+Dawsyn%27s+Wedding&amp;dates=20261230T220000Z/20261231T040000Z&amp;location=The+Wedding+Bowl+at+Cuvier+Park,+590+Coast+Blvd+S,+La+Jolla,+CA+92037&amp;details=Ceremony+at+2:00+PM+on+the+bluff+at+Cuvier+Park.+Dinner+to+follow+at+6:00+PM.+Everything+for+guests:+https://djgolding.com/guests/" target="_blank" rel="noopener">Google Calendar</a>
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Cuvier+Park+Wedding+Bowl,+590+Coast+Blvd+S,+La+Jolla,+CA+92037" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
+            Directions
+          </a>
+        </div>
       </div>
 
       <ul class="details rise">
@@ -715,7 +850,6 @@
     <div class="frame filled"><img src="/img/hero-collage.jpg" alt="Engagement photo collage" loading="lazy"></div>
     <div class="frame filled"><img src="/img/notes-fun.jpg" alt="Jameson and Dawsyn making faces at the camera" loading="lazy"></div>
   </div>
-  <p class="frames-note">Send more and they'll drop straight in. Empty frames read as room to grow until then.</p>
 </section>
 
 <div class="waves" aria-hidden="true">
@@ -736,6 +870,15 @@
     <div class="eyebrow" id="foot-count">—</div>
   </div>
 </footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <span class="lb-count" id="lbCount" aria-live="polite"></span>
+  <div class="lb-stage"><img id="lbImg" alt=""></div>
+  <p class="lb-cap" id="lbCap"></p>
+  <button class="lb-btn lb-close" type="button" aria-label="Close photo viewer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="lb-btn lb-next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
 
 <script>
 (function(){
@@ -819,35 +962,160 @@
   var reduce = window.matchMedia &&
                window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---- hero parallax ---- */
+  /* ---- scroll-driven touches, batched to one update per frame ----
+     These used to run on every scroll event (several per frame on a phone),
+     each forcing a fresh layout. Now they read once and write once per frame. */
   var heroImg = document.getElementById('heroImg');
-  if (heroImg && !reduce){
-    window.addEventListener('scroll', function(){
-      var y = window.scrollY;
-      if (y < window.innerHeight * 1.5)
-        heroImg.style.transform = 'translateY(' + (y * -0.05) + 'px)';
-    }, { passive:true });
-  }
-
-  /* ---- the record's spine fills with gold as you read down it ---- */
   var spine = document.querySelector('.spine i');
   var record = document.querySelector('.record');
-  if (spine && record && !reduce){
-    var fillSpine = function(){
+  var finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var parallax = heroImg && finePointer && !reduce;   // a subtle desktop nicety; skipped on phones
+  var lastDot = null, ticking = false;
+  function update(){
+    ticking = false;
+    var y = window.scrollY, vh = window.innerHeight || 800;
+    if (parallax && y < vh * 1.5) heroImg.style.transform = 'translateY(' + (y * -0.05).toFixed(1) + 'px)';
+    if (spine && record && !reduce){
       var r = record.getBoundingClientRect();
-      var vh = window.innerHeight || 800;
       var span = r.height - vh * 0.35;
       var p = span > 0 ? (vh * 0.62 - r.top) / span : (r.top < vh ? 1 : 0);
       p = Math.max(0, Math.min(1, p));
-      spine.style.setProperty('--spine', p.toFixed(4));
-      spine.style.setProperty('--spine-dot', (p > 0.015 && p < 0.99) ? '1' : '0');
-    };
-    fillSpine();
-    window.addEventListener('scroll', fillSpine, { passive:true });
-    window.addEventListener('resize', fillSpine);
-  } else if (spine){
-    spine.style.setProperty('--spine', '1');
+      spine.style.transform = 'scaleY(' + p.toFixed(4) + ')';
+      var dot = (p > 0.015 && p < 0.99) ? '1' : '0';
+      if (dot !== lastDot){ spine.style.setProperty('--spine-dot', dot); lastDot = dot; }
+    }
   }
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+  if (spine && reduce) spine.style.transform = 'scaleY(1)';
+  if (parallax || (spine && record && !reduce)){
+    update();
+    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', onScroll);
+  }
+
+  /* ---- looping animations rest while off screen ---- */
+  if (typeof IntersectionObserver !== 'undefined'){
+    var resting = new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.target.classList.toggle('paused', !e.isIntersecting); });
+    });
+    ['#top', '.waves', '.entry.mark'].forEach(function(sel){
+      var el = document.querySelector(sel); if (el) resting.observe(el);
+    });
+  }
+
+  /* ---- phone menu ---- */
+  (function(){
+    var mb = document.getElementById('menuBtn'), menu = document.getElementById('menu');
+    if (!mb || !menu) return;
+    var open = false;
+    function set(next){
+      open = next;
+      mb.setAttribute('aria-expanded', open ? 'true' : 'false');
+      mb.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      root.classList.toggle('menu-lock', open);
+      if (open){ menu.hidden = false; void menu.offsetWidth; menu.classList.add('open'); }
+      else { menu.classList.remove('open'); setTimeout(function(){ if (!open) menu.hidden = true; }, 240); }
+    }
+    mb.addEventListener('click', function(){ set(!open); });
+    menu.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+    document.addEventListener('keydown', function(e){ if (open && e.key === 'Escape'){ set(false); mb.focus(); } });
+    window.addEventListener('resize', function(){ if (open && window.innerWidth > 820) set(false); });
+  })();
+
+  /* ---- photo viewer: tap any photo to see it big, swipe through the trip ---- */
+  (function(){
+    var lb = document.getElementById('lb');
+    if (!lb) return;
+    var img = document.getElementById('lbImg'), cap = document.getElementById('lbCap'), count = document.getElementById('lbCount');
+    var closeBtn = lb.querySelector('.lb-close');
+    var groups = [], g = 0, idx = 0, isOpen = false, opener = null, pushed = false, token = 0;
+
+    function group(title, items){ groups.push({ title:title, items:items }); return groups.length - 1; }
+    function opens(el, gi, i, isLink){
+      if (!isLink){ el.tabIndex = 0; el.setAttribute('role', 'button'); }
+      el.addEventListener('click', function(e){ e.preventDefault(); open(gi, i, el); });
+      if (!isLink) el.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(gi, i, el); }
+      });
+    }
+    document.querySelectorAll('.entry').forEach(function(entry){
+      var h = entry.querySelector('h4'), t = entry.querySelector('time');
+      var title = (h ? h.textContent : '') + (t ? ' · ' + t.textContent : '');
+      var links = entry.querySelectorAll('.entry-photos a');
+      if (links.length){
+        var gi = group(title, Array.prototype.map.call(links, function(a){
+          var im = a.querySelector('img');
+          return { full:a.href, thumb:im ? (im.currentSrc || im.src) : a.href, alt:im ? im.alt : '' };
+        }));
+        Array.prototype.forEach.call(links, function(a, i){ opens(a, gi, i, true); });
+      }
+      var plate = entry.querySelector('.entry-plate img');
+      if (plate) opens(plate, group(title, [{ full:plate.src, thumb:plate.src, alt:plate.alt }]), 0, false);
+    });
+    var frames = document.querySelectorAll('.frames .frame.filled img');
+    if (frames.length){
+      var gf = group('Behind the Scenes', Array.prototype.map.call(frames, function(im){ return { full:im.src, thumb:im.src, alt:im.alt }; }));
+      Array.prototype.forEach.call(frames, function(im, i){ opens(im, gf, i, false); });
+    }
+
+    function show(i){
+      var items = groups[g].items;
+      idx = (i + items.length) % items.length;
+      var it = items[idx], mine = ++token;
+      img.src = it.thumb; img.alt = it.alt;            // the small copy appears instantly...
+      var full = new Image();
+      full.onload = function(){ if (mine === token) img.src = it.full; };   // ...and sharpens when the big one lands
+      full.src = it.full;
+      cap.textContent = '';
+      var b = document.createElement('b'); b.textContent = groups[g].title;
+      cap.appendChild(b); cap.appendChild(document.createTextNode(it.alt));
+      count.textContent = (idx + 1) + ' / ' + items.length;
+      if (items.length > 1) [1, -1].forEach(function(d){ (new Image()).src = items[(idx + d + items.length) % items.length].full; });
+    }
+    function open(gi, i, from){
+      g = gi; opener = from; isOpen = true;
+      lb.toggleAttribute('data-single', groups[g].items.length < 2);
+      show(i);
+      lb.hidden = false; root.classList.add('lb-lock');
+      void lb.offsetWidth; lb.classList.add('open');
+      closeBtn.focus({ preventScroll:true });
+      try { history.pushState({ lb:1 }, ''); pushed = true; } catch (e) {}   // the phone's back button closes it
+    }
+    function close(fromHistory){
+      if (!isOpen) return;
+      isOpen = false;
+      lb.classList.remove('open'); root.classList.remove('lb-lock');
+      setTimeout(function(){ if (!isOpen){ lb.hidden = true; img.removeAttribute('src'); } }, 230);
+      if (pushed && !fromHistory){ pushed = false; history.back(); } else pushed = false;
+      if (opener && opener.focus) opener.focus({ preventScroll:true });
+    }
+    window.addEventListener('popstate', function(){ if (isOpen) close(true); });
+    closeBtn.addEventListener('click', function(){ close(false); });
+    lb.querySelector('.lb-prev').addEventListener('click', function(){ show(idx - 1); });
+    lb.querySelector('.lb-next').addEventListener('click', function(){ show(idx + 1); });
+    lb.addEventListener('click', function(e){ if (e.target === lb || e.target.classList.contains('lb-stage')) close(false); });
+    document.addEventListener('keydown', function(e){
+      if (!isOpen) return;
+      if (e.key === 'Escape') close(false);
+      else if (e.key === 'ArrowRight') show(idx + 1);
+      else if (e.key === 'ArrowLeft') show(idx - 1);
+      else if (e.key === 'Tab'){        // keep keyboard focus inside the viewer
+        var f = Array.prototype.filter.call(lb.querySelectorAll('button'), function(b){ return b.offsetParent !== null; });
+        var at = f.indexOf(document.activeElement);
+        e.preventDefault(); f[(at + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+      }
+    });
+    var sx = null, sy = 0;
+    lb.addEventListener('touchstart', function(e){
+      if (e.touches.length === 1){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; } else sx = null;   // ignore pinches
+    }, { passive:true });
+    lb.addEventListener('touchend', function(e){
+      if (sx === null) return;
+      var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; sx = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) show(idx + (dx < 0 ? 1 : -1));
+      else if (dy > 90 && Math.abs(dy) > Math.abs(dx) * 1.3) close(false);   // swipe down to close
+    }, { passive:true });
+  })();
 
   if (reduce || typeof IntersectionObserver === 'undefined'){
     Array.prototype.forEach.call(items, function(el){ el.classList.add('in'); });

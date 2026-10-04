@@ -6,6 +6,19 @@
 <title>For our guests · Jameson &amp; Dawsyn</title>
 <meta name="description" content="Everything you need for December 30, 2026 in La Jolla — schedule, travel, and where to stay.">
 <meta name="theme-color" content="#0C2523">
+<meta property="og:title" content="For our guests · Jameson &amp; Dawsyn">
+<meta property="og:description" content="December 30, 2026 · The Wedding Bowl, La Jolla. Schedule, travel, and where to stay.">
+<meta property="og:image" content="https://djgolding.com/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jameson and Dawsyn dancing in the surf at sunset. December 30, 2026, La Jolla, California.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://djgolding.com/guests/">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -24,14 +37,14 @@
     --fg:#E9EEE9; --fg-2:#8AA697; --fg-3:#C2D0C6;
     --accent:#D2A94E; --accent-soft:rgba(210,169,78,.16);
     --line:rgba(138,166,151,.24); --line-2:rgba(138,166,151,.13);
-    --shell:rgba(12,37,35,.72);
+    --shell:rgba(12,37,35,.72); --shell-solid:#0C2523;
   }
   html[data-theme="light"]{
     --bg:#F3F5F2; --bg-2:#E8ECE7; --bg-3:rgba(14,36,34,.025);
     --fg:#0E2422; --fg-2:#5C7369; --fg-3:#3A4F49;
     --accent:#8A6717; --accent-soft:rgba(138,103,23,.12);
     --line:rgba(14,36,34,.17); --line-2:rgba(14,36,34,.09);
-    --shell:rgba(243,245,242,.78);
+    --shell:rgba(243,245,242,.78); --shell-solid:#F3F5F2;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth; scroll-padding-top:calc(var(--bar) + 24px);}
@@ -43,8 +56,13 @@
   section{padding:calc(var(--stack) * .6) 0;}
 
   .shell{position:fixed; inset:0 0 auto 0; height:var(--bar); z-index:60;
-    background:var(--shell); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    background:var(--shell-solid);
     border-bottom:1px solid var(--line-2);}
+  /* Frosted glass re-blurs everything behind the bar on every scroll frame:
+     fine on a desktop GPU, a stutter on a phone, which gets a solid bar. */
+  @media (hover:hover) and (pointer:fine){
+    .shell{background:var(--shell); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);}
+  }
   .shell-in{max-width:900px; margin:0 auto; padding:0 var(--gutter); height:100%;
     display:flex; align-items:center; gap:12px;}
   .monogram{font-weight:500; font-size:15px; letter-spacing:.14em; text-decoration:none;}
@@ -148,8 +166,8 @@
   <div class="grid2">
     <div class="card">
       <h3>The venue</h3>
-      <p>The Wedding Bowl at Cuvier Park<br>1100 Coast Blvd, La Jolla, CA 92037<br>
-      <a class="lnk" href="https://maps.google.com/?q=Cuvier+Park+La+Jolla" target="_blank" rel="noopener">Open in Google Maps</a></p>
+      <p>The Wedding Bowl at Cuvier Park<br>590 Coast Blvd S, La Jolla, CA 92037<br>
+      <a class="lnk" href="https://www.google.com/maps/search/?api=1&amp;query=Cuvier+Park+Wedding+Bowl,+590+Coast+Blvd+S,+La+Jolla,+CA+92037" target="_blank" rel="noopener">Open in Google Maps</a></p>
     </div>
     <div class="card">
       <h3>Flying in</h3>

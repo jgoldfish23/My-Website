@@ -56,6 +56,9 @@ const makeDefaultTimeline = () => ({
   ].map((it) => ({ subs: [], collapsed: false, ...it })),
 });
 
+// One printed invitation = one envelope = one row in the mailing list.
+const blankInvite = () => ({ id: uid(), name: "", street: "", city: "", region: "", zip: "", mailed: false, mailedOn: "", note: "" });
+
 const DEFAULT_STATE = {
   partnerA: "Jameson",
   partnerB: "Dawsyn",
@@ -146,6 +149,7 @@ const DEFAULT_STATE = {
     },
   ],
   guests: Array.from({ length: GUEST_CAP }, () => ({ id: uid(), name: "", side: "", rsvp: "", meal: "" })),
+  invites: [blankInvite(), blankInvite(), blankInvite()],
   budget: {
     total: "",
     items: [
@@ -231,6 +235,9 @@ const migrateState = (raw) => {
     if (g.rsvp === undefined) g.rsvp = "";
     if (g.meal === undefined) g.meal = "";
   });
+
+  // Mailing list for the printed invitations; saved plans from before it existed start with three blank rows.
+  if (!Array.isArray(s.invites)) s.invites = [blankInvite(), blankInvite(), blankInvite()];
 
   // Give every task a due field, and seed suggested dates for the key milestones.
   const SEED_DUE = {
@@ -669,6 +676,67 @@ function WeddingDashboard() {
       s.vendors.splice(idx, 1);
       return s;
     });
+
+  // ---- Invitation mailing list ----
+  // Today's date where you are: toISOString() is UTC, which is already
+  // tomorrow on a US evening.
+  const localDay = () => {
+    const d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  };
+  const setInvite = (idx, key, val) =>
+    update((s) => {
+      s.invites[idx][key] = val;
+      return s;
+    });
+  // Ticking "mailed" stamps today's date, so you can see when each one went out.
+  const toggleMailed = (idx) =>
+    update((s) => {
+      const it = s.invites[idx];
+      it.mailed = !it.mailed;
+      it.mailedOn = it.mailed ? localDay() : "";
+      return s;
+    });
+  const addInvite = () =>
+    update((s) => {
+      s.invites.push(blankInvite());
+      return s;
+    });
+  const removeInvite = (idx) =>
+    update((s) => {
+      s.invites.splice(idx, 1);
+      return s;
+    });
+  const invites = state.invites || [];
+  const hasAddress = (v) => [v.street, v.city, v.region, v.zip].every((x) => String(x || "").trim());
+  const households = invites.filter((v) => String(v.name || "").trim() || hasAddress(v));   // rows with anything in them
+  const mailedCount = households.filter((v) => v.mailed).length;
+  const readyToMail = households.filter((v) => hasAddress(v) && !v.mailed).length;
+  const needAddress = households.filter((v) => !hasAddress(v)).length;
+  const shortDate = (iso) => {
+    const d = new Date(iso + "T12:00:00");
+    return isNaN(d) ? "" : d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  };
+  // A spreadsheet of every complete address, ready for a label mail-merge.
+  const exportLabels = () => {
+    try {
+      const cell = (x) => '"' + String(x == null ? "" : x).replace(/"/g, '""') + '"';
+      const rows = [["Name", "Street", "City", "State", "ZIP", "Mailed", "Mailed on", "Note"]].concat(
+        households.filter(hasAddress).map((v) => [v.name, v.street, v.city, v.region, v.zip, v.mailed ? "yes" : "no", v.mailedOn, v.note])
+      );
+      const csv = "\uFEFF" + rows.map((r) => r.map(cell).join(",")).join("\r\n");
+      const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "invitation-addresses-" + localDay() + ".csv";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    } catch (e) {
+      /* ignore */
+    }
+  };
 
   // ---- Day-of timeline ----
   const SUNSET_MIN = 16 * 60 + 50; // ~4:50pm on Dec 30 in San Diego — an astronomical fact, not a setting
@@ -1136,6 +1204,10 @@ function WeddingDashboard() {
 .wd-root.dark .wd-vtype{color:var(--sage);}
 .wd-root.dark .wd-vbal{color:var(--clay);}
 .wd-root.dark .wd-vbal.clear{color:var(--sage);}
+.wd-root.dark .wd-addr input{background:rgba(255,255,255,.05); border-color:var(--line); color:var(--ink);}
+.wd-root.dark .wd-addr input::placeholder{color:#6E8478;}
+.wd-root.dark .wd-inv-status{background:rgba(255,255,255,.05);}
+.wd-root.dark .wd-inv-status.ready{background:rgba(232,210,168,.12); border-color:rgba(232,210,168,.3); color:#E8C88A;}
 .wd-root.dark .wd-secicon{background:rgba(255,255,255,.05) !important;}
 .wd-root.dark .wd-save{color:var(--sage);}
 
@@ -1342,6 +1414,28 @@ function WeddingDashboard() {
 .wd-vnote{font-family:'Inter'; font-size:12.5px; color:var(--ink-soft); background:transparent; border:none; outline:none;
   width:100%; margin-top:9px; padding-left:34px;}
 .wd-vnote::placeholder{color:#C6B2BD; font-style:italic;}
+
+/* Invitation addresses */
+.wd-addr{display:grid; grid-template-columns:minmax(0,2fr) minmax(0,.8fr) minmax(0,1fr); gap:8px; margin-top:10px; padding-left:34px;}
+.wd-addr-street{grid-column:1 / -1;}
+.wd-addr input{font-family:'Inter',sans-serif; font-size:13px; color:var(--ink); background:rgba(255,255,255,.55);
+  border:1px solid var(--line); border-radius:8px; padding:7px 9px; outline:none; min-width:0; transition:border-color .15s;}
+.wd-addr input:focus{border-color:var(--clay);}
+.wd-addr input::placeholder{color:#B6A2AC; font-style:italic;}
+.wd-inv-status{font-family:'Inter'; font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+  padding:3px 9px; border-radius:999px; white-space:nowrap; border:1px solid var(--line); color:#B08096; background:rgba(255,255,255,.55);}
+.wd-inv-status.ready{color:#B07A2E; border-color:#E8D2A8; background:#FBF1DE;}
+.wd-inv-status.mailed{color:#fff; border-color:transparent; background:var(--sage);}
+.wd-inv.mailed{opacity:.8;}
+.wd-inv-actions{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:4px;}
+.wd-bbtn:disabled{opacity:.45; cursor:default;}
+@media (max-width:520px){
+  .wd-addr{padding-left:0;}
+  /* on a phone the status drops under the name instead of squeezing it */
+  .wd-inv .wd-vend-top{flex-wrap:wrap; row-gap:6px;}
+  .wd-inv .wd-vname{flex:1 1 60%;}
+  .wd-inv .wd-inv-status{order:3; margin-left:34px;}
+}
 
 `;
 
@@ -1747,6 +1841,71 @@ function WeddingDashboard() {
                   </button>
                 </div>
               ))}
+            </div>
+          </section>
+        )}
+
+        {/* Invitation mailing list */}
+        {filter === "all" && (
+          <section className="wd-sec">
+            <div className="wd-sechead">
+              <span className="wd-secnum" style={{ color: "#C76F97" }}>♡</span>
+              <span className="wd-secicon" style={{ color: "#C76F97", background: "#C76F9716", borderColor: "#C76F973A" }}>
+                <Mail size={17} strokeWidth={1.8} />
+              </span>
+              <span className="wd-sectitle">Invitation Addresses</span>
+              <span className="wd-gcap">{mailedCount}/{households.length} mailed</span>
+            </div>
+
+            <div className="wd-gbar">
+              <div className="wd-gbar-fill" style={{ width: (households.length ? (mailedCount / households.length) * 100 : 0) + "%" }} />
+            </div>
+
+            <div className="wd-gtally">
+              <span className="wd-gpill" style={{ color: "#5FA877" }}>mailed <b>{mailedCount}</b></span>
+              <span className="wd-gpill" style={{ color: "#B07A2E" }}>ready to mail <b>{readyToMail}</b></span>
+              <span className="wd-gpill" style={{ color: "#B08096" }}>need address <b>{needAddress}</b></span>
+              <span className="wd-gpill">households <b>{households.length}</b></span>
+            </div>
+            <div className="wd-note-line">One row per envelope. Tick the box when it goes in the mail.</div>
+
+            {invites.map((v, idx) => {
+              const ok = hasAddress(v);
+              const started = ok || String(v.name || "").trim() || [v.street, v.city, v.region, v.zip].some((x) => String(x || "").trim());
+              return (
+                <div className={"wd-vend wd-inv" + (v.mailed ? " mailed" : "")} key={v.id}>
+                  <div className="wd-vend-top">
+                    <div
+                      className={"wd-check" + (v.mailed ? " done" : "")}
+                      onClick={() => toggleMailed(idx)}
+                      role="checkbox"
+                      aria-checked={v.mailed}
+                      aria-label="Mailed"
+                      title="Mailed?"
+                    >
+                      <Check size={15} strokeWidth={3} />
+                    </div>
+                    <input className="wd-vname" value={v.name} placeholder="Names on the envelope" onChange={(e) => setInvite(idx, "name", e.target.value)} />
+                    {(started || v.mailed) && (
+                      <span className={"wd-inv-status " + (v.mailed ? "mailed" : ok ? "ready" : "need")}>
+                        {v.mailed ? "mailed" + (v.mailedOn ? " " + shortDate(v.mailedOn) : "") : ok ? "ready" : "needs address"}
+                      </span>
+                    )}
+                    <button className="wd-del" onClick={() => removeInvite(idx)} aria-label="Delete"><Trash2 size={16} strokeWidth={1.8} /></button>
+                  </div>
+                  <div className="wd-addr">
+                    <input className="wd-addr-street" value={v.street} placeholder="Street address, apt #" autoComplete="off" onChange={(e) => setInvite(idx, "street", e.target.value)} />
+                    <input value={v.city} placeholder="City" autoComplete="off" onChange={(e) => setInvite(idx, "city", e.target.value)} />
+                    <input value={v.region} placeholder="State" autoComplete="off" onChange={(e) => setInvite(idx, "region", e.target.value)} />
+                    <input value={v.zip} placeholder="ZIP" inputMode="numeric" autoComplete="off" onChange={(e) => setInvite(idx, "zip", e.target.value)} />
+                  </div>
+                  <input className="wd-vnote" value={v.note} placeholder="notes — save-the-date sent, thank-you card owed…" onChange={(e) => setInvite(idx, "note", e.target.value)} />
+                </div>
+              );
+            })}
+            <div className="wd-inv-actions">
+              <button className="wd-add" onClick={addInvite}><Plus size={15} strokeWidth={2.4} /> Add a household</button>
+              <button className="wd-bbtn" onClick={exportLabels} disabled={!households.some(hasAddress)}>Download for labels</button>
             </div>
           </section>
         )}

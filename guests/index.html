@@ -308,11 +308,12 @@
       headers:{'content-type':'application/json'},
       body: JSON.stringify({ messages: history })
     }).then(function(r){
-      return r.json().then(function(data){ return { ok:r.ok, data:data }; });
+      return r.json().catch(function(){ return null; }).then(function(data){ return { ok:r.ok, status:r.status, data:data }; });
     }).then(function(res){
       if (!res.ok) {
-        // Being throttled isn't a breakage — say what actually happened.
-        throw new Error((res.data && res.data.message) || '');
+        // Being throttled isn't a breakage, so say what actually happened. Any
+        // other refusal is an internal detail guests shouldn't see.
+        throw new Error(res.status === 429 && res.data && res.data.message || '');
       }
       var d = res.data;
       var text = (d && d.content && d.content[0] && d.content[0].text) || null;

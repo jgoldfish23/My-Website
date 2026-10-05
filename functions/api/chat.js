@@ -62,7 +62,12 @@ export async function onRequestPost({ request, env }) {
     },
     body: JSON.stringify({
       model: "claude-sonnet-5",
-      max_tokens: 1024,
+      // Sonnet 5 thinks by default (adaptive), and thinking counts against
+      // max_tokens, so leave room for it ahead of a few-sentence answer.
+      max_tokens: 2048,
+      // Short guest Q&A doesn't need deep reasoning: low effort answers
+      // faster and spends less.
+      output_config: { effort: "low" },
       system: SYSTEM,
       messages,
     }),
@@ -72,7 +77,17 @@ export async function onRequestPost({ request, env }) {
   // difference, and it shouldn't see our error detail either.
   if (!res.ok) return fail("assistant unavailable", 502);
 
-  return new Response(await res.text(), {
+  // The reply can open with thinking blocks before the answer, so pull out
+  // the text blocks rather than trusting the first block to be text. The page
+  // only ever gets the answer, never ids, usage, or the rest of the payload.
+  const data = await res.json().catch(() => null);
+  const text = data && Array.isArray(data.content)
+    ? data.content.filter((b) => b && b.type === "text" && typeof b.text === "string")
+        .map((b) => b.text).join("").trim()
+    : "";
+  if (!text || data.stop_reason === "refusal") return fail("assistant unavailable", 502);
+
+  return new Response(JSON.stringify({ content: [{ type: "text", text }] }), {
     status: 200,
     headers: { "content-type": "application/json", "cache-control": "no-store" },
   });

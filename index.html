@@ -68,6 +68,13 @@
 
   .wrap{max-width:1120px; margin:0 auto; padding:0 var(--gutter);}
   section{padding:var(--stack) 0; position:relative;}
+  /* .wrap's padding shorthand zeroes the vertical padding of sections that are
+     also .wrap (the two of us, the record, behind the scenes), which left each
+     heading jammed against whatever came before it. Space them with margins
+     instead: neighbouring margins merge into a single gap rather than
+     doubling, and anchor links still land right on the heading. */
+  section.wrap{margin-block:var(--stack);}
+  .hero + section.wrap{margin-top:clamp(20px, 3vh, 40px);}   /* the hero brings its own room */
 
   /* ============ depth layers ============ */
   /* The glows are already soft radial gradients, and the grain blends normally:
@@ -659,7 +666,7 @@
 
     <div class="entry rise">
       <time>The beginning</time>
-      <h4>Mutual</h4>
+      <h4>It's Mutual</h4>
       <p>Two states apart, matched on a dating app. Statistically unpromising. Went well anyway.</p>
     </div>
 

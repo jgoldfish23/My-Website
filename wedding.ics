@@ -5,12 +5,12 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:jameson-dawsyn-wedding-20261230@djgolding.com
-DTSTAMP:20261004T000000Z
+DTSTAMP:20261004T190000Z
 DTSTART:20261230T220000Z
-DTEND:20261231T040000Z
+DTEND:20261231T050000Z
 SUMMARY:Jameson & Dawsyn's Wedding
 LOCATION:The Wedding Bowl at Cuvier Park\, 590 Coast Blvd S\, La Jolla\, CA 92037
-DESCRIPTION:Ceremony at 2:00 PM on the bluff at Cuvier Park. Dinner to follow at 6:00 PM.\nTravel\, hotel\, and everything else: https://djgolding.com/guests/
+DESCRIPTION:Ceremony at 2:00 PM on the bluff at Cuvier Park. Reception and dinner from 6:00 to 9:00 PM.\nTravel\, hotel\, and everything else: https://djgolding.com/guests/
 URL:https://djgolding.com/
 BEGIN:VALARM
 ACTION:DISPLAY

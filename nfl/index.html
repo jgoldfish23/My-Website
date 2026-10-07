@@ -1375,7 +1375,7 @@ body.boardmode::before,body.boardmode::after{display:none!important}
 /* sb:end */
 /* pl:start */
 /* ===== player analytics (2026-10-04): position leaderboards, the compare tool and the Analytics section on player pages.
-   Source: sports-hub/pl/pl.css; sports-hub/pl/apply.sh copies it into nfl-hub/p1.html between the pl:start and pl:end
+   Source: sports-hub/pl/pl.css; sports-hub/pl/apply.sh copies it into nfl-hub and nba-hub p1.html between the pl:start and pl:end
    markers. Percentile colors: blue low, gray average, orange high (set inline by plHeat in p2pl.js). ===== */
 .pl-seg{display:flex;flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none;margin:0 0 12px;width:max-content}
 .pl-seg::-webkit-scrollbar{display:none}
@@ -1516,6 +1516,34 @@ body.boardmode::before,body.boardmode::after{display:none!important}
   .pl-card-st b{font-size:14px}
 }
 /* pl:end */
+/* nav:start */
+/* ===== grouped navigation and a quieter info line (2026-10-07). Source: sports-hub/nav/nav.css; sports-hub/nav/apply.sh
+   copies it into the college, NFL and NBA p1.html between the nav:start and nav:end markers. navgroups.js builds the rows. ===== */
+.nav.navg{display:block;height:auto;overflow:visible;flex-basis:100%;-webkit-mask-image:none;mask-image:none;margin-left:0;margin-right:0;padding-left:0;padding-right:0}
+.navg .ng-main{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.navg .ng-main::-webkit-scrollbar,.navg .ng-sub::-webkit-scrollbar{display:none}
+.navg .ng-tab{flex:none}
+.navg .ng-tab.cur{color:var(--ink);border-bottom-color:var(--gold)}
+.nav.navg .ng-tab.cur::after{transform:scaleX(1)}
+.navg .ng-sub{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:9px 1px 11px;border-top:1px solid var(--line-2)}
+.navg .ng-sub.one{display:none}
+.nav.navg .ng-sub a{display:none;flex:none;align-items:center;height:auto;padding:5px 13px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-family:var(--body);font-size:13.5px;font-weight:600;letter-spacing:0;line-height:1.35;color:var(--ink-2);text-transform:none}
+.nav.navg .ng-sub a::after,.nav.navg .ng-sub a::before{display:none}
+.nav.navg .ng-sub a.show{display:inline-flex}
+.nav.navg .ng-sub a:hover{color:var(--ink);border-color:var(--ink-3);text-decoration:none}
+.nav.navg .ng-sub a.on{background:var(--accent-fill,var(--accent));border-color:var(--accent-fill,var(--accent));color:var(--accent-fill-ink,var(--accent-ink))}
+/* the info line under the header: when the data was built and the time zone; the counts live in the dot's tooltip */
+.asof .asof-x{display:none}
+@media (max-width:720px){
+  .navg .ng-main{gap:0;justify-content:space-between}
+  .nav.navg .ng-tab{padding-left:9px;padding-right:9px}
+  .navg .ng-sub{padding:8px 0 10px}
+}
+/* once you scroll, the name and search slide away and only the tabs and the score ticker stay pinned: the header sticks at a
+   negative top equal to the height above the tabs (--navg-hide, measured by navgroups.js), so nothing on the page jumps */
+header.top.top{top:calc(-1 * var(--navg-hide, 0px))}
+body:has(.tvframe) header.top.top{top:0}
+/* nav:end */
 </style>
 
 <header class="top">
@@ -1530,7 +1558,7 @@ body.boardmode::before,body.boardmode::after{display:none!important}
       <a href="#/playoffs" data-r="playoffs">Playoff Picture</a>
       <a href="#/draft" data-r="draft">Draft</a>
       <a href="#/teams" data-r="teams">Teams</a>
-      <a href="#/players" data-r="players">Players</a>
+      <a href="#/players" data-r="players">Player stats</a>
       <a href="#/my" data-r="my">My Rankings</a>
       <a href="#/settings" data-r="settings" title="Theme and favorite team">&#9881; Settings</a>
     </nav>
@@ -12189,9 +12217,69 @@ function backBar(fallback, crumbs){ return '<div class="crumb"><a href="#/" clas
 document.addEventListener('click', e=>{ const b=e.target.closest('a.backbtn'); if(!b) return; e.preventDefault(); if(NAV_DEPTH>0){ NAV_DEPTH-=2; history.back(); } else { location.hash=b.dataset.fallback; } });
 document.addEventListener('click', e=>{ const j=e.target.closest('button.jump'); if(!j) return; const el=document.getElementById(j.dataset.target); if(el) el.scrollIntoView({block:'start'}); });
 { const q=$('#q'), res=$('#qres'); let sel=0; const run=()=>{ const v=q.value.trim().toLowerCase(); if(!v){ res.hidden=true; return; } const hits=TEAMS.filter(t=>t.full.toLowerCase().includes(v)||t.ab.toLowerCase().includes(v)||divKey(t).toLowerCase()===v).sort((a,b)=>(a.full.toLowerCase().startsWith(v)||a.nick.toLowerCase().startsWith(v)?0:1)-(b.full.toLowerCase().startsWith(v)||b.nick.toLowerCase().startsWith(v)?0:1)).slice(0,8); sel=0; res.innerHTML=hits.map((t,i)=>'<button data-n="'+t.ab+'" class="'+(i===sel?'on':'')+'">'+chip(t.ab,{nolink:true})+'<span class="mini">'+esc(divKey(t))+' · '+recStr(t.ab)+'</span></button>').join('')||'<div class="mini" style="padding:8px">No team matches.</div>'; res.hidden=false; res.querySelectorAll('button').forEach(b=>b.onclick=()=>{ location.hash='#/team/'+enc(b.dataset.n); res.hidden=true; q.value=''; }); }; q.addEventListener('input',run); q.addEventListener('focus',run); q.addEventListener('keydown',e=>{ const bs=res.querySelectorAll('button'); if(e.key==='ArrowDown'){ sel=Math.min(bs.length-1,sel+1); e.preventDefault(); } else if(e.key==='ArrowUp'){ sel=Math.max(0,sel-1); e.preventDefault(); } else if(e.key==='Enter'){ if(bs[sel]) bs[sel].click(); return; } else if(e.key==='Escape'){ res.hidden=true; return; } else return; bs.forEach((b,i)=>b.classList.toggle('on',i===sel)); }); document.addEventListener('click',e=>{ if(!e.target.closest('.search')) res.hidden=true; }); }
-function asofBar(){ const el=$('#asof'); const played=G.filter(g=>g.played).length; const ageDays=Math.max(0,Math.round((new Date(todayStr)-new Date(AS_OF_DATE))/86400000)); el.innerHTML='<span><i class="dot '+(ageDays<=1?'ok':'warn')+'" title="'+(ageDays===0?'built today':ageDays===1?'built yesterday':'built '+ageDays+' days ago')+'"></i>Data as of <b>'+esc(asOfDisp())+'</b> · times in '+tzInfo().name+' <a href="#/settings">change</a> · '+played+' finals · '+G.filter(g=>g.spread!=null).length+' games with lines · '+Object.keys(DEPTH_RAW).length+' depth charts</span><button id="about">How the numbers work</button> <span id="livestamp"></span>'; $('#about').onclick=()=>{ const d=$('#dlg'); d.innerHTML=aboutHTML(); d.showModal(); $('#dlg-close').onclick=()=>d.close(); }; }
+function asofBar(){ const el=$('#asof'); const played=G.filter(g=>g.played).length; const ageDays=Math.max(0,Math.round((new Date(todayStr)-new Date(AS_OF_DATE))/86400000)); const counts=played+' finals · '+G.filter(g=>g.spread!=null).length+' games with lines · '+Object.keys(DEPTH_RAW).length+' depth charts'; el.innerHTML='<span><i class="dot '+(ageDays<=1?'ok':'warn')+'" title="'+(ageDays===0?'built today':ageDays===1?'built yesterday':'built '+ageDays+' days ago')+' · '+counts+'"></i>Updated <b>'+esc(asOfDisp())+'</b> · times in '+tzInfo().name+' <a href="#/settings">change</a><span class="asof-x"> · '+counts+'</span></span><button id="about">How the numbers work</button> <span id="livestamp"></span>'; $('#about').onclick=()=>{ const d=$('#dlg'); d.innerHTML=aboutHTML(); d.showModal(); $('#dlg-close').onclick=()=>d.close(); }; }
 applyTheme(); asofBar(); route();
 if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
+})();
+</script>
+<script>
+/* Jamo Sports Hub grouped navigation (2026-10-07): the long row of tabs on the college, NFL and NBA pages becomes four or
+   five sections (Scores, Standings, Players, Teams, More), with the section's pages as small tabs underneath. Nothing is
+   removed: every original nav link stays in the page (inside the second row) and each hub's own setNav() keeps marking the
+   current one with class "on"; a MutationObserver follows that mark, so this works without touching any hub's code.
+   Built into each page by its build.sh as its own <script>; styles in nav.css (copied into p1.html by apply.sh). */
+(function(){
+  const nav = document.getElementById('nav'); if (!nav || nav.classList.contains('navg')) return;
+  const links = [...nav.querySelectorAll('a[data-r]')]; if (links.length < 6) return;
+  const has = r => links.some(a => a.dataset.r === r);
+  // route key -> section; a section with none of its routes on this hub's nav is left out
+  const SECTIONS = [
+    { g: 'scores', label: 'Scores', r: ['week', 'scores', 'schedule', 'tv'] },
+    { g: 'standings', label: has('standings') ? 'Standings' : 'Rankings', r: ['standings', 'rankings', 'playoffs', 'playoff', 'predict'] },
+    { g: 'players', label: 'Players', r: ['players', 'leaders', 'transfers', 'draft'] },
+    { g: 'teams', label: 'Teams', r: ['teams', 'cap'] },
+    { g: 'more', label: 'More', r: ['my', 'settings'] },
+  ];
+  const groupOf = {}; SECTIONS.forEach(s => s.r.forEach(r => { groupOf[r] = s.g; }));
+  const main = document.createElement('div'); main.className = 'ng-main';
+  const sub = document.createElement('div'); sub.className = 'ng-sub';
+  const tabs = {};
+  SECTIONS.forEach(s => {
+    const items = links.filter(a => groupOf[a.dataset.r] === s.g).sort((x, y) => s.r.indexOf(x.dataset.r) - s.r.indexOf(y.dataset.r));
+    if (!items.length) return;
+    s.items = items;
+    const t = document.createElement('a'); t.className = 'ng-tab'; t.dataset.g = s.g; t.href = items[0].getAttribute('href');
+    t.textContent = items.length === 1 ? items[0].textContent.replace(/^\W+/, '').trim() : s.label;
+    if (items.length === 1 && items[0].title) t.title = items[0].title;
+    tabs[s.g] = t; main.appendChild(t);
+    items.forEach(a => { a.dataset.g = s.g; sub.appendChild(a); });
+  });
+  // a link this file does not know about joins the More section rather than disappearing
+  links.filter(a => !a.dataset.g).forEach(a => { a.dataset.g = 'more'; sub.appendChild(a); });
+  nav.textContent = ''; nav.appendChild(main); nav.appendChild(sub); nav.classList.add('navg');
+  const KEY = 'jsh-nav-last';
+  let last = {}; try { last = JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch (e) {}
+  let cur = null;
+  function sync() {
+    const on = sub.querySelector('a.on');
+    const g = on ? on.dataset.g : cur || 'scores';
+    if (on) { last[g] = on.getAttribute('href'); try { sessionStorage.setItem(KEY, JSON.stringify(last)); } catch (e) {} }
+    cur = g;
+    Object.entries(tabs).forEach(([k, t]) => {
+      t.classList.toggle('cur', k === g);
+      // a section's tab goes back to the page last opened in it this visit
+      if (k !== g && last[k]) t.setAttribute('href', last[k]);
+    });
+    const n = sub.querySelectorAll('a[data-g="' + g + '"]').length;
+    sub.dataset.g = g; sub.classList.toggle('one', n < 2);
+    sub.querySelectorAll('a').forEach(a => a.classList.toggle('show', a.dataset.g === g));
+  }
+  // pin only the tabs and ticker once the page scrolls: hide everything above the tabs (see nav.css)
+  const top = nav.closest('header');
+  function measure() { if (!top) return; const h = Math.max(0, Math.round(nav.getBoundingClientRect().top - top.getBoundingClientRect().top)); document.documentElement.style.setProperty('--navg-hide', h + 'px'); }
+  measure(); addEventListener('resize', measure); addEventListener('load', measure); if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  new MutationObserver(sync).observe(sub, { attributes: true, attributeFilter: ['class'], subtree: true });
+  sync();
 })();
 </script>
 

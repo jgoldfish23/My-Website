@@ -4254,7 +4254,7 @@ const liveClock = g => { const L = LIVE[g.sport][g.id]; if (!L) return 'In progr
 
 /* ---------- favorites, from each hub's own settings ---------- */
 const cfbSet = ls('cfb-settings') || {}, nflSet = ls('nfl-settings') || {}, nbaSet = ls('nba-settings') || {};
-const FAVS = [...new Set([cfbSet.fav || 'BYU', 'Weber State'])].map(n => ({sport:'cfb', team:n})).concat(nflSet.fav ? [{sport:'nfl', team:nflSet.fav}] : [], [{sport:'nba', team:nbaSet.fav || 'UTAH'}]);
+const FAVS = [cfbSet.fav || 'BYU'].map(n => ({sport:'cfb', team:n})).concat(nflSet.fav ? [{sport:'nfl', team:nflSet.fav}] : [], [{sport:'nba', team:nbaSet.fav || 'UTAH'}]);
 const isFavTeam = (sport, t) => FAVS.some(f => f.sport === sport && f.team === t);
 const favGame = g => isFavTeam(g.sport, g.away) || isFavTeam(g.sport, g.home);
 

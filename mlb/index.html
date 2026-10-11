@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>MLB Postseason · Jamo Sports Hub</title>
+<meta name="description" content="The Dodgers in October: every game, previews and recaps, and the MLB postseason bracket.">
+<meta name="theme-color" content="#070a12">
+<link rel="icon" type="image/svg+xml" href="/sports/icons/jsh.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-180.png">
+<link rel="manifest" href="/sports/icons/site.webmanifest">
+</head>
+<body>
+<!-- Jamo Sports Hub top bar: added by each hub's deploy_public.sh right after <body> (never inside the claude.ai artifact) -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&display=swap">
+<style>
+.jsh{position:relative;z-index:60;display:flex;align-items:center;gap:14px;height:44px;padding:0 max(16px,env(safe-area-inset-left));background:#070a12;background-image:linear-gradient(90deg,rgba(29,78,216,.22),rgba(7,10,18,0) 35%,rgba(7,10,18,0) 65%,rgba(109,40,217,.2));border-bottom:1px solid rgba(255,255,255,.08);font-family:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1;box-sizing:border-box}
+.jsh *,.jsh *::before,.jsh *::after{box-sizing:border-box}
+.jsh a{text-decoration:none!important}
+.jsh-brand{display:flex;align-items:center;gap:9px;color:#fff!important;font-size:15.5px;font-weight:800;letter-spacing:-.015em;white-space:nowrap;flex:none}
+.jsh-brand img{width:26px;height:26px;border-radius:7px;display:block;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.jsh-brand b{font-weight:800;background:linear-gradient(90deg,#7cb6ff,#c4a6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.jsh-nav{display:flex;align-items:center;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.jsh-nav::-webkit-scrollbar{display:none}
+.jsh-nav a{display:flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:999px;color:#b4bfd3!important;font-size:13.5px;font-weight:700;letter-spacing:.005em;white-space:nowrap;transition:background-color .15s,color .15s,box-shadow .15s}
+.jsh-nav a i{flex:none;width:7px;height:7px;border-radius:50%;background:var(--c)}
+.jsh-nav a:hover{color:#fff!important;background:rgba(255,255,255,.08)}
+.jsh-nav a.on{color:#fff!important;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 4px 14px -4px var(--c)}
+.jsh-nav a.on i{background:#fff}
+.jsh-nav a:focus-visible{outline:2px solid #7cb6ff;outline-offset:2px}
+body.boardmode .jsh{display:none}
+@media (max-width:560px){.jsh{gap:8px;padding:0 12px}.jsh-brand span{display:none}.jsh-nav{gap:2px}.jsh-nav a{padding:0 10px;font-size:13px;gap:6px}}
+@media (max-width:360px){.jsh-nav a i{display:none}.jsh-nav a{padding:0 9px}}
+@media print{.jsh{display:none}}
+</style>
+<div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
+  <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
+  <nav class="jsh-nav">
+    <a href="/sports/" data-s="sports" style="--c:#475569"><i></i>Home</a>
+    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>College Football</a>
+    <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><i></i>NFL</a>
+    <a href="/nba/" data-s="nba" style="--c:#6d28d9"><i></i>NBA</a>
+    <a href="/mlb/" data-s="mlb" style="--c:#005a9c"><i></i>MLB</a>
+  </nav>
+</div>
+<script>
+/* Jamo Sports Hub: light/dark and the time zone follow you between College, NFL and NBA (each keeps its own favourite team).
+   Runs before the hub's own script, so a choice made in one hub is in place before the next one reads its settings. */
+(function(){ try {
+  var s = (location.pathname.split('/')[1] || 'sports').toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
+  if (a) { a.className = 'on'; a.setAttribute('aria-current', 'page'); }
+  if (s === 'sports') return;
+  var key = s + '-settings', sh = JSON.parse(localStorage.getItem('jsh-shared') || 'null');
+  if (sh) { var own = JSON.parse(localStorage.getItem(key) || '{}'), ch = false;
+    ['theme', 'tz'].forEach(function (k) { if (sh[k] && own[k] !== sh[k]) { own[k] = sh[k]; ch = true; } });
+    if (ch) localStorage.setItem(key, JSON.stringify(own)); }
+  var save = function () { try { var o = JSON.parse(localStorage.getItem(key) || '{}'); if (o.theme || o.tz) localStorage.setItem('jsh-shared', JSON.stringify({ theme: o.theme || 'auto', tz: o.tz || 'MT' })); } catch (e) {} };
+  addEventListener('pagehide', save); document.addEventListener('visibilitychange', function () { if (document.hidden) save(); });
+} catch (e) {} })();
+</script>
+<style>
+/* MLB postseason page (2026-10-10): the Dodgers' October, Jamo's previews and recaps, and the bracket */
+:root{--bg:#070a12;--surface:#111726;--surface-2:#182033;--line:#263049;--line-2:#1f2840;--ink:#eef2fa;--ink-2:#b4bfd3;--ink-3:#7f8aa3;--gold:#f5c451;--gold-text:#f5c451;--accent:#3b82f6;--accent-soft:rgba(59,130,246,.16);--accent-text:#8ab8ff;--live:#ff4d6d;--lad:#005a9c;--disp:"Inter Tight",system-ui,sans-serif}
+:root.light{--bg:#eef1f6;--surface:#fff;--surface-2:#f4f6fa;--line:#dde2ea;--line-2:#e9edf3;--ink:#0d1220;--ink-2:#465166;--ink-3:#7b8598;--gold:#a9760a;--gold-text:#7a5605;--accent:#1b3a5c;--accent-soft:#e1e9f3;--accent-text:#174a7c;--live:#e0193a}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:18px 16px 64px}
+.head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:6px 0 16px}
+.head h1{margin:0;font-family:var(--disp);font-size:26px;letter-spacing:-.02em}
+.head .sub{color:var(--ink-3);font-size:13px}
+.muted{color:var(--ink-3)}
+.sec{display:flex;align-items:baseline;gap:10px;margin:30px 2px 12px}
+.sec h2{margin:0;font-family:var(--disp);font-size:21px;font-weight:800;letter-spacing:-.025em}
+.sec .note{color:var(--ink-3);font-size:13px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.card .hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:12px 16px 0}
+.card .hd h3{margin:0;font-size:17px}
+.card .bd{padding:12px 16px 16px}
+.mini{font-size:12.5px;color:var(--ink-3)}
+.hero{position:relative;border-radius:20px;padding:20px;color:#fff;background:linear-gradient(135deg,var(--lad),#0b2447 70%);overflow:hidden;box-shadow:0 18px 40px -22px rgba(0,90,156,.9)}
+.hero .wm{position:absolute;right:-30px;top:-30px;width:220px;opacity:.08;pointer-events:none}
+.hero .eb{font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.hero h2{margin:4px 0 2px;font-family:var(--disp);font-size:28px;letter-spacing:-.02em;line-height:1.15}
+.hero .ser{font-size:15px;opacity:.9}
+.hero .nx{margin-top:16px;padding:14px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.14)}
+.hero .nx .k{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.hero .nx .g{margin-top:6px;font-size:16px;font-weight:700}
+.hero .cd{margin-top:6px;font-family:var(--disp);font-size:34px;font-weight:800;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.hero .cd i{font-style:normal;opacity:.5}.hero .cd .u{font-size:16px;opacity:.7;margin:0 6px 0 1px}
+.hero .live{display:inline-flex;align-items:center;gap:6px;padding:2px 9px;border-radius:999px;background:var(--live);font-weight:800;font-size:11px;letter-spacing:.08em}
+.tl-g{border-bottom:1px solid var(--line-2);padding:12px 16px;scroll-margin-top:70px}
+.tl-g:last-child{border-bottom:0}
+.tl-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tl-row .rd{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text);min-width:120px}
+.tl-row .m{flex:1 1 200px;display:flex;align-items:center;gap:8px;font-weight:700}
+.tl-row .m img{width:22px;height:22px;object-fit:contain}
+.tl-row .st{font-size:13px;color:var(--ink-2);white-space:nowrap}
+.tl-row .w{color:#3ddc84}.tl-row .l{color:#ff7b8f}
+:root.light .tl-row .w{color:#14833b}:root.light .tl-row .l{color:#c62828}
+.tl-g .card.ar{margin:12px 0 0;border-radius:14px}
+.bk{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.sr .hd .rd{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text)}
+.sr .tm{display:flex;align-items:center;gap:8px;padding:3px 0;font-weight:700}
+.sr .tm img{width:22px;height:22px;object-fit:contain}
+.sr .tm .n{flex:1}.sr .tm .wn{font-family:var(--disp);font-size:18px;font-variant-numeric:tabular-nums}
+.sr .tm.lose{opacity:.55}
+.sr.lad{box-shadow:inset 0 0 0 1.5px var(--lad)}
+.sr .gl{margin-top:8px;border-top:1px solid var(--line-2);padding-top:6px}
+.sr .gl div{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--ink-2);padding:2px 0}
+.empty{padding:16px;color:var(--ink-3)}
+.livedot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--live);margin-right:5px;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.35}}
+@media (max-width:560px){.hero h2{font-size:23px}.hero .cd{font-size:28px}.tl-row .rd{min-width:0;flex:1 1 100%}}
+/* ar:start - Jamo's preview / recap cards (from the college hub, patch85/86) */
+.card.ar{margin-bottom:14px;border-top:3px solid var(--gold)}
+.ar .bd{padding-top:14px}
+.ar-t{margin:2px 0 8px;font-size:25px;line-height:1.2;font-weight:800;color:var(--ink);text-wrap:balance}
+.ar-dek{margin:0 0 16px;font-size:15.5px;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+.ar-body p{margin:0 0 13px;font-size:15.5px;line-height:1.68;color:var(--ink);text-wrap:pretty}
+.ar-body h4{margin:22px 0 9px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-text)}
+.ar-body ul{margin:0 0 13px;padding-left:20px}
+.ar-body li{margin:0 0 9px;font-size:15px;line-height:1.62;color:var(--ink)}
+.ar-more{margin-top:4px}
+.ar-more summary{display:inline-flex;align-items:center;gap:6px;cursor:pointer;list-style:none;padding:9px 16px;border-radius:999px;background:var(--accent-soft);color:var(--accent-text);font-weight:700;font-size:14px;margin:2px 0 6px}
+.ar-more summary::-webkit-details-marker{display:none}
+.ar-more summary::after{content:"\25BE"}
+.ar-more[open] summary::after{content:"\25B4"}
+.ar-more .ar-close,.ar-more[open] .ar-open{display:none}
+.ar-more[open] .ar-close{display:inline}
+.ar-more[open] summary{margin-bottom:12px}
+.ar-src{font-size:13px!important;color:var(--ink-3)!important;border-top:1px solid var(--line-2);padding-top:12px;margin-top:18px!important}
+.card.ar-recap{border-top-color:var(--accent)}
+.ar-recap .ar-body h4{color:var(--accent-text)}
+.ar-folded .ar-dek{margin-bottom:10px}
+@media (max-width:640px){.ar-t{font-size:22px}.ar-body p{font-size:15px}}
+/* ar:end */
+
+</style>
+<div class="wrap">
+  <div class="head"><h1>MLB Postseason</h1><span class="sub" id="upd"></span></div>
+  <section id="hero"></section>
+  <div class="sec"><h2>The Dodgers' October</h2><span class="note">every game, with Jamo's previews and recaps</span></div>
+  <section class="card" id="timeline"></section>
+  <div class="sec"><h2>The bracket</h2><span class="note">every series, latest round first</span></div>
+  <section class="bk" id="bracket"></section>
+  <p class="mini" style="margin-top:22px">Schedules, scores and TV from ESPN; live scores update every 30 seconds while a game is on. A full MLB section (standings, player stats, TV guide) comes before spring training.</p>
+</div>
+<script type="text/plain" id="d-mlb">2026-09-29|10:00 PM|401907974|CHC|SD|0|8|FINAL|NLWC - Game 1|Peacock/NBCSN|Petco Park|San Diego, California|||SD leads series 1-0
+2026-09-29|2:00 PM|401907965|PHI|ATL|3|5|FINAL|NLWC - Game 1|NBC|Truist Park|Atlanta, Georgia|||ATL leads series 1-0
+2026-09-29|5:00 PM|401907896|CHW|HOU|6|3|FINAL|ALWC - Game 1|Peacock/NBCSN|Daikin Park|Houston, Texas|||CHW lead series 1-0
+2026-09-29|8:00 PM|401907924|BOS|NYY|0|9|FINAL|ALWC - Game 1|NBC|Yankee Stadium|Bronx, New York|||NYY lead series 1-0
+2026-09-30|10:00 PM|401907975|CHC|SD|1|4|FINAL|NLWC - Game 2|Peacock/NBCSN|Petco Park|San Diego, California|||SD wins series 2-0
+2026-09-30|2:00 PM|401907972|PHI|ATL|4|3|FINAL|NLWC - Game 2|NBC|Truist Park|Atlanta, Georgia|||Series tied 1-1
+2026-09-30|5:00 PM|401907897|CHW|HOU|7|3|FINAL|ALWC - Game 2|Peacock/NBCSN|Daikin Park|Houston, Texas|||CHW win series 2-0
+2026-09-30|8:00 PM|401907963|BOS|NYY|2|9|FINAL|ALWC - Game 2|NBC|Yankee Stadium|Bronx, New York|||NYY win series 2-0
+2026-10-01|8:00 PM|401907973|PHI|ATL|2|6|FINAL|NLWC - Game 3|NBC/Peacock|Truist Park|Atlanta, Georgia|||ATL wins series 2-1
+2026-10-03|1:00 PM|401907990|CHW|CLE|3|0|FINAL|ALDS - Game 1|TBS/truTV|Progressive Field|Cleveland, Ohio|||CHW lead series 1-0
+2026-10-03|4:00 PM|401908007|ATL|LAD|3|5|FINAL|NLDS - Game 1|Fox|Dodger Stadium|Los Angeles, California|||LAD lead series 1-0
+2026-10-03|6:30 PM|401907985|NYY|TB|0|1|FINAL|ALDS - Game 1|TBS/truTV|Tropicana Field|St. Petersburg, Florida|||TB leads series 1-0
+2026-10-03|8:30 PM|401908002|SD|MIL|2|3|FINAL|NLDS - Game 1|FS1|American Family Field|Milwaukee, Wisconsin|||MIL leads series 1-0
+2026-10-04|4:00 PM|401908003|SD|MIL|3|4|FINAL|NLDS - Game 2|FS1|American Family Field|Milwaukee, Wisconsin|||MIL leads series 2-0
+2026-10-04|8:00 PM|401908014|ATL|LAD|3|2|FINAL|NLDS - Game 2|FS1|Dodger Stadium|Los Angeles, California|||Series tied 1-1
+2026-10-05|5:00 PM|401907991|CHW|CLE|4|3|FINAL|ALDS - Game 2|TBS/truTV|Progressive Field|Cleveland, Ohio|||CHW lead series 2-0
+2026-10-05|8:00 PM|401907986|NYY|TB|2|5|FINAL|ALDS - Game 2|TBS/truTV|Tropicana Field|St. Petersburg, Florida|||TB leads series 2-0
+2026-10-06|6:00 PM|401908015|LAD|ATL|3|1|FINAL|NLDS - Game 3|FS1|Truist Park|Atlanta, Georgia|||LAD lead series 2-1
+2026-10-06|9:30 PM|401908004|MIL|SD|3|4|FINAL|NLDS - Game 3|FS1|Petco Park|San Diego, California|||MIL leads series 2-1
+2026-10-07|10:00 PM|401908005|MIL|SD|3|1|FINAL|NLDS - Game 4|FS1|Petco Park|San Diego, California|||MIL wins series 3-1
+2026-10-07|4:00 PM|401907992|CLE|CHW|9|3|FINAL|ALDS - Game 3|TBS/truTV|Rate Field|Chicago, Illinois|||CHW lead series 2-1
+2026-10-07|6:00 PM|401908016|LAD|ATL|4|1|FINAL|NLDS - Game 4|FS1|Truist Park|Atlanta, Georgia|||LAD win series 3-1
+2026-10-07|8:00 PM|401907987|TB|NYY|4|3|FINAL|ALDS - Game 3|TBS/truTV|Yankee Stadium|Bronx, New York|||TB wins series 3-0
+2026-10-08|8:00 PM|401907993|CLE|CHW|9|5|FINAL|ALDS - Game 4|TBS/truTV|Rate Field|Chicago, Illinois|||Series tied 2-2
+2026-10-10|8:00 PM|401907994|CHW|CLE|0|2|FINAL|ALDS - Game 5|TBS/truTV|Progressive Field|Cleveland, Ohio|||CLE wins series 3-2
+2026-10-11|8:00 PM|401908030|LAD|MIL|||SCHEDULED|NLCS - Game 1|Fox/FS1|American Family Field|Milwaukee, Wisconsin|MIL -113|6|Series starts 10/11
+2026-10-12|5:00 PM|401908031|LAD|MIL|||SCHEDULED|NLCS - Game 2|Fox/FS1|American Family Field|Milwaukee, Wisconsin|||Series starts 10/11
+2026-10-12|8:00 PM|401908023|CLE|TB|||SCHEDULED|ALCS - Game 1|TBS/truTV|Tropicana Field|St. Petersburg, Florida|TB -168|7|Series starts 10/12
+2026-10-13|8:00 PM|401908024|CLE|TB|||SCHEDULED|ALCS - Game 2|TBS/truTV|Tropicana Field|St. Petersburg, Florida|||Series starts 10/12
+2026-10-14|8:00 PM|401908032|MIL|LAD|||SCHEDULED|NLCS - Game 3|Fox/FS1|Dodger Stadium|Los Angeles, California|||Series starts 10/11
+2026-10-15|6:00 PM|401908025|TB|CLE|||SCHEDULED|ALCS - Game 3|TBS/truTV|Progressive Field|Cleveland, Ohio|||Series starts 10/12
+2026-10-15|9:00 PM|401908033|MIL|LAD|||SCHEDULED|NLCS - Game 4|Fox/FS1|Dodger Stadium|Los Angeles, California|||Series starts 10/11
+2026-10-16|6:00 PM|401908026|TB|CLE|||SCHEDULED|ALCS - Game 4|TBS/truTV|Progressive Field|Cleveland, Ohio|||Series starts 10/12
+2026-10-16|9:00 PM|401908034|MIL|LAD|||SCHEDULED|NLCS - Game 5 If Necessary|Fox/FS1|Dodger Stadium|Los Angeles, California|||Series starts 10/11
+2026-10-17|8:00 PM|401908027|TB|CLE|||SCHEDULED|ALCS - Game 5 If Necessary|TBS/truTV|Progressive Field|Cleveland, Ohio|||Series starts 10/12
+2026-10-18|8:00 PM|401908035|LAD|MIL|||SCHEDULED|NLCS - Game 6 If Necessary|Fox/FS1|American Family Field|Milwaukee, Wisconsin|||Series starts 10/11
+2026-10-19|5:00 PM|401908028|CLE|TB|||SCHEDULED|ALCS - Game 6 If Necessary|TBS/truTV|Tropicana Field|St. Petersburg, Florida|||Series starts 10/12
+2026-10-19|8:00 PM|401908036|LAD|MIL|||SCHEDULED|NLCS - Game 7 If Necessary|Fox/FS1|American Family Field|Milwaukee, Wisconsin|||Series starts 10/11
+2026-10-20|8:00 PM|401908029|CLE|TB|||SCHEDULED|ALCS - Game 7 If Necessary|TBS/truTV|Tropicana Field|St. Petersburg, Florida|||Series starts 10/12
+2026-10-23|TBD|401908042|TBD|TBD|||SCHEDULED|World Series - Game 1|Fox|||||
+2026-10-24|TBD|401908043|TBD|TBD|||SCHEDULED|World Series - Game 2|Fox|||||
+2026-10-26|TBD|401908044|TBD|TBD|||SCHEDULED|World Series - Game 3|Fox|||||
+2026-10-27|TBD|401908045|TBD|TBD|||SCHEDULED|World Series - Game 4|Fox|||||
+2026-10-28|TBD|401908046|TBD|TBD|||SCHEDULED|World Series - Game 5 If Necessary|Fox|||||
+2026-10-30|TBD|401908047|TBD|TBD|||SCHEDULED|World Series - Game 6 If Necessary|Fox|||||
+2026-10-31|TBD|401908048|TBD|TBD|||SCHEDULED|World Series - Game 7 If Necessary|Fox|||||
+</script>
+<script type="application/json" id="d-mlbteams">{"ARI":{"alt":"#000000","color":"#aa182c","full":"Arizona Diamondbacks","loc":"Arizona","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/ari.png","nick":"Diamondbacks"},"ATH":{"alt":"#efb21e","color":"#003831","full":"Athletics","loc":"Athletics","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/ath.png","nick":"Athletics"},"ATL":{"alt":"#ba0c2f","color":"#0c2340","full":"Atlanta Braves","loc":"Atlanta","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/atl.png","nick":"Braves"},"BAL":{"alt":"#000000","color":"#df4601","full":"Baltimore Orioles","loc":"Baltimore","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/bal.png","nick":"Orioles"},"BOS":{"alt":"#bd3039","color":"#0d2b56","full":"Boston Red Sox","loc":"Boston","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/bos.png","nick":"Red Sox"},"CHC":{"alt":"#cc3433","color":"#0e3386","full":"Chicago Cubs","loc":"Chicago","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/chc.png","nick":"Cubs"},"CHW":{"alt":"#c4ced4","color":"#000000","full":"Chicago White Sox","loc":"Chicago","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/chw.png","nick":"White Sox"},"CIN":{"alt":"#ffffff","color":"#c6011f","full":"Cincinnati Reds","loc":"Cincinnati","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/cin.png","nick":"Reds"},"CLE":{"alt":"#e31937","color":"#002b5c","full":"Cleveland Guardians","loc":"Cleveland","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/cle.png","nick":"Guardians"},"COL":{"alt":"#000000","color":"#33006f","full":"Colorado Rockies","loc":"Colorado","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/col.png","nick":"Rockies"},"DET":{"alt":"#ff4713","color":"#0a2240","full":"Detroit Tigers","loc":"Detroit","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/det.png","nick":"Tigers"},"HOU":{"alt":"#eb6e1f","color":"#002d62","full":"Houston Astros","loc":"Houston","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/hou.png","nick":"Astros"},"KC":{"alt":"#7ab2dd","color":"#004687","full":"Kansas City Royals","loc":"Kansas City","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/kc.png","nick":"Royals"},"LAA":{"alt":"#c4ced4","color":"#ba0021","full":"Los Angeles Angels","loc":"Los Angeles","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/laa.png","nick":"Angels"},"LAD":{"alt":"#ffffff","color":"#005a9c","full":"Los Angeles Dodgers","loc":"Los Angeles","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/lad.png","nick":"Dodgers"},"MIA":{"alt":"#000000","color":"#00a3e0","full":"Miami Marlins","loc":"Miami","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/mia.png","nick":"Marlins"},"MIL":{"alt":"#ffc72c","color":"#13294b","full":"Milwaukee Brewers","loc":"Milwaukee","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/mil.png","nick":"Brewers"},"MIN":{"alt":"#e20e32","color":"#031f40","full":"Minnesota Twins","loc":"Minnesota","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/min.png","nick":"Twins"},"NYM":{"alt":"#ff5910","color":"#002d72","full":"New York Mets","loc":"New York","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/nym.png","nick":"Mets"},"NYY":{"alt":"#c4ced4","color":"#132448","full":"New York Yankees","loc":"New York","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/nyy.png","nick":"Yankees"},"PHI":{"alt":"#003278","color":"#e81828","full":"Philadelphia Phillies","loc":"Philadelphia","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/phi.png","nick":"Phillies"},"PIT":{"alt":"#fdb827","color":"#000000","full":"Pittsburgh Pirates","loc":"Pittsburgh","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/pit.png","nick":"Pirates"},"SD":{"alt":"#ffc425","color":"#2f241d","full":"San Diego Padres","loc":"San Diego","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/sd.png","nick":"Padres"},"SEA":{"alt":"#0c2c56","color":"#005c5c","full":"Seattle Mariners","loc":"Seattle","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/sea.png","nick":"Mariners"},"SF":{"alt":"#fd5a1e","color":"#000000","full":"San Francisco Giants","loc":"San Francisco","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/sf.png","nick":"Giants"},"STL":{"alt":"#001541","color":"#be0a14","full":"St. Louis Cardinals","loc":"St. Louis","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/stl.png","nick":"Cardinals"},"TB":{"alt":"#8fbce6","color":"#092c5c","full":"Tampa Bay Rays","loc":"Tampa Bay","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/tb.png","nick":"Rays"},"TEX":{"alt":"#c0111f","color":"#003278","full":"Texas Rangers","loc":"Texas","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/tex.png","nick":"Rangers"},"TOR":{"alt":"#6cace5","color":"#134a8e","full":"Toronto Blue Jays","loc":"Toronto","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/tor.png","nick":"Blue Jays"},"WSH":{"alt":"#11225b","color":"#ab0003","full":"Washington Nationals","loc":"Washington","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/wsh.png","nick":"Nationals"}}</script>
+<script type="application/json" id="d-articles">{"401908030":{"preview":{"angle":"The two-time defending champs meet the 103-win Brewers in an NLCS rematch. Game 1 is Tarik Skubal against NL Cy Young front-runner Jacob Misiorowski in Milwaukee.","body":"Every great franchise eventually becomes somebody else's villain. For the Brewers, that's the Dodgers. Los Angeles knocked them out in the 2018 NLCS, in the 2020 wild-card round, and in last year's NLCS, a four-game sweep on the way to a second straight title.\n\nSo when Milwaukee manager Pat Murphy was asked about drawing the Dodgers again, he didn't pretend to be indifferent: \"If it's going to be that incredible story, you want it to go through the Dodgers.\"\n\nThat's either great leadership or the opening scene of a horror movie. We find out starting Sunday.\n\n## Where things stand\n\n- **Dodgers:** 100-62, NL West champions, two-time defending World Series champions. They beat Atlanta 3-1 in the NLDS and are back in the NLCS for a third straight year.\n- **Brewers:** a franchise-record 103 wins, the best record in baseball, and home-field advantage. They beat San Diego in four and are chasing their first pennant since 1982. That's 44 years in the wilderness, four more than Moses, and Moses never had to face Tarik Skubal.\n- **The schedule:** Games 1 and 2 are in Milwaukee (Sunday at 6 PM MT, Monday at 3 PM MT), then Games 3, 4 and 5 are at Dodger Stadium. Every game is on Fox or FS1.\n- **The line:** Milwaukee is a slight favorite in Game 1 (-113), with the total at 6. A total of 6 tells you what kind of night the oddsmakers expect.\n\n## The matchup that decides it\n\n**The Dodgers' rotation against the Brewers' lineup depth.**\n\nGame 1 has two aces. Skubal, acquired from Detroit on Aug. 1, is a two-time Cy Young winner with a 1.97 ERA in seven career postseason starts. He opposes Jacob Misiorowski, the front-runner for this year's NL Cy Young.\n\nAfter that, it gets interesting for the Dodgers. Blake Snell looks lined up for Game 3, and he looked rusty in the NLDS after a September of left groin tightness. And Shohei Ohtani won't pitch this October because of injuries, so his value is all in the batter's box. Over a seven-game series, the Dodgers need their starters to cover real innings, because the Brewers' bullpen has been doing a lot of the work.\n\n## Who to watch\n\n- **Shohei Ohtani:** he was the Dodgers' home run leader heading into September and is still the lineup's center of gravity. The Dodgers' offense is at its best when he's doing damage near the top of the order.\n- **Freddie Freeman and Mookie Betts:** Freeman had a rough September and used the bye week to work on his swing. Betts finished on a September surge. If those two are both locked in, it's a different lineup.\n- **Jackson Chourio and Christian Yelich:** Chourio has made a habit of big moments, Yelich is still the heartbeat, and the Brewers' stars have made it clear all week that this is the series they wanted.\n\n## What they're saying\n\nDave Roberts, giving the Brewers their due: \"They're a really good ballclub.\"\n\nMurphy, on handling October's chaos: \"Things are going to go haywire.\"\n\n## X-factor\n\n**American Family Field.** Milwaukee has the better record and gets four of a possible seven games at home. The Dodgers have won plenty of big games on the road, but a sold-out stadium of people who still remember last October is a real thing. Somewhere, Laverne and Shirley are leading a chant.\n\n## Prediction\n\nThis is the Dodgers' best opponent of the postseason and the Brewers' best team in decades. Milwaukee is deeper and younger, and it has home field. The Dodgers have Skubal at the front, more October experience than anyone, and a lineup that can flip a series in one swing.\n\n**Dodgers in 7.** It'll be closer than last year, and the Brewers will win the games that feel like turning points. Then the Dodgers will win the one that actually is.\n\n**Confidence:** low to moderate. That's an honest coin flip with a slight Dodger lean.\n","dek":"NLCS preview: the two-time defending champion Dodgers against a 103-win Brewers team that says it wanted this rematch. Game 1 is Sunday night, Skubal vs. Misiorowski.","label":"NLCS preview","lead":2,"pick":"Dodgers in 7. The Brewers are deeper and have home field, but the Dodgers' rotation is built for exactly this.","sources":"MLB.com, ESPN, theScore (AP), FOX Sports, SI/Dodgers On SI, San Gabriel Valley Tribune, StatMuse, and this site's postseason schedule (ESPN).","title":"The Sequel Nobody in Milwaukee Asked to Lose Again","updated":"Sat., Oct. 10"}}}</script>
+<script>
+(function(){
+'use strict';
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const loadJSON = id => { try { return JSON.parse(document.getElementById(id).textContent); } catch (e) { return null; } };
+const ls = k => { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } };
+const shared = ls('jsh-shared') || {};
+if (shared.theme === 'light' || (shared.theme !== 'dark' && matchMedia('(prefers-color-scheme: light)').matches)) document.documentElement.classList.add('light');
+const TZS = {ET:'America/New_York', CT:'America/Chicago', MT:'America/Denver', PT:'America/Los_Angeles'};
+const TZ = TZS[shared.tz] ? shared.tz : 'MT';
+const fmt = (o, d) => new Intl.DateTimeFormat('en-US', Object.assign({timeZone: TZS[TZ]}, o)).format(d || new Date());
+const etDate = d => new Intl.DateTimeFormat('en-CA', {timeZone:'America/New_York', year:'numeric', month:'2-digit', day:'2-digit'}).format(d || new Date());
+const TODAY = etDate();
+const addDay = (d, n) => { const p = d.split('-').map(Number); return new Date(Date.UTC(p[0], p[1] - 1, p[2] + n)).toISOString().slice(0, 10); };
+const kickMs = (date, time) => { const m = /^(\d{1,2}):(\d{2}) (AM|PM)$/.exec(time || ''); const h = m ? (+m[1]) % 12 + (m[3] === 'PM' ? 12 : 0) : 12; const off = date >= '2026-11-01' && date < '2027-03-14' ? '-05:00' : '-04:00'; return Date.parse(date + 'T' + String(h).padStart(2, '0') + ':' + (m ? m[2] : '00') + ':00' + off); };
+const timed = g => /^\d/.test(g.time || '');
+const whenStr = g => { const d = new Date(kickMs(g.date, g.time)); return fmt({weekday:'short', month:'short', day:'numeric'}, d) + (timed(g) ? ' · ' + fmt({hour:'numeric', minute:'2-digit'}, d) + ' ' + TZ : ''); };
+const cdHTML = ms => { let s = Math.max(0, Math.floor((ms - Date.now()) / 1000)); const d = Math.floor(s / 86400); s %= 86400; const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60; const p = n => String(n).padStart(2, '0'); return (d ? d + '<span class="u">d</span>' : '') + p(h) + '<i>:</i>' + p(m) + '<i>:</i>' + p(x); };
+
+const T = loadJSON('d-mlbteams') || {};
+const team = ab => T[ab] || {full: ab, nick: ab, logo: ''};
+const logo = ab => team(ab).logo ? '<img src="' + esc(team(ab).logo) + '" alt="" loading="lazy">' : '';
+const G = $('#d-mlb').textContent.split('\n').map(l => l.split('|')).filter(p => p.length >= 9).map(p => ({date:p[0], time:p[1], id:p[2], away:p[3], home:p[4], as:p[5] === '' ? null : +p[5], hs:p[6] === '' ? null : +p[6], st:p[7], note:p[8], tv:(p[9] || '').split('/')[0], venue:p[10] || '', city:p[11] || '', line:p[12] || '', ou:p[13] || '', series:p[14] || ''}));
+const ARTS = (loadJSON('d-articles') || {});
+const PREVIEWS = {};
+/* ar:start - hand-written game articles ("Jamo's preview" / "Jamo's recap"), shared by the NFL and NBA hubs
+   (the college hub has the same code inline). Data: d-articles, built by sports-hub/articles/articles.pl from
+   <hub>/articles/<game id>.json + .md (preview) and <game id>.recap.json + .md (recap). A json "label" renames the
+   card ("week ahead"). A played game shows the recap first and the preview folded up underneath. */
+const ARTICLES = loadJSON('d-articles') || {};
+Object.keys(ARTICLES).forEach(k=>{ const a=ARTICLES[k].preview||{}; if(a.angle||a.pick) PREVIEWS[k]=Object.assign({}, PREVIEWS[k]||{}, a.angle?{angle:a.angle}:{}, a.pick?{pick:a.pick}:{}); });
+function articleCardHTML(ar,kind,folded){ if(!ar||!ar.body) return '';
+  const inl=s=>esc(s).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/(^|[\s(])\*([^*\s][^*]*)\*/g,'$1<i>$2</i>');
+  const blk=b=>{ b=b.trim(); if(!b) return ''; if(b.startsWith('## ')) return '<h4>'+inl(b.slice(3))+'</h4>'; if(/^- /.test(b)) return '<ul>'+b.split('\n').filter(l=>l.trim()).map(l=>'<li>'+inl(l.replace(/^- /,''))+'</li>').join('')+'</ul>'; return '<p>'+inl(b).replace(/\n/g,'<br>')+'</p>'; };
+  const bl=ar.body.split(/\n{2,}/).filter(b=>b.trim()); const n=folded?0:Math.max(1,ar.lead||2);
+  const head=bl.slice(0,n).map(blk).join(''), rest=bl.slice(n).map(blk).join(''); const word=ar.label||(kind==='recap'?'recap':'preview');
+  return '<div class="card ar'+(kind==='recap'?' ar-recap':'')+(folded?' ar-folded':'')+'"><div class="hd"><h3>Jamo\'s '+esc(word)+'</h3>'+(folded?'<span class="mini">written before the game</span>':ar.updated?'<span class="mini">updated '+esc(ar.updated)+'</span>':'')+'</div><div class="bd">'
+    +'<h2 class="ar-t">'+esc(ar.title||'')+'</h2>'+(ar.dek?'<p class="ar-dek">'+esc(ar.dek)+'</p>':'')
+    +(head?'<div class="ar-body">'+head+'</div>':'')
+    +(rest?'<details class="ar-more"><summary><span class="ar-open">Read the full '+esc(word)+'</span><span class="ar-close">Show less</span></summary><div class="ar-body">'+rest+(ar.sources?'<p class="ar-src"><b>Sources:</b> '+esc(ar.sources)+'</p>':'')+'</div></details>':'')
+    +'</div></div>'; }
+function articleHTML(g){ const A=ARTICLES[g.id]; if(!A) return ''; const done=g.played||g.live;
+  return (done?articleCardHTML(A.recap,'recap'):'')+articleCardHTML(A.preview,'preview',done&&!!A.recap); }
+/* ar:end */
+
+const US = 'LAD';
+const LIVE = {};
+const cur = g => { const L = LIVE[g.id]; if (!L) return g; const o = Object.assign({}, g); if (L.away && L.away.s !== '' && L.away.s != null) o.as = +L.away.s; if (L.home && L.home.s !== '' && L.home.s != null) o.hs = +L.home.s; o.st = L.st; o.det = L.det; o.series = L.series || g.series; return o; };
+const isLive = g => !!g.st && !/^(SCHEDULED|FINAL|POSTPONED|CANCELED|CANCELLED|DELAYED)$/.test(g.st);
+const done = g => g.st === 'FINAL' && g.as != null;
+const round = g => { const r = (g.note.split(' - ')[0] || 'Postseason').trim(); return r === 'ALWC' ? 'AL Wild Card' : r === 'NLWC' ? 'NL Wild Card' : r; };
+const gameNo = g => (g.note.split(' - ')[1] || '').replace(/ If Necessary/i, '').trim();
+const ifNec = g => /If Necessary/i.test(g.note);
+const ours = g => g.away === US || g.home === US;
+const opp = g => g.away === US ? g.home : g.away;
+
+function heroHTML(){ const gs = G.filter(ours).map(cur); if (!gs.length) return '<div class="hero"><div class="eb">Los Angeles Dodgers</div><h2>No postseason games on the schedule</h2></div>';
+  const live = gs.find(isLive), next = gs.find(g => !done(g) && !isLive(g)), last = gs.filter(done).pop();
+  const focus = live || next || last; const w = gs.filter(g => done(g) && (g.away === US ? g.as > g.hs : g.hs > g.as)).length, l = gs.filter(done).length - w;
+  const sr = focus.series || ''; const seriesOver = last && / win series /i.test(last.series) && (!next || round(next) !== round(last));
+  let nx;
+  if (live) { const m = live.away === US ? live.as : live.hs, t = live.away === US ? live.hs : live.as; nx = '<div class="nx"><div class="k"><span class="live">LIVE</span><span>' + esc(live.det || '') + '</span></div><div class="cd">' + m + '<i>–</i>' + t + '</div><div class="g">' + (live.away === US ? 'at ' : 'vs ') + esc(team(opp(live)).full) + ' · ' + esc(round(live)) + ' ' + esc(gameNo(live)) + (live.tv ? ' · ' + esc(live.tv) : '') + '</div></div>'; }
+  else if (next) { const k = kickMs(next.date, next.time); nx = '<div class="nx"><div class="k"><span>Next · ' + esc(round(next)) + ' ' + esc(gameNo(next)) + (ifNec(next) ? ' (if needed)' : '') + '</span><span>' + esc(next.tv || '') + '</span></div><div class="g">' + (next.away === US ? 'at ' : 'vs ') + esc(team(opp(next)).full) + ' · ' + esc(whenStr(next)) + '</div>' + (timed(next) ? '<div class="cd" data-cd="' + k + '">' + cdHTML(k) + '</div>' : '') + (next.line ? '<div class="mini" style="color:rgba(255,255,255,.75)">Line: ' + esc(next.line) + (next.ou ? ' · O/U ' + esc(next.ou) : '') + '</div>' : '') + '</div>'; }
+  else nx = '<div class="nx"><div class="g">' + (last && last.series && / win series /i.test(last.series) && /World Series/i.test(round(last)) && /LAD win/i.test(last.series) ? 'World Series champions.' : 'October is over for the Dodgers.') + '</div></div>';
+  const title = focus ? esc(round(focus)) + ' vs ' + esc(team(opp(focus)).nick) : 'Postseason';
+  return '<div class="hero">' + (team(US).logo ? '<img class="wm" src="' + esc(team(US).logo) + '" alt="">' : '') + '<div class="eb">Los Angeles Dodgers · ' + w + '-' + l + ' this postseason</div><h2>' + title + '</h2><div class="ser">' + esc(sr.replace(/^Series starts (\d+)\/(\d+)$/, (x, m, d) => 'Series starts ' + fmt({weekday:'long', month:'short', day:'numeric'}, new Date(Date.UTC(2026, m - 1, d, 18))))) + '</div>' + nx + '</div>'; }
+
+function statusHTML(g){ if (isLive(g)) return '<span class="livedot"></span>' + esc(g.det || 'Live') + ' · ' + g.as + '-' + g.hs; if (done(g)) { const m = g.away === US ? g.as : g.hs, t = g.away === US ? g.hs : g.as; return ours(g) ? '<b class="' + (m > t ? 'w' : 'l') + '">' + (m > t ? 'W' : 'L') + ' ' + m + '-' + t + '</b>' : 'Final ' + g.as + '-' + g.hs; } return esc(whenStr(g)) + (g.tv ? ' · ' + esc(g.tv) : ''); }
+function timelineHTML(){ const gs = G.filter(ours).map(cur); if (!gs.length) return '<div class="empty">No Dodgers games yet.</div>';
+  const up = gs.filter(g => !done(g)).filter((g, i) => i === 0 || !ifNec(g)), past = gs.filter(done).reverse();
+  return up.concat(past).map(g => { const A = (typeof ARTICLES !== 'undefined' ? ARTICLES[g.id] : null);
+    const arts = A && typeof articleCardHTML === 'function' ? (done(g) ? articleCardHTML(A.recap, 'recap') : '') + articleCardHTML(A.preview, 'preview', done(g) && !!A.recap) : '';
+    return '<div class="tl-g" id="game-' + esc(g.id) + '"><div class="tl-row"><span class="rd">' + esc(round(g)) + ' ' + esc(gameNo(g)) + (ifNec(g) ? '*' : '') + '</span><span class="m">' + logo(opp(g)) + (g.away === US ? 'at ' : 'vs ') + esc(team(opp(g)).nick) + '</span><span class="st" data-g="' + esc(g.id) + '">' + statusHTML(g) + '</span></div>' + arts + '</div>'; }).join('')
+    + (gs.some(g => !done(g) && ifNec(g)) ? '<div class="mini" style="padding:8px 16px 12px">* Later games in the series are played only if needed.</div>' : ''); }
+
+const ORDER = ['World Series', 'ALCS', 'NLCS', 'ALDS', 'NLDS', 'AL Wild Card', 'NL Wild Card'];
+const rank = r => { const i = ORDER.findIndex(x => r.indexOf(x) === 0); return i < 0 ? 99 : i; };
+function bracketHTML(){ const S = {}; G.map(cur).forEach(g => { const r = round(g); const k = r + '|' + [g.away, g.home].sort().join('-'); (S[k] = S[k] || {r, teams:[g.away, g.home].sort(), games:[]}).games.push(g); });
+  const list = Object.values(S).sort((a, b) => rank(a.r) - rank(b.r) || a.r.localeCompare(b.r));
+  if (!list.length) return '<div class="empty">The bracket fills in as the postseason is scheduled.</div>';
+  return list.map(s => { const wins = ab => s.games.filter(g => done(g) && ((g.away === ab && g.as > g.hs) || (g.home === ab && g.hs > g.as))).length;
+    const lastWith = s.games.filter(g => g.series).pop(); const over = s.games.some(g => / win series /i.test(g.series || '')); const winner = over ? s.teams.slice().sort((a, b) => wins(b) - wins(a))[0] : null;
+    const shown = s.games.filter(g => done(g) || isLive(g) || !ifNec(g) || !over).filter(g => !(over && !done(g)));
+    return '<div class="card sr' + (s.teams.includes(US) ? ' lad' : '') + '"><div class="hd"><span class="rd">' + esc(s.r) + '</span><span class="mini">' + esc(lastWith ? lastWith.series : '') + '</span></div><div class="bd">'
+      + s.teams.map(ab => '<div class="tm' + (winner && winner !== ab ? ' lose' : '') + '">' + logo(ab) + '<span class="n">' + esc(team(ab).full) + '</span><span class="wn">' + wins(ab) + '</span></div>').join('')
+      + '<div class="gl">' + shown.map(g => '<div><span>' + esc(gameNo(g)) + (ifNec(g) && !done(g) ? '*' : '') + ' · ' + esc(team(g.away).nick) + ' at ' + esc(team(g.home).nick) + '</span><span data-g="' + esc(g.id) + '">' + (done(g) ? 'Final ' + g.as + '-' + g.hs : isLive(g) ? '<span class="livedot"></span>' + esc(g.det || 'Live') + ' ' + g.as + '-' + g.hs : esc(whenStr(g))) + '</span></div>').join('') + '</div></div></div>'; }).join(''); }
+
+function render(full){ $('#hero').innerHTML = heroHTML(); if (full) { $('#timeline').innerHTML = timelineHTML(); $('#bracket').innerHTML = bracketHTML(); }
+  else { G.forEach(g0 => { const g = cur(g0); document.querySelectorAll('.st[data-g="' + g.id + '"]').forEach(el => { el.innerHTML = statusHTML(g); }); }); $('#bracket').innerHTML = bracketHTML(); } }
+function tick(){ document.querySelectorAll('[data-cd]').forEach(el => { const k = +el.dataset.cd; el.innerHTML = k - Date.now() <= 0 ? 'Starting now' : cdHTML(k); }); }
+const API = /(^|\.)djgolding\.com$/.test(location.hostname) ? '/api' : 'https://djgolding.com/api';
+let TIMER;
+async function poll(){ const days = [TODAY, addDay(TODAY, -1)].filter(d => G.some(g => g.date === d && Math.abs(kickMs(g.date, g.time) - Date.now()) < 6 * 3600e3)); let any = false;
+  for (const d of days) { try { const r = await fetch(API + '/mlb/scoreboard?date=' + d.replace(/-/g, ''), {cache:'no-store'}); if (!r.ok) continue; const j = await r.json(); (j.games || []).forEach(e => { LIVE[e.id] = e; if (isLive(e)) any = true; }); } catch (e) {} }
+  if (days.length) { render(false); $('#upd').textContent = 'live scores ' + fmt({hour:'numeric', minute:'2-digit'}); }
+  clearTimeout(TIMER); TIMER = setTimeout(poll, any ? 30e3 : 300e3); }
+render(true);
+if (location.hash) { const el = document.getElementById(location.hash.slice(1)); if (el) setTimeout(() => el.scrollIntoView({block:'start'}), 50); }
+setInterval(tick, 1000); setTimeout(poll, 600);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
+})();
+</script>
+
+</body>
+</html>

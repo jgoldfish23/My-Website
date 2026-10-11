@@ -20,7 +20,7 @@
 :root{
   --bg:#05070d; --surface:rgba(255,255,255,.035); --surface-2:rgba(255,255,255,.06); --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.05);
   --ink:#eef2f8; --ink-2:#a9b3c4; --ink-3:#6f7a8c; --live:#ff4d6a; --gold:#fbbf24;
-  --cfb:#3b7bff; --nfl:#ff3b5c; --nba:#a45bff;
+  --cfb:#3b7bff; --nfl:#ff3b5c; --nba:#a45bff; --mlb:#2f8cff;
   --plate:#fff; --sh:0 18px 40px -22px rgba(0,0,0,.85); --r:20px;
   --disp:"Inter Tight","Inter",system-ui,sans-serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --num:"Orbitron","Inter Tight",system-ui,sans-serif;
   color-scheme:dark;
@@ -243,6 +243,7 @@ body.boardmode .jsh{display:none}
     <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>College Football</a>
     <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><i></i>NFL</a>
     <a href="/nba/" data-s="nba" style="--c:#6d28d9"><i></i>NBA</a>
+    <a href="/mlb/" data-s="mlb" style="--c:#005a9c"><i></i>MLB</a>
   </nav>
 </div>
 <script>
@@ -4201,7 +4202,55 @@ Tarleton State|#582c83|#ffffff|Texans|UAC
 West Georgia|#0033a1|#db1a21|Wolves|UAC
 West Florida|#00543c|#006ba6|Argonauts|UAC
 </script>
-<script type="application/json" id="d-articles">{"cfb":{"2026-10-09-iowa-state-byu":{"r":"Bear Does Everything, the Defense Does the Rest"},"2026-10-17-notre-dame-byu":{"p":"Sixteen Straight, One Saturday Night"}},"nba":{"401909838":{"p":"Raise the Floor, Then the Roof"}},"nfl":{"401872981":{"p":"What's Left of the Birds Goes to London"}}}</script>
+<script type="text/plain" id="d-mlb">2026-09-29|10:00 PM|401907974|CHC|SD|0|8|FINAL|NLWC - Game 1|Peacock/NBCSN|SD leads series 1-0
+2026-09-29|2:00 PM|401907965|PHI|ATL|3|5|FINAL|NLWC - Game 1|NBC|ATL leads series 1-0
+2026-09-29|5:00 PM|401907896|CHW|HOU|6|3|FINAL|ALWC - Game 1|Peacock/NBCSN|CHW lead series 1-0
+2026-09-29|8:00 PM|401907924|BOS|NYY|0|9|FINAL|ALWC - Game 1|NBC|NYY lead series 1-0
+2026-09-30|10:00 PM|401907975|CHC|SD|1|4|FINAL|NLWC - Game 2|Peacock/NBCSN|SD wins series 2-0
+2026-09-30|2:00 PM|401907972|PHI|ATL|4|3|FINAL|NLWC - Game 2|NBC|Series tied 1-1
+2026-09-30|5:00 PM|401907897|CHW|HOU|7|3|FINAL|ALWC - Game 2|Peacock/NBCSN|CHW win series 2-0
+2026-09-30|8:00 PM|401907963|BOS|NYY|2|9|FINAL|ALWC - Game 2|NBC|NYY win series 2-0
+2026-10-01|8:00 PM|401907973|PHI|ATL|2|6|FINAL|NLWC - Game 3|NBC/Peacock|ATL wins series 2-1
+2026-10-03|1:00 PM|401907990|CHW|CLE|3|0|FINAL|ALDS - Game 1|TBS/truTV|CHW lead series 1-0
+2026-10-03|4:00 PM|401908007|ATL|LAD|3|5|FINAL|NLDS - Game 1|Fox|LAD lead series 1-0
+2026-10-03|6:30 PM|401907985|NYY|TB|0|1|FINAL|ALDS - Game 1|TBS/truTV|TB leads series 1-0
+2026-10-03|8:30 PM|401908002|SD|MIL|2|3|FINAL|NLDS - Game 1|FS1|MIL leads series 1-0
+2026-10-04|4:00 PM|401908003|SD|MIL|3|4|FINAL|NLDS - Game 2|FS1|MIL leads series 2-0
+2026-10-04|8:00 PM|401908014|ATL|LAD|3|2|FINAL|NLDS - Game 2|FS1|Series tied 1-1
+2026-10-05|5:00 PM|401907991|CHW|CLE|4|3|FINAL|ALDS - Game 2|TBS/truTV|CHW lead series 2-0
+2026-10-05|8:00 PM|401907986|NYY|TB|2|5|FINAL|ALDS - Game 2|TBS/truTV|TB leads series 2-0
+2026-10-06|6:00 PM|401908015|LAD|ATL|3|1|FINAL|NLDS - Game 3|FS1|LAD lead series 2-1
+2026-10-06|9:30 PM|401908004|MIL|SD|3|4|FINAL|NLDS - Game 3|FS1|MIL leads series 2-1
+2026-10-07|10:00 PM|401908005|MIL|SD|3|1|FINAL|NLDS - Game 4|FS1|MIL wins series 3-1
+2026-10-07|4:00 PM|401907992|CLE|CHW|9|3|FINAL|ALDS - Game 3|TBS/truTV|CHW lead series 2-1
+2026-10-07|6:00 PM|401908016|LAD|ATL|4|1|FINAL|NLDS - Game 4|FS1|LAD win series 3-1
+2026-10-07|8:00 PM|401907987|TB|NYY|4|3|FINAL|ALDS - Game 3|TBS/truTV|TB wins series 3-0
+2026-10-08|8:00 PM|401907993|CLE|CHW|9|5|FINAL|ALDS - Game 4|TBS/truTV|Series tied 2-2
+2026-10-10|8:00 PM|401907994|CHW|CLE|0|2|FINAL|ALDS - Game 5|TBS/truTV|CLE wins series 3-2
+2026-10-11|8:00 PM|401908030|LAD|MIL|||SCHEDULED|NLCS - Game 1|Fox/FS1|Series starts 10/11
+2026-10-12|5:00 PM|401908031|LAD|MIL|||SCHEDULED|NLCS - Game 2|Fox/FS1|Series starts 10/11
+2026-10-12|8:00 PM|401908023|CLE|TB|||SCHEDULED|ALCS - Game 1|TBS/truTV|Series starts 10/12
+2026-10-13|8:00 PM|401908024|CLE|TB|||SCHEDULED|ALCS - Game 2|TBS/truTV|Series starts 10/12
+2026-10-14|8:00 PM|401908032|MIL|LAD|||SCHEDULED|NLCS - Game 3|Fox/FS1|Series starts 10/11
+2026-10-15|6:00 PM|401908025|TB|CLE|||SCHEDULED|ALCS - Game 3|TBS/truTV|Series starts 10/12
+2026-10-15|9:00 PM|401908033|MIL|LAD|||SCHEDULED|NLCS - Game 4|Fox/FS1|Series starts 10/11
+2026-10-16|6:00 PM|401908026|TB|CLE|||SCHEDULED|ALCS - Game 4|TBS/truTV|Series starts 10/12
+2026-10-16|9:00 PM|401908034|MIL|LAD|||SCHEDULED|NLCS - Game 5 If Necessary|Fox/FS1|Series starts 10/11
+2026-10-17|8:00 PM|401908027|TB|CLE|||SCHEDULED|ALCS - Game 5 If Necessary|TBS/truTV|Series starts 10/12
+2026-10-18|8:00 PM|401908035|LAD|MIL|||SCHEDULED|NLCS - Game 6 If Necessary|Fox/FS1|Series starts 10/11
+2026-10-19|5:00 PM|401908028|CLE|TB|||SCHEDULED|ALCS - Game 6 If Necessary|TBS/truTV|Series starts 10/12
+2026-10-19|8:00 PM|401908036|LAD|MIL|||SCHEDULED|NLCS - Game 7 If Necessary|Fox/FS1|Series starts 10/11
+2026-10-20|8:00 PM|401908029|CLE|TB|||SCHEDULED|ALCS - Game 7 If Necessary|TBS/truTV|Series starts 10/12
+2026-10-23|TBD|401908042|TBD|TBD|||SCHEDULED|World Series - Game 1|Fox|
+2026-10-24|TBD|401908043|TBD|TBD|||SCHEDULED|World Series - Game 2|Fox|
+2026-10-26|TBD|401908044|TBD|TBD|||SCHEDULED|World Series - Game 3|Fox|
+2026-10-27|TBD|401908045|TBD|TBD|||SCHEDULED|World Series - Game 4|Fox|
+2026-10-28|TBD|401908046|TBD|TBD|||SCHEDULED|World Series - Game 5 If Necessary|Fox|
+2026-10-30|TBD|401908047|TBD|TBD|||SCHEDULED|World Series - Game 6 If Necessary|Fox|
+2026-10-31|TBD|401908048|TBD|TBD|||SCHEDULED|World Series - Game 7 If Necessary|Fox|
+</script>
+<script type="application/json" id="d-mlbteams">{"ARI":{"alt":"#000000","color":"#aa182c","full":"Arizona Diamondbacks","loc":"Arizona","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/ari.png","nick":"Diamondbacks"},"ATH":{"alt":"#efb21e","color":"#003831","full":"Athletics","loc":"Athletics","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/ath.png","nick":"Athletics"},"ATL":{"alt":"#ba0c2f","color":"#0c2340","full":"Atlanta Braves","loc":"Atlanta","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/atl.png","nick":"Braves"},"BAL":{"alt":"#000000","color":"#df4601","full":"Baltimore Orioles","loc":"Baltimore","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/bal.png","nick":"Orioles"},"BOS":{"alt":"#bd3039","color":"#0d2b56","full":"Boston Red Sox","loc":"Boston","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/bos.png","nick":"Red Sox"},"CHC":{"alt":"#cc3433","color":"#0e3386","full":"Chicago Cubs","loc":"Chicago","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/chc.png","nick":"Cubs"},"CHW":{"alt":"#c4ced4","color":"#000000","full":"Chicago White Sox","loc":"Chicago","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/chw.png","nick":"White Sox"},"CIN":{"alt":"#ffffff","color":"#c6011f","full":"Cincinnati Reds","loc":"Cincinnati","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/cin.png","nick":"Reds"},"CLE":{"alt":"#e31937","color":"#002b5c","full":"Cleveland Guardians","loc":"Cleveland","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/cle.png","nick":"Guardians"},"COL":{"alt":"#000000","color":"#33006f","full":"Colorado Rockies","loc":"Colorado","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/col.png","nick":"Rockies"},"DET":{"alt":"#ff4713","color":"#0a2240","full":"Detroit Tigers","loc":"Detroit","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/det.png","nick":"Tigers"},"HOU":{"alt":"#eb6e1f","color":"#002d62","full":"Houston Astros","loc":"Houston","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/hou.png","nick":"Astros"},"KC":{"alt":"#7ab2dd","color":"#004687","full":"Kansas City Royals","loc":"Kansas City","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/kc.png","nick":"Royals"},"LAA":{"alt":"#c4ced4","color":"#ba0021","full":"Los Angeles Angels","loc":"Los Angeles","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/laa.png","nick":"Angels"},"LAD":{"alt":"#ffffff","color":"#005a9c","full":"Los Angeles Dodgers","loc":"Los Angeles","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/lad.png","nick":"Dodgers"},"MIA":{"alt":"#000000","color":"#00a3e0","full":"Miami Marlins","loc":"Miami","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/mia.png","nick":"Marlins"},"MIL":{"alt":"#ffc72c","color":"#13294b","full":"Milwaukee Brewers","loc":"Milwaukee","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/mil.png","nick":"Brewers"},"MIN":{"alt":"#e20e32","color":"#031f40","full":"Minnesota Twins","loc":"Minnesota","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/min.png","nick":"Twins"},"NYM":{"alt":"#ff5910","color":"#002d72","full":"New York Mets","loc":"New York","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/nym.png","nick":"Mets"},"NYY":{"alt":"#c4ced4","color":"#132448","full":"New York Yankees","loc":"New York","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/nyy.png","nick":"Yankees"},"PHI":{"alt":"#003278","color":"#e81828","full":"Philadelphia Phillies","loc":"Philadelphia","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/phi.png","nick":"Phillies"},"PIT":{"alt":"#fdb827","color":"#000000","full":"Pittsburgh Pirates","loc":"Pittsburgh","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/pit.png","nick":"Pirates"},"SD":{"alt":"#ffc425","color":"#2f241d","full":"San Diego Padres","loc":"San Diego","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/sd.png","nick":"Padres"},"SEA":{"alt":"#0c2c56","color":"#005c5c","full":"Seattle Mariners","loc":"Seattle","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/sea.png","nick":"Mariners"},"SF":{"alt":"#fd5a1e","color":"#000000","full":"San Francisco Giants","loc":"San Francisco","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/sf.png","nick":"Giants"},"STL":{"alt":"#001541","color":"#be0a14","full":"St. Louis Cardinals","loc":"St. Louis","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/stl.png","nick":"Cardinals"},"TB":{"alt":"#8fbce6","color":"#092c5c","full":"Tampa Bay Rays","loc":"Tampa Bay","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/tb.png","nick":"Rays"},"TEX":{"alt":"#c0111f","color":"#003278","full":"Texas Rangers","loc":"Texas","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/tex.png","nick":"Rangers"},"TOR":{"alt":"#6cace5","color":"#134a8e","full":"Toronto Blue Jays","loc":"Toronto","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/tor.png","nick":"Blue Jays"},"WSH":{"alt":"#11225b","color":"#ab0003","full":"Washington Nationals","loc":"Washington","logo":"https://a.espncdn.com/i/teamlogos/mlb/500/wsh.png","nick":"Nationals"}}</script>
+<script type="application/json" id="d-articles">{"cfb":{"2026-10-09-iowa-state-byu":{"r":"Bear Does Everything, the Defense Does the Rest"},"2026-10-17-notre-dame-byu":{"p":"Sixteen Straight, One Saturday Night"}},"mlb":{"401908030":{"p":"The Sequel Nobody in Milwaukee Asked to Lose Again"}},"nba":{"401909838":{"p":"Raise the Floor, Then the Roof"}},"nfl":{"401872981":{"p":"What's Left of the Birds Goes to London"}}}</script>
 
 <script>
 (function(){
@@ -4244,16 +4293,21 @@ const NFLW = txt('d-nflweeks').split('\n').map(l => l.split('|')).filter(p => p.
 const NFLT = JSON.parse(txt('d-nflteams') || '{}');
 const NBA = txt('d-nba').split('\n').map(l => l.split('|')).filter(p => p.length >= 10).map(p => ({sport:'nba', stype:+p[0], date:p[1], time:p[2], id:p[3], away:p[4], home:p[5], as:p[6] === '' ? null : +p[6], hs:p[7] === '' ? null : +p[7], st:p[8], neutral:p[9] === 'N', tv:p[10] || ''}));
 const NBAT = JSON.parse(txt('d-nbateams') || '{}');
+const MLB = txt('d-mlb').split('\n').map(l => l.split('|')).filter(p => p.length >= 9).map(p => ({sport:'mlb', date:p[0], time:p[1], id:p[2], away:p[3], home:p[4], as:p[5] === '' ? null : +p[5], hs:p[6] === '' ? null : +p[6], st:p[7], note:p[8], tv:p[9] || '', series:p[10] || '', spread:null}));
+const MLBT = JSON.parse(txt('d-mlbteams') || '{}');
+const mlbRound = g => ((g && g.note) || '').split(' - ')[0] || 'Postseason';
 
 /* ---------- each sport answers the same few questions ---------- */
 const ICON = {
   fb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><ellipse cx="12" cy="12" rx="10" ry="6" transform="rotate(-35 12 12)"/><path d="M9 15l6-6M10.5 11.5l2 2M12.5 9.5l2 2M8.5 13.5l2 2"/></svg>',
+  base: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M6.5 4.8c2 2.2 2 12.2 0 14.4M17.5 4.8c-2 2.2-2 12.2 0 14.4"/></svg>',
   bb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2v20M5 5c3 3 3 11 0 14M19 5c-3 3-3 11 0 14"/></svg>'
 };
 const SPORT = {
   cfb: {name:'College Football', short:'College', c:'var(--cfb)', icon:ICON.fb, url:'/cfb/'},
   nfl: {name:'NFL', short:'NFL', c:'var(--nfl)', icon:ICON.fb, url:'/nfl/'},
-  nba: {name:'NBA', short:'NBA', c:'var(--nba)', icon:ICON.bb, url:'/nba/'}
+  nba: {name:'NBA', short:'NBA', c:'var(--nba)', icon:ICON.bb, url:'/nba/'},
+  mlb: {name:'MLB', short:'MLB', c:'var(--mlb)', icon:ICON.base, url:'/mlb/'}
 };
 const played = g => g.st === 'FINAL' && g.as != null && g.hs != null;
 const cfbShort = n => n.replace(/ State$/, ' St').replace(/^North Carolina$/, 'N Carolina');
@@ -4265,13 +4319,17 @@ const O = {
   nfl: { name: ab => (NFLT[ab] && NFLT[ab].nick) || ab, full: ab => (NFLT[ab] && NFLT[ab].full) || ab, nick: ab => (NFLT[ab] && NFLT[ab].nick) || '', logo: ab => '/nfl/img/logos/' + ab + '.png', color: ab => (NFLT[ab] && NFLT[ab].color) || '#334155', alt: ab => (NFLT[ab] && NFLT[ab].alt) || '', group: ab => NFLT[ab] ? NFLT[ab].conf + ' ' + NFLT[ab].div : '',
     href: g => '/nfl/#/game/' + g.id, teamHref: ab => '/nfl/#/team/' + encodeURIComponent(ab), list: () => NFL, recOnly: g => g.stype === 2 },
   nba: { name: ab => (NBAT[ab] && NBAT[ab].nick) || ab, full: ab => (NBAT[ab] && NBAT[ab].full) || ab, nick: ab => (NBAT[ab] && NBAT[ab].nick) || '', logo: ab => '/nba/img/logos/' + ab + '.png', color: ab => (NBAT[ab] && NBAT[ab].color) || '#334155', alt: ab => (NBAT[ab] && NBAT[ab].alt) || '', group: ab => NBAT[ab] ? NBAT[ab].conf + ' · ' + NBAT[ab].div : '',
-    href: g => '/nba/#/game/' + g.id, teamHref: ab => '/nba/#/team/' + encodeURIComponent(ab), list: () => NBA, recOnly: g => g.stype !== 1 || !NBA.some(x => x.stype === 2 && played(x)) }
+    href: g => '/nba/#/game/' + g.id, teamHref: ab => '/nba/#/team/' + encodeURIComponent(ab), list: () => NBA, recOnly: g => g.stype !== 1 || !NBA.some(x => x.stype === 2 && played(x)) },
+  /* MLB is the Dodgers' postseason for now: the "group" line is the current series */
+  mlb: { name: ab => (MLBT[ab] && MLBT[ab].nick) || ab, full: ab => (MLBT[ab] && MLBT[ab].full) || ab, nick: ab => (MLBT[ab] && MLBT[ab].nick) || '', logo: ab => (MLBT[ab] && MLBT[ab].logo) || null, color: ab => (MLBT[ab] && MLBT[ab].color) || '#334155', alt: ab => (MLBT[ab] && MLBT[ab].alt) || '',
+    group: ab => { const gs = MLB.filter(g => g.away === ab || g.home === ab); const g = gs.find(x => !played(x)) || gs[gs.length - 1]; return g ? mlbRound(g) + (g.series && !/^Series starts/.test(g.series) ? ' · ' + g.series : '') : ''; },
+    href: g => '/mlb/#game-' + g.id, teamHref: () => '/mlb/', list: () => MLB }
 };
 
 /* ---------- live scores overlay, filled by the hubs' proxies ---------- */
-const LIVE = {cfb:{}, nfl:{}, nba:{}};
+const LIVE = {cfb:{}, nfl:{}, nba:{}, mlb:{}};
 const applyLive = g => { const L = LIVE[g.sport][g.id]; if (!L) return g; const o = Object.assign({}, g); if (L.as !== '' && L.as != null) o.as = +L.as; if (L.hs !== '' && L.hs != null) o.hs = +L.hs; o.st = L.st; o.live = isLiveSt(L.st); return o; };
-const liveClock = g => { const L = LIVE[g.sport][g.id]; if (!L) return 'In progress'; if (L.per && L.clk) return (g.sport !== 'nba' && L.per > 4 ? 'OT' : 'Q' + L.per) + ' ' + L.clk; return L.det || 'In progress'; };
+const liveClock = g => { const L = LIVE[g.sport][g.id]; if (!L) return 'In progress'; if (g.sport === 'mlb') return L.det || 'In progress'; if (L.per && L.clk) return (g.sport !== 'nba' && L.per > 4 ? 'OT' : 'Q' + L.per) + ' ' + L.clk; return L.det || 'In progress'; };
 
 /* ---------- favorites, from each hub's own settings ---------- */
 const ARTS = (() => { try { return JSON.parse(document.getElementById('d-articles').textContent) || {}; } catch (e) { return {}; } })();
@@ -4279,7 +4337,7 @@ const ARTS = (() => { try { return JSON.parse(document.getElementById('d-article
 document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('.tc-ar[data-go]'); if (!a) return; e.preventDefault(); e.stopPropagation(); location.href = a.dataset.go; }, true);
 document.addEventListener('keydown', e => { if (e.key !== 'Enter') return; const a = e.target.closest && e.target.closest('.tc-ar[data-go]'); if (a) { e.preventDefault(); location.href = a.dataset.go; } }, true);
 const cfbSet = ls('cfb-settings') || {}, nflSet = ls('nfl-settings') || {}, nbaSet = ls('nba-settings') || {};
-const FAVS = [cfbSet.fav || 'BYU'].map(n => ({sport:'cfb', team:n})).concat((('fav' in nflSet) ? nflSet.fav : 'PHI') ? [{sport:'nfl', team:('fav' in nflSet) ? nflSet.fav : 'PHI'}] : [], [{sport:'nba', team:nbaSet.fav || 'UTAH'}]);
+const FAVS = [cfbSet.fav || 'BYU'].map(n => ({sport:'cfb', team:n})).concat((('fav' in nflSet) ? nflSet.fav : 'PHI') ? [{sport:'nfl', team:('fav' in nflSet) ? nflSet.fav : 'PHI'}] : [], [{sport:'nba', team:nbaSet.fav || 'UTAH'}], MLB.length ? [{sport:'mlb', team:'LAD'}] : []);
 const isFavTeam = (sport, t) => FAVS.some(f => f.sport === sport && f.team === t);
 const favGame = g => isFavTeam(g.sport, g.away) || isFavTeam(g.sport, g.home);
 
@@ -4312,6 +4370,7 @@ function heroHTML(){
   $('#h-lead').textContent = lv ? lv + ' game' + (lv === 1 ? ' is' : 's are') + ' live right now. Your teams come first, then everything on TV today.' : 'College football, the NFL and the NBA in one place: your teams first, then everything on TV today.';
   const chips = [];
   if (lv) chips.push('<a class="chip live" href="#live-wrap"><i></i>' + lv + ' live now</a>');
+  { const mg = MLB.filter(g => !played(g) && g.st !== 'CANCELED')[0] || (MLB.length && MLB[MLB.length - 1].date >= addDay(TODAY, -2) ? MLB[MLB.length - 1] : null); if (mg) chips.push('<a class="chip" style="--c:var(--mlb)" href="/mlb/"><i></i>MLB \u00b7 ' + esc(mlbRound(mg).replace(/ - .*/, '')) + '</a>'); }
   chips.push('<a class="chip" style="--c:var(--cfb)" href="/cfb/#/week/' + CFB_WEEK + '"><i></i>College · Week ' + CFB_WEEK + '</a>', '<a class="chip" style="--c:var(--nfl)" href="/nfl/#/week/' + nflWeek.week + '"><i></i>NFL · ' + esc(nflWeek.label) + '</a>', '<a class="chip" style="--c:var(--nba)" href="/nba/#/scores"><i></i>NBA · ' + (nbaPre ? 'preseason' : 'regular season') + '</a>');
   $('#h-pulse').innerHTML = chips.join('');
   /* a favorite playing now wins; otherwise the soonest favorite game */
@@ -4332,8 +4391,8 @@ function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(
   const live = gs.find(g => g.live), last = gs.filter(played).pop(), next = gs.find(g => !played(g) && !g.live && g.st !== 'CANCELED' && g.st !== 'POSTPONED');
   const c1 = cardColor(o.color(t), o.alt(t)); const c2 = mixHex(c1, '#000000', .55);
   const rk = o.rank ? o.rank(t, gs) : 0; const counted = gs.filter(g => played(g) && (!o.recOnly || o.recOnly(g)));
-  const preseason = f.sport === 'nba' && nbaPre;
-  const meta = (f.sport === 'cfb' && o.nick(t) ? esc(o.nick(t)) + ' · ' : '') + (counted.length ? '<b>' + record(f.sport, t, gs) + '</b>' + (preseason ? ' preseason' : '') : (preseason ? 'Preseason' : 'No games yet')) + (o.group(t) ? ' · ' + esc(o.group(t)) : '');
+  const preseason = f.sport === 'nba' && nbaPre; const post = f.sport === 'mlb';
+  const meta = (f.sport === 'cfb' && o.nick(t) ? esc(o.nick(t)) + ' · ' : '') + (counted.length ? '<b>' + record(f.sport, t, gs) + '</b>' + (preseason ? ' preseason' : post ? ' postseason' : '') : (preseason ? 'Preseason' : 'No games yet')) + (o.group(t) ? ' · ' + esc(o.group(t)) : '');
   let nx;
   if (live) { const mine = live.home === t ? live.hs : live.as, them = live.home === t ? live.as : live.hs; nx = '<div class="tc-next"><div class="tc-k"><span class="pill-live">LIVE</span><span>' + esc(liveClock(live)) + '</span></div><div class="tc-sc">' + mine + '<span class="dim">–</span>' + them + '<span class="dim">' + (live.home === t ? 'vs ' : 'at ') + esc(o.name(live.home === t ? live.away : live.home)) + '</span></div></div>'; }
   else if (next) { const opp = next.home === t ? next.away : next.home; const k = kickMs(next.date, next.time); nx = '<div class="tc-next"><div class="tc-k"><span>Next</span><span>' + esc(dayStr(next)) + (timed(next) ? ' · ' + esc(kickStr(next)) : '') + '</span></div><div class="tc-g">' + (next.neutral ? 'vs' : (next.home === t ? 'vs' : 'at')) + ' ' + esc(o.full(opp)) + ' <span class="dim">' + (net(next) ? '· ' + esc(net(next)) : '') + (lineStr(next, o) ? ' · ' + esc(lineStr(next, o)) : '') + '</span></div>' + (timed(next) ? '<div class="tc-cd" data-cd="' + k + '">' + cdHTML(k) + '</div>' : '') + '</div>'; }
@@ -4346,7 +4405,7 @@ function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(
   const logo = o.logo(t);
   return '<a class="tc rise" style="--i:' + i + ';--tc:' + c1 + ';--tc2:' + c2 + '" href="' + o.teamHref(t) + '" aria-label="' + esc(o.full(t)) + ' team page">' + (logo ? '<img class="wm" src="' + logo + '" alt="">' : '')
     + '<div class="tc-top"><span class="tc-sport">' + SPORT[f.sport].icon + esc(SPORT[f.sport].short) + '</span>' + (rk ? '<span class="tc-rank">#' + rk + '</span>' : '') + '</div>'
-    + '<div class="tc-id">' + plate(logo) + '<div style="min-width:0"><div class="tc-name">' + esc(f.sport === 'cfb' ? t : o.full(t)) + '</div><div class="tc-meta">' + meta + '</div></div></div>'
+    + '<div class="tc-id">' + plate(logo) + '<div style="min-width:0"><div class="tc-name">' + esc(f.sport === 'cfb' ? t : f.sport === 'mlb' ? o.nick(t) : o.full(t)) + '</div><div class="tc-meta">' + meta + '</div></div></div>'
     + nx + lastLine + '</a>'; }
 function teamsHTML(){ const cards = FAVS.map((f, i) => teamCard(f, i)).filter(Boolean);
   if (!FAVS.some(f => f.sport === 'nfl')) cards.splice(Math.min(2, cards.length), 0, '<a class="tc pick rise" style="--i:2" href="/nfl/#/settings"><div><span class="tc-sport">' + ICON.fb + 'NFL</span><div class="big">Pick your NFL team</div><div class="small">Choose one in <b>NFL settings</b> and its next game shows up here with a countdown.</div></div></a>');
@@ -4354,7 +4413,7 @@ function teamsHTML(){ const cards = FAVS.map((f, i) => teamCard(f, i)).filter(Bo
   $('#t-note').textContent = 'tap a card for the team page'; }
 
 /* ---------- live now ---------- */
-function liveAll(){ const out = []; [CFB.filter(g => g.week === CFB_WEEK), NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype), NBA.filter(g => g.date === TODAY || g.date === addDay(TODAY, -1))].forEach(list => list.map(applyLive).filter(g => g.live).forEach(g => out.push(g))); return out; }
+function liveAll(){ const out = []; [CFB.filter(g => g.week === CFB_WEEK), NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype), NBA.filter(g => g.date === TODAY || g.date === addDay(TODAY, -1)), MLB.filter(g => g.date === TODAY || g.date === addDay(TODAY, -1))].forEach(list => list.map(applyLive).filter(g => g.live).forEach(g => out.push(g))); return out; }
 function liveHTML(){ const lv = liveAll(); $('#live-wrap').hidden = !lv.length; if (!lv.length) return; $('#live-n').textContent = lv.length + ' game' + (lv.length === 1 ? '' : 's');
   lv.sort((a, b) => (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0));
   $('#live').innerHTML = lv.map(g => { const o = O[g.sport]; return '<a class="lc" style="--c:' + SPORT[g.sport].c + '" href="' + o.href(g) + '"><div class="lc-h"><span>' + SPORT[g.sport].short + '</span><span>' + esc(liveClock(g)) + '</span></div>' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + '</a>'; }).join(''); }
@@ -4362,6 +4421,7 @@ function liveHTML(){ const lv = liveAll(); $('#live-wrap').hidden = !lv.length; 
 /* ---------- worth tuning in: live games in overtime, close late, or an upset in the making ---------- */
 const clkSecs = c => { const m = /^(\d+):(\d\d)/.exec(c || ''); return m ? +m[1] * 60 + +m[2] : null; };
 function tuneWhy(g){ const L = LIVE[g.sport][g.id] || {}; const per = +L.per || 0; if (!per) return null;
+  if (g.sport === 'mlb') { const m = Math.abs((g.as || 0) - (g.hs || 0)), mine = favGame(g) ? 25 : 0; if (per > 9) return {s: 200 + mine - m, t: 'Extra innings'}; if (per >= 8 && m <= 2) return {s: 150 + mine - m, t: m ? m + '-run game in the ' + (per === 8 ? '8th' : '9th') : 'Tied in the ' + (per === 8 ? '8th' : '9th')}; return null; }
   const nba = g.sport === 'nba', left = clkSecs(L.clk), m = Math.abs((g.as || 0) - (g.hs || 0)), mine = favGame(g) ? 25 : 0;
   if (per > 4) return {s: 200 + mine - m, t: 'Overtime' + (m ? '' : ' · tied')};
   if (per === 4 && (nba ? (left != null && left <= 360 && m <= 6) : m <= 8)) return {s: 150 + mine - m, t: m === 0 ? 'Tied in the 4th' : (nba ? m + '-point game, ' + Math.ceil(left / 60) + ' min left' : 'One-score game in the 4th')};
@@ -4381,8 +4441,9 @@ function tvItems(day){
   const cfb = CFB.filter(g => g.date === day && g.tv && (NAT.test(net(g)) || favGame(g))).map(applyLive).map(g => ({g, s:(favGame(g) ? 1000 : 0) + (g.ar && g.hr ? 200 - g.ar - g.hr : (g.ar || g.hr) ? 80 - (g.ar || g.hr) : 0)})).sort((a, b) => b.s - a.s).slice(0, 10).map(x => x.g);
   const nfl = NFL.filter(g => g.date === day).map(applyLive);
   const nba = NBA.filter(g => g.date === day).map(applyLive).sort((a, b) => (favGame(b) ? 2 : b.tv ? 1 : 0) - (favGame(a) ? 2 : a.tv ? 1 : 0)).slice(0, 8);
-  const total = CFB.filter(g => g.date === day && g.tv).length + NFL.filter(g => g.date === day).length + NBA.filter(g => g.date === day).length;
-  return {all: cfb.concat(nfl, nba).sort((a, b) => (kickMs(a.date, a.time) || 0) - (kickMs(b.date, b.time) || 0) || (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0)), total}; }
+  const mlb = MLB.filter(g => g.date === day).map(applyLive);
+  const total = CFB.filter(g => g.date === day && g.tv).length + NFL.filter(g => g.date === day).length + NBA.filter(g => g.date === day).length + mlb.length;
+  return {all: cfb.concat(nfl, nba, mlb).sort((a, b) => (kickMs(a.date, a.time) || 0) - (kickMs(b.date, b.time) || 0) || (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0)), total}; }
 function tvHTML(){ const day = tvDay(); const {all, total} = tvItems(day);
   $('#tv-h').textContent = day === TODAY ? 'On TV today' : (day === addDay(TODAY, 1) ? 'On TV tomorrow' : 'Next on TV · ' + fmt({weekday:'long'}, new Date(kickMs(day, '12:00 PM'))));
   $('#tv-note').textContent = all.length ? (all.length < total ? all.length + ' of ' + total + ' games' : total + ' game' + (total === 1 ? '' : 's')) : '';
@@ -4426,6 +4487,7 @@ async function poll(){ const jobs = [];
   if (near(CFB.filter(g => g.week === CFB_WEEK), 5)) for (const grp of ['80', '81']) jobs.push(getJ(API + '/cfb/scoreboard?week=' + CFB_WEEK + '&groups=' + grp).then(j => { (j && j.games || []).forEach(e => { LIVE.cfb[e.date + '|' + e.away.n + '|' + e.home.n] = slim(e); }); }));
   if (near(NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype), 5)) jobs.push(getJ(API + '/nfl/scoreboard?week=' + nflWeek.week + '&stype=' + nflWeek.stype).then(j => { (j && j.games || []).forEach(e => { LIVE.nfl[e.id] = slim(e); }); }));
   for (const d of [TODAY, addDay(TODAY, -1)]) if (near(NBA.filter(g => g.date === d), 4)) jobs.push(getJ(API + '/nba/scoreboard?date=' + d.replace(/-/g, '')).then(j => { (j && j.games || []).forEach(e => { LIVE.nba[e.id] = slim(e); }); }));
+  for (const d of [TODAY, addDay(TODAY, -1)]) if (near(MLB.filter(g => g.date === d), 5)) jobs.push(getJ(API + '/mlb/scoreboard?date=' + d.replace(/-/g, '')).then(j => { (j && j.games || []).forEach(e => { LIVE.mlb[e.id] = slim(e); }); }));
   if (jobs.length) { await Promise.all(jobs); LAST = Date.now(); $('#fd').classList.remove('anim'); render(); }
   const anyLive = Object.values(LIVE).some(m => Object.values(m).some(x => isLiveSt(x.st)));
   clearTimeout(TIMER); TIMER = setTimeout(poll, anyLive ? 30e3 : (jobs.length ? 120e3 : 600e3)); }

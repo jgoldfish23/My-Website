@@ -1,0 +1,170 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Jamo Sports Hub//Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Los Angeles Dodgers · Jamo Sports Hub
+X-WR-TIMEZONE:America/Denver
+REFRESH-INTERVAL;VALUE=DURATION:PT6H
+X-PUBLISHED-TTL:PT6H
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:mlb-401908007@djgolding.com
+DTSTAMP:20261011T031840Z
+DTSTART;TZID=America/New_York:20261003T160000
+DTEND;TZID=America/New_York:20261003T191500
+SUMMARY:⚾ Los Angeles Dodgers 5\, Atlanta Braves 3 (W) · NLDS Game 1
+DESCRIPTION:TV: Fox\nGame page: https://djgolding.com/mlb/#game-401908007
+URL:https://djgolding.com/mlb/#game-401908007
+LOCATION:Dodger Stadium\, Los Angeles\, California
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mlb-401908014@djgolding.com
+DTSTAMP:20261011T031840Z
+DTSTART;TZID=America/New_York:20261004T200000
+DTEND;TZID=America/New_York:20261004T231500
+SUMMARY:⚾ Los Angeles Dodgers 2\, Atlanta Braves 3 (L) · NLDS Game 2
+DESCRIPTION:TV: FS1\nGame page: https://djgolding.com/mlb/#game-401908014
+URL:https://djgolding.com/mlb/#game-401908014
+LOCATION:Dodger Stadium\, Los Angeles\, California
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mlb-401908015@djgolding.com
+DTSTAMP:20261011T031840Z
+DTSTART;TZID=America/New_York:20261006T180000
+DTEND;TZID=America/New_York:20261006T211500
+SUMMARY:⚾ Los Angeles Dodgers 3\, Atlanta Braves 1 (W) · NLDS Game 3
+DESCRIPTION:TV: FS1\nGame page: https://djgolding.com/mlb/#game-401908015
+URL:https://djgolding.com/mlb/#game-401908015
+LOCATION:Truist Park\, Atlanta\, Georgia
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mlb-401908016@djgolding.com
+DTSTAMP:20261011T031840Z
+DTSTART;TZID=America/New_York:20261007T180000
+DTEND;TZID=America/New_York:20261007T211500
+SUMMARY:⚾ Los Angeles Dodgers 4\, Atlanta Braves 1 (W) · NLDS Game 4
+DESCRIPTION:TV: FS1\nGame page: https://djgolding.com/mlb/#game-401908016
+URL:https://djgolding.com/mlb/#game-401908016
+LOCATION:Truist Park\, Atlanta\, Georgia
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mlb-401908030@djgolding.com
+DTSTAMP:20261011T031840Z
+DTSTART;TZID=America/New_York:20261011T200000
+DTEND;TZID=America/New_York:20261011T231500
+SUMMARY:⚾ Los Angeles Dodgers at Milwaukee Brewers · NLCS Game 1
+DESCRIPTION:TV: Fox/FS1\nLine: MIL -113 · O/U 6\nJamo's preview: The Seque
+ l Nobody in Milwaukee Asked to Lose Again\nGame page: https://djgolding.co
+ m/mlb/#game-401908030
+URL:https://djgolding.com/mlb/#game-401908030
+LOCATION:American Family Field\, Milwaukee\, Wisconsin
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mlb-401908031@djgolding.com
+DTSTAMP:20261011T031840Z
+DTSTART;TZID=America/New_York:20261012T170000
+DTEND;TZID=America/New_York:20261012T201500
+SUMMARY:⚾ Los Angeles Dodgers at Milwaukee Brewers · NLCS Game 2
+DESCRIPTION:TV: Fox/FS1\nGame page: https://djgolding.com/mlb/#game-4019080
+ 31
+URL:https://djgolding.com/mlb/#game-401908031
+LOCATION:American Family Field\, Milwaukee\, Wisconsin
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mlb-401908032@djgolding.com
+DTSTAMP:20261011T031840Z
+DTSTART;TZID=America/New_York:20261014T200000
+DTEND;TZID=America/New_York:20261014T231500
+SUMMARY:⚾ Los Angeles Dodgers vs Milwaukee Brewers · NLCS Game 3
+DESCRIPTION:TV: Fox/FS1\nGame page: https://djgolding.com/mlb/#game-4019080
+ 32
+URL:https://djgolding.com/mlb/#game-401908032
+LOCATION:Dodger Stadium\, Los Angeles\, California
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mlb-401908033@djgolding.com
+DTSTAMP:20261011T031840Z
+DTSTART;TZID=America/New_York:20261015T210000
+DTEND;TZID=America/New_York:20261016T001500
+SUMMARY:⚾ Los Angeles Dodgers vs Milwaukee Brewers · NLCS Game 4
+DESCRIPTION:TV: Fox/FS1\nGame page: https://djgolding.com/mlb/#game-4019080
+ 33
+URL:https://djgolding.com/mlb/#game-401908033
+LOCATION:Dodger Stadium\, Los Angeles\, California
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mlb-401908034@djgolding.com
+DTSTAMP:20261011T031840Z
+DTSTART;TZID=America/New_York:20261016T210000
+DTEND;TZID=America/New_York:20261017T001500
+SUMMARY:⚾ Los Angeles Dodgers vs Milwaukee Brewers · NLCS Game 5 (if nee
+ ded)
+DESCRIPTION:TV: Fox/FS1\nGame page: https://djgolding.com/mlb/#game-4019080
+ 34
+URL:https://djgolding.com/mlb/#game-401908034
+LOCATION:Dodger Stadium\, Los Angeles\, California
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mlb-401908035@djgolding.com
+DTSTAMP:20261011T031840Z
+DTSTART;TZID=America/New_York:20261018T200000
+DTEND;TZID=America/New_York:20261018T231500
+SUMMARY:⚾ Los Angeles Dodgers at Milwaukee Brewers · NLCS Game 6 (if nee
+ ded)
+DESCRIPTION:TV: Fox/FS1\nGame page: https://djgolding.com/mlb/#game-4019080
+ 35
+URL:https://djgolding.com/mlb/#game-401908035
+LOCATION:American Family Field\, Milwaukee\, Wisconsin
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mlb-401908036@djgolding.com
+DTSTAMP:20261011T031840Z
+DTSTART;TZID=America/New_York:20261019T200000
+DTEND;TZID=America/New_York:20261019T231500
+SUMMARY:⚾ Los Angeles Dodgers at Milwaukee Brewers · NLCS Game 7 (if nee
+ ded)
+DESCRIPTION:TV: Fox/FS1\nGame page: https://djgolding.com/mlb/#game-4019080
+ 36
+URL:https://djgolding.com/mlb/#game-401908036
+LOCATION:American Family Field\, Milwaukee\, Wisconsin
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

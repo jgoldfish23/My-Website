@@ -97,6 +97,19 @@
   .reg{display:flex; flex-direction:column;}
   .reg .btn{margin-top:auto; align-self:flex-start;}
   .reg p{margin-bottom:18px;}
+  /* the one specific thing we're hoping for */
+  .reg.feature{grid-column:1 / -1;
+    border-color:var(--accent-soft);
+    background:linear-gradient(160deg, var(--accent-soft), rgba(255,255,255,.012) 58%);}
+  html[data-theme="light"] .reg.feature{
+    background:linear-gradient(160deg, var(--accent-soft), rgba(255,255,255,.5) 58%);}
+  .reg-tag{display:block; font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--accent); font-weight:500; margin-bottom:9px;}
+  .reg-actions{display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-top:auto;}
+  .reg-actions .btn{margin-top:0;}
+  .lnk{color:var(--accent); text-decoration:none; font-size:14px;
+    border-bottom:1px solid var(--accent-soft); padding-bottom:2px;}
+  .lnk:hover{border-bottom-color:var(--accent);}
   .pay{display:grid; grid-template-columns:1fr auto; gap:clamp(20px,4vw,38px); align-items:center;}
   .pay-qr{background:#fff; border-radius:14px; padding:12px; line-height:0;
     box-shadow:0 18px 44px -24px rgba(0,0,0,.6);}
@@ -161,7 +174,7 @@
 </header>
 
 <section class="wrap" id="registry" hidden>
-  <div class="sec-head"><h2>Our registries</h2><span class="eyebrow">Target &amp; Amazon</span></div>
+  <div class="sec-head"><h2>Our registries</h2><span class="eyebrow">Target, Amazon &amp; Lagoon</span></div>
   <div class="regs">
     <div class="card reg" id="reg-target" hidden>
       <h3>Target</h3>
@@ -173,6 +186,15 @@
       <p>Everything else — and the quickest way to get something to our door.</p>
       <a class="btn" id="reg-amazon-btn" href="#" target="_blank" rel="noopener">Open our Amazon registry</a>
     </div>
+    <div class="card reg feature" id="reg-lagoon" hidden>
+      <span class="reg-tag">Top of our list</span>
+      <h3>Two Lagoon season passports — 2027</h3>
+      <p>We're a few exits down I-15 from Lagoon, and two 2027 passports would carry our whole first summer as a married couple. Next season's passports usually go on sale in the fall — if they aren't up yet, chipping in toward them counts just the same.</p>
+      <div class="reg-actions">
+        <a class="btn" id="reg-lagoon-btn" href="#" target="_blank" rel="noopener">See Lagoon season passports</a>
+        <a class="lnk" href="#give">or put something toward one →</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -182,7 +204,7 @@
     <div class="pay">
       <div>
         <h3>Send something directly</h3>
-        <p>If you'd rather not ship anything, whatever you send our way goes straight into the trip we're taking after the wedding.</p>
+        <p>If you'd rather not ship anything, whatever you send our way goes toward the trip we're taking after the wedding — or the Lagoon passes above.</p>
         <div id="venmo-live" hidden>
           <a class="btn" id="venmo-btn" href="#">Open Venmo</a>
           <p class="muted" style="margin-top:10px;">or find us at <span class="handle" id="venmo-handle"></span></p>
@@ -231,6 +253,7 @@
   var VENMO_HANDLE = "Jameson-Golding";
   var REGISTRY_TARGET = "https://www.target.com/gift-registry/gift/goldings2026";
   var REGISTRY_AMAZON = "https://www.amazon.com/wedding/guest-view/2D55B3UBLJ71R";
+  var REGISTRY_LAGOON = "https://www.lagoonpark.com/season-passports";
   /* ------------------------------------------- */
 
   var PAGE_URL = "https://djgolding.com/gifts";
@@ -256,7 +279,7 @@
   /* registries — each card shows only if its link is set */
   (function(){
     var any = false;
-    [['target', REGISTRY_TARGET], ['amazon', REGISTRY_AMAZON]].forEach(function(pair){
+    [['target', REGISTRY_TARGET], ['amazon', REGISTRY_AMAZON], ['lagoon', REGISTRY_LAGOON]].forEach(function(pair){
       if (!pair[1]) return;
       any = true;
       document.getElementById('reg-' + pair[0] + '-btn').href = pair[1];

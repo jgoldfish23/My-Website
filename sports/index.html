@@ -190,7 +190,7 @@ a.gm:hover{background:var(--surface-2)}
   .tc{scroll-snap-align:start;min-height:220px}
   .sports{grid-template-columns:1fr}.sp.nba{grid-column:auto}
   .tv-slot{grid-template-columns:1fr}.tv-t{padding:12px 16px 2px}.tv-t small{display:inline;margin-left:6px}.tv-gs{border-left:0}
-  .tv-g{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"m st" "tag net";row-gap:6px;padding:10px 16px}
+  .tv-g{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"m m m" "tag st net";row-gap:7px;column-gap:10px;padding:10px 16px}
   .tv-g .sp-tag{grid-area:tag;justify-self:start}.tv-g .tv-m{grid-area:m}.tv-g .net{grid-area:net;justify-self:end}.tv-g .tv-st{grid-area:st;min-width:0}
   .lrow{grid-auto-columns:82%}
   .cd{font-size:29px}
@@ -4324,7 +4324,7 @@ function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(
   let lastLine = '';
   if (last) { const mine = last.home === t ? last.hs : last.as, them = last.home === t ? last.as : last.hs; const opp = last.home === t ? last.away : last.home; lastLine = '<div class="tc-last">Last: <b class="' + (mine > them ? 'w' : mine < them ? 'l' : '') + '">' + (mine > them ? 'W' : mine < them ? 'L' : 'T') + ' ' + mine + '-' + them + '</b> ' + (last.neutral ? 'vs' : (last.home === t ? 'vs' : 'at')) + ' ' + esc(o.name(opp)) + '</div>'; }
   const gid = g => (o.href(g).split('#/game/')[1] || ''), art = (g, k) => g && ((ARTS[f.sport] || {})[gid(g)] || {})[k];
-  const arLine = (g, k, word) => { const tt = art(g, k); return tt ? '<span class="tc-ar" role="link" tabindex="0" data-go="' + esc(o.href(g)) + '"><span class="tc-ar-k">Jamo's ' + word + '</span> ' + esc(tt) + ' ›</span>' : ''; };
+  const arLine = (g, k, word) => { const tt = art(g, k); return tt ? '<span class="tc-ar" role="link" tabindex="0" data-go="' + esc(o.href(g)) + '"><span class="tc-ar-k">Jamo’s ' + word + '</span> ' + esc(tt) + ' ›</span>' : ''; };
   lastLine += arLine(live || next, 'p', 'preview') + arLine(last, 'r', 'recap');
   const logo = o.logo(t);
   return '<a class="tc rise" style="--i:' + i + ';--tc:' + c1 + ';--tc2:' + c2 + '" href="' + o.teamHref(t) + '" aria-label="' + esc(o.full(t)) + ' team page">' + (logo ? '<img class="wm" src="' + logo + '" alt="">' : '')

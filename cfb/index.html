@@ -2233,6 +2233,25 @@ body:has(.tvframe) header.top.top{top:0}
   .pl-card-st b{font-size:14px}
 }
 /* pl:end */
+/* patch85: Jamo's preview (hand-written game articles) */
+.card.ar{margin-bottom:14px;border-top:3px solid var(--gold)}
+.ar .bd{padding-top:14px}
+.ar-t{margin:2px 0 8px;font-size:25px;line-height:1.2;font-weight:800;color:var(--ink);text-wrap:balance}
+.ar-dek{margin:0 0 16px;font-size:15.5px;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+.ar-body p{margin:0 0 13px;font-size:15.5px;line-height:1.68;color:var(--ink);text-wrap:pretty}
+.ar-body h4{margin:22px 0 9px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-text)}
+.ar-body ul{margin:0 0 13px;padding-left:20px}
+.ar-body li{margin:0 0 9px;font-size:15px;line-height:1.62;color:var(--ink)}
+.ar-more{margin-top:4px}
+.ar-more summary{display:inline-flex;align-items:center;gap:6px;cursor:pointer;list-style:none;padding:9px 16px;border-radius:999px;background:var(--accent-soft);color:var(--accent-text);font-weight:700;font-size:14px;margin:2px 0 6px}
+.ar-more summary::-webkit-details-marker{display:none}
+.ar-more summary::after{content:"\25BE"}
+.ar-more[open] summary::after{content:"\25B4"}
+.ar-more .ar-close,.ar-more[open] .ar-open{display:none}
+.ar-more[open] .ar-close{display:inline}
+.ar-more[open] summary{margin-bottom:12px}
+.ar-src{font-size:13px!important;color:var(--ink-3)!important;border-top:1px solid var(--line-2);padding-top:12px;margin-top:18px!important}
+@media (max-width:640px){.ar-t{font-size:22px}.ar-body p{font-size:15px}}
 </style>
 
 <header class="top">
@@ -3202,14 +3221,14 @@ ORV|Oklahoma State 187, Boise State 161, Nebraska 117, Wake Forest 87, Northwest
 6|2026-10-09|Iowa|Washington|41|24|FINAL|9:00 PM||-3|41.5|130|-155|Fox||C|20|
 6|2026-10-09|Washington State|Utah State|16|17|FINAL|9:00 PM||-4|44.5|154|-185|CW||C||
 6|2026-10-09|Wyoming|San José State|16|13|FINAL|9:00 PM||-4.5|42.5|160|-192|CBSSN||C||
-6|2026-10-10|Air Force|Northern Illinois|7|7|IN_PROGRESS|7:30 PM||7|46.5|-310|250|CBSSN||C||
+6|2026-10-10|Air Force|Northern Illinois|14|7|IN_PROGRESS|7:30 PM||7|46.5|-310|250|CBSSN||C||
 6|2026-10-10|Arizona|West Virginia|52|31|FINAL|12:00 PM||3.5|61.5|-175|145|TNT||C||
 6|2026-10-10|Ball State|Northwestern|14|45|FINAL|12:30 PM||-34.5|53.5|5000|-100000|BTN||||
 6|2026-10-10|Boise State|Fresno State|||SCHEDULED|10:30 PM||8.5|48.5|-310|250|CW||C|23|
 6|2026-10-10|Buffalo|Toledo|23|8|FINAL|3:30 PM||-18.5|54.5|700|-1100|ESPN+||C||
 6|2026-10-10|Central Michigan|Ohio|14|31|FINAL|3:30 PM||-2.5|45.5|114|-135|ESPN+||C||
 6|2026-10-10|Charlotte|North Texas|10|50|FINAL|3:30 PM||-27.5|58.5|1700|-4500|ESPN+||C||
-6|2026-10-10|Coastal Carolina|Marshall|13|0|IN_PROGRESS|7:00 PM||-4|58.5|150|-180|ESPN+||C||
+6|2026-10-10|Coastal Carolina|Marshall|13|0|HALFTIME|7:00 PM||-4|58.5|150|-180|ESPN+||C||
 6|2026-10-10|Duke|Georgia Tech|25|28|FINAL|3:30 PM||4.5|45.5|-205|170|ESPN2||C||
 6|2026-10-10|Eastern Michigan|Akron|25|23|FINAL|3:30 PM||4.5|51.5|-205|170|ESPN+||C||
 6|2026-10-10|Georgia|Alabama|3|0|IN_PROGRESS|7:30 PM||-1.5|51.5|102|-122|ABC||C|2|6
@@ -3218,13 +3237,13 @@ ORV|Oklahoma State 187, Boise State 161, Nebraska 117, Wake Forest 87, Northwest
 6|2026-10-10|Illinois|Michigan State|38|37|FINAL|3:30 PM||2.5|48.5|-142|120|FS1||C||
 6|2026-10-10|Indiana|Nebraska|20|17|FINAL|12:00 PM||9.5|48.5|-360|285|Fox||C|7|
 6|2026-10-10|James Madison|Georgia Southern|0|7|IN_PROGRESS|8:10 PM||7.5|51.5|-325|260|ESPNU||C||
-6|2026-10-10|Kansas|Utah|0|7|IN_PROGRESS|8:00 PM||-15.5|51.5|525|-750|ESPNEWS||C||12
+6|2026-10-10|Kansas|Utah|0|14|IN_PROGRESS|8:00 PM||-15.5|51.5|525|-750|ESPNEWS||C||12
 6|2026-10-10|Kent State|Western Michigan|7|38|FINAL|3:30 PM||-13.5|43.5|425|-575|ESPN+||C||
 6|2026-10-10|LSU|Kentucky|17|14|IN_PROGRESS|7:00 PM||8.5|51.5|-345|275|ESPN||C|10|
-6|2026-10-10|Louisiana|Louisiana Tech|7|7|IN_PROGRESS|7:30 PM||-3|48.5|124|-148|ESPN+||C||
+6|2026-10-10|Louisiana|Louisiana Tech|10|7|IN_PROGRESS|7:30 PM||-3|48.5|124|-148|ESPN+||C||
 6|2026-10-10|Maryland|Ohio State|16|45|FINAL|4:15 PM||-31.5|56.5|||BTN||C||5
 6|2026-10-10|Miami (OH)|Massachusetts|20|19|FINAL|2:00 PM||6|44.5|-225|185|ESPN+||C||
-6|2026-10-10|Minnesota|Purdue|0|3|IN_PROGRESS|8:00 PM||2.5|50.5|-130|110|BTN||C||
+6|2026-10-10|Minnesota|Purdue|0|9|IN_PROGRESS|8:00 PM||2.5|50.5|-130|110|BTN||C||
 6|2026-10-10|Nevada|UTEP|10|7|IN_PROGRESS|7:00 PM||10|49.5|-375|295|FS1||C||
 6|2026-10-10|North Carolina|Pittsburgh|21|17|FINAL|12:00 PM||-3.5|47.5|145|-175|ESPN||C||25
 6|2026-10-10|North Dakota State|UNLV|7|7|IN_PROGRESS|7:00 PM||3|47.5|-155|130|CW||C||
@@ -3241,11 +3260,11 @@ ORV|Oklahoma State 187, Boise State 161, Nebraska 117, Wake Forest 87, Northwest
 6|2026-10-10|Texas|Oklahoma|24|27|FINAL|3:30 PM|N|7.5|40.5|-345|275|ABC|Cotton Bowl, Dallas|C|1|
 6|2026-10-10|Tulane|Army|17|20|FINAL|12:00 PM||-5.5|48.5|170|-205|CBSSN||C||
 6|2026-10-10|Tulsa|Navy|26|34|FINAL|3:30 PM||-3|47.5|130|-155|CBSSN||C||
-6|2026-10-10|UAB|Memphis|10|10|IN_PROGRESS|7:00 PM||-14|53.5|440|-600|ESPN2||C||
+6|2026-10-10|UAB|Memphis|13|10|IN_PROGRESS|7:00 PM||-14|53.5|440|-600|ESPN2||C||
 6|2026-10-10|UCF|Oklahoma State|28|42|FINAL|12:00 PM||-10.5|53.5|310|-395|ESPN2||C||18
 6|2026-10-10|UCLA|Oregon|17|15|FINAL|3:30 PM||-10|57.5|320|-410|CBS||C|21|13
 6|2026-10-10|UConn|Temple|34|20|FINAL|3:45 PM||-3.5|55.5|150|-180|ESPNU||||
-6|2026-10-10|USC|Penn State|14|7|IN_PROGRESS|7:30 PM||-1.5|54.5|102|-122|NBC||C|19|
+6|2026-10-10|USC|Penn State|14|14|IN_PROGRESS|7:30 PM||-1.5|54.5|102|-122|NBC||C|19|
 6|2026-10-10|Virginia Tech|California|20|25|FINAL|3:30 PM||11.5|51.5|-440|340|ACC Network||C||
 6|2026-10-10|Wake Forest|NC State|38|14|FINAL|12:00 PM||4|56.5|-180|150|CW||C||
 7|2026-10-13|Delaware|Middle Tennessee|||SCHEDULED|7:00 PM||1.5|48.5|-118|-102|CBSSN||C||
@@ -4146,7 +4165,7 @@ ORV|Oklahoma State 187, Boise State 161, Nebraska 117, Wake Forest 87, Northwest
 6|2026-10-10|Bethune-Cookman|Alabama A&M|17|55|FINAL|1:00 PM||-4|48.5|151|-189|||C||
 6|2026-10-10|Bryant|Brown|13|28|FINAL|12:00 PM||-5.5|43.5|147|-184|ESPN+/NESN+||||
 6|2026-10-10|Bucknell|Georgetown|14|21|FINAL|12:30 PM||-2.5|44.5|109|-136|ESPN+||C||
-6|2026-10-10|Cal Poly|Idaho State|18|21|IN_PROGRESS|6:00 PM||||||ESPN+||C||
+6|2026-10-10|Cal Poly|Idaho State|18|24|IN_PROGRESS|6:00 PM||||||ESPN+||C||
 6|2026-10-10|Central Arkansas|Abilene Christian|0|3|IN_PROGRESS|8:00 PM||||||ESPN+||C||
 6|2026-10-10|Dartmouth|Yale|7|28|FINAL|12:00 PM||-7|53.5|241|-316|ESPNU||C||
 6|2026-10-10|Davidson|Presbyterian|21|38|FINAL|12:00 PM||-14.5|56.5|470|-720|ESPN+||C||
@@ -4159,7 +4178,7 @@ ORV|Oklahoma State 187, Boise State 161, Nebraska 117, Wake Forest 87, Northwest
 6|2026-10-10|Howard|Pennsylvania|20|24|FINAL|1:00 PM||-11.5|42.5|406|-590|ESPN+||||
 6|2026-10-10|Idaho|Weber State|27|38|FINAL|3:00 PM||4|69.5|-182|145|ESPN+||C||
 6|2026-10-10|Incarnate Word|Lamar|35|38|FINAL|4:00 PM||-7|49.5|209|-269|ESPN+||C||
-6|2026-10-10|Jackson State|Grambling|38|42|IN_PROGRESS|5:00 PM||||||||C||
+6|2026-10-10|Jackson State|Grambling|38|45|IN_PROGRESS|5:00 PM||||||||C||
 6|2026-10-10|Long Island University|Duquesne|17|14|FINAL|1:00 PM||-3.5|45.5|145|-181|NEC Front Row/SportsNet PIT||C||
 6|2026-10-10|Mississippi Valley State|Texas Southern|38|34|FINAL|3:00 PM||-14|53.5|421|-620|||C||
 6|2026-10-10|Montana|Northern Arizona|42|49|IN_PROGRESS|5:00 PM||||||ESPN+/Scripps Sports||C||
@@ -4167,7 +4186,7 @@ ORV|Oklahoma State 187, Boise State 161, Nebraska 117, Wake Forest 87, Northwest
 6|2026-10-10|New Hampshire|North Carolina A&T|27|30|FINAL|12:00 PM||5.5|44.5|-213|168|FloSports||C||
 6|2026-10-10|North Dakota|Northern Iowa|17|24|FINAL|5:00 PM||13.5|58.5|-468|337|ESPN+||C||
 6|2026-10-10|Northeastern State|West Florida|||CANCELED|5:00 PM||||||||||
-6|2026-10-10|Northern Colorado|Eastern Washington|6|21|IN_PROGRESS|7:00 PM||||||ESPN+||C||
+6|2026-10-10|Northern Colorado|Eastern Washington|6|27|IN_PROGRESS|7:00 PM||||||ESPN+||C||
 6|2026-10-10|Princeton|Wagner|28|13|FINAL|12:00 PM||25.5|43.5|-7100|1400|||||
 6|2026-10-10|Richmond|Fordham|14|20|FINAL|3:30 PM||8.5|45.5|-355|267|ESPN+||C||
 6|2026-10-10|Robert Morris|Morgan State|27|28|FINAL|12:00 PM||-10|50.5|270|-360|ESPN+||||
@@ -4181,7 +4200,7 @@ ORV|Oklahoma State 187, Boise State 161, Nebraska 117, Wake Forest 87, Northwest
 6|2026-10-10|Stetson|St. Thomas|21|64|FINAL|2:00 PM||-22.5|52.5|990|-2500|Midco Sports Plus||C||
 6|2026-10-10|Stonehill|Sacred Heart|28|7|FINAL|12:00 PM||-7|43.5|236|-309|FloSports||||
 6|2026-10-10|Stony Brook|Towson|31|24|FINAL|4:00 PM||3.5|58.5|-160|128|MNMT/FloSports||C||
-6|2026-10-10|Tarleton State|Austin Peay|23|3|IN_PROGRESS|7:00 PM||||||ESPN+||C||
+6|2026-10-10|Tarleton State|Austin Peay|23|10|IN_PROGRESS|7:00 PM||||||ESPN+||C||
 6|2026-10-10|UT Martin|Tennessee State|42|28|FINAL|3:30 PM||8.5|46.5|-349|263|ESPN+||C||
 6|2026-10-10|Utah Tech|Portland State|14|30|FINAL|4:00 PM||-2.5|60.5|136|-170|ESPN+/Rose City Sports Net||C||
 6|2026-10-10|Virginia Lynchburg|Norfolk State|0|62|FINAL|2:00 PM||||||||||
@@ -7770,17 +7789,17 @@ Yale|Ivy
 2026-10-03|San José State|Hawai'i|Hawai'i|passingYards|Micah Alejado|QB|23/35, 341 YDS, 1 TD, 2 INT
 2026-10-03|San José State|Hawai'i|San José State|rushingYards|Jabari Bates|RB|27 CAR, 74 YDS
 2026-10-03|San José State|Hawai'i|Hawai'i|receivingYards|Devin Alves|WR|3 REC, 121 YDS, 1 TD
-2026-10-10|San Diego State|Oregon State|Oregon State|passingYards|Braden Atkinson|QB|25/34, 374 YDS, 5 TD
+2026-10-10|San Diego State|Oregon State|Oregon State|passingYards|Braden Atkinson|QB|27/36, 384 YDS, 5 TD
 2026-10-10|San Diego State|Oregon State|Oregon State|rushingYards|AJ Newberry|RB|9 CAR, 55 YDS, 1 TD
 2026-10-10|San Diego State|Oregon State|Oregon State|receivingYards|Jesse Legree|WR|10 REC, 191 YDS, 3 TD
 2026-10-10|LSU|Kentucky|LSU|passingYards|Sam Leavitt|QB|14/18, 162 YDS, 2 TD
-2026-10-10|LSU|Kentucky|Kentucky|rushingYards|CJ Baxter|RB|5 CAR, 86 YDS, 1 TD
+2026-10-10|LSU|Kentucky|Kentucky|rushingYards|CJ Baxter|RB|8 CAR, 108 YDS, 1 TD
 2026-10-10|LSU|Kentucky|LSU|receivingYards|Dilin Jones|RB|4 REC, 43 YDS
-2026-10-10|UAB|Memphis|UAB|passingYards|Ryder Burton|QB|7/10, 87 YDS, 1 INT
+2026-10-10|UAB|Memphis|UAB|passingYards|Ryder Burton|QB|7/11, 87 YDS, 1 INT
 2026-10-10|UAB|Memphis|Memphis|rushingYards|Jaylin Carter|RB|8 CAR, 56 YDS, 1 TD
 2026-10-10|UAB|Memphis|UAB|receivingYards|Ty Mims|WR|2 REC, 50 YDS
 2026-10-10|Nevada|UTEP|Nevada|passingYards|Carter Jones|QB|8/15, 51 YDS, 1 TD
-2026-10-10|Nevada|UTEP|Nevada|rushingYards|Herschel Turner|RB|8 CAR, 46 YDS
+2026-10-10|Nevada|UTEP|Nevada|rushingYards|Herschel Turner|RB|10 CAR, 96 YDS
 2026-10-10|Nevada|UTEP|UTEP|receivingYards|Jaden Smith|WR|3 REC, 28 YDS, 1 TD
 2026-10-10|North Dakota State|UNLV|North Dakota State|passingYards|Nathan Hayes|QB|4/7, 56 YDS, 1 TD, 2 INT
 2026-10-10|North Dakota State|UNLV|North Dakota State|rushingYards|Myles Mitchell|RB|10 CAR, 57 YDS
@@ -7788,27 +7807,30 @@ Yale|Ivy
 2026-10-10|Coastal Carolina|Marshall|Coastal Carolina|passingYards|Deuce Bailey|QB|6/14, 62 YDS, 1 TD, 1 INT
 2026-10-10|Coastal Carolina|Marshall|Marshall|rushingYards|Judah Price|RB|6 CAR, 60 YDS
 2026-10-10|Coastal Carolina|Marshall|Coastal Carolina|receivingYards|Dominic Lee-Knicely|RB|2 REC, 39 YDS
-2026-10-10|Georgia|Alabama|Georgia|passingYards|Gunner Stockton|QB|1/1, 26 YDS
+2026-10-10|Georgia|Alabama|Georgia|passingYards|Gunner Stockton|QB|2/2, 29 YDS
 2026-10-10|Georgia|Alabama|Georgia|rushingYards|Dwight Phillips Jr.|RB|2 CAR, 16 YDS
 2026-10-10|Georgia|Alabama|Georgia|receivingYards|Lawson Luckie|TE|1 REC, 26 YDS
-2026-10-10|USC|Penn State|USC|passingYards|Jayden Maiava|QB|9/11, 120 YDS, 2 TD
-2026-10-10|USC|Penn State|USC|rushingYards|King Miller|RB|5 CAR, 18 YDS
-2026-10-10|USC|Penn State|Penn State|receivingYards|Chase Sowell|WR|3 REC, 57 YDS
-2026-10-10|Syracuse|Virginia|Syracuse|passingYards|Malachi Nelson|QB|7/8, 129 YDS, 1 TD
+2026-10-10|USC|Penn State|Penn State|passingYards|Rocco Becht|QB|7/8, 131 YDS, 1 TD
+2026-10-10|USC|Penn State|Penn State|rushingYards|James Peoples|RB|4 CAR, 19 YDS
+2026-10-10|USC|Penn State|Penn State|receivingYards|Chase Sowell|WR|3 REC, 94 YDS
+2026-10-10|Syracuse|Virginia|Syracuse|passingYards|Malachi Nelson|QB|7/9, 129 YDS, 1 TD
 2026-10-10|Syracuse|Virginia|Syracuse|rushingYards|Tylik Hill|RB|6 CAR, 25 YDS
 2026-10-10|Syracuse|Virginia|Syracuse|receivingYards|Umari Hatcher|WR|3 REC, 75 YDS, 1 TD
 2026-10-10|Air Force|Northern Illinois|Northern Illinois|passingYards|Taron Dickens|QB|5/6, 79 YDS, 1 INT
 2026-10-10|Air Force|Northern Illinois|Air Force|rushingYards|Owen Allen|RB|7 CAR, 48 YDS, 1 TD
 2026-10-10|Air Force|Northern Illinois|Northern Illinois|receivingYards|DeAree Rogers|WR|3 REC, 46 YDS
-2026-10-10|Louisiana|Louisiana Tech|Louisiana|passingYards|Lunch Winfield|QB|7/9, 88 YDS
-2026-10-10|Louisiana|Louisiana Tech|Louisiana|rushingYards|Lunch Winfield|QB|5 CAR, 23 YDS, 1 TD
+2026-10-10|Louisiana|Louisiana Tech|Louisiana|passingYards|Lunch Winfield|QB|7/11, 88 YDS
+2026-10-10|Louisiana|Louisiana Tech|Louisiana|rushingYards|Lunch Winfield|QB|7 CAR, 33 YDS, 1 TD
 2026-10-10|Louisiana|Louisiana Tech|Louisiana Tech|receivingYards|Talyn Shettron|WR|5 REC, 68 YDS
 2026-10-10|Kansas|Utah|Utah|passingYards|Devon Dampier|QB|3/3, 59 YDS
 2026-10-10|Kansas|Utah|Utah|rushingYards|Wayshawn Parker|RB|5 CAR, 32 YDS, 1 TD
 2026-10-10|Kansas|Utah|Utah|receivingYards|Ricky Johnson|WR|2 REC, 50 YDS
-2026-10-10|Minnesota|Purdue|Purdue|passingYards|Ryan Browne|QB|3/5, 49 YDS
-2026-10-10|Minnesota|Purdue|Purdue|rushingYards|Fame Ijeboi|RB|6 CAR, 42 YDS
-2026-10-10|Minnesota|Purdue|Purdue|receivingYards|De'Nylon Morrissette|WR|1 REC, 30 YDS
+2026-10-10|Minnesota|Purdue|Purdue|passingYards|Ryan Browne|QB|5/7, 85 YDS, 1 TD
+2026-10-10|Minnesota|Purdue|Purdue|rushingYards|Fame Ijeboi|RB|10 CAR, 53 YDS
+2026-10-10|Minnesota|Purdue|Purdue|receivingYards|De'Nylon Morrissette|WR|2 REC, 51 YDS
+2026-10-10|James Madison|Georgia Southern|Georgia Southern|passingYards|Max Johnson|QB|6/7, 85 YDS, 1 TD
+2026-10-10|James Madison|Georgia Southern|James Madison|rushingYards|George Pettaway|RB|2 CAR, 26 YDS
+2026-10-10|James Madison|Georgia Southern|Georgia Southern|receivingYards|Jeremiah Ware|WR|1 REC, 50 YDS
 2026-10-10|Texas|Oklahoma|Texas|passingYards|Arch Manning|QB|19/31, 260 YDS, 3 TD, 2 INT
 2026-10-10|Texas|Oklahoma|Oklahoma|rushingYards|Lloyd Avant|RB|10 CAR, 72 YDS, 1 TD
 2026-10-10|Texas|Oklahoma|Texas|receivingYards|Cam Coleman|WR|5 REC, 110 YDS, 1 TD
@@ -7899,9 +7921,6 @@ Yale|Ivy
 2026-10-10|UConn|Temple|Temple|passingYards|Ajani Sheppard|QB|19/25, 260 YDS, 1 TD
 2026-10-10|UConn|Temple|UConn|rushingYards|Trey Cornist|RB|7 CAR, 114 YDS, 1 TD
 2026-10-10|UConn|Temple|Temple|receivingYards|JoJo Bermudez|WR|2 REC, 96 YDS, 1 TD
-2026-10-10|James Madison|Georgia Southern|Georgia Southern|passingYards|Max Johnson|QB|2/2, 68 YDS, 1 TD
-2026-10-10|James Madison|Georgia Southern|James Madison|rushingYards|George Pettaway|RB|2 CAR, 26 YDS
-2026-10-10|James Madison|Georgia Southern|Georgia Southern|receivingYards|Jeremiah Ware|WR|1 REC, 50 YDS
 2026-10-06|Southern Miss|Troy|Southern Miss|passingYards|Landry Lyddy|QB|24/37, 316 YDS, 2 TD, 1 INT
 2026-10-06|Southern Miss|Troy|Troy|rushingYards|Goose Crowder|QB|17 CAR, 145 YDS, 2 TD
 2026-10-06|Southern Miss|Troy|Southern Miss|receivingYards|Kaden Saunders|WR|7 REC, 138 YDS
@@ -8880,28 +8899,25 @@ Yale|Ivy
 2026-10-03|Eastern Washington|UC Davis|Eastern Washington|passingYards|Nate Bell|QB|39/58, 413 YDS, 3 TD, 1 INT
 2026-10-03|Eastern Washington|UC Davis|UC Davis|rushingYards|Jordan Fisher|RB|20 CAR, 255 YDS, 2 TD
 2026-10-03|Eastern Washington|UC Davis|Eastern Washington|receivingYards|Drew Carlson|WR|6 REC, 95 YDS, 1 TD
-2026-10-10|North Dakota|Northern Iowa|North Dakota|passingYards|Jerry Kaminski|QB|16/35, 152 YDS, 2 INT
-2026-10-10|North Dakota|Northern Iowa|Northern Iowa|rushingYards|Christian Collins|RB|11 CAR, 64 YDS
-2026-10-10|North Dakota|Northern Iowa|North Dakota|receivingYards|Deng Deng|WR|5 REC, 80 YDS
 2026-10-10|Montana|Northern Arizona|Montana|passingYards|Keali'i Ah Yat|QB|29/39, 347 YDS, 3 TD, 1 INT
 2026-10-10|Montana|Northern Arizona|Montana|rushingYards|Eli Gillman|RB|19 CAR, 94 YDS, 2 TD
 2026-10-10|Montana|Northern Arizona|Montana|receivingYards|Landon Ransom-Goelz|WR|7 REC, 128 YDS, 1 TD
-2026-10-10|Jackson State|Grambling|Grambling|passingYards|Jacobe Robinson|QB|16/20, 214 YDS, 4 TD
+2026-10-10|Jackson State|Grambling|Grambling|passingYards|Jacobe Robinson|QB|17/21, 212 YDS, 4 TD
 2026-10-10|Jackson State|Grambling|Jackson State|rushingYards|Li'Darius Pryor|RB|22 CAR, 166 YDS, 3 TD
 2026-10-10|Jackson State|Grambling|Grambling|receivingYards|Tyson George|WR|8 REC, 93 YDS, 1 TD
-2026-10-10|Cal Poly|Idaho State|Idaho State|passingYards|Jordan Cooke|QB|18/28, 190 YDS, 1 TD, 1 INT
-2026-10-10|Cal Poly|Idaho State|Idaho State|rushingYards|Tytan Mason|RB|11 CAR, 60 YDS
-2026-10-10|Cal Poly|Idaho State|Idaho State|receivingYards|Tommy Poe|WR|4 REC, 91 YDS
-2026-10-10|Tarleton State|Austin Peay|Tarleton State|passingYards|Kaden Anderson|QB|10/17, 151 YDS, 2 TD
+2026-10-10|Cal Poly|Idaho State|Idaho State|passingYards|Jordan Cooke|QB|20/31, 225 YDS, 1 TD, 1 INT
+2026-10-10|Cal Poly|Idaho State|Idaho State|rushingYards|Tytan Mason|RB|12 CAR, 61 YDS
+2026-10-10|Cal Poly|Idaho State|Idaho State|receivingYards|Tommy Poe|WR|5 REC, 108 YDS
+2026-10-10|Tarleton State|Austin Peay|Tarleton State|passingYards|Kaden Anderson|QB|12/19, 161 YDS, 2 TD
 2026-10-10|Tarleton State|Austin Peay|Tarleton State|rushingYards|Miequle Brock|RB|7 CAR, 51 YDS, 1 TD
 2026-10-10|Tarleton State|Austin Peay|Tarleton State|receivingYards|Tanner Schmidt|WR|4 REC, 62 YDS, 1 TD
-2026-10-10|Northern Colorado|Eastern Washington|Eastern Washington|passingYards|Nate Bell|QB|17/21, 273 YDS, 3 TD
+2026-10-10|Northern Colorado|Eastern Washington|Eastern Washington|passingYards|Nate Bell|QB|18/23, 283 YDS, 4 TD
 2026-10-10|Northern Colorado|Eastern Washington|Northern Colorado|rushingYards|Kenny Lueth|QB|5 CAR, 87 YDS
 2026-10-10|Northern Colorado|Eastern Washington|Eastern Washington|receivingYards|Wesley Garrett|WR|6 REC, 118 YDS, 1 TD
 2026-10-10|Central Arkansas|Abilene Christian|Abilene Christian|passingYards|Tucker Parks|QB|6/11, 53 YDS
-2026-10-10|Central Arkansas|Abilene Christian|Abilene Christian|rushingYards|Rovaughn Banks Jr.|RB|2 CAR, 5 YDS
+2026-10-10|Central Arkansas|Abilene Christian|Central Arkansas|rushingYards|Donovyn Omolo|QB|4 CAR, 21 YDS
 2026-10-10|Central Arkansas|Abilene Christian|Abilene Christian|receivingYards|Jayden York|TE|3 REC, 25 YDS
-2026-10-10|SE Louisiana|UT Rio Grande Valley|SE Louisiana|passingYards|Kyle Lowe|QB|5/5, 49 YDS
+2026-10-10|SE Louisiana|UT Rio Grande Valley|SE Louisiana|passingYards|Kyle Lowe|QB|7/8, 65 YDS
 2026-10-10|SE Louisiana|UT Rio Grande Valley|SE Louisiana|rushingYards|Kyree Paul|RB|1 CAR, 14 YDS
 2026-10-10|SE Louisiana|UT Rio Grande Valley|SE Louisiana|receivingYards|Tristan Goodly|WR|1 REC, 35 YDS
 2026-10-10|New Hampshire|North Carolina A&T|New Hampshire|passingYards|Brooks Bentley|QB|23/35, 267 YDS, 2 TD, 1 INT
@@ -9021,6 +9037,9 @@ Yale|Ivy
 2026-10-10|Incarnate Word|Lamar|Incarnate Word|passingYards|Emmett Brown|QB|26/39, 303 YDS, 2 TD
 2026-10-10|Incarnate Word|Lamar|Lamar|rushingYards|Jojo Uga|RB|22 CAR, 144 YDS, 3 TD
 2026-10-10|Incarnate Word|Lamar|Incarnate Word|receivingYards|Jacob Emmers|WR|7 REC, 104 YDS, 1 TD
+2026-10-10|North Dakota|Northern Iowa|North Dakota|passingYards|Jerry Kaminski|QB|16/35, 152 YDS, 2 INT
+2026-10-10|North Dakota|Northern Iowa|Northern Iowa|rushingYards|Christian Collins|RB|11 CAR, 64 YDS
+2026-10-10|North Dakota|Northern Iowa|North Dakota|receivingYards|Deng Deng|WR|5 REC, 80 YDS
 2026-10-09|Florida A&M|Alabama State|Florida A&M|passingYards|Armond Parker|QB|13/20, 290 YDS, 3 TD, 2 INT
 2026-10-09|Florida A&M|Alabama State|Alabama State|rushingYards|Jamarie Hostzclaw|RB|28 CAR, 128 YDS, 1 TD
 2026-10-09|Florida A&M|Alabama State|Florida A&M|receivingYards|Armand Burris|WR|4 REC, 216 YDS, 2 TD
@@ -9059,6 +9078,7 @@ Yale|Ivy
 "2026-09-10-florida-a-m-miami": {"angle": "Thursday night filler with a 55.5-point line. Miami's Mensah threw five touchdown passes at Stanford in a 45-6 win and this is a tune-up before the ACC schedule. For Florida A&M it is a paycheck game and a chance to see an FBS defense up close. The only question is the total (61.5) and how long Miami leaves its starters on the field.", "pick": "The model has Miami by more than 60, but a 55.5-point spread is a question about starters' minutes, not football. Pass."}
 }
 </script>
+<script type="application/json" id="d-articles">{"2026-10-17-notre-dame-byu":{"angle":"No. 3 Notre Dame (16 straight wins) visits No. 8 BYU under the lights in Provo. Bear Bachmeier just threw for 329 and ran for 109 against Iowa State, but BYU is without LJ Martin, and Notre Dame freshman Jonaz Walton ran for 181 against Stanford.","body":"There are two kinds of big games in Provo. In one kind, the Cougars play somebody good. In the other, the whole country finally shows up to watch. This is the second kind.\n\nCollege GameDay's host says there's \"a really good chance\" the show comes to town. Notre Dame has won 16 straight. The last time these teams met, in Las Vegas in 2022, the Irish won 28-20. Cougar fans still bring it up.\n\n## Where things stand\n\nDraftKings opened Notre Dame at -11.5. By Saturday night the line had moved to -12.5, with a total of 49.5. ESPN's FPI gives the Irish a 76.3% chance to win. SP+ has Notre Dame at No. 3 and BYU at No. 17.\n\nThat's a real gap, but not a Great and Spacious Building gap. The bigger difference is in recruiting talent: Notre Dame ranks No. 6 nationally, BYU No. 59. BYU's answer is experience. The Cougars bring back 78.5% of last year's production (No. 15). Notre Dame brings back 51.2% (No. 54).\n\n## The matchup that decides it\n\n**Notre Dame's run game against a BYU defense that just held Iowa State to 200 yards.**\n\nThat 200 was the Cyclones' lowest total since 2018. Their quarterback, Jaylen Raynor, went 16-for-29 for 98 yards. First-year coordinator Poppinga's defense is real.\n\nBut the Irish just found a new weapon. Freshman running back Jonaz Walton ran for 181 yards on 13 carries against Stanford, including a 97-yard touchdown, the third-longest offensive play in Notre Dame Stadium history. Notre Dame outgained Stanford 598-202 and converted 8 of 13 third downs.\n\nIf BYU can make Notre Dame's offense earn it in small steps, this game stays close. If Walton breaks one or two long runs, it won't.\n\n## By the numbers: Notre Dame\n\n- **Offense:** CJ Carr went 14-for-20 for 181 yards and 3 TDs against Stanford. That puts him at about 1,378 yards, 16 TDs and **1 interception** this season, and his ESPN QBR ranked top-5 nationally in September. SP+ ranked the offense No. 4 in its late-September splits.\n- **Defense:** No. 6 in those same SP+ splits. Notre Dame allowed 7.7 points per game through three games (5th nationally), though North Carolina scored 26 in a 37-26 Irish win.\n- **Special teams:** SP+ has them No. 51. Fine, not scary.\n- **Players to watch:** Walton; WR Jordan Faison (8 catches, 132 yards and 2 TDs at UNC); DE Boubacar Traore.\n\n## By the numbers: BYU\n\n- **Offense:** Bear Bachmeier's line against Iowa State: 22-for-30, a season-high 329 passing yards, 2 TDs, plus a career-high 109 rushing yards on 9 carries. That was his first 100-yard rushing game. SP+ had BYU's offense No. 16 in late September.\n- **Defense:** No. 18 in the same SP+ splits, and BYU has allowed 10 points in each of its last two games.\n- **Special teams:** No. 40 in SP+. A fourth-quarter muffed punt against Iowa State handed the Cyclones their only touchdown, so this is a small worry.\n- **Players to watch:** Bachmeier; WR Legend Glasker (5 catches, 99 yards and a 75-yard TD against ISU); receiver Kyler Kasper.\n\n## Three keys\n\n- **Bear has to be the run game.** Without Martin, BYU's running backs combined for 40 yards on 14 carries against Iowa State. Bachmeier's legs carried the ground game. That works, but every quarterback run is also a risk of Bear getting hurt, and Notre Dame's defensive front is a lot better than Iowa State's.\n- **Make Carr hold the ball.** He has thrown one interception in six games, so BYU is not going to steal this one with turnovers. The best it can do is make him take sacks and face long third downs, and keep him off schedule.\n- **No gifts on special teams.** BYU can survive one muffed punt against Iowa State. It probably can't survive one against Notre Dame.\n\n## Injuries\n\n- **BYU:** RB **LJ Martin** (lower body, injured at TCU) is expected to miss 4-6 weeks, which likely includes this game. He had 344 yards and 3 TDs this season and is the reigning Big 12 Offensive Player of the Year. LB **Isaiah Glasker** was listed doubtful for Iowa State, and his status for Notre Dame is **TBD** as of Saturday.\n- **Notre Dame:** OL Charles Jagusah (left tibia), freshman Tiki Hola (knee) and Christopher Burgess have been out since camp. WR Quincy Porter is out for the season. CB Chaz Smith has a wrist injury.\n\n## What they're saying\n\nKalani Sitake after the Iowa State game: \"I feel good about Bear throwing the ball.\"\n\nBachmeier, earlier in the week, when asked whether he'd peeked ahead at Notre Dame: \"No, just Iowa State.\"\n\nThat was the right answer last week. He's allowed to look ahead now. Notre Dame's side of this section comes Monday, after Marcus Freeman's weekly press conference.\n\n## X-factor\n\n**The stadium.** It's a night game, Notre Dame is coming from the Eastern time zone, and BYU's crowd is about to have its biggest night in years. Home field is worth something like three points on paper. In Provo, under the lights, against Notre Dame, it may count for more.\n\n## Prediction\n\nNotre Dame is the better team. It's deeper and more talented, and it has a quarterback who doesn't make mistakes. BYU is the more experienced team, playing at home, with a defense good enough to make this a grind instead of a 58-7 shootout. Missing Martin is what keeps me from picking the upset.\n\n**Notre Dame 30, BYU 24.** BYU covers +12.5, and the Irish win.\n\n**Confidence:** moderate on Notre Dame winning; I lean BYU against the spread.\n","dek":"No. 3 Notre Dame brings the longest winning streak in major college football to Provo. No. 8 BYU brings a perfect record, a quarterback who just did everything, and no LJ Martin.","lead":2,"pick":"Notre Dame 30, BYU 24. BYU covers +12.5 and the Irish win: BYU's defense makes it a grind, but without Martin the Cougars lean too hard on Bachmeier's legs.","sources":"AP, ESPN (box scores, FPI, SP+, player pages), Chicago Tribune, Deseret News, KSL, FOX Sports, DraftKings via ESPN, UHND, StatMuse, and this hub's box scores.","title":"Sixteen Straight, One Saturday Night","updated":"Sat., Oct. 10 · Notre Dame quotes coming Monday"}}</script>
 <script type="text/plain" id="d-draftbb">1|Arch Manning|QB|Texas
 2|Dante Moore|QB|Oregon
 3|Jeremiah Smith|WR|Ohio State
@@ -91050,6 +91070,9 @@ const HEADLINES={}, LEADERS={};
 loadText('d-headlines').split('\n').forEach(l=>{ const p=l.trim().split('|'); if(p.length<6||p[3]!=='HEADLINE') return; HEADLINES[p[0]+'|'+norm(p[1])+'|'+norm(p[2])]=p[5]; });
 loadText('d-wk1lead').split('\n').forEach(l=>{ const p=l.trim().split('|'); if(p.length<8) return; const k=p[0]+'|'+norm(p[1])+'|'+norm(p[2]); const arr=(LEADERS[k]=LEADERS[k]||[]); const tm=norm(p[3]); if(arr.some(x=>x.team===tm&&x.cat===p[4]&&x.n===p[5])) return; arr.push({team:tm,cat:p[4],n:p[5],pos:p[6],v:p[7]}); });
 const PREVIEWS = loadJSON('d-previews') || {};
+/* hand-written articles: their angle and pick also feed the preview card and the scoreboard card */
+const ARTICLES = loadJSON('d-articles') || {};
+Object.keys(ARTICLES).forEach(k=>{ const a=ARTICLES[k]; if(a.angle||a.pick) PREVIEWS[k]=Object.assign({}, PREVIEWS[k]||{}, a.angle?{angle:a.angle}:{}, a.pick?{pick:a.pick}:{}); });
 const gkey = g => g.date+'|'+g.away+'|'+g.home;
 const headlineFor = g => HEADLINES[gkey(g)] || '';
 const CATL = {passingYards:'Pass',rushingYards:'Rush',receivingYards:'Rec'};
@@ -91089,7 +91112,7 @@ function renderPreviews(w){ setNav('previews'); w = WEEKS.includes(w)? w : CUR_W
   if(upcoming.length){ const top=upcoming.slice(0,8); html+='<div class="sec"><h2>Marquee</h2><span class="muted">the eight to plan the weekend around</span></div><div class="grid g2">'+top.map(g=>pcard(g)).join('')+'</div>'; const rest=upcoming.slice(8); if(rest.length){ html+='<div class="sec"><h2>The rest of the board</h2><span class="muted">'+rest.length+' more, most interesting first</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Matchup</th><th>Kick</th><th>Line</th><th class="r">Model</th><th class="r">Edge</th><th>Projected</th><th>One thing</th></tr></thead><tbody>'+rest.map(g=>{ const ps=projScore(g); const k=previewKeys(g); const one=storyline(g); return '<tr class="click" data-href="#/game/'+g.id+'"><td>'+chip(g.away,{short:true})+' <span class="dim">'+(g.neutral?'vs':'at')+'</span> '+chip(g.home,{short:true})+'</td><td class="small nw">'+esc(fmtDate(g.date,true).slice(0,3))+' '+esc(kick(g))+(g.tv?' <span class="dim">'+esc(tvShort(g.tv))+'</span>':'')+'</td><td class="nw">'+esc(spreadStr(g,{short:true}))+(g.total!=null?' <span class="dim">o/u '+g.total+'</span>':'')+'</td><td class="r nw">'+esc(modelStr(g,{short:true}))+'</td><td class="r">'+edgeCell(g)+'</td><td class="small nw">'+(g.tbd?'—':esc(tshort(g.away))+' '+ps.a+', '+esc(tshort(g.home))+' '+ps.h)+'</td><td class="small one">'+esc(one)+'</td></tr>'; }).join('')+'</tbody></table></div>'; } }
   if(done.length){ html+='<div class="sec"><h2>'+(upcoming.length?'Already played this week':'Results')+'</h2><span class="muted">'+done.length+' final'+(done.length>1?'s':'')+'</span></div><div class="grid g2">'+done.map(g=>{ const hl=headlineFor(g); const c=covered(g,'home'); return '<a class="card pcard" href="#/game/'+g.id+'" style="border-top-color:'+esc(team(g.home).color)+'"><div class="bd"><div class="wm"><span class="'+(g.as>g.hs?'rw':'rl')+'">'+esc(tshort(g.away))+' '+g.as+'</span> <span class="dim">'+(g.neutral?'vs':'at')+'</span> <span class="'+(g.hs>g.as?'rw':'rl')+'">'+esc(tshort(g.home))+' '+g.hs+'</span></div><div class="wt">'+(g.as!==g.hs?'<b>'+esc(tshort(g.as>g.hs?g.away:g.home))+' wins by '+Math.abs(g.as-g.hs)+'</b> &middot; ':'')+(g.spread!=null?esc(spreadStr(g,{short:true}))+' &middot; '+(c==='P'?'push':(c==='W'?esc(tshort(g.home)):esc(tshort(g.away)))+' covered'):'no line')+'</div><div class="wh">'+esc(hl||unesc(hook(g)))+'</div></div></a>'; }).join('')+'</div>'; }
   view.innerHTML=html; }
-function renderGame(id){ const g=GI[id]; if(!g){ view.innerHTML='<div class="note">Game not found. <a href="#/week">Back to the scoreboard.</a></div>'; return; } setNav('week'); const a=team(g.away), h=team(g.home); const p=projAt(g); const sa=a.other?null:stats(a.name), sh=h.other?null:stats(h.name); let html=backBar('#/week/'+g.week, '<a href="#/week/'+g.week+'">Week '+g.week+'</a> · '+esc(fmtDateLong(g.date))+(g.conf?' · '+esc(h.conf)+' game':'')); html+='<div class="ghead" style="'+gheadStyle(a,h)+'">'+(customLogo(a)?'<img class="ghead-wm l" src="'+customLogo(a).wm+'" alt="">':'')+(customLogo(h)?'<img class="ghead-wm r" src="'+customLogo(h).wm+'" alt="">':'')+'<div class="side">'+(a.other?mono(a):'<a class="monolink" href="#/team/'+enc(a.name)+'" title="'+esc(a.disp)+' team page">'+mono(a)+'</a>')+'<div><div class="nm">'+(a.ap?'<span class="dim" style="font-size:20px">#'+a.ap+' </span>':'')+(a.fcs?esc(a.disp):'<a href="#/team/'+enc(a.name)+'">'+esc(a.disp)+'</a>')+'</div><div class="rec">'+(a.tbd?'Opponent to be determined':a.other?'Non-D1 opponent · rating '+num1(a.rating):recStr(a.name)+' · '+esc(a.conf)+(a.fcs?' (FCS)':'')+' · rating '+num1(a.rating))+'</div>'+(a.other?'':'<div class="mini"><a href="#/team/'+enc(a.name)+'">Team page &rsaquo;</a></div>')+'</div></div><div class="mid">'+(g.played?'<div class="sc">'+scoreSpan(g,'a',g.as,g.as>g.hs?'w':'l')+' – '+scoreSpan(g,'h',g.hs,g.hs>g.as?'w':'l')+'</div><div class="when">Final'+(g.as!==g.hs?' · <b>'+esc(tshort(g.as>g.hs?g.away:g.home))+'</b> wins by '+Math.abs(g.as-g.hs):'')+'</div>':g.live?'<div class="sc">'+scoreSpan(g,'a',g.as)+' - '+scoreSpan(g,'h',g.hs)+'</div><div class="when"><span class="livedot"></span>'+esc(g.clk||'In progress')+'</div>':'<div class="sc" style="font-size:30px">'+esc(kick(g))+' <span class="tzl">'+tzInfo().lbl+'</span></div><div class="when">'+esc(g.tv||'TV TBD')+'</div>')+'<div class="when">'+esc(venue(g))+'</div></div><div class="side home">'+(h.other?mono(h):'<a class="monolink" href="#/team/'+enc(h.name)+'" title="'+esc(h.disp)+' team page">'+mono(h)+'</a>')+'<div><div class="nm">'+(h.ap?'<span class="dim" style="font-size:20px">#'+h.ap+' </span>':'')+(h.fcs?esc(h.disp):'<a href="#/team/'+enc(h.name)+'">'+esc(h.disp)+'</a>')+'</div><div class="rec">'+(h.tbd?'Opponent to be determined':h.other?'Non-D1 opponent · rating '+num1(h.rating):recStr(h.name)+' · '+esc(h.conf)+(h.fcs?' (FCS)':'')+' · rating '+num1(h.rating))+'</div>'+(h.other?'':'<div class="mini"><a href="#/team/'+enc(h.name)+'">Team page &rsaquo;</a></div>')+'</div></div></div>'; /* line tiles */ const fav = p.diff>0?h:a; html+='<div class="grid g6" style="margin-top:14px">'+tile(g.played?'Closing spread':'Spread', spreadStr(g,{short:true}), g.src?('source: '+g.src):'no line posted')+tile('Total', g.total??'—', g.played?((g.as+g.hs)+' scored → '+(ouResult(g)==='O'?'over':ouResult(g)==='U'?'under':'push')):'over / under')+tile('Moneyline', g.mlA!=null?mlStr(g.mlA)+' / '+mlStr(g.mlH):'—', tshort(g.away)+' / '+tshort(g.home))+(g.tbd ? tile('Model line','—','waits for the matchup')+tile('Win probability','—','opponent not named yet') : tile('Model line', modelStr(g,{short:true}), 'ratings + '+(g.neutral?'no home field':HFA+' pts home field'))+tile(g.played?'Pregame win prob.':'Win probability', pct(Math.max(p.pHome,p.pAway))+' '+tshort(fav.name), g.spread!=null?'market implied '+pct(Math.max(p.mktPHome,1-p.mktPHome)):''))+(g.live? tile('Live score', g.as+'-'+g.hs, LIVE.last?'updating live':'when this page was built') : tile('Edge', p.edge!=null? (Math.abs(p.edge)<0.05?'None':tshort(p.edge>0?g.home:g.away)+' '+sgn(Math.abs(p.edge))) : '—', p.edge!=null?(g.played?'model vs closing line':Math.abs(p.edge)>=3?'strong lean':Math.abs(p.edge)>=1.5?'slight lean':'model agrees with market'):'needs a posted line'))+'</div>'; html+=wpBarHTML(g)+wpChartHTML(g); html+=((g.played||g.live)?liveCardHTML(g)+boxScoreHTML(g):''); html+='<div class="grid gside" style="margin-top:14px"><div class="gmain">'+(g.played?recapHTML(g):(g.live?'':previewHTML(g)))+watchHTML(g)+'<div class="card" style="margin-top:14px"><div class="hd"><h3>The read</h3></div><div class="bd">'+narrative(g)+'</div></div></div><div class="gaside">'+(g.played?'':lineMoveHTML(g))+injuryHTML(g)+h2hHistoryHTML(g)+draftCardHTML(g)+betButtonsHTML(g)+((a.tbd||h.tbd)?'':'<div class="card"><div class="hd"><h3>Head to head</h3><div class="legend"><span><i style="background:var(--s2)"></i>'+esc(a.disp)+'</span><span><i style="background:var(--s1)"></i>'+esc(h.disp)+'</span></div></div><div class="bd">'+compareHTML(a,h,sa,sh)+'</div></div>')+'<div class="card"><div class="hd"><h3>Form</h3><span class="mini">each team\'s season so far</span></div><div class="bd">'+formHTML(a)+formHTML(h)+'</div></div></div></div>'; /* lineups */ const qa=starterAt(a.name,['QB']), qh=starterAt(h.name,['QB']); if(qa||qh){ html+='<div class="sec"><h2>Projected starters</h2><span class="muted">from each depth chart</span></div><div class="grid g2">'+(a.tbd?'':lineupCard(a))+(h.tbd?'':lineupCard(h))+'</div>'; } view.innerHTML=html; }
+function renderGame(id){ const g=GI[id]; if(!g){ view.innerHTML='<div class="note">Game not found. <a href="#/week">Back to the scoreboard.</a></div>'; return; } setNav('week'); const a=team(g.away), h=team(g.home); const p=projAt(g); const sa=a.other?null:stats(a.name), sh=h.other?null:stats(h.name); let html=backBar('#/week/'+g.week, '<a href="#/week/'+g.week+'">Week '+g.week+'</a> · '+esc(fmtDateLong(g.date))+(g.conf?' · '+esc(h.conf)+' game':'')); html+='<div class="ghead" style="'+gheadStyle(a,h)+'">'+(customLogo(a)?'<img class="ghead-wm l" src="'+customLogo(a).wm+'" alt="">':'')+(customLogo(h)?'<img class="ghead-wm r" src="'+customLogo(h).wm+'" alt="">':'')+'<div class="side">'+(a.other?mono(a):'<a class="monolink" href="#/team/'+enc(a.name)+'" title="'+esc(a.disp)+' team page">'+mono(a)+'</a>')+'<div><div class="nm">'+(a.ap?'<span class="dim" style="font-size:20px">#'+a.ap+' </span>':'')+(a.fcs?esc(a.disp):'<a href="#/team/'+enc(a.name)+'">'+esc(a.disp)+'</a>')+'</div><div class="rec">'+(a.tbd?'Opponent to be determined':a.other?'Non-D1 opponent · rating '+num1(a.rating):recStr(a.name)+' · '+esc(a.conf)+(a.fcs?' (FCS)':'')+' · rating '+num1(a.rating))+'</div>'+(a.other?'':'<div class="mini"><a href="#/team/'+enc(a.name)+'">Team page &rsaquo;</a></div>')+'</div></div><div class="mid">'+(g.played?'<div class="sc">'+scoreSpan(g,'a',g.as,g.as>g.hs?'w':'l')+' – '+scoreSpan(g,'h',g.hs,g.hs>g.as?'w':'l')+'</div><div class="when">Final'+(g.as!==g.hs?' · <b>'+esc(tshort(g.as>g.hs?g.away:g.home))+'</b> wins by '+Math.abs(g.as-g.hs):'')+'</div>':g.live?'<div class="sc">'+scoreSpan(g,'a',g.as)+' - '+scoreSpan(g,'h',g.hs)+'</div><div class="when"><span class="livedot"></span>'+esc(g.clk||'In progress')+'</div>':'<div class="sc" style="font-size:30px">'+esc(kick(g))+' <span class="tzl">'+tzInfo().lbl+'</span></div><div class="when">'+esc(g.tv||'TV TBD')+'</div>')+'<div class="when">'+esc(venue(g))+'</div></div><div class="side home">'+(h.other?mono(h):'<a class="monolink" href="#/team/'+enc(h.name)+'" title="'+esc(h.disp)+' team page">'+mono(h)+'</a>')+'<div><div class="nm">'+(h.ap?'<span class="dim" style="font-size:20px">#'+h.ap+' </span>':'')+(h.fcs?esc(h.disp):'<a href="#/team/'+enc(h.name)+'">'+esc(h.disp)+'</a>')+'</div><div class="rec">'+(h.tbd?'Opponent to be determined':h.other?'Non-D1 opponent · rating '+num1(h.rating):recStr(h.name)+' · '+esc(h.conf)+(h.fcs?' (FCS)':'')+' · rating '+num1(h.rating))+'</div>'+(h.other?'':'<div class="mini"><a href="#/team/'+enc(h.name)+'">Team page &rsaquo;</a></div>')+'</div></div></div>'; /* line tiles */ const fav = p.diff>0?h:a; html+='<div class="grid g6" style="margin-top:14px">'+tile(g.played?'Closing spread':'Spread', spreadStr(g,{short:true}), g.src?('source: '+g.src):'no line posted')+tile('Total', g.total??'—', g.played?((g.as+g.hs)+' scored → '+(ouResult(g)==='O'?'over':ouResult(g)==='U'?'under':'push')):'over / under')+tile('Moneyline', g.mlA!=null?mlStr(g.mlA)+' / '+mlStr(g.mlH):'—', tshort(g.away)+' / '+tshort(g.home))+(g.tbd ? tile('Model line','—','waits for the matchup')+tile('Win probability','—','opponent not named yet') : tile('Model line', modelStr(g,{short:true}), 'ratings + '+(g.neutral?'no home field':HFA+' pts home field'))+tile(g.played?'Pregame win prob.':'Win probability', pct(Math.max(p.pHome,p.pAway))+' '+tshort(fav.name), g.spread!=null?'market implied '+pct(Math.max(p.mktPHome,1-p.mktPHome)):''))+(g.live? tile('Live score', g.as+'-'+g.hs, LIVE.last?'updating live':'when this page was built') : tile('Edge', p.edge!=null? (Math.abs(p.edge)<0.05?'None':tshort(p.edge>0?g.home:g.away)+' '+sgn(Math.abs(p.edge))) : '—', p.edge!=null?(g.played?'model vs closing line':Math.abs(p.edge)>=3?'strong lean':Math.abs(p.edge)>=1.5?'slight lean':'model agrees with market'):'needs a posted line'))+'</div>'; html+=wpBarHTML(g)+wpChartHTML(g); html+=((g.played||g.live)?liveCardHTML(g)+boxScoreHTML(g):''); html+='<div class="grid gside" style="margin-top:14px"><div class="gmain">'+articleHTML(g)+(g.played?recapHTML(g):(g.live?'':previewHTML(g)))+watchHTML(g)+'<div class="card" style="margin-top:14px"><div class="hd"><h3>The read</h3></div><div class="bd">'+narrative(g)+'</div></div></div><div class="gaside">'+(g.played?'':lineMoveHTML(g))+injuryHTML(g)+h2hHistoryHTML(g)+draftCardHTML(g)+betButtonsHTML(g)+((a.tbd||h.tbd)?'':'<div class="card"><div class="hd"><h3>Head to head</h3><div class="legend"><span><i style="background:var(--s2)"></i>'+esc(a.disp)+'</span><span><i style="background:var(--s1)"></i>'+esc(h.disp)+'</span></div></div><div class="bd">'+compareHTML(a,h,sa,sh)+'</div></div>')+'<div class="card"><div class="hd"><h3>Form</h3><span class="mini">each team\'s season so far</span></div><div class="bd">'+formHTML(a)+formHTML(h)+'</div></div></div></div>'; /* lineups */ const qa=starterAt(a.name,['QB']), qh=starterAt(h.name,['QB']); if(qa||qh){ html+='<div class="sec"><h2>Projected starters</h2><span class="muted">from each depth chart</span></div><div class="grid g2">'+(a.tbd?'':lineupCard(a))+(h.tbd?'':lineupCard(h))+'</div>'; } view.innerHTML=html; }
 function narrative(g){ const a=team(g.away), h=team(g.home); if(g.tbd){ const n=g.tbd==='away'?h:a; const pl=(g.tbdPool||[]).map(x=>team(x).disp); return '<p>'+esc(n.disp)+'’s opponent has not been named yet'+(pl.length?' (one of '+esc(pl.join(', '))+')':'')+'. The model line and win probability wait for the matchup; season projections count this as a game against the average of '+(pl.length?'those teams':'the '+esc(n.conf||'level'))+' (rating '+num1(g.tbdR)+').</p>'; } const p=projAt(g); const parts=[]; const fav=p.diff>0?h:a, dog=p.diff>0?a:h; parts.push('<p>On ratings alone, <b>'+esc(fav.disp)+'</b> is '+num1(Math.abs(p.diff))+' points better here'+(g.neutral?' on a neutral field':(fav===h?' with home field counted':' even after giving '+esc(h.disp)+' '+HFA+' points for home field'))+', which works out to a '+pct(Math.max(p.pHome,p.pAway))+' chance to win.</p>'); if(g.live) parts.unshift('<p><b>This game is underway.</b> It stood '+g.as+'-'+g.hs+' when the page was last built, so the numbers below are the pregame picture.</p>'); if(g.spread!=null && !g.played && !g.live){ const e=p.edge; const who=e>0?h:a; if(Math.abs(e)<1.5) parts.push('<p>The market has it about the same ('+esc(spreadStr(g))+'). No real disagreement.</p>'); else parts.push('<p>The market says '+esc(spreadStr(g))+'. This page\'s model leans <b>'+esc(who.disp)+'</b> by '+num1(Math.abs(e))+' points relative to that number'+(Math.abs(e)>=3?', which is a meaningful gap':', a modest gap')+'. '+(g.src==='opener'||g.src==='look-ahead'?'That is an early number and will move.':'')+'</p>'); } if(g.played){ const m=g.hs-g.as; const w=m>0?h:a; const l=m>0?a:h; parts.push('<p><b>'+esc(w.disp)+'</b> won by '+Math.abs(m)+'. '+(g.spread!=null?('Against the closing line ('+esc(spreadStr(g))+'), '+(covered(g,'home')==='P'?'it was a push':(covered(g,'home')==='W'?esc(h.disp):esc(a.disp))+' covered')+'. '):'')+(p.diff!==0?'The model had '+esc(modelStr(g))+', so it '+((p.diff>0)===(m>0)?'picked the winner':'was on the wrong side')+'.':'')+'</p>'); } const sa=a.other?null:stats(a.name), sh=h.other?null:stats(h.name); if(sa&&sh){ const bits=[]; if(sa.gp&&sh.gp){ bits.push(esc(a.disp)+' is scoring '+num1(sa.pf/sa.gp)+' and allowing '+num1(sa.pa/sa.gp)+'; '+esc(h.disp)+' is scoring '+num1(sh.pf/sh.gp)+' and allowing '+num1(sh.pa/sh.gp)+'.'); } const sosA=SOS_RANK[a.name], sosH=SOS_RANK[h.name]; if(sosA&&sosH) bits.push('Schedule strength: '+esc(a.disp)+' #'+sosA+', '+esc(h.disp)+' #'+sosH+' (of '+FBS.length+').'); parts.push('<p>'+bits.join(' ')+'</p>'); } [a,h].filter(x=>x.level!=='FBS').forEach(x=>{ parts.push('<p class="muted">'+esc(x.disp)+(x.other ? ' is a non-Division I opponent, carried at a placeholder rating of '+num1(x.rating)+'.' : ' is an FCS program from the '+esc(CONF_LONG[x.conf]||x.conf)+'. Its rating of '+num1(x.rating)+(x.basis==='2025' ? ' starts from last season\'s results'+(x.rec2025?' ('+esc(x.rec2025)+')':'')+' and moves with this year\'s games.' : ' is a league-level estimate until it plays.'))+'</p>'); }); return parts.join(''); }
 function compareHTML(a,h,sa,sh){ const rows=[]; const add=(k,va,vh,fmt,hi)=>rows.push({k,va,vh,fmt:fmt||(x=>x==null?'—':String(x)),hi:hi!==false}); add('Power rating',a.rating,h.rating,x=>num1(x)); add('FPI',a.fpi,h.fpi,x=>x==null?'—':num1(x)); add('Record',sa?sa.w:null,sh?sh.w:null,(x,t)=>t?t.w+'-'+t.l:'—'); add('Points / game',sa&&sa.gp?sa.pf/sa.gp:null,sh&&sh.gp?sh.pf/sh.gp:null,x=>x==null?'—':num1(x)); add('Allowed / game',sa&&sa.gp?sa.pa/sa.gp:null,sh&&sh.gp?sh.pa/sh.gp:null,x=>x==null?'—':num1(x),false); { const ba=a.other?null:seasonBox(a.name), bh=h.other?null:seasonBox(h.name); if(ba&&bh&&ba.g&&bh.g){ add('Yards / game',ba.yds/ba.g,bh.yds/bh.g,x=>x==null?'—':String(Math.round(x))); add('Yards allowed',ba.aYds/ba.g,bh.aYds/bh.g,x=>x==null?'—':String(Math.round(x)),false); add('Turnover margin',ba.take-ba.to,bh.take-bh.to,x=>x==null?'—':(x>0?'+':'')+x); } } add('Avg margin',sa?sa.margin:null,sh?sh.margin:null,x=>x==null?'—':sgn(x)); add('ATS',sa?sa.ats.w:null,sh?sh.ats.w:null,(x,t)=>t?t.ats.w+'-'+t.ats.l:'—'); add('Sched. strength',sa?sa.sosAll:null,sh?sh.sosAll:null,x=>x==null?'—':num1(x)); add('Proj. record',sa?sa.projW:null,sh?sh.projW:null,(x,t)=>t?num1(t.projW)+'-'+num1(t.projL):'—'); let html='<div class="cmp">'; rows.forEach(r=>{ const va=r.va, vh=r.vh; const both = va!=null && vh!=null; let wa=0,wh=0; if(both){ const lo=Math.min(va,vh), span=Math.max(Math.abs(va),Math.abs(vh),1e-6); const norm=v=>{ const lo=Math.min(va,vh), hiV=Math.max(va,vh); const base = (r.k==='Power rating'||r.k==='FPI'||r.k==='Avg margin'||r.k==='Sched. strength') ? (v+30)/60 : (r.k==='Turnover margin') ? (v+8)/16 : (r.hi===false ? (v>0 ? lo/v : 1) : (v/(hiV||1))); return Math.max(0.06,Math.min(1,base)); }; wa=norm(va); wh=norm(vh); } html+='<div class="rowv a"><span class="v">'+esc(r.fmt(va,sa))+'</span><div class="b a" style="flex:1"><span style="width:'+(wa*100)+'%"></span></div></div><div class="k">'+esc(r.k)+'</div><div class="rowv h"><div class="b h" style="flex:1"><span style="width:'+(wh*100)+'%"></span></div><span class="v">'+esc(r.fmt(vh,sh))+'</span></div>'; }); html+='</div>'; return html; }
 function formHTML(t){ if(t.tbd) return '<div class="mini" style="margin:6px 0"><b>TBD</b>: opponent not named yet.</div>'; if(t.other) return '<div class="mini" style="margin:6px 0"><b>'+esc(t.disp)+'</b>: non-Division I opponent, results not tracked here.</div>'; const s=stats(t.name); let html='<div style="margin:6px 0 12px"><div><b>'+esc(t.disp)+'</b> <span class="muted">'+s.w+'-'+s.l+' · '+s.ats.w+'-'+s.ats.l+' ATS</span></div>'; if(!s.played.length) html+='<div class="mini">No games played yet. Opens '+(s.upcoming[0]?(s.upcoming[0].g.home===t.name?'vs ':'at ')+esc(tshort(s.upcoming[0].g.home===t.name?s.upcoming[0].g.away:s.upcoming[0].g.home)):'')+'.</div>'; s.played.slice(-5).forEach(g=>{ const home=g.home===t.name; const opp=team(home?g.away:g.home); const pf=home?g.hs:g.as, pa=home?g.as:g.hs; html+='<div class="mini"><a href="#/game/'+g.id+'">'+(pf>pa?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+pf+'-'+pa+' '+(home?'vs':'at')+' '+esc(tshort(opp.name))+'</a> '+(g.spread!=null?'<span class="dim">('+esc(spreadStr(g,{short:true}))+')</span> ':'')+pillATS(covered(g,home?'home':'away'))+'</div>'; }); return html+'</div>'; }
@@ -91759,6 +91782,17 @@ function pickHTML(g){ if(g.tbd) return ''; const p=proj(g); const ps=projScore(g
     +(im?col('Betting line implies', score(halfStr(im.away),halfStr(im.home)), esc(spreadStr(g,{short:true}))+' &middot; total '+g.total):col('Betting line', '<div class="scoreproj dim">Not posted yet</div>', 'the model goes it alone for now'))
     +ats+(hand&&hand.pick?'<div class="pnote"><div class="eyebrow">The call</div>'+esc(hand.pick)+'</div>':'')+'</div>'; }
 function keyRowsHTML(list){ return '<div class="pv-keys">'+list.map(k=>'<div class="pkey"><div class="pkey-t"><span class="pill '+(k.cls||'line')+'">'+esc(k.tag)+'</span></div><div class="pkey-x">'+k.text+'</div></div>').join('')+'</div>'; }
+/* "Jamo's preview": headline, dek and the opening paragraphs, the rest behind "Read the full preview" */
+function articleHTML(g){ const ar=ARTICLES[g.id]; if(!ar||!ar.body) return '';
+  const inl=s=>esc(s).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/(^|[\s(])\*([^*\s][^*]*)\*/g,'$1<i>$2</i>');
+  const blk=b=>{ b=b.trim(); if(!b) return ''; if(b.startsWith('## ')) return '<h4>'+inl(b.slice(3))+'</h4>'; if(/^- /.test(b)) return '<ul>'+b.split('\n').filter(l=>l.trim()).map(l=>'<li>'+inl(l.replace(/^- /,''))+'</li>').join('')+'</ul>'; return '<p>'+inl(b).replace(/\n/g,'<br>')+'</p>'; };
+  const bl=ar.body.split(/\n{2,}/).filter(b=>b.trim()); const n=Math.max(1,ar.lead||2);
+  const head=bl.slice(0,n).map(blk).join(''), rest=bl.slice(n).map(blk).join('');
+  return '<div class="card ar"><div class="hd"><h3>Jamo\'s preview</h3>'+(ar.updated?'<span class="mini">updated '+esc(ar.updated)+'</span>':'')+'</div><div class="bd">'
+    +'<h2 class="ar-t">'+esc(ar.title||'')+'</h2>'+(ar.dek?'<p class="ar-dek">'+esc(ar.dek)+'</p>':'')
+    +'<div class="ar-body">'+head+'</div>'
+    +(rest?'<details class="ar-more"><summary><span class="ar-open">Read the full preview</span><span class="ar-close">Show less</span></summary><div class="ar-body">'+rest+(ar.sources?'<p class="ar-src"><b>Sources:</b> '+esc(ar.sources)+'</p>':'')+'</div></details>':'')
+    +'</div></div>'; }
 function previewHTML(g){ const a=team(g.away), h=team(g.home); const hand=PREVIEWS[g.id]; const keys=previewKeys(g); const lede=hand&&hand.angle?hand.angle:storyline(g);
   return '<div class="card pv pv2"><div class="hd"><h3>Game preview</h3><span class="mini">'+esc(fmtDate(g.date))+' &middot; '+esc(kick(g))+(g.tv?' &middot; '+esc(tvShort(g.tv)):'')+'</span></div><div class="bd">'
     +'<p class="pv-lede'+(hand&&hand.angle?'':' gen')+'">'+esc(lede)+'</p>'+pickHTML(g)

@@ -101,6 +101,9 @@ a.tc:hover{transform:translateY(-3px);box-shadow:0 26px 50px -24px rgba(0,0,0,.9
 .tc-last{font-size:12.5px;color:rgba(255,255,255,.82)}
 .tc-last b{font-weight:800}
 .tc-last .w{color:#9df5c1}.tc-last .l{color:#ffb3bf}
+.tc-ar{display:block;margin-top:8px;padding:8px 10px;border-radius:11px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);font-size:12.5px;font-weight:600;line-height:1.35;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+.tc-ar:hover,.tc-ar:focus-visible{background:rgba(255,255,255,.2);outline:none}
+.tc-ar-k{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffd77a;margin-right:4px}
 .tc.pick{align-items:center;justify-content:center;text-align:center;background:var(--surface);border:1.5px dashed var(--line);color:var(--ink);box-shadow:none}
 .tc.pick::before{display:none}
 .tc.pick b{color:var(--nfl)}
@@ -268,7 +271,7 @@ body.boardmode .jsh{display:none}
 
   <footer class="foot"><span id="asof"></span><span>A <i>Kramerica Industries</i> production</span></footer>
 </main>
-<script type="application/json" id="d-meta">{"cfb":"Sat Oct 10, 2026 · 8:34 PM ET","nfl":"Sat Oct 10, 2026 · 8:29 PM ET","nba":"Fri Oct 9, 2026 · 11:21 AM ET"}</script>
+<script type="application/json" id="d-meta">{"cfb":"Sat Oct 10, 2026 · 8:34 PM ET","nfl":"Sat Oct 10, 2026 · 8:29 PM ET","nba":"Sat Oct 10, 2026 · 10:23 PM ET"}</script>
 <script type="text/plain" id="d-cfb">1|2026-08-29|Hawai'i|Stanford|27|37|FINAL|7:00 PM||-4.5|48.5|170|-205|ACC Network||
 1|2026-08-29|Jacksonville State|North Dakota State|7|33|FINAL|5:30 PM||-6.5|46.5|230|-285|CBSSN||
 1|2026-08-29|Memphis|UNLV|27|21|FINAL|10:00 PM||-4.5|55.5|160|-192|Fox||
@@ -2662,14 +2665,14 @@ Youngstown State|2754
 1|2026-10-08|7:30 PM|401901823|PHI|BKN|108|114|FINAL||
 1|2026-10-08|7:30 PM|401906508|WSH|NY|111|109|FINAL||NBA TV
 1|2026-10-09|8:00 AM|401898395|HOU|DAL|135|117|FINAL|N|NBA TV
-1|2026-10-09|8:00 PM|401908940|MEM|CHI|||SCHEDULED||NBA TV
-1|2026-10-10|7:00 PM|401898396|ATL|IND|||SCHEDULED||
-1|2026-10-10|8:00 PM|401898397|MIN|MIA|||SCHEDULED||
-1|2026-10-10|8:00 PM|401898398|PHI|BOS|||SCHEDULED||NBA TV
-1|2026-10-10|8:30 PM|401898399|SAC|GS|||SCHEDULED||
+1|2026-10-09|8:00 PM|401908940|MEM|CHI|104|100|FINAL||NBA TV
+1|2026-10-10|7:00 PM|401898396|ATL|IND|119|117|FINAL||
+1|2026-10-10|8:00 PM|401898397|MIN|MIA|112|110|IN_PROGRESS||
+1|2026-10-10|8:00 PM|401898398|PHI|BOS|94|138|IN_PROGRESS||NBA TV
+1|2026-10-10|8:30 PM|401898399|SAC|GS|78|82|IN_PROGRESS||
 1|2026-10-10|10:30 PM|401898720|SA|PHX|||SCHEDULED||ESPN2
-1|2026-10-10|6:30 PM|401902645|LAC|TOR|||SCHEDULED||
-1|2026-10-10|7:00 PM|401906510|DET|WSH|||SCHEDULED||
+1|2026-10-10|6:30 PM|401902645|LAC|TOR|106|114|FINAL||
+1|2026-10-10|7:00 PM|401906510|DET|WSH|108|114|FINAL||
 1|2026-10-11|6:00 AM|401898400|DAL|HOU|||SCHEDULED|N|NBA TV
 1|2026-10-11|6:30 PM|401898401|ORL|CLE|||SCHEDULED||ESPN
 1|2026-10-11|7:00 PM|401901821|MIL|CHA|||SCHEDULED||
@@ -4181,6 +4184,7 @@ Tarleton State|#582c83|#ffffff|Texans|UAC
 West Georgia|#0033a1|#db1a21|Wolves|UAC
 West Florida|#00543c|#006ba6|Argonauts|UAC
 </script>
+<script type="application/json" id="d-articles">{"cfb":{"2026-10-09-iowa-state-byu":{"r":"Bear Does Everything, the Defense Does the Rest"},"2026-10-17-notre-dame-byu":{"p":"Sixteen Straight, One Saturday Night"}},"nfl":{"401872981":{"p":"What's Left of the Birds Goes to London"}}}</script>
 
 <script>
 (function(){
@@ -4253,8 +4257,12 @@ const applyLive = g => { const L = LIVE[g.sport][g.id]; if (!L) return g; const 
 const liveClock = g => { const L = LIVE[g.sport][g.id]; if (!L) return 'In progress'; if (L.per && L.clk) return (g.sport !== 'nba' && L.per > 4 ? 'OT' : 'Q' + L.per) + ' ' + L.clk; return L.det || 'In progress'; };
 
 /* ---------- favorites, from each hub's own settings ---------- */
+const ARTS = (() => { try { return JSON.parse(document.getElementById('d-articles').textContent) || {}; } catch (e) { return {}; } })();
+/* the article links sit inside the team card's link: a tap on one opens that game page instead of the team page */
+document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('.tc-ar[data-go]'); if (!a) return; e.preventDefault(); e.stopPropagation(); location.href = a.dataset.go; }, true);
+document.addEventListener('keydown', e => { if (e.key !== 'Enter') return; const a = e.target.closest && e.target.closest('.tc-ar[data-go]'); if (a) { e.preventDefault(); location.href = a.dataset.go; } }, true);
 const cfbSet = ls('cfb-settings') || {}, nflSet = ls('nfl-settings') || {}, nbaSet = ls('nba-settings') || {};
-const FAVS = [cfbSet.fav || 'BYU'].map(n => ({sport:'cfb', team:n})).concat(nflSet.fav ? [{sport:'nfl', team:nflSet.fav}] : [], [{sport:'nba', team:nbaSet.fav || 'UTAH'}]);
+const FAVS = [cfbSet.fav || 'BYU'].map(n => ({sport:'cfb', team:n})).concat((('fav' in nflSet) ? nflSet.fav : 'PHI') ? [{sport:'nfl', team:('fav' in nflSet) ? nflSet.fav : 'PHI'}] : [], [{sport:'nba', team:nbaSet.fav || 'UTAH'}]);
 const isFavTeam = (sport, t) => FAVS.some(f => f.sport === sport && f.team === t);
 const favGame = g => isFavTeam(g.sport, g.away) || isFavTeam(g.sport, g.home);
 
@@ -4315,13 +4323,16 @@ function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(
   else nx = '<div class="tc-next"><div class="tc-k"><span>Season</span></div><div class="tc-g">Nothing left on the schedule</div></div>';
   let lastLine = '';
   if (last) { const mine = last.home === t ? last.hs : last.as, them = last.home === t ? last.as : last.hs; const opp = last.home === t ? last.away : last.home; lastLine = '<div class="tc-last">Last: <b class="' + (mine > them ? 'w' : mine < them ? 'l' : '') + '">' + (mine > them ? 'W' : mine < them ? 'L' : 'T') + ' ' + mine + '-' + them + '</b> ' + (last.neutral ? 'vs' : (last.home === t ? 'vs' : 'at')) + ' ' + esc(o.name(opp)) + '</div>'; }
+  const gid = g => (o.href(g).split('#/game/')[1] || ''), art = (g, k) => g && ((ARTS[f.sport] || {})[gid(g)] || {})[k];
+  const arLine = (g, k, word) => { const tt = art(g, k); return tt ? '<span class="tc-ar" role="link" tabindex="0" data-go="' + esc(o.href(g)) + '"><span class="tc-ar-k">Jamo's ' + word + '</span> ' + esc(tt) + ' ›</span>' : ''; };
+  lastLine += arLine(live || next, 'p', 'preview') + arLine(last, 'r', 'recap');
   const logo = o.logo(t);
   return '<a class="tc rise" style="--i:' + i + ';--tc:' + c1 + ';--tc2:' + c2 + '" href="' + o.teamHref(t) + '" aria-label="' + esc(o.full(t)) + ' team page">' + (logo ? '<img class="wm" src="' + logo + '" alt="">' : '')
     + '<div class="tc-top"><span class="tc-sport">' + SPORT[f.sport].icon + esc(SPORT[f.sport].short) + '</span>' + (rk ? '<span class="tc-rank">#' + rk + '</span>' : '') + '</div>'
     + '<div class="tc-id">' + plate(logo) + '<div style="min-width:0"><div class="tc-name">' + esc(f.sport === 'cfb' ? t : o.full(t)) + '</div><div class="tc-meta">' + meta + '</div></div></div>'
     + nx + lastLine + '</a>'; }
 function teamsHTML(){ const cards = FAVS.map((f, i) => teamCard(f, i)).filter(Boolean);
-  if (!nflSet.fav) cards.splice(Math.min(2, cards.length), 0, '<a class="tc pick rise" style="--i:2" href="/nfl/#/settings"><div><span class="tc-sport">' + ICON.fb + 'NFL</span><div class="big">Pick your NFL team</div><div class="small">Choose one in <b>NFL settings</b> and its next game shows up here with a countdown.</div></div></a>');
+  if (!FAVS.some(f => f.sport === 'nfl')) cards.splice(Math.min(2, cards.length), 0, '<a class="tc pick rise" style="--i:2" href="/nfl/#/settings"><div><span class="tc-sport">' + ICON.fb + 'NFL</span><div class="big">Pick your NFL team</div><div class="small">Choose one in <b>NFL settings</b> and its next game shows up here with a countdown.</div></div></a>');
   $('#teams').innerHTML = cards.join('');
   $('#t-note').textContent = 'tap a card for the team page'; }
 

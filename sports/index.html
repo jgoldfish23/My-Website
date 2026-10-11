@@ -71,6 +71,19 @@ a.nu:hover{border-color:rgba(255,255,255,.28)}
 .sec h2{margin:0;font-family:var(--disp);font-size:21px;font-weight:800;letter-spacing:-.025em}
 .sec .note{color:var(--ink-3);font-size:13px}
 .sec .more{margin-left:auto;font-size:13px;font-weight:700;color:var(--ink-2);white-space:nowrap}
+.lc.hot{box-shadow:inset 0 0 0 1.5px rgba(255,92,92,.55),0 6px 22px -10px rgba(255,70,70,.55)}
+.lc-why{margin-top:9px;padding-top:8px;border-top:1px solid rgba(127,127,127,.22);font-size:12.5px;font-weight:800;color:#ff7b7b;letter-spacing:.01em}
+html.light .lc-why{color:#c62828}
+.cal-btn{border:1px solid var(--line, rgba(255,255,255,.18));background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;font-size:13px;font-weight:700;color:var(--ink-2)}
+.cal-btn:hover,.cal-btn[aria-expanded="true"]{background:rgba(127,127,127,.14)}
+.cal-panel{margin:0 0 14px;padding:14px 16px;border-radius:16px;border:1px solid var(--line, rgba(255,255,255,.14));background:var(--card, rgba(127,127,127,.08))}
+.cal-panel p{margin:0 0 10px;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.cal-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 0;border-top:1px solid var(--line, rgba(255,255,255,.1))}
+.cal-row b{flex:1 1 100%;font-size:14.5px}
+.cal-row .n{font-weight:500;color:var(--ink-3);font-size:12.5px;margin-left:4px}
+.cal-row a,.cal-row button{border:1px solid var(--line, rgba(255,255,255,.18));border-radius:999px;padding:6px 11px;font:inherit;font-size:12.5px;font-weight:700;color:inherit;background:transparent;cursor:pointer;text-decoration:none;white-space:nowrap}
+.cal-row a:hover,.cal-row button:hover{background:rgba(127,127,127,.16)}
+.cal-row.all b{color:var(--gold, #d9a520)}
 a.more:hover{color:var(--ink)}
 /* ---------- your teams ---------- */
 .teams{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
@@ -189,6 +202,7 @@ a.gm:hover{background:var(--surface-2)}
   .teams::-webkit-scrollbar{display:none}
   .tc{scroll-snap-align:start;min-height:220px}
   .sports{grid-template-columns:1fr}.sp.nba{grid-column:auto}
+  #t-note{display:none}
   .tv-slot{grid-template-columns:1fr}.tv-t{padding:12px 16px 2px}.tv-t small{display:inline;margin-left:6px}.tv-gs{border-left:0}
   .tv-g{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"m m m" "tag st net";row-gap:7px;column-gap:10px;padding:10px 16px}
   .tv-g .sp-tag{grid-area:tag;justify-self:start}.tv-g .tv-m{grid-area:m}.tv-g .net{grid-area:net;justify-self:end}.tv-g .tv-st{grid-area:st;min-width:0}
@@ -258,8 +272,11 @@ body.boardmode .jsh{display:none}
     <div id="h-next"></div>
   </section>
 
-  <div class="sec"><h2>Your teams</h2><span class="note" id="t-note"></span></div>
+  <div class="sec"><h2>Your teams</h2><span class="note" id="t-note"></span><button class="more cal-btn" id="cal-btn" type="button" aria-expanded="false" aria-controls="cal-panel">📅 Add to calendar</button></div>
+  <div class="cal-panel" id="cal-panel" hidden></div>
   <section class="teams" id="teams" aria-label="Your teams"></section>
+
+  <div id="tune-wrap" hidden><div class="sec"><h2>Worth tuning in</h2><span class="note" id="tune-n"></span></div><div class="lrow" id="tune"></div></div>
 
   <div id="live-wrap" hidden><div class="sec"><h2>Live now</h2><span class="note" id="live-n"></span></div><div class="lrow" id="live"></div></div>
 
@@ -4342,6 +4359,21 @@ function liveHTML(){ const lv = liveAll(); $('#live-wrap').hidden = !lv.length; 
   lv.sort((a, b) => (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0));
   $('#live').innerHTML = lv.map(g => { const o = O[g.sport]; return '<a class="lc" style="--c:' + SPORT[g.sport].c + '" href="' + o.href(g) + '"><div class="lc-h"><span>' + SPORT[g.sport].short + '</span><span>' + esc(liveClock(g)) + '</span></div>' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + '</a>'; }).join(''); }
 
+/* ---------- worth tuning in: live games in overtime, close late, or an upset in the making ---------- */
+const clkSecs = c => { const m = /^(\d+):(\d\d)/.exec(c || ''); return m ? +m[1] * 60 + +m[2] : null; };
+function tuneWhy(g){ const L = LIVE[g.sport][g.id] || {}; const per = +L.per || 0; if (!per) return null;
+  const nba = g.sport === 'nba', left = clkSecs(L.clk), m = Math.abs((g.as || 0) - (g.hs || 0)), mine = favGame(g) ? 25 : 0;
+  if (per > 4) return {s: 200 + mine - m, t: 'Overtime' + (m ? '' : ' · tied')};
+  if (per === 4 && (nba ? (left != null && left <= 360 && m <= 6) : m <= 8)) return {s: 150 + mine - m, t: m === 0 ? 'Tied in the 4th' : (nba ? m + '-point game, ' + Math.ceil(left / 60) + ' min left' : 'One-score game in the 4th')};
+  if (per >= 3 && g.spread != null && !isNaN(g.spread) && Math.abs(g.spread) >= (nba ? 6 : 7)) {
+    const dogHome = g.spread > 0, lead = dogHome ? g.hs - g.as : g.as - g.hs;
+    if (lead > 0) return {s: 100 + mine + Math.abs(g.spread), t: 'Upset watch · ' + O[g.sport].name(dogHome ? g.home : g.away) + ' (+' + Math.abs(g.spread) + ') leads by ' + lead}; }
+  return null; }
+function tuneHTML(){ const hot = liveAll().map(g => ({g, w: tuneWhy(g)})).filter(x => x.w).sort((a, b) => b.w.s - a.w.s).slice(0, 6);
+  $('#tune-wrap').hidden = !hot.length; if (!hot.length) return;
+  $('#tune-n').textContent = hot.length === 1 ? 'close, late or an upset brewing' : hot.length + ' games close, late or upset-y';
+  $('#tune').innerHTML = hot.map(({g, w}) => { const o = O[g.sport]; return '<a class="lc hot" style="--c:' + SPORT[g.sport].c + '" href="' + o.href(g) + '"><div class="lc-h"><span>' + SPORT[g.sport].short + '</span><span>' + esc(liveClock(g)) + '</span></div>' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + '<div class="lc-why">\u{1F525} ' + esc(w.t) + '</div></a>'; }).join(''); }
+
 /* ---------- on TV: one timeline across the three sports ---------- */
 const NAT = /^(ABC|CBS|FOX|NBC|ESPN|ESPN2|ESPNU|FS1|FS2|BTN|Big Ten Network|SECN|SEC Network|ACCN|ACC Network|CW|The CW|Peacock|Prime Video|NFL Net|NFL Network|Netflix|YouTube|TNT|truTV|NBA TV|NBCSN|CBSSN|CBS Sports Network)$/i;
 function tvDay(){ for (let i = 0; i < 8; i++) { const d = addDay(TODAY, i); if (CFB.some(g => g.date === d && g.tv) || NFL.some(g => g.date === d) || NBA.some(g => g.date === d)) return d; } return TODAY; }
@@ -4381,7 +4413,7 @@ function sportsHTML(){
 
 /* ---------- draw, tick and poll ---------- */
 let LAST = 0, TIMER = null;
-function render(){ heroHTML(); teamsHTML(); liveHTML(); tvHTML(); sportsHTML();
+function render(){ heroHTML(); teamsHTML(); tuneHTML(); liveHTML(); tvHTML(); sportsHTML();
   const when = s => { const m = /^[A-Z][a-z]{2} ([A-Z][a-z]{2} \d+), \d{4} · (.*)$/.exec(s || ''); return m ? (m[1] === md(TODAY) ? '' : m[1] + ', ') + m[2] : (s || '?'); };
   $('#asof').textContent = 'Updated: College ' + when(META.cfb) + ' · NFL ' + when(META.nfl) + ' · NBA ' + when(META.nba);
   $('#upd').textContent = LAST ? 'live scores ' + fmt({hour:'numeric', minute:'2-digit'}, new Date(LAST)) : ''; }
@@ -4397,6 +4429,25 @@ async function poll(){ const jobs = [];
   if (jobs.length) { await Promise.all(jobs); LAST = Date.now(); $('#fd').classList.remove('anim'); render(); }
   const anyLive = Object.values(LIVE).some(m => Object.values(m).some(x => isLiveSt(x.st)));
   clearTimeout(TIMER); TIMER = setTimeout(poll, anyLive ? 30e3 : (jobs.length ? 120e3 : 600e3)); }
+/* ---------- calendar sync: subscribe links for each team's feed (built by cal/make_cal.pl on every deploy) ---------- */
+(function(){ const btn = document.getElementById('cal-btn'), panel = document.getElementById('cal-panel'); if (!btn || !panel) return;
+  const base = 'djgolding.com/sports/cal/';
+  const row = (label, file, n, all) => { const https = 'https://' + base + file, web = 'webcal://' + base + file;
+    return '<div class="cal-row' + (all ? ' all' : '') + '"><b>' + esc(label) + (n ? '<span class="n">' + n + ' games</span>' : '') + '</b>'
+      + '<a href="' + web + '">iPhone / Outlook</a>'
+      + '<a href="https://calendar.google.com/calendar/render?cid=' + encodeURIComponent(web) + '" target="_blank" rel="noopener">Google</a>'
+      + '<button type="button" data-copy="' + https + '">Copy link</button></div>'; };
+  let loaded = false;
+  async function load(){ if (loaded) return; loaded = true; let ix = null;
+    try { const r = await fetch('/sports/cal/index.json', {cache:'no-store'}); ix = r.ok ? await r.json() : null; } catch (e) {}
+    if (!ix || !ix.teams) { panel.innerHTML = '<p>The calendars are not available right now. Try again in a minute.</p>'; loaded = false; return; }
+    panel.innerHTML = '<p>Subscribe once and every game shows up in your phone’s calendar with the time, TV channel and line. Kickoff changes, new TV picks and final scores update by themselves (Google can take up to a day).</p>'
+      + row('All my teams', ix.all, 0, true) + ix.teams.map(t => row(t.team, t.file, t.games)).join(''); }
+  btn.addEventListener('click', () => { const open = panel.hidden; panel.hidden = !open; btn.setAttribute('aria-expanded', String(open)); if (open) load(); });
+  panel.addEventListener('click', e => { const c = e.target.closest('[data-copy]'); if (!c) return; const u = c.dataset.copy;
+    const done = () => { const t = c.textContent; c.textContent = 'Copied'; setTimeout(() => { c.textContent = t; }, 1500); };
+    if (navigator.clipboard) navigator.clipboard.writeText(u).then(done, () => prompt('Copy this link:', u)); else prompt('Copy this link:', u); });
+})();
 render(); setInterval(tick, 1000); setTimeout(poll, 900);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
 })();

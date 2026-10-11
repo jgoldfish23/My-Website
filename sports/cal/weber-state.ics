@@ -1,0 +1,186 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Jamo Sports Hub//Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Weber State · Jamo Sports Hub
+X-WR-TIMEZONE:America/Denver
+REFRESH-INTERVAL;VALUE=DURATION:PT6H
+X-PUBLISHED-TTL:PT6H
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:cfb-2026-08-28-weber-state-northern-colorado@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20260828T210000
+DTEND;TZID=America/New_York:20260829T003000
+SUMMARY:🏈 Weber State 30\, Northern Colorado 29 (W)
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-08-
+ 28-weber-state-northern-colorado
+URL:https://djgolding.com/cfb/#/game/2026-08-28-weber-state-northern-colora
+ do
+LOCATION:at Northern Colorado
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cfb-2026-09-05-weber-state-southern-utah@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20260905T200000
+DTEND;TZID=America/New_York:20260905T233000
+SUMMARY:🏈 Weber State 42\, Southern Utah 47 (L)
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-09-
+ 05-weber-state-southern-utah
+URL:https://djgolding.com/cfb/#/game/2026-09-05-weber-state-southern-utah
+LOCATION:at Southern Utah
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cfb-2026-09-12-weber-state-colorado@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20260912T153000
+DTEND;TZID=America/New_York:20260912T190000
+SUMMARY:🏈 Weber State 21\, Colorado 52 (L)
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-09-
+ 12-weber-state-colorado
+URL:https://djgolding.com/cfb/#/game/2026-09-12-weber-state-colorado
+LOCATION:at Colorado
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cfb-2026-09-19-northwestern-state-weber-state@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20260919T200000
+DTEND;TZID=America/New_York:20260919T233000
+SUMMARY:🏈 Weber State 49\, Northwestern State 20 (W)
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-09-
+ 19-northwestern-state-weber-state
+URL:https://djgolding.com/cfb/#/game/2026-09-19-northwestern-state-weber-st
+ ate
+LOCATION:Stewart Stadium\, Ogden\, UT
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cfb-2026-09-26-portland-state-weber-state@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20260926T200000
+DTEND;TZID=America/New_York:20260926T233000
+SUMMARY:🏈 Weber State 41\, Portland State 44 (L)
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-09-
+ 26-portland-state-weber-state
+URL:https://djgolding.com/cfb/#/game/2026-09-26-portland-state-weber-state
+LOCATION:Stewart Stadium\, Ogden\, UT
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cfb-2026-10-03-weber-state-cal-poly@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20261003T200000
+DTEND;TZID=America/New_York:20261003T233000
+SUMMARY:🏈 Weber State 42\, Cal Poly 34 (W)
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-10-
+ 03-weber-state-cal-poly
+URL:https://djgolding.com/cfb/#/game/2026-10-03-weber-state-cal-poly
+LOCATION:at Cal Poly
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cfb-2026-10-10-idaho-weber-state@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20261010T150000
+DTEND;TZID=America/New_York:20261010T183000
+SUMMARY:🏈 Weber State 38\, Idaho 27 (W)
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-10-
+ 10-idaho-weber-state
+URL:https://djgolding.com/cfb/#/game/2026-10-10-idaho-weber-state
+LOCATION:Stewart Stadium\, Ogden\, UT
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cfb-2026-10-17-idaho-state-weber-state@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20261017T150000
+DTEND;TZID=America/New_York:20261017T183000
+SUMMARY:🏈 Weber State vs Idaho State
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-10-
+ 17-idaho-state-weber-state
+URL:https://djgolding.com/cfb/#/game/2026-10-17-idaho-state-weber-state
+LOCATION:Stewart Stadium\, Ogden\, UT
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cfb-2026-10-24-weber-state-montana-state@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20261024T150000
+DTEND;TZID=America/New_York:20261024T183000
+SUMMARY:🏈 Weber State at Montana State
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-10-
+ 24-weber-state-montana-state
+URL:https://djgolding.com/cfb/#/game/2026-10-24-weber-state-montana-state
+LOCATION:at Montana State
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cfb-2026-10-31-uc-davis-weber-state@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20261031T150000
+DTEND;TZID=America/New_York:20261031T183000
+SUMMARY:🏈 Weber State vs UC Davis
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-10-
+ 31-uc-davis-weber-state
+URL:https://djgolding.com/cfb/#/game/2026-10-31-uc-davis-weber-state
+LOCATION:Stewart Stadium\, Ogden\, UT
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cfb-2026-11-14-weber-state-northern-arizona@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20261114T160000
+DTEND;TZID=America/New_York:20261114T193000
+SUMMARY:🏈 Weber State at Northern Arizona
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-11-
+ 14-weber-state-northern-arizona
+URL:https://djgolding.com/cfb/#/game/2026-11-14-weber-state-northern-arizon
+ a
+LOCATION:at Northern Arizona
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cfb-2026-11-21-utah-tech-weber-state@djgolding.com
+DTSTAMP:20261011T025506Z
+DTSTART;TZID=America/New_York:20261121T150000
+DTEND;TZID=America/New_York:20261121T183000
+SUMMARY:🏈 Weber State vs Utah Tech
+DESCRIPTION:TV: ESPN+\nGame page: https://djgolding.com/cfb/#/game/2026-11-
+ 21-utah-tech-weber-state
+URL:https://djgolding.com/cfb/#/game/2026-11-21-utah-tech-weber-state
+LOCATION:Stewart Stadium\, Ogden\, UT
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

@@ -80,12 +80,21 @@ function slimSummary(j) {
   const st = hdr.status || {};
   const cur = j.drives && j.drives.current;
   const drive = cur ? { desc: cur.description || "", plays: (cur.plays || []).slice(-4).map((p) => String(p.text || "").slice(0, 180)) } : null;
+  // every possession for the game-day screen (2026-10-16): who had it, how it ended, when and where it started
+  const seen = new Set();
+  const drives = ((j.drives && j.drives.previous) || []).concat(cur ? [cur] : [])
+    .filter((d) => d && !seen.has(d.id) && seen.add(d.id))
+    .map((d) => ({
+      team: d.team && d.team.id, desc: d.description || "", res: d.displayResult || d.result || "", sc: !!d.isScore,
+      per: d.start && d.start.period && d.start.period.number, clk: (d.start && d.start.clock && d.start.clock.displayValue) || "",
+      from: (d.start && d.start.text) || "", cur: !!(cur && d.id === cur.id),
+    }));
   return {
     t: Date.now(),
     st: ((st.type && st.type.name) || "").replace("STATUS_", ""),
     det: (st.type && st.type.shortDetail) || "",
     ls: (hdr.competitors || []).map((c) => ({ id: c.id, ha: c.homeAway, s: c.score, ls: (c.linescores || []).map((l) => l.displayValue) })),
-    teams, players, scoring, drive,
+    teams, players, scoring, drive, drives,
     wp: slimWP(j, hdr),
   };
 }

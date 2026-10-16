@@ -161,6 +161,23 @@ export async function onRequestGet({ request }) {
   const url = new URL(request.url);
   const p = url.pathname;
   try {
+    if (p === "/api/cfb/probe") {   // TEMPORARY (2026-10-16): which ESPN hosts answer a Cloudflare server call
+      const qs = "/scoreboard?dates=2026&seasontype=2&week=7&groups=80&limit=400";
+      const tries = {
+        web: "https://site.web.api.espn.com/apis/site/v2/sports/football/college-football" + qs,
+        site: "https://site.api.espn.com/apis/site/v2/sports/football/college-football" + qs,
+        cdn: "https://cdn.espn.com/core/college-football/scoreboard?xhr=1&week=7&groups=80",
+        core: "https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/seasons/2026/types/2/weeks/7/events?groups=80&limit=5",
+        webv3: "https://site.web.api.espn.com/apis/v2/scoreboard/header?sport=football&league=college-football",
+        summary: "https://site.web.api.espn.com/apis/site/v2/sports/football/college-football/summary?event=401752745",
+      };
+      const uas = { plain: "Mozilla/5.0 (compatible; djgolding.com live scores)", browser: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36" };
+      const out = {};
+      for (const [k, u] of Object.entries(tries)) for (const [uk, ua] of Object.entries(uas)) {
+        try { const r = await fetch(u, { headers: { "user-agent": ua, "accept": "application/json", "referer": "https://www.espn.com/" } }); out[k + ":" + uk] = r.status + " " + (await r.text()).length; } catch (e) { out[k + ":" + uk] = "err " + e.message; }
+      }
+      return json(request, out, 200, false);
+    }
     if (p === "/api/cfb/scoreboard") {
       const week = parseInt(url.searchParams.get("week"), 10);
       const groups = url.searchParams.get("groups") === "81" ? "81" : "80";

@@ -4,6 +4,7 @@ import * as cfb from "./functions/api/cfb.js";
 import * as nfl from "./functions/api/nfl.js";
 import * as nba from "./functions/api/nba.js";
 import * as mlb from "./functions/api/mlb.js";
+import * as nhl from "./functions/api/nhl.js";
 import { clientIp, originOk, rateLimit, tooMany, forbidden } from "./functions/api/_guard.js";
 
 const RECORD_KEY = "record_entries";
@@ -244,6 +245,12 @@ export default {
     if (pathname.startsWith("/api/nba/")) {
       if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
       return nba.onRequestGet({ request, env, ctx });
+    }
+
+    // Live NHL scores for /nhl and the front door (same shape as the other proxies)
+    if (pathname.startsWith("/api/nhl/")) {
+      if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
+      return nhl.onRequestGet({ request, env, ctx });
     }
 
     // Live MLB scores for the front door and /mlb (Dodgers postseason, same shape as the other proxies)

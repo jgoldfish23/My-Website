@@ -60,12 +60,17 @@ function slimEvent(e) {
 }
 
 async function upstream(url, ttl) {
-  const res = await fetch(url, {
-    headers: { "user-agent": "Mozilla/5.0 (compatible; djgolding.com live scores)", "accept": "application/json" },
-    cf: { cacheTtl: ttl || TTL, cacheEverything: true },
-  });
-  if (!res.ok) throw new Error("upstream " + res.status);
-  return res.json();
+  // ESPN refuses server calls on one of its two hosts and has switched which one (site.api earlier in 2026, site.web.api
+  // from Oct 16, 2026), so try site.api first and fall back to site.web.api on a 403
+  for (const u of [url.replace("://site.web.api.espn.com/", "://site.api.espn.com/"), url]) {
+    const res = await fetch(u, {
+      headers: { "user-agent": "Mozilla/5.0 (compatible; djgolding.com live scores)", "accept": "application/json" },
+      cf: { cacheTtl: ttl || TTL, cacheEverything: true },
+    });
+    if (res.ok) return res.json();
+    if (res.status !== 403) throw new Error("upstream " + res.status);
+  }
+  throw new Error("upstream 403");
 }
 
 export async function onRequestGet({ request }) {

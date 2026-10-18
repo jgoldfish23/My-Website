@@ -270,6 +270,50 @@ a.gm:hover{background:var(--surface-2)}
 
 /* front_hero fix (2026-10-18): one swipeable row of chips on phones */
 @media (max-width:720px){.pulse{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-18px;margin-right:-18px;padding:0 18px 2px;scroll-padding-left:18px}.pulse::-webkit-scrollbar{display:none}.pulse .chip{flex:none}.tvq-l{flex-wrap:nowrap}.tvq-l a{padding:6px 10px}}
+
+/* front_teams_top (2026-10-18): Your teams at the very top, smaller cards, and a minimized strip */
+.yt{margin-bottom:18px}
+.sec.top{margin-top:2px;align-items:center}
+.sec.top h2{white-space:nowrap}
+.sec .t-min{margin-left:0}
+.teams{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.tc-ar + .tc-ar{display:none}
+.tc{min-height:0;gap:8px;padding:12px 13px 11px}
+.tc .wm{width:112px;height:112px;right:-20px;bottom:-24px}
+.tc-sport{padding:3px 8px 3px 6px;font-size:10px}
+.tc-id{gap:10px}
+.plate{width:42px;height:42px;border-radius:12px}
+.plate img{width:32px;height:32px}
+.plate .sw{width:22px;height:22px}
+.tc-name{font-size:clamp(17px,1.4vw,19px)}
+.tc-meta{font-size:12px;margin-top:2px}
+.tc-next{padding:8px 10px;border-radius:12px}
+.tc-k{font-size:10px}
+.tc-g{font-size:13px;margin-top:2px}
+.tc-cd{font-size:16px;margin-top:3px}
+.tc-sc{font-size:19px;margin-top:2px}
+.tc-last{font-size:12px}
+.tc-ar{margin-top:4px;padding:6px 9px;font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.teams.mini .tc{flex-direction:row;align-items:center;gap:8px;padding:8px 10px}
+.teams.mini .tc-top,.teams.mini .tc-meta,.teams.mini .tc-last,.teams.mini .tc-ar,.teams.mini .tc-g,.teams.mini .wm,.teams.mini .tc.pick .small{display:none}
+.teams.mini .tc-id{flex:1;min-width:0;gap:9px}
+.teams.mini .plate{width:30px;height:30px;border-radius:9px;box-shadow:none}
+.teams.mini .plate img{width:23px;height:23px}
+.teams.mini .tc-name{font-size:0;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.teams.mini .tc-name::after{content:attr(data-mini);font-size:15px}
+.teams.mini .tc-next{margin:0 0 0 auto;padding:0;background:none;border:0;flex:none;text-align:right}
+.teams.mini .tc-next:has(.tc-cd,.tc-sc) .tc-k{display:none}
+.teams.mini .tc-cd,.teams.mini .tc-sc{margin:0;font-size:13px;letter-spacing:0}
+.teams.mini .tc-cd .u{margin:0 4px 0 1px}
+.teams.mini .tc.pick{padding:8px 12px}
+.teams.mini .tc.pick .big{font-size:14px;margin:0}
+@media (max-width:720px){
+  .teams .tc{min-height:0}
+  .sec.top{gap:6px}.sec.top .cal-btn{padding:5px 9px;font-size:12px}
+  .teams{grid-template-columns:none;grid-auto-columns:74%}
+  .teams.mini{grid-auto-columns:max-content}
+  .teams.mini .tc{min-width:210px}
+}
 </style>
 </head>
 <body>
@@ -327,6 +371,12 @@ body.boardmode .jsh{display:none}
 <main class="fd anim" id="fd">
   <div class="stale" id="stale" role="status" hidden></div>
   <div class="miss" id="miss" role="status" hidden></div>
+  <div class="yt" id="yt">
+  <div class="sec top"><h2>Your teams</h2><span class="note" id="t-note"></span><button class="more cal-btn" id="cal-btn" type="button" aria-expanded="false" aria-controls="cal-panel">📅 Add to calendar</button><button class="more cal-btn t-min" id="t-min" type="button" aria-pressed="false" aria-controls="teams">Minimize</button></div>
+  <div class="cal-panel" id="cal-panel" hidden></div>
+  <section class="teams" id="teams" aria-label="Your teams"></section>
+  </div>
+
   <section class="hero" aria-labelledby="hero-h">
     <div class="hi-l">
       <div class="eyebrow" id="h-date">Jamo Sports Hub</div>
@@ -337,10 +387,6 @@ body.boardmode .jsh{display:none}
     </div>
     <div id="h-next"></div>
   </section>
-
-  <div class="sec"><h2>Your teams</h2><span class="note" id="t-note"></span><button class="more cal-btn" id="cal-btn" type="button" aria-expanded="false" aria-controls="cal-panel">📅 Add to calendar</button></div>
-  <div class="cal-panel" id="cal-panel" hidden></div>
-  <section class="teams" id="teams" aria-label="Your teams"></section>
 
   <div id="tune-wrap" hidden><div class="sec"><h2>Worth tuning in</h2><span class="note" id="tune-n"></span></div><div class="lrow" id="tune"></div></div>
 
@@ -358,7 +404,7 @@ body.boardmode .jsh{display:none}
 
   <footer class="foot"><span id="asof"></span><span>A <i>Kramerica Industries</i> production</span></footer>
 </main>
-<script type="application/json" id="d-meta">{"cfb":"Sun Oct 18, 2026 · 4:18 PM ET","nfl":"","nba":"Sun Oct 18, 2026 · 7:06 PM ET","nhl":"Sun Oct 18, 2026 · 7:06 PM ET"}</script>
+<script type="application/json" id="d-meta">{"cfb":"Sun Oct 18, 2026 · 4:18 PM ET","nfl":"","nba":"","nhl":"Sun Oct 18, 2026 · 7:06 PM ET"}</script>
 <script type="text/plain" id="d-cfb">1|2026-08-29|Hawai'i|Stanford|27|37|FINAL|7:00 PM||-4.5|48.5|170|-205|ACC Network||
 1|2026-08-29|Jacksonville State|North Dakota State|7|33|FINAL|5:30 PM||-6.5|46.5|230|-285|CBSSN||
 1|2026-08-29|Memphis|UNLV|27|21|FINAL|10:00 PM||-4.5|55.5|160|-192|Fox||
@@ -5928,12 +5974,17 @@ function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(
   const logo = o.logo(t);
   return '<a class="tc rise" style="--i:' + i + ';--tc:' + c1 + ';--tc2:' + c2 + '" href="' + o.teamHref(t) + '" aria-label="' + esc(o.full(t)) + ' team page">' + (logo ? '<img class="wm" src="' + logo + '" alt="">' : '')
     + '<div class="tc-top"><span class="tc-sport">' + SPORT[f.sport].icon + esc(SPORT[f.sport].short) + '</span>' + (rk ? '<span class="tc-rank">#' + rk + '</span>' : '') + '</div>'
-    + '<div class="tc-id">' + plate(logo) + '<div style="min-width:0"><div class="tc-name">' + esc(f.sport === 'cfb' ? t : f.sport === 'mlb' ? o.nick(t) : o.full(t)) + '</div><div class="tc-meta">' + meta + '</div></div></div>'
+    + '<div class="tc-id">' + plate(logo) + '<div style="min-width:0"><div class="tc-name" data-mini="' + esc(f.sport === 'cfb' ? t : o.name(t)) + '">' + esc(f.sport === 'cfb' ? t : f.sport === 'mlb' ? o.nick(t) : o.full(t)) + '</div><div class="tc-meta">' + meta + '</div></div></div>'
     + nx + lastLine + '</a>'; }
 function teamsHTML(){ const cards = FAVS.map((f, i) => teamCard(f, i)).filter(Boolean);
   if (!FAVS.some(f => f.sport === 'nfl')) cards.splice(Math.min(2, cards.length), 0, '<a class="tc pick rise" style="--i:2" href="/nfl/#/settings"><div><span class="tc-sport">' + ICON.fb + 'NFL</span><div class="big">Pick your NFL team</div><div class="small">Choose one in <b>NFL settings</b> and its next game shows up here with a countdown.</div></div></a>');
   $('#teams').innerHTML = cards.join('');
   $('#t-note').textContent = 'tap a card for the team page'; }
+/* minimize "Your teams" to a slim strip; remembered on this device */
+(function(){ const b = document.getElementById('t-min'), s = document.getElementById('teams'); if (!b || !s) return;
+  const set = on => { s.classList.toggle('mini', on); b.textContent = on ? 'Expand' : 'Minimize'; b.setAttribute('aria-pressed', on ? 'true' : 'false'); };
+  let on = false; try { on = localStorage.getItem('jsh-teams-mini') === '1'; } catch (e) {} set(on);
+  b.addEventListener('click', () => { on = !s.classList.contains('mini'); set(on); try { localStorage.setItem('jsh-teams-mini', on ? '1' : '0'); } catch (e) {} }); })();
 
 /* ---------- live now ---------- */
 function liveAll(){ const out = []; [CFB.filter(g => g.week === CFB_WEEK), NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype), NBA.filter(g => g.date === TODAY || g.date === addDay(TODAY, -1)), MLB.filter(g => g.date === TODAY || g.date === addDay(TODAY, -1)), NHL.filter(g => g.date === TODAY || g.date === addDay(TODAY, -1))].forEach(list => list.map(applyLive).filter(g => g.live).forEach(g => out.push(g))); return out; }

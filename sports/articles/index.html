@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Jamo's Articles · Jamo Sports Hub</title>
+<link rel="icon" type="image/svg+xml" href="/sports/icons/jsh.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-180.png">
+<link rel="manifest" href="/sports/icons/site.webmanifest">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#05070d;--surface:rgba(255,255,255,.035);--surface-2:rgba(255,255,255,.07);--line:rgba(255,255,255,.08);--ink:#eef2f8;--ink-2:#a9b3c4;--ink-3:#6f7a8c;--acc:#7cb6ff;
+  --byu:#1d5fd8;--weber:#7c3aed;--eagles:#0f766e;--jazz:#a16207;--dodgers:#2563eb;--col:#be185d;--r:18px;--disp:"Inter Tight","Inter",system-ui,sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:dark}
+:root.light{--bg:#eef1f6;--surface:#fff;--surface-2:#f1f4f9;--line:#dde2ea;--ink:#0d1220;--ink-2:#465166;--ink-3:#7b8598;--acc:#1d5fd8;color-scheme:light}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:22px 16px 48px}
+h1{font-family:var(--disp);font-size:30px;font-weight:800;letter-spacing:-.03em;margin:4px 0 4px}
+.sub{color:var(--ink-2);margin:0 0 16px}
+.eyebrow{font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 18px;padding:0 16px 2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:7px 13px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip b{font-weight:800;opacity:.6;margin-left:4px}
+.day{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:20px 2px 8px}
+.ar{display:block;padding:14px 16px;margin-bottom:10px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);color:inherit;text-decoration:none;border-left:4px solid var(--c,var(--acc))}
+.ar:hover{background:var(--surface-2)}
+.ar-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:12px;font-weight:700;color:var(--ink-3)}
+.tag{padding:2px 8px;border-radius:999px;background:var(--c,var(--acc));color:#fff;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.kind{color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em;font-size:11px;font-weight:800}
+.ar h2{font-family:var(--disp);font-size:19px;font-weight:800;letter-spacing:-.015em;line-height:1.2;margin:6px 0 4px}
+.ar p{margin:0;color:var(--ink-2);font-size:14px}
+.fin{margin-top:6px;font-size:12.5px;font-weight:700;color:var(--ink)}
+.empty{color:var(--ink-3);padding:30px 0;text-align:center}
+</style>
+</head>
+<body>
+<!-- Jamo Sports Hub top bar: added by each hub's deploy_public.sh right after <body> (never inside the claude.ai artifact) -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&display=swap">
+<style>
+.jsh{position:relative;z-index:60;display:flex;align-items:center;gap:14px;height:44px;padding:0 max(16px,env(safe-area-inset-left));background:#070a12;background-image:linear-gradient(90deg,rgba(29,78,216,.22),rgba(7,10,18,0) 35%,rgba(7,10,18,0) 65%,rgba(109,40,217,.2));border-bottom:1px solid rgba(255,255,255,.08);font-family:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1;box-sizing:border-box}
+.jsh *,.jsh *::before,.jsh *::after{box-sizing:border-box}
+.jsh a{text-decoration:none!important}
+.jsh-brand{display:flex;align-items:center;gap:9px;color:#fff!important;font-size:15.5px;font-weight:800;letter-spacing:-.015em;white-space:nowrap;flex:none}
+.jsh-brand img{width:26px;height:26px;border-radius:7px;display:block;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.jsh-brand b{font-weight:800;background:linear-gradient(90deg,#7cb6ff,#c4a6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.jsh-nav{display:flex;align-items:center;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.jsh-nav::-webkit-scrollbar{display:none}
+.jsh-nav a{display:flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:999px;color:#b4bfd3!important;font-size:13.5px;font-weight:700;letter-spacing:.005em;white-space:nowrap;transition:background-color .15s,color .15s,box-shadow .15s}
+.jsh-nav a i{flex:none;width:7px;height:7px;border-radius:50%;background:var(--c)}
+.jsh-nav a:hover{color:#fff!important;background:rgba(255,255,255,.08)}
+.jsh-nav a.on{color:#fff!important;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 4px 14px -4px var(--c)}
+.jsh-nav a.on i{background:#fff}
+.jsh-nav a:focus-visible{outline:2px solid #7cb6ff;outline-offset:2px}
+body.boardmode .jsh{display:none}
+@media (max-width:560px){.jsh{gap:8px;padding:0 12px}.jsh-brand span{display:none}.jsh-nav{gap:2px}.jsh-nav a{padding:0 10px;font-size:13px;gap:6px}}
+@media (max-width:360px){.jsh-nav a i{display:none}.jsh-nav a{padding:0 9px}}
+@media print{.jsh{display:none}}
+</style>
+<div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
+  <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
+  <nav class="jsh-nav">
+    <a href="/sports/" data-s="sports" style="--c:#475569"><i></i>Home</a>
+    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>College Football</a>
+    <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><i></i>NFL</a>
+    <a href="/nba/" data-s="nba" style="--c:#6d28d9"><i></i>NBA</a>
+    <a href="/nhl/" data-s="nhl" style="--c:#0284c7"><i></i>NHL</a>
+    <a href="/mlb/" data-s="mlb" style="--c:#005a9c"><i></i>MLB</a>
+    <a href="/sports/articles/" data-s="articles" style="--c:#be185d"><i></i>Articles</a>
+  </nav>
+</div>
+<script>
+/* Jamo Sports Hub: light/dark and the time zone follow you between College, NFL and NBA (each keeps its own favourite team).
+   Runs before the hub's own script, so a choice made in one hub is in place before the next one reads its settings. */
+(function(){ try {
+  var s = (location.pathname.indexOf('/sports/articles') === 0 ? 'articles' : (location.pathname.split('/')[1] || 'sports')).toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
+  if (a) { a.className = 'on'; a.setAttribute('aria-current', 'page'); }
+  if (s === 'sports' || s === 'articles') return;
+  var key = s + '-settings', sh = JSON.parse(localStorage.getItem('jsh-shared') || 'null');
+  if (sh) { var own = JSON.parse(localStorage.getItem(key) || '{}'), ch = false;
+    ['theme', 'tz'].forEach(function (k) { if (sh[k] && own[k] !== sh[k]) { own[k] = sh[k]; ch = true; } });
+    if (ch) localStorage.setItem(key, JSON.stringify(own)); }
+  var save = function () { try { var o = JSON.parse(localStorage.getItem(key) || '{}'); if (o.theme || o.tz) localStorage.setItem('jsh-shared', JSON.stringify({ theme: o.theme || 'auto', tz: o.tz || 'MT' })); } catch (e) {} };
+  addEventListener('pagehide', save); document.addEventListener('visibilitychange', function () { if (document.hidden) save(); });
+} catch (e) {} })();
+</script>
+
+<main class="wrap">
+  <div class="eyebrow">Jamo Sports Hub</div>
+  <h1>Jamo’s articles</h1>
+  <p class="sub">Every preview, recap and column, newest first. Tap one to read it on its game page.</p>
+  <div class="chips" id="chips" role="tablist" aria-label="Filter by team"></div>
+  <div id="list"></div>
+</main>
+<script type="application/json" id="d-arts">{"list":[{"date":"2026-10-24","dek":"No. 2 BYU goes to Orlando to play a 3-3 UCF team coming off a bye. After beating Notre Dame, the job now is to avoid the letdown.","final":"","href":"/cfb/#/game/2026-10-24-byu-ucf","kind":"preview","lg":"cfb","match":"BYU at UCF","team":"BYU","title":"The Week After the Biggest Win","updated":"Sun., Oct. 18"},{"date":"2026-10-21","dek":"After 22 wins, a lottery miracle and a franchise-altering trade, the Jazz finally have a team built to win now. Our 2026-27 season preview: what changed, what could go wrong, and whether Jamo's playoff call holds up.","final":"","href":"/nba/#/game/401909838","kind":"preview","label":"season preview","lg":"nba","match":"Jazz at Grizzlies","team":"Jazz","title":"Raise the Floor, Then the Roof","updated":"Sat., Oct. 10"},{"date":"2026-10-18","dek":"The 2-3 Eagles, on a three-game skid, host a 2-2 Carolina team that leads the NFC South, comes off a bye and throws for more yards than anybody. Sunday, 1:00 PM ET (11:00 MT), CBS.","final":"","href":"/nfl/#/game/401872998","kind":"preview","lg":"nfl","match":"Panthers at Eagles","team":"Eagles","title":"Bring Back the Hamstrings","updated":"Tue., Oct. 13"},{"date":"2026-10-17","dek":"Weber State 27, Idaho State 20. Spencer Ferguson runs for 133 and the winning touchdown with 1:10 left, Robert Young adds a punt-return score, and the Wildcats beat No. 21 Idaho State for their third straight win.","final":"Idaho State 20, Weber State 27","href":"/cfb/#/game/2026-10-17-idaho-state-weber-state","kind":"recap","lg":"cfb","match":"Idaho State at Weber State","team":"Weber State","title":"Ferguson Runs It Home","updated":"Sun., Oct. 18"},{"date":"2026-10-17","dek":"BYU 28, Notre Dame 24. Bear Bachmeier runs for two, catches one and throws the winner to Walker Lyons with 1:47 left, and the defense stops the Irish at the 9 on the last play. BYU's first win over an AP top-two team since 1990.","final":"Notre Dame 24, BYU 28","href":"/cfb/#/game/2026-10-17-notre-dame-byu","kind":"recap","lg":"cfb","match":"Notre Dame at BYU","team":"BYU","title":"Sixteen Straight, Then Provo","updated":"Sun., Oct. 18 (added the Big 12 clock statement)"},{"date":"2026-10-17","dek":"Idaho State has beaten Weber State two straight times, 31-3 last fall. The Bengals arrive in Ogden 4-2 after two heartbreaking home losses. The Wildcats arrive 3-1 in the Big Sky with a run game that just piled up 307 yards.","final":"","href":"/cfb/#/game/2026-10-17-idaho-state-weber-state","kind":"preview","lg":"cfb","match":"Idaho State at Weber State","team":"Weber State","title":"Homecoming, With a Two-Game Grudge","updated":"Mon., Oct. 12 (new FCS poll, kickoff, injuries; no line posted yet)"},{"date":"2026-10-17","dek":"No. 2 Notre Dame brings the longest winning streak in major college football to Provo. No. 8 BYU brings a perfect record, a quarterback who just did everything, and no LJ Martin.","final":"","href":"/cfb/#/game/2026-10-17-notre-dame-byu","kind":"preview","lg":"cfb","match":"Notre Dame at BYU","team":"BYU","title":"Sixteen Straight, One Saturday Night","updated":"Mon., Oct. 12 (game-week quotes, injuries, line now ND -10.5)"},{"date":"2026-10-12","dek":"Brewers 7, Dodgers 4. Yoshinobu Yamamoto lasts 2⅔ innings, William Contreras drives in three, and Milwaukee's bullpen retires the last 15 Dodgers in a row. The Brewers lead the NLCS 2-0.","final":"Dodgers 4, Brewers 7","href":"/mlb/#game-401908031","kind":"recap","lg":"mlb","match":"Dodgers at Brewers","team":"Dodgers","title":"Three Leads, Three Hits, Zero Answers","updated":"Tue., Oct. 13"},{"date":"2026-10-11","dek":"Brewers 2, Dodgers 1. Brice Turang homers off Tarik Skubal, Luis Lara singles in the go-ahead run, and LA goes 1 for 6 with runners in scoring position. Milwaukee leads the NLCS 1-0.","final":"Dodgers 1, Brewers 2","href":"/mlb/#game-401908030","kind":"recap","lg":"mlb","match":"Dodgers at Brewers","team":"Dodgers","title":"Three Double Plays and a Bullpen Wall","updated":"Mon., Oct. 12"},{"date":"2026-10-11","dek":"Jaguars 19, Eagles 17. A patched-up Eagles team took the lead with 8 seconds left in London, kicked the ball back into play, and lost on a 57-yarder at the gun. Sirianni took the blame.","final":"Eagles 17, Jaguars 19","href":"/nfl/#/game/401872981","kind":"recap","lg":"nfl","match":"Eagles at Jaguars","team":"Eagles","title":"Eight Seconds From Fine","updated":"Tue., Oct. 13"},{"date":"2026-10-11","dek":"A calm, measured, completely biased investigation by a BYU fan who has now watched Alabama lose to Georgia twice in ten months and not move an inch.","href":"/cfb/#/column/col-2026-10-11-sec","kind":"column","lg":"cfb","team":"Columns","title":"The SEC Is Obviously Corrupt, and I Have a Corkboard to Prove It","updated":"Sun., Oct. 11"},{"date":"2026-10-11","dek":"NLCS preview: the two-time defending champion Dodgers against a 103-win Brewers team that says it wanted this rematch. Game 1 is Sunday night, Skubal vs. Misiorowski.","final":"","href":"/mlb/#game-401908030","kind":"preview","label":"NLCS preview","lg":"mlb","match":"Dodgers at Brewers","team":"Dodgers","title":"The Sequel Nobody in Milwaukee Asked to Lose Again","updated":"Sat., Oct. 10"},{"date":"2026-10-11","dek":"No Saquon, no DeVonta, no Lane Johnson, and a 7.5-point line that moved ten points in a week. The 2-2 Eagles meet the 3-1 Jaguars at Tottenham.","final":"","href":"/nfl/#/game/401872981","kind":"preview","lg":"nfl","match":"Eagles at Jaguars","team":"Eagles","title":"What's Left of the Birds Goes to London","updated":"Sat., Oct. 10 (final injury report)"},{"date":"2026-10-10","dek":"Weber State 38, Idaho 27. Spencer Ferguson scores on the first snap, he and Seth Rigtrup each run for 125-plus, Trevian Tribble picks off two passes, and the Wildcats are 3-1 in the Big Sky.","final":"Idaho 27, Weber State 38","href":"/cfb/#/game/2026-10-10-idaho-weber-state","kind":"recap","lg":"cfb","match":"Idaho at Weber State","team":"Weber State","title":"Eleven Seconds, 307 Yards, Two Straight","updated":"Sun., Oct. 11"},{"date":"2026-10-09","dek":"BYU 24, Iowa State 10. Bachmeier throws for 329 and runs for 109, the defense holds the Cyclones to 200 yards, and the Cougars are 5-0 for the third straight season.","final":"Iowa State 10, BYU 24","href":"/cfb/#/game/2026-10-09-iowa-state-byu","kind":"recap","lg":"cfb","match":"Iowa State at BYU","team":"BYU","title":"Bear Does Everything, the Defense Does the Rest","updated":"Sat., Oct. 10"},{"date":"2026-10-07","dek":"Dodgers 4, Braves 1. Pages' two-run single in the seventh breaks a tie, Max Muncy homers again, the bullpen throws 4 1/3 scoreless and LA heads to a third straight NLCS.","final":"Dodgers 4, Braves 1","href":"/mlb/#game-401908016","kind":"recap","lg":"mlb","match":"Dodgers at Braves","team":"Dodgers","title":"Andy Pages Finally Finds the Gap","updated":"Sun., Oct. 11"},{"date":"2026-10-06","dek":"Dodgers 3, Braves 1. Yoshinobu Yamamoto strikes out 10 over seven innings, Kiké Hernández and Freddie Freeman homer off Chris Sale, and LA is one win from the NLCS.","final":"Dodgers 3, Braves 1","href":"/mlb/#game-401908015","kind":"recap","lg":"mlb","match":"Dodgers at Braves","team":"Dodgers","title":"October Kiké Returns, Right on Schedule","updated":"Sun., Oct. 11"},{"date":"2026-10-04","dek":"Braves 3, Dodgers 2. Blake Snell can't find the zone, Michael Harris II does it all for Atlanta, and Max Muncy's ninth-inning homer comes up one run short. NLDS tied 1-1.","final":"Braves 3, Dodgers 2","href":"/mlb/#game-401908014","kind":"recap","lg":"mlb","match":"Braves at Dodgers","team":"Dodgers","title":"Five Walks, One Wild Pitch, and a Series","updated":"Sun., Oct. 11"},{"date":"2026-10-03","dek":"Dodgers 5, Braves 3. Tarik Skubal strikes out seven over six innings, Teoscar Hernández, Kyle Tucker and Max Muncy homer, and LA takes a 1-0 NLDS lead.","final":"Braves 3, Dodgers 5","href":"/mlb/#game-401908007","kind":"recap","lg":"mlb","match":"Braves at Dodgers","team":"Dodgers","title":"Skubal Brings His Own Heat to a 100-Degree Day","updated":"Sun., Oct. 11"}],"teams":["BYU","Weber State","Eagles","Jazz","Dodgers","Columns"]}</script>
+<script>
+(function(){
+  try { var sh = JSON.parse(localStorage.getItem('jsh-shared') || 'null') || {}; if (sh.theme === 'light' || (sh.theme !== 'dark' && matchMedia('(prefers-color-scheme: light)').matches)) document.documentElement.classList.add('light'); } catch (e) {}
+  var D = JSON.parse(document.getElementById('d-arts').textContent), L = D.list;
+  var C = {'BYU':'var(--byu)','Weber State':'var(--weber)','Eagles':'var(--eagles)','Jazz':'var(--jazz)','Dodgers':'var(--dodgers)','Columns':'var(--col)','College':'var(--acc)'};
+  var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
+  var day = function(d){ var x = new Date(d + 'T12:00:00Z'); return new Intl.DateTimeFormat('en-US', {timeZone:'UTC', weekday:'short', month:'short', day:'numeric'}).format(x); };
+  var kindName = function(a){ return a.kind === 'column' ? 'Column' : a.label ? a.label.charAt(0).toUpperCase() + a.label.slice(1) : a.kind === 'recap' ? 'Recap' : 'Preview'; };
+  var cur = 'All'; try { cur = sessionStorage.getItem('arts-team') || 'All'; } catch (e) {}
+  if (cur !== 'All' && D.teams.indexOf(cur) < 0) cur = 'All';
+  function chips(){ document.getElementById('chips').innerHTML = ['All'].concat(D.teams).map(function(t){ var n = t === 'All' ? L.length : L.filter(function(a){ return a.team === t; }).length; return '<button class="chip' + (t === cur ? ' on' : '') + '" role="tab" aria-selected="' + (t === cur) + '" data-t="' + esc(t) + '">' + esc(t) + '<b>' + n + '</b></button>'; }).join(''); }
+  function list(){ var rows = L.filter(function(a){ return cur === 'All' || a.team === cur; }); var last = '', h = '';
+    rows.forEach(function(a){ if (a.date !== last) { h += '<div class="day">' + esc(day(a.date)) + '</div>'; last = a.date; }
+      h += '<a class="ar" href="' + esc(a.href) + '" style="--c:' + (C[a.team] || 'var(--acc)') + '"><div class="ar-top"><span class="tag">' + esc(a.team) + '</span><span class="kind">' + esc(kindName(a)) + '</span>' + (a.match ? '<span>' + esc(a.match) + '</span>' : '') + '</div><h2>' + esc(a.title) + '</h2><p>' + esc(a.dek) + '</p>' + (a.final ? '<div class="fin">Final: ' + esc(a.final) + '</div>' : '') + '</a>'; });
+    document.getElementById('list').innerHTML = h || '<div class="empty">No articles yet.</div>'; }
+  document.getElementById('chips').addEventListener('click', function(e){ var b = e.target.closest('.chip'); if (!b) return; cur = b.getAttribute('data-t'); try { sessionStorage.setItem('arts-team', cur); } catch (x) {} chips(); list(); });
+  chips(); list();
+})();
+</script>
+</body>
+</html>

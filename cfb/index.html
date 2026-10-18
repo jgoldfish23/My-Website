@@ -47,15 +47,16 @@ body.boardmode .jsh{display:none}
     <a href="/nba/" data-s="nba" style="--c:#6d28d9"><i></i>NBA</a>
     <a href="/nhl/" data-s="nhl" style="--c:#0284c7"><i></i>NHL</a>
     <a href="/mlb/" data-s="mlb" style="--c:#005a9c"><i></i>MLB</a>
+    <a href="/sports/articles/" data-s="articles" style="--c:#be185d"><i></i>Articles</a>
   </nav>
 </div>
 <script>
 /* Jamo Sports Hub: light/dark and the time zone follow you between College, NFL and NBA (each keeps its own favourite team).
    Runs before the hub's own script, so a choice made in one hub is in place before the next one reads its settings. */
 (function(){ try {
-  var s = (location.pathname.split('/')[1] || 'sports').toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
+  var s = (location.pathname.indexOf('/sports/articles') === 0 ? 'articles' : (location.pathname.split('/')[1] || 'sports')).toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
   if (a) { a.className = 'on'; a.setAttribute('aria-current', 'page'); }
-  if (s === 'sports') return;
+  if (s === 'sports' || s === 'articles') return;
   var key = s + '-settings', sh = JSON.parse(localStorage.getItem('jsh-shared') || 'null');
   if (sh) { var own = JSON.parse(localStorage.getItem(key) || '{}'), ch = false;
     ['theme', 'tz'].forEach(function (k) { if (sh[k] && own[k] !== sh[k]) { own[k] = sh[k]; ch = true; } });

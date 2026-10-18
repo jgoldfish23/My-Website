@@ -2068,6 +2068,8 @@ a.ss:hover{text-decoration:none;transform:translateY(-2px);border-color:var(--ac
 /* ===== grouped navigation and a quieter info line (2026-10-07). Source: sports-hub/nav/nav.css; sports-hub/nav/apply.sh
    copies it into the college, NFL and NBA p1.html between the nav:start and nav:end markers. navgroups.js builds the rows. ===== */
 .nav.navg{display:block;height:auto;overflow:visible;flex-basis:100%;-webkit-mask-image:none;mask-image:none;margin-left:0;margin-right:0;padding-left:0;padding-right:0}
+/* navg overflow fix (2026-10-18): the menu must not stretch the page on phones */
+.nav.navg{min-width:0;max-width:100%;width:100%}.navg .ng-main,.navg .ng-sub{min-width:0;max-width:100%}
 .navg .ng-main{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
 .navg .ng-main::-webkit-scrollbar,.navg .ng-sub::-webkit-scrollbar{display:none}
 .navg .ng-tab{flex:none}
@@ -2296,7 +2298,9 @@ body:has(.tvframe) header.top.top{top:0}
 .gd-side{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;color:inherit;text-decoration:none;min-width:0}
 .gd-side img{width:56px;height:56px;object-fit:contain}
 .gd-nm{font-weight:700;font-size:16px}
-.gd-sc{font-size:46px;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums;color:var(--tc)}
+.gd-sc{font-size:46px;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums;color:var(--ink)}
+.gd-side.lose .gd-sc{opacity:.42}
+.gd-side.lose .gd-nm{opacity:.7}
 .gd-ball{font-size:12px;font-weight:700;color:var(--tc)}
 .gd-mid{text-align:center;min-width:86px}
 .gd-st{font-weight:700;font-size:15px;margin-top:2px}
@@ -105156,7 +105160,7 @@ function gdEnsure(g){ if(!LIVE.on||LIVE.sum[g.id]||GD_IDQ[g.id]) return; GD_IDQ[
 function gdPick(name){ const gs=teamGames[name]||[]; const live=gs.find(g=>g.live); if(live) return live; const now=Date.now(); const recent=gs.filter(g=>g.played).reverse().find(g=>{ const k=kickMs(g); return k!=null&&now-k<30*3600e3; }); if(recent) return recent; return gs.find(g=>!g.played)||gs[gs.length-1]||null; }
 function gdOrd(n){ return n+(n%100>=11&&n%100<=13?'th':['th','st','nd','rd'][n%10]||'th'); }
 function gdHero(g){ const a=team(g.away), h=team(g.home); const [ca,ch]=pairColors(a,h); const on=g.live||g.played;
-  const side=(t,ha,c)=>{ const lg=logoOf(t), sc=ha==='home'?g.hs:g.as; return '<a class="gd-side" href="#/team/'+enc(t.name)+'" style="--tc:'+c+'">'+(lg?'<img src="'+lg.icon+'" alt="">':'<span class="sw" style="background:'+c+'"></span>')+'<div class="gd-nm">'+(t.ap?'<span class="dim">#'+t.ap+'</span> ':'')+esc(tshort(t.name))+'</div><div class="mini dim">'+(t.other?'':recStr(t.name))+'</div>'+(on?'<div class="gd-sc">'+scoreSpan(g,ha==='home'?'h':'a',sc)+'</div>':'')+(g.live&&g.pos===ha?'<div class="gd-ball">&#9679; has the ball</div>':'')+'</a>'; };
+  const side=(t,ha,c)=>{ const lg=logoOf(t), sc=ha==='home'?g.hs:g.as; const lose=g.played&&sc<(ha==='home'?g.as:g.hs); return '<a class="gd-side'+(lose?' lose':'')+'" href="#/team/'+enc(t.name)+'" style="--tc:'+c+'">'+(lg?'<img src="'+lg.icon+'" alt="">':'<span class="sw" style="background:'+c+'"></span>')+'<div class="gd-nm">'+(t.ap?'<span class="dim">#'+t.ap+'</span> ':'')+esc(tshort(t.name))+'</div><div class="mini dim">'+(t.other?'':recStr(t.name))+'</div>'+(on?'<div class="gd-sc">'+scoreSpan(g,ha==='home'?'h':'a',sc)+'</div>':'')+(g.live&&g.pos===ha?'<div class="gd-ball">&#9679; has the ball</div>':'')+'</a>'; };
   const k=kickMs(g), left=k?k-Date.now():null; const cd=left&&left>0?(left>36*3600e3?'':'Kickoff in '+(left>=3600e3?Math.floor(left/3600e3)+' hr '+Math.round(left%3600e3/60e3)+' min':Math.max(1,Math.round(left/60e3))+' min')):'';
   const mid='<div class="gd-mid">'+(g.live?'<div><span class="livedot"></span> <b>LIVE</b></div>':'')+'<div class="gd-st">'+(g.live?esc(g.clk||'In progress'):g.played?'Final':esc(fmtDate(g.date,true))+'<br>'+esc(kick(g)))+'</div>'+(g.live&&g.dd?'<div class="gd-dd">'+esc(g.dd)+(g.rz?' <span class="pill loss">red zone</span>':'')+'</div>':'')+(!on?'<div class="mini">'+[g.tv?esc(tvShort(g.tv)):'', g.spread!=null?esc(spreadStr(g,{short:true})):''].filter(Boolean).join(' · ')+'</div>'+(cd?'<div class="gd-cd">'+cd+'</div>':''):'')+'</div>';
   return '<div class="gd-hero">'+side(a,'away',ca)+mid+side(h,'home',ch)+'</div>'+(g.live&&g.last?'<div class="gd-last"><b>Last play:</b> '+esc(g.last)+'</div>':''); }

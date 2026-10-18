@@ -44,6 +44,17 @@ img{max-width:100%}
 .hero h1{margin:8px 0 6px;font-family:var(--disp);font-size:clamp(30px,4.6vw,48px);font-weight:800;letter-spacing:-.035em;line-height:1.02}
 .hero h1 b{background:linear-gradient(90deg,#9cc6ff,#cdb2ff 55%,#fcd56b);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .lead{margin:0;color:#c6d0e3;font-size:15.5px;max-width:560px}
+.tvq{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:12px}
+.tvq-main{display:inline-flex;align-items:center;gap:10px;padding:9px 14px 9px 12px;border-radius:14px;background:var(--ink);color:var(--bg);text-decoration:none;box-shadow:var(--sh)}
+.tvq-main svg{width:20px;height:20px;flex:none}
+.tvq-main>span{display:flex;flex-direction:column;line-height:1.15}
+.tvq-main b{font-size:14.5px;font-weight:800}
+.tvq-main #tvq-n{font-size:12px;font-weight:600;opacity:.75}
+.tvq-l{display:flex;flex-wrap:wrap;gap:6px}
+.tvq-l a{padding:6px 11px;border-radius:999px;border:1px solid var(--line);font-size:12.5px;font-weight:700;color:var(--ink-2);text-decoration:none}
+.tvq-l a:hover{color:var(--ink);background:var(--surface-2)}
+#tv-h,#tv{scroll-margin-top:72px}
+html{scroll-behavior:smooth}
 .pulse{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .chip{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);font-size:12.5px;font-weight:600;color:#e6ecf7;white-space:nowrap}
 .chip i{width:7px;height:7px;border-radius:50%;background:var(--c,#fff);flex:none}
@@ -238,6 +249,10 @@ a.gm:hover{background:var(--surface-2)}
   .cd{font-size:29px}
 }
 @media (prefers-reduced-motion:reduce){.anim .rise,.chip.live i,.pill-live::before{animation:none}a.tc:hover,.lc:hover{transform:none}}
+
+/* front_cards fix (2026-10-18): wrap long team names and article titles to two lines instead of cutting them off */
+.tc-name{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:clamp(20px,1.75vw,24px);line-height:1.08;overflow-wrap:anywhere}
+.tc-ar{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 </style>
 </head>
 <body>
@@ -299,6 +314,7 @@ body.boardmode .jsh{display:none}
       <h1 id="hero-h"><span id="h-greet">Welcome back</span>, <b>Jamo</b></h1>
       <p class="lead" id="h-lead">College football, the NFL and the NBA in one place.</p>
       <div class="pulse" id="h-pulse"></div>
+      <div class="tvq" id="tvq"><a class="tvq-main" href="#tv-h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="m8 3 4 4 4-4"/></svg><span><b>TV guide</b><span id="tvq-n">What’s on today</span></span></a><nav class="tvq-l" aria-label="Full TV guides"><a href="/cfb/#/tv">College</a><a href="/nfl/#/tv">NFL</a><a href="/nba/#/tv">NBA</a><a href="/nhl/#/tv">NHL</a></nav></div>
     </div>
     <div id="h-next"></div>
   </section>
@@ -5993,7 +6009,7 @@ function scoreHTML(){ const S = SCORE, wrap = $('#score-wrap'); if (!S || !wrap)
       + (pre ? '<div class="sc-sub">The preview’s pick</div><a class="sc-row" href="' + esc(pre.href) + '"><div class="sc-m">' + pre.w + '-' + pre.l + ', No. ' + pre.seed + ' seed</div><div class="sc-d">' + esc(pre.title) + ' · play-in, not the playoffs</div></a>' : '') + '</div>'; }
   if (!L && !R) return; wrap.hidden = false; $('#score').innerHTML = L + R;
   $('#score-n').textContent = T.n ? T.w + '-' + T.l + ' picking winners' : 'every article pick, graded'; }
-function render(){ staleHTML(); heroHTML(); teamsHTML(); tuneHTML(); liveHTML(); tvHTML(); sportsHTML(); scoreHTML();
+function render(){ staleHTML(); heroHTML(); teamsHTML(); tuneHTML(); liveHTML(); tvHTML(); sportsHTML(); scoreHTML(); { const h = $('#tv-h'), n = $('#tv-note'), q = $('#tvq-n'); if (h && q) q.textContent = h.textContent.replace(/^On TV /, '').replace(/^Next on TV · /, 'Next: ') + (n && n.textContent ? ' · ' + n.textContent : ''); }
   const when = s => { const m = /^[A-Z][a-z]{2} ([A-Z][a-z]{2} \d+), \d{4} · (.*)$/.exec(s || ''); return m ? (m[1] === md(TODAY) ? '' : m[1] + ', ') + m[2] : (s || '?'); };
   $('#asof').textContent = 'Updated: College ' + when(META.cfb) + ' · NFL ' + when(META.nfl) + ' · NBA ' + when(META.nba);
   $('#upd').textContent = LAST ? 'live scores ' + fmt({hour:'numeric', minute:'2-digit'}, new Date(LAST)) : ''; }

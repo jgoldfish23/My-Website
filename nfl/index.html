@@ -70,7 +70,7 @@ body.boardmode .jsh{display:none}
 <title>NFL · Jamo Sports Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#EEF1F5; --surface:#FFFFFF; --surface-2:#F4F6F9; --surface-3:#E6EAEF;
@@ -886,6 +886,679 @@ body.boardmode main{max-width:none;padding:0}
 .dgr .meta{grid-area:meta;font-size:12px;color:var(--ink-3);line-height:1.35}
 .dgr .who .chip{margin:0}
 @media (max-width:720px){.dgr .who .k{min-width:100%}}
+/* ===== One look (2026-10-18): the college hub's CLEAN design layer, shared by College, NFL and NBA.
+   Source of truth: cfb-hub/p1.html (lines from DESIGN LAYER: "CLEAN" through the TV container sizes). Copied here by
+   sports-hub/look/port.pl without the college identity colors (--accent*, --gold*), so each hub keeps its own. ===== */
+/* =====================================================================
+   DESIGN LAYER: "CLEAN"
+   Modern sports-app clarity, in the spirit of Apple Sports and the
+   Athletic app's data views.
+   - Inter for the UI and body text (optical sizes on), Inter Tight for
+     headings and big scores. Tabular figures everywhere numbers line up.
+   - Quiet layered surfaces with hairline borders. True-black dark mode
+     with lifted #111214 cards.
+   - Color is used only for meaning (win / loss / live / edge) and for the
+     favorite team's identity (--accent*, --gold* are still written by the
+     JS on <html>, so team tinting keeps working).
+   Append at the very end of the <style> in p1.html. Every class name and
+   token name the JS uses is unchanged; this layer only overrides.
+   v2 (critic pass): stronger segmented thumb in dark mode, visible row
+   hairlines, fluid game-header type so long names never hit the score,
+   selects capped to their container on phones, TV list times and network
+   marks refit for Inter, TV card subtitle contrast restored, live-card
+   color scoped to the edge, 40px targets on sort headers and the as-of
+   button, inset focus rings inside scrolling strips.
+   ===================================================================== */
+
+/* ---------- 1. tokens ---------- */
+:root{
+  --bg:#F2F3F5; --surface:#FFFFFF; --surface-2:#F6F7F9; --surface-3:#ECEEF1;
+  --ink:#0E1013; --ink-2:#4B515A; --ink-3:#62686F;
+  --line:#E1E4E8; --line-2:#E6E8EC; --line-3:#8A9099; --ring:rgba(14,16,19,.14);
+  --good:#0A7A3B; --good-soft:#E3F4EA; --bad:#C4262E; --bad-soft:#FCE9E8; --push:#5F6771; --push-soft:#EDEFF2;
+  --live:#D0262D; --live-soft:#FBE7E8;
+  --s1:#2A6FDB; --s2:#E4682C; --s3:#12A06C;
+  --chrome:rgba(255,255,255,.84); --seg-track:#E8EAEE; --seg-thumb:#FFFFFF;
+  --seg-shadow:0 1px 2px rgba(16,24,40,.12),0 0 0 1px rgba(16,24,40,.08);
+  --focus:var(--accent-text);
+  --good-base:var(--good); /* resolved on :root, so children of .livecard get the real --good back */
+  --shadow:0 1px 2px rgba(16,24,40,.04),0 1px 3px rgba(16,24,40,.04);
+  --shadow-md:0 4px 14px rgba(16,24,40,.08),0 1px 3px rgba(16,24,40,.05);
+  --shadow-lg:0 14px 36px rgba(16,24,40,.16),0 2px 6px rgba(16,24,40,.06);
+  --radius:10px; --r-sm:6px; --r-lg:14px; --r-xl:20px; --r-pill:999px;
+  --disp:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --num:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1); --dur:.15s;
+  --hdr-h:102px; /* pinned header height without the ticker (desktop; phones set their own below) */
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --surface:#111214; --surface-2:#18191C; --surface-3:#232428;
+    --ink:#F3F4F6; --ink-2:#A9AEB6; --ink-3:#8A9099;
+    --line:#2A2B30; --line-2:#24252A; --line-3:#62676F; --ring:rgba(255,255,255,.14);
+    --good:#3CCB7F; --good-soft:#0F2A1C; --bad:#FF6B64; --bad-soft:#351819; --push:#9AA2AC; --push-soft:#232428;
+    --live:#FF5B52; --live-soft:#3A1614;
+    --s1:#4D8FEA; --s2:#F07A3E; --s3:#2BB883;
+    --chrome:rgba(0,0,0,.78); --seg-track:#18191C; --seg-thumb:#404249;
+    --seg-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 1px 2px rgba(0,0,0,.5);
+    --shadow:inset 0 1px 0 rgba(255,255,255,.035);
+    --shadow-md:0 8px 22px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.05);
+    --shadow-lg:0 18px 44px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.07);
+    --radius:10px;
+    --disp:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --surface:#111214; --surface-2:#18191C; --surface-3:#232428;
+  --ink:#F3F4F6; --ink-2:#A9AEB6; --ink-3:#8A9099;
+  --line:#2A2B30; --line-2:#24252A; --line-3:#62676F; --ring:rgba(255,255,255,.14);
+  --good:#3CCB7F; --good-soft:#0F2A1C; --bad:#FF6B64; --bad-soft:#351819; --push:#9AA2AC; --push-soft:#232428;
+  --live:#FF5B52; --live-soft:#3A1614;
+  --s1:#4D8FEA; --s2:#F07A3E; --s3:#2BB883;
+  --chrome:rgba(0,0,0,.78); --seg-track:#18191C; --seg-thumb:#404249;
+  --seg-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 1px 2px rgba(0,0,0,.5);
+  --shadow:inset 0 1px 0 rgba(255,255,255,.035);
+  --shadow-md:0 8px 22px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.05);
+  --shadow-lg:0 18px 44px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.07);
+  --radius:10px;
+  --disp:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
+/* the sticky header grows when the score ticker is showing */
+:root:has(#ticker:not([hidden])){--hdr-h:137px}
+
+/* ---------- 2. base type ---------- */
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-padding-top:calc(var(--hdr-h) + 12px)}
+body{font-family:var(--body);font-size:15px;line-height:1.5;letter-spacing:-.006em;font-variant-numeric:tabular-nums lining-nums;background:var(--bg);color:var(--ink)}
+h1,h2,h3,h4{font-family:var(--disp);font-weight:700;letter-spacing:-.02em;line-height:1.15}
+h1{font-size:32px;letter-spacing:-.028em}
+h2{font-size:22px}
+h3{font-size:17px;letter-spacing:-.015em}
+h4{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.eyebrow{font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--ink-3);font-feature-settings:"case"}
+.num{font-family:var(--num);font-weight:700;letter-spacing:-.01em}
+.small{font-size:13px}
+.mini{font-size:12.5px;line-height:1.5;color:var(--ink-2)}
+a{color:var(--accent-text);text-underline-offset:.18em;text-decoration-thickness:1px}
+::selection{background:color-mix(in srgb,var(--accent) 24%,transparent)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+input[type=checkbox]{accent-color:var(--accent)}
+
+/* ---------- 3. elevation (one --sh per surface; state changes only swap --sh) ---------- */
+.card,.tile,.thead,.ghead,.favcard,.tblwrap,.gmlist,.dcp,.cfp-m,.bxkeys,.bcard,.rlist,.pick{--sh:var(--shadow);box-shadow:var(--sh)}
+.gm{--sh:none;box-shadow:var(--sh)}
+.card.flat{--sh:none}
+/* the old light-mode polish rules set fixed shadows at higher specificity; point them at --sh instead */
+:root[data-theme="light"] :is(.card,.tile,.gm,.thead,.ghead,.favcard,.tblwrap){box-shadow:var(--sh)}
+:root[data-theme="light"] .top{box-shadow:none}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) :is(.card,.tile,.gm,.thead,.ghead,.favcard,.tblwrap){box-shadow:var(--sh)}
+  :root:not([data-theme="dark"]) .top{box-shadow:none}
+}
+
+/* ---------- 4. header, nav, ticker ---------- */
+.top,body.themed .top{background:var(--chrome);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--line);box-shadow:none}
+.top-in{position:relative;padding:0 20px;column-gap:16px;row-gap:0;align-items:center}
+.brand{min-height:54px;flex-wrap:wrap;align-content:center;align-items:baseline;gap:2px 12px;min-width:0}
+.wordmark{font-family:var(--disp);font-size:20px;font-weight:800;letter-spacing:-.03em;line-height:1.1;color:var(--ink)}
+.wordmark b{font-weight:800;color:var(--accent-text)}
+.wordmark:hover{text-decoration:none}
+.season{font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding-left:12px;border-left:1px solid var(--line);line-height:1.25;font-feature-settings:"case"}
+.nav{height:44px;gap:0;margin:0 -10px;align-items:stretch;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{display:flex;align-items:center;height:44px;padding:0 10px;border-bottom:0;font-family:var(--body);font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--ink-2);transition:color var(--dur) var(--ease)}
+.nav a::after{content:"";position:absolute;left:10px;right:10px;bottom:0;height:2px;border-radius:2px 2px 0 0;background:var(--accent);transform:scaleX(0);transition:transform var(--dur) var(--ease)}
+.nav a:hover{color:var(--ink);text-decoration:none}
+.nav a.on{color:var(--ink)}
+.nav a.on::after{transform:scaleX(1)}
+.nav a:focus-visible{outline-offset:-4px;border-radius:var(--radius)}
+.yard{height:3px;opacity:1;background:repeating-linear-gradient(90deg,transparent 0 calc(10% - 1px),var(--line) calc(10% - 1px) 10%)}
+
+/* form fields (the header search, selects, text boxes) */
+select,input[type=text],input[type=search],input[type=number]{max-width:100%;min-height:36px;padding:6px 10px;border:1px solid var(--line-3);border-radius:var(--radius);background-color:var(--surface);color:var(--ink);font-family:var(--body);font-size:14px;transition:border-color var(--dur),box-shadow var(--dur)}
+select:focus,input[type=text]:focus,input[type=search]:focus,input[type=number]:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+/* several selects carry an inline border:1px solid var(--line) from the JS; pointing --line at the 3:1 border
+   color on those elements alone gives them the same edge as every other field, without !important */
+select[style*="var(--line)"],input[style*="var(--line)"]{--line:var(--line-3)}
+input::placeholder{color:var(--ink-3);opacity:1}
+.search input{-webkit-appearance:none;appearance:none;width:240px;height:36px;padding:0 12px 0 34px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%238A9099' stroke-width='1.7' stroke-linecap='round'%3E%3Ccircle cx='7' cy='7' r='4.75'/%3E%3Cpath d='m10.6 10.6 3.2 3.2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:12px 50%;background-size:15px 15px}
+.search-res{top:44px;width:300px;padding:4px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--shadow-lg)}
+.search-res button{min-height:40px;padding:8px 10px;border-radius:var(--radius);gap:10px;font-size:14px}
+.search-res button:hover,.search-res button.on{background:var(--surface-2)}
+
+/* score ticker: part of the translucent header */
+.ticker{background:transparent;border-top:1px solid var(--line-2)}
+.tick-in{padding:0 10px}
+.tk{height:34px;padding:0 12px;gap:6px;font-size:12.5px;color:var(--ink-2);border-right:1px solid var(--line-2);transition:background-color var(--dur)}
+.tk:hover{background:var(--surface-2);color:var(--ink);text-decoration:none}
+.tk:focus-visible{outline-offset:-2px}
+.tk-logo{width:16px;height:16px}
+.tk-sw{width:4px;height:14px;border-radius:2px}
+.tk-ab{font-size:12.5px;font-weight:600;letter-spacing:0;color:var(--ink)}
+.tk .sc-num{font-family:var(--num);font-size:14px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.tk .sc-num.l{color:var(--ink-3);font-weight:500}
+.tk .dash{margin:0 2px;color:var(--ink-3)}
+.tk-time{font-size:12px;font-weight:500;color:var(--ink-2)}
+.tk-live{font-size:11px;font-weight:700;letter-spacing:.02em;color:var(--live)}
+.tk-fin{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--ink-3)}
+.tk-day{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.tk.islive{background:color-mix(in srgb,var(--live) 7%,transparent)}
+.tk.fav{box-shadow:inset 2px 0 0 var(--gold)}
+
+.asof{padding:10px 20px 0;gap:6px 14px;font-size:12px;color:var(--ink-3)}
+.asof b{font-weight:600;color:var(--ink-2)}
+.asof button{padding:11px 4px;margin:-11px -4px;font-size:12px;font-weight:600}
+.asof .dot{width:7px;height:7px;vertical-align:1px}
+
+/* ---------- 5. page frame ---------- */
+.page-head{margin:8px 0 20px;gap:12px 20px;align-items:flex-end}
+.page-head .eyebrow{margin-bottom:6px}
+.page-head h1{line-height:1.06}
+.page-head .sub{margin-top:6px;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+.crumb{font-size:13px;color:var(--ink-3);margin:0 0 14px;line-height:1.6}
+.crumb .backbtn{display:inline-flex;align-items:center;min-height:32px;padding:0 13px 0 10px;margin-right:6px;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--surface);color:var(--ink);font-weight:600;line-height:1;vertical-align:middle;transition:background-color var(--dur),border-color var(--dur)}
+.crumb .backbtn:hover{background:var(--surface-2);border-color:var(--line-3)}
+.toolbar{gap:8px 10px;margin:0 0 18px}
+.toolbar .mini{flex:1 1 260px;font-size:12px;line-height:1.45;color:var(--ink-3)}
+.sec{margin:32px 0 12px;gap:6px 12px;align-items:baseline}
+.sec h2{letter-spacing:-.022em}
+.sec .muted{font-size:13.5px;color:var(--ink-3)}
+.sec h2 .livedot{vertical-align:3px}
+
+/* segmented control: a quiet track with a raised thumb */
+.seg{gap:2px;padding:2px;border:1px solid var(--line);border-radius:var(--radius);background:var(--seg-track)}
+.seg button,.seg a{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:0 12px;border:0;border-radius:calc(var(--radius) - 2px);background:none;font-family:var(--body);font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--ink-2);white-space:nowrap;transition:background-color var(--dur),color var(--dur),box-shadow var(--dur)}
+.seg button:hover,.seg a:hover{color:var(--ink);text-decoration:none;background:color-mix(in srgb,var(--seg-thumb) 55%,transparent)}
+.seg .on,.seg .on:hover,#theme-seg button.on,#tz-seg button.on{background:var(--seg-thumb);color:var(--ink);box-shadow:var(--seg-shadow)}
+.seg a:focus-visible,.seg button:focus-visible{outline-offset:-2px}
+.tvdays .n{background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink-2)}
+.tvdays .on .n{background:color-mix(in srgb,var(--ink) 12%,transparent);color:var(--ink)}
+
+/* buttons */
+.btn{min-height:36px;padding:0 14px;gap:6px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--ink);font-family:var(--body);font-size:13.5px;font-weight:600;letter-spacing:-.01em;line-height:1.2;transition:background-color var(--dur),border-color var(--dur),transform var(--dur) var(--ease)}
+.btn:hover{background:var(--surface-2);border-color:var(--line-3);text-decoration:none}
+.btn:active{background:var(--surface-3);transform:scale(.98)}
+.btn.sm{min-height:32px;padding:0 11px;font-size:12.5px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{background:var(--accent);filter:brightness(1.07)}
+.btn.danger{color:var(--bad)}
+.btn:disabled{opacity:.45;transform:none}
+
+/* week pager */
+.wk{gap:6px}
+.wk a,.wk button.jump{display:inline-flex;align-items:center;justify-content:center;min-height:32px;padding:0 12px;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--surface);font-family:var(--body);font-size:13px;font-weight:600;letter-spacing:-.005em;color:var(--ink-2);transition:background-color var(--dur),border-color var(--dur),color var(--dur)}
+.wk a:hover,.wk button.jump:hover{color:var(--ink);border-color:var(--line-3);text-decoration:none}
+.wk a:focus-visible,.wk button:focus-visible{outline-offset:-2px}
+.wk a.on,.wk a.on:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.wk a.arrow{padding:0 11px;font-size:18px;line-height:1}
+
+/* ---------- 6. cards, tiles, sections ---------- */
+.card{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface)}
+.card .hd{align-items:baseline}
+.card .hd h3{font-size:16.5px;font-weight:700;letter-spacing:-.015em}
+.card .hd .mini{color:var(--ink-3)}
+.card.flat{border:0;background:transparent}
+.card.live{border-color:color-mix(in srgb,var(--live) 45%,var(--line))}
+.gm,.card{transition:background-color var(--dur),box-shadow var(--dur),border-color var(--dur)}
+.tile{border:1px solid var(--line);border-radius:var(--r-lg)}
+.tile .lbl{font-size:11px;font-weight:600;letter-spacing:.07em;color:var(--ink-3);font-feature-settings:"case"}
+.tile .val{font-family:var(--num);font-weight:700;letter-spacing:-.022em;line-height:1.1;margin-top:6px;text-wrap:balance;overflow-wrap:break-word}
+.tile .sub{margin-top:4px;line-height:1.4;color:var(--ink-2)}
+.tile.gold{border-color:color-mix(in srgb,var(--gold) 50%,var(--line));background:var(--gold-soft)}
+.tile-link{transition:border-color var(--dur)}
+.note{padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2);color:var(--ink-2);font-size:14px;line-height:1.55}
+.note a{font-weight:600}
+.kv{font-size:13.5px;gap:6px 16px}
+.confhead{margin:28px 0 10px}
+.confhead h3{font-size:20px;letter-spacing:-.02em}
+
+/* ---------- 7. tables ---------- */
+.tblwrap{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface)}
+table.tbl{font-size:14px}
+.tbl th{font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--ink-3);background:var(--surface-2);border-bottom:1px solid var(--line);font-feature-settings:"case"}
+.tbl td{border-bottom:1px solid var(--line-2);transition:background-color var(--dur)}
+.tbl tbody tr:nth-child(even) td{background:transparent}
+.tbl tr.click:hover td,.tbl tbody tr.click:hover td{background:var(--surface-2)}
+.tbl tbody tr.hl td{background:var(--gold-soft)}
+.tbl tbody tr.hl td:first-child{box-shadow:inset 3px 0 0 var(--gold)}
+.tbl tbody tr.nx td{box-shadow:none}
+.tbl tbody tr.nx td:first-child{box-shadow:inset 3px 0 0 var(--gold)}
+.tbl .rk{font-size:13px;font-weight:600;color:var(--ink-3)}
+.tbl th.sort{transition:color var(--dur)}
+.tbl th.sorted{color:var(--ink)}
+.tbl th.sorted::after{color:var(--accent-text)}
+.tbl td.r,.tbl th.r,.tbl td.c,.tbl th.c{font-variant-numeric:tabular-nums}
+table.bx{font-size:13px}
+table.bx.ts td.win{font-weight:700}
+@supports (background:color-mix(in srgb,red 50%,blue)){
+  body.themed .tbl th{background:color-mix(in srgb,var(--surface-2) 70%,transparent)}
+}
+
+/* ---------- 8. chips and pills ---------- */
+.chip{gap:7px;font-weight:500}
+.chip .sw{width:6px;height:14px;border-radius:3px}
+.chip .apr,.apr{font-size:11px;font-weight:600;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.pill{padding:2px 8px;border-radius:var(--r-pill);font-size:11.5px;font-weight:600;letter-spacing:.015em;line-height:1.4}
+.pill.line{background:var(--surface-3);color:var(--ink-2)}
+.tag{font-size:11px;letter-spacing:.07em}
+.pos,.neg{font-weight:600}
+
+/* ---------- 9. scoreboard rows ---------- */
+.gmlist{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--surface)}
+.gm{border:0;border-top:1px solid var(--line-2);background:transparent}
+.gmlist > .gm:first-child{border-top:0}
+.gm:hover{background:var(--surface-2)}
+.gm:active{background:var(--surface-3)}
+.gm:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+.gm .tm{gap:6px}
+.gm .tm .row{gap:8px;min-height:24px}
+.gm .tm .row .nm{font-weight:500;letter-spacing:-.01em;color:var(--ink)}
+.gm .tm .row.w .nm{font-weight:700}
+.gm .tm:has(.row.w) .row:not(.w) .nm{color:var(--ink-2)}
+.gm .tm .row .rec{font-size:12px;color:var(--ink-3)}
+.gm .tm .row .rsc{min-width:3ch;padding-left:12px;text-align:right;font-family:var(--num);font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+.gm .tm .row .rsc.l{font-weight:600;color:var(--ink-3)}
+.gm .tm .row .rsc .wcar{margin-right:6px;font-size:10px;vertical-align:2px;color:var(--good)}
+.gm .tm .row .rsc.odds{min-width:0;padding:2px 7px;border-radius:var(--r-sm);background:var(--surface-3);font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:0;color:var(--ink-2)}
+.gm .tm .row .rsc.odds.fav{color:var(--ink)}
+.gm .st{line-height:1.4;color:var(--ink-2)}
+.gm .st b{font-weight:600;color:var(--ink)}
+.gm .st .kick{font-family:var(--num);font-weight:700;letter-spacing:-.01em}
+.gm .st .net{color:var(--ink-3)}
+.gm .st .wn{color:var(--ink-2)}
+.gm .ln{line-height:1.5;color:var(--ink-2)}
+.gm .ln .dim{color:var(--ink-3)}
+.gm .ln .mk,.gm .ln b{font-weight:600;color:var(--ink)}
+.gm .arrow{font-size:20px;line-height:1;color:var(--ink-3);transition:transform var(--dur) var(--ease),color var(--dur)}
+.gm:hover .arrow{transform:translateX(2px);color:var(--ink-2)}
+.gm .gmnote{margin-top:4px;padding-top:9px;border-top:1px solid var(--line-2);font-size:13px;line-height:1.45;color:var(--ink-2)}
+/* live rows carry a thin live bar on the leading edge */
+.gm:has(.st .livedot),.gm.dense.islive{--sh:inset 3px 0 0 var(--live)}
+.gm.dense .dteams{gap:6px;font-weight:500}
+.gm.dense .dt.w{font-weight:700}
+.gm.dense .dsc{font-family:var(--num);font-size:16px;font-weight:700;letter-spacing:-.01em}
+.gm.dense .dsc.t{font-family:var(--body);font-size:13px;font-weight:600;color:var(--ink-2)}
+.gm.dense .dln{color:var(--ink-2)}
+.gm.dense .dst{color:var(--ink-3)}
+.gm.dense.islive .dst{color:var(--live);font-weight:600}
+@supports (background:color-mix(in srgb,red 50%,blue)){
+  body.themed .gmlist{background:color-mix(in srgb,var(--surface) 84%,transparent)}
+  body.themed .gmlist .gm{background:transparent}
+  body.themed .gmlist .gm:hover{background:color-mix(in srgb,var(--surface-2) 70%,transparent)}
+  body.themed .gmlist .gm:active{background:color-mix(in srgb,var(--surface-3) 80%,transparent)}
+}
+.daygrp{margin:28px 0 10px}
+.daygrp h3{margin-bottom:10px;padding:0 2px;align-items:center;font-family:var(--body);font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2);font-feature-settings:"case"}
+.daygrp h3 .cnt{font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--ink-3)}
+.daygrp.today h3{color:var(--ink)}
+.livedot{width:8px;height:8px;background:var(--live)}
+
+/* ---------- 10. game header ---------- */
+.ghead{border:1px solid var(--line);border-radius:var(--r-xl)}
+.ghead .mono{border-radius:var(--r-lg)}
+.ghead .nm{font-family:var(--disp);font-weight:700;letter-spacing:-.025em;line-height:1.1}
+.ghead .rec{margin-top:4px;line-height:1.4;color:var(--ink-2)}
+.ghead .side .mini{margin-top:4px}
+.ghead .side > div{min-width:0}
+.ghead .nm{overflow-wrap:break-word}
+.ghead .mid .sc{font-family:var(--num);font-weight:800;letter-spacing:-.035em;line-height:1}
+.ghead .mid .sc .l{color:var(--ink-3);font-weight:700}
+.ghead .mid .when{margin-top:6px;line-height:1.4;color:var(--ink-2)}
+.ghead .mid .when b{color:var(--ink);font-weight:600}
+.ghead .monolink:hover .mono{outline:2px solid var(--accent);outline-offset:3px}
+.tzl{font-family:var(--body);font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--ink-3)}
+
+/* ---------- 11. team header and sub-navigation ---------- */
+.thead{border:1px solid var(--line);border-radius:var(--r-xl)}
+.thead .bar{width:6px}
+.thead .mono{border-radius:var(--r-lg)}
+.thead .ttl .eyebrow{margin-bottom:6px}
+.thead .ttl h1{font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.thead .ttl .meta{gap:4px 16px;margin-top:8px;color:var(--ink-2)}
+.thead .ranks{gap:8px}
+.thead .ranks .rb{padding:8px 12px;border:1px solid var(--line);border-radius:var(--radius);background:color-mix(in srgb,var(--surface-2) 80%,transparent)}
+.thead .ranks .rb .v{font-family:var(--num);font-weight:700;letter-spacing:-.02em}
+.thead .ranks .rb .k{margin-top:5px;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--ink-3)}
+.subnav{gap:6px;margin:16px 0 8px;padding:8px 0}
+@supports (background:color-mix(in srgb,red 50%,blue)){
+  .subnav{background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px)}
+}
+.subnav a{display:inline-flex;align-items:center;min-height:32px;padding:0 14px;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--surface);font-size:13px;font-weight:600;color:var(--ink-2);transition:background-color var(--dur),border-color var(--dur),color var(--dur)}
+.subnav a:hover{color:var(--ink);border-color:var(--line-3);text-decoration:none}
+.subnav a.on,.subnav a.on:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-text)}
+
+/* ---------- 12. home band, watch and preview cards ---------- */
+.homeband{margin:8px 0 32px}
+.livegrid .lrow{font-size:15px;font-weight:500;letter-spacing:-.01em}
+.livegrid .lrow .sc{font-family:var(--num);font-size:22px;font-weight:700;letter-spacing:-.02em;color:var(--ink-3)}
+.livegrid .lrow.w .sc,.livegrid .lrow.w .nm{color:var(--ink);font-weight:700}
+.livegrid .lst{font-size:12.5px;color:var(--ink-2)}
+/* the live-card edge is an older !important rule that reads var(--good); pointing --good at --live on
+   those cards turns the edge live-red without another !important */
+.livecard{--good:var(--live)}
+.livecard > *{--good:var(--good-base)}
+.livecard .sc{transition:color var(--dur)}
+.wcard{transition:transform var(--dur) var(--ease),box-shadow var(--dur),border-color var(--dur),background-color var(--dur)}
+.wcard:hover,.pcard:hover{--sh:var(--shadow-md);box-shadow:var(--sh);transform:translateY(-1px)}
+.wcard .wm{font-family:var(--disp);font-size:16.5px;font-weight:700;letter-spacing:-.015em;line-height:1.2}
+.wcard .wt{margin:4px 0 8px;font-size:12px;color:var(--ink-3)}
+.wcard .wh{font-size:13px;line-height:1.45;color:var(--ink-2)}
+.pcard{transition:transform var(--dur) var(--ease),box-shadow var(--dur),border-color var(--dur)}
+.card.pcard{border-top-width:3px}
+.card.pcard .bd{padding-top:14px}
+.pcard .wm{font-family:var(--disp);font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.pcard .wt{margin:4px 0 8px;color:var(--ink-3)}
+.pcard .wh{font-size:13.5px;line-height:1.5}
+.favcard{border:1px solid var(--line);border-radius:var(--r-lg)}
+.homeband .favcard{padding:14px 16px}
+.favline{font-weight:500;letter-spacing:-.01em}
+.pv .angle{padding:10px 14px;border-radius:0 var(--radius) var(--radius) 0;font-size:14.5px;line-height:1.55}
+.pick{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface-2)}
+.pick .pnote{border-top:1px solid var(--line)}
+.pick .big .pill{font-size:14px;padding:4px 12px}
+.scoreproj{font-family:var(--num);font-weight:700;letter-spacing:-.02em}
+.watch .wi{font-size:14px;line-height:1.45}
+.lo{border-top-color:var(--line-2)}
+
+/* ---------- 13. team grid, depth chart, rankings, misc ---------- */
+.teamgrid{gap:8px}
+.teamgrid a{min-height:48px;padding:8px 12px;border:1px solid var(--line);border-radius:var(--radius);transition:background-color var(--dur),border-color var(--dur)}
+.teamgrid a:hover{background:var(--surface-2);border-color:var(--line-3)}
+.teamgrid .sw{width:6px;height:24px;border-radius:3px}
+.teamgrid .trk{font-family:var(--num);font-size:14px;font-weight:700;color:var(--ink-3)}
+.teamgrid .n{font-weight:600;letter-spacing:-.01em}
+.teamgrid .m{font-size:12px;color:var(--ink-3)}
+.dcp{padding:12px 14px;border:1px solid var(--line);border-radius:var(--r-lg)}
+.dcp .p .pos{font-family:var(--disp);font-size:15px;font-weight:700;letter-spacing:-.01em}
+.dc-grp h4{font-size:16px}
+.pl{border-top-color:var(--line-2)}
+.rlist{border:1px solid var(--line);border-radius:var(--r-lg)}
+.rlist li{padding:8px 12px}
+.rlist .rk{font-family:var(--num);font-size:18px;font-weight:700;letter-spacing:-.02em}
+.rlist .ops button{width:32px;height:30px;border-radius:var(--r-sm);transition:background-color var(--dur)}
+.slider .w{font-family:var(--num);font-size:17px;font-weight:700}
+.saved button.item{min-height:44px;padding:10px 12px;border-radius:var(--radius);transition:background-color var(--dur),border-color var(--dur)}
+.saved button.item:hover{background:var(--surface-2)}
+.cmp .b,.cmp .b span{border-radius:var(--r-sm)}
+.cmp .v{font-weight:700}
+.legend i{border-radius:3px}
+.strip .bar{border-radius:3px 3px 0 0}
+.dpl{border-top-color:var(--line-2)}
+.dpl .rk{font-family:var(--num);font-size:14px;font-weight:600;color:var(--ink-2)}
+.dgr .val{font-family:var(--num);font-size:14.5px;letter-spacing:-.01em}
+.mvlist .k,.ldr .k,.lo-b .k,.dgr .who .k,.ldr-row .k,.bxt .k{font-feature-settings:"case"}
+.plink{border-bottom-color:color-mix(in srgb,var(--ink-3) 55%,transparent)}
+.spark{margin:4px 0 8px}
+
+/* ---------- 14. box score ---------- */
+.bxkeys{padding:14px 16px 16px;border:1px solid var(--line);border-radius:var(--r-lg)}
+.bxk-head{font-size:13px;font-weight:700;border-bottom-color:var(--line-2)}
+.bxk-head i{width:6px;border-radius:3px}
+.bxk-grid{gap:14px 24px}
+.bxk-t{font-family:var(--num);font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+.bxk-t em{font-family:var(--body);letter-spacing:.06em}
+.bxk-b{gap:2px;height:6px;border-radius:var(--r-pill);background:transparent}
+.bxk-b i{border-radius:var(--r-pill)}
+.bxtop{gap:8px;border-bottom-color:var(--line-2)}
+.bxt{font-size:13px}
+.bxmore{border-radius:var(--r-lg);padding:0 16px}
+.bxmore summary{padding:12px 0;font-weight:600;transition:color var(--dur)}
+.bxmore[open] summary{border-bottom-color:var(--line-2)}
+
+/* ---------- 15. playoff bracket ---------- */
+.cfp-br{gap:16px}
+.cfp-rh{font-size:11px;letter-spacing:.07em;font-feature-settings:"case"}
+.cfp-rh span{font-size:12px;color:var(--ink-3)}
+.cfp-m{border:1px solid var(--line);border-radius:var(--radius)}
+.cfp-t{min-height:40px;padding:7px 12px;gap:9px;transition:background-color var(--dur)}
+.cfp-t:focus-visible,.pal-row:focus-visible,.search-res button:focus-visible{outline-offset:-2px}
+.cfp-t .sd{font-family:var(--num);font-size:12px;font-weight:700}
+.cfp-t .pw{font-family:var(--num);font-size:12.5px;font-weight:600}
+.cfp-t.w .pw{color:var(--good)}
+.cfp-mf{padding:6px 12px;font-size:11.5px}
+.cfp-final{--sh:0 0 0 1px var(--gold),var(--shadow-md);border-color:var(--gold)}
+.cfp-race .row{padding:8px 0}
+.cfp-bar{height:6px;border-radius:var(--r-pill)}
+.cfp-bar i{border-radius:var(--r-pill)}
+
+/* ---------- 16. big board ---------- */
+.board{padding:18px 20px 24px}
+.bcard{padding:14px 16px;border-radius:var(--r-lg);transition:border-color var(--dur)}
+.bcard.islive{border-left-color:var(--live)}
+.bl{font-family:var(--disp);font-weight:700;letter-spacing:-.02em}
+.bl .bs{font-family:var(--num);font-weight:800;letter-spacing:-.03em}
+.bst{font-size:12.5px;font-weight:500;color:var(--ink-3)}
+
+/* ---------- 17. overlays: palette, dialog, toast, tooltip, footer ---------- */
+#palette{background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.pal-box{border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow-lg)}
+.pal-box input{min-height:0;height:auto;padding:16px 18px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:var(--surface);box-shadow:none;font-size:17px;-webkit-appearance:none;appearance:none}
+.pal-box input:focus{box-shadow:none;border-color:var(--line)}
+.pal-row{min-height:44px;padding:8px 18px;gap:12px;font-size:14.5px}
+.pal-kind{font-size:10.5px;letter-spacing:.07em}
+.pal-foot{padding:10px 18px;color:var(--ink-3)}
+dialog{padding:24px 26px;border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow-lg)}
+dialog::backdrop{background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+dialog p,dialog li{line-height:1.6}
+.toast{bottom:calc(20px + env(safe-area-inset-bottom));padding:10px 18px;border-radius:var(--r-pill);font-size:13.5px;font-weight:600;box-shadow:var(--shadow-lg);transform:translate(-50%,6px);transition:opacity .16s var(--ease),transform .16s var(--ease)}
+.toast.show{transform:translate(-50%,0)}
+.tip{padding:7px 10px;border-radius:var(--radius);font-size:12.5px;line-height:1.4;box-shadow:var(--shadow-lg)}
+footer{padding:22px 20px 44px;border-top:1px solid var(--line-2);font-size:12px;line-height:1.65;color:var(--ink-3)}
+
+/* ---------- 18. skeletons ---------- */
+.skel{border-radius:var(--r-lg);background:linear-gradient(90deg,var(--surface-2) 25%,var(--surface-3) 37%,var(--surface-2) 63%);background-size:400% 100%}
+.skel-title{height:36px;border-radius:var(--radius)}
+.skel-sub{height:14px;border-radius:var(--r-sm)}
+.skel-grid{gap:14px}
+.skel-card{height:88px}
+.skel-row{height:64px}
+
+/* ---------- 19. TV guide: keeps its own look; type and radii brought in line ---------- */
+.tvhero{border-radius:var(--r-xl)}
+.tvlogo{font-family:var(--disp);font-size:44px;font-weight:800;letter-spacing:.03em}
+.tvframe{border-radius:var(--r-lg)}
+.tvhead{border-radius:13px 13px 0 0}
+.tvwrap{border-radius:0 0 13px 13px}
+.tvcorner{font-size:14px;font-weight:700;letter-spacing:.05em}
+.tvax{font-family:var(--num);font-size:13.5px}
+.tvg-bar{font-size:14.5px;letter-spacing:.01em}
+.tvg-sc{font-family:var(--num);font-size:16px}
+.tvg.live{box-shadow:0 0 0 2px var(--live),0 1px 3px rgba(10,14,20,.25)}
+.tvg-strip.live{background:#C62A1E}
+.tvs-t{font-family:var(--num);font-size:13.5px;letter-spacing:-.01em}
+.tvs-sc{font-family:var(--num);font-size:14px}
+.tvs-sc.live{color:var(--live)}
+.tvcard .hd h3{font-size:16px;letter-spacing:.05em}
+.card.tvcard .hd{padding:12px 16px}
+.card.tvcard .hd .mini{color:inherit;opacity:1}
+
+/* ---------- 20. desktop and tablet sizes ---------- */
+@media (min-width:721px){
+  main{padding:20px 20px 72px}
+  .grid{gap:16px}
+  .page-head h1{font-size:34px}
+  .sec h2{font-size:22px}
+  .card .hd{padding:14px 16px 10px}
+  .card .bd{padding:0 16px 16px}
+  .tile{padding:12px 14px}
+  .tile .val{font-size:24px}
+  .tile .val.sm{font-size:18px}
+  .tile .sub{font-size:12.5px}
+  .tbl th{padding:10px 12px}
+  .tbl td{padding:10px 12px}
+  .tblwrap > table.tbl th:first-child,.tblwrap > table.tbl td:first-child{padding-left:16px}
+  .tblwrap > table.tbl th:last-child,.tblwrap > table.tbl td:last-child{padding-right:16px}
+  table.bx th{padding:8px 10px}
+  table.bx td{padding:7px 10px}
+  .gm{grid-template-columns:minmax(0,1.8fr) 108px minmax(0,1.1fr) 14px;gap:8px 18px;padding:12px 16px}
+  .gm .tm .row .nm{font-size:15px}
+  .gm .tm .row .rsc{font-size:21px}
+  .gm .st{font-size:12.5px}
+  .gm .st .kick{font-size:14px}
+  .gm .st .net{font-size:11.5px}
+  .gm .ln{font-size:12.5px}
+  .gm.dense{padding:9px 16px;gap:6px 14px}
+  .gm.dense .dteams{font-size:14px}
+  .ghead{padding:24px 28px;gap:20px}
+  .ghead .mono{width:64px;height:64px}
+  .ghead .nm{font-size:clamp(20px,calc(8.886px + 1.5414vw),28px)}
+  .ghead .rec{font-size:13.5px}
+  .ghead .mid{min-width:150px}
+  .ghead .mid .sc{font-size:clamp(40px,calc(17.77px + 3.083vw),56px)}
+  .ghead .mid .when{font-size:13px}
+  .thead{padding:24px 24px 24px 28px;gap:20px}
+  .thead .mono{width:72px;height:72px}
+  .thead .ttl h1{font-size:36px}
+  .thead .ttl .meta{font-size:13.5px}
+  .thead .ranks .rb{min-width:72px}
+  .thead .ranks .rb .v{font-size:22px}
+  .subnav{top:var(--hdr-h)}
+  /* The Teams page toolbar carries an inline style="position:sticky;top:96px" written by the JS
+     (renderTeams). Only !important can move it under the new header height. */
+  .toolbar[style*="sticky"]{top:var(--hdr-h)!important}
+  .pcard .wm{font-size:18px}
+  .scoreproj{font-size:24px}
+}
+/* mid widths: the nav tightens, and fades at its edge if it has to scroll */
+@media (min-width:721px) and (max-width:1100px){
+  .nav{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 20px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 20px),transparent)}
+}
+@media (min-width:721px) and (max-width:1000px){
+  .nav a{padding-left:7px;padding-right:7px;font-size:14px}
+  .nav a::after{left:7px;right:7px}
+  .search input{width:200px}
+  .ghead{padding:20px;gap:14px}
+  .ghead .mono{width:56px;height:56px}
+}
+
+/* ---------- 21. phones ---------- */
+@media (max-width:720px){
+  body{font-size:15.5px}
+  /* the brand + search row slides away on scroll; the nav and ticker stay pinned */
+  .top{top:-52px}
+  body:has(.tvframe) .top{top:0} /* the TV grid pins its own header under the full header height */
+  /* what stays pinned on phones: nav 44 + yard 3 + rule 1 (+ ticker 41); used for scroll-padding */
+  :root{--hdr-h:48px}
+  :root:has(#ticker:not([hidden])){--hdr-h:89px}
+  .top-in{padding:0 16px;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));column-gap:12px}
+  .brand{width:auto;flex:0 1 auto;min-height:52px;margin-right:0;flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:center;gap:1px}
+  .wordmark{font-size:19px}
+  .season{padding-left:0;border-left:0;font-size:10.5px}
+  .search{position:static;width:auto;flex:1 1 0;min-width:0}
+  .search input{width:100%;height:40px;padding:0 10px 0 32px;background-position:10px 50%;font-size:16px}
+  .search-res{left:16px;right:16px;top:48px;width:auto}
+  .nav{margin:0 -16px;padding:0 6px}
+  .nav a{height:44px;padding:0 10px;font-size:15px}
+  .tk{height:40px}
+  .asof{padding:10px 16px 0;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));font-size:12px}
+  main{padding:14px 16px 56px;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+  footer{padding:18px 16px 36px}
+  select,input[type=text],input[type=search],input[type=number]{min-height:40px;font-size:16px}
+  .pal-box input{min-height:0;font-size:17px}
+  .page-head{margin:4px 0 14px;gap:10px}
+  .page-head h1{font-size:28px}
+  .page-head .sub{font-size:14.5px}
+  .crumb .backbtn{min-height:40px;padding:0 14px 0 11px}
+  .toolbar{gap:8px;margin-bottom:14px}
+  .seg{padding:2px}
+  .seg a,.seg button{min-height:40px;padding:0 13px}
+  .btn,.btn.sm{min-height:40px}
+  .wk a,.wk button.jump{min-height:40px;padding:0 13px}
+  .wk a.arrow{padding:0 12px}
+  .sec{margin:24px 0 10px}
+  .sec h2{font-size:19px}
+  .card .hd{padding:12px 14px 8px}
+  .card .hd h3{font-size:16px}
+  .card .bd{padding:0 14px 14px}
+  .tile{padding:10px 12px}
+  .tile .val{font-size:20px}
+  .tile .val.sm{font-size:16px}
+  .tile .sub{font-size:12px}
+  table.tbl{font-size:13px}
+  .tbl th.sort{padding-top:12px;padding-bottom:12px}
+  .tbl th{padding:9px 10px}
+  .tbl td{padding:9px 10px}
+  .tblwrap > table.tbl th:first-child,.tblwrap > table.tbl td:first-child{padding-left:12px}
+  .tblwrap > table.tbl th:last-child,.tblwrap > table.tbl td:last-child{padding-right:12px}
+  table.bx th{padding:7px 8px}
+  table.bx td{padding:6px 8px}
+  .gm{grid-template-columns:minmax(0,1fr) 88px;gap:8px 12px;padding:12px 14px}
+  .gm .tm .row .nm{font-size:15px}
+  .gm .tm .row .rsc{font-size:19px}
+  .gm .st{font-size:12px}
+  .gm .st .kick{font-size:13.5px}
+  .gm .st .net{font-size:11.5px}
+  .gm .ln{font-size:12px;padding-top:1px}
+  .gm .gmnote{font-size:13px}
+  .gm.dense{padding:9px 14px}
+  .gm.dense .dteams{font-size:14px}
+  .gmlist .gm.dense{margin-bottom:0}
+  .daygrp{margin:22px 0 8px}
+  .ghead{padding:16px;gap:12px}
+  .ghead .mono{width:48px;height:48px}
+  .ghead .nm{font-size:22px}
+  .ghead .rec{font-size:13px}
+  .ghead .mid{padding:12px 0;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+  .ghead .mid .sc{font-size:44px}
+  .ghead .mid .when{font-size:13px}
+  .thead{padding:16px 16px 16px 20px;gap:12px}
+  .thead .mono{width:56px;height:56px}
+  .thead .ttl h1{font-size:26px}
+  .thead .ttl .meta{font-size:13px}
+  .thead .ranks .rb{min-width:60px;padding:7px 8px}
+  .thead .ranks .rb .v{font-size:19px}
+  /* sub-navigation scrolls sideways instead of stacking into rows */
+  .subnav{flex-wrap:nowrap;overflow-x:auto;margin:14px -16px 6px;padding:8px 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 24px),transparent)}
+  .subnav::-webkit-scrollbar{display:none}
+  .subnav a{flex:none;min-height:40px}
+  .homeband{margin:6px 0 26px}
+  .pcard .wm{font-size:17px}
+  .scoreproj{font-size:20px}
+  .rlist .ops button{width:36px;height:40px}
+  .cfp-t{min-height:44px}
+  .tvlogo{font-size:30px;letter-spacing:.02em}
+  .tvcorner{font-size:12px}
+  .tvax{font-size:12px}
+  .tvg-bar{font-size:13.5px}
+  .tvs-t{font-size:12.5px}
+  .tvs-sc{font-size:13.5px}
+  .card.tvcard .hd{padding:11px 14px}
+  /* three network marks measured wider than the 64px phone card in Inter; refit them */
+  .nw-two.cbssn b{font-size:1.6em}
+  .nw-prime{font-size:1em}
+  .nw-espn.sm{font-size:1.2em}
+  dialog{max-width:calc(100vw - 24px);padding:20px}
+  .toast{max-width:calc(100vw - 32px)}
+}
+@media (max-width:400px){
+  .wordmark{font-size:17.5px}
+  .gm{padding:12px}
+  .gm .tm .row .nm{font-size:14.5px}
+  .thead .ttl h1{font-size:24px}
+  .ghead .nm{font-size:20px}
+}
+@media (hover:none){
+  .wcard:hover,.pcard:hover,.tvg:hover{transform:none}
+  .gm:hover .arrow{transform:none}
+}
+
+/* ---------- 22. motion ---------- */
+#view.in{animation:clean-in .18s var(--ease)}
+@keyframes clean-in{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .wcard:hover,.pcard:hover,.btn:active,.gm:hover .arrow,.tvg:hover{transform:none}
+}
+
+/* TV blocks still tighten as they narrow; restated last so the sizes above do not override them */
+@container (max-width:260px){.tvg-bar{padding:0 6px;gap:4px;font-size:13.5px}}
+@container (max-width:200px){.tvg-bar{padding:0 5px;font-size:13px}}
+/* ===== end of the shared look; this hub's own layers follow ===== */
+
 /* ===== TV guide (2026-10-04), from the college hub: its TV rules, the NFL/NBA additions, and the neon control-room layer ===== */
 /* ---------- TV guide ---------- */
 .tvhero{position:relative;display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin:6px 0 16px;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:radial-gradient(130% 160% at 0% 0%,var(--accent-soft) 0%,var(--surface) 58%);box-shadow:var(--shadow);overflow:hidden}
@@ -12905,7 +13578,7 @@ function renderWeek(w, filter){ setNav('week'); w = WEEKS.includes(w)? w : CUR_W
   const f = g => { if(filter==='div') return g.div; if(filter==='prime') return isPrime(g); if(filter==='lines') return g.spread!=null; if(filter==='close') return g.spread!=null&&Math.abs(g.spread)<=3; if(filter==='afc') return team(g.home).conf==='AFC'||team(g.away).conf==='AFC'; if(filter==='nfc') return team(g.home).conf==='NFC'||team(g.away).conf==='NFC'; return true; };
   const shown=gs.filter(f); const days=[...new Set(shown.map(g=>g.date))].sort(); const wi=WEEKINFO[w]||{}; const r=WEEKRANGE[w];
   let html=sbHeroHTML(w, gs);
-  html+='<div class="toolbar"><div class="seg">'+[['all','All games'],['div','Division games'],['prime','Primetime'],['close','Close lines'],['lines','Has a line'],['afc','AFC'],['nfc','NFC']].map(x=>'<a href="#/week/'+w+'/'+x[0]+'" class="'+(filter===x[0]?'on':'')+'">'+x[1]+'</a>').join('')+'</div><button class="btn sm" id="dense-btn" type="button" title="Switch between compact one-line rows and full rows">'+(isDense()?'Full rows':'Compact')+'</button><a class="btn sm" href="#/board" title="Full-screen board for a TV or second screen">Big board</a>'+'<a class="btn sm" href="#/tv/'+w+'" title="Every game this week, network by network">TV guide</a>'+(played>2?'<a class="btn sm" href="#/digest/'+w+'">'+esc(weekLabel(w))+' in review</a>':'')+'<span class="mini">Lines are home-team spreads from DraftKings via ESPN; "Model" is this page\'s projection with home field counted. "Edge" is where the model disagrees with the market by the most.</span></div>';
+  html+='<div class="toolbar"><div class="seg">'+[['all','All games'],['div','Division games'],['prime','Primetime'],['close','Close lines'],['lines','Has a line'],['afc','AFC'],['nfc','NFC']].map(x=>'<a href="#/week/'+w+'/'+x[0]+'" class="'+(filter===x[0]?'on':'')+'">'+x[1]+'</a>').join('')+'</div><button class="btn sm" id="dense-btn" type="button" title="Switch between compact one-line rows and full rows">'+(isDense()?'Full rows':'Compact')+'</button>'+''+(played>2?'<a class="btn sm" href="#/digest/'+w+'">'+esc(weekLabel(w))+' in review</a>':'')+'<span class="mini">Lines are home-team spreads from DraftKings via ESPN; "Model" is this page\'s projection with home field counted. "Edge" is where the model disagrees with the market by the most.</span></div>';
   if(filter==='all') html+=homeBandHTML(w); if(filter==='all') html+=watchStrip(gs);
   if(w>18&&!gs.length){ const ph=PLACEHOLDERS.filter(p=>p.week===w); html+='<div class="note">'+esc(PO_LABEL[w])+' matchups are set once the previous round finishes. '+(ph.length?ph.length+' game slot'+(ph.length>1?'s':'')+' on the calendar: '+ph.map(p=>esc(fmtDate(p.date))+(p.venue?' at '+esc(p.venue):'')).join('; ')+'.':'')+' See the <a href="#/playoffs">playoff picture</a>.</div>'; }
   days.forEach(d=>{ const dg=shown.filter(g=>g.date===d).sort((a,b)=>timeMins(a)-timeMins(b)||interest(b)-interest(a)); html+='<div class="daygrp'+(d===todayStr?' today':'')+'" id="'+(d===todayStr?'today':'')+'"><h3>'+esc(fmtDateLong(d))+(d===todayStr?' <span class="pill gold" style="margin-left:4px">Today</span>':'')+' <span class="cnt">'+dg.length+' game'+(dg.length===1?'':'s')+'</span></h3><div class="gmlist">'+dg.map(gameRowAny).join('')+'</div></div>'; });

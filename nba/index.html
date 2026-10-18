@@ -8404,7 +8404,12 @@ const IS_PLAYOFF = g => g.po||g.pin;
 
 /* ---------- tooltip ---------- */
 let tipEl=null; function showTip(html,x,y){ if(!tipEl){ tipEl=document.createElement('div'); tipEl.className='tip'; document.body.appendChild(tipEl);} tipEl.innerHTML=html; tipEl.style.left=(x+12)+'px'; tipEl.style.top=(y+12)+'px'; tipEl.hidden=false; } function hideTip(){ if(tipEl) tipEl.hidden=true; }
-document.addEventListener('mousemove', e=>{ const el=e.target.closest('[data-tip]'); if(el){ showTip(el.getAttribute('data-tip'), e.clientX, e.clientY); } else hideTip(); });
+/* tooltips follow a real mouse only; a phone tap used to leave one stuck on screen (tip_fix, 2026-10-18) */
+const TIP_HOVER = !window.matchMedia || window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+document.addEventListener('pointermove', e=>{ if(e.pointerType!=='mouse'||!TIP_HOVER){ hideTip(); return; } const el=e.target.closest&&e.target.closest('[data-tip]'); if(el){ showTip(el.getAttribute('data-tip'), e.clientX, e.clientY); } else hideTip(); });
+['touchstart','scroll','wheel'].forEach(ev=>document.addEventListener(ev, hideTip, {passive:true, capture:true}));
+document.addEventListener('pointerdown', e=>{ if(e.pointerType!=='mouse') hideTip(); }, true);
+window.addEventListener('hashchange', hideTip); window.addEventListener('blur', hideTip);
 
 /* ---------- charts ---------- */
 function winDist(ab){ return simOf(ab).wins.map((p,k)=>({wins:k,p})); }

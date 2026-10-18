@@ -2105,6 +2105,8 @@ body.boardmode::before,body.boardmode::after{display:none!important}
 /* ===== grouped navigation and a quieter info line (2026-10-07). Source: sports-hub/nav/nav.css; sports-hub/nav/apply.sh
    copies it into the college, NFL and NBA p1.html between the nav:start and nav:end markers. navgroups.js builds the rows. ===== */
 .nav.navg{display:block;height:auto;overflow:visible;flex-basis:100%;-webkit-mask-image:none;mask-image:none;margin-left:0;margin-right:0;padding-left:0;padding-right:0}
+/* navg overflow fix (2026-10-18): the menu must not stretch the page on phones */
+.nav.navg{min-width:0;max-width:100%;width:100%}.navg .ng-main,.navg .ng-sub{min-width:0;max-width:100%}
 .navg .ng-main{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
 .navg .ng-main::-webkit-scrollbar,.navg .ng-sub::-webkit-scrollbar{display:none}
 .navg .ng-tab{flex:none}

@@ -10421,6 +10421,20 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
   sync();
 })();
 </script>
+<script>
+/* tidy:start - empty table columns (2026-10-18 polish pass), shared by the NBA and NFL hubs through ar.js and inlined in
+   the college hub. A column whose every body cell is blank or "—" is hidden: preseason standings (GB, L10, streak),
+   conference tables where nobody is ranked (AP), an odds board before any results. It comes back once there's data,
+   because every render builds fresh table cells. Runs after each render via a MutationObserver on #view. */
+(function(){ const V=document.getElementById('view'); if(!V||!window.MutationObserver) return; let q=0;
+  const blank=x=>{ const s=x?x.textContent.trim():''; return !s||s==='—'||s==='-'||s==='–'; };
+  const tidy=()=>{ q=0; V.querySelectorAll('table.tbl').forEach(tb=>{ const rows=[]; for(const b of tb.tBodies) for(const r of b.rows) rows.push(r); if(rows.length<3) return;
+    if(rows.some(r=>{ for(const c of r.cells) if(c.colSpan>1) return true; return false; })) return;
+    const head=tb.tHead&&tb.tHead.rows.length===1?tb.tHead.rows[0]:null; const n=Math.max(...rows.map(r=>r.cells.length)); if(head&&head.cells.length!==n) return;
+    for(let c=1;c<n;c++){ if(!rows.every(r=>blank(r.cells[c]))) continue; if(head) head.cells[c].style.display='none'; rows.forEach(r=>{ if(r.cells[c]) r.cells[c].style.display='none'; }); } }); };
+  new MutationObserver(()=>{ if(!q) q=setTimeout(tidy,30); }).observe(V,{childList:true,subtree:true}); tidy(); })();
+/* tidy:end */
+</script>
 
 </body>
 </html>

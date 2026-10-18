@@ -138,6 +138,8 @@ function slimWP(j, hdr) {
     const d = Math.round((p[i][1] - p[i - 1][1]) * 10) / 10;
     if (!pl || Math.abs(d) < 8) continue;
     if (/timeout|end of|end period|coin toss/i.test((pl.type && pl.type.text) || "") || /^\s*timeout/i.test(pl.text || "")) continue;
+    // a routine punt or kickoff can't swing a game 25 points; ESPN's feed books the stalled drive's swing on it (2026-10-18)
+    if (/punt|kickoff/i.test(((pl.type && pl.type.text) || "") + " " + (pl.text || "")) && !/block|fumble|muff|touchdown|safety|recover|return.{0,20}for \d{2,} yards/i.test(pl.text || "")) continue;
     sw.push({ i, d, per: (pl.period && pl.period.number) || 0, clk: (pl.clock && pl.clock.displayValue) || "", txt: String(pl.text || "").slice(0, 170) });
   }
   sw.sort((x, y) => Math.abs(y.d) - Math.abs(x.d));

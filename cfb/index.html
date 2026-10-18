@@ -104335,7 +104335,12 @@ function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('sh
 
 /* ---------- tooltip ---------- */
 let tipEl=null; function showTip(html,x,y){ if(!tipEl){ tipEl=document.createElement('div'); tipEl.className='tip'; document.body.appendChild(tipEl);} tipEl.innerHTML=html; tipEl.style.left=(x+12)+'px'; tipEl.style.top=(y+12)+'px'; tipEl.hidden=false; } function hideTip(){ if(tipEl) tipEl.hidden=true; }
-document.addEventListener('mousemove', e=>{ const el=e.target.closest('[data-tip]'); if(el){ showTip(el.getAttribute('data-tip'), e.clientX, e.clientY); } else hideTip(); });
+/* tooltips follow a real mouse only; a phone tap used to leave one stuck on screen (tip_fix, 2026-10-18) */
+const TIP_HOVER = !window.matchMedia || window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+document.addEventListener('pointermove', e=>{ if(e.pointerType!=='mouse'||!TIP_HOVER){ hideTip(); return; } const el=e.target.closest&&e.target.closest('[data-tip]'); if(el){ showTip(el.getAttribute('data-tip'), e.clientX, e.clientY); } else hideTip(); });
+['touchstart','scroll','wheel'].forEach(ev=>document.addEventListener(ev, hideTip, {passive:true, capture:true}));
+document.addEventListener('pointerdown', e=>{ if(e.pointerType!=='mouse') hideTip(); }, true);
+window.addEventListener('hashchange', hideTip); window.addEventListener('blur', hideTip);
 
 /* ---------- charts ---------- */
 function winDistChart(s){ const d=s.dist; if(!d||d.length<2) return '<div class="mini">No remaining games to project.</div>'; const W=520,H=150,pl=28,pb=26,pt=8; const max=Math.max(...d.map(x=>x.p)); const bw=(W-pl-8)/d.length; let out='<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Chance of each final win total">'; const ticks=[0,0.5,1].map(f=>f*max); ticks.forEach(v=>{ const y=pt+(H-pt-pb)*(1-v/max); out+='<line class="grid" x1="'+pl+'" x2="'+(W-8)+'" y1="'+y+'" y2="'+y+'"/><text x="'+(pl-4)+'" y="'+(y+4)+'" text-anchor="end">'+Math.round(v*100)+'%</text>'; }); d.forEach((x,i)=>{ const h=(H-pt-pb)*(x.p/max); const y=pt+(H-pt-pb)-h; const cx=pl+i*bw; const most = x.p===max; out+='<rect class="'+(most?'gold':'s1')+'" x="'+(cx+2)+'" y="'+y+'" width="'+(bw-4)+'" height="'+h+'" rx="3" data-tip="<b>'+x.wins+' wins</b>: '+pct(x.p)+'"/>'; if(x.p>=0.06) out+='<text x="'+(cx+bw/2)+'" y="'+(y-3)+'" text-anchor="middle" class="'+(most?'lbl':'')+'">'+Math.round(x.p*100)+'%</text>'; out+='<text x="'+(cx+bw/2)+'" y="'+(H-8)+'" text-anchor="middle">'+x.wins+'</text>'; }); out+='<line class="axis" x1="'+pl+'" x2="'+(W-8)+'" y1="'+(H-pb)+'" y2="'+(H-pb)+'"/></svg>'; return out; }

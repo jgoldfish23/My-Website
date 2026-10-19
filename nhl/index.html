@@ -47,7 +47,7 @@ body.boardmode .jsh{display:none}
   <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
   <nav class="jsh-nav">
     <a href="/sports/" data-s="sports" style="--c:#475569"><i></i>Home</a>
-    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>College Football</a>
+    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>CFB</a>
     <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><i></i>NFL</a>
     <a href="/nba/" data-s="nba" style="--c:#6d28d9"><i></i>NBA</a>
     <a href="/nhl/" data-s="nhl" style="--c:#0284c7"><i></i>NHL</a>
@@ -56,7 +56,7 @@ body.boardmode .jsh{display:none}
   </nav>
 </div>
 <script>
-/* Jamo Sports Hub: light/dark and the time zone follow you between College, NFL and NBA (each keeps its own favourite team).
+/* Jamo Sports Hub: light/dark and the time zone follow you between CFB, NFL and NBA (each keeps its own favourite team).
    Runs before the hub's own script, so a choice made in one hub is in place before the next one reads its settings. */
 (function(){ try {
   var s = (location.pathname.indexOf('/sports/articles') === 0 ? 'articles' : (location.pathname.split('/')[1] || 'sports')).toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
@@ -1780,7 +1780,7 @@ function renderSchedule(ab){ setNav('teams'); ab = (ab || SET.fav).toUpperCase()
 function renderSettings(){ setNav('settings');
   view.innerHTML = '<div class="sec" style="margin-top:6px"><h2>Settings</h2></div><div class="card"><div class="bd grid" style="gap:14px"><label><div class="mini" style="margin-bottom:4px">Your team</div><select id="s-fav">' + Object.values(T).sort((a, b) => a.full.localeCompare(b.full)).map(t => '<option value="' + t.ab + '"' + (t.ab === SET.fav ? ' selected' : '') + '>' + esc(t.full) + '</option>').join('') + '</select></label>'
     + '<label><div class="mini" style="margin-bottom:4px">Theme</div><select id="s-theme">' + [['auto','Match my device'],['light','Light (fresh sheet of ice)'],['dark','Dark (night game)']].map(x => '<option value="' + x[0] + '"' + (theme() === x[0] ? ' selected' : '') + '>' + x[1] + '</option>').join('') + '</select></label>'
-    + '<label><div class="mini" style="margin-bottom:4px">Time zone</div><select id="s-tz">' + Object.keys(TZS).map(k => '<option' + (TZ() === k ? ' selected' : '') + '>' + k + '</option>').join('') + '</select></label><div class="mini">Theme and time zone are shared with the College, NFL and NBA sections.</div></div></div>';
+    + '<label><div class="mini" style="margin-bottom:4px">Time zone</div><select id="s-tz">' + Object.keys(TZS).map(k => '<option' + (TZ() === k ? ' selected' : '') + '>' + k + '</option>').join('') + '</select></label><div class="mini">Theme and time zone are shared with the CFB, NFL and NBA sections.</div></div></div>';
   $('#s-fav').onchange = e => { SET.fav = e.target.value; save('nhl-settings', SET); };
   $('#s-theme').onchange = e => { SHARED.theme = e.target.value; save('jsh-shared', SHARED); applyTheme(); };
   $('#s-tz').onchange = e => { SHARED.tz = e.target.value; save('jsh-shared', SHARED); upd(); }; }

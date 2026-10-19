@@ -2394,6 +2394,10 @@ body.field-on.wm::after{display:none}
 .fb-photo.stadium+.floor-veil{background:linear-gradient(180deg,rgba(2,10,22,.58),rgba(2,10,22,.76) 40%,rgba(2,10,22,.85))}
 :root[data-theme="light"] .fb-photo.stadium+.floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.84) 45%,rgba(255,255,255,.9))}
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .fb-photo.stadium+.floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.84) 45%,rgba(255,255,255,.9))}}
+
+/* patch101: stadium photo credit, only while the photo is showing */
+.bgcredit{display:none}
+body.field-on .bgcredit{display:inline}
 </style>
 
 <header class="top">
@@ -2429,7 +2433,7 @@ body.field-on.wm::after{display:none}
 </header>
 <div class="asof" id="asof"></div>
 <main id="view"><div class="skel-wrap"><div class="skel skel-title"></div><div class="skel skel-sub"></div><div class="skel-grid"><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div></div><div class="skel skel-row"></div><div class="skel skel-row"></div><div class="skel skel-row"></div></div></main>
-<footer>Scores and schedules from ESPN. Lines are closing numbers for finished games and current or look-ahead numbers for upcoming ones (DraftKings via ESPN, consensus via Covers, and FOX Sports opening lines for marquee games). Preseason ratings from each team's 2025 results. Depth charts from ESPN with roster and recruiting details from On3 and 247Sports where available. Power ratings and projections are this page's own model.</footer>
+<footer>Scores and schedules from ESPN. Lines are closing numbers for finished games and current or look-ahead numbers for upcoming ones (DraftKings via ESPN, consensus via Covers, and FOX Sports opening lines for marquee games). Preseason ratings from each team's 2025 results. Depth charts from ESPN with roster and recruiting details from On3 and 247Sports where available. Power ratings and projections are this page's own model.<span class="bgcredit"> Background photos: Nate Edwards/BYU Photo (<a href="https://byucougars.com/news/2026/10/09/byu-athletics-and-pv3-enterprises-announce-landmark-commitment-to-byu-football" target="_blank" rel="noopener">BYU Athletics</a>).</span></footer>
 <div id="toast" class="toast" role="status"></div>
 <dialog id="dlg"></dialog>
 

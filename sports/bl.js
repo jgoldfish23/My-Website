@@ -41,7 +41,7 @@
 .jbl-pill[hidden]{display:none}
 body.jbl-on{padding-bottom:40px}
 @keyframes jblp{0%,100%{opacity:1}50%{opacity:.35}}
-@media (max-width:640px){.jbl{height:36px;font-size:12.5px}.jbl-i{height:36px;padding:0 11px}.jbl-tag{min-width:0;padding:0 10px}.jbl-tag b{display:none}body.jbl-on{padding-bottom:36px}.jbl-btn{width:34px}}
+@media (max-width:640px){.jbl{height:36px;font-size:12.5px}.jbl-i{height:36px;padding:0 11px}.jbl-tag{display:none}body.jbl-on{padding-bottom:36px}.jbl-btn{width:34px}}
 @media (prefers-reduced-motion:reduce){.jbl-vp{overflow-x:auto}.jbl-tr{position:static}}
 `;
   const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);

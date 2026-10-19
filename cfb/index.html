@@ -2386,6 +2386,14 @@ body:has(.tvframe) header.top.top{top:0}
 :root[data-theme="light"] .floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.82) 45%,rgba(255,255,255,.9))}
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.82) 45%,rgba(255,255,255,.9))}}
 body.field-on.wm::after{display:none}
+
+/* patch100: the stadium photos (the field from above keeps the Y in view on a phone; the aerial is a touch darker) */
+.fb-photo{position:absolute;inset:0;background:#123d22 center/cover no-repeat}
+.fb-photo.field{background-position:72% 50%}
+.fb-photo.stadium{background-position:50% 45%}
+.fb-photo.stadium+.floor-veil{background:linear-gradient(180deg,rgba(2,10,22,.58),rgba(2,10,22,.76) 40%,rgba(2,10,22,.85))}
+:root[data-theme="light"] .fb-photo.stadium+.floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.84) 45%,rgba(255,255,255,.9))}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .fb-photo.stadium+.floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.84) 45%,rgba(255,255,255,.9))}}
 </style>
 
 <header class="top">
@@ -105538,26 +105546,15 @@ function renderGameday(id){ setNav('gameday'); let g=id&&GI[id];
   if(!on) html+='<div style="margin-top:14px">'+gdDrives(g)+'</div>';
   html+='<div style="margin-top:14px">'+injuryCardHTML(g)+'</div>';
   view.innerHTML=html; gdWake(!!g.live); if(on) gdEnsure(g); }
-/* patch99: the BYU field as the wallpaper (see patch99.pl) */
-function byuFieldSVG(){ const B='#002E5D'; const lg=(T['BYU']&&logoOf(T['BYU']))||null; let g='';
-  for(let i=0;i<20;i++) if(i%2) g+='<rect x="'+(150+i*45)+'" y="60" width="45" height="480" fill="#000" opacity=".07"/>';
-  let lines=''; for(let k=0;k<=20;k++){ const x=150+k*45; lines+='<line x1="'+x+'" y1="60" x2="'+x+'" y2="540" stroke-width="'+(k===0||k===20?5:2.2)+'"/>'; }
-  let hash=''; for(let y=1;y<100;y++){ if(y%5===0) continue; const x=150+y*9; hash+='<line x1="'+x+'" y1="64" x2="'+x+'" y2="72"/><line x1="'+x+'" y1="236" x2="'+x+'" y2="246"/><line x1="'+x+'" y1="354" x2="'+x+'" y2="364"/><line x1="'+x+'" y1="528" x2="'+x+'" y2="536"/>'; }
-  let nums=''; [10,20,30,40,50,40,30,20,10].forEach((n,i)=>{ const x=150+(i+1)*90; nums+='<text x="'+x+'" y="498">'+n+'</text><text transform="translate('+x+' 102) rotate(180)">'+n+'</text>'; });
-  return '<svg class="floor-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">'
-    +'<rect width="1200" height="600" fill="#1e5a2c"/><rect x="60" y="60" width="1080" height="480" fill="#2e8040"/>'+g
-    +'<rect x="60" y="60" width="90" height="480" fill="'+B+'"/><rect x="1050" y="60" width="90" height="480" fill="'+B+'"/>'
-    +'<g stroke="#fff" stroke-opacity=".5">'+lines+'<rect x="60" y="60" width="1080" height="480" fill="none" stroke-width="5"/></g>'
-    +'<g stroke="#fff" stroke-opacity=".3" stroke-width="2">'+hash+'</g>'
-    +'<g fill="#fff" fill-opacity=".45" font-family="Inter Tight,Inter,system-ui,sans-serif" font-weight="800" font-size="34" text-anchor="middle">'+nums+'</g>'
-    +'<g fill="#fff" font-family="Inter Tight,Inter,system-ui,sans-serif" font-weight="900" text-anchor="middle" letter-spacing="6">'
-    +'<text transform="translate(120 300) rotate(-90)" font-size="70">BYU</text><text transform="translate(1080 300) rotate(90)" font-size="52">COUGARS</text></g>'
-    +(lg?'<circle cx="600" cy="300" r="78" fill="#fff" fill-opacity=".55"/><image href="'+lg.wm+'" x="532" y="232" width="136" height="136" preserveAspectRatio="xMidYMid meet"/>':'')+'</svg>'; }
-function fieldBg(){ const b=document.body; if(!b) return; const fav=SETTINGS.fav||'BYU'; const parts=(location.hash||'').replace(/^#\/?/,'').split('/').map(dec); let other=false; /* another team's page or a game without BYU keeps its own look */
-  if(parts[0]==='team'&&parts[1]){ const tt=T[norm(parts[1].split('#')[0])]; other=!!tt&&tt.name!=='BYU'; } else if(parts[0]==='game'&&parts[1]){ const gg=GI[parts[1]]; other=!!gg&&gg.home!=='BYU'&&gg.away!=='BYU'; }
+/* patch99 + patch100: LaVell Edwards Stadium as the wallpaper - the field from straight above on every page, the aerial of
+   the whole stadium on BYU's team page (photos from Jamo; see patch100.pl) */
+const BG_BASE = (/(^|\.)djgolding\.com$/.test(location.hostname)) ? '/cfb/img/bg/' : 'https://djgolding.com/cfb/img/bg/';
+function fieldBg(){ const b=document.body; if(!b) return; const fav=SETTINGS.fav||'BYU'; const parts=(location.hash||'').replace(/^#\/?/,'').split('/').map(dec); let other=false, teamPage=false; /* another team's page or a game without BYU keeps its own look */
+  if(parts[0]==='team'&&parts[1]){ const tt=T[norm(parts[1].split('#')[0])]; other=!!tt&&tt.name!=='BYU'; teamPage=!other; } else if(parts[0]==='game'&&parts[1]){ const gg=GI[parts[1]]; other=!!gg&&gg.home!=='BYU'&&gg.away!=='BYU'; }
   const on=fav==='BYU'&&!other; let el=document.getElementById('fieldbg');
-  if(on&&!el){ el=document.createElement('div'); el.id='fieldbg'; el.className='floor-bg'; el.setAttribute('aria-hidden','true'); el.innerHTML=byuFieldSVG()+'<div class="floor-veil"></div>'; b.prepend(el); }
-  if(el) el.hidden=!on; b.classList.toggle('field-on',on); }
+  if(on&&!el){ el=document.createElement('div'); el.id='fieldbg'; el.className='floor-bg'; el.setAttribute('aria-hidden','true'); el.innerHTML='<div class="fb-photo"></div><div class="floor-veil"></div>'; b.prepend(el); }
+  if(el){ el.hidden=!on; const ph=el.querySelector('.fb-photo'); const want=teamPage?'stadium':'field'; if(ph&&ph.dataset.p!==want){ ph.dataset.p=want; ph.className='fb-photo '+want; ph.style.backgroundImage='url("'+BG_BASE+'byu-'+want+'.webp")'; } }
+  b.classList.toggle('field-on',on); }
 { const _apt=applyPageTheme; applyPageTheme=function(){ _apt(); fieldBg(); }; }
 /* ---------- What has to happen (patch91) ---------- */
 function scnPct(x){ if(x==null) return '<span class="dim">—</span>'; if(x>0&&x<0.005) return '&lt;1%'; if(x<1&&x>0.995) return '&gt;99%'; return Math.round(x*100)+'%'; }

@@ -2920,6 +2920,14 @@ body:has(.tvframe) header.top.top{top:0}
 .rev-y{font-size:13.5px;padding:3px 0}
 @media (max-width:900px){.cupgrid3{grid-template-columns:1fr}.cupb{grid-template-columns:1fr}}
 @media (max-width:560px){.cupgrid3>.card,.cupgrid3 .bd{min-width:0}.cupgrid3 .bd{overflow-x:auto}.cuptbl td,.cuptbl th{padding:6px 5px;font-size:12.5px}.cuptbl th{font-size:10px;letter-spacing:.04em}.cupfav-row{gap:18px}.cupfav-n b{font-size:26px}}
+
+/* Jazz floor (2026-10-19, p2floor.js): the home court as the wallpaper on every NBA page except the Cup page */
+.floor-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.floor-bg[hidden]{display:none}
+.floor-svg{position:absolute;inset:0;width:100%;height:100%}
+.floor-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,6,26,.34),rgba(12,6,26,.6) 40%,rgba(12,6,26,.74))}
+:root[data-theme="light"] .floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.84) 45%,rgba(255,255,255,.9))}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.84) 45%,rgba(255,255,255,.9))}}
 </style>
 
 <header class="top">
@@ -11259,6 +11267,34 @@ function renderReview(mon){ setNav('review'); const ab=favAb(), t=team(ab); cons
     +'<div class="mini" style="margin-top:8px">'+(ownTop.length?'The '+esc(t.disp)+' pick goes to '+ownTop.map(([w2,q])=>esc(team(w2).disp)+' '+pct(q)).join(', ')+' of the time under the 2027 pick trades. ':'')+'<a href="#/team/'+enc(ab)+'">Team page &rsaquo;</a> · <a href="#/draft/lottery">Lottery &rsaquo;</a></div></div></div>'
     +'<div class="card"><div class="hd"><h3>Next week</h3><span class="mini">'+revRange(addDays(mon,7))+'</span></div><div class="bd">'+(nx.length?nx.map(g=>{ const home=g.home===ab; const p=proj(g); const mine=home?p.pHome:p.pAway; return '<div class="rev-g">'+esc(fmtDate(g.date))+' '+(home?'vs ':'at ')+'<a href="#/game/'+enc(g.id)+'">'+esc(team(home?g.away:g.home).disp)+'</a> <span class="dim">'+esc(kick(g))+(tvFor(g,ab)?' · '+esc(tvFor(g,ab)):'')+' · model '+pct(mine)+'</span></div>'; }).join(''):'<div class="mini">No games scheduled.</div>')+'</div></div></div>';
   view.innerHTML=html; }
+/* ---------- The Jazz home floor as the NBA hub's wallpaper (2026-10-19, Jamo). Drawn here in the style of the Jazz's
+   mountain court (2025-26 on): maple floor, purple keys, the purple note at center court, a faded mountain range from
+   baseline to baseline and a purple apron with UTAH JAZZ on the baselines. The only official image online is 503 px
+   wide, so this is drawn as vector art to stay sharp at any size. The NBA Cup page keeps the Cup court (p2cup.js).
+   Sits on <body> (fixed) under a veil that keeps text readable; styles in p1.html ("Jazz floor"). ---------- */
+function jazzCourtSVG(){ const L='#2b1654', P='#4E2A84', A='#33195f';
+  const arc=(x,dir)=>'M'+x+' 60H'+(x+dir*140)+'A237.5 237.5 0 0 '+(dir>0?1:0)+' '+(x+dir*140)+' 500H'+x;
+  let planks=''; for(let y=30;y<530;y+=12) planks+='<line x1="30" y1="'+y+'" x2="970" y2="'+y+'"/>';
+  return '<svg class="floor-svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs>'
+    +'<linearGradient id="fl-wood" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6D5B1"/><stop offset=".5" stop-color="#D8C297"/><stop offset="1" stop-color="#CBB283"/></linearGradient>'
+    +'<linearGradient id="fl-apron" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="'+A+'"/><stop offset=".5" stop-color="#3f2373"/><stop offset="1" stop-color="'+A+'"/></linearGradient></defs>'
+    +'<rect width="1000" height="560" fill="url(#fl-apron)"/>'
+    +'<g fill="#6a49a8" opacity=".35"><polygon points="0,0 220,0 120,560 0,560"/><polygon points="1000,0 780,0 880,560 1000,560"/></g>'
+    +'<rect x="30" y="30" width="940" height="500" fill="url(#fl-wood)"/>'
+    +'<g stroke="#9c8259" stroke-opacity=".18" stroke-width="1">'+planks+'</g>'
+    +'<path d="M30 430 L150 330 L215 375 L330 250 L420 330 L500 210 L590 320 L680 255 L790 370 L860 320 L970 410 V530 H30Z" fill="#fff" opacity=".28"/>'
+    +'<path d="M30 470 L170 390 L260 430 L380 330 L500 400 L640 320 L760 410 L870 360 L970 450 V530 H30Z" fill="#fff" opacity=".18"/>'
+    +'<rect x="30" y="200" width="190" height="160" fill="'+P+'"/><rect x="780" y="200" width="190" height="160" fill="'+P+'"/>'
+    +'<g fill="none" stroke="'+L+'" stroke-width="2.5"><rect x="30" y="30" width="940" height="500"/><line x1="500" y1="30" x2="500" y2="530"/><circle cx="500" cy="280" r="60"/>'
+    +'<path d="'+arc(30,1)+'"/><path d="'+arc(970,-1)+'"/><circle cx="220" cy="280" r="60"/><circle cx="780" cy="280" r="60"/>'
+    +'<line x1="70" y1="250" x2="70" y2="310"/><line x1="930" y1="250" x2="930" y2="310"/><circle cx="82.5" cy="280" r="7.5"/><circle cx="917.5" cy="280" r="7.5"/></g>'
+    +'<image href="'+LOGO_BASE+'/UTAH-lg.png" x="420" y="200" width="160" height="160" preserveAspectRatio="xMidYMid meet"/>'
+    +'<g fill="#fff" font-family="Inter Tight,Inter,system-ui,sans-serif" font-weight="900" font-size="30" letter-spacing="2" text-anchor="middle">'
+    +'<text transform="translate(18 280) rotate(-90)">UTAH JAZZ</text><text transform="translate(982 280) rotate(90)">UTAH JAZZ</text></g></svg>'; }
+function floorBg(){ const on=!/^#\/cup/.test(location.hash||''); let el=document.getElementById('floorbg');
+  if(!el){ el=document.createElement('div'); el.id='floorbg'; el.className='floor-bg'; el.setAttribute('aria-hidden','true'); el.innerHTML=jazzCourtSVG()+'<div class="floor-veil"></div>'; document.body.prepend(el); }
+  el.hidden=!on; }
+window.addEventListener('hashchange', floorBg); setTimeout(floorBg, 0); /* after p2c.js sets LOGO_BASE */
 /* ar:start - hand-written game articles ("Jamo's preview" / "Jamo's recap"), shared by the NFL and NBA hubs
    (the college hub has the same code inline). Data: d-articles, built by sports-hub/articles/articles.pl from
    <hub>/articles/<game id>.json + .md (preview) and <game id>.recap.json + .md (recap). A json "label" renames the

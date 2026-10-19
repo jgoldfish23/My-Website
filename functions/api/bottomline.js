@@ -5,18 +5,18 @@
 const BASE = "https://site.api.espn.com/apis/site/v2/sports/";
 const ALLOWED_ORIGINS = ["djgolding.com", "www.djgolding.com", "localhost", "127.0.0.1"];
 const TTL = 30;
-// ESPN only answers server calls that name dates: football gets this week (three days back, five ahead), the nightly
-// leagues get yesterday and today, all on the US Eastern calendar
+// ESPN's default scoreboards: the current week for football, the current day for the nightly leagues (ESPN refuses a
+// date range here, and refuses server calls whose user-agent it does not recognise)
 const ymd = (t) => new Date(t - (5 - (isDst(t) ? 1 : 0)) * 3600e3).toISOString().slice(0, 10).replace(/-/g, "");
 function isDst(t) { const y = new Date(t).getUTCFullYear(); const sun = (m, n) => { const d = new Date(Date.UTC(y, m, 1)); return 1 + (7 - d.getUTCDay()) % 7 + 7 * (n - 1); }; return t >= Date.UTC(y, 2, sun(2, 2), 7) && t < Date.UTC(y, 10, sun(10, 1), 6); }
 function feeds() { const now = Date.now(), D = 864e5; const wk = ymd(now - 3 * D) + "-" + ymd(now + 5 * D), nt = ymd(now - D) + "-" + ymd(now);
   return [
-    { lg: "cfb", path: "football/college-football", q: "?dates=" + wk + "&limit=120" },
-    { lg: "cfbx", path: "football/college-football", q: "?dates=" + wk + "&groups=81&limit=120" }, // FCS, for Weber State only
-    { lg: "nfl", path: "football/nfl", q: "?dates=" + wk + "&limit=40" },
-    { lg: "nba", path: "basketball/nba", q: "?dates=" + nt + "&limit=40" },
-    { lg: "nhl", path: "hockey/nhl", q: "?dates=" + nt + "&limit=40" },
-    { lg: "mlb", path: "baseball/mlb", q: "?dates=" + nt + "&limit=40" },
+    { lg: "cfb", path: "football/college-football", q: "?limit=120" },
+    { lg: "cfbx", path: "football/college-football", q: "?groups=81&limit=120" }, // FCS, for Weber State only
+    { lg: "nfl", path: "football/nfl", q: "?limit=40" },
+    { lg: "nba", path: "basketball/nba", q: "?limit=40" },
+    { lg: "nhl", path: "hockey/nhl", q: "?limit=40" },
+    { lg: "mlb", path: "baseball/mlb", q: "?limit=40" },
   ]; }
 const NEWS = [["cfb", "football/college-football", 4], ["nfl", "football/nfl", 4], ["nba", "basketball/nba", 4], ["mlb", "baseball/mlb", 3], ["nhl", "hockey/nhl", 3]];
 const KEEP_FCS = new Set(["2692"]); // Weber State

@@ -104655,6 +104655,8 @@ function uiColor(t){ const raw=(t&&t.color)||'#8A94A0'; const c=hexRgb(raw); if(
 function monoInk(hex){ const c=hexRgb(hex); if(!c) return '#FFFFFF'; return contrast(c,[255,255,255])>=2.4?'#FFFFFF':'#121A24'; }
 function pillATS(c){ if(c==='W') return '<span class="pill win">Cover</span>'; if(c==='L') return '<span class="pill loss">No cover</span>'; if(c==='P') return '<span class="pill push">Push</span>'; return ''; }
 function edgeCell(g){ const p=projAt(g); if(p.edge==null) return '<span class="dim">—</span>'; const e=p.edge; const who = e>0? g.home : g.away; const cls = Math.abs(e)>=3?'pos':(Math.abs(e)>=1.5?'':'zero'); return '<span class="'+cls+'">'+esc(tshort(who))+' '+sgn(Math.abs(e))+'</span>'; }
+/* patch102: the field's name since Oct. 9, 2026 (BYU Athletics) */
+if(T['BYU']&&/LaVell Edwards/i.test(T['BYU'].stadium||'')) T['BYU'].stadium='PV3 Field at LaVell Edwards Stadium';
 function venue(g){ if(g.neutral) return g.neutral+' (neutral)'; const h=team(g.home); return h.stadium? h.stadium+' · '+h.city : (h.city||''); }
 function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('show'),2200); }
 

@@ -40,7 +40,9 @@ async function upstream(url) {
 function side(c) {
   const t = c.team || {};
   const rk = c.curatedRank && c.curatedRank.current;
-  return { id: t.id || "", ab: t.abbreviation || "", n: t.shortDisplayName || t.location || t.name || "", s: c.score != null ? String(c.score) : "", rk: rk && rk <= 25 ? rk : 0 };
+  // logo: the path on ESPN's image host (the ticker asks ESPN's resizer for a small copy); c/c2: team and alternate colors
+  const logo = String(t.logo || "").replace(/^https?:\/\/a\.espncdn\.com/, "");
+  return { id: t.id || "", ab: t.abbreviation || "", n: t.shortDisplayName || t.location || t.name || "", s: c.score != null ? String(c.score) : "", rk: rk && rk <= 25 ? rk : 0, logo: /^\/i\//.test(logo) ? logo : "", c: /^[0-9a-f]{6}$/i.test(t.color || "") ? t.color : "", c2: /^[0-9a-f]{6}$/i.test(t.alternateColor || "") ? t.alternateColor : "" };
 }
 function slim(lg, e) {
   const cp = (e.competitions || [])[0] || {};

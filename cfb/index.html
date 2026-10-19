@@ -2343,6 +2343,38 @@ body:has(.tvframe) header.top.top{top:0}
 .wk::-webkit-scrollbar{display:none}
 .wk a,.wk button{flex:none}
 .page-head>div:first-child{min-width:0}
+
+/* patch98: injury rows line up (fixed status column, same-width pills, room before the position) */
+.ij-h{display:grid;grid-template-columns:132px minmax(0,1fr);column-gap:14px;align-items:center;font-size:14.5px}
+.ij-h .ij-st{display:flex;justify-content:center;align-items:center;width:100%;min-width:0;margin:0;box-sizing:border-box;padding:4px 8px;white-space:normal;text-align:center;line-height:1.25}
+.ij-who{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px;min-width:0}
+.ij-who b{font-weight:700}
+.ij-p{padding:10px 0}
+.ij-p>.ij-n,.ij-p>.ij-hist,.ij-p>.ij-src{margin-left:146px}
+.ij-teaser .bd{padding:16px 18px}
+.ij-teaser .ij-sum{margin-bottom:12px}
+.ij-teaser .rc-go{margin-top:12px}
+/* patch98: recruiting card */
+.rc-teaser .bd{padding:16px 18px}
+.rc-stats{display:flex;flex-wrap:wrap;gap:12px 32px}
+.rc-stats>div{display:flex;flex-direction:column;gap:2px}
+.rc-stats b{font-family:var(--disp);font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.rc-stats span{font-size:12px;font-weight:600;color:var(--ink-2)}
+.rc-top{margin-top:14px;padding-top:12px;border-top:1px solid var(--line-2)}
+.rc-k{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
+.rc-list{display:flex;flex-wrap:wrap;gap:10px 28px}
+.rc-c{display:flex;flex-direction:column;gap:2px}
+.rc-c b{font-size:15px}
+.rc-m{display:flex;align-items:center;gap:8px;font-size:12.5px}
+.rc-teaser .rc-go{margin-top:14px}
+@media (max-width:600px){
+  .ij-h{grid-template-columns:104px minmax(0,1fr);column-gap:10px;font-size:14px}
+  .ij-h .ij-st{font-size:10px;padding:4px 6px}
+  .ij-p>.ij-n,.ij-p>.ij-hist,.ij-p>.ij-src{margin-left:0}
+  .rc-stats{gap:10px 22px}.rc-stats b{font-size:22px}
+  .rc-list{flex-direction:column;gap:10px}
+  .ij-teaser .bd,.rc-teaser .bd{padding:14px}
+}
 </style>
 
 <header class="top">
@@ -104643,8 +104675,8 @@ function recruitYears(){ return RCLASS&&RCLASS.years?Object.keys(RCLASS.years).s
 function rcStars(n){ n=+n||0; return n?'<span class="rc-stars" title="'+n+'-star">'+'★'.repeat(n)+'<i>'+'★'.repeat(Math.max(0,5-n))+'</i></span>':'<span class="dim">NR</span>'; }
 function rcDate(d){ const m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(d||''); if(!m) return ''; return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m[2]-1]+' '+(+m[3])+(+m[1]!==new Date().getFullYear()?', '+m[1]:''); }
 function recruitTeaserHTML(name){ const ys=recruitYears(); if(!ys.length||RCLASS.team!==name) return ''; const y=ys[0], c=RCLASS.years[y]; const top=c.players.filter(p=>!p.decommitted).slice(0,3);
-  return '<div class="sec"><h2>Recruiting</h2><span class="muted">class of '+y+'</span></div><a class="card rc-teaser" href="#/recruiting/'+y+'"><div class="bd"><div class="rc-tz"><b>'+c.commits+'</b> commits'+(c.natRank?' · <b>No. '+c.natRank+'</b> nationally':'')+(c.confRank?' · No. '+c.confRank+' in the '+esc(c.conf||'conference'):'')+'</div>'
-    +(top.length?'<div class="mini">Top commits: '+top.map(p=>esc(p.name)+' <span class="dim">('+(p.stars?p.stars+'★ ':'')+esc(p.pos||'')+')</span>').join(', ')+'</div>':'')+'<div class="rc-go">Open the recruiting tracker ›</div></div></a>'; }
+  return '<div class="sec"><h2>Recruiting</h2><span class="muted">class of '+y+'</span></div><a class="card rc-teaser" href="#/recruiting/'+y+'"><div class="bd"><div class="rc-stats"><div><b>'+c.commits+'</b><span>commits</span></div>'+(c.natRank?'<div><b>No. '+c.natRank+'</b><span>nationally</span></div>':'')+(c.confRank?'<div><b>No. '+c.confRank+'</b><span>in the '+esc(c.conf||'conference')+'</span></div>':'')+'</div>'
+    +(top.length?'<div class="rc-top"><div class="rc-k">Top commits</div><div class="rc-list">'+top.map(p=>'<span class="rc-c"><b>'+esc(p.name)+'</b><span class="rc-m">'+(p.stars?rcStars(p.stars):'')+'<span class="dim">'+esc(p.pos||'')+'</span></span></span>').join('')+'</div></div>':'')+'<div class="rc-go">Open the recruiting tracker ›</div></div></a>'; } /* patch98 */
 function renderRecruiting(yr){ setNav('recruiting'); const ys=recruitYears(); const team=(RCLASS&&RCLASS.team)||'BYU'; const back=backBar('#/team/'+enc(team));
   if(!ys.length){ view.innerHTML=back+'<div class="note">Recruiting data is not loaded yet. It refreshes a couple of times a day.</div>'; return; }
   const y=ys.includes(yr)?yr:ys[0], c=RCLASS.years[y]; const live=c.players.filter(p=>!p.decommitted), gone=c.players.filter(p=>p.decommitted);
@@ -104671,9 +104703,9 @@ function injCls(s){ s=s||''; return /out|suspend|season/i.test(s)?'out':/doubt/i
 function injRank(s,c){ return ({out:0,doubt:1,quest:2,info:3,likely:4})[c||injCls(s)]; }
 function injPill(st,cls){ return '<span class="ij-st ij-'+(cls||injCls(st))+'">'+esc(st||'—')+'</span>'; }
 function injSrc(list){ return (list||[]).map(s=>(s.u?'<a href="'+esc(s.u)+'" target="_blank" rel="noopener">'+esc(s.t)+'</a>':esc(s.t))+(s.d?' <span class="dim">'+esc(s.d)+'</span>':'')).join(' · '); }
-function injFeatRows(F,full){ return (F.players||[]).slice().sort((a,b)=>injRank(a.status,a.cls)-injRank(b.status,b.cls)).map(p=>'<div class="ij-p"><div class="ij-h">'+injPill(p.status,p.cls)+'<b>'+esc(p.name)+'</b> <span class="dim">'+(p.num?'#'+esc(p.num)+' ':'')+esc(p.pos||'')+'</span></div>'
+function injFeatRows(F,full){ return (F.players||[]).slice().sort((a,b)=>injRank(a.status,a.cls)-injRank(b.status,b.cls)).map(p=>'<div class="ij-p"><div class="ij-h">'+injPill(p.status,p.cls)+'<span class="ij-who"><b>'+esc(p.name)+'</b><span class="dim">'+(p.num?'#'+esc(p.num)+' ':'')+esc(p.pos||'')+'</span></span></div>'
   +(full?(p.note?'<div class="ij-n">'+esc(p.note)+'</div>':'')+(p.history?'<div class="ij-hist">Official report: '+esc(p.history)+'</div>':'')+(p.src&&p.src.length?'<div class="ij-src">Source: '+injSrc(p.src)+'</div>':''):'')+'</div>').join(''); }
-function injCoversRows(name,max){ const L=(INJC[name]||[]).slice().sort((a,b)=>injRank(a.st)-injRank(b.st)); return L.slice(0,max||999).map(x=>'<div class="ij-p ij-c"><div class="ij-h">'+injPill(x.st+(x.det&&!/^undisclosed$/i.test(x.det)?' · '+x.det:''),injCls(x.st))+'<b>'+esc(x.n)+'</b> <span class="dim">'+esc(x.pos)+(x.d?' · listed '+esc(x.d):'')+'</span></div></div>').join(''); }
+function injCoversRows(name,max){ const L=(INJC[name]||[]).slice().sort((a,b)=>injRank(a.st)-injRank(b.st)); return L.slice(0,max||999).map(x=>'<div class="ij-p ij-c"><div class="ij-h">'+injPill(x.st+(x.det&&!/^undisclosed$/i.test(x.det)?' · '+x.det:''),injCls(x.st))+'<span class="ij-who"><b>'+esc(x.n)+'</b><span class="dim">'+esc(x.pos)+(x.d?' · listed '+esc(x.d):'')+'</span></span></div></div>').join(''); }
 function injuryCardHTML(g){ const sides=[team(g.away),team(g.home)].filter(t=>t&&!t.other&&!t.tbd).sort((x,y)=>(y.name==='BYU')-(x.name==='BYU')); const feat=t=>INJF.teams&&INJF.teams[t.name];
   const parts=sides.map(t=>{ const F=feat(t); if(F) return '<div class="dteam">'+chip(t.name,{norank:true})+' <span class="ij-tag ok">verified</span></div>'+(F.summary?'<p class="ij-sum">'+esc(F.summary)+'</p>':'')+injFeatRows(F,false);
     const L=INJC[t.name]; if(L&&L.length) return '<div class="dteam">'+chip(t.name,{norank:true})+' <span class="ij-tag">unofficial</span></div>'+injCoversRows(t.name,8)+(L.length>8?'<div class="mini dim">+'+(L.length-8)+' more on the injuries page</div>':''); return ''; }).filter(Boolean);
@@ -104688,7 +104720,7 @@ function renderInjuries(sel){ setNav('injuries'); const by=INJF.teams&&INJF.team
   if(by){
     html+='<div class="card ij-feat"><div class="hd"><h3>BYU injury report</h3><span class="mini">updated '+esc(INJF.updated||'')+'</span></div><div class="bd">'+(by.game?'<div class="ij-game">Next game: <b>'+esc(by.game.label)+'</b></div>':'')+(by.summary?'<p class="ij-sum">'+esc(by.summary)+'</p>':'')+injFeatRows(by,true)+'</div></div>';
     if(by.official) html+='<div class="card ij-off"><div class="bd"><b>The official report.</b> '+esc(by.official.next||'')+' '+esc(by.official.how||'')+(by.official.url?' <a href="'+esc(by.official.url)+'" target="_blank" rel="noopener">Big 12 availability reports ›</a>':'')+'</div></div>';
-    if(by.watch&&by.watch.players&&by.watch.players.length) html+='<div class="card"><div class="hd"><h3>'+esc(by.watch.title||'Watch list')+'</h3></div><div class="bd"><p class="ij-sum" style="margin-top:0">'+esc(by.watch.note||'')+'</p>'+by.watch.players.map(p=>'<div class="ij-p"><div class="ij-h">'+injPill('Unconfirmed','info')+'<b>'+esc(p.name)+'</b> <span class="dim">'+(p.num?'#'+esc(p.num)+' ':'')+esc(p.pos||'')+'</span></div>'+(p.note?'<div class="ij-n">'+esc(p.note)+'</div>':'')+'</div>').join('')+(by.watch.src?'<div class="ij-src">Source: '+injSrc(by.watch.src)+'</div>':'')+'</div></div>';
+    if(by.watch&&by.watch.players&&by.watch.players.length) html+='<div class="card"><div class="hd"><h3>'+esc(by.watch.title||'Watch list')+'</h3></div><div class="bd"><p class="ij-sum" style="margin-top:0">'+esc(by.watch.note||'')+'</p>'+by.watch.players.map(p=>'<div class="ij-p"><div class="ij-h">'+injPill('Unconfirmed','info')+'<span class="ij-who"><b>'+esc(p.name)+'</b><span class="dim">'+(p.num?'#'+esc(p.num)+' ':'')+esc(p.pos||'')+'</span></span></div>'+(p.note?'<div class="ij-n">'+esc(p.note)+'</div>':'')+'</div>').join('')+(by.watch.src?'<div class="ij-src">Source: '+injSrc(by.watch.src)+'</div>':'')+'</div></div>';
     if(by.reports&&by.reports.length) html+='<div class="sec"><h2>BYU’s recent official reports</h2><span class="muted">as published</span></div><div class="grid g2">'+by.reports.map(r=>'<div class="card"><div class="hd"><h3>'+esc(r.game)+'</h3><span class="mini">'+esc(r.kind||'')+'</span></div><div class="bd">'+[['OUT','out',r.out],['DOUBTFUL','doubt',r.doubtful],['QUESTIONABLE','quest',r.questionable],['PROBABLE','likely',r.probable]].filter(x=>x[2]&&x[2].length).map(x=>'<div class="ij-grp">'+injPill(x[0],x[1])+'<span>'+x[2].map(esc).join(', ')+'</span></div>').join('')+(r.src?'<div class="ij-src">Source: '+injSrc([r.src])+'</div>':'')+'</div></div>').join('')+'</div>';
     const oppN=by.game&&by.game.opp, opp=oppN&&INJF.teams[oppN];
     if(opp) html+='<div class="sec"><h2>This week’s opponent: '+esc(oppN)+'</h2><span class="muted">verified</span></div><div class="card"><div class="bd">'+(opp.summary?'<p class="ij-sum" style="margin-top:0">'+esc(opp.summary)+'</p>':'')+injFeatRows(opp,true)+(opp.more?'<p class="mini dim">'+esc(opp.more)+(opp.official&&opp.official.url?' <a href="'+esc(opp.official.url)+'" target="_blank" rel="noopener">Full report ›</a>':'')+'</p>':'')+'</div></div>';

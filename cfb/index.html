@@ -106413,8 +106413,13 @@ connectDb();
   // a link this file does not know about joins the More section rather than disappearing
   links.filter(a => !a.dataset.g).forEach(a => { a.dataset.g = 'more'; sub.appendChild(a); });
   nav.textContent = ''; nav.appendChild(main); nav.appendChild(sub); nav.classList.add('navg');
-  const KEY = 'jsh-nav-last';
+  // remembered per hub (2026-10-19 fix: one shared key let the NBA's "#/playoffs" send the college Rankings tab to a page
+  // the college hub doesn't have, which fell back to Scores), and only ever a page from that section on this hub
+  const KEY = 'jsh-nav-last:' + location.pathname.replace(/\/+$/, '');
   let last = {}; try { last = JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch (e) {}
+  const route = h => String(h || '').replace(/^#\/?/, '').split('/')[0];
+  const fits = (g, h) => { const s = SECTIONS.find(x => x.g === g); return !!(s && s.items && s.items.some(a => route(a.getAttribute('href')) === route(h))); };
+  Object.keys(last).forEach(g => { if (!fits(g, last[g])) delete last[g]; });
   let cur = null;
   function sync() {
     const on = sub.querySelector('a.on');
@@ -106424,7 +106429,7 @@ connectDb();
     Object.entries(tabs).forEach(([k, t]) => {
       t.classList.toggle('cur', k === g);
       // a section's tab goes back to the page last opened in it this visit
-      if (k !== g && last[k]) t.setAttribute('href', last[k]);
+      if (k !== g && last[k] && fits(k, last[k])) t.setAttribute('href', last[k]);
     });
     const n = sub.querySelectorAll('a[data-g="' + g + '"]').length;
     sub.dataset.g = g; sub.classList.toggle('one', n < 2);

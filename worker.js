@@ -5,6 +5,7 @@ import * as nfl from "./functions/api/nfl.js";
 import * as nba from "./functions/api/nba.js";
 import * as mlb from "./functions/api/mlb.js";
 import * as nhl from "./functions/api/nhl.js";
+import * as bottomline from "./functions/api/bottomline.js";
 import { clientIp, originOk, rateLimit, tooMany, forbidden } from "./functions/api/_guard.js";
 
 const RECORD_KEY = "record_entries";
@@ -257,6 +258,12 @@ export default {
     if (pathname.startsWith("/api/mlb/")) {
       if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
       return mlb.onRequestGet({ request, env, ctx });
+    }
+
+    // The BottomLine ticker on every hub page: today's games across the leagues and ESPN headlines (one cached feed)
+    if (pathname === "/api/bottomline") {
+      if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
+      return bottomline.onRequestGet({ request, env, ctx });
     }
 
     return env.ASSETS.fetch(request);

@@ -47,8 +47,9 @@ function slim(lg, e) {
   return { id: e.id, lg, date: cp.date || e.date, st: st.state || "pre", det: st.shortDetail || "", a: side(a), h: side(h), tv: tv[0] || "", note: note.slice(0, 60), neutral: !!cp.neutralSite };
 }
 export async function onRequestGet({ request }) {
+  const errs = [];
   try {
-    const boards = await Promise.all(FEEDS.map((f) => upstream(BASE + f.path + "/scoreboard" + f.q).then((j) => ({ f, j })).catch(() => ({ f, j: null }))));
+    const boards = await Promise.all(FEEDS.map((f) => upstream(BASE + f.path + "/scoreboard" + f.q).then((j) => ({ f, j })).catch((e) => { errs.push(f.lg + ": " + (e.message || e)); return { f, j: null }; })));
     const games = [];
     boards.forEach(({ f, j }) => {
       if (!j) return;
@@ -59,14 +60,14 @@ export async function onRequestGet({ request }) {
       });
     });
     const news = [];
-    const lists = await Promise.all(NEWS.map(([lg, path, n]) => upstream(BASE + path + "/news?limit=" + n).then((j) => ({ lg, j })).catch(() => ({ lg, j: null }))));
+    const lists = await Promise.all(NEWS.map(([lg, path, n]) => upstream(BASE + path + "/news?limit=" + n).then((j) => ({ lg, j })).catch((e) => { errs.push("news " + lg + ": " + (e.message || e)); return { lg, j: null }; })));
     lists.forEach(({ lg, j }) => {
       ((j && j.articles) || []).forEach((x) => {
         const href = x.links && x.links.web && x.links.web.href;
         if (x.headline && href) news.push({ lg, t: String(x.headline).slice(0, 140), u: href, d: x.published || "" });
       });
     });
-    return json(request, { t: Date.now(), games, news }, 200, TTL);
+    return json(request, { t: Date.now(), games, news, ...(errs.length ? { errs } : {}) }, 200, errs.length ? 0 : TTL);
   } catch (e) {
     return json(request, { error: String(e.message || e) }, 502);
   }

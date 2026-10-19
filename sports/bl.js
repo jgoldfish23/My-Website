@@ -1,0 +1,88 @@
+/* Jamo Sports Hub BottomLine (2026-10-19, Jamo: "like the ESPN channel's bottom line of news and scores - clean, modern,
+   useful"). A slim bar fixed to the bottom of every hub page: Jamo's teams first, then everything live, then each league's
+   games (college = AP Top 25 plus BYU and Weber State), ESPN headlines and Jamo's newest articles. It glides right to
+   left; the label on the left names the section passing under it. Hover or touch pauses it; a tap opens the game.
+   Data: /api/bottomline (functions/api/bottomline.js in the site repo, 30s edge cache) and /sports/latest.json.
+   Refreshes every minute while games are live, every five minutes otherwise, and not while the tab is hidden.
+   The x hides it (remembered on this device); the "Scores" pill brings it back. Off on full-screen boards. */
+(function(){
+  if (window.__jshBL) return; window.__jshBL = 1;
+  const API = /(^|\.)djgolding\.com$/.test(location.hostname) ? '/api/bottomline' : 'https://djgolding.com/api/bottomline';
+  const LATEST = /(^|\.)djgolding\.com$/.test(location.hostname) ? '/sports/latest.json' : 'https://djgolding.com/sports/latest.json';
+  const FAV = {cfb:['BYU','WEB'], nfl:['PHI'], nba:['UTAH'], mlb:['LAD'], nhl:['UTA','UTAH']};
+  const LG = {cfb:{n:'CFB', c:'#3b82f6', home:'/cfb/#/week'}, nfl:{n:'NFL', c:'#ef4444', home:'/nfl/'}, nba:{n:'NBA', c:'#a855f7', home:'/nba/'}, nhl:{n:'NHL', c:'#38bdf8', home:'/nhl/'}, mlb:{n:'MLB', c:'#22c55e', home:'/mlb/'}};
+  const css = `
+.bl{position:fixed;left:0;right:0;bottom:0;z-index:60;height:40px;display:flex;align-items:stretch;font:600 13.5px/1 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#eef2f8;background:rgba(10,12,18,.9);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border-top:1px solid rgba(255,255,255,.09);box-shadow:0 -8px 24px -12px rgba(0,0,0,.6)}
+.bl[hidden]{display:none}
+.bl-tag{flex:none;display:flex;align-items:center;gap:8px;padding:0 14px 0 12px;font:800 11px/1 "Inter Tight",Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--blc,#3b82f6);min-width:92px;transition:background .35s ease;position:relative}
+.bl-tag::after{content:"";position:absolute;right:-10px;top:0;bottom:0;width:10px;background:linear-gradient(90deg,var(--blc,#3b82f6),transparent)}
+.bl-tag b{font-weight:900;font-size:10px;opacity:.8;letter-spacing:.06em}
+.bl-vp{flex:1;min-width:0;overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 24px),transparent)}
+.bl-tr{position:absolute;left:0;top:0;bottom:0;display:flex;align-items:center;white-space:nowrap;will-change:transform}
+.bl-sec{display:inline-flex;align-items:center;gap:6px;margin:0 10px 0 18px;padding:4px 8px;border-radius:6px;font:800 10.5px/1 "Inter Tight",Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:color-mix(in srgb,var(--c) 70%,transparent)}
+.bl-i{display:inline-flex;align-items:center;gap:7px;padding:0 14px;height:40px;color:inherit;text-decoration:none;border-right:1px solid rgba(255,255,255,.08)}
+.bl-i:hover{background:rgba(255,255,255,.06)}
+.bl-i .t{display:inline-flex;align-items:center;gap:5px}
+.bl-i .rk{font-size:10px;font-weight:700;color:rgba(255,255,255,.55)}
+.bl-i .s{font-variant-numeric:tabular-nums;font-weight:800;color:#fff}
+.bl-i .l{opacity:.6;font-weight:600}
+.bl-i .w{color:#fff;font-weight:800}
+.bl-i .st{font-size:11px;font-weight:700;color:rgba(255,255,255,.62);letter-spacing:.02em}
+.bl-i .live{color:#ff5a6e}
+.bl-i .live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#ff3b52;margin-right:5px;vertical-align:1px;animation:blp 1.6s infinite}
+.bl-i.fav{background:linear-gradient(180deg,rgba(255,215,90,.10),rgba(255,215,90,.03))}
+.bl-i.fav .t b{color:#ffd75a}
+.bl-i.news{font-weight:600;color:#dfe6f2}
+.bl-i.news .src{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--c,#9fb3d1)}
+.bl-btn{flex:none;width:38px;display:grid;place-items:center;border:0;background:transparent;color:rgba(255,255,255,.7);cursor:pointer;font:700 15px/1 system-ui}
+.bl-btn:hover{color:#fff;background:rgba(255,255,255,.07)}
+.bl-pill{position:fixed;right:12px;bottom:12px;z-index:60;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:8px 13px;font:800 11px/1 Inter,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(10,12,18,.88);backdrop-filter:blur(10px);cursor:pointer;box-shadow:0 8px 20px -10px rgba(0,0,0,.6)}
+.bl-pill[hidden]{display:none}
+body.bl-on{padding-bottom:40px}
+@keyframes blp{0%,100%{opacity:1}50%{opacity:.35}}
+@media (max-width:640px){.bl{height:36px;font-size:12.5px}.bl-i{height:36px;padding:0 11px}.bl-tag{min-width:0;padding:0 10px}.bl-tag b{display:none}body.bl-on{padding-bottom:36px}.bl-btn{width:34px}}
+@media (prefers-reduced-motion:reduce){.bl-vp{overflow-x:auto}.bl-tr{position:static}}
+`;
+  const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const ls = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
+  const bar = document.createElement('div'); bar.className = 'bl'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Scores and headlines');
+  bar.innerHTML = '<div class="bl-tag"><span class="bl-lab">Scores</span><b class="bl-sub"></b></div><div class="bl-vp"><div class="bl-tr"></div></div><button class="bl-btn bl-pp" type="button" title="Pause" aria-label="Pause">❚❚</button><button class="bl-btn bl-x" type="button" title="Hide the ticker" aria-label="Hide the ticker">✕</button>';
+  const pill = document.createElement('button'); pill.className = 'bl-pill'; pill.type = 'button'; pill.textContent = 'Scores'; pill.hidden = true;
+  const tag = bar.querySelector('.bl-tag'), lab = bar.querySelector('.bl-lab'), sub = bar.querySelector('.bl-sub'), vp = bar.querySelector('.bl-vp'), tr = bar.querySelector('.bl-tr'), pp = bar.querySelector('.bl-pp');
+  let DATA = null, LAT = [], x = 0, last = 0, lastLab = 0, paused = false, hover = false, segs = [], timer = null;
+  const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const offBoard = () => /^#\/(board)/.test(location.hash || '');
+  function show(on){ const off = ls('jsh-bl-off') === '1'; bar.hidden = !on || off || offBoard(); pill.hidden = !(on && off && !offBoard()); document.body.classList.toggle('bl-on', !bar.hidden); }
+  const isFav = g => (FAV[g.lg] || []).some(ab => ab === g.a.ab || ab === g.h.ab);
+  function href(g){ if (g.lg === 'nba') return '/nba/#/game/' + g.id; if (g.lg === 'nfl') return '/nfl/#/game/' + g.id; return LG[g.lg].home; }
+  function when(g){ const d = new Date(g.date); if (isNaN(d)) return g.det; const today = new Date(); const same = d.toDateString() === today.toDateString(); const t = d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}).replace(':00', '').replace(' ', '').toLowerCase(); return (same ? '' : d.toLocaleDateString([], {weekday:'short'}) + ' ') + t; }
+  function side(s, won, lost){ return '<span class="t">' + (s.rk ? '<span class="rk">' + s.rk + '</span>' : '') + '<b class="' + (won ? 'w' : lost ? 'l' : '') + '">' + esc(s.ab || s.n) + '</b>' + (s.s !== '' && s.s != null ? '<span class="s' + (lost ? ' l' : '') + '">' + esc(s.s) + '</span>' : '') + '</span>'; }
+  function item(g){ const post = g.st === 'post', live = g.st === 'in'; const as = +g.a.s, hs = +g.h.s; const aw = post && as > hs, hw = post && hs > as;
+    const stt = live ? '<span class="st live">' + esc(g.det) + '</span>' : post ? '<span class="st">' + esc(/OT/.test(g.det) ? g.det.replace(/^Final\/?/i, 'F/') : 'Final') + '</span>' : '<span class="st">' + esc(when(g)) + (g.tv ? ' · ' + esc(g.tv) : '') + '</span>';
+    const a = post || live ? side(g.a, aw, hw) : side({rk:g.a.rk, ab:g.a.ab, n:g.a.n, s:''}), h = post || live ? side(g.h, hw, aw) : side({rk:g.h.rk, ab:g.h.ab, n:g.h.n, s:''});
+    return '<a class="bl-i' + (isFav(g) ? ' fav' : '') + '" href="' + href(g) + '" title="' + esc(g.a.n + ' at ' + g.h.n + (g.note ? ' · ' + g.note : '')) + '">' + a + '<span class="l">' + (post || live ? '' : '@') + '</span>' + h + stt + '</a>'; }
+  function sec(key, label, color, html){ return html ? '<span class="bl-sec" data-k="' + key + '" data-l="' + esc(label) + '" style="--c:' + color + '">' + esc(label) + '</span>' + html : ''; }
+  function order(list){ const rank = g => g.st === 'in' ? 0 : g.st === 'pre' ? 1 : 2; return list.slice().sort((p, q) => rank(p) - rank(q) || String(p.date).localeCompare(String(q.date))); }
+  function build(){ if (!DATA) return; const G = DATA.games || []; let h = '';
+    const favs = order(G.filter(isFav)); h += sec('fav', 'Your teams', '#d4a017', favs.map(item).join(''));
+    const live = order(G.filter(g => g.st === 'in' && !isFav(g))); h += sec('live', 'Live now', '#e11d48', live.map(item).join(''));
+    ['cfb', 'nfl', 'nba', 'nhl', 'mlb'].forEach(lg => { const list = order(G.filter(g => g.lg === lg && g.st !== 'in' && !isFav(g))); if (lg === 'cfb') list.splice(0, list.length, ...list.filter(g => g.a.rk || g.h.rk)); h += sec(lg, LG[lg].n + (lg === 'cfb' ? ' · Top 25' : ''), LG[lg].c, list.slice(0, 18).map(item).join('')); });
+    const news = (DATA.news || []).slice(0, 14); h += sec('news', 'Headlines', '#64748b', news.map(n => '<a class="bl-i news" href="' + esc(n.u) + '" target="_blank" rel="noopener" style="--c:' + (LG[n.lg] ? LG[n.lg].c : '#9fb3d1') + '"><span class="src">' + esc(LG[n.lg] ? LG[n.lg].n : '') + '</span>' + esc(n.t) + '</a>').join(''));
+    const jam = LAT.slice(0, 4); h += sec('jamo', 'From Jamo', '#0f766e', jam.map(a => '<a class="bl-i news" href="' + esc(a.href) + '"><span class="src" style="color:#5eead4">' + esc(a.team || '') + '</span>' + esc(a.title) + '</a>').join(''));
+    if (!h) h = '<span class="bl-i">No games on the board right now.</span>';
+    tr.innerHTML = h + '<span class="bl-gap" style="display:inline-block;width:60px"></span>' + h; segs = [...tr.querySelectorAll('.bl-sec')].slice(0, tr.querySelectorAll('.bl-sec').length / 2 || 1); label(); }
+  function label(){ const vl = vp.getBoundingClientRect().left; let cur = null; tr.querySelectorAll('.bl-sec').forEach(s => { if (s.getBoundingClientRect().left <= vl + 40) cur = s; }); cur = cur || tr.querySelector('.bl-sec'); if (!cur) return; lab.textContent = cur.dataset.l; tag.style.setProperty('--blc', cur.style.getPropertyValue('--c')); const live = (DATA && DATA.games || []).filter(g => g.st === 'in').length; sub.textContent = live ? live + ' live' : ''; }
+  function tick(t){ requestAnimationFrame(tick); if (bar.hidden || reduced) return; const dt = last ? Math.min(64, t - last) : 16; last = t; if (paused || hover || document.hidden) return; const half = tr.scrollWidth / 2; if (half <= vp.clientWidth / 2) return; x -= dt * 0.055; if (-x >= half) x += half; tr.style.transform = 'translateX(' + x.toFixed(1) + 'px)'; if (t - lastLab > 250) { lastLab = t; label(); } }
+  async function load(){ try { const r = await fetch(API, {cache:'no-store'}); if (r.ok) { const j = await r.json(); if (j && j.games) DATA = j; } } catch (e) {}
+    if (!LAT.length) { try { const r = await fetch(LATEST); if (r.ok) LAT = await r.json(); } catch (e) {} }
+    build(); clearTimeout(timer); const live = DATA && (DATA.games || []).some(g => g.st === 'in'); timer = setTimeout(() => { if (document.hidden) { document.addEventListener('visibilitychange', function f(){ if (!document.hidden) { document.removeEventListener('visibilitychange', f); load(); } }); } else load(); }, live ? 60e3 : 300e3); }
+  vp.addEventListener('mouseenter', () => hover = true); vp.addEventListener('mouseleave', () => hover = false);
+  vp.addEventListener('touchstart', () => { hover = true; }, {passive:true}); vp.addEventListener('touchend', () => setTimeout(() => hover = false, 2500), {passive:true});
+  pp.addEventListener('click', () => { paused = !paused; pp.textContent = paused ? '▶' : '❚❚'; pp.title = paused ? 'Play' : 'Pause'; pp.setAttribute('aria-label', pp.title); });
+  bar.querySelector('.bl-x').addEventListener('click', () => { ls('jsh-bl-off', '1'); show(true); });
+  pill.addEventListener('click', () => { ls('jsh-bl-off', '0'); show(true); });
+  window.addEventListener('hashchange', () => show(true));
+  function start(){ document.body.appendChild(bar); document.body.appendChild(pill); show(true); load(); requestAnimationFrame(tick); }
+  if (document.body) start(); else document.addEventListener('DOMContentLoaded', start);
+})();

@@ -42,17 +42,24 @@ body.boardmode .jsh{display:none}
 @media (max-width:560px){.jsh{gap:8px;padding:0 12px}.jsh-brand span{display:none}.jsh-nav{gap:2px}.jsh-nav a{padding:0 10px;font-size:13px;gap:6px}}
 @media (max-width:360px){.jsh-nav a i{display:none}.jsh-nav a{padding:0 9px}}
 @media print{.jsh{display:none}}
+/* league logos and a centered row (2026-10-19) */
+.jsh-nav a .jsh-lg{flex:none;width:18px;height:18px;object-fit:contain;display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45))}
+.jsh-nav a svg.jsh-lg{filter:none;opacity:.85}
+.jsh-nav a.on .jsh-lg{filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))}
+@media (min-width:561px){.jsh-nav{margin:0 auto}}
+@media (min-width:1100px){.jsh-nav{position:absolute;left:50%;transform:translateX(-50%);margin:0;overflow:visible}}
+@media (max-width:360px){.jsh-nav a .jsh-lg{width:16px;height:16px}}
 </style>
 <div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
   <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
   <nav class="jsh-nav">
-    <a href="/sports/" data-s="sports" style="--c:#475569"><i></i>Home</a>
-    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>CFB</a>
-    <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><i></i>NFL</a>
-    <a href="/nba/" data-s="nba" style="--c:#6d28d9"><i></i>NBA</a>
-    <a href="/nhl/" data-s="nhl" style="--c:#0284c7"><i></i>NHL</a>
-    <a href="/mlb/" data-s="mlb" style="--c:#005a9c"><i></i>MLB</a>
-    <a href="/sports/articles/" data-s="articles" style="--c:#be185d"><i></i>Articles</a>
+    <a href="/sports/" data-s="sports" style="--c:#475569"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg>Home</a>
+    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">CFB</a>
+    <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nfl.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NFL</a>
+    <a href="/nba/" data-s="nba" style="--c:#6d28d9"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nba.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NBA</a>
+    <a href="/nhl/" data-s="nhl" style="--c:#0284c7"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nhl.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NHL</a>
+    <a href="/mlb/" data-s="mlb" style="--c:#005a9c"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/mlb.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">MLB</a>
+    <a href="/sports/articles/" data-s="articles" style="--c:#be185d"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="15" height="16" rx="2"/><path d="M18 8h3v10a2 2 0 0 1-2 2"/><path d="M7 8h7M7 12h7M7 16h4"/></svg>Articles</a>
   </nav>
 </div>
 <script>

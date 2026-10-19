@@ -9782,70 +9782,307 @@ BYU|Will Zundell|6|0|2026-09-05,2026-09-12,2026-09-19,2026-10-03,2026-10-09,2026
 BYU|Zak Yamauchi|5|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17
 </script>
 <script type="application/json" id="d-injfeat">{
-  "_note": "Hand-checked injury data for BYU and its next opponent (2026-10-13). Every player line cites its source. Statuses come only from official availability reports or what the head coach/team said; anything else is marked unclear. Updated by the 'BYU injury report' scheduled task. Do not fill gaps from Covers - it was wrong about BYU when checked.",
-  "updated": "Tue., Oct. 13, 2026",
+  "_note": "Hand-checked injury data for BYU and its next opponent (2026-10-19). Every player line cites its source. Statuses come only from official availability reports or what the head coach/team said; anything else is marked unclear. Updated by the 'BYU injury report' scheduled task. Do not fill gaps from Covers - it was wrong about BYU when checked.",
+  "updated": "Mon., Oct. 19, 2026",
   "teams": {
     "BYU": {
-      "game": { "opp": "Notre Dame", "date": "2026-10-17", "label": "Notre Dame (Sat., Oct. 17)" },
+      "game": {
+        "opp": "UCF",
+        "date": "2026-10-24",
+        "label": "at UCF (Sat., Oct. 24)"
+      },
       "official": {
         "name": "Big 12 player availability report",
         "url": "https://big12sports.com/sports/2025/8/14/FBreporting.aspx",
-        "next": "The Big 12 site shows this week's Saturday reports expected Wed., Oct. 14 at 9:00 PM CT (8:00 PM MT).",
+        "next": "The Big 12's initial availability reports for Saturday's games are expected Wednesday, Oct. 21 (last week's posted Wednesday at 8:00 PM MT).",
         "how": "Teams file an initial report before each game and update it through game day. Players are listed OUT, DOUBTFUL, QUESTIONABLE or PROBABLE; anyone not listed is expected to be available."
       },
-      "summary": "Coach Kalani Sitake ruled out RB LJ Martin and RT Andrew Gentry for Notre Dame on Monday. LB Isaiah Glasker is uncertain, nickel Cannon DeVries is likely back, and RB Sione Moa has returned to practice.",
+      "summary": "No word yet from Kalani Sitake on UCF, and the Big 12's first availability report is due Wednesday. Against Notre Dame, LB Isaiah Glasker and S Raider Damuni returned and played, and Cannon DeVries returned kicks and punts. RB LJ Martin and RT Andrew Gentry missed the game; ESPN's timeline for Martin (at least a month from Oct. 7) runs through the UCF game.",
       "players": [
-        { "name": "LJ Martin", "num": "4", "pos": "RB", "status": "Out", "cls": "out",
-          "note": "Lower-body injury in the first quarter at TCU (Oct. 3). ESPN reported Oct. 7 that he is expected to miss at least a month (4 to 6 weeks). Sitake ruled him out for Notre Dame on Oct. 12.",
-          "history": "OUT vs. Iowa State (initial report, Oct. 6)",
-          "src": [ { "t": "ESPN", "u": "https://www.espn.com/college-football/story/_/id/50128461/brigham-young-tailback-lj-martin-least-month", "d": "Oct. 7" }, { "t": "KSL Sports (Mitch Harper)", "u": "https://lawlessrepublic.com/injured-running-back-may-return-byu-football-this-week-notre-dame-sione-moa", "d": "Oct. 12" } ] },
-        { "name": "Andrew Gentry", "num": "75", "pos": "OT", "status": "Out", "cls": "out",
-          "note": "Starting right tackle. Had surgery the week of Sept. 28 and was ruled out at TCU. Sitake ruled him out for Notre Dame on Oct. 12. True freshman Bott Mulitalo and redshirt freshman Siosiua Latu-Finau have been filling in.",
-          "history": "OUT vs. TCU (initial report, Sept. 30)",
-          "src": [ { "t": "KSL Sports", "u": "https://sports.ksl.com/ncaa/byu-football/byu-tcu-availability-report/577735", "d": "Sept. 30" }, { "t": "KSL Sports (Mitch Harper)", "u": "https://lawlessrepublic.com/injured-running-back-may-return-byu-football-this-week-notre-dame-sione-moa", "d": "Oct. 12" } ] },
-        { "name": "Isaiah Glasker", "num": "16", "pos": "LB", "status": "Uncertain", "cls": "quest",
-          "note": "Hurt on Faletau Satuala's interception return at TCU (Oct. 3) and missed Iowa State. Sitake on Oct. 12: his return is uncertain, but don't count him out. DC Kelly Poppinga had said they hoped to have him back within a week or two. Kansas State transfer Jake Clifton started in his place.",
-          "history": "OUT vs. Iowa State (initial report, Oct. 6)",
-          "src": [ { "t": "BYU Cougars Wire", "u": "https://byucougarswire.usatoday.com/story/sports/college/cougars/football/2026/10/12/byu-football-isaiah-glasker-kalani-sitake-injury-news/92210572007/", "d": "Oct. 12" }, { "t": "KSL Sports", "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985", "d": "Oct. 6" } ] },
-        { "name": "Cannon DeVries", "num": "32", "pos": "CB / nickel, returner", "status": "Likely to play", "cls": "likely",
-          "note": "Missed the Iowa State game. Sitake said Oct. 12 that he is likely to return against Notre Dame.",
-          "history": "PROBABLE vs. Iowa State (initial report, Oct. 6)",
-          "src": [ { "t": "BYU Cougars Wire", "u": "https://byucougarswire.usatoday.com/story/sports/college/cougars/football/2026/10/12/byu-football-isaiah-glasker-kalani-sitake-injury-news/92210572007/", "d": "Oct. 12" }, { "t": "KSL Sports", "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985", "d": "Oct. 6" } ] },
-        { "name": "Sione Moa", "num": "30", "pos": "RB", "status": "Back at practice", "cls": "likely",
-          "note": "Missed TCU and Iowa State. Sitake said Oct. 12 that Moa is back on the field practicing this week.",
+        {
+          "name": "LJ Martin",
+          "num": "4",
+          "pos": "RB",
+          "status": "Unclear for UCF",
+          "cls": "info",
+          "note": "Missed Iowa State and Notre Dame with a lower-body injury from the TCU game (Oct. 3). ESPN reported Oct. 7 that he was expected to miss at least a month, which would include UCF. BYU has not said anything new; Wednesday's report should settle it.",
+          "history": "Ruled out by Sitake for Notre Dame (Oct. 12); OUT vs. Iowa State (initial report, Oct. 6)",
+          "src": [
+            {
+              "t": "ESPN",
+              "u": "https://www.espn.com/college-football/story/_/id/50128461/brigham-young-tailback-lj-martin-least-month",
+              "d": "Oct. 7"
+            },
+            {
+              "t": "KSL Sports (Mitch Harper)",
+              "u": "https://lawlessrepublic.com/injured-running-back-may-return-byu-football-this-week-notre-dame-sione-moa",
+              "d": "Oct. 12"
+            }
+          ]
+        },
+        {
+          "name": "Andrew Gentry",
+          "num": "75",
+          "pos": "OT",
+          "status": "Unclear for UCF",
+          "cls": "info",
+          "note": "Starting right tackle. Had surgery the week of Sept. 28 and has missed TCU, Iowa State and Notre Dame. No update for UCF yet. Bott Mulitalo and Siosiua Latu-Finau have been filling in.",
+          "history": "Ruled out by Sitake for Notre Dame (Oct. 12); OUT vs. TCU (initial report, Sept. 30)",
+          "src": [
+            {
+              "t": "KSL Sports",
+              "u": "https://sports.ksl.com/ncaa/byu-football/byu-tcu-availability-report/577735",
+              "d": "Sept. 30"
+            },
+            {
+              "t": "KSL Sports (Mitch Harper)",
+              "u": "https://lawlessrepublic.com/injured-running-back-may-return-byu-football-this-week-notre-dame-sione-moa",
+              "d": "Oct. 12"
+            }
+          ]
+        },
+        {
+          "name": "Isaiah Glasker",
+          "num": "16",
+          "pos": "LB",
+          "status": "Played vs. Notre Dame",
+          "cls": "likely",
+          "note": "Returned against Notre Dame after missing Iowa State: 6 tackles and 3 pass breakups, per the box score.",
+          "history": "Uncertain per Sitake (Oct. 12); OUT vs. Iowa State (initial report, Oct. 6)",
+          "src": [
+            {
+              "t": "ESPN box score",
+              "u": "https://www.espn.com/college-football/game/_/gameId/401856809",
+              "d": "Oct. 17"
+            },
+            {
+              "t": "BYU Cougars Wire",
+              "u": "https://byucougarswire.usatoday.com/story/sports/college/cougars/football/2026/10/12/byu-football-isaiah-glasker-kalani-sitake-injury-news/92210572007/",
+              "d": "Oct. 12"
+            },
+            {
+              "t": "KSL Sports",
+              "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985",
+              "d": "Oct. 6"
+            }
+          ]
+        },
+        {
+          "name": "Cannon DeVries",
+          "num": "32",
+          "pos": "CB / nickel, returner",
+          "status": "Played vs. Notre Dame",
+          "cls": "likely",
+          "note": "Back against Notre Dame: returned a kickoff 23 yards and two punts for 24, per the box score.",
+          "history": "Likely to play per Sitake (Oct. 12); PROBABLE vs. Iowa State (initial report, Oct. 6)",
+          "src": [
+            {
+              "t": "ESPN box score",
+              "u": "https://www.espn.com/college-football/game/_/gameId/401856809",
+              "d": "Oct. 17"
+            },
+            {
+              "t": "BYU Cougars Wire",
+              "u": "https://byucougarswire.usatoday.com/story/sports/college/cougars/football/2026/10/12/byu-football-isaiah-glasker-kalani-sitake-injury-news/92210572007/",
+              "d": "Oct. 12"
+            },
+            {
+              "t": "KSL Sports",
+              "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985",
+              "d": "Oct. 6"
+            }
+          ]
+        },
+        {
+          "name": "Sione Moa",
+          "num": "30",
+          "pos": "RB",
+          "status": "Back at practice",
+          "cls": "likely",
+          "note": "Sitake said Oct. 12 that Moa was back on the field practicing. He had no carries against Notre Dame.",
           "history": "OUT vs. TCU and vs. Iowa State",
-          "src": [ { "t": "KSL Sports (Mitch Harper)", "u": "https://lawlessrepublic.com/injured-running-back-may-return-byu-football-this-week-notre-dame-sione-moa", "d": "Oct. 12" }, { "t": "KSL Sports", "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985", "d": "Oct. 6" } ] },
-        { "name": "Raider Damuni", "num": "3", "pos": "S", "status": "Unclear", "cls": "info",
-          "note": "Injured early in the season. Not among the players Sitake ruled out for Notre Dame; the official report on Wednesday should settle it.",
+          "src": [
+            {
+              "t": "KSL Sports (Mitch Harper)",
+              "u": "https://lawlessrepublic.com/injured-running-back-may-return-byu-football-this-week-notre-dame-sione-moa",
+              "d": "Oct. 12"
+            },
+            {
+              "t": "KSL Sports",
+              "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985",
+              "d": "Oct. 6"
+            }
+          ]
+        },
+        {
+          "name": "Raider Damuni",
+          "num": "3",
+          "pos": "S",
+          "status": "Played vs. Notre Dame",
+          "cls": "likely",
+          "note": "Returned against Notre Dame: 7 tackles and a pass breakup, per the box score. ESPN's Pete Thamel had reported he would play but not start.",
           "history": "OUT vs. TCU; DOUBTFUL vs. Iowa State (initial report, Oct. 6)",
-          "src": [ { "t": "KSL Sports", "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985", "d": "Oct. 6" } ] }
+          "src": [
+            {
+              "t": "ESPN box score",
+              "u": "https://www.espn.com/college-football/game/_/gameId/401856809",
+              "d": "Oct. 17"
+            },
+            {
+              "t": "KSL Sports",
+              "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985",
+              "d": "Oct. 6"
+            }
+          ]
+        }
       ],
       "watch": {
-        "title": "Listed out at TCU, not on the Iowa State report",
-        "note": "These players were OUT on the TCU report (Sept. 30) and were not on the Iowa State initial report as published by KSL (Oct. 6). Their status for Notre Dame has not been announced, so treat them as unconfirmed until Wednesday's report.",
+        "title": "Unconfirmed: rumors and unofficial listings",
+        "note": "Not from BYU or the Big 12. J. Nye and Brody Laga come from Covers' injury feed, an aggregator that has been wrong about BYU before; the others were OUT on the TCU report (Sept. 30) and haven't appeared on a report since. Treat all of these as unconfirmed until Wednesday's Big 12 report.",
         "players": [
-          { "name": "Siale Esera", "num": "54", "pos": "LB", "note": "Hurt in the first quarter against Arizona (Sept. 12)." },
-          { "name": "Jonathan Kabeya", "num": "2", "pos": "CB", "note": "" },
-          { "name": "Caden McKee", "num": "73", "pos": "OL", "note": "" },
-          { "name": "Ethan Thomason", "num": "78", "pos": "OT", "note": "OL coach TJ Woods expects him back at some point this season." },
-          { "name": "Brody Laga", "num": "99", "pos": "K", "note": "Kickoff specialist." }
+          {
+            "name": "J. Nye",
+            "num": "",
+            "pos": "TE",
+            "note": "Covers lists him questionable for UCF, injury undisclosed (Oct. 18)."
+          },
+          {
+            "name": "Brody Laga",
+            "num": "99",
+            "pos": "K",
+            "note": "Covers lists him questionable, injury undisclosed (Oct. 18). He hasn't kicked since Week 1; Matthias Dunn has handled kicking, per the box scores."
+          },
+          {
+            "name": "Siale Esera",
+            "num": "54",
+            "pos": "LB",
+            "note": "Hurt in the first quarter against Arizona (Sept. 12)."
+          },
+          {
+            "name": "Jonathan Kabeya",
+            "num": "2",
+            "pos": "CB",
+            "note": ""
+          },
+          {
+            "name": "Caden McKee",
+            "num": "73",
+            "pos": "OL",
+            "note": ""
+          },
+          {
+            "name": "Ethan Thomason",
+            "num": "78",
+            "pos": "OT",
+            "note": "OL coach TJ Woods expects him back at some point this season."
+          }
         ],
-        "src": [ { "t": "KSL Sports", "u": "https://sports.ksl.com/ncaa/byu-football/byu-tcu-availability-report/577735", "d": "Sept. 30" }, { "t": "KSL Sports", "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985", "d": "Oct. 6" } ]
+        "src": [
+          {
+            "t": "Covers injury feed",
+            "u": "https://www.covers.com/sport/football/ncaaf/teams/main/byu-cougars/injuries",
+            "d": "Oct. 18"
+          },
+          {
+            "t": "KSL Sports",
+            "u": "https://sports.ksl.com/ncaa/byu-football/byu-tcu-availability-report/577735",
+            "d": "Sept. 30"
+          },
+          {
+            "t": "KSL Sports",
+            "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985",
+            "d": "Oct. 6"
+          }
+        ]
       },
       "reports": [
-        { "game": "vs. Iowa State (Fri., Oct. 9)", "kind": "Initial report, released Tue., Oct. 6", "out": ["RB #4 LJ Martin", "LB #16 Isaiah Glasker", "RB #30 Sione Moa"], "doubtful": ["S #3 Raider Damuni"], "questionable": [], "probable": ["CB #32 Cannon DeVries"], "src": { "t": "KSL Sports", "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985" } },
-        { "game": "at TCU (Sat., Oct. 3)", "kind": "Initial report, released Wed., Sept. 30", "out": ["CB #2 Jonathan Kabeya", "S #3 Raider Damuni", "RB #30 Sione Moa", "LB #54 Siale Esera", "OL #73 Caden McKee", "OT #75 Andrew Gentry", "OT #78 Ethan Thomason", "K #99 Brody Laga"], "doubtful": [], "questionable": [], "probable": ["CB #20 Kevin Doe"], "src": { "t": "KSL Sports", "u": "https://sports.ksl.com/ncaa/byu-football/byu-tcu-availability-report/577735" } }
+        {
+          "game": "vs. Iowa State (Fri., Oct. 9)",
+          "kind": "Initial report, released Tue., Oct. 6",
+          "out": [
+            "RB #4 LJ Martin",
+            "LB #16 Isaiah Glasker",
+            "RB #30 Sione Moa"
+          ],
+          "doubtful": [
+            "S #3 Raider Damuni"
+          ],
+          "questionable": [],
+          "probable": [
+            "CB #32 Cannon DeVries"
+          ],
+          "src": {
+            "t": "KSL Sports",
+            "u": "https://sports.ksl.com/ncaa/byu-football/byu-iowa-state-availability-report/577985"
+          }
+        },
+        {
+          "game": "at TCU (Sat., Oct. 3)",
+          "kind": "Initial report, released Wed., Sept. 30",
+          "out": [
+            "CB #2 Jonathan Kabeya",
+            "S #3 Raider Damuni",
+            "RB #30 Sione Moa",
+            "LB #54 Siale Esera",
+            "OL #73 Caden McKee",
+            "OT #75 Andrew Gentry",
+            "OT #78 Ethan Thomason",
+            "K #99 Brody Laga"
+          ],
+          "doubtful": [],
+          "questionable": [],
+          "probable": [
+            "CB #20 Kevin Doe"
+          ],
+          "src": {
+            "t": "KSL Sports",
+            "u": "https://sports.ksl.com/ncaa/byu-football/byu-tcu-availability-report/577735"
+          }
+        }
       ]
     },
-    "Notre Dame": {
-      "summary": "From Notre Dame's availability report released Monday, Oct. 12: star CB Leonard Moore is questionable with a concussion, and LB Kyngstonn Viliamu-Asa is back on the depth chart.",
-      "official": { "name": "Notre Dame availability report (released Mondays)", "url": "https://www.wndu.com/2026/10/12/notre-dame-injury-report-whos-out-whos-questionable-notre-dames-game-byu" },
+    "UCF": {
+      "summary": "UCF is coming off a bye. Head coach Scott Frost is hoping starting QB Alonza Barnett III, out since Sept. 12, will be healthy for BYU; Keyone Jenkins has been starting in his place. LB Lewis Carter is hoping to be back after the bye.",
+      "official": {
+        "name": "Big 12 player availability report",
+        "url": "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+      },
       "players": [
-        { "name": "Leonard Moore", "pos": "CB", "status": "Questionable", "cls": "quest", "note": "Concussion suffered against North Carolina.", "src": [ { "t": "WNDU", "u": "https://www.wndu.com/2026/10/12/notre-dame-injury-report-whos-out-whos-questionable-notre-dames-game-byu", "d": "Oct. 12" } ] },
-        { "name": "Kyngstonn Viliamu-Asa", "pos": "LB", "status": "Back on the depth chart", "cls": "likely", "note": "Returned to the depth chart for BYU week.", "src": [ { "t": "WNDU", "u": "https://www.wndu.com/2026/10/12/notre-dame-injury-report-whos-out-whos-questionable-notre-dames-game-byu", "d": "Oct. 12" } ] },
-        { "name": "Quincy Porter", "pos": "WR", "status": "Out for season", "cls": "out", "note": "Knee; expected to miss the rest of the season (unofficial listing).", "src": [ { "t": "Covers injury feed", "u": "https://www.covers.com/sport/football/ncaaf/injuries", "d": "Sept. 28" } ] }
+        {
+          "name": "Alonza Barnett III",
+          "pos": "QB",
+          "status": "Hoping to return",
+          "cls": "quest",
+          "note": "Starting quarterback, hurt against Pitt on Sept. 12 (On3 reports a hamstring, Yahoo Sports ribs). Frost is hoping he is healthy for BYU.",
+          "src": [
+            {
+              "t": "Yahoo Sports",
+              "u": "https://sports.yahoo.com/articles/ucf-vs-byu-highest-ranked-144247515.html",
+              "d": "Oct. 19"
+            },
+            {
+              "t": "On3",
+              "u": "https://www.on3.com/sites/ucf-sports/news/byu-highest-ranked-opponent-ucf",
+              "d": "Oct."
+            }
+          ]
+        },
+        {
+          "name": "Lewis Carter",
+          "pos": "LB",
+          "status": "Hoping to return",
+          "cls": "quest",
+          "note": "Missed UCF's run of ranked opponents and is hoping to be back by the end of the bye week.",
+          "src": [
+            {
+              "t": "Yahoo Sports",
+              "u": "https://sports.yahoo.com/articles/ucf-vs-byu-highest-ranked-144247515.html",
+              "d": "Oct. 19"
+            }
+          ]
+        }
       ],
-      "more": "Notre Dame's report lists several more players ruled out; see the full report for the complete list."
+      "more": "UCF's full list comes with the Big 12 availability report on Wednesday."
     }
   }
 }

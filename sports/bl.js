@@ -28,11 +28,16 @@
 .jbl-i .s{font-variant-numeric:tabular-nums;font-weight:800;color:#fff}
 .jbl-i .l{opacity:.6;font-weight:600}
 .jbl-i .w{color:#fff;font-weight:800}
+.jbl-i .lg{width:20px;height:20px;object-fit:contain;flex:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.5))}
+.jbl-i .nm{display:inline-block;padding:3px 6px 2px;border-radius:5px;background:var(--tc,#2a3140);color:var(--tk,#fff);font-weight:800;font-size:12px;letter-spacing:.02em;line-height:1.1;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+.jbl-i .nm.plain{background:rgba(255,255,255,.1)}
+.jbl-i .t.lost .nm,.jbl-i .t.lost .lg{opacity:.55}
+.jbl-i .nm.w{box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 0 0 1.5px rgba(255,255,255,.85)}
 .jbl-i .st{font-size:11px;font-weight:700;color:rgba(255,255,255,.62);letter-spacing:.02em}
 .jbl-i .live{color:#ff5a6e}
 .jbl-i .live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#ff3b52;margin-right:5px;vertical-align:1px;animation:jblp 1.6s infinite}
 .jbl-i.fav{background:linear-gradient(180deg,rgba(255,215,90,.10),rgba(255,215,90,.03))}
-.jbl-i.fav .t b{color:#ffd75a}
+.jbl-i.fav{box-shadow:inset 0 2px 0 #ffd75a}
 .jbl-i.news{font-weight:600;color:#dfe6f2}
 .jbl-i.news .src{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--c,#9fb3d1)}
 .jbl-btn{flex:none;width:38px;display:grid;place-items:center;border:0;background:transparent;color:rgba(255,255,255,.7);cursor:pointer;font:700 15px/1 system-ui}
@@ -58,10 +63,15 @@ body.jbl-on{padding-bottom:40px}
   const isFav = g => (FAV[g.lg] || []).some(ab => ab === g.a.ab || ab === g.h.ab);
   function href(g){ if (g.lg === 'nba') return '/nba/#/game/' + g.id; if (g.lg === 'nfl') return '/nfl/#/game/' + g.id; return LG[g.lg].home; }
   function when(g){ const d = new Date(g.date); if (isNaN(d)) return g.det; const today = new Date(); const same = d.toDateString() === today.toDateString(); const t = d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}).replace(':00', '').replace(' ', '').toLowerCase(); return (same ? '' : d.toLocaleDateString([], {weekday:'short'}) + ' ') + t; }
-  function side(s, won, lost){ return '<span class="t">' + (s.rk ? '<span class="rk">' + s.rk + '</span>' : '') + '<b class="' + (won ? 'w' : lost ? 'l' : '') + '">' + esc(s.ab || s.n) + '</b>' + (s.s !== '' && s.s != null ? '<span class="s' + (lost ? ' l' : '') + '">' + esc(s.s) + '</span>' : '') + '</span>'; }
+  /* team colors (2026-10-19): the name sits in a chip of the team's color; a pale color gives way to the alternate,
+     and anything still pale gets dark type. Logos come small from ESPN's image resizer. */
+  const lum = hex => { const n = parseInt(hex, 16); const ch = v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }; return .2126 * ch(n >> 16 & 255) + .7152 * ch(n >> 8 & 255) + .0722 * ch(n & 255); };
+  function chip(s){ let c = s.c || '', c2 = s.c2 || ''; if (!c) return ''; if (lum(c) > .55 && c2 && lum(c2) < .45) c = c2; return '--tc:#' + c + ';--tk:' + (lum(c) > .55 ? '#10131a' : '#fff'); }
+  const logo = s => s.logo ? '<img class="lg" src="https://a.espncdn.com/combiner/i?img=' + esc(s.logo) + '&w=48&h=48" alt="" loading="lazy" decoding="async" onerror="this.remove()">' : '';
+  function side(s, won, lost){ const st = chip(s); return '<span class="t' + (lost ? ' lost' : '') + '">' + (s.rk ? '<span class="rk">' + s.rk + '</span>' : '') + logo(s) + '<b class="nm' + (won ? ' w' : '') + (st ? '' : ' plain') + '"' + (st ? ' style="' + st + '"' : '') + '>' + esc(s.ab || s.n) + '</b>' + (s.s !== '' && s.s != null ? '<span class="s' + (lost ? ' l' : '') + '">' + esc(s.s) + '</span>' : '') + '</span>'; }
   function item(g, lgTag){ const post = g.st === 'post', live = g.st === 'in'; const as = +g.a.s, hs = +g.h.s; const aw = post && as > hs, hw = post && hs > as;
     const stt = live ? '<span class="st live">' + esc(g.det) + '</span>' : post ? '<span class="st">' + esc(/OT/.test(g.det) ? g.det.replace(/^Final\/?/i, 'F/') : 'Final') + '</span>' : '<span class="st">' + esc(when(g)) + (g.tv ? ' · ' + esc(g.tv) : '') + '</span>';
-    const a = post || live ? side(g.a, aw, hw) : side({rk:g.a.rk, ab:g.a.ab, n:g.a.n, s:''}), h = post || live ? side(g.h, hw, aw) : side({rk:g.h.rk, ab:g.h.ab, n:g.h.n, s:''});
+    const a = post || live ? side(g.a, aw, hw) : side(Object.assign({}, g.a, {s:''})), h = post || live ? side(g.h, hw, aw) : side(Object.assign({}, g.h, {s:''}));
     return '<a class="jbl-i' + (isFav(g) ? ' fav' : '') + '" href="' + href(g) + '" title="' + esc(g.a.n + ' at ' + g.h.n + (g.note ? ' · ' + g.note : '')) + '">' + (lgTag ? '<span class="lgt" style="color:' + LG[g.lg].c + '">' + LG[g.lg].n + '</span>' : '') + a + '<span class="l">' + (post || live ? '' : '@') + '</span>' + h + stt + '</a>'; }
   function sec(key, label, color, html){ return html ? '<span class="jbl-sec" data-k="' + key + '" data-l="' + esc(label) + '" style="--c:' + color + '">' + esc(label) + '</span>' + html : ''; }
   function order(list){ const rank = g => g.st === 'in' ? 0 : g.st === 'pre' ? 1 : 2; return list.slice().sort((p, q) => rank(p) - rank(q) || String(p.date).localeCompare(String(q.date))); }

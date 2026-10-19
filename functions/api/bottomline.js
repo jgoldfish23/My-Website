@@ -5,14 +5,19 @@
 const BASE = "https://site.api.espn.com/apis/site/v2/sports/";
 const ALLOWED_ORIGINS = ["djgolding.com", "www.djgolding.com", "localhost", "127.0.0.1"];
 const TTL = 30;
-const FEEDS = [
-  { lg: "cfb", path: "football/college-football", q: "" },
-  { lg: "cfbx", path: "football/college-football", q: "?groups=81&limit=60" }, // FCS, for Weber State only
-  { lg: "nfl", path: "football/nfl", q: "" },
-  { lg: "nba", path: "basketball/nba", q: "" },
-  { lg: "nhl", path: "hockey/nhl", q: "" },
-  { lg: "mlb", path: "baseball/mlb", q: "" },
-];
+// ESPN only answers server calls that name dates: football gets this week (three days back, five ahead), the nightly
+// leagues get yesterday and today, all on the US Eastern calendar
+const ymd = (t) => new Date(t - (5 - (isDst(t) ? 1 : 0)) * 3600e3).toISOString().slice(0, 10).replace(/-/g, "");
+function isDst(t) { const y = new Date(t).getUTCFullYear(); const sun = (m, n) => { const d = new Date(Date.UTC(y, m, 1)); return 1 + (7 - d.getUTCDay()) % 7 + 7 * (n - 1); }; return t >= Date.UTC(y, 2, sun(2, 2), 7) && t < Date.UTC(y, 10, sun(10, 1), 6); }
+function feeds() { const now = Date.now(), D = 864e5; const wk = ymd(now - 3 * D) + "-" + ymd(now + 5 * D), nt = ymd(now - D) + "-" + ymd(now);
+  return [
+    { lg: "cfb", path: "football/college-football", q: "?dates=" + wk + "&limit=120" },
+    { lg: "cfbx", path: "football/college-football", q: "?dates=" + wk + "&groups=81&limit=120" }, // FCS, for Weber State only
+    { lg: "nfl", path: "football/nfl", q: "?dates=" + wk + "&limit=40" },
+    { lg: "nba", path: "basketball/nba", q: "?dates=" + nt + "&limit=40" },
+    { lg: "nhl", path: "hockey/nhl", q: "?dates=" + nt + "&limit=40" },
+    { lg: "mlb", path: "baseball/mlb", q: "?dates=" + nt + "&limit=40" },
+  ]; }
 const NEWS = [["cfb", "football/college-football", 4], ["nfl", "football/nfl", 4], ["nba", "basketball/nba", 4], ["mlb", "baseball/mlb", 3], ["nhl", "hockey/nhl", 3]];
 const KEEP_FCS = new Set(["2692"]); // Weber State
 
@@ -26,7 +31,7 @@ function json(request, body, status, ttl) {
 }
 async function upstream(url) {
   for (const u of [url, url.replace("://site.api.espn.com/", "://site.web.api.espn.com/")]) {
-    const res = await fetch(u, { headers: { "user-agent": "Mozilla/5.0 (compatible; djgolding.com bottomline)", "accept": "application/json" }, cf: { cacheTtl: TTL, cacheEverything: true } });
+    const res = await fetch(u, { headers: { "user-agent": "Mozilla/5.0 (compatible; djgolding.com live scores)", "accept": "application/json" }, cf: { cacheTtl: TTL, cacheEverything: true } });
     if (res.ok) return res.json();
     if (res.status !== 403) throw new Error("upstream " + res.status);
   }
@@ -49,7 +54,7 @@ function slim(lg, e) {
 export async function onRequestGet({ request }) {
   const errs = [];
   try {
-    const boards = await Promise.all(FEEDS.map((f) => upstream(BASE + f.path + "/scoreboard" + f.q).then((j) => ({ f, j })).catch((e) => { errs.push(f.lg + ": " + (e.message || e)); return { f, j: null }; })));
+    const boards = await Promise.all(feeds().map((f) => upstream(BASE + f.path + "/scoreboard" + f.q).then((j) => ({ f, j })).catch((e) => { errs.push(f.lg + ": " + (e.message || e)); return { f, j: null }; })));
     const games = [];
     boards.forEach(({ f, j }) => {
       if (!j) return;

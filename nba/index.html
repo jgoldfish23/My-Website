@@ -44,7 +44,7 @@ body.boardmode .jsh{display:none}
   <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
   <nav class="jsh-nav">
     <a href="/sports/" data-s="sports" style="--c:#475569"><i></i>Home</a>
-    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>College Football</a>
+    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>CFB</a>
     <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><i></i>NFL</a>
     <a href="/nba/" data-s="nba" style="--c:#6d28d9"><i></i>NBA</a>
     <a href="/nhl/" data-s="nhl" style="--c:#0284c7"><i></i>NHL</a>
@@ -53,7 +53,7 @@ body.boardmode .jsh{display:none}
   </nav>
 </div>
 <script>
-/* Jamo Sports Hub: light/dark and the time zone follow you between College, NFL and NBA (each keeps its own favourite team).
+/* Jamo Sports Hub: light/dark and the time zone follow you between CFB, NFL and NBA (each keeps its own favourite team).
    Runs before the hub's own script, so a choice made in one hub is in place before the next one reads its settings. */
 (function(){ try {
   var s = (location.pathname.indexOf('/sports/articles') === 0 ? 'articles' : (location.pathname.split('/')[1] || 'sports')).toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
@@ -2881,6 +2881,44 @@ body:has(.tvframe) header.top.top{top:0}
 /* 3-2-1 lottery page (2026-10-18) */
 .lot-rules{margin:0;padding-left:18px;display:grid;gap:6px;font-size:14px;line-height:1.45}
 .tbl tr.grp td{padding:10px 8px 4px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);background:transparent;border-bottom:0}
+
+/* injury rows (2026-10-18): a status column wide enough for "Day-To-Day", same-width pills, room before the name */
+.dpl.inj{grid-template-columns:116px minmax(0,1fr);gap:14px;padding:8px 0}
+.dpl.inj .rk{display:flex;align-items:center}
+.dpl.inj .injpill{display:inline-flex;justify-content:center;width:104px;box-sizing:border-box;padding:3px 8px;font-size:11px;letter-spacing:.02em}
+.dpl.inj .who{line-height:1.35}
+@media (max-width:560px){.dpl.inj{grid-template-columns:100px minmax(0,1fr);gap:10px}.dpl.inj .injpill{width:92px;font-size:10.5px}}
+/* NBA Cup page and week in review (2026-10-18, p2cup.js / p2rev.js) */
+.cup-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(14,6,30,.5),rgba(14,6,30,.84) 50%,rgba(14,6,30,.95)),url("https://cdn.nba.com/teams/uploads/sites/1610612762/2026/10/nba-cup-court.jpeg?im=Resize=(1920)") center top/cover no-repeat,#2b1a5c}
+:root[data-theme="light"] .cup-bg{background:linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.92) 55%,rgba(255,255,255,.96)),url("https://cdn.nba.com/teams/uploads/sites/1610612762/2026/10/nba-cup-court.jpeg?im=Resize=(1920)") center top/cover no-repeat,#e9e4f5}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .cup-bg{background:linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.92) 55%,rgba(255,255,255,.96)),url("https://cdn.nba.com/teams/uploads/sites/1610612762/2026/10/nba-cup-court.jpeg?im=Resize=(1920)") center top/cover no-repeat,#e9e4f5}}
+.card.cupfav{color:#fff;background:linear-gradient(140deg,var(--c1),#0b0b12 140%);border:0;margin-bottom:6px}
+.cupfav .ow-eb{opacity:.85}
+.cupfav-row{display:flex;gap:26px;flex-wrap:wrap;margin:8px 0 10px}
+.cupfav-n{display:flex;flex-direction:column}.cupfav-n b{font-family:var(--disp);font-size:30px;font-weight:800;line-height:1}.cupfav-n span{font-size:12px;opacity:.8}
+.cupfav-g{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13.5px}.cupfav-g a{color:#fff}.cupfav-g .dim{color:rgba(255,255,255,.75)}
+.cupgrid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.cupcard.mine{outline:2px solid var(--accent)}
+.cuptbl td,.cuptbl th{padding:7px 10px}
+.cupb{display:grid;grid-template-columns:1fr 1fr minmax(0,.8fr);gap:12px}
+.cupb-c,.cupb-f{padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.cupb-h{font-family:var(--disp);font-size:16px;font-weight:800;margin-bottom:8px}
+.cupb-r{display:grid;gap:10px}
+.cupb-m{display:grid;gap:4px}
+.cupb-t{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:10px;background:rgba(127,127,127,.08)}
+.cupb-t.mine{outline:2px solid var(--accent)}
+.cupb-t .sd{width:18px;font-weight:800;color:var(--ink-3);font-size:12px}
+.cupb-t .dim{margin-left:auto;font-size:12px}
+.cupb-fin{font-family:var(--disp);font-size:18px;font-weight:800;line-height:1.3}
+.sec .muted a.on{font-weight:800;text-decoration:underline}
+.rev-weeks{margin-bottom:12px;flex-wrap:wrap}
+.rev-hero{padding:16px 18px;border-radius:16px;color:#fff;background:linear-gradient(140deg,var(--c1),#0b0b12 140%)}
+.rev-big{font-family:var(--disp);font-size:44px;font-weight:800;line-height:1.05}.rev-big small{font-size:16px;opacity:.8;margin-left:6px}
+.rev-sub{font-size:14px;opacity:.9}.rev-sub .pos{color:#9df5c1}.rev-sub .neg{color:#ffb3bf}
+.rev-g{padding:7px 0;border-top:1px solid var(--line)}.rev-g:first-child{border-top:0}
+.rev-pow .rev-pn{font-family:var(--disp);font-size:22px;font-weight:800;margin-top:2px}.rev-ps{font-size:14px}
+.rev-y{font-size:13.5px;padding:3px 0}
+@media (max-width:900px){.cupgrid3{grid-template-columns:1fr}.cupb{grid-template-columns:1fr}}
 </style>
 
 <header class="top">
@@ -2898,6 +2936,7 @@ body:has(.tvframe) header.top.top{top:0}
       <a href="#/playoffs" data-r="playoffs">Playoff Picture</a>
       <a href="#/predict" data-r="predict">Playoff Predictor</a>
       <a href="#/root" data-r="root">Rooting guide</a>
+      <a href="#/cup" data-r="cup">NBA Cup</a>
       <a href="#/players" data-r="players">Player stats</a>
       <a href="#/leaders" data-r="leaders">Leaders</a>
       <a href="#/draft" data-r="draft">Draft</a>
@@ -2905,6 +2944,7 @@ body:has(.tvframe) header.top.top{top:0}
       <a href="#/teams" data-r="teams">Teams</a>
       <a href="#/compare" data-r="compare">Compare</a>
       <a href="#/digest" data-r="digest">Weekly digest</a>
+      <a href="#/review" data-r="review">Week in review</a>
       <a href="#/settings" data-r="settings" title="Theme and favorite team">&#9881; Settings</a>
     </nav>
   </div>
@@ -9634,7 +9674,7 @@ function lineMoveHTML(g){ const gi=ginfo(g)||{}; const a=team(g.away), h=team(g.
   if(!bits.length) return '';
   return '<div class="card" style="margin-top:14px"><div class="hd"><h3>Line movement</h3><span class="mini">'+esc(gi.book||g.src||'sportsbook')+' · open to now</span></div><div class="bd"><div class="mvlist">'+bits.join('')+'</div>'+'</div></div>'; }
 function moveNote(g){ const gi=ginfo(g)||{}; const oS=gi.oS??g.oS, cS=gi.cS??g.spread; if(oS==null||cS==null||oS===cS||g.played) return ''; const d=Math.abs(cS-oS); const toward = cS<oS ? team(g.home) : team(g.away); return 'The line has moved '+(d%1?num1(d):String(d))+' point'+(d===1?'':'s')+' toward the '+tshort(toward.ab)+' since it opened.'; }
-function gameInjuryHTML(g){ const a=team(g.away), h=team(g.home); const lists=[a,h].map(t=>({t, list:(INJ[t.ab]||[]).slice().sort((x,y)=>(INJ_ORDER[x.status]??9)-(INJ_ORDER[y.status]??9))})); if(!lists.some(x=>x.list.length)) return ''; return '<div class="card" style="margin-top:14px"><div class="hd"><h3>Injury report</h3><span class="mini">from ESPN</span></div><div class="bd">'+lists.map(({t,list})=>{ if(!list.length) return '<div class="dteam">'+chip(t.ab)+' <span class="mini">no one listed</span></div>'; return '<div class="dteam">'+chip(t.ab)+'</div>'+list.slice(0,7).map(x=>'<div class="dpl"><span class="rk"><span class="pill injpill '+(badStatus(x.status)?'loss':/questionable|day/i.test(x.status)?'gold':'line')+'">'+esc(x.status)+'</span></span><span class="who"><b>'+playerLink(t.ab,x.n)+'</b> <span class="dim">'+esc(x.pos)+(x.type?' · '+esc(x.type):'')+'</span></span></div>').join('')+(list.length>7?'<div class="mini" style="margin:2px 0 6px"><a href="#/team/'+enc(t.ab)+'#s-inj">'+(list.length-7)+' more &rsaquo;</a></div>':''); }).join('')+'</div></div>'; }
+function gameInjuryHTML(g){ const a=team(g.away), h=team(g.home); const lists=[a,h].map(t=>({t, list:(INJ[t.ab]||[]).slice().sort((x,y)=>(INJ_ORDER[x.status]??9)-(INJ_ORDER[y.status]??9))})); if(!lists.some(x=>x.list.length)) return ''; return '<div class="card" style="margin-top:14px"><div class="hd"><h3>Injury report</h3><span class="mini">from ESPN</span></div><div class="bd">'+lists.map(({t,list})=>{ if(!list.length) return '<div class="dteam">'+chip(t.ab)+' <span class="mini">no one listed</span></div>'; return '<div class="dteam">'+chip(t.ab)+'</div>'+list.slice(0,7).map(x=>'<div class="dpl inj"><span class="rk"><span class="pill injpill '+(badStatus(x.status)?'loss':/questionable|day/i.test(x.status)?'gold':'line')+'">'+esc(x.status)+'</span></span><span class="who"><b>'+playerLink(t.ab,x.n)+'</b> <span class="dim">'+esc(x.pos)+(x.type?' · '+esc(x.type):'')+'</span></span></div>').join('')+(list.length>7?'<div class="mini" style="margin:2px 0 6px"><a href="#/team/'+enc(t.ab)+'#s-inj">'+(list.length-7)+' more &rsaquo;</a></div>':''); }).join('')+'</div></div>'; }
 function h2hHistoryHTML(g){ const a=team(g.away), h=team(g.home); const gs=seriesAll(a.ab,h.ab); const now=gs.filter(x=>x.season===SEASON&&x.stype===2); const left=G.filter(x=>x.counts&&!x.played&&((x.away===a.ab&&x.home===h.ab)||(x.away===h.ab&&x.home===a.ab))).length; if(!gs.length) return '<div class="card" style="margin-top:14px"><div class="hd"><h3>Series history</h3></div><div class="bd"><div class="mini">No meetings in the last three seasons.'+(left?' They meet '+left+' time'+(left>1?'s':'')+' this season.':'')+'</div></div></div>'; const rec=seriesRecord(gs, h.ab); const lead = rec.w===rec.l ? 'Even at '+rec.w+'-'+rec.l : (rec.w>rec.l?esc(h.disp)+' lead '+rec.w+'-'+rec.l:esc(a.disp)+' lead '+rec.l+'-'+rec.w); const nr=seriesRecord(now,h.ab);
   return '<div class="card" style="margin-top:14px"><div class="hd"><h3>Series history</h3><span class="mini">'+gs.length+' meeting'+(gs.length>1?'s':'')+' in the last four seasons</span></div><div class="bd"><div class="lo-r" style="margin-bottom:6px">'+lead+' over that stretch.'+(now.length||left?' This season: '+(now.length?(nr.w===nr.l?nr.w+'-'+nr.l:(nr.w>nr.l?esc(tshort(h.ab))+' '+nr.w+'-'+nr.l:esc(tshort(a.ab))+' '+nr.l+'-'+nr.w)):'first meeting')+(left?', '+left+' to play':'')+'.':'')+'</div>'+gs.slice(0,8).map(x=>{ const w=x.hs>x.as?team(x.home):team(x.away); const ws=Math.max(x.hs,x.as), ls=Math.min(x.hs,x.as); return '<div class="mini"><span class="k" style="display:inline-block;width:74px">'+esc(fmtDate(x.date,false))+' \''+String(x.date).slice(2,4)+'</span><b>'+esc(tshort(w.ab))+'</b> '+ws+'-'+ls+' <span class="dim">'+(x.neutral?'neutral floor':(x.home===w.ab?'at home':'on the road'))+'</span>'+(x.stype===3?' <span class="pill gold">'+esc((x.note||'playoffs').replace(/ - Game \d+$/,''))+'</span>':x.stype===5?' <span class="pill gold">play-in</span>':/^cup/.test(x.kind)?' <span class="pill acc">NBA Cup</span>':'')+'</div>'; }).join('')+'</div></div>'; }
 
@@ -11105,6 +11145,106 @@ function teamDraftHTML(ab){ const picks=(DRAFT_BY_TEAM[ab]||[]).slice().sort((x,
     +'<div class="lo-r" style="margin-top:8px">'+(keeps>0.995?'The team keeps its own pick.':'Its own pick: '+(PICK27_NOTES[ab]?esc(PICK27_NOTES[ab])+'. ':'')+'It ends up with '+own.filter(x=>x[1]>=0.05).map(([w,q])=>'<b>'+esc(w===ab?team(ab).disp:team(w).disp)+'</b> '+pct(q)).join(', ')+'.')+'</div>'
     +(held.length?'<div class="lo-r" style="margin-top:8px">Also holds: '+held.map(h=>'<b>'+esc(team(h.from).disp)+'</b>'+(/s$/.test(team(h.from).disp)?'’':'’s')+' pick '+(h.q<0.995?pct(h.q)+' of the time':'')+' (avg slot '+num1(h.pick)+')').join('; ')+'.</div>':'')
     +'<div class="mini" style="margin-top:8px"><a href="#/draft/lottery">See the lottery &rsaquo;</a> · <a href="#/draft/prospects">Prospects &rsaquo;</a></div></div></div><div class="card"><div class="hd"><h3>'+(DRAFT.year||SEASON-1)+' draft class</h3><span class="mini">'+picks.length+' pick'+(picks.length===1?'':'s')+'</span></div><div class="bd">'+(picks.length?picks.map(p=>rookieLine(ab,p)).join(''):'<div class="mini">No picks in that draft.</div>')+'</div></div></div>'; }
+/* ---------- NBA Cup page (#/cup, 2026-10-18). The 2026 Cup: six groups of five (cup_groups.json), group nights
+   Oct. 30 to Nov. 27; the six group winners and one wild card per conference (best record among the rest) make an
+   eight-team bracket. Quarterfinals Dec. 4-5 at the higher seed; semifinals Dec. 8-9 (reports differ on the site);
+   championship Dec. 11 at Hinkle Fieldhouse, Indianapolis, the first final outside Las Vegas (ESPN, Fox Sports,
+   NBA.com). Group tiebreakers (NBA Cup rules): head-to-head, point differential in group games, points scored in
+   group games, last season's record, then a drawing. Odds: this page's power ratings, 4,000 runs of what is left. ---------- */
+const CUP_SIMS = 4000;
+const CUP_GROUPS = Object.keys(CUP.groups||{});
+const cupConf = g => /^East/.test(g)?'East':'West';
+function cupRecords(extra){ const rec={}; CUP_GROUPS.forEach(g=>CUP.groups[g].map(norm).forEach(ab=>rec[ab]={ab, g, w:0, l:0, pf:0, pa:0, h2h:{}, left:0}));
+  const add=(x,as,hs)=>{ const a=rec[x.away], h=rec[x.home]; if(!a||!h) return; a.pf+=as; a.pa+=hs; h.pf+=hs; h.pa+=as; if(hs>as){ h.w++; a.l++; h.h2h[x.away]=(h.h2h[x.away]||0)+1; } else { a.w++; h.l++; a.h2h[x.home]=(a.h2h[x.home]||0)+1; } };
+  G.forEach(x=>{ if(x.kind!=='cup') return; if(x.played) add(x,x.as,x.hs); else if(rec[x.away]&&rec[x.home]){ rec[x.away].left++; rec[x.home].left++; } });
+  (extra||[]).forEach(e=>add(e.g,e.as,e.hs)); return rec; }
+/* order a list by record, then the Cup tiebreakers; prev = last season's win pct */
+function cupOrder(list, rec){ const pd=ab=>rec[ab].pf-rec[ab].pa; const prevPct=ab=>{ const t=team(ab); return t.prevW!=null?t.prevW/((t.prevW+t.prevL)||1):0; };
+  const byW=list.slice().sort((a,b)=>rec[b].w-rec[a].w||rec[a].l-rec[b].l); const out=[]; let i=0;
+  while(i<byW.length){ let j=i+1; while(j<byW.length&&rec[byW[j]].w===rec[byW[i]].w&&rec[byW[j]].l===rec[byW[i]].l) j++; const tied=byW.slice(i,j);
+    const h2h=ab=>tied.reduce((s,o)=>s+(o!==ab?(rec[ab].h2h[o]||0):0),0);
+    tied.sort((a,b)=>h2h(b)-h2h(a)||pd(b)-pd(a)||rec[b].pf-rec[a].pf||prevPct(b)-prevPct(a)||(rec[a].tie??0)-(rec[b].tie??0)); out.push(...tied); i=j; }
+  return out; }
+function cupStand(rec){ const groups={}; CUP_GROUPS.forEach(g=>groups[g]=cupOrder(CUP.groups[g].map(norm).filter(ab=>rec[ab]), rec));
+  const seeds={}; ['East','West'].forEach(c=>{ const gs=CUP_GROUPS.filter(g=>cupConf(g)===c); const winners=cupOrder(gs.map(g=>groups[g][0]).filter(Boolean), rec); const rest=cupOrder(gs.flatMap(g=>groups[g].slice(1)), rec); seeds[c]=winners.concat(rest.slice(0,1)); });
+  return {groups, seeds}; }
+let CUP_SIM=null;
+function cupSim(){ if(CUP_SIM) return CUP_SIM; const left=G.filter(x=>x.kind==='cup'&&!x.played&&T[x.away]&&T[x.home]); const acc={}; Object.keys(cupRecords()).forEach(ab=>acc[ab]={grp:0, adv:0, wc:0, sf:0, fin:0, cup:0});
+  const rr={}; const sig=ab=>3*Math.sqrt(PRIOR_W/(PRIOR_W+ratedGames(ab).length));
+  const play=(hi,lo,home)=>{ const d=rr[hi]-rr[lo]+(home===hi?HCA:home===lo?-HCA:0); return Math.random()<cdf(d/SD)?hi:lo; };
+  for(let it=0;it<CUP_SIMS;it++){ TEAMS.forEach(t=>rr[t.ab]=t.rating+sig(t.ab)*randn());
+    const extra=left.map(x=>{ const m=rr[x.home]-rr[x.away]+(x.neutral?0:HCA)+SD*randn(); const r=Math.max(1,Math.round(Math.abs(m))); const base=110; return {g:x, hs:m>0?base+r:base, as:m>0?base:base+r}; });
+    const rec=cupRecords(extra); Object.values(rec).forEach(r=>r.tie=Math.random()); const st=cupStand(rec);
+    CUP_GROUPS.forEach(g=>{ const w=st.groups[g][0]; if(w) acc[w].grp++; });
+    const fin=[]; ['East','West'].forEach(c=>{ const s=st.seeds[c]; if(s.length<4) return; s.forEach((ab,k)=>{ acc[ab].adv++; if(k===3) acc[ab].wc++; });
+      const q1=play(s[0],s[3],s[0]), q2=play(s[1],s[2],s[1]); acc[q1].sf++; acc[q2].sf++; const sw=play(q1,q2,null); acc[sw].fin++; fin.push(sw); });
+    if(fin.length===2) acc[play(fin[0],fin[1],null)].cup++; }
+  Object.values(acc).forEach(a=>{ for(const k in a) a[k]/=CUP_SIMS; }); return CUP_SIM=acc; }
+function cupGroupCard(g, rec, order, odds, fav){ return '<div class="card cupcard'+(order.includes(fav)?' mine':'')+'"><div class="hd"><h3>'+esc(g)+'</h3><span class="mini">'+(order.some(ab=>rec[ab].left)?order.reduce((s,ab)=>s+rec[ab].left,0)/2+' games left':'final')+'</span></div><div class="bd" style="padding:0"><table class="tbl cuptbl"><thead><tr><th>Team</th><th class="r">W-L</th><th class="r">+/-</th><th class="r pct">Win group</th><th class="r pct">Advance</th></tr></thead><tbody>'
+  +order.map((ab,k)=>{ const r=rec[ab], o=odds[ab]||{}; return '<tr class="click'+(ab===fav?' hl':'')+'" data-href="#/team/'+enc(ab)+'"><td>'+chip(ab)+(k===0&&!order.some(x=>rec[x].left)?' <span class="pill gold">won</span>':'')+'</td><td class="r num">'+r.w+'-'+r.l+'</td><td class="r num">'+sgnInt(r.pf-r.pa)+'</td><td class="r pct">'+heat(o.grp||0)+'</td><td class="r pct">'+heat(o.adv||0)+'</td></tr>'; }).join('')+'</tbody></table></div></div>'; }
+const sgnInt = n => n>0?'+'+n:String(n);
+function renderCup(){ setNav('cup'); if(!CUP_GROUPS.length){ view.innerHTML='<div class="note">The NBA Cup groups have not been loaded.</div>'; return; }
+  const rec=cupRecords(), st=cupStand(rec), odds=cupSim(), fav=favAb(); const favG=CUP_GROUPS.find(g=>CUP.groups[g].map(norm).includes(fav));
+  const started=G.some(x=>x.kind==='cup'&&x.played); const ko=G.filter(x=>x.kind==='cupko'||x.kind==='cupf').sort(byTip); const first=G.filter(x=>x.kind==='cup').sort(byTip)[0];
+  /* the Jazz's 2026 Cup court (Jamo's request), shown from the NBA's own image server, with a darkening layer for readability */
+  let html='<div class="page-head"><div><div class="eyebrow">NBA Cup</div><h1>'+esc(CUP.name||(SEASON-1)+' NBA Cup')+'</h1><div class="sub">Six groups of five. Every group game also counts in the regular-season standings. The six group winners and one wild card from each conference make an eight-team bracket; the championship is Dec. 11 at Hinkle Fieldhouse in Indianapolis, the first Cup final outside Las Vegas. Odds are this page’s own, from '+CUP_SIMS.toLocaleString()+' runs of the games that are left.</div></div></div>';
+  if(favG){ const o=odds[fav]||{}; const mine=G.filter(x=>x.kind==='cup'&&(x.home===fav||x.away===fav)).sort(byTip);
+    html+='<div class="card cupfav" style="--c1:'+sbCardColor(team(fav))+'"><div class="bd"><div class="ow-eb">'+esc(team(fav).disp)+' · '+esc(favG)+'</div><div class="cupfav-row"><div class="cupfav-n"><b>'+pct(o.grp||0)+'</b><span>win the group</span></div><div class="cupfav-n"><b>'+pct(o.adv||0)+'</b><span>reach the quarterfinals</span></div><div class="cupfav-n"><b>'+pct1(o.cup||0)+'</b><span>win the Cup</span></div></div>'
+      +'<div class="cupfav-g">'+mine.map(x=>{ const opp=x.home===fav?x.away:x.home; const res=x.played?(((x.home===fav?x.hs:x.as)>(x.home===fav?x.as:x.hs))?'<b class="pos">W</b> ':'<b class="neg">L</b> ')+(x.home===fav?x.hs+'-'+x.as:x.as+'-'+x.hs):esc(fmtDate(x.date).replace(/^\w+, /,''))+' · '+esc(kick(x)); return '<a href="#/game/'+enc(x.id)+'">'+(x.home===fav?'vs ':'at ')+esc(team(opp).disp)+' <span class="dim">'+res+'</span></a>'; }).join('')+'</div></div></div>'; }
+  html+='<div class="sec"><h2>Groups</h2><span class="muted">'+(started?'current records':'group play starts '+esc(first?fmtDate(first.date):'Oct. 30'))+' · ties: head-to-head, then point differential, then points scored</span></div>';
+  ['East','West'].forEach(c=>{ html+='<div class="cupgrid3">'+CUP_GROUPS.filter(g=>cupConf(g)===c).map(g=>cupGroupCard(g, rec, started?st.groups[g]:st.groups[g].slice().sort((a,b)=>(odds[b].grp||0)-(odds[a].grp||0)), odds, fav)).join('')+'</div>'; });
+  html+='<div class="sec"><h2>Wild card</h2><span class="muted">the best record among the teams that don’t win their group, one per conference</span></div><div class="grid g2">'+['East','West'].map(c=>{ const gs=CUP_GROUPS.filter(g=>cupConf(g)===c); const rest=cupOrder(gs.flatMap(g=>st.groups[g].slice(1)), rec).slice(0,5);
+    return '<div class="card"><div class="hd"><h3>'+c+'</h3><span class="mini">'+(started?'if it ended today':'favorites')+'</span></div><div class="bd" style="padding:0"><table class="tbl cuptbl"><tbody>'+(started?rest:rest.slice().sort((a,b)=>(odds[b].wc||0)-(odds[a].wc||0))).map((ab,k)=>'<tr class="click'+(ab===fav?' hl':'')+'" data-href="#/team/'+enc(ab)+'"><td>'+chip(ab)+(started&&k===0?' <span class="pill acc">in</span>':'')+'</td><td class="r num">'+rec[ab].w+'-'+rec[ab].l+'</td><td class="r num">'+sgnInt(rec[ab].pf-rec[ab].pa)+'</td><td class="r pct">'+heat(odds[ab].wc||0)+' <span class="dim">wild card</span></td></tr>').join('')+'</tbody></table></div></div>'; }).join('')+'</div>';
+  const fav4=c=>{ if(started) return st.seeds[c]; return CUP_GROUPS.filter(g=>cupConf(g)===c).map(g=>CUP.groups[g].map(norm).sort((a,b)=>(odds[b].grp||0)-(odds[a].grp||0))[0]).sort((a,b)=>(odds[b].adv||0)-(odds[a].adv||0)).concat(TEAMS.filter(t=>t.conf===c).map(t=>t.ab).sort((a,b)=>(odds[b].wc||0)-(odds[a].wc||0)).slice(0,1)); };
+  const qf=ko.filter(x=>/Quarter/i.test(x.note||'')), sf=ko.filter(x=>/Semi/i.test(x.note||'')), fn=ko.find(x=>x.kind==='cupf');
+  const slot=(ab,s)=>'<div class="cupb-t'+(ab===fav?' mine':'')+'"><span class="sd">'+s+'</span>'+(ab?chip(ab)+'<span class="dim">'+pct1((odds[ab]||{}).cup||0)+'</span>':'<span class="dim">TBD</span>')+'</div>';
+  html+='<div class="sec"><h2>Bracket</h2><span class="muted">'+(started?'if group play ended today':'most likely field before group play')+' · win-the-Cup odds next to each team</span></div><div class="cupb">'
+    +['East','West'].map(c=>{ const s=fav4(c); return '<div class="cupb-c"><div class="cupb-h">'+c+'</div><div class="cupb-r"><div class="cupb-m"><div class="mini dim">Quarterfinal'+(qf[0]?' · '+esc(fmtDate(qf[0].date))+'+':'')+'</div>'+slot(s[0],1)+slot(s[3],4)+'</div><div class="cupb-m"><div class="mini dim">Quarterfinal</div>'+slot(s[1],2)+slot(s[2],3)+'</div></div><div class="mini dim" style="margin-top:6px">Semifinal'+(sf[0]?' · '+esc(fmtDate(sf[0].date)):' · Dec. 8-9')+'</div></div>'; }).join('')
+    +'<div class="cupb-f"><div class="cupb-h">Championship</div><div class="cupb-fin">'+esc(fn?fmtDate(fn.date):'Dec. 11')+'<br><span class="dim">'+esc(fn&&fn.venue?fn.venue+(fn.city?', '+fn.city:''):'Hinkle Fieldhouse, Indianapolis')+(fn&&fn.tv?' · '+esc(tvShort(fn.tv)):'')+'</span></div><div class="mini dim" style="margin-top:6px">The final doesn’t count in the standings; the two finalists play 83 games.</div></div></div>';
+  const nights={}; G.filter(x=>x.kind==='cup').forEach(x=>(nights[x.date]=nights[x.date]||[]).push(x)); const ds=Object.keys(nights).sort(); const nextD=ds.find(d=>d>=todayStr)||ds[ds.length-1];
+  html+='<div class="sec"><h2>Cup nights</h2><span class="muted">'+ds.map(d=>'<a href="#/cup/'+d+'" class="'+(d===nextD?'on':'')+'">'+esc(fmtDate(d,false))+'</a>').join(' · ')+'</span></div>';
+  const show=(location.hash.split('/')[2]||nextD); const list=(nights[show]||[]).sort(byTip);
+  html+='<div class="daygrp"><h3>'+esc(fmtDateLong(show))+' <span class="cnt">'+list.length+' Cup game'+(list.length===1?'':'s')+'</span></h3><div class="gmlist">'+list.map(gameRowAny).join('')+'</div></div><div class="mini" style="margin-top:8px"><a href="#/schedule/cup">Every Cup game &rsaquo;</a> · <a href="#/standings/cup">Group tables in Standings &rsaquo;</a></div><div class="mini dim" style="margin-top:14px">Background: the Utah Jazz’s 2026 NBA Cup court (image: Utah Jazz / NBA).</div>';
+  view.innerHTML=html; cupBg(true); }
+/* the court sits on the page itself: #view animates with a transform, which would trap a fixed layer inside it */
+function cupBg(on){ let el=document.getElementById('cupbg'); if(on&&!el){ el=document.createElement('div'); el.id='cupbg'; el.className='cup-bg'; el.setAttribute('aria-hidden','true'); document.body.prepend(el); } else if(!on&&el) el.remove(); }
+window.addEventListener('hashchange', ()=>{ if(!/^#\/cup/.test(location.hash)) cupBg(false); });
+/* ---------- Week in review (#/review or #/review/<Monday>, 2026-10-18): an automatic Monday-to-Sunday recap for your
+   team (the Jazz by default). Everything comes from the hub's own data: results, box scores (kept 7 days) or the
+   per-game leaders, the power ratings re-fit through each Sunday, the season simulation and the 3-2-1 lottery. The
+   front door shows the newest one in "Latest from Jamo". ---------- */
+const monOf = d => { let x=d; while(dowOf(x)!==1) x=addDays(x,-1); return x; };
+const revRange = m => esc(fmtDate(m,false))+' to '+esc(fmtDate(addDays(m,6),false));
+function revGames(ab, mon){ const end=addDays(mon,6); return REG.filter(g=>(g.home===ab||g.away===ab)&&g.date>=mon&&g.date<=end).sort(byTip); }
+function revWeeks(ab){ const set=new Set(REG.filter(g=>(g.home===ab||g.away===ab)&&g.played).map(g=>monOf(g.date))); return [...set].sort(); }
+function revDefault(ab){ const ws=revWeeks(ab); const thisMon=monOf(todayStr); const done=ws.filter(m=>m<thisMon); return done.length?done[done.length-1]:(ws.length?ws[ws.length-1]:null); }
+function revRanks(date){ const r=fitRatings(date); const arr=TEAMS.map(t=>({ab:t.ab, r:r[t.ab]!=null?r[t.ab]:t.prior})).sort((a,b)=>b.r-a.r); const out={}; arr.forEach((x,i)=>out[x.ab]={rank:i+1, r:x.r}); return out; }
+function revBoxLines(g, ab){ const b=boxFor(g); if(!b) return null; const side=boxSide(b,ab); return side?(b.players[side]||[]):null; }
+function revTop(g, ab){ const pl=revBoxLines(g,ab); if(pl&&pl.length){ const best=pl.slice().sort((x,y)=>bnum(bstat(y,'PTS'))-bnum(bstat(x,'PTS')))[0]; return playerLink(ab,best.n)+' <span class="dim">'+esc(statLineOf(best).replace(/, [\d-]+ FG$/,''))+'</span>'; }
+  const L=leadersFor(g,ab); const p=L.find(x=>x.cat==='points'); return p?playerLink(ab,p.n)+' <span class="dim">'+esc(p.v)+' pts</span>':''; }
+function revPlayers(gs, ab){ const tot={}; let boxN=0; gs.forEach(g=>{ const pl=revBoxLines(g,ab); if(pl){ boxN++; pl.forEach(p=>{ const o=tot[p.n]||(tot[p.n]={n:p.n, g:0, pts:0, reb:0, ast:0}); o.g++; o.pts+=bnum(bstat(p,'PTS')); o.reb+=bnum(bstat(p,'REB')); o.ast+=bnum(bstat(p,'AST')); }); } });
+  return {boxN, list:Object.values(tot).filter(o=>o.g).sort((a,b)=>(b.pts+1.2*b.reb+1.5*b.ast)/b.g-(a.pts+1.2*a.reb+1.5*a.ast)/a.g)}; }
+function renderReview(mon){ setNav('review'); const ab=favAb(), t=team(ab); const weeks=revWeeks(ab); if(mon) mon=monOf(mon); else mon=revDefault(ab);
+  let html='<div class="page-head"><div><div class="eyebrow">Week in review</div><h1>'+esc(t.disp)+' week in review</h1><div class="sub">Monday to Sunday, written automatically from the box scores, the power ratings and the season simulation. Change the team in Settings.</div></div></div>';
+  if(!mon){ const first=REG.filter(g=>g.home===ab||g.away===ab).sort(byTip)[0]; view.innerHTML=html+'<div class="note">No '+esc(t.disp)+' regular-season games yet.'+(first?' They open '+esc(fmtDate(first.date))+'; the first review covers the week of '+revRange(monOf(first.date))+'.':'')+'</div>'; return; }
+  const gs=revGames(ab,mon), pl=gs.filter(g=>g.played); const w=pl.filter(g=>(g.home===ab?g.hs>g.as:g.as>g.hs)).length, l=pl.length-w; const end=addDays(mon,6); const inProgress=end>=todayStr;
+  html+='<div class="seg rev-weeks">'+weeks.slice(-8).map(m=>'<a href="#/review/'+m+'" class="'+(m===mon?'on':'')+'">'+esc(fmtDate(m,false))+'</a>').join('')+'</div>';
+  const st=standingsNow(); const seed=st.seedOf[ab]; const r0=revRanks(addDays(mon,-1)), r1=revRanks(inProgress?todayStr:end); const d=r1[ab].r-r0[ab].r; const mv=r0[ab].rank-r1[ab].rank;
+  const o=simOf(ab); const own=(o.own||{}); const ownTop=Object.entries(own).sort((a,b)=>b[1]-a[1]).filter(x=>x[0]!==ab&&x[1]>=0.05);
+  html+='<section class="rev-hero" style="--c1:'+sbCardColor(t)+'"><div class="ow-eb">'+revRange(mon)+(inProgress?' · so far':'')+'</div><div class="rev-big">'+w+'-'+l+'<small> this week</small></div><div class="rev-sub">'+esc(recStr(ab))+' on the season'+(seed?' · '+esc(ordinal(seed))+' in the '+esc(t.conf):'')+' · power rank <b>#'+r1[ab].rank+'</b>'+(mv?' <span class="'+(mv>0?'pos':'neg')+'">'+(mv>0?'▲':'▼')+Math.abs(mv)+'</span>':'')+' · rating '+sgn(r1[ab].r)+(Math.abs(d)>=0.05?' ('+(d>0?'+':'')+num1(d)+')':'')+'</div></section>';
+  html+='<div class="grid g2" style="margin-top:14px"><div class="card"><div class="hd"><h3>The games</h3></div><div class="bd">'+(gs.length?gs.map(g=>{ const home=g.home===ab, opp=team(home?g.away:g.home); if(!g.played) return '<div class="rev-g"><span class="dim">'+esc(fmtDate(g.date))+'</span> '+(home?'vs ':'at ')+'<a href="#/game/'+enc(g.id)+'">'+esc(opp.disp)+'</a> <span class="dim">'+esc(kick(g))+'</span></div>';
+      const us=home?g.hs:g.as, them=home?g.as:g.hs; return '<div class="rev-g"><b class="'+(us>them?'pos':'neg')+'">'+(us>them?'W':'L')+' '+us+'-'+them+'</b> '+(home?'vs ':'at ')+'<a href="#/game/'+enc(g.id)+'">'+esc(opp.disp)+'</a> <span class="dim">'+esc(fmtDate(g.date))+'</span><div class="mini">'+revTop(g,ab)+'</div></div>'; }).join(''):'<div class="mini">No games this week.</div>')+'</div></div>';
+  const P=revPlayers(pl,ab); const pow=P.list[0]; let powHTML;
+  if(pow) powHTML='<div class="rev-pow"><div class="ow-eb">Player of the week</div><div class="rev-pn">'+playerLink(ab,pow.n)+'</div><div class="rev-ps">'+num1(pow.pts/pow.g)+' pts · '+num1(pow.reb/pow.g)+' reb · '+num1(pow.ast/pow.g)+' ast <span class="dim">in '+pow.g+' game'+(pow.g===1?'':'s')+'</span></div></div>';
+  else { const cnt={}; pl.forEach(g=>{ const p=leadersFor(g,ab).find(x=>x.cat==='points'); if(p){ const c=cnt[p.n]||(cnt[p.n]={n:p.n,k:0,pts:0}); c.k++; c.pts+=bnum(p.v); } }); const top=Object.values(cnt).sort((a,b)=>b.k-a.k||b.pts-a.pts)[0]; powHTML=top?'<div class="rev-pow"><div class="ow-eb">Leading scorer most often</div><div class="rev-pn">'+playerLink(ab,top.n)+'</div><div class="rev-ps">led the team in '+top.k+' of '+pl.length+' game'+(pl.length===1?'':'s')+'</div></div>':''; }
+  const young=new Set((ROST[ab]||[]).filter(p=>p.age!=null&&p.age<=23).map(p=>dkey(p.n))); const yList=P.list.filter(p=>young.has(dkey(p.n))).slice(0,5);
+  html+='<div class="card"><div class="hd"><h3>Standouts</h3>'+(P.boxN<pl.length&&pl.length?'<span class="mini">box scores for '+P.boxN+' of '+pl.length+' games</span>':'')+'</div><div class="bd">'+(powHTML||'<div class="mini">No box scores yet.</div>')
+    +(yList.length?'<div class="ow-eb" style="margin-top:12px">Young core this week</div>'+yList.map(p=>'<div class="rev-y">'+playerLink(ab,p.n)+' <span class="dim">'+num1(p.pts/p.g)+' pts, '+num1(p.reb/p.g)+' reb, '+num1(p.ast/p.g)+' ast</span></div>').join(''):'')+'</div></div></div>';
+  const nx=revGames(ab,addDays(mon,7)).filter(g=>!g.played);
+  html+='<div class="grid g2" style="margin-top:14px"><div class="card"><div class="hd"><h3>Where it stands</h3><span class="mini">'+SIMS.toLocaleString()+' simulated seasons</span></div><div class="bd"><div class="grid g3">'+tile('Playoffs',pct1(o.po),pct1(o.top6)+' top six')+tile('Play-in',pct1(o.pin),'seeds 7 to 10')+tile('Lottery',pct1(o.lot),'avg pick '+num1(o.pick))+'</div>'
+    +'<div class="mini" style="margin-top:8px">'+(ownTop.length?'The '+esc(t.disp)+' pick goes to '+ownTop.map(([w2,q])=>esc(team(w2).disp)+' '+pct(q)).join(', ')+' of the time under the 2027 pick trades. ':'')+'<a href="#/team/'+enc(ab)+'">Team page &rsaquo;</a> · <a href="#/draft/lottery">Lottery &rsaquo;</a></div></div></div>'
+    +'<div class="card"><div class="hd"><h3>Next week</h3><span class="mini">'+revRange(addDays(mon,7))+'</span></div><div class="bd">'+(nx.length?nx.map(g=>{ const home=g.home===ab; const p=proj(g); const mine=home?p.pHome:p.pAway; return '<div class="rev-g">'+esc(fmtDate(g.date))+' '+(home?'vs ':'at ')+'<a href="#/game/'+enc(g.id)+'">'+esc(team(home?g.away:g.home).disp)+'</a> <span class="dim">'+esc(kick(g))+(tvFor(g,ab)?' · '+esc(tvFor(g,ab)):'')+' · model '+pct(mine)+'</span></div>'; }).join(''):'<div class="mini">No games scheduled.</div>')+'</div></div></div>';
+  view.innerHTML=html; }
 /* ar:start - hand-written game articles ("Jamo's preview" / "Jamo's recap"), shared by the NFL and NBA hubs
    (the college hub has the same code inline). Data: d-articles, built by sports-hub/articles/articles.pl from
    <hub>/articles/<game id>.json + .md (preview) and <game id>.recap.json + .md (recap). A json "label" renames the
@@ -11287,7 +11427,7 @@ function drawIn(root, fresh){ if(!root||QUIET||RM()||!('IntersectionObserver' in
   els.forEach((el,i)=>{ if(seen[i]) el.classList.add('draw'); else DRAW_IO.observe(el); }); }
 /* entrances play once per navigation (#view.enter for 1.6s); rerenderQuiet() drops the class so live redraws never replay them */
 function route(){ view.classList.remove('in','enter'); void view.offsetWidth; routeInner(); applyPageTheme(); renderTicker(); animateScores(view); initSubnav(); view.classList.add('enter'); clearTimeout(ENTER_T); ENTER_T=setTimeout(()=>view.classList.remove('enter'),1600); countUp(view); drawIn(view,true); if(LIVE.on&&!LIVE.busy&&liveGameId()) liveGameRefresh(); setTimeout(()=>view.classList.add('in'),0); }
-function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('/').map(dec); const r=parts[0]||''; if(!QUIET) window.scrollTo(0,0); try{ if(r===''||r==='scores'||r==='week'){ renderScores(parts[1], parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='rankings'){ renderRankings(parts[1], parts[2]); } else if(r==='playoffs'){ renderPlayoffs(parts[1]); } else if(r==='leaders'){ renderLeaders(parts[1], parts[2]); } else if(r==='draft'){ renderDraft(parts[1]); } else if(r==='cap'){ renderCap(parts[1], parts[2]); } else if(r==='teams'){ renderTeams(); } else if(r==='team'){ renderTeam((parts[1]||'').split('#')[0]); const anchor=h.split('#').slice(2)[0]; if(anchor&&!QUIET){ const el=document.getElementById(anchor); if(el) setTimeout(()=>{ gotoSection(el); initSubnav(); },0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='previews'){ renderPreviews(parts[1]); } else if(r==='digest'){ renderDigest(parts[1]); } else if(r==='player'){ renderPlayer(parts[1], parts[2]); } else if(r==='players'){ renderPlayers(parts[1], parts[2]); } else if(r==='compare'){ renderCompare(parts[1], parts[2]); } else if(r==='tv'){ renderTV(parts[1]); } else if(r==='board'){ renderBoard(); } else if(r==='gamenight'){ renderGameNight(parts[1]); } else if(r==='settings'){ renderSettings(); } else if(r==='predict'){ renderPredict(parts[1]); } else if(r==='root'){ renderRoot(parts[1], parts[2]); } else if(r==='my'){ if(parts[1]==='bets') renderBets(); else renderPredict(); } else renderScores(); }catch(e){ console.error(e); view.innerHTML='<div class="note">Something went wrong drawing this page ('+esc(e.message||e)+'). <a href="#/scores">Back to the scoreboard.</a></div>'; } }
+function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('/').map(dec); const r=parts[0]||''; if(!QUIET) window.scrollTo(0,0); try{ if(r===''||r==='scores'||r==='week'){ renderScores(parts[1], parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='rankings'){ renderRankings(parts[1], parts[2]); } else if(r==='playoffs'){ renderPlayoffs(parts[1]); } else if(r==='leaders'){ renderLeaders(parts[1], parts[2]); } else if(r==='draft'){ renderDraft(parts[1]); } else if(r==='cap'){ renderCap(parts[1], parts[2]); } else if(r==='teams'){ renderTeams(); } else if(r==='team'){ renderTeam((parts[1]||'').split('#')[0]); const anchor=h.split('#').slice(2)[0]; if(anchor&&!QUIET){ const el=document.getElementById(anchor); if(el) setTimeout(()=>{ gotoSection(el); initSubnav(); },0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='previews'){ renderPreviews(parts[1]); } else if(r==='digest'){ renderDigest(parts[1]); } else if(r==='player'){ renderPlayer(parts[1], parts[2]); } else if(r==='players'){ renderPlayers(parts[1], parts[2]); } else if(r==='compare'){ renderCompare(parts[1], parts[2]); } else if(r==='tv'){ renderTV(parts[1]); } else if(r==='board'){ renderBoard(); } else if(r==='gamenight'){ renderGameNight(parts[1]); } else if(r==='cup'){ renderCup(); } else if(r==='review'){ renderReview(parts[1]); } else if(r==='settings'){ renderSettings(); } else if(r==='predict'){ renderPredict(parts[1]); } else if(r==='root'){ renderRoot(parts[1], parts[2]); } else if(r==='my'){ if(parts[1]==='bets') renderBets(); else renderPredict(); } else renderScores(); }catch(e){ console.error(e); view.innerHTML='<div class="note">Something went wrong drawing this page ('+esc(e.message||e)+'). <a href="#/scores">Back to the scoreboard.</a></div>'; } }
 window.addEventListener('hashchange', route);
 document.addEventListener('click', e=>{ const tr=e.target.closest('tr.click, .gm.click, .dgr.click'); if(tr && !e.target.closest('a') && !e.target.closest('button')){ location.hash=tr.dataset.href; } });
 document.addEventListener('keydown', e=>{ if(e.key!=='Enter') return; const el=e.target.closest && e.target.closest('.gm.click'); if(el){ location.hash=el.dataset.href; } });
@@ -11316,10 +11456,10 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
   const college = has('playoff');
   const SECTIONS = [
     { g: 'scores', label: 'Scores', r: ['week', 'scores', 'gameday', 'gamenight', 'schedule', 'tv', 'lines', 'previews', 'board'] },
-    { g: 'standings', label: college ? 'Rankings' : 'Standings', r: college ? ['rankings', 'standings', 'playoff', 'scenarios'] : ['standings', 'rankings', 'playoffs', 'predict', 'root'] },
+    { g: 'standings', label: college ? 'Rankings' : 'Standings', r: college ? ['rankings', 'standings', 'playoff', 'scenarios'] : ['standings', 'rankings', 'playoffs', 'predict', 'root', 'cup'] },
     { g: 'players', label: 'Players', r: ['players', 'leaders', 'injuries', 'transfers', 'recruiting', 'draft'] },
     { g: 'teams', label: 'Teams', r: ['teams', 'compare', 'cap'] },
-    { g: 'more', label: 'More', r: ['my', 'digest', 'settings'] },
+    { g: 'more', label: 'More', r: ['my', 'digest', 'review', 'settings'] },
   ];
   const groupOf = {}; SECTIONS.forEach(s => s.r.forEach(r => { groupOf[r] = s.g; }));
   const main = document.createElement('div'); main.className = 'ng-main';

@@ -23,6 +23,7 @@
 .jbl-i{display:inline-flex;align-items:center;gap:7px;padding:0 14px;height:40px;color:inherit;text-decoration:none;border-right:1px solid rgba(255,255,255,.08)}
 .jbl-i:hover{background:rgba(255,255,255,.06)}
 .jbl-i .t{display:inline-flex;align-items:center;gap:5px}
+.jbl-i .lgt{font:800 9.5px/1 "Inter Tight",Inter,system-ui,sans-serif;letter-spacing:.08em;margin-right:2px}
 .jbl-i .rk{font-size:10px;font-weight:700;color:rgba(255,255,255,.55)}
 .jbl-i .s{font-variant-numeric:tabular-nums;font-weight:800;color:#fff}
 .jbl-i .l{opacity:.6;font-weight:600}
@@ -58,15 +59,15 @@ body.jbl-on{padding-bottom:40px}
   function href(g){ if (g.lg === 'nba') return '/nba/#/game/' + g.id; if (g.lg === 'nfl') return '/nfl/#/game/' + g.id; return LG[g.lg].home; }
   function when(g){ const d = new Date(g.date); if (isNaN(d)) return g.det; const today = new Date(); const same = d.toDateString() === today.toDateString(); const t = d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}).replace(':00', '').replace(' ', '').toLowerCase(); return (same ? '' : d.toLocaleDateString([], {weekday:'short'}) + ' ') + t; }
   function side(s, won, lost){ return '<span class="t">' + (s.rk ? '<span class="rk">' + s.rk + '</span>' : '') + '<b class="' + (won ? 'w' : lost ? 'l' : '') + '">' + esc(s.ab || s.n) + '</b>' + (s.s !== '' && s.s != null ? '<span class="s' + (lost ? ' l' : '') + '">' + esc(s.s) + '</span>' : '') + '</span>'; }
-  function item(g){ const post = g.st === 'post', live = g.st === 'in'; const as = +g.a.s, hs = +g.h.s; const aw = post && as > hs, hw = post && hs > as;
+  function item(g, lgTag){ const post = g.st === 'post', live = g.st === 'in'; const as = +g.a.s, hs = +g.h.s; const aw = post && as > hs, hw = post && hs > as;
     const stt = live ? '<span class="st live">' + esc(g.det) + '</span>' : post ? '<span class="st">' + esc(/OT/.test(g.det) ? g.det.replace(/^Final\/?/i, 'F/') : 'Final') + '</span>' : '<span class="st">' + esc(when(g)) + (g.tv ? ' · ' + esc(g.tv) : '') + '</span>';
     const a = post || live ? side(g.a, aw, hw) : side({rk:g.a.rk, ab:g.a.ab, n:g.a.n, s:''}), h = post || live ? side(g.h, hw, aw) : side({rk:g.h.rk, ab:g.h.ab, n:g.h.n, s:''});
-    return '<a class="jbl-i' + (isFav(g) ? ' fav' : '') + '" href="' + href(g) + '" title="' + esc(g.a.n + ' at ' + g.h.n + (g.note ? ' · ' + g.note : '')) + '">' + a + '<span class="l">' + (post || live ? '' : '@') + '</span>' + h + stt + '</a>'; }
+    return '<a class="jbl-i' + (isFav(g) ? ' fav' : '') + '" href="' + href(g) + '" title="' + esc(g.a.n + ' at ' + g.h.n + (g.note ? ' · ' + g.note : '')) + '">' + (lgTag ? '<span class="lgt" style="color:' + LG[g.lg].c + '">' + LG[g.lg].n + '</span>' : '') + a + '<span class="l">' + (post || live ? '' : '@') + '</span>' + h + stt + '</a>'; }
   function sec(key, label, color, html){ return html ? '<span class="jbl-sec" data-k="' + key + '" data-l="' + esc(label) + '" style="--c:' + color + '">' + esc(label) + '</span>' + html : ''; }
   function order(list){ const rank = g => g.st === 'in' ? 0 : g.st === 'pre' ? 1 : 2; return list.slice().sort((p, q) => rank(p) - rank(q) || String(p.date).localeCompare(String(q.date))); }
   function build(){ if (!DATA) return; const G = DATA.games || []; let h = '';
-    const favs = order(G.filter(isFav)); h += sec('fav', 'Your teams', '#d4a017', favs.map(item).join(''));
-    const live = order(G.filter(g => g.st === 'in' && !isFav(g))); h += sec('live', 'Live now', '#e11d48', live.map(item).join(''));
+    const favs = order(G.filter(isFav)); h += sec('fav', 'Your teams', '#d4a017', favs.map(g => item(g, true)).join(''));
+    const live = order(G.filter(g => g.st === 'in' && !isFav(g))); h += sec('live', 'Live now', '#e11d48', live.map(g => item(g, true)).join(''));
     ['cfb', 'nfl', 'nba', 'nhl', 'mlb'].forEach(lg => { const list = order(G.filter(g => g.lg === lg && g.st !== 'in' && !isFav(g))); if (lg === 'cfb') list.splice(0, list.length, ...list.filter(g => g.a.rk || g.h.rk)); h += sec(lg, LG[lg].n + (lg === 'cfb' ? ' · Top 25' : ''), LG[lg].c, list.slice(0, 18).map(item).join('')); });
     const news = (DATA.news || []).slice(0, 14); h += sec('news', 'Headlines', '#64748b', news.map(n => '<a class="jbl-i news" href="' + esc(n.u) + '" target="_blank" rel="noopener" style="--c:' + (LG[n.lg] ? LG[n.lg].c : '#9fb3d1') + '"><span class="src">' + esc(LG[n.lg] ? LG[n.lg].n : '') + '</span>' + esc(n.t) + '</a>').join(''));
     const jam = LAT.slice(0, 4); h += sec('jamo', 'From Jamo', '#0f766e', jam.map(a => '<a class="jbl-i news" href="' + esc(a.href) + '"><span class="src" style="color:#5eead4">' + esc(a.team || '') + '</span>' + esc(a.title) + '</a>').join(''));

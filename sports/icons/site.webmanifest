@@ -1,7 +1,7 @@
 {
   "name": "Jamo Sports Hub",
   "short_name": "Jamo Sports",
-  "description": "College football, the NFL and the NBA in one place.",
+  "description": "CFB, the NFL, the NBA and the NHL in one place.",
   "start_url": "/sports/",
   "scope": "/",
   "display": "standalone",

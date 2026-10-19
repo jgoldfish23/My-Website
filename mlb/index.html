@@ -39,7 +39,7 @@ body.boardmode .jsh{display:none}
   <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
   <nav class="jsh-nav">
     <a href="/sports/" data-s="sports" style="--c:#475569"><i></i>Home</a>
-    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>College Football</a>
+    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>CFB</a>
     <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><i></i>NFL</a>
     <a href="/nba/" data-s="nba" style="--c:#6d28d9"><i></i>NBA</a>
     <a href="/nhl/" data-s="nhl" style="--c:#0284c7"><i></i>NHL</a>
@@ -48,7 +48,7 @@ body.boardmode .jsh{display:none}
   </nav>
 </div>
 <script>
-/* Jamo Sports Hub: light/dark and the time zone follow you between College, NFL and NBA (each keeps its own favourite team).
+/* Jamo Sports Hub: light/dark and the time zone follow you between CFB, NFL and NBA (each keeps its own favourite team).
    Runs before the hub's own script, so a choice made in one hub is in place before the next one reads its settings. */
 (function(){ try {
   var s = (location.pathname.indexOf('/sports/articles') === 0 ? 'articles' : (location.pathname.split('/')[1] || 'sports')).toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');

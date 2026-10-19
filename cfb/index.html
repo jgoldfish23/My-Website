@@ -42,7 +42,7 @@ body.boardmode .jsh{display:none}
   <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
   <nav class="jsh-nav">
     <a href="/sports/" data-s="sports" style="--c:#475569"><i></i>Home</a>
-    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>College Football</a>
+    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><i></i>CFB</a>
     <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><i></i>NFL</a>
     <a href="/nba/" data-s="nba" style="--c:#6d28d9"><i></i>NBA</a>
     <a href="/nhl/" data-s="nhl" style="--c:#0284c7"><i></i>NHL</a>
@@ -51,7 +51,7 @@ body.boardmode .jsh{display:none}
   </nav>
 </div>
 <script>
-/* Jamo Sports Hub: light/dark and the time zone follow you between College, NFL and NBA (each keeps its own favourite team).
+/* Jamo Sports Hub: light/dark and the time zone follow you between CFB, NFL and NBA (each keeps its own favourite team).
    Runs before the hub's own script, so a choice made in one hub is in place before the next one reads its settings. */
 (function(){ try {
   var s = (location.pathname.indexOf('/sports/articles') === 0 ? 'articles' : (location.pathname.split('/')[1] || 'sports')).toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
@@ -65,7 +65,7 @@ body.boardmode .jsh{display:none}
   addEventListener('pagehide', save); document.addEventListener('visibilitychange', function () { if (document.hidden) save(); });
 } catch (e) {} })();
 </script>
-<title>College Football · Jamo Sports Hub</title>
+<title>CFB · Jamo Sports Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
@@ -2347,7 +2347,7 @@ body:has(.tvframe) header.top.top{top:0}
 
 <header class="top">
   <div class="top-in">
-    <div class="brand"><a class="wordmark" href="#/">College <b>Football</b></a><span class="season">Jamo Sports Hub · 2026</span></div>
+    <div class="brand"><a class="wordmark" href="#/">CFB <b>Saturdays</b></a><span class="season">Jamo Sports Hub · 2026</span></div>
     <div class="search"><input id="q" type="search" placeholder="Find a team…" autocomplete="off" aria-label="Find a team"><div id="qres" class="search-res" hidden></div></div>
     <nav class="nav" id="nav">
       <a href="#/week" data-r="week">Gameday</a>
@@ -105981,7 +105981,7 @@ function renderTV(key, scope){ setNav('tv'); document.body.classList.add('tvmode
   const tally=[grid.length?grid.length+' on TV':'', stream.length?stream.length+' streaming':'', rest.length?rest.length+' not set yet':''].filter(Boolean);
 
   let html='<div class="tvhero">'+(FRANK?'<div class="tvset"><img src="'+FRANK+'" alt="Frank Costanza pointing at the camera" width="360" height="271"></div>':'')
-    +'<div class="tvhero-txt"><div class="eyebrow">College football on TV</div><h1 class="tvlogo"><span>TV</span><span>Guide</span></h1>'
+    +'<div class="tvhero-txt"><div class="eyebrow">CFB on TV</div><h1 class="tvlogo"><span>TV</span><span>Guide</span></h1>'
     +'<div class="sub"><b>'+esc(fmtDateLong(day))+'</b> · Week&nbsp;'+w+'<br>'+(tally.length?tally.join(' · ')+' · ':'')+'times in '+esc(tz.name)+' <a href="#/settings">change</a></div></div>'
     +weekPills(w,'#/tv/')+'</div>'; html+=tvDeckHTML(grid, stream, rows);
   const days=tvDays(items, w);
@@ -106061,10 +106061,10 @@ connectDb();
   const college = has('playoff');
   const SECTIONS = [
     { g: 'scores', label: 'Scores', r: ['week', 'scores', 'gameday', 'gamenight', 'schedule', 'tv', 'lines', 'previews', 'board'] },
-    { g: 'standings', label: college ? 'Rankings' : 'Standings', r: college ? ['rankings', 'standings', 'playoff', 'scenarios'] : ['standings', 'rankings', 'playoffs', 'predict', 'root'] },
+    { g: 'standings', label: college ? 'Rankings' : 'Standings', r: college ? ['rankings', 'standings', 'playoff', 'scenarios'] : ['standings', 'rankings', 'playoffs', 'predict', 'root', 'cup'] },
     { g: 'players', label: 'Players', r: ['players', 'leaders', 'injuries', 'transfers', 'recruiting', 'draft'] },
     { g: 'teams', label: 'Teams', r: ['teams', 'compare', 'cap'] },
-    { g: 'more', label: 'More', r: ['my', 'digest', 'settings'] },
+    { g: 'more', label: 'More', r: ['my', 'digest', 'review', 'settings'] },
   ];
   const groupOf = {}; SECTIONS.forEach(s => s.r.forEach(r => { groupOf[r] = s.g; }));
   const main = document.createElement('div'); main.className = 'ng-main';

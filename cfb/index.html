@@ -2405,6 +2405,10 @@ body.field-on.wm::after{display:none}
 /* patch101: stadium photo credit, only while the photo is showing */
 .bgcredit{display:none}
 body.field-on .bgcredit{display:inline}
+
+/* patch103: first four out */
+.cfp-out{padding:6px 0;border-top:1px solid var(--line-2)}
+.cfp-out:first-child{border-top:0}
 </style>
 
 <header class="top">
@@ -104555,7 +104559,7 @@ const norm = n => ALIAS[n] || n;
 const T = {};       // every Division I team (FBS + FCS), by canonical name
 const OTHER = {};   // D2/NAIA opponents that appear only as someone's schedule filler
 const G = [];       // games
-const POLLS = {AP:{week:'',ranks:{},pts:{},fpv:{},prev:{},orv:''},COACHES:{week:'',ranks:{},pts:{},fpv:{},prev:{},orv:''},FCSC:{week:'',ranks:{},pts:{},fpv:{},prev:{},orv:''},FCSM:{week:'',ranks:{},pts:{},fpv:{},prev:{},orv:''}};
+const POLLS = {CFP:{week:'',ranks:{},pts:{},fpv:{},prev:{},orv:''},AP:{week:'',ranks:{},pts:{},fpv:{},prev:{},orv:''},COACHES:{week:'',ranks:{},pts:{},fpv:{},prev:{},orv:''},FCSC:{week:'',ranks:{},pts:{},fpv:{},prev:{},orv:''},FCSM:{week:'',ranks:{},pts:{},fpv:{},prev:{},orv:''}};
 let DEPTH = {};
 
 function loadJSON(id){ const el=document.getElementById(id); if(!el) return null; try { return JSON.parse(el.textContent); } catch(e){ console.warn('bad json',id,e); return null; } }
@@ -104573,7 +104577,7 @@ loadText('d-fpi').split('\n').forEach(l => { const p=l.trim().split('|'); if(p.l
 /* ESPN's preseason FPI, frozen. Today's FPI already contains this season's games, so starting the ratings from it
    and then adding the same games again would count every result twice. */
 loadText('d-fpipre').split('\n').forEach(l => { const p=l.trim().split('|'); if(p.length<2||p[1]==='') return; const t=T[norm(p[0])]; if(t) t.fpiPre=+p[1]; });
-{ const HEAD={'AP|':'AP','COACHES|':'COACHES','FCSCOACHES|':'FCSC','FCSMEDIA|':'FCSM'}; ['d-polls','d-pollsfcs'].forEach(blk=>{ let cur=null; loadText(blk).split('\n').forEach(l=>{ l=l.trim(); if(!l) return; const key=Object.keys(HEAD).find(k=>l.startsWith(k)); if(key){ cur=POLLS[HEAD[key]]; cur.week=l.slice(key.length); return; } if(!cur) return; if(l.startsWith('ORV|')){cur.orv=l.slice(4);return;} const p=l.split('|'); const n=norm(p[1]); cur.ranks[n]=+p[0]; cur.pts[n]=+p[2]; if(p[3]&&+p[3]>0) cur.fpv[n]=+p[3]; if(p[4]) cur.prev[n]=p[4]; }); }); }
+{ const HEAD={'CFP|':'CFP','AP|':'AP','COACHES|':'COACHES','FCSCOACHES|':'FCSC','FCSMEDIA|':'FCSM'}; ['d-polls','d-pollsfcs'].forEach(blk=>{ let cur=null; loadText(blk).split('\n').forEach(l=>{ l=l.trim(); if(!l) return; const key=Object.keys(HEAD).find(k=>l.startsWith(k)); if(key){ cur=POLLS[HEAD[key]]; cur.week=l.slice(key.length); return; } if(!cur) return; if(l.startsWith('ORV|')){cur.orv=l.slice(4);return;} const p=l.split('|'); const n=norm(p[1]); cur.ranks[n]=+p[0]; cur.pts[n]=+p[2]; if(p[3]&&+p[3]>0) cur.fpv[n]=+p[3]; if(p[4]) cur.prev[n]=p[4]; }); }); }
 Object.values(T).forEach(t=>{ t.fcsC=POLLS.FCSC.ranks[t.name]||null; t.fcsM=POLLS.FCSM.ranks[t.name]||null; t.ap=POLLS.AP.ranks[t.name]||null; t.apPts=POLLS.AP.pts[t.name]||0; t.coaches=POLLS.COACHES.ranks[t.name]||null; t.coachesPts=POLLS.COACHES.pts[t.name]||0; });
 { const parseORV = s => { const m={}; s.split(',').forEach(x=>{ const mm=x.trim().match(/^(.+?)\s+(\d+)$/); if(mm) m[norm(mm[1])]=+mm[2]; }); return m; }; const a=parseORV(POLLS.AP.orv), c=parseORV(POLLS.COACHES.orv); Object.values(T).forEach(t=>{ t.apORV=a[t.name]||0; t.coachesORV=c[t.name]||0; }); }
 ['SEC','Big Ten','ACC','Big 12','Ind','AAC','MW','Pac-12','Sun Belt','MAC','CUSA'].forEach(()=>{});
@@ -105615,13 +105619,29 @@ function renderScenarios(name){ setNav('scenarios'); const t=T[name||cfpFocus()]
     html+='<div class="sec"><h2>The '+cn+' race</h2><span class="muted">the other contenders</span></div><div class="grid g2">'+cfpRaceCard('Reaches the title game','top two in the standings',l,'tg')+cfpRaceCard('Wins the '+cn,'the title game included',l.slice().sort((a,b)=>b.champ-a.champ),'champ')+'</div>'; }
   html+='<div class="note" style="margin-top:14px"><b>How to read this.</b> Every simulation plays out the whole season, so each line is “of the seasons where that happened, how often '+nm+' got there.” The “also root for” games are picked by how much they move '+nm+'’s odds; a swing of a point or two can be simulation noise. Conference tiebreakers are simplified (league record, head-to-head, overall record), and the committee is a stand-in, so treat these as a guide, not a guarantee. <a href="#/playoff/fbs">See the full projected bracket ›</a></div>';
   view.innerHTML=html; }
+/* patch103: the bracket if the season ended today, from the committee's rankings once they exist, the AP poll until then */
+function cfpTodayField(){ const useCFP=Object.keys(POLLS.CFP.ranks).length>=12; const P=useCFP?POLLS.CFP:POLLS.AP;
+  const ranked=Object.entries(P.ranks).map(([n,r])=>({t:T[n],r:+r})).filter(x=>x.t&&x.t.level==='FBS').sort((a,b)=>a.r-b.r); const pick=new Map(), why={};
+  CFP_P4.forEach(c=>{ const x=ranked.find(y=>y.t.conf===c); if(x){ pick.set(x.t.name,x); why[x.t.name]='highest-ranked '+c+' team'; } });
+  const g=ranked.find(y=>CFP_G6.indexOf(y.t.conf)>=0&&!pick.has(y.t.name)); if(g){ pick.set(g.t.name,g); why[g.t.name]='highest-ranked Group of 6 team'; }
+  const nd=ranked.find(y=>y.t.name==='Notre Dame'); if(nd&&nd.r<=12&&!pick.has(nd.t.name)){ pick.set(nd.t.name,nd); why[nd.t.name]='Notre Dame, in the top 12'; }
+  for(const y of ranked){ if(pick.size>=12) break; if(!pick.has(y.t.name)){ pick.set(y.t.name,y); why[y.t.name]='at-large'; } }
+  const F=[...pick.values()].sort((a,b)=>a.r-b.r).map((x,i)=>({t:x.t, seed:i+1, rk:x.r, why:why[x.t.name]}));
+  return {F, cfp:useCFP, week:P.week, out:ranked.filter(y=>!pick.has(y.t.name)).slice(0,4)}; }
+function cfpTodayHTML(){ const D=cfpTodayField(); if(D.F.length<12) return ''; const src=D.cfp?'the College Football Playoff rankings':'the AP poll';
+  const rows=D.F.map(x=>'<tr class="click'+(SETTINGS.fav===x.t.name||(!SETTINGS.fav&&x.t.name==='BYU')?' hl':'')+'" data-href="#/team/'+enc(x.t.name)+'"><td class="rk num">'+x.seed+'</td><td>'+chip(x.t.name,{norank:true})+'</td><td class="num">'+recStr(x.t.name)+'</td><td class="num">No. '+x.rk+'</td><td class="muted">'+esc(x.why)+(x.seed<=4?' · first-round bye':'')+'</td></tr>').join('');
+  return '<div class="sec"><h2>If the season ended today</h2><span class="muted">seeded by '+src+(D.week?' ('+esc(D.week)+')':'')+(D.cfp?'':' until the committee releases its first rankings')+'</span></div>'
+    +cfpBracketHTML(D.F)
+    +'<div class="grid g2" style="margin-top:14px"><div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">Seed</th><th>Team</th><th class="num">Record</th><th class="num">'+(D.cfp?'CFP':'AP')+'</th><th>How it gets in</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    +'<div class="card"><div class="hd"><h3>First four out</h3><span class="mini">next in '+src+'</span></div><div class="bd">'+(D.out.length?D.out.map(y=>'<div class="cfp-out">'+chip(y.t.name,{norank:true})+' <span class="dim">No. '+y.r+' · '+recStr(y.t.name)+'</span></div>').join(''):'<div class="mini">Nobody else is ranked.</div>')
+    +'<div class="mini" style="margin-top:10px">'+(D.cfp?'':'The committee’s own rankings start in early November and replace the AP poll here automatically. ')+'Until conference title games are played, the highest-ranked team in each power conference stands in for its champion.</div></div></div></div>'; }
 function renderCFP(){ setNav('playoff');
-  const head='<div class="page-head"><div><div class="eyebrow">College Football Playoff</div><h1>Projected 12-team bracket</h1><div class="sub">The 2026 rules: the SEC, Big Ten, Big 12 and ACC champions are in automatically, so is the highest-ranked team from the other six leagues, and Notre Dame is in if it finishes in the top 12. The highest-ranked teams left fill out the 12, and seeds follow the ranking straight down. Built from '+CFP_SIMS.toLocaleString()+' simulations of the rest of the season using this page’s power ratings.</div></div></div>'+playoffSeg('fbs');
+  const head='<div class="page-head"><div><div class="eyebrow">College Football Playoff</div><h1>Playoff bracket</h1><div class="sub">The 2026 rules: the SEC, Big Ten, Big 12 and ACC champions are in automatically, so is the highest-ranked team from the other six leagues, and Notre Dame is in if it finishes in the top 12. The highest-ranked teams left fill out the 12, and seeds follow the ranking straight down. The bracket up top is today’s field from the current rankings; the projection below plays out the rest of the season '+CFP_SIMS.toLocaleString()+' times using this page’s power ratings.</div></div></div>'+playoffSeg('fbs');
   if(!cfpReady()){ view.innerHTML=head+'<div class="note">Playing out the rest of the season '+CFP_SIMS.toLocaleString()+' times…</div><div class="skel-grid" style="margin-top:12px"><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div></div><div class="skel skel-row"></div><div class="skel skel-row"></div>'; const h=location.hash; setTimeout(()=>{ if(location.hash!==h) return; cfpSim(); renderCFP(); }, 30); return; }
   const R=cfpSim(), F=R.field; const fav=SETTINGS.fav&&T[SETTINGS.fav]; const me=(fav&&fav.level==='FBS')?fav:T['BYU'];
   const fave=R.rows.slice().sort((a,b)=>b.title-a.title)[0]; const g6=R.rows.slice().sort((a,b)=>b.g6-a.g6)[0]; const mx=me&&R.by[me.name];
-  let html=head+'<div class="grid g4" style="margin-bottom:14px">'+tile('Title favorite',fave.t.disp,pct(fave.title)+' to win it all')+tile('Projected No. 1 seed',F[0].t.disp,'first-round bye '+pct(F[0].bye))+(mx?tile(me.disp,mx.make<0.005&&mx.make>0?'<1%':pct(mx.make),'makes the field · '+pct(mx.champ)+' '+me.conf+' title'):'')+tile('Group of 6 bid',g6.t.disp,pct(g6.g6)+' to be the top-ranked team')+'</div>';
-  html+='<div class="sec"><h2>The bracket</h2><span class="muted">most likely field, seeded by where each team ranks on average</span></div>'+cfpBracketHTML(F);
+  let html=head+cfpTodayHTML()+'<div class="sec"><h2>Projected at season’s end</h2><span class="muted">from '+CFP_SIMS.toLocaleString()+' simulations</span></div><div class="grid g4" style="margin-bottom:14px">'+tile('Title favorite',fave.t.disp,pct(fave.title)+' to win it all')+tile('Projected No. 1 seed',F[0].t.disp,'first-round bye '+pct(F[0].bye))+(mx?tile(me.disp,mx.make<0.005&&mx.make>0?'<1%':pct(mx.make),'makes the field · '+pct(mx.champ)+' '+me.conf+' title'):'')+tile('Group of 6 bid',g6.t.disp,pct(g6.g6)+' to be the top-ranked team')+'</div>';
+  html+='<div class="sec"><h2>Projected final bracket</h2><span class="muted">most likely field, seeded by where each team ranks on average</span></div>'+cfpBracketHTML(F);
   html+='<div class="sec"><h2>The field</h2><span class="muted">how each team gets in</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">Seed</th><th>Team</th><th>Conf</th><th>Record</th><th>Bid</th><th class="r">Playoff</th><th class="r">Title</th></tr></thead><tbody>'+F.map(x=>'<tr class="click'+(SETTINGS.fav===x.t.name?' hl':'')+'" data-href="#/team/'+enc(x.t.name)+'"><td class="rk num">'+x.seed+'</td><td>'+chip(x.t.name,{norank:true})+'</td><td class="muted">'+esc(x.t.conf)+'</td><td>'+recStr(x.t.name)+'</td><td class="small">'+(x.how==='auto'?'<span class="pill acc">Auto</span>':'')+esc(x.bid)+'</td><td class="r">'+cfpPct(x.make)+'</td><td class="r">'+cfpPct(x.title)+'</td></tr>').join('')+'</tbody></table></div>';
   const lastIn=F.filter(x=>x.how==='at-large').sort((a,b)=>a.make-b.make).slice(0,4), firstOut=R.out.slice(0,4);
   const bub=(x,lbl)=>'<div class="row'+(SETTINGS.fav===x.t.name?' fav':'')+'"><div class="who">'+chip(x.t.name,{norank:true})+'<div class="mini">'+recStr(x.t.name)+' · '+esc(x.t.conf)+' · '+lbl+'</div></div><b>'+cfpPct(x.make)+'</b></div>';

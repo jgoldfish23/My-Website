@@ -15865,7 +15865,7 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
     { g: 'scores', label: 'Scores', r: ['week', 'scores', 'gameday', 'gamenight', 'schedule', 'tv', 'lines', 'previews', 'board'] },
     { g: 'standings', label: college ? 'Rankings' : 'Standings', r: college ? ['rankings', 'standings', 'playoff', 'scenarios'] : ['standings', 'rankings', 'playoffs', 'predict', 'root', 'cup'] },
     { g: 'players', label: 'Players', r: ['players', 'leaders', 'injuries', 'transfers', 'recruiting', 'draft'] },
-    { g: 'teams', label: 'Teams', r: ['teams', 'compare', 'cap'] },
+    { g: 'teams', label: 'Teams', r: ['teams', 'compare', 'cap', 'uniforms'] },
     { g: 'more', label: 'More', r: ['my', 'digest', 'review', 'settings'] },
   ];
   const groupOf = {}; SECTIONS.forEach(s => s.r.forEach(r => { groupOf[r] = s.g; }));

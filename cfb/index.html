@@ -2414,6 +2414,25 @@ body.field-on .bgcredit{display:inline}
 /* patch103: first four out */
 .cfp-out{padding:6px 0;border-top:1px solid var(--line-2)}
 .cfp-out:first-child{border-top:0}
+
+/* patch104: BYU Uni Watch */
+.uw-card{display:flex;align-items:center;gap:16px;margin:12px 0 0;padding:12px 16px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(105deg,color-mix(in srgb,#0062B8 30%,transparent),var(--surface) 65%);color:inherit;text-decoration:none}
+a.uw-card:hover{border-color:var(--accent)}
+.uw-pic{flex:none;width:86px;height:164px;display:grid;place-items:center;border-radius:12px;background:radial-gradient(120% 80% at 50% 10%,rgba(255,255,255,.16),rgba(255,255,255,.03))}
+.uw-pic .uw-svg{width:78px;height:150px}
+.uw-q{font-family:var(--disp);font-size:48px;font-weight:800;color:var(--ink-3);height:110px}
+.uw-body{display:flex;flex-direction:column;gap:5px;min-width:0}
+.uw-eb{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);display:flex;align-items:center;gap:8px}
+.uw-t{font-family:var(--disp);font-size:19px;font-weight:700;letter-spacing:-.01em;line-height:1.25}
+.uw-swatch{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--ink-2)}
+.uw-swatch i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px;box-shadow:inset 0 0 0 1px rgba(127,127,127,.5)}
+.uw-swatch b{color:var(--ink)}
+.uw-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+.uw-tile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-radius:12px;border:1px solid var(--line-2);background:rgba(127,127,127,.05);color:inherit;text-decoration:none;text-align:center}
+.uw-tile:hover{border-color:var(--accent)}
+.uw-tile .uw-svg.sm{width:52px;height:100px}
+.uw-tl{display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.25}
+@media (max-width:600px){.uw-card{gap:12px;padding:10px 12px}.uw-pic{width:66px;height:126px}.uw-pic .uw-svg{width:60px;height:116px}.uw-t{font-size:16px}}
 </style>
 
 <header class="top">
@@ -9808,6 +9827,21 @@ BYU|Vincent Tautua|2|0|2026-09-05,2026-09-19
 BYU|Walker Lyons|6|6|2026-09-05,2026-09-12,2026-09-19,2026-10-03,2026-10-09,2026-10-17
 BYU|Will Zundell|6|0|2026-09-05,2026-09-12,2026-09-19,2026-10-03,2026-10-09,2026-10-17
 BYU|Zak Yamauchi|5|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17
+</script>
+<script type="application/json" id="d-uniwatch">{
+  "_note": "BYU Uni Watch (patch104). One entry per game once BYU posts the combo (usually early in game week). h = helmet, fm = facemask (blank when not reported), j = jersey, p = pants; colors are royal, navy or white. desc is the combo as reported. first = first time BYU has worn this exact combination. Updated by the 'BYU Uni Watch' scheduled task; sources: BYU Football's posts as reported by KSL Sports (Mitch Harper) and the Deseret News.",
+  "updated": "Mon., Oct. 19, 2026",
+  "season": 2026,
+  "games": [
+    { "date": "2026-09-05", "opp": "Utah Tech", "h": "royal", "fm": "royal", "j": "royal", "p": "white", "desc": "All-royal helmet, royal jersey, white pants", "src": "KSL Sports" },
+    { "date": "2026-09-12", "opp": "Arizona", "h": "white", "fm": "white", "j": "navy", "p": "navy", "desc": "All-white helmet with a white facemask, navy jersey and pants", "src": "KSL Sports" },
+    { "date": "2026-09-19", "opp": "Colorado State", "h": "white", "fm": "white", "j": "white", "p": "white", "trim": "navy", "desc": "All white with navy numbers and stripes and a white facemask", "src": "KSL Sports" },
+    { "date": "2026-10-03", "opp": "TCU", "h": "royal", "fm": "royal", "j": "white", "p": "white", "name": "Royal Sitake", "desc": "Royal helmet and facemask, white jersey and pants with royal accents", "src": "KSL Sports" },
+    { "date": "2026-10-09", "opp": "Iowa State", "h": "white", "fm": "", "j": "navy", "p": "white", "desc": "White helmet, navy jersey, white pants", "src": "KSL Sports" },
+    { "date": "2026-10-17", "opp": "Notre Dame", "h": "white", "fm": "", "j": "royal", "p": "white", "desc": "White helmet with the royal stretch Y, royal jersey, white pants with royal stripes", "src": "KSL Sports, Deseret News" },
+    { "date": "2026-10-24", "opp": "UCF", "h": "royal", "fm": "white", "j": "white", "p": "white", "first": true, "desc": "Royal helmet with a white facemask, white jersey, white pants", "note": "The white facemask on a royal helmet with all white makes it a first-time combo, BYU's seventh different look in seven games.", "src": "KSL Sports (Oct. 19)" }
+  ]
+}
 </script>
 <script type="application/json" id="d-injfeat">{
   "_note": "Hand-checked injury data for BYU and its next opponent (2026-10-19). Every player line cites its source. Statuses come only from official availability reports or what the head coach/team said; anything else is marked unclear. Updated by the 'BYU injury report' scheduled task. Do not fill gaps from Covers - it was wrong about BYU when checked.",
@@ -105593,6 +105627,39 @@ function fieldBg(){ const b=document.body; if(!b) return; const fav=SETTINGS.fav
   if(el){ el.hidden=!on; const ph=el.querySelector('.fb-photo'); const want=teamPage?'stadium':'field'; if(ph&&ph.dataset.p!==want){ ph.dataset.p=want; ph.className='fb-photo '+want; ph.style.backgroundImage='url("'+BG_BASE+'byu-'+want+'.webp")'; } }
   b.classList.toggle('field-on',on); }
 { const _apt=applyPageTheme; applyPageTheme=function(){ _apt(); fieldBg(); }; }
+/* patch104: BYU Uni Watch - the uniform combo for each game, drawn, on game pages, the game-day screen and the team page */
+const UW = loadJSON('d-uniwatch') || {games:[]};
+const UW_C = {royal:'#0062B8', navy:'#002E5D', white:'#FFFFFF'};
+const UW_N = {royal:'royal', navy:'navy', white:'white'};
+function uwFor(g){ if(!g||(g.home!=='BYU'&&g.away!=='BYU')) return null; return (UW.games||[]).find(x=>x.date===g.date)||null; }
+function uwGame(x){ return G.find(g=>g.date===x.date&&(g.home==='BYU'||g.away==='BYU'))||null; }
+/* the combo, drawn: helmet (with facemask) over jersey over pants */
+function uwSVG(x, cls){ const c=k=>UW_C[k]||'#8a94a0'; const H=c(x.h), F=x.fm?c(x.fm):(x.h==='white'?'#C9D3E0':H), J=c(x.j), P=c(x.p);
+  const on=k=>k==='white'?(x.trim?c(x.trim):'#0062B8'):'#FFFFFF'; const edge='rgba(0,0,0,.28)';
+  return '<svg class="uw-svg '+(cls||'')+'" viewBox="0 0 120 230" aria-hidden="true">'
+    +'<g><path d="M26 44 C26 18 46 6 66 6 C88 6 102 20 102 42 L102 50 L80 54 L74 62 L40 62 C32 58 26 52 26 44 Z" fill="'+H+'" stroke="'+edge+'" stroke-width="1.5"/>'
+    +'<path d="M60 8 C58 24 58 40 62 60" stroke="'+on(x.h)+'" stroke-width="5" fill="none" opacity=".9"/>'
+    +'<ellipse cx="44" cy="38" rx="9" ry="7" fill="'+on(x.h)+'" opacity=".95"/><text x="44" y="42" text-anchor="middle" font-family="Georgia,serif" font-weight="900" font-size="10" fill="'+H+'">Y</text>'
+    +'<path d="M100 40 L114 42 M100 50 L114 54 M104 40 L106 62 M112 42 L110 60 M88 56 L108 62" stroke="'+F+'" stroke-width="3.2" stroke-linecap="round" fill="none"/></g>'
+    +'<g transform="translate(0 70)"><path d="M30 4 L46 0 C50 10 70 10 74 0 L90 4 L112 22 L100 40 L90 34 L90 86 L30 86 L30 34 L20 40 L8 22 Z" fill="'+J+'" stroke="'+edge+'" stroke-width="1.5"/>'
+    +'<path d="M46 0 C50 10 70 10 74 0" stroke="'+on(x.j)+'" stroke-width="3" fill="none"/><path d="M8 22 L20 40 M112 22 L100 40" stroke="'+on(x.j)+'" stroke-width="4"/>'
+    +'<text x="60" y="64" text-anchor="middle" font-family="Georgia,serif" font-weight="900" font-size="28" fill="'+on(x.j)+'">Y</text></g>'
+    +'<g transform="translate(0 162)"><path d="M32 0 L88 0 L92 62 L66 62 L60 22 L54 62 L28 62 Z" fill="'+P+'" stroke="'+edge+'" stroke-width="1.5"/>'
+    +'<path d="M34 4 L30 58 M86 4 L90 58" stroke="'+on(x.p)+'" stroke-width="3.5"/></g></svg>'; }
+function uwText(x){ return x.desc||((UW_N[x.h]||x.h)+' helmet, '+(UW_N[x.j]||x.j)+' jersey, '+(UW_N[x.p]||x.p)+' pants'); }
+function uwCardHTML(g){ const x=uwFor(g); const opp=g&&team(g.home==='BYU'?g.away:g.home);
+  if(!x){ if(!g||g.played||!(g.home==='BYU'||g.away==='BYU')) return ''; return '<div class="uw-card uw-wait"><div class="uw-pic uw-q">?</div><div class="uw-body"><div class="uw-eb">Uni Watch</div><div class="uw-t">Combo not posted yet</div><div class="mini">BYU usually shows the uniform early in game week. It shows up here as soon as it’s out.</div></div></div>'; }
+  return '<a class="uw-card" href="#/team/BYU">'+'<div class="uw-pic">'+uwSVG(x)+'</div><div class="uw-body"><div class="uw-eb">Uni Watch'+(x.first?' <span class="pill gold">First-time combo</span>':'')+'</div><div class="uw-t">'+(x.name?esc(x.name)+' · ':'')+esc(uwText(x))+'</div>'
+    +(x.note?'<div class="mini">'+esc(x.note)+'</div>':'')+'<div class="uw-swatch">'+[['Helmet',x.h],['Facemask',x.fm],['Jersey',x.j],['Pants',x.p]].filter(k=>k[1]).map(k=>'<span><i style="background:'+UW_C[k[1]]+'"></i>'+k[0]+' <b>'+esc(UW_N[k[1]]||k[1])+'</b></span>').join('')+'</div>'
+    +'<div class="mini dim">'+(opp?(g.home==='BYU'?'vs ':'at ')+esc(opp.disp)+' · ':'')+'source: '+esc(x.src||'BYU Football')+' · every BYU combo this season ›</div></div></a>'; }
+function uwSeasonHTML(){ const L=(UW.games||[]); if(!L.length) return ''; const rec={}; let tiles='';
+  L.forEach(x=>{ const g=uwGame(x); let res=''; if(g&&g.played){ const us=g.home==='BYU'?g.hs:g.as, th=g.home==='BYU'?g.as:g.hs; const w=us>th; res=(w?'W ':'L ')+us+'-'+th; const r=rec[x.j]||(rec[x.j]={w:0,l:0}); w?r.w++:r.l++; }
+    tiles+='<a class="uw-tile" href="'+(g?'#/game/'+enc(g.id):'#/team/BYU')+'" title="'+esc(uwText(x))+'">'+uwSVG(x,'sm')+'<div class="uw-tl"><b>'+(g&&g.home==='BYU'?'vs ':'at ')+esc(x.opp)+'</b><span class="dim">'+esc(fmtDate(x.date,false))+'</span>'+(res?'<span class="'+(res[0]==='W'?'pos':'neg')+'">'+res+'</span>':'<span class="dim">upcoming</span>')+(x.first?'<span class="pill gold">new</span>':'')+'</div></a>'; });
+  const recs=Object.keys(rec).map(k=>'<span><i style="background:'+UW_C[k]+'"></i>'+esc(UW_N[k]||k)+' jersey <b>'+rec[k].w+'-'+rec[k].l+'</b></span>').join('');
+  return '<div class="sec" id="uw"><h2>Uni Watch</h2><span class="muted">every combo BYU has worn in '+(UW.season||'')+(recs?' · record by jersey':'')+'</span></div><div class="card"><div class="bd"><div class="uw-swatch" style="margin:0 0 10px">'+recs+'</div><div class="uw-strip">'+tiles+'</div><div class="mini dim" style="margin-top:8px">Combos from BYU Football’s game-week posts as reported by KSL Sports and the Deseret News. New ones are added when BYU posts them.</div></div></div>'; }
+{ const _rg=renderGame; renderGame=function(id){ _rg(id); const c=uwCardHTML(GI[id]); if(!c) return; const at=view.querySelector('.ghead'); if(at) at.insertAdjacentHTML('afterend', c); }; }
+{ const _gd=renderGameday; renderGameday=function(id){ _gd(id); const m=(location.hash||'').match(/^#\/gameday\/([^\/#?]+)/); const g=m&&GI[dec(m[1])]; const c=uwCardHTML(g); if(!c) return; const at=view.querySelector('.gd-links'); if(at) at.insertAdjacentHTML('afterend', c); }; }
+{ const _rt=renderTeam; renderTeam=function(name){ _rt(name); if(norm(name||'')!=='BYU') return; const h=[...view.querySelectorAll('.sec h2')].find(x=>/schedule/i.test(x.textContent)); const at=h&&h.closest('.sec'); const html=uwSeasonHTML(); if(at&&html) at.insertAdjacentHTML('beforebegin', html); }; }
 /* ---------- What has to happen (patch91) ---------- */
 function scnPct(x){ if(x==null) return '<span class="dim">—</span>'; if(x>0&&x<0.005) return '&lt;1%'; if(x<1&&x>0.995) return '&gt;99%'; return Math.round(x*100)+'%'; }
 function renderScenarios(name){ setNav('scenarios'); const t=T[name||cfpFocus()]||T['BYU'];

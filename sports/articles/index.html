@@ -57,6 +57,11 @@ h1{font-family:var(--disp);font-size:30px;font-weight:800;letter-spacing:-.03em;
 body.boardmode .jsh{display:none}
 @media (max-width:560px){.jsh{gap:8px;padding:0 12px}.jsh-brand span{display:none}.jsh-nav{gap:2px}.jsh-nav a{padding:0 10px;font-size:13px;gap:6px}}
 @media (max-width:360px){.jsh-nav a i{display:none}.jsh-nav a{padding:0 9px}}
+/* phones (2026-10-19): no Safari text enlarging (it inflated the tab labels in the scrolling row), tabs keep their width */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.jsh,.jsh *{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.jsh-nav{min-width:0}
+.jsh-nav a{flex:none;line-height:1}
 @media print{.jsh{display:none}}
 /* league logos and a centered row (2026-10-19) */
 .jsh-nav a .jsh-lg{flex:none;width:18px;height:18px;object-fit:contain;display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45))}
@@ -94,7 +99,7 @@ body.boardmode .jsh{display:none}
 } catch (e) {} })();
 </script>
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
-<script src="/sports/bl.js?v=20261019f" defer></script>
+<script src="/sports/bl.js?v=20261019g" defer></script>
 
 <main class="wrap">
   <div class="eyebrow">Jamo Sports Hub</div>

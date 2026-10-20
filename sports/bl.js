@@ -44,9 +44,16 @@
 .jbl-btn:hover{color:#fff;background:rgba(255,255,255,.07)}
 .jbl-pill{position:fixed;right:12px;bottom:12px;z-index:60;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:8px 13px;font:800 11px/1 Inter,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(10,12,18,.88);backdrop-filter:blur(10px);cursor:pointer;box-shadow:0 8px 20px -10px rgba(0,0,0,.6)}
 .jbl-pill[hidden]{display:none}
-body.jbl-on{padding-bottom:40px}
+body.jbl-on{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+/* phones (2026-10-19): no Safari text enlarging (the 40,000px-wide track made iOS inflate the type, which squished and
+   overlapped in the fixed-height bar), nothing shrinks, and the bar clears the home indicator in the home-screen app */
+.jbl,.jbl *{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.jbl{padding-bottom:env(safe-area-inset-bottom);height:calc(40px + env(safe-area-inset-bottom))}
+.jbl-tr{width:max-content}
+.jbl-i,.jbl-sec,.jbl-i>*,.jbl-i .t>*{flex:none}
+.jbl-i{line-height:1}
 @keyframes jblp{0%,100%{opacity:1}50%{opacity:.35}}
-@media (max-width:640px){.jbl{height:36px;font-size:12.5px}.jbl-i{height:36px;padding:0 11px}.jbl-tag{display:none}body.jbl-on{padding-bottom:36px}.jbl-btn{width:34px}}
+@media (max-width:640px){.jbl{height:calc(36px + env(safe-area-inset-bottom));font-size:12.5px}.jbl-i{height:36px;padding:0 11px}.jbl-tag{display:none}body.jbl-on{padding-bottom:calc(36px + env(safe-area-inset-bottom))}.jbl-btn{width:34px}}
 @media (prefers-reduced-motion:reduce){.jbl-vp{overflow-x:auto}.jbl-tr{position:static}}
 `;
   const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);

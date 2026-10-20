@@ -2978,6 +2978,14 @@ body:has(.tvframe) header.top.top{top:0}
 .uni-tile .u{font-size:11px;opacity:.75}
 .uni-tile .r{position:absolute;top:8px;right:9px;font-size:11px;font-weight:800}
 @media (max-width:760px){.uni-row{grid-template-columns:repeat(2,minmax(0,1fr))}.uni-hero{gap:14px;padding:14px}.uj.lg{width:92px;height:106px}.uj.lg img{height:238px}.uni-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}}
+
+/* uniform icons on the Jazz schedule (2026-10-19) */
+.uni-sch{display:inline-block;vertical-align:middle;margin-right:8px}
+.uni-sch .uj.xs{width:22px;height:26px;border-radius:5px}
+.uni-sch .uj.xs img{height:58px}
+.uni-sch-note{display:inline-flex;align-items:center;gap:6px;margin-left:auto;font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none}
+.uni-sch-note:hover{color:var(--accent-text)}
+.uni-sch-note .uj.xs{width:18px;height:21px;border-radius:4px}.uni-sch-note .uj.xs img{height:47px}
 </style>
 
 <header class="top">
@@ -11479,6 +11487,10 @@ function renderUniforms(filter){ setNav('uniforms'); filter=UNI_INFO[filter]?fil
 /* game page and game-night screen: the strip goes right under the scoreboard */
 { const _rg=renderGame; renderGame=function(id){ _rg(id); const g=GI[id]; const s=uniStripHTML(g); if(!s) return; const at=view.querySelector('.ghead'); if(at) at.insertAdjacentHTML('afterend', s); }; }
 { const _rn=renderGameNight; renderGameNight=function(id){ _rn(id); const m=(location.hash||'').match(/^#\/gamenight\/([^\/#?]+)/); const g=m&&GI[dec(m[1])]; const s=uniStripHTML(g); if(!s) return; const at=view.querySelector('.gn-hero'); if(at) at.insertAdjacentHTML('afterend', s); }; }
+/* team page (2026-10-19): a small jersey in front of the date on every Jazz schedule row, named on hover */
+{ const _rt=renderTeam; renderTeam=function(ab){ _rt(ab); if(norm(ab||'')!==UNI_TEAM) return; const sec=document.getElementById('s-sched'); if(!sec) return; let box=sec.nextElementSibling; while(box&&!box.querySelector('table')) box=box.nextElementSibling; if(!box) return;
+  let n=0; box.querySelectorAll('tr[data-href^="#/game/"]').forEach(tr=>{ const g=GI[dec(tr.dataset.href.slice(7))]; const u=uniFor(g); const td=tr.cells[0]; if(!u||!td||td.querySelector('.uj')) return; const i=UNI_INFO[u.uni]; td.insertAdjacentHTML('afterbegin', '<span class="uni-sch" title="'+esc(i?i.n+' ('+i.d+')':'Uniform to be announced')+'">'+uniJersey(u.uni,'xs')+'</span>'); n++; });
+  if(n&&!sec.querySelector('.uni-sch-note')) sec.insertAdjacentHTML('beforeend', '<a class="uni-sch-note" href="#/uniforms">'+uniJersey('ICON','xs')+' jersey icons show what the Jazz wear · Jazz uniforms ›</a>'); }; }
 /* ar:start - hand-written game articles ("Jamo's preview" / "Jamo's recap"), shared by the NFL and NBA hubs
    (the college hub has the same code inline). Data: d-articles, built by sports-hub/articles/articles.pl from
    <hub>/articles/<game id>.json + .md (preview) and <game id>.recap.json + .md (recap). A json "label" renames the

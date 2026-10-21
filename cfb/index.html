@@ -107005,7 +107005,7 @@ connectDb();
     +'.fold-btn::after{content:"";width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .15s}'
     +'.fold-btn[aria-expanded="true"]::after{transform:translateY(1px) rotate(-135deg)}'
     +'.fold-hide{display:none!important}'
-    +'.card.fold-closed>:not(.hd){display:none!important}.card.fold-closed>.hd{border-bottom:0!important;margin-bottom:0!important}'
+    +'.card.fold-closed>:not(.hd){display:none!important}.card.fold-closed>.hd{border-bottom:0!important;margin-bottom:0!important}@media (max-width:600px){.card.fold-closed>.hd{flex-wrap:nowrap;align-items:center}.card.fold-closed>.hd>:not(h3):not(.fold-btn){display:none}}'
     +'.sec.fold-closed{opacity:.92}.sec.fold-closed>.muted,.sec.fold-closed>.note,.sec.fold-closed>.seg{display:none}.sec.fold-closed{flex-wrap:nowrap}'
     +'.fold-more{display:flex;justify-content:center;margin:10px 0 4px}.fold-more .fold-btn{margin:0}'
     +'.grid.fold-keep{grid-template-columns:repeat(4,minmax(0,1fr))}@media (max-width:760px){.grid.fold-keep{grid-template-columns:repeat(2,minmax(0,1fr))}}';

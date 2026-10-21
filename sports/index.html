@@ -316,6 +316,15 @@ a.gm:hover{background:var(--surface-2)}
   .teams.mini{grid-auto-columns:max-content}
   .teams.mini .tc{min-width:210px}
 }
+/* fd_simplify (2026-10-21): one-tap "show more" buttons; the greeting runs full width now that the Next up box is gone */
+.hero{grid-template-columns:1fr}
+.fd-more{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:10px 0 2px;padding:10px 14px;font:inherit;font-size:13.5px;font-weight:700;color:var(--ink);background:rgba(127,127,127,.08);border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.fd-more:hover{border-color:rgba(127,127,127,.45)}
+.fd-more::after{content:"";width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg)}
+.fd-more[aria-expanded="true"]::after{transform:translateY(1px) rotate(-135deg)}
+.tv .fd-more{width:auto;margin:10px 14px 4px}
+.sc-list[hidden]{display:none}
+.sp .ql{border-bottom:0}
 </style>
 </head>
 <body>
@@ -438,7 +447,7 @@ header.top.jsh-tuck{pointer-events:none}
 
   <footer class="foot"><span id="asof"></span><span>A <i>Kramerica Industries</i> production</span></footer>
 </main>
-<script type="application/json" id="d-meta">{"cfb":"Wed Oct 21, 2026 · 4:19 PM ET","nfl":"Wed Oct 21, 2026 · 3:03 PM ET","nba":"Wed Oct 21, 2026 · 3:05 PM ET","nhl":"Wed Oct 21, 2026 · 3:06 PM ET"}</script>
+<script type="application/json" id="d-meta">{"cfb":"Wed Oct 21, 2026 · 4:19 PM ET","nfl":"","nba":"","nhl":"Wed Oct 21, 2026 · 3:06 PM ET"}</script>
 <script type="text/plain" id="d-cfb">1|2026-08-29|Hawai'i|Stanford|27|37|FINAL|7:00 PM||-4.5|48.5|170|-205|ACC Network||
 1|2026-08-29|Jacksonville State|North Dakota State|7|33|FINAL|5:30 PM||-6.5|46.5|230|-285|CBSSN||
 1|2026-08-29|Memphis|UNLV|27|21|FINAL|10:00 PM||-4.5|55.5|160|-192|Fox||
@@ -5977,7 +5986,8 @@ function heroHTML(){
   /* a favorite playing now wins; otherwise the soonest favorite game */
   let best = null;
   FAVS.forEach(f => teamGames(f.sport, f.team).forEach(g => { if (g.st === 'CANCELED' || g.st === 'POSTPONED') return; const k = kickMs(g.date, g.time); if (g.live) { if (!best || !best.g.live) best = {f, g, k}; return; } if (played(g) || !timed(g) || k < Date.now()) return; if (!best || (!best.g.live && k < best.k)) best = {f, g, k}; }));
-  const el = $('#h-next'); if (!best) { el.innerHTML = ''; return; }
+  /* fd_simplify (2026-10-21): the "Next up for your teams" box is gone - the Your teams cards already show the next game */
+  const el = $('#h-next'); el.innerHTML = ''; el.hidden = true; return;
   const {f, g} = best, o = O[f.sport]; const home = g.home === f.team; const opp = home ? g.away : g.home; const at = g.neutral ? 'vs' : (home ? 'vs' : 'at');
   const mine = home ? g.hs : g.as, them = home ? g.as : g.hs;
   const lbl = g.live ? '<span><span class="pill-live">LIVE</span></span><span>' + esc(liveClock(g)) + '</span>' : '<span>Next up for your teams</span><span>' + esc(SPORT[f.sport].short) + '</span>';
@@ -6056,20 +6066,26 @@ function tvItems(day){
   const nhl = NHL.filter(g => g.date === day && (/^(ESPN|ABC|TNT|truTV|HBO MAX|NHLN|ESPN2)$/i.test(g.tv) || favGame(g))).map(applyLive);
   const total = CFB.filter(g => g.date === day && g.tv).length + NFL.filter(g => g.date === day).length + NBA.filter(g => g.date === day).length + mlb.length + NHL.filter(g => g.date === day).length;
   return {all: cfb.concat(nfl, nba, mlb, nhl).sort((a, b) => (kickMs(a.date, a.time) || 0) - (kickMs(b.date, b.time) || 0) || (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0)), total}; }
-function tvHTML(){ const day = tvDay(); const {all, total} = tvItems(day);
+/* fd_simplify (2026-10-21): your teams' games first; everything else is one tap away (with no favorite on, the first five) */
+let TV_ALL = false;
+document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('.tv-all'); if (!b) return; TV_ALL = !TV_ALL; tvHTML(); if (!TV_ALL) { const h = document.getElementById('tv-h'); if (h) h.scrollIntoView({block: 'start'}); } });
+document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('.sc-more'); if (!b) return; const l = b.nextElementSibling; const on = l.hidden; l.hidden = !on; b.setAttribute('aria-expanded', on ? 'true' : 'false'); b.textContent = on ? 'Hide the full list' : b.textContent.replace('Hide the full list', 'See every pick'); if (!on) b.textContent = 'See every pick (' + l.querySelectorAll('.sc-row').length + ')'; });
+function tvHTML(){ const day = tvDay(); const {all: every, total} = tvItems(day);
+  const mineOnly = every.filter(g => favGame(g)); const short = mineOnly.length ? mineOnly : every.slice(0, 5); const all = TV_ALL || short.length >= every.length ? every : short;
+  const tvMore = every.length > short.length ? '<button type="button" class="fd-more tv-all" aria-expanded="' + (TV_ALL ? 'true' : 'false') + '">' + (TV_ALL ? (mineOnly.length ? 'Show just my teams' : 'Show fewer') : 'Show everything on TV') + '</button>' : '';
   $('#tv-h').textContent = day === TODAY ? 'On TV today' : (day === addDay(TODAY, 1) ? 'On TV tomorrow' : 'Next on TV · ' + fmt({weekday:'long'}, new Date(kickMs(day, '12:00 PM'))));
-  $('#tv-note').textContent = all.length ? (all.length < total ? all.length + ' of ' + total + ' games' : total + ' game' + (total === 1 ? '' : 's')) : '';
+  $('#tv-note').textContent = (all === short && mineOnly.length && all.length < every.length ? 'your teams · ' : '') + (all.length ? (all.length < total ? all.length + ' of ' + total + ' games' : total + ' game' + (total === 1 ? '' : 's')) : '');
   if (!all.length) { $('#tv').innerHTML = '<div class="empty">Nothing on the schedule this week.</div>'; return; }
   const slots = []; all.forEach(g => { const k = timed(g) ? kickStr(g) : 'TBA'; let s = slots.find(x => x.k === k); if (!s) slots.push(s = {k, gs:[]}); s.gs.push(g); });
   const side = (g, t) => { const rk = g.sport === 'cfb' ? (t === g.away ? g.ar : g.hr) : 0; return (rk ? '<span class="rk">' + rk + '</span>' : '') + '<span class="' + (isFavTeam(g.sport, t) ? 'fav' : '') + '">' + esc(O[g.sport].name(t)) + '</span>'; };
   const rows = slots.map(s => '<div class="tv-slot"><div class="tv-t">' + esc(s.k) + '<small>' + TZ + '</small></div><div class="tv-gs">' + s.gs.map(g => { const o = O[g.sport], sp = SPORT[g.sport];
       const st = g.live ? '<span class="tv-st live"><b>' + g.as + '-' + g.hs + '</b> ' + esc(liveClock(g)) + '</span>' : played(g) ? '<span class="tv-st"><b>' + g.as + '-' + g.hs + '</b> Final</span>' : '<span class="tv-st">' + esc(lineStr(g, o)) + '</span>';
       return '<a class="tv-g" href="' + o.href(g) + '"><span class="sp-tag" style="--c:' + sp.c + '">' + sp.icon + sp.short + '</span><span class="tv-m">' + logoImg(o.logo(g.away)) + '<span class="nm">' + side(g, g.away) + ' <span class="at">' + (g.neutral ? 'vs' : 'at') + '</span> ' + side(g, g.home) + '</span>' + logoImg(o.logo(g.home)) + '</span><span class="net">' + esc(net(g) || (g.sport === 'nba' ? 'League Pass' : 'TV TBA')) + '</span>' + st + '</a>'; }).join('') + '</div></div>').join('');
-  $('#tv').innerHTML = rows + '<div class="tv-foot">Full grids, network by network:<a href="/cfb/#/tv">CFB TV guide</a><a href="/nfl/#/tv">NFL TV guide</a><a href="/nba/#/tv">NBA TV guide</a></div>'; }
+  $('#tv').innerHTML = rows + tvMore + '<div class="tv-foot">Full grids, network by network:<a href="/cfb/#/tv">CFB TV guide</a><a href="/nfl/#/tv">NFL TV guide</a><a href="/nba/#/tv">NBA TV guide</a></div>'; }
 
 /* ---------- around the leagues ---------- */
 function gameRow(g, o){ return '<a class="gm" href="' + o.href(g) + '">' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + '<div class="gm-st">' + statusStr(g, o) + '</div></a>'; }
-function sportPanel(k, i, ctx, links, label, games){ const s = SPORT[k]; return '<article class="sp ' + k + ' rise" style="--c:' + s.c + ';--i:' + i + '"><a class="sp-h" href="' + s.url + '"><span class="sp-ic">' + s.icon + '</span><div style="min-width:0"><div class="sp-n">' + s.name + '</div><div class="sp-x">' + ctx + '</div></div><span class="sp-go">Open &rsaquo;</span></a><nav class="ql" aria-label="' + s.name + ' pages">' + links.map(l => '<a href="' + s.url + l[1] + '">' + l[0] + '</a>').join('') + '</nav><div class="sp-b"><div class="sp-lab">' + label + '</div>' + (games.length ? games.map(g => gameRow(g, O[k])).join('') : '<div class="empty">Nothing scheduled.</div>') + '</div></article>'; }
+function sportPanel(k, i, ctx, links, label, games){ const s = SPORT[k]; return '<article class="sp ' + k + ' rise" style="--c:' + s.c + ';--i:' + i + '"><a class="sp-h" href="' + s.url + '"><span class="sp-ic">' + s.icon + '</span><div style="min-width:0"><div class="sp-n">' + s.name + '</div><div class="sp-x">' + ctx + '</div></div><span class="sp-go">Open &rsaquo;</span></a><nav class="ql" aria-label="' + s.name + ' pages">' + links.map(l => '<a href="' + s.url + l[1] + '">' + l[0] + '</a>').join('') + '</nav></article>'; } /* fd_simplify: just the way in and the quick links; the games are already in On TV and the tickers */
 function sportsHTML(){
   const ww = cfbWeeks[CFB_WEEK]; const cfbWk = CFB.filter(g => g.week === CFB_WEEK).map(applyLive);
   const sc = g => (g.live ? 1000 : 0) + (favGame(g) ? 500 : 0) + (g.ar && g.hr ? 200 - g.ar - g.hr : (g.ar || g.hr ? 60 - (g.ar || g.hr) : 0));
@@ -6118,8 +6134,11 @@ function scoreHTML(){ missHTML(); latestHTML(); const S = SCORE, wrap = $('#scor
   const tile = (v, l) => '<div class="sc-t"><b>' + v + '</b><span>' + l + '</span></div>';
   let L = '<div class="scd"><h3>The picks</h3>';
   if (T.n || T.serW || T.serL) L += '<div class="sc-tiles">' + tile(T.n ? rec(T.w, T.l) : '—', 'Winners') + tile(T.atsW + T.atsL + T.atsP ? rec(T.atsW, T.atsL, T.atsP) : '—', 'vs the spread') + tile(T.ouW + T.ouL + T.ouP ? rec(T.ouW, T.ouL, T.ouP) : '—', 'Over/under') + tile(T.n ? (T.off / T.n).toFixed(1) : '—', 'Points off a game') + '</div>';
+  /* fd_simplify: the full pick-by-pick list folds behind a button; the tiles and this week's picks stay out */
+  const nAll = (S.graded || []).length + (S.series || []).length; if (nAll) L += '<button type="button" class="fd-more sc-more" aria-expanded="false">See every pick (' + nAll + ')</button><div class="sc-list" hidden>';
   (S.graded || []).forEach(o => { L += '<a class="sc-row" href="' + esc(o.href) + '"><div class="sc-m">' + esc(o.away) + ' at ' + esc(o.home) + ' <span class="sc-lg">' + esc(o.league) + ' · ' + md(o.date) + '</span></div><div class="sc-d">Pick ' + score(o, o.pa, o.ph) + ' · Final ' + score(o, o.as, o.hs) + '</div><div class="sc-chips">' + chip(o.win, 'Winner') + (o.ats != null ? chip(o.ats === 2 ? 2 : o.ats, o.atsTeam + ' ' + line(o, o.atsTeam) + (o.ats === 2 ? ' push' : '')) : '') + (o.ou != null ? chip(o.ou === 2 ? 2 : o.ou, (o.ouSide === 'over' ? 'Over ' : 'Under ') + o.total + (o.ou === 2 ? ' push' : '')) : '') + chip(null, 'off by ' + o.off) + '</div></a>'; });
   (S.series || []).forEach(o => { L += '<a class="sc-row" href="' + esc(o.href) + '"><div class="sc-m">' + esc(o.round || 'Series') + ': ' + esc(o.team) + ' in ' + o.games + ' <span class="sc-lg">' + esc(o.league) + '</span></div><div class="sc-d">' + (o.winner ? esc(o.winner) + ' won it ' + esc(o.result) : 'Series in progress') + '</div>' + (o.win != null ? '<div class="sc-chips">' + chip(o.win, 'Series winner') + (o.win ? chip(o.exact, 'Number of games') : '') + '</div>' : '') + '</a>'; });
+  if (nAll) L += '</div>';
   const up = (S.pending || []).slice(0, 5);
   if (up.length) L += '<div class="sc-sub">Riding on this week</div>' + up.map(o => '<a class="sc-row" href="' + esc(o.href) + '"><div class="sc-m">' + esc(o.away) + ' at ' + esc(o.home) + ' <span class="sc-lg">' + esc(o.league) + ' · ' + md(o.date) + '</span></div><div class="sc-d">Pick ' + score(o, o.pa, o.ph) + (o.spread != null && o.pa + o.ph ? ' · ' + esc((o.ph - o.pa) + o.spread > 0 ? o.home : o.away) + ' ' + line(o, (o.ph - o.pa) + o.spread > 0 ? o.home : o.away) : '') + (o.total != null ? ' · ' + (o.pa + o.ph > o.total ? 'over ' : 'under ') + o.total : '') + '</div></a>').join('');
   L += '</div>';

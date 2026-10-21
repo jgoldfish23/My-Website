@@ -106987,6 +106987,66 @@ connectDb();
   new MutationObserver(()=>{ if(!q) q=setTimeout(tidy,30); }).observe(V,{childList:true,subtree:true}); tidy(); })();
 /* tidy:end */
 </script>
+<script>
+/* fold:start - "lead with the essentials" (2026-10-21, Jamo: "too much going on in some places, it can get overwhelming").
+   Shared by the CFB, NFL and NBA hubs (inlined by each build.sh after tidy.js). Runs after each render via a
+   MutationObserver on #view:
+   - team pages open with four stat tiles (record, power rating, projected finish or points, playoff odds); the rest sit
+     behind "More numbers"
+   - the deeper sections on team and game pages start folded: tap the title bar (or Show) to open one. Whatever Jamo
+     opens or closes is remembered on this device, per hub and per section.
+   - phones: the scores strip under the hub tabs is hidden; the BottomLine ticker at the bottom carries every league. */
+(function(){ const V=document.getElementById('view'); if(!V||!window.MutationObserver) return;
+  const st=document.createElement('style'); st.textContent=
+    '@media (max-width:760px){header.top #ticker,header.top .yard{display:none!important}}'
+    +'.fold-h{cursor:pointer;-webkit-tap-highlight-color:transparent}'
+    +'.fold-btn{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:12px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:999px;padding:4px 11px;cursor:pointer;align-self:center}'
+    +'.fold-btn:hover{color:var(--ink);border-color:var(--accent)}'
+    +'.fold-btn::after{content:"";width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .15s}'
+    +'.fold-btn[aria-expanded="true"]::after{transform:translateY(1px) rotate(-135deg)}'
+    +'.fold-hide{display:none!important}'
+    +'.card.fold-closed>:not(.hd){display:none!important}.card.fold-closed>.hd{border-bottom:0!important;margin-bottom:0!important}'
+    +'.sec.fold-closed{opacity:.92}.sec.fold-closed>.muted,.sec.fold-closed>.note,.sec.fold-closed>.seg{display:none}.sec.fold-closed{flex-wrap:nowrap}'
+    +'.fold-more{display:flex;justify-content:center;margin:10px 0 4px}.fold-more .fold-btn{margin:0}'
+    +'.grid.fold-keep{grid-template-columns:repeat(4,minmax(0,1fr))}@media (max-width:760px){.grid.fold-keep{grid-template-columns:repeat(2,minmax(0,1fr))}}';
+  document.head.appendChild(st);
+  const HUB=((/^\/(cfb|nfl|nba)\//.exec(location.pathname)||[])[1])||((/^(CFB|NFL|NBA)\b/.exec(document.title)||[])[1]||'').toLowerCase();
+  const GAME=/^(Game preview|What to watch|How they match up|Series history|Track a bet|Head to head|Form|Projected starters|Draft stock)$/i;
+  const CFG={
+    cfb:{keep:['Record','Points','Power rating','Playoff odds'], team:/^(Recruiting|Analytics|Season stats|NFL draft stock|Depth chart|.+ race)$/i, game:GAME},
+    nba:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(\d{4}-\d{2} schedule|Projections|Odds|Team analytics|Player analytics|Salary cap|Depth chart|Roster|Draft)$/i, game:GAME},
+    nfl:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(Projections|Odds|Analytics|Team analytics|Player analytics|Season stats|Salary cap|Depth chart|Roster|Draft|NFL draft)$/i, game:GAME}}[HUB];
+  if(!CFG) return;
+  const route=()=>((location.hash||'').match(/^#\/(team|game)\//)||[])[1]||null;
+  const key=(r,t)=>'jsh-fold:'+HUB+':'+r+':'+t;
+  const isOpen=(r,t)=>{ try{ return localStorage.getItem(key(r,t))==='1'; }catch(e){ return false; } };
+  const save=(r,t,on)=>{ try{ localStorage.setItem(key(r,t), on?'1':'0'); }catch(e){} };
+  const btn=on=>'<button type="button" class="fold-btn" aria-expanded="'+(on?'true':'false')+'">'+(on?'Hide':'Show')+'</button>';
+  const title=el=>(el&&el.firstChild&&el.firstChild.nodeType===3?el.firstChild.textContent:el?el.textContent:'').trim();
+  /* a .sec heading folds the siblings after it, up to the next heading */
+  function group(sec){ const out=[]; let n=sec.nextElementSibling; while(n&&!n.classList.contains('sec')&&!n.classList.contains('gbot')&&!n.matches('[data-fold-stop]')){ out.push(n); n=n.nextElementSibling; } return out; }
+  function paint(el){ const on=el.dataset.foldOpen==='1'; el.classList.toggle('fold-closed',!on); const b=el.querySelector(':scope > .fold-btn'); if(b){ b.setAttribute('aria-expanded',on?'true':'false'); b.textContent=on?'Hide':'Show'; }
+    if(el.classList.contains('sec')) group(el).forEach(x=>x.classList.toggle('fold-hide',!on)); }
+  function tiles(){ if(V.querySelector('.fold-keep, .fold-more')) return; const kids=[...V.children]; const firstSec=kids.findIndex(e=>e.classList.contains('sec')); const grids=kids.slice(0, firstSec<0?kids.length:firstSec).filter(e=>e.classList.contains('grid')&&e.querySelector(':scope > .tile'));
+    if(!grids.length) return; const all=grids.flatMap(g=>[...g.querySelectorAll(':scope > .tile')]); const pick=[]; CFG.keep.forEach(k=>{ const t=all.find(x=>{ const l=x.querySelector('.lbl'); return l&&l.textContent.trim().toLowerCase()===k.toLowerCase(); }); if(t&&pick.indexOf(t)<0) pick.push(t); });
+    if(pick.length<2||all.length<=pick.length) return;
+    /* the four move (not copy: some tiles update themselves by id) into their own row; "More numbers" shows the rest below */
+    const keep=document.createElement('div'); keep.className='grid fold-keep'; grids[0].before(keep); pick.forEach(t=>keep.appendChild(t));
+    const more=document.createElement('div'); more.className='fold-more'; more.innerHTML='<button type="button" class="fold-btn" aria-expanded="false">More numbers ('+(all.length-pick.length)+')</button>'; grids[grids.length-1].after(more);
+    const set=on=>{ grids.forEach(g=>g.classList.toggle('fold-hide',!on||!g.querySelector(':scope > .tile'))); const b=more.firstChild; b.setAttribute('aria-expanded',on?'true':'false'); b.textContent=on?'Fewer numbers':'More numbers ('+(all.length-pick.length)+')'; };
+    set(isOpen('team','tiles')); more.firstChild.addEventListener('click',()=>{ const on=more.firstChild.getAttribute('aria-expanded')!=='true'; save('team','tiles',on); set(on); }); }
+  let q=0;
+  function run(){ q=0; const r=route(); if(!r) return; const RX=CFG[r];
+    V.querySelectorAll('.sec').forEach(sec=>{ if(sec.dataset.fold) { if(sec.dataset.fold!=='-') paint(sec); return; } const h=sec.querySelector(':scope > h2'); const t=title(h); if(!t||!RX.test(t)) { sec.dataset.fold='-'; return; }
+      sec.dataset.fold=t; sec.dataset.foldOpen=isOpen(r,t)?'1':'0'; sec.classList.add('fold-h'); sec.insertAdjacentHTML('beforeend',btn(false)); paint(sec); });
+    V.querySelectorAll('.card').forEach(c=>{ if(c.dataset.fold) return; const hd=c.querySelector(':scope > .hd'); const h=hd&&hd.querySelector('h3'); const t=title(h); if(!t||!RX.test(t)) { c.dataset.fold='-'; return; }
+      c.dataset.fold=t; c.dataset.foldOpen=isOpen(r,t)?'1':'0'; hd.classList.add('fold-h'); hd.insertAdjacentHTML('beforeend',btn(false)); paint(c); });
+    if(r==='team') tiles(); }
+  V.addEventListener('click', e=>{ const h=e.target.closest&&e.target.closest('.fold-h'); if(!h||!V.contains(h)) return; if(e.target.closest('a, input, select, label, button:not(.fold-btn), .seg')) return;
+    const el=h.classList.contains('sec')?h:h.closest('.card'); if(!el||!el.dataset.fold||el.dataset.fold==='-') return; e.preventDefault(); const on=el.dataset.foldOpen!=='1'; el.dataset.foldOpen=on?'1':'0'; save(route()||'team', el.dataset.fold, on); paint(el); });
+  new MutationObserver(()=>{ if(!q) q=setTimeout(run,40); }).observe(V,{childList:true,subtree:true}); run(); })();
+/* fold:end */
+</script>
 
 </body>
 </html>

@@ -2468,6 +2468,13 @@ body.themed .pk-card,.pk-card{background:var(--surface)!important}
 .uw-tile .uw-borrow{opacity:.55;filter:grayscale(.35)}
 .uw-cred{font-style:italic}
 @media (max-width:600px){.uw-pic{width:96px;height:96px}.uw-tile .uw-ph.sm{width:80px;height:80px}}
+
+/* patch108: reference numbers on the prediction card */
+.pk-avg{display:block;margin-top:4px;font-size:11px;line-height:1.35;color:var(--ink-3);text-align:center;font-variant-numeric:tabular-nums}
+.pk-refnote{margin-top:8px;font-size:11.5px;color:var(--ink-3)}
+.pk-hint{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;margin-top:5px;font-size:11px;font-weight:500;color:var(--ink-3)}
+.pk-fill{font:inherit;font-size:11px;font-weight:600;padding:2px 7px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer}
+.pk-fill:hover{border-color:var(--accent);color:var(--ink)}
 </style>
 
 <header class="top">
@@ -106044,6 +106051,25 @@ function uwDiff(x, y){ const N={h:'helmet',fm:'facemask',j:'jersey',p:'pants'}; 
   return h.replace('<div class="mini dim">', '<div class="mini dim uw-cred">'+line+'</div><div class="mini dim">'); }; }
 { const _us=uwSeasonHTML; uwSeasonHTML=function(){ return _us().replace('New ones are added when BYU posts them.', 'New ones are added when BYU posts them. Photos: BYU Photo (byucougars.com game recaps); a faded tile is the closest earlier look until the game is played.'); }; }
 { const _rg=renderGame; renderGame=function(id){ _rg(id); const u=view.querySelector('.uw-card'), p=document.getElementById('pk'); let bot=view.querySelector('.gbot'); if(!bot){ bot=document.createElement('div'); bot.className='gbot'; view.append(bot); } if(u) bot.append(u); if(p) bot.append(p); }; }
+/* patch108: reference numbers on the prediction card */
+function pkAvgs(name){ const gs=G.filter(x=>x.played&&(x.home===name||x.away===name)); const o={g:gs.length, t:{}, o:{}}; if(!gs.length) return o;
+  o.t.pts=gs.reduce((s,x)=>s+(x.home===name?x.hs:x.as),0)/gs.length; o.o.pts=gs.reduce((s,x)=>s+(x.home===name?x.as:x.hs),0)/gs.length;
+  const sb=seasonBox(name); if(sb.g){ const d=v=>v/sb.g; Object.assign(o.t,{yds:d(sb.yds), pass:d(sb.pass), rush:d(sb.rush), to:d(sb.to), sacks:d(sb.sacksFor), fd:d(sb.fd)}); Object.assign(o.o,{yds:d(sb.aYds), pass:d(sb.aPass), rush:d(sb.aRush), to:d(sb.take), sacks:d(sb.sacksAg)}); o.bg=sb.g; }
+  return o; }
+const pkF = v => v==null||isNaN(v) ? '' : (Math.round(v*10)/10).toFixed(1);
+function pkAvgHTML(R, Ro, k){ const a=R?pkF(R.t[k]):'', o=Ro?pkF(Ro.o[k]):''; if(!a&&!o) return ''; return '<span class="pk-avg">'+(a?'avg '+a:'')+(o?'<br>opp '+(k==='to'?'forces ':'allows ')+o:'')+'</span>'; }
+function pkHint(me, k){ const sb=seasonBox(me); const map={qb:['passing','YDS',1], rusher:['rushing','YDS',3], receiver:['receiving','YDS',3], tackler:['defensive','TOT',3]}[k]; if(!map||!sb.g) return '';
+  const L=BOXL[map[0]]||[]; const i=L.indexOf(map[1]), td=L.indexOf('TD'); const top=Object.values(sb.players).filter(e=>e.cat===map[0]&&e.g>0&&i>=0).sort((x,y)=>y.s[i]/y.g-x.s[i]/x.g).slice(0,map[2]); if(!top.length) return '';
+  const last=n=>n.split(' ').slice(1).join(' ')||n;
+  if(k==='qb'){ const e=top[0]; return '<span class="pk-hint">This season per game: '+esc(last(e.n))+' '+pkF(e.s[i]/e.g)+' yds'+(td>=0?', '+pkF(e.s[td]/e.g)+' TD':'')+'</span>'; }
+  return '<span class="pk-hint">This season per game: '+top.map(e=>'<button type="button" class="pk-fill" data-fill="'+esc(e.n)+'">'+esc(last(e.n))+' '+pkF(e.s[i]/e.g)+'</button>').join(' ')+'</span>'; }
+{ const _pf=pkFormHTML; pkFormHTML=function(g, P, me){ let h=_pf(g, P, me); const RA=pkAvgs(g.away), RH=pkAvgs(g.home);
+  h=h.replace(/(<input class="pk-in"[^>]*name="([ah])\.(\w+)"[^>]*>)/g, (m0, inp, sd, k)=>inp+pkAvgHTML(sd==='a'?RA:RH, sd==='a'?RH:RA, k));
+  h=h.replace(/(<input class="pk-in"[^>]*name="me\.qbYds"[^>]*>)/, (m0, inp)=>inp+pkHint(me,'qb'));
+  h=h.replace(/(<input class="pk-txt"[^>]*name="me\.(rusher|receiver|tackler)"[^>]*>)/g, (m0, inp, k)=>inp+pkHint(me,k));
+  const note=(RA.g||RH.g)?'<div class="pk-refnote">Under each box: that team’s average per game this season and what the other team allows per game (forces, for turnovers). Yardage averages count the games with a box score. Tap a player below to fill in his name.</div>':'';
+  return h.replace('</tbody></table>', '</tbody></table>'+note); }; }
+document.addEventListener('click', e=>{ const b=e.target.closest&&e.target.closest('.pk-fill'); if(!b) return; const lb=b.closest('label'); const inp=lb&&lb.querySelector('input'); if(inp){ inp.value=b.dataset.fill; inp.dispatchEvent(new Event('input',{bubbles:true})); } });
 /* ---------- What has to happen (patch91) ---------- */
 function scnPct(x){ if(x==null) return '<span class="dim">—</span>'; if(x>0&&x<0.005) return '&lt;1%'; if(x<1&&x>0.995) return '&gt;99%'; return Math.round(x*100)+'%'; }
 function renderScenarios(name){ setNav('scenarios'); const t=T[name||cfpFocus()]||T['BYU'];

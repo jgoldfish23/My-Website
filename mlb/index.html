@@ -46,6 +46,13 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media (min-width:561px){.jsh-nav{margin:0 auto}}
 @media (min-width:1100px){.jsh-nav{position:absolute;left:50%;transform:translateX(-50%);margin:0;overflow:visible}}
 @media (max-width:360px){.jsh-nav a .jsh-lg{width:16px;height:16px}}
+/* phones (2026-10-21, design pass): every league fits - the page you're on keeps its name, the others show just the logo */
+@media (max-width:560px){.jsh-nav{gap:1px}.jsh-nav a:not(.on){font-size:0;gap:0;padding:0 8px}.jsh-nav a:not(.on) .jsh-lg{width:20px;height:20px}.jsh-nav a.on{padding:0 11px 0 9px}}
+/* phones: the hub header slides away while you scroll down and comes back as soon as you scroll up */
+header.top{transition:transform .22s ease}
+header.top.jsh-tuck{pointer-events:none}
+/* prediction cards: each reference line stays on one line on phones */
+@media (max-width:600px){body .pk-avg{font-size:10.5px;white-space:nowrap;letter-spacing:-.01em}}
 </style>
 <div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
   <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
@@ -73,6 +80,17 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   var save = function () { try { var o = JSON.parse(localStorage.getItem(key) || '{}'); if (o.theme || o.tz) localStorage.setItem('jsh-shared', JSON.stringify({ theme: o.theme || 'auto', tz: o.tz || 'MT' })); } catch (e) {} };
   addEventListener('pagehide', save); document.addEventListener('visibilitychange', function () { if (document.hidden) save(); });
 } catch (e) {} })();
+</script>
+<script>
+/* phones (2026-10-21): tuck the hub's sticky header (sub-tabs + scores strip) away on scroll down, bring it back on scroll up */
+(function(){ var last = 0, h = null, mq = window.matchMedia('(max-width:760px)');
+  function hdr(){ if (!h || !h.isConnected) h = document.querySelector('header.top'); return h; }
+  function off(e){ e.classList.remove('jsh-tuck'); e.style.transform = ''; }
+  addEventListener('scroll', function(){ var e = hdr(); if (!e) return; var y = window.scrollY, d = y - last; last = y;
+    if (!mq.matches || y < 260 || e.contains(document.activeElement) || d < -4) { if (e.classList.contains('jsh-tuck')) off(e); return; }
+    if (d > 6 && !e.classList.contains('jsh-tuck')) { var top = parseFloat(getComputedStyle(e).top) || 0; e.style.transform = 'translateY(' + (-(e.offsetHeight + top)) + 'px)'; e.classList.add('jsh-tuck'); } }, { passive: true });
+  addEventListener('hashchange', function(){ var e = hdr(); if (e) off(e); });
+})();
 </script>
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
 <script src="/sports/bl.js?v=20261019g" defer></script>

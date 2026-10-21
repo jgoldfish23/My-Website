@@ -6,6 +6,7 @@ import * as nba from "./functions/api/nba.js";
 import * as mlb from "./functions/api/mlb.js";
 import * as nhl from "./functions/api/nhl.js";
 import * as bottomline from "./functions/api/bottomline.js";
+import * as picks from "./functions/api/picks.js";
 import { clientIp, originOk, rateLimit, tooMany, forbidden } from "./functions/api/_guard.js";
 
 const RECORD_KEY = "record_entries";
@@ -259,6 +260,9 @@ export default {
       if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
       return mlb.onRequestGet({ request, env, ctx });
     }
+
+    // Jamo's game predictions on the college hub (PIN-protected saves, KV storage)
+    if (pathname === "/api/picks") return picks.onRequest({ request, env, ctx });
 
     // The BottomLine ticker on every hub page: today's games across the leagues and ESPN headlines (one cached feed)
     if (pathname === "/api/bottomline") {

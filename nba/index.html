@@ -2986,6 +2986,28 @@ body:has(.tvframe) header.top.top{top:0}
 .uni-sch-note{display:inline-flex;align-items:center;gap:6px;margin-left:auto;font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none}
 .uni-sch-note:hover{color:var(--accent-text)}
 .uni-sch-note .uj.xs{width:18px;height:21px;border-radius:4px}.uni-sch-note .uj.xs img{height:47px}
+
+/* Your prediction (Jazz), same look as the college hub */
+.pk-card{margin-top:12px;border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+body.themed .pk-card,.pk-card{background:var(--surface)!important}
+.pk-tbl{width:100%;border-collapse:collapse;font-size:14px}
+.pk-tbl th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2);text-align:center;padding:4px}
+.pk-tbl td{padding:4px 6px}.pk-tbl td:first-child{color:var(--ink-2);font-weight:600}
+.pk-in{width:100%;max-width:120px;display:block;margin:0 auto;font:inherit;font-size:15px;font-weight:700;text-align:center;padding:7px 6px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.pk-txt,.pk-grid select{width:100%;font:inherit;font-size:14px;padding:7px 9px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);margin-top:3px}
+.pk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;margin-top:12px}
+.pk-grid label{display:flex;flex-direction:column;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.pk-grid .pk-in{max-width:none;margin:3px 0 0;text-align:left}
+.pk-lean{margin:10px 0 0;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--accent) 12%,transparent);font-size:13.5px;font-weight:600;min-height:20px}
+.pk-lean:empty{display:none}
+.pk-actions{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.pk-score{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.pk-big{font-family:var(--disp);font-size:44px;font-weight:800;width:64px;height:64px;display:grid;place-items:center;border-radius:16px;background:var(--accent);color:#fff}
+@media (max-width:600px){.pk-grid{grid-template-columns:1fr 1fr;gap:8px 10px}.pk-in{font-size:14px}}
+
+.pk-t{font-family:var(--disp);font-size:19px;font-weight:700;letter-spacing:-.01em}
+.gbot{margin-top:18px}
+.gbot .uni-strip{margin-top:0}
 </style>
 
 <header class="top">
@@ -11558,14 +11580,15 @@ window.addEventListener('hashchange', floorBg); setTimeout(floorBg, 0); /* after
    "Tonight's threads" strip on every Jazz game page and the game-night screen, and a line on the opener card.
    Schedule: uniforms_jazz.txt, read from Jazz Uni Tracker (jazzunitracker.com, fan-made, not affiliated with the NBA or
    the Jazz) on Oct. 19, 2026. Art: the Jazz's own uniform images (utahjazzweb on S3) for Association, Icon and
-   Statement; the City Edition (gray-to-black bands, white UTAH, sky-blue trim, per the Jazz's Oct. 2025 reveal) is drawn
-   here because the Jazz page only shows a blank outline for it. ---------- */
+   Statement; the City Edition is the NBA's photo of the real jersey (nba.com's 2025-26 City Edition
+   gallery, cropped to images/uni-city.jpg) because the Jazz page only shows a blank outline for it (Jamo, Oct. 21: real
+   unis, not the drawing). ---------- */
 const UNI_ART = 'https://utahjazzweb.s3-us-west-2.amazonaws.com/';
 const UNI_INFO = {
   ASSOCIATION: {n:'Association', d:'white', img:UNI_ART+'MountainBasketball2526%20White.png', c:'#f2eefa', k:'#2c1660'},
   ICON:        {n:'Icon', d:'Mountain Purple', img:UNI_ART+'MountainBasketball2526%20Purple.png', c:'#4b2a8a', k:'#fff'},
   STATEMENT:   {n:'Statement', d:'Midnight Black', img:UNI_ART+'MountainBasketball242526%20Black.png', c:'#141218', k:'#fff'},
-  CITY:        {n:'City Edition', d:'gray to black, sky-blue trim', img:null, c:'#5d636e', k:'#fff'},
+  CITY:        {n:'City Edition', d:'gray to black, sky-blue trim', img:((/(^|\.)djgolding\.com$/.test(location.hostname))?'/nba/img/':'https://djgolding.com/nba/img/')+'uni-city.jpg', c:'#5d636e', k:'#fff'},
 };
 const UNI_OPP = {ASSOCIATION:'Association (white)', ICON:'Icon', STATEMENT:'Statement', CITY:'City Edition', SPECTER:'Specter', CLASSIC:'Classic', '?':'TBD'};
 const UNI = loadText('d-uni').split('\n').map(l=>l.trim()).filter(l=>l&&l[0]!=='#').map(l=>{ const p=l.split('|'); return {id:p[0], date:p[1], home:p[2]==='H', opp:p[3], uni:p[4], ouni:p[5]}; });
@@ -11602,6 +11625,88 @@ function renderUniforms(filter){ setNav('uniforms'); filter=UNI_INFO[filter]?fil
 { const _rt=renderTeam; renderTeam=function(ab){ _rt(ab); if(norm(ab||'')!==UNI_TEAM) return; const sec=document.getElementById('s-sched'); if(!sec) return; let box=sec.nextElementSibling; while(box&&!box.querySelector('table')) box=box.nextElementSibling; if(!box) return;
   let n=0; box.querySelectorAll('tr[data-href^="#/game/"]').forEach(tr=>{ const g=GI[dec(tr.dataset.href.slice(7))]; const u=uniFor(g); const td=tr.cells[0]; if(!u||!td||td.querySelector('.uj')) return; const i=UNI_INFO[u.uni]; td.insertAdjacentHTML('afterbegin', '<span class="uni-sch" title="'+esc(i?i.n+' ('+i.d+')':'Uniform to be announced')+'">'+uniJersey(u.uni,'xs')+'</span>'); n++; });
   if(n&&!sec.querySelector('.uni-sch-note')) sec.insertAdjacentHTML('beforeend', '<a class="uni-sch-note" href="#/uniforms">'+uniJersey('ICON','xs')+' jersey icons show what the Jazz wear · Jazz uniforms ›</a>'); }; }
+/* ---------- Jazz predictions (2026-10-21, Jamo: "add predictions to the Jazz as well"). The college hub's prediction card,
+   for basketball: on every Jazz game page and the game-night screen, Jamo calls the final score and each team's FG%, threes,
+   rebounds, assists and turnovers, plus the Jazz's top scorer, rebounder and assists leader, a game ball and a confidence
+   level. Saved on djgolding.com (/api/picks, the same PIN as the college picks), locked at tip-off, graded after the final
+   from the game summary (so the grade still works after the hub's own box scores roll off). The prediction card and the
+   "Tonight's threads" uniform strip sit together at the bottom of the page. A season scorecard sits on the Jazz team page. ---------- */
+const JP_API = (/(^|\.)djgolding\.com$/.test(location.hostname)) ? '/api/picks' : 'https://djgolding.com/api/picks';
+const JP_CACHE = {}, JP_SUM = {};
+function jpMine(g){ if(!g) return null; const m=[UNI_TEAM]; const f=favAb(); if(f&&m.indexOf(f)<0) m.push(f); return m.find(ab=>g.home===ab||g.away===ab)||null; }
+const JP_TEAM = [['pts','Points',12,12],['fg','FG%',6,3],['tpm','3-pointers made',5,4],['reb','Rebounds',8,4],['ast','Assists',6,3],['to','Turnovers',5,3]];
+const jpNick = ab => team(ab).nick || team(ab).disp || ab;
+/* the final box from the game summary (fetched once per game) */
+async function jpSummary(g){ if(JP_SUM[g.id]!==undefined) return JP_SUM[g.id]; try{ const r=await fetch(LIVE_API+'/game?event='+enc(g.id), {cache:'no-store'}); JP_SUM[g.id]=r.ok?await r.json():null; }catch(e){ JP_SUM[g.id]=null; } return JP_SUM[g.id]; }
+function jpActual(g){ const A={a:{pts:g.as},h:{pts:g.hs}}; const s=JP_SUM[g.id]; if(!s||!s.teams||!s.teams.length) return {A, box:false};
+  s.teams.forEach(t=>{ const o=A[t.ha==='home'?'h':'a']; const st=t.stats||{}; o.fg=st.fgp!=null?+st.fgp:null; o.tpm=st.tp?+String(st.tp).split('-')[0]:null; o.reb=st.reb!=null?+st.reb:null; o.ast=st.ast!=null?+st.ast:null; o.to=(st.tto||st.to)!=null?+(st.tto||st.to):null; });
+  const me=jpMine(g); const side=(s.players||[]).find(p=>p.ha===(g.home===me?'home':'away')); const X={A, box:true};
+  if(side){ const col=lab=>side.labels.indexOf(lab); const val=(r,lab)=>{ const i=col(lab); return i<0?0:(+r.s[i]||0); }; const rows=(side.rows||[]).filter(r=>r.s&&r.s.length>1);
+    const top=lab=>{ const m=Math.max(0,...rows.map(r=>val(r,lab))); return {names:rows.filter(r=>val(r,lab)===m&&m>0).map(r=>r.n), n:m}; };
+    X.sc=top('PTS'); X.rb=top('REB'); X.as=top('AST'); }
+  return X; }
+const jpClose = (p, a, tol, w) => (p==null||p===''||a==null) ? null : Math.max(0, 1-Math.abs(+p-a)/tol)*w;
+const jpKey = s => dkey(s||'').replace(/[^a-z]/g,'');
+const jpHit = (p, T) => !!p && !!T && T.names.some(n=>jpKey(n)===jpKey(p) || jpKey(n).endsWith(jpKey(p)));
+function jpGrade(g, P){ const X=jpActual(g); const rows=[]; let got=0, max=0; const add=(label,mine,act,pts,w)=>{ if(pts==null) return; rows.push({label,mine,act,pts,w}); got+=pts; max+=w; };
+  const pw=(+P.h.pts>+P.a.pts)?'h':'a', aw=g.hs>g.as?'h':'a'; add('Winner', esc(jpNick(pw==='h'?g.home:g.away)), esc(jpNick(aw==='h'?g.home:g.away)), pw===aw?15:0, 15);
+  JP_TEAM.forEach(([k,lab,tol,w])=>{ ['a','h'].forEach(sd=>{ if(k!=='pts'&&!X.box) return; add(esc(jpNick(sd==='a'?g.away:g.home))+' '+(k==='fg'?'FG%':lab.toLowerCase()), P[sd][k], X.A[sd][k], jpClose(P[sd][k], X.A[sd][k], tol, w), w); }); });
+  if(X.box&&X.sc){ const M=P.me||{}; const who=T=>esc(T.names.join(' / ')||'—')+' · '+T.n;
+    if(M.scorer) add('Top scorer', esc(M.scorer)+(M.scPts!==''&&M.scPts!=null?' · '+M.scPts:''), who(X.sc), (jpHit(M.scorer,X.sc)?6:0)+(jpClose(M.scPts,X.sc.n,8,4)||0), 10);
+    if(M.reb) add('Top rebounder', esc(M.reb)+(M.rebN!==''&&M.rebN!=null?' · '+M.rebN:''), who(X.rb), (jpHit(M.reb,X.rb)?4:0)+(jpClose(M.rebN,X.rb.n,4,2)||0), 6);
+    if(M.ast) add('Assists leader', esc(M.ast)+(M.astN!==''&&M.astN!=null?' · '+M.astN:''), who(X.as), (jpHit(M.ast,X.as)?4:0)+(jpClose(M.astN,X.as.n,4,2)||0), 6); }
+  const pct=max?got/max:0; const letter=pct>=.9?'A':pct>=.8?'B':pct>=.7?'C':pct>=.6?'D':'F'; return {rows, got, max, pct, letter, box:X.box}; }
+const jpSpr = v => (v>0?'+':'')+v;
+function jpLean(g, P){ const a=+P.a.pts, h=+P.h.pts; if(P.a.pts===''||P.h.pts===''||!(a>=0&&h>=0)) return ''; const bits=[h>a?esc(jpNick(g.home))+' by '+(h-a):a>h?esc(jpNick(g.away))+' by '+(a-h):'A tie (that means overtime)', 'total '+(a+h)];
+  if(g.spread!=null){ const cover=(h-a)+g.spread; bits.push(cover>0?esc(jpNick(g.home))+' covers '+jpSpr(g.spread):cover<0?esc(jpNick(g.away))+' covers '+jpSpr(-g.spread):'a push on the spread'); }
+  if(g.total!=null) bits.push((a+h)>g.total?'over '+g.total:(a+h)<g.total?'under '+g.total:'push on '+g.total); return bits.join(' · '); }
+/* Jazz players for the name boxes, best scorers first */
+function jpPlayers(ab){ const ps=id=>PS_CUR[id]||PS_PREV[id]||null; return (ROST[ab]||[]).slice().sort((x,y)=>((ps(y.id)||{}).pts||0)-((ps(x.id)||{}).pts||0)).map(p=>'<option value="'+esc(p.n)+'">').join(''); }
+function jpNum(name, val, ph){ return '<input class="pk-in" type="number" inputmode="numeric" min="0" max="999" name="'+name+'" value="'+(val==null?'':esc(String(val)))+'" placeholder="'+(ph||'')+'">'; }
+function jpFormHTML(g, P, me){ P=P||{a:{},h:{},me:{}}; const M=P.me||{};
+  const row=(k,lab)=>'<tr><td>'+lab+'</td><td>'+jpNum('a.'+k,P.a[k])+'</td><td>'+jpNum('h.'+k,P.h[k])+'</td></tr>';
+  return '<form class="pk-form" data-game="'+esc(g.id)+'"><table class="pk-tbl"><thead><tr><th></th><th>'+esc(jpNick(g.away))+'</th><th>'+esc(jpNick(g.home))+'</th></tr></thead><tbody>'+JP_TEAM.map(([k,lab])=>row(k,lab)).join('')+'</tbody></table>'
+    +'<div class="pk-lean" aria-live="polite">'+jpLean(g,P)+'</div>'
+    +'<div class="pk-grid"><label>'+esc(jpNick(me))+' top scorer<input class="pk-txt" name="me.scorer" list="jp-pl" value="'+esc(M.scorer||'')+'"></label><label>his points'+jpNum('me.scPts',M.scPts)+'</label>'
+    +'<label>Top rebounder<input class="pk-txt" name="me.reb" list="jp-pl" value="'+esc(M.reb||'')+'"></label><label>rebounds'+jpNum('me.rebN',M.rebN)+'</label>'
+    +'<label>Assists leader<input class="pk-txt" name="me.ast" list="jp-pl" value="'+esc(M.ast||'')+'"></label><label>assists'+jpNum('me.astN',M.astN)+'</label>'
+    +'<label>Game ball<input class="pk-txt" name="me.ball" value="'+esc(M.ball||'')+'" placeholder="who wins it for us?"></label>'
+    +'<label>Confidence<select name="me.conf">'+['','Coin flip','Feeling good','Lock it in','Bet the house'].map(o=>'<option'+(M.conf===o?' selected':'')+'>'+o+'</option>').join('')+'</select></label></div>'
+    +'<datalist id="jp-pl">'+jpPlayers(me)+'</datalist>'
+    +'<div class="pk-actions"><button class="btn primary" type="submit">Save my prediction</button><span class="pk-msg mini"></span></div></form>'; }
+function jpReadForm(f){ const P={a:{},h:{},me:{}}; f.querySelectorAll('[name]').forEach(el=>{ const [sd,k]=el.name.split('.'); const v=el.value.trim(); P[sd][k]=el.type==='number'?(v===''?'':+v):v; }); return P; }
+function jpGradeHTML(g, rec){ const G2=jpGrade(g, rec.pick); const P=rec.pick;
+  return '<div class="pk-score"><div class="pk-big">'+G2.letter+'</div><div><div class="pk-t">'+Math.round(G2.got)+' of '+G2.max+' points ('+Math.round(G2.pct*100)+'%)</div><div class="mini">You had '+esc(jpNick(g.away))+' '+P.a.pts+', '+esc(jpNick(g.home))+' '+P.h.pts+'. Final: '+g.as+'-'+g.hs+'.'+(G2.box?'':' The stat grades load with the box score.')+(P.me&&P.me.ball?' Game ball: '+esc(P.me.ball)+'.':'')+'</div></div></div>'
+    +'<table class="tbl pk-res"><thead><tr><th>Pick</th><th class="r">You</th><th class="r">Actual</th><th class="r">Points</th></tr></thead><tbody>'+G2.rows.map(r=>'<tr><td>'+r.label+'</td><td class="r">'+(r.mine===''||r.mine==null?'—':r.mine)+'</td><td class="r">'+(r.act==null?'—':r.act)+'</td><td class="r '+(r.pts>=r.w*.8?'pos':r.pts<=r.w*.2?'neg':'')+'">'+num1(r.pts)+' / '+r.w+'</td></tr>').join('')+'</tbody></table>'; }
+function jpCardHTML(g, rec){ const me=jpMine(g); if(!me) return ''; const k=kickMs(g); const locked=g.played||g.live||(k!=null&&Date.now()>k);
+  let body; if(g.played&&rec) body=jpGradeHTML(g, rec); else if(locked) body=rec?'<div class="mini">Locked at tip-off. You had '+esc(jpNick(g.away))+' '+rec.pick.a.pts+', '+esc(jpNick(g.home))+' '+rec.pick.h.pts+'. The grade shows up after the final.</div>':'<div class="mini">No prediction was saved before tip-off.</div>'; else body=jpFormHTML(g, rec&&rec.pick, me);
+  return '<div class="card pk-card" id="pk"><div class="hd"><h3>Your prediction</h3><span class="mini">'+(rec?'saved '+new Date(rec.savedAt).toLocaleString([], {weekday:'short', hour:'numeric', minute:'2-digit'}):locked?'':'locks at tip-off')+'</span></div><div class="bd">'+body+'</div></div>'; }
+async function jpLoad(id){ if(JP_CACHE[id]!==undefined) return JP_CACHE[id]; try{ const r=await fetch(JP_API+'?game='+encodeURIComponent(id)); const j=await r.json(); JP_CACHE[id]=j.pick||null; JP_CACHE._pinSet=j.pinSet; }catch(e){ JP_CACHE[id]=null; } return JP_CACHE[id]; }
+/* the bottom block: uniform strip, then the prediction card */
+function jpBottom(){ let bot=view.querySelector('.gbot'); if(!bot){ bot=document.createElement('div'); bot.className='gbot'; view.append(bot); } const u=view.querySelector('.uni-strip'); if(u&&u.parentNode!==bot) bot.prepend(u); return bot; }
+function jpMount(g, route){ if(!jpMine(g)) return; jpBottom(); const here=()=>{ const m=(location.hash||'').match(new RegExp('^#/'+route+'/([^/#?]+)')); return m&&dec(m[1])===g.id; };
+  const place=()=>{ if(!here()) return; const old=document.getElementById('pk'); if(old) old.remove(); jpBottom().insertAdjacentHTML('beforeend', jpCardHTML(g, JP_CACHE[g.id])); };
+  const need=[jpLoad(g.id)]; if(g.played) need.push(jpSummary(g)); if(JP_CACHE[g.id]!==undefined&&(!g.played||JP_SUM[g.id]!==undefined)) place(); else Promise.all(need).then(place); }
+{ const _rg=renderGame; renderGame=function(id){ _rg(id); const g=GI[id]; if(g) jpMount(g, 'game'); }; }
+{ const _rn=renderGameNight; renderGameNight=function(id){ _rn(id); const m=(location.hash||'').match(/^#\/gamenight\/([^\/#?]+)/); const g=m&&GI[dec(m[1])]; if(g) jpMount(g, 'gamenight'); }; }
+document.addEventListener('input', e=>{ const f=e.target.closest&&e.target.closest('.pk-form'); if(!f) return; const g=GI[f.dataset.game]; const el=f.querySelector('.pk-lean'); if(g&&el) el.innerHTML=jpLean(g, jpReadForm(f)); });
+document.addEventListener('submit', async e=>{ const f=e.target.closest&&e.target.closest('.pk-form'); if(!f) return; e.preventDefault(); const g=GI[f.dataset.game]; if(!g) return; const msg=f.querySelector('.pk-msg'); const P=jpReadForm(f);
+  if(P.a.pts===''||P.h.pts===''){ msg.textContent='Put in a score for both teams first.'; return; }
+  let pin=''; try{ pin=localStorage.getItem('jsh-pin')||''; }catch(err){}
+  if(!pin){ pin=(prompt(JP_CACHE._pinSet?'Enter your prediction PIN (4 to 8 digits, the same one as your college picks):':'Pick a PIN for your predictions (4 to 8 digits). You’ll use it the first time on each device.')||'').trim(); if(!/^\d{4,8}$/.test(pin)){ msg.textContent='A PIN is 4 to 8 digits.'; return; } }
+  msg.textContent='Saving…'; try{ const r=await fetch(JP_API, {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({game:String(g.id), pin, kick:kickMs(g), pick:P})}); const j=await r.json();
+    if(!r.ok){ if(j.error==='pin'){ try{ localStorage.removeItem('jsh-pin'); }catch(err){} } msg.textContent=j.message||'Couldn’t save ('+(j.error||r.status)+').'; return; }
+    try{ localStorage.setItem('jsh-pin', pin); }catch(err){} JP_CACHE[g.id]={pick:P, savedAt:j.savedAt, kick:kickMs(g)}; JP_CACHE._pinSet=true; msg.textContent='Saved. You can change it until tip-off.'; const hd=document.querySelector('#pk .hd .mini'); if(hd) hd.textContent='saved just now'; }
+  catch(err){ msg.textContent='Couldn’t reach the server. Try again in a minute.'; } });
+/* season scorecard on the Jazz team page */
+function jpSeasonMount(ab){ if(ab!==UNI_TEAM) return; fetch(JP_API+'?list=1').then(r=>r.ok?r.json():null).then(async j=>{ if(!j||!j.picks) return; const mine=j.picks.filter(p=>GI[p.game]&&jpMine(GI[p.game])).sort((x,y)=>GI[x.game].date<GI[y.game].date?-1:1); if(!mine.length) return;
+    await Promise.all(mine.filter(p=>GI[p.game].played).map(p=>jpSummary(GI[p.game]))); const m=(location.hash||'').match(/^#\/team\/([^\/#?]+)/); if(!m||norm(dec(m[1]))!==ab||document.getElementById('pk-season')) return;
+    let n=0, tot=0, right=0; const rows=mine.map(p=>{ const g=GI[p.game]; JP_CACHE[g.id]=JP_CACHE[g.id]||p; const P=p.pick; let grade='<span class="dim">'+(g.played?'—':'upcoming')+'</span>';
+      if(g.played){ const G2=jpGrade(g,P); n++; tot+=G2.pct; if(G2.rows[0]&&G2.rows[0].pts>0) right++; grade='<b>'+G2.letter+'</b> <span class="dim">'+Math.round(G2.pct*100)+'%</span>'; }
+      return '<tr class="click" data-href="#/game/'+enc(g.id)+'"><td>'+esc(fmtDate(g.date))+'</td><td>'+(g.home===ab?'vs ':'at ')+esc(jpNick(g.home===ab?g.away:g.home))+'</td><td class="r">'+P.a.pts+'-'+P.h.pts+'</td><td class="r">'+(g.played?g.as+'-'+g.hs:'')+'</td><td class="r">'+grade+'</td></tr>'; }).join('');
+    const html='<div class="sec" id="pk-season"><h2>Your predictions</h2><span class="muted">'+(n?'picked the winner '+right+' of '+n+' · average grade '+Math.round(tot/n*100)+'%':'graded after each final')+'</span></div><div class="card"><div class="bd" style="padding:0"><table class="tbl"><thead><tr><th>Date</th><th>Game</th><th class="r">Your score</th><th class="r">Final</th><th class="r">Grade</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
+    const sec=document.getElementById('s-sched'); if(sec) sec.insertAdjacentHTML('beforebegin', html); else view.insertAdjacentHTML('beforeend', html); }).catch(()=>{}); }
+{ const _rt=renderTeam; renderTeam=function(ab){ _rt(ab); jpSeasonMount(norm(ab||'')); }; }
 /* ar:start - hand-written game articles ("Jamo's preview" / "Jamo's recap"), shared by the NFL and NBA hubs
    (the college hub has the same code inline). Data: d-articles, built by sports-hub/articles/articles.pl from
    <hub>/articles/<game id>.json + .md (preview) and <game id>.recap.json + .md (recap). A json "label" renames the

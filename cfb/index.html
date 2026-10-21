@@ -107044,7 +107044,11 @@ connectDb();
     if(r==='team') tiles(); }
   V.addEventListener('click', e=>{ const h=e.target.closest&&e.target.closest('.fold-h'); if(!h||!V.contains(h)) return; if(e.target.closest('a, input, select, label, button:not(.fold-btn), .seg')) return;
     const el=h.classList.contains('sec')?h:h.closest('.card'); if(!el||!el.dataset.fold||el.dataset.fold==='-') return; e.preventDefault(); const on=el.dataset.foldOpen!=='1'; el.dataset.foldOpen=on?'1':'0'; save(route()||'team', el.dataset.fold, on); paint(el); });
-  new MutationObserver(()=>{ if(!q) q=setTimeout(run,40); }).observe(V,{childList:true,subtree:true}); run(); })();
+  /* a jump link to a folded section (the team page's section tabs, or a link ending in #s-...) opens it */
+  const openId=id=>{ const el=id&&document.getElementById(id); if(!el||!el.dataset.fold||el.dataset.fold==='-'||el.dataset.foldOpen==='1') return; el.dataset.foldOpen='1'; save(route()||'team', el.dataset.fold, true); paint(el); };
+  document.addEventListener('click', e=>{ const a=e.target.closest&&e.target.closest('a[data-sec], a[href*="#s-"]'); if(!a) return; openId(a.dataset.sec||(a.getAttribute('href')||'').split('#').pop()); }, true);
+  let lastDeep=''; const deep=()=>{ const h=location.hash||''; if(h===lastDeep) return; const m=h.match(/#(s-[\w-]+)$/); const el=m&&document.getElementById(m[1]); if(el&&el.dataset.fold){ lastDeep=h; openId(m[1]); } };
+  new MutationObserver(()=>{ if(!q) q=setTimeout(()=>{ run(); deep(); },40); }).observe(V,{childList:true,subtree:true}); run(); deep(); })();
 /* fold:end */
 </script>
 

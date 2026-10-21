@@ -418,7 +418,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
   <footer class="foot"><span id="asof"></span><span>A <i>Kramerica Industries</i> production</span></footer>
 </main>
-<script type="application/json" id="d-meta">{"cfb":"Wed Oct 21, 2026 · 8:04 AM ET","nfl":"Wed Oct 21, 2026 · 8:05 AM ET","nba":"Wed Oct 21, 2026 · 8:06 AM ET","nhl":"Wed Oct 21, 2026 · 8:06 AM ET"}</script>
+<script type="application/json" id="d-meta">{"cfb":"Wed Oct 21, 2026 · 8:04 AM ET","nfl":"","nba":"","nhl":"Wed Oct 21, 2026 · 8:06 AM ET"}</script>
 <script type="text/plain" id="d-cfb">1|2026-08-29|Hawai'i|Stanford|27|37|FINAL|7:00 PM||-4.5|48.5|170|-205|ACC Network||
 1|2026-08-29|Jacksonville State|North Dakota State|7|33|FINAL|5:30 PM||-6.5|46.5|230|-285|CBSSN||
 1|2026-08-29|Memphis|UNLV|27|21|FINAL|10:00 PM||-4.5|55.5|160|-192|Fox||
@@ -5992,7 +5992,9 @@ function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(
     + '<div class="tc-top"><span class="tc-sport">' + SPORT[f.sport].icon + esc(SPORT[f.sport].short) + '</span>' + (rk ? '<span class="tc-rank">#' + rk + '</span>' : '') + '</div>'
     + '<div class="tc-id">' + plate(logo) + '<div style="min-width:0"><div class="tc-name" data-mini="' + esc(f.sport === 'cfb' ? t : o.name(t)) + '">' + esc(f.sport === 'cfb' ? t : f.sport === 'mlb' ? o.nick(t) : o.full(t)) + '</div><div class="tc-meta">' + meta + '</div></div></div>'
     + nx + lastLine + '</a>'; }
-function teamsHTML(){ const cards = FAVS.map((f, i) => teamCard(f, i)).filter(Boolean);
+/* front_soonest: soonest game first - a live game, then the next kickoff; no game left goes last */
+function favSoonKey(f){ const gs = teamGames(f.sport, f.team); if (gs.some(g => g.live)) return -1; const n = gs.find(g => !played(g) && !g.live && g.st !== 'CANCELED' && g.st !== 'POSTPONED'); if (!n) return Infinity; const k = kickMs(n.date, n.time); return k != null ? k : Date.parse(n.date + 'T12:00:00Z'); }
+function teamsHTML(){ const cards = FAVS.slice().sort((a, b) => { const x = favSoonKey(a), y = favSoonKey(b); return x === y ? 0 : x < y ? -1 : 1; }).map((f, i) => teamCard(f, i)).filter(Boolean);
   if (!FAVS.some(f => f.sport === 'nfl')) cards.splice(Math.min(2, cards.length), 0, '<a class="tc pick rise" style="--i:2" href="/nfl/#/settings"><div><span class="tc-sport">' + ICON.fb + 'NFL</span><div class="big">Pick your NFL team</div><div class="small">Choose one in <b>NFL settings</b> and its next game shows up here with a countdown.</div></div></a>');
   $('#teams').innerHTML = cards.join('');
   $('#t-note').textContent = 'tap a card for the team page'; }
@@ -6075,7 +6077,7 @@ function staleHTML(){ const el = $('#stale'); if (!el) return; const MON = {Jan:
 /* Jamo's scorecard (scorecard/make_scorecard.pl): graded picks, what's pending, and the "Mark it down" tracker */
 const SCORE = (() => { try { return JSON.parse(document.getElementById('d-score').textContent) || null; } catch (e) { return null; } })();
 /* articles behind schedule (a scheduled article task that stalled): shown only when something is missing */
-function missHTML(){ const el = $('#miss'), M = (SCORE && SCORE.missing) || []; if (!el) return; if (!M.length) { el.hidden = true; return; }
+function missHTML(){ const el = $('#miss'); if (el) el.hidden = true; return; /* front_soonest: the "Articles behind" banner is off (Jamo, 2026-10-21) */ const M = (SCORE && SCORE.missing) || []; if (!M.length) return;
   el.hidden = false; el.innerHTML = '<b>Articles behind:</b> ' + M.map(m => '<a href="' + esc(m.href) + '">' + esc(m.team) + ' ' + (m.kind === 'recap' ? 'recap' : 'preview') + '</a> <span>(' + esc(m.match) + ', ' + md(m.date) + ')</span>').join(' · ') + ' <span>· the scheduled article task may be waiting on an approval in the Claude app.</span>'; }
 /* Latest from Jamo (d-latest): newest articles, a preview hidden once that game's recap is up */
 const LATEST = (() => { try { return JSON.parse(document.getElementById('d-latest').textContent) || []; } catch (e) { return []; } })();

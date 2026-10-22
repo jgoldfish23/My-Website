@@ -107283,6 +107283,7 @@ connectDb();
   const mic=document.createElement('button'); mic.type='button'; mic.className='vs-mic'; mic.setAttribute('aria-label','Search by voice'); mic.title='Search by voice';
   mic.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>';
   box.appendChild(mic);
+  q.placeholder=window.innerWidth<600?'Search':'Find a team or player'; q.setAttribute('aria-label','Find a team or player');
   /* matching: accents and punctuation off, filler words out, then exact > starts > contains > close spelling */
   const norm=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim();
   const FILL=/^(hey |ok |okay )?((show|pull|bring|open|find|search|look|go)( me)?( up| for| to)? )?(the )?/;

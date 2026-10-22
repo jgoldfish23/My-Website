@@ -51,6 +51,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media (min-width:561px){.jsh-nav{margin:0 auto}}
 @media (min-width:1100px){.jsh-nav{position:absolute;left:50%;transform:translateX(-50%);margin:0;overflow:visible}}
 @media (max-width:360px){.jsh-nav a .jsh-lg{width:16px;height:16px}}
+/* clear of the notch and status bar (2026-10-21, Jamo: "the top tabs bar goes under the top a little"): the bar grows by the phone's safe area at the top, plus a little air on phones */
+.jsh{box-sizing:border-box;height:calc(44px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)}
+@media (max-width:560px){.jsh{height:calc(50px + env(safe-area-inset-top,0px));padding-top:calc(6px + env(safe-area-inset-top,0px))}}
 /* phones (2026-10-21, design pass): every league fits - the page you're on keeps its name, the others show just the logo */
 @media (max-width:560px){.jsh-nav{gap:1px}.jsh-nav a:not(.on){font-size:0;gap:0;padding:0 8px}.jsh-nav a:not(.on) .jsh-lg{width:20px;height:20px}.jsh-nav a.on{padding:0 11px 0 9px}}
 /* phones: the hub header slides away while you scroll down and comes back as soon as you scroll up */
@@ -12361,6 +12364,41 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
   let lastDeep=''; const deep=()=>{ const h=location.hash||''; if(h===lastDeep) return; const m=h.match(/#(s-[\w-]+)$/); const el=m&&document.getElementById(m[1]); if(el&&el.dataset.fold){ lastDeep=h; openId(m[1]); } };
   new MutationObserver(()=>{ if(!q) q=setTimeout(()=>{ run(); deep(); },40); }).observe(V,{childList:true,subtree:true}); run(); deep(); })();
 /* fold:end */
+</script>
+<script>
+/* fresh:start - a cleaner, calmer finish (2026-10-21, Jamo: "let's continue to simplify this and make it look clean, freshen
+   up the UI a bit"). Shared by the CFB, NFL and NBA hubs (inlined by each build.sh after fold.js), so it lands last and
+   only refines what is already there:
+   - cards and stat tiles: rounder corners, a quiet hairline edge, no drop glow, no little colored dash on every tile
+   - section headings get a touch more air; card titles one size; buttons one pill shape
+   - tables: lighter header row and row lines
+   - phones: the long explainer under a page title shows two lines; tap it to read the rest */
+(function(){ const css=
+  '#view .card,#view .tile{border-radius:16px;box-shadow:none}'
+  +'#view .card,#view .tile,#view .tblwrap{border-color:color-mix(in srgb,var(--line) 75%,transparent)}'
+  +'#view .tile::before{display:none}'
+  +'#view .tile .lbl{letter-spacing:.07em;font-weight:700}'
+  +'#view .sec{margin-top:34px}'
+  +'#view .sec h2{letter-spacing:-.018em}'
+  +'#view .card>.hd h3{font-size:15.5px;letter-spacing:-.008em}'
+  +'#view .btn{border-radius:999px}'
+  +'#view .tblwrap{border-radius:14px}'
+  +'#view table.tbl thead th{font-size:11px;letter-spacing:.06em;font-weight:700}'
+  +'#view table.tbl tbody tr{border-color:color-mix(in srgb,var(--line) 60%,transparent)}'
+  +'#view table.tbl tbody td{border-color:color-mix(in srgb,var(--line) 60%,transparent)}'
+  +'@media (max-width:760px){'
+  +  '#view .page-head .sub.fr-clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}'
+  +  '#view .page-head .sub.fr-clamp::after{content:""}'
+  +  '#view .sec{margin-top:28px}'
+  +  '#view .card,#view .tile{border-radius:14px}'
+  +'}';
+  const st=document.createElement('style'); st.id='fresh-css'; st.textContent=css; document.head.appendChild(st);
+  const V=document.getElementById('view'); if(!V||!window.MutationObserver) return; let q=0;
+  /* long page-title explainers: two lines on phones, tap to open */
+  const clamp=()=>{ q=0; V.querySelectorAll('.page-head .sub').forEach(s=>{ if(s.dataset.fr) return; s.dataset.fr='1'; if((s.textContent||'').length<120) return; s.classList.add('fr-clamp'); s.title='Tap to read more'; }); };
+  V.addEventListener('click', e=>{ const s=e.target.closest&&e.target.closest('.page-head .sub.fr-clamp'); if(!s||e.target.closest('a')) return; s.classList.remove('fr-clamp'); s.removeAttribute('title'); });
+  new MutationObserver(()=>{ if(!q) q=setTimeout(clamp,40); }).observe(V,{childList:true,subtree:true}); clamp(); })();
+/* fresh:end */
 </script>
 
 </body>

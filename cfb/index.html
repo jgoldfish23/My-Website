@@ -2571,6 +2571,10 @@ body.themed .pk-card,.pk-card{background:var(--surface)!important}
 .bs-x{font-size:26px;line-height:1;background:none;border:0;color:var(--ink-2);cursor:pointer}
 .bs-g{padding:10px 0;border-top:1px solid var(--line)}.bs-gl{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
 .bs-ls{display:flex;flex-wrap:wrap;gap:6px}.bs-ls a{padding:7px 12px;border-radius:999px;border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:13.5px;font-weight:600}
+/* the More sheet stays solid even where the theme surface is see-through (2026-10-21) */
+.bs-panel{background:#14161b}
+:root[data-theme="light"] .bs-panel{background:#fff}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .bs-panel{background:#fff}}
 </style>
 
 <header class="top">

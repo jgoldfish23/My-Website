@@ -16169,11 +16169,16 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
    - typed searches list matching players under the teams, too. */
 (function(){
   const q=document.getElementById('q'), res=document.getElementById('qres'); const box=q&&q.closest('.search'); if(!q||!res||!box) return;
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  /* iPhones and iPads don't let web pages use speech recognition reliably (not at all from a home-screen icon), so there
+     the mic opens the keyboard and the keyboard's own dictation mic does the listening (2026-10-21, Jamo: "it doesn't
+     work on my iPhone and the mic symbol is kind of hidden") */
+  const IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)||/[?&]vskb=1/.test(location.search); /* ?vskb=1 forces this mode for testing */
+  const SR=IOS?null:(window.SpeechRecognition||window.webkitSpeechRecognition);
   const st=document.createElement('style'); st.textContent=
-    '.search{position:relative}.search #q{padding-right:44px}'
-    +'.vs-mic{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:32px;height:32px;display:grid;place-items:center;border-radius:50%;border:0;background:transparent;color:var(--ink-2);cursor:pointer;z-index:2}'
-    +'.vs-mic:hover{color:var(--ink);background:rgba(127,127,127,.12)}.vs-mic svg{width:18px;height:18px}'
+    '.search{position:relative}.search #q{padding-right:48px}'
+    +'.vs-mic{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:36px;height:36px;display:grid;place-items:center;border-radius:50%;border:0;background:var(--accent);color:#fff;cursor:pointer;z-index:2;box-shadow:0 2px 10px -2px color-mix(in srgb,var(--accent) 70%,transparent)}'
+    +'.vs-mic:hover{filter:brightness(1.1)}.vs-mic svg{width:19px;height:19px}'
+    +'.vs-kb{display:flex;align-items:center;gap:10px;padding:12px;font-size:14px;line-height:1.35;color:var(--ink)}.vs-kb .vs-k{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--accent);color:#fff}.vs-kb .vs-k svg{width:18px;height:18px}'
     +'.vs-mic.on{color:#fff;background:#e5484d;animation:vsPulse 1.2s ease-in-out infinite}'
     +'@keyframes vsPulse{0%,100%{box-shadow:0 0 0 0 rgba(229,72,77,.55)}50%{box-shadow:0 0 0 8px rgba(229,72,77,0)}}'
     +'.vs-sec{padding:6px 10px 2px;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}'
@@ -16210,10 +16215,17 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
     if(top&&top.s>=.84&&(!next||top.s-next.s>=.08)){ res.innerHTML='<div class="vs-say">Opening <b>'+top.it.n.replace(/[<>&]/g,'')+'</b>…</div>'; res.hidden=false; setTimeout(()=>{ res.hidden=true; q.value=''; q.blur(); location.hash=top.it.href.replace(/^.*#/,'#'); },450); return; }
     if(!all.length){ res.innerHTML='<div class="vs-say">Heard “<b>'+v.replace(/[<>&]/g,'')+'</b>” - no team or player by that name. Try again or type it.</div>'; res.hidden=false; return; }
     res.innerHTML='<div class="vs-say">Heard “<b>'+v.replace(/[<>&]/g,'')+'</b>”</div>'+all.slice(0,8).map((x,i)=>hit(x,i===0)).join(''); res.hidden=false; }
+  /* keyboard-dictation mode (iPhone, or no speech recognition): the mic opens the box with the keyboard up; once the
+     dictated words stop coming for a moment, the same matching runs and a clear match opens */
+  let kbMode=false, kbT=0;
+  function keyboardVoice(){ kbMode=true; q.value=''; q.focus();
+    res.innerHTML='<div class="vs-kb"><span class="vs-k">'+mic.innerHTML+'</span><span>Tap the <b>microphone on your keyboard</b> (bottom right) and say a team or a player.</span></div>'; res.hidden=false; }
+  q.addEventListener('input', ()=>{ if(!kbMode) return; clearTimeout(kbT); if(!q.value.trim()) return; kbT=setTimeout(()=>{ kbMode=false; said(q.value); }, 1300); });
+  q.addEventListener('blur', ()=>{ setTimeout(()=>{ if(document.activeElement!==q){ kbMode=false; clearTimeout(kbT); } }, 400); });
   let rec=null, live=false;
   function stop(){ live=false; mic.classList.remove('on'); q.placeholder=q.dataset.ph||q.placeholder; if(rec) try{ rec.stop(); }catch(e){} }
   mic.addEventListener('click', ()=>{
-    if(!SR){ q.focus(); res.innerHTML='<div class="vs-say">Tap the <b>microphone on your keyboard</b> and say a team or a player.</div>'; res.hidden=false; return; }
+    if(!SR){ keyboardVoice(); return; }
     if(live){ stop(); return; }
     rec=new SR(); rec.lang='en-US'; rec.interimResults=true; rec.maxAlternatives=3; live=true; mic.classList.add('on'); q.dataset.ph=q.dataset.ph||q.placeholder; q.placeholder='Listening… say a team or player'; q.value='';
     res.innerHTML='<div class="vs-say">Listening… say a team or a player.</div>'; res.hidden=false;

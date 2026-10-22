@@ -106232,6 +106232,13 @@ document.addEventListener('click', e=>{ const m=e.target.closest&&e.target.close
 addEventListener('hashchange', ()=>{ btMark(); btSheet(false); });
 /* after the grouped navigation (navgroups.js) has built its section tabs, whose links the bar reuses */
 setTimeout(btBuild, 250);
+/* patch111: voice search source (see patch111.pl) */
+window.JSH_VOICE = {
+  teams: () => Object.values(T).filter(t => t.level === 'FBS' || t.level === 'FCS').map(t => { const lg = logoOf(t); return { n: t.name, alt: [t.disp, t.mascot ? tshort(t.name) + ' ' + t.mascot : '', t.mascot].filter(Boolean), sub: [t.conf, t.level].filter(Boolean).join(' · '), href: '#/team/' + enc(t.name), logo: lg ? lg.icon : '' }; }),
+  players: () => { const out = [], seen = new Set(); const CAT = {passing: 'passing', rushing: 'rushing', receiving: 'receiving', defensive: 'defense', interceptions: 'defense', kicking: 'kicker', punting: 'punter'};
+    Object.keys(BOX_BY_TEAM).forEach(tn => { if (!T[tn]) return; const lg = logoOf(T[tn]); Object.values(seasonBox(tn).players).forEach(e => { const k = tn + '|' + dkey(e.n); if (seen.has(k)) return; seen.add(k); out.push({ n: e.n, sub: tshort(tn) + ' · ' + (CAT[e.cat] || e.cat), href: '#/player/' + enc(tn) + '/' + enc(e.n), logo: lg ? lg.icon : '' }); }); });
+    return out; }
+};
 /* ---------- What has to happen (patch91) ---------- */
 function scnPct(x){ if(x==null) return '<span class="dim">—</span>'; if(x>0&&x<0.005) return '&lt;1%'; if(x<1&&x>0.995) return '&gt;99%'; return Math.round(x*100)+'%'; }
 function renderScenarios(name){ setNav('scenarios'); const t=T[name||cfpFocus()]||T['BYU'];
@@ -107245,6 +107252,74 @@ connectDb();
   V.addEventListener('click', e=>{ const s=e.target.closest&&e.target.closest('.page-head .sub.fr-clamp'); if(!s||e.target.closest('a')) return; s.classList.remove('fr-clamp'); s.removeAttribute('title'); });
   new MutationObserver(()=>{ if(!q) q=setTimeout(clamp,40); }).observe(V,{childList:true,subtree:true}); clamp(); })();
 /* fresh:end */
+</script>
+<script>
+/* voice:start - voice search for teams and players (2026-10-21, Jamo: "have a voice search option to pull up teams and
+   players"). Shared by the CFB, NFL and NBA hubs (inlined by each build.sh after fresh.js). Each hub hands over its teams
+   and players through window.JSH_VOICE = {teams(), players()} (lists of {n, alt, sub, href, logo}); this file adds:
+   - a microphone button in the "Find a team" box. Say a team or a player ("Lauri Markkanen", "pull up BYU"): a clear
+     match opens straight away, otherwise the matches are listed. Uses the browser's speech recognition; where there is
+     none (some home-screen apps), the button opens the box and points to the keyboard's dictation mic.
+   - typed searches list matching players under the teams, too. */
+(function(){
+  const q=document.getElementById('q'), res=document.getElementById('qres'); const box=q&&q.closest('.search'); if(!q||!res||!box) return;
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const st=document.createElement('style'); st.textContent=
+    '.search{position:relative}.search #q{padding-right:44px}'
+    +'.vs-mic{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:32px;height:32px;display:grid;place-items:center;border-radius:50%;border:0;background:transparent;color:var(--ink-2);cursor:pointer;z-index:2}'
+    +'.vs-mic:hover{color:var(--ink);background:rgba(127,127,127,.12)}.vs-mic svg{width:18px;height:18px}'
+    +'.vs-mic.on{color:#fff;background:#e5484d;animation:vsPulse 1.2s ease-in-out infinite}'
+    +'@keyframes vsPulse{0%,100%{box-shadow:0 0 0 0 rgba(229,72,77,.55)}50%{box-shadow:0 0 0 8px rgba(229,72,77,0)}}'
+    +'.vs-sec{padding:6px 10px 2px;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}'
+    +'a.vs-hit{display:flex;align-items:center;gap:8px;padding:7px 10px;color:inherit;text-decoration:none;border-radius:8px}a.vs-hit:hover,a.vs-hit.on{background:rgba(127,127,127,.12)}'
+    +'a.vs-hit img{width:20px;height:20px;object-fit:contain;flex:none}a.vs-hit b{font-weight:600}a.vs-hit .mini{margin-left:auto;white-space:nowrap}'
+    +'.vs-say{padding:8px 10px;font-size:13px;color:var(--ink-2)}.vs-say b{color:var(--ink)}';
+  document.head.appendChild(st);
+  const mic=document.createElement('button'); mic.type='button'; mic.className='vs-mic'; mic.setAttribute('aria-label','Search by voice'); mic.title='Search by voice';
+  mic.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>';
+  box.appendChild(mic);
+  /* matching: accents and punctuation off, filler words out, then exact > starts > contains > close spelling */
+  const norm=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim();
+  const FILL=/^(hey |ok |okay )?((show|pull|bring|open|find|search|look|go)( me)?( up| for| to)? )?(the )?/;
+  const clean=s=>norm(s).replace(FILL,'').replace(/ (please|page|team page|stats)$/,'').trim();
+  const bi=s=>{ const o=new Map(); s=' '+s+' '; for(let i=0;i<s.length-1;i++){ const k=s.slice(i,i+2); o.set(k,(o.get(k)||0)+1); } return o; };
+  const dice=(a,b)=>{ if(!a||!b) return 0; const A=bi(a), B=bi(b); let n=0, ta=0, tb=0; A.forEach(v=>ta+=v); B.forEach(v=>tb+=v); A.forEach((v,k)=>{ n+=Math.min(v,B.get(k)||0); }); return 2*n/(ta+tb); };
+  function score(v, it){ const names=[it.n].concat(it.alt||[]).map(norm).filter(Boolean); let best=0;
+    names.forEach(nm=>{ let s=0; if(nm===v) s=1; else if(nm.startsWith(v+' ')||nm.endsWith(' '+v)) s=.93; else if(v.length>=3&&nm.includes(v)) s=.86; else s=dice(v,nm)*.9;
+      const last=nm.split(' ').slice(1).join(' '); if(last&&v.length>=4){ if(last===v) s=Math.max(s,.9); else s=Math.max(s,dice(v,last)*.84); } best=Math.max(best,s); }); return best; }
+  let CACHE=null; const lists=()=>{ if(CACHE) return CACHE; const P=window.JSH_VOICE; if(!P) return {teams:[],players:[]}; try{ CACHE={teams:P.teams()||[], players:P.players()||[]}; }catch(e){ CACHE={teams:[],players:[]}; } return CACHE; };
+  const rank=(v, L, min)=>L.map(it=>({it, s:score(v,it)})).filter(x=>x.s>=min).sort((a,b)=>b.s-a.s);
+  const hit=(x,on)=>'<a class="vs-hit'+(on?' on':'')+'" href="'+x.it.href+'">'+(x.it.logo?'<img src="'+x.it.logo+'" alt="">':'')+'<b>'+x.it.n.replace(/[<>&]/g,'')+'</b><span class="mini">'+String(x.it.sub||'').replace(/[<>&]/g,'')+'</span></a>';
+  /* typed searches: players under the hub's own team list */
+  function addPlayers(){ const v=clean(q.value); if(v.length<3||res.hidden) return; res.querySelectorAll('.vs-sec,.vs-hit.p').forEach(e=>e.remove());
+    const ps=rank(v, lists().players, .72).slice(0,6); if(!ps.length) return; const noTeams=/No team matches/.test(res.textContent); if(noTeams) res.innerHTML='';
+    res.insertAdjacentHTML('beforeend','<div class="vs-sec">Players</div>'+ps.map(x=>hit(x).replace('class="vs-hit','class="vs-hit p')).join('')); res.hidden=false; }
+  q.addEventListener('input', ()=>setTimeout(addPlayers,0));
+  res.addEventListener('click', e=>{ const a=e.target.closest('a.vs-hit'); if(!a) return; res.hidden=true; q.value=''; q.blur(); });
+  /* voice */
+  function said(text){ const v=clean(text); if(!v) return; const L=lists(); let all=rank(v, L.teams.map(it=>Object.assign({k:'t'},it)), .6).concat(rank(v, L.players.map(it=>Object.assign({k:'p'},it)), .66)).sort((a,b)=>b.s-a.s);
+    /* nothing for the whole phrase (a misheard first name, say): try its clear words one at a time and list what fits */
+    if(!all.length){ const words=v.split(' ').filter(w=>w.length>=4); if(words.length){ const by=it=>Math.max(...words.map(w=>score(w,it)))*.9; L.teams.concat(L.players).forEach(it=>{ const s=by(it); if(s>=.72) all.push({it, s:Math.min(s,.8)}); }); all.sort((a,b)=>b.s-a.s); } }
+    q.value=v; const top=all[0], next=all[1];
+    if(top&&top.s>=.84&&(!next||top.s-next.s>=.08)){ res.innerHTML='<div class="vs-say">Opening <b>'+top.it.n.replace(/[<>&]/g,'')+'</b>…</div>'; res.hidden=false; setTimeout(()=>{ res.hidden=true; q.value=''; q.blur(); location.hash=top.it.href.replace(/^.*#/,'#'); },450); return; }
+    if(!all.length){ res.innerHTML='<div class="vs-say">Heard “<b>'+v.replace(/[<>&]/g,'')+'</b>” - no team or player by that name. Try again or type it.</div>'; res.hidden=false; return; }
+    res.innerHTML='<div class="vs-say">Heard “<b>'+v.replace(/[<>&]/g,'')+'</b>”</div>'+all.slice(0,8).map((x,i)=>hit(x,i===0)).join(''); res.hidden=false; }
+  let rec=null, live=false;
+  function stop(){ live=false; mic.classList.remove('on'); q.placeholder=q.dataset.ph||q.placeholder; if(rec) try{ rec.stop(); }catch(e){} }
+  mic.addEventListener('click', ()=>{
+    if(!SR){ q.focus(); res.innerHTML='<div class="vs-say">Tap the <b>microphone on your keyboard</b> and say a team or a player.</div>'; res.hidden=false; return; }
+    if(live){ stop(); return; }
+    rec=new SR(); rec.lang='en-US'; rec.interimResults=true; rec.maxAlternatives=3; live=true; mic.classList.add('on'); q.dataset.ph=q.dataset.ph||q.placeholder; q.placeholder='Listening… say a team or player'; q.value='';
+    res.innerHTML='<div class="vs-say">Listening… say a team or a player.</div>'; res.hidden=false;
+    rec.onresult=e=>{ const r=e.results[e.results.length-1]; const t=r[0].transcript; q.value=t; if(r.isFinal){ stop();
+      /* try each alternative the recognizer offered and keep the one that matches best */
+      let best=t, bs=-1; for(let i=0;i<r.length;i++){ const v=clean(r[i].transcript); const L=lists(); const s=Math.max(0,...L.teams.concat(L.players).slice(0,4000).map(it=>score(v,it))); if(s>bs){ bs=s; best=r[i].transcript; } } said(best); } };
+    rec.onerror=e=>{ stop(); res.innerHTML='<div class="vs-say">'+(e.error==='not-allowed'||e.error==='service-not-allowed'?'The microphone is blocked for this site. Allow it in your browser settings, or tap the <b>microphone on your keyboard</b> instead.':e.error==='no-speech'?'Didn’t catch that. Tap the mic and try again.':'Voice search had a hiccup. Try again or type it.')+'</div>'; res.hidden=false; };
+    rec.onend=()=>{ if(live) stop(); };
+    try{ rec.start(); }catch(err){ stop(); }
+  });
+})();
+/* voice:end */
 </script>
 
 </body>

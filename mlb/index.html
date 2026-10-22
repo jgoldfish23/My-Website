@@ -261,7 +261,7 @@ Object.keys(ARTICLES).forEach(k=>{ const a=ARTICLES[k].preview||{}; if(a.angle||
 function articleCardHTML(ar,kind,folded){ if(!ar||!ar.body) return '';
   const inl=s=>esc(s).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/(^|[\s(])\*([^*\s][^*]*)\*/g,'$1<i>$2</i>');
   const blk=b=>{ b=b.trim(); if(!b) return ''; if(b.startsWith('## ')) return '<h4>'+inl(b.slice(3))+'</h4>'; if(/^- /.test(b)) return '<ul>'+b.split('\n').filter(l=>l.trim()).map(l=>'<li>'+inl(l.replace(/^- /,''))+'</li>').join('')+'</ul>'; return '<p>'+inl(b).replace(/\n/g,'<br>')+'</p>'; };
-  const bl=ar.body.split(/\n{2,}/).filter(b=>b.trim()); const n=folded?0:Math.max(1,ar.lead||2);
+  const bl=ar.body.split(/\n{2,}/).filter(b=>b.trim()); const n=0; /* teasers (Jamo, 2026-10-21: less on the page): headline and dek, the whole piece one tap away */
   const head=bl.slice(0,n).map(blk).join(''), rest=bl.slice(n).map(blk).join(''); const word=ar.label||(kind==='recap'?'recap':'preview');
   return '<div class="card ar'+(kind==='recap'?' ar-recap':'')+(folded?' ar-folded':'')+'"><div class="hd"><h3>Jamo\'s '+esc(word)+'</h3>'+(folded?'<span class="mini">written before the game</span>':ar.updated?'<span class="mini">updated '+esc(ar.updated)+'</span>':'')+'</div><div class="bd">'
     +'<h2 class="ar-t">'+esc(ar.title||'')+'</h2>'+(ar.dek?'<p class="ar-dek">'+esc(ar.dek)+'</p>':'')

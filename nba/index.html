@@ -3092,6 +3092,7 @@ a.nl-t:hover{border-color:var(--accent)}
 .jt-st{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;font-family:"Orbitron",var(--disp);font-size:10.5px;letter-spacing:.1em;color:#ffb547;text-shadow:0 0 5px rgba(255,170,40,.6)}
 .jt-st b{color:#fff;min-width:44px;text-shadow:0 0 5px rgba(255,255,255,.4)}
 @media (max-width:600px){.jt{padding-top:20px}.jt-cables::before,.jt-cables::after{height:22px}.jt-box{padding:8px}.jt-screen{gap:4px;padding:12px 6px}.jt-name{padding:3px 6px;gap:5px}.jt-name span{font-size:11px;letter-spacing:.06em}.jt-pl,.jt-pl img{width:18px;height:18px}.jt-ribbon,.jt-lines{margin:0 4px}.jt-stats{margin:8px 4px 0}.jt-st{gap:3px 10px;font-size:9.5px}.jt-lines td{font-size:12px;padding:3px 2px}}
+.jt-ld{font-size:13.5px;padding:3px 0;border-top:1px solid var(--line)}.jt-ld:first-of-type{border-top:0}
 </style>
 
 <header class="top">
@@ -11859,6 +11860,13 @@ function jtHTML(g){ const a=team(g.away), h=team(g.home); const on=g.live||g.pla
     /* the jumbotron carries the line score, so the separate "Score by quarter" card goes */
     { const sq=[...view.querySelectorAll('.card')].find(c=>{ const t=c.querySelector('.hd h3'); return t&&/^Score by quarter/.test(t.textContent); }); if(sq){ const gp=sq.parentElement; sq.remove(); if(gp&&gp.classList.contains('g2')) gp.classList.remove('g2'); } }
     hero.outerHTML=jtHTML(g); if((g.live||g.played)&&typeof nlFetch==='function'){ const had=!!(NL_SUM[g.id]&&NL_SUM[g.id].j); nlFetch(g).then(()=>{ if(had&&!g.live) return; const el=view.querySelector('.jt'); const m2=(location.hash||'').match(/^#\/gamenight\/([^\/#?]+)/); if(el&&m2&&dec(m2[1])===g.id) el.outerHTML=jtHTML(g); setTimeout(sbStart,0); }); } setTimeout(sbStart,0); }; }
+/* the Leaders card under the jumbotron fills from the live box score instead of waiting for the nightly data */
+function jtLeaders(g){ const S=NL_SUM[g.id]&&NL_SUM[g.id].j; const card=[...view.querySelectorAll('.card')].find(c=>{ const t=c.querySelector('.hd h3'); return t&&t.textContent.trim()==='Leaders'; }); if(!S||!S.players||!card) return;
+  const bd=card.querySelector('.bd'); if(!bd||!/once the box score/.test(bd.textContent)) return; const lines=nlLines([g]); if(!lines.length) return;
+  const side=ab=>{ const L=lines.filter(x=>x.ab===ab); const top=k=>L.slice().sort((a,b)=>b[k]-a[k])[0]; const row=(k,lab)=>{ const p=top(k); return p&&p[k]>0?'<div class="jt-ld"><span class="dim">'+lab+'</span> <b>'+esc(p.n)+'</b> '+p[k]+'</div>':''; };
+    return '<div><div class="mini" style="font-weight:700;margin-bottom:4px">'+esc(team(ab).disp)+'</div>'+row('PTS','PTS')+row('REB','REB')+row('AST','AST')+'</div>'; };
+  bd.innerHTML=side(g.away)+side(g.home); }
+{ const _gn2=renderGameNight; renderGameNight=function(id){ _gn2(id); const m=(location.hash||'').match(/^#\/gamenight\/([^\/#?]+)/); const g=m&&GI[dec(m[1])]; if(!g||!(g.live||g.played)) return; jtLeaders(g); nlFetch(g).then(()=>jtLeaders(g)); }; }
 /* ar:start - hand-written game articles ("Jamo's preview" / "Jamo's recap"), shared by the NFL and NBA hubs
    (the college hub has the same code inline). Data: d-articles, built by sports-hub/articles/articles.pl from
    <hub>/articles/<game id>.json + .md (preview) and <game id>.recap.json + .md (recap). A json "label" renames the

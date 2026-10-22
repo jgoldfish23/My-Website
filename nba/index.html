@@ -3050,6 +3050,48 @@ a.nl-t:hover{border-color:var(--accent)}
 .nl-m{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nl-m .ow-pl{flex:none}
 .nl-next{font-size:11px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Jumbotron on the game-night screen (p2jumbo.js, 2026-10-21) */
+.jt{position:relative;max-width:820px;margin:14px auto 0;padding-top:26px}
+.jt-cables::before,.jt-cables::after{content:"";position:absolute;top:0;width:3px;height:30px;background:linear-gradient(180deg,#6b7078,#23262b);border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.4)}
+.jt-cables::before{left:18%}.jt-cables::after{right:18%}
+.jt-box{position:relative;padding:10px;border-radius:16px;background:linear-gradient(180deg,#30343b,#15171b 30%,#0b0c0f);border:1px solid #44484f;box-shadow:0 40px 70px -30px rgba(0,0,0,.9),0 0 0 3px #060708,inset 0 1px 0 rgba(255,255,255,.18),inset 0 -2px 0 rgba(0,0,0,.6)}
+.jt-box::before,.jt-box::after{content:"";position:absolute;top:8px;width:6px;height:6px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#b9bec6,#4a4e55);box-shadow:0 0 0 1px #000}
+.jt-box::before{left:8px}.jt-box::after{right:8px}
+.jt-ribbon{position:relative;height:24px;margin:0 10px;overflow:hidden;border-radius:4px;background:#040404;box-shadow:inset 0 0 0 1px #1d1f23}
+.jt-marq{display:flex;width:max-content;animation:jtMarq 26s linear infinite}
+.jt-marq span{padding-right:60px;font-family:"Orbitron",var(--disp);font-weight:600;font-size:11px;line-height:24px;letter-spacing:.22em;white-space:nowrap;color:#ffb547;text-shadow:0 0 6px rgba(255,170,40,.8)}
+@keyframes jtMarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.jt-marq{animation:none}}
+.jt-screen{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:10px;margin:8px 0;padding:16px 12px 14px;border-radius:8px;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#14161b,#020203 70%);box-shadow:inset 0 0 0 1px #1d2026,inset 0 0 40px rgba(0,0,0,.9)}
+.jt-screen::after,.jt-ribbon::after,.jt-lines::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,transparent 52%,rgba(0,0,0,.6) 56%);background-size:4px 4px}
+.jt-team{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;transition:opacity .3s}
+.jt-team.dim{opacity:.5}
+.jt-name{display:flex;align-items:center;justify-content:center;gap:7px;max-width:100%;padding:3px 10px;border-radius:4px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--tc) 75%,transparent) 15%,color-mix(in srgb,var(--tc) 75%,transparent) 85%,transparent)}
+.jt-name span{font-family:"Orbitron",var(--disp);font-weight:800;font-size:15px;letter-spacing:.1em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 0 8px rgba(255,255,255,.5)}
+.jt-pl{flex:none;display:inline-grid;place-items:center;width:24px;height:24px;border-radius:5px;background:#fff;box-shadow:0 0 6px rgba(255,255,255,.35)}.jt-pl img{width:19px;height:19px;object-fit:contain}
+.jt-score{font-family:"Orbitron",var(--disp);font-weight:800;font-size:clamp(58px,15vw,104px);line-height:1;letter-spacing:.02em;color:#ffcf3a;text-shadow:0 0 10px rgba(255,190,40,.85),0 0 28px rgba(255,140,0,.45);font-variant-numeric:tabular-nums}
+.jt-dig{position:relative;display:inline-block}
+.jt-dig::before{content:attr(data-ghost);position:absolute;inset:0;color:rgba(255,200,70,.07);text-shadow:none;pointer-events:none}
+.jt-dig.off{color:rgba(255,200,70,.25);text-shadow:none}
+.jt-rec{font-family:"Orbitron",var(--disp);font-size:10.5px;letter-spacing:.14em;color:#8f97a3}
+.jt-mid{display:flex;flex-direction:column;align-items:center;gap:2px;padding:0 4px}
+.jt-lab{font-family:"Orbitron",var(--disp);font-size:9px;letter-spacing:.24em;color:#7d8590}
+.jt-per{font-family:"Orbitron",var(--disp);font-weight:800;font-size:clamp(20px,5vw,30px);color:#7dffb0;text-shadow:0 0 10px rgba(80,255,150,.7);margin-bottom:6px;white-space:nowrap}
+.jt-clock{font-family:"Orbitron",var(--disp);font-weight:800;font-size:clamp(26px,7vw,44px);line-height:1;color:#ff4a3d;text-shadow:0 0 10px rgba(255,60,50,.85),0 0 26px rgba(255,40,30,.4);font-variant-numeric:tabular-nums}
+.jt-clock .jt-dig::before{color:rgba(255,80,60,.08)}
+.jt .jt-cd{font-size:clamp(20px,5.5vw,30px)}
+.jt.is-live .jt-marq span{color:#ffd166}
+.jt-lines{position:relative;margin:0 10px;padding:6px 8px;border-radius:6px;background:#030303;box-shadow:inset 0 0 0 1px #1d2026;overflow:hidden}
+.jt-lines table{width:100%;border-collapse:collapse;font-family:"Orbitron",var(--disp);font-variant-numeric:tabular-nums}
+.jt-lines th{font-size:9.5px;font-weight:600;letter-spacing:.14em;color:#7d8590;padding:2px 4px;text-align:center}
+.jt-lines td{font-size:14px;font-weight:700;color:#ffcf3a;text-shadow:0 0 6px rgba(255,190,40,.6);padding:3px 4px;text-align:center}
+.jt-lines td.jt-ab{color:#fff;text-align:left;letter-spacing:.1em;text-shadow:0 0 6px rgba(255,255,255,.4)}
+.jt-lines td.jt-t{color:#ff4a3d;text-shadow:0 0 6px rgba(255,60,50,.7)}
+.jt-stats{display:grid;gap:4px;margin:8px 10px 2px}
+.jt-st{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;font-family:"Orbitron",var(--disp);font-size:10.5px;letter-spacing:.1em;color:#ffb547;text-shadow:0 0 5px rgba(255,170,40,.6)}
+.jt-st b{color:#fff;min-width:44px;text-shadow:0 0 5px rgba(255,255,255,.4)}
+@media (max-width:600px){.jt{padding-top:20px}.jt-cables::before,.jt-cables::after{height:22px}.jt-box{padding:8px}.jt-screen{gap:4px;padding:12px 6px}.jt-name{padding:3px 6px;gap:5px}.jt-name span{font-size:11px;letter-spacing:.06em}.jt-pl,.jt-pl img{width:18px;height:18px}.jt-ribbon,.jt-lines{margin:0 4px}.jt-stats{margin:8px 4px 0}.jt-st{gap:3px 10px;font-size:9.5px}.jt-lines td{font-size:12px;padding:3px 2px}}
 </style>
 
 <header class="top">
@@ -11785,6 +11827,38 @@ async function nlFill(day, gs){ await Promise.all(gs.filter(g=>g.live||g.played)
 { const _rs=renderScores; renderScores=function(d, filter){ _rs(d, filter); const day=nearestDate(d); const gs=G.filter(g=>g.date===day); clearInterval(NL_TIMER); if(!gs.length) return;
     const at=view.querySelector('.homeband')||view.querySelector('.toolbar'); if(!at) return; at.insertAdjacentHTML('afterend', nlCardHTML(day, gs)); const el=document.getElementById('nl'); if(el) el.dataset.day=day;
     nlFill(day, gs); if(gs.some(g=>!g.played)) NL_TIMER=setInterval(()=>{ if(!document.getElementById('nl')){ clearInterval(NL_TIMER); return; } nlFill(day, G.filter(g=>g.date===day)); }, 60e3); }; }
+/* ---------- Jumbotron (2026-10-21, Jamo: "on the game-night scoreboard for the Jazz, make the score look like a jumbotron
+   in an NBA arena"). The game-night screen's score block becomes a center-hung arena scoreboard: a dark metal housing on
+   cables, an LED ribbon across the top, amber LED score digits (with the unlit segments ghosted behind them), the period
+   and a red game clock in the middle, an LED line score and a team-stats ribbon at the bottom. Before tip-off it counts
+   down; after the final it says FINAL. Stats and the line score come from the game summary (nlFetch in p2lead.js). ---------- */
+function jtClock(g){ if(g.played) return {per:'FINAL', clk:''}; const c=String(g.clk||'');
+  let m=c.match(/^([\d:.]+)\s*-\s*(.+)$/); if(m) return {per:m[2].replace(/^(\d)(st|nd|rd|th)$/i,'Q$1').replace(/^OT$/i,'OT').toUpperCase(), clk:m[1]};
+  if(/half/i.test(c)) return {per:'HALF', clk:'0:00'}; m=c.match(/end of (\w+)/i); if(m) return {per:'END '+m[1].replace(/^(\d)(st|nd|rd|th)$/i,'Q$1').toUpperCase(), clk:'0:00'};
+  return {per:(c||'LIVE').toUpperCase().slice(0,10), clk:''}; }
+function jtDig(v, cls){ v=String(v==null?'':v); return '<span class="jt-dig '+(cls||'')+'" data-ghost="'+'8'.repeat(Math.max(v.replace(/[^0-9]/g,'').length,1))+'">'+esc(v)+'</span>'; }
+function jtHTML(g){ const a=team(g.away), h=team(g.home); const on=g.live||g.played; const S=(typeof NL_SUM!=='undefined'&&NL_SUM[g.id]&&NL_SUM[g.id].j)||null;
+  const lead=g.played?(g.as>g.hs?'a':g.hs>g.as?'h':''):'';
+  const side=(t,sc,k)=>'<div class="jt-team '+k+(lead&&lead!==k?' dim':'')+'" style="--tc:'+sbCardColor(t)+'"><div class="jt-name">'+sbPlate(t,'jt-pl')+'<span>'+esc(t.disp.toUpperCase())+'</span></div>'
+    +'<div class="jt-score">'+(on?jtDig(sc):jtDig('--','off'))+'</div><div class="jt-rec">'+esc(t.other?'':(g.pre?'PRESEASON':recStr(t.ab)))+'</div></div>';
+  let mid; if(on){ const C=jtClock(g); mid='<div class="jt-mid"><div class="jt-lab">'+(g.played?'GAME':'PERIOD')+'</div><div class="jt-per">'+esc(C.per)+'</div>'+(C.clk?'<div class="jt-lab">CLOCK</div><div class="jt-clock">'+jtDig(C.clk)+'</div>':'')+'</div>'; }
+  else mid='<div class="jt-mid"><div class="jt-lab">TIP-OFF</div>'+sbClock(kickMs(g),'jt-cd')+'<div class="jt-lab" style="margin-top:6px">'+esc(kick(g))+' '+esc(tzInfo().lbl)+'</div></div>';
+  /* line score: the summary's quarter scores, else the schedule's */
+  let lines=''; const qrow=(t,ha,fallback,tot)=>{ const r=S&&S.ls?S.ls.find(x=>x.ha===ha):null; const q=r?r.ls:(fallback||[]); return {t, q, tot:r?r.s:tot}; };
+  const L=[qrow(a,'away',g.als,g.as), qrow(h,'home',g.hls,g.hs)]; const nq=Math.max(4, ...L.map(x=>x.q.length));
+  if(on&&L.some(x=>x.q.length)) lines='<div class="jt-lines"><table><thead><tr><th></th>'+Array.from({length:nq},(_,i)=>'<th>'+(i<4?i+1:'OT'+(i>4?i-3:''))+'</th>').join('')+'<th>T</th></tr></thead><tbody>'
+    +L.map(x=>'<tr><td class="jt-ab">'+esc(x.t.ab)+'</td>'+Array.from({length:nq},(_,i)=>'<td>'+(x.q[i]!=null&&x.q[i]!==''?esc(String(x.q[i])):'')+'</td>').join('')+'<td class="jt-t">'+esc(String(x.tot==null?'':x.tot))+'</td></tr>').join('')+'</tbody></table></div>';
+  /* team stats ribbon */
+  let stats=''; if(S&&S.teams&&S.teams.length===2){ const st=ha=>{ const t=S.teams.find(x=>x.ha===ha); return t&&t.stats||{}; }; const row=(t,s)=>'<div class="jt-st"><b>'+esc(t.ab)+'</b><span>FG '+esc(s.fgp||'-')+'%</span><span>3PT '+esc(s.tp||'-')+'</span><span>REB '+esc(s.reb||'-')+'</span><span>AST '+esc(s.ast||'-')+'</span><span>TO '+esc(s.tto||s.to||'-')+'</span></div>';
+    stats='<div class="jt-stats">'+row(a,st('away'))+row(h,st('home'))+'</div>'; }
+  const ribbon=[g.live?'● LIVE':g.played?'FINAL':'TONIGHT', a.disp.toUpperCase()+' AT '+h.disp.toUpperCase(), (g.venue||'').toUpperCase(), g.tv?tvShort(g.tv).toUpperCase():'', g.spread!=null?spreadStr(g,{short:true}).toUpperCase():'', g.total!=null?'O/U '+g.total:''].filter(Boolean).join('   ★   ');
+  return '<section class="jt'+(g.live?' is-live':'')+'" aria-label="Scoreboard: '+esc(a.disp)+' '+(on?g.as:'')+', '+esc(h.disp)+' '+(on?g.hs:'')+'"><div class="jt-cables" aria-hidden="true"></div><div class="jt-box">'
+    +'<div class="jt-ribbon" aria-hidden="true"><div class="jt-marq"><span>'+esc(ribbon)+'</span><span>'+esc(ribbon)+'</span></div></div>'
+    +'<div class="jt-screen">'+side(a,g.as,'a')+mid+side(h,g.hs,'h')+'</div>'+lines+stats+'</div></section>'; }
+{ const _gn=renderGameNight; renderGameNight=function(id){ _gn(id); const m=(location.hash||'').match(/^#\/gamenight\/([^\/#?]+)/); const g=m&&GI[dec(m[1])]; if(!g) return; const hero=view.querySelector('.gn-hero'); if(!hero) return;
+    /* the jumbotron carries the line score, so the separate "Score by quarter" card goes */
+    { const sq=[...view.querySelectorAll('.card')].find(c=>{ const t=c.querySelector('.hd h3'); return t&&/^Score by quarter/.test(t.textContent); }); if(sq){ const gp=sq.parentElement; sq.remove(); if(gp&&gp.classList.contains('g2')) gp.classList.remove('g2'); } }
+    hero.outerHTML=jtHTML(g); if((g.live||g.played)&&typeof nlFetch==='function'){ const had=!!(NL_SUM[g.id]&&NL_SUM[g.id].j); nlFetch(g).then(()=>{ if(had&&!g.live) return; const el=view.querySelector('.jt'); const m2=(location.hash||'').match(/^#\/gamenight\/([^\/#?]+)/); if(el&&m2&&dec(m2[1])===g.id) el.outerHTML=jtHTML(g); setTimeout(sbStart,0); }); } setTimeout(sbStart,0); }; }
 /* ar:start - hand-written game articles ("Jamo's preview" / "Jamo's recap"), shared by the NFL and NBA hubs
    (the college hub has the same code inline). Data: d-articles, built by sports-hub/articles/articles.pl from
    <hub>/articles/<game id>.json + .md (preview) and <game id>.recap.json + .md (recap). A json "label" renames the

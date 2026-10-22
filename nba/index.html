@@ -3033,6 +3033,23 @@ body.themed .pk-card,.pk-card{background:var(--surface)!important}
 .pk-hint{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;margin-top:5px;font-size:11px;font-weight:500;color:var(--ink-3)}
 .pk-fill{font:inherit;font-size:11px;font-weight:600;padding:2px 7px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer}
 .pk-fill:hover{border-color:var(--accent);color:var(--ink)}
+
+/* Tonight's leaders on the NBA home page (p2lead.js, 2026-10-21) */
+.nl-card{margin-top:14px}
+.nl-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+@media (max-width:1000px){.nl-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:600px){.nl-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
+.nl-t{display:flex;flex-direction:column;gap:3px;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(127,127,127,.05);color:inherit;text-decoration:none}
+a.nl-t:hover{border-color:var(--accent)}
+.nl-t.mine{border-color:color-mix(in srgb,var(--accent) 70%,var(--line));background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.nl-lab{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.nl-top{display:flex;align-items:flex-end;justify-content:space-between;gap:6px;min-height:40px}
+.nl-hs{width:54px;height:40px;object-fit:cover;object-position:top;border-radius:8px}
+.nl-v{font-family:var(--disp);font-size:30px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.nl-n{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nl-m{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nl-m .ow-pl{flex:none}
+.nl-next{font-size:11px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 
 <header class="top">
@@ -11738,6 +11755,36 @@ function jpSeasonMount(ab){ if(ab!==UNI_TEAM) return; fetch(JP_API+'?list=1').th
 { const _rt=renderTeam; renderTeam=function(ab){ _rt(ab); jpSeasonMount(norm(ab||'')); }; }
 /* tapping a name in a hint fills the box above it */
 document.addEventListener('click', e=>{ const b=e.target.closest&&e.target.closest('.pk-fill'); if(!b) return; const lb=b.closest('label'); const inp=lb&&lb.querySelector('input'); if(inp){ inp.value=b.dataset.fill; inp.dispatchEvent(new Event('input',{bubbles:true})); } });
+/* ---------- Tonight's leaders (2026-10-21, Jamo: "a stats leader for each category for the night of games going on", on
+   the NBA home page). For the day on the scoreboard: the top player in points, rebounds, assists, threes, steals and
+   blocks across every game that has tipped (live or final), with the next two behind him. Built from each game's summary
+   (/api/nba/game), fetched once a game is final and every minute while it's live. ---------- */
+const NL_CATS = [['PTS','Points'],['REB','Rebounds'],['AST','Assists'],['3PT','Threes'],['STL','Steals'],['BLK','Blocks']];
+const NL_SUM = {}; let NL_TIMER = 0;
+async function nlFetch(g){ const c=NL_SUM[g.id]; if(c&&(c.final||Date.now()-c.t<50e3)) return c.j;
+  try{ const r=await fetch(LIVE_API+'/game?event='+enc(g.id), {cache:'no-store'}); const j=r.ok?await r.json():null; if(j) NL_SUM[g.id]={j, t:Date.now(), final:j.st==='FINAL'}; return j||(c&&c.j)||null; }catch(e){ return c?c.j:null; } }
+/* every player line from the started games, with the stats we rank on */
+function nlLines(gs){ const out=[]; gs.forEach(g=>{ const c=NL_SUM[g.id]; const j=c&&c.j; if(!j||!j.players) return; const abOf={}; (j.teams||[]).forEach(t=>{ abOf[t.id]=norm(t.ab); });
+    j.players.forEach(side=>{ const ab=abOf[side.id]||(side.ha==='home'?g.home:g.away); const opp=ab===g.home?g.away:g.home; const L=side.labels||[];
+      (side.rows||[]).forEach(r=>{ if(!r.s||r.s.length<2) return; const v=lab=>{ const i=L.indexOf(lab); if(i<0) return 0; return lab==='3PT'?(+String(r.s[i]).split('-')[0]||0):(+r.s[i]||0); };
+        out.push({n:r.n, id:r.id, ab, opp, home:ab===g.home, g, PTS:v('PTS'), REB:v('REB'), AST:v('AST'), '3PT':v('3PT'), STL:v('STL'), BLK:v('BLK')}); }); }); });
+  return out; }
+function nlShort(n){ const p=String(n||'').split(' '); return p.length>1?p[0][0]+'. '+p.slice(1).join(' '):n; }
+function nlStatus(g){ const c=NL_SUM[g.id]; const j=c&&c.j; if(g.played||(j&&j.st==='FINAL')) return 'Final'; return (j&&j.det)||'Live'; }
+function nlCardHTML(day, gs){ const started=gs.filter(g=>g.live||g.played); const isToday=day===todayStr;
+  const head='<div class="hd"><h3>'+(isToday?'Tonight’s leaders':'Leaders · '+esc(fmtDate(day)))+'</h3><span class="mini">'+(started.length?started.length+' of '+gs.length+' games'+(started.some(g=>g.live)?' · updates live':''):'')+'</span></div>';
+  if(!started.length){ const first=gs.slice().sort((a,b)=>(kickMs(a)||0)-(kickMs(b)||0))[0]; return '<div class="card nl-card" id="nl">'+head+'<div class="bd"><div class="mini">The leaders in points, rebounds, assists, threes, steals and blocks show up here once the first game tips'+(first&&first.time&&first.time!=='TBD'?' at '+esc(kick(first)):'')+'.</div></div></div>'; }
+  const lines=nlLines(started); if(!lines.length) return '<div class="card nl-card" id="nl">'+head+'<div class="bd"><div class="mini">Loading the box scores…</div></div></div>';
+  const tiles=NL_CATS.map(([k,lab])=>{ const top=lines.filter(x=>x[k]>0).sort((a,b)=>b[k]-a[k]||b.PTS-a.PTS).slice(0,3); if(!top.length) return '<div class="nl-t"><div class="nl-lab">'+lab+'</div><div class="mini">—</div></div>';
+    const p=top[0]; const mine=p.ab===favAb(); const shot=p.id?'<img class="nl-hs" src="https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/'+esc(p.id)+'.png&w=96&h=70" alt="" onerror="this.style.visibility=\'hidden\'">':'';
+    return '<a class="nl-t'+(mine?' mine':'')+'" href="#/game/'+enc(p.g.id)+'"><div class="nl-lab">'+lab+'</div><div class="nl-top">'+shot+'<div class="nl-v">'+p[k]+'</div></div>'
+      +'<div class="nl-n">'+esc(nlShort(p.n))+'</div><div class="nl-m">'+sbPlate(team(p.ab),'ow-pl')+esc(team(p.ab).disp)+' '+(p.home?'vs':'at')+' '+esc(team(p.opp).disp)+' · '+esc(nlStatus(p.g))+'</div>'
+      +(top.length>1?'<div class="nl-next">'+top.slice(1).map(x=>esc(nlShort(x.n))+' '+x[k]).join(' · ')+'</div>':'')+'</a>'; }).join('');
+  return '<div class="card nl-card" id="nl">'+head+'<div class="bd"><div class="nl-grid">'+tiles+'</div></div></div>'; }
+async function nlFill(day, gs){ await Promise.all(gs.filter(g=>g.live||g.played).map(nlFetch)); const el=document.getElementById('nl'); if(el&&el.dataset.day===day) { el.outerHTML=nlCardHTML(day, gs); const n=document.getElementById('nl'); if(n) n.dataset.day=day; } }
+{ const _rs=renderScores; renderScores=function(d, filter){ _rs(d, filter); const day=nearestDate(d); const gs=G.filter(g=>g.date===day); clearInterval(NL_TIMER); if(!gs.length) return;
+    const at=view.querySelector('.homeband')||view.querySelector('.toolbar'); if(!at) return; at.insertAdjacentHTML('afterend', nlCardHTML(day, gs)); const el=document.getElementById('nl'); if(el) el.dataset.day=day;
+    nlFill(day, gs); if(gs.some(g=>!g.played)) NL_TIMER=setInterval(()=>{ if(!document.getElementById('nl')){ clearInterval(NL_TIMER); return; } nlFill(day, G.filter(g=>g.date===day)); }, 60e3); }; }
 /* ar:start - hand-written game articles ("Jamo's preview" / "Jamo's recap"), shared by the NFL and NBA hubs
    (the college hub has the same code inline). Data: d-articles, built by sports-hub/articles/articles.pl from
    <hub>/articles/<game id>.json + .md (preview) and <game id>.recap.json + .md (recap). A json "label" renames the
@@ -11747,7 +11794,7 @@ Object.keys(ARTICLES).forEach(k=>{ const a=ARTICLES[k].preview||{}; if(a.angle||
 function articleCardHTML(ar,kind,folded){ if(!ar||!ar.body) return '';
   const inl=s=>esc(s).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/(^|[\s(])\*([^*\s][^*]*)\*/g,'$1<i>$2</i>');
   const blk=b=>{ b=b.trim(); if(!b) return ''; if(b.startsWith('## ')) return '<h4>'+inl(b.slice(3))+'</h4>'; if(/^- /.test(b)) return '<ul>'+b.split('\n').filter(l=>l.trim()).map(l=>'<li>'+inl(l.replace(/^- /,''))+'</li>').join('')+'</ul>'; return '<p>'+inl(b).replace(/\n/g,'<br>')+'</p>'; };
-  const bl=ar.body.split(/\n{2,}/).filter(b=>b.trim()); const n=folded?0:Math.max(1,ar.lead||2);
+  const bl=ar.body.split(/\n{2,}/).filter(b=>b.trim()); const n=0; /* teasers (Jamo, 2026-10-21: less on the page): headline and dek, the whole piece one tap away */
   const head=bl.slice(0,n).map(blk).join(''), rest=bl.slice(n).map(blk).join(''); const word=ar.label||(kind==='recap'?'recap':'preview');
   return '<div class="card ar'+(kind==='recap'?' ar-recap':'')+(folded?' ar-folded':'')+'"><div class="hd"><h3>Jamo\'s '+esc(word)+'</h3>'+(folded?'<span class="mini">written before the game</span>':ar.updated?'<span class="mini">updated '+esc(ar.updated)+'</span>':'')+'</div><div class="bd">'
     +'<h2 class="ar-t">'+esc(ar.title||'')+'</h2>'+(ar.dek?'<p class="ar-dek">'+esc(ar.dek)+'</p>':'')
@@ -12037,7 +12084,23 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
     +'.sec.fold-closed{opacity:.92}.sec.fold-closed>.muted,.sec.fold-closed>.note,.sec.fold-closed>.seg{display:none}.sec.fold-closed{flex-wrap:nowrap}'
     +'.fold-more{display:flex;justify-content:center;margin:10px 0 4px}.fold-more .fold-btn{margin:0}'
     +'.grid.fold-keep{grid-template-columns:repeat(4,minmax(0,1fr))}@media (max-width:760px){.grid.fold-keep{grid-template-columns:repeat(2,minmax(0,1fr))}}';
+  /* quieter wallpaper (2026-10-21): the field / court photo sits further back on reading pages; the game-day and
+     game-night screens keep the brighter look */
+  st.textContent+='body.bg-quiet .floor-veil{background:linear-gradient(180deg,rgba(4,8,18,.6),rgba(4,8,18,.86) 30%,rgba(4,8,18,.93))!important}'
+    +':root[data-theme="light"] body.bg-quiet .floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.74),rgba(255,255,255,.9) 30%,rgba(255,255,255,.95))!important}'
+    +'@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) body.bg-quiet .floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.74),rgba(255,255,255,.9) 30%,rgba(255,255,255,.95))!important}}'
+  /* the "Updated · times in · How the numbers work · live scores" line folds into one small info button */
+    +'#asof:not(.asof-open)>:not(.asof-i){display:none!important}#asof:not(.asof-open){display:flex;justify-content:flex-end;min-height:0;padding-top:4px;padding-bottom:0;margin-bottom:0}'
+    +'.asof-i{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-3);background:transparent;border:1px solid var(--line);border-radius:999px;padding:3px 10px 3px 7px;cursor:pointer}'
+    +'.asof-i b{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;border:1.5px solid currentColor;font-size:10px;font-weight:800;font-style:normal;line-height:1}'
+    +'.asof-i .lv{width:7px;height:7px;border-radius:50%;background:#22c55e}#asof.asof-open .asof-i{margin-left:auto;order:9}';
   document.head.appendChild(st);
+  const quiet=()=>document.body&&document.body.classList.toggle('bg-quiet', !/^#\/(gameday|gamenight)\b/.test(location.hash||''));
+  addEventListener('hashchange', quiet); quiet();
+  const asof=()=>{ const a=document.getElementById('asof'); if(!a||a.querySelector(':scope > .asof-i')) return; const live=a.querySelector('#livestamp .ok, #livestamp .livedot');
+    a.insertAdjacentHTML('afterbegin','<button type="button" class="asof-i" aria-expanded="false" title="When the data was updated, time zone, and how the numbers work"><b>i</b>'+(live?'<span class="lv"></span>':'')+'Info</button>');
+    a.querySelector(':scope > .asof-i').addEventListener('click', ()=>{ const on=!a.classList.contains('asof-open'); a.classList.toggle('asof-open', on); a.querySelector(':scope > .asof-i').setAttribute('aria-expanded', on?'true':'false'); }); };
+  asof(); { const a=document.getElementById('asof'); if(a) new MutationObserver(asof).observe(a,{childList:true}); }
   const HUB=((/^\/(cfb|nfl|nba)\//.exec(location.pathname)||[])[1])||((/^(CFB|NFL|NBA)\b/.exec(document.title)||[])[1]||'').toLowerCase();
   const GAME=/^(Game preview|What to watch|How they match up|Series history|Track a bet|Head to head|Form|Projected starters|Draft stock)$/i;
   const CFG={

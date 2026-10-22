@@ -2493,6 +2493,62 @@ body.themed .pk-card,.pk-card{background:var(--surface)!important}
 .pk-hint{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;margin-top:5px;font-size:11px;font-weight:500;color:var(--ink-3)}
 .pk-fill{font:inherit;font-size:11px;font-weight:600;padding:2px 7px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer}
 .pk-fill:hover{border-color:var(--accent);color:var(--ink)}
+
+/* patch109: game-day jumbotron (same look as the NBA hub's game-night one) */
+.jt{position:relative;max-width:820px;margin:14px auto 0;padding-top:26px}
+.jt-cables::before,.jt-cables::after{content:"";position:absolute;top:0;width:3px;height:30px;background:linear-gradient(180deg,#6b7078,#23262b);border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.4)}
+.jt-cables::before{left:18%}.jt-cables::after{right:18%}
+.jt-box{position:relative;padding:10px;border-radius:16px;background:linear-gradient(180deg,#30343b,#15171b 30%,#0b0c0f);border:1px solid #44484f;box-shadow:0 40px 70px -30px rgba(0,0,0,.9),0 0 0 3px #060708,inset 0 1px 0 rgba(255,255,255,.18),inset 0 -2px 0 rgba(0,0,0,.6)}
+.jt-box::before,.jt-box::after{content:"";position:absolute;top:8px;width:6px;height:6px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#b9bec6,#4a4e55);box-shadow:0 0 0 1px #000}
+.jt-box::before{left:8px}.jt-box::after{right:8px}
+.jt-ribbon{position:relative;height:24px;margin:0 10px;overflow:hidden;border-radius:4px;background:#040404;box-shadow:inset 0 0 0 1px #1d1f23}
+.jt-marq{display:flex;width:max-content;animation:jtMarq 26s linear infinite}
+.jt-marq span{padding-right:60px;font-family:"Orbitron",var(--disp);font-weight:600;font-size:11px;line-height:24px;letter-spacing:.22em;white-space:nowrap;color:#ffb547;text-shadow:0 0 6px rgba(255,170,40,.8)}
+@keyframes jtMarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.jt-marq{animation:none}}
+.jt-screen{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:10px;margin:8px 0;padding:16px 12px 14px;border-radius:8px;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#14161b,#020203 70%);box-shadow:inset 0 0 0 1px #1d2026,inset 0 0 40px rgba(0,0,0,.9)}
+.jt-screen::after,.jt-ribbon::after,.jt-lines::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,transparent 52%,rgba(0,0,0,.6) 56%);background-size:4px 4px}
+.jt-team{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;transition:opacity .3s}
+.jt-team.dim{opacity:.5}
+.jt-name{display:flex;align-items:center;justify-content:center;gap:7px;max-width:100%;padding:3px 10px;border-radius:4px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--tc) 75%,transparent) 15%,color-mix(in srgb,var(--tc) 75%,transparent) 85%,transparent)}
+.jt-name span{font-family:"Orbitron",var(--disp);font-weight:800;font-size:15px;letter-spacing:.1em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 0 8px rgba(255,255,255,.5)}
+.jt-pl{flex:none;display:inline-grid;place-items:center;width:24px;height:24px;border-radius:5px;background:#fff;box-shadow:0 0 6px rgba(255,255,255,.35)}.jt-pl img{width:19px;height:19px;object-fit:contain}
+.jt-score{font-family:"Orbitron",var(--disp);font-weight:800;font-size:clamp(58px,15vw,104px);line-height:1;letter-spacing:.02em;color:#ffcf3a;text-shadow:0 0 10px rgba(255,190,40,.85),0 0 28px rgba(255,140,0,.45);font-variant-numeric:tabular-nums}
+.jt-dig{position:relative;display:inline-block}
+.jt-dig::before{content:attr(data-ghost);position:absolute;inset:0;color:rgba(255,200,70,.07);text-shadow:none;pointer-events:none}
+.jt-dig.off{color:rgba(255,200,70,.25);text-shadow:none}
+.jt-rec{font-family:"Orbitron",var(--disp);font-size:10.5px;letter-spacing:.14em;color:#8f97a3}
+.jt-mid{display:flex;flex-direction:column;align-items:center;gap:2px;padding:0 4px}
+.jt-lab{font-family:"Orbitron",var(--disp);font-size:9px;letter-spacing:.24em;color:#7d8590}
+.jt-per{font-family:"Orbitron",var(--disp);font-weight:800;font-size:clamp(20px,5vw,30px);color:#7dffb0;text-shadow:0 0 10px rgba(80,255,150,.7);margin-bottom:6px;white-space:nowrap}
+.jt-clock{font-family:"Orbitron",var(--disp);font-weight:800;font-size:clamp(26px,7vw,44px);line-height:1;color:#ff4a3d;text-shadow:0 0 10px rgba(255,60,50,.85),0 0 26px rgba(255,40,30,.4);font-variant-numeric:tabular-nums}
+.jt-clock .jt-dig::before{color:rgba(255,80,60,.08)}
+.jt .jt-cd{font-size:clamp(20px,5.5vw,30px)}
+.jt.is-live .jt-marq span{color:#ffd166}
+.jt-lines{position:relative;margin:0 10px;padding:6px 8px;border-radius:6px;background:#030303;box-shadow:inset 0 0 0 1px #1d2026;overflow:hidden}
+.jt-lines table{width:100%;border-collapse:collapse;font-family:"Orbitron",var(--disp);font-variant-numeric:tabular-nums}
+.jt-lines th{font-size:9.5px;font-weight:600;letter-spacing:.14em;color:#7d8590;padding:2px 4px;text-align:center}
+.jt-lines td{font-size:14px;font-weight:700;color:#ffcf3a;text-shadow:0 0 6px rgba(255,190,40,.6);padding:3px 4px;text-align:center}
+.jt-lines td.jt-ab{color:#fff;text-align:left;letter-spacing:.1em;text-shadow:0 0 6px rgba(255,255,255,.4)}
+.jt-lines td.jt-t{color:#ff4a3d;text-shadow:0 0 6px rgba(255,60,50,.7)}
+.jt-stats{display:grid;gap:4px;margin:8px 10px 2px}
+.jt-st{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;font-family:"Orbitron",var(--disp);font-size:10.5px;letter-spacing:.1em;color:#ffb547;text-shadow:0 0 5px rgba(255,170,40,.6)}
+.jt-st b{color:#fff;min-width:44px;text-shadow:0 0 5px rgba(255,255,255,.4)}
+@media (max-width:600px){.jt{padding-top:20px}.jt-cables::before,.jt-cables::after{height:22px}.jt-box{padding:8px}.jt-screen{gap:4px;padding:12px 6px}.jt-name{padding:3px 6px;gap:5px}.jt-name span{font-size:11px;letter-spacing:.06em}.jt-pl,.jt-pl img{width:18px;height:18px}.jt-ribbon,.jt-lines{margin:0 4px}.jt-stats{margin:8px 4px 0}.jt-st{gap:3px 10px;font-size:9.5px}.jt-lines td{font-size:12px;padding:3px 2px}}
+.jt-ld{font-size:13.5px;padding:3px 0;border-top:1px solid var(--line)}.jt-ld:first-of-type{border-top:0}
+</style>
+.jt-tag{font-family:"Orbitron",var(--disp);font-size:9px;letter-spacing:.3em;color:#7d8590;min-height:11px}
+.jt-pl{flex:none;display:inline-grid;place-items:center;width:24px;height:24px;border-radius:5px;background:#fff;box-shadow:0 0 6px rgba(255,255,255,.35)}.jt-pl img{width:19px;height:19px;object-fit:contain}
+.jt-score{display:flex;align-items:center;justify-content:center;gap:6px}
+.jf-ball{font-style:normal;font-size:.32em;color:#7dffb0;text-shadow:0 0 10px rgba(80,255,150,.8);animation:jfBlink 1.2s steps(2,start) infinite}
+@keyframes jfBlink{to{visibility:hidden}}
+.jf-down{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;margin:0 10px 8px;padding:7px 10px;border-radius:6px;background:#030303;box-shadow:inset 0 0 0 1px #1d2026;font-family:"Orbitron",var(--disp)}
+.jf-down span{display:flex;align-items:baseline;gap:8px}.jf-down i{font-style:normal;font-size:9.5px;letter-spacing:.2em;color:#7d8590}.jf-down b{font-size:20px;font-weight:800;color:#ffcf3a;text-shadow:0 0 8px rgba(255,190,40,.7)}
+.jf-dv{font-size:14px;color:#ffcf3a;letter-spacing:.1em}
+.jf-rz{font-size:12px;font-weight:800;letter-spacing:.2em;color:#ff4a3d;text-shadow:0 0 8px rgba(255,60,50,.8);animation:jfBlink 1s steps(2,start) infinite}
+.jf-down.rz{box-shadow:inset 0 0 0 1px rgba(255,74,61,.6),0 0 16px rgba(255,74,61,.25)}
+@media (max-width:600px){.jf-down{gap:4px 14px;margin:0 4px 8px}.jf-down b{font-size:16px}}
+@media (prefers-reduced-motion:reduce){.jf-ball,.jf-rz{animation:none}}
 </style>
 
 <header class="top">
@@ -106088,6 +106144,31 @@ function pkHint(me, k){ const sb=seasonBox(me); const map={qb:['passing','YDS',1
   const note=(RA.g||RH.g)?'<div class="pk-refnote">Under each box: that team’s average per game this season and what the other team allows per game (forces, for turnovers). Yardage averages count the games with a box score. Tap a player below to fill in his name.</div>':'';
   return h.replace('</tbody></table>', '</tbody></table>'+note); }; }
 document.addEventListener('click', e=>{ const b=e.target.closest&&e.target.closest('.pk-fill'); if(!b) return; const lb=b.closest('label'); const inp=lb&&lb.querySelector('input'); if(inp){ inp.value=b.dataset.fill; inp.dispatchEvent(new Event('input',{bubbles:true})); } });
+/* patch109: the game-day jumbotron (see patch109.pl) */
+const jfDig = (v, cls) => { v=String(v==null?'':v); return '<span class="jt-dig '+(cls||'')+'" data-ghost="'+'8'.repeat(Math.max(v.replace(/[^0-9]/g,'').length,1))+'">'+esc(v)+'</span>'; };
+function jfClock(g){ if(g.played) return {per:'FINAL', clk:''}; const c=String(g.clk||''); let m=c.match(/^([\d:]+)\s*-\s*(.+)$/);
+  const q=s=>s.replace(/^(\d)(st|nd|rd|th)$/i,'Q$1').toUpperCase(); if(m) return {per:q(m[2]), clk:m[1]}; if(/half/i.test(c)) return {per:'HALF', clk:'0:00'}; m=c.match(/end of (\w+)/i); if(m) return {per:'END '+q(m[1]), clk:'0:00'}; return {per:(c||'LIVE').toUpperCase().slice(0,10), clk:''}; }
+function jfDown(g){ const m=String(g.dd||'').match(/^(\d)(?:st|nd|rd|th)\s*&\s*(\w+)(?:\s+at\s+(.+))?$/i); if(!m) return g.dd?{txt:g.dd}:null; return {down:m[1], togo:m[2].toUpperCase()==='GOAL'?'GOAL':m[2], spot:(m[3]||'').toUpperCase()}; }
+function jfHTML(g){ const a=team(g.away), h=team(g.home); const [ca,ch]=pairColors(a,h); const on=g.live||g.played; const S=LIVE.sum[g.id]||null;
+  const lead=g.played?(g.as>g.hs?'a':g.hs>g.as?'h':''):'';
+  const side=(t,sc,k,c,tag)=>{ const lg=logoOf(t); const ball=g.live&&g.pos===(k==='a'?'away':'home');
+    return '<div class="jt-team '+k+(lead&&lead!==k?' dim':'')+'" style="--tc:'+c+'"><div class="jt-tag">'+tag+'</div><div class="jt-name">'+(lg?'<span class="jt-pl"><img src="'+lg.icon+'" alt=""></span>':'')+'<span>'+(t.ap?'#'+t.ap+' ':'')+esc(tshort(t.name).toUpperCase())+'</span></div>'
+      +'<div class="jt-score">'+(k==='h'&&ball?'<i class="jf-ball l" title="has the ball">&#9664;</i>':'')+(on?jfDig(sc):jfDig('--','off'))+(k==='a'&&ball?'<i class="jf-ball r" title="has the ball">&#9654;</i>':'')+'</div><div class="jt-rec">'+esc(t.other?'':recStr(t.name))+'</div></div>'; };
+  let mid; if(on){ const C=jfClock(g); mid='<div class="jt-mid"><div class="jt-lab">'+(g.played?'GAME':'QTR')+'</div><div class="jt-per">'+esc(C.per)+'</div>'+(C.clk?'<div class="jt-lab">CLOCK</div><div class="jt-clock">'+jfDig(C.clk)+'</div>':'')+'</div>'; }
+  else { const k=kickMs(g); mid='<div class="jt-mid"><div class="jt-lab">KICKOFF</div>'+(k&&k>Date.now()?'<div class="jt-clock jf-cd" data-k="'+k+'">'+jfDig(jfCdText(k))+'</div>':'<div class="jt-per">SOON</div>')+'<div class="jt-lab" style="margin-top:6px">'+esc(fmtDate(g.date,false).toUpperCase())+' · '+esc(kick(g))+'</div></div>'; }
+  let down=''; const D=g.live?jfDown(g):null; if(D) down='<div class="jf-down'+(g.rz?' rz':'')+'">'+(D.txt?'<span class="jf-dv">'+esc(D.txt.toUpperCase())+'</span>':'<span><i>DOWN</i><b>'+D.down+'</b></span><span><i>TO GO</i><b>'+esc(D.togo)+'</b></span>'+(D.spot?'<span><i>BALL ON</i><b>'+esc(D.spot)+'</b></span>':''))+(g.rz?'<span class="jf-rz">RED ZONE</span>':'')+'</div>';
+  let lines=''; if(on&&S&&S.ls&&S.ls.length===2){ const L=[a,h].map((t,i)=>{ const r=S.ls.find(x=>x.ha===(i?'home':'away'))||{ls:[],s:''}; return {t, q:r.ls||[], tot:r.s}; }); const nq=Math.max(4,...L.map(x=>x.q.length));
+    lines='<div class="jt-lines"><table><thead><tr><th></th>'+Array.from({length:nq},(_,i)=>'<th>'+(i<4?i+1:'OT')+'</th>').join('')+'<th>T</th></tr></thead><tbody>'+L.map(x=>'<tr><td class="jt-ab">'+esc(jfAb(x.t))+'</td>'+Array.from({length:nq},(_,i)=>'<td>'+(x.q[i]!=null?esc(String(x.q[i])):'')+'</td>').join('')+'<td class="jt-t">'+esc(String(x.tot==null?'':x.tot))+'</td></tr>').join('')+'</tbody></table></div>'; }
+  let stats=''; if(on&&S&&S.teams&&S.teams.length===2){ const row=(t,ha)=>{ const x=(S.teams.find(y=>y.ha===ha)||{}).stats||{}; return '<div class="jt-st"><b>'+esc(jfAb(t))+'</b><span>YDS '+esc(x.totalYards||'-')+'</span><span>PASS '+esc(x.netPassingYards||'-')+'</span><span>RUSH '+esc(x.rushingYards||'-')+'</span><span>TO '+esc(x.turnovers||'0')+'</span><span>3RD '+esc(x.thirdDownEff||'-')+'</span></div>'; };
+    stats='<div class="jt-stats">'+row(a,'away')+row(h,'home')+'</div>'; }
+  const ribbon=[g.live?'● LIVE':g.played?'FINAL':'GAME DAY', tshort(a.name).toUpperCase()+(g.neutral?' VS ':' AT ')+tshort(h.name).toUpperCase(), (g.venue||'').toUpperCase(), g.tv?tvShort(g.tv).toUpperCase():'', g.spread!=null?spreadStr(g,{short:true}).toUpperCase():'', g.total!=null?'O/U '+g.total:''].filter(Boolean).join('   ★   ');
+  return '<section class="jt jf'+(g.live?' is-live':'')+'" aria-label="Scoreboard: '+esc(tshort(a.name))+' '+(on?g.as:'')+', '+esc(tshort(h.name))+' '+(on?g.hs:'')+'"><div class="jt-cables" aria-hidden="true"></div><div class="jt-box">'
+    +'<div class="jt-ribbon" aria-hidden="true"><div class="jt-marq"><span>'+esc(ribbon)+'</span><span>'+esc(ribbon)+'</span></div></div>'
+    +'<div class="jt-screen">'+side(a,g.as,'a',ca,'GUEST')+mid+side(h,g.hs,'h',ch,g.neutral?'':'HOME')+'</div>'+down+lines+stats+'</div></section>'; }
+const jfAb = t => { const n=tshort(t.name); return (/\s/.test(n) ? n.split(/\s+/).map(w=>w[0]).join('') : n.slice(0,5)).toUpperCase(); };
+function jfCdText(k){ const s=Math.max(0,Math.floor((k-Date.now())/1000)); const d=Math.floor(s/86400), hh=Math.floor(s%86400/3600), mm=Math.floor(s%3600/60), ss=s%60; const p=v=>String(v).padStart(2,'0'); return (d?d+'D ':'')+p(hh)+':'+p(mm)+':'+p(ss); }
+setInterval(()=>{ document.querySelectorAll('.jf-cd[data-k]').forEach(el=>{ el.innerHTML=jfDig(jfCdText(+el.dataset.k)); }); }, 1000);
+{ const _gd=renderGameday; renderGameday=function(id){ _gd(id); const m=(location.hash||'').match(/^#\/gameday\/([^\/#?]+)/); const g=m&&GI[dec(m[1])]; if(!g) return; const hero=view.querySelector('.gd-hero'); if(hero) hero.outerHTML=jfHTML(g); }; }
 /* ---------- What has to happen (patch91) ---------- */
 function scnPct(x){ if(x==null) return '<span class="dim">—</span>'; if(x>0&&x<0.005) return '&lt;1%'; if(x<1&&x>0.995) return '&gt;99%'; return Math.round(x*100)+'%'; }
 function renderScenarios(name){ setNav('scenarios'); const t=T[name||cfpFocus()]||T['BYU'];

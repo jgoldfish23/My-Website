@@ -11971,13 +11971,13 @@ setTimeout(btBuild, 0);
 
 /* 5. the West race (Standings page) */
 function wrHTML(){ const fav=favAb(); const heads=[...view.querySelectorAll('.confhead')]; let rows=null, conf='';
-  heads.forEach(hd=>{ let n=hd.nextElementSibling; while(n&&!n.classList.contains('tblwrap')) n=n.nextElementSibling; if(!n) return; const tr=[...n.querySelectorAll('tbody tr[data-href^="#/team/"]')]; if(tr.some(r=>norm(dec(r.dataset.href.split('/')[2]))===fav)){ rows=tr; conf=hd.textContent.replace(/conference/i,'').trim(); } });
+  heads.forEach(hd=>{ let n=hd.nextElementSibling; while(n&&!n.classList.contains('tblwrap')) n=n.nextElementSibling; if(!n) return; const tr=[...n.querySelectorAll('tbody tr[data-href^="#/team/"]')]; if(tr.some(r=>norm(dec(r.dataset.href.split('/')[2]))===fav)){ rows=tr; conf=((hd.textContent.match(/\b(Eastern|Western)\b/)||[])[1]||'Conference'); } });
   if(!rows||rows.length<10) return ''; const L=rows.map((r,i)=>{ const ab=norm(dec(r.dataset.href.split('/')[2])); const wl=(r.cells[2]&&r.cells[2].textContent.trim()||'0-0').split('-').map(Number); return {ab, seed:i+1, w:wl[0]||0, l:wl[1]||0}; });
-  const me=L.find(x=>x.ab===fav); const gb=(x,y)=>((x.w-y.w)+(y.l-x.l))/2; const fmt=v=>v===0?'even':(Math.abs(v)%1?Math.abs(v).toFixed(1):Math.abs(v))+(v>0?' ahead':' back');
+  const me=L.find(x=>x.ab===fav); const gb=(x,y)=>((x.w-y.w)+(y.l-x.l))/2; const fmt=v=>v===0?'tied with':(Math.abs(v)%1?Math.abs(v).toFixed(1):Math.abs(v))+(v>0?' ahead of':' back of');
   const s6=L[5], s7=L[6], s10=L[9], s11=L[10]; let sum;
-  if(me.seed<=6) sum='<b>'+esc(team(fav).disp)+' '+me.seed+getOrd(me.seed)+'</b> · in the top six, '+fmt(gb(me,s7))+' of 7th';
-  else if(me.seed<=10) sum='<b>'+esc(team(fav).disp)+' '+me.seed+getOrd(me.seed)+'</b> · in the play-in, '+fmt(gb(me,s6))+' of 6th and '+fmt(gb(me,s11))+' of 11th';
-  else sum='<b>'+esc(team(fav).disp)+' '+me.seed+getOrd(me.seed)+'</b> · '+fmt(gb(me,s10))+' of the play-in (10th) and '+fmt(gb(me,s6))+' of the top six';
+  if(me.seed<=6) sum='<b>'+esc(team(fav).disp)+' '+me.seed+getOrd(me.seed)+'</b> · in the top six, '+fmt(gb(me,s7))+' 7th';
+  else if(me.seed<=10) sum='<b>'+esc(team(fav).disp)+' '+me.seed+getOrd(me.seed)+'</b> · in the play-in, '+fmt(gb(me,s6))+' 6th and '+fmt(gb(me,s11))+' 11th';
+  else sum='<b>'+esc(team(fav).disp)+' '+me.seed+getOrd(me.seed)+'</b> · '+fmt(gb(me,s10))+' the play-in line (10th) and '+fmt(gb(me,s6))+' the top six';
   const line=(cls,txt)=>'<div class="wr-line '+cls+'"><span>'+txt+'</span></div>';
   const row=x=>'<a class="wr-row'+(x.ab===fav?' me':'')+'" href="#/team/'+enc(x.ab)+'"><span class="wr-s">'+x.seed+'</span>'+sbPlate(team(x.ab),'ow-pl')+'<span class="wr-n">'+esc(team(x.ab).disp)+'</span><span class="wr-wl">'+x.w+'-'+x.l+'</span><span class="wr-gb">'+(x.ab===fav?'—':(gb(x,me)>0?'+':gb(x,me)<0?'−':'')+(gb(x,me)===0?'even':Math.abs(gb(x,me))))+'</span></a>';
   let ladder=''; L.forEach((x,i)=>{ if(i===6) ladder+=line('po','Top six above · play-in below'); if(i===10) ladder+=line('pi','Play-in above · lottery below'); ladder+=row(x); });

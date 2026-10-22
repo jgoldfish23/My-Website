@@ -54,6 +54,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media (min-width:561px){.jsh-nav{margin:0 auto}}
 @media (min-width:1100px){.jsh-nav{position:absolute;left:50%;transform:translateX(-50%);margin:0;overflow:visible}}
 @media (max-width:360px){.jsh-nav a .jsh-lg{width:16px;height:16px}}
+/* clear of the notch and status bar (2026-10-21, Jamo: "the top tabs bar goes under the top a little"): the bar grows by the phone's safe area at the top, plus a little air on phones */
+.jsh{box-sizing:border-box;height:calc(44px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)}
+@media (max-width:560px){.jsh{height:calc(50px + env(safe-area-inset-top,0px));padding-top:calc(6px + env(safe-area-inset-top,0px))}}
 /* phones (2026-10-21, design pass): every league fits - the page you're on keeps its name, the others show just the logo */
 @media (max-width:560px){.jsh-nav{gap:1px}.jsh-nav a:not(.on){font-size:0;gap:0;padding:0 8px}.jsh-nav a:not(.on) .jsh-lg{width:20px;height:20px}.jsh-nav a.on{padding:0 11px 0 9px}}
 /* phones: the hub header slides away while you scroll down and comes back as soon as you scroll up */

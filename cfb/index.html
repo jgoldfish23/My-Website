@@ -107269,7 +107269,7 @@ connectDb();
   const IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)||/[?&]vskb=1/.test(location.search); /* ?vskb=1 forces this mode for testing */
   const SR=IOS?null:(window.SpeechRecognition||window.webkitSpeechRecognition);
   const st=document.createElement('style'); st.textContent=
-    '.search{position:relative}.search #q{padding-right:48px}'
+    '.search{position:relative!important}.search #q{padding-right:46px!important}'
     +'.vs-mic{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:36px;height:36px;display:grid;place-items:center;border-radius:50%;border:0;background:var(--accent);color:#fff;cursor:pointer;z-index:2;box-shadow:0 2px 10px -2px color-mix(in srgb,var(--accent) 70%,transparent)}'
     +'.vs-mic:hover{filter:brightness(1.1)}.vs-mic svg{width:19px;height:19px}'
     +'.vs-kb{display:flex;align-items:center;gap:10px;padding:12px;font-size:14px;line-height:1.35;color:var(--ink)}.vs-kb .vs-k{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--accent);color:#fff}.vs-kb .vs-k svg{width:18px;height:18px}'

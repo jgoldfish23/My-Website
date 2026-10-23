@@ -2615,6 +2615,37 @@ a.sl-t:hover{border-color:var(--accent)}.sl-t.mine{border-color:color-mix(in srg
 .scp-rt{font-family:var(--disp);font-weight:700;font-size:15.5px;line-height:1.25;color:var(--ink);text-decoration:none}
 .scp-pog{font-size:13px;line-height:1.35}.scp-pog .mini{display:block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .scp-l{display:flex;gap:14px;margin-top:auto;font-size:13px;font-weight:700}.scp-l a{color:var(--accent);text-decoration:none}
+
+/* patch113: Big 12 ladder and the Holy War */
+.lad-card .wr-row{grid-template-columns:26px 24px minmax(0,1fr) 44px 44px 54px}
+.lad-head{display:grid;grid-template-columns:26px 24px minmax(0,1fr) 44px 44px 54px;gap:6px;padding:0 6px 4px;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.lad-lg{width:20px;height:20px;object-fit:contain}.lad-ov{text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums;font-size:13px}
+.lad-left{margin-top:14px;padding-top:10px;border-top:1px solid var(--line)}.lad-lh{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.lad-g{display:flex;align-items:center;gap:8px;padding:6px 4px;color:inherit;text-decoration:none;border-radius:8px}.lad-g:hover{background:rgba(127,127,127,.08)}.lad-g img{width:20px;height:20px;object-fit:contain}.lad-g .mini:first-child{min-width:54px}
+.hw-card{display:block;margin:14px 0 4px;border-radius:18px;overflow:hidden;color:#fff;text-decoration:none;background:linear-gradient(110deg,#002e5d 0%,#0062b8 42%,#7a0f1d 58%,#cc0000 100%);box-shadow:0 18px 40px -22px rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.12)}
+.hw-top{padding:10px 16px 0}.hw-eb{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.hw-main{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding:10px 16px 12px}
+.hw-t{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}.hw-t img{width:54px;height:54px;object-fit:contain;filter:drop-shadow(0 3px 6px rgba(0,0,0,.4));background:#fff;border-radius:12px;padding:4px}.hw-t b{font-family:var(--disp);font-size:17px}.hw-t .mini{color:rgba(255,255,255,.8)}
+.hw-form{display:flex;gap:3px}.hw-r{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:4px;font-size:10.5px;font-weight:800;background:rgba(0,0,0,.35)}.hw-r.w{color:#7dffb0}.hw-r.l{color:#ff8a80}
+.hw-mid{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 12px;border-radius:12px;background:rgba(0,0,0,.55);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.hw-lab{font-family:"Orbitron",var(--disp);font-size:9px;letter-spacing:.24em;opacity:.75}
+.hw-cd{font-family:"Orbitron",var(--disp);font-weight:800;font-size:clamp(20px,5.5vw,30px);color:#ffcf3a;text-shadow:0 0 10px rgba(255,190,40,.7);white-space:nowrap;font-variant-numeric:tabular-nums}
+.hw-facts{display:flex;flex-wrap:wrap;gap:6px 18px;padding:10px 16px 12px;background:rgba(0,0,0,.28);font-size:13px}.hw-facts i{display:block;font-style:normal;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.hw-strip{display:flex;align-items:center;gap:8px;margin:4px 0 8px;padding:8px 12px;border-radius:14px;color:#fff;text-decoration:none;background:linear-gradient(110deg,#002e5d,#0062b8 45%,#7a0f1d 60%,#cc0000)}
+.hw-strip img{width:22px;height:22px;object-fit:contain;background:#fff;border-radius:6px;padding:2px}.hw-strip b{font-family:var(--disp);letter-spacing:.08em;font-size:13px}.hw-strip .hw-cd{font-size:16px;margin-left:auto}.hw-strip .mini{color:rgba(255,255,255,.85)}
+@media (max-width:600px){.hw-main{gap:6px;padding:8px 10px 10px}.hw-t img{width:44px;height:44px}.hw-t b{font-size:15px}.hw-mid{padding:6px 8px}.hw-strip .mini{display:none}}
+
+/* patch113b: ladder rows (the NBA hub West race styles) */
+.wr-sum{font-size:14.5px;margin-bottom:10px}
+.wr-lad{display:flex;flex-direction:column}
+.wr-row{display:grid;grid-template-columns:26px 26px minmax(0,1fr) 54px 54px;align-items:center;gap:6px;padding:6px 6px;border-radius:8px;color:inherit;text-decoration:none;font-size:14px}
+.wr-row:hover{background:rgba(127,127,127,.08)}
+.wr-row.me{background:color-mix(in srgb,var(--accent) 16%,transparent);box-shadow:inset 3px 0 0 var(--accent);font-weight:700}
+.wr-s{font-weight:800;color:var(--ink-3);text-align:center}.wr-n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wr-wl,.wr-gb{text-align:right;font-variant-numeric:tabular-nums}.wr-gb{color:var(--ink-2);font-size:12.5px}
+.wr-line{position:relative;margin:6px 0;text-align:center}.wr-line::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px dashed var(--line)}
+.wr-line span{position:relative;padding:0 10px;background:var(--surface);font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.wr-line.po::before{border-color:color-mix(in srgb,#22c55e 60%,transparent)}.wr-line.pi::before{border-color:color-mix(in srgb,#f59e0b 60%,transparent)}
 </style>
 
 <header class="top">
@@ -106761,6 +106792,47 @@ function scrapHTML(tn){ const gs=G.filter(g=>(g.home===tn||g.away===tn)&&g.playe
 if(/[?&]dtdemo=1/.test(location.search)){ const fav=(SETTINGS.fav&&T[SETTINGS.fav])?SETTINGS.fav:'BYU'; const g=G.find(x=>(x.home===fav||x.away===fav)&&!x.played); if(g){ LIVE.on=false;
   const mine=g.away===fav?'away':'home', oppAb=jfAb(team(g.away===fav?g.home:g.away)), myAb=jfAb(team(fav)); g.live=true; g.as=g.away===fav?17:10; g.hs=g.home===fav?17:10; g.clk='8:23 - 3rd'; g.pos=mine; g.dd='3rd & 7 at '+oppAb+' 35'; g.abA=jfAb(team(g.away)); g.abH=jfAb(team(g.home)); g.rz=false;
   LIVE.sum[g.id]={ls:[{ha:'away',s:String(g.as),ls:['7','3','7','']},{ha:'home',s:String(g.hs),ls:['3','7','0','']}], teams:[], drive:{desc:'6 plays, 45 yards, 2:51', plays:['Bear Bachmeier pass complete to Parker Kingston for 12 yds to the '+oppAb+' 35','LJ Martin run for 4 yds','Bear Bachmeier pass incomplete','Bear Bachmeier run for 9 yds']}, drives:[{cur:true, from:myAb+' 20', team:''}]}; } }
+/* patch113: Big 12 ladder and the Holy War countdown (see patch113.pl) */
+function lad113(conf){ const R={}; Object.values(T).filter(t=>t.conf===conf&&t.level==='FBS').forEach(t=>{ R[t.name]={t, cw:0, cl:0, ow:0, ol:0, left:0}; });
+  G.forEach(g=>{ const a=R[g.away], h=R[g.home]; if(g.played){ [[a,g.as,g.hs],[h,g.hs,g.as]].forEach(([r,us,th])=>{ if(!r) return; if(us>th) r.ow++; else if(us<th) r.ol++; }); }
+    if(!g.conf||!a||!h) return; if(g.played){ if(g.hs>g.as){ h.cw++; a.cl++; } else if(g.as>g.hs){ a.cw++; h.cl++; } } else { a.left++; h.left++; } });
+  const pct=r=>r.cw+r.cl?r.cw/(r.cw+r.cl):0; const beat=(x,y)=>{ const g=G.find(g=>g.played&&g.conf&&((g.home===x.t.name&&g.away===y.t.name)||(g.home===y.t.name&&g.away===x.t.name))); return g?((g.home===x.t.name?g.hs>g.as:g.as>g.hs)?-1:1):0; };
+  return Object.values(R).sort((x,y)=>(pct(y)-pct(x))||(x.cl-y.cl)||beat(x,y)||(y.cw-x.cw)||((y.ow-y.ol)-(x.ow-x.ol))||x.t.name.localeCompare(y.t.name)); }
+function ladHTML(fav){ const t=T[fav]; if(!t||!t.conf||CFP_P4.concat(CFP_G6||[]).indexOf(t.conf)<0) return ''; const L=lad113(t.conf); const me=L.find(r=>r.t.name===fav); if(!me||L.length<4) return '';
+  const gb=(x,y)=>((x.cw-y.cw)+(y.cl-x.cl))/2; const n=v=>Math.abs(v)%1?Math.abs(v).toFixed(1):String(Math.abs(v)); const at=L.indexOf(me)+1;
+  const ph=v=>v===0?'tied with':n(v)+(v>0?' ahead of':' back of'); const third=L[2], second=L[1];
+  const sum='<b>'+esc(tshort(fav))+' '+at+getOrdDt(at)+'</b> at '+me.cw+'-'+me.cl+' in the '+esc(t.conf)+' · '+(at<=2?ph(gb(me,third))+' 3rd place (the title-game line)':ph(gb(me,second))+' 2nd place (the title-game line)')+' · '+me.left+' conference game'+(me.left===1?'':'s')+' left';
+  const row=(r,i)=>{ const lg=logoOf(r.t); const d=gb(r,me); return '<a class="wr-row'+(r===me?' me':'')+'" href="#/team/'+enc(r.t.name)+'"><span class="wr-s">'+(i+1)+'</span>'+(lg?'<img class="lad-lg" src="'+lg.icon+'" alt="">':'<span></span>')+'<span class="wr-n">'+(r.t.ap?'<span class="dim">'+r.t.ap+'</span> ':'')+esc(tshort(r.t.name))+'</span><span class="wr-wl">'+r.cw+'-'+r.cl+'</span><span class="lad-ov">'+r.ow+'-'+r.ol+'</span><span class="wr-gb">'+(r===me?'—':(d>0?'+':d<0?'−':'')+(d===0?'even':n(d)))+'</span></a>'; };
+  let lad='<div class="lad-head"><span></span><span></span><span></span><span class="wr-wl">Conf</span><span class="lad-ov">All</span><span class="wr-gb">vs '+esc(tshort(fav))+'</span></div>';
+  L.forEach((r,i)=>{ if(i===2) lad+='<div class="wr-line po"><span>Title game: top two above</span></div>'; lad+=row(r,i); });
+  const rest=G.filter(g=>g.conf&&!g.played&&(g.home===fav||g.away===fav)).sort((a,b)=>a.date<b.date?-1:1);
+  const left=rest.length?'<div class="lad-left"><div class="lad-lh">Still to play</div>'+rest.map(g=>{ const o=g.home===fav?g.away:g.home; const r=L.find(x=>x.t.name===o); const pl=r?L.indexOf(r)+1:null; const lg=logoOf(T[o]);
+    return '<a class="lad-g" href="#/game/'+enc(g.id)+'"><span class="mini">'+esc(fmtDate(g.date,false))+'</span>'+(lg?'<img src="'+lg.icon+'" alt="">':'')+'<b>'+(g.home===fav?'vs ':'at ')+esc(tshort(o))+'</b><span class="mini">'+(r?r.cw+'-'+r.cl+' · '+pl+getOrdDt(pl):'')+'</span>'+(pl&&pl<=4?'<span class="pill gold">top 4</span>':'')+'</a>'; }).join('')+'</div>':'';
+  return '<div class="sec" id="s-lad"><h2>'+esc(t.conf)+' ladder</h2><span class="muted">conference records · ties: head-to-head, then fewer losses</span></div><div class="card lad-card"><div class="bd"><div class="wr-sum">'+sum+'</div><div class="wr-lad">'+lad+'</div>'+left+'</div></div>'; }
+/* the Holy War */
+const RIVAL113 = {BYU:'Utah'};
+function hwGame(fav){ const r=RIVAL113[fav]; if(!r) return null; const g=G.find(g=>!g.played&&((g.home===fav&&g.away===r)||(g.away===fav&&g.home===r))); if(!g) return null;
+  const days=(Date.parse(g.date+'T12:00:00Z')-Date.parse(todayStr+'T12:00:00Z'))/864e5; return days>=0&&days<=45?g:null; }
+function hwKick(g){ const k=kickMs(g); return k||Date.parse(g.date+'T06:00:00Z'); }
+function hwCd(g){ const k=hwKick(g); const timed=!!kickMs(g); const s=Math.max(0,Math.floor((k-Date.now())/1000)); const d=Math.floor(s/86400), h=Math.floor(s%86400/3600), m=Math.floor(s%3600/60), sec=s%60, p=v=>String(v).padStart(2,'0');
+  return timed?(d?d+'D ':'')+p(h)+':'+p(m)+':'+p(sec):(d?d+' DAY'+(d===1?'':'S'):'GAME DAY'); }
+function hwForm(name){ return G.filter(g=>g.played&&(g.home===name||g.away===name)).sort((a,b)=>a.date<b.date?1:-1).slice(0,3).map(g=>{ const us=g.home===name?g.hs:g.as, th=g.home===name?g.as:g.hs; return '<span class="hw-r '+(us>th?'w':'l')+'" title="'+esc((g.home===name?'vs ':'at ')+tshort(g.home===name?g.away:g.home))+' '+us+'-'+th+'">'+(us>th?'W':'L')+'</span>'; }).reverse().join(''); }
+function hwHTML(fav, slim){ const g=hwGame(fav); if(!g) return ''; const rv=RIVAL113[fav]; const a=T[fav], b=T[rv]; const la=logoOf(a), lb=logoOf(b);
+  const S=series(fav, rv); const rec=seriesRecord(S, fav); const last=S[0]; const timed=!!kickMs(g);
+  const lastTxt=last?(last.date.slice(0,4)+': '+esc(tshort(last.hs>last.as?last.home:last.away))+' '+Math.max(last.hs,last.as)+', '+esc(tshort(last.hs>last.as?last.away:last.home))+' '+Math.min(last.hs,last.as)):'';
+  const cd='<span class="hw-cd" data-hw="'+esc(g.id)+'">'+hwCd(g)+'</span>';
+  if(slim) return '<a class="hw-strip" href="#/game/'+enc(g.id)+'">'+(la?'<img src="'+la.icon+'" alt="">':'')+'<b>HOLY WAR</b>'+(lb?'<img src="'+lb.icon+'" alt="">':'')+cd+'<span class="mini">'+(g.home===fav?'vs ':'at ')+esc(tshort(rv))+' · '+esc(fmtDate(g.date,false))+' ›</span></a>';
+  const side=(t,lg)=>'<div class="hw-t">'+(lg?'<img src="'+lg.icon+'" alt="">':'')+'<b>'+(t.ap?'<span class="dim">#'+t.ap+'</span> ':'')+esc(tshort(t.name))+'</b><span class="mini">'+recStr(t.name)+'</span><span class="hw-form">'+hwForm(t.name)+'</span></div>';
+  return '<a class="hw-card" href="#/game/'+enc(g.id)+'"><div class="hw-top"><span class="hw-eb">The Holy War · '+esc(fmtDate(g.date,false))+(timed?' · '+esc(kick(g)):' · kickoff time TBA')+(g.tv?' · '+esc(tvShort(g.tv)):'')+'</span></div>'
+    +'<div class="hw-main">'+side(a,la)+'<div class="hw-mid"><div class="hw-lab">'+(timed?'KICKOFF IN':'GAME DAY IN')+'</div>'+cd+'<div class="hw-lab">'+(g.home===fav?'at '+esc(tshort(fav)):'at '+esc(tshort(rv)))+'</div></div>'+side(b,lb)+'</div>'
+    +'<div class="hw-facts">'+(S.length?'<span><i>Series since '+S[S.length-1].date.slice(0,4)+'</i>'+esc(tshort(fav))+' '+rec.w+'-'+rec.l+(rec.t?'-'+rec.t:'')+'</span>':'')+(lastTxt?'<span><i>Last meeting</i>'+lastTxt+'</span>':'')+(g.spread!=null?'<span><i>Line</i>'+esc(spreadStr(g,{short:true}))+(g.total!=null?' · O/U '+g.total:'')+'</span>':'<span><i>Line</i>not posted yet</span>')+'</div></a>'; }
+setInterval(()=>{ document.querySelectorAll('.hw-cd[data-hw]').forEach(el=>{ const g=GI[el.dataset.hw]; if(g) el.textContent=hwCd(g); }); }, 1000);
+{ const _rt=renderTeam; renderTeam=function(name){ _rt(name); const tn=norm((name||'').split('#')[0]); const fav=(SETTINGS.fav&&T[SETTINGS.fav])?SETTINGS.fav:'BYU'; if(tn!==fav) return;
+    const hw=hwHTML(fav); const lad=ladHTML(fav);
+    if(hw){ const at=view.querySelector('.subnav'); if(at) at.insertAdjacentHTML('afterend', hw); }
+    if(lad){ const cr=document.getElementById('conf-race'); const sc=document.getElementById('s-scrap'); const anchor=cr||sc; if(anchor) anchor.insertAdjacentHTML('beforebegin', lad); } }; }
+{ const _rw=renderWeek; renderWeek=function(w, f){ _rw(w, f); if((+w||CUR_WEEK)!==CUR_WEEK) return; const fav=(SETTINGS.fav&&T[SETTINGS.fav])?SETTINGS.fav:'BYU'; const g=hwGame(fav); if(!g||g.date===todayStr) return; const strip=hwHTML(fav, true); if(!strip) return;
+    const top=view.querySelector('.gdtop'); if(top) top.insertAdjacentHTML('afterend', strip); else view.insertAdjacentHTML('afterbegin', strip); }; }
 /* ---------- What has to happen (patch91) ---------- */
 function scnPct(x){ if(x==null) return '<span class="dim">—</span>'; if(x>0&&x<0.005) return '&lt;1%'; if(x<1&&x>0.995) return '&gt;99%'; return Math.round(x*100)+'%'; }
 function renderScenarios(name){ setNav('scenarios'); const t=T[name||cfpFocus()]||T['BYU'];

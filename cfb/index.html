@@ -2646,6 +2646,20 @@ a.sl-t:hover{border-color:var(--accent)}.sl-t.mine{border-color:color-mix(in srg
 .wr-line{position:relative;margin:6px 0;text-align:center}.wr-line::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px dashed var(--line)}
 .wr-line span{position:relative;padding:0 10px;background:var(--surface);font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .wr-line.po::before{border-color:color-mix(in srgb,#22c55e 60%,transparent)}.wr-line.pi::before{border-color:color-mix(in srgb,#f59e0b 60%,transparent)}
+
+/* patch114: player trends, Weber State FCS tracker */
+.pt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.pt{padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(127,127,127,.04)}
+.pt-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.pt-h b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pt-up,.pt-dn,.pt-st{flex:none;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}.pt-up{color:#22c55e}.pt-dn{color:#ef4444}.pt-st{color:var(--ink-3)}
+.pt-bars{display:flex;align-items:flex-end;gap:5px;height:80px;margin-top:8px}
+.pt-b{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;min-width:0;color:var(--ink-3);text-decoration:none;font-size:9.5px;font-weight:700}
+.pt-b i{display:block;width:100%;max-width:22px;border-radius:4px 4px 1px 1px;background:color-mix(in srgb,var(--accent) 45%,transparent)}.pt-b.rec i{background:var(--accent)}
+.pt-b span{white-space:nowrap;overflow:hidden;max-width:100%}
+.ws-card{margin:14px 0 4px;border-color:color-mix(in srgb,#5a2b81 60%,var(--line))}
+.ws-recs{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:10px}.ws-recs span{font-family:var(--disp);font-size:20px;font-weight:800}.ws-recs i{display:block;font-family:var(--body);font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.ws-path{padding:10px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.45}.ws-pl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#a77fd6;margin-bottom:3px}
+.ws-out{margin-top:8px;padding:8px 10px;border-radius:10px;background:rgba(127,127,127,.08);font-size:13.5px}.ws-out .mini{display:block;font-weight:700;margin-bottom:2px}
 </style>
 
 <header class="top">
@@ -106793,7 +106807,7 @@ if(/[?&]dtdemo=1/.test(location.search)){ const fav=(SETTINGS.fav&&T[SETTINGS.fa
   const mine=g.away===fav?'away':'home', oppAb=jfAb(team(g.away===fav?g.home:g.away)), myAb=jfAb(team(fav)); g.live=true; g.as=g.away===fav?17:10; g.hs=g.home===fav?17:10; g.clk='8:23 - 3rd'; g.pos=mine; g.dd='3rd & 7 at '+oppAb+' 35'; g.abA=jfAb(team(g.away)); g.abH=jfAb(team(g.home)); g.rz=false;
   LIVE.sum[g.id]={ls:[{ha:'away',s:String(g.as),ls:['7','3','7','']},{ha:'home',s:String(g.hs),ls:['3','7','0','']}], teams:[], drive:{desc:'6 plays, 45 yards, 2:51', plays:['Bear Bachmeier pass complete to Parker Kingston for 12 yds to the '+oppAb+' 35','LJ Martin run for 4 yds','Bear Bachmeier pass incomplete','Bear Bachmeier run for 9 yds']}, drives:[{cur:true, from:myAb+' 20', team:''}]}; } }
 /* patch113: Big 12 ladder and the Holy War countdown (see patch113.pl) */
-function lad113(conf){ const R={}; Object.values(T).filter(t=>t.conf===conf&&t.level==='FBS').forEach(t=>{ R[t.name]={t, cw:0, cl:0, ow:0, ol:0, left:0}; });
+function lad113(conf){ const R={}; const lv=(Object.values(T).find(t=>t.conf===conf)||{}).level||'FBS'; Object.values(T).filter(t=>t.conf===conf&&t.level===lv).forEach(t=>{ R[t.name]={t, cw:0, cl:0, ow:0, ol:0, left:0}; });
   G.forEach(g=>{ const a=R[g.away], h=R[g.home]; if(g.played){ [[a,g.as,g.hs],[h,g.hs,g.as]].forEach(([r,us,th])=>{ if(!r) return; if(us>th) r.ow++; else if(us<th) r.ol++; }); }
     if(!g.conf||!a||!h) return; if(g.played){ if(g.hs>g.as){ h.cw++; a.cl++; } else if(g.as>g.hs){ a.cw++; h.cl++; } } else { a.left++; h.left++; } });
   const pct=r=>r.cw+r.cl?r.cw/(r.cw+r.cl):0; const beat=(x,y)=>{ const g=G.find(g=>g.played&&g.conf&&((g.home===x.t.name&&g.away===y.t.name)||(g.home===y.t.name&&g.away===x.t.name))); return g?((g.home===x.t.name?g.hs>g.as:g.as>g.hs)?-1:1):0; };
@@ -106833,6 +106847,53 @@ setInterval(()=>{ document.querySelectorAll('.hw-cd[data-hw]').forEach(el=>{ con
     if(lad){ const cr=document.getElementById('conf-race'); const sc=document.getElementById('s-scrap'); const anchor=cr||sc; if(anchor) anchor.insertAdjacentHTML('beforebegin', lad); } }; }
 { const _rw=renderWeek; renderWeek=function(w, f){ _rw(w, f); if((+w||CUR_WEEK)!==CUR_WEEK) return; const fav=(SETTINGS.fav&&T[SETTINGS.fav])?SETTINGS.fav:'BYU'; const g=hwGame(fav); if(!g||g.date===todayStr) return; const strip=hwHTML(fav, true); if(!strip) return;
     const top=view.querySelector('.gdtop'); if(top) top.insertAdjacentHTML('afterend', strip); else view.insertAdjacentHTML('afterbegin', strip); }; }
+/* patch114: player trends and the Weber State FCS playoff tracker (see patch114.pl) */
+function ptVal(g, tn, cat, lab, name){ const b=boxFor(g); if(!b) return null; const sd=boxSide(b,tn); if(!sd) return null; const L=BOXL[cat]||[]; const i=L.indexOf(lab); if(i<0) return null;
+  const p=(b.players[sd][cat]||[]).find(x=>dkey(x.n)===dkey(name)); return p?bnum(p.s[i]):0; }
+function ptHTML(tn){ const gs=G.filter(g=>g.played&&(g.home===tn||g.away===tn)&&boxFor(g)).sort((a,b)=>a.date<b.date?-1:1); if(gs.length<3) return '';
+  const sb=seasonBox(tn); const all=Object.values(sb.players); const v=(e,lab)=>{ const i=(BOXL[e.cat]||[]).indexOf(lab); return i<0?0:e.s[i]; };
+  const pick=(cat,lab,k)=>all.filter(e=>e.cat===cat&&v(e,lab)>0).sort((x,y)=>v(y,lab)-v(x,lab)).slice(0,k).map(e=>({n:e.n, cat, lab}));
+  const P=pick('passing','YDS',1).concat(pick('rushing','YDS',2), pick('receiving','YDS',3), pick('defensive','TOT',2));
+  const ROLE={passing:'passing yards', rushing:'rushing yards', receiving:'receiving yards', defensive:'tackles'};
+  const cards=P.map(p=>{ const pts=gs.map(g=>({g, v:ptVal(g,tn,p.cat,p.lab,p.n)})); const played=pts.filter(x=>x.v!=null&&x.v>0); if(played.length<2) return '';
+    const avg=played.reduce((s,x)=>s+x.v,0)/played.length; /* the last two games he actually played in; a player who sat both is "out", not cooling off */
+    const last2=pts.slice(-2).filter(x=>x.v); const l2=last2.length?last2.reduce((s,x)=>s+x.v,0)/last2.length:null; const r=avg&&l2!=null?l2/avg:1;
+    const read=l2==null?'<span class="pt-st">missed the last two</span>':r>=1.15?'<span class="pt-up">▲ heating up</span>':r<=0.85?'<span class="pt-dn">▼ cooling off</span>':'<span class="pt-st">steady</span>';
+    const mx=Math.max(...pts.map(x=>x.v||0), 1);
+    const bars=pts.map((x,i)=>{ const o=x.g.home===tn?x.g.away:x.g.home; const h=x.v?Math.max(4,Math.round(x.v/mx*56)):2; return '<a class="pt-b'+(i>=pts.length-2?' rec':'')+'" href="#/game/'+enc(x.g.id)+'" title="'+esc((x.g.home===tn?'vs ':'at ')+tshort(o))+': '+(x.v||0)+'"><i style="height:'+h+'px"></i><span>'+esc(jfAb(T[o]||team(o)))+'</span></a>'; }).join('');
+    return '<div class="pt"><div class="pt-h"><b>'+esc(p.n)+'</b>'+read+'</div><div class="mini">'+ROLE[p.cat]+' · '+num1(avg)+' a game · '+(l2==null?'did not play the last two games':'last two '+num1(l2))+'</div><div class="pt-bars">'+bars+'</div></div>'; }).filter(Boolean);
+  if(!cards.length) return '';
+  return '<div class="sec" id="s-trends"><h2>Player trends</h2><span class="muted">game by game · the last two games against the season average</span></div><div class="pt-grid">'+cards.join('')+'</div>'; }
+{ const _rt=renderTeam; renderTeam=function(name){ _rt(name); const tn=norm((name||'').split('#')[0]); const fav=(SETTINGS.fav&&T[SETTINGS.fav])?SETTINGS.fav:'BYU'; if(tn!==fav) return; const html=ptHTML(tn); if(!html) return;
+    const at=document.getElementById('s-analytics')||document.getElementById('s-stats'); if(at) at.insertAdjacentHTML('beforebegin', html); }; }
+
+/* the Weber State FCS playoff tracker */
+const FCS114 = { selection:'2026-11-22', autos:11, atLarge:13, field:24, byes:8,
+  outside:{ date:'Oct. 20', src:'NCAA.com (Stan Becton)', txt:'projects Weber State into the field as an at-large team even with losses to Montana State and Northern Arizona, citing its head-to-head win over Idaho.' } };
+function fcsRec(tn){ let w=0,l=0,fw=0,fl=0; G.forEach(g=>{ if(!g.played||(g.home!==tn&&g.away!==tn)) return; const us=g.home===tn?g.hs:g.as, th=g.home===tn?g.as:g.hs; const o=T[g.home===tn?g.away:g.home]; const win=us>th; win?w++:l++; if(o&&o.level==='FCS'){ win?fw++:fl++; } }); return {w,l,fw,fl}; }
+function wsTrackerHTML(tn){ const t=T[tn]; if(!t||t.level!=='FCS') return ''; const L=lad113(t.conf); const me=L.find(r=>r.t.name===tn); if(!me) return '';
+  const R=fcsRec(tn); const left=G.filter(g=>!g.played&&(g.home===tn||g.away===tn)).sort((a,b)=>a.date<b.date?-1:1);
+  const days=Math.round((Date.parse(FCS114.selection+'T12:00:00Z')-Date.parse(todayStr+'T12:00:00Z'))/864e5);
+  const minL=Math.min(...L.map(r=>r.cl)); const top=L.filter(r=>r.cl===minL); const names=top.map(r=>tshort(r.t.name));
+  /* head-to-head results already played among the teams at the top */
+  const h2h=[]; G.forEach(g=>{ if(!g.played||!g.conf) return; if(top.some(r=>r.t.name===g.home)&&top.some(r=>r.t.name===g.away)){ const wn=g.hs>g.as?g.home:g.away, ls=wn===g.home?g.away:g.home; h2h.push(esc(tshort(wn))+' beat '+esc(tshort(ls))+' '+Math.max(g.hs,g.as)+'-'+Math.min(g.hs,g.as)); } });
+  const vsTop=left.filter(g=>{ const o=g.home===tn?g.away:g.home; return top.some(r=>r.t.name===o); }).map(g=>(g.home===tn?'hosts ':'visits ')+esc(tshort(g.home===tn?g.away:g.home))+' ('+esc(fmtDate(g.date,false))+')');
+  const auto='<div class="ws-path"><div class="ws-pl">Path 1 · Automatic bid</div><div>Win the '+esc(t.conf)+'. '+(top.length>1?esc(names.join(', ').replace(/, ([^,]*)$/,' and $1'))+' each have '+(minL===1?'one':minL)+' '+esc(t.conf)+' loss'+(minL===1?'':'es')+'.':esc(names[0])+' leads with '+(minL)+' '+esc(t.conf)+' loss'+(minL===1?'':'es')+'.')
+    +(h2h.length?' '+h2h.join('; ')+'.':'')+(vsTop.length&&top.some(r=>r.t.name===tn)?' '+esc(tshort(tn))+' still '+vsTop.join(' and ')+'.':'')+'</div></div>';
+  const atl='<div class="ws-path"><div class="ws-pl">Path 2 · At-large</div><div>'+FCS114.atLarge+' spots picked by the committee. '+esc(tshort(tn))+' is '+R.fw+'-'+R.fl+' against FCS teams with '+left.length+' game'+(left.length===1?'':'s')+' left'+(left.every(g=>g.conf)?', all in the '+esc(t.conf):'')+'.</div>'
+    +(tn==='Weber State'?'<div class="ws-out"><span class="mini">Outside view · '+esc(FCS114.outside.src)+', '+esc(FCS114.outside.date)+'</span>'+esc(FCS114.outside.txt)+'</div>':'')+'</div>';
+  const games=left.map(g=>{ const o=g.home===tn?g.away:g.home; const r=L.find(x=>x.t.name===o); const lg=logoOf(T[o]); const ov=T[o]?fcsRec(o):null;
+    return '<a class="lad-g" href="#/game/'+enc(g.id)+'"><span class="mini">'+esc(fmtDate(g.date,false))+'</span>'+(lg?'<img src="'+lg.icon+'" alt="">':'')+'<b>'+(g.home===tn?'vs ':'at ')+esc(tshort(o))+'</b><span class="mini">'+(ov?ov.w+'-'+ov.l:'')+(r?' · '+r.cw+'-'+r.cl+' '+esc(t.conf):'')+'</span>'+(r&&r.cl===minL?'<span class="pill gold">title race</span>':'')+'</a>'; }).join('');
+  return '<div class="card ws-card"><div class="hd"><h3>FCS playoff tracker</h3><span class="mini">'+FCS114.field+' teams · selection Sunday, Nov. 22'+(days>0?' · '+days+' days':'')+'</span></div><div class="bd">'
+    +'<div class="ws-recs"><span><i>Overall</i>'+R.w+'-'+R.l+'</span><span><i>vs FCS</i>'+R.fw+'-'+R.fl+'</span><span><i>'+esc(t.conf)+'</i>'+me.cw+'-'+me.cl+'</span><span><i>'+esc(t.conf)+' place</i>'+(L.indexOf(me)+1)+getOrdDt(L.indexOf(me)+1)+'</span></div>'
+    +auto+atl+(games?'<div class="lad-left"><div class="lad-lh">Still to play</div>'+games+'</div>':'')
+    +'<div class="mini" style="margin-top:10px">Format: '+FCS114.autos+' automatic bids (conference champions) and '+FCS114.atLarge+' at-large; the top '+FCS114.byes+' seeds get first-round byes. Records and the race come from this site’s results.</div></div></div>'; }
+function bigSkyLadHTML(tn){ const t=T[tn]; const L=lad113(t.conf); const me=L.find(r=>r.t.name===tn); if(!me||L.length<4) return ''; const gb=(x,y)=>((x.cw-y.cw)+(y.cl-x.cl))/2; const n=v=>Math.abs(v)%1?Math.abs(v).toFixed(1):String(Math.abs(v));
+  const row=(r,i)=>{ const lg=logoOf(r.t); const d=gb(r,me); return '<a class="wr-row'+(r===me?' me':'')+'" href="#/team/'+enc(r.t.name)+'"><span class="wr-s">'+(i+1)+'</span>'+(lg?'<img class="lad-lg" src="'+lg.icon+'" alt="">':'<span></span>')+'<span class="wr-n">'+esc(tshort(r.t.name))+'</span><span class="wr-wl">'+r.cw+'-'+r.cl+'</span><span class="lad-ov">'+r.ow+'-'+r.ol+'</span><span class="wr-gb">'+(r===me?'—':(d>0?'+':d<0?'−':'')+(d===0?'even':n(d)))+'</span></a>'; };
+  let lad='<div class="lad-head"><span></span><span></span><span></span><span class="wr-wl">Conf</span><span class="lad-ov">All</span><span class="wr-gb">vs '+esc(tshort(tn))+'</span></div>'; L.forEach((r,i)=>{ if(i===1) lad+='<div class="wr-line po"><span>Champion gets the automatic bid</span></div>'; lad+=row(r,i); });
+  return '<div class="sec" id="s-lad"><h2>'+esc(t.conf)+' ladder</h2><span class="muted">conference records · ties: head-to-head, then fewer losses</span></div><div class="card lad-card"><div class="bd"><div class="wr-lad">'+lad+'</div></div></div>'; }
+{ const _rt=renderTeam; renderTeam=function(name){ _rt(name); const tn=norm((name||'').split('#')[0]); if(tn!=='Weber State') return; const tr=wsTrackerHTML(tn); if(!tr) return;
+    const at=view.querySelector('.subnav')||view.querySelector('.thead'); if(at) at.insertAdjacentHTML('afterend', tr+bigSkyLadHTML(tn)); }; }
 /* ---------- What has to happen (patch91) ---------- */
 function scnPct(x){ if(x==null) return '<span class="dim">—</span>'; if(x>0&&x<0.005) return '&lt;1%'; if(x<1&&x>0.995) return '&gt;99%'; return Math.round(x*100)+'%'; }
 function renderScenarios(name){ setNav('scenarios'); const t=T[name||cfpFocus()]||T['BYU'];

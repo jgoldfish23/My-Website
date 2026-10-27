@@ -116291,8 +116291,8 @@ function pst116Inner(name){ const {sb}=pst116Data(name); const all=Object.values
     cols=[['REC',r=>at(r.e,'REC')],['YDS',r=>big(at(r.e,'YDS'))],['AVG',r=>avg(at(r.e,'YDS'),at(r.e,'REC'))],['TD',r=>at(r.e,'TD')],['LONG',r=>r.e.long||0],['YDS/G',r=>pg(at(r.e,'YDS'),r.g)]]; }
   else if (PST116==='defense') { rows=merge(['defensive','interceptions']).filter(r=>at(r.defensive,'TOT')||at(r.interceptions,'INT')); sortv=r=>at(r.defensive,'TOT')+0.001*at(r.defensive,'SACKS');
     cols=[['TOT',r=>at(r.defensive,'TOT')],['SOLO',r=>at(r.defensive,'SOLO')],['TFL',r=>at(r.defensive,'TFL')],['SACKS',r=>at(r.defensive,'SACKS')],['PD',r=>at(r.defensive,'PD')],['QBH',r=>at(r.defensive,'QB HUR')],['INT',r=>at(r.interceptions,'INT')],['TD',r=>at(r.defensive,'TD')+at(r.interceptions,'TD')],['TKL/G',r=>pg(at(r.defensive,'TOT'),r.g)]]; }
-  else if (PST116==='kicking') { rows=byCat('kicking').filter(e=>den(e,'FG')||den(e,'XP')).map(e=>({n:e.n,g:e.g,e})); sortv=r=>at(r.e,'PTS');
-    cols=[['FG',r=>at(r.e,'FG')+'-'+den(r.e,'FG')],['FG%',r=>pct(at(r.e,'FG'),den(r.e,'FG'))],['LONG',r=>r.e.long||0],['XP',r=>at(r.e,'XP')+'-'+den(r.e,'XP')],['PTS',r=>at(r.e,'PTS')]]; }
+  else if (PST116==='kicking') { rows=byCat('kicking').filter(e=>den(e,'FG')||den(e,'XP')).map(e=>({n:e.n,g:e.g,e})); sortv=r=>3*at(r.e,'FG')+at(r.e,'XP');
+    cols=[['FG',r=>at(r.e,'FG')+'-'+den(r.e,'FG')],['FG%',r=>pct(at(r.e,'FG'),den(r.e,'FG'))],['LONG',r=>r.e.long||0],['XP',r=>at(r.e,'XP')+'-'+den(r.e,'XP')],['PTS',r=>3*at(r.e,'FG')+at(r.e,'XP')]]; }
   else if (PST116==='punting') { rows=byCat('punting').filter(e=>at(e,'NO')>0).map(e=>({n:e.n,g:e.g,e})); sortv=r=>at(r.e,'NO');
     cols=[['PUNTS',r=>at(r.e,'NO')],['YDS',r=>big(at(r.e,'YDS'))],['AVG',r=>avg(at(r.e,'YDS'),at(r.e,'NO'))],['IN 20',r=>at(r.e,'In 20')],['TB',r=>at(r.e,'TB')],['LONG',r=>r.e.long||0]]; }
   else { rows=merge(['kickReturns','puntReturns']).filter(r=>at(r.kickReturns,'NO')||at(r.puntReturns,'NO')); sortv=r=>at(r.kickReturns,'YDS')+at(r.puntReturns,'YDS');
@@ -117252,7 +117252,7 @@ connectDb();
   const CFG={
     cfb:{keep:['Record','Points','Power rating','Playoff odds'], team:/^(Recruiting|Analytics|Season stats|Player stats|NFL draft stock|Depth chart|.+ race)$/i, game:GAME},
     nba:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(\d{4}-\d{2} schedule|Projections|Odds|Team analytics|Player stats|Player analytics|Salary cap|Depth chart|Roster|Draft)$/i, game:GAME},
-    nfl:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(Projections|Odds|Analytics|Team analytics|Player analytics|Season stats|Salary cap|Depth chart|Roster|Draft|NFL draft)$/i, game:GAME}}[HUB];
+    nfl:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(Projections|Odds|Analytics|Team analytics|Player analytics|Season stats|Player stats|Salary cap|Depth chart|Roster|Draft|NFL draft)$/i, game:GAME}}[HUB];
   if(!CFG) return;
   const route=()=>((location.hash||'').match(/^#\/(team|game)\//)||[])[1]||null;
   const key=(r,t)=>'jsh-fold:'+HUB+':'+r+':'+t;

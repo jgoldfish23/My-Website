@@ -12026,6 +12026,10 @@ Object.values(TG_BY_TEAM).forEach(l=>l.sort((a,b)=>a.date<b.date?-1:1));
 function tgSide(g, ab){ return g.home===ab ? {t:g.H, o:g.A} : {t:g.A, o:g.H}; }
 /* sum a set of team games into one line (possession-weighted, so ratings over a stretch are exact) */
 function tgSum(list, ab){ const keys=['fgm','fga','tpm','tpa','ftm','fta','oreb','dreb','reb','ast','stl','blk','tov','pf','pts']; const t={}, o={}; keys.forEach(k=>{ t[k]=0; o[k]=0; }); list.forEach(g=>{ const s=tgSide(g,ab); keys.forEach(k=>{ t[k]+=s.t[k]; o[k]+=s.o[k]; }); }); const n=list.length||1; keys.forEach(k=>{ t[k]/=n; o[k]/=n; }); t.gp=list.length; return advOf({t,o}); }
+/* Once this season has started, team analytics follow the box scores whenever they hold more games: ESPN's season
+   team totals can trail by a game (2026-10-26: the Jazz showed 3 games after their 4th), and the trend chart below
+   already reads these same lines, so tiles, four factors, ranks and the chart now agree. */
+if (TS_CUR) { TEAMS.forEach(t=>{ const l=TG_BY_TEAM[t.ab]; if(l&&l.length&&(!TADV[t.ab]||l.length>TADV[t.ab].gp)) TADV[t.ab]=tgSum(l,t.ab); }); Object.keys(ADV_RANK).forEach(k=>delete ADV_RANK[k]); }
 
 /* ---------- Pythagorean record: what the scoring margin says the record should be ---------- */
 const PYTH = 14;

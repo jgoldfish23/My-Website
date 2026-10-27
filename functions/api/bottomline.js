@@ -18,7 +18,7 @@ function feeds() { const now = Date.now(), D = 864e5; const wk = ymd(now - 3 * D
     { lg: "nhl", path: "hockey/nhl", q: "?limit=40" },
     { lg: "mlb", path: "baseball/mlb", q: "?limit=40" },
   ]; }
-const NEWS = [["cfb", "football/college-football", 4], ["nfl", "football/nfl", 4], ["nba", "basketball/nba", 4], ["mlb", "baseball/mlb", 3], ["nhl", "hockey/nhl", 3]];
+const NEWS = [["cfb", "football/college-football", 6], ["nfl", "football/nfl", 6], ["nba", "basketball/nba", 6], ["mlb", "baseball/mlb", 4], ["nhl", "hockey/nhl", 4]];
 const KEEP_FCS = new Set(["2692"]); // Weber State
 
 function corsHeaders(request) {
@@ -71,7 +71,7 @@ export async function onRequestGet({ request }) {
     lists.forEach(({ lg, j }) => {
       ((j && j.articles) || []).forEach((x) => {
         const href = x.links && x.links.web && x.links.web.href;
-        if (x.headline && href) news.push({ lg, t: String(x.headline).slice(0, 140), u: href, d: x.published || "" });
+        if (x.headline && href) { const im = (x.images || []).find((i) => i && i.url); news.push({ lg, t: String(x.headline).slice(0, 140), u: href, d: x.published || "", s: String(x.description || "").slice(0, 220), img: im ? im.url : "" }); } // s + img feed the home page Headlines (2026-10-26)
       });
     });
     return json(request, { t: Date.now(), games, news, ...(errs.length ? { errs } : {}) }, 200, errs.length ? 0 : TTL);

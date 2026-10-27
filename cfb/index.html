@@ -117362,20 +117362,32 @@ connectDb();
   + '@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #view .card,:root:not([data-theme="dark"]) #view .tile{background-image:none;box-shadow:0 1px 2px rgba(15,23,42,.05),0 14px 32px -24px rgba(15,23,42,.28)}}'
   + '#view a.card:hover,#view a.tile:hover,#view .tile-link:hover,#view a.gm:hover,#view .wcard:hover{border-color:color-mix(in srgb,' + A + ' 55%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,' + A + ' 22%,transparent),0 26px 56px -30px color-mix(in srgb,' + A + ' 70%,transparent);transform:translateY(-2px)}'
   /* numbered HUD section headings with a light rule */
-  + '#view{counter-reset:neo}'
-  + '#view .sec{counter-increment:neo;position:relative;padding-bottom:10px}'
+  + '#view .sec{position:relative;padding-bottom:10px}'
   + '#view .sec::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;background:linear-gradient(90deg,color-mix(in srgb,' + A + ' 65%,transparent),color-mix(in srgb,' + A + ' 18%,transparent) 42%,transparent 88%)}'
   + '#view .sec>h2{letter-spacing:-.028em}'
-  + '#view .sec>h2::before{content:counter(neo,decimal-leading-zero);display:inline-block;margin-right:10px;padding:2px 6px;border-radius:6px;font-family:"Orbitron",var(--disp,inherit);font-size:10px;font-weight:800;letter-spacing:.16em;line-height:1.5;vertical-align:4px;color:' + A + ';border:1px solid color-mix(in srgb,' + A + ' 40%,transparent);background:color-mix(in srgb,' + A + ' 9%,transparent);box-shadow:0 0 14px -5px ' + A + '}'
+  + '#view .sec>h2[data-neo]::before{content:attr(data-neo);display:inline-block;margin-right:10px;padding:2px 6px;border-radius:6px;font-family:"Orbitron",var(--disp,inherit);font-size:10px;font-weight:800;letter-spacing:.16em;line-height:1.5;vertical-align:4px;color:' + A + ';border:1px solid color-mix(in srgb,' + A + ' 40%,transparent);background:color-mix(in srgb,' + A + ' 9%,transparent);box-shadow:0 0 14px -5px ' + A + '}'
   /* page titles and eyebrows */
   + '#view .page-head h1{font-size:clamp(28px,4.2vw,46px);letter-spacing:-.042em;line-height:1.02}'
   + '#view .page-head .eyebrow,#view>.eyebrow{font-family:"Orbitron",var(--disp,inherit);font-size:10.5px;font-weight:600;letter-spacing:.22em}'
   /* selected pills glow in the accent color */
   + '.ng-sub a.on,#view .seg .on,#view .seg a.on,#view .seg button.on{background:linear-gradient(90deg,' + A + ',color-mix(in srgb,' + A + ' 60%,#8a4dff))!important;color:#fff!important;border-color:transparent!important;box-shadow:0 8px 22px -10px ' + A + '}'
   + '@media (prefers-reduced-motion:reduce){#neo-bg::before{animation:none}#view a.card:hover,#view a.tile:hover,#view .tile-link:hover,#view a.gm:hover,#view .wcard:hover{transform:none}}'
-  + '@media (max-width:600px){#view .sec>h2::before{margin-right:8px;font-size:9.5px}}';
+  + '@media (max-width:600px){#view .sec>h2[data-neo]::before{margin-right:8px;font-size:9.5px}}';
   const st = document.createElement('style'); st.id = 'neo-css'; st.textContent = css; document.head.appendChild(st);
   const bg = document.createElement('div'); bg.id = 'neo-bg'; bg.setAttribute('aria-hidden', 'true'); document.body.prepend(bg);
+  /* number the section markers in the order they appear on screen (phone layouts move columns around, so the page's
+     own order isn't the reading order); renumbers after each re-render and on resize */
+  let raf = 0;
+  const number = () => { raf = 0;
+    const hs = [...document.querySelectorAll('#view .sec>h2')].map(h => ({ h, r: h.getBoundingClientRect() }));
+    hs.filter(x => !x.r.height).forEach(x => x.h.removeAttribute('data-neo'));
+    hs.filter(x => x.r.height).sort((a, b) => (Math.round(a.r.top / 8) - Math.round(b.r.top / 8)) || (a.r.left - b.r.left))
+      .forEach((x, i) => { const n = String(i + 1).padStart(2, '0'); if (x.h.dataset.neo !== n) x.h.dataset.neo = n; });
+  };
+  const soon = () => { if (!raf) raf = setTimeout(number, 60); };
+  const start = () => { const v = document.getElementById('view'); if (!v) return; new MutationObserver(soon).observe(v, { childList: true, subtree: true }); soon(); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+  addEventListener('resize', soon);
 })();
 /* neo:end */
 </script>

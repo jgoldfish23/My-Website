@@ -117333,6 +117333,52 @@ connectDb();
 })();
 /* voice:end */
 </script>
+<script>
+/* neo:start - the home page's "Neo" look for the league hubs (2026-10-26, Jamo: "bring the new look to all the hubs").
+   Shared by the CFB, NFL, NBA and NHL hubs (inlined last by each build.sh), so it only refines what's there and every
+   hub keeps its own accent color and wallpaper (BYU field, Jazz court, NHL ice):
+   - a deep-space backdrop (slow aurora + fine dot grid) behind pages that have no wallpaper
+   - glass panels: a soft top highlight and hairline edges on cards and stat tiles; tappable ones light up in the
+     hub's accent color
+   - numbered HUD markers on section headings with a light rule underneath
+   - a bigger page title, Orbitron eyebrows, glowing selected pills, a light line under the pinned header
+   Works in light and dark; motion stops for reduced-motion users. */
+(function(){ if (document.getElementById('neo-css')) return;
+  if (!document.querySelector('link[href*="family=Orbitron"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap'; document.head.appendChild(l); }
+  const A = 'var(--accent,var(--blue,#5b8cff))';
+  const css =
+  /* backdrop: an aurora and a dot grid, under any wallpaper the hub draws */
+    '#neo-bg{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}'
+  + '#neo-bg::before{content:"";position:absolute;inset:-12%;background:radial-gradient(760px 520px at 10% 2%,rgba(59,123,255,.20),transparent 62%),radial-gradient(720px 520px at 94% 0%,rgba(164,91,255,.18),transparent 64%),radial-gradient(900px 600px at 50% 108%,rgba(56,189,248,.10),transparent 66%);animation:neoAur 42s ease-in-out infinite alternate}'
+  + '#neo-bg::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 72%);mask-image:linear-gradient(180deg,#000,transparent 72%)}'
+  + '@keyframes neoAur{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}100%{transform:translate3d(2.5%,-1.5%,0) scale(1.03)}}'
+  + ':root[data-theme="light"] #neo-bg::before{opacity:.45}:root[data-theme="light"] #neo-bg::after{background-image:radial-gradient(rgba(15,23,42,.06) 1px,transparent 1.3px)}'
+  + '@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #neo-bg::before{opacity:.45}:root:not([data-theme="dark"]) #neo-bg::after{background-image:radial-gradient(rgba(15,23,42,.06) 1px,transparent 1.3px)}}'
+  /* the pinned header: a thin light line in the accent color */
+  + 'header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,' + A + ' 30%,color-mix(in srgb,' + A + ' 40%,#c4a6ff) 70%,transparent);opacity:.65}'
+  /* glass panels */
+  + '#view .card,#view .tile{background-image:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 58%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 22px 50px -34px rgba(0,0,0,.85);transition:border-color .2s,box-shadow .2s,transform .2s}'
+  + ':root[data-theme="light"] #view .card,:root[data-theme="light"] #view .tile{background-image:none;box-shadow:0 1px 2px rgba(15,23,42,.05),0 14px 32px -24px rgba(15,23,42,.28)}'
+  + '@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #view .card,:root:not([data-theme="dark"]) #view .tile{background-image:none;box-shadow:0 1px 2px rgba(15,23,42,.05),0 14px 32px -24px rgba(15,23,42,.28)}}'
+  + '#view a.card:hover,#view a.tile:hover,#view .tile-link:hover,#view a.gm:hover,#view .wcard:hover{border-color:color-mix(in srgb,' + A + ' 55%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,' + A + ' 22%,transparent),0 26px 56px -30px color-mix(in srgb,' + A + ' 70%,transparent);transform:translateY(-2px)}'
+  /* numbered HUD section headings with a light rule */
+  + '#view{counter-reset:neo}'
+  + '#view .sec{counter-increment:neo;position:relative;padding-bottom:10px}'
+  + '#view .sec::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;background:linear-gradient(90deg,color-mix(in srgb,' + A + ' 65%,transparent),color-mix(in srgb,' + A + ' 18%,transparent) 42%,transparent 88%)}'
+  + '#view .sec>h2{letter-spacing:-.028em}'
+  + '#view .sec>h2::before{content:counter(neo,decimal-leading-zero);display:inline-block;margin-right:10px;padding:2px 6px;border-radius:6px;font-family:"Orbitron",var(--disp,inherit);font-size:10px;font-weight:800;letter-spacing:.16em;line-height:1.5;vertical-align:4px;color:' + A + ';border:1px solid color-mix(in srgb,' + A + ' 40%,transparent);background:color-mix(in srgb,' + A + ' 9%,transparent);box-shadow:0 0 14px -5px ' + A + '}'
+  /* page titles and eyebrows */
+  + '#view .page-head h1{font-size:clamp(28px,4.2vw,46px);letter-spacing:-.042em;line-height:1.02}'
+  + '#view .page-head .eyebrow,#view>.eyebrow{font-family:"Orbitron",var(--disp,inherit);font-size:10.5px;font-weight:600;letter-spacing:.22em}'
+  /* selected pills glow in the accent color */
+  + '.ng-sub a.on,#view .seg .on,#view .seg a.on,#view .seg button.on{background:linear-gradient(90deg,' + A + ',color-mix(in srgb,' + A + ' 60%,#8a4dff))!important;color:#fff!important;border-color:transparent!important;box-shadow:0 8px 22px -10px ' + A + '}'
+  + '@media (prefers-reduced-motion:reduce){#neo-bg::before{animation:none}#view a.card:hover,#view a.tile:hover,#view .tile-link:hover,#view a.gm:hover,#view .wcard:hover{transform:none}}'
+  + '@media (max-width:600px){#view .sec>h2::before{margin-right:8px;font-size:9.5px}}';
+  const st = document.createElement('style'); st.id = 'neo-css'; st.textContent = css; document.head.appendChild(st);
+  const bg = document.createElement('div'); bg.id = 'neo-bg'; bg.setAttribute('aria-hidden', 'true'); document.body.prepend(bg);
+})();
+/* neo:end */
+</script>
 
 </body>
 </html>

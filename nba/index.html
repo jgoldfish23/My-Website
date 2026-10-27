@@ -14098,7 +14098,7 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
   const CFG={
     cfb:{keep:['Record','Points','Power rating','Playoff odds'], team:/^(Recruiting|Analytics|Season stats|Player stats|NFL draft stock|Depth chart|.+ race)$/i, game:GAME},
     nba:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(\d{4}-\d{2} schedule|Projections|Odds|Team analytics|Player stats|Player analytics|Salary cap|Depth chart|Roster|Draft)$/i, game:GAME},
-    nfl:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(Projections|Odds|Analytics|Team analytics|Player analytics|Season stats|Salary cap|Depth chart|Roster|Draft|NFL draft)$/i, game:GAME}}[HUB];
+    nfl:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(Projections|Odds|Analytics|Team analytics|Player analytics|Season stats|Player stats|Salary cap|Depth chart|Roster|Draft|NFL draft)$/i, game:GAME}}[HUB];
   if(!CFG) return;
   const route=()=>((location.hash||'').match(/^#\/(team|game)\//)||[])[1]||null;
   const key=(r,t)=>'jsh-fold:'+HUB+':'+r+':'+t;

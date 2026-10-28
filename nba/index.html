@@ -1381,10 +1381,11 @@ input::placeholder{color:var(--ink-3);opacity:1}
 .tk-sw{width:4px;height:14px;border-radius:2px}
 .tk-ab{font-size:12.5px;font-weight:600;letter-spacing:0;color:var(--ink)}
 .tk .sc-num{font-family:var(--num);font-size:14px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
-.tk .sc-num.l{color:var(--ink-3);font-weight:500}
+.tk .sc-num.l{color:color-mix(in srgb,var(--ink-2) 70%,var(--ink-3));font-weight:500} /* the losing score stays dimmer but readable (was --ink-3, 4.0:1 on the dark ticker; 2026-10-28) */
 .tk .dash{margin:0 2px;color:var(--ink-3)}
 .tk-time{font-size:12px;font-weight:500;color:var(--ink-2)}
 .tk-live{font-size:11px;font-weight:700;letter-spacing:.02em;color:var(--live)}
+:root[data-theme="light"] .tk-live{color:#b4232a}@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .tk-live{color:#b4232a}}
 .tk-fin{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--ink-3)}
 .tk-day{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
 .tk.islive{background:color-mix(in srgb,var(--live) 7%,transparent)}
@@ -12229,7 +12230,7 @@ function pAdv(o){ if(!o) return null; if(PADV_CACHE.has(o)) return PADV_CACHE.ge
   PADV_CACHE.set(o,r); return r; }
 /* the comparison pool: regular rotation players from the same season */
 const POOL_CACHE = {};
-function playerPool(season){ if(POOL_CACHE[season]) return POOL_CACHE[season]; const src=season===SEASON?PS_CUR:PS_PREV; const list=Object.entries(src).map(([id,o])=>Object.assign({id},o)); const maxGp=Math.max(1,...list.map(o=>o.gp||0)); const pool=list.filter(o=>(o.min||0)>=15&&(o.gp||0)>=Math.max(5,Math.floor(maxGp*0.4))); return POOL_CACHE[season]={pool, maxGp}; }
+function playerPool(season){ if(POOL_CACHE[season]) return POOL_CACHE[season]; const src=season===SEASON?PS_CUR:PS_PREV; const list=Object.entries(src).map(([id,o])=>Object.assign({id},o)); const maxGp=Math.max(1,...list.map(o=>o.gp||0)); const pool=list.filter(o=>(o.min||0)>=15&&(o.gp||0)>=Math.max(Math.min(5,Math.ceil(maxGp*0.6)),Math.floor(maxGp*0.4))); /* early season: 60% of the games so far, up to 5 (a flat 5 emptied the Player stats page in week 1, 2026-10-28) */ return POOL_CACHE[season]={pool, maxGp}; }
 const PCTL_CACHE = {};
 function pctile(season, k, v, lowBetter){ if(v==null) return null; const key=season+'|'+k; if(!PCTL_CACHE[key]){ PCTL_CACHE[key]=playerPool(season).pool.map(o=>{ const a=pAdv(o); return k in a ? a[k] : o[k]; }).filter(x=>x!=null&&!isNaN(x)).sort((a,b)=>a-b); } const arr=PCTL_CACHE[key]; if(!arr.length) return null; let below=0; while(below<arr.length&&arr[below]<v) below++; const p=below/arr.length; return lowBetter?1-p:p; }
 const PBARS=[['pts','Scoring','per game',v=>num1(v)],['ts','Efficiency','true shooting',v=>fpct(v)+'%'],['usg','Usage','share of possessions',v=>fpct(v)+'%'],['astp','Playmaking','assist %',v=>fpct(v)+'%'],['rebp','Rebounding','rebound %',v=>fpct(v)+'%'],['tovp','Ball security','turnovers per use',v=>fpct(v)+'%',true],['stlp','Steals','steal %',v=>fpct(v,1)+'%'],['blkp','Rim protection','block %',v=>fpct(v,1)+'%'],['tpar','Three-point volume','share of shots',v=>fpct(v)+'%'],['ftr','Getting to the line','FTA per shot',v=>fratio(v)],['gmsc','Overall','Game Score',v=>num1(v)]];
@@ -13167,7 +13168,7 @@ function renderPlayers(a, b){ setNav('players'); if(String(a||'').toLowerCase()=
     +'<div class="seg"><button type="button" data-plv="per:0" class="'+(PLS.per?'':'on')+'">Per game</button><button type="button" data-plv="per:1" class="'+(PLS.per?'on':'')+'">Per 36 min</button></div>'
     +'<label class="pl-chk"><input type="checkbox" id="pl-all"'+(PLS.all?' checked':'')+'> Include bench players</label><a class="btn sm" href="#/players/compare">Compare players</a></div>';
   html+='<div id="pl-tbl">'+plTableHTML()+'</div>';
-  html+='<div class="pl-note">Rotation players: at least 15 minutes a game and 40% of the games ('+D.n+' players in '+esc(D.label)+'). Percentiles are league-wide. <span class="pl-legend">Percentile shading: low <i></i> high</span> &middot; flipped where lower is better, so orange always means good. '+plSrc+'</div>';
+  html+='<div class="pl-note">Rotation players: at least 15 minutes a game and 40% of the games (60% early in the season, never more than 5 games) ('+D.n+' players in '+esc(D.label)+'). Percentiles are league-wide. <span class="pl-legend">Percentile shading: low <i></i> high</span> &middot; flipped where lower is better, so orange always means good. '+plSrc+'</div>';
   html+='<div id="pl-cbar">'+plBarHTML()+'</div><div class="pl-pad"></div>';
   view.innerHTML=html; }
 function plTableHTML(){ const D=plCur(), g=PLS.g, cols=plCols(); const def0=PLS.adv&&D.hasX?PL_CFG.asort:PL_CFG.sort; const sk=(PLS.sort[PLS.adv]&&cols.includes(PLS.sort[PLS.adv]))?PLS.sort[PLS.adv]:(cols.includes(def0)?def0:'pts'); const dir=PLS.dir[PLS.adv]&&PLS.sort[PLS.adv]===sk?PLS.dir[PLS.adv]:(PL_M[sk].lo?1:-1);

@@ -13502,7 +13502,10 @@ function jazzCourtSVG(){ const L='#2b1654', P='#4E2A84', A='#33195f';
     +'<image href="'+LOGO_BASE+'/UTAH-lg.png" x="420" y="200" width="160" height="160" preserveAspectRatio="xMidYMid meet"/>'
     +'<g fill="#fff" font-family="Inter Tight,Inter,system-ui,sans-serif" font-weight="900" font-size="30" letter-spacing="2" text-anchor="middle">'
     +'<text transform="translate(18 280) rotate(-90)">UTAH JAZZ</text><text transform="translate(982 280) rotate(90)">UTAH JAZZ</text></g></svg>'; }
-function floorBg(){ const on=!/^#\/cup/.test(location.hash||''); let el=document.getElementById('floorbg');
+/* 2026-10-27 (Jamo: "Fix the court on nba pages"): the Jazz floor only belongs where the page is the Jazz's or nobody's.
+   Another team's game or team page is already dressed in that team's colors and logo (applyPageTheme), and the Jazz
+   court under a giant Celtics clover looked broken, so those pages go without it. */
+function floorBg(){ let t=null; try{ t=pageTeam(); }catch(e){} const on=!/^#\/cup/.test(location.hash||'') && (!t || t.ab===HOME); let el=document.getElementById('floorbg');
   if(!el){ el=document.createElement('div'); el.id='floorbg'; el.className='floor-bg'; el.setAttribute('aria-hidden','true'); el.innerHTML=jazzCourtSVG()+'<div class="floor-veil"></div>'; document.body.prepend(el); }
   el.hidden=!on; }
 window.addEventListener('hashchange', floorBg); setTimeout(floorBg, 0); /* after p2c.js sets LOGO_BASE */

@@ -326,8 +326,10 @@
     return Math.round(b);
   }
   let lastB = -1, lastHide = null;
+  // the button stays out of sight until the site has its AI key (GET /api/ask says; remembered for 10 minutes)
+  let READY = !!DEMO;
   function place() {
-    const hide = blocked();
+    const hide = blocked() || !READY;
     if (hide !== lastHide) { lastHide = hide; fab.hidden = hide; if (hide && !panel.hidden) close(); }
     const b = docked();
     if (b === lastB) return; lastB = b;
@@ -376,6 +378,12 @@
   function start() {
     d.body.appendChild(fab); d.body.appendChild(panel);
     send.disabled = true; place();
+    if (!READY) {
+      let c = null; try { c = JSON.parse(sessionStorage.getItem('jask-ready') || 'null'); } catch (e) {}
+      const set = (v) => { READY = !!v; lastHide = null; place(); };
+      if (c && Date.now() - c.t < 600000) set(c.v);
+      else fetch(API, { method: 'GET' }).then(r => r.ok ? r.json() : null).then(j => { const v = !!(j && j.ready); try { sessionStorage.setItem('jask-ready', JSON.stringify({ v, t: Date.now() })); } catch (e) {} set(v); }).catch(() => {});
+    }
     // the ticker, its pill and the NBA tab bar come and go: re-place on body changes, and every couple of seconds as a backstop
     try {
       new MutationObserver(place).observe(d.body, { attributes: true, attributeFilter: ['class'], childList: true });

@@ -123,6 +123,8 @@ header.top.jsh-tuck{pointer-events:none}
 <script src="/sports/bl.js?v=20261027a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
 <script src="/sports/holo.js?v=20261027a" defer></script>
+<!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
+<script src="/sports/stage.js?v=20261027a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
      To bring it back, put this tag back in (and bump ?v=): <script src="/sports/ask.js?v=20261027c" defer></script> -->
 <title>NBA · Jamo Sports Hub</title>
@@ -3127,7 +3129,7 @@ a.nl-t:hover{border-color:var(--accent)}
   .bt-i{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;font:inherit;font-size:10.5px;font-weight:700;color:var(--ink-3);background:none;border:0;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
   .bt-i svg{width:22px;height:22px}.bt-i img{width:24px;height:24px;object-fit:contain;filter:grayscale(.6);opacity:.75}
   .bt-i span{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .bt-i.on{color:var(--accent)}.bt-i.on img{filter:none;opacity:1}
+  .bt-i.on{color:var(--accent-text,var(--accent))}.bt-i.on img{filter:none;opacity:1} /* readable on the dark bar (2026-10-27) */
   .bt-i.on::before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;border-radius:0 0 3px 3px;background:var(--accent)}
   body.has-btab .jbl{bottom:calc(58px + env(safe-area-inset-bottom))!important}
   body.has-btab{padding-bottom:calc(104px + env(safe-area-inset-bottom))!important}

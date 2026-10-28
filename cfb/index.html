@@ -42,6 +42,13 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .jsh-nav{min-width:0}
 .jsh-nav a{flex:none;line-height:1}
 @media print{.jsh{display:none}}
+/* Live Center tab (2026-10-27): a small red dot on the tab while any CFB, NFL or NBA game is live (set from the BottomLine feed) */
+.jsh-nav a[data-s="live"]{position:relative}
+.jsh-nav a .jsh-ld{position:absolute;top:4px;right:5px;width:7px;height:7px;border-radius:50%;background:#ff4d6a;box-shadow:0 0 0 2px rgba(255,77,106,.28);animation:jshLd 1.6s ease-in-out infinite}
+.jsh-nav a .jsh-ld[hidden]{display:none}
+.jsh-nav a.on .jsh-ld{background:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.3)}
+@keyframes jshLd{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.jsh-nav a .jsh-ld{animation:none}}
 /* league logos and a centered row (2026-10-19) */
 .jsh-nav a .jsh-lg{flex:none;width:18px;height:18px;object-fit:contain;display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45))}
 .jsh-nav a svg.jsh-lg{filter:none;opacity:.85}
@@ -67,8 +74,7 @@ header.top.jsh-tuck{pointer-events:none}
     <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">CFB</a>
     <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nfl.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NFL</a>
     <a href="/nba/" data-s="nba" style="--c:#6d28d9"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nba.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NBA</a>
-    <a href="/nhl/" data-s="nhl" style="--c:#0284c7"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nhl.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NHL</a>
-    <a href="/mlb/" data-s="mlb" style="--c:#005a9c"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/mlb.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">MLB</a>
+    <a href="/sports/live/" data-s="live" style="--c:#e11d48" title="Live Center"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.48M7.76 16.24a6 6 0 0 1 0-8.48M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>Live<span class="jsh-ld" hidden></span></a>
     <a href="/sports/articles/" data-s="articles" style="--c:#be185d"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="15" height="16" rx="2"/><path d="M18 8h3v10a2 2 0 0 1-2 2"/><path d="M7 8h7M7 12h7M7 16h4"/></svg>Articles</a>
   </nav>
 </div>
@@ -76,9 +82,9 @@ header.top.jsh-tuck{pointer-events:none}
 /* Jamo Sports Hub: light/dark and the time zone follow you between CFB, NFL and NBA (each keeps its own favourite team).
    Runs before the hub's own script, so a choice made in one hub is in place before the next one reads its settings. */
 (function(){ try {
-  var s = (location.pathname.indexOf('/sports/articles') === 0 ? 'articles' : (location.pathname.split('/')[1] || 'sports')).toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
+  var s = (location.pathname.indexOf('/sports/articles') === 0 ? 'articles' : location.pathname.indexOf('/sports/live') === 0 ? 'live' : location.pathname.indexOf('/sports/alerts') === 0 ? 'alerts' : (location.pathname.split('/')[1] || 'sports')).toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
   if (a) { a.className = 'on'; a.setAttribute('aria-current', 'page'); }
-  if (s === 'sports' || s === 'articles') return;
+  if (s === 'sports' || s === 'articles' || s === 'live' || s === 'alerts') return;
   var key = s + '-settings', sh = JSON.parse(localStorage.getItem('jsh-shared') || 'null');
   if (sh) { var own = JSON.parse(localStorage.getItem(key) || '{}'), ch = false;
     ['theme', 'tz'].forEach(function (k) { if (sh[k] && own[k] !== sh[k]) { own[k] = sh[k]; ch = true; } });
@@ -98,8 +104,23 @@ header.top.jsh-tuck{pointer-events:none}
   addEventListener('hashchange', function(){ var e = hdr(); if (e) off(e); });
 })();
 </script>
+<script>
+/* Live Center tab (2026-10-27): the BottomLine (bl.js) announces every fresh /api/bottomline answer with a "jsh:bl" event;
+   the red dot on the Live tab shows while any college football, NFL or NBA game is in progress. No extra requests.
+   Weber State's FCS games count only when the Live Center's "Follow Weber State too" option is on. */
+(function(){ var a = document.querySelector('.jsh-nav a[data-s="live"]'), d = a && a.querySelector('.jsh-ld'); if (!d) return;
+  document.addEventListener('jsh:bl', function (e) { try {
+    var web = false; try { web = !!(JSON.parse(localStorage.getItem('jsh-live') || '{}') || {}).weber; } catch (x) {}
+    var isWeber = function (g) { return g.lg === 'cfb' && [g.a, g.h].some(function (t) { return t && String(t.id) === '2692'; }); };
+    var n = ((e.detail && e.detail.games) || []).filter(function (g) { return g && g.st === 'in' && /^(cfb|nfl|nba)$/.test(g.lg) && (web || !isWeber(g)); }).length;
+    d.hidden = !n; a.title = n ? 'Live Center: games on now' : 'Live Center';
+  } catch (x) {} });
+})();
+</script>
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
-<script src="/sports/bl.js?v=20261019g" defer></script>
+<script src="/sports/bl.js?v=20261027a" defer></script>
+<!-- Ask the Hub: the AI analyst button and chat (ask/ask.js, published by build.sh as /sports/ask.js) -->
+<script src="/sports/ask.js?v=20261027a" defer></script>
 <title>CFB · Jamo Sports Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117415,8 +117436,8 @@ connectDb();
 </script>
 <script>
 /* neo:start - the home page's "Neo" look for the league hubs (2026-10-26, Jamo: "bring the new look to all the hubs").
-   Shared by the CFB, NFL, NBA and NHL hubs (inlined last by each build.sh), so it only refines what's there and every
-   hub keeps its own accent color and wallpaper (BYU field, Jazz court, NHL ice):
+   Shared by the CFB, NFL and NBA hubs (inlined last by each build.sh), so it only refines what's there and every
+   hub keeps its own accent color and wallpaper (BYU field, Jazz court):
    - a deep-space backdrop (slow aurora + fine dot grid) behind pages that have no wallpaper
    - glass panels: a soft top highlight and hairline edges on cards and stat tiles; tappable ones light up in the
      hub's accent color

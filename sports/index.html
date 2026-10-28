@@ -133,7 +133,7 @@ a.tc:hover{transform:translateY(-3px);box-shadow:0 26px 50px -24px rgba(0,0,0,.9
 .tc-last{font-size:12.5px;color:rgba(255,255,255,.82)}
 .tc-last b{font-weight:800}
 .tc-last .w{color:#9df5c1}.tc-last .l{color:#ffb3bf}
-.tc-ar{display:block;margin-top:8px;padding:8px 10px;border-radius:11px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);font-size:12.5px;font-weight:600;line-height:1.35;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+.tc-ar{display:block;margin-top:8px;padding:8px 10px;border-radius:11px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.14);font-size:12.5px;font-weight:600;line-height:1.35;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
 .tc-ar:hover,.tc-ar:focus-visible{background:rgba(255,255,255,.2);outline:none}
 .tc-ar-k{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffd77a;margin-right:4px}
 .tc.pick{align-items:center;justify-content:center;text-align:center;background:var(--surface);border:1.5px dashed var(--line);color:var(--ink);box-shadow:none}
@@ -169,6 +169,10 @@ a.tc:hover{transform:translateY(-3px);box-shadow:0 26px 50px -24px rgba(0,0,0,.9
 a.tv-g:hover{background:var(--surface-2)}
 .sp-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);white-space:nowrap}
 .sp-tag svg{width:12px;height:12px}
+/* small league tags (2026-10-28): the raw league color was about 3:1 at 10.5 px on the dark glass, so it is lightened in
+   dark and deepened in light; the "Jamo's preview" chip on team cards sits on a darker plate so its gold label reads */
+.sp-tag{color:color-mix(in srgb,var(--c) 55%,#fff)}
+:root.light .sp-tag{color:color-mix(in srgb,var(--c) 70%,#000)}
 .tv-m{display:flex;align-items:center;gap:8px;min-width:0;font-weight:700;font-size:14.5px}
 .tv-m img,.tv-m .sw{width:22px;height:22px;object-fit:contain;flex:none;border-radius:5px}
 .tv-m .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -584,7 +588,7 @@ header.top.jsh-tuck{pointer-events:none}
 
   <footer class="foot"><span id="asof"></span><span>A <i>Kramerica Industries</i> production</span></footer>
 </main>
-<script type="application/json" id="d-meta">{"cfb":"Wed Oct 28, 2026 · 8:03 AM ET","nfl":"Wed Oct 28, 2026 · 8:03 AM ET","nba":"Wed Oct 28, 2026 · 8:04 AM ET"}</script>
+<script type="application/json" id="d-meta">{"cfb":"Wed Oct 28, 2026 · 8:03 AM ET","nfl":"","nba":""}</script>
 <script type="text/plain" id="d-cfb">1|2026-08-29|Hawai'i|Stanford|27|37|FINAL|7:00 PM||-4.5|48.5|170|-205|ACC Network||
 1|2026-08-29|Jacksonville State|North Dakota State|7|33|FINAL|5:30 PM||-6.5|46.5|230|-285|CBSSN||
 1|2026-08-29|Memphis|UNLV|27|21|FINAL|10:00 PM||-4.5|55.5|160|-192|Fox||

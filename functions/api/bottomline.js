@@ -1,6 +1,6 @@
 // The Jamo Sports Hub BottomLine (2026-10-19): one small, edge-cached feed for the ESPN-style ticker along the bottom of
-// every hub page. GET /api/bottomline -> today's games for college football (AP Top 25 plus BYU and Weber State), the NFL,
-// NBA, NHL and MLB, trimmed to what the ticker shows, plus a few ESPN headlines per league.
+// every hub page. GET /api/bottomline -> today's games for college football (AP Top 25 plus BYU and Weber State), the NFL
+// and the NBA, trimmed to what the ticker shows, plus a few ESPN headlines per league (NHL and MLB removed 2026-10-27).
 // Read-only proxy of ESPN's public feeds (browsers cannot call them directly); same host fallback as the other routes.
 const BASE = "https://site.api.espn.com/apis/site/v2/sports/";
 const ALLOWED_ORIGINS = ["djgolding.com", "www.djgolding.com", "localhost", "127.0.0.1"];
@@ -15,10 +15,8 @@ function feeds() { const now = Date.now(), D = 864e5; const wk = ymd(now - 3 * D
     { lg: "cfbx", path: "football/college-football", q: "?groups=81&limit=120" }, // FCS, for Weber State only
     { lg: "nfl", path: "football/nfl", q: "?limit=40" },
     { lg: "nba", path: "basketball/nba", q: "?limit=40" },
-    { lg: "nhl", path: "hockey/nhl", q: "?limit=40" },
-    { lg: "mlb", path: "baseball/mlb", q: "?limit=40" },
   ]; }
-const NEWS = [["cfb", "football/college-football", 6], ["nfl", "football/nfl", 6], ["nba", "basketball/nba", 6], ["mlb", "baseball/mlb", 4], ["nhl", "hockey/nhl", 4]];
+const NEWS = [["cfb", "football/college-football", 6], ["nfl", "football/nfl", 6], ["nba", "basketball/nba", 6]];
 const KEEP_FCS = new Set(["2692"]); // Weber State
 
 function corsHeaders(request) {

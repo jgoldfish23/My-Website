@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Game Alerts · Jamo Sports Hub</title>
+<meta name="description" content="Phone alerts for BYU, Eagles and Jazz games: starting soon, scores, close finishes, overtime and finals.">
+<meta name="theme-color" content="#03050a">
+<meta name="apple-mobile-web-app-title" content="Jamo Alerts">
+<link rel="icon" type="image/svg+xml" href="/sports/icons/jsh.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/sports/icons/jsh-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/sports/icons/jsh-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-180.png">
+<link rel="manifest" href="/sports/icons/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&family=Orbitron:wght@600;800&display=swap">
+<style>
+/* ===== Game alerts settings (2026-10-27): djgolding.com/sports/alerts/, built by sports-hub/alerts/build_alerts.sh.
+   The home page's Neo look: deep-space backdrop, glass cards, Orbitron HUD numbers, gradient switches. Phone first. ===== */
+:root{--bg:#03050a;--ink:#eef2f8;--ink-2:#a9b3c4;--ink-3:#6f7a8c;--line:rgba(255,255,255,.07);--glass:linear-gradient(180deg,rgba(255,255,255,.058),rgba(255,255,255,.018));--edge:rgba(255,255,255,.085);--edge-hi:rgba(140,180,255,.42);--hud:#7cb6ff;
+  --acc:linear-gradient(90deg,#2d5bff,#8a4dff);--live:#ff4d6a;--ok:#34d399;--warn:#f5b544;--bad:#ff7b7b;--cfb:#3b7bff;--nfl:#ff3b5c;--nba:#a45bff;--test:#94a3b8;
+  --disp:"Inter Tight","Inter",system-ui,sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--num:"Orbitron","Inter Tight",system-ui,sans-serif;color-scheme:dark}
+:root.light{--bg:#edf0f7;--ink:#0d1220;--ink-2:#465166;--ink-3:#7b8598;--line:#e3e8f0;--glass:linear-gradient(180deg,#ffffff,#f6f8fc);--edge:#dce2ee;--edge-hi:rgba(29,95,216,.38);--hud:#1d5fd8;--ok:#047857;--warn:#92400e;--bad:#c62828;--cfb:#1d5fd8;--nfl:#d0103a;--nba:#7c3aed;color-scheme:light}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:-12%;z-index:-2;pointer-events:none;background:radial-gradient(760px 520px at 12% 4%,rgba(59,123,255,.22),transparent 62%),radial-gradient(720px 520px at 92% 0%,rgba(164,91,255,.20),transparent 64%),radial-gradient(900px 600px at 50% 105%,rgba(56,189,248,.10),transparent 66%);animation:alAurora 42s ease-in-out infinite alternate}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.075) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);mask-image:linear-gradient(180deg,#000,transparent 75%)}
+:root.light body::before{background:radial-gradient(760px 520px at 12% 4%,rgba(59,123,255,.14),transparent 62%),radial-gradient(720px 520px at 92% 0%,rgba(164,91,255,.11),transparent 64%)}
+:root.light body::after{background-image:radial-gradient(rgba(15,23,42,.07) 1px,transparent 1.3px)}
+@keyframes alAurora{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}100%{transform:translate3d(2.5%,-1.5%,0) scale(1.03)}}
+@media (prefers-reduced-motion:reduce){body::before{animation:none}}
+a{color:inherit}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit}
+.al{max-width:760px;margin:0 auto;padding:22px 16px 40px;counter-reset:al}
+/* header */
+.hd{margin:4px 2px 18px}
+.eyebrow{font-family:var(--num);font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--hud)}
+.hd h1{margin:8px 0 6px;font-family:var(--disp);font-size:clamp(32px,7vw,48px);font-weight:800;letter-spacing:-.045em;line-height:1}
+.hd h1 b{background:linear-gradient(90deg,#9cc6ff,#cdb2ff 45%,#7ef0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+:root.light .hd h1 b{background:linear-gradient(90deg,#1d5fd8,#7c3aed);-webkit-background-clip:text;background-clip:text}
+.lead{margin:0;color:var(--ink-2);font-size:15px;max-width:600px}
+.demo{margin:0 0 14px;padding:9px 13px;border-radius:12px;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.45);color:var(--warn);font-size:13.5px;font-weight:600}
+/* cards */
+.card{background:var(--glass);border:1px solid var(--edge);border-radius:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 24px 54px -36px rgba(0,0,0,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);overflow:hidden}
+:root.light .card{box-shadow:0 1px 2px rgba(15,23,42,.05),0 16px 34px -24px rgba(15,23,42,.28)}
+.pad{padding:16px}
+.load,.err{padding:18px 16px;color:var(--ink-2)}
+.err{color:var(--bad)}
+.err p{margin:0 0 12px}
+/* numbered section headers, as on the home page */
+.sec{display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;position:relative;margin:30px 2px 12px;padding-bottom:10px;counter-increment:al}
+.sec::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,color-mix(in srgb,var(--hud) 70%,transparent),rgba(196,166,255,.22) 42%,transparent 88%)}
+.sec h2{margin:0;font-family:var(--disp);font-size:20px;font-weight:800;letter-spacing:-.025em}
+.sec h2::before{content:counter(al,decimal-leading-zero);display:inline-block;margin-right:10px;padding:3px 7px;border-radius:6px;font-family:var(--num);font-size:10px;font-weight:800;letter-spacing:.16em;color:var(--hud);vertical-align:3px;border:1px solid color-mix(in srgb,var(--hud) 40%,transparent);background:color-mix(in srgb,var(--hud) 9%,transparent)}
+.sec .hint{margin-left:auto;font-size:12.5px;color:var(--ink-3)}
+/* switch rows */
+.row{display:flex;align-items:center;gap:14px;min-height:62px;padding:12px 16px;border-top:1px solid var(--line);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.row:first-child{border-top:0}
+.row:hover{background:rgba(127,127,127,.05)}
+.row.off{opacity:.55}
+.tx{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.tx b{font-size:15.5px;font-weight:650;letter-spacing:-.005em}
+.tx span{font-size:13px;color:var(--ink-2);line-height:1.4}
+.dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.sw{appearance:none;-webkit-appearance:none;flex:none;position:relative;width:50px;height:30px;margin:0;border-radius:999px;background:rgba(127,140,170,.28);border:1px solid var(--edge);cursor:pointer;transition:background .18s,box-shadow .18s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.4);transition:transform .18s}
+.sw:checked{background:var(--acc);border-color:transparent;box-shadow:0 6px 18px -8px rgba(90,100,255,.9)}
+.sw:checked::after{transform:translateX(20px)}
+.sw:focus-visible{outline:2px solid var(--hud);outline-offset:3px}
+.sw:disabled{cursor:not-allowed}
+@media (prefers-reduced-motion:reduce){.sw,.sw::after{transition:none}}
+/* the main switch */
+.master .row{min-height:84px;padding:16px 18px}
+.master .tx b{font-family:var(--disp);font-size:21px;font-weight:800;letter-spacing:-.02em}
+.master .tx span{font-size:14px}
+.bell{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:rgba(127,140,170,.16);color:var(--ink-2);transition:background .2s,color .2s,box-shadow .2s}
+.bell svg{width:24px;height:24px}
+.master.on .bell{background:var(--acc);color:#fff;box-shadow:0 10px 26px -10px rgba(90,100,255,.95)}
+.master.on{border-color:color-mix(in srgb,var(--hud) 45%,transparent)}
+.note{margin:0;padding:12px 18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--warn)}
+/* phone channel */
+.st{display:flex;align-items:flex-start;gap:12px}
+.st i{flex:none;width:10px;height:10px;margin-top:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+.st.no i{background:var(--warn);box-shadow:0 0 10px var(--warn)}
+.st p{margin:0;font-size:14.5px}
+.st p b{font-weight:700}
+.steps{margin:12px 0 0;padding-left:20px;color:var(--ink-2);font-size:14px}
+.steps li{margin:6px 0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;padding:1px 5px;border-radius:5px;background:rgba(127,140,170,.16);color:var(--ink);word-break:break-all}
+details{margin-top:12px;font-size:13.5px;color:var(--ink-2)}
+details summary{cursor:pointer;font-weight:650;color:var(--ink-2)}
+details p{margin:8px 0 0}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+.acts .why{font-size:13px;color:var(--ink-3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);font-size:14.5px;font-weight:700;cursor:pointer;transition:border-color .15s,box-shadow .15s,opacity .15s;-webkit-tap-highlight-color:transparent}
+.btn:hover{border-color:var(--edge-hi)}
+.btn.primary{background:var(--acc);border-color:transparent;color:#fff;box-shadow:0 10px 24px -12px rgba(90,100,255,.95)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn:focus-visible{outline:2px solid var(--hud);outline-offset:2px}
+.btn svg{width:18px;height:18px}
+.link{border:0;background:none;padding:0;color:var(--hud);font-size:13px;font-weight:650;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+/* today and recent */
+.gm{display:flex;align-items:center;gap:12px;padding:13px 16px;border-top:1px solid var(--line);text-decoration:none}
+.gm:first-child{border-top:0}
+a.gm:hover{background:rgba(127,127,127,.05)}
+.gm .tx b{font-size:15px}
+.pill{flex:none;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid var(--edge);color:var(--ink-2);white-space:nowrap}
+.pill.live{color:#fff;background:var(--live);border-color:transparent}
+.pill.final{color:var(--ink)}
+.empty{padding:16px;color:var(--ink-2);font-size:14px}
+.al-it{display:flex;gap:12px;padding:13px 16px;border-top:1px solid var(--line)}
+.al-it:first-child{border-top:0}
+.al-it .dot{margin-top:6px}
+.al-it .tx b{font-size:14.5px;line-height:1.35}
+.al-it .tm{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.al-it .fail{color:var(--bad);font-weight:650}
+/* quiet hours */
+.qh{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:4px 16px 16px;font-size:14px;color:var(--ink-2)}
+.qh select{min-height:42px;padding:0 34px 0 12px;border-radius:12px;border:1px solid var(--edge);background:rgba(127,140,170,.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23a9b3c4' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--ink);font:inherit;font-size:16px;font-weight:650;-webkit-appearance:none;appearance:none;cursor:pointer}
+.qh select:disabled{opacity:.5;cursor:not-allowed}
+.qh select option{color:#0d1220}
+.qh .small{flex-basis:100%;font-size:12.5px;color:var(--ink-3)}
+/* how it works */
+.foot{margin:24px 4px 0;font-size:13px;color:var(--ink-3);line-height:1.55}
+.foot p{margin:0 0 8px}
+/* the save bar: sticks to the bottom of the screen while there are changes, clear of the BottomLine ticker */
+.savebar{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:10px;margin-top:18px;padding:10px 10px 10px 16px;border-radius:18px;border:1px solid color-mix(in srgb,var(--hud) 45%,transparent);background:rgba(10,14,26,.92);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 18px 44px -18px rgba(0,0,0,.9)}
+:root.light .savebar{background:rgba(255,255,255,.95)}
+body.jbl-on .savebar{bottom:calc(48px + env(safe-area-inset-bottom,0px))}
+.savebar #sb-msg{flex:1;min-width:0;font-size:14px;font-weight:650}
+.savebar #sb-msg.bad{color:var(--bad)}
+.savebar .btn{min-height:42px;padding:0 16px}
+/* PIN box */
+.modal{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px;background:rgba(2,4,10,.66);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.mbox{width:100%;max-width:380px;padding:20px;border-radius:22px;border:1px solid var(--edge);background:#0b1020;box-shadow:0 30px 80px -30px rgba(0,0,0,.95)}
+:root.light .mbox{background:#fff}
+.mbox h3{margin:0 0 6px;font-family:var(--disp);font-size:20px;font-weight:800;letter-spacing:-.02em}
+.mbox p{margin:0 0 14px;font-size:14px;color:var(--ink-2)}
+.mbox input{width:100%;min-height:52px;padding:0 14px;border-radius:14px;border:1px solid var(--edge);background:rgba(127,140,170,.12);color:var(--ink);font-family:var(--num);font-size:22px;letter-spacing:.3em;text-align:center}
+.mbox input:focus{outline:2px solid var(--hud);outline-offset:1px}
+.mbox .merr{min-height:20px;margin:8px 0 0;font-size:13.5px;color:var(--bad)}
+.mbox .acts{justify-content:flex-end;margin-top:10px}
+/* a short confirmation, above the ticker */
+.toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:85;max-width:calc(100% - 32px);padding:11px 16px;border-radius:14px;background:#111a30;color:#fff;font-size:14px;font-weight:600;box-shadow:0 18px 40px -16px rgba(0,0,0,.9);border:1px solid rgba(255,255,255,.12);transform:translate(-50%,0);opacity:0;pointer-events:none;transition:opacity .2s}
+body.jbl-on .toast{bottom:calc(52px + env(safe-area-inset-bottom,0px))}
+.toast.show{opacity:1}
+.toast.bad{background:#3a1018;border-color:rgba(255,123,123,.4)}
+@media (max-width:560px){.al{padding:16px 16px 32px}.hd{margin-bottom:14px}.sec{margin-top:26px}.row{padding:12px 14px;gap:12px}.master .row{padding:14px}.savebar{padding:8px 8px 8px 14px}.savebar .btn{padding:0 13px}}
+@media (max-width:360px){.savebar #undo{display:none}}
+</style>
+</head>
+<body>
+<!-- Jamo Sports Hub top bar: added by each hub's deploy_public.sh right after <body> (never inside the claude.ai artifact) -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&display=swap">
+<style>
+.jsh{position:relative;z-index:60;display:flex;align-items:center;gap:14px;height:44px;padding:0 max(16px,env(safe-area-inset-left));background:#070a12;background-image:linear-gradient(90deg,rgba(29,78,216,.22),rgba(7,10,18,0) 35%,rgba(7,10,18,0) 65%,rgba(109,40,217,.2));border-bottom:1px solid rgba(255,255,255,.08);font-family:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1;box-sizing:border-box}
+.jsh *,.jsh *::before,.jsh *::after{box-sizing:border-box}
+.jsh a{text-decoration:none!important}
+.jsh-brand{display:flex;align-items:center;gap:9px;color:#fff!important;font-size:15.5px;font-weight:800;letter-spacing:-.015em;white-space:nowrap;flex:none}
+.jsh-brand img{width:26px;height:26px;border-radius:7px;display:block;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.jsh-brand b{font-weight:800;background:linear-gradient(90deg,#7cb6ff,#c4a6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.jsh-nav{display:flex;align-items:center;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.jsh-nav::-webkit-scrollbar{display:none}
+.jsh-nav a{display:flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:999px;color:#b4bfd3!important;font-size:13.5px;font-weight:700;letter-spacing:.005em;white-space:nowrap;transition:background-color .15s,color .15s,box-shadow .15s}
+.jsh-nav a i{flex:none;width:7px;height:7px;border-radius:50%;background:var(--c)}
+.jsh-nav a:hover{color:#fff!important;background:rgba(255,255,255,.08)}
+.jsh-nav a.on{color:#fff!important;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 4px 14px -4px var(--c)}
+.jsh-nav a.on i{background:#fff}
+.jsh-nav a:focus-visible{outline:2px solid #7cb6ff;outline-offset:2px}
+body.boardmode .jsh{display:none}
+@media (max-width:560px){.jsh{gap:8px;padding:0 12px}.jsh-brand span{display:none}.jsh-nav{gap:2px}.jsh-nav a{padding:0 10px;font-size:13px;gap:6px}}
+@media (max-width:360px){.jsh-nav a i{display:none}.jsh-nav a{padding:0 9px}}
+/* phones (2026-10-19): no Safari text enlarging (it inflated the tab labels in the scrolling row), tabs keep their width */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.jsh,.jsh *{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.jsh-nav{min-width:0}
+.jsh-nav a{flex:none;line-height:1}
+@media print{.jsh{display:none}}
+/* Live Center tab (2026-10-27): a small red dot on the tab while any CFB, NFL or NBA game is live (set from the BottomLine feed) */
+.jsh-nav a[data-s="live"]{position:relative}
+.jsh-nav a .jsh-ld{position:absolute;top:4px;right:5px;width:7px;height:7px;border-radius:50%;background:#ff4d6a;box-shadow:0 0 0 2px rgba(255,77,106,.28);animation:jshLd 1.6s ease-in-out infinite}
+.jsh-nav a .jsh-ld[hidden]{display:none}
+.jsh-nav a.on .jsh-ld{background:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.3)}
+@keyframes jshLd{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.jsh-nav a .jsh-ld{animation:none}}
+/* league logos and a centered row (2026-10-19) */
+.jsh-nav a .jsh-lg{flex:none;width:18px;height:18px;object-fit:contain;display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45))}
+.jsh-nav a svg.jsh-lg{filter:none;opacity:.85}
+.jsh-nav a.on .jsh-lg{filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))}
+@media (min-width:561px){.jsh-nav{margin:0 auto}}
+@media (min-width:1100px){.jsh-nav{position:absolute;left:50%;transform:translateX(-50%);margin:0;overflow:visible}}
+@media (max-width:360px){.jsh-nav a .jsh-lg{width:16px;height:16px}}
+/* clear of the notch and status bar (2026-10-21, Jamo: "the top tabs bar goes under the top a little"): the bar grows by the phone's safe area at the top, plus a little air on phones */
+.jsh{box-sizing:border-box;height:calc(44px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)}
+@media (max-width:560px){.jsh{height:calc(50px + env(safe-area-inset-top,0px));padding-top:calc(6px + env(safe-area-inset-top,0px))}}
+/* phones (2026-10-21, design pass): every league fits - the page you're on keeps its name, the others show just the logo */
+@media (max-width:560px){.jsh-nav{gap:1px}.jsh-nav a:not(.on){font-size:0;gap:0;padding:0 8px}.jsh-nav a:not(.on) .jsh-lg{width:20px;height:20px}.jsh-nav a.on{padding:0 11px 0 9px}}
+/* phones: the hub header slides away while you scroll down and comes back as soon as you scroll up */
+header.top{transition:transform .22s ease}
+header.top.jsh-tuck{pointer-events:none}
+/* prediction cards: each reference line stays on one line on phones */
+@media (max-width:600px){body .pk-avg{font-size:10.5px;white-space:nowrap;letter-spacing:-.01em}}
+</style>
+<div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
+  <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
+  <nav class="jsh-nav">
+    <a href="/sports/" data-s="sports" style="--c:#475569"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg>Home</a>
+    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">CFB</a>
+    <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nfl.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NFL</a>
+    <a href="/nba/" data-s="nba" style="--c:#6d28d9"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nba.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NBA</a>
+    <a href="/sports/live/" data-s="live" style="--c:#e11d48" title="Live Center"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.48M7.76 16.24a6 6 0 0 1 0-8.48M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>Live<span class="jsh-ld" hidden></span></a>
+    <a href="/sports/articles/" data-s="articles" style="--c:#be185d"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="15" height="16" rx="2"/><path d="M18 8h3v10a2 2 0 0 1-2 2"/><path d="M7 8h7M7 12h7M7 16h4"/></svg>Articles</a>
+  </nav>
+</div>
+<script>
+/* Jamo Sports Hub: light/dark and the time zone follow you between CFB, NFL and NBA (each keeps its own favourite team).
+   Runs before the hub's own script, so a choice made in one hub is in place before the next one reads its settings. */
+(function(){ try {
+  var s = (location.pathname.indexOf('/sports/articles') === 0 ? 'articles' : location.pathname.indexOf('/sports/live') === 0 ? 'live' : location.pathname.indexOf('/sports/alerts') === 0 ? 'alerts' : (location.pathname.split('/')[1] || 'sports')).toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
+  if (a) { a.className = 'on'; a.setAttribute('aria-current', 'page'); }
+  if (s === 'sports' || s === 'articles' || s === 'live' || s === 'alerts') return;
+  var key = s + '-settings', sh = JSON.parse(localStorage.getItem('jsh-shared') || 'null');
+  if (sh) { var own = JSON.parse(localStorage.getItem(key) || '{}'), ch = false;
+    ['theme', 'tz'].forEach(function (k) { if (sh[k] && own[k] !== sh[k]) { own[k] = sh[k]; ch = true; } });
+    if (ch) localStorage.setItem(key, JSON.stringify(own)); }
+  var save = function () { try { var o = JSON.parse(localStorage.getItem(key) || '{}'); if (o.theme || o.tz) localStorage.setItem('jsh-shared', JSON.stringify({ theme: o.theme || 'auto', tz: o.tz || 'MT' })); } catch (e) {} };
+  addEventListener('pagehide', save); document.addEventListener('visibilitychange', function () { if (document.hidden) save(); });
+} catch (e) {} })();
+</script>
+<script>
+/* phones (2026-10-21): tuck the hub's sticky header (sub-tabs + scores strip) away on scroll down, bring it back on scroll up */
+(function(){ var last = 0, h = null, mq = window.matchMedia('(max-width:760px)');
+  function hdr(){ if (!h || !h.isConnected) h = document.querySelector('header.top'); return h; }
+  function off(e){ e.classList.remove('jsh-tuck'); e.style.transform = ''; }
+  addEventListener('scroll', function(){ var e = hdr(); if (!e) return; var y = window.scrollY, d = y - last; last = y;
+    if (!mq.matches || y < 260 || e.contains(document.activeElement) || d < -4) { if (e.classList.contains('jsh-tuck')) off(e); return; }
+    if (d > 6 && !e.classList.contains('jsh-tuck')) { var top = parseFloat(getComputedStyle(e).top) || 0; e.style.transform = 'translateY(' + (-(e.offsetHeight + top)) + 'px)'; e.classList.add('jsh-tuck'); } }, { passive: true });
+  addEventListener('hashchange', function(){ var e = hdr(); if (e) off(e); });
+})();
+</script>
+<script>
+/* Live Center tab (2026-10-27): the BottomLine (bl.js) announces every fresh /api/bottomline answer with a "jsh:bl" event;
+   the red dot on the Live tab shows while any college football, NFL or NBA game is in progress. No extra requests.
+   Weber State's FCS games count only when the Live Center's "Follow Weber State too" option is on. */
+(function(){ var a = document.querySelector('.jsh-nav a[data-s="live"]'), d = a && a.querySelector('.jsh-ld'); if (!d) return;
+  document.addEventListener('jsh:bl', function (e) { try {
+    var web = false; try { web = !!(JSON.parse(localStorage.getItem('jsh-live') || '{}') || {}).weber; } catch (x) {}
+    var isWeber = function (g) { return g.lg === 'cfb' && [g.a, g.h].some(function (t) { return t && String(t.id) === '2692'; }); };
+    var n = ((e.detail && e.detail.games) || []).filter(function (g) { return g && g.st === 'in' && /^(cfb|nfl|nba)$/.test(g.lg) && (web || !isWeber(g)); }).length;
+    d.hidden = !n; a.title = n ? 'Live Center: games on now' : 'Live Center';
+  } catch (x) {} });
+})();
+</script>
+<!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
+<script src="/sports/bl.js?v=20261027a" defer></script>
+<!-- Ask the Hub: the AI analyst button and chat (ask/ask.js, published by build.sh as /sports/ask.js) -->
+<script src="/sports/ask.js?v=20261027a" defer></script>
+
+<main class="al" id="al">
+  <div class="demo" id="demo" role="note" hidden>Demo with sample data. Nothing here is saved or sent.</div>
+  <header class="hd">
+    <div class="eyebrow">Jamo Sports Hub</div>
+    <h1>Game <b>alerts</b></h1>
+    <p class="lead">Your phone buzzes during your teams’ games: when they’re about to start, every football score, the basketball halftime score, close finishes, overtime and the final.</p>
+  </header>
+
+  <div class="card load" id="load" role="status">Loading your alert settings…</div>
+  <div class="card err" id="err" role="alert" hidden><p id="err-t">Couldn’t reach the alert settings.</p><button class="btn" id="retry" type="button">Try again</button></div>
+
+  <div id="app" hidden>
+    <section class="card master" id="master" aria-label="Game alerts on or off">
+      <label class="row" for="m-on">
+        <span class="bell" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>
+        <span class="tx"><b>Game alerts</b><span id="m-sub">Off. Nothing is sent.</span></span>
+        <input class="sw" type="checkbox" id="m-on" data-g="enabled">
+      </label>
+      <p class="note" id="m-note" hidden></p>
+    </section>
+
+    <div class="sec"><h2>Your phone</h2></div>
+    <section class="card pad" id="phone"></section>
+
+    <div class="sec"><h2>Today</h2><span class="hint">Mountain time</span></div>
+    <section class="card" id="today" aria-live="polite"></section>
+
+    <div class="sec"><h2>Teams</h2></div>
+    <section class="card" id="teams"></section>
+
+    <div class="sec"><h2>What to send</h2></div>
+    <section class="card" id="moments"></section>
+
+    <div class="sec"><h2>Quiet hours</h2></div>
+    <section class="card" id="quiet"></section>
+
+    <div class="sec"><h2>Recent alerts</h2><span class="hint" id="rc-hint"></span></div>
+    <section class="card" id="recent" aria-live="polite"></section>
+
+    <div class="foot">
+      <p>How it works: during your teams’ games the site checks the score every 2 minutes and sends each alert once, through the free ntfy app. Tapping an alert opens that game in the hub.</p>
+      <p id="pin-note"></p>
+    </div>
+
+    <div class="savebar" id="savebar" hidden>
+      <span id="sb-msg" role="status">You have unsaved changes</span>
+      <button class="btn" id="undo" type="button">Undo</button>
+      <button class="btn primary" id="save" type="button">Save</button>
+    </div>
+  </div>
+</main>
+
+<div class="modal" id="pinm" hidden role="dialog" aria-modal="true" aria-labelledby="pin-h">
+  <form class="mbox" id="pin-f" autocomplete="off">
+    <h3 id="pin-h">Enter your PIN</h3>
+    <p id="pin-p">It’s the same PIN as your game predictions. This phone will remember it.</p>
+    <input id="pin-i" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" aria-label="PIN, 4 to 8 digits" autocomplete="off">
+    <div class="merr" id="pin-e" role="alert"></div>
+    <div class="acts"><button class="btn" type="button" id="pin-x">Cancel</button><button class="btn primary" type="submit" id="pin-ok">Continue</button></div>
+  </form>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+var $ = function(id){ return document.getElementById(id); };
+var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
+// ?alertsdemo=1: sample data, alerts on; ?alertsdemo=new: the first visit (off, phone not connected, no PIN yet)
+var DEMO = (/[?&]alertsdemo=(1|new)(&|$)/.exec(location.search) || [])[1] || '';
+var API = /(^|\.)djgolding\.com$/.test(location.hostname) ? '' : 'https://djgolding.com';
+try { var sh = JSON.parse(localStorage.getItem('jsh-shared') || 'null') || {}; if (sh.theme === 'light' || (sh.theme !== 'dark' && matchMedia('(prefers-color-scheme: light)').matches)) document.documentElement.classList.add('light'); } catch (e) {}
+
+var TEAMS = [
+  {k:'byu', name:'BYU', sub:'College football', c:'var(--cfb)'},
+  {k:'eagles', name:'Eagles', sub:'NFL', c:'var(--nfl)'},
+  {k:'jazz', name:'Jazz', sub:'NBA', c:'var(--nba)'},
+  {k:'weber', name:'Weber State', sub:'College football (FCS). Off unless you turn it on.', c:'var(--cfb)'}
+];
+var TEAM = {}; TEAMS.forEach(function(t){ TEAM[t.k] = t; });
+var MOMENTS = [
+  {k:'soon', name:'Starting soon', sub:'About 15 minutes before kickoff or tip-off, with the TV channel'},
+  {k:'start', name:'Kickoff and tip-off', sub:'When the game gets underway'},
+  {k:'scores', name:'Every football score', sub:'Touchdowns, field goals and safeties, with the new score'},
+  {k:'half', name:'Basketball halftime', sub:'The score at the half'},
+  {k:'close', name:'Close late', sub:'Football: within 8 points with under 8 minutes left. Basketball: within 5 in the last 5 minutes or overtime.'},
+  {k:'ot', name:'Overtime', sub:'As soon as a game is headed to overtime'},
+  {k:'final', name:'Final score', sub:'Win or loss, with the final score'}
+];
+var LGC = {cfb:'var(--cfb)', nfl:'var(--nfl)', nba:'var(--nba)', test:'var(--test)'};
+var TZ = 'America/Denver';
+var fmtT = new Intl.DateTimeFormat('en-US', {timeZone:TZ, hour:'numeric', minute:'2-digit'});
+var fmtD = new Intl.DateTimeFormat('en-US', {timeZone:TZ, weekday:'short', month:'short', day:'numeric'});
+var dayKey = new Intl.DateTimeFormat('en-CA', {timeZone:TZ, year:'numeric', month:'2-digit', day:'2-digit'});
+function when(t){ var d = new Date(t), k = dayKey.format(d), now = new Date(), today = dayKey.format(now), yday = dayKey.format(new Date(now.getTime() - 864e5));
+  return (k === today ? 'Today' : k === yday ? 'Yesterday' : fmtD.format(d)) + ' ' + fmtT.format(d); }
+function hourName(h){ return h === 0 ? 'midnight' : h === 12 ? 'noon' : (h % 12) + (h < 12 ? ' AM' : ' PM'); }
+var clone = function(o){ return JSON.parse(JSON.stringify(o)); };
+var same = function(a, b){ return JSON.stringify(a) === JSON.stringify(b); };
+
+/* ---------- the PIN: the same one as the game predictions, remembered per device in "jsh-pin" ---------- */
+var demoPin = '';
+function getPin(){ if (DEMO) return demoPin; try { return localStorage.getItem('jsh-pin') || ''; } catch (e) { return ''; } }
+function keepPin(p){ if (DEMO) { demoPin = p; return; } try { localStorage.setItem('jsh-pin', p); } catch (e) {} }
+function dropPin(){ if (DEMO) { demoPin = ''; return; } try { localStorage.removeItem('jsh-pin'); } catch (e) {} }
+
+/* ---------- the API (or, with ?alertsdemo=1, a stand-in that keeps everything in this page) ---------- */
+function api(method, path, body){
+  if (DEMO) return demoApi(method, path, body);
+  return fetch(API + path, {method:method, cache:'no-store', headers: body ? {'content-type':'application/json'} : {}, body: body ? JSON.stringify(body) : undefined})
+    .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok, status:r.status, j:j}; }); });
+}
+var D = null;
+function demoApi(method, path, body){
+  if (!D) { var now = Date.now(), m = 60e3;
+    D = {pin:'', st:{enabled:true, teams:{byu:true, eagles:true, jazz:true, weber:false}, moments:{soon:true, start:true, scores:true, half:true, close:true, ot:true, final:true}, quiet:{on:false, from:23, to:7}, savedAt:now - 86400e3,
+      channelReady:true, channel:'shared', pinSet:true, checked:true,
+      today:[{team:'byu', lg:'cfb', game:'Sample State at BYU', start:new Date(now - 70 * m).toISOString(), tv:'Fox', href:'/cfb/#/gameday/', state:'live'}, {team:'jazz', lg:'nba', game:'Sample Team at Jazz', start:new Date(now + 95 * m).toISOString(), tv:'KJZZ', href:'/nba/', state:'upcoming'}],
+      recent:[{t:now - 9 * m, title:'BYU touchdown!', body:'BYU 14, Sample State 7 - 2nd 8:30', lg:'cfb', team:'byu'}, {t:now - 66 * m, title:'Kickoff: Sample State at BYU', body:'Underway on Fox. Tap to follow along.', lg:'cfb', team:'byu'}, {t:now - 84 * m, title:'BYU: kickoff in 14 min', body:'Sample State at BYU, on Fox.', lg:'cfb', team:'byu'}, {t:now - 26 * 3600e3, title:'Test alert from Jamo Sports Hub', body:'If you can read this, game alerts will reach this phone.', lg:'test', team:'', failed:true}]}};
+    if (DEMO === 'new') { D.st.enabled = false; D.st.channelReady = false; D.st.channel = 'none'; D.st.pinSet = false; D.st.checked = false; D.st.today = []; D.st.recent = []; D.st.savedAt = null; D.st.teams.weber = false; } }
+  var res = function(ok, status, j){ return new Promise(function(r){ setTimeout(function(){ r({ok:ok, status:status, j:clone(j)}); }, 350); }); };
+  if (method === 'GET') return res(true, 200, D.st);
+  var pin = body && body.pin;
+  if (!/^\d{4,8}$/.test(pin || '')) return res(false, 400, {error:'pin', message:'Your PIN is 4 to 8 digits.'});
+  if (pin === '0000') return res(false, 403, {error:'pin', message:'That PIN doesn’t match. It’s the same PIN as your game predictions.'});
+  if (path === '/api/alerts/test' && !D.st.channelReady) return res(false, 409, {error:'channel', message:'Your phone isn’t connected yet, so there’s nowhere to send it.'});
+  if (path === '/api/alerts/test') { D.st.recent.unshift({t:Date.now(), title:'Test alert from Jamo Sports Hub', body:'If you can read this, game alerts will reach this phone.', lg:'test', team:''}); return res(true, 200, {ok:true}); }
+  ['enabled', 'teams', 'moments', 'quiet'].forEach(function(k){ D.st[k] = clone(body.prefs[k]); }); D.st.savedAt = Date.now();
+  var first = !D.st.pinSet; D.st.pinSet = true;
+  return res(true, 200, {ok:true, firstPin:first, prefs:{enabled:D.st.enabled, teams:D.st.teams, moments:D.st.moments, quiet:D.st.quiet, savedAt:D.st.savedAt}});
+}
+
+/* ---------- state: S = what the site says, P = the saved settings, F = the settings on screen ---------- */
+var S = null, P = null, F = null, busy = false;
+function prefsOf(s){ return {enabled:!!s.enabled, teams:clone(s.teams || {}), moments:clone(s.moments || {}), quiet:clone(s.quiet || {on:false, from:23, to:7})}; }
+function dirty(){ return !!(P && F && !same(P, F)); }
+
+function load(first){
+  return api('GET', '/api/alerts').then(function(r){
+    if (!r.ok || !r.j || typeof r.j.enabled !== 'boolean') throw new Error('status ' + r.status);
+    S = r.j;
+    if (!dirty()) { P = prefsOf(S); F = clone(P); }
+    else P = prefsOf(S);
+    $('load').hidden = true; $('err').hidden = true; $('app').hidden = false;
+    render();
+  }).catch(function(){
+    if (first) { $('load').hidden = true; $('err').hidden = false; $('err-t').textContent = 'Couldn’t reach the alert settings. Check your connection and try again.'; }
+  });
+}
+
+/* ---------- drawing ---------- */
+function swRow(g, k, name, sub, on, c, off){
+  return '<label class="row' + (off ? ' off' : '') + '">' + (c ? '<i class="dot" style="--c:' + c + '" aria-hidden="true"></i>' : '') + '<span class="tx"><b>' + esc(name) + '</b>' + (sub ? '<span>' + esc(sub) + '</span>' : '') + '</span><input class="sw" type="checkbox" data-g="' + g + '" data-k="' + k + '"' + (on ? ' checked' : '') + '></label>';
+}
+function render(){
+  var on = F.enabled, saved = P.enabled;
+  $('master').classList.toggle('on', on);
+  $('m-on').checked = on;
+  $('m-sub').textContent = on !== saved ? (on ? 'Turns on when you tap Save.' : 'Turns off when you tap Save.') : on ? 'On. Your games are checked every 2 minutes.' : 'Off. Nothing is sent.';
+  var note = '';
+  if (on && !S.channelReady) note = 'Your phone isn’t connected yet (see below), so nothing can be sent until it is.';
+  else if (on && !TEAMS.some(function(t){ return F.teams[t.k]; })) note = 'No teams are turned on, so nothing will be sent.';
+  $('m-note').hidden = !note; $('m-note').textContent = note;
+  renderPhone(); renderToday();
+  $('teams').innerHTML = TEAMS.map(function(t){ return swRow('teams', t.k, t.name, t.sub, F.teams[t.k], t.c, !on); }).join('');
+  $('moments').innerHTML = MOMENTS.map(function(m){ return swRow('moments', m.k, m.name, m.sub, F.moments[m.k], '', !on); }).join('');
+  var q = F.quiet, opts = function(sel){ var h = ''; for (var i = 0; i < 24; i++) h += '<option value="' + i + '"' + (i === sel ? ' selected' : '') + '>' + hourName(i) + '</option>'; return h; };
+  $('quiet').innerHTML = swRow('quiet', 'on', 'Quiet hours', 'Hold everything but final scores overnight', q.on, '', !on) +
+    '<div class="qh"><span>From</span><select data-g="quiet" data-k="from" aria-label="Quiet hours start"' + (q.on ? '' : ' disabled') + '>' + opts(q.from) + '</select><span>to</span><select data-g="quiet" data-k="to" aria-label="Quiet hours end"' + (q.on ? '' : ' disabled') + '>' + opts(q.to) + '</select>' +
+    '<span class="small">' + (q.on && q.from === q.to ? 'Pick two different hours. With the same start and end, quiet hours do nothing.' : q.on ? 'Between ' + hourName(q.from) + ' and ' + hourName(q.to) + ' Mountain time only the final score comes through. Anything else in that window is skipped, not sent later.' : 'Off: alerts come through at any hour.') + '</span></div>';
+  renderRecent(); renderBar();
+  var pin = getPin();
+  $('pin-note').innerHTML = pin ? 'Your PIN is remembered on this device. <button class="link" type="button" id="forget">Forget it</button>' : S.pinSet ? 'Saving and test alerts ask for your PIN: the same one as your game predictions.' : 'Your first save sets your PIN. Your game predictions use the same one.';
+}
+function renderPhone(){
+  var h;
+  if (S.channelReady) {
+    h = '<div class="st"><i aria-hidden="true"></i><p><b>Connected.</b> Alerts go to your phone through the ntfy app' + (S.channel === 'shared' ? ', on the same channel as your wedding RSVP pings.' : ', on their own channel.') + '</p></div>';
+    if (S.channel === 'shared') h += '<details><summary>Want game alerts on their own channel?</summary><p>In the ntfy app, subscribe to a new private channel name. Then in Cloudflare (Workers &amp; Pages › my-website › Settings › Variables and Secrets) add a secret named <code>NTFY_SPORTS_TOPIC</code> with that name. Game alerts move there; RSVP pings stay where they are.</p></details>';
+  } else {
+    h = '<div class="st no"><i aria-hidden="true"></i><p><b>Not connected yet.</b> Alerts are sent through ntfy, a free phone app. To connect:</p></div>' +
+      '<ol class="steps"><li>In the ntfy app, subscribe to a private channel name only you know (for example, <code>jamo-games-</code> plus a few random letters).</li><li>In Cloudflare, open Workers &amp; Pages › my-website › Settings › Variables and Secrets, and add a secret named <code>NTFY_SPORTS_TOPIC</code> with that same name.</li><li>Come back here and tap Send a test alert.</li></ol>';
+  }
+  var why = !S.channelReady ? 'Connect your phone first.' : !S.pinSet ? 'Save your settings once first. That sets your PIN.' : '';
+  h += '<div class="acts"><button class="btn" type="button" id="test"' + (why ? ' disabled' : '') + '><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>Send a test alert</button>' + (why ? '<span class="why">' + esc(why) + '</span>' : '') + '</div>';
+  $('phone').innerHTML = h;
+}
+function renderToday(){
+  var el = $('today');
+  if (!P.enabled) { el.innerHTML = '<div class="empty">Turn alerts on and save, and today’s games for your teams show up here.</div>'; return; }
+  if (!S.channelReady) { el.innerHTML = '<div class="empty">Once your phone is connected, today’s games for your teams show up here.</div>'; return; }
+  if (!S.checked) { el.innerHTML = '<div class="empty">The first check of today’s schedule runs within 2 minutes. This updates on its own.</div>'; return; }
+  var g = S.today || [];
+  if (!g.length) { el.innerHTML = '<div class="empty">No games today for your teams.</div>'; return; }
+  el.innerHTML = g.map(function(x){
+    var t = TEAM[x.team] || {}, start = Date.parse(x.start), tm = x.tbd ? 'Time to be set' : fmtT.format(new Date(start));
+    var pill = x.state === 'live' ? '<span class="pill live">Live</span>' : x.state === 'final' ? '<span class="pill final">Final</span>' : x.state === 'off' ? '<span class="pill">Postponed</span>' : '<span class="pill">' + esc(tm) + '</span>';
+    var href = /^\/(cfb|nfl|nba)\//.test(x.href || '') ? x.href : '/' + x.lg + '/';
+    return '<a class="gm" href="' + esc(href) + '"><i class="dot" style="--c:' + (LGC[x.lg] || 'var(--hud)') + '" aria-hidden="true"></i><span class="tx"><b>' + esc(x.game) + '</b><span>' + esc((t.sub || '').split('.')[0] + (x.tv ? ' · ' + x.tv : '') + (x.state === 'upcoming' ? '' : ' · ' + tm)) + '</span></span>' + pill + '</a>';
+  }).join('');
+}
+function renderRecent(){
+  var r = S.recent || [];
+  $('rc-hint').textContent = r.length ? 'last ' + r.length : '';
+  $('recent').innerHTML = r.length ? r.map(function(x){
+    return '<div class="al-it"><i class="dot" style="--c:' + (LGC[x.lg] || 'var(--hud)') + '" aria-hidden="true"></i><span class="tx"><span class="tm">' + esc(when(x.t)) + (x.failed ? ' · <span class="fail">didn’t go through</span>' : '') + '</span><b>' + esc(x.title) + '</b><span>' + esc(x.body) + '</span></span></div>';
+  }).join('') : '<div class="empty">No alerts yet. They show up here as they go out.</div>';
+}
+function renderBar(msg, bad){
+  var d = dirty();
+  $('savebar').hidden = !d && !msg;
+  $('sb-msg').textContent = msg || (F.enabled !== P.enabled ? (F.enabled ? 'Save to turn alerts on' : 'Save to turn alerts off') : 'You have unsaved changes');
+  $('sb-msg').className = bad ? 'bad' : '';
+  $('save').disabled = busy || !d; $('undo').disabled = busy || !d;
+  $('save').textContent = busy ? 'Saving…' : 'Save';
+}
+
+/* ---------- toast ---------- */
+var tt = 0;
+function toast(msg, bad){ var el = $('toast'); el.textContent = msg; el.className = 'toast show' + (bad ? ' bad' : ''); clearTimeout(tt); tt = setTimeout(function(){ el.className = 'toast' + (bad ? ' bad' : ''); }, bad ? 6000 : 3500); }
+
+/* ---------- PIN box ---------- */
+var pinDone = null, pinLast = null;
+function askPin(err){
+  return new Promise(function(resolve){
+    pinDone = resolve; pinLast = document.activeElement;
+    $('pin-h').textContent = S.pinSet ? 'Enter your PIN' : 'Pick a PIN';
+    $('pin-p').textContent = S.pinSet ? 'It’s the same PIN as your game predictions. This device will remember it.' : 'Use 4 to 8 digits. Your first save sets it, and your game predictions use the same one.';
+    $('pin-e').textContent = err || ''; $('pin-i').value = '';
+    $('pinm').hidden = false; setTimeout(function(){ $('pin-i').focus(); }, 30);
+  });
+}
+function closePin(v){ $('pinm').hidden = true; var f = pinDone; pinDone = null; if (pinLast && pinLast.focus) try { pinLast.focus(); } catch (e) {} if (f) f(v); }
+$('pin-f').addEventListener('submit', function(e){ e.preventDefault(); var v = $('pin-i').value.trim(); if (!/^\d{4,8}$/.test(v)) { $('pin-e').textContent = 'A PIN is 4 to 8 digits.'; $('pin-i').focus(); return; } closePin(v); });
+$('pin-x').addEventListener('click', function(){ closePin(''); });
+$('pinm').addEventListener('click', function(e){ if (e.target === $('pinm')) closePin(''); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !$('pinm').hidden) closePin(''); });
+// runs call(pin) with the remembered PIN, or asks for one; a wrong PIN forgets it and asks again
+function withPin(call){
+  var go = function(pin, err){
+    if (!pin) return askPin(err).then(function(p){ return p ? go(p) : null; });
+    return call(pin).then(function(r){
+      if (r.status === 403 && r.j && r.j.error === 'pin') { dropPin(); return go('', r.j.message || 'That PIN doesn’t match.'); }
+      if (r.ok) keepPin(pin);
+      return r;
+    });
+  };
+  return go(getPin());
+}
+
+/* ---------- changes, saving, the test alert ---------- */
+$('app').addEventListener('change', function(e){
+  var el = e.target, g = el.getAttribute('data-g'), k = el.getAttribute('data-k');
+  if (!g) return;
+  if (g === 'enabled') F.enabled = el.checked;
+  else if (g === 'quiet') F.quiet[k] = k === 'on' ? el.checked : parseInt(el.value, 10);
+  else F[g][k] = el.checked;
+  render();
+  // the lists are redrawn: put keyboard focus back on the same switch
+  var again = g === 'enabled' ? $('m-on') : document.querySelector('[data-g="' + g + '"][data-k="' + k + '"]');
+  if (again && document.activeElement !== again && again !== el) try { again.focus({preventScroll:true}); } catch (x) {}
+});
+$('undo').addEventListener('click', function(){ F = clone(P); render(); toast('Changes undone.'); });
+$('save').addEventListener('click', function(){
+  if (busy || !dirty()) return;
+  busy = true; renderBar();
+  var prefs = clone(F);
+  withPin(function(pin){ return api('POST', '/api/alerts', {pin:pin, prefs:prefs}); }).then(function(r){
+    busy = false;
+    if (!r) { renderBar('Not saved yet: it needs your PIN.'); return; }
+    if (!r.ok) { renderBar((r.j && r.j.message) || 'Couldn’t save (' + r.status + '). Try again in a minute.', true); return; }
+    P = prefsOf(r.j.prefs); F = clone(P); S.enabled = P.enabled; S.pinSet = true; S.savedAt = r.j.prefs.savedAt;
+    render();
+    toast(r.j.firstPin ? 'Saved, and your PIN is set. Use it for predictions too.' : P.enabled ? 'Saved. Alerts are on.' : 'Saved. Alerts are off.');
+    load(false);
+  }).catch(function(){ busy = false; renderBar('Couldn’t reach the site. Check your connection and try again.', true); });
+});
+$('app').addEventListener('click', function(e){
+  var b = e.target.closest && e.target.closest('button');
+  if (!b) return;
+  if (b.id === 'forget') { dropPin(); render(); toast('This device will ask for your PIN next time.'); return; }
+  if (b.id !== 'test' || b.disabled) return;
+  b.disabled = true; var label = b.innerHTML; b.lastChild.textContent = 'Sending…';
+  withPin(function(pin){ return api('POST', '/api/alerts/test', {pin:pin}); }).then(function(r){
+    b.disabled = false; b.innerHTML = label;
+    if (!r) return;
+    if (r.ok) { toast('Sent. It should reach your phone in a few seconds.'); load(false); }
+    else toast((r.j && r.j.message) || 'Couldn’t send it (' + r.status + ').', true);
+  }).catch(function(){ b.disabled = false; b.innerHTML = label; toast('Couldn’t reach the site. Check your connection and try again.', true); });
+});
+$('retry').addEventListener('click', function(){ $('err').hidden = true; $('load').hidden = false; load(true); });
+// keep "Today" and "Recent alerts" fresh while the page is open (your unsaved changes are left alone)
+setInterval(function(){ if (!document.hidden && S && !busy) load(false); }, 60000);
+document.addEventListener('visibilitychange', function(){ if (!document.hidden && S && !busy) load(false); });
+window.addEventListener('beforeunload', function(e){ if (dirty()) { e.preventDefault(); e.returnValue = ''; } });
+
+if (DEMO) $('demo').hidden = false;
+load(true);
+})();
+</script>
+</body>
+</html>

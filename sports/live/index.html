@@ -1,0 +1,1779 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Live Center · Jamo Sports Hub</title>
+<meta name="description" content="Every live college football, NFL and NBA game on one screen, hottest first.">
+<meta name="theme-color" content="#03050a">
+<meta name="apple-mobile-web-app-title" content="Live Center">
+<link rel="icon" type="image/svg+xml" href="/sports/icons/jsh.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/sports/icons/jsh-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/sports/icons/jsh-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-180.png">
+<link rel="manifest" href="/sports/icons/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&family=Orbitron:wght@600;800&display=swap">
+<style>
+/* ===== Jamo Sports Hub Live Center (2026-10-27): every live college football, NFL and NBA game (the three sports the
+   site covers) on one screen. A Spotlight game up top, your teams pinned, the rest ranked by an excitement score, a merged
+   scoring feed,
+   what is coming up and today's finals. Built by sports-hub/live/build_live.pl into My-Website/sports/live/index.html.
+   Tokens and the glass "Neo" look are copied from sports-hub/front.html so the two pages match. ===== */
+:root{
+  --bg:#03050a; --surface:rgba(255,255,255,.035); --surface-2:rgba(255,255,255,.06); --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.05);
+  --ink:#eef2f8; --ink-2:#a9b3c4; --ink-3:#6f7a8c; --live:#ff4d6a; --gold:#fbbf24;
+  --cfb:#3b7bff; --nfl:#ff3b5c; --nba:#a45bff;
+  --plate:#fff; --r:20px;
+  --glass:linear-gradient(180deg,rgba(255,255,255,.058),rgba(255,255,255,.018)); --edge:rgba(255,255,255,.085); --edge-hi:rgba(140,180,255,.42);
+  --glow:0 0 0 1px rgba(120,160,255,.16),0 26px 60px -32px rgba(48,96,255,.55); --hud:#7cb6ff;
+  --sh:inset 0 1px 0 rgba(255,255,255,.05),0 24px 54px -36px rgba(0,0,0,.9);
+  --disp:"Inter Tight","Inter",system-ui,sans-serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --num:"Orbitron","Inter Tight",system-ui,sans-serif;
+  color-scheme:dark;
+}
+:root.light{--bg:#edf0f7;--surface:#fff;--surface-2:#f4f6fa;--line:#dde2ea;--line-2:#e9edf3;--ink:#0d1220;--ink-2:#465166;--ink-3:#7b8598;--live:#e0193a;--cfb:#1d5fd8;--nfl:#d0103a;--nba:#7c3aed;--glass:linear-gradient(180deg,#ffffff,#f6f8fc);--edge:#dce2ee;--edge-hi:rgba(29,95,216,.38);--glow:0 0 0 1px rgba(29,95,216,.14),0 18px 40px -26px rgba(29,95,216,.38);--hud:#1d5fd8;--sh:0 1px 2px rgba(15,23,42,.05),0 16px 34px -24px rgba(15,23,42,.28);color-scheme:light}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:-12%;z-index:-1;pointer-events:none;background:radial-gradient(760px 520px at 12% 4%,rgba(255,77,106,.16),transparent 62%),radial-gradient(720px 520px at 92% 0%,rgba(164,91,255,.20),transparent 64%),radial-gradient(900px 600px at 50% 105%,rgba(56,189,248,.10),transparent 66%);animation:nxAurora 42s ease-in-out infinite alternate}
+:root.light body::before{background:radial-gradient(760px 520px at 12% 4%,rgba(255,77,106,.10),transparent 62%),radial-gradient(720px 520px at 92% 0%,rgba(164,91,255,.10),transparent 64%)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.075) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);mask-image:linear-gradient(180deg,#000,transparent 75%)}
+:root.light body::after{background-image:radial-gradient(rgba(15,23,42,.07) 1px,transparent 1.3px)}
+@keyframes nxAurora{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}100%{transform:translate3d(2.5%,-1.5%,0) scale(1.03)}}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit}
+.lv{max-width:1320px;margin:0 auto;padding:16px 16px 48px}
+/* ---------- header ---------- */
+.lv-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px 18px;margin:4px 2px 16px}
+.lv-title{min-width:0}
+.eyebrow{font-family:var(--num);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--hud)}
+.lv-head h1{margin:6px 0 6px;font-family:var(--disp);font-size:clamp(32px,4.6vw,52px);font-weight:800;letter-spacing:-.045em;line-height:1}
+.lv-head h1 b{background:linear-gradient(90deg,#ff8da0,#cdb2ff 45%,#7ef0ff 75%,#ff8da0);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:nxShine 10s linear infinite}
+@keyframes nxShine{to{background-position:220% 0}}
+.lead{margin:0;color:var(--ink-2);font-size:14.5px;max-width:660px}
+.lead b{color:var(--ink)}
+.lv-tools{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;white-space:nowrap;transition:border-color .15s,box-shadow .15s}
+.btn:hover{border-color:var(--edge-hi);box-shadow:var(--glow)}
+.btn svg{width:16px;height:16px;flex:none}
+.btn.pri{color:#fff;border-color:transparent;background:linear-gradient(90deg,#e11d48,#7c3aed);box-shadow:0 10px 26px -12px rgba(225,29,72,.8)}
+.btn:focus-visible,.mc-spot:focus-visible,a:focus-visible{outline:2px solid var(--hud);outline-offset:2px}
+.upd{display:inline-flex;align-items:center;gap:6px;padding:6px 4px;border:0;background:none;font-size:12.5px;font-weight:600;color:var(--ink-3);cursor:pointer;white-space:nowrap}
+.upd i{width:7px;height:7px;border-radius:50%;background:#22c55e;flex:none}
+.upd.warn i{background:#f59e0b}
+.upd.idle i{background:var(--ink-3)}
+.demo{margin:0 0 14px;padding:10px 14px;border-radius:12px;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.45);color:#f5b544;font-size:13.5px}
+:root.light .demo{color:#92400e;background:#fef3c7;border-color:#f59e0b}
+.demo b{color:inherit}
+.opt{margin:0 0 16px;padding:14px 16px;border-radius:16px;border:1px solid var(--edge);background:var(--glass)}
+.opt label{display:flex;align-items:flex-start;gap:10px;padding:7px 0;font-size:14px;cursor:pointer}
+.opt label input{margin-top:3px;width:17px;height:17px;flex:none;accent-color:#7c3aed}
+.opt label span small{display:block;color:var(--ink-3);font-size:12.5px}
+/* ---------- section headers ---------- */
+.sec{position:relative;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:30px 2px 12px;padding-bottom:10px}
+.sec::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,color-mix(in srgb,var(--hud) 70%,transparent),rgba(196,166,255,.22) 42%,transparent 88%)}
+.sec h2{margin:0;font-family:var(--disp);font-size:clamp(19px,2vw,23px);font-weight:800;letter-spacing:-.025em}
+.sec .note{color:var(--ink-3);font-size:13px}
+.why-note{margin:-4px 2px 12px;font-size:13px;color:var(--ink-2);max-width:760px}
+.empty{padding:16px;border:1px dashed var(--line);border-radius:14px;color:var(--ink-3);font-size:14px;text-align:center}
+/* ---------- small pieces ---------- */
+.lg-tag{display:inline-flex;align-items:center;padding:3px 8px;border-radius:999px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--c);background:color-mix(in srgb,var(--c) 15%,transparent);white-space:nowrap}
+.pill-live{display:inline-flex;align-items:center;gap:5px;padding:2px 7px;border-radius:5px;background:var(--live);color:#fff;font-size:10px;font-weight:800;letter-spacing:.1em}
+.pill-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+.plate{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:var(--plate);box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.plate img{width:34px;height:34px;object-fit:contain;display:block}
+.sw{display:inline-block;width:22px;height:22px;border-radius:6px;background:#64748b}
+.net{padding:4px 9px;border-radius:8px;background:var(--surface-2);border:1px solid var(--line);font-size:11.5px;font-weight:800;letter-spacing:.03em;color:var(--ink-2);white-space:nowrap}
+.heat{flex:none;display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:999px;font-family:var(--num);font-size:11px;font-weight:800;letter-spacing:.02em;color:var(--hc);background:color-mix(in srgb,var(--hc) 16%,transparent)}
+.fbi{display:inline-block;width:14px;height:14px;vertical-align:-2px;color:#c98a45;flex:none}
+.fbi svg{display:block;width:100%;height:100%}
+/* ---------- spotlight ---------- */
+.spot{position:relative;display:block;padding:18px 20px 18px;border-radius:26px;color:#fff;background-color:#05070f;background-image:radial-gradient(760px 380px at 0% 0%,color-mix(in srgb,var(--ca) 58%,transparent),transparent 62%),radial-gradient(760px 380px at 100% 0%,color-mix(in srgb,var(--ch) 58%,transparent),transparent 62%),radial-gradient(640px 260px at 50% 130%,rgba(255,77,106,.20),transparent 66%);border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 44px 100px -56px rgba(0,0,0,.95);overflow:hidden;isolation:isolate}
+.spot::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(120% 90% at 50% 0%,#000 25%,transparent 75%);mask-image:radial-gradient(120% 90% at 50% 0%,#000 25%,transparent 75%)}
+.spot-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#d5def0}
+.spot-top .lg-tag{--c:#fff;background:rgba(255,255,255,.14)}
+.spot-top .heat{margin-left:auto;font-size:12px;letter-spacing:.04em;text-transform:none}
+.spot-board{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;margin:16px 0 8px;color:#fff}
+.st{display:flex;align-items:center;gap:14px;min-width:0}
+.st.h{flex-direction:row-reverse;text-align:right}
+.st .plate{width:76px;height:76px;border-radius:22px;box-shadow:0 12px 28px rgba(0,0,0,.45)}
+.st .plate img{width:58px;height:58px}
+.st .plate .sw{width:36px;height:36px}
+.st-n{display:flex;flex-direction:column;min-width:0}
+.st-n b{font-family:var(--disp);font-size:clamp(20px,2.3vw,30px);font-weight:800;letter-spacing:-.03em;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-n small{margin-top:3px;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-n small .fbi{color:#e7b77a}
+.st-s{margin-left:auto;font-family:var(--num);font-size:clamp(44px,5.6vw,76px);font-weight:800;line-height:1;font-variant-numeric:tabular-nums;text-shadow:0 0 26px rgba(255,255,255,.28)}
+.st.h .st-s{margin-left:0;margin-right:auto}
+.st.lose .st-s{opacity:.55}
+.spot-mid{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:120px;text-align:center}
+.spot-mid .clk{font-family:var(--num);font-size:19px;font-weight:800;letter-spacing:.04em;color:#ff9fb0;text-shadow:0 0 16px rgba(255,77,106,.45);white-space:nowrap}
+.spot-mid .sub{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.72);white-space:nowrap}
+.spot-mid .big{font-family:var(--num);font-size:clamp(28px,3.6vw,40px);font-weight:800;letter-spacing:.02em;color:#eaf6ff;text-shadow:0 0 18px rgba(120,180,255,.45);font-variant-numeric:tabular-nums;white-space:nowrap}
+.spot-mid .big i{font-style:normal;opacity:.45;margin:0 1px}
+.spot-mid .big .u{font-family:var(--body);font-size:12px;font-weight:700;color:#a9bde2;margin:0 5px 0 2px;letter-spacing:.04em;text-shadow:none}
+.spot-why{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.spot-why span{padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);font-size:12px;font-weight:700;color:#fff}
+.spot-why span.hot{background:rgba(255,77,106,.22);border-color:rgba(255,120,140,.5)}
+.spot-why span.me{background:rgba(251,191,36,.18);border-color:rgba(251,191,36,.5);color:#ffe08a}
+.spot-sit{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:10px;font-size:13.5px;color:#dfe6f4}
+.spot-sit b{color:#fff}
+.chip-rz{padding:3px 9px;border-radius:999px;background:rgba(255,77,106,.25);border:1px solid rgba(255,120,140,.55);font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+.spot-last{margin-top:12px;padding:10px 12px;border-radius:14px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.1);font-size:13.5px;line-height:1.4;color:#e6ecf7}
+.spot-last .k{display:block;margin-bottom:2px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ffd27a}
+.spot-last .k2{margin-top:8px;color:rgba(255,255,255,.6)}
+.spot-act{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:14px}
+.spot-act .go{display:inline-flex;align-items:center;gap:6px;padding:9px 15px;border-radius:999px;background:#fff;color:#0b1020;font-size:13.5px;font-weight:800}
+.spot-act .go:hover{box-shadow:0 0 0 3px rgba(255,255,255,.25)}
+.spot-act .tvn{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.75)}
+.spot-act .back{margin-left:auto;border:1px solid rgba(255,255,255,.22);background:transparent;color:#fff;border-radius:999px;padding:7px 12px;font-size:12.5px;font-weight:700;cursor:pointer}
+/* win chance bar and its line through the game */
+.wp{margin-top:12px}
+.wp-l{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12.5px;font-weight:700;color:#e6ecf7}
+.wp-l .k{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);text-align:center}
+.wp-l b{font-family:var(--num);font-size:15px}
+.wp-bar{display:flex;height:9px;margin-top:6px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.12)}
+.wp-bar i{display:block;height:100%}
+.wp-bar i+i{border-left:2px solid #05070f}
+.wp-sp{display:block;width:100%;height:56px;margin-top:8px}
+.bump{animation:bump .9s cubic-bezier(.2,.8,.2,1)}
+@keyframes bump{0%{transform:scale(1)}25%{transform:scale(1.22);color:#ffe08a;text-shadow:0 0 22px rgba(255,214,120,.8)}100%{transform:scale(1)}}
+/* ---------- cards (your teams and the live grid) ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:12px}
+.mc{position:relative;border-radius:18px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--sh);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s;min-width:0}
+.mc::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--c),transparent);opacity:.9}
+.mc:hover{border-color:var(--edge-hi);box-shadow:var(--glow);transform:translateY(-2px)}
+.mc.fav{border-color:color-mix(in srgb,var(--gold) 55%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 25%,transparent),var(--sh)}
+.mc.hot{box-shadow:inset 0 0 0 1.5px rgba(255,92,92,.5),0 8px 26px -12px rgba(255,70,70,.6)}
+.mc-a{display:block;padding:11px 13px 11px;color:inherit}
+.mc-h{display:flex;align-items:center;gap:8px;min-height:22px;margin-bottom:7px;padding-right:32px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.mc-h .lg{color:var(--c)}
+.mc-h .clk{color:var(--live);letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc-h .when{color:var(--ink-2);letter-spacing:.03em}
+.mc-h .me{margin-left:auto;color:var(--gold);letter-spacing:.06em}
+.tr{position:relative;display:flex;align-items:center;gap:9px;padding:4px 0 4px 11px;font-weight:700;font-size:15px;color:var(--ink-2);min-width:0}
+.tr::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:3px;background:var(--tc)}
+.tr.w{color:var(--ink)}
+.tr img,.tr .sw{width:24px;height:24px;object-fit:contain;flex:none;border-radius:5px}
+.tr .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tr .rk{font-size:11px;color:var(--ink-3);margin-right:3px}
+.tr .sc{font-family:var(--num);font-size:19px;font-weight:800;font-variant-numeric:tabular-nums;display:inline-block}
+.mwp{display:flex;height:4px;margin:7px 0 0 11px;border-radius:999px;overflow:hidden;background:var(--surface-2)}
+.mwp i{display:block;height:100%}
+.mc-f{display:flex;align-items:center;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--line-2);font-size:12.5px;font-weight:700;color:var(--ink-2);min-width:0}
+.mc-f .why{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mc.hot .mc-f .why{color:#ff8a8a}
+:root.light .mc.hot .mc-f .why{color:#c62828}
+.mc-f .cd{font-family:var(--num);font-size:13px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
+.mc-spot{position:absolute;top:8px;right:8px;display:grid;place-items:center;width:30px;height:30px;border-radius:10px;border:1px solid var(--edge);background:var(--surface);color:var(--ink-3);cursor:pointer;transition:color .15s,border-color .15s}
+.mc-spot:hover{color:var(--ink);border-color:var(--edge-hi)}
+.mc-spot svg{width:16px;height:16px}
+/* ---------- the two columns: live grid / coming up / finals, and the scoring feed beside them ---------- */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 340px;column-gap:24px;align-items:start}
+.cols>section{min-width:0;grid-column:1}
+#grid-wrap{grid-row:1}#up-wrap{grid-row:2}#fin-wrap{grid-row:3}
+#feed-wrap{grid-column:2;grid-row:1 / span 3;position:sticky;top:12px}
+.cols.nofeed{grid-template-columns:minmax(0,1fr)}
+@media (max-width:1000px){.cols{grid-template-columns:minmax(0,1fr)}#grid-wrap,#up-wrap,#fin-wrap,#feed-wrap{grid-column:1;grid-row:auto;position:static}}
+/* phones: the six hottest games, the rest one tap away */
+.grid-more{display:none}
+@media (max-width:640px){#grid:not(.all) .mc:nth-child(n+7){display:none}.grid-more{display:flex}}
+/* scoring feed */
+.feed{list-style:none;margin:0;padding:6px;border-radius:20px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--sh);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);max-height:calc(100vh - 140px);overflow-y:auto;scrollbar-width:thin}
+@media (max-width:1000px){.feed{max-height:none}}
+.feed li a{display:block;padding:10px 11px 10px 13px;border-radius:14px;border-left:3px solid var(--c);color:inherit}
+.feed li+li a{margin-top:2px}
+.feed li a:hover{background:var(--surface-2)}
+.feed li.fav a{border-left-color:var(--gold);background:color-mix(in srgb,var(--gold) 7%,transparent)}
+.feed li.new a{animation:fdin 1.2s ease}
+@keyframes fdin{0%{background:color-mix(in srgb,var(--gold) 22%,transparent)}100%{background:transparent}}
+.fd-m{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;font-size:11.5px;font-weight:700;color:var(--ink-3)}
+.fd-m .lg{font-size:10.5px;font-weight:800;letter-spacing:.08em;color:var(--c)}
+.fd-m b{font-family:var(--num);font-size:12px;color:var(--ink);letter-spacing:.02em}
+.fd-t{display:flex;gap:8px;align-items:flex-start;margin-top:4px;font-size:13.5px;line-height:1.38;color:var(--ink)}
+.fd-t img,.fd-t .sw{width:20px;height:20px;object-fit:contain;flex:none;margin-top:1px;border-radius:4px}
+.fd-more{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:10px 0 2px;padding:10px 14px;font:inherit;font-size:13.5px;font-weight:700;color:var(--ink);background:rgba(127,127,127,.08);border:1px solid var(--line);border-radius:999px;cursor:pointer}
+.fd-more:hover{border-color:rgba(127,127,127,.45)}
+/* coming up */
+.up{border-radius:var(--r);background:var(--glass);border:1px solid var(--edge);box-shadow:var(--sh);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);overflow:hidden}
+.up-r{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:11px 16px;border-top:1px solid var(--line-2);transition:background .15s}
+.up-r:first-child{border-top:0}
+.up-r:hover{background:var(--surface-2)}
+.up-r.fav{box-shadow:inset 3px 0 0 var(--gold)}
+.up-m{display:flex;align-items:center;gap:8px;min-width:0;font-weight:700;font-size:14.5px}
+.up-m img,.up-m .sw{width:22px;height:22px;object-fit:contain;flex:none;border-radius:5px}
+.up-m .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.up-m .at{font-weight:500;color:var(--ink-3);font-size:12.5px}
+.up-m .fv{color:var(--gold)}
+.up-m .rk{font-size:11px;color:var(--ink-3);margin-right:2px}
+.up-t{display:flex;flex-direction:column;align-items:flex-end;min-width:88px;text-align:right;line-height:1.2}
+.up-t b{font-size:13px;font-weight:700;color:var(--ink-2);white-space:nowrap}
+.up-t .cd{font-family:var(--num);font-size:13.5px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.up-t .cd.soon{color:var(--live)}
+@media (max-width:640px){
+  .up-r{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"m m m" "tag t net";row-gap:7px;column-gap:10px;padding:10px 14px}
+  .up-r .lg-tag{grid-area:tag;justify-self:start}.up-r .up-m{grid-area:m}.up-r .net{grid-area:net;justify-self:end}.up-r .up-t{grid-area:t;flex-direction:row;align-items:baseline;gap:8px;min-width:0;justify-self:end}
+}
+/* finals */
+.fins{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:10px}
+.fin{display:block;padding:10px 12px;border-radius:14px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--sh);min-width:0;transition:border-color .15s}
+.fin:hover{border-color:var(--edge-hi)}
+.fin.fav{border-color:color-mix(in srgb,var(--gold) 50%,transparent)}
+.fin-h{display:flex;justify-content:space-between;gap:6px;margin-bottom:5px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.fin-h .lg{color:var(--c)}
+.fr{display:flex;align-items:center;gap:7px;padding:2px 0;font-size:13.5px;font-weight:700;color:var(--ink-3);min-width:0}
+.fr.w{color:var(--ink)}
+.fr img,.fr .sw{width:18px;height:18px;object-fit:contain;flex:none}
+.fr span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fr b{font-family:var(--num);font-size:14px;font-variant-numeric:tabular-nums}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin-top:30px;padding:0 2px;color:var(--ink-3);font-size:12.5px;opacity:.75}
+.foot i{font-style:normal;color:var(--ink-2)}
+/* ---------- moment pop-ups ---------- */
+.toasts{position:fixed;z-index:80;top:calc(60px + env(safe-area-inset-top,0px));right:16px;display:flex;flex-direction:column;gap:10px;width:min(370px,calc(100vw - 32px));pointer-events:none}
+.toast{position:relative;pointer-events:auto;border-radius:16px;background:rgba(12,16,28,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.13);border-left:4px solid var(--tc);box-shadow:0 24px 50px -18px rgba(0,0,0,.95);color:#fff;animation:tin .4s cubic-bezier(.2,.8,.2,1)}
+.toast.out{animation:tout .35s ease forwards}
+@keyframes tin{from{opacity:0;transform:translateY(-10px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes tout{to{opacity:0;transform:translateX(30px)}}
+.toast a{display:flex;gap:12px;align-items:center;padding:12px 40px 12px 12px;color:#fff}
+.toast .plate{width:40px;height:40px;border-radius:12px}
+.toast .plate img{width:30px;height:30px}
+.toast-t{display:flex;flex-direction:column;min-width:0}
+.toast-t .k{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ffd27a}
+.toast-t b{font-family:var(--disp);font-size:16.5px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.toast-t span{font-size:12.5px;color:rgba(255,255,255,.78);overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.toast-x{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:8px;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:16px;line-height:1;cursor:pointer}
+/* ---------- TV mode: big type, no site chrome, the screen stays on while games are live ---------- */
+.tvbar{display:none}
+body.livetv .jsh,body.livetv .jbl,body.livetv .jbl-pill{display:none!important}
+body.livetv.jbl-on{padding-bottom:0!important}
+body.livetv .lv{max-width:none;padding:14px 22px 24px}
+body.livetv .lv-head,body.livetv .opt,body.livetv .why-note,body.livetv #fin-wrap,body.livetv .foot{display:none!important}
+body.livetv .tvbar{display:flex;align-items:center;gap:14px;margin:0 2px 14px}
+.tvbar .t{font-family:var(--disp);font-size:20px;font-weight:800;letter-spacing:-.02em}
+.tvbar .t b{color:var(--live)}
+.tvbar .clock{font-family:var(--num);font-size:20px;font-weight:800;letter-spacing:.04em;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.tvbar .wake{font-size:12.5px;font-weight:600;color:var(--ink-3)}
+.tvbar .btn{margin-left:auto}
+body.livetv .toasts{top:14px}
+body.livetv .sec{margin-top:20px}
+@media (min-width:1000px){
+  body.livetv .cols{grid-template-columns:minmax(0,1fr) 400px}
+  body.livetv .spot{padding:24px 30px 24px}
+  body.livetv .st .plate{width:112px;height:112px;border-radius:30px}
+  body.livetv .st .plate img{width:86px;height:86px}
+  body.livetv .st-n b{font-size:clamp(30px,3vw,46px)}
+  body.livetv .st-n small{font-size:16px}
+  body.livetv .st-s{font-size:clamp(70px,8vw,128px)}
+  body.livetv .spot-mid .clk{font-size:28px}
+  body.livetv .spot-mid .sub{font-size:16px}
+  body.livetv .spot-sit,body.livetv .spot-last{font-size:17px}
+  body.livetv .wp-l{font-size:15px}
+  body.livetv .grid{grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+  body.livetv .tr{font-size:18.5px}
+  body.livetv .tr img,body.livetv .tr .sw{width:30px;height:30px}
+  body.livetv .tr .sc{font-size:25px}
+  body.livetv .mc-h{font-size:12.5px}
+  body.livetv .mc-f{font-size:14px}
+  body.livetv .fd-t{font-size:16px}
+  body.livetv .up-m{font-size:16.5px}
+}
+/* ---------- widths ---------- */
+@media (max-width:760px){
+  .spot{padding:15px 15px 16px;border-radius:22px}
+  .spot-board{grid-template-columns:minmax(0,1fr);gap:8px;margin:12px 0 6px}
+  .spot-mid{order:-1;flex-direction:row;flex-wrap:wrap;align-items:baseline;justify-content:flex-start;gap:4px 10px;min-width:0;text-align:left}
+  .st,.st.h{flex-direction:row;text-align:left;gap:12px}
+  .st.h .st-s{margin-left:auto;margin-right:0}
+  .st .plate{width:52px;height:52px;border-radius:16px}
+  .st .plate img{width:40px;height:40px}
+  .st-n b{font-size:21px}
+  .st-s{font-size:42px}
+  .spot-act .back{margin-left:0}
+}
+@media (max-width:600px){.lv{padding:12px 16px 40px}.lv-head{margin-top:2px}.sec{margin-top:24px}.lv-tools{width:100%;flex-wrap:nowrap;gap:6px}.lv-tools .upd{margin-right:auto;min-width:0}.upd .ul{display:none}.lv-tools .btn{padding:7px 11px;font-size:12.5px;gap:6px}.lead{font-size:14px}}
+@media (prefers-reduced-motion:reduce){body::before,.lv-head h1 b,.pill-live::before,.bump,.toast,.feed li.new a{animation:none!important}.mc:hover{transform:none}}
+</style>
+</head>
+<body>
+<!-- Jamo Sports Hub top bar: added by each hub's deploy_public.sh right after <body> (never inside the claude.ai artifact) -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&display=swap">
+<style>
+.jsh{position:relative;z-index:60;display:flex;align-items:center;gap:14px;height:44px;padding:0 max(16px,env(safe-area-inset-left));background:#070a12;background-image:linear-gradient(90deg,rgba(29,78,216,.22),rgba(7,10,18,0) 35%,rgba(7,10,18,0) 65%,rgba(109,40,217,.2));border-bottom:1px solid rgba(255,255,255,.08);font-family:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1;box-sizing:border-box}
+.jsh *,.jsh *::before,.jsh *::after{box-sizing:border-box}
+.jsh a{text-decoration:none!important}
+.jsh-brand{display:flex;align-items:center;gap:9px;color:#fff!important;font-size:15.5px;font-weight:800;letter-spacing:-.015em;white-space:nowrap;flex:none}
+.jsh-brand img{width:26px;height:26px;border-radius:7px;display:block;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.jsh-brand b{font-weight:800;background:linear-gradient(90deg,#7cb6ff,#c4a6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.jsh-nav{display:flex;align-items:center;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.jsh-nav::-webkit-scrollbar{display:none}
+.jsh-nav a{display:flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:999px;color:#b4bfd3!important;font-size:13.5px;font-weight:700;letter-spacing:.005em;white-space:nowrap;transition:background-color .15s,color .15s,box-shadow .15s}
+.jsh-nav a i{flex:none;width:7px;height:7px;border-radius:50%;background:var(--c)}
+.jsh-nav a:hover{color:#fff!important;background:rgba(255,255,255,.08)}
+.jsh-nav a.on{color:#fff!important;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 4px 14px -4px var(--c)}
+.jsh-nav a.on i{background:#fff}
+.jsh-nav a:focus-visible{outline:2px solid #7cb6ff;outline-offset:2px}
+body.boardmode .jsh{display:none}
+@media (max-width:560px){.jsh{gap:8px;padding:0 12px}.jsh-brand span{display:none}.jsh-nav{gap:2px}.jsh-nav a{padding:0 10px;font-size:13px;gap:6px}}
+@media (max-width:360px){.jsh-nav a i{display:none}.jsh-nav a{padding:0 9px}}
+/* phones (2026-10-19): no Safari text enlarging (it inflated the tab labels in the scrolling row), tabs keep their width */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.jsh,.jsh *{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.jsh-nav{min-width:0}
+.jsh-nav a{flex:none;line-height:1}
+@media print{.jsh{display:none}}
+/* Live Center tab (2026-10-27): a small red dot on the tab while any CFB, NFL or NBA game is live (set from the BottomLine feed) */
+.jsh-nav a[data-s="live"]{position:relative}
+.jsh-nav a .jsh-ld{position:absolute;top:4px;right:5px;width:7px;height:7px;border-radius:50%;background:#ff4d6a;box-shadow:0 0 0 2px rgba(255,77,106,.28);animation:jshLd 1.6s ease-in-out infinite}
+.jsh-nav a .jsh-ld[hidden]{display:none}
+.jsh-nav a.on .jsh-ld{background:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.3)}
+@keyframes jshLd{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.jsh-nav a .jsh-ld{animation:none}}
+/* league logos and a centered row (2026-10-19) */
+.jsh-nav a .jsh-lg{flex:none;width:18px;height:18px;object-fit:contain;display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45))}
+.jsh-nav a svg.jsh-lg{filter:none;opacity:.85}
+.jsh-nav a.on .jsh-lg{filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))}
+@media (min-width:561px){.jsh-nav{margin:0 auto}}
+@media (min-width:1100px){.jsh-nav{position:absolute;left:50%;transform:translateX(-50%);margin:0;overflow:visible}}
+@media (max-width:360px){.jsh-nav a .jsh-lg{width:16px;height:16px}}
+/* clear of the notch and status bar (2026-10-21, Jamo: "the top tabs bar goes under the top a little"): the bar grows by the phone's safe area at the top, plus a little air on phones */
+.jsh{box-sizing:border-box;height:calc(44px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)}
+@media (max-width:560px){.jsh{height:calc(50px + env(safe-area-inset-top,0px));padding-top:calc(6px + env(safe-area-inset-top,0px))}}
+/* phones (2026-10-21, design pass): every league fits - the page you're on keeps its name, the others show just the logo */
+@media (max-width:560px){.jsh-nav{gap:1px}.jsh-nav a:not(.on){font-size:0;gap:0;padding:0 8px}.jsh-nav a:not(.on) .jsh-lg{width:20px;height:20px}.jsh-nav a.on{padding:0 11px 0 9px}}
+/* phones: the hub header slides away while you scroll down and comes back as soon as you scroll up */
+header.top{transition:transform .22s ease}
+header.top.jsh-tuck{pointer-events:none}
+/* prediction cards: each reference line stays on one line on phones */
+@media (max-width:600px){body .pk-avg{font-size:10.5px;white-space:nowrap;letter-spacing:-.01em}}
+</style>
+<div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
+  <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
+  <nav class="jsh-nav">
+    <a href="/sports/" data-s="sports" style="--c:#475569"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg>Home</a>
+    <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">CFB</a>
+    <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nfl.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NFL</a>
+    <a href="/nba/" data-s="nba" style="--c:#6d28d9"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nba.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NBA</a>
+    <a href="/sports/live/" data-s="live" style="--c:#e11d48" title="Live Center"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.48M7.76 16.24a6 6 0 0 1 0-8.48M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>Live<span class="jsh-ld" hidden></span></a>
+    <a href="/sports/articles/" data-s="articles" style="--c:#be185d"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="15" height="16" rx="2"/><path d="M18 8h3v10a2 2 0 0 1-2 2"/><path d="M7 8h7M7 12h7M7 16h4"/></svg>Articles</a>
+  </nav>
+</div>
+<script>
+/* Jamo Sports Hub: light/dark and the time zone follow you between CFB, NFL and NBA (each keeps its own favourite team).
+   Runs before the hub's own script, so a choice made in one hub is in place before the next one reads its settings. */
+(function(){ try {
+  var s = (location.pathname.indexOf('/sports/articles') === 0 ? 'articles' : location.pathname.indexOf('/sports/live') === 0 ? 'live' : location.pathname.indexOf('/sports/alerts') === 0 ? 'alerts' : (location.pathname.split('/')[1] || 'sports')).toLowerCase(), a = document.querySelector('.jsh-nav a[data-s="' + s + '"]');
+  if (a) { a.className = 'on'; a.setAttribute('aria-current', 'page'); }
+  if (s === 'sports' || s === 'articles' || s === 'live' || s === 'alerts') return;
+  var key = s + '-settings', sh = JSON.parse(localStorage.getItem('jsh-shared') || 'null');
+  if (sh) { var own = JSON.parse(localStorage.getItem(key) || '{}'), ch = false;
+    ['theme', 'tz'].forEach(function (k) { if (sh[k] && own[k] !== sh[k]) { own[k] = sh[k]; ch = true; } });
+    if (ch) localStorage.setItem(key, JSON.stringify(own)); }
+  var save = function () { try { var o = JSON.parse(localStorage.getItem(key) || '{}'); if (o.theme || o.tz) localStorage.setItem('jsh-shared', JSON.stringify({ theme: o.theme || 'auto', tz: o.tz || 'MT' })); } catch (e) {} };
+  addEventListener('pagehide', save); document.addEventListener('visibilitychange', function () { if (document.hidden) save(); });
+} catch (e) {} })();
+</script>
+<script>
+/* phones (2026-10-21): tuck the hub's sticky header (sub-tabs + scores strip) away on scroll down, bring it back on scroll up */
+(function(){ var last = 0, h = null, mq = window.matchMedia('(max-width:760px)');
+  function hdr(){ if (!h || !h.isConnected) h = document.querySelector('header.top'); return h; }
+  function off(e){ e.classList.remove('jsh-tuck'); e.style.transform = ''; }
+  addEventListener('scroll', function(){ var e = hdr(); if (!e) return; var y = window.scrollY, d = y - last; last = y;
+    if (!mq.matches || y < 260 || e.contains(document.activeElement) || d < -4) { if (e.classList.contains('jsh-tuck')) off(e); return; }
+    if (d > 6 && !e.classList.contains('jsh-tuck')) { var top = parseFloat(getComputedStyle(e).top) || 0; e.style.transform = 'translateY(' + (-(e.offsetHeight + top)) + 'px)'; e.classList.add('jsh-tuck'); } }, { passive: true });
+  addEventListener('hashchange', function(){ var e = hdr(); if (e) off(e); });
+})();
+</script>
+<script>
+/* Live Center tab (2026-10-27): the BottomLine (bl.js) announces every fresh /api/bottomline answer with a "jsh:bl" event;
+   the red dot on the Live tab shows while any college football, NFL or NBA game is in progress. No extra requests.
+   Weber State's FCS games count only when the Live Center's "Follow Weber State too" option is on. */
+(function(){ var a = document.querySelector('.jsh-nav a[data-s="live"]'), d = a && a.querySelector('.jsh-ld'); if (!d) return;
+  document.addEventListener('jsh:bl', function (e) { try {
+    var web = false; try { web = !!(JSON.parse(localStorage.getItem('jsh-live') || '{}') || {}).weber; } catch (x) {}
+    var isWeber = function (g) { return g.lg === 'cfb' && [g.a, g.h].some(function (t) { return t && String(t.id) === '2692'; }); };
+    var n = ((e.detail && e.detail.games) || []).filter(function (g) { return g && g.st === 'in' && /^(cfb|nfl|nba)$/.test(g.lg) && (web || !isWeber(g)); }).length;
+    d.hidden = !n; a.title = n ? 'Live Center: games on now' : 'Live Center';
+  } catch (x) {} });
+})();
+</script>
+<!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
+<script src="/sports/bl.js?v=20261027a" defer></script>
+<!-- Ask the Hub: the AI analyst button and chat (ask/ask.js, published by build.sh as /sports/ask.js) -->
+<script src="/sports/ask.js?v=20261027a" defer></script>
+
+<main class="lv" id="lv">
+  <div class="tvbar" id="tvbar"><span class="t">Live <b>Center</b></span><span class="clock" id="tv-clock"></span><span class="wake" id="tv-wake"></span><button type="button" class="btn" id="tv-exit">Exit TV mode</button></div>
+  <header class="lv-head">
+    <div class="lv-title">
+      <div class="eyebrow" id="lv-date">Jamo Sports Hub</div>
+      <h1>Live <b>Center</b></h1>
+      <p class="lead" id="lv-lead">Every live college football, NFL and NBA game, on one screen.</p>
+    </div>
+    <div class="lv-tools">
+      <button type="button" class="upd idle" id="upd" title="Check for new scores now"><i></i><span id="upd-t">Loading scores…</span></button>
+      <button type="button" class="btn" id="opt-btn" aria-expanded="false" aria-controls="opt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>Options</button>
+      <button type="button" class="btn pri" id="tv-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg>TV mode</button>
+    </div>
+  </header>
+  <div class="demo" id="demo" role="status" hidden><b>Demo mode:</b> the live games on this page are made up, to show how it works. Take <b>?livedemo=1</b> off the address for real scores.</div>
+  <div class="opt" id="opt" hidden>
+    <label><input type="checkbox" id="opt-pop"><span>Pop-up alerts for big moments<small>A game going to overtime, getting close late, or your team scoring. One alert per moment.</small></span></label>
+    <label><input type="checkbox" id="opt-web"><span>Follow Weber State too<small>Adds the Wildcats’ games (FCS) and treats them like one of your teams. Off unless you turn it on.</small></span></label>
+  </div>
+
+  <section id="spot" aria-label="Spotlight game"></section>
+
+  <section id="mine-wrap" hidden><div class="sec"><h2>Your teams</h2><span class="note" id="mine-n"></span></div><div class="grid" id="mine"></div></section>
+
+  <div class="cols" id="cols">
+    <section id="grid-wrap" hidden><div class="sec"><h2>Live now</h2><span class="note" id="grid-n"></span></div><p class="why-note">Hottest first: the 🔥 number (0 to 100) grows the closer a game is for its sport (ESPN’s live win chance when it has one), the less time is left, in overtime and when an underdog leads late, and your teams get a bump up the list.</p><div class="grid" id="grid"></div><button type="button" class="fd-more grid-more" id="grid-more" hidden></button></section>
+    <section id="feed-wrap" hidden><div class="sec"><h2>Scoring feed</h2><span class="note" id="feed-n">newest first</span></div><ol class="feed" id="feed"></ol></section>
+    <section id="up-wrap" hidden><div class="sec"><h2 id="up-h">Coming up</h2><span class="note" id="up-n"></span></div><div class="up" id="up"></div></section>
+    <section id="fin-wrap" hidden><div class="sec"><h2>Finals today</h2><span class="note" id="fin-n"></span></div><div class="fins" id="fin"></div></section>
+  </div>
+
+  <footer class="foot"><span id="lv-foot">Scores refresh every 25 seconds while games are on. Tap any game for its full game page.</span><span>A <i>Kramerica Industries</i> production</span></footer>
+</main>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<script type="application/json" id="d-meta">{"cfb":"Tue Oct 27, 2026 · 8:52 PM ET","nfl":"Tue Oct 27, 2026 · 8:53 PM ET","nba":"Tue Oct 27, 2026 · 7:05 PM ET"}</script>
+<script type="text/plain" id="d-cfb">8|2026-10-24|Akron|Kent State|20|35|FINAL|1:00 PM||-3|48.5|124|-148|ESPN+||
+8|2026-10-24|BYU|UCF|31|39|FINAL|3:30 PM||7.5|43.5|-305|245|Fox|2|
+8|2026-10-24|Baylor|Kansas|24|25|FINAL|1:00 PM||-1.5|54.5|-102|-118|TNT||
+8|2026-10-24|Boise State|Washington State|31|10|FINAL|6:00 PM||14.5|52.5|-625|455|USA Net|21|
+8|2026-10-24|Boston College|Georgia Tech|49|27|FINAL|3:30 PM||-6.5|50.5|200|-245|ACC Network||
+8|2026-10-24|Bowling Green|Buffalo|24|31|FINAL|3:30 PM||-3|44.5|130|-155|ESPN+||
+8|2026-10-24|California|SMU|20|59|FINAL|12:00 PM||-18.5|55.5|675|-1050|CW||23
+8|2026-10-24|Colorado|Oklahoma State|24|57|FINAL|7:00 PM||-12.5|55.5|410|-550|FS1||
+8|2026-10-24|Eastern Michigan|Ohio|20|24|FINAL|4:00 PM||-11.5|48.5|370|-485|ESPNU||
+8|2026-10-24|Georgia State|Arkansas State|32|38|FINAL|7:00 PM||2.5|58.5|-135|114|ESPN+||
+8|2026-10-24|Hawai'i|Northern Illinois|56|21|FINAL|3:30 PM||3|48.5|-180|150|MW+||
+8|2026-10-24|Houston|Utah|13|21|FINAL|10:15 PM||-6.5|57.5|190|-230|ESPN|14|10
+8|2026-10-24|Indiana|Michigan|13|6|FINAL|12:00 PM||7.5|43.5|-298|240|Fox|6|
+8|2026-10-24|Iowa State|Arizona|3|39|FINAL|7:30 PM||-11.5|51.5|295|-375|ESPN2||25
+8|2026-10-24|Iowa|Minnesota|10|13|FINAL|3:30 PM||7.5|40.5|-290|235|FS1|15|
+8|2026-10-24|Kansas State|Arizona State|17|28|FINAL|3:45 PM||1.5|51.5|-118|-102|ESPN2||
+8|2026-10-24|LSU|Auburn|38|17|FINAL|12:00 PM||7|51.5|-285|230|ABC|18|
+8|2026-10-24|Louisiana|Southern Miss|31|35|FINAL|5:00 PM||11.5|52.5|-470|360|ESPN+||
+8|2026-10-24|Miami (OH)|Central Michigan|28|27|FINAL|1:00 PM||3.5|41.5|-166|140|ESPN+||
+8|2026-10-24|Michigan State|UCLA|10|28|FINAL|3:30 PM||-16.5|43.5|575|-850|CBS||9
+8|2026-10-24|North Dakota State|New Mexico|16|21|FINAL|10:20 PM||-4.5|39.5|160|-192|CW||
+8|2026-10-24|North Texas|Navy|49|39|FINAL|3:30 PM||3|60.5|-148|124|CBSSN||
+8|2026-10-24|Oklahoma|Mississippi State|23|15|FINAL|3:30 PM||1.5|49.5|-122|102|SEC Network||
+8|2026-10-24|Old Dominion|Louisiana Tech|0|26|FINAL|5:00 PM||-13.5|43.5|410|-550|ESPN+||
+8|2026-10-24|Ole Miss|Texas|27|34|FINAL|7:30 PM||-3|54.5|142|-170|ABC|7|19
+8|2026-10-24|Oregon|Illinois|10|21|FINAL|3:00 PM||10.5|49.5|-410|320|BTN||
+8|2026-10-24|Pittsburgh|Miami|23|52|FINAL|12:00 PM||-20.5|50.5|950|-1650|ESPNEWS/Disney+||1
+8|2026-10-24|Rice|Florida Atlantic|49|51|FINAL|12:00 PM||-9.5|55.5|270|-340|ESPNU||
+8|2026-10-24|Rutgers|Northwestern|14|42|FINAL|12:00 PM||-15.5|58.5|525|-750|Peacock||24
+8|2026-10-24|Sacramento State|Ball State|17|34|FINAL|3:30 PM||-14.5|51.5|440|-600|ESPN+||
+8|2026-10-24|San Diego State|Colorado State|49|56|FINAL|6:30 PM||1.5|57.5|-110|-110|CW||
+8|2026-10-24|San José State|Nevada|13|28|FINAL|5:00 PM||-6|46.5|190|-230|MW+||
+8|2026-10-24|Syracuse|North Carolina|31|30|FINAL|7:30 PM||-7.5|49.5|275|-345|ACC Network||
+8|2026-10-24|Tennessee|South Carolina|24|27|FINAL|3:30 PM||-2.5|50.5|114|-135|ESPN/Disney+|11|
+8|2026-10-24|Texas A&M|Alabama|20|31|FINAL|3:30 PM||-13.5|49.5|440|-600|ABC||13
+8|2026-10-24|Texas Tech|Cincinnati|24|37|FINAL|12:00 PM||10.5|57.5|-425|330|FS1|8|
+8|2026-10-24|UL Monroe|Troy|21|14|FINAL|4:00 PM||-13.5|50.5|455|-625|ESPN+||
+8|2026-10-24|USC|Wisconsin|7|24|FINAL|7:30 PM||1.5|50.5|-125|105|NBC|16|
+8|2026-10-24|UTSA|Tulane|42|19|FINAL|8:00 PM||3|52.5|-148|124|ESPNU||
+8|2026-10-24|Utah State|Texas State|17|20|FINAL|7:30 PM||-14.5|58.5|455|-625|CBSSN||
+8|2026-10-24|Vanderbilt|Kentucky|17|34|FINAL|7:30 PM||-9.5|51.5|340|-440|SEC Network||12
+8|2026-10-24|Virginia Tech|Clemson|20|16|FINAL|7:00 PM||-3|50.5|120|-142|ESPN||
+8|2026-10-24|West Virginia|TCU|24|20|FINAL|12:00 PM||-10|58.5|285|-360|ESPN2||
+8|2026-10-24|Western Michigan|Toledo|38|45|FINAL|12:00 PM||-2.5|48.5|120|-142|CBSSN||
+9|2026-10-27|Delaware|Western Kentucky|28|21|IN_PROGRESS|7:00 PM||-1.5|55.5|102|-122|CBSSN||
+9|2026-10-27|Sam Houston|Missouri State|3|7|IN_PROGRESS|8:00 PM||-6|52.5|185|-225|ESPN2||
+9|2026-10-28|Jacksonville State|New Mexico State|||SCHEDULED|8:00 PM||3|49.5|-162|136|ESPN2||
+9|2026-10-28|Kennesaw State|Middle Tennessee|||SCHEDULED|7:00 PM||-2.5|50.5|120|-142|CBSSN||
+9|2026-10-29|Florida Atlantic|North Texas|||SCHEDULED|7:30 PM||-13.5|77.5|390|-520|ESPN||
+9|2026-10-29|Troy|James Madison|||SCHEDULED|7:30 PM||-21|49.5|900|-1600|ESPN2||
+9|2026-10-30|Baylor|UCF|||SCHEDULED|7:30 PM||-1.5|47.5|-102|-118|ESPN||
+9|2026-10-30|Kent State|Sacramento State|||SCHEDULED|10:30 PM||10|46.5|-395|310|ESPN2||
+9|2026-10-30|Tulane|Charlotte|||SCHEDULED|7:00 PM||10|46.5|-395|310|ESPN2||
+9|2026-10-31|App State|Georgia Southern|||SCHEDULED|6:30 PM||-5.5|56.5|170|-205|ESPN+||
+9|2026-10-31|Arizona State|BYU|||SCHEDULED|3:30 PM||-16.5|48.5|525|-750|Fox||8
+9|2026-10-31|Arizona|Texas Tech|||SCHEDULED|12:00 PM||-3.5|54.5|140|-166|ESPN|22|13
+9|2026-10-31|Army|Memphis|||SCHEDULED|8:00 PM||-6|59.5|190|-230|ESPNU||
+9|2026-10-31|Auburn|Ole Miss|||SCHEDULED|12:45 PM||-13.5|57.5|400|-535|SEC Network||12
+9|2026-10-31|Boston College|Duke|||SCHEDULED|12:00 PM||-7|47.5|225|-278|CW||
+9|2026-10-31|Bowling Green|Western Michigan|||SCHEDULED|12:00 PM||-13.5|44.5|410|-550|CBSSN||
+9|2026-10-31|California|NC State|||SCHEDULED|12:00 PM||-7|56.5|225|-278|ACC Network||
+9|2026-10-31|Clemson|Florida State|||SCHEDULED|7:00 PM||-6|49.5|180|-218|ACC Network||
+9|2026-10-31|Coastal Carolina|Georgia State|||SCHEDULED|2:00 PM||-6.5|58.5|200|-245|ESPN+||
+9|2026-10-31|Colorado State|Utah State|||SCHEDULED|3:30 PM||-6.5|63.5|200|-245|USA Net||
+9|2026-10-31|Florida International|Liberty|||SCHEDULED|3:30 PM||-14|44.5|440|-600|CBSSN||
+9|2026-10-31|Florida|Georgia|||SCHEDULED|3:30 PM|N|-11.5|55.5|340|-440|ABC|17|3
+9|2026-10-31|Georgia Tech|Pittsburgh|||SCHEDULED|7:30 PM||-7.5|54.5|245|-305|ESPN2||
+9|2026-10-31|Illinois|Maryland|||SCHEDULED|12:00 PM||2.5|54.5|-135|114|FS1||
+9|2026-10-31|Kansas State|Colorado|||SCHEDULED|2:00 PM||1.5|47.5|-115|-105|TNT||
+9|2026-10-31|Kansas|TCU|||SCHEDULED|3:30 PM||-6|46.5|190|-230|FS1||
+9|2026-10-31|Louisiana Tech|South Alabama|||SCHEDULED|3:00 PM||5.5|58.5|-218|180|ESPN+||
+9|2026-10-31|Marshall|Old Dominion|||SCHEDULED|1:00 PM||2.5|45.5|-142|120|ESPN+||
+9|2026-10-31|Miami|North Carolina|||SCHEDULED|7:30 PM||14.5|52.5|-675|490|ABC|1|
+9|2026-10-31|Michigan|Rutgers|||SCHEDULED|12:30 PM||14|46.5|-600|440|BTN||
+9|2026-10-31|Minnesota|Indiana|||SCHEDULED|3:30 PM||-20.5|41.5|850|-1450|CBS||4
+9|2026-10-31|Mississippi State|Texas|||SCHEDULED|7:30 PM||-20.5|50.5|850|-1450|ESPN||11
+9|2026-10-31|Missouri|Arkansas|||SCHEDULED|7:45 PM||10|49.5|-380|300|SEC Network|23|
+9|2026-10-31|Nevada|UCLA|||SCHEDULED|4:15 PM||-22.5|44.5|1000|-1800|BTN||7
+9|2026-10-31|New Mexico|San José State|||SCHEDULED|4:00 PM||14.5|42.5|-675|490|MW+||
+9|2026-10-31|Northern Illinois|UNLV|||SCHEDULED|10:30 PM||-23.5|53.5|1200|-2400|CBSSN||
+9|2026-10-31|Northwestern|Oregon|||SCHEDULED|3:30 PM||-3.5|47.5|145|-175|Peacock|20|
+9|2026-10-31|Notre Dame|Navy|||SCHEDULED|12:00 PM|N|30.5|56.5|-6500|2000|ABC|5|
+9|2026-10-31|Ohio State|USC|||SCHEDULED|7:30 PM||6.5|51.5|-245|200|NBC|2|
+9|2026-10-31|Oklahoma State|Iowa State|||SCHEDULED|7:00 PM||8.5|57.5|-340|270|FS1|24|
+9|2026-10-31|Oregon State|Fresno State|||SCHEDULED|11:00 PM||5.5|57.5|-225|185|USA Net||
+9|2026-10-31|Purdue|Penn State|||SCHEDULED|4:15 PM||-7.5|54.5|235|-290|BTN||
+9|2026-10-31|SMU|Syracuse|||SCHEDULED|12:00 PM||10|58.5|-360|285|ESPN2|19|
+9|2026-10-31|South Carolina|Oklahoma|||SCHEDULED|4:15 PM||-5.5|44.5|164|-198|SEC Network||
+9|2026-10-31|Southern Miss|UL Monroe|||SCHEDULED|3:30 PM||3.5|55.5|-170|142|ESPN+||
+9|2026-10-31|Stanford|Louisville|||SCHEDULED|3:15 PM||-22.5|60.5|1100|-2100|ACC Network||
+9|2026-10-31|Temple|East Carolina|||SCHEDULED|3:00 PM||-6|49.5|190|-230|ESPN+||
+9|2026-10-31|Texas State|Boise State|||SCHEDULED|10:00 PM||-11.5|64.5|340|-440|CW||20
+9|2026-10-31|UAB|South Florida|||SCHEDULED|12:00 PM||-8.5|42.5|245|-305|ESPNU||
+9|2026-10-31|UConn|Air Force|||SCHEDULED|3:00 PM||-1.5|51.5|-105|-115|MW+||
+9|2026-10-31|UTEP|North Dakota State|||SCHEDULED|3:30 PM||-24.5|42.5|1200|-2400|MW+||
+9|2026-10-31|Utah|Cincinnati|||SCHEDULED|3:45 PM||6.5|56.5|-258|210|ESPN|6|
+9|2026-10-31|Virginia|Wake Forest|||SCHEDULED|3:45 PM||-12.5|49.5|390|-520|ESPN2||14
+9|2026-10-31|Washington State|San Diego State|||SCHEDULED|7:00 PM||-2.5|48.5|120|-142|CBSSN||
+9|2026-10-31|Washington|Nebraska|||SCHEDULED|8:00 PM||-7.5|50.5|250|-310|BTN||
+9|2026-10-31|Wisconsin|Iowa|||SCHEDULED|12:00 PM||-3.5|36.5|142|-170|Fox|25|
+10|2026-11-03|Buffalo|Miami (OH)|||SCHEDULED|8:00 PM||||||ESPN||
+10|2026-11-03|Ohio|Akron|||SCHEDULED|7:00 PM||||||ESPN2||
+10|2026-11-04|Ball State|Massachusetts|||SCHEDULED|7:00 PM||||||ESPNU||
+10|2026-11-04|Central Michigan|Eastern Michigan|||SCHEDULED|7:30 PM|N|||||ESPN2||
+10|2026-11-04|Toledo|Sacramento State|||SCHEDULED|7:00 PM||||||CBSSN||
+10|2026-11-05|James Madison|Southern Miss|||SCHEDULED|8:00 PM||||||ESPN2||
+10|2026-11-05|UTSA|Florida Atlantic|||SCHEDULED|7:30 PM||||||ESPN||
+10|2026-11-06|Nebraska|Illinois|||SCHEDULED|8:00 PM||||||Fox||
+10|2026-11-06|New Mexico|Nevada|||SCHEDULED|9:00 PM||||||CBSSN||
+10|2026-11-06|South Florida|East Carolina|||SCHEDULED|7:30 PM||||||ESPN2||
+10|2026-11-06|TCU|Arizona|||SCHEDULED|10:15 PM||||||ESPN||22
+10|2026-11-06|Virginia Tech|SMU|||SCHEDULED|7:00 PM||||||ESPN||19
+10|2026-11-07|Air Force|Army|||SCHEDULED|7:30 PM||||||CBS||
+10|2026-11-07|Alabama|LSU|||SCHEDULED|3:30 PM||||||ABC|10|15
+10|2026-11-07|Arkansas|Auburn|||SCHEDULED|12:45 PM||||||SEC Network||
+10|2026-11-07|BYU|Utah|||SCHEDULED|12:00 PM||-3|||||8|6
+10|2026-11-07|Boise State|Colorado State|||SCHEDULED|6:00 PM||||||USA Net|20|
+10|2026-11-07|Charlotte|UAB|||SCHEDULED|3:30 PM||||||ESPN+||
+10|2026-11-07|Cincinnati|Houston|||SCHEDULED|TBD||||||||18
+10|2026-11-07|Clemson|Syracuse|||SCHEDULED|12:00 PM||||||ESPN2||
+10|2026-11-07|Colorado|Arizona State|||SCHEDULED|7:30 PM||||||ESPN2||
+10|2026-11-07|Delaware|Kennesaw State|||SCHEDULED|3:00 PM||||||ESPN+||
+10|2026-11-07|Duke|NC State|||SCHEDULED|12:30 PM||||||CW||
+10|2026-11-07|Florida State|Boston College|||SCHEDULED|12:00 PM||||||ACC Network||
+10|2026-11-07|Fresno State|Utah State|||SCHEDULED|9:30 PM||||||USA Net||
+10|2026-11-07|Georgia State|App State|||SCHEDULED|2:30 PM||||||ESPN+||
+10|2026-11-07|Georgia|Ole Miss|||SCHEDULED|7:30 PM||||||ABC|3|12
+10|2026-11-07|Hawai'i|UTEP|||SCHEDULED|9:30 PM||||||FS1||
+10|2026-11-07|Iowa State|Baylor|||SCHEDULED|TBD||||||||
+10|2026-11-07|Iowa|Northwestern|||SCHEDULED|TBD||||||||20
+10|2026-11-07|Kentucky|Tennessee|||SCHEDULED|6:15 PM||||||ESPN|9|16
+10|2026-11-07|Liberty|New Mexico State|||SCHEDULED|8:00 PM||||||ESPNU||
+10|2026-11-07|Louisiana Tech|Troy|||SCHEDULED|4:00 PM||||||ESPN+||
+10|2026-11-07|Louisville|Georgia Tech|||SCHEDULED|7:30 PM||||||ACC Network||
+10|2026-11-07|Marshall|Georgia Southern|||SCHEDULED|3:30 PM||||||ESPN+||
+10|2026-11-07|Maryland|Purdue|||SCHEDULED|12:30 PM||||||BTN||
+10|2026-11-07|Merrimack|Wake Forest|||SCHEDULED|3:30 PM||||||ACC Network||14
+10|2026-11-07|Miami|Notre Dame|||SCHEDULED|7:30 PM||||||NBC|1|5
+10|2026-11-07|Michigan State|Michigan|||SCHEDULED|TBD||||||||
+10|2026-11-07|Missouri State|Florida International|||SCHEDULED|4:00 PM||||||ESPN+||
+10|2026-11-07|North Carolina|UConn|||SCHEDULED|12:00 PM||||||CBSSN||
+10|2026-11-07|Northern Illinois|San José State|||SCHEDULED|4:00 PM||||||MW+||
+10|2026-11-07|Oklahoma State|Kansas State|||SCHEDULED|TBD|||||||24|
+10|2026-11-07|Oklahoma|Florida|||SCHEDULED|7:45 PM||||||SEC Network||17
+10|2026-11-07|Old Dominion|Coastal Carolina|||SCHEDULED|1:00 PM||||||ESPN+||
+10|2026-11-07|Oregon|Ohio State|||SCHEDULED|3:30 PM||-6||||CBS||2
+10|2026-11-07|Penn State|Washington|||SCHEDULED|TBD||||||||
+10|2026-11-07|Rice|North Texas|||SCHEDULED|4:00 PM||||||ESPNU||
+10|2026-11-07|Rutgers|Wisconsin|||SCHEDULED|12:30 PM||||||BTN||25
+10|2026-11-07|Sam Houston|Jacksonville State|||SCHEDULED|7:00 PM||||||CBSSN||
+10|2026-11-07|South Alabama|Louisiana|||SCHEDULED|5:00 PM||||||ESPN+||
+10|2026-11-07|Temple|Navy|||SCHEDULED|3:30 PM||||||CBSSN||
+10|2026-11-07|Texas A&M|South Carolina|||SCHEDULED|3:00 PM||||||ESPN||
+10|2026-11-07|Texas State|Oregon State|||SCHEDULED|10:30 PM||||||CW||
+10|2026-11-07|Texas|Missouri|||SCHEDULED|12:00 PM|||||||11|23
+10|2026-11-07|Tulsa|Tulane|||SCHEDULED|12:00 PM||||||ESPNU||
+10|2026-11-07|UCF|Kansas|||SCHEDULED|TBD||||||||
+10|2026-11-07|UCLA|Minnesota|||SCHEDULED|TBD|||||||7|
+10|2026-11-07|UL Monroe|Arkansas State|||SCHEDULED|3:00 PM||||||ESPN+||
+10|2026-11-07|Vanderbilt|Mississippi State|||SCHEDULED|4:15 PM||||||SEC Network||
+10|2026-11-07|West Virginia|Texas Tech|||SCHEDULED|TBD||||||||13
+10|2026-11-07|Western Kentucky|Middle Tennessee|||SCHEDULED|3:30 PM||||||ESPN+||
+10|2026-11-07|Wyoming|UNLV|||SCHEDULED|10:30 PM||||||CBSSN||
+11|2026-11-10|Kent State|Bowling Green|||SCHEDULED|7:00 PM||||||||
+11|2026-11-10|Ohio|Miami (OH)|||SCHEDULED|7:00 PM||||||||
+11|2026-11-10|Western Michigan|Akron|||SCHEDULED|7:00 PM||||||||
+11|2026-11-11|Buffalo|Ball State|||SCHEDULED|TBD||||||||
+11|2026-11-11|Massachusetts|Toledo|||SCHEDULED|TBD||||||||
+11|2026-11-11|Sacramento State|Central Michigan|||SCHEDULED|TBD||||||||
+11|2026-11-12|Louisiana|UL Monroe|||SCHEDULED|9:00 PM||||||ESPN2||
+11|2026-11-12|Memphis|South Florida|||SCHEDULED|8:00 PM||||||ESPN||
+11|2026-11-13|Florida State|Pittsburgh|||SCHEDULED|7:00 PM||||||ESPN||
+11|2026-11-13|Houston|Colorado|||SCHEDULED|10:15 PM||||||ESPN|18|
+11|2026-11-13|Illinois|UCLA|||SCHEDULED|9:00 PM||||||Fox||7
+11|2026-11-14|Alabama|Vanderbilt|||SCHEDULED|TBD|||||||10|
+11|2026-11-14|App State|Marshall|||SCHEDULED|TBD||||||||
+11|2026-11-14|Arizona State|UCF|||SCHEDULED|TBD||||||||
+11|2026-11-14|Arkansas State|Coastal Carolina|||SCHEDULED|TBD||||||||
+11|2026-11-14|Auburn|Mississippi State|||SCHEDULED|TBD||||||||
+11|2026-11-14|Baylor|BYU|||SCHEDULED|TBD||||||||8
+11|2026-11-14|Boston College|Notre Dame|||SCHEDULED|3:30 PM||||||NBC||5
+11|2026-11-14|California|Virginia|||SCHEDULED|TBD||||||||
+11|2026-11-14|Cincinnati|Iowa State|||SCHEDULED|TBD||||||||
+11|2026-11-14|Colorado State|Washington State|||SCHEDULED|10:30 PM||||||CBSSN||
+11|2026-11-14|Duke|Miami|||SCHEDULED|TBD||||||||1
+11|2026-11-14|East Carolina|Charlotte|||SCHEDULED|TBD||||||||
+11|2026-11-14|Florida Atlantic|Tulsa|||SCHEDULED|TBD||||||||
+11|2026-11-14|Florida International|Delaware|||SCHEDULED|3:00 PM||||||||
+11|2026-11-14|Florida|Kentucky|||SCHEDULED|TBD|||||||17|9
+11|2026-11-14|Fresno State|Texas State|||SCHEDULED|4:00 PM||||||CW||
+11|2026-11-14|Georgia Southern|Georgia State|||SCHEDULED|TBD||||||||
+11|2026-11-14|Georgia Tech|Clemson|||SCHEDULED|TBD||||||||
+11|2026-11-14|Jacksonville State|Western Kentucky|||SCHEDULED|3:30 PM||||||||
+11|2026-11-14|James Madison|UConn|||SCHEDULED|12:00 PM||||||CBSSN||
+11|2026-11-14|Kansas State|TCU|||SCHEDULED|TBD||||||||
+11|2026-11-14|Kansas|West Virginia|||SCHEDULED|TBD||||||||
+11|2026-11-14|Kennesaw State|Sam Houston|||SCHEDULED|2:00 PM||||||||
+11|2026-11-14|Louisville|North Carolina|||SCHEDULED|TBD||||||||
+11|2026-11-14|Michigan|Oregon|||SCHEDULED|TBD||||||||
+11|2026-11-14|Middle Tennessee|Liberty|||SCHEDULED|3:30 PM||||||CBSSN||
+11|2026-11-14|Minnesota|Penn State|||SCHEDULED|TBD||||||||
+11|2026-11-14|Missouri|Georgia|||SCHEDULED|TBD|||||||23|3
+11|2026-11-14|Nebraska|Rutgers|||SCHEDULED|TBD||||||||
+11|2026-11-14|Nevada|Northern Illinois|||SCHEDULED|TBD||||||MW+||
+11|2026-11-14|New Mexico State|Missouri State|||SCHEDULED|3:00 PM||||||||
+11|2026-11-14|North Dakota State|Hawai'i|||SCHEDULED|11:00 PM||||||CW||
+11|2026-11-14|North Texas|UTSA|||SCHEDULED|TBD||||||||
+11|2026-11-14|Northwestern|Ohio State|||SCHEDULED|TBD|||||||20|2
+11|2026-11-14|Ole Miss|Oklahoma|||SCHEDULED|TBD|||||||12|
+11|2026-11-14|Oregon State|Boise State|||SCHEDULED|6:00 PM||||||USA Net||20
+11|2026-11-14|Purdue|Iowa|||SCHEDULED|TBD||||||||
+11|2026-11-14|San José State|Air Force|||SCHEDULED|7:00 PM||||||CBSSN||
+11|2026-11-14|South Carolina|Arkansas|||SCHEDULED|TBD||||||||
+11|2026-11-14|Southern Miss|Louisiana Tech|||SCHEDULED|TBD||||||||
+11|2026-11-14|Stanford|Virginia Tech|||SCHEDULED|TBD||||||||
+11|2026-11-14|Syracuse|NC State|||SCHEDULED|TBD||||||||
+11|2026-11-14|Tennessee|Texas A&M|||SCHEDULED|TBD|||||||16|
+11|2026-11-14|Texas Tech|Oklahoma State|||SCHEDULED|TBD|||||||13|24
+11|2026-11-14|Texas|LSU|||SCHEDULED|TBD|||||||11|15
+11|2026-11-14|Troy|South Alabama|||SCHEDULED|TBD||||||||
+11|2026-11-14|Tulane|Rice|||SCHEDULED|TBD||||||||
+11|2026-11-14|UAB|Temple|||SCHEDULED|TBD||||||||
+11|2026-11-14|UNLV|New Mexico|||SCHEDULED|7:30 PM||||||CW||
+11|2026-11-14|USC|Indiana|||SCHEDULED|TBD||||||||4
+11|2026-11-14|Utah State|San Diego State|||SCHEDULED|9:30 PM||||||USA Net||
+11|2026-11-14|Utah|Arizona|||SCHEDULED|TBD|||||||6|22
+11|2026-11-14|Wake Forest|SMU|||SCHEDULED|TBD|||||||14|19
+11|2026-11-14|Washington|Michigan State|||SCHEDULED|TBD||||||||
+11|2026-11-14|Wisconsin|Maryland|||SCHEDULED|TBD|||||||25|
+11|2026-11-14|Wyoming|UTEP|||SCHEDULED|TBD||||||||
+12|2026-11-17|Ball State|Ohio|||SCHEDULED|7:00 PM||||||||
+12|2026-11-17|Eastern Michigan|Western Michigan|||SCHEDULED|7:00 PM||||||||
+12|2026-11-17|Miami (OH)|Kent State|||SCHEDULED|7:00 PM||||||||
+8|2026-10-24|Weber State|Montana State|33|38|FINAL|3:00 PM||-25.5|64.5|1180|-4000|ESPN+/Scripps Sports||
+9|2026-10-31|UC Davis|Weber State|||SCHEDULED|3:00 PM||||||ESPN+||
+10|2026-11-07|Merrimack|Wake Forest|||SCHEDULED|3:30 PM||||||ACC Network||14
+11|2026-11-14|Weber State|Northern Arizona|||SCHEDULED|4:00 PM||||||ESPN+||
+</script>
+<script type="text/plain" id="d-cfblogos">Air Force|2005
+Akron|2006
+Alabama|333
+App State|2026
+Arizona|12
+Arizona State|9
+Arkansas|8
+Arkansas State|2032
+Army|349
+Auburn|2
+BYU|252
+Ball State|2050
+Baylor|239
+Boise State|68
+Boston College|103
+Bowling Green|189
+Buffalo|2084
+California|25
+Central Michigan|2117
+Charlotte|2429
+Cincinnati|2132
+Clemson|228
+Coastal Carolina|324
+Colorado|38
+Colorado State|36
+Delaware|48
+Duke|150
+East Carolina|151
+Eastern Michigan|2199
+Florida|57
+Florida Atlantic|2226
+Florida International|2229
+Florida State|52
+Fresno State|278
+Georgia|61
+Georgia Southern|290
+Georgia State|2247
+Georgia Tech|59
+Hawai'i|62
+Houston|248
+Illinois|356
+Indiana|84
+Iowa|2294
+Iowa State|66
+Jacksonville State|55
+James Madison|256
+Kansas|2305
+Kansas State|2306
+Kennesaw State|338
+Kent State|2309
+Kentucky|96
+LSU|99
+Liberty|2335
+Louisiana|309
+Louisiana Tech|2348
+Louisville|97
+Marshall|276
+Maryland|120
+Massachusetts|113
+Memphis|235
+Merrimack|2771
+Miami|2390
+Miami (OH)|193
+Michigan|130
+Michigan State|127
+Middle Tennessee|2393
+Minnesota|135
+Mississippi State|344
+Missouri|142
+Missouri State|2623
+Montana State|147
+NC State|152
+Navy|2426
+Nebraska|158
+Nevada|2440
+New Mexico|167
+New Mexico State|166
+North Carolina|153
+North Dakota State|2449
+North Texas|249
+Northern Arizona|2464
+Northern Illinois|2459
+Northwestern|77
+Notre Dame|87
+Ohio|195
+Ohio State|194
+Oklahoma|201
+Oklahoma State|197
+Old Dominion|295
+Ole Miss|145
+Oregon|2483
+Oregon State|204
+Penn State|213
+Pittsburgh|221
+Purdue|2509
+Rice|242
+Rutgers|164
+SMU|2567
+Sacramento State|16
+Sam Houston|2534
+San Diego State|21
+San José State|23
+South Alabama|6
+South Carolina|2579
+South Florida|58
+Southern Miss|2572
+Stanford|24
+Syracuse|183
+TCU|2628
+Temple|218
+Tennessee|2633
+Texas|251
+Texas A&M|245
+Texas State|326
+Texas Tech|2641
+Toledo|2649
+Troy|2653
+Tulane|2655
+Tulsa|202
+UAB|5
+UC Davis|302
+UCF|2116
+UCLA|26
+UConn|41
+UL Monroe|2433
+UNLV|2439
+USC|30
+UTEP|2638
+UTSA|2636
+Utah|254
+Utah State|328
+Vanderbilt|238
+Virginia|258
+Virginia Tech|259
+Wake Forest|154
+Washington|264
+Washington State|265
+Weber State|2692
+West Virginia|277
+Western Kentucky|98
+Western Michigan|2711
+Wisconsin|275
+Wyoming|2751
+</script>
+<script type="text/plain" id="d-nfl">2|7|2026-10-25|9:30 AM|401873011|PIT|NO|16|10|FINAL|N|NFL Net|3|43.5
+2|7|2026-10-25|1:00 PM|401873017|SF|ATL|20|29|FINAL||Fox|2.5|50.5
+2|7|2026-10-25|1:00 PM|401873013|CLE|TEN|27|24|FINAL||CBS|1.5|36.5
+2|7|2026-10-25|1:00 PM|401873014|IND|MIN|10|16|FINAL||CBS|-6.5|41.5
+2|7|2026-10-25|1:00 PM|401873015|MIA|NYJ|28|25|FINAL||CBS|-4.5|39.5
+2|7|2026-10-25|1:00 PM|401873018|TB|CAR|43|13|FINAL||Fox|-3|44.5
+2|7|2026-10-25|1:00 PM|401873012|CIN|BAL|35|13|FINAL||CBS|3|46.5
+2|7|2026-10-25|1:00 PM|401873016|NYG|HOU|27|21|FINAL||Fox|-10.5|42.5
+2|7|2026-10-25|4:05 PM|401873019|DEN|ARI|30|16|FINAL||CBS|4.5|43.5
+2|7|2026-10-25|4:25 PM|401873020|GB|DET|17|20|FINAL||Fox|-3.5|55.5
+2|7|2026-10-25|4:25 PM|401873021|LAR|LV|35|21|FINAL||Fox|3.5|48.5
+2|7|2026-10-25|8:20 PM|401873022|KC|SEA|3|20|FINAL||NBC|-3|42.5
+2|7|2026-10-26|8:15 PM|401873009|DAL|PHI|38|21|FINAL||ESPN/ABC/Disney+/ESPN/ABC/Disney+|4.5|43.5
+2|8|2026-10-29|8:15 PM|401873023|CAR|GB|||SCHEDULED||Prime Video|-3.5|47.5
+2|8|2026-11-01|1:00 PM|401873026|BAL|BUF|||SCHEDULED||CBS|-3.5|54.5
+2|8|2026-11-01|1:00 PM|401873031|TEN|CIN|||SCHEDULED||CBS|-10|46.5
+2|8|2026-11-01|1:00 PM|401873024|ARI|DAL|||SCHEDULED||Fox|-6.5|54.5
+2|8|2026-11-01|1:00 PM|401873030|MIN|DET|||SCHEDULED||Fox|-3|46.5
+2|8|2026-11-01|1:00 PM|401873029|LV|NYJ|||SCHEDULED||Fox|-1.5|45.5
+2|8|2026-11-01|1:00 PM|401873027|CLE|PIT|||SCHEDULED||CBS|-3.5|39.5
+2|8|2026-11-01|1:00 PM|401873025|ATL|TB|||SCHEDULED||Fox|-2.5|45.5
+2|8|2026-11-01|1:00 PM|401873028|IND|JAX|||SCHEDULED||CBS|-9.5|46.5
+2|8|2026-11-01|4:05 PM|401873032|LAC|LAR|||SCHEDULED||Fox|-6.5|45.5
+2|8|2026-11-01|4:25 PM|401873033|KC|DEN|||SCHEDULED||CBS|1.5|41.5
+2|8|2026-11-01|4:25 PM|401873034|NE|MIA|||SCHEDULED||CBS|7|44.5
+2|8|2026-11-01|8:20 PM|401873035|PHI|WSH|||SCHEDULED||NBC|-5.5|40.5
+2|8|2026-11-02|8:15 PM|401873036|CHI|SEA|||SCHEDULED||ESPN|-3|46.5
+2|9|2026-11-05|8:15 PM|401873037|JAX|BAL|||SCHEDULED||Prime Video|-2.5|48.5
+2|9|2026-11-08|9:30 AM|401873038|CIN|ATL|||SCHEDULED|N|NFL Net|3|49.5
+2|9|2026-11-08|1:00 PM|401873040|DAL|IND|||SCHEDULED||Fox|3.5|51.5
+2|9|2026-11-08|1:00 PM|401873045|NYJ|KC|||SCHEDULED||CBS|-9.5|43.5
+2|9|2026-11-08|1:00 PM|401873042|DET|MIA|||SCHEDULED||Fox|7|47.5
+2|9|2026-11-08|1:00 PM|401873039|CLE|NO|||SCHEDULED||CBS|-2.5|43.5
+2|9|2026-11-08|1:00 PM|401873044|NYG|PHI|||SCHEDULED||Fox|1.5|40.5
+2|9|2026-11-08|1:00 PM|401873043|LAR|WSH|||SCHEDULED||Fox|5.5|48.5
+2|9|2026-11-08|1:00 PM|401873041|DEN|CAR|||SCHEDULED||CBS|2.5|44.5
+2|9|2026-11-08|4:05 PM|401873046|HOU|LAC|||SCHEDULED||CBS|3|42.5
+2|9|2026-11-08|4:25 PM|401873049|GB|NE|||SCHEDULED||Fox|-3|47.5
+2|9|2026-11-08|4:25 PM|401873047|LV|SF|||SCHEDULED||Fox|-9.5|48.5
+2|9|2026-11-08|4:25 PM|401873048|ARI|SEA|||SCHEDULED||Fox|-10.5|44.5
+2|9|2026-11-08|8:20 PM|401873050|TB|CHI|||SCHEDULED||NBC|-6|47.5
+2|9|2026-11-09|8:15 PM|401873051|BUF|MIN|||SCHEDULED||ESPN/ABC/ESPN/ABC|2.5|47.5
+2|10|2026-11-12|8:15 PM|401873052|WSH|NYG|||SCHEDULED||Prime Video||
+2|10|2026-11-15|9:30 AM|401873053|NE|DET|||SCHEDULED|N|Fox||
+2|10|2026-11-15|1:00 PM|401873058|KC|ATL|||SCHEDULED||CBS||
+2|10|2026-11-15|1:00 PM|401873056|HOU|CLE|||SCHEDULED||Fox||
+2|10|2026-11-15|1:00 PM|401873060|MIN|GB|||SCHEDULED||Fox||
+2|10|2026-11-15|1:00 PM|401873057|JAX|TEN|||SCHEDULED||Fox||
+2|10|2026-11-15|1:00 PM|401873059|MIA|IND|||SCHEDULED||CBS||
+2|10|2026-11-15|1:00 PM|401873055|CAR|NO|||SCHEDULED||Fox||
+2|10|2026-11-15|1:00 PM|401873054|BUF|NYJ|||SCHEDULED||CBS||
+2|10|2026-11-15|4:05 PM|401873062|SEA|LV|||SCHEDULED||CBS||
+2|10|2026-11-15|4:05 PM|401873061|LAR|ARI|||SCHEDULED||CBS||
+2|10|2026-11-15|4:25 PM|401873063|SF|DAL|||SCHEDULED||Fox||
+2|10|2026-11-15|8:20 PM|401873064|PIT|CIN|||SCHEDULED||NBC||
+2|10|2026-11-16|8:15 PM|401873065|LAC|BAL|||SCHEDULED||ESPN||
+</script>
+<script type="text/plain" id="d-nflweeks">2|1|Week 1|Week 1|2026-09-06|2026-09-15
+2|2|Week 2|Week 2|2026-09-16|2026-09-22
+2|3|Week 3|Week 3|2026-09-23|2026-09-29
+2|4|Week 4|Week 4|2026-09-30|2026-10-06
+2|5|Week 5|Week 5|2026-10-07|2026-10-13
+2|6|Week 6|Week 6|2026-10-14|2026-10-20
+2|7|Week 7|Week 7|2026-10-21|2026-10-27
+2|8|Week 8|Week 8|2026-10-28|2026-11-03
+2|9|Week 9|Week 9|2026-11-04|2026-11-10
+2|10|Week 10|Week 10|2026-11-11|2026-11-17
+2|11|Week 11|Week 11|2026-11-18|2026-11-24
+2|12|Week 12|Week 12|2026-11-25|2026-12-01
+2|13|Week 13|Week 13|2026-12-02|2026-12-08
+2|14|Week 14|Week 14|2026-12-09|2026-12-15
+2|15|Week 15|Week 15|2026-12-16|2026-12-22
+2|16|Week 16|Week 16|2026-12-23|2026-12-29
+2|17|Week 17|Week 17|2026-12-30|2027-01-05
+2|18|Week 18|Week 18|2027-01-06|2027-01-12
+3|1|Wild Card|Wild Card|2027-01-13|2027-01-19
+3|2|Divisional Round|Div Rd|2027-01-20|2027-01-26
+3|3|Conference Championship|Conf Champ|2027-01-27|2027-02-02
+3|4|Super Bowl|Super Bowl|2027-02-03|2027-02-15
+</script>
+<script type="text/plain" id="d-nba">2|2026-10-24|6:00 PM|401909853|MIA|CHA|110|115|FINAL||NBA League Pass
+2|2026-10-24|7:30 PM|401909854|BKN|CLE|121|125|FINAL||
+2|2026-10-24|7:30 PM|401909855|MIL|PHI|116|127|FINAL||NBA TV
+2|2026-10-24|8:30 PM|401909856|HOU|ATL|121|114|FINAL||NBA League Pass
+2|2026-10-24|8:00 PM|401909857|WSH|CHI|124|120|FINAL||
+2|2026-10-24|8:00 PM|401909858|SA|DAL|122|106|FINAL||
+2|2026-10-24|9:00 PM|401909859|NO|DEN|135|141|FINAL||
+2|2026-10-24|10:00 PM|401909860|GS|PHX|122|131|FINAL||NBA TV
+2|2026-10-25|5:00 PM|401909861|LAL|UTAH|132|123|FINAL||
+2|2026-10-25|6:00 PM|401909862|IND|BKN|136|109|FINAL||
+2|2026-10-25|7:00 PM|401909863|ORL|NY|111|102|FINAL||NBA League Pass
+2|2026-10-25|7:00 PM|401909864|TOR|MIN|94|117|FINAL||NBA TV
+2|2026-10-25|7:00 PM|401909865|LAC|OKC|101|108|FINAL||
+2|2026-10-25|7:30 PM|401909866|DET|PHI|106|93|FINAL||NBA League Pass
+2|2026-10-25|9:00 PM|401909867|MEM|SAC|123|112|FINAL||
+2|2026-10-26|7:00 PM|401909868|WSH|CHA|103|110|FINAL||
+2|2026-10-26|7:00 PM|401909869|MIN|CLE|125|127|FINAL||
+2|2026-10-26|7:30 PM|401909870|CHI|BOS|99|134|FINAL||NBA League Pass
+2|2026-10-26|7:30 PM|401909871|DAL|MIA|113|109|FINAL||NBA TV
+2|2026-10-26|8:00 PM|401909872|IND|MIL|102|110|FINAL||
+2|2026-10-26|8:00 PM|401909873|PHX|OKC|114|125|FINAL||
+2|2026-10-26|8:30 PM|401909874|ATL|HOU|110|120|FINAL||NBA League Pass
+2|2026-10-26|9:00 PM|401909875|MEM|UTAH|110|105|FINAL||
+2|2026-10-26|10:00 PM|401909876|GS|DEN|134|114|FINAL||NBCSN
+2|2026-10-27|7:30 PM|401909877|BKN|BOS|||SCHEDULED||
+2|2026-10-27|8:00 PM|401909878|DET|NY|||SCHEDULED||NBC
+2|2026-10-27|8:00 PM|401909879|SAC|SA|||SCHEDULED||NBA League Pass
+2|2026-10-27|11:00 PM|401909880|POR|LAL|||SCHEDULED||Peacock/NBC
+2|2026-10-28|7:00 PM|401909881|MIA|ATL|||SCHEDULED||NBA League Pass
+2|2026-10-28|7:00 PM|401909882|WSH|CLE|||SCHEDULED||
+2|2026-10-28|7:00 PM|401909883|CHA|DET|||SCHEDULED||NBA League Pass
+2|2026-10-28|7:00 PM|401909884|PHI|IND|||SCHEDULED||ESPN
+2|2026-10-28|7:30 PM|401909885|ORL|TOR|||SCHEDULED||NBA League Pass
+2|2026-10-28|8:00 PM|401909886|NY|CHI|||SCHEDULED||NBA League Pass
+2|2026-10-28|8:00 PM|401909887|HOU|MIL|||SCHEDULED||
+2|2026-10-28|8:00 PM|401909888|GS|MIN|||SCHEDULED||NBA League Pass
+2|2026-10-28|8:00 PM|401909889|DEN|NO|||SCHEDULED||
+2|2026-10-28|9:00 PM|401909890|SA|UTAH|||SCHEDULED||
+2|2026-10-28|9:30 PM|401909891|OKC|DAL|||SCHEDULED||ESPN
+2|2026-10-28|10:30 PM|401909892|LAL|LAC|||SCHEDULED||
+2|2026-10-29|8:00 PM|401909893|CLE|ATL|||SCHEDULED||NBA TV
+2|2026-10-29|8:00 PM|401909894|SAC|NO|||SCHEDULED||
+2|2026-10-29|10:00 PM|401909895|MEM|POR|||SCHEDULED||
+2|2026-10-30|7:00 PM|401909277|CHA|WSH|||SCHEDULED||
+2|2026-10-30|7:30 PM|401909278|CHI|BOS|||SCHEDULED||NBA League Pass
+2|2026-10-30|7:30 PM|401909279|DET|BKN|||SCHEDULED||
+2|2026-10-30|7:30 PM|401909280|NY|PHI|||SCHEDULED||Prime Video
+2|2026-10-30|7:30 PM|401909281|ORL|TOR|||SCHEDULED||NBA League Pass
+2|2026-10-30|8:00 PM|401909282|IND|MIA|||SCHEDULED||
+2|2026-10-30|8:00 PM|401909283|HOU|DAL|||SCHEDULED||
+2|2026-10-30|8:00 PM|401909284|LAC|MIN|||SCHEDULED||
+2|2026-10-30|10:00 PM|401909285|LAL|GS|||SCHEDULED||Prime Video
+2|2026-10-30|10:00 PM|401909286|DEN|PHX|||SCHEDULED||
+2|2026-10-31|3:00 PM|401909896|POR|UTAH|||SCHEDULED||
+2|2026-10-31|6:00 PM|401909897|PHI|CHA|||SCHEDULED||NBA TV
+2|2026-10-31|7:00 PM|401909898|ATL|NO|||SCHEDULED||
+2|2026-10-31|8:00 PM|401909899|SAC|MEM|||SCHEDULED||
+2|2026-10-31|8:00 PM|401909900|CLE|MIL|||SCHEDULED||
+2|2026-10-31|8:00 PM|401909901|MIN|SA|||SCHEDULED||
+2|2026-10-31|8:30 PM|401909902|OKC|HOU|||SCHEDULED||NBA TV
+2|2026-11-01|3:30 PM|401909903|BOS|ORL|||SCHEDULED||NBA League Pass
+2|2026-11-01|5:00 PM|401909904|BKN|IND|||SCHEDULED||
+2|2026-11-01|8:30 PM|401909905|LAC|GS|||SCHEDULED||
+2|2026-11-01|9:00 PM|401909906|TOR|LAL|||SCHEDULED||
+2|2026-11-02|7:00 PM|401909907|OKC|CLE|||SCHEDULED||NBCSN
+2|2026-11-02|7:30 PM|401909908|DET|CHA|||SCHEDULED||NBA League Pass
+2|2026-11-02|7:30 PM|401909909|ATL|IND|||SCHEDULED||
+2|2026-11-02|7:30 PM|401909910|BKN|NY|||SCHEDULED||
+2|2026-11-02|7:30 PM|401909911|WSH|ORL|||SCHEDULED||
+2|2026-11-02|7:30 PM|401909912|CHI|PHI|||SCHEDULED||NBA League Pass
+2|2026-11-02|8:00 PM|401909913|SAC|DAL|||SCHEDULED||
+2|2026-11-02|8:00 PM|401909914|NO|MEM|||SCHEDULED||
+2|2026-11-02|8:00 PM|401909915|MIL|MIN|||SCHEDULED||
+2|2026-11-02|8:30 PM|401909916|BOS|HOU|||SCHEDULED||NBA League Pass
+2|2026-11-02|8:30 PM|401909917|UTAH|SA|||SCHEDULED||
+2|2026-11-02|9:00 PM|401909918|POR|DEN|||SCHEDULED||
+2|2026-11-02|10:00 PM|401909919|PHX|GS|||SCHEDULED||
+2|2026-11-02|10:00 PM|401909920|TOR|LAC|||SCHEDULED||
+2|2026-11-02|10:00 PM|401909921|MIA|LAL|||SCHEDULED||
+2|2026-11-04|7:00 PM|401909922|PHI|DET|||SCHEDULED||ESPN
+2|2026-11-04|7:00 PM|401909923|ATL|WSH|||SCHEDULED||
+2|2026-11-04|7:30 PM|401909924|MIL|BOS|||SCHEDULED||
+2|2026-11-04|7:30 PM|401909925|CHA|BKN|||SCHEDULED||
+2|2026-11-04|7:30 PM|401909926|CHI|NY|||SCHEDULED||
+2|2026-11-04|8:00 PM|401909927|IND|MEM|||SCHEDULED||
+2|2026-11-04|8:00 PM|401909928|UTAH|NO|||SCHEDULED||
+2|2026-11-04|8:00 PM|401909929|CLE|OKC|||SCHEDULED||
+2|2026-11-04|8:30 PM|401909930|MIN|HOU|||SCHEDULED||
+2|2026-11-04|9:00 PM|401909931|TOR|DEN|||SCHEDULED||
+2|2026-11-04|9:00 PM|401909932|POR|PHX|||SCHEDULED||
+2|2026-11-04|9:30 PM|401909933|DAL|SA|||SCHEDULED||ESPN
+2|2026-11-04|10:00 PM|401909934|LAL|SAC|||SCHEDULED||
+2|2026-11-04|10:30 PM|401909935|MIA|LAC|||SCHEDULED||
+2|2026-11-05|9:00 PM|401909936|ORL|PHX|||SCHEDULED||
+2|2026-11-05|10:00 PM|401909937|MIA|GS|||SCHEDULED||NBA TV
+2|2026-11-06|7:00 PM|401909287|WSH|ATL|||SCHEDULED||
+2|2026-11-06|7:00 PM|401909288|BOS|CHA|||SCHEDULED||
+2|2026-11-06|7:30 PM|401909289|PHI|CLE|||SCHEDULED||Prime Video
+2|2026-11-06|8:00 PM|401909290|UTAH|DAL|||SCHEDULED||
+2|2026-11-06|8:00 PM|401909291|OKC|MEM|||SCHEDULED||
+2|2026-11-06|8:00 PM|401909292|TOR|MIL|||SCHEDULED||
+2|2026-11-06|8:00 PM|401909293|MIN|NO|||SCHEDULED||
+2|2026-11-06|10:00 PM|401909294|POR|LAL|||SCHEDULED||Prime Video
+2|2026-11-06|10:00 PM|401909295|SA|SAC|||SCHEDULED||
+2|2026-11-07|5:00 PM|401909938|DEN|IND|||SCHEDULED|N|NBA TV
+2|2026-11-07|7:30 PM|401909939|BKN|ATL|||SCHEDULED||
+2|2026-11-07|8:00 PM|401909940|NY|CLE|||SCHEDULED||NBA TV
+2|2026-11-07|8:00 PM|401909941|WSH|OKC|||SCHEDULED||
+2|2026-11-07|8:30 PM|401909942|ORL|GS|||SCHEDULED||
+2|2026-11-07|9:00 PM|401909943|HOU|PHX|||SCHEDULED||
+2|2026-11-07|10:00 PM|401909944|SA|POR|||SCHEDULED||
+2|2026-11-08|3:30 PM|401909945|PHI|CHI|||SCHEDULED||
+2|2026-11-08|6:00 PM|401909946|LAL|DET|||SCHEDULED||NBA TV
+2|2026-11-08|7:00 PM|401909947|UTAH|MIN|||SCHEDULED||
+2|2026-11-08|7:30 PM|401909948|BKN|DAL|||SCHEDULED||
+2|2026-11-08|8:00 PM|401909949|BOS|MIL|||SCHEDULED||
+2|2026-11-08|9:00 PM|401909950|NO|LAC|||SCHEDULED||
+2|2026-11-08|9:00 PM|401909951|MIA|SAC|||SCHEDULED||
+2|2026-11-09|7:00 PM|401909952|LAL|ATL|||SCHEDULED||
+2|2026-11-09|7:00 PM|401909953|CLE|CHA|||SCHEDULED||
+2|2026-11-09|7:00 PM|401909954|WSH|DET|||SCHEDULED||NBCSN
+2|2026-11-09|7:30 PM|401909955|MEM|TOR|||SCHEDULED||
+2|2026-11-09|8:00 PM|401909956|IND|DAL|||SCHEDULED||
+2|2026-11-09|8:30 PM|401909957|DEN|HOU|||SCHEDULED||
+2|2026-11-09|9:00 PM|401909958|SA|PHX|||SCHEDULED||
+2|2026-11-09|10:00 PM|401909959|NO|GS|||SCHEDULED||NBA TV
+2|2026-11-10|7:30 PM|401909960|MIL|NY|||SCHEDULED||
+2|2026-11-10|8:00 PM|401909961|BOS|PHI|||SCHEDULED||NBC
+2|2026-11-10|9:00 PM|401909962|LAC|PHX|||SCHEDULED||
+2|2026-11-10|9:00 PM|401909963|MIA|UTAH|||SCHEDULED||
+2|2026-11-10|10:00 PM|401909964|ORL|SAC|||SCHEDULED||
+2|2026-11-10|11:00 PM|401909965|OKC|POR|||SCHEDULED||NBC
+2|2026-11-11|7:00 PM|401909966|WSH|IND|||SCHEDULED||
+2|2026-11-11|7:00 PM|401909967|CLE|NY|||SCHEDULED||ESPN
+2|2026-11-11|7:00 PM|401909968|BOS|TOR|||SCHEDULED||
+2|2026-11-11|8:00 PM|401909969|SA|CHI|||SCHEDULED||
+2|2026-11-11|8:00 PM|401909970|DEN|MEM|||SCHEDULED||
+2|2026-11-11|8:00 PM|401909971|LAL|MIL|||SCHEDULED||
+2|2026-11-11|8:00 PM|401909972|BKN|NO|||SCHEDULED||
+2|2026-11-11|9:00 PM|401909973|ORL|UTAH|||SCHEDULED||
+2|2026-11-11|9:30 PM|401909974|GS|HOU|||SCHEDULED||ESPN
+2|2026-11-11|10:00 PM|401909975|OKC|POR|||SCHEDULED||
+2|2026-11-12|7:00 PM|401909976|TOR|PHI|||SCHEDULED||
+2|2026-11-12|7:00 PM|401909977|DET|WSH|||SCHEDULED||
+2|2026-11-12|8:00 PM|401909978|DAL|MIN|||SCHEDULED||NBA TV
+2|2026-11-12|9:00 PM|401909979|CHA|PHX|||SCHEDULED||
+2|2026-11-13|7:00 PM|401909296|NY|IND|||SCHEDULED||Prime Video
+2|2026-11-13|7:00 PM|401909297|MIL|ORL|||SCHEDULED||
+2|2026-11-13|8:00 PM|401909298|CLE|MIA|||SCHEDULED||
+2|2026-11-13|8:00 PM|401909299|ATL|CHI|||SCHEDULED||
+2|2026-11-13|8:00 PM|401909300|MEM|NO|||SCHEDULED||
+2|2026-11-13|8:30 PM|401909301|UTAH|HOU|||SCHEDULED||
+2|2026-11-13|9:30 PM|401909302|GS|SA|||SCHEDULED||Prime Video
+2|2026-11-13|10:00 PM|401909303|POR|SAC|||SCHEDULED||
+2|2026-11-13|10:30 PM|401909304|OKC|LAC|||SCHEDULED||
+2|2026-11-14|7:00 PM|401909980|DEN|NO|||SCHEDULED||
+2|2026-11-14|7:30 PM|401909981|DAL|CLE|||SCHEDULED||
+2|2026-11-14|8:00 PM|401909982|DET|MIA|||SCHEDULED||NBA TV
+2|2026-11-14|8:00 PM|401909983|BKN|MEM|||SCHEDULED||
+2|2026-11-14|8:00 PM|401909984|CHI|MIN|||SCHEDULED||
+2|2026-11-15|1:00 PM|401909985|IND|PHI|||SCHEDULED||
+2|2026-11-15|4:00 PM|401909986|LAL|PHX|||SCHEDULED||
+2|2026-11-15|4:30 PM|401909987|CHA|LAC|||SCHEDULED||
+2|2026-11-15|5:00 PM|401909988|SA|UTAH|||SCHEDULED||
+2|2026-11-15|6:00 PM|401909989|DAL|BOS|||SCHEDULED||
+2|2026-11-15|6:00 PM|401909990|NY|TOR|||SCHEDULED||
+2|2026-11-15|7:00 PM|401909991|HOU|WSH|||SCHEDULED||
+2|2026-11-15|8:00 PM|401909992|ATL|MIL|||SCHEDULED||
+2|2026-11-15|9:00 PM|401909993|OKC|SAC|||SCHEDULED||
+2|2026-11-16|7:00 PM|401909994|ORL|BOS|||SCHEDULED||NBCSN
+2|2026-11-16|7:00 PM|401909995|CHI|CLE|||SCHEDULED||
+2|2026-11-16|7:00 PM|401909996|MEM|WSH|||SCHEDULED||
+2|2026-11-16|7:30 PM|401909997|PHI|BKN|||SCHEDULED||
+2|2026-11-16|7:30 PM|401909998|HOU|MIA|||SCHEDULED||
+2|2026-11-16|8:00 PM|401909999|POR|MIN|||SCHEDULED||
+2|2026-11-16|8:00 PM|401910000|GS|NO|||SCHEDULED||
+2|2026-11-16|9:00 PM|401910001|PHX|DEN|||SCHEDULED||
+2|2026-11-17|7:30 PM|401910002|NY|TOR|||SCHEDULED||
+2|2026-11-17|8:00 PM|401910003|POR|MIN|||SCHEDULED||
+2|2026-11-17|8:00 PM|401910004|DET|SA|||SCHEDULED||NBC
+2|2026-11-17|10:00 PM|401910005|CHA|LAL|||SCHEDULED||
+2|2026-11-17|11:00 PM|401910006|UTAH|LAC|||SCHEDULED||NBC
+</script>
+<script type="application/json" id="d-nflteams">{"ARI":{"alt":"#ffffff","color":"#a40227","conf":"NFC","div":"West","full":"Arizona Cardinals","nick":"Cardinals"},"ATL":{"alt":"#000000","color":"#a71930","conf":"NFC","div":"South","full":"Atlanta Falcons","nick":"Falcons"},"BAL":{"alt":"#000000","color":"#29126f","conf":"AFC","div":"North","full":"Baltimore Ravens","nick":"Ravens"},"BUF":{"alt":"#d50a0a","color":"#00338d","conf":"AFC","div":"East","full":"Buffalo Bills","nick":"Bills"},"CAR":{"alt":"#000000","color":"#0085ca","conf":"NFC","div":"South","full":"Carolina Panthers","nick":"Panthers"},"CHI":{"alt":"#e64100","color":"#0b1c3a","conf":"NFC","div":"North","full":"Chicago Bears","nick":"Bears"},"CIN":{"alt":"#000000","color":"#fb4f14","conf":"AFC","div":"North","full":"Cincinnati Bengals","nick":"Bengals"},"CLE":{"alt":"#ff3c00","color":"#472a08","conf":"AFC","div":"North","full":"Cleveland Browns","nick":"Browns"},"DAL":{"alt":"#b0b7bc","color":"#002a5c","conf":"NFC","div":"East","full":"Dallas Cowboys","nick":"Cowboys"},"DEN":{"alt":"#fc4c02","color":"#0a2343","conf":"AFC","div":"West","full":"Denver Broncos","nick":"Broncos"},"DET":{"alt":"#bbbbbb","color":"#0076b6","conf":"NFC","div":"North","full":"Detroit Lions","nick":"Lions"},"GB":{"alt":"#ffb612","color":"#204e32","conf":"NFC","div":"North","full":"Green Bay Packers","nick":"Packers"},"HOU":{"alt":"#eb0028","color":"#021018","conf":"AFC","div":"South","full":"Houston Texans","nick":"Texans"},"IND":{"alt":"#ffffff","color":"#003b75","conf":"AFC","div":"South","full":"Indianapolis Colts","nick":"Colts"},"JAX":{"alt":"#d7a22a","color":"#007487","conf":"AFC","div":"South","full":"Jacksonville Jaguars","nick":"Jaguars"},"KC":{"alt":"#ffb612","color":"#e31837","conf":"AFC","div":"West","full":"Kansas City Chiefs","nick":"Chiefs"},"LAC":{"alt":"#ffc20e","color":"#0080c6","conf":"AFC","div":"West","full":"Los Angeles Chargers","nick":"Chargers"},"LAR":{"alt":"#ffd100","color":"#003594","conf":"NFC","div":"West","full":"Los Angeles Rams","nick":"Rams"},"LV":{"alt":"#a5acaf","color":"#000000","conf":"AFC","div":"West","full":"Las Vegas Raiders","nick":"Raiders"},"MIA":{"alt":"#fc4c02","color":"#008e97","conf":"AFC","div":"East","full":"Miami Dolphins","nick":"Dolphins"},"MIN":{"alt":"#ffc62f","color":"#4f2683","conf":"NFC","div":"North","full":"Minnesota Vikings","nick":"Vikings"},"NE":{"alt":"#c60c30","color":"#002a5c","conf":"AFC","div":"East","full":"New England Patriots","nick":"Patriots"},"NO":{"alt":"#000000","color":"#d3bc8d","conf":"NFC","div":"South","full":"New Orleans Saints","nick":"Saints"},"NYG":{"alt":"#c9243f","color":"#003c7f","conf":"NFC","div":"East","full":"New York Giants","nick":"Giants"},"NYJ":{"alt":"#ffffff","color":"#115740","conf":"AFC","div":"East","full":"New York Jets","nick":"Jets"},"PHI":{"alt":"#000000","color":"#06424d","conf":"NFC","div":"East","full":"Philadelphia Eagles","nick":"Eagles"},"PIT":{"alt":"#ffb612","color":"#000000","conf":"AFC","div":"North","full":"Pittsburgh Steelers","nick":"Steelers"},"SEA":{"alt":"#69be28","color":"#002a5c","conf":"NFC","div":"West","full":"Seattle Seahawks","nick":"Seahawks"},"SF":{"alt":"#b3995d","color":"#aa0000","conf":"NFC","div":"West","full":"San Francisco 49ers","nick":"49ers"},"TB":{"alt":"#3e3a35","color":"#bd1c36","conf":"NFC","div":"South","full":"Tampa Bay Buccaneers","nick":"Buccaneers"},"TEN":{"alt":"#001532","color":"#4495d2","conf":"AFC","div":"South","full":"Tennessee Titans","nick":"Titans"},"WSH":{"alt":"#ffb612","color":"#5a1414","conf":"NFC","div":"East","full":"Washington Commanders","nick":"Commanders"}}</script>
+<script type="application/json" id="d-nbateams">{"ATL":{"alt":"#fdb927","color":"#c8102e","conf":"East","div":"Southeast","full":"Atlanta Hawks","nick":"Hawks"},"BKN":{"alt":"#ffffff","color":"#000000","conf":"East","div":"Atlantic","full":"Brooklyn Nets","nick":"Nets"},"BOS":{"alt":"#ffffff","color":"#008348","conf":"East","div":"Atlantic","full":"Boston Celtics","nick":"Celtics"},"CHA":{"alt":"#1d1060","color":"#008ca8","conf":"East","div":"Southeast","full":"Charlotte Hornets","nick":"Hornets"},"CHI":{"alt":"#000000","color":"#ce1141","conf":"East","div":"Central","full":"Chicago Bulls","nick":"Bulls"},"CLE":{"alt":"#bc945c","color":"#860038","conf":"East","div":"Central","full":"Cleveland Cavaliers","nick":"Cavaliers"},"DAL":{"alt":"#bbc4ca","color":"#0064b1","conf":"West","div":"Southwest","full":"Dallas Mavericks","nick":"Mavericks"},"DEN":{"alt":"#fec524","color":"#0e2240","conf":"West","div":"Northwest","full":"Denver Nuggets","nick":"Nuggets"},"DET":{"alt":"#c8102e","color":"#1d428a","conf":"East","div":"Central","full":"Detroit Pistons","nick":"Pistons"},"GS":{"alt":"#1d428a","color":"#fdb927","conf":"West","div":"Pacific","full":"Golden State Warriors","nick":"Warriors"},"HOU":{"alt":"#000000","color":"#ce0e2d","conf":"West","div":"Southwest","full":"Houston Rockets","nick":"Rockets"},"IND":{"alt":"#ffd520","color":"#0c2340","conf":"East","div":"Central","full":"Indiana Pacers","nick":"Pacers"},"LAC":{"alt":"#c8102e","color":"#12173f","conf":"West","div":"Pacific","full":"LA Clippers","nick":"Clippers"},"LAL":{"alt":"#fdb927","color":"#552583","conf":"West","div":"Pacific","full":"Los Angeles Lakers","nick":"Lakers"},"MEM":{"alt":"#12173f","color":"#5d76a9","conf":"West","div":"Southwest","full":"Memphis Grizzlies","nick":"Grizzlies"},"MIA":{"alt":"#000000","color":"#98002e","conf":"East","div":"Southeast","full":"Miami Heat","nick":"Heat"},"MIL":{"alt":"#eee1c6","color":"#00471b","conf":"East","div":"Central","full":"Milwaukee Bucks","nick":"Bucks"},"MIN":{"alt":"#79bc43","color":"#266092","conf":"West","div":"Northwest","full":"Minnesota Timberwolves","nick":"Timberwolves"},"NO":{"alt":"#b4975a","color":"#0a2240","conf":"West","div":"Southwest","full":"New Orleans Pelicans","nick":"Pelicans"},"NY":{"alt":"#f58426","color":"#1d428a","conf":"East","div":"Atlantic","full":"New York Knicks","nick":"Knicks"},"OKC":{"alt":"#ef3b24","color":"#007ac1","conf":"West","div":"Northwest","full":"Oklahoma City Thunder","nick":"Thunder"},"ORL":{"alt":"#9ca0a3","color":"#0150b5","conf":"East","div":"Southeast","full":"Orlando Magic","nick":"Magic"},"PHI":{"alt":"#e01234","color":"#1d428a","conf":"East","div":"Atlantic","full":"Philadelphia 76ers","nick":"76ers"},"PHX":{"alt":"#e56020","color":"#29127a","conf":"West","div":"Pacific","full":"Phoenix Suns","nick":"Suns"},"POR":{"alt":"#000000","color":"#e03a3e","conf":"West","div":"Northwest","full":"Portland Trail Blazers","nick":"Trail Blazers"},"SA":{"alt":"#c4ced4","color":"#000000","conf":"West","div":"Southwest","full":"San Antonio Spurs","nick":"Spurs"},"SAC":{"alt":"#6a7a82","color":"#5a2d81","conf":"West","div":"Pacific","full":"Sacramento Kings","nick":"Kings"},"TOR":{"alt":"#000000","color":"#d91244","conf":"East","div":"Atlantic","full":"Toronto Raptors","nick":"Raptors"},"UTAH":{"alt":"#79a3dc","color":"#4e008e","conf":"West","div":"Northwest","full":"Utah Jazz","nick":"Jazz"},"WSH":{"alt":"#002b5c","color":"#e31837","conf":"East","div":"Southeast","full":"Washington Wizards","nick":"Wizards"}}</script>
+<script type="text/plain" id="d-cfbteams">Boston College|#98002E|#BC9B6A|Eagles|ACC
+California|#003262|#FDB515|Golden Bears|ACC
+Clemson|#F56600|#522D80|Tigers|ACC
+Duke|#003087|#FFFFFF|Blue Devils|ACC
+Florida State|#782F40|#CEB888|Seminoles|ACC
+Georgia Tech|#B3A369|#003057|Yellow Jackets|ACC
+Louisville|#AD0000|#000000|Cardinals|ACC
+Miami|#F47321|#005030|Hurricanes|ACC
+North Carolina|#7BAFD4|#13294B|Tar Heels|ACC
+NC State|#CC0000|#000000|Wolfpack|ACC
+Pittsburgh|#003594|#FFB81C|Panthers|ACC
+SMU|#0033A0|#C8102E|Mustangs|ACC
+Stanford|#8C1515|#FFFFFF|Cardinal|ACC
+Syracuse|#F76900|#000E54|Orange|ACC
+Virginia|#232D4B|#F84C1E|Cavaliers|ACC
+Virginia Tech|#630031|#CF4420|Hokies|ACC
+Wake Forest|#9E7E38|#000000|Demon Deacons|ACC
+Arizona|#CC0033|#003366|Wildcats|Big 12
+Arizona State|#8C1D40|#FFC627|Sun Devils|Big 12
+Baylor|#154734|#FFB81C|Bears|Big 12
+BYU|#0062B8|#FFFFFF|Cougars|Big 12
+Cincinnati|#E00122|#000000|Bearcats|Big 12
+Colorado|#CFB87C|#000000|Buffaloes|Big 12
+Houston|#C8102E|#FFFFFF|Cougars|Big 12
+Iowa State|#C8102E|#F1BE48|Cyclones|Big 12
+Kansas|#0051BA|#E8000D|Jayhawks|Big 12
+Kansas State|#512888|#FFFFFF|Wildcats|Big 12
+Oklahoma State|#FF7300|#000000|Cowboys|Big 12
+TCU|#4D1979|#FFFFFF|Horned Frogs|Big 12
+Texas Tech|#CC0000|#000000|Red Raiders|Big 12
+UCF|#000000|#BA9B37|Knights|Big 12
+Utah|#CC0000|#FFFFFF|Utes|Big 12
+West Virginia|#002855|#EAAA00|Mountaineers|Big 12
+Illinois|#E84A27|#13294B|Fighting Illini|Big Ten
+Indiana|#990000|#FFFFFF|Hoosiers|Big Ten
+Iowa|#FFCD00|#000000|Hawkeyes|Big Ten
+Maryland|#E03A3E|#FFD520|Terrapins|Big Ten
+Michigan|#00274C|#FFCB05|Wolverines|Big Ten
+Michigan State|#18453B|#FFFFFF|Spartans|Big Ten
+Minnesota|#7A0019|#FFCC33|Golden Gophers|Big Ten
+Nebraska|#E41C38|#FFFFFF|Cornhuskers|Big Ten
+Northwestern|#4E2A84|#FFFFFF|Wildcats|Big Ten
+Ohio State|#BB0000|#666666|Buckeyes|Big Ten
+Oregon|#154733|#FEE123|Ducks|Big Ten
+Penn State|#041E42|#FFFFFF|Nittany Lions|Big Ten
+Purdue|#CEB888|#000000|Boilermakers|Big Ten
+Rutgers|#CC0033|#000000|Scarlet Knights|Big Ten
+UCLA|#2D68C4|#F2A900|Bruins|Big Ten
+USC|#990000|#FFC72C|Trojans|Big Ten
+Washington|#4B2E83|#B7A57A|Huskies|Big Ten
+Wisconsin|#C5050C|#FFFFFF|Badgers|Big Ten
+Alabama|#9E1B32|#828A8F|Crimson Tide|SEC
+Arkansas|#9D2235|#FFFFFF|Razorbacks|SEC
+Auburn|#0C2340|#E87722|Tigers|SEC
+Florida|#0021A5|#FA4616|Gators|SEC
+Georgia|#BA0C2F|#000000|Bulldogs|SEC
+Kentucky|#0033A0|#FFFFFF|Wildcats|SEC
+LSU|#461D7C|#FDD023|Tigers|SEC
+Mississippi State|#660000|#FFFFFF|Bulldogs|SEC
+Missouri|#F1B82D|#000000|Tigers|SEC
+Oklahoma|#841617|#FDF9D8|Sooners|SEC
+Ole Miss|#CE1126|#14213D|Rebels|SEC
+South Carolina|#73000A|#000000|Gamecocks|SEC
+Tennessee|#FF8200|#FFFFFF|Volunteers|SEC
+Texas|#BF5700|#FFFFFF|Longhorns|SEC
+Texas A&M|#500000|#FFFFFF|Aggies|SEC
+Vanderbilt|#866D4B|#000000|Commodores|SEC
+Army|#000000|#D4BF91|Black Knights|AAC
+Charlotte|#046A38|#B9975B|49ers|AAC
+East Carolina|#592A8A|#FDC82F|Pirates|AAC
+Florida Atlantic|#003366|#CC0000|Owls|AAC
+Memphis|#003087|#898D8D|Tigers|AAC
+Navy|#00205B|#C5B783|Midshipmen|AAC
+North Texas|#00853E|#000000|Mean Green|AAC
+Rice|#00205B|#C1C6C8|Owls|AAC
+South Florida|#006747|#CFC493|Bulls|AAC
+Temple|#9D2235|#FFFFFF|Owls|AAC
+Tulane|#006747|#418FDE|Green Wave|AAC
+Tulsa|#002D72|#C5B358|Golden Hurricane|AAC
+UAB|#1E6B52|#F4C300|Blazers|AAC
+UTSA|#0C2340|#F15A22|Roadrunners|AAC
+Delaware|#00539F|#FFD200|Fightin' Blue Hens|CUSA
+Jacksonville State|#CC0000|#000000|Gamecocks|CUSA
+Kennesaw State|#FFC423|#000000|Owls|CUSA
+Liberty|#002D62|#C41230|Flames|CUSA
+Middle Tennessee|#0066CC|#FFFFFF|Blue Raiders|CUSA
+Missouri State|#5E0009|#FFFFFF|Bears|CUSA
+New Mexico State|#8C0B42|#FFFFFF|Aggies|CUSA
+Sam Houston|#F56F1A|#FFFFFF|Bearkats|CUSA
+Western Kentucky|#C60C30|#FFFFFF|Hilltoppers|CUSA
+Akron|#041E42|#A89968|Zips|MAC
+Ball State|#BA0C2F|#000000|Cardinals|MAC
+Bowling Green|#FE5000|#4F2C1D|Falcons|MAC
+Buffalo|#005BBB|#FFFFFF|Bulls|MAC
+Central Michigan|#6A0032|#FFC82E|Chippewas|MAC
+Eastern Michigan|#006633|#FFFFFF|Eagles|MAC
+Kent State|#002664|#EAAB00|Golden Flashes|MAC
+Miami (OH)|#B61E2E|#000000|RedHawks|MAC
+Ohio|#00694E|#CDA077|Bobcats|MAC
+Sacramento State|#043927|#C4B581|Hornets|MAC
+Toledo|#15397F|#FFD200|Rockets|MAC
+Western Michigan|#6C4023|#B5A167|Broncos|MAC
+Air Force|#003087|#B2B4B2|Falcons|MW
+Hawai'i|#024731|#FFFFFF|Rainbow Warriors|MW
+Nevada|#003366|#807F84|Wolf Pack|MW
+New Mexico|#BA0C2F|#A7A8AA|Lobos|MW
+North Dakota State|#0A5640|#FFC82E|Bison|MW
+Northern Illinois|#BA0C2F|#000000|Huskies|MW
+San José State|#0055A2|#E5A823|Spartans|MW
+UNLV|#CF0A2C|#666666|Rebels|MW
+UTEP|#FF8200|#041E42|Miners|MW
+Wyoming|#492F24|#FFC425|Cowboys|MW
+Boise State|#0033A0|#D64309|Broncos|Pac-12
+Colorado State|#1E4D2B|#C8C372|Rams|Pac-12
+Fresno State|#DB0032|#002E6D|Bulldogs|Pac-12
+Oregon State|#DC4405|#000000|Beavers|Pac-12
+San Diego State|#A6192E|#000000|Aztecs|Pac-12
+Texas State|#501214|#AC9155|Bobcats|Pac-12
+Utah State|#0F2439|#FFFFFF|Aggies|Pac-12
+Washington State|#981E32|#5E6A71|Cougars|Pac-12
+App State|#222222|#FFCC00|Mountaineers|Sun Belt
+Coastal Carolina|#006F71|#A27752|Chanticleers|Sun Belt
+Georgia Southern|#041E42|#A28D5B|Eagles|Sun Belt
+Georgia State|#0039A6|#C60C30|Panthers|Sun Belt
+James Madison|#450084|#CBB677|Dukes|Sun Belt
+Marshall|#00B140|#000000|Thundering Herd|Sun Belt
+Old Dominion|#003057|#7C878E|Monarchs|Sun Belt
+Arkansas State|#CC092F|#000000|Red Wolves|Sun Belt
+Louisiana|#CE181E|#FFFFFF|Ragin' Cajuns|Sun Belt
+Louisiana Tech|#002F8B|#E31B23|Bulldogs|Sun Belt
+UL Monroe|#800029|#FFC72C|Warhawks|Sun Belt
+South Alabama|#00205B|#BF0D3E|Jaguars|Sun Belt
+Southern Miss|#FFAB00|#000000|Golden Eagles|Sun Belt
+Troy|#8A2432|#C4C6C8|Trojans|Sun Belt
+Notre Dame|#0C2340|#C99700|Fighting Irish|Ind
+UConn|#000E2F|#FFFFFF|Huskies|Ind
+Montana State|#00205c|#bc955c|Bobcats|Big Sky
+UC Davis|#002855|#c3c4c6|Aggies|Big Sky
+Northern Arizona|#003976|#1b3069|Lumberjacks|Big Sky
+Weber State|#18005a|#ebebeb|Wildcats|Big Sky
+Merrimack|#000000|#f2a900|Warriors|FCS Indep.
+</script>
+<script type="application/json" id="d-lvx">{"fbs":["Air Force","Akron","Alabama","App State","Arizona","Arizona State","Arkansas","Arkansas State","Army","Auburn","BYU","Ball State","Baylor","Boise State","Boston College","Bowling Green","Buffalo","California","Central Michigan","Charlotte","Cincinnati","Clemson","Coastal Carolina","Colorado","Colorado State","Delaware","Duke","East Carolina","Eastern Michigan","FIU","Florida","Florida Atlantic","Florida State","Fresno State","Georgia","Georgia Southern","Georgia State","Georgia Tech","Hawai'i","Houston","Illinois","Indiana","Iowa","Iowa State","Jacksonville State","James Madison","Kansas","Kansas State","Kennesaw State","Kent State","Kentucky","LSU","Liberty","Louisiana","Louisiana Tech","Louisville","Marshall","Maryland","Memphis","Miami","Miami (OH)","Michigan","Michigan State","Middle Tennessee","Minnesota","Mississippi State","Missouri","Missouri State","NC State","Navy","Nebraska","Nevada","New Mexico","New Mexico State","North Carolina","North Dakota State","North Texas","Northern Illinois","Northwestern","Notre Dame","Ohio","Ohio State","Oklahoma","Oklahoma State","Old Dominion","Ole Miss","Oregon","Oregon State","Penn State","Pittsburgh","Purdue","Rice","Rutgers","SMU","Sacramento State","Sam Houston","San Diego State","San José State","South Alabama","South Carolina","South Florida","Southern Miss","Stanford","Syracuse","TCU","Temple","Tennessee","Texas","Texas A&M","Texas State","Texas Tech","Toledo","Troy","Tulane","Tulsa","UAB","UCF","UCLA","UConn","UL Monroe","UMass","UNLV","USC","UTEP","UTSA","Utah","Utah State","Vanderbilt","Virginia","Virginia Tech","Wake Forest","Washington","Washington State","West Virginia","Western Kentucky","Western Michigan","Wisconsin","Wyoming"],"nbal":{"401909277":[null,"MNMT;"],"401909279":[null,"DAZN (YES);"],"401909282":[null,";DAZN IND"],"401909283":[null,"KFAA-TV/MavsTV;"],"401909284":[null,";ClipperVision"],"401909286":[null,"Suns Live/Arizona's Family 3TV;"],"401909287":[null,";MNMT"],"401909290":[null,"KFAA-TV/MavsTV;KJZZ-TV/Jazz+"],"401909291":[null,"DAZN MEM;KSBI/Thunder App"],"401909292":[null,"MyMi/Bucks App;"],"401909293":[null,"GCSEN/Pelicans.com;"],"401909294":[null,"Spectrum Sports Net/Spectrum Sports Net +;"],"401909295":[null,";DAZN SAS"],"401909297":[null,";MyMi/Bucks App"],"401909298":[null,";DAZN CLE"],"401909300":[null,"GCSEN/Pelicans.com;DAZN MEM"],"401909301":[null,";KJZZ-TV/Jazz+"],"401909303":[null,";KUNP 16/BlazerVision"],"401909304":[null,"KTLA/ClipperVision;KSBI/Thunder App"],"401909853":[3.5,";"],"401909854":[-11.5,"DAZN CLE;DAZN (YES)"],"401909855":[-12.5,";MyMi/Bucks App"],"401909856":[1.5,";"],"401909857":[-1.5,";MNMT"],"401909858":[14.5,"KFAA-TV/MavsTV;DAZN SAS"],"401909859":[-11.5,";GCSEN/Pelicans.com"],"401909860":[-9.5,"Suns Live/Arizona's Family CBS5;"],"401909861":[6.5,"KJZZ-TV/Jazz+;Spectrum Sports Net/Spectrum Sports Net +"],"401909862":[7.5,"DAZN (YES);DAZN IND"],"401909863":[-6.5,";"],"401909864":[-3.5,"DAZN MIN;"],"401909865":[-16.5,"KSBI/Thunder App;ClipperVision"],"401909866":[1.5,";"],"401909867":[3.5,";DAZN MEM"],"401909868":[-2.5,";MNMT"],"401909869":[-3.5,";DAZN MIN"],"401909870":[-14.5,";"],"401909871":[-7.5,";KFAA-TV/MavsTV"],"401909872":[3.5,"MyMi/Bucks App;DAZN IND"],"401909873":[-8.5,"KSBI/Thunder App;Suns Live/Arizona's Family 3TV"],"401909874":[-4.5,";"],"401909875":[-1.5,"KJZZ-TV/Jazz+;DAZN MEM"],"401909876":[-7.5,";"],"401909877":[-12.5,";DAZN (YES)"],"401909878":[-3.5,";"],"401909879":[-18.5,";"],"401909880":[-1.5,"Spectrum Sports Net/Spectrum Sports Net +;"],"401909881":[-3.5,";"],"401909882":[-10.5,"DAZN CLE;MNMT"],"401909883":[-7.5,";"],"401909884":[4.5,"DAZN IND;"],"401909885":[-4.5,";"],"401909887":[null,"MyMi/Bucks App;"],"401909889":[null,"GCSEN/Pelicans.com;"],"401909890":[null,"KJZZ-TV/Jazz+;DAZN SAS"],"401909891":[null,"KFAA-TV/MavsTV;KSBI/Thunder App"],"401909892":[null,"KTLA/ClipperVision;Spectrum Sports Net/Spectrum Sports Net +"],"401909894":[null,"GCSEN/Pelicans.com;"],"401909895":[null,"KUNP 16/BlazerVision;DAZN MEM"],"401909896":[null,"KJZZ-TV/Jazz+;KUNP 16/BlazerVision"],"401909898":[null,"GCSEN/Pelicans.com;"],"401909899":[null,"DAZN MEM;"],"401909900":[null,"MyMi/Bucks App;DAZN CLE"],"401909901":[null,"DAZN SAS;DAZN MIN"],"401909902":[null,";Thunder App"],"401909904":[null,"DAZN IND;DAZN (YES)"],"401909905":[null,";ClipperVision"],"401909906":[null,"Spectrum Sports Net/Spectrum Sports Net +;"],"401909909":[null,"DAZN IND;"],"401909910":[null,";DAZN (YES)"],"401909911":[null,";MNMT"],"401909913":[null,"KFAA-TV/MavsTV;"],"401909914":[null,";GCSEN/Pelicans.com"],"401909915":[null,"DAZN MIN;MyMi/Bucks App"],"401909917":[null,"DAZN SAS;KJZZ-TV/Jazz+"],"401909918":[null,"ALT2/KTVD;KUNP 16/BlazerVision"],"401909919":[null,";Suns Live/Arizona's Family 3TV"],"401909920":[null,"KTLA/ClipperVision;"],"401909921":[null,"Spectrum Sports Net/Spectrum Sports Net +;"],"401909923":[null,"MNMT;"],"401909924":[null,";MyMi/Bucks App"],"401909925":[null,"DAZN (YES);"],"401909927":[null,"DAZN MEM;DAZN IND"],"401909928":[null,"GCSEN/Pelicans.com;KJZZ-TV/Jazz+"],"401909929":[null,"KSBI/Thunder App;DAZN CLE"],"401909930":[null,";DAZN MIN"],"401909932":[null,"Arizona's Family 3TV/Suns Live;KUNP 16/BlazerVision"],"401909934":[null,";Spectrum Sports Net/Spectrum Sports Net +"],"401909935":[null,"ClipperVision;"],"401909936":[null,"Suns Live/Arizona's Family 3TV;"],"401909938":[null,"DAZN IND;"],"401909939":[null,";DAZN (YES)"],"401909940":[null,"DAZN CLE;"],"401909941":[null,"KSBI/Thunder App;MNMT"],"401909943":[null,"Arizona's Family 3TV/Suns Live;"],"401909944":[null,"KUNP 16/BlazerVision;DAZN SAS"],"401909946":[null,";Spectrum Sports Net/Spectrum Sports Net +"],"401909947":[null,"DAZN MIN;KJZZ-TV/Jazz+"],"401909948":[null,"KFAA-TV/MavsTV;DAZN (YES)"],"401909949":[null,"MyMi/Bucks App;"],"401909950":[null,"ClipperVision;GCSEN/Pelicans.com"],"401909952":[null,";Spectrum Sports Net/Spectrum Sports Net +"],"401909953":[null,";DAZN CLE"],"401909955":[null,";DAZN MEM"],"401909956":[null,"KFAA-TV/MavsTV;DAZN IND"],"401909957":[null,"KUSA-TV (9NEWS);ALT2/KTVD"],"401909958":[null,"Arizona's Family 3TV/Suns Live;DAZN SAS"],"401909959":[null,";GCSEN/Pelicans.com"],"401909960":[null,";MyMi/Bucks App"],"401909962":[null,"Suns Live/Arizona's Family 3TV;ClipperVision"],"401909963":[null,"KJZZ-TV/Jazz+;"],"401909965":[null,";KSBI/Thunder App"],"401909966":[null,"DAZN IND;MNMT"],"401909969":[null,";DAZN SAS"],"401909971":[null,"MyMi/Bucks App;Spectrum Sports Net/Spectrum Sports Net +"],"401909972":[null,"GCSEN/Pelicans.com;DAZN (YES)"],"401909973":[null,"KJZZ-TV/Jazz+;"],"401909975":[null,"KUNP 16/BlazerVision;KSBI/Thunder App"],"401909977":[null,"MNMT;"],"401909978":[null,";KFAA-TV/MavsTV"],"401909979":[null,"Suns Live/Arizona's Family 3TV;"],"401909980":[null,"GCSEN/Pelicans.com;"],"401909981":[null,";KFAA-TV/MavsTV"],"401909983":[null,"DAZN MEM;DAZN (YES)"],"401909984":[null,"DAZN MIN;"],"401909985":[null,";DAZN IND"],"401909986":[null,"Arizona's Family 3TV/Suns Live;Spectrum Sports Net/Spectrum Sports Net +"],"401909987":[null,"ClipperVision;"],"401909988":[null,"KJZZ-TV/Jazz+;DAZN SAS"],"401909989":[null,";KFAA-TV/MavsTV"],"401909991":[null,"MNMT;"],"401909992":[null,"MyMi/Bucks App;"],"401909993":[null,";KSBI/Thunder App"],"401909995":[null,"DAZN CLE;"],"401909996":[null,"MNMT;"],"401909997":[null,"DAZN (YES);"],"401909999":[null,"DAZN MIN;KUNP 16/BlazerVision"],"401910000":[null,"GCSEN/Pelicans.com;"],"401910001":[null,";Suns Live/Arizona's Family 3TV"],"401910003":[null,"DAZN MIN;BlazerVision"],"401910005":[null,"Spectrum Sports Net/Spectrum Sports Net +;"]}}</script>
+
+<script>
+(function(){
+'use strict';
+/* ---------- basics ---------- */
+const $ = s => document.querySelector(s);
+const txt = id => { const el = document.getElementById(id); return el ? el.textContent : ''; };
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const jsonOf = id => { try { return JSON.parse(txt(id) || 'null'); } catch (e) { return null; } };
+const ls = k => { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const ssGet = k => { try { return JSON.parse(sessionStorage.getItem(k) || 'null'); } catch (e) { return null; } };
+const ssSet = (k, v) => { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const DEMO = new URLSearchParams(location.search).get('livedemo') === '1';
+const SK = DEMO ? 'jsh-live-demo-' : 'jsh-live-';   /* this visit's memory (feed, pop-ups, spotlight pick); the demo keeps its own */
+const API = /(^|\.)djgolding\.com$/.test(location.hostname) ? '' : 'https://djgolding.com';
+
+/* ---------- theme and time zone, shared with the hubs (jsh-shared), like the home page ---------- */
+const shared = ls('jsh-shared') || ls('cfb-settings') || {};
+const lightMode = shared.theme === 'light' || (shared.theme !== 'dark' && matchMedia('(prefers-color-scheme: light)').matches);
+if (lightMode) document.documentElement.classList.add('light');
+const TZS = {ET:'America/New_York', CT:'America/Chicago', MT:'America/Denver', PT:'America/Los_Angeles'};
+const TZ = TZS[shared.tz] ? shared.tz : 'MT';
+const fmt = (o, d) => new Intl.DateTimeFormat('en-US', Object.assign({timeZone: TZS[TZ]}, o)).format(d || new Date());
+const dayFmt = new Intl.DateTimeFormat('en-CA', {timeZone: TZS[TZ], year:'numeric', month:'2-digit', day:'2-digit'});
+const localDay = t => dayFmt.format(t == null ? new Date() : new Date(t));
+const etDate = d => new Intl.DateTimeFormat('en-CA', {timeZone:'America/New_York', year:'numeric', month:'2-digit', day:'2-digit'}).format(d || new Date());
+let TODAY = etDate();
+const addDay = (d, n) => { const p = d.split('-').map(Number); return new Date(Date.UTC(p[0], p[1] - 1, p[2] + n)).toISOString().slice(0, 10); };
+const kickMs = (date, time) => { const m = /^(\d{1,2}):(\d{2}) (AM|PM)$/.exec(time || ''); const h = m ? (+m[1]) % 12 + (m[3] === 'PM' ? 12 : 0) : 12; const off = date >= '2026-11-01' && date < '2027-03-14' ? '-05:00' : '-04:00'; return Date.parse(date + 'T' + String(h).padStart(2, '0') + ':' + (m ? m[2] : '00') + ':00' + off); };
+const timed = g => /^\d{1,2}:\d{2} (AM|PM)$/.test(g.time || '');
+const kickStr = t => fmt({hour:'numeric', minute:'2-digit'}, new Date(t));
+const dayWord = t => { const d = localDay(t), now = localDay(); return d === now ? 'Today' : d === addDay(now, 1) ? 'Tomorrow' : fmt({weekday:'long'}, new Date(t)); };
+const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th','st','nd','rd'][n % 10] || 'th');
+const clkSecs = c => { const s = String(c || ''); const m = /^(\d+):(\d\d)/.exec(s); if (m) return +m[1] * 60 + +m[2]; const f = parseFloat(s); return isNaN(f) ? null : f; };
+
+/* colors: hex helpers from the home page, plus a version of each team color that reads on the dark glass */
+const hexRgb = h => { const m = /^#?([0-9a-f]{6})$/i.exec(h || ''); return m ? [0, 2, 4].map(i => parseInt(m[1].slice(i, i + 2), 16)) : null; };
+const lum = c => { const f = v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }; return .2126 * f(c[0]) + .7152 * f(c[1]) + .0722 * f(c[2]); };
+const mixHex = (h, t, k) => { const a = hexRgb(h), b = hexRgb(t); if (!a || !b) return h; return '#' + a.map((v, i) => Math.round(v + (b[i] - v) * k).toString(16).padStart(2, '0')).join(''); };
+const normHex = h => hexRgb(h) ? '#' + String(h).replace('#', '').toLowerCase() : null;
+const uiColor = (c, alt) => { let x = normHex(c) || '#64748b'; const a = normHex(alt); if (lum(hexRgb(x)) < .03 && a && lum(hexRgb(a)) > .06 && lum(hexRgb(a)) < .7) x = a; let n = 0; while (lum(hexRgb(x)) < .05 && n < 8) { x = mixHex(x, '#ffffff', .16); n++; } return x; };
+const deep = (c, alt) => { let x = normHex(c) || '#334155'; const a = normHex(alt); if (lum(hexRgb(x)) > .5 && a && lum(hexRgb(a)) < .3) x = a; let n = 0; while (lum(hexRgb(x)) > .2 && n < 8) { x = mixHex(x, '#000000', .16); n++; } return x; };
+const near = (c1, c2) => { const a = hexRgb(c1), b = hexRgb(c2); return !a || !b || Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]) + Math.abs(a[2] - b[2]) < 90; };
+
+/* ---------- data: the same blocks the home page carries (sports-hub/build.sh), trimmed to the weeks around now ---------- */
+const CFB = []; { const seen = {}; txt('d-cfb').split('\n').forEach(l => { const p = l.split('|'); if (p.length < 14) return; const k = p[1] + '|' + p[2] + '|' + p[3]; const g = {week:+p[0], date:p[1], away:p[2], home:p[3], as:p[4] === '' ? null : +p[4], hs:p[5] === '' ? null : +p[5], st:p[6], time:p[7], neutral:p[8] === 'N', spread:p[9] === '' ? null : +p[9], tv:p[13] || '', ar:+p[14] || 0, hr:+p[15] || 0, id:k}; if (seen[k]) { const o = seen[k]; if (o.spread == null && g.spread != null) o.spread = g.spread; if (!o.ar && g.ar) o.ar = g.ar; if (!o.hr && g.hr) o.hr = g.hr; return; } seen[k] = g; CFB.push(g); }); }
+const CFBLOGO = {}; txt('d-cfblogos').split('\n').forEach(l => { const p = l.split('|'); if (p[1]) CFBLOGO[p[0]] = p[1]; });
+const CFBT = {}; txt('d-cfbteams').split('\n').forEach(l => { const p = l.split('|'); if (p[0]) CFBT[p[0]] = {color:p[1], alt:p[2], mascot:p[3], conf:p[4]}; });
+const NFL = txt('d-nfl').split('\n').map(l => l.split('|')).filter(p => p.length >= 12).map(p => ({stype:+p[0], week:+p[1], date:p[2], time:p[3], id:p[4], away:p[5], home:p[6], as:p[7] === '' ? null : +p[7], hs:p[8] === '' ? null : +p[8], st:p[9], neutral:p[10] === 'N', tv:p[11], spread:p[12] === '' || p[12] == null ? null : +p[12]}));
+const NFLT = jsonOf('d-nflteams') || {};
+const NBA = txt('d-nba').split('\n').map(l => l.split('|')).filter(p => p.length >= 10).map(p => ({stype:+p[0], date:p[1], time:p[2], id:p[3], away:p[4], home:p[5], as:p[6] === '' ? null : +p[6], hs:p[7] === '' ? null : +p[7], st:p[8], neutral:p[9] === 'N', tv:p[10] || ''}));
+const NBAT = jsonOf('d-nbateams') || {};
+/* Live Center extras (build_live.pl): FBS team names, NBA pregame lines + local TV */
+const LVX = jsonOf('d-lvx') || {};
+const FBS = new Set(LVX.fbs || []);
+const NBAL = LVX.nbal || {};
+
+/* ---------- settings: pop-ups on, Weber State off (never a built-in favorite) ---------- */
+const OPT = Object.assign({pop: true, weber: false}, ls('jsh-live') || {});
+const WEBER = 'Weber State';
+
+/* ---------- your teams: the same favorites as the home page (each hub's own setting) ---------- */
+const played = g => /^FINAL/.test(g.st || '') && g.as != null && g.hs != null;
+const cfbSet = ls('cfb-settings') || {}, nflSet = ls('nfl-settings') || {}, nbaSet = ls('nba-settings') || {};
+const CFB_HUBFAV = cfbSet.fav || 'BYU';
+function favList(){ const nflFav = ('fav' in nflSet) ? nflSet.fav : 'PHI'; const out = [{sport:'cfb', team:CFB_HUBFAV}];
+  if (nflFav) out.push({sport:'nfl', team:nflFav}); out.push({sport:'nba', team:nbaSet.fav || 'UTAH'});
+  if (OPT.weber && CFB_HUBFAV !== WEBER) out.push({sport:'cfb', team:WEBER});
+  return out; }
+let FAVS = favList();
+const isFav = (lg, t) => FAVS.some(f => f.sport === lg && f.team === t);
+const favSide = G => isFav(G.lg, G.a.t) ? 'a' : isFav(G.lg, G.h.t) ? 'h' : '';
+
+/* ---------- leagues ---------- */
+const ICON = {
+  fb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><ellipse cx="12" cy="12" rx="10" ry="6" transform="rotate(-35 12 12)"/><path d="M9 15l6-6M10.5 11.5l2 2M12.5 9.5l2 2M8.5 13.5l2 2"/></svg>',
+  spot: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg>'
+};
+/* sd: how far apart two teams usually finish (points), used to judge how close a score really is.
+   h: the part of a lead one quick score wipes out (half a touchdown, a three), so a late one-score game still counts as
+   close. rf: the least time left the closeness math will assume (a last drive, a last possession).
+   len: seconds in a quarter; dur: hours a game usually takes. */
+const LG = {
+  cfb: {n:'CFB', c:'var(--cfb)', hex:'#3b7bff', sd:16, h:4, rf:.03, per:4, len:900, dur:3.4, big:21},
+  nfl: {n:'NFL', c:'var(--nfl)', hex:'#ff3b5c', sd:13.5, h:4, rf:.03, per:4, len:900, dur:3.2, big:21},
+  nba: {n:'NBA', c:'var(--nba)', hex:'#a45bff', sd:12, h:1.5, rf:.02, per:4, len:720, dur:2.3, big:18}
+};
+const cfbShort = n => String(n).replace(/ State$/, ' St').replace(/^North Carolina$/, 'N Carolina');
+const cfbSlug = (d, a, h) => (d + '-' + a + '-' + h).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const loc = (full, nick) => full && nick && full.slice(-nick.length) === nick ? full.slice(0, -nick.length).trim() : '';
+const O = {
+  cfb: { name: cfbShort, full: n => n, sub: n => (CFBT[n] && CFBT[n].mascot) || '', logo: (n, id) => CFBLOGO[n] ? '/cfb/img/logos/' + CFBLOGO[n] + '.png' : (/^\d+$/.test(id || '') ? 'https://a.espncdn.com/i/teamlogos/ncaa/500/' + id + '.png' : null), color: n => (CFBT[n] && CFBT[n].color) || '', alt: n => (CFBT[n] && CFBT[n].alt) || '', plural: false },
+  nfl: { name: ab => (NFLT[ab] && NFLT[ab].nick) || ab, full: ab => (NFLT[ab] && NFLT[ab].full) || ab, sub: ab => NFLT[ab] ? loc(NFLT[ab].full, NFLT[ab].nick) : '', logo: ab => '/nfl/img/logos/' + ab + '.png', color: ab => (NFLT[ab] && NFLT[ab].color) || '', alt: ab => (NFLT[ab] && NFLT[ab].alt) || '', plural: true },
+  nba: { name: ab => (NBAT[ab] && NBAT[ab].nick) || ab, full: ab => (NBAT[ab] && NBAT[ab].full) || ab, sub: ab => NBAT[ab] ? loc(NBAT[ab].full, NBAT[ab].nick) : '', logo: ab => '/nba/img/logos/' + ab + '.png', color: ab => (NBAT[ab] && NBAT[ab].color) || '', alt: ab => (NBAT[ab] && NBAT[ab].alt) || '', plural: true }
+};
+/* each hub's game page: college uses its own game ids (date-away-home, as cfb-hub/p2.html builds them), and its game-day
+   screen for your team while live; the NFL and NBA hubs use ESPN's event ids */
+const HREF = {
+  cfb: G => '/cfb/#/' + (G.st === 'in' && [G.a.t, G.h.t].some(t => t === 'BYU' || t === CFB_HUBFAV) ? 'gameday/' : 'game/') + G.hid,
+  nfl: G => '/nfl/#/game/' + G.id,
+  nba: G => '/nba/#/game/' + G.id
+};
+const nameOf = (G, s) => O[G.lg].name(G[s].t);
+const abOf = (G, s) => G[s].ab || (G.lg === 'cfb' ? cfbShort(G[s].t) : G[s].t);
+const colorOf = (G, s) => uiColor(O[G.lg].color(G[s].t) || (G[s].c ? '#' + G[s].c : ''), O[G.lg].alt(G[s].t));
+const logoOf = (G, s) => O[G.lg].logo(G[s].t, G[s].eid);
+const logoImg = (src, eager) => src ? '<img src="' + esc(src) + '" alt=""' + (eager ? '' : ' loading="lazy"') + ' onerror="this.style.visibility=\'hidden\'">' : '<span class="sw"></span>';
+const plate = src => '<span class="plate">' + logoImg(src, true) + '</span>';
+const net = tv => String(tv || '').replace(/^;/, '').split(/[\/;]/)[0].trim();
+const NAT = /^(ABC|CBS|FOX|NBC|ESPN|ESPN2|ESPNU|FS1|FS2|BTN|Big Ten Network|SECN|SEC Network|ACCN|ACC Network|CW|The CW|Peacock|Prime Video|NFL Net|NFL Network|Netflix|YouTube|TNT|truTV|NBA TV|CBSSN|CBS Sports Network)$/i;
+/* college games in play here: anything with an FBS team (plus Weber State's games when that option is on) */
+const cfbIn = g => (!FBS.size || FBS.has(g.away) || FBS.has(g.home)) || (OPT.weber && (g.away === WEBER || g.home === WEBER));
+
+/* ---------- live data from the site's relays (/api/<league>/...), keyed like the home page ---------- */
+const LIVE = {cfb:{}, nfl:{}, nba:{}};
+const SUM = {};            /* game summaries: ESPN's in-game win chance and the scoring plays */
+const ERR = {}, OKT = {};  /* last failure / success per league */
+let LAST = 0;
+const LINES = ssGet(SK + 'lines') || {};   /* pregame lines seen on the scoreboards, kept after the game starts */
+async function getJ(path){ try { const r = await fetch(API + path, {cache:'no-store'}); return r.ok ? await r.json() : null; } catch (e) { return null; } }
+
+/* ---------- one game, in one shape for every league ---------- */
+function relaySt(s, per){ s = String(s || ''); if (!s || s === 'SCHEDULED') return 'pre'; if (/^FINAL/.test(s)) return 'post'; if (/POSTPONED|CANCEL|SUSPENDED|FORFEIT/.test(s)) return 'off'; if (s === 'DELAYED' && !per) return 'pre'; return 'in'; }
+function mk(lg, o){ const kick = timed(o) ? kickMs(o.date, o.time) : null; const now = Date.now();
+  let st = 'pre'; if (/^FINAL/.test(o.st || '')) st = 'post'; else if (/POSTPONED|CANCEL/.test(o.st || '')) st = 'off'; else if (kick && kick < now - 6 * 3600e3) st = 'stale'; else if (!kick && o.date < TODAY) st = 'stale';
+  return {key: lg + ':' + o.id, lg, id: String(o.id), hid: o.hid || String(o.id), eid: lg === 'cfb' ? '' : String(o.id), date: o.date, time: o.time || '', kick, st, det: '', per: 0, clk: '', inter: false, live: false,
+    a: {t: o.away, s: o.as, rk: o.ar || 0, eid: '', ab: '', c: ''}, h: {t: o.home, s: o.hs, rk: o.hr || 0, eid: '', ab: '', c: ''},
+    tv: o.tv || '', spread: o.spread == null || isNaN(o.spread) ? null : +o.spread, neutral: !!o.neutral, week: o.week, stype: o.stype, sit: {}, wp: null, wps: null, has: false}; }
+function overlay(G, L){
+  const n = v => v === '' || v == null || isNaN(+v) ? null : +v; const A = L.away || {}, H = L.home || {};
+  G.has = true; G.st = relaySt(L.st, L.per); G.raw = String(L.st || ''); G.det = L.det || ''; G.per = +L.per || 0; G.clk = String(L.clk == null ? '' : L.clk);
+  if (G.st !== 'pre') { G.a.s = n(A.s) == null ? 0 : n(A.s); G.h.s = n(H.s) == null ? 0 : n(H.s); }
+  G.a.eid = String(A.id || ''); G.h.eid = String(H.id || ''); G.a.ab = A.ab || ''; G.h.ab = H.ab || '';
+  const qs = x => (Array.isArray(x) ? x : []).map(v => n(v)).filter(v => v != null); G.ls = G.st === 'in' ? [qs(A.ls), qs(H.ls)] : null;
+  if (G.lg === 'cfb') G.eid = String(L.id || '');
+  G.inter = /^(HALFTIME|END_PERIOD)$/.test(G.raw) || /halftime|^end of/i.test(G.det);
+  const s = {};
+  if (G.lg === 'cfb' || G.lg === 'nfl') { s.pos = L.pos && String(L.pos) === String(A.id) ? 'a' : L.pos && String(L.pos) === String(H.id) ? 'h' : ''; s.dd = s.pos ? (L.dd || '') : ''; s.rz = !!L.rz && !!s.pos; }
+  /* the scoreboard's last play, unless it is only a substitution, a timeout or the end of a quarter */
+  s.last = G.st === 'in' && !/^(End of|Start of)|enters the game|timeout|jump ball|challenge|^\s*$/i.test(L.last || '') ? (L.last || '') : '';
+  G.sit = s;
+  if (L.odds && L.odds.det && G.st === 'pre') { const m = /^([A-Z0-9&]+)\s+(-?\d+(?:\.\d+)?)$/.exec(L.odds.det.trim()); let v = null; if (/^(EVEN|PK|PICK)/i.test(L.odds.det)) v = 0; else if (m) v = m[1] === H.ab ? +m[2] : m[1] === A.ab ? -m[2] : null; if (v != null && LINES[G.key] !== v) { LINES[G.key] = v; ssSet(SK + 'lines', LINES); } }
+}
+function build(lg, g, L, k){
+  let o;
+  if (g) o = lg === 'cfb' ? Object.assign({}, g, {hid: cfbSlug(g.date, g.away, g.home)}) : lg === 'nba' ? Object.assign({}, g, {spread: NBAL[g.id] ? NBAL[g.id][0] : null}) : g;
+  else if (lg === 'cfb') o = {id: k, hid: cfbSlug(L.date, (L.away || {}).n, (L.home || {}).n), date: L.date, away: (L.away || {}).n, home: (L.home || {}).n};
+  else o = {id: String(L.id), date: L.date, away: (L.away || {}).ab, home: (L.home || {}).ab};
+  const G = mk(lg, o);
+  if (L) overlay(G, L);
+  if (G.spread == null && LINES[G.key] != null) G.spread = LINES[G.key];
+  if (G.lg === 'nba' && NBAL[G.id] && NBAL[G.id][1]) G.tvl = NBAL[G.id][1];
+  G.live = G.st === 'in';
+  /* a summary is only fetched for the top four games each round, so a win chance older than 90 s is dropped (the excitement
+     score falls back to the margin) rather than shown stale */
+  const S = SUM[G.key]; if (S && G.live) { if (Date.now() - S.t < 90e3) { G.wp = S.wp; G.wps = S.wps; } G.lastScore = S.last; }
+  G.fav = !!favSide(G); G.href = HREF[lg](G);
+  return G; }
+/* every game near today, from the schedule plus anything the relays returned that the schedule lacks */
+function universe(){
+  const lo = addDay(TODAY, -1), hi = addDay(TODAY, 8), U = [], seen = new Set();
+  const push = G => { if (seen.has(G.key)) return; seen.add(G.key); U.push(G); };
+  CFB.forEach(g => { if (g.date >= lo && g.date <= hi && cfbIn(g)) push(build('cfb', g, LIVE.cfb[g.id])); });
+  NFL.forEach(g => { if (g.date >= lo && g.date <= hi) push(build('nfl', g, LIVE.nfl[g.id])); });
+  NBA.forEach(g => { if (g.date >= lo && g.date <= hi) push(build('nba', g, LIVE.nba[g.id])); });
+  Object.keys(LIVE).forEach(lg => Object.keys(LIVE[lg]).forEach(k => { const L = LIVE[lg][k]; if (seen.has(lg + ':' + k) || !L.date || L.date < lo || L.date > hi) return;
+    if (lg === 'cfb' && L._g === '81' && !(OPT.weber && [(L.away || {}).n, (L.home || {}).n].includes(WEBER))) return;
+    push(build(lg, null, L, k)); }));
+  return U; }
+
+/* ---------- how far along a game is, and how exciting it is ---------- */
+function prog(G){ const L = LG[G.lg];
+  const per = G.per || 0; if (!per) return {f: 0, rem: 1, ot: 0};
+  if (per > L.per) return {f: 1, rem: .06, ot: per - L.per};
+  let left = clkSecs(G.clk); if (G.inter && /half|end/i.test(G.det)) left = 0;
+  if (left == null) left = L.len / 2;
+  const el = (per - 1) * L.len + (L.len - Math.min(L.len, left)); const f = el / (L.per * L.len);
+  return {f, rem: Math.max(.012, 1 - f), ot: 0}; }
+const erf = x => { const s = Math.sign(x); x = Math.abs(x); const t = 1 / (1 + .3275911 * x); return s * (1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - .284496736) * t + .254829592) * t * Math.exp(-x * x)); };
+const PHI = z => .5 * (1 + erf(z / Math.SQRT2));
+const margin = G => Math.abs((G.a.s || 0) - (G.h.s || 0));
+/* the pregame underdog, when there was a line of 3 or more (spread is the home team's line) */
+function dogLead(G){ const s = G.spread; if (s == null || Math.abs(s) < 3) return null; const side = s > 0 ? 'h' : 'a', other = side === 'a' ? 'h' : 'a'; const by = (G[side].s || 0) - (G[other].s || 0); return by > 0 ? {side, line: Math.abs(s), by} : null; }
+function closeLate(G){ if (G.st !== 'in') return false; const p = G.P || prog(G); if (p.ot) return false; const m = margin(G);
+  if (G.lg === 'nba') { const left = clkSecs(G.clk); return G.per === 4 && left != null && left <= 360 && m <= 6; }
+  return G.per === 4 && m <= 8; }
+/* excitement, 0-100: how much the result is still in doubt (ESPN's live win chance when a summary has it, otherwise the
+   margin against how much a game like this swings in the time left), weighted toward the end of the game, plus overtime,
+   a close-and-late bump (the home page's "Worth tuning in" rules), an underdog leading late, and +20 for your teams
+   (the +20 orders the page but is left out of the number shown) */
+function heat(G){ const p = G.P = prog(G), m = margin(G), U = LG[G.lg]; let close;
+  if (G.wp != null) close = 1 - Math.abs(2 * G.wp / 100 - 1);
+  else close = 2 * (1 - PHI(Math.max(0, m - U.h) / (U.sd * Math.sqrt(Math.max(p.rem, U.rf)))));
+  const late = p.ot ? 1 : .3 + .7 * Math.pow(Math.min(1, p.f), 1.6);
+  let s = 100 * close * late;
+  if (p.ot) s += 12 + 4 * (p.ot - 1);
+  if (closeLate(G)) s += 30;
+  const d = dogLead(G); if (d && p.f >= .25) s += Math.min(14, d.line * .9) * (.4 + .6 * Math.min(1, p.f));
+  const base = s; if (G.fav) s += 20;
+  return {s, show: Math.max(1, Math.min(99, Math.round(base))), close, late}; }
+const heatColor = v => v >= 70 ? '#ff4d6a' : v >= 45 ? '#ff9f43' : v >= 25 ? '#fbbf24' : '#8a94a6';
+const heatWord = (v, G) => v >= 70 ? 'Must-watch' : v >= 50 ? 'Tight' : v >= 30 ? 'Competitive' : (G.P && G.P.f < .3 ? 'Early' : 'One-sided');
+/* one plain line for why a game matters right now */
+function whyText(G){ const p = G.P || prog(G), m = margin(G), o = O[G.lg], lead = (G.a.s || 0) > (G.h.s || 0) ? 'a' : (G.h.s || 0) > (G.a.s || 0) ? 'h' : '';
+  if (p.ot) return (p.ot > 1 ? p.ot + ' overtimes' : 'Overtime') + (m ? '' : ', tied');
+  if (closeLate(G)) { if (!m) return 'Tied in the 4th';
+    if (G.lg === 'nba') return m + '-point game, ' + Math.max(1, Math.ceil((clkSecs(G.clk) || 0) / 60)) + ' min left';
+    return 'One-score game in the 4th'; }
+  const d = dogLead(G); if (d && p.f >= .25) return 'Upset watch: ' + o.name(G[d.side].t) + ' (+' + d.line + ') up ' + d.by;
+  if ((G.lg === 'cfb' || G.lg === 'nfl') && G.sit.rz && G.sit.pos) return 'Red zone: ' + nameOf(G, G.sit.pos);
+  if (/halftime/i.test(G.det) || G.raw === 'HALFTIME') return !m ? 'Tied at halftime' : o.name(G[lead].t) + ' up ' + m + ' at halftime';
+  if (p.f < .2) return 'Just getting going';
+  if (!m) return 'Tied';
+  if (lead && m >= LG[G.lg].big && p.f > .5) return 'One-sided: ' + o.name(G[lead].t) + ' by ' + m;
+  return o.name(G[lead].t) + ' by ' + m; }
+function clockStr(G){
+  if (G.st === 'post') return /^final/i.test(G.det) ? G.det : 'Final';
+  if (G.st === 'off') return /postpon/i.test(G.raw || G.det) ? 'Postponed' : 'Canceled';
+  if (G.st !== 'in') return G.kick ? kickStr(G.kick) : 'Time TBA';
+  if (/halftime/i.test(G.det) || G.raw === 'HALFTIME') return 'Halftime';
+  if (/^end of/i.test(G.det)) return G.det;
+  if (G.per > 4) { const n = G.per - 4; return (n > 1 ? n + 'OT' : 'OT') + (G.clk && G.lg !== 'cfb' ? ' ' + G.clk : ''); }
+  return G.per ? 'Q' + G.per + ' ' + G.clk : (G.det || 'Starting'); }
+const scoreLine = G => abOf(G, 'a') + ' ' + (G.a.s || 0) + ', ' + abOf(G, 'h') + ' ' + (G.h.s || 0);
+const tvOf = G => { const n = net(G.tv); if (n) return n; const fs = favSide(G);
+  if (G.tvl && fs && G.lg === 'nba') { const p = String(G.tvl).split(';'); const v = (fs === 'h' ? p[0] : p[1]) || '';   /* nba-hub tvl is "home;away" */ if (v.trim()) return v.split('/')[0].trim(); }
+  return G.lg === 'nba' ? 'League Pass' : ''; };
+
+/* ---------- the scoring feed: real scoring plays from the game summaries, newest first ---------- */
+const FEED = new Map((ssGet(SK + 'feed') || []).map(e => [e.k, e]));
+const SUMSEEN = new Set(ssGet(SK + 'sumseen') || []);
+const NEWK = new Set();
+function fracAt(lg, per, left){ const L = LG[lg]; if (per > L.per) return 1; return ((per - 1) * L.len + (L.len - Math.min(L.len, left == null ? L.len / 2 : left))) / (L.per * L.len); }
+let FSEQ = 0;   /* plays found in the same check keep their game order (a tie, then the go-ahead free throw) */
+function addFeed(G, e){ if (FEED.has(e.k)) return; const now = Date.now(); const live = SUMSEEN.has(G.key) || e.live;
+  const est = G.kick ? Math.min(now - 1000, G.kick + fracAt(G.lg, e.per, e.left) * LG[G.lg].dur * 3600e3) : now - (1 - fracAt(G.lg, e.per, e.left)) * 7200e3;
+  FSEQ = (FSEQ + 1) % 1e5;
+  FEED.set(e.k, {k: e.k, g: G.key, lg: G.lg, t: (live ? now : est) + FSEQ / 1e5, seen: live, txt: String(e.text || '').slice(0, 220), when: e.when || '', sl: e.sl, side: e.side || '', team: e.side ? G[e.side].t : '', eid: e.side ? G[e.side].eid : '', href: G.href, fav: !!e.side && isFav(G.lg, G[e.side].t), day: G.date});
+  if (live) NEWK.add(e.k); }
+function saveFeed(){ const all = [...FEED.values()].sort((a, b) => b.t - a.t).slice(0, 150); FEED.clear(); all.forEach(e => FEED.set(e.k, e)); ssSet(SK + 'feed', all); ssSet(SK + 'sumseen', [...SUMSEEN].slice(-80)); }
+const sumUrl = G => G.lg === 'cfb' ? (/^\d{6,12}$/.test(G.eid) ? '/api/cfb/game?event=' + G.eid : null) : G.lg === 'nfl' ? '/api/nfl/game?event=' + G.id : G.lg === 'nba' ? '/api/nba/game?event=' + G.id : null;
+const pct = v => v == null || isNaN(+v) ? null : Math.max(0, Math.min(100, +v));
+function applySum(G, j){
+  const S = {t: Date.now(), wp: null, wps: null, last: ''};
+  if (G.lg === 'cfb' && j.wp && Array.isArray(j.wp.p) && j.wp.p.length) { S.wp = pct(j.wp.p[j.wp.p.length - 1][1]); S.wps = j.wp.p.map(x => pct(x[1])).filter(v => v != null); }
+  if ((G.lg === 'nfl' || G.lg === 'nba') && j.wp != null) S.wp = pct(j.wp);
+  if (G.lg === 'nba' && Array.isArray(j.wpSeries)) S.wps = j.wpSeries.map(pct).filter(v => v != null);
+  const ents = [];
+  if (G.lg === 'cfb' || G.lg === 'nfl') (j.scoring || []).forEach(s => { const side = String(s.team) === G.a.eid ? 'a' : String(s.team) === G.h.eid ? 'h' : '';
+    ents.push({k: G.key + '|' + s.per + '|' + s.clk + '|' + s.as + '-' + s.hs, per: +s.per || 0, left: clkSecs(s.clk), when: (s.per > 4 ? 'OT' : 'Q' + s.per) + ' ' + (s.clk || ''), text: s.text, side, sl: abOf(G, 'a') + ' ' + s.as + '–' + s.hs + ' ' + abOf(G, 'h')}); });
+  /* basketball scores every trip, so the feed keeps only the threes, the go-ahead baskets and the ties; the spotlight's
+     "last score" is the newest basket of any kind */
+  let lastAny = '';
+  if (G.lg === 'nba') { const P = (j.plays || []).filter(p => p.as != null && p.hs != null).map(p => Object.assign({}, p, {as: +p.as, hs: +p.hs})); for (let i = 1; i < P.length; i++) { const a = P[i - 1], b = P[i]; const da = b.as - a.as, dh = b.hs - a.hs; if (da <= 0 && dh <= 0) continue;
+      lastAny = b.text || lastAny;
+      const side = da > 0 ? 'a' : 'h', d = Math.max(da, dh), before = a.as - a.hs, after = b.as - b.hs, flip = after !== 0 && Math.sign(after) !== Math.sign(before), tie = after === 0;
+      if (!(d === 3 || flip || tie)) continue;
+      ents.push({k: G.key + '|' + b.per + '|' + b.clk + '|' + b.as + '-' + b.hs, per: +b.per || 0, left: clkSecs(b.clk), when: (b.per > 4 ? 'OT' : 'Q' + b.per) + ' ' + (b.clk || ''), text: (flip ? 'Go-ahead: ' : tie ? 'Ties it: ' : '') + b.text, side, sl: abOf(G, 'a') + ' ' + b.as + '–' + b.hs + ' ' + abOf(G, 'h')}); } }
+  ents.forEach(e => addFeed(G, e));
+  if (lastAny) S.last = lastAny;
+  else if (ents.length) S.last = ents[ents.length - 1].text;
+  else if (SUM[G.key]) S.last = SUM[G.key].last;
+  SUMSEEN.add(G.key); SUM[G.key] = S; }
+
+/* ---------- moments: a pop-up when a game goes to overtime, gets close late, or your team scores (once per moment) ---------- */
+const PREV = {};
+const TOASTED = new Set(ssGet(SK + 'toasted') || []);
+const LASTPOP = {};
+function toast(G, ev, kicker, title, body){ const id = G.key + '|' + ev; if (TOASTED.has(id)) return; TOASTED.add(id); ssSet(SK + 'toasted', [...TOASTED].slice(-300));
+  if (!OPT.pop) return; const box = $('#toasts'); if (!box) return;
+  const fs = favSide(G) || ((G.a.s || 0) >= (G.h.s || 0) ? 'a' : 'h');
+  const el = document.createElement('div'); el.className = 'toast'; el.setAttribute('role', 'status'); el.style.setProperty('--tc', colorOf(G, fs));
+  el.innerHTML = '<a href="' + esc(G.href) + '">' + plate(logoOf(G, fs)) + '<span class="toast-t"><span class="k">' + esc(LG[G.lg].n + ' · ' + kicker) + '</span><b>' + esc(title) + '</b><span>' + esc(body) + '</span></span></a><button type="button" class="toast-x" aria-label="Dismiss">×</button>';
+  const kill = () => { if (!el.isConnected) return; el.classList.add('out'); setTimeout(() => el.remove(), 380); };
+  el.querySelector('.toast-x').addEventListener('click', kill);
+  box.prepend(el); while (box.children.length > 3) box.lastElementChild.remove();
+  setTimeout(kill, 9000); }
+function moments(U){ const now = Date.now();
+  U.forEach(G => { if (G.st !== 'in' && G.st !== 'post') return;
+    const cur = {as: G.a.s || 0, hs: G.h.s || 0, ot: G.st === 'in' ? (G.P || prog(G)).ot : 0, cl: closeLate(G), st: G.st, det: G.det};
+    const p = PREV[G.key]; PREV[G.key] = cur; if (!p || G.st !== 'in') return;
+    const sc = scoreLine(G) + ' · ' + clockStr(G);
+    if (cur.ot > (p.ot || 0)) toast(G, 'ot' + cur.ot, 'Big moment', cur.ot > 1 ? cur.ot + ' overtimes' : 'Overtime', sc);
+    if (cur.cl && !p.cl) toast(G, 'close', 'Big moment', 'Close and late', sc);
+    const fs = favSide(G); if (!fs) return; const mine = fs === 'a' ? 'as' : 'hs', theirs = fs === 'a' ? 'hs' : 'as', nm = nameOf(G, fs);
+    if (G.lg === 'nba') { if (cur[mine] > cur[theirs] && p[mine] <= p[theirs] && !(LASTPOP[G.key] > now - 240e3)) { LASTPOP[G.key] = now; toast(G, 'lead|' + cur.as + '-' + cur.hs, 'Your team', nm + ' take the lead', sc); } return; }
+    const d = cur[mine] - p[mine]; if (d <= 0) return;
+    if ((G.lg === 'cfb' || G.lg === 'nfl') && d <= 2 && LASTPOP[G.key] > now - 150e3) return;
+    LASTPOP[G.key] = now;
+    const title = d >= 6 ? 'Touchdown, ' + nm + '!' : d === 3 ? nm + ' field goal' : nm + (O[G.lg].plural ? ' score' : ' scores');
+    toast(G, 'fav|' + cur[mine], 'Your team', title, sc + (G.lastScore ? ' · ' + G.lastScore : '')); }); }
+
+/* ---------- drawing ---------- */
+const cdHTML = ms => { let s = Math.max(0, Math.floor((ms - Date.now()) / 1000)); const d = Math.floor(s / 86400); s %= 86400; const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60; const p = n => String(n).padStart(2, '0'); return (d ? d + '<span class="u">d</span>' : '') + p(h) + '<i>:</i>' + p(m) + '<i>:</i>' + p(x); };
+const cdShort = ms => { const s = Math.floor((ms - Date.now()) / 1000); if (s <= 0) return 'Starting'; if (s < 600) return 'in ' + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); if (s < 3600) return 'in ' + Math.ceil(s / 60) + ' min'; const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60); return s < 86400 ? 'in ' + h + 'h ' + m + 'm' : 'in ' + Math.floor(h / 24) + 'd ' + (h % 24) + 'h'; };
+const SHOWN = {};   /* last drawn score per game, for the little bump when it changes */
+function scoreSpan(G, s, cls){ const v = G[s].s == null ? '' : G[s].s; const k = G.key + s; const bump = SHOWN[k] != null && SHOWN[k] !== v; SHOWN[k] = v; return '<span class="' + cls + (bump ? ' bump' : '') + '">' + v + '</span>'; }
+function teamRow(G, s){ const o = O[G.lg], other = s === 'a' ? 'h' : 'a', on = G.st === 'in' || G.st === 'post'; const win = on && (G[s].s || 0) > (G[other].s || 0);
+  return '<div class="tr' + (win ? ' w' : '') + '" style="--tc:' + colorOf(G, s) + '">' + logoImg(logoOf(G, s)) + '<span class="nm">' + (G[s].rk ? '<span class="rk">' + G[s].rk + '</span>' : '') + esc(o.name(G[s].t)) + (G.live && G.sit.pos === s ? ' <span class="fbi" title="Has the ball">' + ICON.fb + '</span>' : '') + '</span>' + (on ? scoreSpan(G, s, 'sc') : '') + '</div>'; }
+function wpBar(G, cls){ if (G.wp == null) return ''; const ca = colorOf(G, 'a'); let ch = colorOf(G, 'h'); if (near(ca, ch)) ch = uiColor(O[G.lg].alt(G.h.t) || '#cbd5e1'); if (near(ca, ch)) ch = '#cbd5e1'; const h = Math.round(G.wp), a = 100 - h;
+  return '<div class="' + cls + '" title="Win chance, per ESPN: ' + esc(abOf(G, 'a')) + ' ' + a + '%, ' + esc(abOf(G, 'h')) + ' ' + h + '%"><i style="width:' + a + '%;background:' + ca + '"></i><i style="flex:1;background:' + ch + '"></i></div>'; }
+function cardHTML(G, i){ const H = G.H || {show: 0}; const hot = G.live && (closeLate(G) || (G.P && G.P.ot));
+  const foot = G.live ? '<span class="why">' + esc(whyText(G)) + '</span><span class="heat" style="--hc:' + heatColor(H.show) + '" title="Excitement score, 0 to 100">\u{1F525} ' + H.show + '</span>'
+    : '<span class="why">' + esc(dayWord(G.kick) + ' ' + kickStr(G.kick) + (tvOf(G) ? ' · ' + tvOf(G) : '')) + '</span><span class="cd" data-cd="' + G.kick + '" data-cdk="s">' + cdShort(G.kick) + '</span>';
+  return '<article class="mc' + (G.fav ? ' fav' : '') + (hot ? ' hot' : '') + '" style="--c:' + LG[G.lg].c + '"><a class="mc-a" href="' + esc(G.href) + '"><div class="mc-h"><span class="lg">' + LG[G.lg].n + '</span>' + (G.live ? '<span class="clk">' + esc(clockStr(G)) + '</span>' : '<span class="when">' + (G.kick && G.kick <= Date.now() ? 'Starting now' : 'Up next') + '</span>') + (G.fav ? '<span class="me">Your team</span>' : '') + '</div>'
+    + teamRow(G, 'a') + teamRow(G, 'h') + (G.live ? wpBar(G, 'mwp') : '') + '<div class="mc-f">' + foot + '</div></a>'
+    + (G.live ? '<button type="button" class="mc-spot" data-spot="' + esc(G.key) + '" aria-label="Show this game in the spotlight" title="Show in the spotlight">' + ICON.spot + '</button>' : '') + '</article>'; }
+/* the situation line: who has the ball, down and distance and the red zone in football; then the score by quarter and the
+   pregame line, when the relays and the schedule have them */
+function sitHTML(G){ const s = G.sit, out = [];
+  if ((G.lg === 'cfb' || G.lg === 'nfl') && s.pos) out.push('<span><span class="fbi">' + ICON.fb + '</span> <b>' + esc(nameOf(G, s.pos)) + '</b> ball' + (s.dd ? ' · ' + esc(s.dd) : '') + '</span>' + (s.rz ? '<span class="chip-rz">Red zone</span>' : ''));
+  if (G.ls && G.ls[0].length && G.ls[0].length === G.ls[1].length) out.push('<span class="qtrs">By quarter: <b>' + esc(abOf(G, 'a')) + '</b> ' + esc(G.ls[0].join('-')) + ' · <b>' + esc(abOf(G, 'h')) + '</b> ' + esc(G.ls[1].join('-')) + '</span>');
+  if (G.spread != null && G.spread !== 0) out.push('<span>Pregame line: ' + esc(nameOf(G, G.spread < 0 ? 'h' : 'a')) + ' by ' + Math.abs(G.spread) + '</span>');
+  return out.length ? '<div class="spot-sit">' + out.join('') + '</div>' : ''; }
+function sparkline(vals, ca, ch){ if (!vals || vals.length < 3) return ''; const W = 300, Hh = 56, n = vals.length; const step = Math.max(1, Math.floor(n / 90)); const v = vals.filter((x, i) => i % step === 0 || i === n - 1); const X = i => (i / (v.length - 1)) * W, Y = p => Hh - 3 - (p / 100) * (Hh - 6);
+  const d = v.map((p, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(p).toFixed(1)).join(' ');
+  return '<svg class="wp-sp" viewBox="0 0 ' + W + ' ' + Hh + '" preserveAspectRatio="none" aria-hidden="true"><defs><clipPath id="spt"><rect x="0" y="0" width="' + W + '" height="' + Y(50) + '"/></clipPath><clipPath id="spb"><rect x="0" y="' + Y(50) + '" width="' + W + '" height="' + Hh + '"/></clipPath></defs>'
+    + '<path d="' + d + ' L' + W + ' ' + Y(50) + ' L0 ' + Y(50) + 'Z" fill="' + ch + '" opacity=".28" clip-path="url(#spt)"/><path d="' + d + ' L' + W + ' ' + Y(50) + ' L0 ' + Y(50) + 'Z" fill="' + ca + '" opacity=".28" clip-path="url(#spb)"/>'
+    + '<line x1="0" x2="' + W + '" y1="' + Y(50) + '" y2="' + Y(50) + '" stroke="rgba(255,255,255,.25)" stroke-dasharray="3 4"/><path d="' + d + '" fill="none" stroke="#fff" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>'; }
+function spotHTML(G, picked){ const o = O[G.lg], H = G.H || {show: 0}; const ca = deep(o.color(G.a.t), o.alt(G.a.t)), ch = deep(o.color(G.h.t), o.alt(G.h.t));
+  const lose = s => (G.a.s || 0) !== (G.h.s || 0) && (G[s].s || 0) < (G[s === 'a' ? 'h' : 'a'].s || 0);
+  const side = s => '<div class="st ' + s + (lose(s) ? ' lose' : '') + '">' + plate(logoOf(G, s)) + '<div class="st-n"><b>' + (G[s].rk ? '<span style="opacity:.6;font-size:.6em;margin-right:4px">' + G[s].rk + '</span>' : '') + esc(o.name(G[s].t)) + '</b><small>' + esc(o.sub(G[s].t) || o.full(G[s].t)) + (G.sit.pos === s ? ' · has the ball' : '') + '</small></div>' + scoreSpan(G, s, 'st-s') + '</div>';
+  const chips = []; const w = whyText(G); chips.push('<span class="' + (closeLate(G) || (G.P && G.P.ot) ? 'hot' : '') + '">' + esc(w) + '</span>'); if (G.fav) chips.push('<span class="me">Your team</span>');
+  let wp = ''; if (G.wp != null) { const h = Math.round(G.wp); const caU = colorOf(G, 'a'); let chU = colorOf(G, 'h'); if (near(caU, chU)) chU = '#cbd5e1';
+    wp = '<div class="wp"><div class="wp-l"><span>' + esc(abOf(G, 'a')) + ' <b>' + (100 - h) + '%</b></span><span class="k">Win chance, per ESPN</span><span><b>' + h + '%</b> ' + esc(abOf(G, 'h')) + '</span></div>' + wpBar(G, 'wp-bar') + sparkline(G.wps, caU, chU) + '</div>'; }
+  /* the last scoring play, and the latest play under it when that is something else (football: the play that just happened) */
+  const ls = G.lastScore, lp = G.sit.last && G.sit.last !== ls && !(G.lg === 'nba' && ls) ? G.sit.last : '';
+  const last = ls || lp ? '<div class="spot-last">' + (ls ? '<span class="k">Last score</span>' + esc(ls) : '') + (lp ? '<span class="k' + (ls ? ' k2' : '') + '">Last play</span>' + esc(lp) : '') + '</div>' : '';
+  const tv = tvOf(G);
+  return '<article class="spot" style="--ca:' + ca + ';--ch:' + ch + '"><div class="spot-top"><span class="pill-live">LIVE</span><span>Spotlight</span><span class="lg-tag">' + LG[G.lg].n + '</span><span class="heat" style="--hc:' + heatColor(H.show) + '" title="Excitement score, 0 to 100">\u{1F525} ' + H.show + ' · ' + esc(heatWord(H.show, G)) + '</span></div>'
+    + '<a class="spot-board" href="' + esc(G.href) + '">' + side('a') + '<div class="spot-mid"><span class="clk">' + esc(clockStr(G)) + '</span><span class="sub">' + (G.neutral ? 'neutral site' : esc(abOf(G, 'a')) + ' at ' + esc(abOf(G, 'h'))) + '</span></div>' + side('h') + '</a>'
+    + '<div class="spot-why">' + chips.join('') + '</div>' + sitHTML(G) + wp + last
+    + '<div class="spot-act"><a class="go" href="' + esc(G.href) + '">Open the game page ›</a>' + (tv ? '<span class="tvn">On ' + esc(tv) + '</span>' : '') + (picked ? '<button type="button" class="back" data-spot="">Back to the hottest game</button>' : '') + '</div></article>'; }
+function nextHTML(G, label){ const o = O[G.lg]; const ca = deep(o.color(G.a.t), o.alt(G.a.t)), ch = deep(o.color(G.h.t), o.alt(G.h.t)); const tv = tvOf(G);
+  const side = s => '<div class="st ' + s + '">' + plate(logoOf(G, s)) + '<div class="st-n"><b>' + (G[s].rk ? '<span style="opacity:.6;font-size:.6em;margin-right:4px">' + G[s].rk + '</span>' : '') + esc(o.name(G[s].t)) + '</b><small>' + esc(o.sub(G[s].t) || o.full(G[s].t)) + '</small></div></div>';
+  const line = G.spread != null ? (G.spread === 0 ? 'Pick ’em' : 'Line: ' + nameOf(G, G.spread < 0 ? 'h' : 'a') + ' by ' + Math.abs(G.spread)) : '';
+  return '<article class="spot" style="--ca:' + ca + ';--ch:' + ch + '"><div class="spot-top"><span>' + esc(label || 'Up next') + '</span><span class="lg-tag">' + LG[G.lg].n + '</span>' + (G.fav ? '<span class="lg-tag" style="color:#ffe08a;background:rgba(251,191,36,.18)">Your team</span>' : '') + '</div>'
+    + '<a class="spot-board" href="' + esc(G.href) + '">' + side('a') + '<div class="spot-mid"><span class="big" data-cd="' + G.kick + '" data-cdk="b">' + cdHTML(G.kick) + '</span><span class="sub">' + esc(dayWord(G.kick) + ' · ' + kickStr(G.kick) + ' ' + TZ) + '</span></div>' + side('h') + '</a>'
+    + '<div class="spot-sit">' + (tv ? '<span>On <b>' + esc(tv) + '</b></span>' : '') + (line ? '<span>' + esc(line) + '</span>' : '') + '<span>' + (G.neutral ? 'Neutral site' : esc(o.full(G.h.t)) + ' at home') + '</span></div>'
+    + '<div class="spot-act"><a class="go" href="' + esc(G.href) + '">Open the game page ›</a></div></article>'; }
+function upRow(G){ const o = O[G.lg]; const side = s => (G[s].rk ? '<span class="rk">' + G[s].rk + '</span>' : '') + '<span class="' + (isFav(G.lg, G[s].t) ? 'fv' : '') + '">' + esc(o.name(G[s].t)) + '</span>';
+  const started = G.kick && G.kick <= Date.now();
+  const t = G.st === 'off' ? '<b>' + esc(clockStr(G)) + '</b>' : started ? '<b>' + esc(kickStr(G.kick)) + '</b><span class="cd soon">' + (G.has ? 'Starting' : 'Started · no live score yet') + '</span>' : '<b>' + esc(kickStr(G.kick)) + '</b><span class="cd' + (G.kick - Date.now() < 15 * 60e3 ? ' soon' : '') + '" data-cd="' + G.kick + '" data-cdk="s">' + cdShort(G.kick) + '</span>';
+  return '<a class="up-r' + (G.fav ? ' fav' : '') + '" href="' + esc(G.href) + '"><span class="lg-tag" style="--c:' + LG[G.lg].c + '">' + LG[G.lg].n + '</span><span class="up-m">' + logoImg(logoOf(G, 'a')) + '<span class="nm">' + side('a') + ' <span class="at">' + (G.neutral ? 'vs' : 'at') + '</span> ' + side('h') + '</span>' + logoImg(logoOf(G, 'h')) + '</span><span class="up-t">' + t + '</span><span class="net">' + esc(tvOf(G) || 'TV TBA') + '</span></a>'; }
+function finHTML(G){ const o = O[G.lg]; const w = (G.a.s || 0) > (G.h.s || 0) ? 'a' : (G.h.s || 0) > (G.a.s || 0) ? 'h' : '';
+  const row = s => '<div class="fr' + (w === s ? ' w' : '') + '">' + logoImg(logoOf(G, s)) + '<span>' + esc(o.name(G[s].t)) + '</span><b>' + (G[s].s == null ? '' : G[s].s) + '</b></div>';
+  return '<a class="fin' + (G.fav ? ' fav' : '') + '" href="' + esc(G.href) + '" style="--c:' + LG[G.lg].c + '"><div class="fin-h"><span class="lg">' + LG[G.lg].n + '</span><span>' + esc(clockStr(G)) + '</span></div>' + row('a') + row('h') + '</a>'; }
+function feedHTML(e, U){ const G = U.find(x => x.key === e.g); const lgm = LG[e.lg]; const o = O[e.lg];
+  const logo = e.team ? o.logo(e.team, e.eid) : null; const ago = e.seen ? Math.round((Date.now() - e.t) / 60e3) : null;
+  return '<li class="' + (e.fav ? 'fav' : '') + (NEWK.has(e.k) ? ' new' : '') + '" style="--c:' + lgm.c + '"><a href="' + esc(G ? G.href : e.href) + '"><div class="fd-m"><span class="lg">' + lgm.n + '</span><b>' + esc(e.sl || '') + '</b><span>' + esc(e.when || '') + '</span>' + (ago != null ? '<span>' + (ago < 1 ? 'just now' : ago + ' min ago') + '</span>' : '') + '</div><div class="fd-t">' + (e.team ? logoImg(logo) : '') + '<span>' + esc(e.txt) + '</span></div></a></li>'; }
+
+let SPOT = ssGet(SK + 'spot') || '';   /* a game you put in the spotlight yourself (this visit only) */
+let UPALL = false, FINALL = false, FEEDALL = false, GRIDALL = false;
+let VIEW = null;
+function render(){
+  TODAY = etDate(); FAVS = favList();
+  const U = universe(); const now = Date.now();
+  const live = U.filter(G => G.live); live.forEach(G => { G.H = heat(G); }); live.sort((a, b) => b.H.s - a.H.s);
+  if (SPOT && !live.some(G => G.key === SPOT)) { SPOT = ''; ssSet(SK + 'spot', ''); }
+  const spot = live.find(G => G.key === SPOT) || live[0] || null;
+  /* coming up: the rest of today (your time), or the next day with games; college only national TV, ranked or your teams */
+  const pre = U.filter(G => (G.st === 'pre' || G.st === 'off') && G.kick && G.kick > now - 3 * 3600e3 && !(G.st === 'pre' && !G.has && G.kick < now - 20 * 60e3 && (DEMO || !ERR[G.lg])) && !(G.lg === 'cfb' && !G.fav && !G.a.rk && !G.h.rk && !NAT.test(net(G.tv))))
+    .sort((a, b) => a.kick - b.kick || (b.fav ? 1 : 0) - (a.fav ? 1 : 0));
+  const today = localDay(now); let upDay = today; let up = pre.filter(G => localDay(G.kick) === today);
+  if (!up.length && pre.length) { upDay = localDay(pre[0].kick); up = pre.filter(G => localDay(G.kick) === upDay); }
+  /* your teams: live now (other than the spotlight), or starting later today */
+  const mine = live.filter(G => G.fav && G !== spot).concat(pre.filter(G => G.fav && G.st === 'pre' && G.kick > now - 45 * 60e3 && localDay(G.kick) === today));
+  const mineKeys = new Set(mine.map(G => G.key));
+  const rest = live.filter(G => G !== spot && !mineKeys.has(G.key));
+  const late = +fmt({hour:'numeric', hourCycle:'h23'}) < 4; const yday = addDay(today, -1);
+  const fins = U.filter(G => G.st === 'post' && (G.kick ? (localDay(G.kick) === today || (late && localDay(G.kick) === yday)) : G.date === TODAY)).sort((a, b) => (b.fav ? 1 : 0) - (a.fav ? 1 : 0) || (b.kick || 0) - (a.kick || 0));
+  VIEW = {U, live, spot};
+  /* header */
+  $('#lv-date').textContent = fmt({weekday:'long', month:'long', day:'numeric'});
+  const later = pre.filter(G => G.kick > now && localDay(G.kick) === today).length;
+  const nx = pre.find(G => G.st === 'pre' && G.kick > now);
+  const loading = !DEMO && !LAST && !live.length;   /* the first draw, before the first check of the scores */
+  /* games that should be under way while their league's scores are not coming through */
+  const blind = DEMO ? [] : pre.filter(G => G.st === 'pre' && !G.has && G.kick <= now && ERR[G.lg]);
+  $('#lv-lead').innerHTML = loading ? 'Checking live scores for college football, the NFL and the NBA…' : live.length ? '<b>' + live.length + ' game' + (live.length === 1 ? '' : 's') + ' live</b> right now' + (later ? ', ' + later + ' more later today' : '') + '. Tap any game for its full game page.'
+    : blind.length ? 'Live scores aren’t coming through right now, so the page keeps trying. <b>' + blind.length + ' game' + (blind.length === 1 ? '' : 's') + '</b> should be under way: tap one below for its game page.'
+    : 'Nothing live right now.' + (nx ? ' Next up: <b>' + esc(O[nx.lg].name(nx.a.t) + ' at ' + O[nx.lg].name(nx.h.t)) + '</b>, ' + esc(/^(Today|Tomorrow)$/.test(dayWord(nx.kick)) ? dayWord(nx.kick).toLowerCase() : dayWord(nx.kick)) + ' at ' + esc(kickStr(nx.kick)) + ' ' + TZ + '.' : ' No games on the schedule this week.');
+  document.title = (live.length ? '(' + live.length + ' live) ' : '') + 'Live Center · Jamo Sports Hub';
+  /* spotlight, or the next game with a countdown when nothing is live */
+  let spotEl = '';
+  if (spot) spotEl = spotHTML(spot, SPOT && spot.key === SPOT && live[0] !== spot);
+  else if (loading) spotEl = '<div class="empty" style="padding:48px 16px">Checking live scores…</div>';
+  else { const soonFav = pre.find(G => G.fav && G.st === 'pre' && G.kick > now && G.kick - now < 24 * 3600e3); const n2 = soonFav || nx; if (n2) spotEl = nextHTML(n2, blind.length ? 'Scores aren’t loading right now · next up' : 'Nothing live right now · next up'); else spotEl = '<div class="empty">No games on the schedule for the next week.</div>'; }
+  $('#spot').innerHTML = spotEl;
+  /* your teams */
+  $('#mine-wrap').hidden = !mine.length; $('#mine').innerHTML = mine.map(cardHTML).join(''); $('#mine-n').textContent = mine.length ? (mine.some(G => G.live) ? 'live and later today' : 'later today') : '';
+  /* live grid */
+  $('#grid-wrap').hidden = !rest.length; $('#grid').innerHTML = rest.map(cardHTML).join(''); $('#grid').classList.toggle('all', GRIDALL);
+  { const b = $('#grid-more'); b.hidden = rest.length <= 6; b.textContent = GRIDALL ? 'Show the hottest six' : 'Show all ' + rest.length + ' live games'; b.setAttribute('aria-expanded', String(GRIDALL)); } $('#grid-n').textContent = rest.length ? rest.length + ' more game' + (rest.length === 1 ? '' : 's') : '';
+  /* scoring feed */
+  const dayKeys = new Set(U.filter(G => G.st === 'in' || G.st === 'post').map(G => G.key));
+  const feed = [...FEED.values()].filter(e => dayKeys.has(e.g)).sort((a, b) => b.t - a.t);
+  const fshow = FEEDALL ? feed.slice(0, 60) : feed.slice(0, 12);
+  $('#feed-wrap').hidden = !feed.length; $('#cols').classList.toggle('nofeed', !feed.length);
+  $('#feed').innerHTML = fshow.map(e => feedHTML(e, U)).join('') + (feed.length > 12 ? '<li><button type="button" class="fd-more" id="feed-all">' + (FEEDALL ? 'Show fewer' : 'Show more (' + Math.min(60, feed.length) + ')') + '</button></li>' : '');
+  $('#feed-n').textContent = 'newest first · ' + feed.length + ' play' + (feed.length === 1 ? '' : 's');
+  NEWK.clear();
+  /* coming up */
+  const upShow = up.filter(G => !mineKeys.has(G.key)); const cap = UPALL ? upShow.length : 10;
+  $('#up-wrap').hidden = !upShow.length;
+  $('#up-h').textContent = upDay === today ? 'Coming up today' : 'Coming up · ' + dayWord(upShow.length ? upShow[0].kick : now);
+  $('#up-n').textContent = upShow.length ? upShow.length + ' game' + (upShow.length === 1 ? '' : 's') + ' · times ' + TZ : '';
+  $('#up').innerHTML = upShow.slice(0, cap).map(upRow).join('') + (upShow.length > 10 ? '<button type="button" class="fd-more" id="up-all" style="width:auto;margin:10px 14px">' + (UPALL ? 'Show fewer' : 'Show all ' + upShow.length) + '</button>' : '');
+  /* finals */
+  $('#fin-wrap').hidden = !fins.length; $('#fin-n').textContent = fins.length ? fins.length + ' game' + (fins.length === 1 ? '' : 's') : '';
+  $('#fin').innerHTML = fins.slice(0, FINALL ? 80 : 12).map(finHTML).join('') + (fins.length > 12 ? '<button type="button" class="fd-more" id="fin-all" style="grid-column:1/-1">' + (FINALL ? 'Show fewer' : 'Show all ' + fins.length) + '</button>' : '');
+  status(); wake(); }
+function status(){ const b = $('#upd'), t = $('#upd-t'); if (!b || !t) return; const bad = Object.keys(ERR).filter(k => ERR[k] && LG[k]);
+  b.className = 'upd' + (DEMO ? '' : bad.length ? ' warn' : !LAST ? ' idle' : '');
+  t.innerHTML = DEMO ? 'Demo scores' : bad.length ? esc(bad.map(k => LG[k].n).join(', ')) + ' scores <span class="ul">did not load, </span>retrying' : LAST ? '<span class="ul">Updated </span>' + esc(fmt({hour:'numeric', minute:'2-digit', second:'2-digit'}, new Date(LAST))) : 'Loading scores…'; }
+
+/* ---------- polling: every 25 seconds while a game is live or about to start, slower otherwise, paused while hidden ---------- */
+let TIMER = null, BUSY = false, FIRST = true;
+async function fetchAll(first){
+  const now = Date.now(), want = {cfb: new Set(), cfbx: new Set(), nfl: new Set(), nba: new Set()};
+  const need = (L, g, hrs) => { if (L) { const s = relaySt(L.st, L.per); if (s === 'in') return true; if (s === 'post' || s === 'off') return false; } if (!first && played(g)) return false; if (first && played(g)) return false;
+    if (!timed(g)) return g.date === TODAY && first; const k = kickMs(g.date, g.time); return k <= now + 15 * 60e3 && k >= now - (first ? 14 : hrs) * 3600e3; };
+  CFB.forEach(g => { if (!cfbIn(g) || !need(LIVE.cfb[g.id], g, 5)) return; (FBS.size && !FBS.has(g.away) && !FBS.has(g.home) ? want.cfbx : want.cfb).add(g.week); });
+  NFL.forEach(g => { if (need(LIVE.nfl[g.id], g, 5)) want.nfl.add(g.stype + ':' + g.week); });
+  NBA.forEach(g => { if (need(LIVE.nba[g.id], g, 4)) want.nba.add(g.date); });
+  /* games the schedule does not have but a relay showed in progress */
+  Object.keys(LIVE).forEach(lg => Object.values(LIVE[lg]).forEach(L => { if (relaySt(L.st, L.per) !== 'in') return; if (lg === 'cfb') (L._g === '81' ? want.cfbx : want.cfb).add(L._wk); else if (lg === 'nfl') want.nfl.add(L._k); else want[lg].add(L.date); }));
+  const jobs = [], asked = new Set();
+  const run = (lg, path, put) => asked.add(lg) && jobs.push(getJ(path).then(j => { if (!j || !Array.isArray(j.games)) { ERR[lg] = Date.now(); return; } ERR[lg] = 0; OKT[lg] = Date.now(); j.games.forEach(put); }));
+  want.cfb.forEach(w => { if (w >= 1 && w <= 16) run('cfb', '/api/cfb/scoreboard?week=' + w + '&groups=80', e => { if (!e.away || !e.home) return; e._wk = w; e._g = '80'; LIVE.cfb[e.date + '|' + e.away.n + '|' + e.home.n] = e; }); });
+  want.cfbx.forEach(w => { if (w >= 1 && w <= 16) run('cfb', '/api/cfb/scoreboard?week=' + w + '&groups=81', e => { if (!e.away || !e.home) return; const k = e.date + '|' + e.away.n + '|' + e.home.n; if (LIVE.cfb[k] && LIVE.cfb[k]._g === '80') return; e._wk = w; e._g = '81'; LIVE.cfb[k] = e; }); });
+  want.nfl.forEach(k => { const p = k.split(':'); if (p[1]) run('nfl', '/api/nfl/scoreboard?week=' + p[1] + '&stype=' + (p[0] === '3' ? 3 : 2), e => { if (!e || !e.away || !e.home) return; e._k = k; LIVE.nfl[String(e.id)] = e; }); });
+  want.nba.forEach(d => run('nba', '/api/nba/scoreboard?date=' + d.replace(/-/g, ''), e => { if (e && e.away && e.home) LIVE.nba[String(e.id)] = e; }));
+  Object.keys(LG).forEach(lg => { if (!asked.has(lg)) ERR[lg] = 0; });   /* a league with nothing to check this round has nothing failing */
+  if (jobs.length) { await Promise.all(jobs); LAST = Date.now(); }
+  else if (!LAST) LAST = Date.now(); }
+/* game summaries for at most four live games per round: the spotlight, your teams, then the hottest */
+async function fetchSums(){ const U = universe(); const live = U.filter(G => G.live && sumUrl(G)); live.forEach(G => { G.H = heat(G); });
+  const pri = G => (G.key === SPOT ? 1e6 : 0) + (G.fav ? 1e5 : 0) + G.H.s;
+  const pick = live.sort((a, b) => pri(b) - pri(a)).slice(0, 4);
+  await Promise.all(pick.map(G => getJ(sumUrl(G)).then(j => { if (j && !j.error) applySum(G, j); }))); }
+function delay(){ if (DEMO) return 7000; const now = Date.now(); const U = VIEW ? VIEW.U : [];
+  if (U.some(G => G.live)) return 25000;
+  const nexts = U.filter(G => G.st === 'pre' && G.kick).map(G => G.kick).filter(k => k > now - 3 * 3600e3);
+  if (nexts.some(k => k - now < 15 * 60e3)) return 25000;
+  const soon = nexts.filter(k => k > now).sort((a, b) => a - b)[0];
+  return soon ? Math.max(60e3, Math.min(10 * 60e3, soon - 15 * 60e3 - now)) : 10 * 60e3; }
+async function cycle(){ if (BUSY) return; BUSY = true; clearTimeout(TIMER);
+  try { TODAY = etDate();
+    if (DEMO) demoStep(); else { await fetchAll(FIRST); await fetchSums(); }
+    const U = universe(); U.forEach(G => { if (G.live) G.P = prog(G); }); moments(U); saveFeed(); render(); }
+  catch (e) { /* a bad answer from one relay never stops the page: keep the last good scores and try again */ ERR._page = Date.now(); }
+  FIRST = false; BUSY = false; plan(); }
+function plan(){ clearTimeout(TIMER); if (document.hidden) return; TIMER = setTimeout(cycle, delay()); }
+document.addEventListener('visibilitychange', () => { if (document.hidden) { clearTimeout(TIMER); wake(); } else cycle(); });
+
+/* ---------- countdowns and the TV clock ---------- */
+function tick(){ document.querySelectorAll('[data-cd]').forEach(el => { const k = +el.dataset.cd; if (!k) return; if (el.dataset.cdk === 'b') el.innerHTML = k - Date.now() <= 0 ? 'Starting' : cdHTML(k); else el.textContent = cdShort(k); });
+  const c = $('#tv-clock'); if (c && TVM) c.textContent = fmt({hour:'numeric', minute:'2-digit'}); }
+
+/* ---------- TV mode: big screen layout, no site chrome, screen kept awake while games are live ---------- */
+let TVM = false, WL = null;
+async function wake(){ const want = TVM && !document.hidden && VIEW && VIEW.live.length > 0; const w = $('#tv-wake');
+  if (want && !WL && 'wakeLock' in navigator) { try { WL = await navigator.wakeLock.request('screen'); WL.addEventListener('release', () => { WL = null; }); } catch (e) { WL = null; } }
+  if (!want && WL) { try { await WL.release(); } catch (e) {} WL = null; }
+  if (w) w.textContent = !TVM ? '' : !('wakeLock' in navigator) ? '' : WL ? 'Screen stays on while games are live' : (VIEW && VIEW.live.length ? '' : 'Screen can sleep: nothing live'); }
+function setTV(on, user){ TVM = on; document.body.classList.toggle('livetv', on);
+  if (user) { try { history.replaceState(null, '', location.pathname + location.search + (on ? '#tv' : '')); } catch (e) {} }
+  if (user && on && document.documentElement.requestFullscreen && matchMedia('(min-width:900px)').matches) { document.documentElement.requestFullscreen().catch(() => {}); }
+  if (user && !on && document.fullscreenElement && document.exitFullscreen) { document.exitFullscreen().catch(() => {}); }
+  tick(); wake(); }
+$('#tv-btn').addEventListener('click', () => setTV(true, true));
+$('#tv-exit').addEventListener('click', () => setTV(false, true));
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && TVM) setTV(false, true); });
+addEventListener('hashchange', () => { if ((location.hash === '#tv') !== TVM) setTV(location.hash === '#tv', false); });
+
+/* ---------- buttons ---------- */
+$('#upd').addEventListener('click', () => cycle());
+$('#opt-btn').addEventListener('click', () => { const p = $('#opt'), open = p.hidden; p.hidden = !open; $('#opt-btn').setAttribute('aria-expanded', String(open)); });
+$('#opt-pop').checked = !!OPT.pop; $('#opt-web').checked = !!OPT.weber;
+$('#opt-pop').addEventListener('change', e => { OPT.pop = e.target.checked; lsSet('jsh-live', OPT); });
+$('#opt-web').addEventListener('change', e => { OPT.weber = e.target.checked; lsSet('jsh-live', OPT); FAVS = favList(); cycle(); });
+document.addEventListener('click', e => { const t = e.target.closest ? e.target : null; if (!t) return;
+  const sp = t.closest('[data-spot]'); if (sp) { e.preventDefault(); SPOT = sp.dataset.spot || ''; ssSet(SK + 'spot', SPOT); render(); if (SPOT) { const s = $('#spot'); if (s) s.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'}); } return; }
+  if (t.closest('#up-all')) { UPALL = !UPALL; render(); return; }
+  if (t.closest('#grid-more')) { GRIDALL = !GRIDALL; render(); return; }
+  if (t.closest('#fin-all')) { FINALL = !FINALL; render(); return; }
+  if (t.closest('#feed-all')) { FEEDALL = !FEEDALL; render(); } });
+/* the top bar lights "Live" (or nothing) instead of Home on this page */
+(function(){ const on = document.querySelector('.jsh-nav a.on'); const me = document.querySelector('.jsh-nav a[data-s="live"]'); if (on && on !== me && on.getAttribute('data-s') === 'sports') { on.classList.remove('on'); on.removeAttribute('aria-current'); } if (me) { me.classList.add('on'); me.setAttribute('aria-current', 'page'); } })();
+
+/* ---------- demo (?livedemo=1): a handful of nearby games marked live with made-up clocks and scores, so the spotlight,
+   grid, feed and pop-ups can be checked any time. Nothing here is fetched; every number is invented and labeled. ---------- */
+let DS = null, DN = -1;
+const rng = (s => () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; })(20261027);
+function demoInit(){ const out = [], used = new Set(), lo = addDay(TODAY, -1), hi = addDay(TODAY, 8);
+  const inWin = g => g.date >= lo && g.date <= hi; const byNear = (a, b) => Math.abs(Date.parse(a.date) - Date.parse(TODAY)) - Math.abs(Date.parse(b.date) - Date.parse(TODAY));
+  const pick = (list, f) => list.filter(g => inWin(g) && !used.has(g.id) && (!f || f(g))).sort(byNear)[0];
+  const fav = sp => (FAVS.find(f => f.sport === sp) || {}).team; const has = t => g => t && (g.away === t || g.home === t);
+  const add = (lg, g, s) => { if (!g) return null; used.add(g.id); const d = {lg, g, s: Object.assign({as: 0, hs: 0, per: 1, clk: 900, freeze: 0}, s), n: out.length}; out.push(d); return d; };
+  const byu = pick(CFB.filter(cfbIn), has(fav('cfb')));
+  if (byu) { const me = byu.away === fav('cfb') ? 'a' : 'h'; add('cfb', byu, {per: 4, clk: 161, as: me === 'a' ? 24 : 27, hs: me === 'a' ? 27 : 24, pos: me, dd: '2nd & 6 at the 28', wp: me === 'a' ? 59 : 41, script: {3: {side: me, pts: 7, text: 'Demo play: 28-yard touchdown pass'}}, freeze: 3}); }
+  const upset = pick(CFB.filter(cfbIn), g => g.spread != null && Math.abs(g.spread) >= 7);
+  if (upset) { const dog = upset.spread > 0 ? 'h' : 'a'; add('cfb', upset, {per: 3, clk: 25, as: dog === 'a' ? 27 : 17, hs: dog === 'h' ? 27 : 17, pos: dog === 'a' ? 'h' : 'a', dd: '1st & 10 at the 35', wp: dog === 'h' ? 38 : 62, script: {2: {side: dog === 'a' ? 'h' : 'a', pts: 3, text: 'Demo play: 41-yard field goal'}}, freeze: 3}); }
+  const nfl = pick(NFL, has(fav('nfl'))) || pick(NFL); if (nfl) { const me = isFav('nfl', nfl.away) ? 'a' : 'h'; add('nfl', nfl, {per: 2, clk: 550, as: me === 'a' ? 14 : 7, hs: me === 'a' ? 7 : 14, pos: me, dd: '3rd & 4 at the 47', wp: me === 'a' ? 33 : 67, script: {5: {side: me, pts: 3, text: 'Demo play: 46-yard field goal'}}, freeze: 6}); }
+  const nb1 = pick(NBA, has(fav('nba'))) || pick(NBA); if (nb1) add('nba', nb1, {per: 4, clk: 40, as: 101, hs: 101, wp: 52, freeze: 2, script: {2: {side: 'h', pts: 3, text: 'Demo play: corner three'}}});
+  const nb2 = pick(NBA); if (nb2) add('nba', nb2, {per: 3, clk: 340, as: 88, hs: 64, wp: 96});
+  const nb3 = pick(NBA); if (nb3) add('nba', nb3, {per: 5, clk: 210, as: 112, hs: 112, wp: 50, freeze: 1});
+  const cf3 = pick(CFB.filter(cfbIn)); if (cf3) add('cfb', cf3, {per: 1, clk: 610, as: 7, hs: 0, pos: 'h', dd: '1st & 10 at the 25', wp: 58});
+  return out; }
+function demoStep(){ if (!DS) { DS = demoInit(); const b = $('#demo'); if (b) b.hidden = false; } DN++; const now = Date.now();
+  DS.forEach(d => { const s = d.s, g = d.g;
+    if (DN > 0 && !s.done) { const ev = s.script && s.script[DN];
+      { const L = LG[d.lg], step = d.lg === 'nba' ? 38 : 33; s.clk -= step; if (s.clk <= 0) { if (s.per < L.per || margin({a: {s: s.as}, h: {s: s.hs}}) === 0) { s.per++; s.clk = s.per > L.per ? (d.lg === 'nba' ? 300 : 600) : L.len; } else { s.clk = 0; s.done = true; } } }
+      if (ev) { if (ev.side === 'a') s.as += ev.pts; else s.hs += ev.pts; s.wp = s.wp != null ? Math.max(3, Math.min(97, s.wp + (ev.side === 'h' ? 12 : -12))) : null; d.newPlay = ev; }
+      else if (DN > (s.freeze || 0)) { const r = rng(); const pts = d.lg === 'nba' ? (r < .5 ? 2 : r < .7 ? 3 : 0) : (r < .12 ? 7 : r < .18 ? 3 : 0); if (pts) { const side = rng() < .5 ? 'a' : 'h'; if (side === 'a') s.as += pts; else s.hs += pts; if (d.lg !== 'nba' || pts === 3) d.newPlay = {side, pts, text: d.lg === 'nba' ? 'Demo play: pull-up three' : pts === 7 ? 'Demo play: 9-yard touchdown run' : 'Demo play: 38-yard field goal'}; } } }
+    const mmss = x => Math.floor(Math.max(0, x) / 60) + ':' + String(Math.max(0, Math.round(x)) % 60).padStart(2, '0');
+    const nbaClk = x => x >= 60 ? mmss(x) : Math.max(0, x).toFixed(1);
+    /* made-up quarter scores that add up to the made-up total */
+    const qtrs = (tot, per) => { const n = Math.max(1, per), b = Math.floor(tot / n); return Array.from({length: n}, (x, i) => i < n - 1 ? b : tot - b * (n - 1)); };
+    const A = {id: 'd-a', ab: '', n: g.away, s: String(s.as), ls: qtrs(s.as, s.per)}, H = {id: 'd-h', ab: '', n: g.home, s: String(s.hs), ls: qtrs(s.hs, s.per)};
+    let L;
+    if (d.lg === 'cfb') { A.id = CFBLOGO[g.away] || 'd-a'; H.id = CFBLOGO[g.home] || 'd-h'; L = {id: 'demo' + d.n, date: g.date, st: 'IN_PROGRESS', det: '', per: s.per, clk: mmss(s.clk), away: A, home: H, pos: s.pos === 'a' ? A.id : H.id, dd: s.dd, rz: false, last: ''}; }
+    else if (d.lg === 'nfl') { A.ab = g.away; H.ab = g.home; L = {id: g.id, date: g.date, st: 'IN_PROGRESS', det: '', per: s.per, clk: mmss(s.clk), away: A, home: H, pos: s.pos === 'a' ? 'd-a' : 'd-h', dd: s.dd, rz: false, last: ''}; }
+    else { A.ab = g.away; H.ab = g.home; L = {id: g.id, date: g.date, st: 'IN_PROGRESS', det: '', per: s.per, clk: nbaClk(s.clk), away: A, home: H, last: 'Demo play: defensive rebound'}; }
+    if (s.done) { L.st = 'FINAL'; L.det = 'Final'; L.pos = ''; }
+    const lk = d.lg === 'cfb' ? g.id : String(g.id); LIVE[d.lg][lk] = L;
+    const G = build(d.lg, g, L);
+    if (!SUM[G.key]) { SUM[G.key] = {t: now, wp: s.wp, wps: null, last: ''};
+      { const w = [50]; for (let i = 1; i < 40; i++) w.push(Math.max(4, Math.min(96, w[i - 1] + (rng() - .5) * 9))); w.push(s.wp); SUM[G.key].wps = w; }
+      const seed = d.lg === 'nba' ? [{side: 'a', text: 'Demo play: step-back three'}] : [{side: 'h', text: 'Demo play: 12-yard touchdown run'}, {side: 'a', text: 'Demo play: 33-yard touchdown pass'}];
+      seed.forEach((p, i) => addFeed(G, {k: G.key + '|seed' + i, per: Math.max(1, s.per - 1 - i), left: 300, when: 'Q' + Math.max(1, s.per - 1 - i), text: p.text, side: p.side, sl: abOf(G, 'a') + ' ' + (G.a.s || 0) + '–' + (G.h.s || 0) + ' ' + abOf(G, 'h')})); SUM[G.key].last = seed[seed.length - 1].text; }
+    else { SUM[G.key].t = now; if (s.wp != null) SUM[G.key].wp = s.wp; }
+    if (d.newPlay) { SUMSEEN.add(G.key); const Gn = build(d.lg, g, L); addFeed(Gn, {k: G.key + '|d' + DN, per: s.per, left: s.clk, when: clockStr(Gn), text: d.newPlay.text, side: d.newPlay.side, sl: abOf(Gn, 'a') + ' ' + s.as + '–' + s.hs + ' ' + abOf(Gn, 'h'), live: true}); SUM[G.key].last = d.newPlay.text; }
+    d.newPlay = null; }); }
+
+/* ---------- start ---------- */
+if (location.hash === '#tv') setTV(true, false);
+try { render(); } catch (e) {}
+setInterval(tick, 1000);
+setTimeout(cycle, DEMO ? 300 : 200);
+})();
+</script>
+</body>
+</html>

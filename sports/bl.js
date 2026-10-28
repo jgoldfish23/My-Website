@@ -9,8 +9,8 @@
   if (window.__jshBL) return; window.__jshBL = 1;
   const API = /(^|\.)djgolding\.com$/.test(location.hostname) ? '/api/bottomline' : 'https://djgolding.com/api/bottomline';
   const LATEST = /(^|\.)djgolding\.com$/.test(location.hostname) ? '/sports/latest.json' : 'https://djgolding.com/sports/latest.json';
-  const FAV = {cfb:['BYU','WEB'], nfl:['PHI'], nba:['UTAH'], mlb:['LAD'], nhl:['UTA','UTAH']};
-  const LG = {cfb:{n:'CFB', c:'#3b82f6', home:'/cfb/#/week'}, nfl:{n:'NFL', c:'#ef4444', home:'/nfl/'}, nba:{n:'NBA', c:'#a855f7', home:'/nba/'}, nhl:{n:'NHL', c:'#38bdf8', home:'/nhl/'}, mlb:{n:'MLB', c:'#22c55e', home:'/mlb/'}};
+  const FAV = {cfb:['BYU','WEB'], nfl:['PHI'], nba:['UTAH']};
+  const LG = {cfb:{n:'CFB', c:'#3b82f6', home:'/cfb/#/week'}, nfl:{n:'NFL', c:'#ef4444', home:'/nfl/'}, nba:{n:'NBA', c:'#a855f7', home:'/nba/'}};
   const css = `
 .jbl{position:fixed;left:0;right:0;bottom:0;z-index:60;height:40px;display:flex;align-items:stretch;font:600 13.5px/1 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#eef2f8;background:rgba(10,12,18,.9);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border-top:1px solid rgba(255,255,255,.09);box-shadow:0 -8px 24px -12px rgba(0,0,0,.6)}
 .jbl[hidden]{display:none}
@@ -82,18 +82,19 @@ body.jbl-on{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
     return '<a class="jbl-i' + (isFav(g) ? ' fav' : '') + '" href="' + href(g) + '" title="' + esc(g.a.n + ' at ' + g.h.n + (g.note ? ' · ' + g.note : '')) + '">' + (lgTag ? '<span class="lgt" style="color:' + LG[g.lg].c + '">' + LG[g.lg].n + '</span>' : '') + a + '<span class="l">' + (post || live ? '' : '@') + '</span>' + h + stt + '</a>'; }
   function sec(key, label, color, html){ return html ? '<span class="jbl-sec" data-k="' + key + '" data-l="' + esc(label) + '" style="--c:' + color + '">' + esc(label) + '</span>' + html : ''; }
   function order(list){ const rank = g => g.st === 'in' ? 0 : g.st === 'pre' ? 1 : 2; return list.slice().sort((p, q) => rank(p) - rank(q) || String(p.date).localeCompare(String(q.date))); }
-  function build(){ if (!DATA) return; const G = DATA.games || []; let h = '';
+  function build(){ if (!DATA) return; const G = (DATA.games || []).filter(g => LG[g.lg]); let h = ''; /* only the leagues the site covers: CFB, NFL, NBA */
     const favs = order(G.filter(isFav)); h += sec('fav', 'Your teams', '#d4a017', favs.map(g => item(g, true)).join(''));
     const live = order(G.filter(g => g.st === 'in' && !isFav(g))); h += sec('live', 'Live now', '#e11d48', live.map(g => item(g, true)).join(''));
-    ['cfb', 'nfl', 'nba', 'nhl', 'mlb'].forEach(lg => { const list = order(G.filter(g => g.lg === lg && g.st !== 'in' && !isFav(g))); if (lg === 'cfb') list.splice(0, list.length, ...list.filter(g => g.a.rk || g.h.rk)); h += sec(lg, LG[lg].n + (lg === 'cfb' ? ' · Top 25' : ''), LG[lg].c, list.slice(0, 18).map(item).join('')); });
-    const news = (DATA.news || []).slice(0, 14); h += sec('news', 'Headlines', '#64748b', news.map(n => '<a class="jbl-i news" href="' + esc(n.u) + '" target="_blank" rel="noopener" style="--c:' + (LG[n.lg] ? LG[n.lg].c : '#9fb3d1') + '"><span class="src">' + esc(LG[n.lg] ? LG[n.lg].n : '') + '</span>' + esc(n.t) + '</a>').join(''));
+    ['cfb', 'nfl', 'nba'].forEach(lg => { const list = order(G.filter(g => g.lg === lg && g.st !== 'in' && !isFav(g))); if (lg === 'cfb') list.splice(0, list.length, ...list.filter(g => g.a.rk || g.h.rk)); h += sec(lg, LG[lg].n + (lg === 'cfb' ? ' · Top 25' : ''), LG[lg].c, list.slice(0, 18).map(item).join('')); });
+    const news = (DATA.news || []).filter(n => LG[n.lg]).slice(0, 14); h += sec('news', 'Headlines', '#64748b', news.map(n => '<a class="jbl-i news" href="' + esc(n.u) + '" target="_blank" rel="noopener" style="--c:' + (LG[n.lg] ? LG[n.lg].c : '#9fb3d1') + '"><span class="src">' + esc(LG[n.lg] ? LG[n.lg].n : '') + '</span>' + esc(n.t) + '</a>').join(''));
     const jam = LAT.slice(0, 4); h += sec('jamo', 'From Jamo', '#0f766e', jam.map(a => '<a class="jbl-i news" href="' + esc(a.href) + '"><span class="src" style="color:#5eead4">' + esc(a.team || '') + '</span>' + esc(a.title) + '</a>').join(''));
     if (!h) h = '<span class="jbl-i">No games on the board right now.</span>';
     tr.innerHTML = h + '<span class="jbl-gap" style="display:inline-block;width:60px"></span>' + h; segs = [...tr.querySelectorAll('.jbl-sec')].slice(0, tr.querySelectorAll('.jbl-sec').length / 2 || 1); label(); }
-  function label(){ const vl = vp.getBoundingClientRect().left; let cur = null; tr.querySelectorAll('.jbl-sec').forEach(s => { if (s.getBoundingClientRect().left <= vl + 40) cur = s; }); cur = cur || tr.querySelector('.jbl-sec'); if (!cur) return; lab.textContent = cur.dataset.l; tag.style.setProperty('--jblc', cur.style.getPropertyValue('--c')); const live = (DATA && DATA.games || []).filter(g => g.st === 'in').length; sub.textContent = live ? live + ' live' : ''; }
+  function label(){ const vl = vp.getBoundingClientRect().left; let cur = null; tr.querySelectorAll('.jbl-sec').forEach(s => { if (s.getBoundingClientRect().left <= vl + 40) cur = s; }); cur = cur || tr.querySelector('.jbl-sec'); if (!cur) return; lab.textContent = cur.dataset.l; tag.style.setProperty('--jblc', cur.style.getPropertyValue('--c')); const live = (DATA && DATA.games || []).filter(g => g.st === 'in' && LG[g.lg]).length; sub.textContent = live ? live + ' live' : ''; }
   function tick(t){ requestAnimationFrame(tick); if (bar.hidden || reduced) return; const dt = last ? Math.min(64, t - last) : 16; last = t; if (paused || hover || document.hidden) return; const half = tr.scrollWidth / 2; if (half <= vp.clientWidth / 2) return; x -= dt * 0.055; if (-x >= half) x += half; tr.style.transform = 'translateX(' + x.toFixed(1) + 'px)'; if (t - lastLab > 250) { lastLab = t; label(); } }
   async function load(){ try { const r = await fetch(API, {cache:'no-store'}); if (r.ok) { const j = await r.json(); if (j && j.games) DATA = j; } } catch (e) {}
     if (!LAT.length) { try { const r = await fetch(LATEST); if (r.ok) LAT = await r.json(); } catch (e) {} }
+    try { document.dispatchEvent(new CustomEvent('jsh:bl', {detail: DATA})); } catch (e) {} /* the top bar's Live dot listens (2026-10-27) */
     build(); clearTimeout(timer); const live = DATA && (DATA.games || []).some(g => g.st === 'in'); timer = setTimeout(() => { if (document.hidden) { document.addEventListener('visibilitychange', function f(){ if (!document.hidden) { document.removeEventListener('visibilitychange', f); load(); } }); } else load(); }, live ? 60e3 : 300e3); }
   vp.addEventListener('mouseenter', () => hover = true); vp.addEventListener('mouseleave', () => hover = false);
   vp.addEventListener('touchstart', () => { hover = true; }, {passive:true}); vp.addEventListener('touchend', () => setTimeout(() => hover = false, 2500), {passive:true});

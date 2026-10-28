@@ -3,10 +3,10 @@ import * as wedding from "./functions/api/wedding.js";
 import * as cfb from "./functions/api/cfb.js";
 import * as nfl from "./functions/api/nfl.js";
 import * as nba from "./functions/api/nba.js";
-import * as mlb from "./functions/api/mlb.js";
-import * as nhl from "./functions/api/nhl.js";
 import * as bottomline from "./functions/api/bottomline.js";
 import * as picks from "./functions/api/picks.js";
+import * as ask from "./functions/api/ask.js";
+import * as alerts from "./functions/api/alerts.js";
 import { clientIp, originOk, rateLimit, tooMany, forbidden } from "./functions/api/_guard.js";
 
 const RECORD_KEY = "record_entries";
@@ -249,17 +249,17 @@ export default {
       return nba.onRequestGet({ request, env, ctx });
     }
 
-    // Live NHL scores for /nhl and the front door (same shape as the other proxies)
-    if (pathname.startsWith("/api/nhl/")) {
-      if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
-      return nhl.onRequestGet({ request, env, ctx });
+    // Ask the Hub: the AI sports analyst on every hub page. Paid API, so ask.js checks the origin, caps the body at
+    // 40 KB and rate-limits (30 an hour per visitor, 60 a day site-wide) after it has validated the question.
+    if (pathname === "/api/ask") {
+      if (request.method === "OPTIONS") return ask.onRequestOptions({ request });
+      if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
+      return ask.onRequestPost({ request, env, ctx });
     }
 
-    // Live MLB scores for the front door and /mlb (Dodgers postseason, same shape as the other proxies)
-    if (pathname.startsWith("/api/mlb/")) {
-      if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
-      return mlb.onRequestGet({ request, env, ctx });
-    }
+    // Game alerts for Jamo's teams: settings (GET public, POST with the predictions PIN), a test push and a dry run.
+    // The checks themselves run from scheduled() at the bottom of this file.
+    if (pathname === "/api/alerts" || pathname.startsWith("/api/alerts/")) return alerts.onRequest({ request, env, ctx });
 
     // Jamo's game predictions on the college hub (PIN-protected saves, KV storage)
     if (pathname === "/api/picks") return picks.onRequest({ request, env, ctx });
@@ -270,6 +270,15 @@ export default {
       return bottomline.onRequestGet({ request, env, ctx });
     }
 
+    // The NHL hub and the MLB page were removed 2026-10-27 (the site covers CFB, the NFL and the NBA): old links go home
+    if (/^\/(nhl|mlb)(\/|$)/i.test(pathname)) return Response.redirect(new URL("/sports/", request.url).toString(), 302);
+
     return env.ASSETS.fetch(request);
+  },
+
+  // Game alerts: one check every 2 minutes (wrangler.jsonc "triggers"). Alerts stay off until Jamo turns them on at
+  // /sports/alerts/; while they are off a check is one KV read and nothing else.
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(alerts.scheduled(env));
   },
 };

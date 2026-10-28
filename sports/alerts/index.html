@@ -25,11 +25,32 @@
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:-12%;z-index:-2;pointer-events:none;background:radial-gradient(760px 520px at 12% 4%,rgba(59,123,255,.22),transparent 62%),radial-gradient(720px 520px at 92% 0%,rgba(164,91,255,.20),transparent 64%),radial-gradient(900px 600px at 50% 105%,rgba(56,189,248,.10),transparent 66%);animation:alAurora 42s ease-in-out infinite alternate}
-body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.075) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);mask-image:linear-gradient(180deg,#000,transparent 75%)}
-:root.light body::before{background:radial-gradient(760px 520px at 12% 4%,rgba(59,123,255,.14),transparent 62%),radial-gradient(720px 520px at 92% 0%,rgba(164,91,255,.11),transparent 64%)}
-:root.light body::after{background-image:radial-gradient(rgba(15,23,42,.07) 1px,transparent 1.3px)}
-@keyframes alAurora{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}100%{transform:translate3d(2.5%,-1.5%,0) scale(1.03)}}
+/* Clean gradient backdrop (2026-10-27, Jamo: "Keep team colors but have clean electronic look that's smooth and gradient").
+   Replaces the moving aurora with one calm, static layer: the brand blue and violet as two wide, soft washes from the top
+   corners over a deep navy that settles into the page color, one faint diagonal light sweep, a fine grain so the dark
+   gradient never bands, and a softer dot grid that fades out by the middle of the screen. Light theme: the same washes,
+   paler, on a cool white. Same block as sports-hub/front.html. Measured (worst case = a white grain
+   pixel on a dot, in the blue wash at the top left; the dimmest one in the light theme): muted text (--ink-3) is 4.8:1 on a
+   glass panel and 5.7:1 right on the page in the dark theme, 6.0:1 on a white card and 4.5:1 on the page in the light theme
+   (4.9:1 and 5.2:1 against the average of the wash), and the light theme's blue eyebrow (--hud) is 4.9:1 on the page.
+   The layers are sized to the large viewport (plus a margin) so the iPhone toolbar sliding in and out never shows an edge. */
+:root{--ink-3:#9aa4b5}
+:root.light{--ink-3:#525c6f;--hud:#1850b8}
+body::before{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(100lvh + 48px);z-index:-2;pointer-events:none;transform:none;animation:none;background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='2 0 0 0 -.5 2 0 0 0 -.5 2 0 0 0 -.5 0 0 0 0 .032'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/160px 160px repeat,
+  linear-gradient(112deg,rgba(150,180,255,0) 30%,rgba(150,180,255,.04) 44%,rgba(150,180,255,0) 58%),
+  radial-gradient(120% 75% at 0% 0%,rgba(52,108,255,.16) 0%,rgba(52,108,255,.06) 45%,rgba(52,108,255,0) 75%),
+  radial-gradient(110% 70% at 100% 0%,rgba(146,86,255,.15) 0%,rgba(146,86,255,.055) 45%,rgba(146,86,255,0) 75%),
+  radial-gradient(130% 55% at 50% 112%,rgba(40,150,240,.08) 0%,rgba(40,150,240,0) 70%),
+  linear-gradient(180deg,#070a19 0%,#05070f 42%,var(--bg) 100%)}
+:root.light body::before{background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='2 0 0 0 -.5 2 0 0 0 -.5 2 0 0 0 -.5 0 0 0 0 .025'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/160px 160px repeat,
+  linear-gradient(112deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.35) 44%,rgba(255,255,255,0) 58%),
+  radial-gradient(120% 75% at 0% 0%,rgba(59,123,255,.13) 0%,rgba(59,123,255,.04) 45%,rgba(59,123,255,0) 75%),
+  radial-gradient(110% 70% at 100% 0%,rgba(146,86,255,.10) 0%,rgba(146,86,255,.03) 45%,rgba(146,86,255,0) 75%),
+  linear-gradient(180deg,#f4f6fb 0%,#eef1f7 50%,var(--bg) 100%)}
+body::after{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(100lvh + 64px);z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(150,175,255,.05) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,rgba(0,0,0,.35) 32%,transparent 60%);mask-image:linear-gradient(180deg,#000,rgba(0,0,0,.35) 32%,transparent 60%)}
+:root.light body::after{background-image:radial-gradient(rgba(15,23,42,.06) 1px,transparent 1.3px)}
 @media (prefers-reduced-motion:reduce){body::before{animation:none}}
 a{color:inherit}
 [hidden]{display:none!important}
@@ -89,7 +110,7 @@ button{font:inherit;color:inherit}
 .st p b{font-weight:700}
 .steps{margin:12px 0 0;padding-left:20px;color:var(--ink-2);font-size:14px}
 .steps li{margin:6px 0}
-code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;padding:1px 5px;border-radius:5px;background:rgba(127,140,170,.16);color:var(--ink);word-break:break-all}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;padding:1px 5px;border-radius:5px;background:rgba(127,140,170,.16);color:var(--ink);overflow-wrap:anywhere}
 details{margin-top:12px;font-size:13.5px;color:var(--ink-2)}
 details summary{cursor:pointer;font-weight:650;color:var(--ink-2)}
 details p{margin:8px 0 0}
@@ -150,6 +171,8 @@ body.jbl-on .toast{bottom:calc(52px + env(safe-area-inset-bottom,0px))}
 .toast.bad{background:#3a1018;border-color:rgba(255,123,123,.4)}
 @media (max-width:560px){.al{padding:16px 16px 32px}.hd{margin-bottom:14px}.sec{margin-top:26px}.row{padding:12px 14px;gap:12px}.master .row{padding:14px}.savebar{padding:8px 8px 8px 14px}.savebar .btn{padding:0 13px}}
 @media (max-width:360px){.savebar #undo{display:none}}
+/* 10-27: no blur behind the panels - over the smooth gradient it showed nothing and cost the phone a repaint per scroll frame */
+.card{-webkit-backdrop-filter:none;backdrop-filter:none}
 </style>
 </head>
 <body>
@@ -259,6 +282,8 @@ header.top.jsh-tuck{pointer-events:none}
 <script src="/sports/bl.js?v=20261027a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
 <script src="/sports/holo.js?v=20261027a" defer></script>
+<!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
+<script src="/sports/stage.js?v=20261027a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
      To bring it back, put this tag back in (and bump ?v=): <script src="/sports/ask.js?v=20261027c" defer></script> -->
 

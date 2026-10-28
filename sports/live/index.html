@@ -36,11 +36,32 @@
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:-12%;z-index:-1;pointer-events:none;background:radial-gradient(760px 520px at 12% 4%,rgba(255,77,106,.16),transparent 62%),radial-gradient(720px 520px at 92% 0%,rgba(164,91,255,.20),transparent 64%),radial-gradient(900px 600px at 50% 105%,rgba(56,189,248,.10),transparent 66%);animation:nxAurora 42s ease-in-out infinite alternate}
-:root.light body::before{background:radial-gradient(760px 520px at 12% 4%,rgba(255,77,106,.10),transparent 62%),radial-gradient(720px 520px at 92% 0%,rgba(164,91,255,.10),transparent 64%)}
-body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.075) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);mask-image:linear-gradient(180deg,#000,transparent 75%)}
-:root.light body::after{background-image:radial-gradient(rgba(15,23,42,.07) 1px,transparent 1.3px)}
-@keyframes nxAurora{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}100%{transform:translate3d(2.5%,-1.5%,0) scale(1.03)}}
+/* Clean gradient backdrop (2026-10-27, Jamo: "Keep team colors but have clean electronic look that's smooth and gradient").
+   Replaces the moving aurora with one calm, static layer: the brand blue and violet as two wide, soft washes from the top
+   corners over a deep navy that settles into the page color, one faint diagonal light sweep, a fine grain so the dark
+   gradient never bands, and a softer dot grid that fades out by the middle of the screen. Light theme: the same washes,
+   paler, on a cool white. Same block as sports-hub/front.html. Measured (worst case = a white grain
+   pixel on a dot, in the blue wash at the top left; the dimmest one in the light theme): muted text (--ink-3) is 4.8:1 on a
+   glass panel and 5.7:1 right on the page in the dark theme, 6.0:1 on a white card and 4.5:1 on the page in the light theme
+   (4.9:1 and 5.2:1 against the average of the wash), and the light theme's blue eyebrow (--hud) is 4.9:1 on the page.
+   The layers are sized to the large viewport (plus a margin) so the iPhone toolbar sliding in and out never shows an edge. */
+:root{--ink-3:#9aa4b5}
+:root.light{--ink-3:#525c6f;--hud:#1850b8}
+body::before{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(100lvh + 48px);z-index:-2;pointer-events:none;transform:none;animation:none;background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='2 0 0 0 -.5 2 0 0 0 -.5 2 0 0 0 -.5 0 0 0 0 .032'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/160px 160px repeat,
+  linear-gradient(112deg,rgba(150,180,255,0) 30%,rgba(150,180,255,.04) 44%,rgba(150,180,255,0) 58%),
+  radial-gradient(120% 75% at 0% 0%,rgba(52,108,255,.16) 0%,rgba(52,108,255,.06) 45%,rgba(52,108,255,0) 75%),
+  radial-gradient(110% 70% at 100% 0%,rgba(146,86,255,.15) 0%,rgba(146,86,255,.055) 45%,rgba(146,86,255,0) 75%),
+  radial-gradient(130% 55% at 50% 112%,rgba(40,150,240,.08) 0%,rgba(40,150,240,0) 70%),
+  linear-gradient(180deg,#070a19 0%,#05070f 42%,var(--bg) 100%)}
+:root.light body::before{background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='2 0 0 0 -.5 2 0 0 0 -.5 2 0 0 0 -.5 0 0 0 0 .025'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/160px 160px repeat,
+  linear-gradient(112deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.35) 44%,rgba(255,255,255,0) 58%),
+  radial-gradient(120% 75% at 0% 0%,rgba(59,123,255,.13) 0%,rgba(59,123,255,.04) 45%,rgba(59,123,255,0) 75%),
+  radial-gradient(110% 70% at 100% 0%,rgba(146,86,255,.10) 0%,rgba(146,86,255,.03) 45%,rgba(146,86,255,0) 75%),
+  linear-gradient(180deg,#f4f6fb 0%,#eef1f7 50%,var(--bg) 100%)}
+body::after{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(100lvh + 64px);z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(150,175,255,.05) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,rgba(0,0,0,.35) 32%,transparent 60%);mask-image:linear-gradient(180deg,#000,rgba(0,0,0,.35) 32%,transparent 60%)}
+:root.light body::after{background-image:radial-gradient(rgba(15,23,42,.06) 1px,transparent 1.3px)}
 a{color:inherit;text-decoration:none}
 img{max-width:100%}
 [hidden]{display:none!important}
@@ -230,7 +251,7 @@ button{font:inherit;color:inherit}
 .fr img,.fr .sw{width:18px;height:18px;object-fit:contain;flex:none}
 .fr span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fr b{font-family:var(--num);font-size:14px;font-variant-numeric:tabular-nums}
-.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin-top:30px;padding:0 2px;color:var(--ink-3);font-size:12.5px;opacity:.75}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin-top:30px;padding:0 2px;color:var(--ink-3);font-size:12.5px}
 .foot i{font-style:normal;color:var(--ink-2)}
 /* ---------- moment pop-ups ---------- */
 .toasts{position:fixed;z-index:80;top:calc(60px + env(safe-area-inset-top,0px));right:16px;display:flex;flex-direction:column;gap:10px;width:min(370px,calc(100vw - 32px));pointer-events:none}
@@ -295,6 +316,8 @@ body.livetv .sec{margin-top:20px}
   .spot-act .back{margin-left:0}
 }
 @media (max-width:600px){.lv{padding:12px 16px 40px}.lv-head{margin-top:2px}.sec{margin-top:24px}.lv-tools{width:100%;flex-wrap:nowrap;gap:6px}.lv-tools .upd{margin-right:auto;min-width:0}.upd .ul{display:none}.lv-tools .btn{padding:7px 11px;font-size:12.5px;gap:6px}.lead{font-size:14px}}
+/* 10-27: no blur behind the panels - over the smooth gradient it showed nothing and cost the phone a repaint per scroll frame */
+.mc,.feed,.up{-webkit-backdrop-filter:none;backdrop-filter:none}
 @media (prefers-reduced-motion:reduce){body::before,.lv-head h1 b,.pill-live::before,.bump,.toast,.feed li.new a{animation:none!important}.mc:hover{transform:none}}
 </style>
 </head>
@@ -405,6 +428,8 @@ header.top.jsh-tuck{pointer-events:none}
 <script src="/sports/bl.js?v=20261027a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
 <script src="/sports/holo.js?v=20261027a" defer></script>
+<!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
+<script src="/sports/stage.js?v=20261027a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
      To bring it back, put this tag back in (and bump ?v=): <script src="/sports/ask.js?v=20261027c" defer></script> -->
 
@@ -442,7 +467,7 @@ header.top.jsh-tuck{pointer-events:none}
   <footer class="foot"><span id="lv-foot">Scores refresh every 25 seconds while games are on. Tap any game for its full game page.</span><span>A <i>Kramerica Industries</i> production</span></footer>
 </main>
 <div class="toasts" id="toasts" aria-live="polite"></div>
-<script type="application/json" id="d-meta">{"cfb":"Wed Oct 28, 2026 · 1:43 AM ET","nfl":"Wed Oct 28, 2026 · 1:43 AM ET","nba":""}</script>
+<script type="application/json" id="d-meta">{"cfb":"Wed Oct 28, 2026 · 1:43 AM ET","nfl":"","nba":""}</script>
 <script type="text/plain" id="d-cfb">9|2026-10-27|Delaware|Western Kentucky|35|21|FINAL|7:00 PM||-2.5|55.5|114|-135|CBSSN||
 9|2026-10-27|Sam Houston|Missouri State|3|24|FINAL|8:00 PM||-5.5|51.5|180|-218|ESPN2||
 9|2026-10-28|Jacksonville State|New Mexico State|||SCHEDULED|8:00 PM||3|49.5|-162|136|ESPN2||
@@ -1301,6 +1326,8 @@ const colorOf = (G, s) => uiColor(O[G.lg].color(G[s].t) || (G[s].c ? '#' + G[s].
 const logoOf = (G, s) => O[G.lg].logo(G[s].t, G[s].eid);
 const logoImg = (src, eager) => src ? '<img src="' + esc(src) + '" alt=""' + (eager ? '' : ' loading="lazy"') + ' onerror="this.style.visibility=\'hidden\'">' : '<span class="sw"></span>';
 const plate = src => '<span class="plate">' + logoImg(src, true) + '</span>';
+/* 10-27: the Spotlight's 58 px logos use the 320 px files (the 96 px ones were soft on phone and laptop screens) */
+const bigLogo = u => u && /^\/(cfb|nfl|nba)\/img\/logos\/[^/]+\.png$/.test(u) && !/-lg\.png$/.test(u) ? u.replace(/\.png$/, '-lg.png') : u;
 const net = tv => String(tv || '').replace(/^;/, '').split(/[\/;]/)[0].trim();
 const NAT = /^(ABC|CBS|FOX|NBC|ESPN|ESPN2|ESPNU|FS1|FS2|BTN|Big Ten Network|SECN|SEC Network|ACCN|ACC Network|CW|The CW|Peacock|Prime Video|NFL Net|NFL Network|Netflix|YouTube|TNT|truTV|NBA TV|CBSSN|CBS Sports Network)$/i;
 /* college games in play here: anything with an FBS team (plus Weber State's games when that option is on) */
@@ -1514,7 +1541,7 @@ function sparkline(vals, ca, ch){ if (!vals || vals.length < 3) return ''; const
     + '<line x1="0" x2="' + W + '" y1="' + Y(50) + '" y2="' + Y(50) + '" stroke="rgba(255,255,255,.25)" stroke-dasharray="3 4"/><path d="' + d + '" fill="none" stroke="#fff" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>'; }
 function spotHTML(G, picked){ const o = O[G.lg], H = G.H || {show: 0}; const ca = deep(o.color(G.a.t), o.alt(G.a.t)), ch = deep(o.color(G.h.t), o.alt(G.h.t));
   const lose = s => (G.a.s || 0) !== (G.h.s || 0) && (G[s].s || 0) < (G[s === 'a' ? 'h' : 'a'].s || 0);
-  const side = s => '<div class="st ' + s + (lose(s) ? ' lose' : '') + '">' + plate(logoOf(G, s)) + '<div class="st-n"><b>' + (G[s].rk ? '<span style="opacity:.6;font-size:.6em;margin-right:4px">' + G[s].rk + '</span>' : '') + esc(o.name(G[s].t)) + '</b><small>' + esc(o.sub(G[s].t) || o.full(G[s].t)) + (G.sit.pos === s ? ' · has the ball' : '') + '</small></div>' + scoreSpan(G, s, 'st-s') + '</div>';
+  const side = s => '<div class="st ' + s + (lose(s) ? ' lose' : '') + '">' + plate(bigLogo(logoOf(G, s))) + '<div class="st-n"><b>' + (G[s].rk ? '<span style="opacity:.6;font-size:.6em;margin-right:4px">' + G[s].rk + '</span>' : '') + esc(o.name(G[s].t)) + '</b><small>' + esc(o.sub(G[s].t) || o.full(G[s].t)) + (G.sit.pos === s ? ' · has the ball' : '') + '</small></div>' + scoreSpan(G, s, 'st-s') + '</div>';
   const chips = []; const w = whyText(G); chips.push('<span class="' + (closeLate(G) || (G.P && G.P.ot) ? 'hot' : '') + '">' + esc(w) + '</span>'); if (G.fav) chips.push('<span class="me">Your team</span>');
   let wp = ''; if (G.wp != null) { const h = Math.round(G.wp); const caU = colorOf(G, 'a'); let chU = colorOf(G, 'h'); if (near(caU, chU)) chU = '#cbd5e1';
     wp = '<div class="wp"><div class="wp-l"><span>' + esc(abOf(G, 'a')) + ' <b>' + (100 - h) + '%</b></span><span class="k">Win chance, per ESPN</span><span><b>' + h + '%</b> ' + esc(abOf(G, 'h')) + '</span></div>' + wpBar(G, 'wp-bar') + sparkline(G.wps, caU, chU) + '</div>'; }
@@ -1527,7 +1554,7 @@ function spotHTML(G, picked){ const o = O[G.lg], H = G.H || {show: 0}; const ca 
     + '<div class="spot-why">' + chips.join('') + '</div>' + sitHTML(G) + wp + last
     + '<div class="spot-act"><a class="go" href="' + esc(G.href) + '">Open the game page ›</a>' + (tv ? '<span class="tvn">On ' + esc(tv) + '</span>' : '') + (picked ? '<button type="button" class="back" data-spot="">Back to the hottest game</button>' : '') + '</div></article>'; }
 function nextHTML(G, label){ const o = O[G.lg]; const ca = deep(o.color(G.a.t), o.alt(G.a.t)), ch = deep(o.color(G.h.t), o.alt(G.h.t)); const tv = tvOf(G);
-  const side = s => '<div class="st ' + s + '">' + plate(logoOf(G, s)) + '<div class="st-n"><b>' + (G[s].rk ? '<span style="opacity:.6;font-size:.6em;margin-right:4px">' + G[s].rk + '</span>' : '') + esc(o.name(G[s].t)) + '</b><small>' + esc(o.sub(G[s].t) || o.full(G[s].t)) + '</small></div></div>';
+  const side = s => '<div class="st ' + s + '">' + plate(bigLogo(logoOf(G, s))) + '<div class="st-n"><b>' + (G[s].rk ? '<span style="opacity:.6;font-size:.6em;margin-right:4px">' + G[s].rk + '</span>' : '') + esc(o.name(G[s].t)) + '</b><small>' + esc(o.sub(G[s].t) || o.full(G[s].t)) + '</small></div></div>';
   const line = G.spread != null ? (G.spread === 0 ? 'Pick ’em' : 'Line: ' + nameOf(G, G.spread < 0 ? 'h' : 'a') + ' by ' + Math.abs(G.spread)) : '';
   return '<article class="spot" style="--ca:' + ca + ';--ch:' + ch + '"><div class="spot-top"><span>' + esc(label || 'Up next') + '</span><span class="lg-tag">' + LG[G.lg].n + '</span>' + (G.fav ? '<span class="lg-tag" style="color:#ffe08a;background:rgba(251,191,36,.18)">Your team</span>' : '') + '</div>'
     + '<a class="spot-board" href="' + esc(G.href) + '">' + side('a') + '<div class="spot-mid"><span class="big" data-cd="' + G.kick + '" data-cdk="b">' + cdHTML(G.kick) + '</span><span class="sub">' + esc(dayWord(G.kick) + ' · ' + kickStr(G.kick) + ' ' + TZ) + '</span></div>' + side('h') + '</a>'

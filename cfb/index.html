@@ -121,6 +121,8 @@ header.top.jsh-tuck{pointer-events:none}
 <script src="/sports/bl.js?v=20261027a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
 <script src="/sports/holo.js?v=20261027a" defer></script>
+<!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
+<script src="/sports/stage.js?v=20261027a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
      To bring it back, put this tag back in (and bump ?v=): <script src="/sports/ask.js?v=20261027c" defer></script> -->
 <title>CFB · Jamo Sports Hub</title>
@@ -2434,26 +2436,15 @@ body:has(.tvframe) header.top.top{top:0}
   .ij-teaser .bd,.rc-teaser .bd{padding:14px}
 }
 
-/* patch99: the BYU field wallpaper (fieldBg in p2.html) */
-.floor-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.floor-bg[hidden]{display:none}
-.floor-svg{position:absolute;inset:0;width:100%;height:100%}
-.floor-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,10,22,.5),rgba(2,10,22,.72) 40%,rgba(2,10,22,.82))}
-:root[data-theme="light"] .floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.82) 45%,rgba(255,255,255,.9))}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.82) 45%,rgba(255,255,255,.9))}}
-body.field-on.wm::after{display:none}
-
-/* patch100: the stadium photos (the field from above keeps the Y in view on a phone; the aerial is a touch darker) */
-.fb-photo{position:absolute;inset:0;background:#123d22 center/cover no-repeat}
-.fb-photo.field{background-position:72% 50%}
-.fb-photo.stadium{background-position:50% 45%}
-.fb-photo.stadium+.floor-veil{background:linear-gradient(180deg,rgba(2,10,22,.58),rgba(2,10,22,.76) 40%,rgba(2,10,22,.85))}
-:root[data-theme="light"] .fb-photo.stadium+.floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.84) 45%,rgba(255,255,255,.9))}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .fb-photo.stadium+.floor-veil{background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.84) 45%,rgba(255,255,255,.9))}}
-
-/* patch101: stadium photo credit, only while the photo is showing */
-.bgcredit{display:none}
-body.field-on .bgcredit{display:inline}
+/* patch118: the BYU photo wallpaper (patch99/100/101/117) is gone - BYU and neutral pages use the team-color gradient */
+/* patch117 sweep: Player trends tiles were see-through over the photo; trend words, injury pills and scrapbook links get
+   colours that pass 4.5:1 in both themes */
+.pt{background:color-mix(in srgb,var(--surface) 84%,transparent)}
+.pt-up{color:var(--good)}.pt-dn{color:var(--bad)}
+.scp-l a{color:var(--accent-text)}
+.ij-out{color:#b42318}.ij-doubt{color:#9a3a06}.ij-quest{color:#7a5800}.ij-likely,.ij-tag.ok{color:#0a6b34}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ij-out{color:#ff7a72}:root:not([data-theme="light"]) .ij-doubt{color:#fb923c}:root:not([data-theme="light"]) .ij-quest{color:#e9b949}:root:not([data-theme="light"]) :is(.ij-likely,.ij-tag.ok){color:#4ade80}}
+:root[data-theme="dark"] .ij-out{color:#ff7a72}:root[data-theme="dark"] .ij-doubt{color:#fb923c}:root[data-theme="dark"] .ij-quest{color:#e9b949}:root[data-theme="dark"] :is(.ij-likely,.ij-tag.ok){color:#4ade80}
 
 /* patch103: first four out */
 .cfp-out{padding:6px 0;border-top:1px solid var(--line-2)}
@@ -2582,7 +2573,7 @@ body.themed .pk-card,.pk-card{background:var(--surface)!important}
   .bt-i{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;font:inherit;font-size:10.5px;font-weight:700;color:var(--ink-3);background:none;border:0;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
   .bt-i svg{width:22px;height:22px}.bt-i img{width:24px;height:24px;object-fit:contain;filter:grayscale(.6);opacity:.75}
   .bt-i span{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .bt-i.on{color:var(--accent)}.bt-i.on img{filter:none;opacity:1}
+  .bt-i.on{color:var(--accent-text,var(--accent))}.bt-i.on img{filter:none;opacity:1}
   .bt-i.on::before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;border-radius:0 0 3px 3px;background:var(--accent)}
   body.has-btab .jbl{bottom:calc(58px + env(safe-area-inset-bottom))!important}
   body.has-btab{padding-bottom:calc(104px + env(safe-area-inset-bottom))!important}
@@ -2683,6 +2674,12 @@ a.sl-t:hover{border-color:var(--accent)}.sl-t.mine{border-color:color-mix(in srg
 .ws-recs{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:10px}.ws-recs span{font-family:var(--disp);font-size:20px;font-weight:800}.ws-recs i{display:block;font-family:var(--body);font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .ws-path{padding:10px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.45}.ws-pl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#a77fd6;margin-bottom:3px}
 .ws-out{margin-top:8px;padding:8px 10px;border-radius:10px;background:rgba(127,127,127,.08);font-size:13.5px}.ws-out .mini{display:block;font-weight:700;margin-bottom:2px}
+/* patch119 (2026-10-27): phone overflow from a graded prediction table, trend colors, scrapbook link */
+.gbot>*,.gbot .pk-card{min-width:0;max-width:100%}
+.gbot .pk-card table.tbl{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+#view .pt{background:color-mix(in srgb,var(--surface) 84%,transparent)}
+#view .pt-up{color:var(--good)}#view .pt-dn{color:var(--bad)}
+#view .scp-l a{color:var(--accent-text)}
 </style>
 
 <header class="top">
@@ -2718,7 +2715,7 @@ a.sl-t:hover{border-color:var(--accent)}.sl-t.mine{border-color:color-mix(in srg
 </header>
 <div class="asof" id="asof"></div>
 <main id="view"><div class="skel-wrap"><div class="skel skel-title"></div><div class="skel skel-sub"></div><div class="skel-grid"><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div></div><div class="skel skel-row"></div><div class="skel skel-row"></div><div class="skel skel-row"></div></div></main>
-<footer>Scores and schedules from ESPN. Lines are closing numbers for finished games and current or look-ahead numbers for upcoming ones (DraftKings via ESPN, consensus via Covers, and FOX Sports opening lines for marquee games). Preseason ratings from each team's 2025 results. Depth charts from ESPN with roster and recruiting details from On3 and 247Sports where available. Power ratings and projections are this page's own model.<span class="bgcredit"> Background photos: Nate Edwards/BYU Photo (<a href="https://byucougars.com/news/2026/10/09/byu-athletics-and-pv3-enterprises-announce-landmark-commitment-to-byu-football" target="_blank" rel="noopener">BYU Athletics</a>).</span></footer>
+<footer>Scores and schedules from ESPN. Lines are closing numbers for finished games and current or look-ahead numbers for upcoming ones (DraftKings via ESPN, consensus via Covers, and FOX Sports opening lines for marquee games). Preseason ratings from each team's 2025 results. Depth charts from ESPN with roster and recruiting details from On3 and 247Sports where available. Power ratings and projections are this page's own model.</footer>
 <div id="toast" class="toast" role="status"></div>
 <dialog id="dlg"></dialog>
 
@@ -115572,7 +115569,7 @@ function logoOf(t){ const n = typeof t==='string' ? norm(t) : (t&&t.name); if(!n
 function customLogo(t){ const n = typeof t==='string' ? norm(t) : (t&&t.name); return (n && LOGOS[n]) || null; }
 function logoTag(t, cls){ const l=logoOf(t); if(!l) return ''; return '<img class="'+(cls||'tlogo')+'" src="'+l.icon+'" alt="">'; }
 /* Which team, if any, colors the page: the team whose page or game this is (when it has a logo or is the favorite), else the favorite. */
-function pageTeam(){ const parts=(location.hash||'').replace(/^#\/?/,'').split('/').map(dec); const fav=(SETTINGS.tint&&SETTINGS.fav&&T[SETTINGS.fav])||null; if(parts[0]==='team'&&parts[1]){ const t=T[norm(parts[1].split('#')[0])]; if(t&&(customLogo(t)||t===fav)) return t; } if(parts[0]==='game'&&parts[1]){ const g=GI[parts[1]]; if(g){ const a=team(g.away), h=team(g.home); if(fav&&(a===fav||h===fav)) return fav; if(customLogo(h)) return h; if(customLogo(a)) return a; } } return fav; }
+function pageTeam(){ const parts=(location.hash||'').replace(/^#\/?/,'').split('/').map(dec); const fav=(SETTINGS.tint&&T[SETTINGS.fav||'BYU'])||null; /* patch118: no favorite = BYU, where the photo used to show */ if(parts[0]==='team'&&parts[1]){ const t=T[norm(parts[1].split('#')[0])]; if(t&&(customLogo(t)||t===fav)) return t; } if(parts[0]==='game'&&parts[1]){ const g=GI[parts[1]]; if(g){ const a=team(g.away), h=team(g.home); if(fav&&(a===fav||h===fav)) return fav; if(customLogo(h)) return h; if(customLogo(a)) return a; } } return fav; }
 function applyPageTheme(){ const t=pageTeam(); const b=document.body; if(!b) return; if(!t){ b.classList.remove('themed','wm'); b.style.removeProperty('--pbg'); b.style.removeProperty('--wm'); return; } const dark=isDarkMode(); const c=hexRgb(t.color)||[27,58,92]; const end=rgbHex(dark ? (lum(c)<0.03?mix(c,[255,255,255],0.25):c) : mix(c,[255,255,255],0.5)); const start=dark?'#000000':'#EEF1F5'; b.style.setProperty('--pbg','linear-gradient(165deg,'+start+' 0%,'+start+' 26%,'+end+' 100%)'); const l=logoOf(t); if(l) b.style.setProperty('--wm','url("'+l.wm+'")'); else b.style.removeProperty('--wm'); b.classList.add('themed'); b.classList.toggle('wm',!!l); }
 /* ---------- compact scoreboard rows ---------- */
 function isDense(){ const d=(SETTINGS.dense||'auto'); if(d==='on') return true; if(d==='off') return false; return window.innerWidth<=720; }
@@ -116097,16 +116094,7 @@ function renderGameday(id){ setNav('gameday'); let g=id&&GI[id];
   if(!on) html+='<div style="margin-top:14px">'+gdDrives(g)+'</div>';
   html+='<div style="margin-top:14px">'+injuryCardHTML(g)+'</div>';
   view.innerHTML=html; gdWake(!!g.live); if(on) gdEnsure(g); }
-/* patch99 + patch100: LaVell Edwards Stadium as the wallpaper - the field from straight above on every page, the aerial of
-   the whole stadium on BYU's team page (photos from Jamo; see patch100.pl) */
-const BG_BASE = (/(^|\.)djgolding\.com$/.test(location.hostname)) ? '/cfb/img/bg/' : 'https://djgolding.com/cfb/img/bg/';
-function fieldBg(){ const b=document.body; if(!b) return; const fav=SETTINGS.fav||'BYU'; const parts=(location.hash||'').replace(/^#\/?/,'').split('/').map(dec); let other=false, teamPage=false; /* another team's page or a game without BYU keeps its own look */
-  if(parts[0]==='team'&&parts[1]){ const tt=T[norm(parts[1].split('#')[0])]; other=!!tt&&tt.name!=='BYU'; teamPage=!other; } else if(parts[0]==='game'&&parts[1]){ const gg=GI[parts[1]]; other=!!gg&&gg.home!=='BYU'&&gg.away!=='BYU'; }
-  const on=fav==='BYU'&&!other; let el=document.getElementById('fieldbg');
-  if(on&&!el){ el=document.createElement('div'); el.id='fieldbg'; el.className='floor-bg'; el.setAttribute('aria-hidden','true'); el.innerHTML='<div class="fb-photo"></div><div class="floor-veil"></div>'; b.prepend(el); }
-  if(el){ el.hidden=!on; const ph=el.querySelector('.fb-photo'); const want=teamPage?'stadium':'field'; if(ph&&ph.dataset.p!==want){ ph.dataset.p=want; ph.className='fb-photo '+want; ph.style.backgroundImage='url("'+BG_BASE+'byu-'+want+'.webp")'; } }
-  b.classList.toggle('field-on',on); }
-{ const _apt=applyPageTheme; applyPageTheme=function(){ _apt(); fieldBg(); }; }
+/* patch118: the BYU photo wallpaper (patch99/100) is gone - BYU and neutral pages are themed by applyPageTheme */
 /* patch104: BYU Uni Watch - the uniform combo for each game, drawn, on game pages, the game-day screen and the team page */
 const UW = loadJSON('d-uniwatch') || {games:[]};
 const UW_C = {royal:'#0062B8', navy:'#002E5D', white:'#FFFFFF'};

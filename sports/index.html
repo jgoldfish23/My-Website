@@ -179,7 +179,7 @@ a.tv-g:hover{background:var(--surface-2)}
 .tv-st{min-width:86px;text-align:right;font-size:12.5px;color:var(--ink-3);font-weight:600;white-space:nowrap}
 .tv-st b{font-family:var(--num);font-size:14px;color:var(--ink)}
 .tv-st.live{color:var(--live)}
-.tv-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 16px;border-top:1px solid var(--line);background:var(--surface-2);font-size:13px;color:var(--ink-3)}
+.tv-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 16px;border-top:1px solid var(--line);background:var(--surface-2);font-size:13px;color:var(--ink-2)}
 .tv-foot a{font-weight:700;color:var(--ink);padding:5px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
 .tv-foot a:hover{border-color:var(--ink-3)}
 .empty{padding:16px;border:1px dashed var(--line);border-radius:14px;color:var(--ink-3);font-size:14px;text-align:center}
@@ -330,16 +330,37 @@ a.gm:hover{background:var(--surface-2)}
 .sp .ql{border-bottom:0}
 
 /* ===== Neo layer (2026-10-26, Jamo: "enhance the design, UI and layout - more futuristic and epic and clean"). Appended last
-   so it only refines: a deep-space backdrop with a slow aurora and a fine dot grid, glass panels with hairline edges that
+   so it only refines: a deep-space backdrop (since 10-27 the static clean gradient below, no aurora), glass panels with hairline edges that
    light up on hover, numbered HUD section headers, a bigger hero, a sheen across the team cards, league-colored light
    strips, and the Headlines section. Motion stops for reduced-motion users. ===== */
 :root{--bg:#03050a;--glass:linear-gradient(180deg,rgba(255,255,255,.058),rgba(255,255,255,.018));--edge:rgba(255,255,255,.085);--edge-hi:rgba(140,180,255,.42);--glow:0 0 0 1px rgba(120,160,255,.16),0 26px 60px -32px rgba(48,96,255,.55);--hud:#7cb6ff}
 :root.light{--bg:#edf0f7;--glass:linear-gradient(180deg,#ffffff,#f6f8fc);--edge:#dce2ee;--edge-hi:rgba(29,95,216,.38);--glow:0 0 0 1px rgba(29,95,216,.14),0 18px 40px -26px rgba(29,95,216,.38);--hud:#1d5fd8}
-body::before{inset:-12%;background:radial-gradient(760px 520px at 12% 4%,rgba(59,123,255,.22),transparent 62%),radial-gradient(720px 520px at 92% 0%,rgba(164,91,255,.20),transparent 64%),radial-gradient(900px 600px at 50% 105%,rgba(56,189,248,.10),transparent 66%);animation:nxAurora 42s ease-in-out infinite alternate}
-:root.light body::before{background:radial-gradient(760px 520px at 12% 4%,rgba(59,123,255,.14),transparent 62%),radial-gradient(720px 520px at 92% 0%,rgba(164,91,255,.11),transparent 64%)}
-body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.075) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);mask-image:linear-gradient(180deg,#000,transparent 75%)}
-:root.light body::after{background-image:radial-gradient(rgba(15,23,42,.07) 1px,transparent 1.3px)}
-@keyframes nxAurora{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}100%{transform:translate3d(2.5%,-1.5%,0) scale(1.03)}}
+/* Clean gradient backdrop (2026-10-27, Jamo: "Keep team colors but have clean electronic look that's smooth and gradient").
+   Replaces the moving aurora with one calm, static layer: the brand blue and violet as two wide, soft washes from the top
+   corners over a deep navy that settles into the page color, one faint diagonal light sweep, a fine grain so the dark
+   gradient never bands, and a softer dot grid that fades out by the middle of the screen. Light theme: the same washes,
+   paler, on a cool white. The same block sits in live/live.html and alerts/alerts.html. Measured (worst case = a white grain
+   pixel on a dot, in the blue wash at the top left; the dimmest one in the light theme): muted text (--ink-3) is 4.8:1 on a
+   glass panel and 5.7:1 right on the page in the dark theme, 6.0:1 on a white card and 4.5:1 on the page in the light theme
+   (4.9:1 and 5.2:1 against the average of the wash), and the light theme's blue eyebrow (--hud) is 4.9:1 on the page.
+   The layers are sized to the large viewport (plus a margin) so the iPhone toolbar sliding in and out never shows an edge. */
+:root{--ink-3:#9aa4b5}
+:root.light{--ink-3:#525c6f;--hud:#1850b8}
+body::before{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(100lvh + 48px);z-index:-2;pointer-events:none;transform:none;animation:none;background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='2 0 0 0 -.5 2 0 0 0 -.5 2 0 0 0 -.5 0 0 0 0 .032'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/160px 160px repeat,
+  linear-gradient(112deg,rgba(150,180,255,0) 30%,rgba(150,180,255,.04) 44%,rgba(150,180,255,0) 58%),
+  radial-gradient(120% 75% at 0% 0%,rgba(52,108,255,.16) 0%,rgba(52,108,255,.06) 45%,rgba(52,108,255,0) 75%),
+  radial-gradient(110% 70% at 100% 0%,rgba(146,86,255,.15) 0%,rgba(146,86,255,.055) 45%,rgba(146,86,255,0) 75%),
+  radial-gradient(130% 55% at 50% 112%,rgba(40,150,240,.08) 0%,rgba(40,150,240,0) 70%),
+  linear-gradient(180deg,#070a19 0%,#05070f 42%,var(--bg) 100%)}
+:root.light body::before{background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='2 0 0 0 -.5 2 0 0 0 -.5 2 0 0 0 -.5 0 0 0 0 .025'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/160px 160px repeat,
+  linear-gradient(112deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.35) 44%,rgba(255,255,255,0) 58%),
+  radial-gradient(120% 75% at 0% 0%,rgba(59,123,255,.13) 0%,rgba(59,123,255,.04) 45%,rgba(59,123,255,0) 75%),
+  radial-gradient(110% 70% at 100% 0%,rgba(146,86,255,.10) 0%,rgba(146,86,255,.03) 45%,rgba(146,86,255,0) 75%),
+  linear-gradient(180deg,#f4f6fb 0%,#eef1f7 50%,var(--bg) 100%)}
+body::after{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(100lvh + 64px);z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(150,175,255,.05) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,rgba(0,0,0,.35) 32%,transparent 60%);mask-image:linear-gradient(180deg,#000,rgba(0,0,0,.35) 32%,transparent 60%)}
+:root.light body::after{background-image:radial-gradient(rgba(15,23,42,.06) 1px,transparent 1.3px)}
 /* numbered HUD section headers with a light rule underneath */
 .fd{counter-reset:nx}
 .fd .sec:not(.top){counter-increment:nx;position:relative;margin-top:46px;padding-bottom:12px;align-items:center}
@@ -361,6 +382,12 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 .fd .lt{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 24px 54px -36px rgba(0,0,0,.9);transition:box-shadow .2s,transform .2s}
 .fd a.lc:hover,.fd a.lt:hover,.fd .sp:hover{border-color:var(--edge-hi);box-shadow:var(--glow);transform:translateY(-2px)}
 :root.light .fd .lc,:root.light .fd .tv,:root.light .fd .sp,:root.light .fd .lt{box-shadow:0 1px 2px rgba(15,23,42,.05),0 16px 34px -24px rgba(15,23,42,.28)}
+/* 10-27: no blur behind the panels - over the smooth gradient it showed nothing, and a dozen blurred panels cost the phone
+   a repaint on every scroll frame */
+.fd .lc,.fd .tv,.fd .sp{-webkit-backdrop-filter:none;backdrop-filter:none}
+/* 10-27: the welcome panel is dark in both themes, so it keeps the dark text tokens in the light theme too - the CFB / NFL /
+   NBA quick links were light-theme slate on the dark panel (2.2:1) and the TV guide button turned dark on dark */
+:root.light .hero{--ink:#eef2f8;--ink-2:#a9b3c4;--ink-3:#9aa4b5;--bg:#03050a;--line:rgba(255,255,255,.16);--surface-2:rgba(255,255,255,.08)}
 /* a light strip in each league's color along the top of its panel */
 .fd .sp{position:relative;overflow:hidden}
 .fd .sp::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--c),transparent);opacity:.9}
@@ -369,7 +396,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 .teams .tc::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.12) 46%,transparent 60%);transform:translateX(-110%);transition:transform 1s ease}
 .teams a.tc:hover::after{transform:translateX(110%)}
 .fd-more{border-radius:999px}
-.foot{opacity:.7}
+/* 10-27: the footer stays at full strength - at 70% the muted text fell to 4.0:1 */
 @media (prefers-reduced-motion:reduce){body::before,.hero h1 b{animation:none}.teams .tc::after{display:none}}
 @media (max-width:600px){.hero{padding:22px 18px 20px;border-radius:24px}.fd .sec:not(.top){margin-top:36px}}
 /* ---------- Headlines ---------- */
@@ -513,6 +540,8 @@ header.top.jsh-tuck{pointer-events:none}
 <script src="/sports/bl.js?v=20261027a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
 <script src="/sports/holo.js?v=20261027a" defer></script>
+<!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
+<script src="/sports/stage.js?v=20261027a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
      To bring it back, put this tag back in (and bump ?v=): <script src="/sports/ask.js?v=20261027c" defer></script> -->
 
@@ -555,7 +584,7 @@ header.top.jsh-tuck{pointer-events:none}
 
   <footer class="foot"><span id="asof"></span><span>A <i>Kramerica Industries</i> production</span></footer>
 </main>
-<script type="application/json" id="d-meta">{"cfb":"Wed Oct 28, 2026 · 1:43 AM ET","nfl":"Wed Oct 28, 2026 · 1:43 AM ET","nba":""}</script>
+<script type="application/json" id="d-meta">{"cfb":"Wed Oct 28, 2026 · 1:43 AM ET","nfl":"","nba":""}</script>
 <script type="text/plain" id="d-cfb">1|2026-08-29|Hawai'i|Stanford|27|37|FINAL|7:00 PM||-4.5|48.5|170|-205|ACC Network||
 1|2026-08-29|Jacksonville State|North Dakota State|7|33|FINAL|5:30 PM||-6.5|46.5|230|-285|CBSSN||
 1|2026-08-29|Memphis|UNLV|27|21|FINAL|10:00 PM||-4.5|55.5|160|-192|Fox||
@@ -4615,7 +4644,8 @@ function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(
   const gid = g => (o.href(g).split('#/game/')[1] || ''), art = (g, k) => g && ((ARTS[f.sport] || {})[gid(g)] || {})[k];
   const arLine = (g, k, word) => { const tt = art(g, k); return tt ? '<span class="tc-ar" role="link" tabindex="0" data-go="' + esc(o.href(g)) + '"><span class="tc-ar-k">Jamo’s ' + word + '</span> ' + esc(tt) + ' ›</span>' : ''; };
   lastLine += arLine(live || next, 'p', 'preview') + arLine(last, 'r', 'recap');
-  const logo = o.logo(t);
+  /* 10-27: the card logo (44 px plate, 150 px watermark) uses the 320 px file - the 96 px one was soft on an iPhone screen */
+  const logo0 = o.logo(t), logo = logo0 && /^\/(cfb|nfl|nba)\/img\/logos\/[^/]+\.png$/.test(logo0) && !/-lg\.png$/.test(logo0) ? logo0.replace(/\.png$/, '-lg.png') : logo0;
   return '<a class="tc rise" style="--i:' + i + ';--tc:' + c1 + ';--tc2:' + c2 + '" href="' + o.teamHref(t) + '" aria-label="' + esc(o.full(t)) + ' team page">' + (logo ? '<img class="wm" src="' + logo + '" alt="">' : '')
     + '<div class="tc-top"><span class="tc-sport">' + SPORT[f.sport].icon + esc(SPORT[f.sport].short) + '</span>' + (rk ? '<span class="tc-rank">#' + rk + '</span>' : '') + '</div>'
     + '<div class="tc-id">' + plate(logo) + '<div style="min-width:0"><div class="tc-name" data-mini="' + esc(f.sport === 'cfb' ? t : o.name(t)) + '">' + esc(f.sport === 'cfb' ? t : o.full(t)) + '</div><div class="tc-meta">' + meta + '</div></div></div>'

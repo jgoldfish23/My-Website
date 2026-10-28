@@ -13438,7 +13438,7 @@ function renderCup(){ setNav('cup'); if(!CUP_GROUPS.length){ view.innerHTML='<di
   html+='<div class="sec"><h2>Cup nights</h2><span class="muted">'+ds.map(d=>'<a href="#/cup/'+d+'" class="'+(d===nextD?'on':'')+'">'+esc(fmtDate(d,false))+'</a>').join(' · ')+'</span></div>';
   const show=(location.hash.split('/')[2]||nextD); const list=(nights[show]||[]).sort(byTip);
   html+='<div class="daygrp"><h3>'+esc(fmtDateLong(show))+' <span class="cnt">'+list.length+' Cup game'+(list.length===1?'':'s')+'</span></h3><div class="gmlist">'+list.map(gameRowAny).join('')+'</div></div><div class="mini" style="margin-top:8px"><a href="#/schedule/cup">Every Cup game &rsaquo;</a> · <a href="#/standings/cup">Group tables in Standings &rsaquo;</a></div><div class="mini dim" style="margin-top:14px">Background: the Utah Jazz’s 2026 NBA Cup court (image: Utah Jazz / NBA).</div>';
-  view.innerHTML=html; cupBg(true); }
+  view.innerHTML=html; cupBg(false); /* the Cup court wallpaper was removed 2026-10-27 (clean team-color look) */ }
 /* the court sits on the page itself: #view animates with a transform, which would trap a fixed layer inside it */
 function cupBg(on){ let el=document.getElementById('cupbg'); if(on&&!el){ el=document.createElement('div'); el.id='cupbg'; el.className='cup-bg'; el.setAttribute('aria-hidden','true'); document.body.prepend(el); } else if(!on&&el) el.remove(); }
 window.addEventListener('hashchange', ()=>{ if(!/^#\/cup/.test(location.hash)) cupBg(false); });
@@ -13478,37 +13478,13 @@ function renderReview(mon){ setNav('review'); const ab=favAb(), t=team(ab); cons
     +'<div class="mini" style="margin-top:8px">'+(ownTop.length?'The '+esc(t.disp)+' pick goes to '+ownTop.map(([w2,q])=>esc(team(w2).disp)+' '+pct(q)).join(', ')+' of the time under the 2027 pick trades. ':'')+'<a href="#/team/'+enc(ab)+'">Team page &rsaquo;</a> · <a href="#/draft/lottery">Lottery &rsaquo;</a></div></div></div>'
     +'<div class="card"><div class="hd"><h3>Next week</h3><span class="mini">'+revRange(addDays(mon,7))+'</span></div><div class="bd">'+(nx.length?nx.map(g=>{ const home=g.home===ab; const p=proj(g); const mine=home?p.pHome:p.pAway; return '<div class="rev-g">'+esc(fmtDate(g.date))+' '+(home?'vs ':'at ')+'<a href="#/game/'+enc(g.id)+'">'+esc(team(home?g.away:g.home).disp)+'</a> <span class="dim">'+esc(kick(g))+(tvFor(g,ab)?' · '+esc(tvFor(g,ab)):'')+' · model '+pct(mine)+'</span></div>'; }).join(''):'<div class="mini">No games scheduled.</div>')+'</div></div></div>';
   view.innerHTML=html; }
-/* ---------- The Jazz home floor as the NBA hub's wallpaper (2026-10-19, Jamo). Drawn here in the style of the Jazz's
-   mountain court (2025-26 on): maple floor, purple keys, the purple note at center court, a faded mountain range from
-   baseline to baseline and a purple apron with UTAH JAZZ on the baselines. The only official image online is 503 px
-   wide, so this is drawn as vector art to stay sharp at any size. The NBA Cup page keeps the Cup court (p2cup.js).
-   Sits on <body> (fixed) under a veil that keeps text readable; styles in p1.html ("Jazz floor"). ---------- */
-function jazzCourtSVG(){ const L='#2b1654', P='#4E2A84', A='#33195f';
-  const arc=(x,dir)=>'M'+x+' 60H'+(x+dir*140)+'A237.5 237.5 0 0 '+(dir>0?1:0)+' '+(x+dir*140)+' 500H'+x;
-  let planks=''; for(let y=30;y<530;y+=12) planks+='<line x1="30" y1="'+y+'" x2="970" y2="'+y+'"/>';
-  return '<svg class="floor-svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs>'
-    +'<linearGradient id="fl-wood" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6D5B1"/><stop offset=".5" stop-color="#D8C297"/><stop offset="1" stop-color="#CBB283"/></linearGradient>'
-    +'<linearGradient id="fl-apron" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="'+A+'"/><stop offset=".5" stop-color="#3f2373"/><stop offset="1" stop-color="'+A+'"/></linearGradient></defs>'
-    +'<rect width="1000" height="560" fill="url(#fl-apron)"/>'
-    +'<g fill="#6a49a8" opacity=".35"><polygon points="0,0 220,0 120,560 0,560"/><polygon points="1000,0 780,0 880,560 1000,560"/></g>'
-    +'<rect x="30" y="30" width="940" height="500" fill="url(#fl-wood)"/>'
-    +'<g stroke="#9c8259" stroke-opacity=".18" stroke-width="1">'+planks+'</g>'
-    +'<path d="M30 430 L150 330 L215 375 L330 250 L420 330 L500 210 L590 320 L680 255 L790 370 L860 320 L970 410 V530 H30Z" fill="#fff" opacity=".28"/>'
-    +'<path d="M30 470 L170 390 L260 430 L380 330 L500 400 L640 320 L760 410 L870 360 L970 450 V530 H30Z" fill="#fff" opacity=".18"/>'
-    +'<rect x="30" y="200" width="190" height="160" fill="'+P+'"/><rect x="780" y="200" width="190" height="160" fill="'+P+'"/>'
-    +'<g fill="none" stroke="'+L+'" stroke-width="2.5"><rect x="30" y="30" width="940" height="500"/><line x1="500" y1="30" x2="500" y2="530"/><circle cx="500" cy="280" r="60"/>'
-    +'<path d="'+arc(30,1)+'"/><path d="'+arc(970,-1)+'"/><circle cx="220" cy="280" r="60"/><circle cx="780" cy="280" r="60"/>'
-    +'<line x1="70" y1="250" x2="70" y2="310"/><line x1="930" y1="250" x2="930" y2="310"/><circle cx="82.5" cy="280" r="7.5"/><circle cx="917.5" cy="280" r="7.5"/></g>'
-    +'<image href="'+LOGO_BASE+'/UTAH-lg.png" x="420" y="200" width="160" height="160" preserveAspectRatio="xMidYMid meet"/>'
-    +'<g fill="#fff" font-family="Inter Tight,Inter,system-ui,sans-serif" font-weight="900" font-size="30" letter-spacing="2" text-anchor="middle">'
-    +'<text transform="translate(18 280) rotate(-90)">UTAH JAZZ</text><text transform="translate(982 280) rotate(90)">UTAH JAZZ</text></g></svg>'; }
-/* 2026-10-27 (Jamo: "Fix the court on nba pages"): the Jazz floor only belongs where the page is the Jazz's or nobody's.
-   Another team's game or team page is already dressed in that team's colors and logo (applyPageTheme), and the Jazz
-   court under a giant Celtics clover looked broken, so those pages go without it. */
-function floorBg(){ let t=null; try{ t=pageTeam(); }catch(e){} const on=!/^#\/cup/.test(location.hash||'') && (!t || t.ab===HOME); let el=document.getElementById('floorbg');
-  if(!el){ el=document.createElement('div'); el.id='floorbg'; el.className='floor-bg'; el.setAttribute('aria-hidden','true'); el.innerHTML=jazzCourtSVG()+'<div class="floor-veil"></div>'; document.body.prepend(el); }
-  el.hidden=!on; }
-window.addEventListener('hashchange', floorBg); setTimeout(floorBg, 0); /* after p2c.js sets LOGO_BASE */
+/* ---------- Court wallpapers removed (2026-10-27, Jamo: "Let's remove the court backgrounds so the information is more
+   clear. Keep team colors but have clean electronic look that's smooth and gradient"). The Jazz home floor (2026-10-19)
+   and the NBA Cup court on #/cup are gone; pages sit on the team-color gradient (applyPageTheme) and the shared stage
+   layer (sports-hub/polish/stage.js). The old drawing is in git history. This stub only removes a floor that a page
+   cached before the change may still draw. ---------- */
+function floorBg(){ const el=document.getElementById('floorbg'); if(el) el.remove(); }
+setTimeout(floorBg, 0);
 /* ---------- Jazz uniform tracker (2026-10-19, Jamo). What the Jazz wear every night: a "Jazz uniforms" page (#/uniforms)
    with the four jerseys, how often each is worn, the next game in each and the whole season as colored tiles, plus a
    "Tonight's threads" strip on every Jazz game page and the game-night screen, and a line on the opener card.
@@ -13748,7 +13724,7 @@ document.addEventListener('click', e=>{ const b=e.target.closest&&e.target.close
 { const _rs=renderScores; renderScores=function(d, f){ _rs(d, f); hmTrim(); setTimeout(hmTrim, 600); }; }
 
 /* 4. bottom tab bar (phones) */
-const BT_GROUP = r => (['','scores','week','gamenight','schedule','tv','lines','previews','board','game'].indexOf(r)>=0?'scores':['standings','rankings','playoffs','predict','root','cup'].indexOf(r)>=0?'standings':['players','leaders','injuries','draft','player'].indexOf(r)>=0?'players':r==='team'?'team':'more');
+const BT_GROUP = r => (['','scores','week','gamenight','schedule','tv','lines','previews','board','game'].indexOf(r)>=0?'scores':['standings','rankings','playoffs','predict','root','cup'].indexOf(r)>=0?'standings':['players','leaders','plusminus','injuries','draft','player'].indexOf(r)>=0?'players':r==='team'?'team':'more');
 const BT_ICON = {
   scores:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>',
   standings:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
@@ -13839,6 +13815,190 @@ function articleHTML(g){ const A=ARTICLES[g.id], hl=hlCardHTML(g); if(!A) return
 function articleHTML0(A,done){
   return (done?articleCardHTML(A.recap,'recap'):'')+articleCardHTML(A.preview,'preview',done&&!!A.recap); }
 /* ar:end */
+/* ---------- Plus-minus, game by game (2026-10-27, Jamo: "For the NBA add an analytic that tracks average Plus or Minus every
+   game for every player (Royal for positive, red for negative) incorporate your own calculation if that stat isn't out there").
+   - #/plusminus[/<team>] (Players menu): leaders (best and worst average +/- and Adjusted +/-, qualified players only), then
+     every player's season averages (+/- a game, Adjusted +/- a game, +/- per 36 minutes, games, minutes a game) with a strip
+     of his games in date order: royal blue when his team outscored the other team while he played, red when it was
+     outscored, grey for even, darker = a bigger margin. A mouse hover or a tap on a game reads it out:
+     "Oct 24 vs DEN (W 141-135 OT): +9 in 31 min (adjusted +4.2)".
+   - team pages: a "Plus-minus" section (after Player stats) with that team's players and their strips.
+   - Adjusted +/- is the hub's own number: his +/- minus the share of his team's final margin his minutes alone would give
+     him (margin x minutes / game minutes; 48, plus 5 for each overtime). Above zero = the team did better with him on the
+     floor than its overall result. A team's adjusted numbers in one game add up to about zero (box minutes are rounded).
+   - small samples (fewer than 5 games - fewer this early in the season, see pmPrep - or under 10 minutes a game) are
+     marked and kept out of the leaders and the default league list.
+   Data: pm.json from make_pm.mjs (run by build.sh from playergames.txt + sched.txt), published as /nba/data/pm.json by
+   deploy_public.sh and fetched the first time a plus-minus view opens, so the page itself stays light. Every number is
+   from the ESPN box scores; regular season only. Styles are injected below (pm-css). ---------- */
+const PM = { data:null, busy:null, err:'', sort:'pm', dir:-1, team:'', q:'', small:null, shown:40 };
+const PMT = { sort:'pm', dir:-1 };
+const PM_STEP = 40;
+const pmF = (x, d) => { if(x==null||!isFinite(x)) return '—'; const k=d==null?1:d; const r=+(+x).toFixed(k); return (r>0?'+':r<0?'−':'')+Math.abs(r).toFixed(k); };
+const pmC = (x, d) => { const r=+(+x).toFixed(d==null?1:d); return r>0?'up':r<0?'dn':'ev'; };
+const pmV = (x, d) => '<b class="pmv '+pmC(x,d)+'">'+pmF(x,d)+'</b>';
+const pmStep = v => { const a=Math.abs(v); return a<=3?1:a<=7?2:a<=12?3:a<=19?4:5; };
+const pmShort = n => { const p=String(n||'').split(' '); return p.length<2?String(n||''):p[0].charAt(0)+'. '+p.slice(1).join(' '); };
+const pmOT = n => n>1?' '+n+'OT':n===1?' OT':'';
+
+/* ---------- data ---------- */
+function pmURLs(){ const v='?v='+encodeURIComponent(AS_OF); const site=/(^|\.)djgolding\.com$/.test(location.hostname), local=/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  return site ? ['/nba/data/pm.json'+v] : local ? ['pm.json'+v, 'data/pm.json'+v, '/nba/data/pm.json'+v] : ['https://djgolding.com/nba/data/pm.json'+v]; }
+function pmLoad(){ if(PM.data) return Promise.resolve(PM.data); if(PM.busy) return PM.busy;
+  PM.err=''; PM.busy=(async()=>{ for(const u of pmURLs()){ try{ const r=await fetch(u); if(!r.ok) continue; const j=await r.json(); if(j&&Array.isArray(j.g)&&Array.isArray(j.p)){ PM.data=pmPrep(j); return PM.data; } }catch(e){} }
+    PM.err='The plus-minus numbers did not load. Check the connection and try again.'; PM.busy=null; return null; })();
+  return PM.busy; }
+function pmPrep(j){
+  const games=j.g.map((r,i)=>{ const ot=+r[6]||0; return {i, id:String(r[0]), date:r[1], away:norm(r[2]), home:norm(r[3]), as:+r[4], hs:+r[5], ot, len:48+5*ot}; });
+  const teamGP={}; games.forEach(g=>{ teamGP[g.away]=(teamGP[g.away]||0)+1; teamGP[g.home]=(teamGP[g.home]||0)+1; });
+  const players=j.p.map(r=>{ const ab=norm(r[2]), a=r[3]||[], gl=[]; let min=0, pm=0, adj=0;
+    for(let k=0;k+2<a.length;k+=3){ const g=games[a[k]]; if(!g) continue; const home=g.home===ab; const margin=home?g.hs-g.as:g.as-g.hs; const m=+a[k+1]||0, v=+a[k+2]||0;
+      const ad=v-margin*m/g.len; gl.push({g, home, opp:home?g.away:g.home, margin, min:m, pm:v, adj:ad}); min+=m; pm+=v; adj+=ad; }
+    const n=gl.length; return {id:String(r[0]), n:String(r[1]||''), key:dkey(r[1]), ab, gl, gp:n, min, pmT:pm, adjT:adj, mpg:n?min/n:0, pmg:n?pm/n:0, adjg:n?adj/n:0, p36:min?pm/min*36:null}; }).filter(p=>p.gp);
+  /* small sample: under 10 minutes a game, or fewer than 5 games - until teams have played 7, fewer than 70% of a typical
+     team's games (3 when most teams have played 3 or 4), so the leaders aren't empty in the first week */
+  const gps=Object.values(teamGP).sort((a,b)=>a-b); const med=gps.length?gps[Math.floor(gps.length/2)]:0;
+  const gMin=Math.max(1, Math.min(5, Math.ceil(0.7*med)));
+  players.forEach((p,i)=>{ p.pk=i; p.small = p.gp<gMin || p.mpg<10; });
+  return {season:j.season, through:j.through||'', games, players, gMin}; }
+
+/* ---------- pieces ---------- */
+function pmTip(p, k){ const x=p.gl[k]; if(!x) return ''; const g=x.g; const pf=x.home?g.hs:g.as, pa=x.home?g.as:g.hs;
+  return '<b>'+esc(fmtDate(g.date,false))+' '+(x.home?'vs ':'at ')+esc(team(x.opp).ab)+'</b> ('+(pf>pa?'W':'L')+' '+pf+'-'+pa+pmOT(g.ot)+'): '+pmV(x.pm,0)+' in '+x.min+' min (adjusted '+pmV(x.adj,1)+')'; }
+function pmStrip(p){ const cells=p.gl.map((x,k)=>'<i class="pmc '+(x.pm>0?'u'+pmStep(x.pm):x.pm<0?'d'+pmStep(x.pm):'z')+'" data-pmk="'+k+'"></i>').join('');
+  const lab='Game by game, oldest first: '+p.gl.map(x=>pmF(x.pm,0)).join(', ');
+  return '<div class="pm-strip" data-pmp="'+p.pk+'" role="img" aria-label="'+esc(lab)+'">'+cells+'</div><div class="pm-read" aria-live="polite"></div>'; }
+function pmLegend(){ return '<span class="pm-lg"><span><i class="pmc u3"></i>team ahead with him on</span><span><i class="pmc d3"></i>behind</span><span><i class="pmc z"></i>even</span><span class="dim">stronger color = bigger · oldest game first</span></span>'; }
+function pmHow(){ return '<div class="pm-how"><b>Adjusted +/- is the hub’s own number:</b> his +/- minus the share of his team’s final margin his minutes alone would earn (final margin × his minutes ÷ game length: 48 minutes, 53 with one overtime), so above zero means the team did better with him on the floor than it did overall.</div>'; }
+/* the full name on wide screens, "J. McDaniels" on phones (the short one is a second link, hidden from screen readers) */
+const pmName = (p, o) => '<span class="pm-fn">'+playerLink(p.ab, p.n)+'</span><span class="pm-sn" aria-hidden="true">'+playerLink(p.ab, p.n, pmShort(p.n)).replace('<a ','<a tabindex="-1" ')+'</span>';
+const PM_COLS = [['n','Player','',''], ['gp','GP','r','Games played'], ['mpg','MIN','r','Minutes a game'], ['pm','+/-','r','Plus-minus a game: the score change while he was on the floor'], ['adj','ADJ','r','Adjusted +/- a game (the hub’s own): +/- minus his minutes’ share of the final margin'], ['p36','/36','r','Plus-minus per 36 minutes']];
+const PM_KEY = {n:p=>p.n, gp:p=>p.gp, mpg:p=>p.mpg, pm:p=>p.pmg, adj:p=>p.adjg, p36:p=>p.p36};
+function pmSort(list, st){ const f=PM_KEY[st.sort]||PM_KEY.pm, rate=/^(pm|adj|p36)$/.test(st.sort);
+  return list.slice().sort((a,b)=>{ if(rate&&a.small!==b.small) return a.small?1:-1; if(st.sort==='n') return st.dir*String(a.n).localeCompare(String(b.n)); const va=f(a), vb=f(b); return (st.dir*((va??-1e9)-(vb??-1e9)))||(b.gp-a.gp)||(b.min-a.min); }); }
+function pmTable(rows, st, opts){ const o=opts||{}; const n=PM_COLS.length+1;
+  const th=c=>'<th class="sort'+(c[2]?' '+c[2]:'')+(st.sort===c[0]?' sorted'+(st.dir>0?' asc':''):'')+'" data-pms="'+c[0]+'"'+(c[3]?' title="'+esc(c[3])+'"':'')+'>'+esc(c[1])+'</th>';
+  const body=rows.map((p,i)=>{ const ss=p.small?' ss':'';
+    return '<tr class="pm-r'+ss+'"><td class="pm-rk dim">'+(i+1)+'</td><td class="pm-nm">'+(o.team?chipLogo(p.ab):'')+pmName(p)+(o.team||p.small?'<span class="pm-sub">'+(o.team?esc(team(p.ab).ab):'')+(p.small?'<span class="pm-ss">small sample</span>':'')+'</span>':'')+'</td>'
+      +'<td class="r">'+p.gp+'</td><td class="r">'+num1(p.mpg)+'</td><td class="r">'+pmV(p.pmg)+'</td><td class="r">'+pmV(p.adjg)+'</td><td class="r">'+(p.p36==null?'—':pmV(p.p36))+'</td></tr>'
+      +'<tr class="pm-sr'+ss+'"><td colspan="'+n+'">'+pmStrip(p)+'</td></tr>'; }).join('');
+  return '<div class="tblwrap pm-wrap"><table class="tbl pm-tbl"><thead><tr><th class="pm-rk">#</th>'+PM_COLS.map(th).join('')+'</tr></thead><tbody>'+body+'</tbody></table></div>'; }
+function pmLeaders(list, scopeLabel){ const q=list.filter(p=>!p.small); const n=Math.min(3, Math.floor(q.length/2));
+  if(n<1) return '<div class="note" style="margin-bottom:12px">Not enough qualified players'+(scopeLabel?' for the '+esc(scopeLabel):'')+' yet for leaders: they need '+PM.data.gMin+'+ games and 10+ minutes a game.</div>';
+  /* phones: the number moves under the name (two leader columns side by side leave no room for it on the right) */
+  const li=(p,k)=>'<li>'+chipLogo(p.ab)+'<span class="nm">'+playerLink(p.ab, p.n, pmShort(p.n))+'<span class="pm-sub"><span class="pm-vm">'+pmV(p[k])+' </span>'+esc(team(p.ab).ab)+' · '+p.gp+' g<span class="pm-mn"> · '+num1(p.mpg)+' min</span></span></span><span class="pm-vd">'+pmV(p[k])+'</span></li>';
+  const card=(title, sub, k)=>{ const s=q.slice().sort((a,b)=>b[k]-a[k]||b.gp-a.gp); return '<div class="card pm-ld"><div class="hd"><h3>'+title+'</h3><span class="mini">'+sub+'</span></div><div class="bd"><div class="pm-ldg"><div><div class="pm-ldh">Best</div><ol>'+s.slice(0,n).map(p=>li(p,k)).join('')+'</ol></div><div><div class="pm-ldh">Worst</div><ol>'+s.slice(-n).reverse().map(p=>li(p,k)).join('')+'</ol></div></div></div></div>'; };
+  return '<div class="grid g2 pm-lds">'+card('Average +/-','a game'+(scopeLabel?' · '+esc(scopeLabel):''),'pmg')+card('Adjusted +/-','the hub’s own · a game'+(scopeLabel?' · '+esc(scopeLabel):''),'adjg')+'</div>'; }
+
+/* ---------- #/plusminus ---------- */
+function pmSmallOn(){ return PM.small==null ? !!PM.team : PM.small; }
+function pmList(){ const D=PM.data; if(!D) return []; const q=dkey(PM.q); let L=D.players;
+  if(PM.team) L=L.filter(p=>p.ab===PM.team);
+  if(q) L=L.filter(p=>p.key.indexOf(q)>=0); else if(!pmSmallOn()) L=L.filter(p=>!p.small);
+  return pmSort(L, PM); }
+function pmTblHTML(){ const D=PM.data; const L=pmList(); const all=PM.team?D.players.filter(p=>p.ab===PM.team):D.players; const hid=PM.q?0:all.filter(p=>p.small).length;
+  if(!L.length){ if(!PM.q) return '<div class="note">'+(all.length?'No qualified players'+(PM.team?' for the '+esc(team(PM.team).disp):'')+' yet. Tick “Include small samples” to see all '+all.length+'.':'No games yet.')+'</div>';
+    const q=dkey(PM.q); const els=q&&PM.team?D.players.filter(p=>p.key.indexOf(q)>=0).length:0;
+    return '<div class="note">No player'+(PM.team?' on the '+esc(team(PM.team).disp):'')+' matches “'+esc(PM.q)+'”.'+(els?' <button type="button" class="btn sm" data-pmt="">Search every team ('+els+')</button>':'')+'</div>'; }
+  const show=PM.team||PM.q?L.length:Math.min(L.length, PM.shown); const left=L.length-show;
+  return '<div class="mini pm-count">'+(show<L.length?'Showing '+show+' of '+L.length:L.length+(L.length===1?' player':' players'))+(PM.q?' matching “'+esc(PM.q)+'”':'')+(!PM.q&&!pmSmallOn()&&hid?' · '+hid+' small samples hidden':'')+' · tap a column to sort, tap a game for the details</div>'
+    + pmTable(L.slice(0,show), PM, {team:!PM.team})
+    + (left>0?'<div class="pm-more"><button type="button" class="btn sm" data-pmm="'+PM_STEP+'">Show '+Math.min(PM_STEP,left)+' more</button>'+(left>PM_STEP?'<button type="button" class="btn sm" data-pmm="all">Show all '+L.length+'</button>':'')+'</div>':''); }
+function pmLeadHTML(){ const D=PM.data; const L=PM.team?D.players.filter(p=>p.ab===PM.team):D.players; return pmLeaders(L, PM.team?team(PM.team).disp:''); }
+function pmBodyHTML(){ const D=PM.data; const fav=favAb(), ft=team(fav);
+  const teams=TEAMS.slice().sort((x,y)=>x.full.localeCompare(y.full));
+  return pmHow()+'<div id="pm-lead">'+pmLeadHTML()+'</div>'
+    + '<div class="pm-tools"><div class="seg pm-seg"><button type="button" data-pmt=""'+(PM.team?'':' class="on"')+'>All teams</button><button type="button" data-pmt="'+esc(fav)+'"'+(PM.team===fav?' class="on"':'')+'>'+chipLogo(fav)+esc(ft.disp)+'</button></div>'
+    + '<select id="pm-team" aria-label="Team"><option value="">Pick a team</option>'+teams.map(t=>'<option value="'+t.ab+'"'+(PM.team===t.ab?' selected':'')+'>'+esc(t.full)+'</option>').join('')+'</select>'
+    + '<input type="search" id="pm-q" placeholder="Find a player" value="'+esc(PM.q)+'" autocomplete="off" aria-label="Find a player">'
+    + '<label class="pl-chk"><input type="checkbox" id="pm-small"'+(pmSmallOn()?' checked':'')+'> Include small samples</label></div>'
+    + '<div class="pm-legrow">'+pmLegend()+'</div>'
+    + '<div id="pm-tbl">'+pmTblHTML()+'</div>'
+    + '<div class="pl-note">+/- is how the score changed while he was on the floor (ESPN box scores, '+esc(SEASON_LABEL)+' regular season, '+D.games.length+(D.games.length===1?' game':' games')+(D.through?' through '+esc(fmtDate(D.through,false)):'')+'). Per 36 = his +/- for every 36 minutes he played. Small sample = fewer than '+D.gMin+' games or under 10 minutes a game: kept out of the leaders, and out of the list unless the box is ticked.</div>'; }
+function renderPlusMinus(arg){ setNav('plusminus'); pmNavFix();
+  const a=norm(String(arg||'').toUpperCase()); PM.team=T[a]?a:''; PM.shown=PM_STEP;
+  view.innerHTML='<div class="page-head"><div><div class="eyebrow">Players · '+esc(SEASON_LABEL)+'</div><h1>Plus-minus</h1><div class="sub">Every player’s +/- game by game: royal blue when his team won his minutes, red when it lost them.</div></div></div><div id="pm-body">'+(PM.data?pmBodyHTML():'<div class="note">Loading every player’s game-by-game plus-minus…</div>')+'</div>';
+  if(!PM.data) pmLoad().then(d=>{ const b=document.getElementById('pm-body'); if(!b||!/^#\/plusminus/.test(location.hash||'')) return; b.innerHTML=d?pmBodyHTML():'<div class="note">'+esc(PM.err)+' <button type="button" class="btn sm" id="pm-retry">Try again</button></div>'; }); }
+function pmRedraw(lead){ if(!PM.data) return; const t=document.getElementById('pm-tbl'); if(t) t.innerHTML=pmTblHTML(); if(lead){ const l=document.getElementById('pm-lead'); if(l) l.innerHTML=pmLeadHTML(); } }
+function pmSetTeam(ab){ PM.team=T[ab]?ab:''; PM.shown=PM_STEP; try{ history.replaceState(null,'','#/plusminus'+(PM.team?'/'+enc(PM.team):'')); }catch(e){}
+  view.querySelectorAll('.pm-seg [data-pmt]').forEach(b=>b.classList.toggle('on', b.dataset.pmt===PM.team));
+  const s=document.getElementById('pm-team'); if(s) s.value=PM.team; const c=document.getElementById('pm-small'); if(c) c.checked=pmSmallOn(); pmRedraw(true); }
+
+/* ---------- team pages ---------- */
+function pmTeamInner(ab){ const D=PM.data; const L=D.players.filter(p=>p.ab===ab); if(!L.length) return '<div class="mini">No games for the '+esc(team(ab).disp)+' yet.</div>';
+  return '<div class="pm-scope" data-scope="tm" data-ab="'+esc(ab)+'"><div class="pm-legrow">'+pmLegend()+'</div>'+pmTable(pmSort(L, PMT), PMT, {})
+    + '<div class="mini pm-tfoot">Adjusted +/- is the hub’s own: his +/- minus his minutes’ share of the team’s final margin, so above zero means the '+esc(team(ab).disp)+' did better with him on the floor than they did overall. Small sample = fewer than '+D.gMin+' games or under 10 minutes a game. <a href="#/plusminus/'+enc(ab)+'">Leaders and every player in the league &rsaquo;</a></div></div>'; }
+function pmTeamFill(ab){ const box=document.getElementById('pm-tbox'); if(!box||box.dataset.ab!==ab) return; box.innerHTML=PM.data?pmTeamInner(ab):'<div class="mini">'+esc(PM.err||'Loading…')+'</div>'; }
+function pmTeamMount(ab){ if(!T[ab]||document.getElementById('s-pm')) return; if(typeof pstRows==='function'&&!pstRows(ab).length) return;
+  const at=document.getElementById('s-players'); if(!at) return; const t=team(ab);
+  at.insertAdjacentHTML('beforebegin','<div id="s-pm" class="sec"><h2>Plus-minus</h2><span class="muted">the score with each '+esc(t.disp)+' player on the floor, game by game</span></div><div class="card pm-tcard" style="margin-top:12px"><div class="bd" id="pm-tbox" data-ab="'+esc(ab)+'">'+(PM.data?pmTeamInner(ab):'<div class="mini">Loading the game-by-game plus-minus…</div>')+'</div></div>');
+  const sn=view.querySelector('.subnav a[data-sec="s-players"]'); if(sn&&!view.querySelector('.subnav a[data-sec="s-pm"]')) sn.insertAdjacentHTML('beforebegin','<a href="#/team/'+enc(ab)+'#s-pm" data-sec="s-pm">Plus-minus</a>');
+  if(!PM.data) pmLoad().then(()=>pmTeamFill(ab)); }
+{ const _rt=renderTeam; renderTeam=function(ab){ _rt(ab); pmTeamMount(norm(ab||'')); }; }
+
+/* ---------- events ---------- */
+document.addEventListener('click', e=>{ const el=e.target; if(!el.closest||!view.contains(el)) return;
+  const c=el.closest('.pmc'); if(c&&c.dataset.pmk!=null){ const s=c.closest('.pm-strip'); const p=PM.data&&PM.data.players[+s.dataset.pmp]; const rd=s.nextElementSibling; if(!p||!rd) return;
+    const was=c.classList.contains('sel'); s.querySelectorAll('.pmc.sel').forEach(x=>x.classList.remove('sel')); if(was){ rd.innerHTML=''; return; } c.classList.add('sel'); const x=p.gl[+c.dataset.pmk]; rd.innerHTML=pmTip(p, +c.dataset.pmk)+(x&&GI[x.g.id]?' · <a href="#/game/'+enc(x.g.id)+'">Game page &rsaquo;</a>':''); return; }
+  const th=el.closest('[data-pms]'); if(th&&PM.data){ const scope=th.closest('.pm-scope'); const st=scope?PMT:PM; const k=th.dataset.pms; if(st.sort===k) st.dir=-st.dir; else { st.sort=k; st.dir=k==='n'?1:-1; }
+    if(scope) pmTeamFill(scope.dataset.ab); else pmRedraw(false); return; }
+  const t=el.closest('[data-pmt]'); if(t){ e.preventDefault(); pmSetTeam(t.dataset.pmt||''); return; }
+  const m=el.closest('[data-pmm]'); if(m){ PM.shown=m.dataset.pmm==='all'?1e6:PM.shown+PM_STEP; pmRedraw(false); return; }
+  if(el.closest('#pm-retry')){ const b=document.getElementById('pm-body'); if(b) b.innerHTML='<div class="note">Loading…</div>'; pmLoad().then(d=>{ const bb=document.getElementById('pm-body'); if(bb) bb.innerHTML=d?pmBodyHTML():'<div class="note">'+esc(PM.err)+' <button type="button" class="btn sm" id="pm-retry">Try again</button></div>'; }); } });
+document.addEventListener('change', e=>{ const el=e.target; if(el.id==='pm-team') pmSetTeam(el.value); else if(el.id==='pm-small'){ PM.small=el.checked; PM.shown=PM_STEP; pmRedraw(false); } });
+{ let qt=0; document.addEventListener('input', e=>{ if(e.target.id!=='pm-q') return; clearTimeout(qt); qt=setTimeout(()=>{ PM.q=e.target.value.trim(); PM.shown=PM_STEP; pmRedraw(false); }, 140); }); }
+/* a real mouse gets the same readout as a floating tip (the hub's own tooltip; a tap uses the line under the strip) */
+document.addEventListener('pointermove', e=>{ if(e.pointerType!=='mouse'||!TIP_HOVER) return; const c=e.target.closest&&e.target.closest('.pmc[data-pmk]'); if(!c) return; const s=c.closest('.pm-strip'); const p=PM.data&&s&&PM.data.players[+s.dataset.pmp]; if(p) showTip(pmTip(p, +c.dataset.pmk), e.clientX, e.clientY); });
+
+/* ---------- menu: "Plus-minus" sits with the Players pages (after Leaders) ----------
+   The link joins #nav before the grouped navigation (sports-hub/nav/navgroups.js) runs; that file files any route it doesn't
+   know under More, so once it has run the link is moved back next to Leaders and given the Players section. */
+function pmNavFix(){ const nav=document.getElementById('nav'); if(!nav) return; let a=nav.querySelector('a[data-r="plusminus"]');
+  if(!a){ const after=nav.querySelector('a[data-r="leaders"]')||nav.querySelector('a[data-r="players"]'); a=document.createElement('a'); a.href='#/plusminus'; a.dataset.r='plusminus'; a.textContent='Plus-minus'; a.title='Every player’s +/- game by game, and the hub’s own Adjusted +/-'; if(after) after.after(a); else nav.appendChild(a); }
+  if(nav.classList.contains('navg')&&a.dataset.g!=='players'){ const lead=nav.querySelector('.ng-sub a[data-r="leaders"]'); a.dataset.g='players'; if(lead) lead.after(a);
+    a.classList.add('pm-moved'); a.classList.remove('pm-moved'); /* a class change wakes navgroups' observer, which re-marks the section tabs */ } }
+pmNavFix();
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', pmNavFix); else setTimeout(pmNavFix, 0);
+
+/* ---------- styles ---------- */
+{ const st=document.createElement('style'); st.id='pm-css'; st.textContent=
+  ':root{--pm-pos:37,99,235;--pm-neg:229,72,77;--pm-pos-ink:#1D4ED8;--pm-neg-ink:#C81E24;--pm-zero:rgba(107,116,128,.3);--pm-a1:.4;--pm-a2:.56;--pm-a3:.72;--pm-a4:.86}'
+  +'@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--pm-pos:77,141,255;--pm-neg:240,84,90;--pm-pos-ink:#7DB0FF;--pm-neg-ink:#FF7D82;--pm-zero:rgba(160,168,176,.3);--pm-a1:.52;--pm-a2:.66;--pm-a3:.8;--pm-a4:.9}}'
+  +':root[data-theme="dark"]{--pm-pos:77,141,255;--pm-neg:240,84,90;--pm-pos-ink:#7DB0FF;--pm-neg-ink:#FF7D82;--pm-zero:rgba(160,168,176,.3);--pm-a1:.52;--pm-a2:.66;--pm-a3:.8;--pm-a4:.9}'
+  +'.pmv{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}.pmv.up{color:var(--pm-pos-ink)}.pmv.dn{color:var(--pm-neg-ink)}.pmv.ev{color:var(--ink-3)}'
+  +'.tip .pmv.up{color:var(--pm-pos-ink)}.tip .pmv.dn{color:var(--pm-neg-ink)}'
+  +'.pm-strip{display:flex;flex-wrap:wrap;gap:2px;padding:1px 0}'
+  +'.pmc{display:block;flex:none;width:12px;height:18px;border-radius:3px;background:var(--pm-zero);cursor:pointer;-webkit-tap-highlight-color:transparent;position:relative}.pmc::after{content:"";position:absolute;inset:-1px}'
+  /* ::after closes the 2px gaps, so a slightly-off tap on a phone still lands on a game */
+  +'.pmc.u1{background:rgba(var(--pm-pos),var(--pm-a1))}.pmc.u2{background:rgba(var(--pm-pos),var(--pm-a2))}.pmc.u3{background:rgba(var(--pm-pos),var(--pm-a3))}.pmc.u4{background:rgba(var(--pm-pos),var(--pm-a4))}.pmc.u5{background:rgb(var(--pm-pos))}'
+  +'.pmc.d1{background:rgba(var(--pm-neg),var(--pm-a1))}.pmc.d2{background:rgba(var(--pm-neg),var(--pm-a2))}.pmc.d3{background:rgba(var(--pm-neg),var(--pm-a3))}.pmc.d4{background:rgba(var(--pm-neg),var(--pm-a4))}.pmc.d5{background:rgb(var(--pm-neg))}'
+  +'.pmc.sel{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--ink)}'
+  +'.pm-read{font-size:12.5px;line-height:1.45;color:var(--ink-2);margin-top:6px;white-space:normal}.pm-read:empty{display:none}'
+  +'.pm-tbl .pm-r td{border-bottom:0;padding-bottom:2px}.pm-tbl .pm-sr td{padding-top:3px;padding-bottom:10px;white-space:normal}'
+  +'.pm-tbl tr.ss td{opacity:.72}.pm-tbl th.sorted.asc::after{content:" ▴"}'
+  +'.pm-nm .plink{font-weight:600}.pm-nm .sw-logo{margin-right:6px}.pm-sub{display:block;font-size:11.5px;font-weight:500;color:var(--ink-3);line-height:1.25}'
+  +'.pm-ss{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--line);border-radius:999px;padding:0 6px;margin-left:5px;vertical-align:1px}.pm-sub .pm-ss:first-child{margin-left:0}'
+  +'.pm-how{margin:0 0 12px;padding:10px 12px;border:1px solid var(--line);border-left:3px solid rgb(var(--pm-pos));border-radius:var(--radius);background:var(--surface);font-size:13.5px;line-height:1.5;color:var(--ink-2)}.pm-how b{color:var(--ink)}'
+  +'.pm-lds{margin-bottom:14px}.pm-ldg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 18px}'
+  +'.pm-ldh{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:2px 0 2px}'
+  +'.pm-ld ol{list-style:none;margin:0;padding:0}.pm-ld li{display:flex;align-items:center;gap:7px;padding:6px 0;border-bottom:1px solid var(--line-2);min-width:0}.pm-ld li:last-child{border-bottom:0}'
+  +'.pm-ld li .sw-logo{margin:0!important}.pm-ld .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;font-size:14px}.pm-ld .nm .pm-sub{overflow:hidden;text-overflow:ellipsis}'
+  +'.pm-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px}.pm-tools input[type=search]{width:200px}'
+  +'.pm-seg button{display:inline-flex;align-items:center;gap:6px}.pm-seg .sw-logo{margin:0!important;width:16px!important;height:16px!important}.pm-seg .on .sw-logo{background:#fff!important;border-radius:50%!important;padding:1px;width:18px!important;height:18px!important}'
+  +'.pm-tbl .pm-rk{width:1%}.pm-tbl th.pm-nm,.pm-tbl td.pm-nm{width:38%}'
+  +'.pm-legrow{margin:0 0 8px}.pm-lg{display:inline-flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:12.5px;color:var(--ink-2)}.pm-lg>span{display:inline-flex;align-items:center;gap:5px}.pm-lg .pmc{cursor:default;width:11px;height:14px}'
+  +'.pm-sn,.pm-vm{display:none}'
+  +'.pm-count{margin:0 0 8px}.pm-more{display:flex;justify-content:center;gap:8px;margin:12px 0 4px}.pm-tfoot{margin-top:10px;line-height:1.5}'
+  +'@media (max-width:600px){.pm-tbl .pm-rk{display:none}.pm-tbl th.pm-nm,.pm-tbl td.pm-nm{width:auto}'
+  /* the team card's table runs edge to edge on phones so all six columns fit without sideways scrolling */
+  +'.pm-tcard>.bd{padding:12px 0 12px}.pm-tcard .pm-legrow,.pm-tcard .pm-tfoot{padding:0 12px}.pm-tcard .pm-wrap{border-left:0;border-right:0;border-radius:0}'
+  +'.pm-tools input[type=search]{flex:1 1 100%;width:auto;font-size:16px}.pm-tools select{flex:1 1 0;min-width:0}'
+  +'.pm-tbl th,.pm-tbl td{padding-left:5px;padding-right:5px}.pm-tbl th{letter-spacing:.02em}.pm-tbl td{font-size:13px}.pm-tbl .pm-nm{font-size:13.5px}'
+  +'.pm-fn,.pm-nm .sw-logo{display:none!important}.pm-sn{display:inline}.pm-sn .plink{max-width:7.6em;display:inline-block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}'
+  +'.pm-ldg{gap:2px 12px}.pm-ld .nm{font-size:13.5px}.pm-ld.card .hd,.pm-ld.card .bd{padding-left:12px;padding-right:12px}.pm-vd,.pm-mn{display:none}.pm-vm{display:inline}.pm-vm .pmv{font-size:14px}.pm-ld li{align-items:flex-start}.pm-ld li .sw-logo{margin-top:2px!important}}';
+  /* into <body>, after the hub stylesheet: on the live page p1.html sits inside <body> (after the top bar), so a <head>
+     copy would lose every tie to it */
+  (document.body||document.head).appendChild(st); }
 
 /* ---------- logos & team themes ---------- */
 const LOGO_BASE = (/(^|\.)djgolding\.com$/.test(location.hostname) || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) ? '/nba/img/logos' : 'https://djgolding.com/nba/img/logos';
@@ -13887,7 +14047,7 @@ function uiRestore(s,y){ const seen={};
 /* a game page only redraws when that game changed (other games' live scores just update the ticker) */
 function quietSkip(ids){ const m=(location.hash||'').match(/^#\/game\/([^\/#?]+)/); if(!m) return false; let id=m[1]; try{ id=decodeURIComponent(id); }catch(e){} return !(ids||[]).some(x=>String(x)===id); }
 /* keep:end */
-function rerenderQuiet(){ view.classList.remove('enter'); const h=location.hash||'#/'; if(/^#\/(my|settings|predict|players|cap\/rules)/.test(h)){ renderTicker(); return; } if(/^#\/root/.test(h)){ rootQuietRefresh(); renderTicker(); return; } const y=window.scrollY; const KEEP=uiSnap(); const lock=view.offsetHeight; view.style.minHeight=lock+'px'; QUIET=true; routeInner(); QUIET=false; applyPageTheme(); uiRestore(KEEP,y); view.style.minHeight=''; renderTicker(); animateScores(view); initSubnav(); }
+function rerenderQuiet(){ view.classList.remove('enter'); const h=location.hash||'#/'; if(/^#\/(my|settings|predict|players|plusminus|cap\/rules)/.test(h)){ renderTicker(); return; } if(/^#\/root/.test(h)){ rootQuietRefresh(); renderTicker(); return; } const y=window.scrollY; const KEEP=uiSnap(); const lock=view.offsetHeight; view.style.minHeight=lock+'px'; QUIET=true; routeInner(); QUIET=false; applyPageTheme(); uiRestore(KEEP,y); view.style.minHeight=''; renderTicker(); animateScores(view); initSubnav(); }
 function liveNext(){ const now=Date.now(); const ds=liveDates(); const gs=G.filter(g=>ds.includes(g.date)); const anyLive=gs.some(g=>g.live); const soon=gs.some(g=>{ if(g.played||g.live) return false; const k=kickMs(g); return k!=null && k-now<45*60e3 && now-k<4*3600e3; }); return anyLive?30e3 : soon?90e3 : gs.length?5*60e3 : 20*60e3; }
 function liveSchedule(){ clearTimeout(LIVE.timer); if(!LIVE.on) return; LIVE.timer=setTimeout(async()=>{ await livePoll(); liveSchedule(); }, liveNext()); }
 function liveStamp(){ const el=document.getElementById('livestamp'); if(!el) return; if(!LIVE.on){ el.innerHTML=''; return; } const ds=liveDates(); const anyLive=G.some(g=>ds.includes(g.date)&&g.live); if(!LIVE.last){ el.innerHTML=LIVE.err?'<span class="dim">live scores unavailable</span>':''; return; } const d=new Date(LIVE.last); el.innerHTML=(anyLive?'<i class="dot ok livedot"></i>':'')+'<span class="dim">live scores '+(anyLive?'on · ':'checked ')+d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+'</span>'; }
@@ -13949,7 +14109,7 @@ document.addEventListener('keydown', e=>{ if(!(location.hash||'').startsWith('#/
 
 /* ---------- command palette ---------- */
 let PAL_IDX=null, PAL_SEL=0;
-function palIndex(){ if(PAL_IDX) return PAL_IDX; const out=[]; [['Scoreboard','#/scores'],['Schedule','#/schedule'],['Previews','#/previews'],['Night in review','#/digest'],['Standings','#/standings'],['NBA Cup groups','#/standings/cup'],['Power rankings','#/rankings'],['Title odds','#/rankings/odds'],['Playoff picture','#/playoffs'],['Playoff predictor','#/predict'],['Rooting guide','#/root'],['My bracket','#/predict/mine'],['League leaders','#/leaders'],['Player stats','#/players'],['Compare players','#/players/compare'],['Draft lottery','#/draft'],['Draft order','#/draft/order'],['Rookie class','#/draft/rookies'],['Salary cap','#/cap'],['Team payrolls','#/cap/payrolls'],['Contracts','#/cap/contracts'],['Luxury-tax calculator','#/cap/rules'],['Teams','#/teams'],['Bet tracker','#/my/bets'],['Compare teams','#/compare'],['TV guide','#/tv'],['Big board','#/board'],['Settings','#/settings']].forEach(p=>out.push({kind:'Page',label:p[0],href:p[1]})); TEAMS.forEach(t=>out.push({kind:'Team',label:t.full,sub:t.conf+' · '+t.div,href:'#/team/'+enc(t.ab)})); G.forEach(g=>{ const a=team(g.away), h=team(g.home); out.push({kind:'Game',label:a.disp+' at '+h.disp,sub:fmtDate(g.date,false)+(g.pre?' · preseason':'')+(g.played?' · final '+g.as+'-'+g.hs:''),href:'#/game/'+g.id}); }); Object.keys(ROST).forEach(ab=>ROST[ab].forEach(p=>{ out.push({kind:'Player',label:p.n,sub:tshort(ab)+' · '+p.pos,href:'#/player/'+enc(ab)+'/'+enc(p.n)}); })); return PAL_IDX=out; }
+function palIndex(){ if(PAL_IDX) return PAL_IDX; const out=[]; [['Scoreboard','#/scores'],['Schedule','#/schedule'],['Previews','#/previews'],['Night in review','#/digest'],['Standings','#/standings'],['NBA Cup groups','#/standings/cup'],['Power rankings','#/rankings'],['Title odds','#/rankings/odds'],['Playoff picture','#/playoffs'],['Playoff predictor','#/predict'],['Rooting guide','#/root'],['My bracket','#/predict/mine'],['League leaders','#/leaders'],['Player stats','#/players'],['Plus-minus','#/plusminus'],['Compare players','#/players/compare'],['Draft lottery','#/draft'],['Draft order','#/draft/order'],['Rookie class','#/draft/rookies'],['Salary cap','#/cap'],['Team payrolls','#/cap/payrolls'],['Contracts','#/cap/contracts'],['Luxury-tax calculator','#/cap/rules'],['Teams','#/teams'],['Bet tracker','#/my/bets'],['Compare teams','#/compare'],['TV guide','#/tv'],['Big board','#/board'],['Settings','#/settings']].forEach(p=>out.push({kind:'Page',label:p[0],href:p[1]})); TEAMS.forEach(t=>out.push({kind:'Team',label:t.full,sub:t.conf+' · '+t.div,href:'#/team/'+enc(t.ab)})); G.forEach(g=>{ const a=team(g.away), h=team(g.home); out.push({kind:'Game',label:a.disp+' at '+h.disp,sub:fmtDate(g.date,false)+(g.pre?' · preseason':'')+(g.played?' · final '+g.as+'-'+g.hs:''),href:'#/game/'+g.id}); }); Object.keys(ROST).forEach(ab=>ROST[ab].forEach(p=>{ out.push({kind:'Player',label:p.n,sub:tshort(ab)+' · '+p.pos,href:'#/player/'+enc(ab)+'/'+enc(p.n)}); })); return PAL_IDX=out; }
 function palSearch(q){ q=q.trim().toLowerCase(); if(!q) return palIndex().filter(x=>x.kind==='Page').slice(0,12); const rank=x=>{ const l=x.label.toLowerCase(); if(l===q) return 0; if(l.startsWith(q)) return 1; if(l.includes(q)) return 2; const s=(x.sub||'').toLowerCase(); if(s.includes(q)) return 4; return 9; }; const kindBias={Page:0,Team:0.2,Player:0.4,Game:0.6}; return palIndex().map(x=>({x,r:rank(x)+ (kindBias[x.kind]||0)})).filter(o=>o.r<5).sort((a,b)=>a.r-b.r||a.x.label.length-b.x.label.length).slice(0,20).map(o=>o.x); }
 function palOpen(){ let el=document.getElementById('palette'); if(!el){ el=document.createElement('div'); el.id='palette'; el.innerHTML='<div class="pal-box"><input id="pal-q" type="search" placeholder="Jump to a team, game, player or page…" autocomplete="off"><div id="pal-res" class="pal-res"></div><div class="pal-foot"><span class="dim">↑↓ to move · Enter to open · Esc to close</span></div></div>'; document.body.appendChild(el); el.addEventListener('click', e=>{ if(e.target===el) palClose(); }); } el.classList.add('on'); PAL_SEL=0; const q=document.getElementById('pal-q'); q.value=''; palDraw(); setTimeout(()=>q.focus(),10); q.oninput=()=>{ PAL_SEL=0; palDraw(); }; q.onkeydown=e=>{ const rows=[...document.querySelectorAll('#pal-res .pal-row')]; if(e.key==='ArrowDown'){ e.preventDefault(); PAL_SEL=Math.min(rows.length-1,PAL_SEL+1); palMark(); } else if(e.key==='ArrowUp'){ e.preventDefault(); PAL_SEL=Math.max(0,PAL_SEL-1); palMark(); } else if(e.key==='Enter'){ const r=rows[PAL_SEL]; if(r){ location.hash=r.dataset.href; palClose(); } } else if(e.key==='Escape'){ palClose(); } }; }
 function palDraw(){ const q=(document.getElementById('pal-q')||{}).value||''; const res=palSearch(q); const box=document.getElementById('pal-res'); box.innerHTML=res.length?res.map((x,i)=>'<button class="pal-row'+(i===PAL_SEL?' on':'')+'" data-href="'+esc(x.href)+'"><span class="pal-kind">'+esc(x.kind)+'</span><span class="pal-label">'+esc(x.label)+'</span>'+(x.sub?'<span class="pal-sub">'+esc(x.sub)+'</span>':'')+'</button>').join(''):'<div class="mini" style="padding:12px">Nothing matches.</div>'; box.querySelectorAll('.pal-row').forEach(b=>b.onclick=()=>{ location.hash=b.dataset.href; palClose(); }); }
@@ -13996,7 +14156,7 @@ function drawIn(root, fresh){ if(!root||QUIET||RM()||!('IntersectionObserver' in
   els.forEach((el,i)=>{ if(seen[i]) el.classList.add('draw'); else DRAW_IO.observe(el); }); }
 /* entrances play once per navigation (#view.enter for 1.6s); rerenderQuiet() drops the class so live redraws never replay them */
 function route(){ view.classList.remove('in','enter'); void view.offsetWidth; routeInner(); applyPageTheme(); renderTicker(); animateScores(view); initSubnav(); view.classList.add('enter'); clearTimeout(ENTER_T); ENTER_T=setTimeout(()=>view.classList.remove('enter'),1600); countUp(view); drawIn(view,true); if(LIVE.on&&!LIVE.busy&&liveGameId()) liveGameRefresh(); setTimeout(()=>view.classList.add('in'),0); }
-function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('/').map(dec); const r=parts[0]||''; if(!QUIET) window.scrollTo(0,0); try{ if(r===''||r==='scores'||r==='week'){ renderScores(parts[1], parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='rankings'){ renderRankings(parts[1], parts[2]); } else if(r==='playoffs'){ renderPlayoffs(parts[1]); } else if(r==='leaders'){ renderLeaders(parts[1], parts[2]); } else if(r==='draft'){ renderDraft(parts[1]); } else if(r==='cap'){ renderCap(parts[1], parts[2]); } else if(r==='teams'){ renderTeams(); } else if(r==='team'){ renderTeam((parts[1]||'').split('#')[0]); const anchor=h.split('#').slice(2)[0]; if(anchor&&!QUIET){ const el=document.getElementById(anchor); if(el) setTimeout(()=>{ gotoSection(el); initSubnav(); },0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='previews'){ renderPreviews(parts[1]); } else if(r==='digest'){ renderDigest(parts[1]); } else if(r==='player'){ renderPlayer(parts[1], parts[2]); } else if(r==='players'){ renderPlayers(parts[1], parts[2]); } else if(r==='compare'){ renderCompare(parts[1], parts[2]); } else if(r==='tv'){ renderTV(parts[1]); } else if(r==='board'){ renderBoard(); } else if(r==='gamenight'){ renderGameNight(parts[1]); } else if(r==='cup'){ renderCup(); } else if(r==='review'){ renderReview(parts[1]); } else if(r==='uniforms'){ renderUniforms(parts[1]); } else if(r==='settings'){ renderSettings(); } else if(r==='predict'){ renderPredict(parts[1]); } else if(r==='root'){ renderRoot(parts[1], parts[2]); } else if(r==='my'){ if(parts[1]==='bets') renderBets(); else renderPredict(); } else renderScores(); }catch(e){ console.error(e); view.innerHTML='<div class="note">Something went wrong drawing this page ('+esc(e.message||e)+'). <a href="#/scores">Back to the scoreboard.</a></div>'; } }
+function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('/').map(dec); const r=parts[0]||''; if(!QUIET) window.scrollTo(0,0); try{ if(r===''||r==='scores'||r==='week'){ renderScores(parts[1], parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='rankings'){ renderRankings(parts[1], parts[2]); } else if(r==='playoffs'){ renderPlayoffs(parts[1]); } else if(r==='leaders'){ renderLeaders(parts[1], parts[2]); } else if(r==='draft'){ renderDraft(parts[1]); } else if(r==='cap'){ renderCap(parts[1], parts[2]); } else if(r==='teams'){ renderTeams(); } else if(r==='team'){ renderTeam((parts[1]||'').split('#')[0]); const anchor=h.split('#').slice(2)[0]; if(anchor&&!QUIET){ const el=document.getElementById(anchor); if(el) setTimeout(()=>{ gotoSection(el); initSubnav(); },0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='previews'){ renderPreviews(parts[1]); } else if(r==='digest'){ renderDigest(parts[1]); } else if(r==='player'){ renderPlayer(parts[1], parts[2]); } else if(r==='players'){ renderPlayers(parts[1], parts[2]); } else if(r==='plusminus'){ renderPlusMinus(parts[1]); } else if(r==='compare'){ renderCompare(parts[1], parts[2]); } else if(r==='tv'){ renderTV(parts[1]); } else if(r==='board'){ renderBoard(); } else if(r==='gamenight'){ renderGameNight(parts[1]); } else if(r==='cup'){ renderCup(); } else if(r==='review'){ renderReview(parts[1]); } else if(r==='uniforms'){ renderUniforms(parts[1]); } else if(r==='settings'){ renderSettings(); } else if(r==='predict'){ renderPredict(parts[1]); } else if(r==='root'){ renderRoot(parts[1], parts[2]); } else if(r==='my'){ if(parts[1]==='bets') renderBets(); else renderPredict(); } else renderScores(); }catch(e){ console.error(e); view.innerHTML='<div class="note">Something went wrong drawing this page ('+esc(e.message||e)+'). <a href="#/scores">Back to the scoreboard.</a></div>'; } }
 window.addEventListener('hashchange', route);
 document.addEventListener('click', e=>{ const tr=e.target.closest('tr.click, .gm.click, .dgr.click'); if(tr && !e.target.closest('a') && !e.target.closest('button')){ location.hash=tr.dataset.href; } });
 document.addEventListener('keydown', e=>{ if(e.key!=='Enter') return; const el=e.target.closest && e.target.closest('.gm.click'); if(el){ location.hash=el.dataset.href; } });
@@ -14134,7 +14294,7 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
   const GAME=/^(Game preview|What to watch|How they match up|Series history|Track a bet|Head to head|Form|Projected starters|Draft stock)$/i;
   const CFG={
     cfb:{keep:['Record','Points','Power rating','Playoff odds'], team:/^(Recruiting|Analytics|Season stats|Player stats|NFL draft stock|Depth chart|.+ race)$/i, game:GAME},
-    nba:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(\d{4}-\d{2} schedule|Projections|Odds|Team analytics|Player stats|Player analytics|Salary cap|Depth chart|Roster|Draft)$/i, game:GAME},
+    nba:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(\d{4}-\d{2} schedule|Projections|Odds|Team analytics|Player stats|Plus-minus|Player analytics|Salary cap|Depth chart|Roster|Draft)$/i, game:GAME},
     nfl:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(Projections|Odds|Analytics|Team analytics|Player analytics|Season stats|Player stats|Salary cap|Depth chart|Roster|Draft|NFL draft)$/i, game:GAME}}[HUB];
   if(!CFG) return;
   const route=()=>((location.hash||'').match(/^#\/(team|game)\//)||[])[1]||null;

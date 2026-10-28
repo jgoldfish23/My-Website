@@ -900,6 +900,15 @@ function withCors(request, res) {
   return res;
 }
 
+// GET /api/ask -> { ready }: whether the site has its Anthropic key, so the widget can stay out of sight until it does.
+// Says nothing else; cached for 5 minutes.
+export function onRequestGet({ request, env }) {
+  return new Response(JSON.stringify({ ready: !!env.ANTHROPIC_API_KEY }), {
+    status: 200,
+    headers: { "content-type": "application/json", "cache-control": "public, max-age=300", ...corsHeaders(request) },
+  });
+}
+
 export function onRequestOptions({ request }) {
   return new Response(null, {
     status: 204,

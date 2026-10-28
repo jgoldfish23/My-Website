@@ -253,6 +253,7 @@ export default {
     // 40 KB and rate-limits (30 an hour per visitor, 60 a day site-wide) after it has validated the question.
     if (pathname === "/api/ask") {
       if (request.method === "OPTIONS") return ask.onRequestOptions({ request });
+      if (request.method === "GET") return ask.onRequestGet({ request, env });
       if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
       return ask.onRequestPost({ request, env, ctx });
     }

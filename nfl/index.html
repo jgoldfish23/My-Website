@@ -125,6 +125,8 @@ header.top.jsh-tuck{pointer-events:none}
 <script src="/sports/holo.js?v=20261027a" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261027a" defer></script>
+<!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
+<script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
      To bring it back, put this tag back in (and bump ?v=): <script src="/sports/ask.js?v=20261027c" defer></script> -->
 <title>NFL · Jamo Sports Hub</title>
@@ -2313,6 +2315,28 @@ body:has(.tvframe) header.top.top{top:0}
 .hl-v:hover{background:var(--surface-2)}
 .hl-tx{display:flex;flex-direction:column;min-width:0}
 .hl-play{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#e62117;color:#fff;font-size:12px;flex:none;padding-left:2px}
+/* phone bottom tab bar + More sheet (2026-10-28, copied from the NBA hub so all three hubs match - nfl-hub/p2btab.js) */
+.btab{display:none}
+@media (max-width:760px){
+  .btab{position:fixed;left:0;right:0;bottom:0;z-index:80;display:grid;grid-template-columns:repeat(5,1fr);height:calc(58px + env(safe-area-inset-bottom));padding:0 4px env(safe-area-inset-bottom);background:color-mix(in srgb,var(--surface) 88%,transparent);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border-top:1px solid var(--line)}
+  .bt-i{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;font:inherit;font-size:10.5px;font-weight:700;color:var(--ink-3);background:none;border:0;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .bt-i svg{width:22px;height:22px}.bt-i img{width:24px;height:24px;object-fit:contain;filter:grayscale(.6);opacity:.75}
+  .bt-i span{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bt-i.on{color:var(--accent-text,var(--accent))}.bt-i.on img{filter:none;opacity:1} /* readable on the dark bar (2026-10-27) */
+  .bt-i.on::before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;border-radius:0 0 3px 3px;background:var(--accent)}
+  body.has-btab .jbl{bottom:calc(58px + env(safe-area-inset-bottom))!important}
+  body.has-btab{padding-bottom:calc(104px + env(safe-area-inset-bottom))!important}
+  body.has-btab .ng-main{display:none!important}
+}
+.bsheet{position:fixed;inset:0;z-index:90}.bsheet[hidden]{display:none}
+.bs-back{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.bs-panel{position:absolute;left:0;right:0;bottom:0;max-height:78vh;overflow:auto;padding:8px 16px calc(24px + env(safe-area-inset-bottom));border-radius:20px 20px 0 0;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -20px 50px rgba(0,0,0,.5);animation:bsUp .2s ease}
+@keyframes bsUp{from{transform:translateY(30px);opacity:.4}to{transform:none;opacity:1}}
+.bs-grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:4px auto 10px}
+.bs-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}.bs-h b{font-family:var(--disp);font-size:18px}
+.bs-x{font-size:26px;line-height:1;background:none;border:0;color:var(--ink-2);cursor:pointer}
+.bs-g{padding:10px 0;border-top:1px solid var(--line)}.bs-gl{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.bs-ls{display:flex;flex-wrap:wrap;gap:6px}.bs-ls a{padding:7px 12px;border-radius:999px;border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:13.5px;font-weight:600}
 </style>
 
 <header class="top">
@@ -6214,6 +6238,38 @@ window.JSH_VOICE = {
   teams: () => TEAMS.map(t => ({ n: t.full || t.disp, alt: [t.nick, t.loc, t.ab, t.loc && t.nick ? t.loc + ' ' + t.nick : ''].filter(Boolean), sub: [t.conf, t.div].filter(Boolean).join(' · '), href: '#/team/' + enc(t.ab), logo: LOGO_BASE + '/' + t.ab + '.png' })),
   players: () => Object.keys(ROST).flatMap(ab => (ROST[ab] || []).map(p => ({ n: p.n, sub: (T[ab] ? T[ab].nick || T[ab].disp : ab) + (p.pos ? ' · ' + p.pos : '') + (p.no ? ' #' + p.no : ''), href: '#/player/' + enc(ab) + '/' + enc(p.n), logo: LOGO_BASE + '/' + ab + '.png' })))
 };
+/* ---------- bottom tab bar on phones (2026-10-28, Jamo picked "the same menu on all three hubs"): the college and NBA
+   hubs already had one (Scores, my team, Standings/Rankings, Players, More); the NFL page now has the same bar - Scores,
+   Eagles (or the team picked in Settings), Standings, Players, More - and the same "All NFL pages" sheet behind More.
+   Same look and styles as the NBA's (p1.html, .btab / .bsheet); the top row of section tabs steps aside on phones. ---------- */
+const BT_GROUP = r => (['','week','scores','schedule','tv','lines','previews','board','game'].indexOf(r)>=0?'scores':['standings','rankings','playoffs'].indexOf(r)>=0?'standings':['players','player','draft','injuries'].indexOf(r)>=0?'players':r==='team'?'team':'more');
+const BT_ICON = {
+  scores:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9.5" ry="6" transform="rotate(-35 12 12)"/><path d="M9.5 14.5l5-5M10.5 10.5l1 1M12.5 12.5l1 1"/></svg>',
+  standings:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+  players:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',
+  more:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' };
+const btFav = () => (SETTINGS.fav && T[SETTINGS.fav]) ? SETTINGS.fav : 'PHI';
+const btHref = (r, dflt) => { const a=document.querySelector('#nav a[data-r="'+r+'"]'); return a ? a.getAttribute('href') : dflt; };
+function btBuild(){ if(document.getElementById('btab')) return; const fav=btFav(); const t=team(fav);
+  const item=(k,lab,href,ic)=>'<a class="bt-i" data-k="'+k+'" href="'+href+'">'+ic+'<span>'+esc(lab)+'</span></a>';
+  const nav=document.createElement('nav'); nav.id='btab'; nav.className='btab'; nav.setAttribute('aria-label','NFL sections');
+  nav.innerHTML=item('scores','Scores',btHref('week','#/week'),BT_ICON.scores)+item('team',t.nick||t.disp||fav,'#/team/'+enc(fav),'<img src="'+LOGO_BASE+'/'+fav+'.png" alt="">')+item('standings','Standings',btHref('standings','#/standings'),BT_ICON.standings)+item('players','Players',btHref('players','#/players'),BT_ICON.players)
+    +'<button type="button" class="bt-i" data-k="more" aria-haspopup="dialog" aria-expanded="false">'+BT_ICON.more+'<span>More</span></button>';
+  document.body.appendChild(nav); document.body.classList.add('has-btab'); btMark(); }
+function btMark(){ const nav=document.getElementById('btab'); if(!nav) return; const parts=(location.hash||'#/').replace(/^#\/?/,'').split('/').map(dec); let k=BT_GROUP(parts[0]||'');
+  if(k==='team') k=norm(parts[1]||'')===btFav()?'team':'more'; nav.querySelectorAll('.bt-i').forEach(a=>a.classList.toggle('on', a.dataset.k===k)); }
+function btSheet(open){ let s=document.getElementById('bsheet'); const b=document.querySelector('#btab [data-k="more"]');
+  if(!open){ if(s) s.hidden=true; if(b) b.setAttribute('aria-expanded','false'); return; }
+  if(!s){ s=document.createElement('div'); s.id='bsheet'; s.className='bsheet'; s.setAttribute('role','dialog'); s.setAttribute('aria-label','All NFL pages'); document.body.appendChild(s); }
+  const links=[...document.querySelectorAll('#nav a[data-r]')]; const seen=new Set(); const groups={scores:[],standings:[],players:[],team:[],more:[]}; const GN={scores:'Scores',standings:'Standings',players:'Players',team:'Teams',more:'More'};
+  links.forEach(a=>{ const h=a.getAttribute('href'); if(seen.has(h)) return; seen.add(h); const r=a.dataset.r; const g=['teams','compare'].indexOf(r)>=0?'team':BT_GROUP(r); groups[g].push('<a href="'+esc(h)+'">'+esc(a.textContent.replace(/^\W+/,'').trim())+'</a>'); });
+  s.innerHTML='<div class="bs-back" data-close="1"></div><div class="bs-panel"><div class="bs-grab"></div><div class="bs-h"><b>All NFL pages</b><button type="button" class="bs-x" data-close="1" aria-label="Close">&times;</button></div>'
+    +Object.keys(groups).filter(k=>groups[k].length).map(k=>'<div class="bs-g"><div class="bs-gl">'+GN[k]+'</div><div class="bs-ls">'+groups[k].join('')+'</div></div>').join('')+'</div>';
+  s.hidden=false; if(b) b.setAttribute('aria-expanded','true'); }
+document.addEventListener('click', e=>{ const m=e.target.closest&&e.target.closest('#btab [data-k="more"]'); if(m){ const s=document.getElementById('bsheet'); btSheet(!s||s.hidden); return; }
+  const s=document.getElementById('bsheet'); if(s&&!s.hidden&&(e.target.closest('[data-close]')||e.target.closest('.bs-ls a'))) btSheet(false); });
+addEventListener('hashchange', ()=>{ btMark(); btSheet(false); });
+setTimeout(btBuild, 0);
 /* ar:start - hand-written game articles ("Jamo's preview" / "Jamo's recap"), shared by the NFL and NBA hubs
    (the college hub has the same code inline). Data: d-articles, built by sports-hub/articles/articles.pl from
    <hub>/articles/<game id>.json + .md (preview) and <game id>.recap.json + .md (recap). A json "label" renames the

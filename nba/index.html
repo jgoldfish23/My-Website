@@ -14009,6 +14009,31 @@ function pmPlayerMount(ab, name){ if(!T[ab]||!name||document.getElementById('s-p
   if(anchor) anchor.insertAdjacentHTML('beforebegin', html); else head.insertAdjacentHTML('afterend', html);
   if(PM.data) pmPlayerFill(ab, name); else pmLoad().then(()=>pmPlayerFill(ab, name)); }
 { const _rp=renderPlayer; renderPlayer=function(ab, name){ _rp(ab, name); try{ pmPlayerMount(norm(ab||''), name); }catch(e){ console.error(e); } }; }
+/* ---------- compare players (2026-10-28, Jamo: "Add the plus-minus box to the NBA compare players tool too"): a Plus-minus
+   section before "Every number" with one card per picked player, in his compare color: +/- a game and Adjusted +/- with
+   league ranks (the better of the picked players marked "best"), per 36, totals and his game strip. This season only
+   (pm.json has no earlier seasons), so it stays off when the tool is set to last season. ---------- */
+function pmCmpInner(sel){ const D=PM.data; const ord=n=>{ const s=['th','st','nd','rd'], v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); };
+  const rows=sel.map(p=>({p, m:pmFind(p.t, p.n)[0]||null}));
+  const best=k=>{ const q=rows.filter(r=>r.m&&!r.m.small); if(q.length<2) return null; const top=Math.max(...q.map(r=>r.m[k])); const hit=q.filter(r=>r.m[k]===top); return hit.length===1?hit[0]:null; };
+  const bP=best('pmg'), bA=best('adjg');
+  return '<div class="pm-cmp">'+rows.map((r,i)=>{ const m=r.m; const head='<div class="pm-cmph"><span class="pl-dot"></span><a href="'+plHref(r.p)+'">'+esc(r.p.n)+'</a><span class="dim">'+esc(team(r.p.t).ab)+'</span></div>';
+    if(!m) return '<div class="card pm-cmpc" style="--pc:'+PL_COLORS[i]+'"><div class="bd">'+head+'<div class="mini">No regular-season minutes yet.</div></div></div>';
+    const r1=pmRankOf(m,'pmg'), r2=pmRankOf(m,'adjg');
+    const box=(v,k,sub,b)=>'<div'+(b?' class="pm-best"':'')+'><b>'+v+'</b><span>'+k+(b?' <i>best</i>':'')+'</span>'+(sub?'<em>'+sub+'</em>':'')+'</div>';
+    return '<div class="card pm-cmpc" style="--pc:'+PL_COLORS[i]+'"><div class="bd">'+head
+      + '<div class="stat3 pm-p3">'+box(pmV(m.pmg),'+/- a game', r1?ord(r1.r)+' of '+r1.n:'', bP===r)+box(pmV(m.adjg),'Adjusted', r2?ord(r2.r)+' of '+r2.n:'', bA===r)+box(m.p36==null?'—':pmV(m.p36),'per 36','')+'</div>'
+      + '<div class="mini pm-cmpf">'+m.gp+' game'+(m.gp===1?'':'s')+' · '+num1(m.mpg)+' min · season '+pmV(m.pmT,0)+(m.small?' · <span class="pm-ss" style="margin-left:0">small sample</span>':'')+'</div>'
+      + '<div class="pm-scope">'+pmStrip(m)+'</div></div></div>'; }).join('')+'</div>'
+    + '<div class="mini pm-tfoot">'+pmLegend()+'<br>Adjusted +/- is the hub’s own: +/- minus his minutes’ share of the team’s final margin. Ranks are among the '+D.players.filter(x=>!x.small).length+' qualified players. <a href="#/plusminus">Every player’s plus-minus &rsaquo;</a></div>'; }
+function pmCmpFill(key){ const box=document.getElementById('pm-cbox'); if(!box||box.dataset.k!==key) return; const D=plCur(); const sel=PLS.sel.map(id=>D.byId[id]).filter(Boolean);
+  box.innerHTML=PM.data?pmCmpInner(sel):'<div class="mini">'+esc(PM.err||'Loading…')+'</div>'; }
+function pmCmpMount(){ if(PLS.season!=='cur'||document.getElementById('s-cpm')) return; const D=plCur(); const sel=PLS.sel.map(id=>D.byId[id]).filter(Boolean); if(!sel.length) return;
+  const anchor=[...view.querySelectorAll('.sec')].find(s=>/^(Every number|Pick someone)/.test((s.querySelector('h2')||{}).textContent||'')); if(!anchor) return;
+  const key=PLS.sel.join(',');
+  anchor.insertAdjacentHTML('beforebegin','<div id="s-cpm" class="sec"><h2>Plus-minus</h2><span class="muted">the score with each of them on the floor, game by game</span></div><div id="pm-cbox" data-k="'+esc(key)+'">'+(PM.data?'':'<div class="mini">Loading the game-by-game plus-minus…</div>')+'</div>');
+  if(PM.data) pmCmpFill(key); else pmLoad().then(()=>pmCmpFill(key)); }
+{ const _rc=renderPlayerCompare; renderPlayerCompare=function(ids){ _rc(ids); try{ pmCmpMount(); }catch(e){ console.error(e); } }; }
 document.addEventListener('click', e=>{ const a=e.target.closest&&e.target.closest('#pm-prb'); if(!a) return; e.preventDefault(); const s=document.getElementById('s-ppm'); if(s) s.scrollIntoView({behavior:'smooth', block:'start'}); });
 
 /* ---------- events ---------- */
@@ -14063,6 +14088,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
   +'.pm-tbl .pm-rk{width:1%}.pm-tbl th.pm-nm,.pm-tbl td.pm-nm{width:38%}'
   +'.pm-legrow{margin:0 0 8px}.pm-lg{display:inline-flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:12.5px;color:var(--ink-2)}.pm-lg>span{display:inline-flex;align-items:center;gap:5px}.pm-lg .pmc{cursor:default;width:11px;height:14px}'
   +'.pm-p3 em{display:block;font-style:normal;font-size:11px;color:var(--ink-3);margin-top:1px}.pm-p3 b .pmv{font:inherit}.pm-rb{text-decoration:none;color:inherit;cursor:pointer}.pm-rb .v .pmv{font:inherit}.pm-ph{display:flex;align-items:center;gap:6px;font-weight:600;font-size:13px;margin:0 0 8px}.pm-ph .sw-logo{margin:0!important}.pm-hr{border:0;border-top:1px solid var(--line-2);margin:14px 0}'
+  +'.pm-cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.pm-cmpc{border-top:3px solid var(--pc)}.pm-cmph{display:flex;align-items:center;gap:7px;font-weight:700;font-size:14.5px;margin:0 0 10px;min-width:0}.pm-cmph a{color:inherit;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pm-cmph .pl-dot{flex:none;width:9px;height:9px;border-radius:50%;background:var(--pc)}.pm-cmph .dim{font-size:12px;font-weight:600}.pm-best i{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.06em;color:#fff;background:var(--pc,rgb(var(--pm-pos)));border-radius:4px;padding:1px 5px;margin-left:3px;vertical-align:1px}.pm-cmpc .pm-best i{background:var(--pc)}.pm-cmpf{margin:8px 0}#pm-cbox .pm-tfoot .pm-lg{margin-bottom:4px}'
   +'.pm-sn,.pm-vm{display:none}'
   +'.pm-count{margin:0 0 8px}.pm-more{display:flex;justify-content:center;gap:8px;margin:12px 0 4px}.pm-tfoot{margin-top:10px;line-height:1.5}'
   +'@media (max-width:600px){.pm-tbl .pm-rk{display:none}.pm-tbl th.pm-nm,.pm-tbl td.pm-nm{width:auto}'

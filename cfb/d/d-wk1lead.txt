@@ -1600,8 +1600,8 @@
 2026-10-24|USC|Wisconsin|USC|passingYards|Jayden Maiava|QB|31/50, 258 YDS, 1 TD, 2 INT
 2026-10-24|USC|Wisconsin|Wisconsin|rushingYards|Abu Sama III|RB|17 CAR, 71 YDS
 2026-10-24|USC|Wisconsin|USC|receivingYards|Taniela Tupou|TE|6 REC, 46 YDS, 1 TD
-2026-10-24|LSU|Auburn|LSU|passingYards|Sam Leavitt|QB|32/45, 387 YDS, 3 TD
-2026-10-24|LSU|Auburn|LSU|rushingYards|Dilin Jones|RB|21 CAR, 92 YDS, 1 TD
+2026-10-24|LSU|Auburn|LSU|passingYards|Sam Leavitt|QB|32/45, 388 YDS, 3 TD
+2026-10-24|LSU|Auburn|LSU|rushingYards|Dilin Jones|RB|21 CAR, 91 YDS, 1 TD
 2026-10-24|LSU|Auburn|LSU|receivingYards|Jackson Harris|WR|9 REC, 178 YDS, 2 TD
 2026-10-24|Boise State|Washington State|Washington State|passingYards|Owen Eshelman|QB|21/40, 191 YDS, 1 INT
 2026-10-24|Boise State|Washington State|Boise State|rushingYards|Dylan Riley|RB|13 CAR, 128 YDS, 2 TD

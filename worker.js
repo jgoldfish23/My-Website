@@ -273,6 +273,8 @@ export default {
 
     // The NHL hub and the MLB page were removed 2026-10-27 (the site covers CFB, the NFL and the NBA): old links go home
     if (/^\/(nhl|mlb)(\/|$)/i.test(pathname)) return Response.redirect(new URL("/sports/", request.url).toString(), 302);
+    // The articles page was taken down 2026-10-28 (Jamo: "put a stop to the AI Generated Articles"): old links go home
+    if (/^\/sports\/articles(\/|$)/i.test(pathname)) return Response.redirect(new URL("/sports/", request.url).toString(), 302);
 
     return env.ASSETS.fetch(request);
   },

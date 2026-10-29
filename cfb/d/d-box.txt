@@ -92204,3 +92204,86 @@ P|1044|H|defensive|Michael Osei-Bonsu||0;0;0;0;0;2;0
 P|1044|H|kickReturns|Jmariyae Robinson||1;6;6.0;6;0
 P|1044|H|kicking|Yousef Obeid||1/2;50.0;34;3/3;6
 P|1044|H|punting|Stewart McDonald||4;169;42.3;0;2;45
+G|1045|2026-10-28|Jacksonville State|New Mexico State
+T|1045|A|firstDowns=23;thirdDownEff=6-11;fourthDownEff=1-3;totalYards=433;netPassingYards=109;completionAttempts=11/17;yardsPerPass=6.4;rushingYards=324;rushingAttempts=46;yardsPerRushAttempt=7.0;totalPenaltiesYards=6-40;turnovers=2;fumblesLost=0;interceptions=2;possessionTime=35:18;defSacks=1;defTfl=3
+T|1045|H|firstDowns=11;thirdDownEff=7-14;fourthDownEff=0-2;totalYards=221;netPassingYards=29;completionAttempts=6/19;yardsPerPass=1.5;rushingYards=192;rushingAttempts=34;yardsPerRushAttempt=5.6;totalPenaltiesYards=6-50;turnovers=1;fumblesLost=0;interceptions=1;possessionTime=24:42;defSacks=1;defTfl=6
+P|1045|A|passing|Caden Creel||11/17;109;6.4;1;2;77.1
+P|1045|A|rushing|Caden Creel||21;211;10.0;1;84
+P|1045|A|rushing|Jalen Likely||4;39;9.8;1;27
+P|1045|A|rushing|Justus Savage||3;28;9.3;0;22
+P|1045|A|rushing|Khristian Lando||10;27;2.7;0;8
+P|1045|A|rushing|Lucas Farrington||7;20;2.9;0;7
+P|1045|A|rushing|Aidan Thompson||1;-1;-1.0;0;0
+P|1045|A|receiving|Luke Gilbert||5;67;13.4;1;29
+P|1045|A|receiving|Khristian Lando||1;10;10.0;0;10
+P|1045|A|receiving|Jamill Williams||2;10;5.0;0;7
+P|1045|A|receiving|Ronnel Johnson||1;9;9.0;0;9
+P|1045|A|receiving|Deondre Johnson||1;7;7.0;0;7
+P|1045|A|receiving|Justus Savage||1;6;6.0;0;6
+P|1045|A|defensive|Caleb Nix||9;8;0;0;0;0;0
+P|1045|A|defensive|Morven Joseph||5;2;0;0;0;0;0
+P|1045|A|defensive|Tae Floyd||5;2;0;0;0;2;0
+P|1045|A|defensive|Quay Hood||4;0;0;0;0;1;0
+P|1045|A|defensive|Brayden Matthews||3;2;1;1;0;0;0
+P|1045|A|defensive|Jonavan Carr||3;2;0;0;2;0;0
+P|1045|A|defensive|Jacob Cruz||3;1;0;0;0;0;0
+P|1045|A|defensive|Christopher Johnson||3;1;0;0;0;0;0
+P|1045|A|defensive|Tre'Quon Fegans||2;2;0;0;0;0;0
+P|1045|A|defensive|Marquis Hood||2;2;0;1;0;0;0
+P|1045|A|defensive|Mikey Rosa||2;1;0;1;0;0;0
+P|1045|A|defensive|Rob Billings IV||2;0;0;0;0;0;0
+P|1045|A|defensive|Javan Allison||2;0;0;0;0;0;0
+P|1045|A|defensive|Myles Butler||2;0;0;0;0;1;0
+P|1045|A|defensive|Jameson McCollough||2;0;0;0;0;0;0
+P|1045|A|defensive|Deondre Johnson||1;1;0;0;0;0;0
+P|1045|A|defensive|Walter Reddick||1;1;0;0;0;0;0
+P|1045|A|defensive|JQ Brooks||1;1;0;0;0;0;0
+P|1045|A|defensive|Ian Mitchell||1;1;0;0;0;0;0
+P|1045|A|defensive|Caden Creel||1;0;0;0;0;0;0
+P|1045|A|defensive|Lance Johnson||1;0;0;0;0;0;0
+P|1045|A|defensive|Kyten Davis||0;0;0;0;1;0;0
+P|1045|A|interceptions|Marc Woods||1;5;0
+P|1045|A|kickReturns|Caleb Nix||1;0;0.0;25;0
+P|1045|A|puntReturns|Caleb Nix||1;2;2.0;2;0
+P|1045|A|kicking|Garrison Rippa||1/1;100.0;49;2/2;5
+P|1045|A|kicking|Carter Lewis||0/0;0.0;0;1/1;1
+P|1045|A|punting|Conor Donaghy||1;46;46.0;0;1;46
+P|1045|H|passing|Adam Damante||6/19;29;1.5;0;1;1.5
+P|1045|H|rushing|James Jones||20;112;5.6;0;21
+P|1045|H|rushing|TJ Washington Jr.||10;70;7.0;0;28
+P|1045|H|rushing|Dijon Stanley||2;15;7.5;0;8
+P|1045|H|rushing|Adam Damante||2;-5;-2.5;0;1
+P|1045|H|receiving|Brodie Malone-Bradford||3;19;6.3;0;10
+P|1045|H|receiving|AJ Williams III||2;12;6.0;0;7
+P|1045|H|receiving|Terrione Graves||1;-2;-2.0;0;0
+P|1045|H|defensive|Tory Gethers||10;4;0;2;0;0;0
+P|1045|H|defensive|Henry Davis III||5;4;0;0;0;0;0
+P|1045|H|defensive|Nick Session||5;3;0;0;0;0;0
+P|1045|H|defensive|Brad Vislisel||4;3;1;1;0;0;0
+P|1045|H|defensive|Fa'apaia Fualema||4;1;0;0.5;0;0;0
+P|1045|H|defensive|Josiah Charles||3;3;0;0;1;0;0
+P|1045|H|defensive|De'Marcus Peters||3;3;0;0;0;0;0
+P|1045|H|defensive|Gabe Peterson||3;2;0;0;0;0;0
+P|1045|H|defensive|Sone Aupiu||3;2;0;1;1;0;0
+P|1045|H|defensive|Enzo-Pierre Tayou||2;2;0;1;0;0;0
+P|1045|H|defensive|Walter Owens||2;1;0;0;0;0;0
+P|1045|H|defensive|Zhakius Thomas||2;0;0;0.5;0;0;0
+P|1045|H|defensive|Obinna Okeke||1;1;0;0;0;0;0
+P|1045|H|defensive|Izzy Clark-White||1;1;0;0;0;0;0
+P|1045|H|defensive|Chance Barron||1;1;0;0;0;0;0
+P|1045|H|defensive|AJ Williams III||1;1;0;0;0;0;0
+P|1045|H|defensive|Lorenzo Smith||1;1;0;0;0;0;0
+P|1045|H|defensive|Latrell Treadwell||1;1;0;0;0;0;0
+P|1045|H|defensive|Jordan-Lebron Downey||1;1;0;0;0;0;0
+P|1045|H|defensive|Myles Libman||1;0;0;0;0;0;0
+P|1045|H|defensive|RJ Chapman||1;0;0;0;0;0;0
+P|1045|H|defensive|Amaurey Brooks||1;0;0;0;0;0;0
+P|1045|H|defensive|Kyah Francone||1;0;0;0;0;0;0
+P|1045|H|defensive|Reeves Baller||0;0;0;0;0;1;0
+P|1045|H|interceptions|RJ Chapman||1;53;0
+P|1045|H|interceptions|Josiah Charles||1;-1;0
+P|1045|H|kicking|Kyah Francone||0/2;0.0;0;0/0;0
+P|1045|H|punting|Brody Richter||3;124;41.3;0;0;43
+G|1046|2026-10-28|Kennesaw State|Middle Tennessee
+T|1046|A|firstDowns=14;thirdDownEff=2-10;fourthDownEff=0-1;totalYards=318;netPassingYards=206;completionAttempts=16/19;yardsPerPass=10.8;rushingYards=112;rushingAttempts=29;yardsPerRushAttempt=3.9;totalPenaltiesYards=9-72;turnovers=2;fumblesLost=1;interceptions=1;possessionTime=19:41;defSacks=0;defTfl=0
+T|1046|H|firstDowns=22;thirdDownEff=11-20;fourthDownEff=0-2;totalYards=380;netPassingYards=183;completionAttempts=21/44;yardsPerPass=4.2;rushingYards=197;rushingAttempts=45;yardsPerRushAttempt=4.4;totalPenaltiesYards=7-55;turnovers=2;fumblesLost=0;interceptions=2;possessionTime=40:19;defSacks=0;defTfl=0

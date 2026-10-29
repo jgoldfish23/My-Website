@@ -123,7 +123,7 @@ CAR||Darren Waller|TE|Active||||2026-10-26|Waller brought in one of two targets 
 CAR||Bryce Young|QB|Active||||2026-10-26|Young completed 14 of 27 passes for 163 yards with one touchdown and two interceptions and added one carry for nine yards in the Panthers' 43-13 loss to the Buccaneers on Sunday.
 CAR||Chuba Hubbard|RB|Active||||2026-10-25|Hubbard rushed seven times for 33 yards and brought in four of five targets for 27 yards in the Panthers' 43-13 loss to the Buccaneers on Sunday.
 CAR||Tetairoa McMillan|WR|Active||||2026-10-25|McMillan secured four of six targets for 40 yards in the Panthers' 43-13 loss to the Buccaneers on Sunday.
-CHI||Anthony Johnson Jr.|S|Injured Reserve|Undisclosed||2026-10-18|2026-10-29|ir
+CHI||Anthony Johnson Jr.|S|Out|Undisclosed||2026-10-18|2026-10-29|out
 CHI||Coby Bryant|S|Injured Reserve|Knee|Surgery|2026-12-19|2026-10-28|Coach Ben Johnson said Wednesday that Bryant (knee) will start running again in the "near future," Courtney Cronin of ESPN.com reports.
 CHI||Kyle Monangai|RB|Questionable|Toe|Sprain|2026-11-02|2026-10-28|Monangai (thumb/toe) was on a stationary bike during warmups but wasn't on the field during the open portion of Wednesday's practice, Adam Jahns of AllCHGO.com reports.
 CHI||Zavier Scott|RB|Active||||2026-10-27|Chicago signed Scott from the practice squad to the active roster Tuesday.
@@ -375,7 +375,7 @@ JAX||Eric Murray|S|Active||||2026-10-17|Murray (concussion) does not have an inj
 JAX||Cole Van Lanen|OT|Active||||2026-10-16|
 KC||Jaylon Moore|OT|Questionable|Concussion|Concussion|2026-11-01|2026-10-29|Moore (concussion) was a full participant in Wednesday's practice.
 KC||Omarr Norman-Lott|DT|Out|Knee - ACL|Surgery|2026-11-01|2026-10-29|The Chiefs designated Norman-Lott (knee) to return from injured reserve Wednesday.
-KC||Rashee Rice|WR|Questionable|Hamstring||2026-11-01|2026-10-28|Rice (hamstring) was a limited participant Wednesday
+KC||Rashee Rice|WR|Questionable|Hamstring||2026-11-01|2026-10-28|Rice (hamstring) was a limited participant in practice Wednesday
 KC||L'Jarius Sneed|CB|Questionable|Knee||2026-11-01|2026-10-28|questionable
 KC||Cyrus Allen|WR|Active||||2026-10-28|Chiefs head coach Andy Reid said Wednesday that Allen will "get a little bit more [snaps]" during Sunday's game against the Broncos, Nate Taylor of ESPN.com reports.
 KC||Harrison Butker|PK|Active||||2026-10-28|Head coach Andy Reid said Wednesday that Butker will "probably" serve as the Chiefs' kicker in Sunday's game against the Broncos, Sam McDowell of The Kansas City Star reports.

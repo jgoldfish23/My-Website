@@ -1,0 +1,8 @@
+# Jamo Sports Hub data blocks (sports-hub/speed/split.pl in the jamo-sports-hub repo): each URL carries a hash of its
+# contents (?v=...), so phones can keep a copy for a year and fetch again only when the hash changes.
+/cfb/d/*
+  Cache-Control: public, max-age=31536000, immutable
+/nfl/d/*
+  Cache-Control: public, max-age=31536000, immutable
+/nba/d/*
+  Cache-Control: public, max-age=31536000, immutable

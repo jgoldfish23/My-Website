@@ -154,7 +154,7 @@
     '#view a.sb-nu', '#view a.sbt', '#view .btn', '#view .seg a', '#view .seg button', '#view .fold-btn', '#view .subnav a', '#view .crumb a',
     '#view a.gotw', '#view a.hw-strip', '#view a.hw-card', 'header.top .ng-tab', 'header.top .ng-sub a', 'header.top a.tk', '#asof .asof-i',
     '.jsh-nav a', '.jsh-brand', '#btab a', '#btab button', '.fd a.tc', '.fd .tc-ar', '.fd a.lc', '.fd a.tv-g', '.fd a.gm', '.fd .sp-h', '.fd .ql a',
-    '.fd a.nw-item', '.fd a.nw-lead', '.fd .nw-seg button', '.fd .fd-more', '.fd button.more', '.fd .hero .chip', '.fd a.lt',
+    '.fd .nw-ln a', '.fd .nw-tog', '.fd .fd-more', '.fd button.more', '.fd .hero .chip', '.fd a.lt',
     'main.wrap a.ar', 'main.wrap #chips .chip', '#holo-sec .hs-b', '#holo-sec .hs-i'].join(',');
   let pr = null, prT = 0, prAt = 0;
   /* a tap keeps the press look at least 110 ms so it is seen; a cancelled press (the finger started a scroll) drops it at once */

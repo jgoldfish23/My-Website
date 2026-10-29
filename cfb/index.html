@@ -123,6 +123,8 @@ header.top.jsh-tuck{pointer-events:none}
 <script src="/sports/holo.js?v=20261027a" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261027a" defer></script>
+<!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
+<script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
      To bring it back, put this tag back in (and bump ?v=): <script src="/sports/ask.js?v=20261027c" defer></script> -->
 <title>CFB · Jamo Sports Hub</title>
@@ -2706,7 +2708,7 @@ a.sl-t:hover{border-color:var(--accent)}.sl-t.mine{border-color:color-mix(in srg
     <div class="brand"><a class="wordmark" href="#/">CFB <b>Saturdays</b></a><span class="season">Jamo Sports Hub · 2026</span></div>
     <div class="search"><input id="q" type="search" placeholder="Find a team…" autocomplete="off" aria-label="Find a team"><div id="qres" class="search-res" hidden></div></div>
     <nav class="nav" id="nav">
-      <a href="#/week" data-r="week">Gameday</a>
+      <a href="#/week" data-r="week">Scoreboard</a>
       <a href="#/gameday" data-r="gameday" title="Live score, drives, win probability and matchups for your team's game">Game-day screen</a>
       <a href="#/schedule" data-r="schedule">Schedule</a>
       <a href="#/tv" data-r="tv">TV Guide</a>

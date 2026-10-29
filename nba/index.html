@@ -13980,6 +13980,37 @@ function pmTeamMount(ab){ if(!T[ab]||document.getElementById('s-pm')) return; if
   if(!PM.data) pmLoad().then(()=>pmTeamFill(ab)); }
 { const _rt=renderTeam; renderTeam=function(ab){ _rt(ab); pmTeamMount(norm(ab||'')); }; }
 
+/* ---------- player pages (2026-10-28, Jamo: "Add the average plus minus stat for each player to their main player
+   profile"): a "+/- a game" box in the header next to PPG, and a Plus-minus card after Averages with his average +/-,
+   Adjusted +/-, per 36, his rank among qualified players, and his game-by-game strip. A player traded mid-season gets one
+   row per team (pm.json keys players by team). ---------- */
+function pmFind(ab, name){ const D=PM.data; if(!D) return []; const k=dkey(name); const L=D.players.filter(p=>p.key===k); return L.sort((a,b)=>(b.ab===ab)-(a.ab===ab)||b.gp-a.gp); }
+function pmRankOf(p, k){ const q=PM.data.players.filter(x=>!x.small); if(p.small) return null; const r=q.filter(x=>x[k]>p[k]).length+1; return {r, n:q.length}; }
+function pmPlayerInner(ab, name){ const L=pmFind(ab, name); const D=PM.data;
+  if(!L.length) return '<div class="mini">No regular-season minutes yet'+(D.through?' through '+esc(fmtDate(D.through,false)):'')+'.</div>';
+  const ord=n=>{ const s=['th','st','nd','rd'], v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); };
+  return L.map(p=>{ const r1=pmRankOf(p,'pmg'), r2=pmRankOf(p,'adjg'); const t=team(p.ab);
+    const box=(v,k,sub)=>'<div><b>'+v+'</b><span>'+k+'</span>'+(sub?'<em>'+sub+'</em>':'')+'</div>';
+    return (L.length>1?'<div class="pm-ph">'+chipLogo(p.ab)+'with the '+esc(t.disp)+'</div>':'')
+      + '<div class="stat3 pm-p3">'+box(pmV(p.pmg),'+/- a game', r1?ord(r1.r)+' of '+r1.n:'')+box(pmV(p.adjg),'Adjusted +/-', r2?ord(r2.r)+' of '+r2.n:'')+box(p.p36==null?'—':pmV(p.p36),'per 36 min','')
+      + box(pmV(p.pmT,0),'season total','')+box(String(p.gp),'games','')+box(num1(p.mpg),'min a game','')+'</div>'
+      + '<div class="pm-legrow" style="margin-top:10px">'+pmLegend()+'</div><div class="pm-scope pm-pstrip">'+pmStrip(p)+'</div>'
+      + (p.small?'<div class="mini" style="margin-top:6px"><span class="pm-ss" style="margin-left:0">small sample</span> fewer than '+D.gMin+' games or under 10 minutes a game, so no league rank yet.</div>':''); }).join('<hr class="pm-hr">')
+    + '<div class="mini pm-tfoot">Adjusted +/- is the hub’s own: his +/- minus his minutes’ share of the team’s final margin, so above zero means his team did better with him on the floor than it did overall. Ranks are among the '+(PM.data.players.filter(x=>!x.small).length)+' qualified players. <a href="#/plusminus/'+enc(L[0].ab)+'">Team and league plus-minus &rsaquo;</a></div>'; }
+function pmPlayerFill(ab, name){ const box=document.getElementById('pm-pbox'); if(!box||box.dataset.k!==dkey(name)) return;
+  box.innerHTML=PM.data?pmPlayerInner(ab, name):'<div class="mini">'+esc(PM.err||'Loading…')+'</div>';
+  const rb=document.getElementById('pm-prb'); const p=PM.data&&pmFind(ab, name)[0];
+  if(rb){ if(p){ rb.innerHTML='<div class="v">'+pmV(p.pmg)+'</div><div class="k">+/- a game</div>'; rb.hidden=false; } else rb.hidden=true; } }
+function pmPlayerMount(ab, name){ if(!T[ab]||!name||document.getElementById('s-ppm')) return; const head=view.querySelector('.thead.phero'); if(!head) return;
+  const ranks=head.querySelector('.ranks'); if(ranks) ranks.insertAdjacentHTML('beforeend','<a class="rb pm-rb" id="pm-prb" href="#s-ppm" hidden></a>');
+  const html='<div id="s-ppm" class="sec"><h2>Plus-minus</h2><span class="muted">the score with him on the floor, game by game</span></div><div class="card"><div class="bd" id="pm-pbox" data-k="'+esc(dkey(name))+'">'+(PM.data?'':'<div class="mini">Loading his game-by-game plus-minus…</div>')+'</div></div>';
+  /* after Averages + analytics when he has them, else right after the header (and its injury note) */
+  const anchor=[...view.querySelectorAll('.sec')].find(s=>/^(Contract|Recent games|Game log|Roster entry)/.test((s.querySelector('h2')||{}).textContent||''));
+  if(anchor) anchor.insertAdjacentHTML('beforebegin', html); else head.insertAdjacentHTML('afterend', html);
+  if(PM.data) pmPlayerFill(ab, name); else pmLoad().then(()=>pmPlayerFill(ab, name)); }
+{ const _rp=renderPlayer; renderPlayer=function(ab, name){ _rp(ab, name); try{ pmPlayerMount(norm(ab||''), name); }catch(e){ console.error(e); } }; }
+document.addEventListener('click', e=>{ const a=e.target.closest&&e.target.closest('#pm-prb'); if(!a) return; e.preventDefault(); const s=document.getElementById('s-ppm'); if(s) s.scrollIntoView({behavior:'smooth', block:'start'}); });
+
 /* ---------- events ---------- */
 document.addEventListener('click', e=>{ const el=e.target; if(!el.closest||!view.contains(el)) return;
   const c=el.closest('.pmc'); if(c&&c.dataset.pmk!=null){ const s=c.closest('.pm-strip'); const p=PM.data&&PM.data.players[+s.dataset.pmp]; const rd=s.nextElementSibling; if(!p||!rd) return;
@@ -14031,6 +14062,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
   +'.pm-seg button{display:inline-flex;align-items:center;gap:6px}.pm-seg .sw-logo{margin:0!important;width:16px!important;height:16px!important}.pm-seg .on .sw-logo{background:#fff!important;border-radius:50%!important;padding:1px;width:18px!important;height:18px!important}'
   +'.pm-tbl .pm-rk{width:1%}.pm-tbl th.pm-nm,.pm-tbl td.pm-nm{width:38%}'
   +'.pm-legrow{margin:0 0 8px}.pm-lg{display:inline-flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:12.5px;color:var(--ink-2)}.pm-lg>span{display:inline-flex;align-items:center;gap:5px}.pm-lg .pmc{cursor:default;width:11px;height:14px}'
+  +'.pm-p3 em{display:block;font-style:normal;font-size:11px;color:var(--ink-3);margin-top:1px}.pm-p3 b .pmv{font:inherit}.pm-rb{text-decoration:none;color:inherit;cursor:pointer}.pm-rb .v .pmv{font:inherit}.pm-ph{display:flex;align-items:center;gap:6px;font-weight:600;font-size:13px;margin:0 0 8px}.pm-ph .sw-logo{margin:0!important}.pm-hr{border:0;border-top:1px solid var(--line-2);margin:14px 0}'
   +'.pm-sn,.pm-vm{display:none}'
   +'.pm-count{margin:0 0 8px}.pm-more{display:flex;justify-content:center;gap:8px;margin:12px 0 4px}.pm-tfoot{margin-top:10px;line-height:1.5}'
   +'@media (max-width:600px){.pm-tbl .pm-rk{display:none}.pm-tbl th.pm-nm,.pm-tbl td.pm-nm{width:auto}'

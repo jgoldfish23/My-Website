@@ -98,7 +98,13 @@ BUF||Ar'maj Reed-Adams|G|Active||||2026-10-19|
 BUF||Keon Coleman|WR|Active||||2026-10-19|Coleman brought in four of six targets for 59 yards and a touchdown in the Bills' 33-30 win over the Raiders on Sunday.
 BUF||Khalil Shakir|WR|Active||||2026-10-19|Shakir brought in four of six targets for 34 yards and a touchdown in the Bills' 33-30 win over the Raiders on Sunday.
 BUF||Josh Allen|QB|Active||||2026-10-19|Allen completed 23 of 33 passes for 255 yards with two touchdowns and no interceptions and rushed five times for one yard in the Bills' 33-30 win over the Raiders on Sunday.
-CAR||Will Lee III|CB|Questionable|Hamstring||2026-10-29|2026-10-30|Lee is dealing with a hamstring injury and is doubtful to return to Thursday's Week 8 matchup against Green Bay, Joe Person of The Athletic reports.
+CAR||Ryan Fitzgerald|PK|Active||||2026-10-30|Fitzgerald made both field goal attempts and converted his only extra-point try in Thursday's 27-19 loss to Green Bay.
+CAR||Jalen Coker|WR|Active||||2026-10-30|Coker secured two of five targets for 37 yards and a touchdown in the Panthers' 27-19 loss to the Packers on Thursday. He also lost a fumble.
+CAR||Corey Bullock|C|Questionable|Quadriceps||2026-11-08|2026-10-30|Bullock (quadriceps) exited Thursday's 27-19 loss to Green Bay and did not return, Sheena Quick of Fox Sports Radio 1340 reports.
+CAR||Bryce Young|QB|Active||||2026-10-30|Young completed 23 of 41 passes for 209 yards with one touchdown and one interception in the Panthers' 27-19 loss to the Packers on Thursday.
+CAR||Chuba Hubbard|RB|Active||||2026-10-30|Hubbard rushed 22 times for 81 yards and a touchdown and brought in seven of eight targets for 38 yards in the Panthers' 27-19 loss to the Packers on Thursday.
+CAR||Tetairoa McMillan|WR|Active||||2026-10-30|McMillan brought in six of 11 targets for 57 yards in the Panthers' 27-19 loss to the Packers on Thursday.
+CAR||Will Lee III|CB|Questionable|Hamstring||2026-11-08|2026-10-30|Lee is dealing with a hamstring injury and is doubtful to return to Thursday's Week 8 matchup against Green Bay, Joe Person of The Athletic reports.
 CAR||Akayleb Evans|CB|Injured Reserve|Triceps||2026-11-30|2026-10-30|Evans (triceps) was placed on injured reserve by the Panthers on Thursday, Darin Gantt of the team's official website reports.
 CAR||Bobby Brown III|DT|Out|Hand||2026-11-08|2026-10-29|Brown (hand) is inactive for Thursday night's matchup against the Packers, Darin Gantt of the Panthers' official website reports.
 CAR||Haynes King|QB|Out|Coach's Decision||2026-11-08|2026-10-29|King (coach's decision) is inactive but operating as the Panthers' emergency No. 3 quarterback against the Packers on Thursday night, Darin Gantt of the team's official website reports.
@@ -109,7 +115,6 @@ CAR||Damien Lewis|G|Out|Knee||2026-11-08|2026-10-29|Lewis (knee) has been ruled 
 CAR||Jaelan Phillips|LB|Out|Hamstring||2026-11-08|2026-10-28|Phillips (hamstring) has been ruled out ahead of Thursday night's game against the Packers.
 CAR||Devin Lloyd|LB|Active||||2026-10-28|Lloyd posted four tackles in Sunday's loss to the Buccaneers.
 CAR||Bobby Okereke|LB|Active||||2026-10-28|Okereke tallied 10 tackles (seven solo) and a defensed pass in Sunday's loss to Tampa Bay.
-CAR||Jalen Coker|WR|Active||||2026-10-27|Coker (shoulder) was listed as a full participant in Tuesday's practice, Mike Kaye of ESPN.com reports.
 CAR||John Metchie III|WR|Active||||2026-10-27|Metchie caught two passes for 20 yards during Sunday's 43-13 defeat versus the Buccaneers.
 CAR||Mitchell Evans|TE|Active||||2026-10-27|Evans gathered in both targets for 39 yards during Sunday's 43-13 loss versus Tampa Bay.
 CAR||Trevor Etienne|RB|Active||||2026-10-27|Etienne posted six carries for eight yards, reeled in both targets for 17 yards and compiled 69 kickoff-return yards during Sunday's 43-13 defeat to the Buccaneers.
@@ -118,11 +123,6 @@ CAR||Taylor Moton|OT|Injured Reserve|Lower Leg|Surgery|2027-02-15|2026-10-26|The
 CAR||TeRah Edwards|DT|Active||||2026-10-26|
 CAR||Sam Hecht|C|Active||||2026-10-26|
 CAR||Stone Forsythe|OT|Active||||2026-10-26|
-CAR||Anthony Tyus III|RB|Active||||2026-10-26|Tyus rushed three times for 23 yards and a touchdown in Sunday's 43-13 loss to the Bucs.
-CAR||Ryan Fitzgerald|PK|Active||||2026-10-26|Fitzgerald did not attempt a field goal and went 1-for-2 on extra-point tries during Sunday's 43-13 loss to the Buccaneers.
-CAR||Darren Waller|TE|Active||||2026-10-26|Waller brought in one of two targets for a 50-yard touchdown in the Panthers' 43-13 loss to the Buccaneers on Sunday.
-CAR||Bryce Young|QB|Active||||2026-10-26|Young completed 14 of 27 passes for 163 yards with one touchdown and two interceptions and added one carry for nine yards in the Panthers' 43-13 loss to the Buccaneers on Sunday.
-CAR||Chuba Hubbard|RB|Active||||2026-10-25|Hubbard rushed seven times for 33 yards and brought in four of five targets for 27 yards in the Panthers' 43-13 loss to the Buccaneers on Sunday.
 CHI||Anthony Johnson Jr.|S|Injured Reserve|Undisclosed||2026-11-08|2026-10-30|ir
 CHI||T.J. Edwards|LB|Active||||2026-10-30|Edwards (hamstring) was considered to be a full participant on the Bears' estimated practice report Thursday.
 CHI||Kyle Monangai|RB|Questionable|Thumb|Sprain|2026-11-02|2026-10-29|Monangai (thumb/toe) did not practice Thursday.
@@ -273,7 +273,13 @@ DET||Ben Bartch|G|Injured Reserve|Foot||2026-11-22|2026-10-17|The Lions placed B
 DET||Devin White|LB|Injured Reserve|Forearm|Surgery|2026-11-22|2026-10-17|The Lions placed White (forearm) on injured reserve Friday.
 DET||Tom Kennedy|WR|Injured Reserve|Knee - MCL|Surgery|2027-02-15|2026-10-17|The Lions placed Kennedy (knee) on injured reserve Friday.
 DET||DJ Wonnum|LB|Active||||2026-10-09|
-GB||Christian Watson|WR|Active||||2026-10-30|Watson (chest) returned to Thursday night's game against the Panthers, Matt Schneidman of The Athletic reports.
+GB||MarShawn Lloyd|RB|Active||||2026-10-30|Lloyd rushed three times for seven yards and brought in his only target for nine yards in the Packers' 27-19 win over the Panthers on Thursday.
+GB||Trey Smack|PK|Active||||2026-10-30|Smack converted three of four extra-point tries and didn't attempt a field goal Thursday in a 27-19 win over Carolina.
+GB||Jordan Love|QB|Active||||2026-10-30|Love completed 30 of 41 passes for 288 yards with three touchdowns and one interception and recovered a fumble in the Packers' 27-19 win over the Panthers on Thursday.
+GB||Christian Watson|WR|Questionable|Ribs|Fracture|2026-11-08|2026-10-30|Watson said he suffered a broken rib in Thursday night's 27-19 win over the Panthers, Rob Demovsky of ESPN.com reports.
+GB||Tucker Kraft|TE|Active||||2026-10-30|Kraft secured all six targets for 53 yards and a touchdown in the Packers' 27-19 win over the Panthers on Thursday.
+GB||Matthew Golden|WR|Active||||2026-10-30|Golden brought in seven of 13 targets for 79 yards and a touchdown in the Packers' 27-19 win over the Panthers on Thursday.
+GB||Josh Jacobs|RB|Active||||2026-10-30|Jacobs rushed 21 times for 39 yards and a touchdown and brought in all six targets for 13 yards and another score in the Packers' 27-19 win over the Panthers on Thursday.
 GB||Devonte Wyatt|DT|Active||||2026-10-29|Wyatt (ankle) is active for Thursday's game against the Panthers, Mike Spofford of the team's official site reports.
 GB||Keisean Nixon|CB|Active||||2026-10-29|Nixon (shoulder) is active for Thursday's game against Carolina, Mike Spofford of the team's official site reports.
 GB||Kaleb Johnson|RB|Out|Coach's Decision||2026-11-08|2026-10-29|Johnson (coach's decision) is inactive for Thursday's game against the Panthers, Mike Spofford of the team's official site reports.
@@ -284,7 +290,6 @@ GB||Donovan Jennings|G|Out|Coach's Decision||2026-11-08|2026-10-29|inactive
 GB||Zaire Franklin|LB|Out|Shin|Fracture|2026-11-08|2026-10-29|inactive
 GB||Anthony Campbell|DT|Active||||2026-10-29|
 GB||Brenton Cox Jr.|DE|Active||||2026-10-29|
-GB||Matthew Golden|WR|Active||||2026-10-29|Golden (shoulder/foot) is listed as active Thursday against the Panthers, Mike Spofford of the Packers' official site reports.
 GB||Micah Parsons|DE|Out|Knee - ACL|Surgery|2026-11-08|2026-10-28|Packers head coach Matt LaFleur said Tuesday that Parsons (knee) has "a chance" to resume practicing next week, Matt Schneidman of The Athletic reports.
 GB||Aaron Banks|G|Active||||2026-10-28|
 GB||Evan Williams|S|Active||||2026-10-28|Williams finished Sunday's 20-17 loss to the Lions with nine tackles (five solo) and one pass defense.
@@ -293,11 +298,6 @@ GB||Xavier McKinney|S|Active||||2026-10-28|McKinney posted 10 tackles (four solo
 GB||Bo Melton|WR|Active||||2026-10-27|Melton caught one of his two targets for four yards and logged a 24-yard kickoff return in the Packers' 20-17 loss to the Lions on Sunday.
 GB||Savion Williams|WR|Active||||2026-10-26|Williams caught three passes on as many targets for 47 yards and turned two carries into four yards during the Packers' 20-17 loss to the Lions on Sunday.
 GB||Benjamin St-Juste|CB|Active||||2026-10-26|St-Juste (hamstring) was estimated as a full participant on Monday's practice report, Matt Schneidman of The Athletic reports.
-GB||Jacob Monk|C|Injured Reserve|Quadriceps||2026-12-06|2026-10-26|The Packers placed Monk (quadriceps) on injured reserve Monday.
-GB||Jager Burton|C|Active||||2026-10-26|
-GB||Kevin Zeitler|G|Active||||2026-10-26|
-GB||MarShawn Lloyd|RB|Active||||2026-10-26|Lloyd tallied six carries for 20 yards and two catches (on two targets) for 15 yards during Sunday's 20-17 loss in Detroit.
-GB||Tucker Kraft|TE|Active||||2026-10-26|Kraft compiled four catches (on six targets) for 48 yards and one touchdown during Sunday's 20-17 loss at Detroit.
 HOU||Jaylin Noel|WR|Injured Reserve|Toe|Surgery|2027-02-15|2026-10-28|Noel, who was placed on injured reserve earlier Wednesday, is expected to require surgery to address his toe injury and will miss the remainder of the season, Jonathan M. Alexander of the Houston Chronicle reports.
 HOU||Azeez Al-Shaair|LB|Active||||2026-10-28|Al-Shaair recorded nine tackles (two solo) in a Week 7 overtime loss to the Giants on Sunday.
 HOU||Henry To'oTo'o|LB|Active||||2026-10-28|To'oTo'o notched 10 tackles (three solo), including 0.5 sacks, in Sunday's Week 7 overtime loss to the Giants.

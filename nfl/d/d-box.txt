@@ -10211,4 +10211,105 @@ P|107|H|kickReturns|Elijah Mitchell||4241555|3;27;9.0;16;0
 P|107|H|kickReturns|Britain Covey||3926231|1;18;18.0;18;0
 P|107|H|kicking|Jake Elliott||3050478|0/0;0.0;0;3/3;3
 P|107|H|punting|Braden Mann||4035239|3;150;50.0;0;3;61
+G|108|401873023|2026-10-29|CAR|GB
+T|108|A|firstDowns=14;firstDownsPassing=10;firstDownsRushing=4;firstDownsPenalty=0;thirdDownEff=5-18;fourthDownEff=2-4;totalOffensivePlays=70;totalYards=258;yardsPerPlay=3.7;totalDrives=13;netPassingYards=176;completionAttempts=23/41;yardsPerPass=3.7;interceptions=1;sacksYardsLost=6-33;rushingYards=82;rushingAttempts=23;yardsPerRushAttempt=3.6;redZoneAttempts=1-2;totalPenaltiesYards=5-41;turnovers=2;fumblesLost=1;interceptions=1;defensiveTouchdowns=0;possessionTime=28:57;defSacks=0;defTfl=2
+T|108|H|firstDowns=21;firstDownsPassing=13;firstDownsRushing=6;firstDownsPenalty=2;thirdDownEff=9-16;fourthDownEff=0-0;totalOffensivePlays=67;totalYards=354;yardsPerPlay=5.3;totalDrives=12;netPassingYards=288;completionAttempts=30/41;yardsPerPass=7.0;interceptions=1;sacksYardsLost=0-0;rushingYards=66;rushingAttempts=26;yardsPerRushAttempt=2.5;redZoneAttempts=3-3;totalPenaltiesYards=6-45;turnovers=3;fumblesLost=2;interceptions=1;defensiveTouchdowns=0;possessionTime=31:03;defSacks=6;defTfl=7
+S|108|1|11:43|CAR|Ryan Fitzgerald 39 Yd Field Goal|3|0
+S|108|1|5:08|GB|Tucker Kraft 12 Yd pass from Jordan Love (Trey Smack PAT Failed)|3|6
+S|108|2|14:57|CAR|Chuba Hubbard 1 Yd Rush (Ryan Fitzgerald Kick)|10|6
+S|108|2|6:33|GB|Josh Jacobs 1 Yd Rush (Trey Smack Kick)|10|13
+S|108|2|1:46|GB|Matthew Golden 24 Yd pass from Jordan Love (Trey Smack Kick)|10|20
+S|108|3|7:30|GB|Josh Jacobs 4 Yd pass from Jordan Love (Trey Smack Kick)|10|27
+S|108|3|4:07|CAR|Ryan Fitzgerald 50 Yd Field Goal|13|27
+S|108|4|5:37|CAR|Jalen Coker 26 Yd pass from Bryce Young (Two-Point Pass Conversion Failed)|19|27
+W|108|65;56;59;55;61;58;60;72;67;66;66;54;54;49;50;61;65;67;76;80;76;86;88;87;87;86;86;87;92;94;95;94;95;96;97;96;96;57;97;95;97;98;91;92;91;98;98;99;100;100
+P|108|A|passing|Bryce Young||4685720|23/41;209;5.1;1;1;6-33;36.2;68.0
+P|108|A|rushing|Chuba Hubbard||4241416|22;81;3.7;1;18
+P|108|A|rushing|Trevor Etienne||4685350|1;1;1.0;0;1
+P|108|A|receiving|Tetairoa McMillan||4685472|6;58;9.7;0;14;11
+P|108|A|receiving|Chuba Hubbard||4241416|7;38;5.4;0;11;8
+P|108|A|receiving|Jalen Coker||4695883|2;36;18.0;1;26;5
+P|108|A|receiving|Mitchell Evans||4683243|2;22;11.0;0;17;2
+P|108|A|receiving|Tommy Tremble||4372780|1;19;19.0;0;19;3
+P|108|A|receiving|John Metchie III||4567096|3;14;4.7;0;6;3
+P|108|A|receiving|Darren Waller||2576925|1;11;11.0;0;11;2
+P|108|A|receiving|Brycen Tremayne||4360763|1;11;11.0;0;11;1
+P|108|A|fumbles|Jalen Coker||4695883|1;1;0
+P|108|A|fumbles|Bobby Okereke||3117253|0;0;1
+P|108|A|fumbles|Nick Hampton||4360773|0;0;1
+P|108|A|defensive|Marco Wilson||4240595|8;6;0;0;2;0;0
+P|108|A|defensive|Zakee Wheatley||4566384|7;4;0;0;1;0;0
+P|108|A|defensive|Devin Lloyd||4243256|7;3;0;0;0;0;0
+P|108|A|defensive|Tre'von Moehrig||4362487|5;4;0;0;0;0;0
+P|108|A|defensive|Nick Scott||3116179|5;3;0;0;1;0;0
+P|108|A|defensive|Bobby Okereke||3117253|5;3;0;0;0;0;0
+P|108|A|defensive|Will Lee III||5151083|4;4;0;0;0;0;0
+P|108|A|defensive|Tershawn Wharton||4058925|4;0;0;0;0;0;0
+P|108|A|defensive|Patrick Jones II||4036063|3;3;0;1;0;0;0
+P|108|A|defensive|Chau Smith-Wade||4697636|3;2;0;0;0;0;0
+P|108|A|defensive|Derrick Brown||4035495|3;1;0;1;0;0;0
+P|108|A|defensive|Aaron Hall||4602967|3;1;0;0;0;0;0
+P|108|A|defensive|Jackson Kuwatch||4875592|2;2;0;0;0;0;0
+P|108|A|defensive|Trevis Gipson||3917016|2;1;0;0;0;0;0
+P|108|A|defensive|Princely Umanmielen||4429166|2;1;0;0;0;0;0
+P|108|A|defensive|Lee Hunter||4431551|2;1;0;0;0;0;0
+P|108|A|defensive|Tyrel Dodson||4035232|1;1;0;0;0;0;0
+P|108|A|defensive|Brycen Tremayne||4360763|1;1;0;0;0;0;0
+P|108|A|defensive|TeRah Edwards||4431077|1;1;0;0;1;0;0
+P|108|A|defensive|Bryce Young||4685720|1;1;0;0;0;0;0
+P|108|A|defensive|Jalen Coker||4695883|1;1;0;0;0;0;0
+P|108|A|defensive|Malcolm DeWalt IV||5225251|1;1;0;0;0;0;0
+P|108|A|defensive|Isaiah Simmons||4035462|1;0;0;0;0;0;0
+P|108|A|defensive|Nick Hampton||4360773|1;0;0;0;0;0;0
+P|108|A|defensive|Lathan Ransom||4429110|1;0;0;0;0;0;0
+P|108|A|defensive|Bam Martin-Scott||4880613|1;0;0;0;0;0;0
+P|108|A|interceptions|Zakee Wheatley||4566384|1;17;0
+P|108|A|kickReturns|Anthony Tyus III||4709392|4;92;23.0;33;0
+P|108|A|puntReturns|Trevor Etienne||4685350|2;9;4.5;8;0
+P|108|A|kicking|Ryan Fitzgerald||4568263|2/2;100.0;50;1/1;7
+P|108|A|punting|Sam Martin||15928|4;195;48.8;0;2;52
+P|108|H|passing|Jordan Love||4036378|30/41;288;7.0;3;1;0-0;80.0;106.6
+P|108|H|rushing|Josh Jacobs||4047365|21;39;1.9;1;6
+P|108|H|rushing|Savion Williams||4431487|1;18;18.0;0;18
+P|108|H|rushing|MarShawn Lloyd||4429023|3;7;2.3;0;5
+P|108|H|rushing|Pierre Strong Jr.||4249836|1;2;2.0;0;2
+P|108|H|receiving|Christian Watson||4248528|8;113;14.1;0;53;10
+P|108|H|receiving|Matthew Golden||4701936|7;79;11.3;1;24;13
+P|108|H|receiving|Tucker Kraft||4572680|6;53;8.8;1;14;6
+P|108|H|receiving|J. Michael Sturdivant||4635009|1;16;16.0;0;16;1
+P|108|H|receiving|Josh Jacobs||4047365|6;13;2.2;1;5;6
+P|108|H|receiving|MarShawn Lloyd||4429023|1;9;9.0;0;9;1
+P|108|H|receiving|Savion Williams||4431487|1;5;5.0;0;5;2
+P|108|H|fumbles|Christian Watson||4248528|1;1;0
+P|108|H|fumbles|Coleman Owen||4578436|1;1;0
+P|108|H|fumbles|John Williams||2312707|1;0;0
+P|108|H|fumbles|Jordan Love||4036378|0;0;1
+P|108|H|fumbles|Brenton Cox Jr.||4361776|0;0;1
+P|108|H|defensive|Evan Williams||4428863|10;7;0;0;0;0;0
+P|108|H|defensive|Isaiah McDuffie||4239947|10;3;0;0;0;0;0
+P|108|H|defensive|Ty'Ron Hopper||4567406|8;6;1;0;3;2;0
+P|108|H|defensive|Lukas Van Ness||4686906|6;3;1;1;1;1;0
+P|108|H|defensive|Chris McClellan||4820574|6;2;0;0;0;0;0
+P|108|H|defensive|Barryn Sorrell||4683643|4;4;1;1;0;1;0
+P|108|H|defensive|Javon Bullard||4688930|4;2;0;0;0;0;0
+P|108|H|defensive|Dani Dennis-Sutton||4685315|3;2;1;2;1;1;0
+P|108|H|defensive|Xavier McKinney||4241470|3;2;0;0;1;0;0
+P|108|H|defensive|Brenton Cox Jr.||4361776|2;2;1;1;0;2;0
+P|108|H|defensive|Devonte Wyatt||4361791|2;2;1;2;0;1;0
+P|108|H|defensive|Keisean Nixon||4259493|2;2;0;0;0;0;0
+P|108|H|defensive|Kamal Hadden||4427356|2;1;0;0;0;0;0
+P|108|H|defensive|Brandon Cisse||5076652|2;0;0;0;2;0;0
+P|108|H|defensive|Nick Niemann||4036141|1;1;0;0;0;0;0
+P|108|H|defensive|Pierre Strong Jr.||4249836|1;1;0;0;0;0;0
+P|108|H|defensive|Bo Melton||4259305|1;1;0;0;0;0;0
+P|108|H|defensive|Anthony Campbell||4887255|1;1;0;0;0;1;0
+P|108|H|defensive|Kristian Welch||4036153|1;0;0;0;0;0;0
+P|108|H|defensive|Arron Mosby||4242996|1;0;0;0;0;0;0
+P|108|H|defensive|Kitan Oladapo||4374037|1;0;0;0;0;0;0
+P|108|H|interceptions|Ty'Ron Hopper||4567406|1;1;0
+P|108|H|kickReturns|Coleman Owen||4578436|4;105;26.3;31;0
+P|108|H|kickReturns|Bo Melton||4259305|1;20;20.0;20;0
+P|108|H|puntReturns|Coleman Owen||4578436|2;7;3.5;7;0
+P|108|H|kicking|Trey Smack||4869461|0/0;0.0;0;3/4;3
+P|108|H|punting|Daniel Whelan||4248789|5;223;44.6;1;2;51
 

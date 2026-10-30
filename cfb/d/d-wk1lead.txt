@@ -1696,6 +1696,12 @@
 2026-10-24|North Dakota State|New Mexico|North Dakota State|passingYards|Nathan Hayes|QB|17/33, 198 YDS, 2 TD, 2 INT
 2026-10-24|North Dakota State|New Mexico|New Mexico|rushingYards|Kiefer Sibley|RB|13 CAR, 91 YDS, 1 TD
 2026-10-24|North Dakota State|New Mexico|North Dakota State|receivingYards|Jackson Williams|WR|4 REC, 71 YDS
+2026-10-29|Florida Atlantic|North Texas|North Texas|passingYards|Tayven Jackson|QB|14/18, 191 YDS, 2 TD
+2026-10-29|Florida Atlantic|North Texas|North Texas|rushingYards|Jahiem White|RB|9 CAR, 44 YDS
+2026-10-29|Florida Atlantic|North Texas|Florida Atlantic|receivingYards|Easton Messer|WR|8 REC, 80 YDS, 1 TD
+2026-10-29|Troy|James Madison|James Madison|passingYards|Camden Coleman|QB|8/9, 112 YDS, 2 TD
+2026-10-29|Troy|James Madison|James Madison|rushingYards|Seth Cromwell|RB|10 CAR, 74 YDS, 1 TD
+2026-10-29|Troy|James Madison|James Madison|receivingYards|Michael Scott|WR|4 REC, 68 YDS
 2026-10-27|Delaware|Western Kentucky|Delaware|passingYards|Nick Minicucci|QB|32/38, 414 YDS, 4 TD
 2026-10-27|Delaware|Western Kentucky|Western Kentucky|rushingYards|Brock Glenn|QB|17 CAR, 129 YDS
 2026-10-27|Delaware|Western Kentucky|Delaware|receivingYards|Sean Wilson|WR|9 REC, 183 YDS, 2 TD
@@ -3133,3 +3139,6 @@
 2026-10-24|Prairie View A&M|East Texas A&M|East Texas A&M|passingYards|Reese Mooney|QB|31/52, 333 YDS, 2 TD
 2026-10-24|Prairie View A&M|East Texas A&M|Prairie View A&M|rushingYards|Chase Bingmon|RB|9 CAR, 77 YDS, 2 TD
 2026-10-24|Prairie View A&M|East Texas A&M|East Texas A&M|receivingYards|Micah Simpson|WR|10 REC, 90 YDS, 1 TD
+2026-10-29|South Carolina State|Morgan State|South Carolina State|passingYards|Keely Watson|QB|14/16, 151 YDS, 2 TD
+2026-10-29|South Carolina State|Morgan State|South Carolina State|rushingYards|Ricorian Brown|RB|7 CAR, 40 YDS
+2026-10-29|South Carolina State|Morgan State|South Carolina State|receivingYards|Malaqhi Jones|WR|4 REC, 49 YDS

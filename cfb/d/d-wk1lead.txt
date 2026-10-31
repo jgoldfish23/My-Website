@@ -1696,12 +1696,9 @@
 2026-10-24|North Dakota State|New Mexico|North Dakota State|passingYards|Nathan Hayes|QB|17/33, 198 YDS, 2 TD, 2 INT
 2026-10-24|North Dakota State|New Mexico|New Mexico|rushingYards|Kiefer Sibley|RB|13 CAR, 91 YDS, 1 TD
 2026-10-24|North Dakota State|New Mexico|North Dakota State|receivingYards|Jackson Williams|WR|4 REC, 71 YDS
-2026-10-30|Tulane|Charlotte|Charlotte|passingYards|Conner Harrell|QB|16/23, 157 YDS, 2 TD
-2026-10-30|Tulane|Charlotte|Charlotte|rushingYards|Khamani Alexander|RB|1 CAR, 44 YDS, 1 TD
-2026-10-30|Tulane|Charlotte|Charlotte|receivingYards|Jaden Barnes|WR|6 REC, 55 YDS, 1 TD
-2026-10-30|Baylor|UCF|Baylor|passingYards|DJ Lagway|QB|9/11, 116 YDS, 1 TD
-2026-10-30|Baylor|UCF|Baylor|rushingYards|Michael Turner|RB|7 CAR, 20 YDS
-2026-10-30|Baylor|UCF|Baylor|receivingYards|Dre'lon Miller|WR|2 REC, 44 YDS
+2026-10-30|Kent State|Sacramento State|Kent State|passingYards|Dru DeShields|QB|14/28, 172 YDS, 1 TD, 1 INT
+2026-10-30|Kent State|Sacramento State|Sacramento State|rushingYards|Isaiah Ene|RB|16 CAR, 106 YDS, 1 TD
+2026-10-30|Kent State|Sacramento State|Kent State|receivingYards|Wayne Harris|WR|3 REC, 122 YDS, 1 TD
 2026-10-27|Delaware|Western Kentucky|Delaware|passingYards|Nick Minicucci|QB|32/38, 414 YDS, 4 TD
 2026-10-27|Delaware|Western Kentucky|Western Kentucky|rushingYards|Brock Glenn|QB|17 CAR, 129 YDS
 2026-10-27|Delaware|Western Kentucky|Delaware|receivingYards|Sean Wilson|WR|9 REC, 183 YDS, 2 TD
@@ -1720,6 +1717,12 @@
 2026-10-29|Troy|James Madison|Troy|passingYards|Tucker Kilcrease|QB|15/31, 179 YDS
 2026-10-29|Troy|James Madison|James Madison|rushingYards|Seth Cromwell|RB|23 CAR, 135 YDS, 1 TD
 2026-10-29|Troy|James Madison|James Madison|receivingYards|Michael Scott|WR|4 REC, 68 YDS
+2026-10-30|Tulane|Charlotte|Tulane|passingYards|Trace Johnson|QB|28/36, 284 YDS, 1 TD, 1 INT
+2026-10-30|Tulane|Charlotte|Charlotte|rushingYards|Henry Rutledge|RB|22 CAR, 121 YDS
+2026-10-30|Tulane|Charlotte|Charlotte|receivingYards|Henry Rutledge|RB|4 REC, 79 YDS
+2026-10-30|Baylor|UCF|Baylor|passingYards|DJ Lagway|QB|16/25, 319 YDS, 4 TD
+2026-10-30|Baylor|UCF|Baylor|rushingYards|Ryelan Morris|RB|11 CAR, 82 YDS
+2026-10-30|Baylor|UCF|Baylor|receivingYards|Gavin Freeman|WR|5 REC, 114 YDS, 1 TD
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD
@@ -3145,9 +3148,9 @@
 2026-10-24|Prairie View A&M|East Texas A&M|East Texas A&M|passingYards|Reese Mooney|QB|31/52, 333 YDS, 2 TD
 2026-10-24|Prairie View A&M|East Texas A&M|Prairie View A&M|rushingYards|Chase Bingmon|RB|9 CAR, 77 YDS, 2 TD
 2026-10-24|Prairie View A&M|East Texas A&M|East Texas A&M|receivingYards|Micah Simpson|WR|10 REC, 90 YDS, 1 TD
-2026-10-30|Harvard|Dartmouth|Harvard|passingYards|Charlie Smith|QB|12/15, 168 YDS, 2 TD, 2 INT
-2026-10-30|Harvard|Dartmouth|Dartmouth|rushingYards|Grayson Saunier|QB|13 CAR, 81 YDS, 1 TD
-2026-10-30|Harvard|Dartmouth|Harvard|receivingYards|Ryan Tattersall|WR|4 REC, 73 YDS, 1 TD
 2026-10-29|South Carolina State|Morgan State|South Carolina State|passingYards|Keely Watson|QB|27/36, 279 YDS, 4 TD
 2026-10-29|South Carolina State|Morgan State|South Carolina State|rushingYards|Kacy Fields|RB|11 CAR, 71 YDS, 1 TD
 2026-10-29|South Carolina State|Morgan State|Morgan State|receivingYards|Justin Perry|WR|5 REC, 72 YDS
+2026-10-30|Harvard|Dartmouth|Harvard|passingYards|Charlie Smith|QB|23/37, 277 YDS, 2 TD, 5 INT
+2026-10-30|Harvard|Dartmouth|Dartmouth|rushingYards|Grayson Saunier|QB|20 CAR, 109 YDS, 1 TD
+2026-10-30|Harvard|Dartmouth|Harvard|receivingYards|Ryan Tattersall|WR|6 REC, 94 YDS, 1 TD

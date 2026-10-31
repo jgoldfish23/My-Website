@@ -1696,9 +1696,6 @@
 2026-10-24|North Dakota State|New Mexico|North Dakota State|passingYards|Nathan Hayes|QB|17/33, 198 YDS, 2 TD, 2 INT
 2026-10-24|North Dakota State|New Mexico|New Mexico|rushingYards|Kiefer Sibley|RB|13 CAR, 91 YDS, 1 TD
 2026-10-24|North Dakota State|New Mexico|North Dakota State|receivingYards|Jackson Williams|WR|4 REC, 71 YDS
-2026-10-30|Kent State|Sacramento State|Kent State|passingYards|Dru DeShields|QB|14/28, 172 YDS, 1 TD, 1 INT
-2026-10-30|Kent State|Sacramento State|Sacramento State|rushingYards|Isaiah Ene|RB|16 CAR, 106 YDS, 1 TD
-2026-10-30|Kent State|Sacramento State|Kent State|receivingYards|Wayne Harris|WR|3 REC, 122 YDS, 1 TD
 2026-10-27|Delaware|Western Kentucky|Delaware|passingYards|Nick Minicucci|QB|32/38, 414 YDS, 4 TD
 2026-10-27|Delaware|Western Kentucky|Western Kentucky|rushingYards|Brock Glenn|QB|17 CAR, 129 YDS
 2026-10-27|Delaware|Western Kentucky|Delaware|receivingYards|Sean Wilson|WR|9 REC, 183 YDS, 2 TD
@@ -1723,6 +1720,9 @@
 2026-10-30|Baylor|UCF|Baylor|passingYards|DJ Lagway|QB|16/25, 319 YDS, 4 TD
 2026-10-30|Baylor|UCF|Baylor|rushingYards|Ryelan Morris|RB|11 CAR, 82 YDS
 2026-10-30|Baylor|UCF|Baylor|receivingYards|Gavin Freeman|WR|5 REC, 114 YDS, 1 TD
+2026-10-30|Kent State|Sacramento State|Kent State|passingYards|Dru DeShields|QB|16/33, 190 YDS, 1 TD, 1 INT
+2026-10-30|Kent State|Sacramento State|Sacramento State|rushingYards|Isaiah Ene|RB|19 CAR, 107 YDS, 2 TD
+2026-10-30|Kent State|Sacramento State|Kent State|receivingYards|Wayne Harris|WR|3 REC, 122 YDS, 1 TD
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD

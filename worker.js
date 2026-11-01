@@ -3,6 +3,7 @@ import * as wedding from "./functions/api/wedding.js";
 import * as cfb from "./functions/api/cfb.js";
 import * as nfl from "./functions/api/nfl.js";
 import * as nba from "./functions/api/nba.js";
+import * as cbb from "./functions/api/cbb.js";
 import * as bottomline from "./functions/api/bottomline.js";
 import * as picks from "./functions/api/picks.js";
 import * as ask from "./functions/api/ask.js";
@@ -247,6 +248,12 @@ export default {
     if (pathname.startsWith("/api/nba/")) {
       if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
       return nba.onRequestGet({ request, env, ctx });
+    }
+
+    // Live college basketball scores and box scores for /cbb (CBB Hardwood, 2026-11-01)
+    if (pathname.startsWith("/api/cbb/")) {
+      if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
+      return cbb.onRequestGet({ request, env, ctx });
     }
 
     // Ask the Hub: the AI sports analyst on every hub page. Paid API, so ask.js checks the origin, caps the body at

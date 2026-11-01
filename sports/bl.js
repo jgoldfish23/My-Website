@@ -55,8 +55,38 @@ body.jbl-on{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
 @keyframes jblp{0%,100%{opacity:1}50%{opacity:.35}}
 @media (max-width:640px){.jbl{height:calc(36px + env(safe-area-inset-bottom));font-size:12.5px}.jbl-i{height:36px;padding:0 11px}.jbl-tag{display:none}body.jbl-on{padding-bottom:calc(36px + env(safe-area-inset-bottom))}.jbl-btn{width:34px}}
 @media (prefers-reduced-motion:reduce){.jbl-vp{overflow-x:auto}.jbl-tr{position:static}}
+/* jbl neo:start (2026-10-31, Jamo: "make it cooler and more futuristic"): a light edge that runs through the league colors,
+   faint scanlines, angled HUD tags, digital-style scores, a pulsing red underline under live games, a gold flash on a game
+   whose score just changed, and a glow under the game your pointer is on. Motion stops for reduce-motion. */
+.jbl{background:linear-gradient(180deg,rgba(16,21,38,.95),rgba(4,6,13,.98));border-top:0;box-shadow:0 -14px 36px -20px rgba(70,110,255,.65)}
+.jbl::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;z-index:3;pointer-events:none;background:linear-gradient(90deg,#3b82f6,#a855f7,#ef4444,#ffd75a,#3b82f6);background-size:200% 100%;box-shadow:0 0 14px rgba(120,140,255,.85),0 0 4px rgba(255,255,255,.4);animation:jblEdge 9s linear infinite}
+.jbl::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px)}
+@keyframes jblEdge{to{background-position:-200% 0}}
+.jbl-tag{position:relative;z-index:4;padding-right:24px;background:linear-gradient(135deg,var(--jblc,#3b82f6),color-mix(in srgb,var(--jblc,#3b82f6) 45%,#05070d));clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%);text-shadow:0 0 12px rgba(255,255,255,.55)}
+.jbl-tag::after{display:none}
+.jbl-sec{margin:0 12px 0 20px;padding:6px 14px;border-radius:0;background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 40%,#05070d));clip-path:polygon(7px 0,100% 0,calc(100% - 7px) 100%,0 100%);text-shadow:0 0 10px rgba(255,255,255,.45)}
+.jbl-i{position:relative;border-right:0}
+.jbl-i::after{content:"";position:absolute;right:0;top:9px;bottom:9px;width:1px;background:linear-gradient(180deg,transparent,rgba(140,170,255,.4),transparent)}
+.jbl-i .s{font-family:Orbitron,"Inter Tight",Inter,system-ui,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:.05em}
+.jbl-i .st{font-family:"Inter Tight",Inter,system-ui,sans-serif;letter-spacing:.04em}
+.jbl-i.on{background:linear-gradient(180deg,rgba(255,59,82,.13),rgba(255,59,82,0) 75%)}
+.jbl-i.on .s{text-shadow:0 0 10px rgba(255,255,255,.5)}
+.jbl-i.on::before{content:"";position:absolute;left:12px;right:12px;bottom:1px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,#ff3b52,transparent);box-shadow:0 0 10px #ff3b52;animation:jblp 1.6s infinite}
+.jbl-i.fav{box-shadow:inset 0 2px 0 #ffd75a;background:linear-gradient(180deg,rgba(255,215,90,.16),rgba(255,215,90,.02) 80%)}
+.jbl-i:hover{background:linear-gradient(180deg,rgba(124,182,255,.18),rgba(124,182,255,.03));box-shadow:inset 0 -2px 0 #7cb6ff,inset 0 -14px 18px -14px rgba(124,182,255,.8)}
+.jbl-i.chg{animation:jblChg 2.2s ease-out}
+@keyframes jblChg{0%,25%{background:rgba(255,215,90,.34);box-shadow:inset 0 0 0 1px #ffd75a,inset 0 0 22px rgba(255,215,90,.55)}100%{}}
+.jbl-i.chg .s{animation:jblNum 2.2s ease-out}
+@keyframes jblNum{0%,30%{color:#ffd75a;text-shadow:0 0 12px #ffd75a}100%{}}
+.jbl-btn{position:relative;z-index:4;color:#9fb3d1}.jbl-btn:hover{color:#fff;background:rgba(124,182,255,.12)}
+.jbl-pill{background:linear-gradient(135deg,rgba(16,21,38,.96),rgba(4,6,13,.98));border-color:rgba(124,182,255,.45);box-shadow:0 0 18px -4px rgba(90,130,255,.8)}
+@media (prefers-reduced-motion:reduce){.jbl::before,.jbl-i.on::before,.jbl-i.chg,.jbl-i.chg .s{animation:none}}
+/* jbl neo:end */
 `;
   const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+  if (!document.querySelector('link[href*="Orbitron"]')) { const fl = document.createElement('link'); fl.rel = 'stylesheet'; fl.href = 'https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800&display=swap'; document.head.appendChild(fl); }
+  /* the last score seen for each game, so a change can flash (neo, 2026-10-31) */
+  const SEEN = {};
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const ls = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
   const bar = document.createElement('div'); bar.className = 'jbl'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Scores and headlines');
@@ -79,7 +109,8 @@ body.jbl-on{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
   function item(g, lgTag){ const post = g.st === 'post', live = g.st === 'in'; const as = +g.a.s, hs = +g.h.s; const aw = post && as > hs, hw = post && hs > as;
     const stt = live ? '<span class="st live">' + esc(g.det) + '</span>' : post ? '<span class="st">' + esc(/OT/.test(g.det) ? g.det.replace(/^Final\/?/i, 'F/') : 'Final') + '</span>' : '<span class="st">' + esc(when(g)) + (g.tv ? ' · ' + esc(g.tv) : '') + '</span>';
     const a = post || live ? side(g.a, aw, hw) : side(Object.assign({}, g.a, {s:''})), h = post || live ? side(g.h, hw, aw) : side(Object.assign({}, g.h, {s:''}));
-    return '<a class="jbl-i' + (isFav(g) ? ' fav' : '') + '" href="' + href(g) + '" title="' + esc(g.a.n + ' at ' + g.h.n + (g.note ? ' · ' + g.note : '')) + '">' + (lgTag ? '<span class="lgt" style="color:' + LG[g.lg].c + '">' + LG[g.lg].n + '</span>' : '') + a + '<span class="l">' + (post || live ? '' : '@') + '</span>' + h + stt + '</a>'; }
+    const key = g.lg + '|' + (g.id || g.a.n + '@' + g.h.n), sc = (live || post) ? as + '-' + hs : '', chg = live && SEEN[key] != null && SEEN[key] !== sc; if (sc) SEEN[key] = sc;
+    return '<a class="jbl-i' + (isFav(g) ? ' fav' : '') + (live ? ' on' : '') + (chg ? ' chg' : '') + '" href="' + href(g) + '" title="' + esc(g.a.n + ' at ' + g.h.n + (g.note ? ' · ' + g.note : '')) + '">' + (lgTag ? '<span class="lgt" style="color:' + LG[g.lg].c + '">' + LG[g.lg].n + '</span>' : '') + a + '<span class="l">' + (post || live ? '' : '@') + '</span>' + h + stt + '</a>'; }
   function sec(key, label, color, html){ return html ? '<span class="jbl-sec" data-k="' + key + '" data-l="' + esc(label) + '" style="--c:' + color + '">' + esc(label) + '</span>' + html : ''; }
   function order(list){ const rank = g => g.st === 'in' ? 0 : g.st === 'pre' ? 1 : 2; return list.slice().sort((p, q) => rank(p) - rank(q) || String(p.date).localeCompare(String(q.date))); }
   function build(){ if (!DATA) return; const G = (DATA.games || []).filter(g => LG[g.lg]); let h = ''; /* only the leagues the site covers: CFB, NFL, NBA */

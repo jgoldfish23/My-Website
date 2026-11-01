@@ -321,6 +321,106 @@ body.livetv .sec{margin-top:20px}
 @media (max-width:600px){.lv{padding:12px 16px 40px}.lv-head{margin-top:2px}.sec{margin-top:24px}.lv-tools{width:100%;flex-wrap:nowrap;gap:6px}.lv-tools .upd{margin-right:auto;min-width:0}.upd .ul{display:none}.lv-tools .btn{padding:7px 11px;font-size:12.5px;gap:6px}.lead{font-size:14px}}
 /* 10-27: no blur behind the panels - over the smooth gradient it showed nothing and cost the phone a repaint per scroll frame */
 .mc,.feed,.up{-webkit-backdrop-filter:none;backdrop-filter:none}
+/* lc2:start - filters, heat meters, score flashes and the TV dashboard (2026-10-31; see patch_lc2.pl) */
+.lvf{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin:0 0 14px;padding:2px 2px 4px}
+.lvf::-webkit-scrollbar{display:none}
+.lvf button{flex:none;display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);color:var(--ink-2);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:color .15s,border-color .15s,box-shadow .15s,background .15s;-webkit-tap-highlight-color:transparent}
+.lvf button i{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c)}
+.lvf button span{min-width:20px;padding:1px 7px;border-radius:999px;background:rgba(255,255,255,.1);font-size:11.5px;font-weight:800;text-align:center}
+.lvf button:hover{color:var(--ink);border-color:var(--edge-hi)}
+.lvf button.on{color:#fff;border-color:transparent;background:linear-gradient(90deg,#ff3d63,#ff7a45);box-shadow:0 8px 24px -10px rgba(255,70,90,.9)}
+.lvf button.on i{background:#fff;box-shadow:0 0 8px #fff}.lvf button.on span{background:rgba(255,255,255,.25)}
+:root.light .lvf button span{background:rgba(0,0,0,.07)}
+.mc-heat{position:absolute;left:0;bottom:0;height:3px;width:var(--hv);border-radius:0 3px 0 0;background:linear-gradient(90deg,transparent,var(--hc));box-shadow:0 0 12px var(--hc);transition:width .8s ease;pointer-events:none}
+@media (prefers-reduced-motion:no-preference){
+  .mc:has(.sc.bump){animation:lcFlash 1.5s ease-out}
+  .spot:has(.st-s.bump){animation:lcSpotFlash 1.8s ease-out}
+}
+@keyframes lcFlash{0%{box-shadow:0 0 0 2px color-mix(in srgb,var(--c) 85%,#fff),0 0 38px 4px color-mix(in srgb,var(--c) 70%,transparent)}100%{box-shadow:var(--sh)}}
+@keyframes lcSpotFlash{0%{box-shadow:0 0 0 2px rgba(255,255,255,.75),0 0 80px 10px color-mix(in srgb,var(--ch,#4f8cff) 65%,transparent)}100%{}}
+/* TV dashboard */
+.tvd{display:none}
+body.livetv #spot,body.livetv #mine-wrap,body.livetv #cols,body.livetv .lvf,body.livetv .toasts{display:none!important}
+body.livetv .tvd:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr);gap:16px;position:relative}
+.tvd-amb{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.9;transition:opacity .6s;background:radial-gradient(55vw 70vh at 8% 40%,color-mix(in srgb,var(--ca,#1d4ed8) 55%,transparent),transparent 70%),radial-gradient(55vw 70vh at 92% 40%,color-mix(in srgb,var(--ch,#7c3aed) 55%,transparent),transparent 70%)}
+:root.light .tvd-amb{opacity:.35}
+.tvd-main{display:flex;flex-direction:column;min-height:0;min-width:0}
+.tvd-spot{min-height:0}
+.tvd-rot{display:flex;align-items:center;gap:12px;margin-top:10px;font-size:13px;color:var(--ink-3)}
+.tvd-rot[hidden]{display:none}
+.tvd-dots{display:flex;gap:7px}
+.tvd-dots button{width:11px;height:11px;padding:0;border-radius:50%;border:0;background:rgba(255,255,255,.22);cursor:pointer;transition:transform .2s,background .2s}
+.tvd-dots button.on{background:var(--c);box-shadow:0 0 12px var(--c);transform:scale(1.25)}
+.tvd-prog{flex:1;max-width:260px;height:3px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
+.tvd-prog i{display:block;height:100%;background:linear-gradient(90deg,var(--live),#ffb547);transform-origin:left;animation:tvProg var(--rot) linear forwards}
+.tvd-prog.paused i{animation-play-state:paused}
+@keyframes tvProg{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.tvd-hint{font-weight:600}
+.tvd-un{border:0;background:none;color:var(--hud);font:inherit;font-weight:700;cursor:pointer;padding:0}
+.tvd-side{display:flex;flex-direction:column;min-height:0;min-width:0}
+.tvd-sh{display:flex;align-items:baseline;gap:10px;margin:2px 2px 10px}.tvd-sh b{font-family:var(--disp);font-size:20px;font-weight:800;letter-spacing:-.02em}.tvd-sh span{font-size:13px;font-weight:600;color:var(--ink-3)}
+.tvd-grid.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;align-content:start}
+.tvd-grid .mc-spot{display:none}
+.tvd-tick{position:relative;overflow:hidden;height:46px;display:flex;align-items:center;border-top:1px solid var(--edge);-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
+.tvd-tick[hidden]{display:none}
+.tk-track{display:inline-flex;align-items:center;gap:38px;white-space:nowrap;padding-left:20px;animation:tkRun var(--dur) linear infinite}
+.tvd-tick:hover .tk-track{animation-play-state:paused}
+@keyframes tkRun{to{transform:translateX(-50%)}}
+.tk-i{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--ink)}
+.tk-i b{font-size:10.5px;font-weight:800;letter-spacing:.12em;padding:3px 7px;border-radius:5px;color:#fff;background:var(--c)}
+.tk-i em{font-style:normal;font-family:var(--num);font-size:12.5px;font-weight:800;color:#ffd27a}
+.tvd-count{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--ink-2)}
+.tvd-count i{width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 10px var(--live)}
+@media (prefers-reduced-motion:no-preference){.tvd-count i{animation:tvPing 1.6s ease-in-out infinite}}
+@keyframes tvPing{50%{opacity:.35}}
+.tvbar #tv-fs{margin-left:auto}.tvbar #tv-exit{margin-left:0}
+.tvd-moment{position:fixed;left:50%;top:16%;z-index:95;width:min(820px,92vw);padding:24px 34px 26px;border-radius:26px;text-align:center;color:#fff;overflow:hidden;transform:translateX(-50%);
+  background:linear-gradient(125deg,color-mix(in srgb,var(--tc) 80%,#000),#090d1a 75%);box-shadow:0 0 0 2px color-mix(in srgb,var(--tc) 55%,#fff),0 40px 100px -24px rgba(0,0,0,.85),0 0 90px -10px var(--tc)}
+.tvd-moment[hidden]{display:none}
+.tvd-moment::before{content:"";position:absolute;top:-50%;bottom:-50%;left:-40%;width:35%;transform:skewX(-18deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);pointer-events:none}
+.tvd-moment .mo-k{display:block;font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#ffd27a}
+.tvd-moment b{display:block;margin:8px 0 6px;font-family:var(--disp);font-size:clamp(28px,3.6vw,52px);font-weight:800;letter-spacing:-.02em;line-height:1.08}
+.tvd-moment .mo-b{display:block;font-size:clamp(15px,1.4vw,20px);color:rgba(255,255,255,.85)}
+@media (prefers-reduced-motion:no-preference){
+  .tvd-moment.go{animation:moIn .55s cubic-bezier(.2,.9,.3,1.25),moOut .5s ease-in 6.4s forwards}
+  .tvd-moment.go::before{animation:moSweep 1.3s ease-out .2s}
+}
+@keyframes moIn{from{opacity:0;transform:translateX(-50%) translateY(-24px) scale(.94)}to{opacity:1;transform:translateX(-50%)}}
+@keyframes moOut{to{opacity:0;transform:translateX(-50%) translateY(-14px)}}
+@keyframes moSweep{from{left:-40%}to{left:130%}}
+/* a TV or laptop: one screen, no scrolling */
+@media (min-width:1000px) and (min-height:560px){
+  body.livetv{overflow:hidden}
+  body.livetv .lv{height:100vh;height:100dvh;display:flex;flex-direction:column;padding:14px 22px 0}
+  body.livetv .tvbar{flex:none}
+  body.livetv .demo{flex:none;margin-bottom:10px}
+  body.livetv .tvd:not([hidden]){flex:1;min-height:0;grid-template-columns:minmax(0,1.65fr) minmax(330px,1fr);grid-template-rows:minmax(0,1fr) auto;gap:14px 20px}
+  body.livetv .tvd-main .spot{max-height:100%;overflow:hidden}
+  body.livetv .tvd-spot{flex:1;min-height:0;display:flex;flex-direction:column}
+  body.livetv .tvd-spot>*{flex:1;min-height:0}
+  body.livetv .tvd-main{grid-column:1;grid-row:1}
+  body.livetv .tvd-side{grid-column:2;grid-row:1}
+  body.livetv .tvd-grid{flex:1;min-height:0;overflow:hidden auto;scrollbar-width:none;padding:2px 2px 12px}
+  body.livetv .tvd-grid::-webkit-scrollbar{display:none}
+  body.livetv .tvd-tick{grid-column:1/-1}
+  body.livetv .tvd-grid.cards{grid-auto-rows:max-content}
+  /* the spotlight takes about 60% of the screen here, so its type scales to that column, not the whole screen */
+  body.livetv .tvd .st .plate{width:clamp(64px,6.4vw,124px);height:clamp(64px,6.4vw,124px);border-radius:clamp(18px,1.8vw,32px)}
+  body.livetv .tvd .st .plate img{width:76%;height:76%}
+  body.livetv .tvd .st-n b{font-size:clamp(20px,2.2vw,44px)}
+  body.livetv .tvd .st-n small{font-size:clamp(12px,1vw,17px)}
+  body.livetv .tvd .st-s{font-size:clamp(44px,5vw,124px)}
+  body.livetv .tvd .spot-mid .clk{font-size:clamp(16px,1.6vw,30px)}
+  body.livetv .tvd .spot-mid .sub{font-size:clamp(12px,1vw,17px)}
+}
+@media (min-width:1000px) and (max-width:1399px) and (min-height:560px){
+  body.livetv .tvd .st .plate{width:4.8vw;height:4.8vw;border-radius:14px}
+  body.livetv .tvd .st-s{font-size:4vw}
+  body.livetv .tvd .st-n b{font-size:clamp(17px,1.9vw,26px)}
+  body.livetv .tvd .st-n small{display:none}
+}
+@media print{.tvd,.tvd-moment{display:none!important}}
+/* lc2:end */
 @media (prefers-reduced-motion:reduce){body::before,.lv-head h1 b,.pill-live::before,.bump,.toast,.feed li.new a{animation:none!important}.mc:hover{transform:none}}
 </style>
 </head>
@@ -427,7 +527,7 @@ header.top.jsh-tuck{pointer-events:none}
 })();
 </script>
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
-<script src="/sports/bl.js?v=20261027a" defer></script>
+<script src="/sports/bl.js?v=20261031a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
 <script src="/sports/holo.js?v=20261027a" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
@@ -440,7 +540,7 @@ header.top.jsh-tuck{pointer-events:none}
      To bring it back, put this tag back in (and bump ?v=): <script src="/sports/ask.js?v=20261027c" defer></script> -->
 
 <main class="lv" id="lv">
-  <div class="tvbar" id="tvbar"><span class="t">Live <b>Center</b></span><span class="clock" id="tv-clock"></span><span class="wake" id="tv-wake"></span><button type="button" class="btn" id="tv-exit">Exit TV mode</button></div>
+  <div class="tvbar" id="tvbar"><span class="t">Live <b>Center</b></span><span class="clock" id="tv-clock"></span><span class="tvd-count" id="tv-live"></span><span class="wake" id="tv-wake"></span><button type="button" class="btn" id="tv-fs" title="Full screen (F)">Full screen</button><button type="button" class="btn" id="tv-exit">Exit TV mode</button></div>
   <header class="lv-head">
     <div class="lv-title">
       <div class="eyebrow" id="lv-date">Jamo Sports Hub</div>
@@ -459,7 +559,15 @@ header.top.jsh-tuck{pointer-events:none}
     <label><input type="checkbox" id="opt-web"><span>Follow Weber State too<small>Adds the Wildcats’ games (FCS) and treats them like one of your teams. Off unless you turn it on.</small></span></label>
   </div>
 
+  <nav class="lvf" id="lvf" aria-label="Show these games"></nav>
   <section id="spot" aria-label="Spotlight game"></section>
+  <section class="tvd" id="tvd" hidden aria-label="TV mode">
+    <div class="tvd-amb" aria-hidden="true"></div>
+    <div class="tvd-main"><div class="tvd-spot" id="tvd-spot"></div><div class="tvd-rot" id="tvd-rot" hidden></div></div>
+    <aside class="tvd-side"><div class="tvd-sh"><b id="tvd-sh"></b><span id="tvd-sn"></span></div><div class="tvd-grid" id="tvd-grid"></div></aside>
+    <div class="tvd-tick" id="tvd-tick" hidden aria-hidden="true"></div>
+  </section>
+  <div class="tvd-moment" id="tvd-moment" role="status" hidden></div>
 
   <section id="mine-wrap" hidden><div class="sec"><h2>Your teams</h2><span class="note" id="mine-n"></span></div><div class="grid" id="mine"></div></section>
 
@@ -473,7 +581,7 @@ header.top.jsh-tuck{pointer-events:none}
   <footer class="foot"><span id="lv-foot">Scores refresh every 25 seconds while games are on. Tap any game for its full game page.</span><span>A <i>Kramerica Industries</i> production</span></footer>
 </main>
 <div class="toasts" id="toasts" aria-live="polite"></div>
-<script type="application/json" id="d-meta">{"cfb":"Sat Oct 31, 2026 · 8:51 PM ET","nfl":"Sat Oct 31, 2026 · 8:52 PM ET","nba":"Sat Oct 31, 2026 · 7:05 PM ET"}</script>
+<script type="application/json" id="d-meta">{"cfb":"Sat Oct 31, 2026 · 8:51 PM ET","nfl":"","nba":""}</script>
 <script type="text/plain" id="d-cfb">9|2026-10-28|Jacksonville State|New Mexico State|24|0|FINAL|8:00 PM||3|50.5|-155|130|ESPN2|||
 9|2026-10-28|Kennesaw State|Middle Tennessee|44|28|FINAL|7:00 PM||1.5|49.5|-112|-108|CBSSN|||
 9|2026-10-29|Florida Atlantic|North Texas|41|48|FINAL|7:30 PM||-15.5|78.5|455|-625|ESPN|||
@@ -1567,7 +1675,7 @@ function toast(G, ev, kicker, title, body){ const id = G.key + '|' + ev; if (TOA
   const kill = () => { if (!el.isConnected) return; el.classList.add('out'); setTimeout(() => el.remove(), 380); };
   el.querySelector('.toast-x').addEventListener('click', kill);
   box.prepend(el); while (box.children.length > 3) box.lastElementChild.remove();
-  setTimeout(kill, 9000); }
+  setTimeout(kill, 9000); if (TVM) tvMoment(G, kicker, title, body, colorOf(G, fs)); }
 function moments(U){ const now = Date.now();
   U.forEach(G => { if (G.st !== 'in' && G.st !== 'post') return;
     const cur = {as: G.a.s || 0, hs: G.h.s || 0, ot: G.st === 'in' ? (G.P || prog(G)).ot : 0, cl: closeLate(G), st: G.st, det: G.det};
@@ -1597,6 +1705,7 @@ function cardHTML(G, i){ const H = G.H || {show: 0}; const hot = G.live && (clos
     : '<span class="why">' + esc(dayWord(G.kick) + ' ' + kickStr(G.kick) + (tvOf(G) ? ' · ' + tvOf(G) : '')) + '</span><span class="cd" data-cd="' + G.kick + '" data-cdk="s">' + cdShort(G.kick) + '</span>';
   return '<article class="mc' + (G.fav ? ' fav' : '') + (hot ? ' hot' : '') + '" style="--c:' + LG[G.lg].c + '"><a class="mc-a" href="' + esc(G.href) + '"><div class="mc-h"><span class="lg">' + LG[G.lg].n + '</span>' + (G.live ? '<span class="clk">' + esc(clockStr(G)) + '</span>' : '<span class="when">' + (G.kick && G.kick <= Date.now() ? 'Starting now' : 'Up next') + '</span>') + (G.fav ? '<span class="me">Your team</span>' : '') + '</div>'
     + teamRow(G, 'a') + teamRow(G, 'h') + (G.live ? wpBar(G, 'mwp') : '') + '<div class="mc-f">' + foot + '</div></a>'
+    + (G.live ? '<i class="mc-heat" style="--hv:' + Math.max(4, H.show) + '%;--hc:' + heatColor(H.show) + '" aria-hidden="true"></i>' : '')
     + (G.live ? '<button type="button" class="mc-spot" data-spot="' + esc(G.key) + '" aria-label="Show this game in the spotlight" title="Show in the spotlight">' + ICON.spot + '</button>' : '') + '</article>'; }
 /* the situation line: who has the ball, down and distance and the red zone in football; then the score by quarter and the
    pregame line, when the relays and the schedule have them */
@@ -1647,7 +1756,8 @@ let UPALL = false, FINALL = false, FEEDALL = false, GRIDALL = false;
 let VIEW = null;
 function render(){
   TODAY = etDate(); FAVS = favList();
-  const U = universe(); const now = Date.now();
+  const UA = universe(); const now = Date.now(); UA.forEach(G => { if (G.live) G.H = heat(G); }); chipsHTML(UA);
+  const U = UA.filter(passF); const anyLive = UA.filter(G => G.live).length;
   const live = U.filter(G => G.live); live.forEach(G => { G.H = heat(G); }); live.sort((a, b) => b.H.s - a.H.s);
   if (SPOT && !live.some(G => G.key === SPOT)) { SPOT = ''; ssSet(SK + 'spot', ''); }
   const spot = live.find(G => G.key === SPOT) || live[0] || null;
@@ -1662,7 +1772,7 @@ function render(){
   const rest = live.filter(G => G !== spot && !mineKeys.has(G.key));
   const late = +fmt({hour:'numeric', hourCycle:'h23'}) < 4; const yday = addDay(today, -1);
   const fins = U.filter(G => G.st === 'post' && (G.kick ? (localDay(G.kick) === today || (late && localDay(G.kick) === yday)) : G.date === TODAY)).sort((a, b) => (b.fav ? 1 : 0) - (a.fav ? 1 : 0) || (b.kick || 0) - (a.kick || 0));
-  VIEW = {U, live, spot};
+  VIEW = {U, UA, live, spot, pre, up, fins};
   /* header */
   $('#lv-date').textContent = fmt({weekday:'long', month:'long', day:'numeric'});
   const later = pre.filter(G => G.kick > now && localDay(G.kick) === today).length;
@@ -1673,22 +1783,24 @@ function render(){
   $('#lv-lead').innerHTML = loading ? 'Checking live scores for college football, the NFL and the NBA…' : live.length ? '<b>' + live.length + ' game' + (live.length === 1 ? '' : 's') + ' live</b> right now' + (later ? ', ' + later + ' more later today' : '') + '. Tap any game for its full game page.'
     : blind.length ? 'Live scores aren’t coming through right now, so the page keeps trying. <b>' + blind.length + ' game' + (blind.length === 1 ? '' : 's') + '</b> should be under way: tap one below for its game page.'
     : 'Nothing live right now.' + (nx ? ' Next up: <b>' + esc(O[nx.lg].name(nx.a.t) + ' at ' + O[nx.lg].name(nx.h.t)) + '</b>, ' + esc(/^(Today|Tomorrow)$/.test(dayWord(nx.kick)) ? dayWord(nx.kick).toLowerCase() : dayWord(nx.kick)) + ' at ' + esc(kickStr(nx.kick)) + ' ' + TZ + '.' : ' No games on the schedule this week.');
-  document.title = (live.length ? '(' + live.length + ' live) ' : '') + 'Live Center · Jamo Sports Hub';
+  document.title = (anyLive ? '(' + anyLive + ' live) ' : '') + 'Live Center · Jamo Sports Hub';
   /* spotlight, or the next game with a countdown when nothing is live */
   let spotEl = '';
-  if (spot) spotEl = spotHTML(spot, SPOT && spot.key === SPOT && live[0] !== spot);
+  if (TVM) spotEl = '';   /* TV mode draws its own spotlight (tvRender), so the score flash isn't used up here */
+  else if (spot) spotEl = spotHTML(spot, SPOT && spot.key === SPOT && live[0] !== spot);
+  else if (FILTER !== 'all' && anyLive && !live.length) spotEl = '<div class="empty">No live games for “' + esc(fName()) + '” right now. <button type="button" class="fd-more" data-flt="all" style="width:auto;margin:0 0 0 8px">Show all ' + anyLive + ' live game' + (anyLive === 1 ? '' : 's') + '</button></div>';
   else if (loading) spotEl = '<div class="empty" style="padding:48px 16px">Checking live scores…</div>';
   else { const soonFav = pre.find(G => G.fav && G.st === 'pre' && G.kick > now && G.kick - now < 24 * 3600e3); const n2 = soonFav || nx; if (n2) spotEl = nextHTML(n2, blind.length ? 'Scores aren’t loading right now · next up' : 'Nothing live right now · next up'); else spotEl = '<div class="empty">No games on the schedule for the next week.</div>'; }
-  $('#spot').innerHTML = spotEl;
+  if (!TVM) $('#spot').innerHTML = spotEl;
   /* your teams */
-  $('#mine-wrap').hidden = !mine.length; $('#mine').innerHTML = mine.map(cardHTML).join(''); $('#mine-n').textContent = mine.length ? (mine.some(G => G.live) ? 'live and later today' : 'later today') : '';
+  $('#mine-wrap').hidden = !mine.length; if (!TVM) $('#mine').innerHTML = mine.map(cardHTML).join(''); $('#mine-n').textContent = mine.length ? (mine.some(G => G.live) ? 'live and later today' : 'later today') : '';
   /* live grid */
-  $('#grid-wrap').hidden = !rest.length; $('#grid').innerHTML = rest.map(cardHTML).join(''); $('#grid').classList.toggle('all', GRIDALL);
+  $('#grid-wrap').hidden = !rest.length; if (!TVM) $('#grid').innerHTML = rest.map(cardHTML).join(''); $('#grid').classList.toggle('all', GRIDALL);
   { const b = $('#grid-more'); b.hidden = rest.length <= 6; b.textContent = GRIDALL ? 'Show the hottest six' : 'Show all ' + rest.length + ' live games'; b.setAttribute('aria-expanded', String(GRIDALL)); } $('#grid-n').textContent = rest.length ? rest.length + ' more game' + (rest.length === 1 ? '' : 's') : '';
   /* scoring feed */
   const dayKeys = new Set(U.filter(G => G.st === 'in' || G.st === 'post').map(G => G.key));
   const feed = [...FEED.values()].filter(e => dayKeys.has(e.g)).sort((a, b) => b.t - a.t);
-  const fshow = FEEDALL ? feed.slice(0, 60) : feed.slice(0, 12);
+  VIEW.feed = feed; const fshow = FEEDALL ? feed.slice(0, 60) : feed.slice(0, 12);
   $('#feed-wrap').hidden = !feed.length; $('#cols').classList.toggle('nofeed', !feed.length);
   $('#feed').innerHTML = fshow.map(e => feedHTML(e, U)).join('') + (feed.length > 12 ? '<li><button type="button" class="fd-more" id="feed-all">' + (FEEDALL ? 'Show fewer' : 'Show more (' + Math.min(60, feed.length) + ')') + '</button></li>' : '');
   $('#feed-n').textContent = 'newest first · ' + feed.length + ' play' + (feed.length === 1 ? '' : 's');
@@ -1702,7 +1814,7 @@ function render(){
   /* finals */
   $('#fin-wrap').hidden = !fins.length; $('#fin-n').textContent = fins.length ? fins.length + ' game' + (fins.length === 1 ? '' : 's') : '';
   $('#fin').innerHTML = fins.slice(0, FINALL ? 80 : 12).map(finHTML).join('') + (fins.length > 12 ? '<button type="button" class="fd-more" id="fin-all" style="grid-column:1/-1">' + (FINALL ? 'Show fewer' : 'Show all ' + fins.length) + '</button>' : '');
-  status(); wake(); }
+  status(); wake(); tvRender(); }
 function status(){ const b = $('#upd'), t = $('#upd-t'); if (!b || !t) return; const bad = Object.keys(ERR).filter(k => ERR[k] && LG[k]);
   b.className = 'upd' + (DEMO ? '' : bad.length ? ' warn' : !LAST ? ' idle' : '');
   t.innerHTML = DEMO ? 'Demo scores' : bad.length ? esc(bad.map(k => LG[k].n).join(', ')) + ' scores <span class="ul">did not load, </span>retrying' : LAST ? '<span class="ul">Updated </span>' + esc(fmt({hour:'numeric', minute:'2-digit', second:'2-digit'}, new Date(LAST))) : 'Loading scores…'; }
@@ -1761,11 +1873,74 @@ function setTV(on, user){ TVM = on; document.body.classList.toggle('livetv', on)
   if (user) { try { history.replaceState(null, '', location.pathname + location.search + (on ? '#tv' : '')); } catch (e) {} }
   if (user && on && document.documentElement.requestFullscreen && matchMedia('(min-width:900px)').matches) { document.documentElement.requestFullscreen().catch(() => {}); }
   if (user && !on && document.fullscreenElement && document.exitFullscreen) { document.exitFullscreen().catch(() => {}); }
-  tick(); wake(); }
+  if (!on) { clearTimeout(TVT); TVT = null; const m = $('#tvd-moment'); if (m) m.hidden = true; }
+  if (VIEW) render(); tick(); wake(); }
 $('#tv-btn').addEventListener('click', () => setTV(true, true));
 $('#tv-exit').addEventListener('click', () => setTV(false, true));
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && TVM) setTV(false, true); });
 addEventListener('hashchange', () => { if ((location.hash === '#tv') !== TVM) setTV(location.hash === '#tv', false); });
+
+/* lc2:start - filters and the TV dashboard (2026-10-31; see patch_lc2.pl) */
+const FILTERS = [['all', 'All'], ['mine', 'Your teams'], ['cfb', 'CFB'], ['nfl', 'NFL'], ['nba', 'NBA'], ['close', 'Close games']];
+let FILTER = ls('jsh-live-filter') || 'all'; if (!FILTERS.some(x => x[0] === FILTER)) FILTER = 'all';
+const fName = () => (FILTERS.find(x => x[0] === FILTER) || FILTERS[0])[1];
+const isClose = G => !!G.live && (closeLate(G) || !!(G.P && G.P.ot) || !!(G.H && G.H.show >= 70));
+const passF = G => TVM || FILTER === 'all' ? true : FILTER === 'mine' ? !!G.fav : FILTER === 'close' ? isClose(G) : G.lg === FILTER;
+function chipsHTML(UA){ const nav = $('#lvf'); if (!nav) return; const L = UA.filter(G => G.live);
+  const cnt = {all: L.length, mine: L.filter(G => G.fav).length, cfb: 0, nfl: 0, nba: 0, close: L.filter(isClose).length}; L.forEach(G => { cnt[G.lg]++; });
+  nav.innerHTML = FILTERS.map(x => '<button type="button" data-flt="' + x[0] + '" class="' + (FILTER === x[0] ? 'on' : '') + '" aria-pressed="' + (FILTER === x[0]) + '"' + (LG[x[0]] ? ' style="--c:' + LG[x[0]].c + '"' : '') + '>' + (LG[x[0]] ? '<i></i>' : '') + (x[0] === 'close' ? '\u{1F525} ' : '') + esc(x[1]) + (cnt[x[0]] ? '<span>' + cnt[x[0]] + '</span>' : '') + '</button>').join(''); }
+
+const ROT_MS = 20000;
+let TVROT = 0, TVPAUSE = false, TVT = null, TVKEY = '';
+/* the games that take turns in the spotlight: a game you picked, else your teams' live games, then the hottest - four at most */
+function tvPool(){ const live = VIEW ? VIEW.live : []; if (SPOT) { const g = live.find(G => G.key === SPOT); if (g) return [g]; }
+  const out = []; live.filter(G => G.fav).concat(live).forEach(G => { if (out.length < 4 && out.indexOf(G) < 0) out.push(G); }); return out; }
+function tvSchedule(){ clearTimeout(TVT); TVT = null; if (!TVM || TVPAUSE || tvPool().length < 2) return; TVT = setTimeout(() => { TVROT++; tvRender(true); }, ROT_MS); }
+function tvRender(sw){ const box = $('#tvd'); if (!box) return; box.hidden = !TVM; if (!TVM || !VIEW) return;
+  const pool = tvPool(); if (TVROT >= pool.length) TVROT = 0; const G = pool[TVROT] || null; const key = G ? G.key : '';
+  const switched = !!sw || key !== TVKEY; TVKEY = key; const live = VIEW.live;
+  const lv = $('#tv-live'); if (lv) lv.innerHTML = live.length ? '<i></i>' + live.length + ' live' : 'Nothing live';
+  if (G) { const o = O[G.lg]; box.style.setProperty('--ca', deep(o.color(G.a.t), o.alt(G.a.t))); box.style.setProperty('--ch', deep(o.color(G.h.t), o.alt(G.h.t))); $('#tvd-spot').innerHTML = spotHTML(G, false); }
+  else { box.style.removeProperty('--ca'); box.style.removeProperty('--ch'); const nx = (VIEW.pre || []).find(x => x.st === 'pre' && x.kick > Date.now());
+    $('#tvd-spot').innerHTML = nx ? nextHTML(nx, 'Nothing live right now · next up') : '<div class="empty">No games on the schedule for the next week.</div>'; }
+  /* turns: dots for each game, a timer bar, and the keys */
+  const rot = $('#tvd-rot');
+  if (pool.length > 1) { rot.hidden = false;
+    if (switched || !rot.querySelector('.tvd-prog')) rot.innerHTML = '<span class="tvd-dots">' + pool.map((x, i) => '<button type="button" data-tvi="' + i + '" class="' + (i === TVROT ? 'on' : '') + '" style="--c:' + LG[x.lg].c + '" aria-label="Show ' + esc(nameOf(x, 'a') + ' at ' + nameOf(x, 'h')) + '"></button>').join('') + '</span>'
+      + '<span class="tvd-prog' + (TVPAUSE ? ' paused' : '') + '" style="--rot:' + ROT_MS + 'ms"><i></i></span><span class="tvd-hint">' + (TVPAUSE ? 'Paused · Space to resume' : 'The hottest games take turns · ← → switch · Space pauses') + '</span>';
+    if (switched) tvSchedule(); }
+  else { clearTimeout(TVT); TVT = null; rot.hidden = !SPOT; rot.innerHTML = SPOT ? '<span class="tvd-hint">You picked this game. <button type="button" class="tvd-un" data-spot="">Go back to taking turns</button></span>' : ''; }
+  /* the side: every other live game; with nothing else live, what's coming up, then today's finals */
+  const others = live.filter(x => x !== G).sort((a, b) => (b.fav ? 1 : 0) - (a.fav ? 1 : 0) || b.H.s - a.H.s);
+  let sh = '', side = '', sn = '';
+  if (others.length) { sh = 'Also live'; sn = others.length + ' game' + (others.length === 1 ? '' : 's'); side = others.map(cardHTML).join(''); }
+  else { const up = (VIEW.up || []).filter(x => x !== G).slice(0, 8), fins = (VIEW.fins || []).slice(0, 8);
+    if (up.length) { sh = 'Coming up'; side = '<div class="up">' + up.map(upRow).join('') + '</div>'; } else if (fins.length) { sh = 'Finals today'; side = '<div class="fins">' + fins.map(finHTML).join('') + '</div>'; } else side = '<div class="empty">That’s everything for now.</div>'; }
+  $('#tvd-sh').textContent = sh; $('#tvd-sn').textContent = sn; $('#tvd-grid').innerHTML = side; $('#tvd-grid').classList.toggle('cards', !!others.length);
+  /* the ticker: the latest scoring plays, or today's finals when there are none */
+  const feed = (VIEW.feed || []).slice(0, 12), fins = VIEW.fins || []; let items = '';
+  if (feed.length) items = feed.map(e => '<span class="tk-i" style="--c:' + LG[e.lg].c + '"><b>' + LG[e.lg].n + '</b>' + (e.sl ? '<em>' + esc(e.sl) + '</em>' : '') + esc(e.txt) + '</span>').join('');
+  else if (fins.length) items = fins.slice(0, 14).map(x => '<span class="tk-i" style="--c:' + LG[x.lg].c + '"><b>' + LG[x.lg].n + '</b><em>Final</em>' + esc(nameOf(x, 'a')) + ' ' + (x.a.s == null ? '' : x.a.s) + ', ' + esc(nameOf(x, 'h')) + ' ' + (x.h.s == null ? '' : x.h.s) + '</span>').join('');
+  const tk = $('#tvd-tick'), sig = items.length + '|' + items.slice(0, 300);
+  if (tk.dataset.sig !== sig) { tk.dataset.sig = sig; tk.hidden = !items; tk.innerHTML = items ? '<div class="tk-track" style="--dur:' + Math.max(36, (feed.length || Math.min(fins.length, 14)) * 9) + 's">' + items + items + '</div>' : ''; } }
+/* a big moment fills the top of the screen for a few seconds, in the scoring team's color */
+function tvMoment(G, kicker, title, body, col){ const m = $('#tvd-moment'); if (!m || !TVM) return; m.style.setProperty('--tc', col);
+  m.innerHTML = '<span class="mo-k">' + esc(LG[G.lg].n + ' · ' + kicker) + '</span><b>' + esc(title) + '</b><span class="mo-b">' + esc(body) + '</span>';
+  m.hidden = false; m.classList.remove('go'); void m.offsetWidth; m.classList.add('go'); clearTimeout(m._t); m._t = setTimeout(() => { m.hidden = true; }, 7000); }
+function tvFull(){ if (document.fullscreenElement) { if (document.exitFullscreen) document.exitFullscreen().catch(() => {}); } else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {}); }
+/* the side tiles page through on their own when there are more than fit (a mouse over them holds them still) */
+setInterval(() => { if (!TVM || document.hidden) return; const g = $('#tvd-grid'); if (!g || g.matches(':hover')) return; const max = g.scrollHeight - g.clientHeight; if (max < 12) return;
+  const step = (g.firstElementChild ? g.firstElementChild.offsetHeight : 150) + 12; g.scrollTo({top: g.scrollTop + 4 >= max ? 0 : Math.min(max, g.scrollTop + step), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}); }, 6500);
+document.addEventListener('keydown', e => { if (!TVM) return; const tg = (e.target.tagName || '').toLowerCase(); if (tg === 'input' || tg === 'textarea' || tg === 'select') return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { const k = tvPool().length; if (k < 2) return; e.preventDefault(); TVROT = (TVROT + (e.key === 'ArrowRight' ? 1 : k - 1)) % k; tvRender(true); }
+  else if (e.key === ' ') { e.preventDefault(); TVPAUSE = !TVPAUSE; if (TVPAUSE) { clearTimeout(TVT); TVT = null; } tvRender(true); }
+  else if (e.key === 'f' || e.key === 'F') tvFull(); });
+document.addEventListener('click', e => { const t = e.target.closest ? e.target : null; if (!t) return;
+  const d = t.closest('[data-tvi]'); if (d) { TVROT = +d.dataset.tvi; tvRender(true); return; }
+  if (t.closest('#tv-fs')) { tvFull(); return; }
+  const fl = t.closest('[data-flt]'); if (fl) { FILTER = fl.dataset.flt; lsSet('jsh-live-filter', FILTER); render(); } });
+document.addEventListener('fullscreenchange', () => { const b = $('#tv-fs'); if (b) b.textContent = document.fullscreenElement ? 'Leave full screen' : 'Full screen'; });
+/* lc2:end */
 
 /* ---------- buttons ---------- */
 $('#upd').addEventListener('click', () => cycle());

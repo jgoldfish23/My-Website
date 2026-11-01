@@ -28,6 +28,7 @@ function slimEvent(e) {
     st: (st.type && st.type.name || "").replace("STATUS_", "").replace("FINAL_OT", "FINAL"),
     det: st.type && st.type.shortDetail || "",
     per: st.period || 0,
+    clk: st.displayClock || "",
     away: team(a),
     home: team(h),
   };

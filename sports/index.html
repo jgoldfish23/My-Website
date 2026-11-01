@@ -55,6 +55,15 @@ img{max-width:100%}
 .tvq-l a:hover{color:var(--ink);background:var(--surface-2)}
 /* Live Center button beside the TV guide (2026-10-27) */
 .tvq-main.tvq-lc{background:linear-gradient(90deg,#e11d48,#7c3aed);color:#fff;box-shadow:0 10px 26px -12px rgba(225,29,72,.8)}
+/* TV guide button (2026-10-31, Jamo: "The TV guide selection on home page is big white eye sore"): dark glass with a blue
+   light edge, so it sits beside the Live Center button instead of shouting over it. The hero is always dark, so these
+   colors are fixed rather than theme-based. */
+.hero .tvq-main:not(.tvq-lc){background:linear-gradient(135deg,rgba(124,182,255,.16),rgba(255,255,255,.03) 60%);color:#fff;border:1px solid rgba(124,182,255,.42);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 10px 26px -16px rgba(59,130,246,.95);transition:border-color .2s,box-shadow .2s,transform .2s}
+.hero .tvq-main:not(.tvq-lc) svg{color:#8fc2ff;filter:drop-shadow(0 0 6px rgba(124,182,255,.75))}
+.hero .tvq-main:not(.tvq-lc) #tvq-n{color:#b9cdee;opacity:1}
+.hero .tvq-main:not(.tvq-lc):hover{border-color:#8fc2ff;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 0 1px rgba(124,182,255,.35),0 12px 30px -12px rgba(59,130,246,1);transform:translateY(-1px)}
+.hero .tvq-l a{border-color:rgba(255,255,255,.16);color:rgba(255,255,255,.78);background:rgba(255,255,255,.04)}
+.hero .tvq-l a:hover{color:#fff;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)}
 .tvq-lc #tvq-lc{font-size:12px;font-weight:600;opacity:.85}
 #tv-h,#tv{scroll-margin-top:72px}
 html{scroll-behavior:smooth}
@@ -575,7 +584,7 @@ header.top.jsh-tuck{pointer-events:none}
 
   <footer class="foot"><span id="asof"></span><span>A <i>Kramerica Industries</i> production</span></footer>
 </main>
-<script type="application/json" id="d-meta">{"cfb":"Sat Oct 31, 2026 · 8:51 PM ET","nfl":"Sat Oct 31, 2026 · 8:52 PM ET","nba":"Sat Oct 31, 2026 · 7:05 PM ET"}</script>
+<script type="application/json" id="d-meta">{"cfb":"Sat Oct 31, 2026 · 8:51 PM ET","nfl":"","nba":""}</script>
 <script type="text/plain" id="d-cfb">1|2026-08-29|Hawai'i|Stanford|27|37|FINAL|7:00 PM||-4.5|48.5|170|-205|ACC Network|||
 1|2026-08-29|Jacksonville State|North Dakota State|7|33|FINAL|5:30 PM||-6.5|46.5|230|-285|CBSSN|||
 1|2026-08-29|Memphis|UNLV|27|21|FINAL|10:00 PM||-4.5|55.5|160|-192|Fox|||

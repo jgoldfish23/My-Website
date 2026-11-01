@@ -27,7 +27,7 @@
    sliding in and out does not redraw it. Steps back on the big board, TV guide, game night and game day screens. */
 (function(){ if (window.JSH_STAGE) return;
   const D = document, H = D.documentElement;
-  const HUB = (/^\/(cfb|nfl|nba)(\/|$)/.exec(location.pathname) || [])[1] || ((/^(CFB|NFL|NBA)\b/.exec(D.title) || [])[1] || '').toLowerCase();
+  const HUB = (/^\/(cfb|nfl|nba|cbb)(\/|$)/.exec(location.pathname) || [])[1] || ((/^(CFB|NFL|NBA|CBB)\b/.exec(D.title) || [])[1] || '').toLowerCase();
   if (!HUB) return;
   const OFF = /^#\/(board|tv|gamenight|gameday)\b/;
   const MQ = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;

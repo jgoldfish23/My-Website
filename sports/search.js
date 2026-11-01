@@ -13,16 +13,16 @@
 (function(){
   if (window.__jshSearch) return; window.__jshSearch = true;
   var bar = document.querySelector('.jsh'); if (!bar) return;
-  var SP = { cfb:{n:'College', t:'CFB', c:'#1d5fd8', base:'/cfb/'}, nfl:{n:'NFL', t:'NFL', c:'#c8102e', base:'/nfl/'}, nba:{n:'NBA', t:'NBA', c:'#6d28d9', base:'/nba/'}, sports:{n:'Sports Hub', t:'HUB', c:'#475569', base:''} };
-  var here = /^\/cfb\//.test(location.pathname) ? 'cfb' : /^\/nfl\//.test(location.pathname) ? 'nfl' : /^\/nba\//.test(location.pathname) ? 'nba' : 'sports';
-  var MINE = { cfb:['BYU', 'Weber State'], nfl:['PHI'], nba:['UTAH'] };
+  var SP = { cfb:{n:'College', t:'CFB', c:'#1d5fd8', base:'/cfb/'}, nfl:{n:'NFL', t:'NFL', c:'#c8102e', base:'/nfl/'}, nba:{n:'NBA', t:'NBA', c:'#6d28d9', base:'/nba/'}, cbb:{n:'College hoops', t:'CBB', c:'#d97706', base:'/cbb/'}, sports:{n:'Sports Hub', t:'HUB', c:'#475569', base:''} };
+  var here = /^\/cfb\//.test(location.pathname) ? 'cfb' : /^\/nfl\//.test(location.pathname) ? 'nfl' : /^\/nba\//.test(location.pathname) ? 'nba' : /^\/cbb\//.test(location.pathname) ? 'cbb' : 'sports';
+  var MINE = { cfb:['BYU', 'Weber State'], nfl:['PHI'], nba:['UTAH'], cbb:['252', '2692'] };
   var IDX = null, LOADING = null, SEL = 0, RES = [];
   var fold = function (s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’'.]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); };
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; }); };
   var enc = encodeURIComponent;
 
   /* ---------- data ---------- */
-  function logo(sp, t){ if (!t) return ''; if (sp === 'cfb') return t[3] ? '/cfb/img/logos/' + t[3] + '.png' : ''; return '/' + sp + '/img/logos/' + t[2] + '.png'; }
+  function logo(sp, t){ if (!t) return ''; if (sp === 'cbb') return 'https://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/' + t[2] + '.png&w=64&h=64'; if (sp === 'cfb') return t[3] ? '/cfb/img/logos/' + t[3] + '.png' : ''; return '/' + sp + '/img/logos/' + t[2] + '.png'; }
   function build(j){ var out = [];
     Object.keys(j.s || {}).forEach(function (sp) { var d = j.s[sp], m = SP[sp]; if (!m) return; var T = d.teams || [];
       (d.pages || []).forEach(function (p) { out.push({ k:'Page', sp:sp, l:p[0], sub:m.n, href:(p[1].charAt(0) === '#' ? m.base : '') + p[1], f:fold(p[0] + ' ' + m.n + (sp === 'cfb' ? ' college football ncaa' : '')) }); });
@@ -31,7 +31,7 @@
       (d.players || []).forEach(function (p) { var t = T[p[1]]; if (!t) return;
         out.push({ k:'Player', sp:sp, l:p[0], sub:(sp === 'cfb' ? t[2] : t[3] || t[2]) + (p[2] ? ' · ' + p[2] : ''), img:logo(sp, t), tf:fold(t[0] + ' ' + t[2]), href:m.base + '#/player/' + enc(t[2]) + '/' + enc(p[0]), f:fold(p[0]) }); });
       /* games: found by naming both teams ("byu utah", "jazz nuggets"); the next one up and the latest ones rank first */
-      (d.games || []).forEach(function (g) { var a = T[g[0]], h = T[g[1]]; if (!a || !h) return; var nm = function (t) { return sp === 'cfb' ? t[2] : t[3] || t[2]; };
+      (d.games || []).forEach(function (g) { var a = T[g[0]], h = T[g[1]]; if (!a || !h) return; var nm = function (t) { return sp === 'cfb' ? t[2] : sp === 'cbb' ? t[4] || t[0] : t[3] || t[2]; };
         var fin = g[4] !== '' && g[4] != null, days = (Date.parse(g[2] + 'T12:00:00') - Date.now()) / 864e5;
         out.push({ k:'Game', sp:sp, l:nm(a) + ' at ' + nm(h), sub:dstr(g[2]) + (fin ? ' · final ' + g[4] + '-' + g[5] : ''), img:logo(sp, h), days:days,
           href:m.base + '#/game/' + enc(g[3]), f:fold(a[0] + ' ' + a[2] + ' ' + (a[3] || '') + ' ' + h[0] + ' ' + h[2] + ' ' + (h[3] || '')),

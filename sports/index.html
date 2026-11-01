@@ -427,6 +427,26 @@ body::after{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(
 .nw-tog:hover{color:var(--ink)}
 @media (min-width:721px){.nw-ln a:nth-child(-n+2){border-top:0}}
 @media (max-width:720px){.nw-ln{grid-template-columns:1fr}.nw-card:not(.open) .nw-ln a:nth-child(n+5){display:none}.nw-ln a:first-child{border-top:0}.nw-ln b{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}}
+/* Today at a glance (polish/front_glance.pl, 2026-10-31) */
+@media (min-width:900px){.hero{grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr)!important}}
+#h-next[hidden],.hx[hidden]{display:none!important}
+.hx{display:flex;flex-direction:column;justify-content:center;gap:10px;min-width:0}
+.hx-h{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#9fb6dc}
+.hx-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.hx-t{position:relative;display:flex;flex-direction:column;gap:2px;min-width:0;padding:14px 14px 17px;border-radius:18px;color:#fff;text-decoration:none;overflow:hidden;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--c) 28%,rgba(255,255,255,.04)),rgba(255,255,255,.02) 72%);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 14px 30px -20px var(--c);transition:transform .2s,box-shadow .2s,border-color .2s}
+.hx-t:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--c) 75%,#fff);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 18px 36px -14px var(--c)}
+.hx-lg{font-size:10.5px;font-weight:800;letter-spacing:.14em;color:color-mix(in srgb,var(--c) 55%,#fff)}
+.hx-n{display:flex;align-items:center;gap:8px;margin-top:4px;font-family:var(--num,"Orbitron"),"Inter Tight",system-ui,sans-serif;font-size:clamp(30px,3vw,42px);font-weight:800;line-height:1.05;text-shadow:0 0 18px color-mix(in srgb,var(--c) 70%,transparent)}
+.hx-t.on .hx-n::after{content:"";width:9px;height:9px;border-radius:50%;background:#ff4d6a;box-shadow:0 0 12px #ff4d6a}
+.hx-k{font-size:12.5px;font-weight:700;color:#dbe4f3}
+.hx-s{font-size:11.5px;font-weight:600;color:#9aa8bf;min-height:1.3em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hx-bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08)}
+.hx-bar b{display:block;height:100%;background:linear-gradient(90deg,transparent,var(--c));box-shadow:0 0 10px var(--c);transition:width .8s ease}
+@media (prefers-reduced-motion:no-preference){.hx-t.on .hx-n::after{animation:hxPing 1.6s ease-in-out infinite}}
+@keyframes hxPing{50%{opacity:.3}}
+@media (max-width:899px){.hx{margin-top:16px}.hx-g{gap:8px}.hx-t{padding:11px 10px 13px;border-radius:15px}.hx-n{font-size:26px}.hx-k{font-size:11.5px}.hx-s{white-space:normal;font-size:11px}}
 </style>
 </head>
 <body>
@@ -562,6 +582,7 @@ header.top.jsh-tuck{pointer-events:none}
       <div class="tvq" id="tvq"><a class="tvq-main tvq-lc" href="/sports/live/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.48M7.76 16.24a6 6 0 0 1 0-8.48M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg><span><b>Live Center</b><span id="tvq-lc">Every live game, one screen</span></span></a><a class="tvq-main" href="#tv-h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="m8 3 4 4 4-4"/></svg><span><b>TV guide</b><span id="tvq-n">What’s on today</span></span></a><nav class="tvq-l" aria-label="Full TV guides"><a href="/cfb/#/tv">CFB</a><a href="/nfl/#/tv">NFL</a><a href="/nba/#/tv">NBA</a></nav></div>
     </div>
     <div id="h-next"></div>
+    <div class="hx" id="h-board" hidden></div>
   </section>
 
   <div id="tune-wrap" hidden><div class="sec"><h2>Worth tuning in</h2><span class="note" id="tune-n"></span></div><div class="lrow" id="tune"></div></div>
@@ -4602,6 +4623,22 @@ function teamRow(g, side, o){ const t = side === 'a' ? g.away : g.home; const on
 function statusStr(g, o){ if (g.live) return '<span class="pill-live">LIVE</span> ' + esc(liveClock(g)); if (played(g)) return 'Final' + (g.as !== g.hs ? ' · ' + esc(o.name(g.as > g.hs ? g.away : g.home)) + ' by ' + Math.abs(g.as - g.hs) : ''); return esc(dayStr(g) + ' ' + kickStr(g)) + (net(g) ? ' · ' + esc(net(g)) : '') + (lineStr(g, o) ? ' · ' + esc(lineStr(g, o)) : ''); }
 
 /* ---------- hero: a greeting, today in one line, and a countdown to your next game ---------- */
+/* Today at a glance (polish/front_glance.pl, 2026-10-31): one tile per league in the hero - live now, final, still to come */
+function boardHTML(){ const el = $('#h-board'); if (!el) return;
+  const LIST = {cfb: CFB, nfl: NFL, nba: NBA};   /* every college game the page carries, so the tiles add up to the "live now" count */
+  const href = {cfb: '/cfb/#/week/' + CFB_WEEK, nfl: '/nfl/#/week/' + nflWeek.week, nba: '/nba/#/scores'};
+  const wd = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', {weekday: 'long'});
+  const tiles = ['cfb', 'nfl', 'nba'].map(s => { const gs = LIST[s].filter(g => g.date === TODAY).map(applyLive);
+    const live = gs.filter(g => g.live).length, fin = gs.filter(played).length, later = gs.length - live - fin, now = Date.now();
+    const next = gs.filter(g => !g.live && !played(g) && timed(g)).map(g => kickMs(g.date, g.time)).filter(k => k > now).sort((a, b) => a - b)[0];
+    let big, k, sub;
+    if (!gs.length) { const nd = LIST[s].map(g => g.date).filter(d => d > TODAY).sort()[0]; big = '0'; k = 'games today'; sub = nd ? 'next: ' + wd(nd) : ''; }
+    else if (live) { big = live; k = 'live now'; sub = [fin ? fin + ' final' : '', later ? later + ' later' : ''].filter(Boolean).join(' · ') || 'all under way'; }
+    else if (later) { big = later; k = later === 1 ? 'game later' : 'games later'; sub = [next ? 'first at ' + fmt({hour: 'numeric', minute: '2-digit'}, new Date(next)) : '', fin ? fin + ' final' : ''].filter(Boolean).join(' · '); }
+    else { big = fin; k = fin === 1 ? 'final' : 'finals'; sub = 'all done today'; }
+    const pct = gs.length ? Math.round((fin + live * .5) / gs.length * 100) : 0;
+    return '<a class="hx-t' + (live ? ' on' : '') + '" style="--c:var(--' + s + ')" href="' + href[s] + '" aria-label="' + esc(SPORT[s].short + ': ' + big + ' ' + k + (sub ? ', ' + sub : '')) + '"><span class="hx-lg">' + SPORT[s].short + '</span><span class="hx-n">' + big + '</span><span class="hx-k">' + k + '</span><span class="hx-s">' + esc(sub) + '</span><i class="hx-bar"><b style="width:' + pct + '%"></b></i></a>'; });
+  el.innerHTML = '<div class="hx-h">Today at a glance</div><div class="hx-g">' + tiles.join('') + '</div>'; el.hidden = false; }
 function heroHTML(){
   const now = new Date(); const h = +fmt({hour:'numeric', hourCycle:'h23'}, now) % 24;
   $('#h-greet').textContent = h < 5 ? 'Up late' : h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
@@ -4780,7 +4817,7 @@ function scoreHTML(){ missHTML(); latestHTML(); const S = SCORE, wrap = $('#scor
       + (pre ? '<div class="sc-sub">The preview’s pick</div><a class="sc-row" href="' + esc(pre.href) + '"><div class="sc-m">' + pre.w + '-' + pre.l + ', No. ' + pre.seed + ' seed</div><div class="sc-d">' + esc(pre.title) + ' · play-in, not the playoffs</div></a>' : '') + '</div>'; }
   if (!L && !R) return; wrap.hidden = false; $('#score').innerHTML = L + R;
   $('#score-n').textContent = T.n ? T.w + '-' + T.l + ' picking winners' : 'every article pick, graded'; }
-function render(){ staleHTML(); heroHTML(); teamsHTML(); tuneHTML(); liveHTML(); tvHTML(); sportsHTML(); scoreHTML(); { const h = $('#tv-h'), n = $('#tv-note'), q = $('#tvq-n'); if (h && q) q.textContent = h.textContent.replace(/^On TV /, '').replace(/^Next on TV · /, 'Next: ') + (n && n.textContent ? ' · ' + n.textContent : ''); }
+function render(){ staleHTML(); heroHTML(); boardHTML(); teamsHTML(); tuneHTML(); liveHTML(); tvHTML(); sportsHTML(); scoreHTML(); { const h = $('#tv-h'), n = $('#tv-note'), q = $('#tvq-n'); if (h && q) q.textContent = h.textContent.replace(/^On TV /, '').replace(/^Next on TV · /, 'Next: ') + (n && n.textContent ? ' · ' + n.textContent : ''); }
   const when = s => { const m = /^[A-Z][a-z]{2} ([A-Z][a-z]{2} \d+), \d{4} · (.*)$/.exec(s || ''); return m ? (m[1] === md(TODAY) ? '' : m[1] + ', ') + m[2] : (s || '?'); };
   $('#asof').textContent = 'Updated: CFB ' + when(META.cfb) + ' · NFL ' + when(META.nfl) + ' · NBA ' + when(META.nba);
   $('#upd').textContent = LAST ? 'live scores ' + fmt({hour:'numeric', minute:'2-digit'}, new Date(LAST)) : ''; }

@@ -1,6 +1,6 @@
 /* Jamo Sports Hub BottomLine (2026-10-19, Jamo: "like the ESPN channel's bottom line of news and scores - clean, modern,
    useful"). A slim bar fixed to the bottom of every hub page: Jamo's teams first, then everything live, then each league's
-   games (college = AP Top 25 plus BYU and Weber State), ESPN headlines and Jamo's newest articles. It glides right to
+   games (college football and basketball = Top 25 plus BYU and Weber State), ESPN headlines and Jamo's newest articles. It glides right to
    left; the label on the left names the section passing under it. Hover or touch pauses it; a tap opens the game.
    Data: /api/bottomline (functions/api/bottomline.js in the site repo, 30s edge cache) and /sports/latest.json.
    Refreshes every minute while games are live, every five minutes otherwise, and not while the tab is hidden.
@@ -9,8 +9,8 @@
   if (window.__jshBL) return; window.__jshBL = 1;
   const API = /(^|\.)djgolding\.com$/.test(location.hostname) ? '/api/bottomline' : 'https://djgolding.com/api/bottomline';
   const LATEST = /(^|\.)djgolding\.com$/.test(location.hostname) ? '/sports/latest.json' : 'https://djgolding.com/sports/latest.json';
-  const FAV = {cfb:['BYU','WEB'], nfl:['PHI'], nba:['UTAH']};
-  const LG = {cfb:{n:'CFB', c:'#3b82f6', home:'/cfb/#/week'}, nfl:{n:'NFL', c:'#ef4444', home:'/nfl/'}, nba:{n:'NBA', c:'#a855f7', home:'/nba/'}};
+  const FAV = {cfb:['BYU','WEB'], nfl:['PHI'], nba:['UTAH'], cbb:['BYU','WEB']};
+  const LG = {cfb:{n:'CFB', c:'#3b82f6', home:'/cfb/#/week'}, nfl:{n:'NFL', c:'#ef4444', home:'/nfl/'}, nba:{n:'NBA', c:'#a855f7', home:'/nba/'}, cbb:{n:'CBB', c:'#f59e0b', home:'/cbb/#/scores'}};
   const css = `
 .jbl{position:fixed;left:0;right:0;bottom:0;z-index:60;height:40px;display:flex;align-items:stretch;font:600 13.5px/1 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#eef2f8;background:rgba(10,12,18,.9);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border-top:1px solid rgba(255,255,255,.09);box-shadow:0 -8px 24px -12px rgba(0,0,0,.6)}
 .jbl[hidden]{display:none}
@@ -98,7 +98,7 @@ body.jbl-on{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
   const offBoard = () => /^#\/(board)/.test(location.hash || '');
   function show(on){ const off = ls('jsh-jbl-off') === '1'; bar.hidden = !on || off || offBoard(); pill.hidden = !(on && off && !offBoard()); document.body.classList.toggle('jbl-on', !bar.hidden); }
   const isFav = g => (FAV[g.lg] || []).some(ab => ab === g.a.ab || ab === g.h.ab);
-  function href(g){ if (g.lg === 'nba') return '/nba/#/game/' + g.id; if (g.lg === 'nfl') return '/nfl/#/game/' + g.id; return LG[g.lg].home; }
+  function href(g){ if (g.lg === 'nba') return '/nba/#/game/' + g.id; if (g.lg === 'nfl') return '/nfl/#/game/' + g.id; if (g.lg === 'cbb') return '/cbb/#/game/' + g.id; return LG[g.lg].home; }
   function when(g){ const d = new Date(g.date); if (isNaN(d)) return g.det; const today = new Date(); const same = d.toDateString() === today.toDateString(); const t = d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}).replace(':00', '').replace(' ', '').toLowerCase(); return (same ? '' : d.toLocaleDateString([], {weekday:'short'}) + ' ') + t; }
   /* team colors (2026-10-19): the name sits in a chip of the team's color; a pale color gives way to the alternate,
      and anything still pale gets dark type. Logos come small from ESPN's image resizer. */
@@ -113,10 +113,10 @@ body.jbl-on{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
     return '<a class="jbl-i' + (isFav(g) ? ' fav' : '') + (live ? ' on' : '') + (chg ? ' chg' : '') + '" href="' + href(g) + '" title="' + esc(g.a.n + ' at ' + g.h.n + (g.note ? ' · ' + g.note : '')) + '">' + (lgTag ? '<span class="lgt" style="color:' + LG[g.lg].c + '">' + LG[g.lg].n + '</span>' : '') + a + '<span class="l">' + (post || live ? '' : '@') + '</span>' + h + stt + '</a>'; }
   function sec(key, label, color, html){ return html ? '<span class="jbl-sec" data-k="' + key + '" data-l="' + esc(label) + '" style="--c:' + color + '">' + esc(label) + '</span>' + html : ''; }
   function order(list){ const rank = g => g.st === 'in' ? 0 : g.st === 'pre' ? 1 : 2; return list.slice().sort((p, q) => rank(p) - rank(q) || String(p.date).localeCompare(String(q.date))); }
-  function build(){ if (!DATA) return; const G = (DATA.games || []).filter(g => LG[g.lg]); let h = ''; /* only the leagues the site covers: CFB, NFL, NBA */
+  function build(){ if (!DATA) return; const G = (DATA.games || []).filter(g => LG[g.lg]); let h = ''; /* only the leagues the site covers: CFB, NFL, NBA, CBB */
     const favs = order(G.filter(isFav)); h += sec('fav', 'Your teams', '#d4a017', favs.map(g => item(g, true)).join(''));
     const live = order(G.filter(g => g.st === 'in' && !isFav(g))); h += sec('live', 'Live now', '#e11d48', live.map(g => item(g, true)).join(''));
-    ['cfb', 'nfl', 'nba'].forEach(lg => { const list = order(G.filter(g => g.lg === lg && g.st !== 'in' && !isFav(g))); if (lg === 'cfb') list.splice(0, list.length, ...list.filter(g => g.a.rk || g.h.rk)); h += sec(lg, LG[lg].n + (lg === 'cfb' ? ' · Top 25' : ''), LG[lg].c, list.slice(0, 18).map(item).join('')); });
+    ['cfb', 'nfl', 'nba', 'cbb'].forEach(lg => { const list = order(G.filter(g => g.lg === lg && g.st !== 'in' && !isFav(g))); const col = lg === 'cfb' || lg === 'cbb'; if (col) list.splice(0, list.length, ...list.filter(g => g.a.rk || g.h.rk)); h += sec(lg, LG[lg].n + (col ? ' · Top 25' : ''), LG[lg].c, list.slice(0, 18).map(item).join('')); });
     const news = (DATA.news || []).filter(n => LG[n.lg]).slice(0, 14); h += sec('news', 'Headlines', '#64748b', news.map(n => '<a class="jbl-i news" href="' + esc(n.u) + '" target="_blank" rel="noopener" style="--c:' + (LG[n.lg] ? LG[n.lg].c : '#9fb3d1') + '"><span class="src">' + esc(LG[n.lg] ? LG[n.lg].n : '') + '</span>' + esc(n.t) + '</a>').join(''));
     const jam = LAT.slice(0, 4); h += sec('jamo', 'From Jamo', '#0f766e', jam.map(a => '<a class="jbl-i news" href="' + esc(a.href) + '"><span class="src" style="color:#5eead4">' + esc(a.team || '') + '</span>' + esc(a.title) + '</a>').join(''));
     if (!h) h = '<span class="jbl-i">No games on the board right now.</span>';

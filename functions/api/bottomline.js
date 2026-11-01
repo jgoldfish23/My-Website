@@ -1,6 +1,7 @@
 // The Jamo Sports Hub BottomLine (2026-10-19): one small, edge-cached feed for the ESPN-style ticker along the bottom of
-// every hub page. GET /api/bottomline -> today's games for college football (AP Top 25 plus BYU and Weber State), the NFL
-// and the NBA, trimmed to what the ticker shows, plus a few ESPN headlines per league (NHL and MLB removed 2026-10-27).
+// every hub page. GET /api/bottomline -> today's games for college football (AP Top 25 plus BYU and Weber State), the NFL,
+// the NBA and college basketball (Top 25 plus BYU and Weber State, added 2026-11-01), trimmed to what the ticker shows,
+// plus a few ESPN headlines per league (NHL and MLB removed 2026-10-27).
 // Read-only proxy of ESPN's public feeds (browsers cannot call them directly); same host fallback as the other routes.
 const BASE = "https://site.api.espn.com/apis/site/v2/sports/";
 const ALLOWED_ORIGINS = ["djgolding.com", "www.djgolding.com", "localhost", "127.0.0.1"];
@@ -15,9 +16,12 @@ function feeds() { const now = Date.now(), D = 864e5; const wk = ymd(now - 3 * D
     { lg: "cfbx", path: "football/college-football", q: "?groups=81&limit=120" }, // FCS, for Weber State only
     { lg: "nfl", path: "football/nfl", q: "?limit=40" },
     { lg: "nba", path: "basketball/nba", q: "?limit=40" },
+    { lg: "cbb", path: "basketball/mens-college-basketball", q: "?limit=80" }, // ESPN's default here is the Top 25 games
+    { lg: "cbbx", path: "basketball/mens-college-basketball", q: "?groups=50&limit=400" }, // all of Division I, for BYU and Weber State only
   ]; }
-const NEWS = [["cfb", "football/college-football", 6], ["nfl", "football/nfl", 6], ["nba", "basketball/nba", 6]];
+const NEWS = [["cfb", "football/college-football", 6], ["nfl", "football/nfl", 6], ["nba", "basketball/nba", 6], ["cbb", "basketball/mens-college-basketball", 6]];
 const KEEP_FCS = new Set(["2692"]); // Weber State
+const KEEP_CBB = new Set(["252", "2692"]); // BYU and Weber State
 
 function corsHeaders(request) {
   const origin = request.headers.get("origin");
@@ -59,8 +63,9 @@ export async function onRequestGet({ request }) {
     boards.forEach(({ f, j }) => {
       if (!j) return;
       (j.events || []).forEach((e) => {
-        const g = slim(f.lg === "cfbx" ? "cfb" : f.lg, e);
+        const g = slim(f.lg === "cfbx" ? "cfb" : f.lg === "cbbx" ? "cbb" : f.lg, e);
         if (f.lg === "cfbx" && !KEEP_FCS.has(g.a.id) && !KEEP_FCS.has(g.h.id)) return;
+        if (f.lg === "cbbx" && !KEEP_CBB.has(g.a.id) && !KEEP_CBB.has(g.h.id)) return;
         if (!games.some((x) => x.id === g.id)) games.push(g);
       });
     });

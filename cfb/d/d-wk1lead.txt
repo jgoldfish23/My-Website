@@ -1696,15 +1696,6 @@
 2026-10-24|North Dakota State|New Mexico|North Dakota State|passingYards|Nathan Hayes|QB|17/33, 198 YDS, 2 TD, 2 INT
 2026-10-24|North Dakota State|New Mexico|New Mexico|rushingYards|Kiefer Sibley|RB|13 CAR, 91 YDS, 1 TD
 2026-10-24|North Dakota State|New Mexico|North Dakota State|receivingYards|Jackson Williams|WR|4 REC, 71 YDS
-2026-10-31|Texas State|Boise State|Texas State|passingYards|Brad Jackson|QB|21/33, 248 YDS, 3 TD
-2026-10-31|Texas State|Boise State|Boise State|rushingYards|Dylan Riley|RB|22 CAR, 72 YDS, 1 TD
-2026-10-31|Texas State|Boise State|Boise State|receivingYards|Akeem Wright|WR|6 REC, 85 YDS
-2026-10-31|Northern Illinois|UNLV|UNLV|passingYards|Jackson Arnold|QB|19/29, 260 YDS, 3 TD, 2 INT
-2026-10-31|Northern Illinois|UNLV|Northern Illinois|rushingYards|Elijah Porter|RB|21 CAR, 113 YDS
-2026-10-31|Northern Illinois|UNLV|Northern Illinois|receivingYards|George Dimopoulos|WR|7 REC, 127 YDS, 1 TD
-2026-10-31|Oregon State|Fresno State|Oregon State|passingYards|Braden Atkinson|QB|21/37, 242 YDS
-2026-10-31|Oregon State|Fresno State|Fresno State|rushingYards|Bryson Donelson|RB|12 CAR, 111 YDS, 1 TD
-2026-10-31|Oregon State|Fresno State|Oregon State|receivingYards|DeCorion Temple|TE|6 REC, 97 YDS
 2026-10-27|Delaware|Western Kentucky|Delaware|passingYards|Nick Minicucci|QB|32/38, 414 YDS, 4 TD
 2026-10-27|Delaware|Western Kentucky|Western Kentucky|rushingYards|Brock Glenn|QB|17 CAR, 129 YDS
 2026-10-27|Delaware|Western Kentucky|Delaware|receivingYards|Sean Wilson|WR|9 REC, 183 YDS, 2 TD
@@ -1774,6 +1765,9 @@
 2026-10-31|Northwestern|Oregon|Oregon|passingYards|Dylan Raiola|QB|22/31, 336 YDS, 3 TD
 2026-10-31|Northwestern|Oregon|Northwestern|rushingYards|Aidan Chiles|QB|14 CAR, 93 YDS, 1 TD
 2026-10-31|Northwestern|Oregon|Northwestern|receivingYards|Griffin Wilde|WR|5 REC, 146 YDS, 1 TD
+2026-10-31|Texas State|Boise State|Texas State|passingYards|Brad Jackson|QB|23/38, 327 YDS, 4 TD
+2026-10-31|Texas State|Boise State|Boise State|rushingYards|Dylan Riley|RB|25 CAR, 86 YDS, 1 TD
+2026-10-31|Texas State|Boise State|Boise State|receivingYards|Rasean Jones|WR|9 REC, 117 YDS, 3 TD
 2026-10-31|Missouri|Arkansas|Arkansas|passingYards|KJ Jackson|QB|20/34, 229 YDS, 1 INT
 2026-10-31|Missouri|Arkansas|Missouri|rushingYards|Jamal Roberts|RB|23 CAR, 138 YDS, 1 TD
 2026-10-31|Missouri|Arkansas|Arkansas|receivingYards|Antonio Jordan|WR|7 REC, 106 YDS
@@ -1864,6 +1858,12 @@
 2026-10-31|Army|Memphis|Memphis|passingYards|Marcus Stokes|QB|29/35, 371 YDS, 4 TD
 2026-10-31|Army|Memphis|Army|rushingYards|Godspower Nwawuihe|RB|19 CAR, 100 YDS, 1 TD
 2026-10-31|Army|Memphis|Memphis|receivingYards|Jermane Hayes|WR|9 REC, 86 YDS, 2 TD
+2026-10-31|Northern Illinois|UNLV|UNLV|passingYards|Jackson Arnold|QB|20/30, 269 YDS, 3 TD, 2 INT
+2026-10-31|Northern Illinois|UNLV|UNLV|rushingYards|Jai'Den Thomas|RB|16 CAR, 114 YDS, 1 TD
+2026-10-31|Northern Illinois|UNLV|Northern Illinois|receivingYards|George Dimopoulos|WR|7 REC, 127 YDS, 1 TD
+2026-10-31|Oregon State|Fresno State|Oregon State|passingYards|Braden Atkinson|QB|33/59, 373 YDS, 1 TD
+2026-10-31|Oregon State|Fresno State|Fresno State|rushingYards|Bryson Donelson|RB|16 CAR, 108 YDS, 1 TD
+2026-10-31|Oregon State|Fresno State|Oregon State|receivingYards|DeCorion Temple|TE|6 REC, 97 YDS
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD

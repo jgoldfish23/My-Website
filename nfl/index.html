@@ -76,6 +76,7 @@ header.top.jsh-tuck{pointer-events:none}
     <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">CFB</a>
     <a href="/nfl/" data-s="nfl" style="--c:#c8102e"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nfl.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NFL</a>
     <a href="/nba/" data-s="nba" style="--c:#6d28d9"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/leagues/500-dark/nba.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">NBA</a>
+    <a href="/cbb/" data-s="cbb" style="--c:#d97706" title="College basketball"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-basketball.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">CBB</a>
     <a href="/sports/live/" data-s="live" style="--c:#e11d48" title="Live Center"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.48M7.76 16.24a6 6 0 0 1 0-8.48M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>Live<span class="jsh-ld" hidden></span></a>
   </nav>
 </div>
@@ -6459,7 +6460,7 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
   const college = has('playoff');
   const SECTIONS = [
     { g: 'scores', label: 'Scores', r: ['week', 'scores', 'gameday', 'gamenight', 'schedule', 'tv', 'lines', 'previews', 'board'] },
-    { g: 'standings', label: college ? 'Rankings' : 'Standings', r: college ? ['rankings', 'standings', 'playoff', 'scenarios'] : ['standings', 'rankings', 'playoffs', 'predict', 'root', 'cup'] },
+    { g: 'standings', label: college ? 'Rankings' : 'Standings', r: college ? ['rankings', 'standings', 'playoff', 'scenarios'] : ['standings', 'rankings', 'playoffs', 'predict', 'root', 'cup', 'bracket'] },
     { g: 'players', label: 'Players', r: ['players', 'leaders', 'injuries', 'transfers', 'recruiting', 'draft'] },
     { g: 'teams', label: 'Teams', r: ['teams', 'compare', 'cap', 'uniforms'] },
     { g: 'more', label: 'More', r: ['my', 'digest', 'review', 'settings'] },
@@ -6564,7 +6565,7 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
     a.insertAdjacentHTML('afterbegin','<button type="button" class="asof-i" aria-expanded="false" title="When the data was updated, time zone, and how the numbers work"><b>i</b>'+(live?'<span class="lv"></span>':'')+'Info</button>');
     a.querySelector(':scope > .asof-i').addEventListener('click', ()=>{ const on=!a.classList.contains('asof-open'); a.classList.toggle('asof-open', on); a.querySelector(':scope > .asof-i').setAttribute('aria-expanded', on?'true':'false'); }); };
   asof(); { const a=document.getElementById('asof'); if(a) new MutationObserver(asof).observe(a,{childList:true}); }
-  const HUB=((/^\/(cfb|nfl|nba)\//.exec(location.pathname)||[])[1])||((/^(CFB|NFL|NBA)\b/.exec(document.title)||[])[1]||'').toLowerCase();
+  const HUB=((/^\/(cfb|nfl|nba|cbb)\//.exec(location.pathname)||[])[1])||((/^(CFB|NFL|NBA|CBB)\b/.exec(document.title)||[])[1]||'').toLowerCase();
   const GAME=/^(Game preview|What to watch|How they match up|Series history|Track a bet|Head to head|Form|Projected starters|Draft stock)$/i;
   const CFG={
     cfb:{keep:['Record','Points','Power rating','Playoff odds'], team:/^(Recruiting|Analytics|Season stats|Player stats|NFL draft stock|Depth chart|.+ race)$/i, game:GAME},

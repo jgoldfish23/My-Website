@@ -100372,3 +100372,914 @@ P|1139|H|kickReturns|Hunter Green||1;1;1.0;1;0
 P|1139|H|puntReturns|Hakeem Watters||2;5;2.5;3;0
 P|1139|H|kicking|Matt Rolader||0/0;0.0;0;5/5;5
 P|1139|H|punting|Baxter Pearce||7;277;39.6;1;4;59
+G|1140|2026-10-31|App State|Georgia Southern
+T|1140|A|firstDowns=12;thirdDownEff=2-9;fourthDownEff=1-1;totalYards=222;netPassingYards=216;completionAttempts=16/29;yardsPerPass=7.4;rushingYards=6;rushingAttempts=16;yardsPerRushAttempt=0.4;totalPenaltiesYards=3-27;turnovers=3;fumblesLost=1;interceptions=2;possessionTime=16:06;defSacks=0;defTfl=2
+T|1140|H|firstDowns=25;thirdDownEff=8-17;fourthDownEff=2-3;totalYards=427;netPassingYards=325;completionAttempts=37/48;yardsPerPass=6.8;rushingYards=102;rushingAttempts=32;yardsPerRushAttempt=3.2;totalPenaltiesYards=6-58;turnovers=0;fumblesLost=0;interceptions=0;possessionTime=43:54;defSacks=3;defTfl=5
+P|1140|A|passing|Malachi Singleton||15/28;215;7.7;0;2;11.7
+P|1140|A|passing|Henry Hasselbeck||1/1;1;1.0;0;0;--
+P|1140|A|rushing|Jaquari Lewis||3;11;3.7;0;10
+P|1140|A|rushing|Treyaun Webb||3;10;3.3;0;6
+P|1140|A|rushing|Henry Hasselbeck||1;-2;-2.0;0;0
+P|1140|A|rushing|Malachi Singleton||9;-13;-1.4;0;11
+P|1140|A|receiving|Sam Pickett III||4;86;21.5;0;45
+P|1140|A|receiving|Chris Lofton||5;82;16.4;0;42
+P|1140|A|receiving|Nate Branch||4;36;9.0;0;21
+P|1140|A|receiving|Luke Douglas||2;10;5.0;0;9
+P|1140|A|receiving|Dillon Galloway||1;2;2.0;0;2
+P|1140|A|fumbles|Malachi Singleton||1;1;0
+P|1140|A|fumbles|Sam Pickett III||1;0;0
+P|1140|A|defensive|Colton Phares||12;3;0;0;0;0;0
+P|1140|A|defensive|Juan Berchal||10;8;0;0;2;0;0
+P|1140|A|defensive|Khalil Conley||8;7;0;1;0;0;0
+P|1140|A|defensive|Kaleb Purdy||7;4;0;0;0;0;0
+P|1140|A|defensive|Alex Mitchell||6;5;0;1;0;0;0
+P|1140|A|defensive|Ja'Den McBurrows||4;4;0;0;1;0;0
+P|1140|A|defensive|Devin Henderson||4;4;0;0;0;0;0
+P|1140|A|defensive|Dre Walker||3;3;0;0;0;0;0
+P|1140|A|defensive|Ki'Shawn Harvey||3;1;0;0;0;0;0
+P|1140|A|defensive|Joe Reddish||2;2;0;0;0;0;0
+P|1140|A|defensive|Eric Adams||2;1;0;0;0;0;0
+P|1140|A|defensive|Caleb Pitts||2;1;0;0;0;0;0
+P|1140|A|defensive|Carson Sloan||2;1;0;0;0;0;0
+P|1140|A|defensive|Jakob Gude||2;0;0;0;0;0;0
+P|1140|A|defensive|Ahmad Robinson||1;1;0;0;0;0;0
+P|1140|A|defensive|Ricky Lolohea||1;1;0;0;0;0;0
+P|1140|A|defensive|Jehchys Brown||1;1;0;0;0;0;0
+P|1140|A|defensive|Caleb Sandstrom||1;1;0;0;0;0;0
+P|1140|A|defensive|Kaden Ellis||1;1;0;0;0;0;0
+P|1140|A|defensive|Sawyer Arnold||1;1;0;0;0;0;0
+P|1140|A|defensive|Kevin Henderson||1;1;0;0;0;0;0
+P|1140|A|defensive|Keaton Braddock||1;1;0;0;0;1;0
+P|1140|A|defensive|BJ Junius||1;0;0;0;0;0;0
+P|1140|A|defensive|Aaron Clark||1;0;0;0;0;0;0
+P|1140|A|defensive|Xavier Joseph||1;0;0;0;0;1;0
+P|1140|A|kickReturns|Ja'Quez Cross||2;74;37.0;51;0
+P|1140|A|kickReturns|Jackson Grier||1;24;24.0;24;0
+P|1140|A|kicking|James London||1/2;50.0;33;0/0;3
+P|1140|A|punting|Jaxson Dunn||4;170;42.5;1;2;55
+P|1140|H|passing|Max Johnson||36/47;318;6.8;0;0;66.0
+P|1140|H|passing|Weston Bryan||1/1;7;7.0;0;0;--
+P|1140|H|rushing|Weston Bryan||7;42;6.0;0;15
+P|1140|H|rushing|Tyrese Woodgett||8;28;3.5;0;10
+P|1140|H|rushing|Taeo Todd||4;17;4.3;1;9
+P|1140|H|rushing|Max Johnson||2;8;4.0;0;5
+P|1140|H|rushing|David Mbadinga||5;6;1.2;0;4
+P|1140|H|rushing|Josh Dallas||1;4;4.0;0;4
+P|1140|H|rushing|Ty Cummings||1;0;0.0;0;0
+P|1140|H|rushing|Taylor Bradshaw||2;-1;-0.5;0;5
+P|1140|H|receiving|Alex Taylor||10;93;9.3;0;21
+P|1140|H|receiving|Josh Dallas||7;86;12.3;0;32
+P|1140|H|receiving|Jeremiah Ware||3;58;19.3;0;50
+P|1140|H|receiving|River Helms||3;19;6.3;0;10
+P|1140|H|receiving|Andre Greene Jr.||2;13;6.5;0;7
+P|1140|H|receiving|Zay Hilliard||2;13;6.5;0;7
+P|1140|H|receiving|Cam King||1;12;12.0;0;12
+P|1140|H|receiving|Taylor Bradshaw||2;10;5.0;0;9
+P|1140|H|receiving|JP Mikhael||1;9;9.0;0;9
+P|1140|H|receiving|Tyrese Woodgett||2;8;4.0;0;8
+P|1140|H|receiving|Ty Cummings||1;5;5.0;0;5
+P|1140|H|receiving|Matthew Williams||1;4;4.0;0;4
+P|1140|H|receiving|David Mbadinga||1;4;4.0;0;4
+P|1140|H|receiving|Taeo Todd||1;0;0.0;0;0
+P|1140|H|fumbles|Anthony Bynum||0;0;1
+P|1140|H|defensive|Ethan Johnson||3;3;1;1;0;0;0
+P|1140|H|defensive|Jayden Jackson||3;3;0;0;0;0;0
+P|1140|H|defensive|Diego Aviles||3;3;0;0;1;1;0
+P|1140|H|defensive|Chance Gamble||3;2;0.5;0.5;3;1;0
+P|1140|H|defensive|Anthony Bynum||2;2;1;2;0;2;0
+P|1140|H|defensive|Aaron Sears||2;2;0;0;0;0;0
+P|1140|H|defensive|JaMari Whitehead||2;2;0;0;0;0;0
+P|1140|H|defensive|O'Marion Brown||2;2;0;1;0;0;0
+P|1140|H|defensive|Chace Calicut||2;2;0;0;0;0;0
+P|1140|H|defensive|Tracy Hill Jr.||2;1;0;0;0;0;0
+P|1140|H|defensive|Phillip Gladney||2;1;0;0;0;0;0
+P|1140|H|defensive|Eli Anders||1;1;0;0;0;0;0
+P|1140|H|defensive|Aidan McCowan||1;1;0;0;0;0;0
+P|1140|H|defensive|Holden Trice||1;1;0;0;0;0;0
+P|1140|H|defensive|Festus Davies||1;1;0;0;0;0;0
+P|1140|H|defensive|Jakyri Jones||1;1;0;0;1;0;0
+P|1140|H|defensive|Brandon Tyson||1;0;0;0;0;1;0
+P|1140|H|defensive|Nigel Eldridge Jr.||1;0;0.5;0.5;0;0;0
+P|1140|H|defensive|JQ Crosby||1;0;0;0;0;0;0
+P|1140|H|defensive|MJ Stroud||0;0;0;0;0;1;0
+P|1140|H|defensive|Uche Iloh||0;0;0;0;0;1;0
+P|1140|H|interceptions|Chance Gamble||1;0;0
+P|1140|H|interceptions|Chace Calicut||1;0;0
+P|1140|H|kickReturns|Kam Mikell||1;13;13.0;13;0
+P|1140|H|puntReturns|Josh Dallas||1;0;0.0;0;0
+P|1140|H|kicking|Tripp Bryant||4/4;100.0;48;1/1;13
+P|1140|H|punting|Alex Smith||2;73;36.5;0;1;42
+G|1141|2026-10-31|Clemson|Florida State
+T|1141|A|firstDowns=19;thirdDownEff=4-17;fourthDownEff=2-2;totalYards=351;netPassingYards=189;completionAttempts=18/32;yardsPerPass=5.9;rushingYards=162;rushingAttempts=44;yardsPerRushAttempt=3.7;totalPenaltiesYards=6-70;turnovers=0;fumblesLost=0;interceptions=0;possessionTime=34:11;defSacks=4;defTfl=9
+T|1141|H|firstDowns=21;thirdDownEff=1-10;fourthDownEff=0-1;totalYards=415;netPassingYards=350;completionAttempts=21/33;yardsPerPass=10.6;rushingYards=65;rushingAttempts=29;yardsPerRushAttempt=2.2;totalPenaltiesYards=6-43;turnovers=4;fumblesLost=1;interceptions=3;possessionTime=25:49;defSacks=4;defTfl=8
+P|1141|A|passing|Tait Reynolds||18/32;189;5.9;2;0
+P|1141|A|rushing|Tait Reynolds||14;85;6.1;1;79
+P|1141|A|rushing|Jarvis Green||9;37;4.1;0;10
+P|1141|A|rushing|Gideon Davidson||12;36;3.0;0;6
+P|1141|A|rushing|Tyler Brown||1;6;6.0;0;6
+P|1141|A|rushing|Chris Johnson Jr.||5;3;0.6;0;2
+P|1141|A|receiving|Tyler Brown||5;74;14.8;0;27
+P|1141|A|receiving|T.J. Moore||3;36;12.0;0;24
+P|1141|A|receiving|Bryant Wesco Jr.||4;33;8.3;0;16
+P|1141|A|receiving|Olsen Patt-Henry||4;30;7.5;1;10
+P|1141|A|receiving|Christian Bentancur||1;18;18.0;1;18
+P|1141|A|receiving|Chris Johnson Jr.||1;-2;-2.0;0;0
+P|1141|A|fumbles|Jahiem Lawson||0;0;1
+P|1141|A|defensive|Corey Myrick||10;7;0;0;0;0;0
+P|1141|A|defensive|Will Heldt||7;5;1;2.5;0;0;0
+P|1141|A|defensive|Jerome Carter III||5;3;1;2;1;0;0
+P|1141|A|defensive|Donovan Starr||4;2;0;0;1;0;0
+P|1141|A|defensive|Sammy Brown||3;3;1;1;0;2;0
+P|1141|A|defensive|Kobe McCloud||3;2;0;0;0;0;0
+P|1141|A|defensive|Jahiem Lawson||3;2;0;1;0;0;0
+P|1141|A|defensive|Darien Mayo||2;2;1;1;0;0;0
+P|1141|A|defensive|Ashton Hampton||2;2;0;0;0;0;0
+P|1141|A|defensive|Elliot Washington II||2;1;0;0;0;0;0
+P|1141|A|defensive|Ronan Hanafin||2;1;0;0;0;0;0
+P|1141|A|defensive|Devarrick Woods||2;1;0;0;0;0;0
+P|1141|A|defensive|Jeremiah Alexander||1;1;0;0;0;1;0
+P|1141|A|defensive|C.J. Wesley||1;1;0;0;0;0;0
+P|1141|A|defensive|Amare Adams||1;1;0;0;0;0;0
+P|1141|A|defensive|London Merritt||1;1;0;1;0;0;0
+P|1141|A|defensive|Logan Anderson||1;1;0;0;0;0;0
+P|1141|A|defensive|Joe Wilkinson||1;1;0;0;0;0;0
+P|1141|A|defensive|C.J. Kubah-Taylor||1;0;0;0.5;0;1;0
+P|1141|A|defensive|Kourtney Kelly||1;0;0;0;0;0;0
+P|1141|A|interceptions|Elliot Washington II||2;0;0
+P|1141|A|interceptions|Jerome Carter III||1;26;0
+P|1141|A|kickReturns|Chris Johnson Jr.||2;48;24.0;38;0
+P|1141|A|puntReturns|Bryant Wesco Jr.||2;1;0.5;1;0
+P|1141|A|kicking|Nolan Hauser||5/5;100.0;50;3/3;18
+P|1141|A|punting|Jack Smith||3;128;42.7;1;1;51
+P|1141|A|punting|Nolan Hauser||2;88;44.0;0;0;53
+P|1141|H|passing|Ashton Daniels||21/33;350;10.6;2;3
+P|1141|H|rushing|Quintrevion Wisner||13;43;3.3;0;14
+P|1141|H|rushing|Ashton Daniels||15;21;1.4;1;13
+P|1141|H|rushing|Amari Thomas||1;1;1.0;0;1
+P|1141|H|receiving|Micahi Danzy||4;108;27.0;1;52
+P|1141|H|receiving|Jayvan Boggs||2;64;32.0;0;40
+P|1141|H|receiving|Jasen Lopez||4;52;13.0;1;41
+P|1141|H|receiving|Quintrevion Wisner||5;50;10.0;0;21
+P|1141|H|receiving|Amari Thomas||3;34;11.3;0;13
+P|1141|H|receiving|Duce Robinson||2;31;15.5;0;28
+P|1141|H|receiving|Desirrio Riles||1;11;11.0;0;11
+P|1141|H|fumbles|Ashton Daniels||1;1;0
+P|1141|H|defensive|CJ Richard Jr.||13;8;0;0;0;0;0
+P|1141|H|defensive|Chris Jones||10;5;0;0;0;0;0
+P|1141|H|defensive|Ashlynd Barker||9;6;0;1;1;0;0
+P|1141|H|defensive|Omar Graham Jr.||5;3;0;1;0;1;0
+P|1141|H|defensive|Daniel Lyons||4;3;0;0;0;1;0
+P|1141|H|defensive|Mikai Gbayor||4;2;1;1;0;0;0
+P|1141|H|defensive|Charles Lester III||4;2;0;0;0;0;0
+P|1141|H|defensive|Caleb LaVallee||3;3;1;2;0;0;0
+P|1141|H|defensive|Rylan Kennedy||3;2;0;1;1;0;0
+P|1141|H|defensive|Kevin Wynn||3;1;0;0;0;0;0
+P|1141|H|defensive|Darryll Desir||2;2;1;1;1;1;0
+P|1141|H|defensive|Deante McCray||2;2;0;0;0;0;0
+P|1141|H|defensive|Jalen Anderson||2;1;1;1;0;1;0
+P|1141|H|defensive|Max Redmon||2;1;0;0;0;0;0
+P|1141|H|defensive|Gabe Panikowski||1;1;0;0;0;0;0
+P|1141|H|defensive|Ja'Bril Rawls||1;1;0;0;1;0;0
+P|1141|H|defensive|Nehemiah Chandler||1;1;0;0;1;0;0
+P|1141|H|defensive|André Otto||1;1;0;0;0;0;0
+P|1141|H|defensive|Mandrell Desir||1;1;0;0;0;0;0
+P|1141|H|defensive|Ma'Khi Jones||1;0;0;0;2;0;0
+P|1141|H|defensive|Xavier Tiller||1;0;0;0;0;0;0
+P|1141|H|defensive|Zay Parks||1;0;0;0;0;0;0
+P|1141|H|kickReturns|Micahi Danzy||3;37;12.3;19;0
+P|1141|H|kickReturns|Amari Thomas||1;20;20.0;20;0
+P|1141|H|puntReturns|Jasen Lopez||1;7;7.0;7;0
+P|1141|H|kicking|Gabe Panikowski||1/1;100.0;35;1/1;4
+P|1141|H|punting|Daniel Hughes||5;159;31.8;0;0;39
+G|1142|2026-10-31|Eastern Kentucky|Tarleton State
+T|1142|A|firstDowns=21;thirdDownEff=5-14;fourthDownEff=0-3;totalYards=474;netPassingYards=283;completionAttempts=16/26;yardsPerPass=10.9;rushingYards=191;rushingAttempts=47;yardsPerRushAttempt=4.1;totalPenaltiesYards=5-40;turnovers=1;fumblesLost=1;interceptions=0;possessionTime=35:36;defSacks=2;defTfl=3
+T|1142|H|firstDowns=24;thirdDownEff=7-11;fourthDownEff=0-2;totalYards=570;netPassingYards=351;completionAttempts=18/32;yardsPerPass=11.0;rushingYards=219;rushingAttempts=31;yardsPerRushAttempt=7.1;totalPenaltiesYards=5-47;turnovers=3;fumblesLost=1;interceptions=2;possessionTime=24:24;defSacks=1;defTfl=8
+P|1142|A|passing|Myles Burkett||11/17;248;14.6;1;0
+P|1142|A|passing|Blake Kendall Jr.||5/8;35;4.4;0;0
+P|1142|A|passing|Braylon Newcomb||0/1;0;0.0;0;0
+P|1142|A|rushing|Brady Hensley||22;139;6.3;2;63
+P|1142|A|rushing|Myles Burkett||8;21;2.6;0;15
+P|1142|A|rushing|Brayden Latham||8;15;1.9;0;15
+P|1142|A|rushing|Blake Kendall Jr.||4;8;2.0;0;6
+P|1142|A|rushing|Ryder Hooks||5;8;1.6;0;4
+P|1142|A|receiving|Jayden West||2;105;52.5;0;61
+P|1142|A|receiving|Caeleb Schlachter||3;63;21.0;0;34
+P|1142|A|receiving|Ryder Hooks||1;48;48.0;0;48
+P|1142|A|receiving|Elijah Caldwell||2;20;10.0;0;13
+P|1142|A|receiving|Jarvis Hayes||2;17;8.5;0;12
+P|1142|A|receiving|Braylon Newcomb||2;13;6.5;0;8
+P|1142|A|receiving|Jackson House||3;12;4.0;0;6
+P|1142|A|receiving|Jakobie Hughes||1;5;5.0;1;5
+P|1142|A|fumbles|Myles Burkett||2;1;0
+P|1142|A|defensive|Derek Taylor||13;9;0;0;0;0;0
+P|1142|A|defensive|Kaden Smith||8;3;0;0;0;0;0
+P|1142|A|defensive|D.J. Galva||7;5;0;0;0;0;0
+P|1142|A|defensive|Jayden Marable||5;3;0.5;0.5;0;0;0
+P|1142|A|defensive|Jeffrey Kinley||5;3;0;0;0;0;0
+P|1142|A|defensive|Cam Jessee||5;1;0;0;0;0;0
+P|1142|A|defensive|Cristian Conyer||3;1;0;0;1;0;0
+P|1142|A|defensive|Aden Tagaloa-Nelson||3;1;0;0;1;0;0
+P|1142|A|defensive|Payne Miller||3;1;0.5;1;0;0;0
+P|1142|A|defensive|Keshawn Hayden||2;1;1;1.5;0;0;0
+P|1142|A|defensive|Jack McGrath||2;1;0;0;2;3;0
+P|1142|A|defensive|Jackson Marshall||1;0;0;0;0;0;0
+P|1142|A|defensive|Caleb Redd||1;0;0;0;0;0;0
+P|1142|A|defensive|Nasir Spruill||1;0;0;0;1;0;0
+P|1142|A|interceptions|Jeffrey Kinley||1;2;0
+P|1142|A|interceptions|Kaden Smith||1;-2;0
+P|1142|A|kicking|Devin Orr||1/1;100.0;41;3/3;6
+P|1142|A|punting|Jettson Brown||4;144;36.0;0;1;43
+P|1142|H|passing|Kaden Anderson||18/32;351;11.0;2;2
+P|1142|H|rushing|Tylan Hines||15;110;7.3;0;24
+P|1142|H|rushing|Miequle Brock||5;79;15.8;1;34
+P|1142|H|rushing|Kaden Anderson||9;31;3.4;0;12
+P|1142|H|rushing|James Paige||1;1;1.0;1;1
+P|1142|H|receiving|Marquis Willis||4;173;43.3;1;56
+P|1142|H|receiving|Tanner Schmidt||8;107;13.4;0;27
+P|1142|H|receiving|B.J. Fleming||3;55;18.3;1;26
+P|1142|H|receiving|Miequle Brock||2;14;7.0;0;9
+P|1142|H|receiving|Kyle Thompson||1;2;2.0;0;2
+P|1142|H|fumbles|Miequle Brock||1;1;0
+P|1142|H|fumbles|Xavier Potts||0;0;1
+P|1142|H|defensive|Chris Robinson||16;6;0;1;0;0;0
+P|1142|H|defensive|Avian Rice||9;3;0;0;1;0;0
+P|1142|H|defensive|Stephen Woods Jr.||8;5;0;0;0;0;0
+P|1142|H|defensive|Seven Cloud||5;4;0;2;0;0;0
+P|1142|H|defensive|Fredd Adams||5;3;0;0;1;0;0
+P|1142|H|defensive|Omar Emmons||5;2;0;0;0;0;0
+P|1142|H|defensive|Xavier Potts||5;1;0;1;0;0;0
+P|1142|H|defensive|Gerard Culotta||5;1;0;1;0;1;0
+P|1142|H|defensive|Kaleb Brown||4;3;1;1.5;0;0;0
+P|1142|H|defensive|Jadan Aubert||4;2;0;0;0;0;0
+P|1142|H|defensive|Roddrick Roberts||2;1;0;0.5;0;0;0
+P|1142|H|defensive|Kareem Edmon||2;1;0;0;0;0;0
+P|1142|H|defensive|Mike Hodge||2;0;0;0;0;1;0
+P|1142|H|defensive|Tylan Hines||1;1;0;0;0;0;0
+P|1142|H|defensive|Derek Joiner||1;1;0;0;0;0;0
+P|1142|H|defensive|Morsello Hooker||1;1;0;0;0;0;0
+P|1142|H|defensive|Manny Lawton||1;1;0;1;0;0;0
+P|1142|H|defensive|Caden Holt||1;0;0;0;0;0;0
+P|1142|H|defensive|Lance Carson||1;0;0;0;0;0;0
+P|1142|H|kicking|Alejandro De La Poza||0/0;0.0;0;4/4;4
+P|1142|H|punting|Charlie Mullen||2;80;40.0;0;1;56
+G|1143|2026-10-31|Lamar|UT Rio Grande Valley
+T|1143|A|firstDowns=19;thirdDownEff=9-14;fourthDownEff=2-2;totalYards=381;netPassingYards=169;completionAttempts=18/26;yardsPerPass=6.5;rushingYards=212;rushingAttempts=41;yardsPerRushAttempt=5.2;totalPenaltiesYards=9-94;turnovers=0;fumblesLost=0;interceptions=0;possessionTime=37:05;defSacks=2;defTfl=5
+T|1143|H|firstDowns=16;thirdDownEff=2-10;fourthDownEff=0-1;totalYards=282;netPassingYards=151;completionAttempts=10/27;yardsPerPass=5.6;rushingYards=131;rushingAttempts=24;yardsPerRushAttempt=5.5;totalPenaltiesYards=1-5;turnovers=2;fumblesLost=0;interceptions=2;possessionTime=22:55;defSacks=0;defTfl=0
+P|1143|A|passing|Aiden McCown||17/24;167;7.0;2;0
+P|1143|A|passing|Evan Bullock||1/2;2;1.0;0;0
+P|1143|A|rushing|Parker Jenkins||18;65;3.6;0;11
+P|1143|A|rushing|LaDamion McDowell||6;55;9.2;0;28
+P|1143|A|rushing|Aiden McCown||7;39;5.6;1;10
+P|1143|A|rushing|Julian Salazar||1;31;31.0;0;31
+P|1143|A|rushing|Cam Patterson||4;10;2.5;0;6
+P|1143|A|rushing|Blake Thomas||2;9;4.5;2;6
+P|1143|A|rushing|Aaron Tenner||1;6;6.0;0;6
+P|1143|A|receiving|Parker Jenkins||1;48;48.0;1;48
+P|1143|A|receiving|Cam Patterson||5;46;9.2;0;15
+P|1143|A|receiving|Blake Thomas||4;29;7.3;0;19
+P|1143|A|receiving|Kyndon Fuselier||3;20;6.7;0;11
+P|1143|A|receiving|Davin Driskell||2;14;7.0;1;8
+P|1143|A|receiving|Jaydn Girard||2;10;5.0;0;8
+P|1143|A|receiving|Tyler Bonkowski||1;2;2.0;0;2
+P|1143|A|defensive|Bryce McDonald||6;5;0;0;1;0;1
+P|1143|A|defensive|C.J. Miller||6;1;0;0;0;0;0
+P|1143|A|defensive|T.J. Nelson||4;2;0.5;0.5;0;0;0
+P|1143|A|defensive|Mar Mar Evans||4;1;0;0;1;0;0
+P|1143|A|defensive|Etelridge McKinney||3;3;1;2;0;0;0
+P|1143|A|defensive|Dawson Washington||3;2;0;0.5;0;0;0
+P|1143|A|defensive|Andrew Huff||2;1;0.5;0.5;0;0;0
+P|1143|A|defensive|Isaac Blessing||2;1;0;0;0;0;0
+P|1143|A|defensive|Kamari Federick||2;1;0;1;0;0;0
+P|1143|A|defensive|Jarrett Mitchel||2;1;0;0;0;0;0
+P|1143|A|defensive|Kyran Bourda||2;0;0;0;0;0;0
+P|1143|A|defensive|Kevin Thomas Jr.||1;1;0;0;0;0;0
+P|1143|A|defensive|Ephraim Dotson||1;1;0;0;0;0;0
+P|1143|A|defensive|Koda Canady||1;1;0;0;0;0;0
+P|1143|A|defensive|Alex Sumler||1;1;0;0;0;0;0
+P|1143|A|defensive|Lanar Kelley||1;1;0;0;1;0;0
+P|1143|A|defensive|Zaylon Stoker||1;1;0;0;0;0;0
+P|1143|A|defensive|Alexandre Dedieu||1;1;0;0;0;0;0
+P|1143|A|defensive|Jordan Dowdy||1;1;0;0;0;0;0
+P|1143|A|defensive|Declan Mullins||1;1;0;0;0;0;0
+P|1143|A|defensive|De'Kelvion Beamon||1;0;0;0;0;0;0
+P|1143|A|defensive|Brennen Bailey||1;0;0;0;2;0;0
+P|1143|A|defensive|Jackson Bandy||1;0;0;0;0;0;0
+P|1143|A|defensive|Griffin Tillis||1;0;0;0;0;0;0
+P|1143|A|defensive|Mason Wuenschel||1;0;0;0.5;0;0;0
+P|1143|A|defensive|Aaron Tenner||1;0;0;0;0;0;0
+P|1143|A|defensive|Daiki Yoshikawa||0;0;0;0;0;1;0
+P|1143|A|defensive|Blake Thomas||0;0;0;0;0;0;1
+P|1143|A|interceptions|Bryce McDonald||1;39;1
+P|1143|A|interceptions|Zaylon Stoker||1;0;0
+P|1143|A|kickReturns|Blake Thomas||4;169;42.3;97;1
+P|1143|A|kickReturns|C.J. Demas||1;4;4.0;4;0
+P|1143|A|puntReturns|Jaydn Girard||3;27;9.0;20;0
+P|1143|A|kicking|Andres Sandoval||1/1;100.0;49;7/7;10
+P|1143|A|punting|Mason Stallons||2;95;47.5;1;1;49
+P|1143|H|passing|Garret Rangel||7/23;135;5.9;0;2
+P|1143|H|passing|Aidan Jakobsohn||3/4;16;4.0;0;0
+P|1143|H|rushing|Broderick Taylor||15;105;7.0;2;44
+P|1143|H|rushing|Garret Rangel||4;23;5.8;0;36
+P|1143|H|rushing|TJ Dement||5;3;0.6;0;5
+P|1143|H|receiving|Braden Baize||3;61;20.3;0;46
+P|1143|H|receiving|Tavian Cord||2;51;25.5;0;38
+P|1143|H|receiving|Christian Sabsook||4;34;8.5;0;22
+P|1143|H|receiving|Cameron Glenn||1;5;5.0;0;5
+P|1143|H|fumbles|Carter Hewitt||1;0;0
+P|1143|H|defensive|Jaiden Haygood||14;5;0;0;0;0;0
+P|1143|H|defensive|Spencer Rich||10;3;0;0;0;0;0
+P|1143|H|defensive|TJ Neal||10;3;0;0;2;0;0
+P|1143|H|defensive|Jackson Waid||5;1;0;0;0;0;0
+P|1143|H|defensive|Jordan Ford||4;4;0;0;0;0;0
+P|1143|H|defensive|Carter Hewitt||3;3;0;0;0;0;0
+P|1143|H|defensive|Alijah Prosser||3;3;0;0;0;0;0
+P|1143|H|defensive|Josh Cashiola||3;2;0;0;0;0;0
+P|1143|H|defensive|Nathan Huerta||3;0;0;0;0;0;0
+P|1143|H|defensive|Marcus Heard Jr.||2;2;0;0;0;0;0
+P|1143|H|defensive|Andrew Earls||2;1;0;0;0;0;0
+P|1143|H|defensive|Withchiel Filamar||2;1;0;0;0;0;0
+P|1143|H|defensive|Trey Bright||2;0;0;0;0;0;0
+P|1143|H|defensive|Jack Harwell||2;0;0;0;0;1;0
+P|1143|H|defensive|Jaden Wincher||2;0;0;0;0;0;0
+P|1143|H|defensive|Ja'Marcus Anderson||1;1;0;0;0;0;0
+P|1143|H|defensive|Keamonie Archie||1;1;0;0;0;0;0
+P|1143|H|defensive|Cameron Glenn||1;1;0;0;0;0;0
+P|1143|H|defensive|Jaxson Maynard||1;1;0;0;0;0;0
+P|1143|H|defensive|Seyyid Smith||1;1;0;0;0;0;0
+P|1143|H|defensive|Keion Bryant||1;0;0;0;0;0;0
+P|1143|H|defensive|Chase Alexander||1;0;0;0;0;0;0
+P|1143|H|defensive|Ty Bush||1;0;0;0;0;0;0
+P|1143|H|defensive|Percy Jackson III||1;0;0;0;0;1;0
+P|1143|H|defensive|David Nwabuoku||1;0;0;0;0;0;0
+P|1143|H|defensive|Nicholas Peace||1;0;0;0;0;0;0
+P|1143|H|defensive|DC Thompson||1;0;0;0;0;0;0
+P|1143|H|defensive|Abdon Mata||0;0;0;0;0;1;0
+P|1143|H|kickReturns|Kyran Lee||3;56;18.7;25;0
+P|1143|H|kickReturns|Fabian Garcia||2;24;12.0;24;0
+P|1143|H|kickReturns|Jaxson Maynard||2;24;12.0;16;0
+P|1143|H|kickReturns|Trey Bright||1;22;22.0;22;0
+P|1143|H|kickReturns|Carter Hewitt||1;-3;-3.0;0;0
+P|1143|H|kicking|Brysen Gardner||3/3;100.0;50;2/2;11
+P|1143|H|punting|Nathaniel Wallace-Dilling||3;121;40.3;0;0;42
+G|1144|2026-10-31|Miami|North Carolina
+T|1144|A|firstDowns=25;thirdDownEff=6-11;fourthDownEff=2-2;totalYards=416;netPassingYards=274;completionAttempts=22/29;yardsPerPass=9.4;rushingYards=142;rushingAttempts=33;yardsPerRushAttempt=4.3;totalPenaltiesYards=3-30;turnovers=0;fumblesLost=0;interceptions=0;possessionTime=29:09;defSacks=4;defTfl=5
+T|1144|H|firstDowns=27;thirdDownEff=8-11;fourthDownEff=2-2;totalYards=407;netPassingYards=341;completionAttempts=28/34;yardsPerPass=10.0;rushingYards=66;rushingAttempts=30;yardsPerRushAttempt=2.2;totalPenaltiesYards=6-37;turnovers=1;fumblesLost=1;interceptions=0;possessionTime=30:51;defSacks=1;defTfl=1
+P|1144|A|passing|Darian Mensah||22/29;274;9.4;3;0
+P|1144|A|rushing|Javian Mallory||12;51;4.3;0;12
+P|1144|A|rushing|Mark Fletcher Jr.||13;43;3.3;2;6
+P|1144|A|rushing|Darian Mensah||4;36;9.0;0;24
+P|1144|A|rushing|Malachi Toney||1;11;11.0;0;11
+P|1144|A|rushing|Jordan Lyle||2;9;4.5;0;5
+P|1144|A|receiving|Malachi Toney||7;75;10.7;2;31
+P|1144|A|receiving|Cooper Barkate||4;71;17.8;0;40
+P|1144|A|receiving|Elija Lofton||3;48;16.0;0;19
+P|1144|A|receiving|Mark Fletcher Jr.||2;43;21.5;1;31
+P|1144|A|receiving|Javian Mallory||3;25;8.3;0;12
+P|1144|A|receiving|Daylyn Upshaw||3;12;4.0;0;7
+P|1144|A|fumbles|Justin Scott||0;0;1
+P|1144|A|defensive|Chase Smith||9;5;0;0;0;0;0
+P|1144|A|defensive|JJ Dunnigan||9;4;0.5;0.5;0;0;0
+P|1144|A|defensive|Mohamed Toure||9;3;0;0;0;0;0
+P|1144|A|defensive|Marquise Lightfoot||7;4;2;2;0;0;0
+P|1144|A|defensive|Zechariah Poyser||6;4;0;0;0;0;0
+P|1144|A|defensive|Ezekiel Marcelin Jr.||6;2;0;0;0;0;0
+P|1144|A|defensive|Justin Scott||4;2;0.5;0.5;0;0;0
+P|1144|A|defensive|Damari Brown||3;1;0;0;0;0;0
+P|1144|A|defensive|Xavier Lucas||2;2;0;0;0;0;0
+P|1144|A|defensive|Bryce Fitzgerald||2;1;0;0;0;0;0
+P|1144|A|defensive|Booker Pickett Jr.||1;1;1;1;0;0;0
+P|1144|A|defensive|Damon Wilson II||1;1;0;0;0;0;0
+P|1144|A|defensive|Ahmad Moten Sr.||1;1;0;0;1;2;0
+P|1144|A|defensive|Ethan O'Connor||1;1;0;0;0;0;0
+P|1144|A|defensive|Ryan Mack||1;1;0;0;0;0;0
+P|1144|A|defensive|Armondo Blount||1;1;0;0;0;0;0
+P|1144|A|defensive|Omar Thornton||1;1;0;1;0;0;0
+P|1144|A|defensive|Herbert Scroggins III||1;0;0;0;0;0;0
+P|1144|A|kickReturns|Somourian Wingo||2;44;22.0;24;0
+P|1144|A|kickReturns|Ezekiel Marcelin Jr.||1;0;0.0;0;0
+P|1144|A|kicking|Jake Weinberg||1/1;100.0;25;5/5;8
+P|1144|A|punting|Dylan Joyce||1;43;43.0;0;0;43
+P|1144|H|passing|Billy Edwards Jr.||28/34;341;10.0;4;0
+P|1144|H|rushing|Demon June||13;44;3.4;1;12
+P|1144|H|rushing|Benjamin Hall||3;13;4.3;0;6
+P|1144|H|rushing|Jaylen McGill||5;12;2.4;0;5
+P|1144|H|rushing|Billy Edwards Jr.||8;-2;-0.3;0;10
+P|1144|H|receiving|Jelani Thurman||5;70;14.0;2;23
+P|1144|H|receiving|Jaylen McGill||6;69;11.5;0;28
+P|1144|H|receiving|Trech Kekahuna||3;57;19.0;1;23
+P|1144|H|receiving|Jordan Shipp||4;44;11.0;1;16
+P|1144|H|receiving|Demon June||3;40;13.3;0;20
+P|1144|H|receiving|Mason Humphrey||2;19;9.5;0;10
+P|1144|H|receiving|Nyqir Helton||2;19;9.5;0;10
+P|1144|H|receiving|Jordan Washington||2;16;8.0;0;8
+P|1144|H|receiving|Shamar Easter||1;7;7.0;0;7
+P|1144|H|fumbles|Billy Edwards Jr.||1;1;0
+P|1144|H|defensive|Derek McDonald||11;5;0;0;0;0;0
+P|1144|H|defensive|Peyton Seelmann||9;2;1;1;0;0;0
+P|1144|H|defensive|Kenton Dopson III||8;6;0;0;0;0;0
+P|1144|H|defensive|Jaiden Patterson||7;6;0;0;0;0;0
+P|1144|H|defensive|Greg Smith III||6;3;0;0;0;0;0
+P|1144|H|defensive|Leroy Jackson||4;1;0;0;0;1;0
+P|1144|H|defensive|Javion Butts||4;1;0;0;1;0;0
+P|1144|H|defensive|Xavier Lewis||4;1;0;0;0;0;0
+P|1144|H|defensive|Kaleb Cost||4;0;0;0;0;0;0
+P|1144|H|defensive|Jaylen Harvey||4;0;0;0;0;1;0
+P|1144|H|defensive|Melkart Abou Jaoude||3;1;0;0;0;0;0
+P|1144|H|defensive|Timir Hickman-Collins||3;0;0;0;0;0;0
+P|1144|H|defensive|Isaiah Johnson||2;1;0;0;0;0;0
+P|1144|H|defensive|Coleman Bryson||2;0;0;0;0;0;0
+P|1144|H|defensive|David Jackson III||2;0;0;0;0;0;0
+P|1144|H|defensive|Nicco Maggio||1;0;0;0;0;0;0
+P|1144|H|defensive|Emmanuel Nwaiwu||1;0;0;0;0;0;0
+P|1144|H|defensive|Donovan Hoilette Jr.||0;0;0;0;0;2;0
+P|1144|H|kicking|Rece Verhoff||0/0;0.0;0;5/5;5
+P|1144|H|punting|Aeron Burrell||1;28;28.0;0;0;28
+G|1145|2026-10-31|Mississippi State|Texas
+T|1145|A|firstDowns=12;thirdDownEff=6-18;fourthDownEff=0-1;totalYards=187;netPassingYards=119;completionAttempts=15/25;yardsPerPass=4.8;rushingYards=68;rushingAttempts=41;yardsPerRushAttempt=1.7;totalPenaltiesYards=6-50;turnovers=1;fumblesLost=1;interceptions=0;possessionTime=32:28;defSacks=5;defTfl=8
+T|1145|H|firstDowns=13;thirdDownEff=6-14;fourthDownEff=0-0;totalYards=280;netPassingYards=220;completionAttempts=17/21;yardsPerPass=10.5;rushingYards=60;rushingAttempts=32;yardsPerRushAttempt=1.9;totalPenaltiesYards=5-42;turnovers=1;fumblesLost=1;interceptions=0;possessionTime=27:32;defSacks=7;defTfl=9
+P|1145|A|passing|AJ Swann||12/15;97;6.5;0;0
+P|1145|A|passing|Parker Puckett||3/10;22;2.2;0;0
+P|1145|A|rushing|Fluff Bothwell||17;49;2.9;0;11
+P|1145|A|rushing|J.J. Hill||5;15;3.0;0;6
+P|1145|A|rushing|Kolin Wilson||4;12;3.0;0;4
+P|1145|A|rushing|Parker Puckett||9;4;0.4;0;12
+P|1145|A|rushing|AJ Swann||4;-2;-0.5;0;2
+P|1145|A|rushing|Anthony Evans III||2;-10;-5.0;0;5
+P|1145|A|receiving|Marquis Johnson||6;61;10.2;0;23
+P|1145|A|receiving|Anthony Evans III||3;19;6.3;0;11
+P|1145|A|receiving|Sanfrisco Magee||1;16;16.0;0;16
+P|1145|A|receiving|Fluff Bothwell||3;13;4.3;0;8
+P|1145|A|receiving|Zion Ragins||1;5;5.0;0;5
+P|1145|A|receiving|Kolin Wilson||1;5;5.0;0;5
+P|1145|A|fumbles|AJ Swann||1;1;0
+P|1145|A|fumbles|Anthony Evans III||1;0;0
+P|1145|A|fumbles|Fluff Bothwell||1;0;0
+P|1145|A|fumbles|Zakari Tillman||0;0;1
+P|1145|A|defensive|Fatt Forrest||7;4;0;0.5;0;0;0
+P|1145|A|defensive|Zakari Tillman||6;4;1;2.5;0;0;0
+P|1145|A|defensive|Jardin Gilbert||5;4;0;0;0;0;0
+P|1145|A|defensive|Marcus Williams||5;4;0;0;0;0;0
+P|1145|A|defensive|Kendel Dolby||4;3;0;0;0;0;0
+P|1145|A|defensive|Kelley Jones||3;3;0;0;0;0;0
+P|1145|A|defensive|DJ Reed||3;2;0.5;1.5;0;0;0
+P|1145|A|defensive|Amaree Williams||3;2;0.5;0.5;0;0;0
+P|1145|A|defensive|Jett Jefferson||3;2;0;0;0;0;0
+P|1145|A|defensive|Tanner Johnson||3;1;0;0;0;1;0
+P|1145|A|defensive|Bralan Womack||3;1;0;0;0;0;0
+P|1145|A|defensive|Jaray Bledsoe||2;2;1;1;0;1;0
+P|1145|A|defensive|AJ Rice||2;2;0;0;0;0;0
+P|1145|A|defensive|Will Whitson||1;1;1;1;0;0;0
+P|1145|A|defensive|Dealyn Evans||1;1;1;1;0;0;0
+P|1145|A|defensive|Kalvin Dinkins||1;1;0;0;0;0;0
+P|1145|A|defensive|LaKendrick James||1;1;0;0;0;0;0
+P|1145|A|defensive|Dre Riley||1;1;0;0;0;0;0
+P|1145|A|defensive|Derion Gullette||1;0;0;0;0;0;0
+P|1145|A|defensive|Marquis Johnson||1;0;0;0;0;0;0
+P|1145|A|defensive|Micah Nickerson||1;0;0;0;0;0;0
+P|1145|A|puntReturns|Anthony Evans III||1;-3;-3.0;0;0
+P|1145|A|kicking|Kyle Ferrie||1/2;50.0;30;0/0;3
+P|1145|A|punting|Ethan Pulliam||7;337;48.1;2;3;56
+P|1145|H|passing|Arch Manning||16/20;220;11.0;3;0
+P|1145|H|passing|KJ Lacey||1/1;0;0.0;0;0
+P|1145|H|rushing|Raleek Brown||8;30;3.8;0;11
+P|1145|H|rushing|Michael Terry III||4;16;4.0;0;8
+P|1145|H|rushing|Arch Manning||13;10;0.8;0;12
+P|1145|H|rushing|Derrek Cooper||1;5;5.0;0;5
+P|1145|H|rushing|James Simon||2;5;2.5;0;4
+P|1145|H|rushing|Hollywood Smothers||4;-6;-1.5;0;5
+P|1145|H|receiving|Emmett Mosley V||4;98;24.5;1;42
+P|1145|H|receiving|Cam Coleman||2;61;30.5;1;47
+P|1145|H|receiving|Raleek Brown||2;26;13.0;1;22
+P|1145|H|receiving|Jermaine Bishop Jr.||3;17;5.7;0;8
+P|1145|H|receiving|Ryan Wingo||3;14;4.7;0;8
+P|1145|H|receiving|Nick Townsend||2;4;2.0;0;3
+P|1145|H|receiving|Emaree Winston||1;0;0.0;0;0
+P|1145|H|fumbles|Arch Manning||1;1;0
+P|1145|H|fumbles|Maraad Watson||0;0;1
+P|1145|H|defensive|Jelani McDonald||9;6;0;0;0;0;0
+P|1145|H|defensive|Rasheem Biles||8;4;3;4;0;0;0
+P|1145|H|defensive|Derek Williams Jr.||6;3;0;1;1;0;0
+P|1145|H|defensive|Colton Vasek||5;2;1;1;1;0;0
+P|1145|H|defensive|Lance Jackson||5;1;0;0;0;0;0
+P|1145|H|defensive|Hero Kanu||5;0;0;0;0;0;0
+P|1145|H|defensive|Kade Phillips||4;4;0;0;0;0;0
+P|1145|H|defensive|Zina Umeozulu||4;2;1;1;0;0;0
+P|1145|H|defensive|Justin Cryer||3;2;1;1;0;0;0
+P|1145|H|defensive|Warren Roberson||3;2;0;0;1;0;0
+P|1145|H|defensive|Justus Terry||3;1;1;1;0;0;0
+P|1145|H|defensive|Brad Spence||3;1;0;0;0;0;0
+P|1145|H|defensive|Maraad Watson||3;1;0;0;0;0;1
+P|1145|H|defensive|Samari Matthews||2;2;0;0;0;0;0
+P|1145|H|defensive|Ian Geffrard||2;1;0;0;0;0;0
+P|1145|H|defensive|Kobe Black||1;1;0;0;0;0;0
+P|1145|H|defensive|Myron Charles||1;1;0;0;0;0;0
+P|1145|H|defensive|Zion Williams||1;1;0;0;0;0;0
+P|1145|H|defensive|Josiah Sharma||1;1;0;0;0;0;0
+P|1145|H|defensive|Bo Mascoe||1;0;0;0;0;0;0
+P|1145|H|defensive|Alex January||1;0;0;0;0;0;0
+P|1145|H|defensive|Jonah Williams||1;0;0;0;0;0;0
+P|1145|H|defensive|Tyler Atkinson||1;0;0;0;0;0;0
+P|1145|H|defensive|Graceson Littleton||1;0;0;0;0;0;0
+P|1145|H|kickReturns|Michael Masunas||1;12;12.0;12;0
+P|1145|H|puntReturns|Ryan Niblett||2;0;0.0;2;0
+P|1145|H|kicking|Gianni Spetic||1/1;100.0;45;4/4;7
+P|1145|H|punting|Mac Chiumento||6;229;38.2;0;0;45
+G|1146|2026-10-31|Missouri|Arkansas
+T|1146|A|firstDowns=22;thirdDownEff=6-13;fourthDownEff=2-3;totalYards=390;netPassingYards=179;completionAttempts=20/31;yardsPerPass=5.8;rushingYards=211;rushingAttempts=35;yardsPerRushAttempt=6.0;totalPenaltiesYards=9-80;turnovers=1;fumblesLost=1;interceptions=0;possessionTime=31:45;defSacks=1;defTfl=2
+T|1146|H|firstDowns=18;thirdDownEff=8-17;fourthDownEff=2-4;totalYards=288;netPassingYards=229;completionAttempts=20/34;yardsPerPass=6.7;rushingYards=59;rushingAttempts=36;yardsPerRushAttempt=1.6;totalPenaltiesYards=7-85;turnovers=4;fumblesLost=3;interceptions=1;possessionTime=28:15;defSacks=0;defTfl=3
+P|1146|A|passing|Austin Simmons||20/31;179;5.8;2;0
+P|1146|A|rushing|Jamal Roberts||23;138;6.0;1;43
+P|1146|A|rushing|Ahmad Hardy||3;42;14.0;0;37
+P|1146|A|rushing|DaMarion Fowlkes||3;18;6.0;0;8
+P|1146|A|rushing|Preston Hatfield||2;12;6.0;0;10
+P|1146|A|rushing|Austin Simmons||3;3;1.0;0;3
+P|1146|A|receiving|Cayden Lee||6;78;13.0;0;46
+P|1146|A|receiving|Donovan Olugbode||5;50;10.0;1;15
+P|1146|A|receiving|Jamal Roberts||3;20;6.7;1;10
+P|1146|A|receiving|Naeshaun Montgomery||3;19;6.3;0;11
+P|1146|A|receiving|Brett Norfleet||1;12;12.0;0;12
+P|1146|A|receiving|DaMarion Fowlkes||2;0;0.0;0;4
+P|1146|A|fumbles|Jamal Roberts||1;1;0
+P|1146|A|fumbles|Darris Smith||0;0;1
+P|1146|A|fumbles|Jahlil Florence||0;0;1
+P|1146|A|fumbles|Santana Banner||0;0;1
+P|1146|A|defensive|Nicholas Rodriguez||9;3;0;0;0;0;0
+P|1146|A|defensive|Santana Banner||9;2;0;0;1;0;0
+P|1146|A|defensive|Trajen Greco||8;3;0;0;1;0;0
+P|1146|A|defensive|Dante McClellan||5;4;0;0;0;0;0
+P|1146|A|defensive|Kensley Louidor-Faustin||5;4;0;1;0;0;0
+P|1146|A|defensive|Jeremiah Beasley||5;2;0;0;0;0;0
+P|1146|A|defensive|Langden Kitchen||5;1;0;0;0;0;0
+P|1146|A|defensive|Jason Dowell||4;0;0;0;0;0;0
+P|1146|A|defensive|Sione Laulea||3;3;0;0;1;0;0
+P|1146|A|defensive|Jalen Marshall||3;1;0;0;0;0;0
+P|1146|A|defensive|Elijah Dotson||3;1;0;0;1;1;0
+P|1146|A|defensive|Chris Graves Jr.||2;1;0;0;2;0;0
+P|1146|A|defensive|Sterling Webb||2;1;0;0;0;0;0
+P|1146|A|defensive|Robert Woodyard Jr.||2;0;0;0;1;0;0
+P|1146|A|defensive|Donta Simpson||1;1;1;1;0;1;0
+P|1146|A|defensive|Jahlil Florence||1;1;0;0;0;0;0
+P|1146|A|defensive|Daeden Hopkins||1;1;0;0;0;1;0
+P|1146|A|defensive|Brody Jones||1;1;0;0;0;0;0
+P|1146|A|defensive|Darris Smith||1;0;0;0;0;0;1
+P|1146|A|interceptions|Trajen Greco||1;22;0
+P|1146|A|kicking|Blake Craig||2/2;100.0;53;4/4;10
+P|1146|A|punting|Brunno Reus||2;60;30.0;0;0;32
+P|1146|H|passing|KJ Jackson||20/34;229;6.7;0;1
+P|1146|H|rushing|Cam Settles||12;38;3.2;0;10
+P|1146|H|rushing|KJ Jackson||13;33;2.5;1;14
+P|1146|H|rushing|Sutton Smith||9;22;2.4;0;7
+P|1146|H|rushing|Braylen Russell||1;0;0.0;0;0
+P|1146|H|receiving|Antonio Jordan||7;106;15.1;0;37
+P|1146|H|receiving|CJ Brown||4;37;9.3;0;14
+P|1146|H|receiving|Cam Settles||4;25;6.3;0;12
+P|1146|H|receiving|Ismael Cisse||1;22;22.0;0;22
+P|1146|H|receiving|Donovan Faupel||1;22;22.0;0;22
+P|1146|H|receiving|Ty Lockwood||1;8;8.0;0;8
+P|1146|H|receiving|Courtney Crutchfield||1;6;6.0;0;6
+P|1146|H|receiving|Matt Adcock||1;3;3.0;0;3
+P|1146|H|fumbles|KJ Jackson||2;1;0
+P|1146|H|fumbles|Antonio Jordan||1;1;0
+P|1146|H|fumbles|Bradley Shaw||0;0;1
+P|1146|H|defensive|Bradley Shaw||9;3;0;0;2;0;0
+P|1146|H|defensive|Joker Johnson||8;5;0;1;0;0;0
+P|1146|H|defensive|Christian Harrison||7;4;0;1;1;0;0
+P|1146|H|defensive|Ja'Quavion Smith||5;2;0;0.5;0;0;0
+P|1146|H|defensive|Khmori House||5;0;0;0;0;1;0
+P|1146|H|defensive|Phoenix Jackson||4;2;0;0;0;0;0
+P|1146|H|defensive|Quincy Rhodes Jr.||4;1;0;0;0;1;0
+P|1146|H|defensive|Ben Bogle||4;1;0;0;0;0;0
+P|1146|H|defensive|Hunter Osborne||3;2;0;0;0;0;0
+P|1146|H|defensive|Xadavien Sims||3;1;0;0;0;0;0
+P|1146|H|defensive|Danny Beale III||3;1;0;0;0;0;0
+P|1146|H|defensive|Carter Stoutmire||2;2;0;0;0;0;0
+P|1146|H|defensive|Shelton Lewis||2;1;0;0;0;0;0
+P|1146|H|defensive|Steven Soles Jr.||2;0;0;0;0;1;0
+P|1146|H|defensive|Jeremy Evans||2;0;0;0;0;0;0
+P|1146|H|defensive|David Oke||1;1;0;0;0;1;0
+P|1146|H|defensive|Charlie Collins||1;1;0;0;0;0;0
+P|1146|H|defensive|Tay Lockett||1;1;0;0;0;0;0
+P|1146|H|defensive|Antonio Jordan||1;1;0;0;0;0;0
+P|1146|H|defensive|Jamari Hawkins||1;0;0;0;0;0;0
+P|1146|H|defensive|Antonio Sandel-Bascomb||1;0;0;0.5;0;0;0
+P|1146|H|kickReturns|Jamari Hawkins||1;25;25.0;25;0
+P|1146|H|kicking|Max Gilbert||1/2;50.0;32;1/1;4
+P|1146|H|punting|Jesse Ehrlich||2;91;45.5;0;2;47
+G|1147|2026-10-31|Ohio State|USC
+T|1147|A|firstDowns=25;thirdDownEff=7-16;fourthDownEff=0-1;totalYards=464;netPassingYards=260;completionAttempts=21/38;yardsPerPass=6.8;rushingYards=204;rushingAttempts=43;yardsPerRushAttempt=4.7;totalPenaltiesYards=11-71;turnovers=1;fumblesLost=1;interceptions=0;possessionTime=39:28;defSacks=1;defTfl=7
+T|1147|H|firstDowns=15;thirdDownEff=4-10;fourthDownEff=0-0;totalYards=338;netPassingYards=222;completionAttempts=15/23;yardsPerPass=9.7;rushingYards=116;rushingAttempts=27;yardsPerRushAttempt=4.3;totalPenaltiesYards=6-42;turnovers=1;fumblesLost=1;interceptions=0;possessionTime=20:32;defSacks=2;defTfl=7
+P|1147|A|passing|Luke Fahey||21/38;260;6.8;1;0
+P|1147|A|rushing|Bo Jackson||21;121;5.8;0;28
+P|1147|A|rushing|Isaiah West||13;65;5.0;0;18
+P|1147|A|rushing|Luke Fahey||7;12;1.7;0;9
+P|1147|A|rushing|Legend Bey||2;6;3.0;0;5
+P|1147|A|receiving|Jeremiah Smith||10;83;8.3;1;27
+P|1147|A|receiving|Chris Henry Jr.||2;50;25.0;0;39
+P|1147|A|receiving|Mason Williams||2;42;21.0;0;24
+P|1147|A|receiving|Bo Jackson||2;32;16.0;0;17
+P|1147|A|receiving|Phillip Bell||2;30;15.0;0;23
+P|1147|A|receiving|Devin McCuin||1;17;17.0;0;17
+P|1147|A|receiving|Isaiah West||2;6;3.0;0;7
+P|1147|A|fumbles|Isaiah West||1;1;0
+P|1147|A|fumbles|Earl Little Jr.||0;0;1
+P|1147|A|defensive|Payton Pierce||6;3;0;0;1;0;0
+P|1147|A|defensive|Earl Little Jr.||5;4;0;1;0;0;0
+P|1147|A|defensive|Jaylen McClain||5;3;0;0;0;0;0
+P|1147|A|defensive|Riley Pettijohn||5;3;0;0.5;1;0;0
+P|1147|A|defensive|Christian Alliegro||4;4;0;1;0;0;0
+P|1147|A|defensive|Eddrick Houston||4;2;0;0.5;0;0;0
+P|1147|A|defensive|Kenyatta Jackson Jr.||4;2;0;1.5;0;0;0
+P|1147|A|defensive|Jermaine Mathews Jr.||3;3;1;2;1;0;0
+P|1147|A|defensive|Qua Russaw||2;2;0;0;0;0;0
+P|1147|A|defensive|John Walker||2;1;0;0;0;0;0
+P|1147|A|defensive|Tarvos Alford||2;1;0;0;0;0;0
+P|1147|A|defensive|Jason Moore||2;0;0;0.5;0;0;0
+P|1147|A|defensive|James Smith||1;1;0;0;0;0;0
+P|1147|A|defensive|Devin Sanchez||1;1;0;0;0;0;0
+P|1147|A|defensive|Joe McGuire||1;1;0;0;0;0;0
+P|1147|A|defensive|Simeon Caldwell||1;1;0;0;0;0;0
+P|1147|A|defensive|Austin Siereveld||1;0;0;0;0;0;0
+P|1147|A|defensive|Gabe VanSickle||1;0;0;0;0;0;0
+P|1147|A|kickReturns|Devin McCuin||2;45;22.5;23;0
+P|1147|A|kickReturns|Brody Lennon||1;11;11.0;11;0
+P|1147|A|puntReturns|Phillip Bell||1;3;3.0;3;0
+P|1147|A|kicking|Connor Hawkins||4/4;100.0;47;0/0;12
+P|1147|A|punting|Joe McGuire||4;161;40.3;0;0;45
+P|1147|H|passing|Jayden Maiava||15/22;222;10.1;1;0
+P|1147|H|rushing|King Miller||13;78;6.0;1;21
+P|1147|H|rushing|Waymond Jordan||12;48;4.0;1;20
+P|1147|H|rushing|Jayden Maiava||1;-9;-9.0;0;0
+P|1147|H|receiving|Trent Mosley||5;101;20.2;1;69
+P|1147|H|receiving|Mark Bowman||3;79;26.3;0;70
+P|1147|H|receiving|Waymond Jordan||2;17;8.5;0;12
+P|1147|H|receiving|Zacharyus Williams||1;15;15.0;0;15
+P|1147|H|receiving|King Miller||2;8;4.0;0;6
+P|1147|H|receiving|Tucker Ashcraft||1;3;3.0;0;3
+P|1147|H|receiving|Carson Tabaracci||1;-1;-1.0;0;0
+P|1147|H|fumbles|King Miller||1;1;0
+P|1147|H|fumbles|Floyd Boucard||0;0;1
+P|1147|H|defensive|Deven Bryant||11;4;0;0.5;0;0;0
+P|1147|H|defensive|Desman Stephens II||9;5;0;1;0;0;0
+P|1147|H|defensive|Kennedy Urlacher||6;4;0;0;0;0;0
+P|1147|H|defensive|Chasen Johnson||5;5;0;0;1;0;0
+P|1147|H|defensive|Alex Graham||5;4;0;0;0;0;0
+P|1147|H|defensive|Braylan Shelby||5;3;1;1;0;0;0
+P|1147|H|defensive|Prophet Brown||5;2;0;1;0;0;0
+P|1147|H|defensive|Christian Pierce||5;2;0;0;0;0;0
+P|1147|H|defensive|Kameryn Crawford||5;2;0.5;1;0;1;0
+P|1147|H|defensive|Ta'Mere Robinson||4;2;0;0;0;0;0
+P|1147|H|defensive|Jahkeem Stewart||3;3;0;0;0;0;0
+P|1147|H|defensive|Alex VanSumeren||3;2;0.5;0.5;0;0;0
+P|1147|H|defensive|Luke Wafle||3;2;0;1;0;0;0
+P|1147|H|defensive|Zuriah Fisher||2;1;0;0;0;0;0
+P|1147|H|defensive|Jontez Williams||2;1;0;1;0;0;0
+P|1147|H|defensive|Jide Abasiri||2;1;0;0;0;0;0
+P|1147|H|defensive|Talanoa Ili||1;1;0;0;0;0;0
+P|1147|H|defensive|Tomuhini Topui||1;1;0;0;0;0;0
+P|1147|H|defensive|RJ Sermons||1;1;0;0;0;0;0
+P|1147|H|defensive|Floyd Boucard||1;1;0;0;0;0;0
+P|1147|H|defensive|Jordan Abarca||1;1;0;0;0;0;0
+P|1147|H|defensive|Jamaal Jarrett||1;0;0;0;0;0;0
+P|1147|H|defensive|Ryan O'Connell||1;0;0;0;0;0;0
+P|1147|H|defensive|GianCarlo Rufo||1;0;0;0;0;0;0
+P|1147|H|defensive|Madden Riordan||1;0;0;0;0;0;0
+P|1147|H|kickReturns|Tanook Hines||1;24;24.0;24;0
+P|1147|H|puntReturns|Trent Mosley||1;44;44.0;44;0
+P|1147|H|kicking|Caden Chittenden||2/2;100.0;36;3/3;9
+P|1147|H|kicking|Ryon Sayeri||1/1;100.0;54;0/0;3
+P|1147|H|punting|Lachlan Carrigan||4;184;46.0;1;1;56
+G|1148|2026-10-31|Oklahoma State|Iowa State
+T|1148|A|firstDowns=27;thirdDownEff=8-12;fourthDownEff=1-1;totalYards=533;netPassingYards=323;completionAttempts=27/42;yardsPerPass=7.7;rushingYards=210;rushingAttempts=32;yardsPerRushAttempt=6.6;totalPenaltiesYards=3-25;turnovers=2;fumblesLost=1;interceptions=1;possessionTime=25:13;defSacks=1;defTfl=5
+T|1148|H|firstDowns=24;thirdDownEff=8-15;fourthDownEff=1-1;totalYards=581;netPassingYards=309;completionAttempts=18/28;yardsPerPass=11.0;rushingYards=272;rushingAttempts=44;yardsPerRushAttempt=6.2;totalPenaltiesYards=7-62;turnovers=1;fumblesLost=0;interceptions=1;possessionTime=34:47;defSacks=0;defTfl=2
+P|1148|A|passing|Drew Mestemaker||27/42;323;7.7;5;1
+P|1148|A|rushing|Caleb Hawkins||25;194;7.8;2;75
+P|1148|A|rushing|Drew Mestemaker||4;16;4.0;0;8
+P|1148|A|rushing|William Mason||1;3;3.0;0;3
+P|1148|A|rushing|Wyatt Young||1;-1;-1.0;0;0
+P|1148|A|receiving|Justin Bowick||7;124;17.7;2;41
+P|1148|A|receiving|Caleb Hawkins||6;81;13.5;1;59
+P|1148|A|receiving|Wyatt Young||7;74;10.6;2;18
+P|1148|A|receiving|Terrence Lewis||3;24;8.0;0;14
+P|1148|A|receiving|Miles Coleman||3;13;4.3;0;6
+P|1148|A|receiving|Oscar Hammond||1;7;7.0;0;7
+P|1148|A|fumbles|Bobby Deal Jr.||1;1;0
+P|1148|A|defensive|Tate Romney||9;5;0;1;0;0;0
+P|1148|A|defensive|Isaiah Chisom||8;6;0;0;0;0;0
+P|1148|A|defensive|Quinton Hammonds||6;5;0;1.5;0;0;0
+P|1148|A|defensive|Ethan Wesloski||6;2;0.5;0.5;0;0;0
+P|1148|A|defensive|Mo Horn||5;5;0;0;2;0;0
+P|1148|A|defensive|Evan Jackson||5;3;0;0;1;0;0
+P|1148|A|defensive|Malik Charles||5;2;0;0;0;0;0
+P|1148|A|defensive|DeSean Brown||4;3;0;0;0;0;0
+P|1148|A|defensive|LaDainian Fields||4;3;0;0.5;1;0;0
+P|1148|A|defensive|Christian Bodnar||4;1;0;0;0;0;0
+P|1148|A|defensive|James Williams||2;1;0;0.5;0;0;0
+P|1148|A|defensive|Braylon Rigsby||2;0;0.5;1;0;0;0
+P|1148|A|defensive|Taurean Davis||2;0;0;0;0;0;0
+P|1148|A|defensive|Gunnar Wilson||1;1;0;0;0;0;0
+P|1148|A|defensive|Oscar Hammond||1;1;0;0;0;0;0
+P|1148|A|defensive|Markeith Williams||1;0;0;0;0;0;0
+P|1148|A|defensive|Saadiq Clements||1;0;0;0;0;0;0
+P|1148|A|defensive|Billy Walton III||1;0;0;0;0;0;0
+P|1148|A|defensive|Vincent Holmes||1;0;0;0;0;0;0
+P|1148|A|defensive|Keviyan Huddleston||1;0;0;0;0;0;0
+P|1148|A|defensive|Luke Webb||1;0;0;0;0;0;0
+P|1148|A|defensive|Jaleel Johnson||0;0;0;0;0;1;0
+P|1148|A|interceptions|LaDainian Fields||1;11;0
+P|1148|A|puntReturns|Bobby Deal Jr.||1;0;0.0;0;0
+P|1148|A|kicking|Sam Keltner||0/1;0.0;0;7/7;7
+P|1148|A|punting|Lachie Pozzobon||2;80;40.0;0;1;43
+P|1148|H|passing|Jaylen Raynor||18/28;309;11.0;3;1
+P|1148|H|rushing|Aiden Flora||29;221;7.6;2;75
+P|1148|H|rushing|Jaylen Raynor||12;48;4.0;1;13
+P|1148|H|rushing|Arnold Barnes III||1;2;2.0;0;2
+P|1148|H|rushing|Omari Hayes||1;1;1.0;0;1
+P|1148|H|rushing|Jamal Polite Jr.||1;0;0.0;0;0
+P|1148|H|receiving|Jamal Polite Jr.||6;171;28.5;1;53
+P|1148|H|receiving|Cameron Pettaway||1;40;40.0;1;40
+P|1148|H|receiving|Cody Jackson||2;33;16.5;0;27
+P|1148|H|receiving|Ty Claiborne||3;32;10.7;0;14
+P|1148|H|receiving|Malcolm Watkins||2;13;6.5;0;8
+P|1148|H|receiving|Vince Benetti||1;9;9.0;0;9
+P|1148|H|receiving|Omari Hayes||2;9;4.5;0;8
+P|1148|H|receiving|Easton Miller||1;2;2.0;1;2
+P|1148|H|fumbles|Jaylen Raynor||1;0;0
+P|1148|H|fumbles|Jamal Polite Jr.||1;0;0
+P|1148|H|fumbles|Caleb Schmidt||0;0;1
+P|1148|H|defensive|Sullivan Schlimgen||8;5;0;0;2;0;0
+P|1148|H|defensive|Drew Surges||6;3;0;0;0;0;0
+P|1148|H|defensive|Duhron Goodman||5;4;0;0;1;0;0
+P|1148|H|defensive|David Coffey||5;3;0;0;2;0;0
+P|1148|H|defensive|Beau Goodwin||5;3;0;0;1;0;0
+P|1148|H|defensive|Carson Willich||4;2;0;0;0;0;0
+P|1148|H|defensive|Seth Johnson||4;2;0;0;0;0;0
+P|1148|H|defensive|Landon Kalsbeck||4;0;0;0;0;0;0
+P|1148|H|defensive|Donovan Fitzmaurice||3;1;0;0;0;0;0
+P|1148|H|defensive|Jack Janikowski||3;0;0;0.5;0;2;0
+P|1148|H|defensive|Isaac Terrell||2;2;0;0;0;1;0
+P|1148|H|defensive|Keyon Washington||2;2;0;1;0;0;0
+P|1148|H|defensive|Trey Verdon||2;2;0;0;0;0;0
+P|1148|H|defensive|Max Baloun||2;1;0;0;0;0;0
+P|1148|H|defensive|Jace Gilbert||2;1;0;0;0;2;0
+P|1148|H|defensive|Tyrone Cotton III||2;1;0;0;1;0;0
+P|1148|H|defensive|Blake Hawkins||2;1;0;0;0;0;0
+P|1148|H|defensive|Malaki Ta'ase||1;1;0;0;0;0;0
+P|1148|H|defensive|Brady Hummel||1;1;0;0;0;0;0
+P|1148|H|defensive|Zaimir Hawk||1;0;0;0;1;0;0
+P|1148|H|defensive|Kaleb Bilal-Jones||1;0;0;0.5;0;0;0
+P|1148|H|interceptions|Beau Goodwin||1;6;0
+P|1148|H|kickReturns|Carson Robbins||1;22;22.0;22;0
+P|1148|H|kickReturns|Cameron Pettaway||1;21;21.0;21;0
+P|1148|H|kicking|Kyle Konrardy||3/3;100.0;39;6/6;15
+P|1148|H|punting|Jonah DuPont||4;163;40.8;0;1;46
+G|1149|2026-10-31|Washington State|San Diego State
+T|1149|A|firstDowns=25;thirdDownEff=9-14;fourthDownEff=0-3;totalYards=367;netPassingYards=299;completionAttempts=30/42;yardsPerPass=7.1;rushingYards=68;rushingAttempts=30;yardsPerRushAttempt=2.3;totalPenaltiesYards=3-35;turnovers=1;fumblesLost=0;interceptions=1;possessionTime=33:05;defSacks=0;defTfl=7
+T|1149|H|firstDowns=18;thirdDownEff=5-11;fourthDownEff=1-1;totalYards=306;netPassingYards=104;completionAttempts=13/22;yardsPerPass=4.7;rushingYards=202;rushingAttempts=37;yardsPerRushAttempt=5.5;totalPenaltiesYards=2-24;turnovers=1;fumblesLost=0;interceptions=1;possessionTime=26:55;defSacks=3;defTfl=6
+P|1149|A|passing|Owen Eshelman||30/42;299;7.1;0;1;73.4
+P|1149|A|rushing|Owen Eshelman||16;34;2.1;2;9
+P|1149|A|rushing|Kirby Vorhees||7;17;2.4;1;6
+P|1149|A|rushing|Maxwell Woods||4;11;2.8;0;7
+P|1149|A|rushing|Leo Pulalasi||3;6;2.0;0;6
+P|1149|A|receiving|Daniel Blood||8;105;13.1;0;43
+P|1149|A|receiving|Trey Leckner||7;59;8.4;0;13
+P|1149|A|receiving|Branden Ganashamoorthy||4;58;14.5;0;23
+P|1149|A|receiving|Leo Pulalasi||2;28;14.0;0;18
+P|1149|A|receiving|Tank Hawkins Jr.||4;24;6.0;0;8
+P|1149|A|receiving|Kirby Vorhees||3;16;5.3;0;10
+P|1149|A|receiving|Caleb Northcroft||1;11;11.0;0;11
+P|1149|A|receiving|Maxwell Woods||1;-2;-2.0;0;0
+P|1149|A|fumbles|Daniel Blood||1;0;0
+P|1149|A|defensive|Keith Brown||11;6;0;0;1;0;0
+P|1149|A|defensive|Linus Zunk||6;4;0;2.5;0;0;0
+P|1149|A|defensive|Jeremiah Bernard||5;4;0;1;0;0;0
+P|1149|A|defensive|Jirah Leaupepetele||5;0;0;0.5;0;0;0
+P|1149|A|defensive|Matyus McLain||4;3;0;1;0;1;0
+P|1149|A|defensive|Jamarey Smith||4;2;0;0;0;0;0
+P|1149|A|defensive|Jaylen Thomas||4;2;0;0;0;0;0
+P|1149|A|defensive|DJ Warner||3;2;0;1;0;0;0
+P|1149|A|defensive|Khamari Terrell||2;1;0;0;1;0;0
+P|1149|A|defensive|Jackquintin Bal||2;1;0;0;1;0;0
+P|1149|A|defensive|Ben Beatty||2;1;0;0;0;0;0
+P|1149|A|defensive|Isaiah Hung||2;1;0;0;1;0;0
+P|1149|A|defensive|Paul Hutson III||2;0;0;0;0;0;0
+P|1149|A|defensive|Jalil Tucker||1;1;0;0;0;0;0
+P|1149|A|defensive|Malachi Wrice||1;1;0;0;0;0;0
+P|1149|A|defensive|Carsten Reynolds||1;1;0;0;0;0;0
+P|1149|A|defensive|Gage Jones||1;1;0;0;0;0;0
+P|1149|A|defensive|Josh Wedel||1;1;0;1;0;0;0
+P|1149|A|defensive|Kaden Beatty||1;0;0;0;0;0;0
+P|1149|A|defensive|Michael Hughes||1;0;0;0;0;0;0
+P|1149|A|defensive|Fernando Lecuona||1;0;0;0;0;0;0
+P|1149|A|interceptions|Jaylen Thomas||1;17;0
+P|1149|A|kickReturns|CJ Solis-Lumar||1;0;0.0;0;0
+P|1149|A|kicking|Jack Stevens||0/1;0.0;0;2/3;2
+P|1149|H|passing|Stone Saunders||12/21;102;4.9;0;1;64.3
+P|1149|H|passing|Bert Emanuel Jr.||1/1;2;2.0;1;0;--
+P|1149|H|rushing|Lucky Sutton||18;115;6.4;0;46
+P|1149|H|rushing|Javion Kinnard||17;87;5.1;2;18
+P|1149|H|rushing|Bert Emanuel Jr.||1;1;1.0;0;1
+P|1149|H|receiving|Bert Emanuel Jr.||3;47;15.7;0;18
+P|1149|H|receiving|Jaylon Hawkins||3;35;11.7;0;18
+P|1149|H|receiving|Nathan Acevedo||2;11;5.5;0;9
+P|1149|H|receiving|Jordan Napier||2;10;5.0;0;10
+P|1149|H|receiving|Jackson Ford||1;2;2.0;1;2
+P|1149|H|receiving|Javion Kinnard||2;-1;-0.5;0;1
+P|1149|H|defensive|Tainoa Lave||9;8;0;0;0;0;0
+P|1149|H|defensive|Josiah Cox||6;4;0;0;0;0;0
+P|1149|H|defensive|Sione Hala||6;3;0.5;1.5;1;1;0
+P|1149|H|defensive|Tano Letuli||6;3;0;0;0;0;0
+P|1149|H|defensive|Gavriel Lightfoot||5;0;0.5;0.5;0;0;0
+P|1149|H|defensive|Djibril Rahman||4;3;0.5;1.5;0;1;0
+P|1149|H|defensive|Isaiah Green||4;3;0;0;0;0;0
+P|1149|H|defensive|Mike Lindsay||4;3;0;0;1;0;0
+P|1149|H|defensive|Kai Wallin||3;2;0;1;0;0;0
+P|1149|H|defensive|Caleb Ricks||3;2;0;0;2;0;0
+P|1149|H|defensive|Krishna Clay||3;1;1.5;1.5;0;1;0
+P|1149|H|defensive|Josh Hunter||3;1;0;0;0;0;0
+P|1149|H|defensive|Kainoa Davis||3;1;0;0;0;0;0
+P|1149|H|defensive|Brady Nassar||2;2;0;0;0;0;0
+P|1149|H|defensive|Carsten Mamaril||2;2;0;0;0;0;0
+P|1149|H|defensive|Cameron Cooper||2;2;0;0;0;0;0
+P|1149|H|defensive|Jelani Whitmore||2;1;0;0;0;0;0
+P|1149|H|defensive|Isaac Lucas||1;1;0;0;0;0;0
+P|1149|H|defensive|Kaimana Tufaga||1;1;0;0;0;0;0
+P|1149|H|interceptions|Kai Wallin||1;16;0
+P|1149|H|kickReturns|Jaylon Hawkins||2;29;14.5;15;0
+P|1149|H|kickReturns|Jeramiah Lewis||1;16;16.0;16;0
+P|1149|H|kicking|Cooper DiLeva||2/2;100.0;45;2/2;8
+P|1149|H|punting|Tashi Dorje||2;90;45.0;1;1;52
+G|1150|2026-10-31|Wofford|Samford
+T|1150|A|firstDowns=22;thirdDownEff=5-15;fourthDownEff=1-1;totalYards=386;netPassingYards=159;completionAttempts=14/22;yardsPerPass=7.2;rushingYards=227;rushingAttempts=50;yardsPerRushAttempt=4.5;totalPenaltiesYards=4-45;turnovers=2;fumblesLost=0;interceptions=2;possessionTime=38:28;defSacks=1;defTfl=5
+T|1150|H|firstDowns=12;thirdDownEff=2-12;fourthDownEff=1-1;totalYards=310;netPassingYards=219;completionAttempts=19/32;yardsPerPass=6.8;rushingYards=91;rushingAttempts=18;yardsPerRushAttempt=5.1;totalPenaltiesYards=5-35;turnovers=0;fumblesLost=0;interceptions=0;possessionTime=21:32;defSacks=3;defTfl=7
+P|1150|A|passing|J.T. Fayard||13/21;125;6.0;0;2
+P|1150|A|passing|Terrence Honeywood||1/1;34;34.0;0;0
+P|1150|A|rushing|Gerald Modest Jr.||38;197;5.2;0;26
+P|1150|A|rushing|Davis Penn||4;18;4.5;0;21
+P|1150|A|rushing|Tay Franklin||2;11;5.5;0;7
+P|1150|A|rushing|J.T. Fayard||6;1;0.2;0;9
+P|1150|A|receiving|Anjuan Coleman Jr.||2;43;21.5;0;34
+P|1150|A|receiving|Jaden Fowler||2;40;20.0;0;23
+P|1150|A|receiving|Colby Alexander||4;38;9.5;0;22
+P|1150|A|receiving|Tay Franklin||2;15;7.5;0;16
+P|1150|A|receiving|Ivory Aikens||3;15;5.0;0;15
+P|1150|A|receiving|Davis Penn||1;8;8.0;0;8
+P|1150|A|fumbles|Grant Tucker||1;0;0
+P|1150|A|defensive|Ky'Ree Murphy||7;6;0;0;1;0;0
+P|1150|A|defensive|Eli Campbell||5;1;0;0;0;0;0
+P|1150|A|defensive|Logan McCloud||4;3;0;0;0;0;0
+P|1150|A|defensive|Jacobi Hatter||3;3;0;0;0;0;0
+P|1150|A|defensive|Elijah Washington||3;2;0;0;0;0;0
+P|1150|A|defensive|Marek Marcellus||2;1;1;1;0;1;0
+P|1150|A|defensive|Alijah Williams||2;1;0;0;0;0;0
+P|1150|A|defensive|Joseph Polite||2;1;0;0.5;0;0;0
+P|1150|A|defensive|Wyatt Ward||2;1;0;1;0;0;0
+P|1150|A|defensive|Cole Walker||2;0;0;0;0;0;0
+P|1150|A|defensive|Aiden Morris||1;1;0;0;0;0;0
+P|1150|A|defensive|Ramon McCollough Jr.||1;1;0;1;0;0;0
+P|1150|A|defensive|Jake Thorner||1;1;0;0;0;0;0
+P|1150|A|defensive|Jordan Johnson||1;1;0;1;0;0;0
+P|1150|A|defensive|Zayd Rogan||1;0;0;0;0;0;0
+P|1150|A|defensive|Nicholas Mathious||1;0;0;0.5;0;0;0
+P|1150|A|defensive|Jeremiah Shelby||1;0;0;0;0;0;0
+P|1150|A|defensive|Tyce Donnelly||0;0;0;0;0;1;0
+P|1150|A|kickReturns|Grant Tucker||1;-3;-3.0;0;0
+P|1150|A|puntReturns|Gavin Batt||2;6;3.0;6;0
+P|1150|A|kicking|Conner Deviney||3/5;60.0;43;0/0;9
+P|1150|A|punting|Cillian Bonner||3;148;49.3;1;2;55
+P|1150|H|passing|Gabarri Johnson||19/32;219;6.8;0;0
+P|1150|H|rushing|Ken Cherry||6;46;7.7;1;41
+P|1150|H|rushing|Gabarri Johnson||4;27;6.8;0;24
+P|1150|H|rushing|Domonique Thomas||6;12;2.0;0;4
+P|1150|H|rushing|Emerson Russell||2;6;3.0;0;3
+P|1150|H|receiving|Kevonte Corbin||3;89;29.7;0;45
+P|1150|H|receiving|Cayden Aukerman||5;48;9.6;0;16
+P|1150|H|receiving|Preston Bird||4;37;9.3;0;23
+P|1150|H|receiving|Ken Cherry||4;27;6.8;0;14
+P|1150|H|receiving|Marquise Henderson||1;9;9.0;0;9
+P|1150|H|receiving|Maddox McKim||2;9;4.5;0;7
+P|1150|H|defensive|Max Steve||20;8;0;0;0;0;0
+P|1150|H|defensive|Spencer Conn||13;8;0;1;0;0;0
+P|1150|H|defensive|Noah Holton||7;2;0;0;0;0;0
+P|1150|H|defensive|John Scott III||6;3;1;2;0;2;0
+P|1150|H|defensive|Maxton Woodward||6;2;0;0.5;0;0;0
+P|1150|H|defensive|David Yancey III||6;1;0;0.5;0;0;0
+P|1150|H|defensive|Andrew Jordan||4;4;1;2;0;0;0
+P|1150|H|defensive|Jackson Bussey||4;1;0;0;0;0;0
+P|1150|H|defensive|Aiden Jeter||3;1;1;1;0;0;0
+P|1150|H|defensive|LaShon Young||3;1;0;0;0;0;0
+P|1150|H|defensive|Dylon Henderson||3;1;0;0;0;0;0
+P|1150|H|defensive|Kyree Lewis||2;0;0;0;0;0;0
+P|1150|H|defensive|Jayden Lewis||1;1;0;0;0;0;0
+P|1150|H|defensive|Keion Dunlap||1;1;0;0;0;0;0
+P|1150|H|defensive|Trey Lenhardt||1;1;0;0;0;1;0
+P|1150|H|defensive|Elijah McDowell||1;1;0;0;0;0;0
+P|1150|H|defensive|Corrion Tyson||1;1;0;0;0;0;0
+P|1150|H|defensive|Joseph Shannon||1;0;0;0;0;0;0
+P|1150|H|defensive|Dezmon Thomas||1;0;0;0;0;0;0
+P|1150|H|defensive|Greg Williams||1;0;0;0;0;0;0
+P|1150|H|interceptions|Max Steve||1;3;0
+P|1150|H|interceptions|LaShon Young||1;0;0
+P|1150|H|kickReturns|Marquise Henderson||1;8;8.0;8;0
+P|1150|H|kickReturns|Kevonte Corbin||1;6;6.0;6;0
+P|1150|H|kicking|Ty Ippolito||1/2;50.0;44;1/1;4
+P|1150|H|punting|Will Thorley||8;302;37.8;0;2;44

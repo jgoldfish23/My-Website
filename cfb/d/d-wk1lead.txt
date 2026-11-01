@@ -1696,39 +1696,30 @@
 2026-10-24|North Dakota State|New Mexico|North Dakota State|passingYards|Nathan Hayes|QB|17/33, 198 YDS, 2 TD, 2 INT
 2026-10-24|North Dakota State|New Mexico|New Mexico|rushingYards|Kiefer Sibley|RB|13 CAR, 91 YDS, 1 TD
 2026-10-24|North Dakota State|New Mexico|North Dakota State|receivingYards|Jackson Williams|WR|4 REC, 71 YDS
-2026-10-31|App State|Georgia Southern|Georgia Southern|passingYards|Max Johnson|QB|24/30, 246 YDS
-2026-10-31|App State|Georgia Southern|Georgia Southern|rushingYards|Taeo Todd|RB|3 CAR, 16 YDS, 1 TD
-2026-10-31|App State|Georgia Southern|App State|receivingYards|Sam Pickett III|WR|4 REC, 86 YDS
-2026-10-31|Oklahoma State|Iowa State|Oklahoma State|passingYards|Drew Mestemaker|QB|12/15, 175 YDS, 3 TD
-2026-10-31|Oklahoma State|Iowa State|Iowa State|rushingYards|Aiden Flora|RB|13 CAR, 92 YDS, 1 TD
-2026-10-31|Oklahoma State|Iowa State|Iowa State|receivingYards|Jamal Polite Jr.|WR|4 REC, 85 YDS, 1 TD
-2026-10-31|Clemson|Florida State|Clemson|passingYards|Tait Reynolds|QB|11/18, 111 YDS, 2 TD
-2026-10-31|Clemson|Florida State|Clemson|rushingYards|Gideon Davidson|RB|7 CAR, 26 YDS
-2026-10-31|Clemson|Florida State|Florida State|receivingYards|Micahi Danzy|WR|2 REC, 51 YDS, 1 TD
-2026-10-31|Washington State|San Diego State|Washington State|passingYards|Owen Eshelman|QB|17/22, 161 YDS, 1 INT
-2026-10-31|Washington State|San Diego State|San Diego State|rushingYards|Lucky Sutton|RB|8 CAR, 68 YDS
-2026-10-31|Washington State|San Diego State|Washington State|receivingYards|Branden Ganashamoorthy|WR|4 REC, 58 YDS
-2026-10-31|Miami|North Carolina|North Carolina|passingYards|Billy Edwards Jr.|QB|13/17, 144 YDS, 1 TD
-2026-10-31|Miami|North Carolina|Miami|rushingYards|Mark Fletcher Jr.|RB|7 CAR, 28 YDS
-2026-10-31|Miami|North Carolina|North Carolina|receivingYards|Trech Kekahuna|WR|2 REC, 42 YDS
-2026-10-31|Ohio State|USC|USC|passingYards|Jayden Maiava|QB|6/10, 107 YDS, 1 TD
-2026-10-31|Ohio State|USC|Ohio State|rushingYards|Isaiah West|RB|9 CAR, 57 YDS
-2026-10-31|Ohio State|USC|USC|receivingYards|Trent Mosley|WR|4 REC, 89 YDS, 1 TD
-2026-10-31|Mississippi State|Texas|Texas|passingYards|Arch Manning|QB|7/10, 89 YDS, 1 TD
-2026-10-31|Mississippi State|Texas|Texas|rushingYards|Raleek Brown|RB|5 CAR, 18 YDS
-2026-10-31|Mississippi State|Texas|Texas|receivingYards|Cam Coleman|WR|2 REC, 61 YDS, 1 TD
-2026-10-31|Georgia Tech|Pittsburgh|Pittsburgh|passingYards|Holden Geriner|QB|9/17, 118 YDS
-2026-10-31|Georgia Tech|Pittsburgh|Pittsburgh|rushingYards|Damon Ferguson Jr.|RB|17 CAR, 112 YDS, 1 TD
+2026-10-31|Miami|North Carolina|North Carolina|passingYards|Billy Edwards Jr.|QB|28/34, 341 YDS, 4 TD
+2026-10-31|Miami|North Carolina|Miami|rushingYards|Javian Mallory|RB|12 CAR, 51 YDS
+2026-10-31|Miami|North Carolina|Miami|receivingYards|Malachi Toney|WR|7 REC, 75 YDS, 2 TD
+2026-10-31|Ohio State|USC|Ohio State|passingYards|Luke Fahey|QB|21/38, 260 YDS, 1 TD
+2026-10-31|Ohio State|USC|Ohio State|rushingYards|Bo Jackson|RB|21 CAR, 121 YDS
+2026-10-31|Ohio State|USC|USC|receivingYards|Trent Mosley|WR|5 REC, 101 YDS, 1 TD
+2026-10-31|Georgia Tech|Pittsburgh|Pittsburgh|passingYards|Holden Geriner|QB|13/30, 180 YDS, 1 TD
+2026-10-31|Georgia Tech|Pittsburgh|Pittsburgh|rushingYards|Damon Ferguson Jr.|RB|31 CAR, 185 YDS, 2 TD
 2026-10-31|Georgia Tech|Pittsburgh|Pittsburgh|receivingYards|Censere Lee|WR|3 REC, 56 YDS
-2026-10-31|Missouri|Arkansas|Missouri|passingYards|Austin Simmons|QB|11/15, 63 YDS
-2026-10-31|Missouri|Arkansas|Missouri|rushingYards|Jamal Roberts|RB|6 CAR, 30 YDS
-2026-10-31|Missouri|Arkansas|Missouri|receivingYards|Cayden Lee|WR|4 REC, 25 YDS
-2026-10-31|Washington|Nebraska|Nebraska|passingYards|Anthony Colandrea|QB|6/13, 81 YDS, 1 TD, 2 INT
-2026-10-31|Washington|Nebraska|Nebraska|rushingYards|Jamal Rule|RB|5 CAR, 32 YDS
-2026-10-31|Washington|Nebraska|Washington|receivingYards|Chris Lawson|WR|3 REC, 29 YDS
-2026-10-31|Army|Memphis|Memphis|passingYards|Marcus Stokes|QB|9/10, 124 YDS, 2 TD
-2026-10-31|Army|Memphis|Army|rushingYards|Godspower Nwawuihe|RB|9 CAR, 77 YDS, 1 TD
-2026-10-31|Army|Memphis|Memphis|receivingYards|Hunter Tipton|TE|2 REC, 57 YDS
+2026-10-31|Missouri|Arkansas|Arkansas|passingYards|KJ Jackson|QB|20/34, 229 YDS, 1 INT
+2026-10-31|Missouri|Arkansas|Missouri|rushingYards|Jamal Roberts|RB|23 CAR, 138 YDS, 1 TD
+2026-10-31|Missouri|Arkansas|Arkansas|receivingYards|Antonio Jordan|WR|7 REC, 106 YDS
+2026-10-31|Washington|Nebraska|Nebraska|passingYards|Anthony Colandrea|QB|18/35, 207 YDS, 1 TD, 2 INT
+2026-10-31|Washington|Nebraska|Nebraska|rushingYards|Jamal Rule|RB|13 CAR, 72 YDS
+2026-10-31|Washington|Nebraska|Washington|receivingYards|Chris Lawson|WR|9 REC, 84 YDS
+2026-10-31|Army|Memphis|Memphis|passingYards|Marcus Stokes|QB|29/35, 371 YDS, 4 TD
+2026-10-31|Army|Memphis|Army|rushingYards|Godspower Nwawuihe|RB|19 CAR, 100 YDS, 1 TD
+2026-10-31|Army|Memphis|Memphis|receivingYards|Jermane Hayes|WR|9 REC, 86 YDS, 2 TD
+2026-10-31|Texas State|Boise State|Boise State|passingYards|Maddux Madsen|QB|9/10, 117 YDS
+2026-10-31|Texas State|Boise State|Boise State|rushingYards|Dylan Riley|RB|8 CAR, 27 YDS, 1 TD
+2026-10-31|Texas State|Boise State|Boise State|receivingYards|Matt Wagner|TE|1 REC, 44 YDS
+2026-10-31|Northern Illinois|UNLV|UNLV|passingYards|Jackson Arnold|QB|5/8, 133 YDS, 1 TD, 1 INT
+2026-10-31|Northern Illinois|UNLV|Northern Illinois|rushingYards|Elijah Porter|RB|5 CAR, 34 YDS
+2026-10-31|Northern Illinois|UNLV|UNLV|receivingYards|Kayden McGee|WR|1 REC, 75 YDS, 1 TD
 2026-10-31|Florida|Georgia|Florida|passingYards|Tramell Jones Jr.|QB|18/25, 172 YDS, 1 INT
 2026-10-31|Florida|Georgia|Georgia|rushingYards|Nate Frazier|RB|12 CAR, 67 YDS, 1 TD
 2026-10-31|Florida|Georgia|Florida|receivingYards|Bailey Stockton|WR|8 REC, 76 YDS
@@ -1747,6 +1738,9 @@
 2026-10-31|Arizona State|BYU|BYU|passingYards|Bear Bachmeier|QB|19/30, 236 YDS, 1 TD, 1 INT
 2026-10-31|Arizona State|BYU|Arizona State|rushingYards|Cardae Mack|RB|23 CAR, 123 YDS
 2026-10-31|Arizona State|BYU|BYU|receivingYards|Legend Glasker|WR|4 REC, 87 YDS
+2026-10-31|Mississippi State|Texas|Texas|passingYards|Arch Manning|QB|16/20, 220 YDS, 3 TD
+2026-10-31|Mississippi State|Texas|Mississippi State|rushingYards|Fluff Bothwell|RB|17 CAR, 49 YDS
+2026-10-31|Mississippi State|Texas|Texas|receivingYards|Emmett Mosley V|WR|4 REC, 98 YDS, 1 TD
 2026-10-31|Auburn|Ole Miss|Ole Miss|passingYards|Trinidad Chambliss|QB|22/34, 263 YDS, 2 TD, 1 INT
 2026-10-31|Auburn|Ole Miss|Ole Miss|rushingYards|Shekai Mills-Knight|RB|16 CAR, 71 YDS, 1 TD
 2026-10-31|Auburn|Ole Miss|Ole Miss|receivingYards|Horatio Fields|WR|6 REC, 73 YDS, 1 TD
@@ -1762,6 +1756,9 @@
 2026-10-31|Northwestern|Oregon|Oregon|passingYards|Dylan Raiola|QB|22/31, 336 YDS, 3 TD
 2026-10-31|Northwestern|Oregon|Northwestern|rushingYards|Aidan Chiles|QB|14 CAR, 93 YDS, 1 TD
 2026-10-31|Northwestern|Oregon|Northwestern|receivingYards|Griffin Wilde|WR|5 REC, 146 YDS, 1 TD
+2026-10-31|Oklahoma State|Iowa State|Oklahoma State|passingYards|Drew Mestemaker|QB|27/42, 323 YDS, 5 TD, 1 INT
+2026-10-31|Oklahoma State|Iowa State|Iowa State|rushingYards|Aiden Flora|RB|29 CAR, 221 YDS, 2 TD
+2026-10-31|Oklahoma State|Iowa State|Iowa State|receivingYards|Jamal Polite Jr.|WR|6 REC, 171 YDS, 1 TD
 2026-10-31|Wisconsin|Iowa|Iowa|passingYards|Hank Brown|QB|20/24, 222 YDS, 2 TD
 2026-10-31|Wisconsin|Iowa|Iowa|rushingYards|Xavier Williams|RB|20 CAR, 78 YDS
 2026-10-31|Wisconsin|Iowa|Wisconsin|receivingYards|Jaylon Domingeaux|WR|6 REC, 86 YDS
@@ -1828,6 +1825,17 @@
 2026-10-31|Purdue|Penn State|Penn State|passingYards|Rocco Becht|QB|16/24, 175 YDS, 1 TD
 2026-10-31|Purdue|Penn State|Penn State|rushingYards|Cam Wallace|RB|22 CAR, 135 YDS, 1 TD
 2026-10-31|Purdue|Penn State|Purdue|receivingYards|Asaad Waseem|WR|3 REC, 64 YDS
+2026-10-31|App State|Georgia Southern|Georgia Southern|passingYards|Max Johnson|QB|36/47, 318 YDS
+2026-10-31|App State|Georgia Southern|Georgia Southern|rushingYards|Weston Bryan|QB|7 CAR, 42 YDS
+2026-10-31|App State|Georgia Southern|Georgia Southern|receivingYards|Alex Taylor|WR|10 REC, 93 YDS
+2026-10-31|Clemson|Florida State|Florida State|passingYards|Ashton Daniels|QB|21/33, 350 YDS, 2 TD, 3 INT
+2026-10-31|Clemson|Florida State|Clemson|rushingYards|Tait Reynolds|QB|14 CAR, 85 YDS, 1 TD
+2026-10-31|Clemson|Florida State|Florida State|receivingYards|Micahi Danzy|WR|4 REC, 108 YDS, 1 TD
+2026-10-31|Washington State|San Diego State|Washington State|passingYards|Owen Eshelman|QB|30/42, 299 YDS, 1 INT
+2026-10-31|Washington State|San Diego State|San Diego State|rushingYards|Lucky Sutton|RB|18 CAR, 115 YDS
+2026-10-31|Washington State|San Diego State|Washington State|receivingYards|Daniel Blood|WR|8 REC, 105 YDS
+2026-10-31|Oregon State|Fresno State|Fresno State|passingYards|Jayden Mandal|QB|1, 0 YDS, 1 INT
+2026-10-31|Oregon State|Fresno State|Fresno State|rushingYards|Rayshon Luke|RB|1 CAR, 5 YDS
 2026-10-27|Delaware|Western Kentucky|Delaware|passingYards|Nick Minicucci|QB|32/38, 414 YDS, 4 TD
 2026-10-27|Delaware|Western Kentucky|Western Kentucky|rushingYards|Brock Glenn|QB|17 CAR, 129 YDS
 2026-10-27|Delaware|Western Kentucky|Delaware|receivingYards|Sean Wilson|WR|9 REC, 183 YDS, 2 TD
@@ -3280,18 +3288,12 @@
 2026-10-24|Prairie View A&M|East Texas A&M|East Texas A&M|passingYards|Reese Mooney|QB|31/52, 333 YDS, 2 TD
 2026-10-24|Prairie View A&M|East Texas A&M|Prairie View A&M|rushingYards|Chase Bingmon|RB|9 CAR, 77 YDS, 2 TD
 2026-10-24|Prairie View A&M|East Texas A&M|East Texas A&M|receivingYards|Micah Simpson|WR|10 REC, 90 YDS, 1 TD
-2026-10-31|Eastern Kentucky|Tarleton State|Tarleton State|passingYards|Kaden Anderson|QB|11/21, 128 YDS, 1 TD, 1 INT
-2026-10-31|Eastern Kentucky|Tarleton State|Eastern Kentucky|rushingYards|Brady Hensley|RB|9 CAR, 92 YDS, 1 TD
-2026-10-31|Eastern Kentucky|Tarleton State|Eastern Kentucky|receivingYards|Jayden West|WR|1 REC, 61 YDS
-2026-10-31|Wofford|Samford|Samford|passingYards|Gabarri Johnson|QB|10/18, 144 YDS
-2026-10-31|Wofford|Samford|Wofford|rushingYards|Gerald Modest Jr.|RB|21 CAR, 126 YDS
-2026-10-31|Wofford|Samford|Samford|receivingYards|Kevonte Corbin|WR|3 REC, 89 YDS
-2026-10-31|Lamar|UT Rio Grande Valley|UT Rio Grande Valley|passingYards|Garret Rangel|QB|2/7, 43 YDS, 1 INT
-2026-10-31|Lamar|UT Rio Grande Valley|UT Rio Grande Valley|rushingYards|Garret Rangel|QB|2 CAR, 37 YDS
-2026-10-31|Lamar|UT Rio Grande Valley|UT Rio Grande Valley|receivingYards|Tavian Cord|WR|1 REC, 38 YDS
-2026-10-31|Grambling|Texas Southern|Texas Southern|passingYards|Cam'Ron McCoy|QB|1/2, 17 YDS
-2026-10-31|Grambling|Texas Southern|Texas Southern|rushingYards|Jacob Washington|RB|4 CAR, 26 YDS
-2026-10-31|Grambling|Texas Southern|Texas Southern|receivingYards|Athean Renfro Jr.|RB|1 REC, 17 YDS
+2026-10-31|Lamar|UT Rio Grande Valley|Lamar|passingYards|Aiden McCown|QB|17/24, 167 YDS, 2 TD
+2026-10-31|Lamar|UT Rio Grande Valley|UT Rio Grande Valley|rushingYards|Broderick Taylor|RB|15 CAR, 105 YDS, 2 TD
+2026-10-31|Lamar|UT Rio Grande Valley|UT Rio Grande Valley|receivingYards|Braden Baize|WR|3 REC, 61 YDS
+2026-10-31|Grambling|Texas Southern|Texas Southern|passingYards|Cam'Ron McCoy|QB|5/14, 80 YDS, 1 INT
+2026-10-31|Grambling|Texas Southern|Texas Southern|rushingYards|Athean Renfro Jr.|RB|15 CAR, 122 YDS, 1 TD
+2026-10-31|Grambling|Texas Southern|Grambling|receivingYards|Nae'Saan Dickerson|WR|3 REC, 63 YDS
 2026-10-31|Campbell|UAlbany|Campbell|passingYards|Kamden Sixkiller|QB|27/44, 271 YDS, 2 TD, 1 INT
 2026-10-31|Campbell|UAlbany|UAlbany|rushingYards|Rahshan La Mons|RB|14 CAR, 119 YDS, 1 TD
 2026-10-31|Campbell|UAlbany|Campbell|receivingYards|Chinua Ezeigbo|WR|7 REC, 110 YDS, 1 TD
@@ -3451,6 +3453,12 @@
 2026-10-31|North Alabama|Central Arkansas|Central Arkansas|passingYards|Donovyn Omolo|QB|15/29, 159 YDS, 1 INT
 2026-10-31|North Alabama|Central Arkansas|Central Arkansas|rushingYards|Jalen Washington|RB|8 CAR, 140 YDS
 2026-10-31|North Alabama|Central Arkansas|Central Arkansas|receivingYards|Dakarai Anderson|WR|7 REC, 71 YDS
+2026-10-31|Eastern Kentucky|Tarleton State|Tarleton State|passingYards|Kaden Anderson|QB|18/32, 351 YDS, 2 TD, 2 INT
+2026-10-31|Eastern Kentucky|Tarleton State|Eastern Kentucky|rushingYards|Brady Hensley|RB|22 CAR, 139 YDS, 2 TD
+2026-10-31|Eastern Kentucky|Tarleton State|Tarleton State|receivingYards|Marquis Willis|WR|4 REC, 173 YDS, 1 TD
+2026-10-31|Wofford|Samford|Samford|passingYards|Gabarri Johnson|QB|19/32, 219 YDS
+2026-10-31|Wofford|Samford|Wofford|rushingYards|Gerald Modest Jr.|RB|38 CAR, 197 YDS
+2026-10-31|Wofford|Samford|Samford|receivingYards|Kevonte Corbin|WR|3 REC, 89 YDS
 2026-10-29|South Carolina State|Morgan State|South Carolina State|passingYards|Keely Watson|QB|27/36, 279 YDS, 4 TD
 2026-10-29|South Carolina State|Morgan State|South Carolina State|rushingYards|Kacy Fields|RB|11 CAR, 71 YDS, 1 TD
 2026-10-29|South Carolina State|Morgan State|Morgan State|receivingYards|Justin Perry|WR|5 REC, 72 YDS

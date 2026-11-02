@@ -1759,7 +1759,7 @@
 2026-10-31|Virginia|Wake Forest|Wake Forest|passingYards|Gio Lopez|QB|13/21, 229 YDS, 1 TD
 2026-10-31|Virginia|Wake Forest|Wake Forest|rushingYards|Jamar Searcy|RB|8 CAR, 78 YDS, 1 TD
 2026-10-31|Virginia|Wake Forest|Wake Forest|receivingYards|Carlos Hernandez|WR|8 REC, 136 YDS, 1 TD
-2026-10-31|SMU|Syracuse|SMU|passingYards|Kevin Jennings|QB|29/36, 351 YDS, 2 TD
+2026-10-31|SMU|Syracuse|SMU|passingYards|Kevin Jennings|QB|29/36, 352 YDS, 2 TD
 2026-10-31|SMU|Syracuse|Syracuse|rushingYards|Ahmad Miller|RB|18 CAR, 56 YDS, 1 TD
 2026-10-31|SMU|Syracuse|SMU|receivingYards|Yannick Smith|WR|5 REC, 95 YDS
 2026-10-31|Northwestern|Oregon|Oregon|passingYards|Dylan Raiola|QB|22/31, 336 YDS, 3 TD
@@ -1956,7 +1956,7 @@
 2026-08-29|Fairmont State|Dayton|Dayton|receivingYards|Donovan Weatherly|TE|4 REC, 71 YDS, 2 TD
 2026-08-29|Georgetown (KY)|Butler|Georgetown (KY)|passingYards|Justice Burnam|QB|24/43, 336 YDS, 1 TD, 1 INT
 2026-08-29|Georgetown (KY)|Butler|Butler|rushingYards|Gabe Passini|QB|23 CAR, 176 YDS, 1 TD
-2026-08-29|Georgetown (KY)|Butler|Butler|receivingYards|Chet Yardley|WR|4 REC, 59 YDS, 1 TD
+2026-08-29|Georgetown (KY)|Butler|Georgetown (KY)|receivingYards|Clayton Davis|WR|6 REC, 100 YDS, 1 TD
 2026-08-29|Roosevelt|Chicago State|Chicago State|passingYards|Ashton Pannell|QB|29/40, 264 YDS, 3 TD, 2 INT
 2026-08-29|Roosevelt|Chicago State|Roosevelt|rushingYards|Jaden Bossie|RB|22 CAR, 141 YDS, 1 TD
 2026-08-29|Roosevelt|Chicago State|Roosevelt|receivingYards|Jaden Bossie|RB|5 REC, 91 YDS, 1 TD

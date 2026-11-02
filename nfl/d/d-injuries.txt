@@ -23,10 +23,10 @@ ARI||Zaven Collins|LB|Active||||2026-10-29|
 ARI||Budda Baker|S|Active||||2026-10-28|Baker logged two tackles (one solo) during Sundays' 30-16 loss to Denver.
 ARI||Jack Gibbens|LB|Active||||2026-10-28|Gibbens recorded seven tackles (four solo) in a 30-16 loss to the Broncos on Sunday.
 ARI||Jalen Brooks|WR|Injured Reserve|Wrist|Surgery|2027-02-15|2026-10-27|The Cardinals placed Brooks (wrist) on injured reserve Tuesday.
+ATL||Drake London|WR|Active||||2026-11-02|London brought in one of six targets for eight yards in the Falcons' 16-0 loss to the Buccaneers on Sunday.
 ATL||Bijan Robinson|RB|Active||||2026-11-01|Robinson rushed 19 times for 76 yards and failed to bring in his only target in the Falcons' 16-0 loss to the Buccaneers on Sunday.
 ATL||Zachariah Branch|WR|Questionable|Hamstring||2026-11-08|2026-11-01|questionable
 ATL||Samson Ebukam|DE|Questionable|Hamstring||2026-11-01|2026-11-01|Ebukam (hamstring) is doubtful to return to Sunday's game against the Buccaneers, Tori McElhaney of the Falcons' official site reports.
-ATL||Drake London|WR|Active||||2026-11-01|London (head) returned to Sunday's contest at Tampa Bay, Tori McElhaney of the Falcons' official site reports.
 ATL||Olamide Zaccheaus|WR|Active||||2026-11-01|Zaccheaus (shoulder) is active for Sunday's game against the Buccaneers.
 ATL||Avieon Terrell|CB|Active||||2026-11-01|Terrell (back/illness) is active for Sunday's game against Tampa Bay.
 ATL||Andy Dalton|QB|Out|Coach's Decision||2026-11-08|2026-11-01|Dalton is inactive for Sunday's game versus the Buccaneers, though he will be available as the team's emergency backup if necessary.
@@ -48,6 +48,7 @@ ATL||Cameron Thomas|DE|Active||||2026-10-30|
 ATL||LaCale London|DE|Active||||2026-10-30|
 ATL||Jawaan Taylor|OT|Active||||2026-10-30|
 ATL||Xavier Watts|S|Active||||2026-10-28|Watts notched seven tackles (three solo) and forced a fumble Sunday in a 29-20 Week 7 victory against the 49ers.
+BAL||Zay Flowers|WR|Active||||2026-11-02|Flowers failed to bring in any of his five targets in the Ravens' 36-10 loss to the Bills on Sunday.
 BAL||Tyler Huntley|QB|Questionable|Toe||2026-11-05|2026-11-01|Huntley sustained what could be a turf-toe injury during Sunday's 36-10 loss at Buffalo, Adam Schefter of ESPN reports.
 BAL||Joe Fagnano|QB|Out|Coach's Decision||2026-11-05|2026-11-01|Fagnano (undisclosed) said that he hopes to be ready for Thursday's game against the Jaguars, but acknowledged he's not 100 percent following Sunday's loss to the Bills, Jonas Shafferof the Baltimore Banner reports.
 BAL||Derrick Henry|RB|Active||||2026-11-01|Henry rushed 11 times for 53 yards and a touchdown and brought in both targets for seven yards in the Ravens' 36-10 loss to the Bills on Sunday.
@@ -72,7 +73,6 @@ BAL||Ja'Kobi Lane|WR|Active||||2026-10-27|Lane caught three of five targets for 
 BAL||Justice Hill|RB|Active||||2026-10-27|Hill took three carries for seven yards and caught three of four targets for 26 yards during Sunday's 35-13 loss versus the Bengals.
 BAL||Rashod Bateman|WR|Active||||2026-10-27|Bateman caught two of four targets for 33 yards during Sunday's 35-13 loss to the Bengals.
 BAL||Andrew Vorhees|G|Active||||2026-10-26|
-BAL||Mark Andrews|TE|Active||||2026-10-26|Andrews caught three of four targets for 23 yards in Sunday's 35-13 loss to the Bengals.
 BUF||C.J. Gardner-Johnson|S|Suspension|Suspension||2026-11-09|2026-11-02|reserve-sus
 BUF||James Cook III|RB|Active||||2026-11-01|Cook rushed 21 times for 80 yards and a touchdown while catching two of three targets for 21 yards in Sunday's 36-10 win over the Ravens.
 BUF||Josh Allen|QB|Active||||2026-11-01|Allen completed 21 of 34 passes for 289 yards, two touchdowns and one interception in Sunday's 36-10 win over the Ravens. He added 30 rushing yards and a rushing touchdown on seven rushing attempts.
@@ -198,6 +198,9 @@ CLE||Jerry Jeudy|WR|Active||||2026-10-28|NFL reporter Jordan Schultz reports tha
 CLE||Ronnie Hickman|S|Active||||2026-10-28|Hickman registered 10 tackles (six solo) and a fumble recovery during Sundays' 27-24 win over Tennessee.
 CLE||Quincy Williams|LB|Active||||2026-10-28|Williams finished Sunday's 27-24 win over the Titans with 10 tackles (seven solo).
 CLE||Kalia Davis|DT|Injured Reserve|Quadriceps||2027-02-15|2026-10-28|Davis (quadriceps) will spend the rest of the 2026 season on injured reserve after his 21-day practice window expired Tuesday, Aaron Wilson of KPRC 2 Houston reports.
+DAL||Dak Prescott|QB|Active||||2026-11-02|Prescott was 19-for-29 passing for 195 yards, one touchdown and no interceptions while rushing seven times for 20 yards and one more TD during Sunday's 33-30 overtime defeat to the Cardinals.
+DAL||George Pickens|WR|Active||||2026-11-02|Pickens tallied two catches (on four targets) for 48 yards during Sunday's 33-30 overtime loss to the Cardinals.
+DAL||Javonte Williams|RB|Active||||2026-11-02|Williams churned out 56 yards on 24 carries and notched one catch (on two targets) for one yard during Sunday's 33-30 overtime defeat to the Cardinals.
 DAL||CeeDee Lamb|WR|Active||||2026-11-02|Lamb recorded seven catches (on 11 targets) for 58 yards during Sunday's 33-30 overtime loss to the Cardinals.
 DAL||Jake Ferguson|TE|Questionable|Ankle|Sprain|2026-11-08|2026-11-02|Ferguson suffered a low-ankle sprain during Sunday's loss to the Cardinals, Jeremy Fowler of ESPN reports.
 DAL||Caleb Downs|S|Questionable|Concussion|Concussion|2026-11-08|2026-11-01|Downs has been ruled out for the rest of Sunday's game against the Cardinals to be evaluated for a concussion, Jon Machota of The Athletic reports.
@@ -210,7 +213,6 @@ DAL||Tyrus Wheat|LB|Out|Coach's Decision||2026-11-08|2026-11-01|inactive
 DAL||Dee Winters|LB|Out|Calf|Strain|2026-11-08|2026-11-01|inactive
 DAL||Shavon Revel Jr.|CB|Out|Coach's Decision||2026-11-08|2026-11-01|inactive
 DAL||Drew Shelton|OT|Out|Coach's Decision||2026-11-08|2026-11-01|inactive
-DAL||George Pickens|WR|Active||||2026-11-01|Pickens (shoulder/hamstring) is listed as active Sunday against the Cardinals.
 DAL||James Mitchell|TE|Active||||2026-11-01|The Cowboys elevated Mitchell from the practice squad to the active roster Saturday.
 DAL||Quinnen Williams|DT|Active||||2026-10-31|Williams (hamstring) is set to play Sunday against Arizona, Tommy Yarrish of the Cowboys' official site reports.
 DAL||Jonathan Bullard|DT|Injured Reserve|Calf||2026-11-08|2026-10-30|Bullard (calf) was designated to return from injured reserve by the Cowboys on Thursday.
@@ -219,8 +221,6 @@ DAL||DeMarvion Overshown|LB|Active||||2026-10-28|Overshown posted six tackles (f
 DAL||Tyler Goodson|RB|Active||||2026-10-27|Goodson turned 10 carries into 38 yards and returned two kickoffs for 42 yards during the Cowboys' 38-21 win over the Eagles on Monday.
 DAL||Brevyn Spann-Ford|TE|Active||||2026-10-27|Spann-Ford finished with two catches for 11 yards on two targets in Monday's 38-21 win over the Eagles.
 DAL||Ryan Flournoy|WR|Active||||2026-10-27|Flournoy secured all four targets for 70 yards in the Cowboys' 38-21 win over the Eagles on Monday night.
-DAL||Javonte Williams|RB|Active||||2026-10-27|Williams rushed 25 times for 155 yards and a touchdown in the Cowboys' 38-21 win over the Eagles on Monday night.
-DAL||Dak Prescott|QB|Active||||2026-10-27|Prescott completed 15 of 27 passes for 212 yards with three touchdowns and no interceptions while adding two rushes for eight yards in the Cowboys' 38-21 win over the Eagles on Monday night. He also had a two-point conve
 DAL||Marist Liufau|LB|Injured Reserve|Forearm|Fracture|2026-11-08|2026-10-25|Liufau (forearm) has been downgraded from questionable to out ahead of Monday night's game against the Eagles.
 DAL||Cobie Durant|CB|Active||||2026-10-24|Durant (hamstring) does not have an injury designation for Monday's game against Philadelphia, Adam Caplan of SiriusXM NFL Radio reports.
 DEN||Brandon Jones|S|Questionable|Hamstring||2026-11-08|2026-11-01|Jones (hamstring) has been ruled out for the rest of Sunday's contest against the Chiefs, Parker Gabriel of The Denver Post reports.
@@ -248,6 +248,8 @@ DEN||Evan Engram|TE|Active||||2026-10-27|Engram caught one of three targets for 
 DEN||Troy Franklin|WR|Active||||2026-10-27|Franklin failed to bring in either of his two targets in the Broncos' 30-16 win over the Cardinals on Sunday.
 DEN||Bo Nix|QB|Active||||2026-10-26|Nix completed 15 of 29 passes for 222 yards and a touchdown while rushing seven times for 73 yards and a touchdown in Sunday's 30-16 win over the Cardinals.
 DEN||Wil Lutz|PK|Active||||2026-10-26|Lutz went 3-for-3 on field-goal tries and made all three of his PATs during Sunday's 30-16 win over Arizona.
+DET||Jameson Williams|WR|Active||||2026-11-02|Williams brought in four of six targets for 70 yards and a touchdown in the Lions' 19-15 win over the Vikings on Sunday.
+DET||Jared Goff|QB|Active||||2026-11-02|Goff completed 18 of 25 passes for 176 yards with a touchdown and an interception and added three carries for no gain in the Lions' 19-15 win over the Vikings on Sunday.
 DET||Jack Campbell|LB|Doubtful|Neck||2026-11-01|2026-11-02|Campbell (neck) will remain in a local hospital Sunday night.
 DET||Amon-Ra St. Brown|WR|Active||||2026-11-01|St. Brown secured seven of eight targets for 46 yards and rushed once for 10 yards in the Lions' 19-15 win over the Vikings on Sunday.
 DET||Jahmyr Gibbs|RB|Active||||2026-11-01|Gibbs rushed 23 times for 153 yards and a touchdown while bringing in two of four targets for 15 yards in the Lions' 19-15 win over the Vikings on Sunday.
@@ -269,8 +271,6 @@ DET||Isiah Pacheco|RB|Injured Reserve|Back||2026-12-28|2026-10-30|Lions coach Da
 DET||Tyleik Williams|DT|Active||||2026-10-29|
 DET||Isaac TeSlaa|WR|Active||||2026-10-27|TeSlaa caught one of his two targets for 10 yards in the Lions' 20-17 win over the Packers on Sunday.
 DET||Sam LaPorta|TE|Active||||2026-10-26|LaPorta caught one of two targets for 18 yards in Sunday's 20-17 win over the Packers.
-DET||Jameson Williams|WR|Active||||2026-10-26|Williams caught five of nine targets for 91 yards and two touchdowns in Sunday's 20-17 win over Green Bay.
-DET||Jared Goff|QB|Active||||2026-10-26|Goff completed 22 of 32 passes for 303 yards and two touchdowns in Sunday's 20-17 win over the Packers.
 DET||Jake Bates|PK|Active||||2026-10-26|Bates went 2-for-2 on field-goal attempts and made both of his PATs during Sunday's 20-17 win over the Packers.
 DET||Rock Ya-Sin|CB|Active||||2026-10-24|Ya-Sin (hamstring) does not have an injury designation for Sunday's game against the Packers.
 GB||Josh Jacobs|RB|Active||||2026-10-31|"Newly released records," according to NBC 26, "show additional women contacted the Hobart/Lawrence Police Department to report alleged physical incidents involving Jacobs."
@@ -498,6 +498,8 @@ MIA||Kevin Coleman Jr.|WR|Active||||2026-10-27|Coleman did not catch his only ta
 MIA||Chris Bell|WR|Active||||2026-10-27|Bell caught three of his four targets for 25 yards in the Dolphins' 28-25 win over the Jets on Sunday.
 MIA||Kaytron Allen|RB|Active||||2026-10-27|Allen logged six snaps on special teams and didn't show up on the box score otherwise during Sunday's 28-25 win over the Jets.
 MIA||DJ Campbell|G|Active||||2026-10-26|
+MIN||Aaron Jones Sr.|RB|Active||||2026-11-02|Jones rushed five times for 22 yards and brought in both targets for 18 yards in the Vikings' 19-15 loss to the Lions on Sunday.
+MIN||Jordan Mason|RB|Active||||2026-11-02|Mason rushed eight times for 20 yards in the Vikings' 19-15 loss to the Lions on Sunday.
 MIN||Justin Jefferson|WR|Active||||2026-11-01|Jefferson brought in five of nine targets for 33 yards and a touchdown in the Vikings' 19-15 loss to the Lions on Sunday.
 MIN||Kyler Murray|QB|Questionable|Hamstring||2026-11-09|2026-11-01|Murray completed 17 of 29 passes for 210 yards with two touchdowns and one interception and rushed four times for 35 yards in the Vikings' 19-15 loss to the Lions on Sunday. He also threw a two-point conversion pass and 
 MIN||Theo Jackson|S|Questionable|Quadriceps||2026-11-09|2026-11-01|Jackson (quadriceps) has been ruled out for the rest of Sunday's game against the Lions.
@@ -510,9 +512,7 @@ MIN||Demond Claiborne|RB|Out|Coach's Decision||2026-11-09|2026-11-01|inactive
 MIN||Charles Demmings|CB|Out|Coach's Decision||2026-11-09|2026-11-01|inactive
 MIN||Jay Ward|S|Active||||2026-11-01|
 MIN||DeeJay Dallas|RB|Active||||2026-11-01|The Vikings elevated Dallas from the practice squad to the active roster Saturday.
-MIN||Jordan Mason|RB|Active||||2026-10-30|Mason and Aaron Jones (knee) will share the backfield against the Lions on Sunday after the latter avoided an injury designation for Week 8, Craig Peters of the Vikings' official site reports.
 MIN||Gavin Bartholomew|TE|Active||||2026-10-30|
-MIN||Aaron Jones Sr.|RB|Active||||2026-10-30|Jones (knee) doesn't have an injury designation for Sunday's game against the Lions, Dane Mizutani of the St. Paul Pioneer Press reports.
 MIN||Brian O'Neill|OT|Active||||2026-10-29|
 MIN||Joe Huber|G|Active||||2026-10-29|
 MIN||Blake Cashman|LB|Active||||2026-10-28|Cashman recorded 12 tackles (8 solo) including 2.0 sacks and four passes defensed during Sunday's 16-10 win versus the Colts.
@@ -723,13 +723,13 @@ SEA||Beau Stephens|G|Active||||2026-10-26|
 SEA||Robert Henry Jr.|RB|Active||||2026-10-26|
 SEA||Jason Myers|PK|Active||||2026-10-26|Myers went 2-for-2 on field-goal tries and made both of his PATs during Sunday night's 20-3 win over the Chiefs.
 SEA||Sam Darnold|QB|Active||||2026-10-26|Darnold completed 20 of 28 passes for 257 yards, one touchdown and one interception in Sunday's 20-3 win over the Chiefs. He added two rushing attempts for 17 yards.
+TB||Kenny Gainwell|RB|Active||||2026-11-02|Gainwell rushed 25 times for 140 yards in the Buccaneers' 16-0 win over the Falcons on Sunday.
 TB||Bucky Irving|RB|Active||||2026-11-01|Irving rushed 27 times for 170 yards and a touchdown in the Buccaneers' 16-0 win over the Falcons on Sunday.
 TB||Yaya Diaby|LB|Questionable|Knee||2026-11-08|2026-11-01|Diaby (knee) won't return to Sunday's game versus the Falcons, Greg Auman of Fox Sports reports.
 TB||Luke Goedeke|OT|Active||||2026-11-01|Goedeke (calf) is active for Sunday's game against the Falcons, Scott Smith of the Buccaneers' official site reports.
 TB||Graham Barton|C|Active||||2026-11-01|Barton (illness) is active for Sunday's game against the Falcons, Scott Smith of the Buccaneers' official site reports.
 TB||Tez Johnson|WR|Active||||2026-11-01|Johnson is in line to see additional snaps and targets in Sunday's Week 8 matchup against the Falcons, as Emeka Egbuka (concussion/foot) remains sidelined for the contest per Scott Smith of the team's official site.
 TB||Chris Godwin Jr.|WR|Active||||2026-11-01|Godwin is in line to operate as the Buccaneers de facto No. 1 receiver again in Sunday's Week 8 matchup against the Falcons, as Emeka Egbuka (concussion/foot) is inactive for the contest per Scott Smith of the team's off
-TB||Kenny Gainwell|RB|Active||||2026-11-01|Gainwell (hip) is active for Sunday's Week 8 matchup against the Falcons, Scott Smith of the team's official site reports.
 TB||Billy Schrauth|G|Out|Coach's Decision||2026-11-08|2026-11-01|inactive
 TB||Ayden Garnes|CB|Out|Coach's Decision||2026-11-08|2026-11-01|inactive
 TB||Luke Haggard|G|Out|Coach's Decision||2026-11-08|2026-11-01|inactive

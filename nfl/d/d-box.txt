@@ -11180,4 +11180,197 @@ P|117|H|kickReturns|Alex Bachman||3919510|4;87;21.8;28;0
 P|117|H|puntReturns|Alex Bachman||3919510|2;8;4.0;8;0
 P|117|H|kicking|Brandon McManus||16339|1/1;100.0;30;3/3;6
 P|117|H|punting|Ethan Evans||5125875|5;246;49.2;1;0;64
+G|118|401873033|2026-11-01|KC|DEN
+T|118|A|firstDowns=22;firstDownsPassing=13;firstDownsRushing=6;firstDownsPenalty=3;thirdDownEff=6-14;fourthDownEff=0-1;totalOffensivePlays=67;totalYards=399;yardsPerPlay=6.0;totalDrives=11;netPassingYards=309;completionAttempts=30/41;yardsPerPass=7.2;interceptions=0;sacksYardsLost=2-12;rushingYards=90;rushingAttempts=24;yardsPerRushAttempt=3.8;redZoneAttempts=2-3;totalPenaltiesYards=11-105;turnovers=0;fumblesLost=0;interceptions=0;defensiveTouchdowns=0;possessionTime=31:29;defSacks=1;defTfl=2
+T|118|H|firstDowns=21;firstDownsPassing=10;firstDownsRushing=6;firstDownsPenalty=5;thirdDownEff=2-11;fourthDownEff=2-2;totalOffensivePlays=56;totalYards=294;yardsPerPlay=5.2;totalDrives=11;netPassingYards=217;completionAttempts=20/32;yardsPerPass=6.6;interceptions=0;sacksYardsLost=1-5;rushingYards=77;rushingAttempts=23;yardsPerRushAttempt=3.3;redZoneAttempts=3-3;totalPenaltiesYards=6-45;turnovers=0;fumblesLost=0;interceptions=0;defensiveTouchdowns=0;possessionTime=28:31;defSacks=2;defTfl=3
+S|118|1|9:43|DEN|Wil Lutz 39 Yd Field Goal|0|3
+S|118|1|6:04|KC|Rashee Rice 11 Yd pass from Patrick Mahomes (Harrison Butker Kick)|7|3
+S|118|2|14:08|DEN|Wil Lutz 45 Yd Field Goal|7|6
+S|118|2|7:40|KC|Emmett Johnson 73 Yd pass from Patrick Mahomes (Harrison Butker Kick)|14|6
+S|118|2|1:15|DEN|Jaylen Waddle 1 Yd pass from Bo Nix (Wil Lutz Kick)|14|13
+S|118|2|0:19|KC|Harrison Butker 45 Yd Field Goal|17|13
+S|118|3|1:38|KC|Noah Gray 4 Yd pass from Patrick Mahomes (Harrison Butker Kick)|24|13
+S|118|4|8:55|DEN|Nate Adkins 2 Yd pass from Bo Nix (Bo Nix Pass to Jaylen Waddle for Two-Point Conversion)|24|21
+S|118|4|1:56|DEN|Jonah Coleman 5 Yd Rush (Wil Lutz Kick)|24|28
+W|118|44;46;49;52;50;43;37;33;36;36;38;42;41;45;49;42;42;43;26;28;36;35;43;33;33;35;32;29;34;28;25;21;23;11;9;8;8;11;21;25;25;20;15;63;68;35;25;100;100
+P|118|A|passing|Patrick Mahomes||3139477|30/41;321;7.8;3;0;2-12;72.7;120.1
+P|118|A|rushing|Kenneth Walker III||4567048|21;69;3.3;0;10
+P|118|A|rushing|Emmett Johnson||4832955|1;15;15.0;0;15
+P|118|A|rushing|Patrick Mahomes||3139477|2;6;3.0;0;4
+P|118|A|receiving|Emmett Johnson||4832955|5;128;25.6;1;73;5
+P|118|A|receiving|Travis Kelce||15847|5;67;13.4;0;32;7
+P|118|A|receiving|Rashee Rice||4428331|7;53;7.6;1;12;8
+P|118|A|receiving|Cyrus Allen||4912218|2;20;10.0;0;12;3
+P|118|A|receiving|Noah Gray||4240472|2;15;7.5;1;11;2
+P|118|A|receiving|Kenneth Walker III||4567048|4;15;3.8;0;8;5
+P|118|A|receiving|Xavier Worthy||4683062|3;13;4.3;0;7;6
+P|118|A|receiving|Jake Briningstool||4431196|1;6;6.0;0;6;1
+P|118|A|receiving|Jalen Royals||5082630|1;4;4.0;0;4;1
+P|118|A|fumbles|Creed Humphrey||4241385|1;0;0
+P|118|A|fumbles|Nikko Remigio||4372716|1;0;1
+P|118|A|fumbles|Patrick Mahomes||3139477|0;0;1
+P|118|A|defensive|Nick Bolton||4362759|9;5;0;0;0;1;0
+P|118|A|defensive|Alohi Gilman||4039413|6;2;0;0;0;0;0
+P|118|A|defensive|Drue Tranquill||3129310|5;4;0;0;0;0;0
+P|118|A|defensive|Chamarri Conner||4361964|5;3;0;0;0;0;0
+P|118|A|defensive|Chris Roland-Wallace||4428383|5;3;0;0;1;0;0
+P|118|A|defensive|Jack Cochrane||4249766|4;1;0;0;0;0;0
+P|118|A|defensive|Nohl Williams||4610705|4;1;0;0;0;0;0
+P|118|A|defensive|Kristian Fulton||4035433|3;2;0;0;0;0;0
+P|118|A|defensive|Felix Anudike-Uzomah||4612387|3;2;0;0;0;0;0
+P|118|A|defensive|George Karlaftis||4426659|2;2;1;1;3;1;0
+P|118|A|defensive|Khyiris Tonga||4256074|2;2;0;0;1;0;0
+P|118|A|defensive|Ashton Gillotte||4684432|2;2;0;1;0;0;0
+P|118|A|defensive|Jadon Canady||4710706|2;2;0;0;0;0;0
+P|118|A|defensive|Jeffrey Bassa||4602389|2;1;0;0;0;0;0
+P|118|A|defensive|Jaden Hicks||4685232|2;1;0;0;0;0;0
+P|118|A|defensive|Cooper McDonald||4567826|2;0;0;0;0;0;0
+P|118|A|defensive|Andrew Armstrong||5093923|1;1;0;0;0;0;0
+P|118|A|defensive|Jaydn Ott||4685489|1;0;0;0;0;0;0
+P|118|A|defensive|Emmett Johnson||4832955|1;0;0;0;0;0;0
+P|118|A|defensive|R Mason Thomas||5081927|0;0;0;0;1;0;0
+P|118|A|kickReturns|Nikko Remigio||4372716|2;52;26.0;31;0
+P|118|A|kickReturns|Emmett Johnson||4832955|1;44;44.0;44;0
+P|118|A|kickReturns|Jalen Royals||5082630|1;24;24.0;24;0
+P|118|A|puntReturns|Nikko Remigio||4372716|3;19;6.3;10;0
+P|118|A|kicking|Harrison Butker||3055899|1/2;50.0;45;3/3;6
+P|118|A|punting|Matt Araiza||4361496|5;269;53.8;2;1;64
+P|118|H|passing|Bo Nix||4426338|20/32;222;6.9;2;0;1-5;72.3;103.9
+P|118|H|rushing|Jonah Coleman||4702555|11;41;3.7;1;10
+P|118|H|rushing|Marvin Mims Jr.||4686472|2;19;9.5;0;14
+P|118|H|rushing|J.K. Dobbins||4241985|7;13;1.9;0;6
+P|118|H|rushing|Bo Nix||4426338|3;4;1.3;0;5
+P|118|H|receiving|Jonah Coleman||4702555|4;63;15.8;0;51;5
+P|118|H|receiving|Courtland Sutton||3128429|4;53;13.3;0;23;4
+P|118|H|receiving|Jaylen Waddle||4372016|3;39;13.0;1;35;6
+P|118|H|receiving|Adam Trautman||3911853|2;30;15.0;0;22;2
+P|118|H|receiving|Adam Prentice||3929914|1;10;10.0;0;10;1
+P|118|H|receiving|Lil'Jordan Humphrey||4039057|1;10;10.0;0;10;1
+P|118|H|receiving|Marvin Mims Jr.||4686472|2;10;5.0;0;7;3
+P|118|H|receiving|Nate Adkins||4383440|2;4;2.0;1;2;2
+P|118|H|receiving|Troy Franklin||4431280|1;3;3.0;0;3;2
+P|118|H|receiving|Evan Engram||3051876|0;0;0.0;0;0;3
+P|118|H|fumbles|Bo Nix||4426338|1;0;0
+P|118|H|fumbles|Adam Trautman||3911853|0;0;1
+P|118|H|defensive|Alex Singleton||2612151|14;6;1;1;1;1;0
+P|118|H|defensive|Pat Surtain II||4372012|8;7;0;0;1;0;0
+P|118|H|defensive|Devon Key||4037559|8;5;0;1;1;0;0
+P|118|H|defensive|Taylor Rapp||4039007|6;2;0;0;0;0;0
+P|118|H|defensive|Malcolm Roach||4039064|4;3;1;1;0;1;0
+P|118|H|defensive|Riley Moss||4382401|4;3;0;0;1;0;0
+P|118|H|defensive|Ja'Quan McMillian||4567462|4;1;0;0;0;1;0
+P|118|H|defensive|Brandon Jones||4039059|3;3;0;0;0;0;0
+P|118|H|defensive|Jonathon Cooper||4040608|3;1;0;0;0;0;0
+P|118|H|defensive|Sai'vion Jones||4603189|3;1;0;0;0;1;0
+P|118|H|defensive|Justin Strnad||3919548|2;2;0;0;0;0;0
+P|118|H|defensive|Tycen Anderson||4257240|2;2;0;0;0;0;0
+P|118|H|defensive|D.J. Jones||3894915|2;1;0;0;0;0;0
+P|118|H|defensive|JL Skinner||4428503|2;1;0;0;0;0;0
+P|118|H|defensive|Que Robinson||4692048|2;1;0;0;0;1;0
+P|118|H|defensive|Eyioma Uwazurike||4066109|2;0;0;0;0;1;0
+P|118|H|defensive|Nik Bonitto||4360259|1;1;0;0;0;1;0
+P|118|H|defensive|Kris Abrams-Draine||4429193|1;1;0;0;0;0;0
+P|118|H|defensive|Karene Reid||4875336|1;1;0;0;0;0;0
+P|118|H|defensive|Zach Allen||3915282|1;0;0;0;1;3;0
+P|118|H|defensive|Nate Adkins||4383440|1;0;0;0;0;0;0
+P|118|H|defensive|Jordan Turner||4693373|1;0;0;0;0;0;0
+P|118|H|defensive|Dondrea Tillman||5216101|1;0;0;0;1;0;0
+P|118|H|kickReturns|Marvin Mims Jr.||4686472|3;79;26.3;30;0
+P|118|H|kickReturns|Cody Schrader||4391845|2;50;25.0;27;0
+P|118|H|puntReturns|Marvin Mims Jr.||4686472|1;16;16.0;16;0
+P|118|H|kicking|Wil Lutz||2985659|2/2;100.0;45;2/2;8
+P|118|H|punting|Jeremy Crawshaw||4589212|5;217;43.4;0;2;48
+G|119|401873034|2026-11-01|NE|MIA
+T|119|A|firstDowns=16;firstDownsPassing=7;firstDownsRushing=8;firstDownsPenalty=1;thirdDownEff=6-14;fourthDownEff=2-2;totalOffensivePlays=59;totalYards=313;yardsPerPlay=5.3;totalDrives=11;netPassingYards=182;completionAttempts=16/20;yardsPerPass=7.9;interceptions=0;sacksYardsLost=3-17;rushingYards=131;rushingAttempts=36;yardsPerRushAttempt=3.6;redZoneAttempts=1-2;totalPenaltiesYards=7-46;turnovers=1;fumblesLost=1;interceptions=0;defensiveTouchdowns=0;possessionTime=31:57;defSacks=5;defTfl=6
+T|119|H|firstDowns=17;firstDownsPassing=11;firstDownsRushing=5;firstDownsPenalty=1;thirdDownEff=7-14;fourthDownEff=0-0;totalOffensivePlays=60;totalYards=269;yardsPerPlay=4.5;totalDrives=10;netPassingYards=195;completionAttempts=21/32;yardsPerPass=5.3;interceptions=1;sacksYardsLost=5-16;rushingYards=74;rushingAttempts=23;yardsPerRushAttempt=3.2;redZoneAttempts=1-2;totalPenaltiesYards=6-50;turnovers=1;fumblesLost=0;interceptions=1;defensiveTouchdowns=0;possessionTime=28:03;defSacks=3;defTfl=4
+S|119|1|9:10|NE|Andy Borregales 34 Yd Field Goal|3|0
+S|119|1|3:39|MIA|Zane Gonzalez 31 Yd Field Goal|3|3
+S|119|2|9:27|MIA|Zane Gonzalez 52 Yd Field Goal|3|6
+S|119|2|0:08|MIA|Malik Washington 1 Yd pass from Malik Willis (Zane Gonzalez Kick)|3|13
+S|119|3|9:23|NE|Kyle Williams 43 Yd pass from Drake Maye (Andy Borregales Kick)|10|13
+S|119|3|0:59|NE|Drake Maye 2 Yd Rush (Andy Borregales Kick)|17|13
+S|119|4|12:39|NE|DeMario Douglas 48 Yd pass from Drake Maye (Andy Borregales Kick)|24|13
+S|119|4|2:04|MIA|Kevin Coleman Jr. 35 Yd pass from Malik Willis (Two-Point Pass Conversion Failed)|24|19
+W|119|20;19;18;16;19;16;24;22;20;23;25;28;26;29;29;30;26;37;36;47;48;60;58;64;59;58;42;36;30;29;26;20;18;14;6;8;10;4;1;1;1;1;1;0;0
+P|119|A|passing|Drake Maye||4431452|16/20;199;10.0;2;0;3-17;72.2;141.5
+P|119|A|rushing|Rhamondre Stevenson||4569173|19;82;4.3;0;9
+P|119|A|rushing|Corey Kiner||4431431|7;38;5.4;0;20
+P|119|A|rushing|Lan Larison||4698253|2;6;3.0;0;4
+P|119|A|rushing|Drake Maye||4431452|8;5;0.6;1;2
+P|119|A|receiving|DeMario Douglas||4427095|3;76;25.3;1;48;3
+P|119|A|receiving|Kyle Williams||4613202|1;43;43.0;1;43;1
+P|119|A|receiving|Efton Chism III||4695193|5;37;7.4;0;12;5
+P|119|A|receiving|Hunter Henry||3046439|3;30;10.0;0;20;3
+P|119|A|receiving|Rhamondre Stevenson||4569173|3;8;2.7;0;4;3
+P|119|A|receiving|Eli Raridon||4831959|1;5;5.0;0;5;4
+P|119|A|fumbles|Efton Chism III||4695193|1;1;0
+P|119|A|fumbles|Drake Maye||4431452|1;0;2
+P|119|A|fumbles|Jared Wilson||4599198|1;0;0
+P|119|A|defensive|Carlton Davis III||3916923|9;7;0;0;0;0;0
+P|119|A|defensive|Christian Elliss||4245273|9;3;0.5;2;0;1;0
+P|119|A|defensive|Kevin Byard||2574056|7;4;0;0;1;0;0
+P|119|A|defensive|Dre'Mont Jones||3915525|6;4;0;0;0;0;0
+P|119|A|defensive|Marcus Jones||4241720|5;3;0;0;1;0;0
+P|119|A|defensive|Craig Woodson||4428930|5;2;0;1;0;0;0
+P|119|A|defensive|Cory Durden||4240042|4;2;1.5;2;0;3;0
+P|119|A|defensive|Robert Spillane||3129446|4;1;0;0;2;0;0
+P|119|A|defensive|Milton Williams||4239699|4;1;0;0;0;0;0
+P|119|A|defensive|Christian Gonzalez||4686772|3;3;0;0;0;0;0
+P|119|A|defensive|Gabe Jacas||4837244|3;1;1.5;1;0;2;0
+P|119|A|defensive|Leonard Taylor III||4431598|3;1;0;0;0;0;0
+P|119|A|defensive|Charles Woods||4368113|2;1;0;0;0;0;0
+P|119|A|defensive|Lan Larison||4698253|2;1;0;0;0;0;0
+P|119|A|defensive|Brenden Schooler||4047941|1;1;0;0;0;0;0
+P|119|A|defensive|Andy Borregales||4569923|1;1;0;0;0;0;0
+P|119|A|defensive|DaQuan Jones||16910|1;0;0;0;1;0;0
+P|119|A|defensive|Mike Brown||4244310|1;0;0;0;0;0;0
+P|119|A|defensive|Christian Barmore||4372030|1;0;0.5;0;0;1;0
+P|119|A|defensive|Darius Muasau||4428072|1;0;0;0;0;0;0
+P|119|A|defensive|Jaylen Reed||4432758|1;0;0.5;0;0;1;0
+P|119|A|defensive|Joshua Farmer||4611993|1;0;0;0;0;0;0
+P|119|A|defensive|Elijah Ponder||4688432|1;0;0.5;0;1;1;0
+P|119|A|defensive|Julian Ashby||4695254|1;0;0;0;0;0;0
+P|119|A|defensive|Erick Hunter||4890074|1;0;0;0;0;0;0
+P|119|A|interceptions|Kevin Byard||2574056|1;0;0
+P|119|A|puntReturns|Marcus Jones||4241720|3;35;11.7;26;0
+P|119|A|kicking|Andy Borregales||4569923|1/2;50.0;34;3/3;6
+P|119|A|punting|Mitch Wishnowsky||4035685|3;137;45.7;0;2;55
+P|119|H|passing|Malik Willis||4242512|21/32;211;6.6;2;1;5-16;67.1;92.1
+P|119|H|rushing|Ollie Gordon II||4711533|19;69;3.6;0;16
+P|119|H|rushing|Jaylen Wright||4682745|2;5;2.5;0;3
+P|119|H|rushing|Malik Willis||4242512|1;2;2.0;0;2
+P|119|H|rushing|Chris Bell||4869961|1;-2;-2.0;0;-2
+P|119|H|receiving|Kevin Coleman Jr.||4685307|3;46;15.3;1;35;3
+P|119|H|receiving|Greg Dulcich||4367209|4;43;10.8;0;19;6
+P|119|H|receiving|Caleb Douglas||4869645|4;43;10.8;0;18;6
+P|119|H|receiving|Malik Washington||4569603|5;40;8.0;1;23;6
+P|119|H|receiving|Chris Bell||4869961|4;31;7.8;0;9;5
+P|119|H|receiving|Jalen Tolbert||4249417|1;8;8.0;0;8;1
+P|119|H|receiving|Jaylen Wright||4682745|0;0;0.0;0;0;1
+P|119|H|receiving|Ollie Gordon II||4711533|0;0;0.0;0;0;1
+P|119|H|receiving|Will Kacmarek||4880236|0;0;0.0;0;0;1
+P|119|H|fumbles|JuJu Brents||4360488|0;0;1
+P|119|H|defensive|Jordyn Brooks||4043130|11;6;0;0;0;0;0
+P|119|H|defensive|Jacob Rodriguez||4566094|8;2;0;0;0;0;0
+P|119|H|defensive|Zach Sieler||3057956|6;3;0;0;0;0;0
+P|119|H|defensive|Michael Taaffe||4880346|6;3;0;1;0;0;0
+P|119|H|defensive|Jordan Phillips||4837188|5;3;0;0;0;0;0
+P|119|H|defensive|Josh Uche||4046528|4;4;1;1;0;1;0
+P|119|H|defensive|Dante Trader Jr.||4431664|4;3;0;0;0;0;0
+P|119|H|defensive|Chris Johnson||4869579|4;2;0;0;0;0;0
+P|119|H|defensive|Chop Robinson||4431586|3;3;2;2;0;2;0
+P|119|H|defensive|JuJu Brents||4360488|3;3;0;0;0;0;0
+P|119|H|defensive|Kyle Louis||4880273|3;1;0;0;0;0;0
+P|119|H|defensive|Willie Gay Jr.||4259804|3;0;0;0;0;0;0
+P|119|H|defensive|Kaytron Allen||4685246|2;2;0;0;0;0;0
+P|119|H|defensive|Jason Marshall Jr.||4432730|2;1;0;0;0;0;0
+P|119|H|defensive|Kenneth Grant||4894654|2;0;0;0;0;0;0
+P|119|H|defensive|Malik Washington||4569603|1;1;0;0;0;0;0
+P|119|H|defensive|Seydou Traore||4714379|1;1;0;0;0;0;0
+P|119|H|defensive|Zeek Biggers||4683276|1;0;0;0;0;0;0
+P|119|H|kickReturns|Jaylen Wright||4682745|5;142;28.4;43;0
+P|119|H|puntReturns|Malik Washington||4569603|1;14;14.0;14;0
+P|119|H|puntReturns|Kevin Coleman Jr.||4685307|1;6;6.0;6;0
+P|119|H|kicking|Zane Gonzalez||3043234|2/3;66.7;52;1/1;7
+P|119|H|punting|Bradley Pinion||2977680|4;183;45.8;0;1;50
 

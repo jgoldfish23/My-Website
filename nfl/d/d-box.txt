@@ -11373,4 +11373,93 @@ P|119|H|puntReturns|Malik Washington||4569603|1;14;14.0;14;0
 P|119|H|puntReturns|Kevin Coleman Jr.||4685307|1;6;6.0;6;0
 P|119|H|kicking|Zane Gonzalez||3043234|2/3;66.7;52;1/1;7
 P|119|H|punting|Bradley Pinion||2977680|4;183;45.8;0;1;50
+G|120|401873035|2026-11-01|PHI|WSH
+T|120|A|firstDowns=17;firstDownsPassing=9;firstDownsRushing=6;firstDownsPenalty=2;thirdDownEff=5-15;fourthDownEff=1-2;totalOffensivePlays=68;totalYards=268;yardsPerPlay=3.9;totalDrives=12;netPassingYards=177;completionAttempts=23/34;yardsPerPass=4.5;interceptions=1;sacksYardsLost=5-35;rushingYards=91;rushingAttempts=29;yardsPerRushAttempt=3.1;redZoneAttempts=1-2;totalPenaltiesYards=6-30;turnovers=2;fumblesLost=1;interceptions=1;defensiveTouchdowns=0;possessionTime=33:31;defSacks=2;defTfl=4
+T|120|H|firstDowns=16;firstDownsPassing=11;firstDownsRushing=5;firstDownsPenalty=0;thirdDownEff=5-13;fourthDownEff=0-0;totalOffensivePlays=57;totalYards=339;yardsPerPlay=5.9;totalDrives=11;netPassingYards=204;completionAttempts=16/29;yardsPerPass=6.6;interceptions=0;sacksYardsLost=2-13;rushingYards=135;rushingAttempts=26;yardsPerRushAttempt=5.2;redZoneAttempts=2-3;totalPenaltiesYards=9-70;turnovers=1;fumblesLost=1;interceptions=0;defensiveTouchdowns=0;possessionTime=26:29;defSacks=5;defTfl=9
+S|120|1|6:10|PHI|Jake Elliott 40 Yd Field Goal|3|0
+S|120|1|4:27|PHI|Saquon Barkley 3 Yd Rush (Jake Elliott Kick)|10|0
+S|120|1|0:28|WSH|Drew Stevens 56 Yd Field Goal|10|3
+S|120|2|4:56|WSH|Stefon Diggs 8 Yd pass from Jayden Daniels (Drew Stevens Kick)|10|10
+S|120|2|0:19|WSH|Drew Stevens 39 Yd Field Goal|10|13
+S|120|3|1:33|WSH|Drew Stevens 25 Yd Field Goal|10|16
+S|120|4|3:43|WSH|Drew Stevens 42 Yd Field Goal|10|19
+S|120|4|1:52|WSH|Rachaad White 1 Yd Rush (Austin Ekeler Run for Two-Point Conversion)|10|27
+W|120|65;72;74;62;66;65;58;60;55;42;40;40;35;41;38;42;44;48;60;60;61;60;57;59;69;68;70;67;71;66;69;70;62;83;78;76;72;64;66;85;89;93;98;100;100;100;100;100
+P|120|A|passing|Tanner McKee||4685201|23/34;212;6.2;0;1;5-35;33.0;72.2
+P|120|A|rushing|Elijah Mitchell||4241555|11;34;3.1;0;9
+P|120|A|rushing|Saquon Barkley||3929630|13;30;2.3;1;5
+P|120|A|rushing|Tanner McKee||4685201|4;25;6.3;0;15
+P|120|A|rushing|Dallas Goedert||3121023|1;2;2.0;0;2
+P|120|A|receiving|Makai Lemon||4870795|6;57;9.5;0;20;9
+P|120|A|receiving|Eli Stowers||4431574|3;53;17.7;0;34;3
+P|120|A|receiving|Dallas Goedert||3121023|4;30;7.5;0;16;4
+P|120|A|receiving|Saquon Barkley||3929630|1;24;24.0;0;24;1
+P|120|A|receiving|Darius Cooper||4715355|2;19;9.5;0;11;6
+P|120|A|receiving|Hollywood Brown||4241372|2;17;8.5;0;9;2
+P|120|A|receiving|Jaydon Blue||4685279|1;9;9.0;0;9;1
+P|120|A|receiving|Elijah Mitchell||4241555|4;3;0.8;0;4;6
+P|120|A|fumbles|Tanner McKee||4685201|1;1;0
+P|120|A|fumbles|Zack Baun||3917657|0;0;1
+P|120|A|defensive|Jeremiah Trotter Jr.||4432777|10;6;0;0;0;0;0
+P|120|A|defensive|Andrew Mukuba||4602197|9;7;0;0;1;0;0
+P|120|A|defensive|Zack Baun||3917657|7;4;0;0;0;0;0
+P|120|A|defensive|Jalen Carter||4685759|5;2;1;1;1;1;0
+P|120|A|defensive|Kenny Moore II||4218312|3;3;0;0;0;0;0
+P|120|A|defensive|Riq Woolen||4245185|3;3;0;0;0;0;0
+P|120|A|defensive|Quinyon Mitchell||4686273|3;3;0;0;0;0;0
+P|120|A|defensive|Nolan Smith Jr.||4426331|3;1;1;1;0;2;0
+P|120|A|defensive|Moro Ojomo||4362116|3;1;0;1;0;1;0
+P|120|A|defensive|Cooper DeJean||4682618|3;1;0;1;0;0;0
+P|120|A|defensive|Jake Elliott||3050478|1;1;0;0;0;0;0
+P|120|A|defensive|Jonathan Greenard||3916409|1;1;0;0;0;0;0
+P|120|A|defensive|Jordan Davis||4381558|1;1;0;0;0;0;0
+P|120|A|defensive|Rocco Underwood||4686566|1;1;0;0;0;0;0
+P|120|A|defensive|Byron Young||4567123|1;0;0;0;0;0;0
+P|120|A|defensive|Ty Robinson||4569586|1;0;0;0;0;0;0
+P|120|A|defensive|Marcus Epps||3139368|0;0;0;0;1;0;0
+P|120|A|defensive|Jalyx Hunt||4571162|0;0;0;0;0;1;0
+P|120|A|kickReturns|Jaydon Blue||4685279|6;144;24.0;34;0
+P|120|A|puntReturns|Cooper DeJean||4682618|1;12;12.0;12;0
+P|120|A|kicking|Jake Elliott||3050478|1/2;50.0;40;1/1;4
+P|120|A|punting|Braden Mann||4035239|5;221;44.2;1;3;56
+P|120|H|passing|Jayden Daniels||4426348|16/29;217;7.5;1;0;2-13;58.9;90.7
+P|120|H|rushing|Rachaad White||4697815|11;55;5.0;1;33
+P|120|H|rushing|Austin Ekeler||3068267|8;36;4.5;0;18
+P|120|H|rushing|Jayden Daniels||4426348|2;23;11.5;0;14
+P|120|H|rushing|Jeremy McNichols||3127586|5;21;4.2;0;7
+P|120|H|receiving|Treylon Burks||4567156|3;81;27.0;0;53;5
+P|120|H|receiving|Antonio Williams||5081432|5;54;10.8;0;30;7
+P|120|H|receiving|Stefon Diggs||2976212|3;38;12.7;1;20;6
+P|120|H|receiving|Chig Okonkwo||4360635|2;32;16.0;0;21;4
+P|120|H|receiving|Jeremy McNichols||3127586|1;7;7.0;0;7;1
+P|120|H|receiving|Rachaad White||4697815|2;5;2.5;0;4;3
+P|120|H|receiving|Van Jefferson||3930066|0;0;0.0;0;0;1
+P|120|H|fumbles|Chig Okonkwo||4360635|1;1;0
+P|120|H|fumbles|Charles Omenihu||3929865|0;0;1
+P|120|H|defensive|Nick Cross||4426403|9;5;0;1;0;0;0
+P|120|H|defensive|Sonny Styles||5081807|8;4;0;0;0;0;0
+P|120|H|defensive|Frankie Luvu||3127273|8;3;0;0;0;0;0
+P|120|H|defensive|Dorance Armstrong||3928979|7;4;1;1;0;0;0
+P|120|H|defensive|Jeremy Reaves||3125248|7;3;0;0;0;0;0
+P|120|H|defensive|Shy Tuttle||3886601|6;4;1;2;0;1;0
+P|120|H|defensive|Amik Robertson||4239694|6;3;0;1;0;0;0
+P|120|H|defensive|K'Lavon Chaisson||4242205|4;3;1;1;0;3;0
+P|120|H|defensive|Trey Amos||4574689|4;3;0;0;2;0;0
+P|120|H|defensive|Charles Omenihu||3929865|4;2;1;1;0;3;0
+P|120|H|defensive|Quan Martin||4360378|4;2;0;0;0;0;0
+P|120|H|defensive|Tim Settle||3929956|2;2;0;1;0;0;0
+P|120|H|defensive|Odafe Oweh||4361422|2;1;1;1;0;1;0
+P|120|H|defensive|Colson Yankoff||4361088|2;1;0;0;0;0;0
+P|120|H|defensive|Rasul Douglas||3943270|1;1;0;0;1;0;0
+P|120|H|defensive|John Bates||4048228|1;1;0;0;0;0;0
+P|120|H|defensive|Mike Sainristil||4428414|1;1;0;0;0;0;0
+P|120|H|defensive|Joshua Josephs||5081392|1;1;0;0;0;0;0
+P|120|H|defensive|Dyami Brown||4361577|1;0;0;0;0;0;0
+P|120|H|defensive|Kain Medrano||4427984|1;0;0;0;0;0;0
+P|120|H|defensive|Jordan Magee||4568617|1;0;0;0;0;0;0
+P|120|H|interceptions|Rasul Douglas||3943270|1;22;0
+P|120|H|kickReturns|Luke McCaffrey||4426948|1;44;44.0;44;0
+P|120|H|puntReturns|Luke McCaffrey||4426948|1;27;27.0;27;0
+P|120|H|kicking|Drew Stevens||5081335|4/5;80.0;56;1/1;13
+P|120|H|punting|Tress Way||16166|3;153;51.0;0;0;56
 

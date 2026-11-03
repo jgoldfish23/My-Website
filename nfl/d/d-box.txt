@@ -11462,4 +11462,94 @@ P|120|H|kickReturns|Luke McCaffrey||4426948|1;44;44.0;44;0
 P|120|H|puntReturns|Luke McCaffrey||4426948|1;27;27.0;27;0
 P|120|H|kicking|Drew Stevens||5081335|4/5;80.0;56;1/1;13
 P|120|H|punting|Tress Way||16166|3;153;51.0;0;0;56
+G|121|401873036|2026-11-02|CHI|SEA
+T|121|A|firstDowns=22;firstDownsPassing=13;firstDownsRushing=8;firstDownsPenalty=1;thirdDownEff=7-15;fourthDownEff=1-1;totalOffensivePlays=70;totalYards=363;yardsPerPlay=5.2;totalDrives=12;netPassingYards=237;completionAttempts=24/34;yardsPerPass=6.8;interceptions=0;sacksYardsLost=1-10;rushingYards=126;rushingAttempts=35;yardsPerRushAttempt=3.6;redZoneAttempts=4-4;totalPenaltiesYards=10-85;turnovers=1;fumblesLost=1;interceptions=0;defensiveTouchdowns=0;possessionTime=35:03;defSacks=3;defTfl=5
+T|121|H|firstDowns=18;firstDownsPassing=11;firstDownsRushing=1;firstDownsPenalty=6;thirdDownEff=1-11;fourthDownEff=1-2;totalOffensivePlays=56;totalYards=252;yardsPerPlay=4.5;totalDrives=11;netPassingYards=171;completionAttempts=17/34;yardsPerPass=4.6;interceptions=1;sacksYardsLost=3-17;rushingYards=81;rushingAttempts=19;yardsPerRushAttempt=4.3;redZoneAttempts=1-4;totalPenaltiesYards=5-43;turnovers=1;fumblesLost=0;interceptions=1;defensiveTouchdowns=0;possessionTime=24:57;defSacks=1;defTfl=5
+S|121|1|5:25|CHI|Luther Burden III 1 Yd pass from Caleb Williams (Cairo Santos Kick)|7|0
+S|121|2|12:50|SEA|Jason Myers 27 Yd Field Goal|7|3
+S|121|2|6:07|CHI|Cairo Santos 44 Yd Field Goal|10|3
+S|121|2|1:08|CHI|Cairo Santos 38 Yd Field Goal|13|3
+S|121|2|0:30|SEA|Jaxon Smith-Njigba 43 Yd pass from Sam Darnold (Jason Myers PAT Failed)|13|9
+S|121|3|5:38|CHI|D'Andre Swift 1 Yd Rush (Cairo Santos Kick)|20|9
+S|121|4|11:46|SEA|Cooper Kupp 7 Yd pass from Sam Darnold (Sam Darnold Pass to Tory Horton for Two-Point Conversion)|20|17
+S|121|4|8:28|CHI|D'Andre Swift 5 Yd Rush (Cairo Santos Kick)|27|17
+S|121|4|4:41|CHI|D'Andre Swift 5 Yd Rush (Cairo Santos Kick)|34|17
+W|121|57;55;54;51;52;42;38;35;38;45;47;43;47;44;38;37;35;32;31;25;26;31;40;41;42;44;38;37;25;16;20;22;18;11;20;24;35;31;6;5;1;0;0;0;0;0;0
+P|121|A|passing|Caleb Williams||4431611|24/34;247;7.3;1;0;1-10;68.1;101.0
+P|121|A|rushing|D'Andre Swift||4259545|27;69;2.6;3;7
+P|121|A|rushing|Kalif Raymond||2973405|1;39;39.0;0;39
+P|121|A|rushing|Roschon Johnson||4426386|5;17;3.4;0;9
+P|121|A|rushing|Caleb Williams||4431611|2;1;0.5;0;2
+P|121|A|receiving|Rome Odunze||4431299|4;87;21.8;0;24;6
+P|121|A|receiving|Colston Loveland||4723086|7;65;9.3;0;15;9
+P|121|A|receiving|Luther Burden III||4685278|7;56;8.0;1;23;9
+P|121|A|receiving|Kalif Raymond||2973405|2;14;7.0;0;9;3
+P|121|A|receiving|Roschon Johnson||4426386|1;11;11.0;0;11;1
+P|121|A|receiving|D'Andre Swift||4259545|2;10;5.0;0;8;3
+P|121|A|receiving|Zavion Thomas||4869748|1;4;4.0;0;4;3
+P|121|A|fumbles|Colston Loveland||4723086|1;1;0
+P|121|A|defensive|Devin Bush||4036261|6;5;1;1;0;1;0
+P|121|A|defensive|Jeffery Simmons||4035369|6;3;1;2;1;1;0
+P|121|A|defensive|Tyrique Stevenson Sr.||4426374|5;4;0;0;1;0;0
+P|121|A|defensive|Jaylon Johnson||4243253|5;3;0;1;0;0;0
+P|121|A|defensive|Dillon Thieneman||4954445|5;3;0;0;0;0;0
+P|121|A|defensive|Daniel Hardy||4365629|3;2;0;0;0;0;0
+P|121|A|defensive|Noah Sewell||4430822|3;2;0;0;0;0;0
+P|121|A|defensive|Austin Booker||4683553|3;1;0;0;1;0;0
+P|121|A|defensive|T.J. Edwards||3121544|2;2;0;0;0;0;0
+P|121|A|defensive|Cam Lewis||3916577|2;2;0;0;1;0;0
+P|121|A|defensive|Montez Sweat||3134690|2;1;1;1;0;3;0
+P|121|A|defensive|James Lynch||4259181|2;1;0;0;1;0;0
+P|121|A|defensive|Grady Jarrett||2576492|1;1;0;0;0;0;0
+P|121|A|defensive|Jonah Jackson||3930040|1;1;0;0;0;0;0
+P|121|A|defensive|Josh Blackwell||4240459|1;1;0;0;0;0;0
+P|121|A|defensive|Kyler Gordon||4361093|1;1;0;0;1;1;0
+P|121|A|defensive|Jack Sanborn||4372576|1;1;0;0;0;0;0
+P|121|A|defensive|Jahdae Walker||5160110|1;1;0;0;0;0;0
+P|121|A|defensive|Zavier Scott||4257364|1;0;0;0;0;0;0
+P|121|A|defensive|Shemar Turner||4432804|1;0;0;0;0;0;0
+P|121|A|defensive|Skyler Thomas||4879561|1;0;0;0;0;0;0
+P|121|A|interceptions|James Lynch||4259181|1;16;0
+P|121|A|kickReturns|Zavion Thomas||4869748|4;88;22.0;27;0
+P|121|A|puntReturns|Kalif Raymond||2973405|2;7;3.5;7;0
+P|121|A|kicking|Cairo Santos||17427|2/2;100.0;44;4/4;10
+P|121|A|punting|Tory Taylor||4686889|3;147;49.0;0;0;57
+P|121|H|passing|Sam Darnold||3912547|17/34;188;5.5;2;1;3-17;31.3;74.1
+P|121|H|rushing|Jadarian Price||4685512|10;29;2.9;0;9
+P|121|H|rushing|Zach Charbonnet||4426385|6;23;3.8;0;13
+P|121|H|rushing|Sam Darnold||3912547|2;20;10.0;0;14
+P|121|H|rushing|George Holani||4429835|1;9;9.0;0;9
+P|121|H|receiving|Jaxon Smith-Njigba||4430878|6;118;19.7;1;43;11
+P|121|H|receiving|Tory Horton||4597703|3;26;8.7;0;13;6
+P|121|H|receiving|AJ Barner||4576297|2;23;11.5;0;17;5
+P|121|H|receiving|Jadarian Price||4685512|2;8;4.0;0;6;4
+P|121|H|receiving|Cooper Kupp||2977187|1;7;7.0;1;7;3
+P|121|H|receiving|Zach Charbonnet||4426385|3;6;2.0;0;6;4
+P|121|H|receiving|George Holani||4429835|0;0;0.0;0;0;1
+P|121|H|fumbles|DeMarcus Lawrence||16802|0;0;1
+P|121|H|defensive|Ernest Jones IV||4362851|13;5;0;0;1;0;0
+P|121|H|defensive|Devon Witherspoon||4575431|8;5;0;1;0;0;0
+P|121|H|defensive|Julian Love||4046675|7;5;0;0;0;0;0
+P|121|H|defensive|Jarran Reed||3115312|7;4;0;2;0;0;0
+P|121|H|defensive|Drake Thomas||4428659|7;1;0;0;0;0;0
+P|121|H|defensive|Josh Jobe||4372020|5;4;0;0;0;0;0
+P|121|H|defensive|Nick Emmanwori||4869523|5;2;0;0;0;1;0
+P|121|H|defensive|Mike Morris||4572055|4;3;1;1;0;1;0
+P|121|H|defensive|Derick Hall||4567226|4;3;0;1;0;0;0
+P|121|H|defensive|Nehemiah Pritchett||4567222|3;3;0;0;1;0;0
+P|121|H|defensive|Leonard Williams||2971622|3;2;0;0;0;1;0
+P|121|H|defensive|Ty Okada||4247808|3;1;0;0;0;0;0
+P|121|H|defensive|Byron Murphy II||4570040|3;1;0;0;0;0;0
+P|121|H|defensive|DeMarcus Lawrence||16802|3;0;0;0;1;0;0
+P|121|H|defensive|Rodney Thomas II||4248455|2;0;0;0;0;0;0
+P|121|H|defensive|Abraham Lucas||4245171|1;1;0;0;0;0;0
+P|121|H|defensive|Tyrice Knight||4686540|1;1;0;0;0;0;0
+P|121|H|defensive|Irv Charles||3929636|1;0;0;0;0;0;0
+P|121|H|defensive|Brady Russell||4243176|1;0;0;0;0;0;0
+P|121|H|defensive|Patrick O'Connell||4364623|1;0;0;0;0;0;0
+P|121|H|defensive|Rylie Mills||4430838|1;0;0;0;0;0;0
+P|121|H|kickReturns|George Holani||4429835|6;144;24.0;34;0
+P|121|H|puntReturns|Tory Horton||4597703|2;12;6.0;9;0
+P|121|H|kicking|Jason Myers||2473037|1/2;50.0;27;0/1;3
+P|121|H|punting|Michael Dickson||3929851|5;259;51.8;1;1;63
 

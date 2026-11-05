@@ -224,7 +224,7 @@ DAL||Quinnen Williams|DT|Active||||2026-10-31|Williams (hamstring) is set to pla
 DAL||Jonathan Bullard|DT|Injured Reserve|Calf||2026-11-08|2026-10-30|Bullard (calf) was designated to return from injured reserve by the Cowboys on Thursday.
 DAL||DeMarvion Overshown|LB|Active||||2026-10-28|Overshown posted six tackles (five solo) and two pass defenses (including one interception) during the Cowboys' 38-21 win over the Eagles on Monday.
 DEN||Kris Abrams-Draine|CB|Questionable|Ankle||2026-11-08|2026-11-05|Abrams-Draine (ankle) did not practice Wednesday.
-DEN||Pat Bryant|WR|Injured Reserve|Ankle|Sprain|2026-11-08|2026-11-05|Bryant (ankle) was a full participant at the Broncos' practice Wednesday, Aric DiLalla of the team's official website reports.
+DEN||Pat Bryant|WR|Injured Reserve|Ankle|Sprain|2026-11-08|2026-11-05|Bryant (ankle) was a full participant at the Broncos' practice Wednesday, Aric DiLalla of the team's official site reports.
 DEN||Eyioma Uwazurike|DE|Questionable|Shoulder||2026-11-08|2026-11-04|questionable
 DEN||Alex Singleton|LB|Active||||2026-11-04|Singleton notched 14 tackles (six solo), including 1.0 sacks, and defensed a pass in Sunday's 28-24 victory against the Chiefs.
 DEN||Talanoa Hufanga|S|Questionable|Ankle||2026-11-08|2026-11-03|questionable
@@ -304,7 +304,7 @@ HOU||Azeez Al-Shaair|LB|Questionable|Groin||2026-11-08|2026-11-05|Al-Shaair (gro
 HOU||Jalen Pitre|S|Active||||2026-11-05|Pitre (shoulder) was a full participant in Houston's practice Wednesday.
 HOU||Braden Smith|OT|Questionable|Ankle||2026-11-08|2026-11-04|questionable
 HOU||Brevin Jordan|TE|Questionable|Finger||2026-11-08|2026-11-04|questionable
-HOU||David Montgomery|RB|Out|Groin||2026-11-15|2026-11-04|While Montgomery (groin) has made some progress, coach DeMeco Ryans noted Wednesday that the running back will remain out for Sunday's game against the Chargers, Jonathan M. Alexander of the Houston Chronicle reports.
+HOU||David Montgomery|RB|Out|Groin||2026-11-15|2026-11-04|Texans head coach DeMeco Ryans said Wednesday that Montgomery (groin) has made some progress but is still viewed as week-to-week and will remain out for Sunday's game against the Chargers, Jonathan M. Alexander of the Ho
 HOU||Naquan Jones|DT|Active||||2026-11-02|The Texans signed Jones on Monday.
 HOU||Jaylin Noel|WR|Injured Reserve|Toe|Surgery|2027-02-15|2026-10-28|Noel, who was placed on injured reserve earlier Wednesday, is expected to require surgery to address his toe injury and will miss the remainder of the season, Jonathan M. Alexander of the Houston Chronicle reports.
 HOU||Henry To'oTo'o|LB|Active||||2026-10-28|To'oTo'o notched 10 tackles (three solo), including 0.5 sacks, in Sunday's Week 7 overtime loss to the Giants.
@@ -530,8 +530,8 @@ NE||Carlton Davis III|CB|Questionable|Neck||2026-11-08|2026-11-04|questionable
 NE||Christian Barmore|DT|Questionable|Illness||2026-11-08|2026-11-04|questionable
 NE||Kevin Byard|S|Questionable|Chest||2026-11-08|2026-11-04|questionable
 NE||Hunter Henry|TE|Questionable|Foot||2026-11-08|2026-11-04|Henry (foot) wasn't on the field for the media-access portion of Wednesday's practice, Mike Reiss of ESPN.com reports.
-NE||TreVeyon Henderson|RB|Questionable|Illness||2026-11-08|2026-11-04|Henderson (illness) won't practice Wednesday, Doug Kyed of the Boston Herald reports.
-NE||A.J. Brown|WR|Questionable|Ankle||2026-11-08|2026-11-04|Brown (ankle/knee) won't practice Wednesday, Doug Kyed of the Boston Herald reports.
+NE||TreVeyon Henderson|RB|Questionable|Illness||2026-11-08|2026-11-04|Patriots head coach Mike Vrabel said that Henderson (illness) won't practice Wednesday, Doug Kyed of the Boston Herald reports.
+NE||A.J. Brown|WR|Questionable|Knee||2026-11-08|2026-11-04|Patriots head coach Mike Vrabel said that Brown (knee/ankle) won't practice Wednesday, Doug Kyed of the Boston Herald reports.
 NE||Mack Hollins|WR|Injured Reserve|Calf||2026-11-08|2026-11-04|The Patriots are expected to designate Hollins (calf) for return from injured reserve Wednesday, Ian Rapoport of NFL Network reports.
 NE||Efton Chism III|WR|Active||||2026-11-04|Chism caught all five of his targets for 37 yards during Sunday's 24-19 win over the Dolphins.
 NE||Corey Kiner|RB|Active||||2026-11-04|Kiner rushed seven times for 38 yards during Sunday's 24-19 win over Miami.
@@ -557,7 +557,7 @@ NO||Alvin Kamara|RB|Questionable|Back||2026-11-08|2026-11-04|Kamara (rest/back) 
 NO||Asim Richards|OT|Questionable|Thumb||2026-11-08|2026-11-04|questionable
 NO||Martin Emerson Jr.|CB|Questionable|Shin||2026-11-08|2026-11-04|questionable
 NO||Charlie Smyth|PK|Active||||2026-11-04|Coach Kellen Moore announced Wednesday that Smyth will be the Saints' kicker in Week 9, Katherine Terrell of ESPN.com reports.
-NO||Jordyn Tyson|WR|Injured Reserve|Hamstring|Strain|2026-11-08|2026-11-04|Tyson (hamstring) turned in a limited practice Wednesday, Adam Schefter of ESPN reports.
+NO||Jordyn Tyson|WR|Injured Reserve|Hamstring|Strain|2026-11-08|2026-11-04|Tyson (hamstring) had his 21-day practice window opened and was a limited participant in Wednesday's session.
 NO||Travis Etienne Jr.|RB|Injured Reserve|Hamstring|Strain|2026-11-08|2026-11-04|Head coach Kellen Moore said Wednesday that the Saints haven't opened Etienne's (hamstring) practice window just yet, Jeff Nowak of WWL Louisiana reports.
 NO||Carl Granderson|DE|Active||||2026-10-28|Granderson totaled four tackles, including 1.5 sacks, in Sunday's Week 7 loss to Pittsburgh.
 NO||Pete Werner|LB|Active||||2026-10-28|Werner finished Sunday's loss to the Steelers with eight tackles (three solo).
@@ -625,11 +625,11 @@ NYJ||Demario Davis|LB|Active||||2026-10-28|Davis finished Sunday's Week 7 loss t
 NYJ||Jamien Sherwood|LB|Active||||2026-10-28|Sherwood totaled eight tackles (four solo) and two defensed passes Sunday in a loss to Miami.
 PHI||Jihaad Campbell|LB|Questionable|Hamstring||2026-11-08|2026-11-05|Campbell (hamstring/quadriceps) did not participate at the Eagles' practice Wednesday.
 PHI||Jake Elliott|PK|Questionable|Ankle||2026-11-08|2026-11-05|Elliott (ankle) was a limited participant at the Eagles' practice Wednesday.
+PHI||Dontayvion Wicks|WR|Questionable|Ankle||2026-11-08|2026-11-04|Wicks (ankle) was a non-participant at Wednesday's practice.
 PHI||DeVonta Smith|WR|Questionable|Hamstring||2026-11-08|2026-11-04|Smith (hamstring) didn't practice Wednesday.
 PHI||Saquon Barkley|RB|Questionable|Hamstring||2026-11-08|2026-11-04|Barkley (hamstring/back) officially didn't practice Wednesday.
 PHI||Jonathan Greenard|LB|Questionable|Ankle||2026-11-08|2026-11-04|questionable
 PHI||Jalyx Hunt|LB|Questionable|Knee||2026-11-08|2026-11-04|questionable
-PHI||Dontayvion Wicks|WR|Questionable|Ankle||2026-11-08|2026-11-04|Wicks (ankle) wasn't spotted at Wednesday's practice, Brooks Kubena of The Athletic reports.
 PHI||Tanner McKee|QB|Active||||2026-11-04|McKee will shift to a backup role for Sunday's game against the Giants with the Eagles set to move forward with Joe Milton as their starting quarterback in Week 9, Adam Schefter of ESPN and Mike Garafolo of NFL Network r
 PHI||Joe Milton|QB|Active||||2026-11-04|Milton is set to be the Eagles' starting quarterback Sunday against the Giants, Mike Garafolo of NFL Network reports.
 PHI||Elijah Moore|WR|Active||||2026-11-04|Moore did not garner a target during Sunday night's 27-10 loss to the Commanders.

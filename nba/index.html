@@ -3174,6 +3174,60 @@ a.nl-t:hover{border-color:var(--accent)}
 .jt-last{position:relative;display:flex;align-items:baseline;gap:10px;margin:0 10px 8px;padding:6px 10px;border-radius:6px;background:#030303;box-shadow:inset 0 0 0 1px #1d2026;font-family:"Orbitron",var(--disp);font-size:11px;color:#ffb547;text-shadow:0 0 5px rgba(255,170,40,.6);overflow:hidden}
 .jt-last b{font-family:var(--body);font-size:13px;font-weight:600;color:#fff;text-shadow:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 @media (max-width:600px){.jt-last{margin:0 4px 8px;flex-wrap:wrap;gap:2px 8px}.jt-last b{white-space:normal}}
+/* 2026-11-05: jumbotron after the Delta Center's center-hung board (p2jumbo.js) */
+.jt.dcj{--br:#5b2a86;max-width:860px;padding-top:34px}
+.dc-rig{position:absolute;top:0;left:0;right:0;height:40px;pointer-events:none}
+.dc-rig::before,.dc-rig::after{content:"";position:absolute;top:0;width:3px;height:36px;background:linear-gradient(180deg,#5f646c,#1d1f23)}
+.dc-rig::before{left:30%}.dc-rig::after{right:30%}
+.dc-rig i{position:absolute;top:0;width:26px;height:42px;border-radius:4px 4px 16px 16px;background:linear-gradient(90deg,#0b0b0d,#26282d 50%,#0b0b0d);box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+.dc-rig i:first-child{left:8%;transform:rotate(10deg)}.dc-rig i:last-child{right:8%;transform:rotate(-10deg)}
+.dc-box{position:relative;z-index:1;display:grid;grid-template-columns:54px minmax(0,1fr) 54px;padding:10px 0;border:1px solid #2a2c31;border-radius:4px;background:linear-gradient(180deg,#1b1c20,#0a0a0c 40%,#050506);box-shadow:0 36px 70px -30px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.08)}
+.dc-wing{position:relative;margin:6px 0;overflow:hidden;background:repeating-linear-gradient(135deg,rgba(255,255,255,.09) 0 6px,transparent 6px 18px),linear-gradient(180deg,color-mix(in srgb,var(--br) 80%,#fff),var(--br) 55%,color-mix(in srgb,var(--br) 55%,#000));box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.dc-wing.l{transform:perspective(320px) rotateY(32deg);transform-origin:right center}
+.dc-wing.r{transform:perspective(320px) rotateY(-32deg);transform-origin:left center}
+.dc-wl{position:absolute;left:50%;top:50%;display:grid;place-items:center;width:30px;height:30px;transform:translate(-50%,-50%)}.dc-wl img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+.dc-lg .sw,.dc-bl .sw,.dc-wl .sw{display:block;width:70%;height:70%;border-radius:50%}
+.dc-scr{position:relative;min-width:0;overflow:hidden;border-radius:2px;background:#000;box-shadow:0 0 0 3px #000,0 0 0 4px #2a2c31}
+.dc-scr::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,transparent 58%,rgba(0,0,0,.22) 64%);background-size:3px 3px}
+.dc-vid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;min-height:clamp(120px,22vw,200px);padding:14px 10px 12px;background:linear-gradient(105deg,var(--ca) 0 calc(50% - 2px),rgba(255,255,255,.85) calc(50% - 2px) calc(50% + 2px),var(--ch) calc(50% + 2px))}
+.dc-glow{position:absolute;inset:0;background:radial-gradient(60% 90% at 50% 125%,color-mix(in srgb,var(--br) 60%,transparent),transparent 70%),linear-gradient(180deg,rgba(255,255,255,.1),transparent 40%,rgba(0,0,0,.45))}
+.dc-big{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;transition:opacity .3s}
+.dc-bt.dim{opacity:.6}
+.dc-lg{display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.92) 0 47%,rgba(255,255,255,.25) 58%,transparent 70%);width:clamp(54px,11vw,96px);height:clamp(54px,11vw,96px)}.dc-lg img{width:62%;height:62%;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,.55))}
+.dc-nm{max-width:100%;font-family:"Inter Tight",var(--disp);font-weight:800;font-size:clamp(12px,2.3vw,20px);letter-spacing:.08em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.dc-vs{position:relative;z-index:1;display:grid;place-items:center;width:clamp(36px,6vw,50px);aspect-ratio:1;border-radius:50%;background:#000;border:2px solid rgba(255,255,255,.85);font-family:"Inter Tight",var(--disp);font-weight:800;font-size:clamp(11px,1.8vw,15px);color:#fff}
+.dc-bug{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:stretch;border-top:2px solid var(--br);background:#0b0b0e}
+.dc-bt{display:flex;align-items:center;gap:8px;min-width:0;padding:6px 12px;background:linear-gradient(180deg,color-mix(in srgb,var(--tc) 88%,#fff),var(--tc) 60%);transition:opacity .3s}
+.dc-bt.h{flex-direction:row-reverse}
+.dc-bl{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.92)}.dc-bl img{width:72%;height:72%;object-fit:contain}
+.dc-ab{font-family:"Inter Tight",var(--disp);font-weight:800;font-size:14px;letter-spacing:.08em;color:#fff}
+.dc-sc{margin-left:auto;font-family:"Inter Tight",var(--disp);font-weight:800;font-size:clamp(30px,6vw,52px);line-height:1;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 2px 8px rgba(0,0,0,.4);white-space:nowrap}
+.dc-bt.h .dc-sc{margin-left:0;margin-right:auto}
+.dc-sc small{font-size:13px;font-weight:700;letter-spacing:.1em;opacity:.92}
+.dc-bm{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:110px;padding:4px 14px;background:#000}
+.dc-bm i{font-style:normal;font-family:"Inter Tight",var(--disp);font-weight:800;font-size:10px;letter-spacing:.22em;color:color-mix(in srgb,var(--br) 40%,#fff)}
+.dc-bm b,.dc-bm .dc-cd{font-family:"Orbitron",var(--disp);font-weight:800;font-size:clamp(17px,3.4vw,30px);line-height:1.15;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap;text-shadow:0 0 8px rgba(255,255,255,.5)}
+.dc-bm .dc-cd.tba{font-size:13px}
+.jt.dcj .jt-dig::before{color:rgba(255,255,255,.07)}
+.dc-tbs{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;padding:10px 12px 12px;background:#050507}
+.dc-tbs.one{grid-template-columns:1fr}
+.dc-tb{min-width:0}
+.dc-th{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin-bottom:4px}
+.dc-th span{padding:3px 8px;border-radius:2px;font:800 11px/1.25 "Inter Tight",var(--disp);letter-spacing:.12em;color:#fff;text-align:center}
+.dc-th em{font-style:normal;font:800 10px/1 "Inter Tight",var(--disp);letter-spacing:.2em;color:#a3abb9}
+.dc-tr{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:3px 0;border-top:1px solid rgba(255,255,255,.08)}
+.dc-tr b{font-family:"Orbitron",var(--disp);font-weight:700;font-size:13px;color:#fff;text-align:center;font-variant-numeric:tabular-nums}
+.dc-tr em{min-width:64px;font-style:normal;text-align:center;font:700 10px/1.3 "Inter Tight",var(--disp);letter-spacing:.14em;color:#a3abb9}
+.dc-tr.one{grid-template-columns:auto 1fr}.dc-tr.one em{text-align:left}.dc-tr.one b{text-align:right;font-size:12px}
+.dc-fas{position:relative;z-index:1;width:44%;margin:0 auto;padding:7px 10px;border:1px solid #2a2c31;border-top:0;border-radius:0 0 4px 4px;background:linear-gradient(180deg,#121316,#050506);text-align:center;font-family:"Inter Tight",var(--disp);font-weight:800;font-size:clamp(11px,1.7vw,15px);letter-spacing:.3em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dc-under{width:64%;margin:6px auto 0}
+.jt.dcj .jt-last{margin:0;border-radius:3px;background:#000;box-shadow:0 0 0 2px #1a1b1f;color:color-mix(in srgb,var(--br) 40%,#fff);text-shadow:none}
+.jt.dcj .jt-ribbon{height:26px;margin:12px 0 0;border-radius:2px;background:linear-gradient(90deg,#1f56e0,var(--br) 50%,#1f56e0);box-shadow:0 0 18px color-mix(in srgb,var(--br) 45%,transparent)}
+.jt.dcj .jt-ribbon::after{background-image:radial-gradient(circle,transparent 55%,rgba(0,0,0,.25) 62%);background-size:3px 3px}
+.jt.dcj .jt-marq span,.jt.dcj.is-live .jt-marq span{font-family:"Inter Tight",var(--disp);font-weight:800;font-size:12px;line-height:26px;letter-spacing:.18em;color:#fff;text-shadow:none}
+@media (max-width:600px){.jt.dcj{padding-top:24px}.dc-rig i{width:16px;height:28px}.dc-rig::before,.dc-rig::after{height:24px}.dc-box{grid-template-columns:minmax(0,1fr);padding:6px}.dc-wing{display:none}
+  .dc-vid{padding:10px 6px 8px}.dc-bt{gap:5px;padding:5px 7px}.dc-bl{width:22px;height:22px}.dc-ab{font-size:12px}.dc-bm{min-width:74px;padding:4px 6px}.dc-bm i{letter-spacing:.12em}
+  .dc-tbs{grid-template-columns:1fr;padding:8px}.dc-fas{width:72%;letter-spacing:.16em}.dc-under{width:100%}}
 /* the More sheet stays solid even where the theme surface is see-through (2026-10-21) */
 .bs-panel{background:#14161b}
 :root[data-theme="light"] .bs-panel{background:#fff}
@@ -7847,28 +7901,48 @@ function jtClock(g){ if(g.played) return {per:'FINAL', clk:''}; const c=String(g
   if(/half/i.test(c)) return {per:'HALF', clk:'0:00'}; m=c.match(/end of (\w+)/i); if(m) return {per:'END '+m[1].replace(/^(\d)(st|nd|rd|th)$/i,'Q$1').toUpperCase(), clk:'0:00'};
   return {per:(c||'LIVE').toUpperCase().slice(0,10), clk:''}; }
 function jtDig(v, cls){ v=String(v==null?'':v); return '<span class="jt-dig '+(cls||'')+'" data-ghost="'+'8'.repeat(Math.max(v.replace(/[^0-9]/g,'').length,1))+'">'+esc(v)+'</span>'; }
+/* 2026-11-05 (Jamo: "Do the same thing with the Jazz and use their Jumbotron they have in their arena"): the board is redone
+   after the Delta Center's center-hung scoreboard - a black four-sided box under curved speaker arrays, angled end screens in
+   the team color, the main screen with the matchup "video", the broadcast score bar along its bottom (logo, score, black
+   clock box) and a stats table split by team-color header bars, a black fascia under it carrying the arena name, a small
+   underside screen for the last play, and the bowl's blue-purple LED ring as the ribbon. No sponsor logos. The end screens
+   and glow use the Jazz (or the favorite team) when they play, else the home team. */
+function jtBrand(a, h){ const fav=(typeof SETTINGS!=='undefined'&&SETTINGS.fav&&T[SETTINGS.fav])?SETTINGS.fav:'UTAH'; return (a.ab===fav||h.ab===fav)?team(fav):h; }
 function jtHTML(g){ const a=team(g.away), h=team(g.home); const on=g.live||g.played; const S=(typeof NL_SUM!=='undefined'&&NL_SUM[g.id]&&NL_SUM[g.id].j)||null;
-  const lead=g.played?(g.as>g.hs?'a':g.hs>g.as?'h':''):'';
-  const side=(t,sc,k)=>'<div class="jt-team '+k+(lead&&lead!==k?' dim':'')+'" style="--tc:'+sbCardColor(t)+'"><div class="jt-name">'+sbPlate(t,'jt-pl')+'<span>'+esc(t.disp.toUpperCase())+'</span></div>'
-    +'<div class="jt-score">'+(on?jtDig(sc):jtDig('--','off'))+'</div><div class="jt-rec">'+esc(t.other?'':(g.pre?'PRESEASON':recStr(t.ab)))+'</div></div>';
-  let mid; if(on){ const C=jtClock(g); mid='<div class="jt-mid"><div class="jt-lab">'+(g.played?'GAME':'PERIOD')+'</div><div class="jt-per">'+esc(C.per)+'</div>'+(C.clk?'<div class="jt-lab">CLOCK</div><div class="jt-clock">'+jtDig(C.clk)+'</div>':'')+'</div>'; }
-  else mid='<div class="jt-mid"><div class="jt-lab">TIP-OFF</div>'+sbClock(kickMs(g),'jt-cd')+'<div class="jt-lab" style="margin-top:6px">'+esc(kick(g))+' '+esc(tzInfo().lbl)+'</div></div>';
-  /* line score: the summary's quarter scores, else the schedule's */
-  let lines=''; const qrow=(t,ha,fallback,tot)=>{ const r=S&&S.ls?S.ls.find(x=>x.ha===ha):null; const q=r?r.ls:(fallback||[]); return {t, q, tot:r?r.s:tot}; };
-  const L=[qrow(a,'away',g.als,g.as), qrow(h,'home',g.hls,g.hs)]; const nq=Math.max(4, ...L.map(x=>x.q.length));
-  if(on&&L.some(x=>x.q.length)) lines='<div class="jt-lines"><table><thead><tr><th></th>'+Array.from({length:nq},(_,i)=>'<th>'+(i<4?i+1:'OT'+(i>4?i-3:''))+'</th>').join('')+'<th>T</th></tr></thead><tbody>'
-    +L.map(x=>'<tr><td class="jt-ab">'+esc(x.t.ab)+'</td>'+Array.from({length:nq},(_,i)=>'<td>'+(x.q[i]!=null&&x.q[i]!==''?esc(String(x.q[i])):'')+'</td>').join('')+'<td class="jt-t">'+esc(String(x.tot==null?'':x.tot))+'</td></tr>').join('')+'</tbody></table></div>';
-  /* team stats ribbon */
-  let stats=''; if(S&&S.teams&&S.teams.length===2){ const st=ha=>{ const t=S.teams.find(x=>x.ha===ha); return t&&t.stats||{}; }; const row=(t,s)=>'<div class="jt-st"><b>'+esc(t.ab)+'</b><span>FG '+esc(s.fgp||'-')+'%</span><span>3PT '+esc(s.tp||'-')+'</span><span>REB '+esc(s.reb||'-')+'</span><span>AST '+esc(s.ast||'-')+'</span><span>TO '+esc(s.tto||s.to||'-')+'</span></div>';
-    stats='<div class="jt-stats">'+row(a,st('away'))+row(h,st('home'))+'</div>'; }
+  const lead=g.played?(g.as>g.hs?'a':g.hs>g.as?'h':''):''; const dim=k=>lead&&lead!==k?' dim':''; const ca=sbCardColor(a), ch=sbCardColor(h); const br=jtBrand(a,h); const C=on?jtClock(g):null;
+  const rec=t=>t.other?'':(g.pre?'PRESEASON':recStr(t.ab));
+  /* the "video": both teams' logos on a split in their colors */
+  const vid='<div class="dc-vid"><div class="dc-glow" aria-hidden="true"></div>'+[[a,'a'],[h,'h']].map(([t,k],i)=>(i?'<div class="dc-vs">'+(g.neutral?'VS':'AT')+'</div>':'')
+    +'<div class="dc-big '+k+dim(k)+'">'+sbPlate(t,'dc-lg')+'<div class="dc-nm">'+esc(t.disp.toUpperCase())+'</div></div>').join('')+'</div>';
+  /* the score bar along the bottom of the video */
+  const bt=(t,sc,k)=>'<div class="dc-bt '+k+dim(k)+'" style="--tc:'+(k==='a'?ca:ch)+'">'+sbPlate(t,'dc-bl')+'<span class="dc-ab">'+esc(t.ab)+'</span><span class="dc-sc">'+(on?esc(String(sc==null?'':sc)):'<small>'+esc(rec(t))+'</small>')+'</span></div>';
+  const bm=on?'<div class="dc-bm"><i>'+esc(g.played?'FINAL':C.per)+'</i>'+(C.clk?'<b>'+jtDig(C.clk)+'</b>':'')+'</div>':'<div class="dc-bm"><i>TIP-OFF</i>'+sbClock(kickMs(g),'jt-cd dc-cd')+'</div>';
+  const bug='<div class="dc-bug">'+bt(a,g.as,'a')+bm+bt(h,g.hs,'h')+'</div>';
+  /* the stats table: team-color header bars, the label in the middle */
+  const head=lab=>'<div class="dc-th"><span style="background:'+ca+'">'+esc(a.ab)+'</span><em>'+esc(lab)+'</em><span style="background:'+ch+'">'+esc(h.ab)+'</span></div>';
+  const v=x=>x==null||x===''?'-':String(x); const row=(va,lab,vh)=>'<div class="dc-tr"><b>'+esc(v(va))+'</b><em>'+esc(lab)+'</em><b>'+esc(v(vh))+'</b></div>';
+  let tabs='';
+  if(on){ const qrow=(ha,fallback)=>{ const r=S&&S.ls?S.ls.find(x=>x.ha===ha):null; return r?r.ls:(fallback||[]); }; const qa=qrow('away',g.als)||[], qh=qrow('home',g.hls)||[]; const nq=Math.max(qa.length,qh.length);
+    const t1=nq?'<div class="dc-tb">'+head('SCORING')+Array.from({length:nq},(_,i)=>row(qa[i],i<4?['1ST QTR','2ND QTR','3RD QTR','4TH QTR'][i]:'OT'+(i>4?i-3:''),qh[i])).join('')+'</div>':'';
+    let t2=''; if(S&&S.teams&&S.teams.length===2){ const st=ha=>{ const t=S.teams.find(x=>x.ha===ha); return t&&t.stats||{}; }; const A=st('away'), H=st('home'); const pc=x=>x==null||x===''?'':x+'%';
+      t2='<div class="dc-tb">'+head('TEAM STATS')+row(pc(A.fgp),'FG%',pc(H.fgp))+row(A.tp,'3PT',H.tp)+row(A.reb,'REB',H.reb)+row(A.ast,'AST',H.ast)+row(A.tto||A.to,'TO',H.tto||H.to)+'</div>'; }
+    if(t1||t2) tabs='<div class="dc-tbs'+(t1&&t2?'':' one')+'">'+t1+t2+'</div>'; }
+  else { const one=(lab,val)=>'<div class="dc-tr one"><em>'+esc(lab)+'</em><b>'+esc(val)+'</b></div>';
+    const rows=[one('TIP-OFF',kick(g)+' '+tzInfo().lbl)]; if(g.tv) rows.push(one('TV',tvShort(g.tv).toUpperCase())); if(g.spread!=null) rows.push(one('LINE',spreadStr(g,{short:true}).toUpperCase())); if(g.total!=null) rows.push(one('O/U',String(g.total)));
+    tabs='<div class="dc-tbs one"><div class="dc-tb">'+head('TONIGHT')+rows.join('')+'</div></div>'; }
   /* live: the ribbon runs the latest plays, newest first (2026-10-21, Jamo); otherwise the matchup */
   const P=(g.live&&S&&S.plays||[]).slice().reverse(); const qn=n=>n>4?'OT'+(n>5?n-4:''):'Q'+n;
   const playTxt=p=>qn(p.per)+' '+(p.clk||'')+' · '+String(p.text||'').replace(/\s+/g,' ').trim().toUpperCase()+(p.as!=null&&p.hs!=null?' · '+a.ab+' '+p.as+' '+h.ab+' '+p.hs:'');
   const last=P[0]?'<div class="jt-last" data-k="'+esc(P[0].per+'|'+P[0].clk+'|'+P[0].text)+'"><span class="jt-lab">LAST PLAY</span><span>'+esc(qn(P[0].per)+' '+(P[0].clk||''))+'</span><b>'+esc(String(P[0].text||'').replace(/\s+/g,' '))+'</b></div>':'';
   const ribbon=P.length?['● LIVE PLAY-BY-PLAY'].concat(P.map(playTxt)).join('   ★   '):[g.live?'● LIVE':g.played?'FINAL':'TONIGHT', a.disp.toUpperCase()+' AT '+h.disp.toUpperCase(), (g.venue||'').toUpperCase(), g.tv?tvShort(g.tv).toUpperCase():'', g.spread!=null?spreadStr(g,{short:true}).toUpperCase():'', g.total!=null?'O/U '+g.total:''].filter(Boolean).join('   ★   ');
-  return '<section class="jt'+(g.live?' is-live':'')+'" aria-label="Scoreboard: '+esc(a.disp)+' '+(on?g.as:'')+', '+esc(h.disp)+' '+(on?g.hs:'')+'"><div class="jt-cables" aria-hidden="true"></div><div class="jt-box">'
-    +'<div class="jt-ribbon" aria-hidden="true"><div class="jt-marq"><span>'+esc(ribbon)+'</span><span>'+esc(ribbon)+'</span></div></div>'
-    +'<div class="jt-screen">'+side(a,g.as,'a')+mid+side(h,g.hs,'h')+'</div>'+last+lines+stats+'</div></section>'; }
+  /* the fascia names the arena; the schedule often leaves it blank, so the Jazz's home falls back to the Delta Center and others to the home team */
+  const venue=(g.venue||(h.ab==='UTAH'?'Delta Center':'')||(h.other?'':h.full)||h.disp||'').toUpperCase();
+  return '<section class="jt dcj'+(g.live?' is-live':'')+'" style="--br:'+uiColor(br)+';--ca:'+ca+';--ch:'+ch+'" aria-label="Scoreboard: '+esc(a.disp)+' '+(on?g.as:'')+', '+esc(h.disp)+' '+(on?g.hs:'')+(g.live&&C?', '+esc(C.per)+(C.clk?' '+esc(C.clk):''):g.played?', final':'')+'">'
+    +'<div class="dc-rig" aria-hidden="true"><i></i><i></i></div>'
+    +'<div class="dc-box"><div class="dc-wing l" aria-hidden="true">'+sbPlate(br,'dc-wl')+'</div><div class="dc-scr">'+vid+bug+tabs+'</div><div class="dc-wing r" aria-hidden="true">'+sbPlate(br,'dc-wl')+'</div></div>'
+    +(venue?'<div class="dc-fas">'+esc(venue)+'</div>':'')
+    +(last?'<div class="dc-under">'+last+'</div>':'')
+    +'<div class="jt-ribbon dc-rib" aria-hidden="true"><div class="jt-marq"><span>'+esc(ribbon)+'</span><span>'+esc(ribbon)+'</span></div></div></section>'; }
 /* while the game is live, check the summary every 20 seconds and redraw the board when a new play comes in */
 setInterval(()=>{ const m=(location.hash||'').match(/^#\/gamenight\/([^\/#?]+)/); const g=m&&GI[dec(m[1])]; const el=document.querySelector('.jt'); if(!g||!g.live||!el||document.hidden) return;
   nlFetch(g).then(()=>{ const S=NL_SUM[g.id]&&NL_SUM[g.id].j; const p=S&&S.plays&&S.plays[S.plays.length-1]; const k=p?p.per+'|'+p.clk+'|'+p.text:''; const cur=el.querySelector('.jt-last'); if(k&&(!cur||cur.dataset.k!==k)&&el.isConnected){ const la=S.ls&&S.ls.find(x=>x.ha==='away'), lh=S.ls&&S.ls.find(x=>x.ha==='home'); if(la&&lh&&la.s!==''&&lh.s!==''){ g.as=+la.s; g.hs=+lh.s; } if(S.det) g.clk=S.det; el.outerHTML=jtHTML(g); } }); }, 20e3);

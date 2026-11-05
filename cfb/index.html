@@ -2584,6 +2584,54 @@ body.themed .pk-card,.pk-card{background:var(--surface)!important}
 @media (max-width:600px){.jf-down{gap:4px 14px;margin:0 4px 8px}.jf-down b{font-size:16px}}
 @media (prefers-reduced-motion:reduce){.jf-ball,.jf-rz{animation:none}}
 
+/* patch125: jumbotron after LaVell Edwards Stadium's south end zone board */
+.jt.les{--les-navy:#002e5d;--les-royal:#0062b8;--les-trim:#2c5687;max-width:860px;padding-top:0}
+.les-crown{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:max-content;max-width:88%;margin:0 auto}
+.les-medal{position:relative;z-index:1;display:grid;place-items:center;width:76px;height:52px;margin-bottom:-14px;border-radius:50%;background:#fff;border:3px solid var(--les-navy);box-shadow:0 0 0 2px #c8d2de,0 4px 10px rgba(0,0,0,.35)}
+.les-medal img{width:46px;height:34px;object-fit:contain}
+.les-sign{max-width:100%;padding:15px 26px 6px;border:2px solid var(--les-trim);border-bottom:0;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#0e3f76,var(--les-navy));color:#fff;font-family:Rockwell,"Roboto Slab","Zilla Slab",Georgia,serif;font-weight:700;font-size:clamp(12px,2.3vw,19px);letter-spacing:.12em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 0 rgba(0,0,0,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
+.les-box{position:relative;z-index:1;width:88%;margin:0 auto;padding:10px 10px 9px;border:2px solid var(--les-trim);border-radius:6px;background:linear-gradient(180deg,#113f74,var(--les-navy) 45%,#00244a);box-shadow:0 30px 60px -28px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.12)}
+.les-screen{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;min-height:clamp(150px,29vw,250px);border-radius:3px;overflow:hidden;background:#000;box-shadow:0 0 0 2px #04162c}
+.les-split{position:absolute;inset:0;background:linear-gradient(100deg,var(--ca) 0 calc(50% - 3px),#fff calc(50% - 3px) calc(50% + 3px),var(--ch) calc(50% + 3px))}
+.les-split::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.14),transparent 38%,rgba(0,0,0,.32)),radial-gradient(120% 150% at 50% 50%,rgba(0,0,0,.12) 35%,rgba(0,0,0,.5))}
+.les-screen::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,transparent 55%,rgba(0,0,0,.28) 62%);background-size:3px 3px}
+.les-half{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;padding:14px 8px;transition:opacity .3s}
+.les-half.dim{opacity:.55}
+.les-disc{display:grid;place-items:center;width:clamp(46px,9vw,76px);aspect-ratio:1;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.35),0 6px 14px rgba(0,0,0,.4)}
+.les-disc img{width:70%;height:70%;object-fit:contain}.les-disc b{font:800 14px "Inter Tight",var(--disp);color:#111}
+.les-tn{display:flex;align-items:baseline;justify-content:center;gap:5px;max-width:100%;font-family:"Inter Tight",var(--disp);font-weight:800;font-size:clamp(14px,2.6vw,22px);letter-spacing:.06em;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.65)}
+.les-tn span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.les-tn small{font-size:.68em;opacity:.9}
+.les-sc{display:flex;align-items:center;gap:6px;font-family:"Inter Tight",var(--disp);font-weight:800;font-size:clamp(46px,11.5vw,104px);line-height:.95;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 3px 12px rgba(0,0,0,.6)}
+.les-sc .jf-ball{font-size:.28em;color:#fff;text-shadow:0 0 8px rgba(255,255,255,.9)}
+.les-rec{font-family:"Inter Tight",var(--disp);font-weight:700;font-size:11px;letter-spacing:.14em;color:rgba(255,255,255,.88);text-shadow:0 1px 4px rgba(0,0,0,.7)}
+.les-vs{position:relative;z-index:1;display:grid;place-items:center;width:clamp(46px,8vw,66px);aspect-ratio:1;border-radius:50%;background:var(--les-navy);border:3px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.45)}
+.les-vs span{font-family:"Inter Tight",var(--disp);font-weight:800;font-size:clamp(11px,1.9vw,16px);letter-spacing:.03em;color:#fff;white-space:nowrap}
+.les-go{position:absolute;top:50%;left:7px;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;padding:7px 3px;border-radius:3px;background:#fff;color:var(--les-navy);font:800 10px/1 "Inter Tight",var(--disp);letter-spacing:.2em}
+.les-half.h .les-go{left:auto;right:7px}
+.les-band{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;margin-top:9px}
+.les-led{display:flex;flex-direction:column;align-items:center;min-width:72px;padding:4px 10px 5px;border-radius:3px;background:#000;box-shadow:inset 0 0 0 1px #1c2c40}
+.les-led i{font-style:normal;font-family:"Inter Tight",var(--disp);font-weight:700;font-size:8.5px;letter-spacing:.22em;color:#86acd6}
+.les-led b{font-family:"Orbitron",var(--disp);font-weight:800;font-size:clamp(14px,2.8vw,24px);line-height:1.1;letter-spacing:.04em;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums;text-shadow:0 0 8px rgba(255,255,255,.55)}
+.jt.les .jt-dig::before{color:rgba(255,255,255,.07)}
+.les-mid{min-width:0;text-align:center;font-family:"Inter Tight",var(--disp);font-weight:800;font-size:clamp(10px,1.6vw,14px);letter-spacing:.18em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jt.les .jf-down{margin:8px 0 0;padding:6px 10px;border-radius:3px;background:linear-gradient(180deg,#0a70d3,var(--les-royal));box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.jt.les .jf-down i{color:rgba(255,255,255,.82)}.jt.les .jf-down b,.jt.les .jf-dv{color:#fff;text-shadow:none}
+.jt.les .jf-rz{padding:2px 8px;border-radius:3px;background:#d3262e;color:#fff;text-shadow:none}
+.jt.les .jf-down.rz{box-shadow:inset 0 0 0 2px #ff6a70}
+.jt.les .jt-lines{margin:8px 0 0;background:#000;box-shadow:inset 0 0 0 1px #1c2c40}
+.jt.les .jt-lines::after,.jt.les .jt-ribbon::after{background-image:radial-gradient(circle,transparent 55%,rgba(0,0,0,.25) 62%);background-size:3px 3px}
+.jt.les .jt-lines th{color:#86acd6}
+.jt.les .jt-lines td{color:#fff;text-shadow:0 0 6px rgba(255,255,255,.35)}
+.jt.les .jt-lines td.jt-t{color:#7cc4ff;text-shadow:0 0 6px rgba(124,196,255,.6)}
+.jt.les .jt-stats{margin:8px 2px 0}.jt.les .jt-st{color:#cfe2ff;text-shadow:none}.jt.les .jt-st b{color:#fff;text-shadow:none}
+.les-legs{display:flex;justify-content:space-between;width:68%;height:16px;margin:0 auto}
+.les-legs i{width:12px;background:linear-gradient(90deg,#8f9aa6,#e1e6eb 45%,#86909b);box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+.jt.les .jt-ribbon{height:28px;margin:0;border-radius:2px;background:linear-gradient(180deg,#0a70d3,var(--les-royal) 60%,#0052a0);box-shadow:0 0 0 2px #00244a,0 10px 24px -12px rgba(0,0,0,.6)}
+.jt.les .jt-marq span,.jt.les.is-live .jt-marq span{font-family:"Inter Tight",var(--disp);font-weight:800;font-size:12px;line-height:28px;letter-spacing:.18em;color:#fff;text-shadow:none}
+@media (max-width:600px){.les-box{width:100%;padding:7px 6px 7px}.les-crown{max-width:100%}.les-medal{width:60px;height:41px;margin-bottom:-11px}.les-medal img{width:36px;height:27px}
+  .les-sign{padding:12px 14px 5px;letter-spacing:.08em}.les-half{gap:4px;padding:10px 4px}.les-go{display:none}.les-rec{font-size:10px;letter-spacing:.08em}
+  .les-band{gap:6px;margin-top:7px}.les-led{min-width:0;padding:3px 6px 4px}.les-led i{font-size:7.5px;letter-spacing:.14em}.les-mid{letter-spacing:.08em}
+  .les-legs{display:none}.jt.les .jt-ribbon{margin-top:7px;height:26px}.jt.les .jt-marq span{font-size:11px;line-height:26px}}
 /* patch110: phone tab bar (copied from the NBA hub) */
 .btab{display:none}
 @media (max-width:760px){
@@ -13499,6 +13547,39 @@ const jfAb = t => { const n=tshort(t.name); return (/\s/.test(n) ? n.split(/\s+/
 function jfCdText(k){ const s=Math.max(0,Math.floor((k-Date.now())/1000)); const d=Math.floor(s/86400), hh=Math.floor(s%86400/3600), mm=Math.floor(s%3600/60), ss=s%60; const p=v=>String(v).padStart(2,'0'); return (d?d+'D ':'')+p(hh)+':'+p(mm)+':'+p(ss); }
 setInterval(()=>{ document.querySelectorAll('.jf-cd[data-k]').forEach(el=>{ el.innerHTML=jfDig(jfCdText(+el.dataset.k)); }); }, 1000);
 { const _gd=renderGameday; renderGameday=function(id){ _gd(id); const m=(location.hash||'').match(/^#\/gameday\/([^\/#?]+)/); const g=m&&GI[dec(m[1])]; if(!g) return; const hero=view.querySelector('.gd-hero'); if(hero) hero.outerHTML=jfHTML(g); }; }
+/* patch125: the jumbotron redone after LaVell Edwards Stadium's south end zone board (the 2021 Daktronics board): navy
+   cabinet, the oval Y over a "BRIGHAM YOUNG UNIVERSITY" sign, a team-color matchup screen, black clock boxes on the band
+   below and a royal-blue ribbon board. No sponsor logos. Same data and hooks as patch109 (.jt, .jt-marq, .jf-cd). */
+function lesCrown(a, h){ const fav=(SETTINGS.fav&&T[SETTINGS.fav])?SETTINGS.fav:'BYU'; const t=(a.name===fav||h.name===fav)?team(fav):h;
+  return {lg:logoOf(t), name:t.name==='BYU'?'BRIGHAM YOUNG UNIVERSITY':tshort(t.name).toUpperCase()}; }
+/* each half of the screen in the team's own color (the white seam keeps two reds apart); light colors darkened so white type reads */
+function lesColor(t){ const raw=(t&&t.color)||'#4a5563'; const c=hexRgb(raw); if(!c) return '#4a5563'; return lum(c)>0.42?rgbHex(mix(c,[18,26,36],0.4)):rgbHex(c); }
+jfHTML = function(g){ const a=team(g.away), h=team(g.home); const ca=lesColor(a), ch=lesColor(h); const on=g.live||g.played; const S=LIVE.sum[g.id]||null;
+  const lead=g.played?(g.as>g.hs?'a':g.hs>g.as?'h':''):''; const cr=lesCrown(a,h);
+  const half=(t,sc,k)=>{ const lg=logoOf(t); const ball=g.live&&g.pos===(k==='a'?'away':'home');
+    return '<div class="les-half '+k+(lead&&lead!==k?' dim':'')+'">'+(!on&&t.name==='BYU'?'<span class="les-go" aria-hidden="true">GO COUGS</span>':'')
+      +'<div class="les-disc">'+(lg?'<img src="'+lg.icon+'" alt="">':'<b>'+esc(jfAb(t))+'</b>')+'</div>'
+      +'<div class="les-tn">'+(t.ap?'<small>#'+t.ap+'</small>':'')+'<span>'+esc(tshort(t.name).toUpperCase())+'</span></div>'
+      +(on?'<div class="les-sc">'+(k==='h'&&ball?'<i class="jf-ball l" title="has the ball">&#9664;</i>':'')+'<span>'+esc(String(sc==null?'':sc))+'</span>'+(k==='a'&&ball?'<i class="jf-ball r" title="has the ball">&#9654;</i>':'')+'</div>':'')
+      +'<div class="les-rec">'+esc(t.other?'':recStr(t.name))+'</div></div>'; };
+  const C=on?jfClock(g):null; const km=on?0:kickMs(g); const soon=km&&km>Date.now();
+  const box=(lab,val)=>'<div class="les-led"><i>'+lab+'</i><b>'+val+'</b></div>';
+  const venue=esc(((g.venue||'')||(g.tv?tvShort(g.tv):'')).toUpperCase());
+  const band=g.played ? box('GAME','FINAL')+'<div class="les-mid">'+venue+'</div>'+box('DATE',esc(fmtDate(g.date,false).toUpperCase()))
+    : g.live ? box('QTR',esc(C.per))+'<div class="les-mid">'+venue+'</div>'+box('CLOCK',C.clk?jfDig(C.clk):'--:--')
+    : box('KICKOFF',esc(kick(g)))+'<div class="les-mid">'+venue+(venue?' · ':'')+esc(fmtDate(g.date,false).toUpperCase())+'</div>'+(soon?'<div class="les-led"><i>COUNTDOWN</i><b class="jf-cd" data-k="'+km+'">'+jfDig(jfCdText(km))+'</b></div>':box('KICKOFF','SOON'));
+  let down=''; const D=g.live?jfDown(g):null; if(D) down='<div class="jf-down'+(g.rz?' rz':'')+'">'+(D.txt?'<span class="jf-dv">'+esc(D.txt.toUpperCase())+'</span>':'<span><i>DOWN</i><b>'+D.down+'</b></span><span><i>TO GO</i><b>'+esc(D.togo)+'</b></span>'+(D.spot?'<span><i>BALL ON</i><b>'+esc(D.spot)+'</b></span>':''))+(g.rz?'<span class="jf-rz">RED ZONE</span>':'')+'</div>';
+  let lines=''; if(on&&S&&S.ls&&S.ls.length===2){ const L=[a,h].map((t,i)=>{ const r=S.ls.find(x=>x.ha===(i?'home':'away'))||{ls:[],s:''}; return {t, q:r.ls||[], tot:r.s}; }); const nq=Math.max(4,...L.map(x=>x.q.length));
+    lines='<div class="jt-lines"><table><thead><tr><th></th>'+Array.from({length:nq},(_,i)=>'<th>'+(i<4?i+1:'OT')+'</th>').join('')+'<th>T</th></tr></thead><tbody>'+L.map(x=>'<tr><td class="jt-ab">'+esc(jfAb(x.t))+'</td>'+Array.from({length:nq},(_,i)=>'<td>'+(x.q[i]!=null?esc(String(x.q[i])):'')+'</td>').join('')+'<td class="jt-t">'+esc(String(x.tot==null?'':x.tot))+'</td></tr>').join('')+'</tbody></table></div>'; }
+  let stats=''; if(on&&S&&S.teams&&S.teams.length===2){ const row=(t,ha)=>{ const x=(S.teams.find(y=>y.ha===ha)||{}).stats||{}; return '<div class="jt-st"><b>'+esc(jfAb(t))+'</b><span>YDS '+esc(x.totalYards||'-')+'</span><span>PASS '+esc(x.netPassingYards||'-')+'</span><span>RUSH '+esc(x.rushingYards||'-')+'</span><span>TO '+esc(x.turnovers||'0')+'</span><span>3RD '+esc(x.thirdDownEff||'-')+'</span></div>'; };
+    stats='<div class="jt-stats">'+row(a,'away')+row(h,'home')+'</div>'; }
+  const ribbon=[g.live?'● LIVE':g.played?'FINAL':'GAME DAY', tshort(a.name).toUpperCase()+(g.neutral?' VS ':' AT ')+tshort(h.name).toUpperCase(), (g.venue||'').toUpperCase(), g.tv?tvShort(g.tv).toUpperCase():'', g.spread!=null?spreadStr(g,{short:true}).toUpperCase():'', g.total!=null?'O/U '+g.total:''].filter(Boolean).join('   ★   ');
+  return '<section class="jt jf les'+(g.live?' is-live':'')+(g.played?' is-final':'')+'" style="--ca:'+ca+';--ch:'+ch+'" aria-label="Scoreboard: '+esc(tshort(a.name))+' '+(on?g.as:'')+', '+esc(tshort(h.name))+' '+(on?g.hs:'')+(g.live&&C?', '+esc(C.per)+(C.clk?' '+esc(C.clk):''):g.played?', final':'')+'">'
+    +'<div class="les-crown" aria-hidden="true">'+(cr.lg?'<span class="les-medal"><img src="'+cr.lg.icon+'" alt=""></span>':'')+'<div class="les-sign">'+esc(cr.name)+'</div></div>'
+    +'<div class="les-box"><div class="les-screen"><div class="les-split" aria-hidden="true"></div>'+half(a,g.as,'a')+'<div class="les-vs"><span>'+esc(g.played?'FINAL':g.live?C.per:(g.neutral?'VS':'AT'))+'</span></div>'+half(h,g.hs,'h')+'</div>'
+    +'<div class="les-band">'+band+'</div>'+down+lines+stats+'</div>'
+    +'<div class="les-legs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>'
+    +'<div class="jt-ribbon les-rib" aria-hidden="true"><div class="jt-marq"><span>'+esc(ribbon)+'</span><span>'+esc(ribbon)+'</span></div></div></section>'; };
 /* patch110: bottom tab bar on phones (see patch110.pl) */
 const BT_GROUP = r => (['','week','scores','gameday','schedule','tv','lines','previews','board','game'].indexOf(r)>=0?'scores':['rankings','standings','playoff','scenarios'].indexOf(r)>=0?'standings':['players','leaders','injuries','transfers','recruiting','draft','player'].indexOf(r)>=0?'players':['teams','compare'].indexOf(r)>=0?'teams':r==='team'?'team':'more');
 const BT_ICON = {

@@ -13234,7 +13234,7 @@ function uwOppDraw(o){ const H=uwOc(o,'h'), F=o.fm?uwOc(o,'fm'):H, J=uwOc(o,'j')
     +'<path d="M46 0 C50 10 70 10 74 0" stroke="'+on(J)+'" stroke-width="3" fill="none"/><path d="M8 22 L20 40 M112 22 L100 40" stroke="'+on(J)+'" stroke-width="4"/></g>'
     +'<g transform="translate(0 162)"><path d="M32 0 L88 0 L92 62 L66 62 L60 22 L54 62 L28 62 Z" fill="'+P+'" stroke="'+edge+'" stroke-width="1.5"/><path d="M34 4 L30 58 M86 4 L90 58" stroke="'+on(P)+'" stroke-width="3.5"/></g></svg>'; }
 function uwOppPic(x, cls){ const o=x&&x.o; if(!o||!(o.photo||o.j)) return '<span class="uw-ph uw-none '+(cls||'')+'" title="Not known yet">?</span>';
-  if(o.photo) return '<img class="uw-ph '+(cls||'')+'" src="'+UNI_IMG+o.photo+'" alt="'+esc(x.opp+' in this game')+'" loading="lazy">';
+  if(o.photo) return '<img class="uw-ph '+(cls||'')+'" src="'+UNI_IMG+o.photo+'" alt="'+esc(x.opp+' in this game')+'">';
   return '<span class="uw-ph uw-drawn '+(cls||'')+'" title="Drawn from the reported colors">'+uwOppDraw(o)+'</span>'; }
 function uwOppSw(o){ return '<div class="uw-swatch">'+[['Helmet',o.h],['Facemask',o.fm],['Jersey',o.j],['Pants',o.p]].filter(k=>k[1]).map(k=>'<span><i style="background:'+((o.c&&o.c[k[1]])||UW_OC[k[1]]||'#8a94a0')+'"></i>'+k[0]+' <b>'+esc(k[1])+'</b></span>').join('')+'</div>'; }
 { const _uc=uwCardHTML; uwCardHTML=function(g){ const h=_uc(g); const x=uwFor(g); if(!h||!x) return h;

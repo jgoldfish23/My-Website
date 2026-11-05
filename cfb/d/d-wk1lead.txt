@@ -1705,11 +1705,11 @@
 2026-10-28|Kennesaw State|Middle Tennessee|Kennesaw State|passingYards|Rickie Collins|QB|16/19, 206 YDS, 3 TD, 1 INT
 2026-10-28|Kennesaw State|Middle Tennessee|Middle Tennessee|rushingYards|Antonio Martin|RB|18 CAR, 106 YDS, 1 TD
 2026-10-28|Kennesaw State|Middle Tennessee|Middle Tennessee|receivingYards|Cam'ron Lacy|WR|4 REC, 73 YDS
-2026-10-28|Jacksonville State|New Mexico State|Jacksonville State|passingYards|Caden Creel|QB|11/17, 109 YDS, 1 TD, 2 INT
-2026-10-28|Jacksonville State|New Mexico State|Jacksonville State|rushingYards|Caden Creel|QB|21 CAR, 211 YDS, 1 TD
-2026-10-28|Jacksonville State|New Mexico State|Jacksonville State|receivingYards|Luke Gilbert|TE|5 REC, 67 YDS, 1 TD
+2026-10-28|Jacksonville State|New Mexico State|Jacksonville State|passingYards|Caden Creel|QB|11/17, 104 YDS, 1 TD, 2 INT
+2026-10-28|Jacksonville State|New Mexico State|Jacksonville State|rushingYards|Caden Creel|QB|21 CAR, 213 YDS, 1 TD
+2026-10-28|Jacksonville State|New Mexico State|Jacksonville State|receivingYards|Luke Gilbert|TE|5 REC, 60 YDS, 1 TD
 2026-10-29|Florida Atlantic|North Texas|Florida Atlantic|passingYards|Caden Veltkamp|QB|37/56, 452 YDS, 5 TD, 1 INT
-2026-10-29|Florida Atlantic|North Texas|North Texas|rushingYards|Jahiem White|RB|26 CAR, 193 YDS, 2 TD
+2026-10-29|Florida Atlantic|North Texas|North Texas|rushingYards|Jahiem White|RB|26 CAR, 186 YDS, 2 TD
 2026-10-29|Florida Atlantic|North Texas|Florida Atlantic|receivingYards|Easton Messer|WR|16 REC, 189 YDS, 3 TD
 2026-10-29|Troy|James Madison|Troy|passingYards|Tucker Kilcrease|QB|15/31, 179 YDS
 2026-10-29|Troy|James Madison|James Madison|rushingYards|Seth Cromwell|RB|23 CAR, 135 YDS, 1 TD
@@ -1864,21 +1864,21 @@
 2026-10-31|Oregon State|Fresno State|Oregon State|passingYards|Braden Atkinson|QB|33/59, 373 YDS, 1 TD
 2026-10-31|Oregon State|Fresno State|Fresno State|rushingYards|Bryson Donelson|RB|16 CAR, 108 YDS, 1 TD
 2026-10-31|Oregon State|Fresno State|Oregon State|receivingYards|DeCorion Temple|TE|6 REC, 97 YDS
-2026-11-04|Ball State|Massachusetts|Massachusetts|passingYards|William Watson III|QB|8/14, 103 YDS, 1 TD
-2026-11-04|Ball State|Massachusetts|Massachusetts|rushingYards|Curtis Kimmons IV|RB|7 CAR, 44 YDS
-2026-11-04|Ball State|Massachusetts|Massachusetts|receivingYards|Jabari Lewis|WR|1 REC, 64 YDS, 1 TD
-2026-11-04|Toledo|Sacramento State|Sacramento State|passingYards|Jackson Sharman|QB|8/15, 113 YDS, 1 TD
-2026-11-04|Toledo|Sacramento State|Toledo|rushingYards|CJ Miller|RB|12 CAR, 40 YDS
-2026-11-04|Toledo|Sacramento State|Sacramento State|receivingYards|Raiden Brown|WR|1 REC, 59 YDS
-2026-11-04|Central Michigan|Eastern Michigan|Central Michigan|passingYards|Jadyn Glasser|QB|9/12, 141 YDS, 1 TD
-2026-11-04|Central Michigan|Eastern Michigan|Central Michigan|rushingYards|Nick Woodford|RB|9 CAR, 51 YDS, 1 TD
-2026-11-04|Central Michigan|Eastern Michigan|Central Michigan|receivingYards|Justin Ruffin Jr.|WR|3 REC, 49 YDS
 2026-11-03|Ohio|Akron|Akron|passingYards|Cibastian Broughton|QB|22/34, 232 YDS, 1 INT
 2026-11-03|Ohio|Akron|Akron|rushingYards|Jordan Gant|RB|16 CAR, 112 YDS, 1 TD
 2026-11-03|Ohio|Akron|Ohio|receivingYards|Dom Dorwart|WR|4 REC, 108 YDS, 1 TD
 2026-11-03|Buffalo|Miami (OH)|Buffalo|passingYards|Jason Wright|QB|22/46, 358 YDS, 2 TD, 2 INT
 2026-11-03|Buffalo|Miami (OH)|Miami (OH)|rushingYards|D'Shawntae Jones|RB|17 CAR, 112 YDS
 2026-11-03|Buffalo|Miami (OH)|Buffalo|receivingYards|Chance Morrow|WR|12 REC, 199 YDS, 2 TD
+2026-11-04|Ball State|Massachusetts|Massachusetts|passingYards|William Watson III|QB|17/25, 302 YDS, 1 TD
+2026-11-04|Ball State|Massachusetts|Ball State|rushingYards|Jalen Bonds|RB|17 CAR, 132 YDS, 2 TD
+2026-11-04|Ball State|Massachusetts|Massachusetts|receivingYards|Kezion Dia-Johnson|WR|3 REC, 97 YDS
+2026-11-04|Toledo|Sacramento State|Sacramento State|passingYards|Jackson Sharman|QB|8/15, 113 YDS, 1 TD
+2026-11-04|Toledo|Sacramento State|Toledo|rushingYards|CJ Miller|RB|27 CAR, 135 YDS
+2026-11-04|Toledo|Sacramento State|Sacramento State|receivingYards|Raiden Brown|WR|5 REC, 108 YDS
+2026-11-04|Central Michigan|Eastern Michigan|Central Michigan|passingYards|Jadyn Glasser|QB|14/19, 175 YDS, 1 TD
+2026-11-04|Central Michigan|Eastern Michigan|Central Michigan|rushingYards|Nick Woodford|RB|21 CAR, 123 YDS, 3 TD
+2026-11-04|Central Michigan|Eastern Michigan|Central Michigan|receivingYards|Nasir Williams|WR|3 REC, 57 YDS, 1 TD
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD

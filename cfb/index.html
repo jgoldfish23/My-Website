@@ -2507,6 +2507,20 @@ body.themed .pk-card,.pk-card{background:var(--surface)!important}
 .uw-tile .uw-borrow{opacity:.55;filter:grayscale(.35)}
 .uw-cred{font-style:italic}
 @media (max-width:600px){.uw-pic{width:96px;height:96px}.uw-tile .uw-ph.sm{width:80px;height:80px}}
+/* patch124: BYU and the opponent side by side */
+.uw-pair{flex:none;display:flex;align-items:center;gap:8px}
+.uw-side{margin:0;display:flex;flex-direction:column;align-items:center;gap:5px}
+.uw-side figcaption{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);max-width:132px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uw-vs-t{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px}
+.uw-drawn{display:grid;place-items:center;background:radial-gradient(120% 80% at 50% 10%,rgba(255,255,255,.14),rgba(255,255,255,.03))}
+.uw-drawn .uw-osvg{height:92%;width:auto}
+.uw-who{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-right:4px;vertical-align:2px}
+.uw-ob{display:flex;flex-direction:column;gap:5px;margin-top:6px;padding-top:8px;border-top:1px solid var(--line-2,var(--line))}
+.uw-t2{font-family:var(--disp);font-size:16px;font-weight:700;line-height:1.3}
+.uw-tp{display:flex;gap:6px}
+.uw-strip{grid-template-columns:repeat(auto-fill,minmax(168px,1fr))}
+.uw-tile .uw-tp .uw-ph.sm{width:72px;height:72px}
+@media (max-width:600px){.uw-card.uw-vs{flex-direction:column;align-items:flex-start}.uw-card.uw-vs .uw-pair{align-self:center}.uw-card.uw-vs .uw-pic{width:124px;height:124px}.uw-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.uw-tile .uw-tp .uw-ph.sm{width:66px;height:66px}}
 
 /* patch108: reference numbers on the prediction card */
 .pk-avg{display:block;margin-top:4px;font-size:11px;line-height:1.35;color:var(--ink-3);text-align:center;font-variant-numeric:tabular-nums}
@@ -7464,17 +7478,19 @@ BYU|Will Zundell|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-03,2026-10-09,2026
 BYU|Zak Yamauchi|7|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026-10-24,2026-10-31
 </script>
 <script type="application/json" id="d-uniwatch">{
-  "_note": "BYU Uni Watch (patch104). One entry per game once BYU posts the combo (usually early in game week). h = helmet, fm = facemask (blank when not reported), j = jersey, p = pants; colors are royal, navy or white. desc is the combo as reported. first = first time BYU has worn this exact combination. Updated by the 'BYU Uni Watch' scheduled task; photo = BYU Photo's shot from the byucougars.com game recap (images/uni, published at /cfb/img/uni/). Sources: BYU Football's posts as reported by KSL Sports (Mitch Harper) and the Deseret News.",
-  "updated": "Mon., Oct. 19, 2026",
+  "_note": "BYU Uni Watch (patch104). One entry per game once BYU posts the combo (usually early in game week). h = helmet, fm = facemask (blank when not reported), j = jersey, p = pants; colors are royal, navy or white. desc is the combo as reported. first = first time BYU has worn this exact combination. Updated by the 'BYU Uni Watch' scheduled task; photo = BYU Photo's shot from the byucougars.com game recap (images/uni, published at /cfb/img/uni/). Sources: BYU Football's posts as reported by KSL Sports (Mitch Harper) and the Deseret News. \"o\" (patch124) is what the opponent wore: h, fm, j, p in the team's own color words, c = those colors' hex from the school's brand guide, desc, src, photo = the opponent athletics site's game-recap photo (images/uni/<date>-opp.jpg). Only from the opponent's announcement, an outlet's write-up or its game photo; leave it out until known.",
+  "updated": "Thu., Nov. 5, 2026",
   "season": 2026,
   "games": [
-    { "date": "2026-09-05", "photo": "2026-09-05.jpg", "opp": "Utah Tech", "h": "royal", "fm": "royal", "j": "royal", "p": "white", "desc": "All-royal helmet, royal jersey, white pants", "src": "KSL Sports" },
-    { "date": "2026-09-12", "photo": "2026-09-12.jpg", "opp": "Arizona", "h": "white", "fm": "white", "j": "royal", "p": "royal", "desc": "White helmet with a white facemask, royal jersey and royal pants", "src": "BYU Photo (game recap photo, Sept. 12)", "fixed": "Corrected Oct. 21: the log had navy jersey and pants; BYU's own game photo shows royal." },
-    { "date": "2026-09-19", "photo": "2026-09-19.jpg", "opp": "Colorado State", "h": "white", "fm": "white", "j": "white", "p": "white", "trim": "navy", "desc": "All white with navy numbers and stripes and a white facemask", "src": "KSL Sports" },
-    { "date": "2026-10-03", "photo": "2026-10-03.jpg", "opp": "TCU", "h": "royal", "fm": "royal", "j": "white", "p": "white", "name": "Royal Sitake", "desc": "Royal helmet and facemask, white jersey and pants with royal accents", "src": "KSL Sports" },
-    { "date": "2026-10-09", "photo": "2026-10-09.jpg", "opp": "Iowa State", "h": "white", "fm": "", "j": "navy", "p": "white", "desc": "White helmet, navy jersey, white pants", "src": "KSL Sports" },
-    { "date": "2026-10-17", "photo": "2026-10-17.jpg", "opp": "Notre Dame", "h": "white", "fm": "", "j": "royal", "p": "white", "desc": "White helmet with the royal stretch Y, royal jersey, white pants with royal stripes", "src": "KSL Sports, Deseret News" },
-    { "date": "2026-10-24", "opp": "UCF", "h": "royal", "fm": "white", "j": "white", "p": "white", "first": true, "desc": "Royal helmet with a white facemask, white jersey, white pants", "note": "The white facemask on a royal helmet with all white makes it a first-time combo, BYU's seventh different look in seven games.", "src": "KSL Sports (Oct. 19)" }
+    {"date": "2026-09-05", "photo": "2026-09-05.jpg", "opp": "Utah Tech", "h": "royal", "fm": "royal", "j": "royal", "p": "white", "desc": "All-royal helmet, royal jersey, white pants", "src": "KSL Sports", "o": {"h": "red", "fm": "white", "j": "white", "p": "red", "c": {"red": "#BA1C21"},"desc": "Red helmet with the white Trailblazers logo, white jersey with red numbers and shoulder stripes, red pants", "src": "Utah Tech Athletics game photo (Sept. 5)", "photo": "2026-09-05-opp.jpg"}},
+    {"date": "2026-09-12", "photo": "2026-09-12.jpg", "opp": "Arizona", "h": "white", "fm": "white", "j": "royal", "p": "royal", "desc": "White helmet with a white facemask, royal jersey and royal pants", "src": "BYU Photo (game recap photo, Sept. 12)", "fixed": "Corrected Oct. 21: the log had navy jersey and pants; BYU's own game photo shows royal.", "o": {"h": "white", "fm": "white", "j": "white", "p": "white", "c": {"navy": "#0C234B", "red": "#AB0520"},"desc": "All white: white helmet with a red and navy center stripe, white jersey with navy numbers outlined in red, white pants", "src": "Arizona Sports (Sept. 10), from Arizona Football’s reveal", "photo": "2026-09-12-opp.jpg"}},
+    {"date": "2026-09-19", "photo": "2026-09-19.jpg", "opp": "Colorado State", "h": "white", "fm": "white", "j": "white", "p": "white", "trim": "navy", "desc": "All white with navy numbers and stripes and a white facemask", "src": "KSL Sports", "o": {"h": "green", "fm": "", "j": "green", "p": "white", "c": {"green": "#1E4D2B", "gold": "#C8C372"},"desc": "Green helmet with gold ram horns, green jersey with gold shoulder stripes, white pants: the first game in CSU’s new green home set", "src": "ColorWay Sports CSU tracker; Colorado State Athletics game photo", "photo": "2026-09-19-opp.jpg"}},
+    {"date": "2026-10-03", "photo": "2026-10-03.jpg", "opp": "TCU", "h": "royal", "fm": "royal", "j": "white", "p": "white", "name": "Royal Sitake", "desc": "Royal helmet and facemask, white jersey and pants with royal accents", "src": "KSL Sports", "o": {"h": "purple", "fm": "black", "j": "purple", "p": "black", "c": {"purple": "#4D1979"},"desc": "Purple helmet, purple jersey with white numbers, black pants", "src": "ColorWay Sports TCU tracker; TCU Athletics game photo", "photo": "2026-10-03-opp.jpg"}},
+    {"date": "2026-10-09", "photo": "2026-10-09.jpg", "opp": "Iowa State", "h": "white", "fm": "", "j": "navy", "p": "white", "desc": "White helmet, navy jersey, white pants", "src": "KSL Sports", "o": {"h": "cardinal", "fm": "white", "j": "white", "p": "cardinal", "c": {"cardinal": "#C8102E", "gold": "#F1BE48"},"desc": "Cardinal helmet with the gold Cyclones script, white jersey with cardinal and gold shoulder stripes, cardinal pants", "src": "ColorWay Sports Iowa State tracker; Iowa State Athletics game photo", "photo": "2026-10-09-opp.jpg"}},
+    {"date": "2026-10-17", "photo": "2026-10-17.jpg", "opp": "Notre Dame", "h": "white", "fm": "", "j": "royal", "p": "white", "desc": "White helmet with the royal stretch Y, royal jersey, white pants with royal stripes", "src": "KSL Sports, Deseret News", "o": {"h": "gold", "fm": "", "j": "white", "p": "gold", "c": {"gold": "#C99700", "navy": "#0C2340"},"desc": "Gold helmet, white jersey with navy numbers and the ND monogram, gold pants", "src": "Notre Dame Athletics game photo (Oct. 17)", "photo": "2026-10-17-opp.jpg"}},
+    {"date": "2026-10-24", "photo": "2026-10-24.jpg", "opp": "UCF", "h": "royal", "fm": "white", "j": "white", "p": "white", "first": true,"desc": "Royal helmet with a white facemask, white jersey, white pants", "note": "The white facemask on a royal helmet with all white makes it a first-time combo, BYU's seventh different look in seven games.", "src": "KSL Sports (Oct. 19)", "o": {"h": "gold", "fm": "black", "j": "black", "p": "black", "c": {"gold": "#FFC904", "black": "#000000"},"desc": "Gold helmet with the stacked UCF logo, black jersey with white numbers trimmed in gold, black pants: UCF’s Homecoming combo", "src": "UCF Football’s post (Oct. 22) via ColorWay Sports; UCF Athletics game photo", "photo": "2026-10-24-opp.jpg"}},
+    {"date": "2026-10-31", "photo": "2026-10-31.jpg", "opp": "Arizona State", "h": "navy", "fm": "", "j": "navy", "p": "navy", "desc": "All navy: navy helmet, navy jersey, navy pants", "src": "KSL Sports (Oct. 26)", "o": {"h": "black", "fm": "black", "j": "white", "p": "black", "c": {"black": "#000000", "maroon": "#8C1D40", "gold": "#FFC627"},"desc": "Black helmet with Sparky on the side, white jersey with maroon numbers outlined in gold, black pants: ASU’s first time with Sparky on the helmet", "src": "ASU Football’s post (Oct. 29) via ColorWay Sports; Arizona Republic (Oct. 31)", "photo": "2026-10-31-opp.jpg"}},
+    {"date": "2026-11-07", "opp": "Utah", "h": "royal", "fm": "", "j": "royal", "p": "royal", "desc": "All royal: royal helmet, royal jersey, royal pants", "src": "KSL Sports (Nov. 3), Cougars Wire (Nov. 2)"}
   ]
 }
 </script>
@@ -13203,6 +13219,36 @@ function uwDiff(x, y){ const N={h:'helmet',fm:'facemask',j:'jersey',p:'pants'}; 
   return h.replace('<div class="mini dim">', '<div class="mini dim uw-cred">'+line+'</div><div class="mini dim">'); }; }
 { const _us=uwSeasonHTML; uwSeasonHTML=function(){ return _us().replace('New ones are added when BYU posts them.', 'New ones are added when BYU posts them. Photos: BYU Photo (byucougars.com game recaps); a faded tile is the closest earlier look until the game is played.'); }; }
 { const _rg=renderGame; renderGame=function(id){ _rg(id); const u=view.querySelector('.uw-card'), p=document.getElementById('pk'); let bot=view.querySelector('.gbot'); if(!bot){ bot=document.createElement('div'); bot.className='gbot'; view.append(bot); } if(u) bot.append(u); if(p) bot.append(p); }; }
+/* patch124 (2026-11-05, Jamo: "For the Uni Watch for BYU, add the opponents uni side by side"): a game's entry can carry "o",
+   what the opponent wore: {h, fm, j, p in the team's own color words, c: {color word: hex}, desc, src, photo}. The game card
+   and the season strip on BYU's team page show the two side by side: the opponent's own game photo (images/uni/<date>-opp.jpg)
+   when there is one, otherwise their combo drawn in the reported colors, and a "?" until it is known. */
+const UW_OC = {white:'#FFFFFF', black:'#111418', gray:'#8A8D8F', grey:'#8A8D8F', silver:'#A7A9AC'};
+const uwOc = (o, k) => !o[k] ? '' : (o.c&&o.c[o[k]]) || UW_OC[o[k]] || '#8a94a0';
+function uwOppDraw(o){ const H=uwOc(o,'h'), F=o.fm?uwOc(o,'fm'):H, J=uwOc(o,'j')||'#8a94a0', P=uwOc(o,'p')||'#8a94a0';
+  const on=hex=>{ const n=parseInt(String(hex).slice(1),16)||0; return ((n>>16)&255)*.299+((n>>8)&255)*.587+(n&255)*.114>165?'#1b1f24':'#FFFFFF'; }; const edge='rgba(0,0,0,.28)';
+  return '<svg class="uw-osvg" viewBox="0 0 120 230" aria-hidden="true">'
+    +(H?'<g><path d="M26 44 C26 18 46 6 66 6 C88 6 102 20 102 42 L102 50 L80 54 L74 62 L40 62 C32 58 26 52 26 44 Z" fill="'+H+'" stroke="'+edge+'" stroke-width="1.5"/><path d="M60 8 C58 24 58 40 62 60" stroke="'+on(H)+'" stroke-width="5" fill="none" opacity=".75"/>'
+      +'<path d="M100 40 L114 42 M100 50 L114 54 M104 40 L106 62 M112 42 L110 60 M88 56 L108 62" stroke="'+F+'" stroke-width="3.2" stroke-linecap="round" fill="none"/></g>':'')
+    +'<g transform="translate(0 70)"><path d="M30 4 L46 0 C50 10 70 10 74 0 L90 4 L112 22 L100 40 L90 34 L90 86 L30 86 L30 34 L20 40 L8 22 Z" fill="'+J+'" stroke="'+edge+'" stroke-width="1.5"/>'
+    +'<path d="M46 0 C50 10 70 10 74 0" stroke="'+on(J)+'" stroke-width="3" fill="none"/><path d="M8 22 L20 40 M112 22 L100 40" stroke="'+on(J)+'" stroke-width="4"/></g>'
+    +'<g transform="translate(0 162)"><path d="M32 0 L88 0 L92 62 L66 62 L60 22 L54 62 L28 62 Z" fill="'+P+'" stroke="'+edge+'" stroke-width="1.5"/><path d="M34 4 L30 58 M86 4 L90 58" stroke="'+on(P)+'" stroke-width="3.5"/></g></svg>'; }
+function uwOppPic(x, cls){ const o=x&&x.o; if(!o||!(o.photo||o.j)) return '<span class="uw-ph uw-none '+(cls||'')+'" title="Not known yet">?</span>';
+  if(o.photo) return '<img class="uw-ph '+(cls||'')+'" src="'+UNI_IMG+o.photo+'" alt="'+esc(x.opp+' in this game')+'" loading="lazy">';
+  return '<span class="uw-ph uw-drawn '+(cls||'')+'" title="Drawn from the reported colors">'+uwOppDraw(o)+'</span>'; }
+function uwOppSw(o){ return '<div class="uw-swatch">'+[['Helmet',o.h],['Facemask',o.fm],['Jersey',o.j],['Pants',o.p]].filter(k=>k[1]).map(k=>'<span><i style="background:'+((o.c&&o.c[k[1]])||UW_OC[k[1]]||'#8a94a0')+'"></i>'+k[0]+' <b>'+esc(k[1])+'</b></span>').join('')+'</div>'; }
+{ const _uc=uwCardHTML; uwCardHTML=function(g){ const h=_uc(g); const x=uwFor(g); if(!h||!x) return h;
+  const a=h.indexOf('<div class="uw-pic">'), b=h.indexOf('</div><div class="uw-body">', a); if(a<0||b<0) return h;
+  const o=x.o, nm=x.opp||'Opponent', fig=(pic,lbl)=>'<figure class="uw-side"><div class="uw-pic">'+pic+'</div><figcaption>'+esc(lbl)+'</figcaption></figure>';
+  const pair='<div class="uw-pair">'+fig(h.slice(a+20,b),'BYU')+'<span class="uw-vs-t">vs</span>'+fig(uwOppPic(x),nm)+'</div>';
+  let out=h.slice(0,a)+pair+h.slice(b+6); out=out.replace('<a class="uw-card"','<a class="uw-card uw-vs"').replace('<div class="uw-t">','<div class="uw-t"><span class="uw-who">BYU</span> ');
+  const ob='<div class="uw-ob"><div class="uw-t2"><span class="uw-who">'+esc(nm)+'</span> '+(o&&(o.desc||o.j)?esc(o.desc||((o.h?o.h+' helmet, ':'')+o.j+' jersey'+(o.p?', '+o.p+' pants':''))):'<span class="dim">Not known yet. It shows up here once '+esc(nm)+' posts it or the game is played.</span>')+'</div>'
+    +(o&&o.j?uwOppSw(o):'')+(o&&o.src?'<div class="mini dim">'+(o.photo?'Photo: '+esc(nm)+' Athletics · ':o.j?'Drawn from the reported colors · ':'')+'source: '+esc(o.src)+'</div>':'')+'</div>';
+  const k=out.lastIndexOf('<div class="mini dim">'); return k<0?out:out.slice(0,k)+ob+out.slice(k); }; }
+{ const _us=uwSeasonHTML; uwSeasonHTML=function(){ const L=UW.games||[]; let i=0;
+  return _us().replace(/(<a class="uw-tile"[^>]*>)([\s\S]*?)(<div class="uw-tl">)/g, (m,a,img,c)=>{ const x=L[i++]; return a+'<div class="uw-tp">'+img+uwOppPic(x,'sm')+'</div>'+c; })
+    .replace('every combo BYU has worn in', 'every combo BYU has worn, next to the opponent’s, in')
+    .replace('a faded tile is the closest earlier look until the game is played.', 'a faded tile is the closest earlier look until the game is played. Opponents: their own game photo, or their combo drawn in the reported colors.'); }; }
 /* patch108: reference numbers on the prediction card */
 function pkAvgs(name){ const gs=G.filter(x=>x.played&&(x.home===name||x.away===name)); const o={g:gs.length, t:{}, o:{}}; if(!gs.length) return o;
   o.t.pts=gs.reduce((s,x)=>s+(x.home===name?x.hs:x.as),0)/gs.length; o.o.pts=gs.reduce((s,x)=>s+(x.home===name?x.as:x.hs),0)/gs.length;

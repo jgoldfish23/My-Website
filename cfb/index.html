@@ -2584,6 +2584,51 @@ body.themed .pk-card,.pk-card{background:var(--surface)!important}
 @media (max-width:600px){.jf-down{gap:4px 14px;margin:0 4px 8px}.jf-down b{font-size:16px}}
 @media (prefers-reduced-motion:reduce){.jf-ball,.jf-rz{animation:none}}
 
+/* patch126: rivalry card (Holy War) on game pages and the game-day screen */
+.rv-card{position:relative;margin-top:14px;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 14px 30px -22px rgba(0,0,0,.6)}
+.rv-band{height:6px;background:linear-gradient(90deg,var(--ca) 0 49.5%,var(--ink) 49.5% 50.5%,var(--cb) 50.5% 100%)}
+.rv-hd{display:flex;align-items:center;justify-content:space-between;gap:8px 14px;flex-wrap:wrap;padding:14px 16px 2px}
+.rv-eb{display:inline-flex;align-items:center;gap:8px;font:800 14px/1 "Orbitron",var(--disp),sans-serif;letter-spacing:.16em}
+.rv-eb img{width:24px;height:24px;object-fit:contain}
+.rv-n{font-size:12.5px;color:var(--ink-3)}
+.rv-tops{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px 16px 8px}
+.rv-big{display:flex;flex-direction:column;gap:3px;padding:11px 12px;border-radius:12px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.rv-big b{font:800 19px/1.15 var(--disp),sans-serif;letter-spacing:-.01em}
+.rv-big span{font-size:12px;color:var(--ink-3)}
+.rv-bar{display:flex;height:10px;margin:2px 16px 4px;border-radius:999px;overflow:hidden;background:var(--surface-2)}
+.rv-bar i{display:block;height:100%}
+.rv-barl{display:flex;justify-content:space-between;margin:0 16px;font-size:11.5px;font-weight:600;color:var(--ink-3)}
+.rv-why{padding:6px 16px 0;font-size:12px;color:var(--ink-3)}
+.rv-h4{margin:16px 16px 8px;font:700 11.5px/1 var(--disp),sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.rv-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:0 16px}
+.rv-g{display:grid;grid-template-columns:40px 22px minmax(0,1fr) auto;align-items:center;gap:8px;padding:7px 10px;border-radius:10px;background:color-mix(in srgb,var(--wc) 12%,var(--surface-2));box-shadow:inset 3px 0 0 var(--wc)}
+.rv-g img{width:22px;height:22px;object-fit:contain}
+.rv-g .yr{font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.rv-g .who{display:flex;flex-direction:column;min-width:0}
+.rv-g .who b{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rv-g .site{font-size:11.5px;color:var(--ink-3)}
+.rv-g .who b .site{font-weight:600}
+.rv-g .mg{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--surface);color:var(--ink-2);white-space:nowrap}
+.rv-g .mg.cl{background:color-mix(in srgb,var(--gold-text,#e8a317) 24%,var(--surface));color:var(--ink)}
+.rv-facts{padding:10px 16px 0;font-size:12.5px;color:var(--ink-2)}
+.rv-conf{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin:0 16px 10px;font-size:13px}
+.rv-cl{font:700 11px/1 var(--disp),sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+#rv-stakes>.mini{margin:0 16px}
+.rv-sgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 16px}
+.rv-sc{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border-radius:12px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);font-size:13px}
+.rv-sc.w{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--good,#22c55e) 55%,var(--line))}
+.rv-sc.l{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--bad,#ef4444) 55%,var(--line))}
+.rv-sl{font:700 11px/1.2 var(--disp),sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:2px}
+.rv-sc b{font-variant-numeric:tabular-nums}
+.rv-oth{margin:10px 16px 0!important}
+.rv-src{padding:12px 16px 14px;font-size:11px;color:var(--ink-3)}
+@media (max-width:600px){
+  .rv-tops{grid-template-columns:1fr;gap:8px}
+  .rv-big b{font-size:17px}
+  .rv-list{grid-template-columns:1fr}
+  .rv-sgrid{grid-template-columns:1fr}
+  .rv-hd{padding:12px 14px 2px}.rv-tops,.rv-list{padding-left:14px;padding-right:14px}
+}
 /* patch125: jumbotron after LaVell Edwards Stadium's south end zone board */
 .jt.les{--les-navy:#002e5d;--les-royal:#0062b8;--les-trim:#2c5687;max-width:860px;padding-top:0}
 .les-crown{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:max-content;max-width:88%;margin:0 auto}
@@ -13547,6 +13592,75 @@ const jfAb = t => { const n=tshort(t.name); return (/\s/.test(n) ? n.split(/\s+/
 function jfCdText(k){ const s=Math.max(0,Math.floor((k-Date.now())/1000)); const d=Math.floor(s/86400), hh=Math.floor(s%86400/3600), mm=Math.floor(s%3600/60), ss=s%60; const p=v=>String(v).padStart(2,'0'); return (d?d+'D ':'')+p(hh)+':'+p(mm)+':'+p(ss); }
 setInterval(()=>{ document.querySelectorAll('.jf-cd[data-k]').forEach(el=>{ el.innerHTML=jfDig(jfCdText(+el.dataset.k)); }); }, 1000);
 { const _gd=renderGameday; renderGameday=function(id){ _gd(id); const m=(location.hash||'').match(/^#\/gameday\/([^\/#?]+)/); const g=m&&GI[dec(m[1])]; if(!g) return; const hero=view.querySelector('.gd-hero'); if(hero) hero.outerHTML=jfHTML(g); }; }
+/* patch126 (2026-11-05, Jamo: "Do the Holy War rivalry card next"): a rivalry card on BYU–Utah game pages and the game-day
+   screen: the all-time series in both schools' counts, the current streak, the last 10 meetings and (before kickoff) what the
+   game decides, from this page's own season simulation. SOURCES (read 2026-11-05): Wikipedia "Holy War (BYU–Utah)" for the
+   series (Utah's count 62-37-4 since 1896, BYU's 59-34-4 since 1922, through 2025), the results 2005-2025 and the streaks;
+   USA TODAY (Craig Meyer, Nov 9 2024) agrees (62-35-4 and 59-32-4 before BYU's 2024 and 2025 wins); the 2021-2025 scores
+   match ESPN (history.txt). Games after 2025 are added from this page's own results, so the counts stay current.
+   Never add a number here without a source. */
+const RIV126 = {
+  'BYU|Utah': { name: 'The Holy War', first: 'BYU', site: {BYU: 'Provo', Utah: 'Salt Lake City'},
+    counts: [{w: {Utah: 62, BYU: 37}, t: 4, lab: 'Utah’s count, since 1896'}, {w: {Utah: 59, BYU: 34}, t: 4, lab: 'BYU’s count, since 1922'}],
+    why: 'Why two counts: the schools split six games from 1896 to 1898 that BYU doesn’t recognize.',
+    streaks: 'Longest streaks: Utah won 9 straight twice (1929–37 and 2010–19); BYU won 9 straight (1979–87).',
+    /* [date, winner, winner's points, loser's points, site, note] */
+    games: [['2005-11-19','Utah',41,34,'Provo','OT'],['2006-11-25','BYU',33,31,'Salt Lake City',''],['2007-11-24','BYU',17,10,'Provo',''],['2008-11-22','Utah',48,24,'Salt Lake City',''],
+      ['2009-11-28','BYU',26,23,'Provo','OT'],['2010-11-27','Utah',17,16,'Salt Lake City',''],['2011-09-17','Utah',54,10,'Provo',''],['2012-09-15','Utah',24,21,'Salt Lake City',''],
+      ['2013-09-21','Utah',20,13,'Provo',''],['2015-12-19','Utah',35,28,'Las Vegas','Las Vegas Bowl'],['2016-09-10','Utah',20,19,'Salt Lake City',''],['2017-09-09','Utah',19,13,'Provo',''],
+      ['2018-11-24','Utah',35,27,'Salt Lake City',''],['2019-08-29','Utah',30,12,'Provo',''],['2021-09-11','BYU',26,17,'Provo',''],['2024-11-09','BYU',22,21,'Salt Lake City',''],['2025-10-18','BYU',24,21,'Provo','']],
+    src: 'Series, results and streaks: Wikipedia, “Holy War (BYU–Utah)”; USA TODAY (Nov. 9, 2024). Scores since 2021 match ESPN.' }
+};
+function rv126Key(x, y){ const k = [x, y].sort().join('|'); return RIV126[k] ? k : null; }
+/* the sourced list plus anything this page has seen played since */
+function rv126Data(g){ const k = rv126Key(g.away, g.home); if (!k) return null; const R = RIV126[k]; const names = k.split('|'); const last = R.games[R.games.length - 1][0];
+  const seen = new Set(R.games.map(x => x[0])); const more = [];
+  HIST.concat(G.filter(x => x.played)).forEach(x => { if (!x.date || x.date <= last || seen.has(x.date) || x.hs == null || x.as == null || x.hs === x.as) return; if (!((x.home === names[0] && x.away === names[1]) || (x.home === names[1] && x.away === names[0]))) return;
+    seen.add(x.date); const hw = x.hs > x.as; more.push([x.date, hw ? x.home : x.away, Math.max(x.hs, x.as), Math.min(x.hs, x.as), x.neutral ? 'neutral site' : (R.site[x.home] || x.home), x.note || '']); });
+  more.sort((a, b) => a[0] < b[0] ? -1 : 1); const games = R.games.concat(more);
+  const counts = R.counts.map(c => { const w = Object.assign({}, c.w); more.forEach(m => { w[m[1]] = (w[m[1]] || 0) + 1; }); return {w, t: c.t, lab: c.lab}; });
+  const lw = games[games.length - 1][1]; let st = 0; for (let i = games.length - 1; i >= 0 && games[i][1] === lw; i--) st++;
+  const first = names.indexOf(SETTINGS.fav) >= 0 ? SETTINGS.fav : R.first; const other = names[0] === first ? names[1] : names[0];
+  return {R, games, counts, streak: {who: lw, n: st, years: games.slice(-st).map(x => x[0].slice(0, 4))}, first, other}; }
+function rv126Lead(c, A, B){ const a = c.w[A] || 0, b = c.w[B] || 0; const rec = Math.max(a, b) + '–' + Math.min(a, b) + (c.t ? '–' + c.t : ''); return a === b ? 'Tied ' + rec : esc(tshort(a > b ? A : B)) + ' leads ' + rec; }
+function rv126Card(g, opts){ const D = rv126Data(g); if (!D) return ''; opts = opts || {}; const A = D.first, B = D.other; const ta = T[A], tb = T[B]; const ca = uiColor(ta), cb = uiColor(tb); const la = logoOf(ta), lb = logoOf(tb);
+  const upcoming = !g.played; const c0 = D.counts[0], c1 = D.counts[1];
+  const nth = c => { const n = (c.w[A] || 0) + (c.w[B] || 0) + c.t + 1; return n + getOrdDt(n); };
+  const meet = upcoming ? 'Meeting No. ' + nth(c0).replace(/\D+$/, '') + ' by Utah’s count, No. ' + nth(c1).replace(/\D+$/, '') + ' by BYU’s' : (D.games.length ? 'Meeting No. ' + ((c0.w[A] || 0) + (c0.w[B] || 0) + c0.t) + ' by Utah’s count' : '');
+  const big = (b, s) => '<div class="rv-big"><b>' + b + '</b><span>' + s + '</span></div>';
+  const sk = D.streak; const stTxt = sk.n >= 2 ? esc(tshort(sk.who)) + ' has won ' + sk.n + ' straight' : esc(tshort(sk.who)) + ' won the last one';
+  let html = '<section class="rv-card" style="--ca:' + ca + ';--cb:' + cb + '" aria-label="' + esc(D.R.name) + ' rivalry"><div class="rv-band" aria-hidden="true"></div>'
+    + '<div class="rv-hd"><span class="rv-eb">' + (la ? '<img src="' + la.icon + '" alt="">' : '') + esc(D.R.name.toUpperCase()) + (lb ? '<img src="' + lb.icon + '" alt="">' : '') + '</span><span class="rv-n">' + esc(meet) + '</span></div>'
+    + '<div class="rv-tops">' + big(rv126Lead(c0, A, B), esc(c0.lab)) + big(rv126Lead(c1, A, B), esc(c1.lab)) + big(stTxt, sk.years.join(', ')) + '</div>';
+  const wa = c0.w[A] || 0, wb = c0.w[B] || 0, tot = wa + wb + c0.t;
+  html += '<div class="rv-bar" role="img" aria-label="' + esc(tshort(A)) + ' ' + wa + ' wins, ' + c0.t + ' ties, ' + esc(tshort(B)) + ' ' + wb + ' wins"><i style="width:' + (wa / tot * 100) + '%;background:' + ca + '"></i><i style="width:' + (c0.t / tot * 100) + '%;background:var(--ink-3)"></i><i style="width:' + (wb / tot * 100) + '%;background:' + cb + '"></i></div>'
+    + '<div class="rv-barl"><span>' + esc(tshort(A)) + ' ' + wa + '</span><span>' + c0.t + ' ties</span><span>' + esc(tshort(B)) + ' ' + wb + '</span></div><div class="rv-why">' + esc(D.R.why) + '</div>';
+  const last10 = D.games.slice(-10).reverse();
+  html += '<div class="rv-h4">Last 10 meetings</div><div class="rv-list">' + last10.map(x => { const wt = T[x[1]]; const lg = logoOf(wt); const mine = x[1] === A; const m = x[2] - x[3];
+    return '<div class="rv-g' + (mine ? ' us' : '') + '" style="--wc:' + uiColor(wt) + '"><span class="yr">' + x[0].slice(0, 4) + '</span>' + (lg ? '<img src="' + lg.icon + '" alt="">' : '<span></span>') + '<span class="who"><b>' + esc(tshort(x[1])) + ' ' + x[2] + '–' + x[3] + '</b>' + (x[5] ? ' <span class="site">' + esc(x[5]) + '</span>' : '') + '<span class="site">' + esc(x[4]) + '</span></span><span class="mg' + (m <= 3 ? ' cl' : '') + '">by ' + m + '</span></div>'; }).join('') + '</div>';
+  const close = last10.filter(x => x[2] - x[3] <= 3).length;
+  html += '<div class="rv-facts">' + (close ? close + ' of the last 10 were decided by 3 points or fewer. ' : '') + esc(D.R.streaks) + '</div>';
+  if (upcoming && !opts.noStakes) html += '<div class="rv-h4">What this game decides</div><div id="rv-stakes" data-g="' + esc(g.id) + '">' + rv126Stakes(g, A, B) + '</div>';
+  html += '<div class="rv-src">' + esc(D.R.src) + (upcoming && !opts.noStakes ? ' Odds: this site’s own simulation of the rest of the season.' : '') + '</div></section>';
+  return html; }
+/* conference standing and the season simulation's odds, split by Saturday's winner (the same numbers as the Scenarios page) */
+let RV126_Q = false;
+function rv126Stakes(g, A, B){ const ta = T[A], tb = T[B]; if (!ta || ta.level !== 'FBS') return '';
+  let conf = ''; if (ta.conf && ta.conf === tb.conf) { const L = lad113(ta.conf); const place = n => { const i = L.findIndex(r => r.t.name === n); return i < 0 ? null : {r: L[i], at: i + 1}; }; const pa = place(A), pb = place(B);
+    if (pa && pb) conf = '<div class="rv-conf"><span class="rv-cl">' + esc(ta.conf) + ' standings</span>' + [[A, pa], [B, pb]].map(([n, p]) => '<span><b>' + esc(tshort(n)) + '</b> ' + p.r.cw + '-' + p.r.cl + ' <span class="dim">(' + p.at + getOrdDt(p.at) + ')</span></span>').join('') + '<span class="dim">top two meet in the title game</span></div>'; }
+  if (!cfpReady() || CFP_CACHE.foc !== A) { CFP_FOCUS = A; if (!RV126_Q) { RV126_Q = true; setTimeout(() => { RV126_Q = false; const el = document.getElementById('rv-stakes'); if (!el) return; cfpSim(); const gg = GI[el.dataset.g]; if (gg) el.innerHTML = rv126Stakes(gg, A, B); }, 350); }
+    return conf + '<div class="mini">Running the season simulation…</div>'; }
+  const o = CFP_CACHE.focus && CFP_CACHE.focus.games.find(x => x.g.id === g.id); const by = CFP_CACHE.by || {}; const na = by[A], nb = by[B];
+  const home = g.home === A; const W = o && (home ? o.h : o.a), Lo = o && (home ? o.a : o.h); const confd = CFP_P4.indexOf(ta.conf) >= 0 || CFP_G6.indexOf(ta.conf) >= 0;
+  const col = (lab, x, cls) => '<div class="rv-sc' + (cls ? ' ' + cls : '') + '"><div class="rv-sl">' + lab + '</div><div>Playoff <b>' + scnPct(x.mk != null ? x.mk : x.make) + '</b></div>' + (confd ? '<div>' + esc(ta.conf) + ' title game <b>' + scnPct(x.tg) + '</b></div><div>' + esc(ta.conf) + ' title <b>' + scnPct(x.ch != null ? x.ch : x.champ) + '</b></div>' : '') + '</div>';
+  let html = conf + '<div class="rv-sgrid">' + (na ? col(esc(tshort(A)) + ' now', na) : '') + (W ? col('If ' + esc(tshort(A)) + ' wins', W, 'w') : '') + (Lo ? col('If ' + esc(tshort(A)) + ' loses', Lo, 'l') : '') + '</div>';
+  if (nb) html += '<div class="mini rv-oth">' + esc(tshort(B)) + ' right now: playoff <b>' + scnPct(nb.make) + '</b>' + (confd ? ' · ' + esc(tb.conf) + ' title game <b>' + scnPct(nb.tg) + '</b>' : '') + '. <a href="#/scenarios/' + enc(A) + '">Every scenario ›</a></div>';
+  return html; }
+{ const _rg = renderGame; renderGame = function(id){ _rg(id); const g = GI[id]; if (!g || !rv126Key(g.away, g.home)) return; const c = rv126Card(g); if (!c) return;
+    view.querySelectorAll('.card').forEach(el => { const h = el.querySelector(':scope > .hd h3'); if (h && h.textContent.trim() === 'Series history') el.remove(); });
+    const at = view.querySelector('.ghead'); if (at) at.insertAdjacentHTML('afterend', c); }; }
+{ const _gd = renderGameday; renderGameday = function(id){ _gd(id); const m = (location.hash || '').match(/^#\/gameday\/([^\/#?]+)/); const g = m && GI[dec(m[1])]; if (!g || !rv126Key(g.away, g.home)) return; const c = rv126Card(g, {noStakes: true}); if (!c) return;
+    const at = view.querySelector('.gd-links'); if (at) at.insertAdjacentHTML('afterend', c); }; }
 /* patch125: the jumbotron redone after LaVell Edwards Stadium's south end zone board (the 2021 Daktronics board): navy
    cabinet, the oval Y over a "BRIGHAM YOUNG UNIVERSITY" sign, a team-color matchup screen, black clock boxes on the band
    below and a royal-blue ribbon board. No sponsor logos. Same data and hooks as patch109 (.jt, .jt-marq, .jf-cd). */

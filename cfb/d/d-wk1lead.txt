@@ -1864,12 +1864,6 @@
 2026-10-31|Oregon State|Fresno State|Oregon State|passingYards|Braden Atkinson|QB|33/59, 373 YDS, 1 TD
 2026-10-31|Oregon State|Fresno State|Fresno State|rushingYards|Bryson Donelson|RB|16 CAR, 108 YDS, 1 TD
 2026-10-31|Oregon State|Fresno State|Oregon State|receivingYards|DeCorion Temple|TE|6 REC, 97 YDS
-2026-11-05|UTSA|Florida Atlantic|UTSA|passingYards|Owen McCown|QB|5/11, 79 YDS, 1 TD
-2026-11-05|UTSA|Florida Atlantic|Florida Atlantic|rushingYards|Leonard Farrow|RB|6 CAR, 66 YDS
-2026-11-05|UTSA|Florida Atlantic|Florida Atlantic|receivingYards|Easton Messer|WR|4 REC, 38 YDS, 2 TD
-2026-11-05|James Madison|Southern Miss|James Madison|passingYards|JC Evans|QB|3/4, 65 YDS
-2026-11-05|James Madison|Southern Miss|James Madison|rushingYards|Seth Cromwell|RB|3 CAR, 25 YDS
-2026-11-05|James Madison|Southern Miss|James Madison|receivingYards|Corey Scott|WR|2 REC, 60 YDS
 2026-11-03|Ohio|Akron|Akron|passingYards|Cibastian Broughton|QB|22/34, 232 YDS, 1 INT
 2026-11-03|Ohio|Akron|Akron|rushingYards|Jordan Gant|RB|16 CAR, 112 YDS, 1 TD
 2026-11-03|Ohio|Akron|Ohio|receivingYards|Dom Dorwart|WR|4 REC, 108 YDS, 1 TD
@@ -1885,6 +1879,12 @@
 2026-11-04|Central Michigan|Eastern Michigan|Central Michigan|passingYards|Jadyn Glasser|QB|14/19, 175 YDS, 1 TD
 2026-11-04|Central Michigan|Eastern Michigan|Central Michigan|rushingYards|Nick Woodford|RB|21 CAR, 123 YDS, 3 TD
 2026-11-04|Central Michigan|Eastern Michigan|Central Michigan|receivingYards|Nasir Williams|WR|3 REC, 57 YDS, 1 TD
+2026-11-05|UTSA|Florida Atlantic|UTSA|passingYards|Owen McCown|QB|20/35, 265 YDS, 3 TD
+2026-11-05|UTSA|Florida Atlantic|Florida Atlantic|rushingYards|Leonard Farrow|RB|12 CAR, 126 YDS, 1 TD
+2026-11-05|UTSA|Florida Atlantic|UTSA|receivingYards|Mekhi Anderson|WR|6 REC, 117 YDS, 2 TD
+2026-11-05|James Madison|Southern Miss|Southern Miss|passingYards|John White|QB|22/35, 266 YDS, 1 TD
+2026-11-05|James Madison|Southern Miss|James Madison|rushingYards|Seth Cromwell|RB|10 CAR, 56 YDS
+2026-11-05|James Madison|Southern Miss|James Madison|receivingYards|Corey Scott|WR|6 REC, 138 YDS
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD
@@ -3487,6 +3487,6 @@
 2026-10-31|Grambling|Texas Southern|Texas Southern|passingYards|Cam'Ron McCoy|QB|6/15, 115 YDS, 1 INT
 2026-10-31|Grambling|Texas Southern|Texas Southern|rushingYards|Athean Renfro Jr.|RB|21 CAR, 233 YDS, 2 TD
 2026-10-31|Grambling|Texas Southern|Grambling|receivingYards|Nae'Saan Dickerson|WR|4 REC, 61 YDS
-2026-11-05|South Carolina State|Howard|South Carolina State|passingYards|Keely Watson|QB|8/10, 70 YDS
-2026-11-05|South Carolina State|Howard|South Carolina State|rushingYards|Ricorian Brown|RB|7 CAR, 39 YDS
-2026-11-05|South Carolina State|Howard|South Carolina State|receivingYards|Troy Hillman|WR|2 REC, 33 YDS
+2026-11-05|South Carolina State|Howard|South Carolina State|passingYards|Keely Watson|QB|21/29, 241 YDS, 1 TD
+2026-11-05|South Carolina State|Howard|South Carolina State|rushingYards|Ricorian Brown|RB|15 CAR, 143 YDS, 2 TD
+2026-11-05|South Carolina State|Howard|South Carolina State|receivingYards|Malaqhi Jones|WR|9 REC, 107 YDS

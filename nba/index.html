@@ -68,6 +68,13 @@ header.top{transition:transform .22s ease}
 header.top.jsh-tuck{pointer-events:none}
 /* prediction cards: each reference line stays on one line on phones */
 @media (max-width:600px){body .pk-avg{font-size:10.5px;white-space:nowrap;letter-spacing:-.01em}}
+/* 2026-11-05: on phones the BottomLine score ticker slides away while you scroll down and comes back when you scroll up
+   (or reach the end of the page), like the header does; it slides behind the bottom tab bar */
+body .jbl{transition:transform .28s ease,opacity .28s ease}
+@media (max-width:760px){html.jsh-bl-dn body .jbl{transform:translateY(calc(100% + 64px + env(safe-area-inset-bottom)))!important;opacity:0;pointer-events:none;z-index:50}}
+@media (prefers-reduced-motion:reduce){body .jbl{transition:opacity .2s}}
+/* ticker tags at a readable size */
+body .jbl .lgt{font-size:10.5px}body .jbl .src{font-size:11px}body .jbl .jbl-sec{font-size:11px}
 </style>
 <div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
   <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
@@ -104,6 +111,15 @@ header.top.jsh-tuck{pointer-events:none}
     if (!mq.matches || y < 260 || e.contains(document.activeElement) || d < -4) { if (e.classList.contains('jsh-tuck')) off(e); return; }
     if (d > 6 && !e.classList.contains('jsh-tuck')) { var top = parseFloat(getComputedStyle(e).top) || 0; e.style.transform = 'translateY(' + (-(e.offsetHeight + top)) + 'px)'; e.classList.add('jsh-tuck'); } }, { passive: true });
   addEventListener('hashchange', function(){ var e = hdr(); if (e) off(e); });
+})();
+/* phones (2026-11-05): the BottomLine ticker hides on scroll down and returns on scroll up or at the end of the page */
+(function(){ var last = 0, R = document.documentElement, mq = window.matchMedia('(max-width:760px)');
+  function show(){ R.classList.remove('jsh-bl-dn'); }
+  addEventListener('scroll', function(){ var y = window.scrollY, d = y - last; last = y;
+    var end = y + window.innerHeight >= document.documentElement.scrollHeight - 80;
+    if (!mq.matches || y < 200 || d < -4 || end) { if (R.classList.contains('jsh-bl-dn')) show(); return; }
+    if (d > 6) R.classList.add('jsh-bl-dn'); }, { passive: true });
+  addEventListener('hashchange', show);
 })();
 </script>
 <script>
@@ -2695,6 +2711,27 @@ body.boardmode::before,body.boardmode::after{display:none!important}
   #view .homeband .livegrid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:80%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -12px;padding:2px 12px 8px;scroll-padding-left:12px;scrollbar-width:none}
   #view .homeband .livegrid::-webkit-scrollbar{display:none}
   #view .homeband .livegrid>*{scroll-snap-align:start}
+  /* 2026-11-05 polish ("scores on the first screen"): a shorter hero on phones. The count chips sit in one swipe row, the
+     next-up box is smaller, and it hides when it repeats your team's card right below it (the NFL showed the Eagles'
+     next game twice). Games to watch swipe sideways instead of stacking five tall cards. */
+  #view .sbh{gap:10px;padding:14px 14px 10px;border-radius:16px}
+  #view .sbh h1{font-size:29px;line-height:1.08}
+  .sbh-eb{font-size:11px;letter-spacing:.13em}
+  .sbh-sub{font-size:13px;line-height:1.4}
+  .sbh-chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:8px -14px 0;padding:0 14px 2px;-webkit-overflow-scrolling:touch}
+  .sbh-chips::-webkit-scrollbar{display:none}
+  #view .sbh .sb-chip{flex:none;padding:4px 10px;font-size:12px}
+  #view .sb-nu{padding:11px 12px;gap:6px;border-radius:14px}
+  .sb-m{font-size:17px;gap:7px}
+  .sb-plate{width:28px;height:28px;border-radius:8px}
+  .sb-plate img{width:21px;height:21px}
+  .sb-cd{font-size:23px}
+  .sb-s{font-size:12px;line-height:1.35}
+  .sbh-nav{padding-top:8px}
+  #view .sbh:has(.sb-nu.mine):has(~ .homeband .sbt:not(.pick)) .sbh-r{display:none}
+  #view .sbh~.grid.g5{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin-left:-12px;margin-right:-12px;padding:2px 12px 8px;scroll-padding-left:12px;scrollbar-width:none}
+  #view .sbh~.grid.g5::-webkit-scrollbar{display:none}
+  #view .sbh~.grid.g5>*{scroll-snap-align:start;min-width:0}
 }
 @media (prefers-reduced-motion:reduce){.sb-chip.live i,.sb-live::before{animation:none}}
 /* sb:end */
@@ -6835,7 +6872,7 @@ function sbNextHTML(d, gs){ const fav=team(favAb()); const now=Date.now(); let f
   const sub = kind==='live' ? (g.last?esc(g.last):'tap for the live game page')
     : kind==='done' ? 'Final'+(g.ot?' &middot; '+(g.ot>1?g.ot+'OT':'OT'):'')+' &middot; '+esc(tshort(g.as>g.hs?g.away:g.home))+' by '+Math.abs(g.as-g.hs)
     : esc(g.date===todayStr?'Tonight':fmtDate(g.date,true))+(k!=null?' &middot; '+esc(kick(g)):'')+(g.pre?' &middot; preseason':(g.spread!=null?' &middot; '+esc(spreadStr(g,{short:true})):'')+' &middot; model '+pct(Math.max(p.pHome,p.pAway))+' '+esc(tshort(fv)));
-  return '<a class="sb-nu'+(kind==='live'?' live':'')+'" href="#/game/'+g.id+'"><div class="sb-l">'+lbl+'</div>'+teams+big+'<div class="sb-s">'+sub+'</div></a>'; }
+  return '<a class="sb-nu'+(kind==='live'?' live':'')+(g===fg?' mine':'')+'" href="#/game/'+g.id+'"><div class="sb-l">'+lbl+'</div>'+teams+big+'<div class="sb-s">'+sub+'</div></a>'; }
 function sbHeroHTML(d, gs){ const played=gs.filter(g=>g.played).length, liveN=gs.filter(g=>g.live).length, left=gs.filter(g=>!g.played&&!g.live&&!sbOff(g)).length; const natN=gs.filter(isNational).length; const pre=gs.length&&gs.every(g=>g.pre); const ph=PLACEHOLDERS.filter(p=>p.date===d).length;
   const chips=[]; if(liveN) chips.push('<span class="sb-chip live"><i></i>'+liveN+' live</span>'); if(played) chips.push('<span class="sb-chip" style="--c:#3ddc84"><i></i>'+played+' final</span>'); if(left) chips.push('<span class="sb-chip" style="--c:#7fb2ff"><i></i>'+left+' to tip</span>'); if(natN) chips.push('<a class="sb-chip" style="--c:#fbbf24" href="#/tv/'+d+'"><i></i>'+natN+' on national TV</a>');
   if(!SEASON_ON&&todayStr<OPENER&&d<=OPENER){ const n=daysBetween(todayStr,OPENER); chips.push('<a class="sb-chip" style="--c:#c084fc" href="#/scores/'+OPENER+'"><i></i>Opening night '+(n===1?'tomorrow':'in '+n+' days')+'</a>'); }
@@ -8699,6 +8736,25 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
   V.addEventListener('click', e=>{ const t=e.target.closest?e.target:null; if(!t) return; const b=t.closest('.fr-more'); if(b){ const s=b.previousElementSibling; if(s) setOpen(s,s.classList.contains('fr-clamp')); return; }
     const s=t.closest('.page-head .sub.fr-clamp'); if(!s||t.closest('a')) return; setOpen(s,true); });
   new MutationObserver(()=>{ if(!q) q=setTimeout(clamp,40); }).observe(V,{childList:true,subtree:true}); clamp(); })();
+/* 2026-11-05 polish (Jamo: "Enhance the design and UX. Polish the app and improve overall"):
+   - readable small print: any page text drawn under 11 px (tags, labels, captions; dozens per page) grows to 11 px.
+     One pass after each redraw over the text in #view; svg text (chart labels) is left alone.
+   - placeholders while something loads: a "Loading the box score…" style line gets a soft shimmering block under it, so
+     the page has room for what is coming and doesn't jump when it arrives. */
+(function(){ const V=document.getElementById('view'); if(!V||!window.MutationObserver||!document.createTreeWalker) return;
+  const st=document.createElement('style'); st.id='ux-css';
+  st.textContent='#view .jsh-load{color:var(--ink-3)}'
+    +'#view .jsh-load::after{content:"";display:block;height:56px;margin-top:10px;border-radius:12px;background:linear-gradient(100deg,color-mix(in srgb,var(--ink,#888) 5%,transparent) 30%,color-mix(in srgb,var(--ink,#888) 12%,transparent) 50%,color-mix(in srgb,var(--ink,#888) 5%,transparent) 70%);background-size:220% 100%;animation:jshShim 1.3s linear infinite}'
+    +'@keyframes jshShim{from{background-position:120% 0}to{background-position:-120% 0}}'
+    +'@media (prefers-reduced-motion:reduce){#view .jsh-load::after{animation:none}}';
+  document.head.appendChild(st);
+  const LOAD=/^(Loading|Simulating|Running the)\b.{0,90}(…|\.\.\.)$/; const done=new WeakSet(); let q=0;
+  const run=()=>{ q=0; V.querySelectorAll('.jsh-load').forEach(e=>{ if(!LOAD.test(e.textContent.trim())) e.classList.remove('jsh-load'); });
+    const w=document.createTreeWalker(V, NodeFilter.SHOW_TEXT, {acceptNode:n=>n.nodeValue.trim().length>1?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_SKIP}); let n;
+    while((n=w.nextNode())){ const e=n.parentElement; if(!e||done.has(e)) continue; done.add(e); if(e.closest('svg,.pk-avg,[data-keep-size]')) continue;
+      const t=e.textContent.trim(); if(t.length<100&&LOAD.test(t)) e.classList.add('jsh-load');
+      const f=parseFloat(getComputedStyle(e).fontSize); if(f>=7&&f<11) e.style.fontSize='11px'; } };
+  new MutationObserver(()=>{ if(!q) q=setTimeout(run,60); }).observe(V,{childList:true,subtree:true}); run(); })();
 /* fresh:end */
 </script>
 <script type="text/x-jsh-app">

@@ -484,6 +484,17 @@ body .jbl{transition:transform .28s ease,opacity .28s ease}
 @media (prefers-reduced-motion:reduce){body .jbl{transition:opacity .2s}}
 /* ticker tags at a readable size */
 body .jbl .lgt{font-size:10.5px}body .jbl .src{font-size:11px}body .jbl .jbl-sec{font-size:11px}
+/* 2026-11-06: sideways rows (day strips, tabs, wide tables, quick links) fade at the edge that has more to swipe; the
+   script below sets .jsh-xs plus .jsh-xl / .jsh-xr while there is more on the left / right */
+body .jsh-xs.jsh-xr{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent)}
+body .jsh-xs.jsh-xl{-webkit-mask-image:linear-gradient(270deg,#000 calc(100% - 26px),transparent);mask-image:linear-gradient(270deg,#000 calc(100% - 26px),transparent)}
+body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent);mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent)}
+/* 2026-11-06: bigger tap targets on touch screens for the small pill buttons (Show/Hide/More numbers, More/Less, home quick
+   links, Alerts / Add to calendar / Minimize, More headlines) - 28-30 px tall before */
+@media (pointer:coarse){
+  body #view .fold-btn,body #view .fr-more,body .nw-tog{min-height:36px}
+  body .cal-btn,body nav.ql a{min-height:36px;display:inline-flex;align-items:center}
+}
 </style>
 <div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
   <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
@@ -529,6 +540,67 @@ body .jbl .lgt{font-size:10.5px}body .jbl .src{font-size:11px}body .jbl .jbl-sec
     if (!mq.matches || y < 200 || d < -4 || end) { if (R.classList.contains('jsh-bl-dn')) show(); return; }
     if (d > 6) R.classList.add('jsh-bl-dn'); }, { passive: true });
   addEventListener('hashchange', show);
+})();
+</script>
+<script>
+/* 2026-11-06 polish (Jamo: "Do another polish"):
+   - Back keeps your place. The hubs jump to the top on every page change, so Back after opening a game landed at the top of
+     the scoreboard. Each history entry now gets an id (history.state.jshY, merged with whatever a hub keeps there) and its
+     scroll position (sessionStorage jsh-pos:<path>); Back / Forward, a reload and coming back from another section put you
+     where you were. This hashchange listener is registered before the hubs' routers (the top bar loads first), so it reads
+     the old page's position before they reset it. It lets go the moment you scroll or tap yourself.
+   - Sideways rows (day strips, tabs, wide tables, quick links) fade at the edge that has more to swipe (.jsh-xs + .jsh-xl /
+     .jsh-xr), and when a page opens, a picked day or tab that was cut off at the edge of its row is scrolled into view.
+     Card carousels that already peek at the next card and anything with its own fade are left alone. */
+(function(){
+  var H = history, KEY = 'jsh-pos:' + location.pathname, POS = {}, cur = '', n = 0, gen = 0, busy = 0, hands = 0, FRESH = Date.now() + 8000;
+  try { POS = JSON.parse(sessionStorage.getItem(KEY) || '{}') || {}; } catch (e) { POS = {}; }
+  try { if ('scrollRestoration' in H) H.scrollRestoration = 'manual'; } catch (e) {}
+  function save(){ try { var k = Object.keys(POS); if (k.length > 80) k.slice(0, k.length - 80).forEach(function(x){ delete POS[x]; }); sessionStorage.setItem(KEY, JSON.stringify(POS)); } catch (e) {} }
+  function idOf(){ var s = H.state; return s && typeof s === 'object' && s.jshY ? String(s.jshY) : ''; }
+  function stamp(){ var id = idOf(); if (id) return id; var s = H.state; id = Date.now().toString(36) + '-' + (++n);
+    try { H.replaceState(Object.assign({}, s && typeof s === 'object' ? s : {}, { jshY: id }), ''); } catch (e) {} return id; }
+  function go(y){ try { scrollTo({ top: y, left: 0, behavior: 'instant' }); } catch (e) { scrollTo(0, y); } }
+  function restore(y, wait){ var g = ++gen, t0 = Date.now(), ok = 0; hands = 0; busy = 1;
+    (function step(){ if (g !== gen) return; if (hands) { busy = 0; return; }
+      if (Math.abs(scrollY - y) > 2) go(y);
+      ok = Math.abs(scrollY - y) <= 2 ? ok + 1 : 0;
+      if (ok >= 3 || Date.now() - t0 > wait) { busy = 0; if (cur) POS[cur] = scrollY; return; }
+      setTimeout(step, ok ? 120 : 60); })(); }
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function(t){ addEventListener(t, function(){ if (busy) hands = 1; }, { passive: true, capture: true }); });
+  addEventListener('scroll', function(){ if (!busy && cur) POS[cur] = scrollY; }, { passive: true });
+  addEventListener('hashchange', function(){ if (cur && !busy) POS[cur] = scrollY;
+    gen++; busy = 0; FRESH = Date.now() + 1500; var id = idOf(); cur = id;
+    if (id && POS[id] > 0) { var y = POS[id]; setTimeout(function(){ restore(y, 2500); }, 0); }
+    else setTimeout(function(){ cur = stamp(); }, 0);   // after the hubs' own hashchange listeners, which may replace the state
+    save(); });
+  addEventListener('pagehide', save);
+  document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'hidden') save(); });
+  cur = stamp(); if (POS[cur] > 0) restore(POS[cur], 7000);
+
+  var SEEN = new WeakSet(), q = 0;
+  function edge(el){ var x = el.scrollLeft, l = x > 3, r = x + el.clientWidth < el.scrollWidth - 3;
+    if (el.classList.contains('jsh-xl') !== l) el.classList.toggle('jsh-xl', l);
+    if (el.classList.contains('jsh-xr') !== r) el.classList.toggle('jsh-xr', r); }
+  function onX(e){ edge(e.currentTarget); }
+  function pick(el){ if (el.querySelector('table')) return;
+    var a = el.querySelector('.on,.sel,.active,.cur,[aria-selected="true"],[aria-current="page"],[aria-current="true"]'); if (!a) return;
+    var r = a.getBoundingClientRect(), R = el.getBoundingClientRect(); if (!r.width || (r.left >= R.left + 6 && r.right <= R.right - 6)) return;
+    el.scrollLeft += (r.left + r.width / 2) - (R.left + R.width / 2); }
+  function scan(){ q = 0; var R = document.getElementById('view') || document.body; if (!R) return;
+    var all = R.getElementsByTagName('*'), now = Date.now();
+    for (var i = 0; i < all.length; i++) { var el = all[i];
+      if (el.classList.contains('jsh-xs')) { edge(el); continue; }
+      if (SEEN.has(el) || el.clientWidth < 80 || el.scrollWidth <= el.clientWidth + 3) continue;
+      SEEN.add(el); var s = getComputedStyle(el); if (s.overflowX !== 'auto' && s.overflowX !== 'scroll') continue;
+      if (el.closest('.jsh,.jbl,svg,[data-no-fade]')) continue;
+      if ((s.webkitMaskImage && s.webkitMaskImage !== 'none') || (s.maskImage && s.maskImage !== 'none')) continue;
+      if (now < FRESH) pick(el);
+      var c = el.firstElementChild; if (c && !el.querySelector('table') && c.getBoundingClientRect().width > el.clientWidth * .6) continue;
+      el.classList.add('jsh-xs'); el.addEventListener('scroll', onX, { passive: true }); edge(el); } }
+  function later(){ if (!q) q = setTimeout(scan, 150); }
+  if (window.MutationObserver) new MutationObserver(later).observe(document.documentElement, { childList: true, subtree: true });
+  addEventListener('resize', later); addEventListener('load', later);
 })();
 </script>
 <script>

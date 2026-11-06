@@ -227,6 +227,13 @@ header.top{transition:transform .22s ease}
 header.top.jsh-tuck{pointer-events:none}
 /* prediction cards: each reference line stays on one line on phones */
 @media (max-width:600px){body .pk-avg{font-size:10.5px;white-space:nowrap;letter-spacing:-.01em}}
+/* 2026-11-05: on phones the BottomLine score ticker slides away while you scroll down and comes back when you scroll up
+   (or reach the end of the page), like the header does; it slides behind the bottom tab bar */
+body .jbl{transition:transform .28s ease,opacity .28s ease}
+@media (max-width:760px){html.jsh-bl-dn body .jbl{transform:translateY(calc(100% + 64px + env(safe-area-inset-bottom)))!important;opacity:0;pointer-events:none;z-index:50}}
+@media (prefers-reduced-motion:reduce){body .jbl{transition:opacity .2s}}
+/* ticker tags at a readable size */
+body .jbl .lgt{font-size:10.5px}body .jbl .src{font-size:11px}body .jbl .jbl-sec{font-size:11px}
 </style>
 <div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
   <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
@@ -263,6 +270,15 @@ header.top.jsh-tuck{pointer-events:none}
     if (!mq.matches || y < 260 || e.contains(document.activeElement) || d < -4) { if (e.classList.contains('jsh-tuck')) off(e); return; }
     if (d > 6 && !e.classList.contains('jsh-tuck')) { var top = parseFloat(getComputedStyle(e).top) || 0; e.style.transform = 'translateY(' + (-(e.offsetHeight + top)) + 'px)'; e.classList.add('jsh-tuck'); } }, { passive: true });
   addEventListener('hashchange', function(){ var e = hdr(); if (e) off(e); });
+})();
+/* phones (2026-11-05): the BottomLine ticker hides on scroll down and returns on scroll up or at the end of the page */
+(function(){ var last = 0, R = document.documentElement, mq = window.matchMedia('(max-width:760px)');
+  function show(){ R.classList.remove('jsh-bl-dn'); }
+  addEventListener('scroll', function(){ var y = window.scrollY, d = y - last; last = y;
+    var end = y + window.innerHeight >= document.documentElement.scrollHeight - 80;
+    if (!mq.matches || y < 200 || d < -4 || end) { if (R.classList.contains('jsh-bl-dn')) show(); return; }
+    if (d > 6) R.classList.add('jsh-bl-dn'); }, { passive: true });
+  addEventListener('hashchange', show);
 })();
 </script>
 <script>

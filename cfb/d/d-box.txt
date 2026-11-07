@@ -103809,3 +103809,76 @@ P|1179|H|kickReturns|Yannick Smith||1;0;0.0;0;0
 P|1179|H|puntReturns|Yamir Knight||1;-1;-1.0;0;0
 P|1179|H|kicking|Brendan Baird||3/3;100.0;50;6/6;15
 P|1179|H|punting|Wade McSparron||1;37;37.0;0;0;37
+G|1180|2026-11-06|TCU|Arizona
+T|1180|A|firstDowns=22;thirdDownEff=6-12;fourthDownEff=0-0;totalYards=281;netPassingYards=232;completionAttempts=28/41;yardsPerPass=5.7;rushingYards=49;rushingAttempts=21;yardsPerRushAttempt=2.3;totalPenaltiesYards=8-55;turnovers=2;fumblesLost=1;interceptions=1;possessionTime=28:02;defSacks=1;defTfl=2
+T|1180|H|firstDowns=21;thirdDownEff=5-14;fourthDownEff=1-1;totalYards=441;netPassingYards=313;completionAttempts=24/37;yardsPerPass=8.5;rushingYards=128;rushingAttempts=33;yardsPerRushAttempt=3.9;totalPenaltiesYards=10-111;turnovers=1;fumblesLost=0;interceptions=1;possessionTime=31:58;defSacks=3;defTfl=6
+P|1180|A|passing|Jaden Craig||28/41;232;5.7;1;1;71.1
+P|1180|A|rushing|Amante Martin||8;35;4.4;0;11
+P|1180|A|rushing|Jaden Craig||9;12;1.3;2;8
+P|1180|A|rushing|Kari Ashley||2;2;1.0;0;1
+P|1180|A|rushing|Ace Theus||2;0;0.0;0;1
+P|1180|A|receiving|Kari Ashley||14;95;6.8;0;17
+P|1180|A|receiving|Jordan Dwyer||9;86;9.6;1;19
+P|1180|A|receiving|Ed Small||1;20;20.0;0;20
+P|1180|A|receiving|Amante Martin||2;18;9.0;0;18
+P|1180|A|receiving|Ka'Morreun Pimpton||1;11;11.0;0;11
+P|1180|A|receiving|Jeremy Scott||1;2;2.0;0;2
+P|1180|A|fumbles|Ed Small||1;1;0
+P|1180|A|defensive|Hudson Hooper||12;9;0;0;1;0;1
+P|1180|A|defensive|Jordan Lester||8;6;0;0;0;0;0
+P|1180|A|defensive|Kylin Jackson||6;4;0;1;0;0;0
+P|1180|A|defensive|Jamel Johnson||4;3;0;0;0;0;0
+P|1180|A|defensive|Paul Oyewale||4;2;0;0;0;0;0
+P|1180|A|defensive|Max Carroll||4;2;0;0;0;0;0
+P|1180|A|defensive|Kaden McFadden||4;2;0.5;0.5;0;0;0
+P|1180|A|defensive|Gil Jackson Jr.||4;2;0;0;0;0;0
+P|1180|A|defensive|Vernon Glover Jr.||2;2;0;0;0;0;0
+P|1180|A|defensive|Zach Chapman||2;2;0;0;0;0;0
+P|1180|A|defensive|Teon Parks||2;2;0;0;0;0;0
+P|1180|A|defensive|CJ Woodfork||2;1;0;0;0;0;0
+P|1180|A|defensive|Tristan Johnson||2;0;0;0;0;0;0
+P|1180|A|defensive|John Schobel||2;0;0;0;0;1;0
+P|1180|A|defensive|Ansel Din-Mbuh||1;1;0;0;0;1;0
+P|1180|A|defensive|Kilian Registe||1;1;0;0;0;0;0
+P|1180|A|defensive|Markis Deal||1;0;0;0;0;0;0
+P|1180|A|defensive|Koron Hayward||1;0;0.5;0.5;0;0;0
+P|1180|A|defensive|Julius Simms||1;0;0;0;0;0;0
+P|1180|A|defensive|Devyn Hidrogo||0;0;0;0;1;0;0
+P|1180|A|interceptions|Hudson Hooper||1;93;1
+P|1180|A|kickReturns|Ed Small||1;-4;-4.0;0;0
+P|1180|A|puntReturns|Ed Small||1;8;8.0;8;0
+P|1180|A|kicking|Kyle Lemmermann||0/2;0.0;0;4/4;4
+P|1180|A|punting|John Hoyet Chance||4;199;49.8;1;2;59
+P|1180|H|passing|Noah Fifita||24/37;313;8.5;2;1;82.6
+P|1180|H|rushing|Kedrick Reescano||10;52;5.2;0;18
+P|1180|H|rushing|Noah Fifita||11;38;3.5;1;16
+P|1180|H|rushing|Antwan Roberts Jr.||4;21;5.3;0;9
+P|1180|H|rushing|Quincy Craig||5;18;3.6;0;18
+P|1180|H|rushing|Giovanni Richardson||1;3;3.0;0;3
+P|1180|H|receiving|Giovanni Richardson||11;171;15.5;0;46
+P|1180|H|receiving|Isaiah Mizell||6;78;13.0;1;23
+P|1180|H|receiving|Quincy Craig||4;47;11.8;1;15
+P|1180|H|receiving|Brandon Phelps||2;11;5.5;0;8
+P|1180|H|receiving|Antwan Roberts Jr.||1;6;6.0;0;6
+P|1180|H|fumbles|Quincy Craig||1;0;0
+P|1180|H|fumbles|Zuri Watson||0;0;1
+P|1180|H|defensive|Taye Brown||10;5;0;0;0;2;0
+P|1180|H|defensive|Tyrese Boss||6;5;0;0;1;1;0
+P|1180|H|defensive|Dwight Bootle II||5;4;0;0;1;0;0
+P|1180|H|defensive|Everett Roussaw Jr.||5;3;0;0;0;0;0
+P|1180|H|defensive|Chase Kennedy||5;2;0;0;1;0;0
+P|1180|H|defensive|Quinn Olson||4;2;0;1;0;0;0
+P|1180|H|defensive|Leroy Palu||4;2;0;1;0;0;0
+P|1180|H|defensive|Lee Molette III||3;3;0;1;0;0;0
+P|1180|H|defensive|Tre Smith||2;1;1;1;0;0;0
+P|1180|H|defensive|Cooper Blomstrom||2;1;1;1;0;0;0
+P|1180|H|defensive|Prince Williams||2;1;1;1;0;0;0
+P|1180|H|defensive|Malcolm Hartzog Jr.||2;1;0;0;0;0;0
+P|1180|H|defensive|Gavin Hunter||2;1;0;0;0;0;0
+P|1180|H|defensive|Dash Fifita||1;1;0;0;0;0;0
+P|1180|H|defensive|Dominic Lolesio||1;0;0;0;0;0;0
+P|1180|H|defensive|Dajon Hinton||1;0;0;0;0;0;0
+P|1180|H|defensive|Zac Siulepa||1;0;0;0;0;0;0
+P|1180|H|interceptions|Tyrese Boss||1;27;0
+P|1180|H|kicking|Michael Salgado-Medina||3/3;100.0;43;2/2;11
+P|1180|H|punting|Chase Ridley||4;165;41.3;0;1;44

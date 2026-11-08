@@ -1864,12 +1864,6 @@
 2026-10-31|Oregon State|Fresno State|Oregon State|passingYards|Braden Atkinson|QB|33/59, 373 YDS, 1 TD
 2026-10-31|Oregon State|Fresno State|Fresno State|rushingYards|Bryson Donelson|RB|16 CAR, 108 YDS, 1 TD
 2026-10-31|Oregon State|Fresno State|Oregon State|receivingYards|DeCorion Temple|TE|6 REC, 97 YDS
-2026-11-07|Texas State|Oregon State|Texas State|passingYards|Brad Jackson|QB|16/20, 214 YDS, 1 TD, 1 INT
-2026-11-07|Texas State|Oregon State|Texas State|rushingYards|Torrance Burgess Jr.|RB|22 CAR, 162 YDS, 1 TD
-2026-11-07|Texas State|Oregon State|Texas State|receivingYards|Zechariah Sample|WR|3 REC, 95 YDS, 1 TD
-2026-11-07|Wyoming|UNLV|Wyoming|passingYards|Tyler Hughes|QB|5/9, 107 YDS, 1 TD
-2026-11-07|Wyoming|UNLV|Wyoming|rushingYards|Samuel Harris|RB|14 CAR, 99 YDS, 2 TD
-2026-11-07|Wyoming|UNLV|Wyoming|receivingYards|Jake Wilson|TE|2 REC, 56 YDS, 1 TD
 2026-11-03|Ohio|Akron|Akron|passingYards|Cibastian Broughton|QB|22/34, 232 YDS, 1 INT
 2026-11-03|Ohio|Akron|Akron|rushingYards|Jordan Gant|RB|16 CAR, 112 YDS, 1 TD
 2026-11-03|Ohio|Akron|Ohio|receivingYards|Dom Dorwart|WR|4 REC, 108 YDS, 1 TD
@@ -2053,6 +2047,12 @@
 2026-11-07|Hawai'i|UTEP|Hawai'i|passingYards|Micah Alejado|QB|26/40, 303 YDS, 1 TD, 1 INT
 2026-11-07|Hawai'i|UTEP|Hawai'i|rushingYards|Cam Barfield|RB|15 CAR, 64 YDS
 2026-11-07|Hawai'i|UTEP|Hawai'i|receivingYards|Titan Lacaden|WR|11 REC, 109 YDS, 1 TD
+2026-11-07|Texas State|Oregon State|Texas State|passingYards|Brad Jackson|QB|16/20, 214 YDS, 1 TD, 1 INT
+2026-11-07|Texas State|Oregon State|Texas State|rushingYards|Torrance Burgess Jr.|RB|28 CAR, 196 YDS, 1 TD
+2026-11-07|Texas State|Oregon State|Oregon State|receivingYards|Jesse Legree|WR|8 REC, 99 YDS
+2026-11-07|Wyoming|UNLV|Wyoming|passingYards|Tyler Hughes|QB|5/9, 107 YDS, 1 TD
+2026-11-07|Wyoming|UNLV|Wyoming|rushingYards|Samuel Harris|RB|17 CAR, 128 YDS, 2 TD
+2026-11-07|Wyoming|UNLV|Wyoming|receivingYards|Jake Wilson|TE|2 REC, 56 YDS, 1 TD
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD

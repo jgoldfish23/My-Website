@@ -585,14 +585,33 @@
 2026-10-31|Army|Memphis|HEADLINE||Stokes accounts for 5 TDs, leads Memphis over Army 49-22||
 2026-10-31|Northern Illinois|UNLV|HEADLINE||Jackson Arnold throws 3 TD passes, UNLV hands Northern Illinois its 10th straight loss, 31-24||
 2026-10-31|Oregon State|Fresno State|HEADLINE||Jayden Mandal throws 2 TD passes to Josiah Freeman, Fresno State beats Oregon State 38-22||
+2026-11-03|Ohio|Akron|HEADLINE||Duncan Brune's 91-yard TD rallies Ohio over Akron 28-20||
+2026-11-03|Buffalo|Miami (OH)|HEADLINE||Wright accounts for 4TDs to send Buffalo past Miami (Ohio) 34-31 in OT||
+2026-11-04|Ball State|Massachusetts|HEADLINE||Watson's 13-yard TD run in OT lifts UMass over Ball State 31-30||
+2026-11-04|Toledo|Sacramento State|HEADLINE||Miller, Ison lead ground game and Toledo slips past Sacramento State 20-17||
+2026-11-04|Central Michigan|Eastern Michigan|HEADLINE||Nick Woodford scores 3 times and Central Michigan defeats Eastern Michigan 35-7 in Detroit||
+2026-11-05|UTSA|Florida Atlantic|HEADLINE||Veltkamp throws 4 TD passes, FAU knocks off American Conference leader UTSA 60-29||
+2026-11-05|James Madison|Southern Miss|HEADLINE||JC Evans has 4 total TDs, James Madison beats Southern Miss 54-23||
+2026-11-06|TCU|Arizona|HEADLINE||Salgado-Medina makes field goal after recovered onside pooch kick, No. 24 Arizona stuns TCU 29-28||
+2026-11-06|Virginia Tech|SMU|HEADLINE||Kevin Jennings throws for 350 yards and 4 TDs as SMU beats Virginia Tech 51-28||
+2026-11-06|South Florida|East Carolina|HEADLINE||Andrew Conrad's 55-yard FG with 2 seconds left lifts East Carolina over South Florida 20-17||
+2026-11-06|Nebraska|Illinois|HEADLINE||Collin Dixon's 2 TD catches help Illinois become bowl eligible with 24-13 victory over Nebraska||
+2026-11-06|New Mexico|Nevada|HEADLINE||No. 22 New Mexico wins in first game in AP poll in school history, beating Nevada 31-3||
+2026-11-07|Miami|Notre Dame|HEADLINE||No. 4 Notre Dame takes big lead, then holds off No. 1 Miami 31-24 in a classic||
+2026-11-07|Georgia|Ole Miss|HEADLINE||Gunner Stockton and No. 2 Georgia pound No. 12 Mississippi 42-7 to make case for top ranking||
 2026-11-07|BYU|Utah|HEADLINE||No. 3 Utah snaps three-game losing streak to No. 7 BYU with 28-20 win over Cougars||
 2026-11-07|Alabama|LSU|HEADLINE||Russell passes for 3 TDs to propel No. 9 Alabama past No. 15 LSU, 31-13||
+2026-11-07|Kentucky|Tennessee|HEADLINE||Morris, defense lead No. 16 Tennessee past No. 8 Kentucky, 34-6||
 2026-11-07|Texas|Missouri|HEADLINE||No. 10 Texas scores three unanswered TDs in the second half to rally past No. 19 Missouri, 34-20||
 2026-11-07|UCLA|Minnesota|HEADLINE||No. 5 UCLA turns up the speed late to stay unbeaten with 34-20 win at Minnesota||
 2026-11-07|Oregon|Ohio State|HEADLINE||Oregon storms back from 2-touchdown deficit to hammer No. 11 Ohio State 41-28||
+2026-11-07|West Virginia|Texas Tech|HEADLINE||Thomas Castellanos throws 5 TD passes as No. 13 Texas Tech holds off West Virginia 53-48||
 2026-11-07|Merrimack|Wake Forest|HEADLINE||No. 14 Wake Forest rolls to record-setting 77-0 rout of Merrimack behind backup QB Steele Pizzella||
 2026-11-07|Cincinnati|Houston|HEADLINE||Re’Shaun Sanford II breaks tie with long TD run as No. 17 Houston beats Cincinnati 31-24||
+2026-11-07|Iowa|Northwestern|HEADLINE||Hank Brown, No. 21 Iowa defense combine to give Northwestern first loss at new stadium, 24-10||
 2026-11-07|Texas A&M|South Carolina|HEADLINE||Sellers leads No. 23 South Carolina to 4th straight victory with 17-9 win over Texas A&M||
+2026-11-07|Oklahoma|Florida|HEADLINE||Oklahoma throttles No. 25 Florida for a 23-7 victory||
+2026-11-07|Boise State|Colorado State|HEADLINE||Cutforth, Riley spark No. 20 Boise State’s 8th straight win as Broncos beat Colorado State 64-38||
 2026-11-07|Iowa State|Baylor|HEADLINE||DJ Lagway throws 2 TD passes, runs for a score as Baylor surges to 42-31 win over Iowa State||
 2026-11-07|Clemson|Syracuse|HEADLINE||Jahiem Lawson returns fumble 22 yards for a score, Clemson holds on to defeat Syracuse 18-13||
 2026-11-07|Florida State|Boston College|HEADLINE||Thomas runs for 2 TDs  FSU beats BC 31-24 to make interim coach Rick Stockstill a winner in 1st game||
@@ -617,18 +636,14 @@
 2026-11-07|Louisiana Tech|Troy|HEADLINE||Calwise Jr. powers offense, Jackson Jr. leads defense in Louisiana Tech's 41-17 win over Troy||
 2026-11-07|Vanderbilt|Mississippi State|HEADLINE||Vanderbilt holds off Mississippi State to win its first SEC game 25-23||
 2026-11-07|Rutgers|Wisconsin|HEADLINE||Ryan Hopkins shines in his first start as Wisconsin trounces Rutgers 31-10||
-2026-11-03|Ohio|Akron|HEADLINE||Duncan Brune's 91-yard TD rallies Ohio over Akron 28-20||
-2026-11-03|Buffalo|Miami (OH)|HEADLINE||Wright accounts for 4TDs to send Buffalo past Miami (Ohio) 34-31 in OT||
-2026-11-04|Ball State|Massachusetts|HEADLINE||Watson's 13-yard TD run in OT lifts UMass over Ball State 31-30||
-2026-11-04|Toledo|Sacramento State|HEADLINE||Miller, Ison lead ground game and Toledo slips past Sacramento State 20-17||
-2026-11-04|Central Michigan|Eastern Michigan|HEADLINE||Nick Woodford scores 3 times and Central Michigan defeats Eastern Michigan 35-7 in Detroit||
-2026-11-05|UTSA|Florida Atlantic|HEADLINE||Veltkamp throws 4 TD passes, FAU knocks off American Conference leader UTSA 60-29||
-2026-11-05|James Madison|Southern Miss|HEADLINE||JC Evans has 4 total TDs, James Madison beats Southern Miss 54-23||
-2026-11-06|TCU|Arizona|HEADLINE||Salgado-Medina makes field goal after recovered onside pooch kick, No. 24 Arizona stuns TCU 29-28||
-2026-11-06|Virginia Tech|SMU|HEADLINE||Kevin Jennings throws for 350 yards and 4 TDs as SMU beats Virginia Tech 51-28||
-2026-11-06|South Florida|East Carolina|HEADLINE||Andrew Conrad's 55-yard FG with 2 seconds left lifts East Carolina over South Florida 20-17||
-2026-11-06|Nebraska|Illinois|HEADLINE||Collin Dixon's 2 TD catches help Illinois become bowl eligible with 24-13 victory over Nebraska||
-2026-11-06|New Mexico|Nevada|HEADLINE||No. 22 New Mexico wins in first game in AP poll in school history, beating Nevada 31-3||
+2026-11-07|South Alabama|Louisiana|HEADLINE||JJ Garner leads Louisiana-Lafayette to bowl-eligibility again with 28-26 win over South Alabama||
+2026-11-07|Sam Houston|Jacksonville State|HEADLINE||Creed's total 3 TDs lead Jacksonville's romping of Sam Houston 47-14||
+2026-11-07|Colorado|Arizona State|HEADLINE||Jake Fette throws, catches a TD pass in Arizona State's 20-10 win over Colorado||
+2026-11-07|Louisville|Georgia Tech|HEADLINE||Louisville clinches bowl eligibility with 44-17 rout at Georgia Tech||
+2026-11-07|Michigan State|Michigan|HEADLINE||Michigan State makes 5 field goals, forces 4 turnovers and has 5 sacks in 15-6 win over Michigan||
+2026-11-07|Air Force|Army|HEADLINE||Hodges and Medders score, Air Force clinches Commander-in-Chief's Trophy in 24-21 win over Army||
+2026-11-07|Fresno State|Utah State|HEADLINE||Utah State keeps Fresno State out of the end zone until late in the game, wins 17-10||
+2026-11-07|Hawai'i|UTEP|HEADLINE||Alejado-Lacaden combo helps send Hawaii past UTEP 17-14||
 2026-08-27|Mercyhurst|Youngstown State|HEADLINE||Beau Brungard accounts for 5 touchdowns in Youngstown State's season-opening win over Mercyhurst||
 2026-08-27|Gardner-Webb|Austin Peay|HEADLINE||Parson, Simmons lead Austin Peay in 35-17 win over Gardner-Webb||
 2026-08-27|Houston Christian|SE Louisiana|HEADLINE||Cutter Stewart returns from junior college ranks, leads Houston Christian past SE Louisiana 34-28||
@@ -806,6 +821,7 @@
 2026-10-31|Montana|Eastern Washington|HEADLINE||Ah Yat, Davis lead Montana's big-play offense past Eastern Washington 42-33||
 2026-10-31|Eastern Kentucky|Tarleton State|HEADLINE||Anderson's late TD pass lifts undefeated Tarleton State over Eastern Kentucky 28-24||
 2026-10-31|Lamar|UT Rio Grande Valley|HEADLINE||McDonald and Thomas have TD returns for Lamar in 52-23 win over UTRGV||
+2026-11-05|South Carolina State|Howard|HEADLINE||Ricorian Brown's late TD helps South Carolina State edge Howard 35-28||
 2026-11-07|North Carolina A&T|Monmouth|HEADLINE||Weaver passes, runs for TDs and Monmouth clinches at least share of CAA title with 7th straight win||
 2026-11-07|Colgate|Lehigh|HEADLINE||Yoder rushes for 181 yards, 2 TDs as Lehigh beats Colgate 33-7 to keep sole possession of 1st||
 2026-11-07|UAlbany|Bryant|HEADLINE||Myer leads Bryant to a 31-7 upset of Albany||
@@ -821,4 +837,5 @@
 2026-11-07|Eastern Kentucky|Austin Peay|HEADLINE||Williams scores on opening kickoff and Parson accounts for 3 TDs, leading Austin Peay over EKU 55-31||
 2026-11-07|Stephen F. Austin|Lamar|HEADLINE||McCown, Jenkins account for 6 TDs and Lamar seizes Southland lead with win over Stephen F. Austin||
 2026-11-07|Northern Arizona|Cal Poly|HEADLINE||Gossett's 3 rushing TDs, 1 from Pennington send Northern Arizona to lopsided win over Cal Poly||
-2026-11-05|South Carolina State|Howard|HEADLINE||Ricorian Brown's late TD helps South Carolina State edge Howard 35-28||
+2026-11-07|Montana State|Idaho State|HEADLINE||Receiver Steele and TE Schlepp connect for game winner in 3OT as Montana State beats Idaho State||
+2026-11-07|Abilene Christian|Tarleton State|HEADLINE||Tarleton State remains unbeaten with 40-27 victory over Abilene Christian||

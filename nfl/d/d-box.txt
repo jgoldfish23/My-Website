@@ -12808,4 +12808,107 @@ P|134|H|kickReturns|Corey Kiner||4431431|9;224;24.9;28;0
 P|134|H|puntReturns|Marcus Jones||4241720|2;14;7.0;14;0
 P|134|H|kicking|Andy Borregales||4569923|0/0;0.0;0;3/3;3
 P|134|H|punting|Mitch Wishnowsky||4035685|5;228;45.6;0;4;58
+G|135|401873050|2026-11-08|TB|CHI
+T|135|A|firstDowns=18;firstDownsPassing=9;firstDownsRushing=7;firstDownsPenalty=2;thirdDownEff=2-12;fourthDownEff=1-2;totalOffensivePlays=64;totalYards=352;yardsPerPlay=5.5;totalDrives=14;netPassingYards=226;completionAttempts=18/32;yardsPerPass=6.3;interceptions=2;sacksYardsLost=4-17;rushingYards=126;rushingAttempts=28;yardsPerRushAttempt=4.5;redZoneAttempts=2-5;totalPenaltiesYards=8-45;turnovers=2;fumblesLost=0;interceptions=2;defensiveTouchdowns=0;possessionTime=32:52;defSacks=1;defTfl=4
+T|135|H|firstDowns=15;firstDownsPassing=11;firstDownsRushing=4;firstDownsPenalty=0;thirdDownEff=7-13;fourthDownEff=0-0;totalOffensivePlays=60;totalYards=349;yardsPerPlay=5.8;totalDrives=13;netPassingYards=277;completionAttempts=22/37;yardsPerPass=7.3;interceptions=4;sacksYardsLost=1-2;rushingYards=72;rushingAttempts=22;yardsPerRushAttempt=3.3;redZoneAttempts=1-4;totalPenaltiesYards=9-74;turnovers=5;fumblesLost=1;interceptions=4;defensiveTouchdowns=1;possessionTime=27:08;defSacks=4;defTfl=4
+S|135|1|9:38|CHI|Rome Odunze 9 Yd pass from Caleb Williams (Cairo Santos Kick)|0|7
+S|135|1|6:00|CHI|Luther Burden III 56 Yd pass from Caleb Williams (Cairo Santos Kick)|0|14
+S|135|2|13:48|TB|Chase McLaughlin 27 Yd Field Goal|3|14
+S|135|2|3:02|CHI|Cairo Santos 25 Yd Field Goal|3|17
+S|135|2|0:00|TB|Chase McLaughlin 21 Yd Field Goal|6|17
+S|135|3|11:37|TB|Bucky Irving 2 Yd Rush (Chase McLaughlin Kick)|13|17
+S|135|3|3:39|CHI|Jaylon Johnson 67 Yd Interception Return (Cairo Santos Kick)|13|24
+S|135|4|11:24|TB|Chase McLaughlin 35 Yd Field Goal|16|24
+S|135|4|2:51|TB|Bucky Irving 6 Yd Rush (Baker Mayfield Run for Two-Point Conversion)|24|24
+S|135|4|0:00|CHI|Cairo Santos 38 Yd Field Goal|24|27
+W|135|63;68;73;78;78;79;88;89;86;82;86;88;89;91;85;85;85;88;92;90;89;92;87;86;87;85;73;68;74;73;68;73;76;89;91;88;86;87;89;93;89;87;93;93;62;72;88;100
+P|135|A|passing|Baker Mayfield||3052587|18/32;243;7.6;0;2;4-17;24.9;54.6
+P|135|A|rushing|Bucky Irving||4596448|20;97;4.9;2;25
+P|135|A|rushing|Kenny Gainwell||4371733|5;16;3.2;0;8
+P|135|A|rushing|Chris Godwin Jr.||3116165|1;12;12.0;0;12
+P|135|A|rushing|Emeka Egbuka||4567750|1;1;1.0;0;1
+P|135|A|rushing|Baker Mayfield||3052587|1;0;0.0;0;0
+P|135|A|receiving|Tez Johnson||4608810|2;76;38.0;0;58;5
+P|135|A|receiving|Kenny Gainwell||4371733|3;60;20.0;0;44;3
+P|135|A|receiving|Emeka Egbuka||4567750|3;38;12.7;0;21;5
+P|135|A|receiving|Bucky Irving||4596448|4;28;7.0;0;10;5
+P|135|A|receiving|Cade Otton||4243331|4;25;6.3;0;9;8
+P|135|A|receiving|Chris Godwin Jr.||3116165|2;16;8.0;0;9;3
+P|135|A|receiving|Ted Hurst III||5220680|0;0;0.0;0;0;1
+P|135|A|fumbles|Bucky Irving||4596448|1;0;0
+P|135|A|fumbles|Ifeatu Melifonwu||4240401|0;0;1
+P|135|A|defensive|Josiah Trotter||4870998|8;5;0;0;0;0;0
+P|135|A|defensive|Tykee Smith||4428522|7;4;0;1;1;0;0
+P|135|A|defensive|Zyon McCollum||4250392|5;4;0;1;2;0;0
+P|135|A|defensive|Ifeatu Melifonwu||4240401|4;4;0;0;1;0;0
+P|135|A|defensive|Antoine Winfield Jr.||4034790|4;2;0;0;1;0;0
+P|135|A|defensive|Keionte Scott||5093694|4;2;0;0;0;1;0
+P|135|A|defensive|Kevin Knowles||4602648|4;1;0;0;0;0;0
+P|135|A|defensive|Jacob Parrish||4912847|3;3;0;1;1;0;0
+P|135|A|defensive|Anthony Nelson||3894856|3;1;0.5;0;0;1;0
+P|135|A|defensive|Calijah Kancey||4427673|3;1;0.5;0;0;1;0
+P|135|A|defensive|Alex Anzalone||3043107|2;2;0;0;1;0;0
+P|135|A|defensive|Vita Vea||3134362|2;1;0;0;0;0;0
+P|135|A|defensive|Kameron Johnson||5097554|2;1;0;0;0;0;0
+P|135|A|defensive|A'Shawn Robinson||3054857|2;0;0;0;0;0;0
+P|135|A|defensive|Rueben Bain Jr.||4870617|2;0;0;0;0;2;0
+P|135|A|defensive|David Walker||5085355|2;0;0;0;0;0;0
+P|135|A|defensive|Miles Killebrew||2575164|1;1;0;0;0;0;0
+P|135|A|defensive|Al-Quadin Muhammad||3051942|1;1;0;1;0;0;0
+P|135|A|defensive|Payne Durham||4372505|1;1;0;0;0;0;0
+P|135|A|defensive|Tez Johnson||4608810|1;1;0;0;0;0;0
+P|135|A|defensive|David Sills V||3871102|1;0;0;0;0;0;0
+P|135|A|defensive|Ko Kieft||4034779|1;0;0;0;0;0;0
+P|135|A|defensive|SirVocea Dennis||4429511|1;0;0;0;0;0;0
+P|135|A|defensive|Elijah Simmons||4430478|1;0;0;0;0;0;0
+P|135|A|interceptions|Zyon McCollum||4250392|2;0;0
+P|135|A|interceptions|Tykee Smith||4428522|1;23;0
+P|135|A|interceptions|Alex Anzalone||3043107|1;6;0
+P|135|A|kickReturns|Sean Tucker||4430871|4;92;23.0;24;0
+P|135|A|kicking|Chase McLaughlin||3150744|3/3;100.0;35;1/1;10
+P|135|A|punting|Riley Dixon||2577619|6;293;48.8;0;2;54
+P|135|H|passing|Caleb Williams||4431611|22/37;279;7.5;2;4;1-2;52.0;61.5
+P|135|H|rushing|D'Andre Swift||4259545|12;31;2.6;0;6
+P|135|H|rushing|Salvon Ahmed||4243315|5;25;5.0;0;8
+P|135|H|rushing|Caleb Williams||4431611|5;16;3.2;0;9
+P|135|H|receiving|Luther Burden III||4685278|7;97;13.9;1;56;9
+P|135|H|receiving|Rome Odunze||4431299|4;60;15.0;1;23;7
+P|135|H|receiving|Colston Loveland||4723086|4;54;13.5;0;38;6
+P|135|H|receiving|Kalif Raymond||2973405|4;32;8.0;0;13;7
+P|135|H|receiving|Sam Roush||4685504|2;23;11.5;0;18;2
+P|135|H|receiving|Zavion Thomas||4869748|1;13;13.0;0;13;2
+P|135|H|receiving|D'Andre Swift||4259545|0;0;0.0;0;0;1
+P|135|H|fumbles|Luther Burden III||4685278|1;1;0
+P|135|H|fumbles|Kalif Raymond||2973405|1;0;1
+P|135|H|defensive|Devin Bush||4036261|9;3;0;1;2;0;0
+P|135|H|defensive|Montez Sweat||3134690|6;4;0;0;0;1;0
+P|135|H|defensive|Cam Lewis||3916577|6;3;0;0;1;0;0
+P|135|H|defensive|Tyrique Stevenson Sr.||4426374|5;3;0;0;0;0;0
+P|135|H|defensive|Dillon Thieneman||4954445|5;3;0;0;0;0;0
+P|135|H|defensive|Jeffery Simmons||4035369|4;3;1;1;1;1;0
+P|135|H|defensive|Austin Booker||4683553|4;3;1;1;0;2;0
+P|135|H|defensive|T.J. Edwards||3121544|3;3;0;0;0;0;0
+P|135|H|defensive|Kyler Gordon||4361093|3;3;0;0;0;0;0
+P|135|H|defensive|Neville Gallimore||3892883|3;2;0;0;0;0;0
+P|135|H|defensive|Jaylon Johnson||4243253|3;1;0;0;1;0;1
+P|135|H|defensive|Grady Jarrett||2576492|3;0;0.5;0;0;1;0
+P|135|H|defensive|Shemar Turner||4432804|2;2;1;1;0;1;0
+P|135|H|defensive|Daniel Hardy||4365629|2;1;0.5;0;0;1;0
+P|135|H|defensive|Roschon Johnson||4426386|2;0;0;0;0;0;0
+P|135|H|defensive|Noah Sewell||4430822|2;0;0;0;0;0;0
+P|135|H|defensive|Joe Thuney||2577773|1;1;0;0;0;0;0
+P|135|H|defensive|Garrett Bradbury||3116729|1;1;0;0;0;0;0
+P|135|H|defensive|D'Marco Jackson||4241007|1;1;0;0;0;0;0
+P|135|H|defensive|Clark Phillips III||4429067|1;1;0;0;0;0;0
+P|135|H|defensive|Luther Burden III||4685278|1;1;0;0;0;0;0
+P|135|H|defensive|Jahdae Walker||5160110|1;1;0;0;0;0;0
+P|135|H|defensive|Josh Blackwell||4240459|1;0;0;0;0;0;0
+P|135|H|defensive|James Lynch||4259181|1;0;0;0;0;0;0
+P|135|H|interceptions|Jaylon Johnson||4243253|1;67;1
+P|135|H|interceptions|Cam Lewis||3916577|1;0;0
+P|135|H|kickReturns|Zavion Thomas||4869748|3;88;29.3;40;0
+P|135|H|kickReturns|Josh Blackwell||4240459|1;21;21.0;21;0
+P|135|H|puntReturns|Kalif Raymond||2973405|6;48;8.0;26;0
+P|135|H|kicking|Cairo Santos||17427|2/2;100.0;38;3/3;9
+P|135|H|punting|Tory Taylor||4686889|4;161;40.3;0;2;55
 

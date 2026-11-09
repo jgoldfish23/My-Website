@@ -217,6 +217,8 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <script src="/sports/glow.js?v=20261031a" defer></script>
 <!-- Vibe: arena lighting, glowing numbers and live games, and a declutter pass on every page (polish/vibe.js, published by build.sh as /sports/vibe.js) -->
 <script src="/sports/vibe.js?v=20261107a" defer></script>
+<!-- Touch: the phone tune-up on every page - bigger tap areas, nothing under 11 px, names not cut off (polish/touch.js, published by build.sh as /sports/touch.js) -->
+<script src="/sports/touch.js?v=20261109a" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -826,11 +828,11 @@ body.themed.wm::after{content:"";position:fixed;left:50%;top:52%;transform:trans
 .gm.dense.islive .dst{color:var(--good);font-weight:600}
 .gm.dense .ball{color:var(--gold);font-size:9px}
 @media (max-width:720px){
-  .gm.dense{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;gap:1px 8px;padding:7px 10px}
-  .gm.dense .dteams{grid-column:1;grid-row:1}
-  .gm.dense .dsc{grid-column:2;grid-row:1;min-width:0}
+  .gm.dense{grid-template-columns:minmax(0,1fr) auto auto;grid-template-rows:auto auto;gap:1px 8px;padding:7px 10px}
+  .gm.dense .dteams{grid-column:1 / 3;grid-row:1}
+  .gm.dense .dsc{grid-column:3;grid-row:1;min-width:0}
   .gm.dense .dln{grid-column:1;grid-row:2;min-width:0;font-size:12px}
-  .gm.dense .dst{grid-column:2;grid-row:2;min-width:0}
+  .gm.dense .dst{grid-column:2 / 4;grid-row:2;min-width:0}
   .gmlist .gm.dense{margin-bottom:4px}
 }
 
@@ -6613,7 +6615,7 @@ const LIVE_ST = { IN_PROGRESS: 1, HALFTIME: 1, END_PERIOD: 1 };
 function kickMs(g){ const m=String(g.time||'').match(/^(\d{1,2}):(\d{2}) (AM|PM)$/); if(!m) return null; const h=(+m[1])%12+(m[3]==='PM'?12:0); const off=(g.date>='2026-11-01'&&g.date<'2027-03-14')?'-05:00':'-04:00'; const t=Date.parse(g.date+'T'+String(h).padStart(2,'0')+':'+m[2]+':00'+off); return isNaN(t)?null:t; }
 function liveWeeks(){ const ws=[CUR_WEEK]; const i=WEEKS.indexOf(CUR_WEEK); const prev=WEEKS[i-1]; if(prev!=null&&G.some(g=>g.week===prev&&!g.played&&g.time!=='Canceled'&&g.time!=='Postponed')) ws.push(prev); return ws; }
 function applyLiveEvent(e, w){ const g=GI[e.id]; if(!g) return null; const as=+e.away.s, hs=+e.home.s; let changed=false; if(e.st==='FINAL'){ if(!g.played||g.as!==as||g.hs!==hs||g.live){ g.as=as; g.hs=hs; g.played=true; g.live=false; g.status='FINAL'; g.als=(e.away.ls||[]).map(Number); g.hls=(e.home.ls||[]).map(Number); g.ot=g.als.length>4; changed=true; STANDINGS=null; } g.clk=''; } else if(LIVE_ST[e.st]||(e.st==='DELAYED'&&e.per>0)){ if(!g.live||g.as!==as||g.hs!==hs||g.clk!==e.det||g.last!==e.last){ changed=true; } g.as=as; g.hs=hs; g.live=true; g.played=false; g.status=e.st; g.clk=e.det||''; g.per=e.per; g.pos=e.pos&&e.pos===e.home.id?'home':(e.pos&&e.pos===e.away.id?'away':''); g.dd=e.dd||''; g.last=e.last||''; g.rz=!!e.rz; g.als=(e.away.ls||[]).map(Number); g.hls=(e.home.ls||[]).map(Number); } else if(e.st==='SCHEDULED'||e.st==='DELAYED'||e.st==='POSTPONED'){ if(g.live){ g.live=false; changed=true; } if(e.st==='DELAYED'&&g.time!=='Delayed'){ g.time='Delayed'; changed=true; } if(e.odds&&e.odds.det&&g.spread==null){ const m=String(e.odds.det).match(/^(\S+)\s+(-?[\d.]+)/); if(m){ g.spread = m[1]===g.home ? +m[2] : (m[1]===g.away ? -m[2] : null); g.src='DraftKings'; } if(e.odds.ou!=null) g.total=+e.odds.ou; changed=true; } } return changed?g:null; }
-async function livePoll(force){ if(!LIVE.on||LIVE.busy) return; if(document.hidden&&!force) return; LIVE.busy=true; let changed=false, ok=false; const changedIds=[]; const snap=[]; for(const w of liveWeeks()){ const wi=WEEKINFO[w]||{}; const stype=w>18?3:2, wk=w>18?(w===22?5:w-18):w; try{ const r=await fetch(LIVE_API+'/scoreboard?week='+wk+'&stype='+stype, {cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); const j=await r.json(); (j.games||[]).forEach(e=>{ snap.push(Object.assign({w},e)); const cg=applyLiveEvent(e, w); if(cg){ changed=true; changedIds.push(cg.id); } }); ok=true; }catch(err){ LIVE.err++; } } if(ok){ LIVE.last=Date.now(); LIVE.err=0; try{ sessionStorage.setItem('nfl-live', JSON.stringify({t:LIVE.last, snap})); }catch(e){} } LIVE.busy=false; if(changed){ clearStats(); if(quietSkip(changedIds)) renderTicker(); else rerenderQuiet(); liveFlash(changedIds); } await liveGameRefresh(); liveStamp(); }
+async function livePoll(force){ if(!LIVE.on||LIVE.busy) return; if(document.hidden&&!force) return; LIVE.busy=true; let changed=false, ok=false; const changedIds=[]; const snap=[]; for(const w of liveWeeks()){ const wi=WEEKINFO[w]||{}; const stype=w>18?3:2, wk=w>18?(w===22?5:w-18):w; try{ const r=await fetch(LIVE_API+'/scoreboard?week='+wk+'&stype='+stype, {cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); const j=await r.json(); (j.games||[]).forEach(e=>{ snap.push(Object.assign({w},e)); const cg=applyLiveEvent(e, w); if(cg){ changed=true; changedIds.push(cg.id); } }); ok=true; }catch(err){ LIVE.err++; } } if(ok){ LIVE.last=Date.now(); LIVE.err=0; try{ sessionStorage.setItem('nfl-live', JSON.stringify({t:LIVE.last, snap})); }catch(e){} } LIVE.busy=false; if(changed){ clearStats(); if(quietSkip(changedIds)) renderTicker(); else rerenderQuiet(); liveFlash(changedIds); } else if(document.querySelector('.livewait')) rerenderQuiet(); await liveGameRefresh(); liveStamp(); }
 /* keep:start - keep the reader's place through quiet live re-renders (2026-10-10): expanded <details> (a recap's
    "Read the full recap"), rows scrolled sideways, and the card being read stay where they were. Shared by the three
    hubs; sports-hub/keep/apply.pl puts this block in each one. */

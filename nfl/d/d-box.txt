@@ -12911,4 +12911,104 @@ P|135|H|kickReturns|Josh Blackwell||4240459|1;21;21.0;21;0
 P|135|H|puntReturns|Kalif Raymond||2973405|6;48;8.0;26;0
 P|135|H|kicking|Cairo Santos||17427|2/2;100.0;38;3/3;9
 P|135|H|punting|Tory Taylor||4686889|4;161;40.3;0;2;55
+G|136|401873051|2026-11-09|BUF|MIN
+T|136|A|firstDowns=22;firstDownsPassing=14;firstDownsRushing=8;firstDownsPenalty=0;thirdDownEff=7-18;fourthDownEff=1-1;totalOffensivePlays=79;totalYards=339;yardsPerPlay=4.3;totalDrives=13;netPassingYards=205;completionAttempts=21/31;yardsPerPass=5.9;interceptions=1;sacksYardsLost=4-29;rushingYards=134;rushingAttempts=44;yardsPerRushAttempt=3.0;redZoneAttempts=1-3;totalPenaltiesYards=8-62;turnovers=1;fumblesLost=0;interceptions=1;defensiveTouchdowns=0;possessionTime=42:32;defSacks=2;defTfl=2
+T|136|H|firstDowns=9;firstDownsPassing=6;firstDownsRushing=1;firstDownsPenalty=2;thirdDownEff=0-8;fourthDownEff=0-2;totalOffensivePlays=46;totalYards=178;yardsPerPlay=3.9;totalDrives=12;netPassingYards=127;completionAttempts=14/32;yardsPerPass=3.7;interceptions=2;sacksYardsLost=2-12;rushingYards=51;rushingAttempts=12;yardsPerRushAttempt=4.3;redZoneAttempts=0-1;totalPenaltiesYards=4-20;turnovers=3;fumblesLost=1;interceptions=2;defensiveTouchdowns=0;possessionTime=17:28;defSacks=4;defTfl=5
+S|136|1|1:57|BUF|Tyler Bass 39 Yd Field Goal|3|0
+S|136|2|4:02|MIN|Will Reichard 43 Yd Field Goal|3|3
+S|136|2|0:44|BUF|Keleki Latu 25 Yd pass from Josh Allen (Tyler Bass Kick)|10|3
+S|136|2|0:05|MIN|Will Reichard 53 Yd Field Goal|10|6
+S|136|3|6:03|BUF|Tyler Bass 25 Yd Field Goal|13|6
+S|136|4|6:17|BUF|James Cook III 5 Yd Rush (Tyler Bass Kick)|20|6
+S|136|4|4:40|BUF|Tyler Bass 52 Yd Field Goal|23|6
+W|136|34;33;34;33;32;27;40;32;32;33;30;33;28;32;33;32;30;33;37;33;35;33;29;21;24;27;31;28;27;20;16;20;23;12;15;17;12;12;8;6;1;2;0;0;0;0;0;0
+P|136|A|passing|Josh Allen||3918298|21/31;234;7.5;1;1;4-29;74.7;87.3
+P|136|A|rushing|James Cook III||4379399|31;107;3.5;1;11
+P|136|A|rushing|Josh Allen||3918298|6;15;2.5;0;7
+P|136|A|rushing|DJ Moore||3915416|1;11;11.0;0;11
+P|136|A|rushing|Ray Davis||4429501|2;2;1.0;0;2
+P|136|A|rushing|Ty Johnson||3915411|1;1;1.0;0;1
+P|136|A|rushing|Kyle Allen||3115293|3;-2;-0.7;0;0
+P|136|A|receiving|Khalil Shakir||4373678|4;58;14.5;0;22;4
+P|136|A|receiving|Dawson Knox||3930086|4;37;9.3;0;12;5
+P|136|A|receiving|Ty Johnson||3915411|2;36;18.0;0;36;2
+P|136|A|receiving|Dalton Kincaid||4385690|3;28;9.3;0;12;3
+P|136|A|receiving|Keleki Latu||4688552|1;25;25.0;1;25;1
+P|136|A|receiving|DJ Moore||3915416|3;25;8.3;0;15;5
+P|136|A|receiving|Keon Coleman||4635008|3;17;5.7;0;11;6
+P|136|A|receiving|Jackson Hawes||4573699|1;8;8.0;0;8;1
+P|136|A|receiving|James Cook III||4379399|0;0;0.0;0;0;1
+P|136|A|receiving|Ray Davis||4429501|0;0;0.0;0;0;1
+P|136|A|fumbles|Greg Rousseau||4362506|0;0;1
+P|136|A|defensive|Terrel Bernard||4259166|6;2;0;0;2;1;0
+P|136|A|defensive|Dee Alford||4401823|4;3;0;0;0;0;0
+P|136|A|defensive|Cole Bishop||4676004|4;3;0;0;0;0;0
+P|136|A|defensive|TJ Parker||4870886|3;1;0;0;0;0;0
+P|136|A|defensive|Dorian Williams||4568624|3;0;0;0;1;0;0
+P|136|A|defensive|Damar Hamlin||4036060|2;2;0;0;0;0;0
+P|136|A|defensive|Christian Benford||4379778|2;2;0;0;1;0;0
+P|136|A|defensive|Te'Cory Couch||4427348|2;2;0;0;0;0;0
+P|136|A|defensive|Kaleb Elarms-Orr||4594321|2;2;0;0;0;0;0
+P|136|A|defensive|Ed Oliver||4039303|2;1;0;0;0;3;0
+P|136|A|defensive|Greg Rousseau||4362506|1;1;1;1;1;3;0
+P|136|A|defensive|Javon Solomon||4428548|1;1;1;1;0;1;0
+P|136|A|defensive|Michael Hoecht||4033234|1;1;0;0;0;0;0
+P|136|A|defensive|Tylan Grable||4368828|1;1;0;0;0;0;0
+P|136|A|defensive|DeWayne Carter||4426883|1;1;0;0;0;0;0
+P|136|A|defensive|Tommy Doman Jr.||4682758|1;1;0;0;0;0;0
+P|136|A|defensive|Keleki Latu||4688552|1;1;0;0;0;0;0
+P|136|A|defensive|Maxwell Hairston||4688931|1;1;0;0;0;0;0
+P|136|A|defensive|Bradley Chubb||3116733|1;0;0;0;1;0;0
+P|136|A|defensive|T.J. Sanders||4684527|1;0;0;0;0;1;0
+P|136|A|defensive|Deone Walker||4831989|1;0;0;0;0;0;0
+P|136|A|defensive|Davison Igbinosun||4832035|1;0;0;0;1;0;0
+P|136|A|interceptions|Terrel Bernard||4259166|1;5;0
+P|136|A|interceptions|Dorian Williams||4568624|1;0;0
+P|136|A|kickReturns|Greg Dortch||4037235|1;58;58.0;58;0
+P|136|A|puntReturns|Greg Dortch||4037235|2;11;5.5;6;0
+P|136|A|kicking|Tyler Bass||3917232|3/3;100.0;52;2/2;11
+P|136|A|punting|Tommy Doman Jr.||4682758|5;228;45.6;2;0;48
+P|136|H|passing|Carson Wentz||2573079|8/25;81;3.2;0;2;1-6;2.3;8.9
+P|136|H|passing|Max Brosmer||4573398|6/7;58;8.3;0;0;1-6;40.8;101.2
+P|136|H|rushing|Jordan Mason||4360569|6;35;5.8;0;11
+P|136|H|rushing|Aaron Jones Sr.||3042519|5;16;3.2;0;5
+P|136|H|rushing|Carson Wentz||2573079|1;0;0.0;0;0
+P|136|H|receiving|Justin Jefferson||4262921|3;58;19.3;0;24;11
+P|136|H|receiving|T.J. Hockenson||4036133|4;33;8.3;0;14;7
+P|136|H|receiving|Jordan Addison||4429205|2;28;14.0;0;16;3
+P|136|H|receiving|Jordan Mason||4360569|2;7;3.5;0;4;3
+P|136|H|receiving|Myles Price||4430656|1;6;6.0;0;6;4
+P|136|H|receiving|Aaron Jones Sr.||3042519|1;5;5.0;0;5;1
+P|136|H|receiving|DeeJay Dallas||4240631|1;2;2.0;0;2;1
+P|136|H|fumbles|Carson Wentz||2573079|1;1;0
+P|136|H|fumbles|Myles Price||4430656|1;0;0
+P|136|H|fumbles|Ben Yurosek||4433959|0;0;1
+P|136|H|defensive|Blake Cashman||3728281|12;6;0;1;2;0;0
+P|136|H|defensive|Eric Wilson||3056916|9;3;0;1;0;0;0
+P|136|H|defensive|Joshua Metellus||4046537|8;3;0;0;0;1;0
+P|136|H|defensive|James Pierre||4259252|6;5;0;0;0;0;0
+P|136|H|defensive|Dallas Turner||4565190|5;2;1;1;1;1;0
+P|136|H|defensive|Jalen Redmond||4360277|5;2;0.5;0;0;2;0
+P|136|H|defensive|Elijah Williams||4696782|5;2;0;0;0;0;0
+P|136|H|defensive|Levi Drake Rodriguez||5093973|5;2;0;0;0;0;0
+P|136|H|defensive|Tyrion Ingram-Dawkins||4629149|5;0;0.5;0;0;1;0
+P|136|H|defensive|Byron Murphy Jr.||4038999|4;3;0;0;1;0;0
+P|136|H|defensive|Andrew Van Ginkel||3133487|4;2;1;1;0;4;0
+P|136|H|defensive|Ivan Pace Jr.||4430280|4;2;1;1;0;1;0
+P|136|H|defensive|Isaiah Rodgers||4044540|4;2;0;0;0;0;0
+P|136|H|defensive|Jacob Thomas||5082397|3;3;0;0;0;0;0
+P|136|H|defensive|Harrison Smith||14945|2;1;0;0;0;1;0
+P|136|H|defensive|Domonique Orange||4698728|2;1;0;0;0;0;0
+P|136|H|defensive|Bo Richter||4875564|2;1;0;0;0;0;0
+P|136|H|defensive|Kyle Van Noy||16772|2;0;0;0;0;0;0
+P|136|H|defensive|Brian O'Neill||3123954|1;1;0;0;0;0;0
+P|136|H|defensive|T.J. Hockenson||4036133|1;1;0;0;0;0;0
+P|136|H|defensive|DeeJay Dallas||4240631|1;1;0;0;0;0;0
+P|136|H|defensive|Jake Golday||4877652|1;1;0;0;0;0;0
+P|136|H|defensive|Jay Ward||4568007|1;0;0;0;0;0;0
+P|136|H|interceptions|Byron Murphy Jr.||4038999|1;54;0
+P|136|H|kickReturns|Myles Price||4430656|4;124;31.0;35;0
+P|136|H|puntReturns|Myles Price||4430656|1;12;12.0;12;0
+P|136|H|kicking|Will Reichard||4567104|2/2;100.0;53;0/0;6
+P|136|H|punting|Brett Thorson||4799994|5;240;48.0;0;4;66
 

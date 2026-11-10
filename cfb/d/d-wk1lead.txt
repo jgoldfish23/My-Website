@@ -1840,7 +1840,7 @@
 2026-10-31|Purdue|Penn State|Penn State|passingYards|Rocco Becht|QB|16/24, 175 YDS, 1 TD
 2026-10-31|Purdue|Penn State|Penn State|rushingYards|Cam Wallace|RB|22 CAR, 135 YDS, 1 TD
 2026-10-31|Purdue|Penn State|Purdue|receivingYards|Asaad Waseem|WR|3 REC, 64 YDS
-2026-10-31|App State|Georgia Southern|Georgia Southern|passingYards|Max Johnson|QB|36/47, 327 YDS
+2026-10-31|App State|Georgia Southern|Georgia Southern|passingYards|Max Johnson|QB|35/46, 323 YDS
 2026-10-31|App State|Georgia Southern|Georgia Southern|rushingYards|Weston Bryan|QB|7 CAR, 42 YDS
 2026-10-31|App State|Georgia Southern|Georgia Southern|receivingYards|Alex Taylor|WR|10 REC, 93 YDS
 2026-10-31|Clemson|Florida State|Florida State|passingYards|Ashton Daniels|QB|21/33, 350 YDS, 2 TD, 3 INT
@@ -2044,7 +2044,7 @@
 2026-11-07|Fresno State|Utah State|Fresno State|passingYards|Jayden Mandal|QB|22/39, 262 YDS, 1 TD
 2026-11-07|Fresno State|Utah State|Utah State|rushingYards|McCae Hillstead|QB|12 CAR, 56 YDS, 1 TD
 2026-11-07|Fresno State|Utah State|Fresno State|receivingYards|Josiah Freeman|WR|8 REC, 114 YDS
-2026-11-07|Hawai'i|UTEP|Hawai'i|passingYards|Micah Alejado|QB|26/40, 303 YDS, 1 TD, 1 INT
+2026-11-07|Hawai'i|UTEP|Hawai'i|passingYards|Micah Alejado|QB|26/39, 303 YDS, 1 TD, 1 INT
 2026-11-07|Hawai'i|UTEP|Hawai'i|rushingYards|Cam Barfield|RB|15 CAR, 64 YDS
 2026-11-07|Hawai'i|UTEP|Hawai'i|receivingYards|Titan Lacaden|WR|11 REC, 109 YDS, 1 TD
 2026-11-07|Texas State|Oregon State|Texas State|passingYards|Brad Jackson|QB|16/20, 214 YDS, 1 TD, 1 INT

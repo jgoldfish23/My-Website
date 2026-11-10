@@ -1635,7 +1635,7 @@
 2026-10-24|Miami (OH)|Central Michigan|Central Michigan|receivingYards|Langston Lewis|WR|10 REC, 163 YDS, 1 TD
 2026-10-24|Oregon|Illinois|Oregon|passingYards|Dylan Raiola|QB|27/41, 246 YDS
 2026-10-24|Oregon|Illinois|Illinois|rushingYards|Aidan Laughery|RB|13 CAR, 123 YDS, 1 TD
-2026-10-24|Oregon|Illinois|Oregon|receivingYards|Dakorien Moore|WR|9 REC, 70 YDS
+2026-10-24|Oregon|Illinois|Illinois|receivingYards|Collin Dixon|WR|7 REC, 70 YDS, 1 TD
 2026-10-24|Oklahoma|Mississippi State|Oklahoma|passingYards|John Mateer|QB|22/29, 283 YDS, 2 TD
 2026-10-24|Oklahoma|Mississippi State|Mississippi State|rushingYards|Fluff Bothwell|RB|17 CAR, 111 YDS
 2026-10-24|Oklahoma|Mississippi State|Oklahoma|receivingYards|Isaiah Sategna III|WR|8 REC, 164 YDS, 1 TD
@@ -1967,7 +1967,7 @@
 2026-11-07|Maryland|Purdue|Maryland|rushingYards|DeJuan Williams|RB|14 CAR, 99 YDS, 1 TD
 2026-11-07|Maryland|Purdue|Maryland|receivingYards|Chris Durr Jr.|WR|4 REC, 127 YDS, 1 TD
 2026-11-07|Arkansas|Auburn|Auburn|passingYards|Byrum Brown|QB|23/34, 180 YDS, 2 TD
-2026-11-07|Arkansas|Auburn|Auburn|rushingYards|Byrum Brown|QB|23 CAR, 122 YDS, 1 TD
+2026-11-07|Arkansas|Auburn|Auburn|rushingYards|Byrum Brown|QB|23 CAR, 121 YDS, 1 TD
 2026-11-07|Arkansas|Auburn|Arkansas|receivingYards|Chris Marshall|WR|5 REC, 65 YDS
 2026-11-07|Oklahoma State|Kansas State|Oklahoma State|passingYards|Drew Mestemaker|QB|22/28, 313 YDS, 4 TD, 1 INT
 2026-11-07|Oklahoma State|Kansas State|Oklahoma State|rushingYards|Caleb Hawkins|RB|20 CAR, 175 YDS, 3 TD
@@ -2008,9 +2008,9 @@
 2026-11-07|Northern Illinois|San José State|Northern Illinois|passingYards|Taron Dickens|QB|26/36, 259 YDS, 1 TD, 1 INT
 2026-11-07|Northern Illinois|San José State|Northern Illinois|rushingYards|Elijah Porter|RB|12 CAR, 79 YDS
 2026-11-07|Northern Illinois|San José State|Northern Illinois|receivingYards|DeAree Rogers|WR|6 REC, 86 YDS
-2026-11-07|Missouri State|Florida International|Missouri State|passingYards|Henry Belin IV|QB|19/35, 225 YDS, 1 INT
-2026-11-07|Missouri State|Florida International|Florida International|rushingYards|Devonte Lyons|RB|24 CAR, 216 YDS, 2 TD
-2026-11-07|Missouri State|Florida International|Missouri State|receivingYards|Jmariyae Robinson|WR|6 REC, 93 YDS
+2026-11-07|Missouri State|Florida International|Florida International|passingYards|JJ Kohl|QB|20/28, 234 YDS, 1 INT
+2026-11-07|Missouri State|Florida International|Florida International|rushingYards|Devonte Lyons|RB|24 CAR, 215 YDS, 2 TD
+2026-11-07|Missouri State|Florida International|Missouri State|receivingYards|Jmariyae Robinson|WR|6 REC, 100 YDS
 2026-11-07|Louisiana Tech|Troy|Troy|passingYards|Tucker Kilcrease|QB|18/33, 215 YDS, 1 INT
 2026-11-07|Louisiana Tech|Troy|Troy|rushingYards|Jordan Lovett|RB|10 CAR, 31 YDS
 2026-11-07|Louisiana Tech|Troy|Louisiana Tech|receivingYards|Marcus Calwise Jr.|WR|9 REC, 137 YDS, 1 TD

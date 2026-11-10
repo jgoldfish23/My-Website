@@ -1643,7 +1643,7 @@
 2026-10-24|Boston College|Georgia Tech|Boston College|rushingYards|Mason McKenzie|QB|16 CAR, 170 YDS, 2 TD
 2026-10-24|Boston College|Georgia Tech|Georgia Tech|receivingYards|Dalen Penson|WR|5 REC, 88 YDS, 1 TD
 2026-10-24|North Texas|Navy|North Texas|passingYards|Tayven Jackson|QB|17/23, 305 YDS, 3 TD, 1 INT
-2026-10-24|North Texas|Navy|Navy|rushingYards|Jackson Gutierrez|QB|26 CAR, 228 YDS, 3 TD
+2026-10-24|North Texas|Navy|Navy|rushingYards|Jackson Gutierrez|QB|27 CAR, 225 YDS, 3 TD
 2026-10-24|North Texas|Navy|North Texas|receivingYards|Justin Stevenson|WR|8 REC, 209 YDS, 2 TD
 2026-10-24|Hawai'i|Northern Illinois|Hawai'i|passingYards|Micah Alejado|QB|22/32, 323 YDS, 3 TD, 1 INT
 2026-10-24|Hawai'i|Northern Illinois|Hawai'i|rushingYards|DeVon Rice|RB|12 CAR, 71 YDS, 3 TD

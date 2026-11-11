@@ -2053,15 +2053,15 @@
 2026-11-07|Wyoming|UNLV|Wyoming|passingYards|Tyler Hughes|QB|5/9, 107 YDS, 1 TD
 2026-11-07|Wyoming|UNLV|Wyoming|rushingYards|Samuel Harris|RB|17 CAR, 128 YDS, 2 TD
 2026-11-07|Wyoming|UNLV|Wyoming|receivingYards|Jake Wilson|TE|2 REC, 56 YDS, 1 TD
-2026-11-10|Western Michigan|Akron|Akron|passingYards|Cibastian Broughton|QB|8/9, 98 YDS, 1 TD
-2026-11-10|Western Michigan|Akron|Western Michigan|rushingYards|Cole Cabana|RB|7 CAR, 101 YDS, 1 TD
-2026-11-10|Western Michigan|Akron|Akron|receivingYards|Marcel Williams|WR|4 REC, 46 YDS, 1 TD
-2026-11-10|Kent State|Bowling Green|Kent State|passingYards|Dru DeShields|QB|8/12, 146 YDS, 1 TD
-2026-11-10|Kent State|Bowling Green|Bowling Green|rushingYards|Nakai Amachree|RB|9 CAR, 43 YDS
-2026-11-10|Kent State|Bowling Green|Kent State|receivingYards|Wayne Harris|WR|5 REC, 98 YDS, 1 TD
-2026-11-10|Ohio|Miami (OH)|Ohio|passingYards|Nick Poulos|QB|2/3, 14 YDS, 1 TD
-2026-11-10|Ohio|Miami (OH)|Ohio|rushingYards|Duncan Brune|RB|4 CAR, 25 YDS
-2026-11-10|Ohio|Miami (OH)|Ohio|receivingYards|Riley Neer|WR|1 REC, 8 YDS, 1 TD
+2026-11-10|Western Michigan|Akron|Akron|passingYards|Cibastian Broughton|QB|12/18, 173 YDS, 2 TD
+2026-11-10|Western Michigan|Akron|Western Michigan|rushingYards|Jalen Buckley|RB|23 CAR, 121 YDS, 2 TD
+2026-11-10|Western Michigan|Akron|Akron|receivingYards|Marcel Williams|WR|5 REC, 85 YDS, 2 TD
+2026-11-10|Kent State|Bowling Green|Kent State|passingYards|Dru DeShields|QB|19/38, 332 YDS, 2 TD, 2 INT
+2026-11-10|Kent State|Bowling Green|Bowling Green|rushingYards|Nakai Amachree|RB|19 CAR, 110 YDS, 1 TD
+2026-11-10|Kent State|Bowling Green|Kent State|receivingYards|Wayne Harris|WR|8 REC, 143 YDS, 2 TD
+2026-11-10|Ohio|Miami (OH)|Ohio|passingYards|Nick Poulos|QB|20/39, 193 YDS, 1 TD, 1 INT
+2026-11-10|Ohio|Miami (OH)|Miami (OH)|rushingYards|D'Shawntae Jones|RB|18 CAR, 115 YDS, 2 TD
+2026-11-10|Ohio|Miami (OH)|Ohio|receivingYards|Riley Neer|WR|6 REC, 74 YDS, 1 TD
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD

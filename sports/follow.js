@@ -166,7 +166,8 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
     + '.fw-p{flex:none;font-size:12px;font-weight:800;padding:2px 7px;border-radius:999px;background:rgba(91,140,255,.18);border:1px solid rgba(91,140,255,.35);white-space:nowrap}'
     + '.fw-x{flex:none;width:36px;height:36px;margin-right:-6px;border:0;background:transparent;color:#aab4c5;font-size:20px;line-height:1;cursor:pointer;border-radius:10px}'
     + '.fw-x:hover{color:#fff;background:rgba(255,255,255,.08)}'
-    + '@media (max-width:420px){.fw-k{display:none}.fw-c{font-size:12px}}'
+    /* phones: the logos stand in for the team letters, so a 112-105 game still fits on one line */
+    + '@media (max-width:420px){.fw-k{display:none}.fw-c{font-size:12px}.fw-t.lg .ab{display:none}.fw-t{gap:7px}.fw-p{padding:2px 6px}}'
     /* the button on game pages */
     + '.fw-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;min-height:36px;padding:6px 14px;border-radius:999px;cursor:pointer;'
     + 'font:700 13px/1 Inter,system-ui,sans-serif;color:var(--ink,#e8eef8);background:transparent;border:1px solid color-mix(in srgb,var(--accent,#5b8cff) 50%,var(--line,#2a3448))}'
@@ -200,10 +201,13 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
   var bar = null, spacer = null;
   function lift(){ /* sit just above whatever is pinned to the bottom of the screen (the scores ticker, a hub's tab bar) */
     if (!bar || bar.hidden) return; var top = W.innerHeight, rs = [];
-    D.querySelectorAll('body>*,body>*>*').forEach(function(el){ if (el === bar || el === spacer || bar.contains(el) || el.closest('#view')) return; var cs = getComputedStyle(el); if (cs.position !== 'fixed' || cs.display === 'none' || cs.visibility === 'hidden') return;
+    D.querySelectorAll('body>*,body>*>*').forEach(function(el){ if (el === bar || el === spacer || bar.contains(el) || el.closest('#view')) return; var cs = getComputedStyle(el); if (cs.position !== 'fixed' || cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0') return;
       var r = el.getBoundingClientRect(); if (r.height < 20 || r.height > 160 || r.width < W.innerWidth * 0.6) return; rs.push(r); });
-    /* stack up from the bottom: the tab bar, then the ticker sitting on it, and so on */
-    for (var moved = true; moved; ) { moved = false; rs.forEach(function(r){ if (r.bottom >= top - 3 && r.top < top - 1) { top = r.top; moved = true; } }); }
+    /* stack up from the bottom: the tab bar, then the ticker sitting on it, and so on. Bars may float a little above the
+       edge or above each other (Finish, 2026-11-10), so a gap of up to 18 px still counts as stacked; a bar that is
+       switched off sits below the screen and is skipped. */
+    rs = rs.filter(function(r){ return r.top < W.innerHeight - 4; });
+    for (var moved = true; moved; ) { moved = false; rs.forEach(function(r){ if (r.bottom >= top - 18 && r.top < top - 1) { top = r.top; moved = true; } }); }
     bar.style.bottom = Math.max(0, Math.round(W.innerHeight - top)) + 'px';
     if (spacer) spacer.style.height = bar.offsetHeight + 'px'; }
   function row(f){
@@ -213,7 +217,7 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
     var p = null; if (W.JSHOdds) { if (live && s.pc) p = JSHOdds.prob(f.lg, (+s.hs || 0) - (+s.as || 0), JSHOdds.left(f.lg, s.pc[0], s.pc[1]), f.mu, f.sd); else if (!fin) p = JSHOdds.prob(f.lg, 0, 1, f.mu, f.sd); }
     var pTxt = p == null ? '' : '<span class="fw-p" title="Hub win chance">' + esc(p >= 0.5 ? f.h : f.a) + ' ' + JSHOdds.pc(Math.max(p, 1 - p)) + '</span>';
     var clk = fin ? 'Final' : live ? (s.det || 'Live') : (s.det || 'Not started');
-    return '<div class="fw-g" data-k="' + esc(key(f)) + '"><a class="fw-g" style="flex:1 1 auto;min-width:0" href="' + esc(f.href) + '"><span class="fw-k">Following</span><span class="fw-t">' + logo(f.al, f.ac) + '<span>' + esc(f.a) + '</span>' + sc('a') + '<span style="opacity:.5">–</span>' + sc('h') + '<span>' + esc(f.h) + '</span>' + logo(f.hl, f.hc) + '</span><span class="fw-c">' + esc(clk) + '</span>' + pTxt + '</a><button type="button" class="fw-x" data-k="' + esc(key(f)) + '" aria-label="Stop following ' + esc(f.an) + ' at ' + esc(f.hn) + '">×</button></div>'; }
+    return '<div class="fw-g" data-k="' + esc(key(f)) + '"><a class="fw-g" style="flex:1 1 auto;min-width:0" href="' + esc(f.href) + '"><span class="fw-k">Following</span><span class="fw-t' + (f.al && f.hl ? ' lg' : '') + '">' + logo(f.al, f.ac) + '<span class="ab">' + esc(f.a) + '</span>' + sc('a') + '<span style="opacity:.5">–</span>' + sc('h') + '<span class="ab">' + esc(f.h) + '</span>' + logo(f.hl, f.hc) + '</span><span class="fw-c">' + esc(clk) + '</span>' + pTxt + '</a><button type="button" class="fw-x" data-k="' + esc(key(f)) + '" aria-label="Stop following ' + esc(f.an) + ' at ' + esc(f.hn) + '">×</button></div>'; }
   function draw(flash){
     if (!bar) return;
     var now = Date.now(); LIST = LIST.filter(function(f){ var s = ST[key(f)]; return !(s && s.fin && now - s.fin > KEEP); }); put(KEY, LIST);

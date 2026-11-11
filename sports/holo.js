@@ -195,7 +195,7 @@
     root.querySelectorAll(SC).forEach(el => { const host = el.closest('a[href],[data-href]'); const k0 = host && root.contains(host) ? (host.getAttribute('href') || host.getAttribute('data-href')) + '|' + kind(host) : '~';
       const i = n[k0] = (n[k0] || 0) + 1; m.set(k0 + '|' + i, [el, (el.getAttribute('data-to') || el.textContent).replace(/\s+/g, ' ').trim()]); });
     return m; }
-  function bumpDiff(prev, next){ if (!prev || !on) return; next.forEach((x, k) => { const o = prev.get(k); if (o && x[1] && o[1] !== x[1]) { const el = x[0]; el.classList.add('holo-bump'); setTimeout(() => el.classList.remove('holo-bump'), 1400); } }); }
+  function bumpDiff(prev, next){ if (!prev || !on) return; next.forEach((x, k) => { const o = prev.get(k); if (o && x[1] && o[1] !== x[1]) { const el = x[0]; /* data-was: the old value, so Fluid (polish/fluid.js) can roll the number to its new one (2026-11-10) */ if (/^\d{1,3}$/.test(o[1]) && /^\d{1,3}$/.test(x[1])) el.setAttribute('data-was', o[1]); el.classList.add('holo-bump'); setTimeout(() => { el.classList.remove('holo-bump'); el.removeAttribute('data-was'); }, 1400); } }); }
 
   /* ---------- 7 entrance on a real page change (never on a quiet live re-render of the same page) ---------- */
   function enter(v){ if (RM.matches) return; const kids = [].slice.call(v.children, 0, 8);

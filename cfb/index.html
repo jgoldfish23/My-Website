@@ -940,6 +940,44 @@ body.boardmode main{max-width:none;padding:0}
 .cfp-t.fav{box-shadow:inset 3px 0 0 var(--gold)}
 .cfp-mf{font-size:11.5px;color:var(--ink-3);padding:5px 10px;border-top:1px solid var(--line-2);background:var(--surface-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cfp-final{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+/* the Playoff bracket as an actual bracket (2026-11-10, Jamo: "Make it look like an actual fun bracket") */
+.cfpx-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;margin:0 -4px;padding:2px 4px 10px}
+.cfpx{position:relative;display:grid;grid-template-columns:repeat(4,minmax(200px,1fr)) minmax(178px,.95fr);grid-template-rows:auto repeat(4,auto);column-gap:34px;row-gap:14px;min-width:1114px}
+.cfpx-lines{position:absolute;left:0;top:0;pointer-events:none;overflow:visible;z-index:0}
+.cfpx-lines path{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.cfpx-lines path.fav{stroke-width:4;opacity:1;filter:drop-shadow(0 0 4px rgba(227,178,74,.65))}
+.cfpx.draw .cfpx-lines path{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:cfpxDraw .55s ease-out forwards;animation-delay:var(--d,0s)}
+@keyframes cfpxDraw{to{stroke-dashoffset:0}}
+.cfpx-h{grid-row:1;font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:800;color:var(--ink-2)}
+.cfpx-h span{display:block;text-transform:none;letter-spacing:0;font-weight:500;font-size:12px;color:var(--ink-3);margin-top:2px}
+.cfpx-g{position:relative;z-index:1;align-self:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 8px 22px -14px rgba(0,0,0,.55)}
+.cfpx-g.fin{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 10px 30px -12px rgba(227,178,74,.45)}
+.cfpx-t{display:flex;align-items:center;gap:8px;min-height:40px;padding:6px 10px 6px 12px;color:var(--ink-2);text-decoration:none;position:relative;font-size:14px}
+.cfpx-t::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--tc,#888)}
+.cfpx-t+.cfpx-t{border-top:1px solid var(--line-2)}
+.cfpx-t:hover{background:var(--surface-2);text-decoration:none;color:var(--ink)}
+.cfpx-t.w{color:var(--ink);font-weight:700;background:linear-gradient(90deg,color-mix(in srgb,var(--tc,#888) 20%,transparent),transparent 75%)}
+.cfpx-t.l .nm,.cfpx-t.l img{opacity:.55}
+.cfpx-t .sd{width:16px;text-align:right;font-variant-numeric:tabular-nums;font-size:12px;font-weight:800;color:var(--ink-3);flex:none}
+.cfpx-t img,.cfpx-t .sw{width:22px;height:22px;object-fit:contain;flex:none;border-radius:4px}
+.cfpx-t .nm{flex:1;min-width:0;line-height:1.2;font-size:13.5px}
+.cfpx-t .nm small{display:block;font-weight:500;font-size:11.5px;color:var(--ink-3)}
+.cfpx-t .pw{flex:none;font-variant-numeric:tabular-nums;font-size:12.5px;font-weight:700;color:var(--ink-3)}
+.cfpx-t.w .pw{color:var(--good)}
+.cfpx-t.fav{box-shadow:inset 0 0 0 2px var(--gold)}
+.cfpx-f{font-size:11.5px;color:var(--ink-3);padding:5px 10px 6px 12px;border-top:1px solid var(--line-2);background:var(--surface-2);line-height:1.3}
+.cfpx-champ{position:relative;z-index:1;align-self:center;text-align:center;padding:18px 14px 16px;border-radius:16px;border:1px solid var(--gold);
+  background:radial-gradient(120% 90% at 50% 0%,color-mix(in srgb,var(--tc,#888) 38%,transparent),transparent 70%),
+  radial-gradient(2px 2px at 18% 22%,#f2c14e 60%,transparent 61%),radial-gradient(2px 2px at 82% 30%,#7cc4ff 60%,transparent 61%),radial-gradient(2px 2px at 30% 78%,#ff7a9a 60%,transparent 61%),radial-gradient(2px 2px at 72% 84%,#8be0a4 60%,transparent 61%),radial-gradient(1.5px 1.5px at 50% 12%,#fff 60%,transparent 61%),var(--surface);
+  box-shadow:0 0 0 1px var(--gold),0 14px 40px -14px rgba(227,178,74,.55)}
+.cfpx-champ .tr{font-size:34px;line-height:1;filter:drop-shadow(0 4px 10px rgba(227,178,74,.6))}
+.cfpx-champ img{width:64px;height:64px;object-fit:contain;display:block;margin:10px auto 6px}
+.cfpx-champ b{display:block;font-size:19px;font-weight:800;color:var(--ink);line-height:1.15}
+.cfpx-champ .k{display:block;margin-top:4px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.cfpx-champ small{display:block;margin-top:6px;font-size:12px;color:var(--ink-3);line-height:1.35}
+.cfpx-hint{display:none;font-size:12px;color:var(--ink-3);margin:2px 0 8px}
+@media (max-width:1000px){.cfpx-hint{display:block}}
+@media (prefers-reduced-motion:reduce){.cfpx.draw .cfpx-lines path{animation:none;stroke-dashoffset:0}}
 .cfp-race .row{display:flex;align-items:center;gap:12px;padding:7px 0}
 .cfp-race .row+.row{border-top:1px solid var(--line-2)}
 .cfp-race .row .who{flex:1;min-width:0}
@@ -13068,13 +13106,34 @@ function playoffSeg(kind){ return '<div class="toolbar"><div class="seg"><a href
 function renderPlayoff(kind){ if(kind!=='fbs'&&kind!=='fcs'){ const f=SETTINGS.fav&&T[SETTINGS.fav]; kind=f&&f.level==='FCS'?'fcs':'fbs'; } if(kind==='fcs') renderPlayoffFCS(); else renderCFP(); }
 function cfpTeamRow(x, p, won){ const t=x.t, lg=logoOf(t), fav=SETTINGS.fav===t.name; return '<a class="cfp-t'+(won?' w':'')+(fav?' fav':'')+'" href="#/team/'+enc(t.name)+'"><span class="sd">'+x.seed+'</span>'+(lg?'<img src="'+lg.icon+'" alt="" loading="lazy">':'<span class="sw" style="background:'+uiColor(t)+'"></span>')+'<span class="nm">'+esc(tshort(t.name))+' <span class="dim">'+recStr(t.name)+'</span></span><span class="pw">'+Math.round(p*100)+'%</span></a>'; }
 function cfpMatch(x, y, adv, foot, cls){ const p=cdf((x.t.rating-y.t.rating+(adv?HFA:0))/SD); const xw=p>=0.5; return {html:'<div class="cfp-m'+(cls?' '+cls:'')+'">'+cfpTeamRow(x,p,xw)+cfpTeamRow(y,1-p,!xw)+(foot?'<div class="cfp-mf">'+foot+'</div>':'')+'</div>', w:xw?x:y}; }
-function cfpBracketHTML(F){ const s=k=>F[k-1]; const home=x=>'at '+esc(x.t.stadium||(tshort(x.t.name)+' home'));
-  const r1=[cfpMatch(s(8),s(9),1,home(s(8))), cfpMatch(s(5),s(12),1,home(s(5))), cfpMatch(s(7),s(10),1,home(s(7))), cfpMatch(s(6),s(11),1,home(s(6)))];
-  const q=[cfpMatch(s(1),r1[0].w,0,'Quarterfinal bowl'), cfpMatch(s(4),r1[1].w,0,'Quarterfinal bowl'), cfpMatch(s(2),r1[2].w,0,'Quarterfinal bowl'), cfpMatch(s(3),r1[3].w,0,'Quarterfinal bowl')];
-  const sf=[cfpMatch(q[0].w,q[1].w,0,'Semifinal'), cfpMatch(q[2].w,q[3].w,0,'Semifinal')];
-  const fin=cfpMatch(sf[0].w,sf[1].w,0,'Allegiant Stadium · Las Vegas','cfp-final');
-  const col=(h,sub,ms)=>'<div class="cfp-col"><div class="cfp-rh">'+h+'<span>'+sub+'</span></div><div class="cfp-stack">'+ms.map(x=>x.html).join('')+'</div></div>';
-  return '<div class="cfp-br">'+col('First round','Dec 18-19 · higher seed hosts',r1)+col('Quarterfinals','Dec 30 - Jan 1 · Fiesta, Cotton, Rose, Peach',q)+col('Semifinals','Jan 14-15 · Orange, Sugar',sf)+col('Championship','Mon, Jan 25 · Las Vegas',[fin])+'</div><div class="mini" style="margin-top:8px">Projected winner of each game in bold with its chance to win that one game. The committee decides which bowl hosts which quarterfinal and semifinal, so those are left open.</div>'; }
+/* the Playoff bracket as an actual bracket (2026-11-10, Jamo: "Make it look like an actual fun bracket"): one tree read
+   left to right - first round, quarterfinals (seeds 1-4 wait there), semifinals, the title game and the champion - with
+   lines joining each game to the next (drawn by cfpLines once the page is on screen), each line in the colors of the team
+   it carries and your team's path in gold. In each game the team the hub favors moves on, with its chance to win that one
+   game. On a phone the bracket scrolls sideways. */
+let CFPX_N=0;
+function cfpxGame(x, y, adv, foot, id, to, col, row, span, cls){ const p=cdf((x.t.rating-y.t.rating+(adv?HFA:0))/SD); const xw=p>=0.5, w=xw?x:y; const fav=SETTINGS.fav||'BYU';
+  const tr=(z,pz,won)=>{ const t=z.t, lg=logoOf(t); return '<a class="cfpx-t '+(won?'w':'l')+(t.name===fav?' fav':'')+'" style="--tc:'+uiColor(t)+'" href="#/team/'+enc(t.name)+'"><span class="sd">'+z.seed+'</span>'+(lg?'<img src="'+lg.icon+'" alt="" loading="lazy">':'<span class="sw" style="background:'+uiColor(t)+'"></span>')+'<span class="nm">'+esc(tshort(t.name))+'<small>'+recStr(t.name)+'</small></span><span class="pw">'+Math.round(pz*100)+'%</span></a>'; };
+  return {w, p:xw?p:1-p, html:'<div class="cfpx-g'+(cls?' '+cls:'')+'" id="'+id+'"'+(to?' data-to="'+to+'"':'')+' data-c="'+uiColor(w.t)+'"'+(w.t.name===fav?' data-fav="1"':'')+' style="grid-column:'+col+';grid-row:'+row+' / span '+span+'">'+tr(x,p,xw)+tr(y,1-p,!xw)+(foot?'<div class="cfpx-f">'+foot+'</div>':'')+'</div>'}; }
+function cfpBracketHTML(F){ const s=k=>F[k-1]; const home=x=>'at '+esc(x.t.stadium||(tshort(x.t.name)+' home')); const u='cfpx'+(++CFPX_N)+'-';
+  const r1=[cfpxGame(s(8),s(9),1,home(s(8)),u+'r0',u+'q0:b',1,2,1), cfpxGame(s(5),s(12),1,home(s(5)),u+'r1',u+'q1:b',1,3,1), cfpxGame(s(7),s(10),1,home(s(7)),u+'r2',u+'q2:b',1,4,1), cfpxGame(s(6),s(11),1,home(s(6)),u+'r3',u+'q3:b',1,5,1)];
+  const q=[cfpxGame(s(1),r1[0].w,0,'',u+'q0',u+'s0:a',2,2,1), cfpxGame(s(4),r1[1].w,0,'',u+'q1',u+'s0:b',2,3,1), cfpxGame(s(2),r1[2].w,0,'',u+'q2',u+'s1:a',2,4,1), cfpxGame(s(3),r1[3].w,0,'',u+'q3',u+'s1:b',2,5,1)];
+  const sf=[cfpxGame(q[0].w,q[1].w,0,'',u+'s0',u+'f:a',3,2,2), cfpxGame(q[2].w,q[3].w,0,'',u+'s1',u+'f:b',3,4,2)];
+  const fin=cfpxGame(sf[0].w,sf[1].w,0,'Allegiant Stadium · Las Vegas',u+'f',u+'c:c',4,2,4,'fin');
+  const ch=fin.w, lg=logoOf(ch.t); const path=[...r1,...q,...sf,fin].filter(g=>g.w===ch); const all=path.reduce((a,g)=>a*g.p,1);
+  const champ='<div class="cfpx-champ" id="'+u+'c" style="grid-column:5;grid-row:2 / span 4;--tc:'+uiColor(ch.t)+'"><div class="tr" aria-hidden="true">\u{1F3C6}</div>'+(lg?'<img src="'+lg.icon+'" alt="">':'')+'<b>'+esc(tshort(ch.t.name))+'</b><span class="k">Projected champion</span><small>No. '+ch.seed+' seed · favored in all '+path.length+' games · '+Math.round(all*100)+'% to win them all</small></div>';
+  const hd=(c,h,sub)=>'<div class="cfpx-h" style="grid-column:'+c+'">'+h+'<span>'+sub+'</span></div>';
+  return '<div class="cfpx-hint">Swipe sideways to see the whole bracket ›</div><div class="cfpx-wrap"><div class="cfpx"><svg class="cfpx-lines" aria-hidden="true"></svg>'
+    +hd(1,'First round','Dec 18-19 · higher seed hosts')+hd(2,'Quarterfinals','Dec 30 - Jan 1 · Fiesta, Cotton, Rose, Peach')+hd(3,'Semifinals','Jan 14-15 · Orange, Sugar')+hd(4,'Championship','Mon, Jan 25 · Las Vegas')+hd(5,'Champion','if the favorites keep winning')
+    +[...r1,...q,...sf,fin].map(g=>g.html).join('')+champ+'</div></div><div class="mini" style="margin-top:8px">Each game shows the hub’s chance for each team. The favorite moves on, and the line it travels is in its colors (your team’s path in gold). Seeds 1-4 wait in the quarterfinals. The committee decides which bowl hosts which quarterfinal and semifinal, so those are left open.</div>'; }
+function cfpLines(){ const RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('#view .cfpx').forEach(box=>{ const draw=()=>{ const svg=box.querySelector('.cfpx-lines'); if(!svg||!box.isConnected) return; const B=box.getBoundingClientRect(), W=box.scrollWidth, H=box.scrollHeight; svg.setAttribute('width',W); svg.setAttribute('height',H); svg.setAttribute('viewBox','0 0 '+W+' '+H); let out='';
+      box.querySelectorAll('.cfpx-g[data-to]').forEach(g=>{ const [tid,slot]=g.dataset.to.split(':'); const t=document.getElementById(tid); if(!t) return; const a=g.getBoundingClientRect(), b=t.getBoundingClientRect(); const ar=(g.querySelector('.cfpx-t.w')||g).getBoundingClientRect(); const rows=t.querySelectorAll('.cfpx-t'); const tr=slot==='c'?b:(rows[slot==='a'?0:1]||t).getBoundingClientRect();
+        const x1=Math.round(a.right-B.left), y1=Math.round(ar.top+ar.height/2-B.top), x2=Math.round(b.left-B.left), y2=Math.round(tr.top+tr.height/2-B.top), xm=Math.round((x1+x2)/2), len=Math.abs(x2-x1)+Math.abs(y2-y1)+4, d=/r\d$/.test(g.id)?0:/q\d$/.test(g.id)?0.2:/s\d$/.test(g.id)?0.4:0.6;
+        out+='<path d="M'+x1+' '+y1+' H'+xm+' V'+y2+' H'+x2+'" stroke="'+(g.dataset.fav?'#E3B24A':g.dataset.c)+'"'+(g.dataset.fav?' class="fav"':'')+' style="--len:'+len+';--d:'+d+'s"/>'; });
+      svg.innerHTML=out; };
+    draw(); if(!box.dataset.drawn&&!RM){ box.dataset.drawn='1'; box.classList.add('draw'); setTimeout(()=>box.classList.remove('draw'),1600); }
+    if(window.ResizeObserver&&!box._ro){ let q=0; box._ro=new ResizeObserver(()=>{ if(!q) q=requestAnimationFrame(()=>{ q=0; draw(); }); }); box._ro.observe(box); } }); }
 function cfpMeCard(R, t){ if(!t) return ''; const x=R.by[t.name]; if(!x) return ''; const nm=esc(t.disp);
   const path = x.make<0.005 ? nm+' is a long shot in these simulations. It would take a run nobody is projecting yet.' : x.via>=0.6 ? 'Most of '+nm+'’s way in is winning the '+esc(t.conf)+': '+pct(x.via)+' of its playoff trips come as league champion.' : x.via<=0.25 ? nm+' mostly gets in as an at-large team, so the overall record matters more than the league title.' : 'It is a mix: '+pct(x.via)+' of '+nm+'’s playoff trips come as '+esc(t.conf)+' champion, the rest at-large.';
   const tot=x.byL.reduce((a,b)=>a+b,0)||1; const lrows=x.byL.map((c,k)=>({k,c,in:x.inL[k]})).filter(o=>o.c/tot>=0.01);
@@ -13753,7 +13812,7 @@ function renderCFP(){ setNav('playoff');
   const g6l=R.rows.filter(x=>x.g6>0).sort((a,b)=>b.g6-a.g6).slice(0,6);
   html+='<div class="sec"><h2>Conference races</h2><span class="muted">each league crowns its champion in a title game on Dec 4-5</span></div><div class="grid g3 cfp-races">'+cfpRaceCard('Group of 6 bid','top-ranked team from the other six leagues',g6l,'g6')+races.join('')+'</div>';
   html+='<div class="note" data-sim-ms="'+R.ms+'" style="margin-top:14px"><b>How this works.</b> Each simulation plays every remaining game with this page’s win probabilities, and lets each team’s strength drift a little (about '+num1(R.sig)+' points), since early-season ratings can be off. The top two in each league standings meet for the title (division winners in the Sun Belt). Then every team is ranked the way a committee roughly does it: its record against what a playoff-level team would expect from the same schedule, plus how good the team is. The 12 are picked under the 2026 rules and the bracket is played out, the first round on the higher seed’s field. Army-Navy is Dec 12, after Selection Day on Dec 6, so it does not count. '+R.unplayed+' games are left to play before then.</div>';
-  view.innerHTML=html; }
+  view.innerHTML=html; cfpLines(); }
 function cfpTile(t){ if(!t||t.level!=='FBS') return ''; if(!cfpReady()){ setTimeout(()=>{ const el=document.getElementById('cfp-tile'); if(!el||el.dataset.team!==t.name) return; cfpSim(); const e2=document.getElementById('cfp-tile'); if(e2&&e2.dataset.team===t.name) e2.outerHTML=cfpTile(t); }, 60); return '<a class="tile tile-link" id="cfp-tile" data-team="'+esc(t.name)+'" href="#/scenarios/'+enc(t.name)+'"><div class="lbl">Playoff odds</div><div class="val">…</div><div class="sub">simulating the season…</div></a>'; } const x=cfpSim().by[t.name]; if(!x) return ''; return '<a class="tile tile-link" id="cfp-tile" data-team="'+esc(t.name)+'" href="#/scenarios/'+enc(t.name)+'"><div class="lbl">Playoff odds</div><div class="val">'+(x.make<0.005&&x.make>0?'&lt;1%':Math.round(x.make*100)+'%')+'</div><div class="sub">'+(t.conf==='Ind'?'what has to happen ›':pct(x.champ)+' league title · scenarios ›')+'</div></a>'; }
 /* ---------- in-page section links ---------- */
 /* The team-page subnav points at sections inside the page. A bare "#s-sched" href reads as a route to the hash

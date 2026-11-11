@@ -77,6 +77,15 @@ header.top.jsh-tuck{pointer-events:none}
 body .jbl{transition:transform .28s ease,opacity .28s ease}
 @media (max-width:760px){html.jsh-bl-dn body .jbl{transform:translateY(calc(100% + 64px + env(safe-area-inset-bottom)))!important;opacity:0;pointer-events:none;z-index:50}}
 @media (prefers-reduced-motion:reduce){body .jbl{transition:opacity .2s}}
+/* a phone held sideways (2026-11-10, Jamo: "That top bar stays in the middle of the screen"): the screen is wide enough for
+   the desktop layout but only about 390 px tall, so the pinned header, the section tabs pinned under it and the ticker left
+   a thin strip of page. On short screens the section tabs, the Teams toolbar and the TV guide's time row scroll with the
+   page (as they do on a phone held upright), and the header and the ticker tuck away on the way down (scripts below). */
+@media (max-height:560px) and (min-width:721px){
+  :root .subnav,:root .tvhead{position:static}
+  :root .toolbar[style*="sticky"]{position:static!important}
+}
+@media (max-height:560px){html.jsh-bl-dn body .jbl{transform:translateY(calc(100% + 64px + env(safe-area-inset-bottom)))!important;opacity:0;pointer-events:none}}
 /* ticker tags at a readable size */
 body .jbl .lgt{font-size:10.5px}body .jbl .src{font-size:11px}body .jbl .jbl-sec{font-size:11px}
 /* 2026-11-06: sideways rows (day strips, tabs, wide tables, quick links) fade at the edge that has more to swipe; the
@@ -119,20 +128,20 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 </script>
 <script>
 /* phones (2026-10-21): tuck the hub's sticky header (sub-tabs + scores strip) away on scroll down, bring it back on scroll up */
-(function(){ var last = 0, h = null, mq = window.matchMedia('(max-width:760px)');
+(function(){ var last = 0, h = null, mq = window.matchMedia('(max-width:760px), (max-height:560px)');
   function hdr(){ if (!h || !h.isConnected) h = document.querySelector('header.top'); return h; }
   function off(e){ e.classList.remove('jsh-tuck'); e.style.transform = ''; }
   addEventListener('scroll', function(){ var e = hdr(); if (!e) return; var y = window.scrollY, d = y - last; last = y;
-    if (!mq.matches || y < 260 || e.contains(document.activeElement) || d < -4) { if (e.classList.contains('jsh-tuck')) off(e); return; }
+    if (!mq.matches || y < (window.innerHeight <= 560 ? 120 : 260) || e.contains(document.activeElement) || d < -4) { if (e.classList.contains('jsh-tuck')) off(e); return; }
     if (d > 6 && !e.classList.contains('jsh-tuck')) { var top = parseFloat(getComputedStyle(e).top) || 0; e.style.transform = 'translateY(' + (-(e.offsetHeight + top)) + 'px)'; e.classList.add('jsh-tuck'); } }, { passive: true });
   addEventListener('hashchange', function(){ var e = hdr(); if (e) off(e); });
 })();
 /* phones (2026-11-05): the BottomLine ticker hides on scroll down and returns on scroll up or at the end of the page */
-(function(){ var last = 0, R = document.documentElement, mq = window.matchMedia('(max-width:760px)');
+(function(){ var last = 0, R = document.documentElement, mq = window.matchMedia('(max-width:760px), (max-height:560px)');
   function show(){ R.classList.remove('jsh-bl-dn'); }
   addEventListener('scroll', function(){ var y = window.scrollY, d = y - last; last = y;
     var end = y + window.innerHeight >= document.documentElement.scrollHeight - 80;
-    if (!mq.matches || y < 200 || d < -4 || end) { if (R.classList.contains('jsh-bl-dn')) show(); return; }
+    if (!mq.matches || y < (window.innerHeight <= 560 ? 100 : 200) || d < -4 || end) { if (R.classList.contains('jsh-bl-dn')) show(); return; }
     if (d > 6) R.classList.add('jsh-bl-dn'); }, { passive: true });
   addEventListener('hashchange', show);
 })();

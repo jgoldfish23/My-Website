@@ -36,6 +36,21 @@ function slimEvent(e) {
     home: team(h),
   };
 }
+/* the hub's own win chance (2026-11-10): every scoring change as [period, seconds left in the period, away, home], and
+   where the game stands now as [period, seconds left], so the pages draw their own line (never ESPN's) */
+function clockSecs(c) { const s = String(c || "").trim(); let m = /^(\d+):(\d+(?:\.\d+)?)$/.exec(s); if (m) return +m[1] * 60 + +m[2]; m = /^(\d+(?:\.\d+)?)$/.exec(s); return m ? +m[1] : 0; }
+function scoreLine(list, isScore) {
+  const out = []; let la = -1, lh = -1;
+  (list || []).forEach((p) => {
+    if (isScore && !isScore(p)) return;
+    const a = +p.awayScore, h = +p.homeScore;
+    if (!isFinite(a) || !isFinite(h) || (a === la && h === lh)) return;
+    la = a; lh = h; out.push([(p.period && p.period.number) || 0, clockSecs(p.clock && p.clock.displayValue), a, h]);
+  });
+  return out;
+}
+function nowAt(st) { return [(st && st.period) || 0, clockSecs(st && st.displayClock)]; }
+
 function slimSummary(j) {
   const bs = j.boxscore || {};
   const line = {};
@@ -60,7 +75,7 @@ function slimSummary(j) {
     .map((p) => ({ x: p.text, c: p.clock && p.clock.displayValue || "", p: p.period && p.period.number || 0, s: p.scoringPlay ? 1 : 0, tm: p.team && p.team.id || "", as: p.awayScore, hs: p.homeScore }));
   const v = j.gameInfo && j.gameInfo.venue || {};
   const venue = v.fullName ? { n: v.fullName, c: [v.address && v.address.city, v.address && v.address.state].filter(Boolean).join(", ") } : null;
-  return { t: Date.now(), st: (st.type && st.type.name || "").replace("STATUS_", "").replace("FINAL_OT", "FINAL"), det: st.type && st.type.shortDetail || "", per: st.period || 0, clk: st.displayClock || "", teams, ls, ts, plays, venue };
+  return { t: Date.now(), tl: scoreLine(j.plays, (p) => p.scoringPlay), pc: nowAt(st), st: (st.type && st.type.name || "").replace("STATUS_", "").replace("FINAL_OT", "FINAL"), det: st.type && st.type.shortDetail || "", per: st.period || 0, clk: st.displayClock || "", teams, ls, ts, plays, venue };
 }
 // one team's roster for the team page (jersey, position, height, class, hometown, injuries); rosters change rarely
 function slimRoster(j) {

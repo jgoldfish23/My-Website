@@ -56,6 +56,21 @@ function slimEvent(e) {
   };
 }
 
+/* the hub's own win chance (2026-11-10): every scoring change as [period, seconds left in the period, away, home], and
+   where the game stands now as [period, seconds left], so the pages draw their own line (never ESPN's) */
+function clockSecs(c) { const s = String(c || "").trim(); let m = /^(\d+):(\d+(?:\.\d+)?)$/.exec(s); if (m) return +m[1] * 60 + +m[2]; m = /^(\d+(?:\.\d+)?)$/.exec(s); return m ? +m[1] : 0; }
+function scoreLine(list, isScore) {
+  const out = []; let la = -1, lh = -1;
+  (list || []).forEach((p) => {
+    if (isScore && !isScore(p)) return;
+    const a = +p.awayScore, h = +p.homeScore;
+    if (!isFinite(a) || !isFinite(h) || (a === la && h === lh)) return;
+    la = a; lh = h; out.push([(p.period && p.period.number) || 0, clockSecs(p.clock && p.clock.displayValue), a, h]);
+  });
+  return out;
+}
+function nowAt(st) { return [(st && st.period) || 0, clockSecs(st && st.displayClock)]; }
+
 function slimSummary(j) {
   const bs = j.boxscore || {};
   const teams = (bs.teams || []).map((t) => ({
@@ -90,6 +105,7 @@ function slimSummary(j) {
   const wp = j.winprobability || [];
   return {
     t: Date.now(),
+    tl: scoreLine(j.scoringPlays), pc: nowAt(st),
     st: (st.type && st.type.name || "").replace("STATUS_", ""),
     det: st.type && st.type.shortDetail || "",
     ls: (hdr.competitors || []).map((c) => ({ id: c.id, ha: c.homeAway, s: c.score, ls: (c.linescores || []).map((l) => l.displayValue) })),

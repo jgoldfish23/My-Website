@@ -248,6 +248,20 @@ a.sp-h:hover .sp-go{color:var(--c)}
 .ql{display:flex;gap:6px;padding:0 16px 12px;overflow-x:auto;scrollbar-width:none}
 .ql::-webkit-scrollbar{display:none}
 .ql a{flex:none;padding:6px 11px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line)}
+/* Rookie of the Year race on the NBA card (2026-11-10) */
+.roy-mini{display:block;margin:0 16px 14px;padding:10px 12px 6px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);color:inherit;text-decoration:none}
+.roy-mini .rm-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 8px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.roy-mini .rm-h span{font-size:11.5px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink-3)}
+.roy-mini .rm-r{display:grid;grid-template-columns:16px 24px minmax(0,1fr) auto;align-items:center;gap:8px;padding:7px 0;border-top:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.roy-mini .rm-h+.rm-r{border-top:0;margin-top:4px}
+.roy-mini .rm-k{font-weight:800;color:var(--ink-3);font-size:12.5px;text-align:center}
+.roy-mini .rm-r img{width:24px;height:24px;object-fit:contain}
+.roy-mini .rm-n{min-width:0;font-weight:700;font-size:14px;line-height:1.25}
+.roy-mini .rm-n small{font-weight:600;color:var(--ink-3);font-size:12px;margin-left:6px}
+.roy-mini .rm-n small.up{color:var(--good,#3ecf8e)}.roy-mini .rm-n small.dn{color:var(--bad,#ff6b6b)}
+.roy-mini .rm-v{text-align:right;font-variant-numeric:tabular-nums;font-weight:800;font-size:14px;line-height:1.2}
+.roy-mini .rm-v small{display:block;font-size:11px;font-weight:600;color:var(--ink-3)}
+.roy-mini:hover{border-color:color-mix(in srgb,var(--c,#888) 45%,var(--line))}
 .ql a:hover{color:var(--ink);border-color:color-mix(in srgb,var(--c) 60%,var(--line))}
 .sp-b{padding:2px 12px 12px}
 .sp-lab{margin:6px 4px 6px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
@@ -671,7 +685,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
 <script src="/sports/bl.js?v=20261101a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
-<script src="/sports/holo.js?v=20261027a" defer></script>
+<script src="/sports/holo.js?v=20261110a" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261027a" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
@@ -680,6 +694,10 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <script src="/sports/vibe.js?v=20261107a" defer></script>
 <!-- Touch: the phone tune-up on every page - bigger tap areas, nothing under 11 px, names not cut off (polish/touch.js, published by build.sh as /sports/touch.js) -->
 <script src="/sports/touch.js?v=20261109a" defer></script>
+<!-- App: smooth page changes, saved copies for weak signal (registers /sw.js) and pull down to refresh in the home-screen app (polish/app.js, published by build.sh as /sports/app.js) -->
+<script src="/sports/app.js?v=20261110a" defer></script>
+<!-- Explain: tap a dotted stat name for what it means; press and hold a column name that sorts (polish/explain.js, published by build.sh as /sports/explain.js) -->
+<script src="/sports/explain.js?v=20261110a" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -5549,7 +5567,21 @@ function sportsHTML(){
     + sportPanel('nba', 2, nbaPre ? 'Preseason · tips off ' + (nbaOpener ? md(nbaOpener) : '') : 'Regular season', [['Scoreboard', '#/scores'], ['TV guide', '#/tv'], ['Standings', '#/standings'], ['Predictor', '#/predict'], ['Trade Machine', '#/trade'], ['Mock draft', '#/draft/mock']], (nd === TODAY ? 'Today' : md(nd)) + ' · ' + NBA.filter(g => g.date === nd).length + ' games', nbaTop)
     + (() => { const cd = [...new Set(CBB.map(g => g.date))].sort(); const cn = cd.find(d => d >= TODAY) || cd[cd.length - 1]; const cnt = CBB.filter(g => g.date === cn).length;
       return sportPanel('cbb', 3, cn ? (cn === TODAY ? 'Today' : md(cn)) + ' · ' + cnt + ' game' + (cnt === 1 ? '' : 's') : 'College basketball', [['Scoreboard', '#/scores'], ['TV guide', '#/tv'], ['Rankings', '#/rankings'], ['Bracketology', '#/bracket'], ['NBA Draft', '#/draft']], '', []); })();
+  royMini();
 }
+/* Rookie of the Year race on the NBA card (2026-11-10, Jamo picked "Rookie race on home"): the top 3 from the NBA hub's
+   race (/nba/data/rookies.json, written by nba-hub/make_rookies.mjs), linking to the full page. Fetched once a visit. */
+let ROY = null, ROY_ASKED = false;
+function royMini(){ const p = document.querySelector('#sports .sp.nba'); if (!p || p.querySelector('.roy-mini')) return;
+  if (!ROY) { if (!ROY_ASKED) { ROY_ASKED = true; fetch('/nba/data/rookies.json').then(r => r.ok ? r.json() : null).then(j => { if (j && Array.isArray(j.p)) { ROY = j; royMini(); } }).catch(() => {}); } return; }
+  const k = ROY.k || [], iP = k.indexOf('pts'), iG = k.indexOf('gp');
+  const top = ROY.p.filter(x => x.rank).sort((a, b) => a.rank - b.rank).slice(0, 3); if (!top.length) return;
+  const row = x => { const gp = x.t && x.t[iG], ppg = gp ? x.t[iP] / gp : null;
+    const mv = x.wk && x.wk !== x.rank ? (x.wk > x.rank ? '<small class="up">▲' + (x.wk - x.rank) + '</small>' : '<small class="dn">▼' + (x.rank - x.wk) + '</small>') : '';
+    return '<div class="rm-r"><span class="rm-k">' + x.rank + '</span>' + logoImg(O.nba.logo(x.ab)) + '<span class="rm-n">' + esc(x.n) + '<small>' + esc(x.ab) + '</small>' + mv + '</span><span class="rm-v">' + (+x.score).toFixed(1) + (ppg != null ? '<small>' + ppg.toFixed(1) + ' ppg</small>' : '') + '</span></div>'; };
+  const a = document.createElement('a'); a.className = 'roy-mini'; a.href = '/nba/#/rookies';
+  a.innerHTML = '<div class="rm-h">Rookie of the Year race<span>rookie score · through ' + esc(md(ROY.through)) + '</span></div>' + top.map(row).join('');
+  p.appendChild(a); }
 
 /* ---------- draw, tick and poll ---------- */
 let LAST = 0, TIMER = null;

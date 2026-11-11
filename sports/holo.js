@@ -85,13 +85,14 @@
   + 'html.holo-on .nav.navg .ng-tab.cur::after{box-shadow:0 0 10px 1px color-mix(in srgb,' + A + ' 70%,transparent)}'
   + 'html.holo-on #view .subnav a.on{box-shadow:0 0 0 1px color-mix(in srgb,' + A + ' 30%,transparent),0 6px 18px -8px ' + A + '}'
   + 'html.holo-on main.wrap #chips .chip.on{box-shadow:0 0 0 1px rgba(255,255,255,.1),0 8px 22px -10px var(--c,' + A + ')}'
-  /* 7 page entrance: from 60% to full, 6 px, about 0.2 s; the hubs' own whole-page fade and the NBA rise give way to it */
-  + '@keyframes holoIn{from{opacity:.6;transform:translate3d(0,6px,0)}}'
+  /* 7 page entrance: from 60% to full, 6 px, about 0.2 s; the hubs' own whole-page fade and the NBA rise give way to it.
+     2026-11-10 (Jamo picked "Smooth page changes"): from clear to full and 10 px, 0.26 s, each block 30 ms after the one above */
+  + '@keyframes holoIn{from{opacity:0;transform:translate3d(0,10px,0)}}'
   + 'html.holo-on #view.in{animation:none}'
   + 'html.holo-on #view.enter :is(.grid>.tile,.gmlist>.gm,.thead.hero,.ghead.hero,.root-card){animation:none}'
   + '@media (prefers-reduced-motion:no-preference){'
-  +   'html.holo-on #view>:is(.holo-in,#holo-z){animation:holoIn .2s cubic-bezier(.2,.7,.2,1) backwards}'
-  +   'html.holo-on #view>:is(.holo-in,#holo-z).hi1{animation-delay:12ms}html.holo-on #view>:is(.holo-in,#holo-z).hi2{animation-delay:24ms}html.holo-on #view>:is(.holo-in,#holo-z).hi3{animation-delay:36ms}html.holo-on #view>:is(.holo-in,#holo-z).hi4{animation-delay:48ms}'
+  +   'html.holo-on #view>:is(.holo-in,#holo-z){animation:holoIn .26s cubic-bezier(.2,.7,.2,1) backwards}'
+  +   'html.holo-on #view>:is(.holo-in,#holo-z).hi1{animation-delay:30ms}html.holo-on #view>:is(.holo-in,#holo-z).hi2{animation-delay:60ms}html.holo-on #view>:is(.holo-in,#holo-z).hi3{animation-delay:90ms}html.holo-on #view>:is(.holo-in,#holo-z).hi4{animation-delay:120ms}'
   +   'html.holo-on .fd.anim .rise{animation:holoIn .2s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(min(var(--i,0),4) * 12ms)}'
   + '}'
   /* 8 desktop: a soft light under the mouse on tappable cards, in the card's background (behind the text) */
@@ -199,7 +200,7 @@
   /* ---------- 7 entrance on a real page change (never on a quiet live re-render of the same page) ---------- */
   function enter(v){ if (RM.matches) return; const kids = [].slice.call(v.children, 0, 8);
     kids.forEach((e, i) => e.classList.add('holo-in', 'hi' + Math.min(i, 4)));
-    setTimeout(() => kids.forEach((e, i) => e.classList.remove('holo-in', 'hi' + Math.min(i, 4))), 450); }
+    setTimeout(() => kids.forEach((e, i) => e.classList.remove('holo-in', 'hi' + Math.min(i, 4))), 600); }
 
   /* ---------- 11 count-up on headline stat tiles (CFB/NFL, desktop, fresh page view, tiles on screen only) ---------- */
   function countUp(v){ if (!(HUB === 'cfb' || HUB === 'nfl') || !FINE.matches || RM.matches || innerWidth < 761) return; const vh = innerHeight;

@@ -1,7 +1,8 @@
 {
+  "id": "/sports/",
   "name": "Jamo Sports Hub",
   "short_name": "Jamo Sports",
-  "description": "CFB, the NFL and the NBA in one place.",
+  "description": "College football, the NFL, the NBA and college basketball in one place.",
   "start_url": "/sports/",
   "scope": "/",
   "display": "standalone",
@@ -11,5 +12,11 @@
     { "src": "/sports/icons/jsh-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/sports/icons/jsh-512.png", "sizes": "512x512", "type": "image/png" },
     { "src": "/sports/icons/jsh.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "shortcuts": [
+    { "name": "College Football", "short_name": "CFB", "url": "/cfb/" },
+    { "name": "NFL", "short_name": "NFL", "url": "/nfl/" },
+    { "name": "NBA", "short_name": "NBA", "url": "/nba/" },
+    { "name": "College Basketball", "short_name": "CBB", "url": "/cbb/" }
   ]
 }

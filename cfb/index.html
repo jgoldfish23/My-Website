@@ -208,7 +208,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
 <script src="/sports/bl.js?v=20261101a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
-<script src="/sports/holo.js?v=20261027a" defer></script>
+<script src="/sports/holo.js?v=20261110a" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261027a" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
@@ -217,6 +217,10 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <script src="/sports/vibe.js?v=20261107a" defer></script>
 <!-- Touch: the phone tune-up on every page - bigger tap areas, nothing under 11 px, names not cut off (polish/touch.js, published by build.sh as /sports/touch.js) -->
 <script src="/sports/touch.js?v=20261109a" defer></script>
+<!-- App: smooth page changes, saved copies for weak signal (registers /sw.js) and pull down to refresh in the home-screen app (polish/app.js, published by build.sh as /sports/app.js) -->
+<script src="/sports/app.js?v=20261110a" defer></script>
+<!-- Explain: tap a dotted stat name for what it means; press and hold a column name that sorts (polish/explain.js, published by build.sh as /sports/explain.js) -->
+<script src="/sports/explain.js?v=20261110a" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -11732,8 +11736,9 @@ function run(){
   finally{ D.addEventListener=dA; W.addEventListener=wA; }
   var w=D.getElementById('jsh-wait'); if(w) w.remove(); }
 function go(){ Promise.all(wait).then(run, function(){ var w=document.getElementById('jsh-wait'); if(w) w.innerHTML='The latest numbers did not load. Check the connection, then <button type="button" onclick="location.reload()">Reload</button>'; }); }
-/* a quiet note in case the data takes a moment (first visit on a slow connection) */
-setTimeout(function(){ if(document.querySelector('script[type="text/x-jsh-app"]')&&!document.getElementById('jsh-wait')){ var d=document.createElement('div'); d.id='jsh-wait'; d.setAttribute('role','status'); d.style.cssText='margin:18vh auto;max-width:320px;text-align:center;font:600 14px/1.5 system-ui,sans-serif;color:#8f9aac'; d.textContent='Loading the latest numbers…'; var v=document.getElementById('view')||document.body; v.appendChild(d); } }, 600);
+/* a quiet note in case the data takes a moment (first visit on a slow connection); since 2026-11-10 (Jamo picked "Smooth
+   page changes") with soft loading shapes under it instead of blank space */
+setTimeout(function(){ if(document.querySelector('script[type="text/x-jsh-app"]')&&!document.getElementById('jsh-wait')){ var d=document.createElement('div'); d.id='jsh-wait'; d.setAttribute('role','status'); d.style.cssText='margin:10vh auto 0;max-width:560px;padding:0 16px;text-align:center;font:600 14px/1.5 system-ui,sans-serif;color:#8f9aac'; d.innerHTML='Loading the latest numbers…<style>@keyframes jshWaitS{from{background-position:120% 0}to{background-position:-120% 0}}#jsh-wait i{display:block;height:72px;margin-top:14px;border-radius:16px;background:linear-gradient(100deg,rgba(140,150,170,.07) 30%,rgba(140,150,170,.17) 50%,rgba(140,150,170,.07) 70%);background-size:220% 100%;animation:jshWaitS 1.3s linear infinite}#jsh-wait i+i{height:132px}@media (prefers-reduced-motion:reduce){#jsh-wait i{animation:none}}</style><i></i><i></i><i></i>'; var v=document.getElementById('view')||document.body; v.appendChild(d); } }, 600);
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();</script>
 

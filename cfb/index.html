@@ -3035,6 +3035,118 @@ a.sl-t:hover{border-color:var(--accent)}.sl-t.mine{border-color:color-mix(in srg
 #view .grid.g3.yp128-tiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 @media (max-width:560px){ #view .yp128-tiles .tile{padding:9px 10px} #view .yp128-tiles .sub{font-size:11px;line-height:1.3} }
 @media (max-width:560px){ .yp128-r{grid-template-columns:minmax(0,1fr) auto;gap:3px 10px} .yp128-bar,.yp128-s{grid-column:1 / -1} .yp128-s{white-space:normal} }
+/* ---- Build your own top 25, rebuilt 2026-11-10 (my rankings): saved-list chips, the editor card with its tabs,
+   finger-drag rows, ballot check, formula "why" bars, compare and history ---- */
+.my-new{display:flex;gap:8px;flex-wrap:wrap}
+.my-lists{display:flex;gap:8px;overflow-x:auto;margin:0 0 14px;padding-bottom:2px;scrollbar-width:none}
+.my-lists::-webkit-scrollbar{display:none}
+.my-li{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:8px 14px;min-height:44px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink-2);cursor:pointer;font:inherit;text-align:left}
+.my-li b{font-size:14px;color:var(--ink)}
+.my-li small{font-size:11.5px;color:var(--ink-3)}
+.my-li.on{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.my-hd{align-items:center}
+.my-hd #lname{font-family:var(--disp);font-size:22px;font-weight:600;flex:1 1 220px;min-width:0;width:auto;max-width:420px;height:auto;padding:4px 8px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--ink)}
+.my-hd #lname:hover,.my-hd #lname:focus{border-color:var(--line);background:var(--surface-2)}
+.my-hd-r{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.my-tabs{display:inline-flex;max-width:calc(100% - 28px);margin:0 14px 14px;overflow-x:auto;scrollbar-width:none}
+.my-tabs::-webkit-scrollbar{display:none}
+.my-tabs button{flex:0 0 auto;min-height:40px;white-space:nowrap}
+:root .my-tabs button{padding-left:18px;padding-right:18px}
+.my-n{display:inline-block;min-width:18px;padding:0 5px;margin-left:3px;border-radius:999px;background:var(--gold);color:#1a1300;font-style:normal;font-size:11.5px;font-weight:700;line-height:18px;text-align:center}
+.my-n.ok{background:none;color:var(--good);padding:0;min-width:0}
+.seg .on .my-n.ok{color:inherit}
+.my-k{margin:16px 0 6px;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.my-bd>.my-k:first-child{margin-top:0}
+.my-lead{margin-bottom:12px;max-width:80ch}
+.my-tools{margin-bottom:10px}
+.my-tools select{height:36px;max-width:100%}
+.my-add{flex:1 1 200px;min-width:160px;max-width:420px}
+.my-add input{width:100%}
+.my-add .search-res{left:0;right:auto;width:min(320px,100%)}
+.my-start{padding:14px;border:1px dashed var(--line);border-radius:var(--radius);background:var(--surface-2);margin-bottom:12px}
+.my-start .mini{margin:4px 0 10px}
+.my-chips{display:flex;flex-wrap:wrap;gap:8px}
+.my-chip{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);cursor:pointer;font:inherit;font-size:13.5px;font-weight:500}
+.my-chip img{width:20px;height:20px;object-fit:contain}
+.my-chip small{color:var(--ink-3);font-size:11.5px;font-weight:500}
+.my-chip b{color:var(--gold-text);font-size:16px;line-height:1}
+.my-chip.big{min-height:42px;padding:6px 16px}
+.my-chip.on{border-color:var(--gold);background:var(--gold-soft);color:var(--gold-text)}
+.my-rl{max-width:760px}
+.my-rl li{grid-template-columns:44px minmax(0,1fr) auto auto;gap:8px;padding:5px 8px 5px 6px;background:var(--surface);transition:transform .14s ease}
+.my-rl .rk{width:40px;height:40px;padding:0;border:0;border-radius:10px;background:none;cursor:pointer;font-size:19px;color:var(--ink-3)}
+.my-rl .rk:hover{background:var(--surface-2);color:var(--ink)}
+.my-num{width:44px;height:40px;padding:0;border:1px solid var(--gold);border-radius:10px;background:var(--surface-2);color:var(--ink);font:inherit;font-size:17px;font-weight:600;text-align:center;-moz-appearance:textfield;appearance:textfield}
+.my-num::-webkit-outer-spin-button,.my-num::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.my-team{display:flex;align-items:center;gap:10px;min-width:0}
+.my-lg{flex:none;width:28px;height:28px;object-fit:contain}
+.my-sw{border-radius:6px}
+.my-nm{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.my-nm b{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.my-nm small{font-size:12px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.my-mv{display:inline-block;margin-left:4px;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.my-mv.up{color:var(--good)}
+.my-mv.dn{color:var(--bad)}
+.my-mv.new{padding:1px 6px;border-radius:999px;background:var(--gold-soft);color:var(--gold-text);font-size:10.5px;letter-spacing:.04em}
+.my-rl .ops{align-items:center;gap:4px}
+.my-rl .ops button{width:34px;height:34px;border-radius:8px;font-size:14px}
+.my-rl .grip{display:grid;place-items:center;width:40px;height:40px;padding:0;border-radius:8px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;font-size:18px;letter-spacing:-2px;color:var(--ink-3)}
+.my-rl .grip:hover{background:var(--surface-2);color:var(--ink)}
+.my-rl li.drag{position:relative;z-index:5;opacity:1;transition:none;background:var(--surface-2);box-shadow:0 10px 28px rgba(0,0,0,.35),inset 0 0 0 1px var(--gold);border-radius:12px}
+.my-rl li.drag .grip{cursor:grabbing}
+.my-rl li.cut{border-bottom:2px solid var(--gold)}
+.my-rl li.bench .my-team,.my-rl li.bench .rk{opacity:.62}
+html.my-dragging,html.my-dragging body{user-select:none;-webkit-user-select:none}
+.my-tip{margin-top:8px}
+.my-sum{display:block;width:100%;max-width:760px;margin-top:14px;padding:11px 14px;border:1px solid var(--gold);border-radius:var(--radius);background:var(--gold-soft);color:var(--gold-text);font:inherit;font-size:14px;text-align:left;cursor:pointer}
+.my-sum.ok{border-color:var(--line);background:var(--surface-2);color:var(--ink-2)}
+.my-clean{padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2)}
+.my-clean b{color:var(--good);font-size:16px}
+.my-flags{display:flex;flex-direction:column;gap:8px;max-width:820px}
+.my-flag{display:flex;align-items:center;justify-content:space-between;gap:10px 12px;flex-wrap:wrap;padding:10px 12px;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:10px;background:var(--surface-2);font-size:14px;line-height:1.45}
+.my-flag>span{flex:1 1 260px;min-width:0}
+.my-flag .btn{flex:none;min-height:36px}
+.my-flag.off{border-left-color:var(--accent)}
+.my-flag.bad,.my-flag.short{border-left-color:var(--bad)}
+.my-sl{max-width:760px}
+.my-sl .slider{grid-template-columns:190px 1fr 30px;min-height:38px}
+.my-pd{margin:8px 0 0}
+.my-whyb{display:inline-flex;align-items:center;gap:5px;min-height:32px;padding:0 2px;border:0;background:none;color:inherit;font:inherit;cursor:pointer}
+.my-whyb i{font-style:normal;font-size:11px;color:var(--gold-text)}
+tr.my-open>td{border-bottom-color:transparent}
+.tbl tr.my-why>td{padding:0 12px 12px;white-space:normal;text-align:left}
+.my-whyx{position:sticky;left:12px;display:flex;flex-direction:column;gap:9px;padding:12px;border-radius:12px;background:var(--surface-2);max-width:min(640px,calc(100vw - 88px))}
+.my-bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;align-items:center}
+.my-bar .t{grid-column:1 / -1;display:flex;justify-content:space-between;gap:2px 10px;flex-wrap:wrap;font-size:13px}
+.my-bar .t span{color:var(--ink-2)}
+.my-bar .b{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.my-bar .b i{display:block;height:100%;border-radius:999px;background:var(--gold)}
+.my-bar .p{min-width:78px;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+.my-bar .p small{font-weight:500;color:var(--ink-3)}
+.my-tiles{margin-bottom:14px}
+.my-two{gap:8px 24px}
+.my-dl{display:flex;align-items:center;justify-content:space-between;gap:4px 8px;flex-wrap:wrap;padding:7px 0;border-bottom:1px solid var(--line-2);font-size:13.5px}
+.my-cmpn{margin-top:12px}
+.my-out{max-width:560px}
+@media (max-width:600px){
+  .my-new{width:100%}
+  .my-new .btn{flex:1;justify-content:center;min-height:42px}
+  .my-hd #lname{font-size:19px;flex-basis:100%;max-width:none}
+  .my-rl li{grid-template-columns:40px minmax(0,1fr) auto auto;gap:6px;padding:4px 4px 4px 2px}
+  .my-rl .ops button[data-op=up],.my-rl .ops button[data-op=down]{display:none}
+  .my-rl .ops button{width:38px;height:38px}
+  .my-rl .grip{width:42px;height:42px}
+  .my-lg{width:26px;height:26px}
+  .my-sl .slider{grid-template-columns:1fr 30px;gap:2px 10px}
+  .my-sl .slider label{grid-column:1 / -1}
+  .my-flag .btn{width:100%;justify-content:center}
+  .my-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .my-tabs{display:flex}
+  :root .my-tabs button{flex:1 0 auto;padding-left:6px;padding-right:6px;font-size:13px}
+  .my-ft th:nth-child(5),.my-ft tr:not(.my-why)>td:nth-child(5){display:none}
+}
+.my-gap{display:inline-block;min-width:22px;font-size:12px;font-weight:700;text-align:right}
+.my-ft tbody tr:not(.my-why){cursor:pointer}
 </style>
 
 <header class="top">
@@ -12710,22 +12822,259 @@ function renderTransfers(mode){ if(mode==='down'||mode==='up'||!portalYears().le
 function renderTransfersLevels(mode){ setNav('transfers'); mode=mode==='up'?'up':'down'; const back=backBar('#/teams'); const all=transferRows(); const down=all.filter(r=>r.dir==='down'), up=all.filter(r=>r.dir==='up'); const rows=(mode==='down'?down:up).slice().sort((a,b)=>(b.rt-a.rt)||(a.string-b.string)||a.team.disp.localeCompare(b.team.disp)); const p4n=down.filter(r=>r.p4).length; const byTeam={}; down.forEach(r=>{ byTeam[r.team.name]=(byTeam[r.team.name]||0)+1; }); const top=Object.entries(byTeam).sort((a,b)=>b[1]-a[1]); let html=back+'<div class="page-head"><div><div class="eyebrow">Transfers between levels</div><h1>'+(mode==='down'?'Down from FBS':'Up from FCS')+'</h1><div class="sub">'+(mode==='down'?'Players on FCS two-deeps who were at an FBS program last season, from 247Sports portal records and ESPN 2025 stat leaders. Power 4 (and Notre Dame) arrivals are highlighted.':'Players on FBS two-deeps who came up from the FCS: the names FBS staffs took from the level below.')+'</div></div></div>'; html+='<div class="toolbar"><div class="seg">'+(portalYears().length?'<a href="#/transfers">'+esc((RCLASS&&RCLASS.team)||'BYU')+' portal</a>':'')+'<a href="#/transfers/down" class="'+(mode==='down'?'on':'')+'">Down from FBS ('+down.length+')</a><a href="#/transfers/up" class="'+(mode==='up'?'on':'')+'">Up from FCS ('+up.length+')</a></div></div>'; if(mode==='down'){ html+='<div class="grid g4" style="margin-bottom:14px">'+tile('Former FBS players', String(down.length), 'on FCS two-deeps')+tile('From the Power 4', String(p4n), 'including Notre Dame')+tile('FCS teams with at least one', String(Object.keys(byTeam).length), 'of '+FCSD1.length)+tile('Most on one roster', top[0]?String(top[0][1]):'0', top[0]?T[top[0][0]].disp:'')+'</div>'; if(top.length) html+='<div class="mini" style="margin-bottom:12px">Deepest FBS pipelines: '+top.slice(0,8).map(x=>'<a href="#/team/'+enc(x[0])+'">'+esc(T[x[0]].disp)+'</a> ('+x[1]+')').join(' · ')+'</div>'; } html+='<div class="tblwrap"><table class="tbl"><thead><tr><th>Player</th><th>Pos</th><th>Now</th><th>From</th><th class="r">247</th><th>2026</th><th>2025</th><th class="c">String</th></tr></thead><tbody>'+rows.map(r=>'<tr class="click'+(mode==='down'&&r.p4?' hl':'')+'" data-href="#/team/'+enc(r.team.name)+'"><td><b>'+playerLink(r.team.name,r.pl.n)+'</b>'+(r.pl.cls?' <span class="dim">'+esc(r.pl.cls)+'</span>':'')+'</td><td>'+esc(r.pos)+'</td><td>'+chip(r.team.name,{norank:true})+'</td><td>'+chip(r.from.name,{short:true,norank:true})+' '+(mode==='down'?(r.p4?'<span class="pill gold">Power 4</span>':'<span class="pill acc">Group of 5</span>'):'<span class="pill line">'+esc(r.from.conf)+'</span>')+'</td><td class="r">'+(r.pl.rt?esc(String(r.pl.rt))+(r.pl.stars?' <span class="dim">'+'★'.repeat(Math.min(5,+r.pl.stars))+'</span>':''):'<span class="dim">—</span>')+'</td><td class="small">'+(function(){ const p=seasonProd(r.team.name, r.pl.n, r.pos); return p?'<b>'+esc(p)+'</b>':'<span class="dim">—</span>'; })()+'</td><td class="small">'+(r.pl.s25?esc(fmtStat(r.pl.s25)):'<span class="dim">—</span>')+'</td><td class="c">'+(r.string===0?'starter':'backup')+'</td></tr>').join('')+'</tbody></table></div>'; if(!rows.length) html+='<div class="note">Nothing found yet.</div>'; html+='<div class="mini" style="margin-top:10px">The 2026 column shows production so far this season, taken from the box scores, so an empty cell means he has not recorded a stat yet. FCS two-deeps are projected from rosters, 2025 production and 247 ratings; FBS two-deeps come from Ourlads. A player only appears here when his prior school is known.</div>'; view.innerHTML=html; }
 
 /* ---------- my rankings ---------- */
-const FACTORS=[['rating','Power rating',10],['record','Win-loss record',6],['sos','Schedule strength',4],['margin','Scoring margin',4],['polls','Poll consensus',5],['ats','Against the spread',0]];
-let MY = {lists:{}, active:null}; // lists: id -> {id,name,type:'manual'|'formula',teams:[],weights:{},updated}
+/* Build your own top 25, rebuilt 2026-11-10 (Jamo: "Enhance build your own top 25 in the cfb hub"; he picked: easier
+   on the phone, start from the committee, ballot check, smarter formula, your playoff bracket, you vs. the committee,
+   week-by-week history; not sharing).
+   - a list is {id,name,type:'manual'|'formula',teams:[],weights:{},updated,hist:{w<week>:{teams:[],at}}}. The open
+     list (MY.active) is the one team pages and the Rankings tab show. Every change saves by itself.
+   - hist keeps one ballot per hub week (CUR_WEEK), refreshed whenever the list is opened or changed that week; the
+     arrows and the History tab compare with the latest earlier week.
+   - formula items are scored by where a team stands among all FBS teams (ties share the middle), then weighted.
+   - the bracket uses the same 2026 rules as cfpTodayField, fed with your order. */
+const FACTORS=[['record','Win-loss record',6,'Results'],['sor','Strength of record',0,'Results'],['rw','Wins over ranked teams',0,'Results'],['margin','Scoring margin',4,'Results'],['form','Last four games',0,'Results'],
+  ['rating','Power rating',10,'Team strength'],['ypp','Yards per play (net)',0,'Team strength'],['sos','Schedule strength',4,'Team strength'],
+  ['cfp','Playoff committee',0,'Voters'],['polls','AP and Coaches polls',5,'Voters'],['ats','Against the spread',0,'Betting']];
+const MY_PRESETS=[
+  ['Balanced',{rating:10,record:6,sos:4,margin:4,polls:5},'A bit of everything: how good the team is, its record, its schedule and what the voters think.'],
+  ['Most deserving',{record:9,sor:10,rw:6,sos:3,margin:1,form:1},'Résumé first: what the record is worth and who it came against.'],
+  ['Best team',{rating:10,ypp:6,margin:5,sos:3,form:2},'Who would win on a neutral field, whatever the record says.'],
+  ['Committee style',{record:7,sor:8,rw:6,sos:5,rating:5,margin:2,form:2},'Record and résumé, with an eye on how good the team looks.'],
+  ['Hot right now',{form:10,margin:4,record:4,rating:4,ypp:2},'Who is playing the best football lately.']];
+let MY = {lists:{}, active:null}; // lists: id -> {id,name,type:'manual'|'formula',teams:[],weights:{},updated,hist:{}}
 let dbNS=null, dbUnsub=null;
+let MYTAB='build', MYCMP='', MYHW=0, MYF=null, MYWHY='';
 function loadLocal(){ try{ const raw=localStorage.getItem('sl-rankings'); if(raw){ const o=JSON.parse(raw); if(o&&o.lists) MY=o; } }catch(e){} }
 function saveLocal(){ try{ localStorage.setItem('sl-rankings', JSON.stringify(MY)); }catch(e){} }
 loadLocal();
 function uid(){ return 'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
-function formulaRank(weights){ const teams=FBS; const comp={}; const pctile=(arr,key)=>{ const sorted=arr.map(key).slice().sort((a,b)=>a-b); return v=>{ let i=0; while(i<sorted.length&&sorted[i]<=v) i++; return i/sorted.length; }; }; const st=teams.map(t=>{ const s=stats(t.name); const gp=s.gp; return {t, rating:t.rating, record: gp? (s.w+0.5)/(gp+1) : 0.5, sos: s.sosAll??-30, margin: s.margin??0, polls: t.apPts+t.coachesPts+t.apORV+t.coachesORV, ats: (s.ats.w+s.ats.l)? s.ats.w/(s.ats.w+s.ats.l) : 0.5}; }); const P={}; ['rating','record','sos','margin','polls','ats'].forEach(k=>{ P[k]=pctile(st,x=>x[k]); }); const tot=FACTORS.reduce((n,f)=>n+(+weights[f[0]]||0),0)||1; return st.map(x=>{ let sc=0; FACTORS.forEach(f=>{ sc += (+weights[f[0]]||0)*P[f[0]](x[f[0]]); }); return {name:x.t.name, score: sc/tot*100}; }).sort((a,b)=>b.score-a.score); }
-function listTeams(l){ if(!l) return []; if(l.type==='formula') return formulaRank(l.weights||{}).slice(0,25).map(x=>x.name); return (l.teams||[]).slice(0,25); }
+const myOrd=n=>n+(n%100>=11&&n%100<=13?'th':({1:'st',2:'nd',3:'rd'})[n%10]||'th');
+function myIds(){ return Object.keys(MY.lists).sort((a,b)=>String(MY.lists[a].name).localeCompare(String(MY.lists[b].name))||(a<b?-1:1)); }
+function myName(base){ const names=Object.values(MY.lists).map(x=>x.name); if(names.indexOf(base)<0) return base; let k=2; while(names.indexOf(base+' '+k)>=0) k++; return base+' '+k; }
+
+/* what each formula item is worth for every FBS team: the raw number, where it stands (0 to 1) and its rank */
+function formulaData(){ const key=cfpKey()+'|'+FBS.length+'|'+Object.keys(POLLS.CFP.ranks).length+'|'+Object.keys(POLLS.AP.ranks).length; if(MYF&&MYF.key===key) return MYF;
+  let sor={}, ypp={}; try{ sor=sorAll().by; }catch(e){} try{ ypp=yp128All(false).m; }catch(e){}
+  const rows=FBS.map(t=>{ const s=stats(t.name), gp=s.gp, so=sor[t.name], yp=ypp[t.name]; const last=s.played.slice(-4); let fm=0.5;
+    if(last.length) fm=last.reduce((a,g)=>{ const mg=g.home===t.name?g.hs-g.as:g.as-g.hs; return a+(mg>0?1:0)+Math.max(-28,Math.min(28,mg))/56; },0)/last.length;
+    return {t, v:{record:gp?(s.w+0.5)/(gp+1):0.5, sor:so&&so.n?-so.p+so.wa*1e-6:-2, rw:s.rw, margin:s.margin??0, form:fm, rating:t.rating, ypp:(yp&&yp.net!=null)?yp.net:-9, sos:s.sosAll??-30,
+      cfp:t.cfp?26-t.cfp:0, polls:(t.apPts||0)+(t.coachesPts||0)+(t.apORV||0)+(t.coachesORV||0), ats:(s.ats.w+s.ats.l)?s.ats.w/(s.ats.w+s.ats.l):0.5}}; });
+  const pc={}, rk={}, n=rows.length; FACTORS.forEach(f=>{ const k=f[0]; const vals=rows.map(r=>r.v[k]).sort((a,b)=>a-b); pc[k]={}; rk[k]={};
+    rows.forEach(r=>{ const v=r.v[k]; let lo=0, eq=0; for(const x of vals){ if(x<v) lo++; else if(x===v) eq++; else break; } pc[k][r.t.name]=(lo+eq/2)/n; rk[k][r.t.name]=n-lo-eq+1; }); });
+  return MYF={key, rows, pc, rk}; }
+function formulaRank(weights){ weights=weights||{}; const D=formulaData(); const tot=FACTORS.reduce((n,f)=>n+(+weights[f[0]]||0),0)||1;
+  return D.rows.map(r=>{ let sc=0; FACTORS.forEach(f=>{ sc+=(+weights[f[0]]||0)*D.pc[f[0]][r.t.name]; }); return {name:r.t.name, score:sc/tot*100}; }).sort((a,b)=>b.score-a.score||T[b.name].rating-T[a.name].rating); }
+function listTeams(l){ if(!l) return []; if(l.type==='formula') return formulaRank(l.weights||{}).slice(0,25).map(x=>x.name); return (l.teams||[]).filter(n=>T[n]).slice(0,25); }
 function myRankOf(name){ const l=MY.active&&MY.lists[MY.active]; if(!l) return null; const arr=listTeams(l); const i=arr.indexOf(name); return i<0?null:{rank:i+1,name:l.name}; }
-function renderMineRead(){ const ids=Object.keys(MY.lists); if(!ids.length) return '<div class="note">You have no saved rankings yet. <a href="#/my">Build one</a> — hand-pick a top 25 or set formula weights and let the page rank all '+FBS.length+' teams.</div>'; let html='<div class="grid g2">'; ids.sort((a,b)=>(MY.lists[b].updated||0)-(MY.lists[a].updated||0)).forEach(id=>{ const l=MY.lists[id]; const arr=listTeams(l); html+='<div class="card"><div class="hd"><h3>'+esc(l.name)+'</h3><span class="mini">'+(l.type==='formula'?'formula':'hand-picked')+(MY.active===id?' · <span class="pill gold">active</span>':'')+' · <a href="#/my/'+id+'">edit</a></span></div><div class="bd"><div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>Team</th><th>Record</th><th class="r">AP</th><th class="r">Δ vs AP</th></tr></thead><tbody>'+arr.map((n,i)=>{ const t=T[n]; if(!t) return ''; const d=t.apPoll?t.apPoll-(i+1):null; return '<tr class="click" data-href="#/team/'+enc(n)+'"><td class="rk num">'+(i+1)+'</td><td>'+chip(n,{norank:true})+'</td><td>'+recStr(n)+'</td><td class="r muted">'+(t.apPoll||'NR')+'</td><td class="r '+(d==null?'dim':d>0?'pos':d<0?'neg':'zero')+'">'+(d==null?'—':d>0?'+'+d:d)+'</td></tr>'; }).join('')+'</tbody></table></div></div></div>'; }); return html+'</div>'; }
-function renderMy(id){ setNav('my'); if(id && MY.lists[id]) MY.active=id; const l = MY.active && MY.lists[MY.active]; let html='<div class="toolbar"><div class="seg"><a href="#/my" class="on">Rankings</a><a href="#/my/bets">Bets</a></div></div><div class="page-head"><div><div class="eyebrow">My rankings</div><h1>Build your own top 25</h1><div class="sub">Two ways: hand-pick and order teams yourself, or set weights and let the page rank every FBS team by formula. Saved lists show up on the Rankings tab and on team pages.</div></div><div><button class="btn primary" id="new-manual">+ Hand-picked list</button> <button class="btn" id="new-formula">+ Formula ranking</button></div></div>'; html+='<div class="grid gside"><div id="editor">'; if(!l){ html+='<div class="note">Pick a saved ranking on the right, or start a new one above.</div>'; } else if(l.type==='formula'){ html+=formulaEditor(l); } else { html+=manualEditor(l); } html+='</div><div><div class="card"><div class="hd"><h3>Saved</h3><span class="mini" id="sync-state">'+(dbNS?'synced to your account':'saved in this browser')+'</span></div><div class="bd saved" id="saved">'+Object.keys(MY.lists).sort((a,b)=>(MY.lists[b].updated||0)-(MY.lists[a].updated||0)).map(x=>{ const s=MY.lists[x]; return '<button class="item '+(MY.active===x?'on':'')+'" data-id="'+x+'"><span><b>'+esc(s.name)+'</b><br><span class="t">'+(s.type==='formula'?'formula':'hand-picked · '+(s.teams||[]).length+' teams')+'</span></span><span class="t">'+(s.updated?new Date(s.updated).toLocaleDateString():'')+'</span></button>'; }).join('')+(Object.keys(MY.lists).length?'':'<div class="mini">Nothing saved yet.</div>')+'</div></div><div class="note" style="margin-top:12px"><b>Tip:</b> start a hand-picked list from the AP or power ratings, then drag teams where you think they belong.</div></div></div>'; view.innerHTML=html; $('#new-manual').onclick=()=>{ const id=uid(); MY.lists[id]={id,name:'My Top 25',type:'manual',teams:[],updated:Date.now()}; MY.active=id; persist(); renderMy(id); }; $('#new-formula').onclick=()=>{ const id=uid(); const w={}; FACTORS.forEach(f=>w[f[0]]=f[2]); MY.lists[id]={id,name:'My formula',type:'formula',weights:w,updated:Date.now()}; MY.active=id; persist(); renderMy(id); }; document.querySelectorAll('#saved .item').forEach(b=>b.onclick=()=>{ MY.active=b.dataset.id; saveLocal(); renderMy(); }); if(l) wireEditor(l); }
-function manualEditor(l){ const arr=l.teams||[]; let html='<div class="card"><div class="hd"><input type="text" id="lname" value="'+esc(l.name)+'" style="font-family:var(--disp);font-size:22px;font-weight:600;width:min(100%,360px)"><span><button class="btn sm" id="use-active">Set as active</button> <button class="btn sm danger" id="del">Delete</button></span></div><div class="bd"><div class="toolbar"><select id="seed"><option value="">Start from…</option><option value="ap">AP Top 25</option><option value="coaches">Coaches Poll</option></select><div class="search" style="flex:1;min-width:200px"><input id="addq" type="search" placeholder="Add a team…" style="width:100%"><div id="addres" class="search-res" hidden></div></div><button class="btn" id="clear">Clear</button></div>'; html+='<ol class="rlist" id="rlist">'+arr.map((n,i)=>'<li draggable="true" data-i="'+i+'"><span class="rk">'+(i+1)+'</span>'+chip(n,{nolink:true})+'<span class="ops"><span class="grip" title="Drag to reorder">⋮⋮</span><button data-op="up" title="Move up">↑</button><button data-op="down" title="Move down">↓</button><button data-op="x" title="Remove">✕</button></span></li>').join('')+'</ol>'+(arr.length?'':'<div class="mini" style="margin-top:8px">Empty. Pick a starting point or search for teams to add.</div>')+(arr.length>25?'<div class="mini" style="margin-top:8px">Only the first 25 count as your top 25; the rest are kept as a bench.</div>':'')+'<div style="margin-top:12px;display:flex;gap:8px;align-items:center"><button class="btn primary" id="save">Save list</button><span class="mini">'+arr.length+' teams</span></div></div></div>'; return html; }
-function formulaEditor(l){ const w=l.weights||{}; const ranked=formulaRank(w); let html='<div class="card"><div class="hd"><input type="text" id="lname" value="'+esc(l.name)+'" style="font-family:var(--disp);font-size:22px;font-weight:600;width:min(100%,360px)"><span><button class="btn sm" id="use-active">Set as active</button> <button class="btn sm danger" id="del">Delete</button></span></div><div class="bd"><div class="mini" style="margin-bottom:6px">Each factor is scored 0-100 by percentile across FBS, then weighted. Set a weight to 0 to ignore it.</div>'; FACTORS.forEach(f=>{ html+='<div class="slider"><label for="w-'+f[0]+'">'+f[1]+'</label><input type="range" id="w-'+f[0]+'" min="0" max="10" step="1" value="'+(w[f[0]]??f[2])+'"><span class="w" id="wv-'+f[0]+'">'+(w[f[0]]??f[2])+'</span></div>'; }); html+='<div style="margin:12px 0;display:flex;gap:8px"><button class="btn primary" id="save">Save formula</button></div><div class="tblwrap"><table class="tbl" id="ftbl"><thead><tr><th class="rk">#</th><th>Team</th><th>Record</th><th class="r">Score</th><th class="r">AP</th></tr></thead><tbody>'+formulaRows(ranked)+'</tbody></table></div></div></div>'; return html; }
-function formulaRows(ranked){ return ranked.slice(0,25).map((x,i)=>{ const t=T[x.name]; return '<tr class="click" data-href="#/team/'+enc(x.name)+'"><td class="rk num">'+(i+1)+'</td><td>'+chip(x.name,{norank:true})+'</td><td>'+recStr(x.name)+'</td><td class="r"><b>'+num1(x.score)+'</b></td><td class="r muted">'+(t.apPoll||'—')+'</td></tr>'; }).join(''); }
-function wireEditor(l){ const nameEl=$('#lname'); $('#use-active').onclick=()=>{ MY.active=l.id; persist(); toast('Active ranking: '+l.name); renderMy(); }; $('#del').onclick=()=>{ if(!confirm('Delete "'+l.name+'"?')) return; delete MY.lists[l.id]; if(MY.active===l.id) MY.active=Object.keys(MY.lists)[0]||null; persist({deleted:l.id}); renderMy(); }; if(l.type==='formula'){ FACTORS.forEach(f=>{ const inp=$('#w-'+f[0]); inp.oninput=()=>{ l.weights[f[0]]=+inp.value; $('#wv-'+f[0]).textContent=inp.value; $('#ftbl tbody').innerHTML=formulaRows(formulaRank(l.weights)); }; }); $('#save').onclick=()=>{ l.name=nameEl.value.trim()||'My formula'; l.updated=Date.now(); persist(); toast('Saved'); renderMy(); }; return; } const list=$('#rlist'); const rerender=()=>{ l.updated=Date.now(); saveLocal(); renderMy(); }; $('#seed').onchange=e=>{ const v=e.target.value; if(!v) return; let arr=[]; if(v==='ap') arr=Object.values(T).filter(t=>t.apPoll).sort((a,b)=>a.apPoll-b.apPoll||b.apPts-a.apPts).map(t=>t.name); if(v==='coaches') arr=Object.values(T).filter(t=>t.coaches).sort((a,b)=>a.coaches-b.coaches||b.coachesPts-a.coachesPts).map(t=>t.name); if(v==='power') arr=FBS.slice(0,25).map(t=>t.name); l.teams=arr.slice(0,25); rerender(); }; $('#clear').onclick=()=>{ l.teams=[]; rerender(); }; list.querySelectorAll('button[data-op]').forEach(b=>b.onclick=()=>{ const i=+b.closest('li').dataset.i; const op=b.dataset.op; if(op==='x') l.teams.splice(i,1); if(op==='up'&&i>0){ [l.teams[i-1],l.teams[i]]=[l.teams[i],l.teams[i-1]]; } if(op==='down'&&i<l.teams.length-1){ [l.teams[i+1],l.teams[i]]=[l.teams[i],l.teams[i+1]]; } rerender(); }); let dragI=null; list.querySelectorAll('li').forEach(li=>{ li.addEventListener('dragstart',e=>{ dragI=+li.dataset.i; li.classList.add('drag'); e.dataTransfer.effectAllowed='move'; }); li.addEventListener('dragend',()=>li.classList.remove('drag')); li.addEventListener('dragover',e=>{ e.preventDefault(); li.classList.add('over'); }); li.addEventListener('dragleave',()=>li.classList.remove('over')); li.addEventListener('drop',e=>{ e.preventDefault(); const to=+li.dataset.i; if(dragI==null||dragI===to) return; const [m]=l.teams.splice(dragI,1); l.teams.splice(to,0,m); rerender(); }); }); const q=$('#addq'), res=$('#addres'); q.oninput=()=>{ const v=q.value.trim().toLowerCase(); if(!v){ res.hidden=true; return; } const hits=Object.values(T).filter(t=>!l.teams.includes(t.name)&&(t.disp.toLowerCase().includes(v)||t.name.toLowerCase().includes(v)||(t.mascot||'').toLowerCase().includes(v))).slice(0,8); res.innerHTML=hits.map(t=>'<button data-n="'+esc(t.name)+'">'+chip(t.name,{nolink:true})+' <span class="mini">'+esc(t.conf)+'</span></button>').join('')||'<div class="mini" style="padding:8px">No match</div>'; res.hidden=false; res.querySelectorAll('button').forEach(b=>b.onclick=()=>{ l.teams.push(b.dataset.n); rerender(); }); }; q.onkeydown=e=>{ if(e.key==='Enter'){ const b=res.querySelector('button'); if(b) b.click(); } }; $('#save').onclick=()=>{ l.name=nameEl.value.trim()||'My Top 25'; l.updated=Date.now(); persist(); toast('Saved'); renderMy(); }; }
+/* a formula item in plain words for one team (the "Why" rows) */
+function myFText(k, n){ const t=T[n], s=stats(n);
+  if(k==='record') return recStr(n);
+  if(k==='sor'){ let r=null; try{ r=sorRank(n); }catch(e){} return r?myOrd(r)+' best résumé':'no games yet'; }
+  if(k==='rw') return s.rw+'-'+s.rl+' against ranked teams';
+  if(k==='margin') return s.margin==null?'no games yet':(s.margin>=0?'+':'')+num1(s.margin)+' points a game';
+  if(k==='form'){ const L=s.played.slice(-4); const w=L.filter(g=>(g.home===n?g.hs-g.as:g.as-g.hs)>0).length; return L.length?w+'-'+(L.length-w)+' in the last '+(L.length===4?'four':L.length):'no games yet'; }
+  if(k==='rating') return num1(t.rating);
+  if(k==='ypp'){ let y=null; try{ y=yp128All(false).m[n]; }catch(e){} return y&&y.net!=null?(y.net>=0?'+':'')+y.net.toFixed(2)+' yards a play':'no box scores yet'; }
+  if(k==='sos') return SOS_RANK[n]?myOrd(SOS_RANK[n])+' toughest schedule':'';
+  if(k==='cfp') return t.cfp?'No. '+t.cfp+' with the committee':'not ranked by the committee';
+  if(k==='polls') return 'AP '+(t.apPoll||'NR')+', Coaches '+(t.coaches||'NR');
+  if(k==='ats') return s.ats.w+'-'+s.ats.l+' against the spread';
+  return ''; }
+function myPresetOf(w){ w=w||{}; return MY_PRESETS.findIndex(p=>FACTORS.every(f=>(+w[f[0]]||0)===(p[1][f[0]]||0))); }
+
+/* the published rankings, and every FBS team in "best first" order for suggestions and for filling out a bracket */
+function pollOrder(k){ const f=k==='cfp'?'cfp':k==='ap'?'apPoll':'coaches'; return Object.values(T).filter(t=>t[f]).sort((a,b)=>a[f]-b[f]||b.rating-a.rating).map(t=>t.name).slice(0,25); }
+function myOrderAll(){ let so={}; try{ so=sorAll().by; }catch(e){} const r=n=>(so[n]&&so[n].rank)||999; return FBS.slice().sort((a,b)=>((a.cfp||99)-(b.cfp||99))||((a.apPoll||99)-(b.apPoll||99))||(r(a.name)-r(b.name))).map(t=>t.name); }
+
+/* one ballot per week */
+function myPrev(l){ const H=(l&&l.hist)||{}; const ws=Object.keys(H).map(k=>+k.slice(1)).filter(w=>w<CUR_WEEK&&H['w'+w]&&(H['w'+w].teams||[]).length).sort((a,b)=>b-a); return ws.length?{week:ws[0], teams:H['w'+ws[0]].teams}:null; }
+function mySnap(l){ if(!l) return; const arr=listTeams(l); if(!arr.length) return; l.hist=l.hist||{}; const k='w'+CUR_WEEK, c=l.hist[k]; if(c&&(c.teams||[]).join('|')===arr.join('|')) return; l.hist[k]={teams:arr, at:Date.now()}; saveLocal(); }
+function myMove(pv, n, i){ if(!pv||i>=25) return ''; const j=pv.teams.indexOf(n); if(j<0) return '<span class="my-mv new">NEW</span>'; const d=j-i; return d>0?'<span class="my-mv up">▲'+d+'</span>':d<0?'<span class="my-mv dn">▼'+(-d)+'</span>':''; }
+
+/* where to start a hand-picked list from */
+function mySeeds(l){ const S=[]; if(CFP_ON) S.push(['cfp','Playoff committee rankings','Polls']); S.push(['ap','AP Top 25','Polls'],['coaches','Coaches Poll','Polls']);
+  const pv=myPrev(l); if(pv) S.push(['last','My Week '+pv.week+' ballot','My lists']);
+  myIds().forEach(x=>{ const o=MY.lists[x]; if(o.id!==l.id&&listTeams(o).length) S.push(['l:'+o.id, o.name+(o.type==='formula'?' (formula)':''),'My lists']); });
+  MY_PRESETS.forEach((p,i)=>S.push(['p:'+i,p[0]+' formula','Formula styles'])); S.push(['sor','Strength of record','Formula styles']); return S; }
+function mySeedTeams(l, v){ if(v==='cfp'||v==='ap'||v==='coaches') return pollOrder(v); if(v==='last'){ const pv=myPrev(l); return pv?pv.teams.slice():[]; }
+  if(v.slice(0,2)==='l:') return listTeams(MY.lists[v.slice(2)]); if(v.slice(0,2)==='p:'){ const p=MY_PRESETS[+v.slice(2)]; return p?formulaRank(p[1]).slice(0,25).map(x=>x.name):[]; }
+  if(v==='sor'){ try{ return sorAll().order.slice(0,25); }catch(e){ return []; } } return []; }
+
+/* ballot check: spots where the list goes against the results */
+function myH2H(a,b){ let aw=0,bw=0,lb=null; (teamGames[a]||[]).forEach(g=>{ if(!g.played) return; if((g.home===a?g.away:g.home)!==b) return; const am=g.home===a?g.hs-g.as:g.as-g.hs; if(am>0) aw++; else { bw++; lb=g; } }); return {aw,bw,lb}; }
+function myFlags(l){ const arr=listTeams(l), F=[], man=l.type!=='formula'; if(!arr.length) return F; const nm=n=>'<b>'+esc(tshort(n))+'</b>';
+  if(man&&arr.length<25) F.push({k:'short', html:'Your list has '+arr.length+' team'+(arr.length===1?'':'s')+'. Add '+(25-arr.length)+' more to fill out the Top 25.'});
+  for(let i=0;i<arr.length;i++) for(let j=i+1;j<arr.length;j++){ const a=arr[i], b=arr[j], h=myH2H(a,b); if(h.bw>h.aw&&h.lb){ const g=h.lb;
+    F.push({k:'h2h', html:nm(b)+' beat '+nm(a)+' '+Math.max(g.hs,g.as)+'-'+Math.min(g.hs,g.as)+' on '+fmtDate(g.date,false)+', but you have '+esc(tshort(a))+' at No. '+(i+1)+' and '+esc(tshort(b))+' at No. '+(j+1)+'.', act:man?{op:'above', a:b, b:a, label:'Move '+tshort(b)+' above '+tshort(a)}:null}); } }
+  const L=[]; for(let i=0;i<arr.length;i++){ const a=arr[i], sa=stats(a); let best=null; if(!SOS_RANK[a]) continue;
+    for(let j=i+1;j<arr.length;j++){ const b=arr[j], sb=stats(b), d=sa.l-sb.l; if(d>=2&&SOS_RANK[b]&&sb.gp>=sa.gp-1&&SOS_RANK[b]<=SOS_RANK[a]+15&&!myH2H(a,b).aw&&(!best||d>best.d)) best={a,b,i,j,d}; }
+    if(best) L.push(best); }
+  const used={}; L.sort((x,y)=>y.d-x.d||x.i-y.i).filter(x=>{ if(used[x.b]) return false; used[x.b]=1; return true; }).slice(0,4).forEach(x=>{
+    F.push({k:'loss', html:nm(x.a)+' (No. '+(x.i+1)+', '+recStr(x.a)+') is ahead of '+nm(x.b)+' (No. '+(x.j+1)+', '+recStr(x.b)+'). '+esc(tshort(x.b))+' has '+x.d+' fewer losses, and its schedule ranks '+myOrd(SOS_RANK[x.b])+' toughest to '+esc(tshort(x.a))+'’s '+myOrd(SOS_RANK[x.a])+'.'}); });
+  if(arr.length>=25){ const f=CFP_ON?'cfp':'apPoll', who=CFP_ON?'The committee has ':'The AP poll has '; const offL=pollOrder(CFP_ON?'cfp':'ap').filter(n=>arr.indexOf(n)<0);
+    offL.forEach(n=>{ F.push({k:'off', html:who+nm(n)+' at No. '+T[n][f]+' ('+recStr(n)+'). It is not in your Top 25.', act:man?{op:'add', a:n, label:'Add '+tshort(n)}:null}); });
+    FBS.forEach(t=>{ const s=stats(t.name); if(s.gp>=7&&s.l<=1&&arr.indexOf(t.name)<0&&offL.indexOf(t.name)<0) F.push({k:'off', html:nm(t.name)+' is '+recStr(t.name)+' and not in your Top 25.', act:man?{op:'add', a:t.name, label:'Add '+tshort(t.name)}:null}); }); }
+  arr.forEach((n,i)=>{ const s=stats(n); if(s.gp>=4&&s.w<=s.l) F.push({k:'bad', html:nm(n)+' is No. '+(i+1)+' on your list with a '+recStr(n)+' record.'}); });
+  return F; }
+
+/* your order run through the 2026 playoff rules (see cfpTodayField). A league with nobody on the list still sends its
+   champion, so its best team in the polls stands in at the back of the line. */
+function myField(arr){ const top=arr.slice(0,25), on={}; top.forEach(n=>on[n]=1); const ranked=top.map((n,i)=>({t:T[n], r:i+1}));
+  myOrderAll().forEach((n,k)=>{ if(!on[n]) ranked.push({t:T[n], r:26+k, off:true}); }); const pick=new Map(), why={};
+  CFP_P4.forEach(c=>{ const x=ranked.find(y=>y.t.conf===c); if(x){ pick.set(x.t.name,x); why[x.t.name]=x.off?'top '+c+' team in the polls (none on your list)':'your highest-ranked '+c+' team'; } });
+  const g=ranked.find(y=>CFP_G6.indexOf(y.t.conf)>=0&&!pick.has(y.t.name)); if(g){ pick.set(g.t.name,g); why[g.t.name]=g.off?'top Group of 6 team in the polls (none on your list)':'your highest-ranked Group of 6 team'; }
+  const nd=ranked.find(y=>y.t.name==='Notre Dame'); if(nd&&nd.r<=12&&!pick.has(nd.t.name)){ pick.set(nd.t.name,nd); why[nd.t.name]='Notre Dame, in your top 12'; }
+  for(const y of ranked){ if(pick.size>=12) break; if(!pick.has(y.t.name)){ pick.set(y.t.name,y); why[y.t.name]='at-large'; } }
+  const F=[...pick.values()].sort((a,b)=>a.r-b.r).map((x,i)=>({t:x.t, seed:i+1, rk:x.off?null:x.r, why:why[x.t.name]}));
+  return {F, out:ranked.filter(y=>!y.off&&!pick.has(y.t.name)).slice(0,4)}; }
+
+/* ---- the page ---- */
+function myCell(n){ const t=T[n]; if(!t) return esc(n); const lg=logoOf(t);
+  return (lg?'<img class="my-lg" src="'+lg.icon+'" alt="" loading="lazy">':'<span class="my-lg my-sw" style="background:'+uiColor(t)+'"></span>')+'<span class="my-nm"><b>'+esc(t.disp)+'</b><small>'+recStr(n)+(t.cfp?' · CFP '+t.cfp:'')+(t.apPoll?' · AP '+t.apPoll:'')+'</small></span>'; }
+function renderMineRead(){ const ids=myIds(); if(!ids.length) return '<div class="note">You have no saved rankings yet. <a href="#/my">Build one</a>: hand-pick a top 25, or set a formula and let the page rank all '+FBS.length+' teams.</div>';
+  const f=CFP_ON?'cfp':'apPoll', nm=CFP_ON?'CFP':'AP'; let html='<div class="grid g2">';
+  ids.forEach(id=>{ const l=MY.lists[id]; const arr=listTeams(l); html+='<div class="card"><div class="hd"><h3>'+esc(l.name)+'</h3><span class="mini">'+(l.type==='formula'?'formula':'hand-picked')+(MY.active===id?' · <span class="pill gold">on team pages</span>':'')+' · <a href="#/my/'+id+'">edit</a></span></div><div class="bd"><div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>Team</th><th>Record</th><th class="r">'+nm+'</th><th class="r">Gap</th></tr></thead><tbody>'
+    +arr.map((n,i)=>{ const t=T[n]; if(!t) return ''; const d=t[f]?t[f]-(i+1):null; return '<tr class="click" data-href="#/team/'+enc(n)+'"><td class="rk num">'+(i+1)+'</td><td>'+chip(n,{norank:true})+'</td><td>'+recStr(n)+'</td><td class="r muted">'+(t[f]||'NR')+'</td><td class="r '+(d==null?'dim':d>0?'pos':d<0?'neg':'zero')+'">'+(d==null?'—':d>0?'+'+d:d)+'</td></tr>'; }).join('')+'</tbody></table></div></div></div>'; });
+  return html+'</div>'; }
+function renderMy(id){ setNav('my'); if(id&&MY.lists[id]) MY.active=id; if(MY.active&&!MY.lists[MY.active]) MY.active=null;
+  if(!MY.active){ const r=Object.keys(MY.lists).sort((a,b)=>(MY.lists[b].updated||0)-(MY.lists[a].updated||0)); if(r.length) MY.active=r[0]; }
+  const l=MY.active&&MY.lists[MY.active]; if(l){ if(l.type!=='formula') l.teams=(l.teams||[]).filter((n,i,a)=>T[n]&&a.indexOf(n)===i); else l.weights=l.weights||{}; mySnap(l); }
+  const ids=myIds();
+  let html='<div class="toolbar"><div class="seg"><a href="#/my" class="on">Rankings</a><a href="#/my/bets">Bets</a></div></div>'
+    +'<div class="page-head"><div><div class="eyebrow">My rankings</div><h1>Build your own top 25</h1><div class="sub">Rank the teams by hand, or set a formula and let the hub rank all '+FBS.length+'. Then check your ballot, see the playoff bracket it makes, and stack it up against the committee.</div></div><div class="my-new"><button class="btn primary" id="new-manual">+ Hand-picked list</button> <button class="btn" id="new-formula">+ Formula ranking</button></div></div>';
+  if(ids.length>1) html+='<div class="my-lists" aria-label="Your saved rankings">'+ids.map(x=>{ const s=MY.lists[x]; return '<button class="my-li'+(MY.active===x?' on':'')+'" data-id="'+x+'"'+(MY.active===x?' aria-current="true"':'')+'><b>'+esc(s.name)+'</b><small>'+(s.type==='formula'?'formula':'hand-picked')+'</small></button>'; }).join('')+'</div>';
+  if(!l){ html+='<div class="note">Start with a hand-picked list (you place every team) or a formula ranking (you set what matters and the hub does the ranking). Keep as many as you like.</div>'; view.innerHTML=html; myWireTop(); return; }
+  const flags=myFlags(l); const tabs=[['build',l.type==='formula'?'Formula':'Build'],['check','Check'],['bracket','Bracket'],['compare','Compare'],['history','History']]; if(!tabs.some(t=>t[0]===MYTAB)) MYTAB='build';
+  html+='<div class="card my-ed jsh-noswipe"><div class="hd my-hd"><input type="text" id="lname" value="'+esc(l.name)+'" aria-label="Name of this ranking" maxlength="40"><span class="my-hd-r"><span class="mini" id="sync-state">'+(dbNS?'synced to your account':'saves by itself · shows on team pages')+'</span><button class="btn sm danger" id="del">Delete</button></span></div>'
+    +'<div class="seg my-tabs" role="tablist">'+tabs.map(t=>'<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(MYTAB===t[0]?'true':'false')+'" class="'+(MYTAB===t[0]?'on':'')+'">'+t[1]+(t[0]==='check'?(flags.length?' <i class="my-n">'+flags.length+'</i>':' <i class="my-n ok">✓</i>'):'')+'</button>').join('')+'</div><div class="bd my-bd" id="my-bd">'
+    +(MYTAB==='check'?myCheckHTML(l,flags):MYTAB==='bracket'?myBracketHTML(l):MYTAB==='compare'?myCompareHTML(l):MYTAB==='history'?myHistoryHTML(l):(l.type==='formula'?myFormulaHTML(l):myBuildHTML(l,flags)))+'</div></div>';
+  view.innerHTML=html; myWireTop(); myWire(l); if(MYTAB==='bracket'){ try{ cfpLines(); }catch(e){} } }
+
+function myBuildHTML(l, flags){ const arr=l.teams||[]; const seeds=mySeeds(l); let grp='', opt='<option value="">Start from…</option>';
+  seeds.forEach(s=>{ if(s[2]!==grp){ if(grp) opt+='</optgroup>'; grp=s[2]; opt+='<optgroup label="'+esc(grp)+'">'; } opt+='<option value="'+esc(s[0])+'">'+esc(s[1])+'</option>'; }); if(grp) opt+='</optgroup>';
+  let html='<div class="toolbar my-tools"><select id="seed" aria-label="Start from a ranking">'+opt+'</select><div class="search my-add"><input id="addq" type="search" placeholder="Add a team…" autocomplete="off" aria-label="Add a team"><div id="addres" class="search-res" hidden></div></div>'+(arr.length?'<button class="btn" id="clear">Clear</button>':'')+'</div>';
+  if(!arr.length){ const st=seeds.filter(s=>s[2]==='Polls'||s[0]==='last'||s[0]==='p:1'||s[0]==='p:2'); html+='<div class="my-start"><b>Where do you want to start?</b><div class="mini">Pick a ranking to start from, then move teams where you think they belong. Or search for teams above and build it one at a time.</div><div class="my-chips">'+st.map(s=>'<button class="my-chip big" data-seed="'+esc(s[0])+'">'+esc(s[1])+'</button>').join('')+'</div></div>'; }
+  const pv=myPrev(l);
+  html+='<ol class="rlist my-rl jsh-nopull" id="rlist">'+arr.map((n,i)=>'<li data-i="'+i+'" class="'+(i===24&&arr.length>25?'cut':'')+(i>=25?' bench':'')+'"><button class="rk" data-op="num" title="Tap to move this team to another spot" aria-label="No. '+(i+1)+'. Tap to move to another spot">'+(i+1)+'</button><span class="my-team">'+myCell(n)+'</span><span class="my-mvc">'+myMove(pv,n,i)+'</span><span class="ops"><button data-op="up" title="Move up" aria-label="Move up">↑</button><button data-op="down" title="Move down" aria-label="Move down">↓</button><button data-op="x" title="Remove" aria-label="Remove '+esc(tshort(n))+'">✕</button><span class="grip" title="Drag to reorder" aria-hidden="true">⋮⋮</span></span></li>').join('')+'</ol>';
+  if(arr.length) html+='<div class="mini my-tip">Drag the dots to move a team, or tap its number and type the spot you want.'+(pv?' Arrows show the move from your Week '+pv.week+' ballot.':'')+(arr.length>25?' Teams below the gold line are your bench.':'')+'</div>';
+  const sug=myOrderAll().filter(n=>arr.indexOf(n)<0).slice(0,8);
+  if(sug.length) html+='<div class="my-sug"><div class="my-k">Best teams not on your list</div><div class="my-chips">'+sug.map(n=>{ const t=T[n], lg=logoOf(t); return '<button class="my-chip" data-add="'+esc(n)+'" aria-label="Add '+esc(t.disp)+'">'+(lg?'<img src="'+lg.icon+'" alt="" loading="lazy">':'')+'<span>'+esc(tshort(n))+' <small>'+recStr(n)+(t.cfp?' · CFP '+t.cfp:t.apPoll?' · AP '+t.apPoll:'')+'</small></span><b>+</b></button>'; }).join('')+'</div></div>';
+  if(arr.length) html+='<button class="my-sum'+(flags.length?'':' ok')+'" data-goto="check">'+(flags.length?'<b>Ballot check:</b> '+flags.length+' thing'+(flags.length===1?'':'s')+' worth a second look ›':'<b>Ballot check:</b> nothing to flag ✓')+'</button>';
+  return html; }
+
+function myCheckHTML(l, flags){ const man=l.type!=='formula'; if(!listTeams(l).length) return '<div class="note">Add some teams first, then come back for the check.</div>';
+  if(!flags.length) return '<div class="my-clean"><b>✓ Nothing to flag</b><div class="mini">No team sits above one that beat it, the records line up, and nobody the '+(CFP_ON?'committee':'AP poll')+' ranks is missing.</div></div>';
+  const G=[['short','Fill it out'],['h2h','Head to head'],['loss','Records'],['off','Left off your list'],['bad','Worth a look']];
+  let html='<div class="mini my-lead">These are not mistakes, just spots where your ballot goes against the results. '+(man?'Fix one with a tap, or leave it if you meant it.':'A formula list can’t be moved by hand: change the sliders, or start a hand-picked list from this one.')+'</div>';
+  G.forEach(g=>{ const L=flags.filter(f=>f.k===g[0]); if(!L.length) return; html+='<div class="my-k">'+g[1]+'</div><div class="my-flags">'+L.map(f=>'<div class="my-flag '+f.k+'"><span>'+f.html+'</span>'+(f.act?'<button class="btn sm" data-act="'+f.act.op+'" data-a="'+esc(f.act.a)+'"'+(f.act.b?' data-b="'+esc(f.act.b)+'"':'')+'>'+esc(f.act.label)+'</button>':'')+'</div>').join('')+'</div>'; });
+  return html; }
+
+function myBracketHTML(l){ const arr=listTeams(l); if(arr.length<12) return '<div class="note">Rank at least 12 teams to see your bracket. You have '+arr.length+' so far.</div>';
+  const D=myField(arr); let cmp='';
+  try{ const C=cfpTodayField(); if(C.F.length>=12){ const who=C.cfp?'the committee':'the AP poll'; const mine=D.F.map(x=>x.t.name), theirs=C.F.map(x=>x.t.name); const a=mine.filter(n=>theirs.indexOf(n)<0), b=theirs.filter(n=>mine.indexOf(n)<0);
+    cmp='<div class="note my-cmpn">'+(a.length?'<b>In your field, not '+who+'’s:</b> '+a.map(n=>esc(tshort(n))).join(', ')+'. <b>In theirs, not yours:</b> '+b.map(n=>esc(tshort(n))).join(', ')+'.':'<b>Your 12 teams are the same 12 '+who+' has in today.</b>')+' Your No. 1 seed is '+esc(tshort(mine[0]))+(mine[0]===theirs[0]?', same as theirs.':'; theirs is '+esc(tshort(theirs[0]))+'.')+'</div>'; } }catch(e){}
+  const rows=D.F.map(x=>'<tr><td class="rk num">'+x.seed+'</td><td>'+chip(x.t.name,{norank:true})+'</td><td class="num">'+recStr(x.t.name)+'</td><td class="num">'+(x.rk?'No. '+x.rk:'—')+'</td><td class="muted">'+esc(x.why)+(x.seed<=4?' · first-round bye':'')+'</td></tr>').join('');
+  return '<div class="mini my-lead">Your Top 25 run through the real 2026 rules: your top team from the SEC, Big Ten, Big 12 and ACC is in, so is your top Group of 6 team, Notre Dame is in if you have it in your top 12, and your next-highest teams fill out the 12. Seeds follow your order.</div>'
+    +cfpBracketHTML(D.F)+cmp
+    +'<div class="tblwrap" style="margin-top:14px"><table class="tbl"><thead><tr><th class="rk">Seed</th><th>Team</th><th class="num">Record</th><th class="num">Yours</th><th>How it gets in</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    +'<div class="my-k">Your first four out</div>'+(D.out.length?'<div class="my-out">'+D.out.map(y=>'<div class="my-dl">'+chip(y.t.name,{norank:true})+'<span class="dim">No. '+y.r+' on your list · '+recStr(y.t.name)+'</span></div>').join('')+'</div>':'<div class="mini">Nobody else is on your list.</div>'); }
+
+function myCompareHTML(l){ const opts=[]; if(CFP_ON) opts.push(['cfp','Committee','the committee']); opts.push(['ap','AP poll','the AP poll'],['coaches','Coaches','the coaches']); if(!opts.some(o=>o[0]===MYCMP)) MYCMP=opts[0][0];
+  const O=opts.find(o=>o[0]===MYCMP), who=O[2], f=MYCMP==='cfp'?'cfp':MYCMP==='ap'?'apPoll':'coaches';
+  const seg='<div class="toolbar"><div class="seg">'+opts.map(o=>'<button data-cmp="'+o[0]+'" class="'+(o[0]===MYCMP?'on':'')+'">'+o[1]+'</button>').join('')+'</div></div>';
+  const mine=listTeams(l), theirs=pollOrder(MYCMP); if(!mine.length) return seg+'<div class="note">Add some teams first.</div>'; if(!theirs.length) return seg+'<div class="note">That ranking is not out yet.</div>';
+  const mp={}, tp={}; mine.forEach((n,i)=>mp[n]=i+1); theirs.forEach(n=>tp[n]=T[n][f]);
+  let tot=0, common=0, same=0, gap=0; const D=mine.concat(theirs.filter(n=>!mp[n])).map(n=>{ const a=mp[n]||26, b=tp[n]||26; tot+=Math.abs(a-b); if(mp[n]&&tp[n]){ common++; gap+=Math.abs(a-b); if(a===b) same++; } return {n, a:mp[n]||0, b:tp[n]||0, d:b-a}; });
+  const score=Math.max(0,Math.round(100*(1-tot/650)));
+  const hi=D.filter(x=>x.a&&x.d>0).sort((x,y)=>y.d-x.d).slice(0,5), lo=D.filter(x=>x.d<0).sort((x,y)=>x.d-y.d).slice(0,5);
+  const line=x=>'<div class="my-dl">'+chip(x.n,{norank:true})+'<span class="dim">'+(x.a?'you No. '+x.a:'not on yours')+' · '+(x.b?who+' No. '+x.b:'not ranked by '+who)+'</span></div>';
+  const at={}; theirs.forEach(n=>{ if(!at[tp[n]]) at[tp[n]]=n; });
+  const rows=mine.map((n,i)=>{ const b=tp[n], d=b?b-(i+1):null, o=at[i+1]; return '<tr><td class="rk num">'+(i+1)+'</td><td>'+chip(n,{norank:true})+'</td><td class="num">'+(b?'No. '+b+' <span class="my-gap '+(d>0?'pos':d<0?'neg':'dim')+'">'+(d>0?'+'+d:d<0?d:'=')+'</span>':'<span class="dim">NR</span>')+'</td><td class="muted">'+(o?(o===n?'<span class="dim">same team</span>':chip(o,{norank:true,short:true})):'—')+'</td></tr>'; }).join('');
+  const only=theirs.filter(n=>!mp[n]);
+  return seg+'<div class="grid g4 my-tiles">'+tile('Agreement',score+' / 100','with '+who+(mine.length<25?' · fill out all 25 for a fair score':''))+tile('Teams in common',common+' of '+Math.min(25,theirs.length),'on both lists')+tile('Same exact spot',String(same),same===1?'team':'teams')+tile('Average gap',common?num1(gap/common)+' spots':'—','for teams you both ranked')+'</div>'
+    +'<div class="grid g2 my-two"><div><div class="my-k">You are higher on</div>'+(hi.length?hi.map(line).join(''):'<div class="mini">Nobody.</div>')+'</div><div><div class="my-k">You are lower on</div>'+(lo.length?lo.map(line).join(''):'<div class="mini">Nobody.</div>')+'</div></div>'
+    +'<div class="tblwrap" style="margin-top:14px"><table class="tbl"><thead><tr><th class="rk">#</th><th>Your pick</th><th class="num">'+esc(O[1])+'</th><th>Their pick here</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    +'<div class="mini" style="margin-top:8px">The small number is the gap: a plus means you have the team higher than '+who+' does.'+(only.length?' <b>Ranked by '+who+', not by you:</b> '+only.map(n=>esc(tshort(n))+' (No. '+tp[n]+')').join(', ')+'.':'')+'</div>'; }
+
+function myHistoryHTML(l){ const H=l.hist||{}; const ws=Object.keys(H).map(k=>+k.slice(1)).filter(w=>H['w'+w]&&(H['w'+w].teams||[]).length).sort((a,b)=>a-b);
+  if(!ws.length) return '<div class="note">No ballot saved yet. Add some teams and the hub keeps this week’s ballot by itself.</div>';
+  if(ws.indexOf(MYHW)<0) MYHW=ws[ws.length-1]; const wi=ws.indexOf(MYHW), cur=H['w'+MYHW].teams, pw=wi>0?ws[wi-1]:null, prev=pw!=null?H['w'+pw].teams:null, cols=ws.slice(Math.max(0,wi-4),wi).reverse();
+  let html='<div class="toolbar"><div class="seg my-wk">'+ws.map(w=>'<button data-hw="'+w+'" class="'+(w===MYHW?'on':'')+'">Week '+w+'</button>').join('')+'</div></div>';
+  if(!prev) html+='<div class="note" style="margin-bottom:12px">'+(ws.length===1?'This is your first saved ballot. The hub keeps one for every week you open or change this list, and from next week on it shows who you moved up and down.':'This is the earliest ballot saved for this list.')+'</div>';
+  else { const mv=cur.map((n,i)=>({n, d:prev.indexOf(n)<0?0:prev.indexOf(n)-i})).filter(x=>x.d); const up=mv.filter(x=>x.d>0).sort((a,b)=>b.d-a.d), dn=mv.filter(x=>x.d<0).sort((a,b)=>a.d-b.d); const nw=cur.filter(n=>prev.indexOf(n)<0), out=prev.filter(n=>cur.indexOf(n)<0);
+    html+='<div class="grid g4 my-tiles">'+tile('Biggest climb',up.length?tshort(up[0].n):'—',up.length?'up '+up[0].d+' from Week '+pw:'nobody moved up')+tile('Biggest drop',dn.length?tshort(dn[0].n):'—',dn.length?'down '+(-dn[0].d)+' from Week '+pw:'nobody moved down')+tile('New this week',String(nw.length),nw.length?nw.map(n=>tshort(n)).join(', '):'same teams as Week '+pw)+tile('Dropped out',String(out.length),out.length?out.map(n=>tshort(n)).join(', '):'nobody')+'</div>'; }
+  html+='<div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">#</th><th>Team</th>'+(prev?'<th class="num">Move</th>':'')+cols.map(w=>'<th class="num">Wk '+w+'</th>').join('')+'</tr></thead><tbody>'
+    +cur.map((n,i)=>{ if(!T[n]) return ''; const j=prev?prev.indexOf(n):-1, d=j<0?null:j-i; return '<tr><td class="rk num">'+(i+1)+'</td><td>'+chip(n,{norank:true})+'</td>'+(prev?'<td class="num">'+(d==null?'<span class="my-mv new">NEW</span>':d>0?'<span class="my-mv up">▲'+d+'</span>':d<0?'<span class="my-mv dn">▼'+(-d)+'</span>':'<span class="dim">–</span>')+'</td>':'')+cols.map(w=>{ const k=H['w'+w].teams.indexOf(n); return '<td class="num'+(k<0?' dim':'')+'">'+(k<0?'–':k+1)+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table></div>';
+  return html+'<div class="mini" style="margin-top:8px">Week '+MYHW+' ballot'+(H['w'+MYHW].at?', last changed '+new Date(H['w'+MYHW].at).toLocaleDateString(undefined,{month:'short',day:'numeric'}):'')+'. One ballot is kept per week; this week’s changes along with your list until the week turns over.</div>'; }
+
+function myFormulaHTML(l){ const w=l.weights||(l.weights={}); const pi=myPresetOf(w);
+  let html='<div class="my-k">Pick a style, or mix your own</div><div class="my-chips">'+MY_PRESETS.map((p,i)=>'<button class="my-chip big'+(i===pi?' on':'')+'" data-preset="'+i+'">'+esc(p[0])+'</button>').join('')+'</div><div class="mini my-pd" id="my-pd">'+esc(pi>=0?MY_PRESETS[pi][2]:'Your own mix.')+'</div><div class="my-sl">';
+  let grp=''; FACTORS.forEach(f=>{ if(f[3]!==grp){ grp=f[3]; html+='<div class="my-k">'+esc(grp)+'</div>'; } const v=+w[f[0]]||0; html+='<div class="slider"><label for="w-'+f[0]+'">'+esc(f[1])+'</label><input type="range" id="w-'+f[0]+'" min="0" max="10" step="1" value="'+v+'"><span class="w" id="wv-'+f[0]+'">'+v+'</span></div>'; });
+  html+='</div><div class="mini" style="margin:12px 0 10px;max-width:80ch">Every team gets a 0 to 100 mark on each item (where it stands among all '+FBS.length+' FBS teams), and the sliders set how much each one counts. Slide one to 0 to leave it out. Tap a team’s row to see what put it where it is.</div>';
+  return html+'<div class="tblwrap"><table class="tbl my-ft" id="ftbl"><thead><tr><th class="rk">#</th><th>Team</th><th class="num">Record</th><th class="num">Score</th><th class="num">'+(CFP_ON?'CFP':'AP')+'</th></tr></thead><tbody>'+myFormulaRows(l)+'</tbody></table></div>'; }
+function myFormulaRows(l){ const w=l.weights||{}; const ranked=formulaRank(w), D=formulaData(), pv=myPrev(l); const tot=FACTORS.reduce((n,f)=>n+(+w[f[0]]||0),0)||1;
+  return ranked.slice(0,25).map((x,i)=>{ const t=T[x.name], open=MYWHY===x.name;
+    let row='<tr class="'+(open?'my-open':'')+'"><td class="rk num">'+(i+1)+'</td><td>'+chip(x.name,{norank:true})+myMove(pv,x.name,i)+'</td><td class="num">'+recStr(x.name)+'</td><td class="num"><button class="my-whyb" data-why="'+esc(x.name)+'" aria-expanded="'+(open?'true':'false')+'" aria-label="Score '+num1(x.score)+'. Why is '+esc(tshort(x.name))+' here?"><b>'+num1(x.score)+'</b><i aria-hidden="true">'+(open?'▴':'▾')+'</i></button></td><td class="num muted">'+((CFP_ON?t.cfp:t.apPoll)||'—')+'</td></tr>';
+    if(open){ const parts=FACTORS.filter(f=>(+w[f[0]]||0)>0).map(f=>{ const p=D.pc[f[0]][x.name]; return {f, p, pts:(+w[f[0]])*p/tot*100, max:(+w[f[0]])/tot*100}; }).sort((a,b)=>b.max-a.max);
+      row+='<tr class="my-why"><td colspan="5"><div class="my-whyx">'+parts.map(q=>'<div class="my-bar"><div class="t"><b>'+esc(q.f[1])+'</b><span>'+esc(myFText(q.f[0],x.name))+' · '+myOrd(D.rk[q.f[0]][x.name])+' of '+D.rows.length+'</span></div><div class="b"><i style="width:'+Math.round(q.p*100)+'%"></i></div><div class="p">'+num1(q.pts)+' <small>of '+num1(q.max)+'</small></div></div>').join('')+'<div class="mini">The points add up to the score of '+num1(x.score)+'. A full bar means best in the country on that item.</div></div></td></tr>'; }
+    return row; }).join(''); }
+
+/* ---- wiring ---- */
+function myWireTop(){ const nm=$('#new-manual'), nf=$('#new-formula');
+  if(nm) nm.onclick=()=>{ const id=uid(); MY.lists[id]={id,name:myName('My Top 25'),type:'manual',teams:[],updated:Date.now()}; MY.active=id; MYTAB='build'; MYWHY=''; persist(); renderMy(id); };
+  if(nf) nf.onclick=()=>{ const id=uid(); const w={}; FACTORS.forEach(f=>w[f[0]]=f[2]); MY.lists[id]={id,name:myName('My formula'),type:'formula',weights:w,updated:Date.now()}; MY.active=id; MYTAB='build'; MYWHY=''; persist(); renderMy(id); };
+  view.querySelectorAll('.my-li').forEach(b=>b.onclick=()=>{ MY.active=b.dataset.id; MYTAB='build'; MYWHY=''; saveLocal(); try{ if(location.hash!=='#/my') history.replaceState(history.state,'','#/my'); }catch(e){} renderMy(); }); }
+/* tap a rank number: it turns into a box, type the new spot */
+function myNumEdit(li, i, n, done){ const b=li.querySelector('.rk'); if(!b) return; const inp=document.createElement('input'); inp.type='number'; inp.className='my-num'; inp.min=1; inp.max=n; inp.value=i+1; inp.inputMode='numeric'; inp.setAttribute('aria-label','Move to spot (1 to '+n+')'); b.replaceWith(inp); inp.focus(); inp.select();
+  let fin=false; const go=ok=>{ if(fin) return; fin=true; const v=Math.round(+inp.value); if(ok&&v>=1&&v!==i+1) done(Math.min(v,n)-1); else renderMy(); };
+  inp.onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); go(true); } else if(e.key==='Escape'){ go(false); } }; inp.onblur=()=>go(true); }
+/* drag a row by its dots, with a finger or a mouse: the row follows the pointer, the others slide out of the way,
+   and the page scrolls when the pointer nears the top or bottom */
+function myDrag(list, onMove){ let d=null, raf=0;
+  const place=()=>{ if(!d) return; const dy=(d.cy-d.y0)+(window.scrollY-d.sy0); d.li.style.transform='translateY('+dy+'px)'; const c=d.mid[d.from]+dy; let to=d.from;
+    for(let k=0;k<d.items.length;k++){ if(k<d.from&&c<d.mid[k]) to=Math.min(to,k); if(k>d.from&&c>d.mid[k]) to=Math.max(to,k); }
+    if(to!==d.to){ d.to=to; d.items.forEach((x,k)=>{ if(k===d.from) return; let sh=0; if(to<d.from&&k>=to&&k<d.from) sh=d.h; if(to>d.from&&k<=to&&k>d.from) sh=-d.h; x.style.transform=sh?'translateY('+sh+'px)':''; }); } };
+  const tick=()=>{ if(!d) return; const y=d.cy, H=window.innerHeight; let v=0; if(y<120) v=-Math.min(18,(120-y)/5); else if(y>H-170) v=Math.min(18,(y-(H-170))/5); if(v){ window.scrollBy(0,v); place(); } raf=requestAnimationFrame(tick); };
+  const end=commit=>{ if(!d) return; cancelAnimationFrame(raf); const x=d; d=null; x.items.forEach(el=>{ el.style.transform=''; }); x.li.classList.remove('drag'); list.classList.remove('dragging'); document.documentElement.classList.remove('my-dragging'); if(commit&&x.to!==x.from) onMove(x.from,x.to); };
+  list.addEventListener('pointerdown', e=>{ const grip=e.target.closest&&e.target.closest('.grip'); if(!grip||d||e.button>0) return; const li=grip.closest('li[data-i]'); if(!li) return; e.preventDefault();
+    const items=[...list.querySelectorAll('li[data-i]')], from=items.indexOf(li), rs=items.map(x=>x.getBoundingClientRect());
+    d={li, items, from, to:from, y0:e.clientY, cy:e.clientY, sy0:window.scrollY, mid:rs.map(r=>r.top+r.height/2), h:rs[from].height};
+    li.classList.add('drag'); list.classList.add('dragging'); document.documentElement.classList.add('my-dragging'); try{ grip.setPointerCapture(e.pointerId); }catch(x){} raf=requestAnimationFrame(tick); });
+  list.addEventListener('pointermove', e=>{ if(!d) return; d.cy=e.clientY; place(); });
+  list.addEventListener('pointerup', ()=>end(true)); list.addEventListener('pointercancel', ()=>end(false)); list.addEventListener('lostpointercapture', ()=>end(true)); }
+function myWire(l){ const man=l.type!=='formula';
+  const changed=focusAdd=>{ l.updated=Date.now(); mySnap(l); persist(); renderMy(); if(focusAdd){ const q=$('#addq'); if(q) q.focus(); } };
+  const addTeam=(n, at)=>{ if(!T[n]) return; l.teams=l.teams||[]; const i=l.teams.indexOf(n); if(i>=0) l.teams.splice(i,1); l.teams.splice(at==null?l.teams.length:Math.min(at,l.teams.length),0,n); };
+  const moveTo=(from,to)=>{ if(from===to||from<0||to<0||from>=l.teams.length) return; const m=l.teams.splice(from,1)[0]; l.teams.splice(Math.min(to,l.teams.length),0,m); };
+  const nameEl=$('#lname'); if(nameEl) nameEl.onchange=()=>{ l.name=nameEl.value.trim()||(man?'My Top 25':'My formula'); l.updated=Date.now(); persist(); renderMy(); };
+  const del=$('#del'); if(del) del.onclick=()=>{ if(!confirm('Delete "'+l.name+'"? Its saved weekly ballots go with it.')) return; delete MY.lists[l.id]; MY.active=null; MYTAB='build'; MYWHY=''; persist({deleted:l.id}); renderMy(); };
+  view.querySelectorAll('.my-tabs button').forEach(b=>b.onclick=()=>{ MYTAB=b.dataset.tab; renderMy(); });
+  view.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>{ MYTAB=b.dataset.goto; renderMy(); const ed=view.querySelector('.my-ed'); if(ed) gotoSection(ed); });
+  view.querySelectorAll('[data-cmp]').forEach(b=>b.onclick=()=>{ MYCMP=b.dataset.cmp; renderMy(); });
+  view.querySelectorAll('[data-hw]').forEach(b=>b.onclick=()=>{ MYHW=+b.dataset.hw; renderMy(); });
+  view.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{ if(!man) return; const op=b.dataset.act, a=b.dataset.a, x=b.dataset.b; l.teams=l.teams||[];
+    if(op==='add') addTeam(a, 24); else if(op==='above'){ const i=l.teams.indexOf(a), j=l.teams.indexOf(x); if(i>=0&&j>=0&&i>j) moveTo(i,j); }
+    toast(tshort(a)+(op==='add'?' added at No. ':' moved to No. ')+(l.teams.indexOf(a)+1)); changed(); });
+  if(MYTAB!=='build') return;
+  if(!man){ const redraw=()=>{ const tb=view.querySelector('#ftbl tbody'); if(tb) tb.innerHTML=myFormulaRows(l); wireWhy(); const pi=myPresetOf(l.weights); view.querySelectorAll('[data-preset]').forEach(b=>b.classList.toggle('on', +b.dataset.preset===pi)); const pd=$('#my-pd'); if(pd) pd.textContent=pi>=0?MY_PRESETS[pi][2]:'Your own mix.'; };
+    const wireWhy=()=>{ view.querySelectorAll('#ftbl [data-why]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); MYWHY=MYWHY===b.dataset.why?'':b.dataset.why; redraw(); }); view.querySelectorAll('#ftbl tbody tr:not(.my-why)').forEach(tr=>tr.onclick=e=>{ if(e.target.closest('a,button')) return; const b=tr.querySelector('[data-why]'); if(b) b.click(); }); };
+    FACTORS.forEach(f=>{ const inp=$('#w-'+f[0]); if(!inp) return; inp.oninput=()=>{ l.weights[f[0]]=+inp.value; const o=$('#wv-'+f[0]); if(o) o.textContent=inp.value; redraw(); };
+      inp.onchange=()=>{ l.updated=Date.now(); mySnap(l); persist(); const n=myFlags(l).length, bn=view.querySelector('.my-tabs [data-tab="check"] .my-n'); if(bn){ bn.textContent=n||'✓'; bn.classList.toggle('ok', !n); } }; });
+    view.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>{ const p=MY_PRESETS[+b.dataset.preset][1]; l.weights={}; FACTORS.forEach(f=>l.weights[f[0]]=p[f[0]]||0); changed(); });
+    wireWhy(); return; }
+  const seedIt=v=>{ if(!v) return; const arr=mySeedTeams(l,v); const s=$('#seed'); if(!arr.length){ toast('That ranking is not out yet'); if(s) s.value=''; return; } if((l.teams||[]).length&&!confirm('Replace the '+l.teams.length+' teams on this list?')){ if(s) s.value=''; return; } l.teams=arr.slice(0,25); changed(); };
+  const seed=$('#seed'); if(seed) seed.onchange=e=>seedIt(e.target.value);
+  view.querySelectorAll('[data-seed]').forEach(b=>b.onclick=()=>seedIt(b.dataset.seed));
+  const clr=$('#clear'); if(clr) clr.onclick=()=>{ if(!confirm('Take all '+l.teams.length+' teams off this list?')) return; l.teams=[]; changed(); };
+  view.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{ addTeam(b.dataset.add, null); toast(tshort(b.dataset.add)+' added at No. '+l.teams.length+(l.teams.length>25?', below the Top 25 line':'')); changed(); });
+  const list=$('#rlist'); if(list){ list.querySelectorAll('button[data-op]').forEach(b=>b.onclick=()=>{ const li=b.closest('li'), i=+li.dataset.i, op=b.dataset.op;
+      if(op==='num'){ myNumEdit(li, i, l.teams.length, to=>{ moveTo(i,to); changed(); }); return; }
+      if(op==='x') l.teams.splice(i,1); else if(op==='up'&&i>0) moveTo(i,i-1); else if(op==='down'&&i<l.teams.length-1) moveTo(i,i+1); changed(); });
+    myDrag(list, (from,to)=>{ moveTo(from,to); changed(); }); }
+  const q=$('#addq'), res=$('#addres'); if(q&&res){ q.oninput=()=>{ const v=q.value.trim().toLowerCase(); if(!v){ res.hidden=true; return; }
+      const hits=Object.values(T).filter(t=>(l.teams||[]).indexOf(t.name)<0&&(t.disp.toLowerCase().includes(v)||t.name.toLowerCase().includes(v)||(t.mascot||'').toLowerCase().includes(v))).sort((a,b)=>(a.level==='FBS'?0:1)-(b.level==='FBS'?0:1)).slice(0,8);
+      res.innerHTML=hits.map(t=>'<button data-n="'+esc(t.name)+'">'+chip(t.name,{nolink:true})+' <span class="mini">'+esc(t.conf)+' · '+recStr(t.name)+'</span></button>').join('')||'<div class="mini" style="padding:8px">No match</div>'; res.hidden=false;
+      res.querySelectorAll('button').forEach(b=>b.onclick=()=>{ addTeam(b.dataset.n, null); toast(tshort(b.dataset.n)+' added at No. '+l.teams.length); changed(true); }); };
+    q.onkeydown=e=>{ if(e.key==='Enter'){ const b=res.querySelector('button'); if(b) b.click(); } }; } }
 function persist(opts={}){ saveLocal(); if(!dbNS) return; try{ const col=dbNS.collection('rankings'); if(opts.deleted){ col.doc(opts.deleted).delete().catch(()=>{}); } Object.values(MY.lists).forEach(l=>{ col.doc(l.id).set(JSON.parse(JSON.stringify(l))).catch(e=>console.warn('db set',e)); }); dbNS.doc('settings/active').set({active:MY.active||''}).catch(()=>{}); }catch(e){ console.warn(e); } }
 function connectDb(){ if(!window.claude||!window.claude.use) return; window.claude.use('db').then(ns=>{ if(!ns) return; dbNS=ns; const st=$('#sync-state'); if(st) st.textContent='synced to your account'; ns.collection('rankings').onSnapshot(snap=>{ let changed=false; snap.docs.forEach(d=>{ if(!d.exists) return; const l=d.data(); if(!l||!l.id) return; const cur=MY.lists[l.id]; if(!cur||(l.updated||0)>(cur.updated||0)){ MY.lists[l.id]=l; changed=true; } }); snap.docChanges().forEach(c=>{ if(c.type==='removed' && MY.lists[c.doc.id]){ delete MY.lists[c.doc.id]; changed=true; } }); if(changed){ saveLocal(); if(location.hash.startsWith('#/my')||location.hash.startsWith('#/rankings/mine')) route(); } }, e=>console.warn('db snapshot',e)); try{ ns.collection('bets').onSnapshot(snap=>{ let ch=false; snap.docs.forEach(d=>{ if(!d.exists) return; const b=d.data(); if(!b||!b.id) return; if(!BETS.some(x=>x.id===b.id)){ BETS.push(b); ch=true; } }); snap.docChanges().forEach(c=>{ if(c.type==='removed'){ const i=BETS.findIndex(x=>x.id===c.doc.id); if(i>=0){ BETS.splice(i,1); ch=true; } } }); if(ch){ try{ localStorage.setItem('cfb-bets', JSON.stringify(BETS)); }catch(e){} if(location.hash.startsWith('#/my/bets')) renderBets(); } }, ()=>{}); }catch(e){}
     ns.doc('settings/active').get().then(s=>{ if(s.exists&&s.data().active&&MY.lists[s.data().active]){ MY.active=s.data().active; saveLocal(); } }).catch(()=>{}); /* push local-only lists up once */ const local=Object.values(MY.lists); if(local.length) persist(); }).catch(e=>console.warn('db',e)); }

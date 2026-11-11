@@ -148,7 +148,8 @@
       'class score': ['Recruiting class score: the average industry rating of the commits.', HI],
       'blue chips': ['Share of commits rated 4 or 5 stars.', HI],
       'stars': ['Recruiting stars from the recruiting services (5 is the top).', HI],
-      'fcs rank': ['Rank in the FCS poll.', '']
+      'fcs rank': ['Rank in the FCS poll.', ''],
+      'cfp': ['Rank in the College Football Playoff committee’s top 25, the list that picks and seeds the Playoff field. It comes out on Tuesdays late in the season.', '']
     }
   };
   var G = {};

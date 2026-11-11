@@ -59,8 +59,8 @@ async function rsvpTopic(env) {
   return TOPIC_OK.test(env.NTFY_TOPIC || "") ? env.NTFY_TOPIC : "";
 }
 
-// true = ntfy accepted the push
-async function pushNtfy(topic, title, body, tags) {
+// Send one push. Answers { ok, status, why } so the planner's test button can say what went wrong.
+async function pushNtfyDetail(topic, title, body, tags) {
   try {
     const res = await fetch(NTFY + topic, {
       method: "POST",
@@ -74,10 +74,19 @@ async function pushNtfy(topic, title, body, tags) {
       body,
       signal: AbortSignal.timeout(8000),
     });
-    return res.ok;
+    let why = "";
+    if (!res.ok) {
+      try { why = (await res.text()).slice(0, 200); } catch (e) { /* the status says enough */ }
+    }
+    return { ok: res.ok, status: res.status, why };
   } catch (e) {
-    return false;
+    return { ok: false, status: 0, why: String((e && e.message) || e).slice(0, 200) };
   }
+}
+
+// true = ntfy accepted the push
+async function pushNtfy(topic, title, body, tags) {
+  return (await pushNtfyDetail(topic, title, body, tags)).ok;
 }
 
 async function listRsvps(env) {
@@ -259,13 +268,13 @@ async function handleRsvpAlerts(request, env) {
   if (action === "test") {
     const topic = await rsvpTopic(env);
     if (!topic) return json({ error: "off", message: "Alerts are off, so there's nowhere to send a test." }, 409);
-    const ok = await pushNtfy(
+    const sent = await pushNtfyDetail(
       topic,
       "Test alert - it works",
       "This is what an RSVP alert looks like. You'll get one each time someone replies.",
       "white_check_mark"
     );
-    return json({ ok }, ok ? 200 : 502);
+    return json(sent, sent.ok ? 200 : 502);
   }
 
   return json({ error: "bad action" }, 400);

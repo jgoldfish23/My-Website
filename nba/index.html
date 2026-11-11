@@ -5381,6 +5381,69 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
 /* winodds:end */
 </script>
 <script type="text/x-jsh-app">
+/* trend:start - player trends (2026-11-10, Jamo picked "Player trends"). Inlined by the CFB, NFL and NBA builds (in
+   front of the app) so their player pages can show, from the box scores already on the page:
+   - a last-10-games line for the three stats that matter for the player's role (bars, newest on the right, with a
+     dashed line at his season average);
+   - "Hot" or "Cold" only when his last 5 games really differ from his season: at least 8 games played, at least 15%
+     and a set amount off his average (3 points, 25 yards and so on), and more than half his usual game-to-game swing;
+   - home and away averages side by side.
+   Nothing here is invented: every number is an average of games in the box scores.
+   Use: JSHTrend.html(rows, stats) where rows are newest first: {date: 'Nov 2', home: true, opp: 'DAL', v: {key: number}}
+   and stats are {k: key, l: 'label', d: decimals, min: smallest gap worth a tag}. */
+var JSHTrend = window.JSHTrend || (window.JSHTrend = (function(){
+  var D = document;
+  var esc = function(x){ return String(x == null ? '' : x).replace(/[&<>"]/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); };
+  var num = function(x){ if (x == null || x === '' || x === '--' || x === '—') return null; var n = parseFloat(String(x).replace(/,/g, '')); return isFinite(n) ? n : null; };
+  var avg = function(a){ return a.length ? a.reduce(function(s, x){ return s + x; }, 0) / a.length : null; };
+  var fmt = function(x, d){ return x == null ? '—' : (+x).toFixed(d || 0); };
+  var CSS = '.tr-card .tr-row{display:grid;grid-template-columns:minmax(92px,1fr) minmax(0,2.2fr);gap:4px 14px;align-items:center;padding:10px 0;border-top:1px solid color-mix(in srgb,var(--line,#2a3448) 70%,transparent)}'
+    + '.tr-card .tr-row:first-child{border-top:0;padding-top:2px}'
+    + '.tr-card .tr-k{font-weight:800;font-size:14px}.tr-card .tr-k small{display:block;font-weight:600;font-size:12px;color:var(--ink-3,#8f9aac);margin-top:2px}'
+    + '.tr-card .tr-k .tr-tag{display:inline-block;margin:4px 0 0;padding:1px 8px;border-radius:999px;font-size:11.5px;font-weight:800;letter-spacing:.02em}'
+    + '.tr-card .tr-tag.hot{color:#ffb27a;background:rgba(255,138,61,.16);border:1px solid rgba(255,138,61,.45)}'
+    + '.tr-card .tr-tag.cold{color:#9fd0ff;background:rgba(91,180,255,.14);border:1px solid rgba(91,180,255,.42)}'
+    + '.tr-card svg{display:block;width:100%;height:58px;overflow:visible}.tr-card svg rect{fill:color-mix(in srgb,var(--accent,#5b8cff) 70%,transparent)}'
+    + '.tr-card svg rect.l5{fill:var(--accent,#5b8cff)}.tr-card svg line{stroke:var(--ink-3,#8f9aac);stroke-width:1;stroke-dasharray:3 3}'
+    + '.tr-card svg text{font-size:10.5px;fill:var(--ink-3,#8f9aac);font-weight:700}'
+    + '.tr-card .tr-sp{margin-top:12px}.tr-card .tr-sp table{width:100%}.tr-card .tr-note{margin-top:8px;font-size:12px;color:var(--ink-3,#8f9aac)}';
+  function css(){ if (D.getElementById('tr-css')) return; var s = D.createElement('style'); s.id = 'tr-css'; s.textContent = CSS; (D.head || D.documentElement).appendChild(s); }
+  function spark(vals, mean, labels){ /* vals oldest -> newest (up to 10) */
+    var W = 300, H = 58, n = vals.length, gap = 4, bw = Math.max(6, (W - gap * (n - 1)) / Math.max(n, 1)), mx = Math.max.apply(null, vals.map(function(v){ return v || 0; }).concat([mean || 0, 1]));
+    var y = function(v){ return H - 14 - (H - 18) * (Math.max(0, v || 0) / mx); }, out = '';
+    vals.forEach(function(v, i){ var x = i * (bw + gap), top = y(v); out += '<rect class="' + (i >= n - 5 ? 'l5' : '') + '" x="' + x.toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + Math.max(1.5, H - 14 - top).toFixed(1) + '" rx="2"><title>' + esc(labels[i]) + '</title></rect>'; });
+    if (mean != null) out += '<line x1="0" x2="' + W + '" y1="' + y(mean).toFixed(1) + '" y2="' + y(mean).toFixed(1) + '"/>';
+    out += '<text x="0" y="' + H + '">' + (n >= 10 ? '10 games ago' : n + ' games ago') + '</text><text x="' + W + '" y="' + H + '" text-anchor="end">latest</text>';
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" role="img" aria-label="last ' + n + ' games">' + out + '</svg>'; }
+  function html(rows, stats){
+    rows = (rows || []).filter(function(r){ return r && r.v; }); if (rows.length < 3 || !stats || !stats.length) return '';
+    css();
+    var body = '', any = false;
+    stats.forEach(function(s){
+      var all = rows.map(function(r){ return num(r.v[s.k]); }).filter(function(v){ return v != null; }); if (all.length < 3) return;
+      any = true; var mean = avg(all), l5 = avg(rows.slice(0, 5).map(function(r){ return num(r.v[s.k]); }).filter(function(v){ return v != null; }));
+      var sd = Math.sqrt(avg(all.map(function(v){ return (v - mean) * (v - mean); })) || 0), gapV = l5 - mean, tag = '';
+      if (all.length >= 8 && l5 != null && Math.abs(gapV) >= Math.max(0.15 * Math.abs(mean), s.min || 0) && Math.abs(gapV) > 0.5 * sd)
+        tag = '<span class="tr-tag ' + (gapV > 0 ? 'hot' : 'cold') + '">' + (gapV > 0 ? 'Hot' : 'Cold') + ': ' + fmt(l5, s.d) + ' last 5</span>';
+      var last = rows.slice(0, 10).slice().reverse();
+      body += '<div class="tr-row"><div class="tr-k">' + esc(s.l) + '<small>' + fmt(mean, s.d) + ' a game · last 5: ' + fmt(l5, s.d) + '</small>' + tag + '</div><div>'
+        + spark(last.map(function(r){ return num(r.v[s.k]); }), mean, last.map(function(r){ return r.date + (r.home ? ' vs ' : ' at ') + r.opp + ': ' + (num(r.v[s.k]) == null ? '—' : r.v[s.k]); })) + '</div></div>';
+    });
+    if (!any) return '';
+    var H = rows.filter(function(r){ return r.home; }), A = rows.filter(function(r){ return !r.home; }), split = '';
+    if (H.length && A.length) {
+      var cell = function(list, s){ return fmt(avg(list.map(function(r){ return num(r.v[s.k]); }).filter(function(v){ return v != null; })), s.d); };
+      split = '<div class="tr-sp"><div class="tblwrap"><table class="tbl"><thead><tr><th>Split</th><th class="r">G</th>' + stats.map(function(s){ return '<th class="r">' + esc(s.l) + '</th>'; }).join('') + '</tr></thead><tbody>'
+        + '<tr><td>Home</td><td class="r">' + H.length + '</td>' + stats.map(function(s){ return '<td class="r">' + cell(H, s) + '</td>'; }).join('') + '</tr>'
+        + '<tr><td>Away' + (rows.some(function(r){ return r.neutral; }) ? ' &amp; neutral' : '') + '</td><td class="r">' + A.length + '</td>' + stats.map(function(s){ return '<td class="r">' + cell(A, s) + '</td>'; }).join('') + '</tr></tbody></table></div></div>';
+    }
+    return '<div class="sec"><h2>Trends</h2><span class="muted">last ' + Math.min(10, rows.length) + ' games · per game</span></div><div class="card tr-card"><div class="bd">' + body + split
+      + '<div class="tr-note">Darker bars are the last 5 games; the dashed line is the season average. "Hot" or "Cold" shows only when the last 5 really stand out.</div></div></div>'; }
+  return {html: html, num: num};
+})());
+/* trend:end */
+</script>
+<script type="text/x-jsh-app">
 (function(){
 'use strict';
 /* =========================================================
@@ -6151,6 +6214,12 @@ function gameNoteHTML(g){ if(g.other) return ''; let txt=''; if(g.played){ const
 
 /* ---------- players ---------- */
 function playerLink(ab, name, label){ if(!ab||!name||!T[norm(ab)]) return esc(label||name||''); return '<a class="plink" href="#/player/'+enc(norm(ab))+'/'+enc(name)+'">'+esc(label||name)+'</a>'; }
+/* player trends (sports-hub/polish/trend.js, 2026-11-10, Jamo picked "Player trends"): points, rebounds and assists over
+   the last 10 games, hot or cold only when the last 5 really stand out, and home and away averages */
+/* the page keeps only a few box scores per team, so trends normally come from the full ESPN game log (loadGameLog) */
+const NBA_TR=[{k:'pts',l:'Points',d:1,min:3},{k:'reb',l:'Rebounds',d:1,min:1.5},{k:'ast',l:'Assists',d:1,min:1.5}];
+function trendFromLog(ev, L){ if(!window.JSHTrend) return ''; const iP=L.indexOf('PTS'), iR=L.indexOf('REB'), iA=L.indexOf('AST'); const rows=ev.slice().sort((x,y)=>String(x.date)<String(y.date)?1:-1).map(e=>({date:e.date?fmtDate(e.date,false):'', home:!!e.home, opp:String(e.opp||''), v:{pts:(e.s||[])[iP], reb:(e.s||[])[iR], ast:(e.s||[])[iA]}})); return JSHTrend.html(rows, NBA_TR); }
+function trendHTML(ab, log){ if(!window.JSHTrend||!log.length) return ''; const rows=log.filter(x=>x.g).map(x=>{ const home=x.g.home===ab; return {date:fmtDate(x.b.date,false), home, neutral:!!x.g.neutral, opp:tshort(home?x.g.away:x.g.home), v:{pts:bstat(x.p,'PTS'), reb:bstat(x.p,'REB'), ast:bstat(x.p,'AST')}}; }); return JSHTrend.html(rows,[{k:'pts',l:'Points',d:1,min:3},{k:'reb',l:'Rebounds',d:1,min:1.5},{k:'ast',l:'Assists',d:1,min:1.5}]); }
 function playerLog(ab, name){ const key=dkey(name); const out=[]; (BOX_BY_TEAM[ab]||[]).forEach(b=>{ const side=boxSide(b,ab); if(!side) return; const g=GI[b.eid]; const hit=(b.players[side]||[]).find(p=>dkey(p.n)===key); if(hit) out.push({b,g,p:hit}); }); return out.sort((x,y)=>x.b.date<y.b.date?1:-1); }
 function psCard(title, o, note){ if(!o) return ''; return '<div class="card"><div class="hd"><h3>'+esc(title)+'</h3><span class="mini">'+esc(note||'')+'</span></div><div class="bd"><div class="stat3">'+[['PTS',o.pts],['REB',o.reb],['AST',o.ast],['STL',o.stl],['BLK',o.blk],['MIN',o.min],['FG%',o.fgp],['3P%',o.tpa?o.tpp:null],['FT%',o.ftp]].map(x=>'<div><b>'+(x[1]==null||x[1]===''?'—':num1(x[1]))+'</b><span>'+x[0]+'</span></div>').join('')+'</div><div class="mini" style="margin-top:8px">'+o.gp+' games · '+num1(o.tpm)+' threes a game on '+num1(o.tpa)+' tries · '+num1(o.to)+' turnovers'+(o.dd?' · '+o.dd+' double-double'+(o.dd>1?'s':''):'')+(o.td?' · '+o.td+' triple-double'+(o.td>1?'s':''):'')+'</div></div></div>'; }
 function renderPlayer(ab, name){ setNav('teams'); ab=norm(ab||''); const t=T[ab]; if(!t){ view.innerHTML='<div class="note">No team called "'+esc(ab)+'". <a href="#/teams">See all teams.</a></div>'; return; } const info=(ROST[ab]||[]).find(p=>dkey(p.n)===dkey(name))||null; const log=playerLog(ab,name); const inj=injOf(ab,name); const pk=draftPick(name); const cur=info?psById(info.id):null; const prev=info?psPrevById(info.id):null; let slot=''; const d=depthOf(ab); if(d){ const st=startersOf(ab).find(p=>dkey(p.n)===dkey(name)); if(st) slot='starting '+(POS_LONG[st.slot]||st.slot).toLowerCase(); else d.forEach(x=>x.players.forEach((pl,i)=>{ if(!slot&&dkey(pl.n)===dkey(name)) slot=(i===0?'starting ':'backup ')+(POS_LONG[x.pos]||x.pos).toLowerCase(); })); }
@@ -6161,11 +6230,12 @@ function renderPlayer(ab, name){ setNav('teams'); ab=norm(ab||''); const t=T[ab]
   if(inj&&(inj.note||inj.ret)) html+='<div class="note" style="margin-top:10px">'+esc(inj.note||'')+(inj.ret?' <span class="dim">Expected back '+esc(fmtDate(inj.ret,false))+'.</span>':'')+'</div>';
   if(cur||prev){ html+='<div class="sec"><h2>Averages</h2><span class="muted">per game, from ESPN</span></div><div class="grid g2">'+(cur?psCard(SEASON_LABEL, cur, t.disp):'')+(prev?psCard(PREV_LABEL, prev, prev.team&&prev.team!==ab?'with the '+team(prev.team).disp:''):'')+'</div>'; const src=cur&&cur.gp>=5?cur:prev; if(src) html+=plAnalyticsHTML(info.id, src===cur); /* p2pl.js: percentile bars (with PER, plus-minus, win shares) and a Compare button */ }
   html+=playerContractHTML(info, ab);
+  html+=(info&&LIVE.on)?'<div id="tr-slot"></div>':trendHTML(ab, log);
   if(log.length){ html+='<div class="sec"><h2>Recent games</h2><span class="muted">from the box scores on this page</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th>'+BXCOLS.map(c=>'<th class="r">'+c+'</th>').join('')+'</tr></thead><tbody>'+log.map(x=>{ const g=x.g; const home=g&&g.home===ab; const opp=g?team(home?g.away:g.home):null; const pf=g?(home?g.hs:g.as):null, pa=g?(home?g.as:g.hs):null; return '<tr'+(g?' class="click" data-href="#/game/'+g.id+'"':'')+'><td class="small nw">'+esc(fmtDate(x.b.date,false))+'</td><td>'+(opp?(home?'vs ':'at ')+chip(opp.ab,{short:true}):'—')+'</td><td class="small nw">'+(pf!=null?(pf>pa?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+pf+'-'+pa:'—')+'</td>'+BXCOLS.map(c=>'<td class="r">'+esc(bstat(x.p,c))+'</td>').join('')+'</tr>'; }).join('')+'</tbody></table></div>'; }
   if(info&&LIVE.on){ html+='<div class="sec"><h2>Game log</h2><span class="muted" id="gl-note">loading the full log from ESPN…</span></div><div id="gl-body"></div>'; }
   if(info) html+='<div class="sec"><h2>Roster entry</h2></div><div class="card"><div class="bd" style="padding-top:8px">'+playerLine(info,{label:info.pos})+'</div></div>';
   view.innerHTML=html; if(info&&LIVE.on) loadGameLog(info); }
-async function loadGameLog(info){ const body=document.getElementById('gl-body'), note=document.getElementById('gl-note'); if(!body) return; try{ const r=await fetch(LIVE_API+'/player?id='+enc(info.id), {cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); const j=await r.json(); if(!document.body.contains(body)) return; const ev=j.events||[]; if(!ev.length){ note.textContent='no games logged yet'; return; } const L=j.labels||[]; note.textContent=(j.season?(j.season-1)+'-'+String(j.season).slice(2)+' · ':'')+ev.length+' game'+(ev.length>1?'s':'')+(j.type?' · '+j.type:''); const want=['MIN','PTS','REB','AST','STL','BLK','TO','FG','3PT','FT']; const ix=want.map(w=>L.indexOf(w)); body.innerHTML='<div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th>'+want.map((w,i)=>ix[i]>=0?'<th class="r">'+w+'</th>':'').join('')+'</tr></thead><tbody>'+ev.map(e=>{ const g=GI[e.id]; return '<tr'+(g?' class="click" data-href="#/game/'+esc(e.id)+'"':'')+'><td class="small nw">'+esc(e.date?fmtDate(e.date,false):'')+'</td><td>'+(e.home?'vs ':'at ')+(T[norm(e.opp)]?chip(norm(e.opp),{short:true}):esc(e.opp||''))+'</td><td class="small nw">'+(e.res?'<span class="'+(e.res==='W'?'pos':'neg')+'">'+esc(e.res)+'</span> ':'')+esc(e.score||'')+'</td>'+want.map((w,i)=>ix[i]>=0?'<td class="r">'+esc((e.s||[])[ix[i]]??'')+'</td>':'').join('')+'</tr>'; }).join('')+'</tbody></table></div>'; }catch(err){ if(note) note.textContent='the full game log is not available right now'; } }
+async function loadGameLog(info){ const body=document.getElementById('gl-body'), note=document.getElementById('gl-note'); if(!body) return; try{ const r=await fetch(LIVE_API+'/player?id='+enc(info.id), {cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); const j=await r.json(); if(!document.body.contains(body)) return; const ev=j.events||[]; if(!ev.length){ note.textContent='no games logged yet'; return; } const L=j.labels||[]; note.textContent=(j.season?(j.season-1)+'-'+String(j.season).slice(2)+' · ':'')+ev.length+' game'+(ev.length>1?'s':'')+(j.type?' · '+j.type:''); const want=['MIN','PTS','REB','AST','STL','BLK','TO','FG','3PT','FT']; const ix=want.map(w=>L.indexOf(w)); body.innerHTML='<div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th>'+want.map((w,i)=>ix[i]>=0?'<th class="r">'+w+'</th>':'').join('')+'</tr></thead><tbody>'+ev.map(e=>{ const g=GI[e.id]; return '<tr'+(g?' class="click" data-href="#/game/'+esc(e.id)+'"':'')+'><td class="small nw">'+esc(e.date?fmtDate(e.date,false):'')+'</td><td>'+(e.home?'vs ':'at ')+(T[norm(e.opp)]?chip(norm(e.opp),{short:true}):esc(e.opp||''))+'</td><td class="small nw">'+(e.res?'<span class="'+(e.res==='W'?'pos':'neg')+'">'+esc(e.res)+'</span> ':'')+esc(e.score||'')+'</td>'+want.map((w,i)=>ix[i]>=0?'<td class="r">'+esc((e.s||[])[ix[i]]??'')+'</td>':'').join('')+'</tr>'; }).join('')+'</tbody></table></div>'; const ts=document.getElementById('tr-slot'); if(ts) ts.outerHTML=trendFromLog(ev,L); }catch(err){ if(note) note.textContent='the full game log is not available right now'; } }
 
 /* ---------- line movement, injuries, series ---------- */
 function moveArrow(open, cur, favLabel){ if(open==null||cur==null||open===cur) return ''; const d=Math.abs(cur-open); const dir = cur<open ? 'toward '+favLabel[0] : 'toward '+favLabel[1]; return '<span class="mv '+(cur<open?'dn':'up')+'">'+(cur<open?'▼':'▲')+' '+num1(d)+'</span> <span class="dim">'+esc(dir)+'</span>'; }
@@ -9003,7 +9073,7 @@ function woNow(g){ if(!g.live||!window.JSHOdds) return null; const ph=JSHOdds.no
 function woTag(g){ const w=woNow(g); return w?'<span class="wo-tag" title="Hub win chance">'+esc(tshort(w.ab))+' '+JSHOdds.pc(w.p)+'</span>':''; }
 function woHTML(g){ if(!(g.played||g.live)||!window.JSHOdds) return ''; const a=team(g.away), h=team(g.home); return '<div class="wo" data-lg="nba" data-id="'+esc(g.id)+'" data-mu="'+proj(g).diff.toFixed(2)+'" data-sd="'+SD+'" data-a="'+esc(a.ab)+'" data-h="'+esc(h.ab)+'" data-an="'+esc(a.disp)+'" data-hn="'+esc(h.disp)+'" data-ac="'+esc(a.color)+'" data-hc="'+esc(h.color)+'"></div>'; }
 /* Follow a game (sports-hub/polish/follow.js, 2026-11-10): what the Follow button needs to know about a game */
-window.JSH_GAME=function(id){ const g=GI[id]; if(!g) return null; const a=team(g.away), h=team(g.home); return {lg:'nba', eid:String(g.id), gid:String(g.id), live:!!g.live, as:g.as, hs:g.hs, det:g.clk, per:g.per, a:a.ab, h:h.ab, an:a.disp, hn:h.disp, ac:a.color, hc:h.color, al:'/nba/img/logos/'+a.ab+'.png', hl:'/nba/img/logos/'+h.ab+'.png', mu:+proj(g).diff.toFixed(2), sd:SD, href:'/nba/#/game/'+g.id, done:!!g.played}; };
+window.JSH_GAME=function(id){ const g=GI[id]; if(!g) return null; const a=team(g.away), h=team(g.home); return {lg:'nba', eid:String(g.id), gid:String(g.id), live:!!(g.live&&LIVE.last&&Date.now()-LIVE.last<90000), as:g.as, hs:g.hs, det:g.clk, per:g.per, a:a.ab, h:h.ab, an:a.disp, hn:h.disp, ac:a.color, hc:h.color, al:'/nba/img/logos/'+a.ab+'.png', hl:'/nba/img/logos/'+h.ab+'.png', mu:+proj(g).diff.toFixed(2), sd:SD, href:'/nba/#/game/'+g.id, done:!!g.played}; };
 function liveCardHTML(g){ if(!g.live&&!(LIVE.sum[g.id])) return ''; const a=team(g.away), h=team(g.home); const j=LIVE.sum[g.id]; let html='<div class="card pv live"><div class="hd"><h3><span class="livedot"></span>'+(g.live?'Live':'Final')+'</h3><span class="mini">'+esc(g.clk||(j&&j.det)||'')+(LIVE.last?' · updated '+new Date(LIVE.last).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'')+'</span></div><div class="bd">'; if(g.live&&g.last) html+='<div class="mini" style="margin-bottom:8px">Last play: '+esc(g.last)+'</div>'; html+=linescoreHTML(g, j); if(g.live){ const w=woNow(g); if(w) html+='<div class="mini" style="margin:6px 0">Hub win chance: <b>'+esc(tshort(w.ab))+' '+JSHOdds.pc(w.p)+'</b></div>'; }; if(j&&j.plays&&j.plays.length&&g.live) html+='<div class="eyebrow" style="margin-top:10px">Latest plays</div><div class="ldr" style="margin-top:4px">'+j.plays.slice().reverse().map(p=>'<div><span class="k">'+(p.per?(p.per<=4?'Q'+p.per:'OT'+(p.per>5?p.per-4:'')):'')+'</span><span class="dim">'+esc(p.clk||'')+'</span> '+esc(p.text)+(p.as!=null?' <span class="dim">'+esc(String(p.as))+'-'+esc(String(p.hs))+'</span>':'')+'</div>').join('')+'</div>'; if(!j) html+='<div class="mini">Loading the live box score…</div>'; return html+'</div></div>'; }
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden&&LIVE.on){ livePoll(true); liveSchedule(); } });
 function liveTeamRow(g, side){ const t=team(side==='home'?g.home:g.away); const pts=side==='home'?g.hs:g.as, opp=side==='home'?g.as:g.hs; return '<div class="lrow'+(pts>opp?' w':'')+'">'+(logoOf(t)?'<img class="sw sw-logo" src="'+logoOf(t).icon+'" alt="">':'<span class="sw" style="background:'+uiColor(t)+'"></span>')+'<span class="nm">'+esc(t.disp)+'</span><span class="sc">'+scoreSpan(g,side==='home'?'h':'a',pts)+'</span></div>'; }

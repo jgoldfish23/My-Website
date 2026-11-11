@@ -9,6 +9,7 @@ import * as picks from "./functions/api/picks.js";
 import * as ask from "./functions/api/ask.js";
 import * as alerts from "./functions/api/alerts.js";
 import { clientIp, originOk, rateLimit, tooMany, forbidden } from "./functions/api/_guard.js";
+import { b64u, makeVapidKeys, sendPush, cleanSubscription } from "./functions/api/webpush.js";
 
 const RECORD_KEY = "record_entries";
 
@@ -36,33 +37,66 @@ const clean = (v, max) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 
 const GUEST_CAP = 40;
 
-// RSVP phone alerts are switched on from the planner (/plan), so no Cloudflare login is needed. The setting lives in
-// KV under a key outside the "rsvp_" prefix that listRsvps() scans.
-const ALERTS_KEY = "wedding:rsvp_alerts";
-const NTFY = "https://ntfy.sh/";
-const TOPIC_OK = /^[A-Za-z0-9_-]{8,64}$/;
+// RSVP alerts go straight from this worker to each phone's own notification service (Web Push, see webpush.js).
+// Jameson and Dawsyn switch them on per device from the planner (/plan), so nothing is set up in Cloudflare.
+// (The first try went through ntfy.sh; it refuses pushes from Cloudflare's shared addresses once their daily quota is
+// used up, which is most of the time.) Both keys sit outside the "rsvp_" prefix that listRsvps() scans.
+const PUSH_VAPID_KEY = "wedding:push_vapid";   // this site's signing keys, made on first use
+const PUSH_SUBS_KEY = "wedding:push_subs";     // the devices that asked for alerts
+const PUSH_SUBJECT = "https://djgolding.com";  // contact shown to the push services
+const PUSH_MAX = 12;                           // devices; the oldest drops off past this
 
-async function alertPrefs(env) {
+async function kvJson(env, key, fallback) {
   try {
-    const raw = await env.WEDDING_KV.get(ALERTS_KEY);
-    return raw ? JSON.parse(raw) : null;
+    const raw = await env.WEDDING_KV.get(key);
+    return raw ? JSON.parse(raw) : fallback;
   } catch (e) {
-    return null;
+    return fallback;
   }
 }
 
-// Where RSVP pushes go: the channel set up in the planner; failing that, a NTFY_TOPIC secret if one is ever added.
-// Turning alerts off in the planner means off, even if a secret exists.
-async function rsvpTopic(env) {
-  const p = await alertPrefs(env);
-  if (p) return p.on && TOPIC_OK.test(p.topic || "") ? p.topic : "";
-  return TOPIC_OK.test(env.NTFY_TOPIC || "") ? env.NTFY_TOPIC : "";
+async function pushVapid(env, create) {
+  let vapid = await kvJson(env, PUSH_VAPID_KEY, null);
+  if (!vapid && create) {
+    vapid = await makeVapidKeys();
+    await env.WEDDING_KV.put(PUSH_VAPID_KEY, JSON.stringify(vapid));
+  }
+  return vapid;
 }
 
-// Send one push. Answers { ok, status, why } so the planner's test button can say what went wrong.
-async function pushNtfyDetail(topic, title, body, tags) {
+const pushSubs = (env) => kvJson(env, PUSH_SUBS_KEY, []);
+
+// A short fingerprint of a subscription, so a page can tell which device in the list is itself without the
+// subscription addresses ever leaving the worker.
+async function subTag(endpoint) {
+  return b64u(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(endpoint))).slice(0, 16);
+}
+
+const deviceList = (subs) => subs.map((s) => ({ tag: s.tag, label: s.label, added: s.added }));
+
+// Push one message to every device (or just the one with `onlyTag`). Devices whose subscription has lapsed are dropped.
+async function pushAll(env, message, onlyTag) {
+  const vapid = await pushVapid(env, false);
+  if (!vapid) return [];
+  const subs = await pushSubs(env);
+  const targets = onlyTag ? subs.filter((s) => s.tag === onlyTag) : subs;
+  const results = await Promise.all(
+    targets.map(async (s) => {
+      const r = await sendPush(s, message, vapid, PUSH_SUBJECT);
+      return { tag: s.tag, label: s.label, ok: r.ok, status: r.status, gone: r.gone, why: r.why };
+    })
+  );
+  const gone = results.filter((r) => r.gone).map((r) => r.tag);
+  if (gone.length) {
+    await env.WEDDING_KV.put(PUSH_SUBS_KEY, JSON.stringify(subs.filter((s) => !gone.includes(s.tag))));
+  }
+  return results;
+}
+
+// Optional extra channel: only used if a NTFY_TOPIC secret is ever added in Cloudflare.
+async function pushNtfy(topic, title, body, tags) {
   try {
-    const res = await fetch(NTFY + topic, {
+    const res = await fetch("https://ntfy.sh/" + topic, {
       method: "POST",
       headers: {
         // HTTP headers must be latin-1; strip anything else out of the title
@@ -74,19 +108,10 @@ async function pushNtfyDetail(topic, title, body, tags) {
       body,
       signal: AbortSignal.timeout(8000),
     });
-    let why = "";
-    if (!res.ok) {
-      try { why = (await res.text()).slice(0, 200); } catch (e) { /* the status says enough */ }
-    }
-    return { ok: res.ok, status: res.status, why };
+    return res.ok;
   } catch (e) {
-    return { ok: false, status: 0, why: String((e && e.message) || e).slice(0, 200) };
+    return false;
   }
-}
-
-// true = ntfy accepted the push
-async function pushNtfy(topic, title, body, tags) {
-  return (await pushNtfyDetail(topic, title, body, tags)).ok;
 }
 
 async function listRsvps(env) {
@@ -118,7 +143,7 @@ async function notifyRsvp(entry, env) {
     /* totals are a nicety; skip them if KV hiccups */
   }
 
-  // Push goes through a third party, so keep it to the headline —
+  // A push lands on a lock screen, so keep it to the headline —
   // no guest emails, no free-text notes. Details live in the planner.
   const pushBody = [
     `${entry.name} ${who} — party of ${entry.partySize}`,
@@ -137,9 +162,11 @@ async function notifyRsvp(entry, env) {
 
   const jobs = [];
 
-  const topic = await rsvpTopic(env);
-  if (topic) {
-    jobs.push(pushNtfy(topic, `RSVP: ${entry.name}`, pushBody, entry.attending ? "tada" : "pensive"));
+  // every phone or computer that turned alerts on in the planner
+  jobs.push(pushAll(env, { title: `RSVP: ${entry.name}`, body: pushBody, url: "/plan/" }));
+
+  if (/^[A-Za-z0-9_-]{8,64}$/.test(env.NTFY_TOPIC || "")) {
+    jobs.push(pushNtfy(env.NTFY_TOPIC, `RSVP: ${entry.name}`, pushBody, entry.attending ? "tada" : "pensive"));
   }
 
   if (env.RESEND_API_KEY && env.NOTIFY_EMAIL) {
@@ -219,62 +246,58 @@ async function handleRsvp(request, env, ctx) {
   return json({ error: "method not allowed" }, 405);
 }
 
-// RSVP phone alerts, run from the planner. Everything here needs the wedding passcode.
-//   GET                      -> { on, topic, source, since, email }
-//   POST { action: "on" }    -> start alerts (makes a private channel name the first time)
-//   POST { action: "off" }   -> stop alerts (keeps the channel name so turning them back on needs no phone setup)
-//   POST { action: "test" }  -> send one test push
+// RSVP alerts, run from the planner. Everything here needs the wedding passcode.
+//   GET                                          -> { publicKey, devices: [{ tag, label, added }] }
+//   POST { action: "subscribe", sub, label }     -> add this device (sub = the browser's push subscription)
+//   POST { action: "unsubscribe", tag }          -> remove a device
+//   POST { action: "test", tag? }                -> send a test push to every device, or just one
 async function handleRsvpAlerts(request, env) {
   if (!authorized(request, env)) return json({ error: "unauthorized" }, 401);
 
-  const status = async () => {
-    const p = await alertPrefs(env);
-    const topic = await rsvpTopic(env);
-    return {
-      on: Boolean(topic),
-      topic: p && TOPIC_OK.test(p.topic || "") ? p.topic : null,
-      source: !topic ? "none" : p ? "planner" : "cloudflare",
-      since: (p && p.since) || null,
-      email: Boolean(env.RESEND_API_KEY && env.NOTIFY_EMAIL),
-    };
-  };
-
-  if (request.method === "GET") return json(await status());
+  if (request.method === "GET") {
+    const vapid = await pushVapid(env, true);
+    return json({ publicKey: vapid.publicKey, devices: deviceList(await pushSubs(env)) });
+  }
   if (request.method !== "POST") return json({ error: "method not allowed" }, 405);
 
   const body = await request.json().catch(() => null);
   const action = body && typeof body.action === "string" ? body.action : "";
 
-  if (action === "on" || action === "off") {
-    const p = (await alertPrefs(env)) || {};
-    if (action === "on") {
-      if (!TOPIC_OK.test(p.topic || "")) p.topic = "jd-rsvp-" + crypto.randomUUID().replace(/-/g, "").slice(0, 20);
-      p.on = true;
-      p.since = new Date().toISOString();
-    } else {
-      p.on = false;
-    }
-    await env.WEDDING_KV.put(ALERTS_KEY, JSON.stringify(p));
+  if (action === "subscribe") {
+    const sub = cleanSubscription(body.sub);
+    if (!sub) return json({ error: "bad subscription" }, 400);
+    await pushVapid(env, true);
+    const tag = await subTag(sub.endpoint);
+    const entry = { tag, ...sub, label: clean(body.label, 40) || "A device", added: new Date().toISOString() };
+    const subs = (await pushSubs(env)).filter((s) => s.tag !== tag);
+    subs.push(entry);
+    while (subs.length > PUSH_MAX) subs.shift();
+    await env.WEDDING_KV.put(PUSH_SUBS_KEY, JSON.stringify(subs));
+    await env.WEDDING_KV.delete("wedding:rsvp_alerts").catch(() => {}); // the retired ntfy setting, if it's still there
     // Answer from what was just saved: KV reads can lag a write by a few seconds.
-    return json({
-      on: Boolean(p.on && p.topic),
-      topic: p.topic || null,
-      source: p.on && p.topic ? "planner" : "none",
-      since: p.since || null,
-      email: Boolean(env.RESEND_API_KEY && env.NOTIFY_EMAIL),
-    });
+    return json({ tag, devices: deviceList(subs) });
+  }
+
+  if (action === "unsubscribe") {
+    const tag = clean(body.tag, 40);
+    const subs = (await pushSubs(env)).filter((s) => s.tag !== tag);
+    await env.WEDDING_KV.put(PUSH_SUBS_KEY, JSON.stringify(subs));
+    return json({ devices: deviceList(subs) });
   }
 
   if (action === "test") {
-    const topic = await rsvpTopic(env);
-    if (!topic) return json({ error: "off", message: "Alerts are off, so there's nowhere to send a test." }, 409);
-    const sent = await pushNtfyDetail(
-      topic,
-      "Test alert - it works",
-      "This is what an RSVP alert looks like. You'll get one each time someone replies.",
-      "white_check_mark"
+    const results = await pushAll(
+      env,
+      {
+        title: "Test alert — it works",
+        body: "This is what an RSVP alert looks like. You'll get one each time someone replies.",
+        url: "/plan/",
+      },
+      clean(body.tag, 40) || ""
     );
-    return json(sent, sent.ok ? 200 : 502);
+    if (!results.length) return json({ error: "none", message: "No device is set up for alerts yet." }, 409);
+    const ok = results.some((r) => r.ok);
+    return json({ ok, results: results.map((r) => ({ label: r.label, ok: r.ok, status: r.status, why: r.why })) }, ok ? 200 : 502);
   }
 
   return json({ error: "bad action" }, 400);

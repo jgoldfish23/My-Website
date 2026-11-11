@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Wedding Planning</title>
+<!-- Lets the planner sit on a phone's Home Screen like an app, which is what an iPhone needs before it will
+     show RSVP alerts. -->
+<link rel="manifest" href="/plan/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Wedding Plan">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0C2523">
 <style>
   :root {
     --bg: #0C2523; --fg: #E9EEE9; --fg-2: #8AA697;
@@ -98,20 +107,99 @@
         if (!res.ok) throw new Error("save failed");
         return await res.json();
       },
-      async alerts() {
-        const res = await fetch("/api/rsvp-alerts", { headers: { "x-wedding-pass": pass } });
-        if (!res.ok) throw new Error("alerts failed");
-        return await res.json();
+      push: makePush(pass),
+    };
+  }
+
+  // RSVP alerts on this device. The site pushes straight to the phone's own notification system, so there is no app
+  // to install; an iPhone only allows it once the planner has been added to the Home Screen.
+  function makePush(pass) {
+    const ua = navigator.userAgent || "";
+    const isIOS = /iphone|ipad|ipod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    const standalone = navigator.standalone === true || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+    const supported = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+    const label = /ipad/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? "iPad"
+      : /iphone|ipod/i.test(ua) ? "iPhone"
+      : /android/i.test(ua) ? "Android phone"
+      : /windows/i.test(ua) ? "Windows computer"
+      : /mac os x|macintosh/i.test(ua) ? "Mac"
+      : "A device";
+
+    const call = async (method, body) => {
+      const res = await fetch("/api/rsvp-alerts", {
+        method,
+        headers: { "x-wedding-pass": pass, "content-type": "application/json" },
+        body: body ? JSON.stringify(body) : undefined,
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok && !data.results) throw new Error(data.message || "That didn't go through. Try again in a minute.");
+      return data;
+    };
+    const keyBytes = (b64) => {
+      const s = b64.replace(/-/g, "+").replace(/_/g, "/");
+      const bin = atob(s + "=".repeat((4 - (s.length % 4)) % 4));
+      return Uint8Array.from(bin, (c) => c.charCodeAt(0));
+    };
+    // the same short fingerprint the server keeps for each device (it never sends the subscription address back)
+    const tagOf = async (endpoint) => {
+      const hash = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(new URL(endpoint).toString())));
+      return btoa(String.fromCharCode(...hash)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "").slice(0, 16);
+    };
+    const registration = () => navigator.serviceWorker.register("/plan/sw.js", { scope: "/plan/", updateViaCache: "none" });
+    const mySub = async () => {
+      if (!supported) return null;
+      const reg = await navigator.serviceWorker.getRegistration("/plan/");
+      return reg ? await reg.pushManager.getSubscription() : null;
+    };
+
+    // What the planner's alert box needs to draw itself.
+    const status = async () => {
+      const server = await call("GET");
+      const sub = await mySub().catch(() => null);
+      const tag = sub ? await tagOf(sub.endpoint) : null;
+      return {
+        supported,
+        needsInstall: !supported && isIOS && !standalone,   // an iPhone in a Safari tab
+        blocked: supported && Notification.permission === "denied",
+        tag,
+        onHere: Boolean(tag && server.devices.some((d) => d.tag === tag)),
+        devices: server.devices,
+        label,
+      };
+    };
+
+    return {
+      status,
+      async enable() {
+        if (!supported) throw new Error("This browser can't show notifications.");
+        const permission = await Notification.requestPermission();
+        if (permission !== "granted") throw new Error("Notifications weren't allowed, so alerts stay off on this device.");
+        const { publicKey } = await call("GET");
+        const reg = await registration();
+        await navigator.serviceWorker.ready;
+        let sub = await reg.pushManager.getSubscription();
+        if (sub) {
+          // a subscription made for an older site key can't be used; start clean
+          const had = sub.options && sub.options.applicationServerKey ? new Uint8Array(sub.options.applicationServerKey) : null;
+          const want = keyBytes(publicKey);
+          if (!had || had.length !== want.length || had.some((b, i) => b !== want[i])) { await sub.unsubscribe(); sub = null; }
+        }
+        if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(publicKey) });
+        await call("POST", { action: "subscribe", sub: sub.toJSON(), label });
+        return await status();
       },
-      async alertsDo(action) {
-        const res = await fetch("/api/rsvp-alerts", {
-          method: "POST",
-          headers: { "x-wedding-pass": pass, "content-type": "application/json" },
-          body: JSON.stringify({ action }),
-        });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(data.message || "alerts failed");
-        return data;
+      async disable() {
+        const sub = await mySub();
+        if (sub) {
+          await call("POST", { action: "unsubscribe", tag: await tagOf(sub.endpoint) });
+          await sub.unsubscribe().catch(() => {});
+        }
+        return await status();
+      },
+      // { ok, results: [{ label, ok, status, why }] }
+      async test(onlyThisDevice) {
+        const sub = onlyThisDevice ? await mySub() : null;
+        return await call("POST", { action: "test", tag: sub ? await tagOf(sub.endpoint) : "" });
       },
     };
   }

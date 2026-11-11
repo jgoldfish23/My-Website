@@ -380,11 +380,9 @@ function WeddingDashboard() {
   // ---- Live website RSVPs ----
   // Read straight from the site (the same replies /admin shows); they are not part of this planner's saved state.
   const [live, setLive] = useState({ list: null, failed: false, at: null });
-  const [alertSt, setAlertSt] = useState(null);         // { on, topic, source } once loaded
-  const [alertBusy, setAlertBusy] = useState("");       // "on" | "off" | "test" while a button is working
+  const [alertSt, setAlertSt] = useState(null);         // what weddingApi.push.status() says, once loaded
+  const [alertBusy, setAlertBusy] = useState("");       // "enable" | "disable" | "test" while a button is working
   const [alertMsg, setAlertMsg] = useState("");
-  const [alertSetup, setAlertSetup] = useState(false);  // phone setup steps open
-  const [topicCopied, setTopicCopied] = useState(false);
 
   const loadLive = () => {
     const api = typeof window !== "undefined" && window.weddingApi;
@@ -399,7 +397,7 @@ function WeddingDashboard() {
     const api = typeof window !== "undefined" && window.weddingApi;
     if (!api) return;
     loadLive();
-    api.alerts().then(setAlertSt).catch(() => {});
+    if (api.push) api.push.status().then(setAlertSt).catch(() => setAlertSt({ failed: true, devices: [] }));
     const t = setInterval(loadLive, 60000);
     const onShow = () => {
       if (!document.hidden) loadLive();
@@ -411,32 +409,27 @@ function WeddingDashboard() {
     };
   }, []);
 
+  // RSVP alerts are turned on per device: each phone asks its own notification system for permission.
   const alertDo = (action) => {
-    const api = typeof window !== "undefined" && window.weddingApi;
-    if (!api || alertBusy) return;
+    const push = typeof window !== "undefined" && window.weddingApi && window.weddingApi.push;
+    if (!push || alertBusy) return;
     setAlertBusy(action);
     setAlertMsg("");
-    api
-      .alertsDo(action)
+    const run = action === "enable" ? push.enable() : action === "disable" ? push.disable() : push.test(false);
+    run
       .then((res) => {
         if (action === "test") {
-          setAlertMsg(res.ok ? "Sent. Your phone should buzz within a few seconds." : "The test didn't go through. Try again in a minute.");
+          const missed = (res.results || []).filter((r) => !r.ok);
+          if (!res.ok) setAlertMsg("The test didn't go through" + (missed[0] && missed[0].status ? " (the phone's notification service answered " + missed[0].status + ")." : ". Try again in a minute."));
+          else if (missed.length) setAlertMsg("Sent, but it didn't reach: " + missed.map((r) => r.label).join(", ") + ".");
+          else setAlertMsg("Sent. Every connected device should buzz within a few seconds.");
         } else {
           setAlertSt(res);
-          if (action === "on") setAlertSetup(true);
+          setAlertMsg(action === "enable" ? "Alerts are on for this device. Tap Send a test to try it." : "Alerts are off for this device.");
         }
       })
-      .catch(() => setAlertMsg(action === "test" ? "The test didn't go through. Try again in a minute." : "Couldn't change that just now. Try again."))
+      .catch((e) => setAlertMsg((e && e.message) || "That didn't go through. Try again in a minute."))
       .finally(() => setAlertBusy(""));
-  };
-
-  const copyTopic = () => {
-    const t = alertSt && alertSt.topic;
-    if (!t || !navigator.clipboard) return;
-    navigator.clipboard.writeText(t).then(() => {
-      setTopicCopied(true);
-      setTimeout(() => setTopicCopied(false), 1600);
-    }).catch(() => {});
   };
 
   // Fix a reply's seat count in place (someone added a guest in their note, or two replies cover the same people).
@@ -639,6 +632,7 @@ function WeddingDashboard() {
   const rsvpInvited = named.filter((g) => g.rsvp === "invited").length;
   const rsvpPending = named.length - rsvpYes - rsvpNo;
   // Live website replies
+  const alertDevices = (alertSt && alertSt.devices) || [];
   const liveList = live.list || [];
   const liveNo = liveList.filter((r) => !r.attending).length;
   const liveHeads = liveList.filter((r) => r.attending).reduce((n, r) => n + (r.partySize || 1), 0);
@@ -1541,15 +1535,11 @@ function WeddingDashboard() {
 .wd-alerts.on .wd-alerts-state{color:#fff; background:var(--sage); border-color:transparent;}
 .wd-alerts p{font-size:13px; line-height:1.5; color:var(--ink-soft); margin:10px 0 0;}
 .wd-alerts p.wd-alerts-msg{color:var(--ink); font-weight:600;}
-.wd-alerts details{margin-top:10px;}
-.wd-alerts summary{cursor:pointer; font-size:12.5px; font-weight:700; color:var(--ink-soft);}
-.wd-alerts-steps{margin:8px 0 0; padding-left:20px; font-size:13px; line-height:1.75; color:var(--ink);}
-.wd-alerts-steps a{color:var(--clay-deep);}
-.wd-alerts code{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12.5px; padding:2px 7px; border-radius:6px;
-  border:1px solid var(--line); background:rgba(255,255,255,.6); user-select:all; overflow-wrap:anywhere;}
+.wd-alerts p b{color:var(--ink); font-weight:700;}
+.wd-alerts-steps{margin:10px 0 0; padding-left:20px; font-size:13px; line-height:1.7; color:var(--ink);}
 .wd-alerts-actions{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;}
 .wd-root.dark .wd-live-row{border-bottom-color:#2A3A33;}
-.wd-root.dark .wd-live-note,.wd-root.dark .wd-live-num,.wd-root.dark .wd-alerts,.wd-root.dark .wd-alerts code{
+.wd-root.dark .wd-live-note,.wd-root.dark .wd-live-num,.wd-root.dark .wd-alerts{
   background:rgba(255,255,255,.045);}
 @media (prefers-reduced-motion:reduce){ .wd-live-dot{animation:none;} }
 @media (max-width:520px){
@@ -1993,57 +1983,74 @@ function WeddingDashboard() {
               </p>
             )}
 
-            <div className={"wd-alerts" + (alertSt && alertSt.on ? " on" : "")}>
+            <div className={"wd-alerts" + (alertDevices.length ? " on" : "")}>
               <div className="wd-alerts-head">
                 <BellIcon size={15} strokeWidth={2} />
-                <b>Phone alerts</b>
-                <span className="wd-alerts-state">{!alertSt ? "checking…" : alertSt.on ? "on" : "off"}</span>
+                <b>RSVP alerts</b>
+                <span className="wd-alerts-state">
+                  {!alertSt
+                    ? "checking…"
+                    : alertSt.failed
+                    ? "unavailable"
+                    : alertDevices.length
+                    ? "on · " + alertDevices.length + (alertDevices.length === 1 ? " device" : " devices")
+                    : "off"}
+                </span>
               </div>
 
-              {alertSt && !alertSt.on && (
+              {alertSt && !alertSt.failed && (
                 <>
-                  <p>Get a buzz on your phones the moment someone replies. Setup takes about two minutes.</p>
-                  <div className="wd-alerts-actions">
-                    <button className="wd-bbtn" onClick={() => alertDo("on")} disabled={!!alertBusy}>
-                      {alertBusy === "on" ? "Turning on…" : "Turn on alerts"}
-                    </button>
-                  </div>
-                </>
-              )}
-
-              {alertSt && alertSt.on && (
-                <>
-                  <p>Every new reply sends a push with the name, party size and running total. Notes and emails stay here.</p>
-                  {alertSt.topic && (
-                    <details open={alertSetup} onToggle={(e) => setAlertSetup(e.currentTarget.open)}>
-                      <summary>Connect a phone</summary>
-                      <ol className="wd-alerts-steps">
-                        <li>
-                          Install the free <b>ntfy</b> app (
-                          <a href="https://apps.apple.com/us/app/ntfy/id1625396347" target="_blank" rel="noopener">iPhone</a>
-                          {" · "}
-                          <a href="https://play.google.com/store/apps/details?id=io.heckel.ntfy" target="_blank" rel="noopener">Android</a>
-                          ).
-                        </li>
-                        <li>
-                          In the app tap <b>+</b> and subscribe to this topic: <code>{alertSt.topic}</code>{" "}
-                          <button className="wd-live-refresh" onClick={copyTopic}>{topicCopied ? "copied" : "copy"}</button>
-                        </li>
-                        <li>Tap <b>Send a test</b> below. The phone should buzz.</li>
-                      </ol>
-                    </details>
+                  {alertDevices.length ? (
+                    <p>
+                      Each new reply buzzes{" "}
+                      {alertDevices.map((d, i) => (
+                        <span key={d.tag}>
+                          {i ? (i === alertDevices.length - 1 ? " and " : ", ") : ""}
+                          <b>{d.label}</b>
+                          {d.tag === alertSt.tag ? " (this one)" : ""}
+                        </span>
+                      ))}{" "}
+                      with the name, party size and running total. Notes and emails stay here.
+                    </p>
+                  ) : (
+                    <p>Get a buzz the moment someone replies. Each of you turns it on once, on your own phone. There's no app to install.</p>
                   )}
+
+                  {alertSt.needsInstall && (
+                    <ol className="wd-alerts-steps">
+                      <li>An iPhone only allows alerts from the Home Screen. In Safari, tap the <b>Share</b> button, then <b>Add to Home Screen</b>.</li>
+                      <li>Open the new <b>Wedding Plan</b> icon and enter the passcode.</li>
+                      <li>Scroll back to this box and tap <b>Turn on alerts</b>.</li>
+                    </ol>
+                  )}
+                  {!alertSt.supported && !alertSt.needsInstall && (
+                    <p>This browser can't show notifications. Open the planner in Safari or Chrome to turn alerts on.</p>
+                  )}
+                  {alertSt.blocked && (
+                    <p>Notifications are blocked for this site on this device. Allow them in the browser's site settings, then come back.</p>
+                  )}
+
                   <div className="wd-alerts-actions">
-                    <button className="wd-bbtn" onClick={() => alertDo("test")} disabled={!!alertBusy}>
-                      {alertBusy === "test" ? "Sending…" : "Send a test"}
-                    </button>
-                    <button className="wd-bbtn" onClick={() => alertDo("off")} disabled={!!alertBusy}>
-                      {alertBusy === "off" ? "Turning off…" : "Turn off"}
-                    </button>
+                    {alertSt.supported && !alertSt.onHere && !alertSt.blocked && (
+                      <button className="wd-bbtn" onClick={() => alertDo("enable")} disabled={!!alertBusy}>
+                        {alertBusy === "enable" ? "Turning on…" : "Turn on alerts on this device"}
+                      </button>
+                    )}
+                    {alertDevices.length > 0 && (
+                      <button className="wd-bbtn" onClick={() => alertDo("test")} disabled={!!alertBusy}>
+                        {alertBusy === "test" ? "Sending…" : "Send a test"}
+                      </button>
+                    )}
+                    {alertSt.onHere && (
+                      <button className="wd-bbtn" onClick={() => alertDo("disable")} disabled={!!alertBusy}>
+                        {alertBusy === "disable" ? "Turning off…" : "Turn off on this device"}
+                      </button>
+                    )}
                   </div>
                 </>
               )}
 
+              {alertSt && alertSt.failed && <p>Couldn't check the alert settings just now. Reload the page to try again.</p>}
               {alertMsg ? <p className="wd-alerts-msg">{alertMsg}</p> : null}
             </div>
           </section>

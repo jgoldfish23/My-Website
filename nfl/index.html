@@ -7098,7 +7098,7 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
   const HUB=((/^\/(cfb|nfl|nba|cbb)\//.exec(location.pathname)||[])[1])||((/^(CFB|NFL|NBA|CBB)\b/.exec(document.title)||[])[1]||'').toLowerCase();
   const GAME=/^(Game preview|What to watch|How they match up|Series history|Track a bet|Head to head|Form|Projected starters|Draft stock)$/i;
   const CFG={
-    cfb:{keep:['Record','Points','Power rating','Playoff odds'], team:/^(Recruiting|Analytics|Season stats|Player stats|NFL draft stock|Depth chart|.+ race)$/i, game:GAME},
+    cfb:{keep:['Record','Playoff ranking','Power rating','Playoff odds','Points'], team:/^(Recruiting|Analytics|Season stats|Player stats|NFL draft stock|Depth chart|.+ race)$/i, game:GAME},
     nba:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(\d{4}-\d{2} schedule|Projections|Odds|Team analytics|Player stats|Plus-minus|Player analytics|Salary cap|Depth chart|Roster|Draft)$/i, game:GAME},
     nfl:{keep:['Record','Power rating','Projected finish','Playoff odds'], team:/^(Projections|Odds|Analytics|Team analytics|Player analytics|Season stats|Player stats|Salary cap|Depth chart|Roster|Draft|NFL draft)$/i, game:GAME},
     cbb:{keep:['Record','Power rating','Projected finish','Bracketology'], team:/^(Roster & player stats)$/i, game:/(?!)/}}[HUB];
@@ -7114,7 +7114,7 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
   function paint(el){ const on=el.dataset.foldOpen==='1'; el.classList.toggle('fold-closed',!on); const b=el.querySelector(':scope > .fold-btn'); if(b){ b.setAttribute('aria-expanded',on?'true':'false'); b.textContent=on?'Hide':'Show'; }
     if(el.classList.contains('sec')) group(el).forEach(x=>x.classList.toggle('fold-hide',!on)); }
   function tiles(){ if(V.querySelector('.fold-keep, .fold-more')) return; const kids=[...V.children]; const firstSec=kids.findIndex(e=>e.classList.contains('sec')); const grids=kids.slice(0, firstSec<0?kids.length:firstSec).filter(e=>e.classList.contains('grid')&&e.querySelector(':scope > .tile'));
-    if(!grids.length) return; const all=grids.flatMap(g=>[...g.querySelectorAll(':scope > .tile')]); const pick=[]; CFG.keep.forEach(k=>{ const t=all.find(x=>{ const l=x.querySelector('.lbl'); return l&&l.textContent.trim().toLowerCase()===k.toLowerCase(); }); if(t&&pick.indexOf(t)<0) pick.push(t); });
+    if(!grids.length) return; const all=grids.flatMap(g=>[...g.querySelectorAll(':scope > .tile')]); const pick=[]; CFG.keep.forEach(k=>{ const t=all.find(x=>{ const l=x.querySelector('.lbl'); return l&&l.textContent.trim().toLowerCase()===k.toLowerCase(); }); if(t&&pick.indexOf(t)<0) pick.push(t); }); pick.length=Math.min(pick.length,4); /* the first four found: on CFB team pages the playoff ranking once the committee ranks teams, else points (2026-11-10) */
     if(pick.length<2||all.length<=pick.length) return;
     /* the four move (not copy: some tiles update themselves by id) into their own row; "More numbers" shows the rest below */
     const keep=document.createElement('div'); keep.className='grid fold-keep'; grids[0].before(keep); pick.forEach(t=>keep.appendChild(t));

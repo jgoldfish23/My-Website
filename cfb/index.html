@@ -11880,6 +11880,69 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
 /* winodds:end */
 </script>
 <script type="text/x-jsh-app">
+/* trend:start - player trends (2026-11-10, Jamo picked "Player trends"). Inlined by the CFB, NFL and NBA builds (in
+   front of the app) so their player pages can show, from the box scores already on the page:
+   - a last-10-games line for the three stats that matter for the player's role (bars, newest on the right, with a
+     dashed line at his season average);
+   - "Hot" or "Cold" only when his last 5 games really differ from his season: at least 8 games played, at least 15%
+     and a set amount off his average (3 points, 25 yards and so on), and more than half his usual game-to-game swing;
+   - home and away averages side by side.
+   Nothing here is invented: every number is an average of games in the box scores.
+   Use: JSHTrend.html(rows, stats) where rows are newest first: {date: 'Nov 2', home: true, opp: 'DAL', v: {key: number}}
+   and stats are {k: key, l: 'label', d: decimals, min: smallest gap worth a tag}. */
+var JSHTrend = window.JSHTrend || (window.JSHTrend = (function(){
+  var D = document;
+  var esc = function(x){ return String(x == null ? '' : x).replace(/[&<>"]/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); };
+  var num = function(x){ if (x == null || x === '' || x === '--' || x === '—') return null; var n = parseFloat(String(x).replace(/,/g, '')); return isFinite(n) ? n : null; };
+  var avg = function(a){ return a.length ? a.reduce(function(s, x){ return s + x; }, 0) / a.length : null; };
+  var fmt = function(x, d){ return x == null ? '—' : (+x).toFixed(d || 0); };
+  var CSS = '.tr-card .tr-row{display:grid;grid-template-columns:minmax(92px,1fr) minmax(0,2.2fr);gap:4px 14px;align-items:center;padding:10px 0;border-top:1px solid color-mix(in srgb,var(--line,#2a3448) 70%,transparent)}'
+    + '.tr-card .tr-row:first-child{border-top:0;padding-top:2px}'
+    + '.tr-card .tr-k{font-weight:800;font-size:14px}.tr-card .tr-k small{display:block;font-weight:600;font-size:12px;color:var(--ink-3,#8f9aac);margin-top:2px}'
+    + '.tr-card .tr-k .tr-tag{display:inline-block;margin:4px 0 0;padding:1px 8px;border-radius:999px;font-size:11.5px;font-weight:800;letter-spacing:.02em}'
+    + '.tr-card .tr-tag.hot{color:#ffb27a;background:rgba(255,138,61,.16);border:1px solid rgba(255,138,61,.45)}'
+    + '.tr-card .tr-tag.cold{color:#9fd0ff;background:rgba(91,180,255,.14);border:1px solid rgba(91,180,255,.42)}'
+    + '.tr-card svg{display:block;width:100%;height:58px;overflow:visible}.tr-card svg rect{fill:color-mix(in srgb,var(--accent,#5b8cff) 70%,transparent)}'
+    + '.tr-card svg rect.l5{fill:var(--accent,#5b8cff)}.tr-card svg line{stroke:var(--ink-3,#8f9aac);stroke-width:1;stroke-dasharray:3 3}'
+    + '.tr-card svg text{font-size:10.5px;fill:var(--ink-3,#8f9aac);font-weight:700}'
+    + '.tr-card .tr-sp{margin-top:12px}.tr-card .tr-sp table{width:100%}.tr-card .tr-note{margin-top:8px;font-size:12px;color:var(--ink-3,#8f9aac)}';
+  function css(){ if (D.getElementById('tr-css')) return; var s = D.createElement('style'); s.id = 'tr-css'; s.textContent = CSS; (D.head || D.documentElement).appendChild(s); }
+  function spark(vals, mean, labels){ /* vals oldest -> newest (up to 10) */
+    var W = 300, H = 58, n = vals.length, gap = 4, bw = Math.max(6, (W - gap * (n - 1)) / Math.max(n, 1)), mx = Math.max.apply(null, vals.map(function(v){ return v || 0; }).concat([mean || 0, 1]));
+    var y = function(v){ return H - 14 - (H - 18) * (Math.max(0, v || 0) / mx); }, out = '';
+    vals.forEach(function(v, i){ var x = i * (bw + gap), top = y(v); out += '<rect class="' + (i >= n - 5 ? 'l5' : '') + '" x="' + x.toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + Math.max(1.5, H - 14 - top).toFixed(1) + '" rx="2"><title>' + esc(labels[i]) + '</title></rect>'; });
+    if (mean != null) out += '<line x1="0" x2="' + W + '" y1="' + y(mean).toFixed(1) + '" y2="' + y(mean).toFixed(1) + '"/>';
+    out += '<text x="0" y="' + H + '">' + (n >= 10 ? '10 games ago' : n + ' games ago') + '</text><text x="' + W + '" y="' + H + '" text-anchor="end">latest</text>';
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" role="img" aria-label="last ' + n + ' games">' + out + '</svg>'; }
+  function html(rows, stats){
+    rows = (rows || []).filter(function(r){ return r && r.v; }); if (rows.length < 3 || !stats || !stats.length) return '';
+    css();
+    var body = '', any = false;
+    stats.forEach(function(s){
+      var all = rows.map(function(r){ return num(r.v[s.k]); }).filter(function(v){ return v != null; }); if (all.length < 3) return;
+      any = true; var mean = avg(all), l5 = avg(rows.slice(0, 5).map(function(r){ return num(r.v[s.k]); }).filter(function(v){ return v != null; }));
+      var sd = Math.sqrt(avg(all.map(function(v){ return (v - mean) * (v - mean); })) || 0), gapV = l5 - mean, tag = '';
+      if (all.length >= 8 && l5 != null && Math.abs(gapV) >= Math.max(0.15 * Math.abs(mean), s.min || 0) && Math.abs(gapV) > 0.5 * sd)
+        tag = '<span class="tr-tag ' + (gapV > 0 ? 'hot' : 'cold') + '">' + (gapV > 0 ? 'Hot' : 'Cold') + ': ' + fmt(l5, s.d) + ' last 5</span>';
+      var last = rows.slice(0, 10).slice().reverse();
+      body += '<div class="tr-row"><div class="tr-k">' + esc(s.l) + '<small>' + fmt(mean, s.d) + ' a game · last 5: ' + fmt(l5, s.d) + '</small>' + tag + '</div><div>'
+        + spark(last.map(function(r){ return num(r.v[s.k]); }), mean, last.map(function(r){ return r.date + (r.home ? ' vs ' : ' at ') + r.opp + ': ' + (num(r.v[s.k]) == null ? '—' : r.v[s.k]); })) + '</div></div>';
+    });
+    if (!any) return '';
+    var H = rows.filter(function(r){ return r.home; }), A = rows.filter(function(r){ return !r.home; }), split = '';
+    if (H.length && A.length) {
+      var cell = function(list, s){ return fmt(avg(list.map(function(r){ return num(r.v[s.k]); }).filter(function(v){ return v != null; })), s.d); };
+      split = '<div class="tr-sp"><div class="tblwrap"><table class="tbl"><thead><tr><th>Split</th><th class="r">G</th>' + stats.map(function(s){ return '<th class="r">' + esc(s.l) + '</th>'; }).join('') + '</tr></thead><tbody>'
+        + '<tr><td>Home</td><td class="r">' + H.length + '</td>' + stats.map(function(s){ return '<td class="r">' + cell(H, s) + '</td>'; }).join('') + '</tr>'
+        + '<tr><td>Away' + (rows.some(function(r){ return r.neutral; }) ? ' &amp; neutral' : '') + '</td><td class="r">' + A.length + '</td>' + stats.map(function(s){ return '<td class="r">' + cell(A, s) + '</td>'; }).join('') + '</tr></tbody></table></div></div>';
+    }
+    return '<div class="sec"><h2>Trends</h2><span class="muted">last ' + Math.min(10, rows.length) + ' games · per game</span></div><div class="card tr-card"><div class="bd">' + body + split
+      + '<div class="tr-note">Darker bars are the last 5 games; the dashed line is the season average. "Hot" or "Cold" shows only when the last 5 really stand out.</div></div></div>'; }
+  return {html: html, num: num};
+})());
+/* trend:end */
+</script>
+<script type="text/x-jsh-app">
 (function(){
 'use strict';
 /* =========================================================
@@ -12740,6 +12803,18 @@ function gheadStyle(a,h){ const dark=isDarkMode(); const surf=hexRgb(dark?'#1112
 const PLAYER_CATS=['passing','rushing','receiving','defensive','interceptions','fumbles','kicking','punting','kickReturns','puntReturns'];
 function playerLink(teamName, name, label){ if(!teamName||!name) return esc(label||name||''); return '<a class="plink" href="#/player/'+enc(teamName)+'/'+enc(name)+'">'+esc(label||name)+'</a>'; }
 /* every box-score line this player has, newest first */
+/* player trends (sports-hub/polish/trend.js, 2026-11-10, Jamo picked "Player trends"): the three numbers that fit the
+   player's role (passer, runner, receiver or defender) over the last 10 games, hot or cold only when the last 5 really
+   stand out, and home and away averages. Kickers and punters get none. Columns are read by label (statCell). */
+function trendHTML(side, log){ if(!window.JSHTrend||!log.length) return ''; const n=c=>log.filter(x=>x.cats[c]).length, half=Math.max(2,log.length/2);
+  const val=(x,c,lab)=>x.cats[c]?statCell(c,x.cats[c],lab):0, tot=(c,lab)=>log.reduce((s,x)=>s+(JSHTrend.num(val(x,c,lab))||0),0); let stats;
+  if(n('kicking')>=half||n('punting')>=half) return '';
+  if(n('passing')>=half) stats=[['passing','YDS','Pass yards',0,25],['passing','TD','Pass TDs',1,0.8],['rushing','YDS','Rush yards',0,10]];
+  else if(n('rushing')>=half||n('receiving')>=half){ if(tot('rushing','CAR')>=tot('receiving','REC')) stats=[['rushing','YDS','Rush yards',0,15],['rushing','CAR','Carries',1,3],['receiving','YDS','Rec. yards',0,10]]; else stats=[['receiving','REC','Catches',1,1.5],['receiving','YDS','Rec. yards',0,15],(BOXL.receiving||[]).indexOf('TGTS')>=0?['receiving','TGTS','Targets',1,2]:['receiving','TD','Rec. TDs',1,0.5]]; }
+  else if(n('defensive')>=half) stats=[['defensive','TOT','Tackles',1,2],['defensive','SACKS','Sacks',1,0.5],['defensive','TFL','Tackles for loss',1,0.5]];
+  else return '';
+  const rows=log.filter(x=>x.g).map(x=>{ const home=x.g.home===side; const v={}; stats.forEach((s,i)=>{ v['s'+i]=val(x,s[0],s[1]); }); return {date:fmtDate(x.b.date,false), home, neutral:!!x.g.neutral, opp:tshort(home?x.g.away:x.g.home), v}; });
+  return JSHTrend.html(rows, stats.map((s,i)=>({k:'s'+i, l:s[2], d:s[3], min:s[4]}))); }
 function playerLog(teamName, name){ const key=dkey(name); const out=[]; (BOX_BY_TEAM[teamName]||[]).forEach(b=>{ const side=boxSide(b,teamName); if(!side) return; const g=GAME_BY_KEY[b.key]; const cats={}; let any=false; PLAYER_CATS.forEach(c=>{ const row=(b.players[side]||{})[c]; if(!row) return; const hit=row.find(p=>dkey(p.n)===key); if(hit){ cats[c]=hit.s; any=true; } }); if(any) out.push({b,g,cats}); }); return out.sort((x,y)=>x.b.date<y.b.date?1:-1); }
 function playerEntry(teamName, name){ const key=dkey(name); const d=DEPTH[teamName]; let info=null, pos='', string=null; if(d&&d.depth) d.depth.forEach(p=>(p.players||[]).forEach((pl,i)=>{ if(!info&&dkey(pl.n)===key){ info=pl; pos=String(p.pos).replace(/\d+$/,''); string=i; } })); return {info,pos,string}; }
 function statCell(cat, stats, label){ const L=BOXL[cat]||[]; const i=L.indexOf(label); return i<0?'':(stats[i]??''); }
@@ -12752,6 +12827,7 @@ function renderPlayer(teamName, name){ setNav('teams'); teamName=norm(teamName||
   html+='<div class="thead"><div class="bar" style="background:'+uiColor(t)+'"></div>'+mono(t)+'<div class="ttl"><div class="eyebrow">'+esc(t.disp)+(pos?' · '+esc(pos):'')+(string!=null?' · '+(string===0?'starter':'backup'):'')+'</div><h1>'+esc(name)+'</h1><div class="meta">'+[info&&info.cls?esc(info.cls):'', info&&info.ht?esc(info.ht):'', info&&info.wt?esc(info.wt)+' lb':'', info&&info.home?esc(info.home):'', info&&info.prev?'from '+esc(info.prev):''].filter(Boolean).map(x=>'<span>'+x+'</span>').join('')+'</div></div><div class="ranks">'+(dr?'<div class="rb"><div class="v">'+esc(draftRankStr(dr))+'</div><div class="k">2027 board</div></div>':'')+(info&&info.rt?'<div class="rb"><div class="v">'+esc(String(info.rt))+'</div><div class="k">247 rating</div></div>':'')+(log.length?(function(){ const og=plOffG(teamName,name); return '<div class="rb"><div class="v">'+Math.max(log.length,og?og.gp:0)+'</div><div class="k">Games'+(og?' · '+og.gs+' start'+(og.gs===1?'':'s'):'')+'</div></div>'; })():'')+'</div></div>';
   if(dr) html+='<div class="mini" style="margin:10px 0">'+roundPill(dr)+' <span class="dim">'+esc(draftWhy(dr))+'</span></div>';
   html+=plAnalyticsHTML(teamName,name); if(season.length){ html+='<div class="sec"><h2>Season</h2><span class="muted">totals from every box score</span></div><div class="ldgrid">'+season.map(e=>'<div class="ldr-row"><span class="k">'+esc((CATV[e.cat]||{t:e.cat}).t)+'</span><div class="mini">'+esc(seasonStatLine(e))+'</div></div>').join('')+'</div>'; }
+  html+=trendHTML(teamName, log);
   if(log.length){ const cats=PLAYER_CATS.filter(c=>log.some(x=>x.cats[c]));
     html+='<div class="sec"><h2>Game log</h2><span class="muted">'+log.length+' game'+(log.length>1?'s':'')+'</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th>'+cats.map(c=>{ const v=CATV[c]||{t:c,c:[]}; return v.c.map(x=>'<th class="r">'+esc(x)+'</th>').join(''); }).join('')+'</tr></thead><tbody>'+log.map(x=>{ const g=x.g; const home=g&&g.home===teamName; const opp=g?team(home?g.away:g.home):null; const pf=g?(home?g.hs:g.as):null, pa=g?(home?g.as:g.hs):null;
       return '<tr'+(g?' class="click" data-href="#/game/'+g.id+'"':'')+'><td class="small nw">'+esc(fmtDate(x.b.date,false))+'</td><td>'+(opp?(home?'vs ':'at ')+chip(opp.name,{short:true,norank:true}):'—')+'</td><td class="small nw">'+(pf!=null?(pf>pa?'<span class="pos">W</span>':'<span class="neg">L</span>')+' '+pf+'-'+pa:'—')+'</td>'+cats.map(c=>{ const v=CATV[c]||{c:[]}; const s=x.cats[c]; return v.c.map(lab=>'<td class="r">'+(s?esc(statCell(c,s,lab)):'')+'</td>').join(''); }).join('')+'</tr>'; }).join('')+'</tbody></table></div>'; }
@@ -13873,7 +13949,7 @@ function woNow(g){ if(!g.live||g.tbd||!window.JSHOdds) return null; const ph=JSH
 function woTag(g){ const w=woNow(g); return w?'<span class="wo-tag" title="Hub win chance">'+esc(tshort(w.t))+' '+JSHOdds.pc(w.p)+'</span>':''; }
 function woHTML(g){ if(!(g.played||g.live)||g.tbd||!window.JSHOdds) return ''; const eid=espnIdOf(g); if(!eid) return ''; const a=team(g.away), h=team(g.home); const [ca,ch]=pairColors(a,h); return '<div class="wo" data-lg="cfb" data-id="'+esc(eid)+'" data-mu="'+projAt(g).diff.toFixed(2)+'" data-sd="'+SD+'" data-a="'+esc(a.name)+'" data-h="'+esc(h.name)+'" data-an="'+esc(tshort(a.name))+'" data-hn="'+esc(tshort(h.name))+'" data-ac="'+esc(ca)+'" data-hc="'+esc(ch)+'"></div>'; }
 /* Follow a game (sports-hub/polish/follow.js, 2026-11-10): what the Follow button needs to know about a game */
-window.JSH_GAME=function(id){ const g=GI[id]; if(!g||g.tbd) return null; const eid=espnIdOf(g); if(!eid) return null; const a=team(g.away), h=team(g.home); const [ca,ch]=pairColors(a,h); const la=logoOf(a), lh=logoOf(h); return {lg:'cfb', eid:String(eid), gid:String(g.id), live:!!g.live, as:g.as, hs:g.hs, det:g.clk, per:g.per, a:tshort(a.name), h:tshort(h.name), an:a.name, hn:h.name, ac:ca, hc:ch, al:la?(la.icon||la.wm||''):'', hl:lh?(lh.icon||lh.wm||''):'', mu:+proj(g).diff.toFixed(2), sd:SD, href:'/cfb/#/game/'+encodeURIComponent(g.id), done:!!g.played}; };
+window.JSH_GAME=function(id){ const g=GI[id]; if(!g||g.tbd) return null; const eid=espnIdOf(g); if(!eid) return null; const a=team(g.away), h=team(g.home); const [ca,ch]=pairColors(a,h); const la=logoOf(a), lh=logoOf(h); return {lg:'cfb', eid:String(eid), gid:String(g.id), live:!!(g.live&&LIVE.last&&Date.now()-LIVE.last<90000), as:g.as, hs:g.hs, det:g.clk, per:g.per, a:tshort(a.name), h:tshort(h.name), an:a.name, hn:h.name, ac:ca, hc:ch, al:la?(la.icon||la.wm||''):'', hl:lh?(lh.icon||lh.wm||''):'', mu:+proj(g).diff.toFixed(2), sd:SD, href:'/cfb/#/game/'+encodeURIComponent(g.id), done:!!g.played}; };
 function wpData(g){ const s=LIVE.sum[g.id]; return (s&&s.wp&&s.wp.p&&s.wp.p.length>1)?s.wp:(WP[g.id]||null); }
 function wpFetch(g){ if(WP[g.id]!==undefined||WP_PEND[g.id]) return; const id=espnIdOf(g); if(!id){ WP[g.id]=null; return; } WP_PEND[g.id]=1;
   fetch(LIVE_API+'/game?event='+id).then(r=>r.ok?r.json():null).then(j=>{ WP[g.id]=(j&&j.wp&&j.wp.p&&j.wp.p.length>1)?j.wp:null; }).catch(()=>{ WP[g.id]=null; }).finally(()=>{ delete WP_PEND[g.id]; const el=document.getElementById('wpc-'+g.id); if(el) el.outerHTML=wpChartHTML(g); }); }

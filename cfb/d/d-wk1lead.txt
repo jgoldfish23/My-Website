@@ -1657,9 +1657,9 @@
 2026-10-24|Kansas State|Arizona State|Kansas State|passingYards|Jacob Knuth|QB|26/41, 194 YDS, 1 TD
 2026-10-24|Kansas State|Arizona State|Arizona State|rushingYards|Cardae Mack|RB|26 CAR, 159 YDS, 4 TD
 2026-10-24|Kansas State|Arizona State|Arizona State|receivingYards|Reed Harris|WR|6 REC, 147 YDS
-2026-10-24|Eastern Michigan|Ohio|Ohio|passingYards|Nick Poulos|QB|19/29, 266 YDS, 1 TD
+2026-10-24|Eastern Michigan|Ohio|Ohio|passingYards|Nick Poulos|QB|20/30, 278 YDS, 1 TD
 2026-10-24|Eastern Michigan|Ohio|Eastern Michigan|rushingYards|Amareon Blue|RB|11 CAR, 67 YDS
-2026-10-24|Eastern Michigan|Ohio|Ohio|receivingYards|Dom Dorwart|WR|4 REC, 125 YDS, 1 TD
+2026-10-24|Eastern Michigan|Ohio|Ohio|receivingYards|Dom Dorwart|WR|4 REC, 142 YDS, 1 TD
 2026-10-24|UL Monroe|Troy|UL Monroe|passingYards|Aidan Armenta|QB|13/22, 147 YDS, 2 TD
 2026-10-24|UL Monroe|Troy|Troy|rushingYards|Jordan Lovett|RB|17 CAR, 70 YDS
 2026-10-24|UL Monroe|Troy|Troy|receivingYards|TJ Lott|WR|1 REC, 32 YDS

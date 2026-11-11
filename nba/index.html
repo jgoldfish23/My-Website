@@ -3351,6 +3351,23 @@ a.nl-t:hover{border-color:var(--accent)}
 .bs-panel{background:#14161b}
 :root[data-theme="light"] .bs-panel{background:#fff}
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .bs-panel{background:#fff}}
+/* Rookie of the Year race on the home page (2026-11-10) */
+.royh .bd{padding-top:4px}
+.royh-r{display:grid;grid-template-columns:18px 36px minmax(0,1fr) auto;align-items:center;gap:10px;padding:8px 4px;color:inherit;text-decoration:none;border-radius:8px}
+.royh-r+.royh-r{border-top:1px solid var(--line-2);border-radius:0}
+.royh-r:hover{text-decoration:none;background:var(--surface-2)}
+.royh-r .rk{font-weight:800;color:var(--ink-3);text-align:center;font-variant-numeric:tabular-nums}
+.royh-r img{width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:top;background:var(--surface-2)}
+.royh-r img.lg{border-radius:8px;object-fit:contain;background:none}
+.royh-r .nm{min-width:0;font-weight:700;font-size:14.5px;line-height:1.2;color:var(--ink)}
+.royh-r .nm small{display:block;font-weight:500;font-size:12px;color:var(--ink-3);margin-top:2px}
+.royh-r .sc{text-align:right;font-variant-numeric:tabular-nums;font-weight:800;font-size:15px;color:var(--ink)}
+.royh-r .sc small{display:block;font-size:11px;font-weight:600;color:var(--ink-3)}
+.royh-r.mine{box-shadow:inset 3px 0 0 var(--gold)}
+.royh-gap{font-size:12px;letter-spacing:.3em;color:var(--ink-3);text-align:center;padding:0 0 2px}
+.royh-go{margin-top:10px}
+.hb-roy{max-width:440px}
+@media (min-width:981px){.homeband.has-roy .hb-main{grid-row:span 2}.homeband.has-roy .hb-side,.homeband.has-roy .hb-roy{grid-column:2}}
 </style>
 
 <header class="top">
@@ -9079,7 +9096,17 @@ document.addEventListener('visibilitychange', ()=>{ if(!document.hidden&&LIVE.on
 function liveTeamRow(g, side){ const t=team(side==='home'?g.home:g.away); const pts=side==='home'?g.hs:g.as, opp=side==='home'?g.as:g.hs; return '<div class="lrow'+(pts>opp?' w':'')+'">'+(logoOf(t)?'<img class="sw sw-logo" src="'+logoOf(t).icon+'" alt="">':'<span class="sw" style="background:'+uiColor(t)+'"></span>')+'<span class="nm">'+esc(t.disp)+'</span><span class="sc">'+scoreSpan(g,side==='home'?'h':'a',pts)+'</span></div>'; }
 function liveStripHTML(d){ if(!LIVE.on||d!==todayStr&&d!==addDays(todayStr,-1)) return ''; if(!LIVE.last&&!LIVE.err&&liveDates().length) return '<div class="sec" style="margin-top:4px"><h2><span class="livedot"></span> Live scores</h2><span class="muted">checking for games in progress…</span></div><div class="livewait"></div>'; const live=G.filter(g=>g.live).sort((a,b)=>interest(b)-interest(a)); let html=''; if(live.length){ html+='<div class="sec" style="margin-top:4px"><h2><span class="livedot"></span> Live now</h2><span class="muted">'+live.length+' game'+(live.length>1?'s':'')+' in progress · updates every 30 seconds</span></div><div class="grid g4 livegrid">'+live.map(g=>'<a class="card wcard livecard" href="#/game/'+g.id+'">'+liveTeamRow(g,'away')+liveTeamRow(g,'home')+'<div class="lst"><b>'+esc(g.clk||'In progress')+'</b>'+woTag(g)+(g.spread!=null?' · <span class="dim">'+esc(spreadStr(g,{short:true}))+'</span>':'')+'</div>'+(g.last?'<div class="wh">'+esc(g.last)+'</div>':'')+'</a>').join('')+'</div>'; return html; } const now=Date.now(); const up=G.filter(g=>!g.played&&!g.live&&g.date===d).map(g=>({g,k:kickMs(g)})).filter(x=>x.k!=null&&x.k>now-20*60e3).sort((a,b)=>a.k-b.k).slice(0,4); if(!up.length) return ''; html+='<div class="sec" style="margin-top:4px"><h2>Next tip-offs</h2><span class="muted">nothing in progress right now · scores appear here live once games start</span></div><div class="grid g4 livegrid">'+up.map(({g,k})=>{ const mins=Math.round((k-now)/60e3); const when = mins<=0?'tipping off now':mins<60?'in '+mins+' min':'in '+Math.round(mins/60)+' hours'; return '<a class="card wcard" href="#/game/'+g.id+'"><div class="wm">'+esc(tshort(g.away))+' <span class="dim">'+(g.neutral?'vs':'at')+'</span> '+esc(tshort(g.home))+'</div><div class="wt">'+esc(kick(g))+(g.tv?' · '+esc(tvShort(g.tv)):'')+'</div><div class="wh">'+esc(when)+(g.spread!=null?' · '+esc(spreadStr(g,{short:true})):'')+'</div></a>'; }).join('')+'</div>'; return html; }
 function liveFlash(ids){ if(!ids||!ids.length) return; ids.forEach(id=>{ document.querySelectorAll('[data-href="#/game/'+id+'"], a[href="#/game/'+id+'"]').forEach(el=>{ el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'), 2000); }); }); }
-function homeBandHTML(d){ const live=liveStripHTML(d); const fav=sbTeamCardHTML(d); const favSec='<div class="sec"><h2>Your team</h2><span class="muted">'+esc(SEASON_LABEL+(G.some(g=>g.date===d&&g.pre)?' preseason':' season'))+'</span></div>'; if(live&&fav) return '<div class="homeband"><div class="hb-main">'+live+'</div><div class="hb-side">'+favSec+fav+'</div></div>'; if(live) return '<div class="homeband one">'+live+'</div>'; if(fav) return '<div class="homeband one"><div class="hb-side">'+favSec+fav+'</div></div>'; return ''; }
+function homeBandHTML(d){ const live=liveStripHTML(d); const fav=sbTeamCardHTML(d); const favSec='<div class="sec"><h2>Your team</h2><span class="muted">'+esc(SEASON_LABEL+(G.some(g=>g.date===d&&g.pre)?' preseason':' season'))+'</span></div>'; const roy=royHomeHTML(), R=roy?'<div class="hb-roy">'+roy+'</div>':'', S=fav?'<div class="hb-side">'+favSec+fav+'</div>':''; /* the race card is its own block: under Your team on a computer, after Live now on a phone */ if(live&&(S||R)) return '<div class="homeband'+(R?' has-roy':'')+'"><div class="hb-main">'+live+'</div>'+S+R+'</div>'; if(live) return '<div class="homeband one">'+live+'</div>'; if(S||R) return '<div class="homeband one">'+S+R+'</div>'; return ''; }
+/* Rookie of the Year race on the home page (2026-11-10, Jamo: "Add the Rookie of the Year race to the NBA home page"):
+   the top 3 by the hub's own Rookie score (d-roy, the same numbers as #/rookies), plus your team's best rookie when he is
+   further down, each linking to his player page, and a button to the full race. Hidden until rookies are ranked. */
+function royHomeHTML(){ const D=royHomeHTML.d||(royHomeHTML.d=loadJSON('d-roy')||{r:{}}); const R=D.r||{}; if(!Object.keys(R).length) return ''; const who={};
+  Object.keys(ROST||{}).forEach(ab=>(ROST[ab]||[]).forEach(p=>{ if(p&&p.id&&R[p.id]&&!who[p.id]) who[p.id]={ab,p}; }));
+  const list=Object.keys(R).filter(id=>who[id]).map(id=>({rank:R[id][0], score:R[id][1], ab:who[id].ab, p:who[id].p})).sort((a,b)=>a.rank-b.rank); if(!list.length) return '';
+  const fav=favAb(), mine=list.find(x=>x.ab===fav), extra=mine&&mine.rank>3?mine:null;
+  const row=x=>{ const cur=psById(x.p.id), lg=logoOf(x.ab); const pic=x.p.hs?'<img src="https://a.espncdn.com/i/headshots/nba/players/full/'+esc(x.p.id)+'.png" alt="" loading="lazy">':(lg?'<img class="lg" src="'+lg.icon+'" alt="" loading="lazy">':'<span></span>');
+    return '<a class="royh-r'+(x.ab===fav?' mine':'')+'" href="#/player/'+enc(x.ab)+'/'+enc(x.p.n)+'"><span class="rk">'+x.rank+'</span>'+pic+'<span class="nm">'+esc(x.p.n)+'<small>'+esc(team(x.ab).disp)+(cur&&cur.pts!=null?' · '+num1(cur.pts)+' ppg':'')+'</small></span><span class="sc">'+num1(x.score)+'<small>score</small></span></a>'; };
+  return '<div class="sec"><h2>Rookie of the Year race</h2><span class="muted">the hub’s Rookie score'+(D.through?' · through '+esc(fmtDate(D.through,false)):'')+'</span></div><div class="card royh"><div class="bd">'+list.slice(0,3).map(row).join('')+(extra?'<div class="royh-gap" aria-hidden="true">···</div>'+row(extra):'')+'<div class="royh-go"><a class="btn sm" href="#/rookies">The full race ›</a></div></div></div>'; }
 function liveWarm(){ if(!LIVE.on) return; try{ const raw=sessionStorage.getItem('nba-live'); if(!raw) return; const c=JSON.parse(raw); if(!c||!c.snap||Date.now()-c.t>3*60e3) return; c.snap.forEach(e=>applyLiveEvent(e)); LIVE.last=c.t; clearStats(); }catch(e){} }
 liveWarm();
 

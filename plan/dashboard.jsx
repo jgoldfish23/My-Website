@@ -10,6 +10,7 @@ const CopyIcon = LucideReact.Copy || Blank;
 const PinIcon = LucideReact.Pin || Blank;
 const MapPinIcon = LucideReact.MapPin || Blank;
 const RotateIcon = LucideReact.RotateCcw || Blank;
+const BellIcon = LucideReact.Bell || Blank;
 
 const STORAGE_KEY = "wedding_dashboard_state";
 const uid = () => Math.random().toString(36).slice(2, 9);
@@ -376,6 +377,77 @@ function WeddingDashboard() {
   const focusRef = useRef(null);
   const importRef = useRef(null);
 
+  // ---- Live website RSVPs ----
+  // Read straight from the site (the same replies /admin shows); they are not part of this planner's saved state.
+  const [live, setLive] = useState({ list: null, failed: false, at: null });
+  const [alertSt, setAlertSt] = useState(null);         // { on, topic, source } once loaded
+  const [alertBusy, setAlertBusy] = useState("");       // "on" | "off" | "test" while a button is working
+  const [alertMsg, setAlertMsg] = useState("");
+  const [alertSetup, setAlertSetup] = useState(false);  // phone setup steps open
+  const [topicCopied, setTopicCopied] = useState(false);
+
+  const loadLive = () => {
+    const api = typeof window !== "undefined" && window.weddingApi;
+    if (!api) return;
+    api
+      .rsvps()
+      .then((list) => setLive({ list: Array.isArray(list) ? list : [], failed: false, at: Date.now() }))
+      .catch(() => setLive((cur) => ({ ...cur, failed: true })));
+  };
+
+  useEffect(() => {
+    const api = typeof window !== "undefined" && window.weddingApi;
+    if (!api) return;
+    loadLive();
+    api.alerts().then(setAlertSt).catch(() => {});
+    const t = setInterval(loadLive, 60000);
+    const onShow = () => {
+      if (!document.hidden) loadLive();
+    };
+    document.addEventListener("visibilitychange", onShow);
+    return () => {
+      clearInterval(t);
+      document.removeEventListener("visibilitychange", onShow);
+    };
+  }, []);
+
+  const alertDo = (action) => {
+    const api = typeof window !== "undefined" && window.weddingApi;
+    if (!api || alertBusy) return;
+    setAlertBusy(action);
+    setAlertMsg("");
+    api
+      .alertsDo(action)
+      .then((res) => {
+        if (action === "test") {
+          setAlertMsg(res.ok ? "Sent. Your phone should buzz within a few seconds." : "The test didn't go through. Try again in a minute.");
+        } else {
+          setAlertSt(res);
+          if (action === "on") setAlertSetup(true);
+        }
+      })
+      .catch(() => setAlertMsg(action === "test" ? "The test didn't go through. Try again in a minute." : "Couldn't change that just now. Try again."))
+      .finally(() => setAlertBusy(""));
+  };
+
+  const copyTopic = () => {
+    const t = alertSt && alertSt.topic;
+    if (!t || !navigator.clipboard) return;
+    navigator.clipboard.writeText(t).then(() => {
+      setTopicCopied(true);
+      setTimeout(() => setTopicCopied(false), 1600);
+    }).catch(() => {});
+  };
+
+  // Fix a reply's seat count in place (someone added a guest in their note, or two replies cover the same people).
+  const saveParty = (r, raw) => {
+    const n = Math.min(Math.max(parseInt(raw, 10) || 1, 1), 12);
+    const api = typeof window !== "undefined" && window.weddingApi;
+    if (n === (r.partySize || 1) || !api) return;
+    setLive((cur) => ({ ...cur, list: (cur.list || []).map((x) => (x.id === r.id ? { ...x, partySize: n } : x)) }));
+    api.setParty(r.id, n).catch(() => loadLive()); // if the save fails, show what the site really has
+  };
+
   useEffect(() => {
     let active = true;
     (async () => {
@@ -566,6 +638,17 @@ function WeddingDashboard() {
   const rsvpNo = named.filter((g) => g.rsvp === "no").length;
   const rsvpInvited = named.filter((g) => g.rsvp === "invited").length;
   const rsvpPending = named.length - rsvpYes - rsvpNo;
+  // Live website replies
+  const liveList = live.list || [];
+  const liveNo = liveList.filter((r) => !r.attending).length;
+  const liveHeads = liveList.filter((r) => r.attending).reduce((n, r) => n + (r.partySize || 1), 0);
+  const liveLeft = GUEST_CAP - liveHeads;
+  const liveWhen = (iso) => {
+    const d = new Date(iso);
+    return isNaN(d) ? "" : d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  };
+  const liveAt = live.at ? new Date(live.at).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) : "";
+
   const rsvpLabel = (r) => (r === "yes" ? "Yes" : r === "no" ? "No" : r === "invited" ? "Sent" : "RSVP");
   const rsvpColor = (r) => (r === "yes" ? "#5FA877" : r === "no" ? "#B08096" : r === "invited" ? "#E07CA3" : "");
 
@@ -1429,6 +1512,51 @@ function WeddingDashboard() {
 .wd-inv.mailed{opacity:.8;}
 .wd-inv-actions{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:4px;}
 .wd-bbtn:disabled{opacity:.45; cursor:default;}
+
+/* Live website RSVPs */
+.wd-live-at{margin-left:auto; display:inline-flex; align-items:center; gap:7px; font-size:11px; color:var(--ink-soft); font-weight:600;}
+.wd-live-dot{width:7px; height:7px; border-radius:50%; background:var(--sage); animation:wdLivePulse 2.4s ease-out infinite;}
+@keyframes wdLivePulse{0%{box-shadow:0 0 0 0 rgba(95,168,119,.5);} 100%{box-shadow:0 0 0 7px rgba(95,168,119,0);}}
+.wd-live-refresh{font:inherit; color:var(--clay-deep); background:none; border:none; padding:0; cursor:pointer;
+  text-decoration:underline; text-underline-offset:2px;}
+.wd-live-list{margin-top:6px;}
+.wd-live-row{display:flex; align-items:flex-start; gap:12px; padding:11px 2px; border-bottom:1px solid #E5DEE2;}
+.wd-live-main{flex:1; min-width:0;}
+.wd-live-name{font-size:15px; font-weight:600; color:var(--ink); overflow-wrap:anywhere;}
+.wd-live-sub{font-size:12.5px; color:var(--ink-soft); margin-top:2px; overflow-wrap:anywhere;}
+.wd-live-note{font-size:12.5px; line-height:1.5; color:var(--ink); margin-top:7px; padding:7px 10px; white-space:pre-wrap;
+  overflow-wrap:anywhere; border-left:2px solid var(--clay); background:rgba(255,255,255,.45); border-radius:0 8px 8px 0;}
+.wd-live-date{font-size:11.5px; color:var(--ink-soft); white-space:nowrap; padding-top:5px;}
+.wd-live-party{display:inline-flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-soft); white-space:nowrap;}
+.wd-live-num{width:50px; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; text-align:center; color:var(--ink);
+  background:rgba(255,255,255,.55); border:1px solid var(--line); border-radius:8px; padding:5px 4px; outline:none;}
+.wd-live-num:focus{border-color:var(--clay);}
+.wd-live-row .wd-inv-status{margin-top:3px;}
+.wd-live-empty{font-size:13.5px; color:var(--ink-soft); margin:14px 2px;}
+.wd-alerts{margin-top:18px; padding:14px 16px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,.45);}
+.wd-alerts-head{display:flex; align-items:center; gap:9px; font-size:13.5px; color:var(--ink);}
+.wd-alerts-head b{font-weight:700;}
+.wd-alerts-state{font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:3px 9px;
+  border-radius:999px; border:1px solid var(--line); color:#B08096;}
+.wd-alerts.on .wd-alerts-state{color:#fff; background:var(--sage); border-color:transparent;}
+.wd-alerts p{font-size:13px; line-height:1.5; color:var(--ink-soft); margin:10px 0 0;}
+.wd-alerts p.wd-alerts-msg{color:var(--ink); font-weight:600;}
+.wd-alerts details{margin-top:10px;}
+.wd-alerts summary{cursor:pointer; font-size:12.5px; font-weight:700; color:var(--ink-soft);}
+.wd-alerts-steps{margin:8px 0 0; padding-left:20px; font-size:13px; line-height:1.75; color:var(--ink);}
+.wd-alerts-steps a{color:var(--clay-deep);}
+.wd-alerts code{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12.5px; padding:2px 7px; border-radius:6px;
+  border:1px solid var(--line); background:rgba(255,255,255,.6); user-select:all; overflow-wrap:anywhere;}
+.wd-alerts-actions{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;}
+.wd-root.dark .wd-live-row{border-bottom-color:#2A3A33;}
+.wd-root.dark .wd-live-note,.wd-root.dark .wd-live-num,.wd-root.dark .wd-alerts,.wd-root.dark .wd-alerts code{
+  background:rgba(255,255,255,.045);}
+@media (prefers-reduced-motion:reduce){ .wd-live-dot{animation:none;} }
+@media (max-width:520px){
+  .wd-live-row{flex-wrap:wrap; row-gap:8px;}
+  .wd-live-main{flex:1 1 100%;}
+  .wd-live-at{margin-left:0; flex-basis:100%;}
+}
 @media (max-width:520px){
   .wd-addr{padding-left:0;}
   /* on a phone the status drops under the name instead of squeezing it */
@@ -1640,8 +1768,19 @@ function WeddingDashboard() {
           </div>
           <div className="wd-cc-tile">
             <div className="k">Guests</div>
-            <div className="v green">{rsvpYes}<small> yes / {guestFilled} listed</small></div>
-            <div className="s">{GUEST_CAP - guestFilled} spots open · {rsvpPending} awaiting</div>
+            {live.list ? (
+              <>
+                <div className="v green">{liveHeads}<small> / {GUEST_CAP} coming</small></div>
+                <div className={"s" + (liveLeft < 0 ? " over" : "")}>
+                  {liveList.length} website {liveList.length === 1 ? "reply" : "replies"} · {liveLeft >= 0 ? liveLeft + " seats left" : -liveLeft + " over"}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="v green">{rsvpYes}<small> yes / {guestFilled} listed</small></div>
+                <div className="s">{GUEST_CAP - guestFilled} spots open · {rsvpPending} awaiting</div>
+              </>
+            )}
           </div>
           <div className="wd-cc-tile">
             <div className="k">Vendors</div>
@@ -1776,6 +1915,139 @@ function WeddingDashboard() {
             </section>
           );
         })}
+
+        {/* Live website RSVPs */}
+        {filter === "all" && typeof window !== "undefined" && window.weddingApi && (
+          <section className="wd-sec" style={{ animationDelay: state.categories.length * 0.06 + "s" }}>
+            <div className="wd-sechead">
+              <span className="wd-secnum" style={{ color: "#5FA877" }}>♡</span>
+              <span className="wd-secicon" style={{ color: "#5FA877", background: "#5FA87716", borderColor: "#5FA8773A" }}>
+                <BellIcon size={17} strokeWidth={1.8} />
+              </span>
+              <span className="wd-sectitle">Website RSVPs</span>
+              <span className="wd-gcap">
+                {live.list ? liveHeads + " of " + GUEST_CAP + " seats" : live.failed ? "couldn't load" : "loading…"}
+              </span>
+            </div>
+
+            {live.list && (
+              <>
+                <div className="wd-gbar">
+                  <div className="wd-gbar-fill" style={{ width: Math.min(liveHeads / GUEST_CAP, 1) * 100 + "%" }} />
+                </div>
+
+                <div className="wd-gtally">
+                  <span className="wd-gpill" style={{ color: "#5FA877" }}>people coming <b>{liveHeads}</b></span>
+                  <span className="wd-gpill">replies <b>{liveList.length}</b></span>
+                  <span className="wd-gpill" style={{ color: "#B08096" }}>can't make it <b>{liveNo}</b></span>
+                  {liveLeft >= 0 ? (
+                    <span className="wd-gpill">seats left <b>{liveLeft}</b></span>
+                  ) : (
+                    <span className="wd-gpill" style={{ color: "#C76F97" }}>over by <b>{-liveLeft}</b></span>
+                  )}
+                  <span className="wd-live-at">
+                    <i className="wd-live-dot" />
+                    live{live.failed ? " · couldn't refresh" : liveAt ? " · updated " + liveAt : ""}
+                    <button className="wd-live-refresh" onClick={loadLive}>refresh</button>
+                  </span>
+                </div>
+
+                {liveList.length === 0 ? (
+                  <p className="wd-live-empty">No replies yet. They'll show up here the moment someone RSVPs on the site.</p>
+                ) : (
+                  <div className="wd-live-list">
+                    {liveList.map((r) => (
+                      <div className="wd-live-row" key={r.id}>
+                        <div className="wd-live-main">
+                          <div className="wd-live-name">{r.name}</div>
+                          {r.guestNames ? <div className="wd-live-sub">with {r.guestNames}</div> : null}
+                          {String(r.note || "").trim() ? <div className="wd-live-note">{r.note}</div> : null}
+                        </div>
+                        <span className="wd-live-date">{liveWhen(r.ts)}</span>
+                        <label className="wd-live-party" title="Seats this reply takes. Change it if they added someone in their note, or if two replies cover the same people.">
+                          <input
+                            className="wd-live-num"
+                            type="number"
+                            min="1"
+                            max="12"
+                            key={r.id + ":" + (r.partySize || 1)}
+                            defaultValue={r.partySize || 1}
+                            onBlur={(e) => saveParty(r, e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") e.target.blur();
+                            }}
+                          />
+                          <span>{(r.partySize || 1) === 1 ? "seat" : "seats"}</span>
+                        </label>
+                        <span className={"wd-inv-status" + (r.attending ? " mailed" : "")}>{r.attending ? "coming" : "can't come"}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+
+            {!live.list && live.failed && (
+              <p className="wd-live-empty">
+                Couldn't reach the RSVP list. <button className="wd-live-refresh" onClick={loadLive}>Try again</button>
+              </p>
+            )}
+
+            <div className={"wd-alerts" + (alertSt && alertSt.on ? " on" : "")}>
+              <div className="wd-alerts-head">
+                <BellIcon size={15} strokeWidth={2} />
+                <b>Phone alerts</b>
+                <span className="wd-alerts-state">{!alertSt ? "checking…" : alertSt.on ? "on" : "off"}</span>
+              </div>
+
+              {alertSt && !alertSt.on && (
+                <>
+                  <p>Get a buzz on your phones the moment someone replies. Setup takes about two minutes.</p>
+                  <div className="wd-alerts-actions">
+                    <button className="wd-bbtn" onClick={() => alertDo("on")} disabled={!!alertBusy}>
+                      {alertBusy === "on" ? "Turning on…" : "Turn on alerts"}
+                    </button>
+                  </div>
+                </>
+              )}
+
+              {alertSt && alertSt.on && (
+                <>
+                  <p>Every new reply sends a push with the name, party size and running total. Notes and emails stay here.</p>
+                  {alertSt.topic && (
+                    <details open={alertSetup} onToggle={(e) => setAlertSetup(e.currentTarget.open)}>
+                      <summary>Connect a phone</summary>
+                      <ol className="wd-alerts-steps">
+                        <li>
+                          Install the free <b>ntfy</b> app (
+                          <a href="https://apps.apple.com/us/app/ntfy/id1625396347" target="_blank" rel="noopener">iPhone</a>
+                          {" · "}
+                          <a href="https://play.google.com/store/apps/details?id=io.heckel.ntfy" target="_blank" rel="noopener">Android</a>
+                          ).
+                        </li>
+                        <li>
+                          In the app tap <b>+</b> and subscribe to this topic: <code>{alertSt.topic}</code>{" "}
+                          <button className="wd-live-refresh" onClick={copyTopic}>{topicCopied ? "copied" : "copy"}</button>
+                        </li>
+                        <li>Tap <b>Send a test</b> below. The phone should buzz.</li>
+                      </ol>
+                    </details>
+                  )}
+                  <div className="wd-alerts-actions">
+                    <button className="wd-bbtn" onClick={() => alertDo("test")} disabled={!!alertBusy}>
+                      {alertBusy === "test" ? "Sending…" : "Send a test"}
+                    </button>
+                    <button className="wd-bbtn" onClick={() => alertDo("off")} disabled={!!alertBusy}>
+                      {alertBusy === "off" ? "Turning off…" : "Turn off"}
+                    </button>
+                  </div>
+                </>
+              )}
+
+              {alertMsg ? <p className="wd-alerts-msg">{alertMsg}</p> : null}
+            </div>
+          </section>
+        )}
 
         {/* Guest list */}
         {filter === "all" && (

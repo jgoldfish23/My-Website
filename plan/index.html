@@ -81,6 +81,39 @@
         return true;
       },
     };
+
+    // Live website RSVPs and the phone-alert switch, for the planner's RSVP panel.
+    window.weddingApi = {
+      async rsvps() {
+        const res = await fetch("/api/rsvp", { headers: { "x-wedding-pass": pass } });
+        if (!res.ok) throw new Error("rsvps failed");
+        return await res.json();
+      },
+      async setParty(id, partySize) {
+        const res = await fetch("/api/rsvp", {
+          method: "PUT",
+          headers: { "x-wedding-pass": pass, "content-type": "application/json" },
+          body: JSON.stringify({ id, partySize }),
+        });
+        if (!res.ok) throw new Error("save failed");
+        return await res.json();
+      },
+      async alerts() {
+        const res = await fetch("/api/rsvp-alerts", { headers: { "x-wedding-pass": pass } });
+        if (!res.ok) throw new Error("alerts failed");
+        return await res.json();
+      },
+      async alertsDo(action) {
+        const res = await fetch("/api/rsvp-alerts", {
+          method: "POST",
+          headers: { "x-wedding-pass": pass, "content-type": "application/json" },
+          body: JSON.stringify({ action }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.message || "alerts failed");
+        return data;
+      },
+    };
   }
 
   async function boot(pass) {

@@ -36,6 +36,50 @@ const clean = (v, max) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 
 const GUEST_CAP = 40;
 
+// RSVP phone alerts are switched on from the planner (/plan), so no Cloudflare login is needed. The setting lives in
+// KV under a key outside the "rsvp_" prefix that listRsvps() scans.
+const ALERTS_KEY = "wedding:rsvp_alerts";
+const NTFY = "https://ntfy.sh/";
+const TOPIC_OK = /^[A-Za-z0-9_-]{8,64}$/;
+
+async function alertPrefs(env) {
+  try {
+    const raw = await env.WEDDING_KV.get(ALERTS_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+// Where RSVP pushes go: the channel set up in the planner; failing that, a NTFY_TOPIC secret if one is ever added.
+// Turning alerts off in the planner means off, even if a secret exists.
+async function rsvpTopic(env) {
+  const p = await alertPrefs(env);
+  if (p) return p.on && TOPIC_OK.test(p.topic || "") ? p.topic : "";
+  return TOPIC_OK.test(env.NTFY_TOPIC || "") ? env.NTFY_TOPIC : "";
+}
+
+// true = ntfy accepted the push
+async function pushNtfy(topic, title, body, tags) {
+  try {
+    const res = await fetch(NTFY + topic, {
+      method: "POST",
+      headers: {
+        // HTTP headers must be latin-1; strip anything else out of the title
+        Title: String(title).replace(/[^\x20-\x7E]/g, "").slice(0, 80) || "New RSVP",
+        Priority: "default",
+        Tags: tags,
+        Click: "https://djgolding.com/plan/",
+      },
+      body,
+      signal: AbortSignal.timeout(8000),
+    });
+    return res.ok;
+  } catch (e) {
+    return false;
+  }
+}
+
 async function listRsvps(env) {
   const list = await env.WEDDING_KV.list({ prefix: "rsvp_" });
   const items = (
@@ -66,10 +110,10 @@ async function notifyRsvp(entry, env) {
   }
 
   // Push goes through a third party, so keep it to the headline —
-  // no guest emails, no free-text notes. Details live on /admin.
+  // no guest emails, no free-text notes. Details live in the planner.
   const pushBody = [
     `${entry.name} ${who} — party of ${entry.partySize}`,
-    entry.note ? "They left a note — see djgolding.com/admin" : "",
+    entry.note ? "They left a note — tap to read it in the planner" : "",
     tally,
   ].filter(Boolean).join("\n");
 
@@ -84,19 +128,9 @@ async function notifyRsvp(entry, env) {
 
   const jobs = [];
 
-  if (env.NTFY_TOPIC) {
-    jobs.push(
-      fetch(`https://ntfy.sh/${env.NTFY_TOPIC}`, {
-        method: "POST",
-        headers: {
-          // HTTP headers must be latin-1; strip anything else out of the name
-          Title: `RSVP: ${entry.name}`.replace(/[^\x20-\x7E]/g, "").slice(0, 80) || "New RSVP",
-          Priority: "default",
-          Tags: entry.attending ? "tada" : "pensive",
-        },
-        body: pushBody,
-      })
-    );
+  const topic = await rsvpTopic(env);
+  if (topic) {
+    jobs.push(pushNtfy(topic, `RSVP: ${entry.name}`, pushBody, entry.attending ? "tada" : "pensive"));
   }
 
   if (env.RESEND_API_KEY && env.NOTIFY_EMAIL) {
@@ -176,6 +210,67 @@ async function handleRsvp(request, env, ctx) {
   return json({ error: "method not allowed" }, 405);
 }
 
+// RSVP phone alerts, run from the planner. Everything here needs the wedding passcode.
+//   GET                      -> { on, topic, source, since, email }
+//   POST { action: "on" }    -> start alerts (makes a private channel name the first time)
+//   POST { action: "off" }   -> stop alerts (keeps the channel name so turning them back on needs no phone setup)
+//   POST { action: "test" }  -> send one test push
+async function handleRsvpAlerts(request, env) {
+  if (!authorized(request, env)) return json({ error: "unauthorized" }, 401);
+
+  const status = async () => {
+    const p = await alertPrefs(env);
+    const topic = await rsvpTopic(env);
+    return {
+      on: Boolean(topic),
+      topic: p && TOPIC_OK.test(p.topic || "") ? p.topic : null,
+      source: !topic ? "none" : p ? "planner" : "cloudflare",
+      since: (p && p.since) || null,
+      email: Boolean(env.RESEND_API_KEY && env.NOTIFY_EMAIL),
+    };
+  };
+
+  if (request.method === "GET") return json(await status());
+  if (request.method !== "POST") return json({ error: "method not allowed" }, 405);
+
+  const body = await request.json().catch(() => null);
+  const action = body && typeof body.action === "string" ? body.action : "";
+
+  if (action === "on" || action === "off") {
+    const p = (await alertPrefs(env)) || {};
+    if (action === "on") {
+      if (!TOPIC_OK.test(p.topic || "")) p.topic = "jd-rsvp-" + crypto.randomUUID().replace(/-/g, "").slice(0, 20);
+      p.on = true;
+      p.since = new Date().toISOString();
+    } else {
+      p.on = false;
+    }
+    await env.WEDDING_KV.put(ALERTS_KEY, JSON.stringify(p));
+    // Answer from what was just saved: KV reads can lag a write by a few seconds.
+    return json({
+      on: Boolean(p.on && p.topic),
+      topic: p.topic || null,
+      source: p.on && p.topic ? "planner" : "none",
+      since: p.since || null,
+      email: Boolean(env.RESEND_API_KEY && env.NOTIFY_EMAIL),
+    });
+  }
+
+  if (action === "test") {
+    const topic = await rsvpTopic(env);
+    if (!topic) return json({ error: "off", message: "Alerts are off, so there's nowhere to send a test." }, 409);
+    const ok = await pushNtfy(
+      topic,
+      "Test alert - it works",
+      "This is what an RSVP alert looks like. You'll get one each time someone replies.",
+      "white_check_mark"
+    );
+    return json({ ok }, ok ? 200 : 502);
+  }
+
+  return json({ error: "bad action" }, 400);
+}
+
 async function handleRecord(request, env) {
   if (request.method === "GET") {
     const raw = await env.WEDDING_KV.get(RECORD_KEY);
@@ -230,6 +325,7 @@ export default {
     }
 
     if (pathname === "/api/rsvp") return handleRsvp(request, env, ctx);
+    if (pathname === "/api/rsvp-alerts") return handleRsvpAlerts(request, env);
     if (pathname === "/api/record") return handleRecord(request, env);
 
     // Live college football scores for /cfb (read-only, edge-cached, same-site CORS)

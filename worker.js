@@ -137,7 +137,7 @@ async function notifyRsvp(entry, env) {
     const all = await listRsvps(env);
     const heads = all
       .filter((r) => r.attending)
-      .reduce((s, r) => s + (r.partySize || 1), 0);
+      .reduce((s, r) => s + (r.partySize ?? 1), 0);
     tally = `Running total: ${heads} of ${GUEST_CAP} seats · ${all.length} replies`;
   } catch (e) {
     /* totals are a nicety; skip them if KV hiccups */
@@ -224,7 +224,9 @@ async function handleRsvp(request, env, ctx) {
     if (!raw) return json({ error: "not found" }, 404);
     const existing = JSON.parse(raw);
     if (body.partySize !== undefined) {
-      existing.partySize = Math.min(Math.max(parseInt(body.partySize, 10) || 1, 1), 12);
+      // Jameson and Dawsyn may set 0: "these people are already counted on another reply". Guests can only send 1 to 12.
+      const seats = parseInt(body.partySize, 10);
+      existing.partySize = Math.min(Math.max(Number.isNaN(seats) ? 1 : seats, 0), 12);
     }
     if (body.attending !== undefined) existing.attending = Boolean(body.attending);
     if (body.guestNames !== undefined) existing.guestNames = clean(body.guestNames, 400);

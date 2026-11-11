@@ -212,7 +212,7 @@
     var stats = document.getElementById('rsvpStats');
     api('/api/rsvp').then(function(r){ return r.json(); }).then(function(items){
       var yes = items.filter(function(i){ return i.attending; });
-      var heads = yes.reduce(function(s,i){ return s + (i.partySize || 1); }, 0);
+      var heads = yes.reduce(function(s,i){ return s + (i.partySize == null ? 1 : i.partySize); }, 0);
       stats.innerHTML = '';
       [[items.length, 'replies'], [yes.length, 'parties coming'], [heads, 'people coming'], [40 - heads, 'seats left of 40']]
         .forEach(function(s){
@@ -249,8 +249,8 @@
         /* party size is editable — guests often add people in the note */
         var partyCell = document.createElement('td');
         var num = document.createElement('input');
-        num.type = 'number'; num.min = '1'; num.max = '12';
-        num.value = en.partySize || 1;
+        num.type = 'number'; num.min = '0'; num.max = '12';
+        num.value = en.partySize == null ? 1 : en.partySize;
         num.style.cssText = 'width:58px; padding:5px 7px; font-size:14px; text-align:center;';
         num.title = 'Edit if they mentioned extra people in their note';
         num.addEventListener('change', function(){
@@ -263,7 +263,7 @@
             loadRsvps();
           }).catch(function(){
             num.disabled = false;
-            num.value = en.partySize || 1;
+            num.value = en.partySize == null ? 1 : en.partySize;
             alert('Could not save that change.');
           });
         });

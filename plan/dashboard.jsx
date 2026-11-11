@@ -11,6 +11,7 @@ const PinIcon = LucideReact.Pin || Blank;
 const MapPinIcon = LucideReact.MapPin || Blank;
 const RotateIcon = LucideReact.RotateCcw || Blank;
 const BellIcon = LucideReact.Bell || Blank;
+const GlobeIcon = LucideReact.Globe || Blank;
 
 const STORAGE_KEY = "wedding_dashboard_state";
 const uid = () => Math.random().toString(36).slice(2, 9);
@@ -151,6 +152,7 @@ const DEFAULT_STATE = {
   ],
   guests: Array.from({ length: GUEST_CAP }, () => ({ id: uid(), name: "", side: "", rsvp: "", meal: "" })),
   invites: [blankInvite(), blankInvite(), blankInvite()],
+  rsvpLinks: {},   // website reply id -> guest ids added to it by hand (the plus-ones a reply didn't name)
   budget: {
     total: "",
     items: [
@@ -176,6 +178,96 @@ const DEFAULT_STATE = {
 
 const hasStorage = () =>
   typeof window !== "undefined" && window.storage && typeof window.storage.get === "function";
+
+// ---- Matching website replies to names on the guest list ----
+// Names are compared loosely: capitals, accents, punctuation, middle initials, "nicknames in quotes" and (notes in
+// brackets) are ignored, so `Chris,"yo Daddy golfing" Jenkins` is Chris Jenkins and `Wyatt "Poop" Jenkins` is Wyatt Jenkins.
+const nameTokens = (raw) =>
+  String(raw || "")
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/"[^"]*"|“[^”]*”|\([^)]*\)/g, " ")
+    .replace(/[^a-z\s]/g, " ")
+    .split(/\s+/)
+    .filter((t) => t.length > 1 && !["jr", "sr", "ii", "iii", "iv"].includes(t));
+
+// How many seats a reply takes. 0 is allowed: "these people are already counted on another reply".
+const seatsOf = (r) => (r.partySize == null ? 1 : r.partySize);
+
+// Works out which guest-list rows each website reply covers.
+//   byGuest[guestId] = { rsvp: "yes" | "no", by: replier's name, when }   the tick shown on that row
+//   byReply[replyId] = { found: [{ id, name, how }], unnamed, suggest: [{ id, name }], doubles: [{ name, others }] }
+// A reply covers: the person who sent it, anyone they listed under "who's coming with you", and anyone linked to it
+// by hand in the planner (links = { replyId: [guestId] }, saved with the plan). Nothing here changes saved marks.
+const tickFromReplies = (replies, guests, links) => {
+  const G = guests
+    .map((g, idx) => {
+      const t = nameTokens(g.name);
+      return { idx, id: g.id, name: String(g.name || "").trim(), t, key: t.join(" "), first: t[0] || "", last: t.length > 1 ? t[t.length - 1] : "" };
+    })
+    .filter((g) => g.t.length);
+  const one = (list) => (list.length === 1 ? list[0] : null);   // only ever match when there is exactly one candidate
+  // a full name: the same name, else the same first and last name, else a one-word list entry that is this first name
+  const findFull = (t) =>
+    one(G.filter((g) => g.key === t.join(" "))) ||
+    (t.length > 1 ? one(G.filter((g) => g.t.length > 1 && g.first === t[0] && g.last === t[t.length - 1])) : null) ||
+    one(G.filter((g) => g.t.length === 1 && g.first === t[0]));
+  // a first name on its own: the one person in the replier's family with it, else the only person on the list with it
+  const findFirst = (first, family) => {
+    const c = G.filter((g) => g.first === first);
+    return (family ? one(c.filter((g) => g.last === family)) : null) || one(c);
+  };
+
+  const sources = {};   // guestId -> [{ r, how }] oldest reply first
+  const byReply = {};
+  [...replies]
+    .sort((a, b) => (a.ts < b.ts ? -1 : 1))
+    .forEach((r) => {
+      const rt = nameTokens(r.name);
+      const family = rt.length > 1 ? rt[rt.length - 1] : "";
+      const found = [];
+      const add = (g, how) => {
+        if (g && !found.some((f) => f.id === g.id)) found.push({ id: g.id, name: g.name, how });
+      };
+      if (rt.length) add(findFull(rt), "own");
+      String(r.guestNames || "")
+        .split(/[,;&+\n]|\band\b/i)
+        .forEach((part) => {
+          const t = nameTokens(part);
+          if (!t.length) return;
+          let g = t.length > 1 ? findFull(t) : null;
+          for (let i = 0; !g && i < t.length; i++) g = findFirst(t[i], family);   // "my husband Mike" still finds Mike
+          add(g, "with");
+        });
+      (links[r.id] || []).forEach((gid) => add(G.find((g) => g.id === gid), "linked"));
+      byReply[r.id] = { found, family, unnamed: r.attending ? Math.max(0, seatsOf(r) - found.length) : 0, suggest: [], doubles: [] };
+      found.forEach((f) => (sources[f.id] = sources[f.id] || []).push({ r, how: f.how }));
+    });
+
+  const byGuest = {};
+  Object.keys(sources).forEach((gid) => {
+    const all = sources[gid];
+    const own = all.filter((x) => x.how === "own");
+    const pick = (own.length ? own : all).slice(-1)[0];   // their own reply wins; otherwise the newest one
+    byGuest[gid] = { rsvp: pick.r.attending ? "yes" : "no", by: pick.r.name, when: pick.r.ts };
+    // the same person on two "coming" replies means a seat is probably counted twice
+    const coming = all.filter((x) => x.r.attending && seatsOf(x.r) > 0);
+    if (coming.length > 1) {
+      const name = (G.find((g) => g.id === gid) || {}).name;
+      coming.forEach((x) => byReply[x.r.id].doubles.push({ name, others: coming.filter((y) => y.r.id !== x.r.id).map((y) => y.r.name) }));
+    }
+  });
+
+  // for seats with no name yet, offer the rest of the replier's family first
+  replies.forEach((r) => {
+    const br = byReply[r.id];
+    if (!br || !(br.unnamed > 0 || br.found.length === 0) || !br.family) return;
+    br.suggest = G.filter((g) => g.last === br.family && !br.found.some((f) => f.id === g.id)).slice(0, 8).map((g) => ({ id: g.id, name: g.name }));
+  });
+
+  return { byGuest, byReply, listed: G.map((g) => ({ id: g.id, name: g.name })) };
+};
 
 // Move any previously saved (Hawaii-era) state over to the San Diego / La Jolla plan.
 const migrateState = (raw) => {
@@ -239,6 +331,7 @@ const migrateState = (raw) => {
 
   // Mailing list for the printed invitations; saved plans from before it existed start with three blank rows.
   if (!Array.isArray(s.invites)) s.invites = [blankInvite(), blankInvite(), blankInvite()];
+  if (!s.rsvpLinks || typeof s.rsvpLinks !== "object" || Array.isArray(s.rsvpLinks)) s.rsvpLinks = {};
 
   // Give every task a due field, and seed suggested dates for the key milestones.
   const SEED_DUE = {
@@ -434,9 +527,10 @@ function WeddingDashboard() {
 
   // Fix a reply's seat count in place (someone added a guest in their note, or two replies cover the same people).
   const saveParty = (r, raw) => {
-    const n = Math.min(Math.max(parseInt(raw, 10) || 1, 1), 12);
+    const typed = parseInt(raw, 10);
+    const n = Math.min(Math.max(Number.isNaN(typed) ? seatsOf(r) : typed, 0), 12);   // 0 = already counted on another reply
     const api = typeof window !== "undefined" && window.weddingApi;
-    if (n === (r.partySize || 1) || !api) return;
+    if (n === seatsOf(r) || !api) return;
     setLive((cur) => ({ ...cur, list: (cur.list || []).map((x) => (x.id === r.id ? { ...x, partySize: n } : x)) }));
     api.setParty(r.id, n).catch(() => loadLive()); // if the save fails, show what the site really has
   };
@@ -608,11 +702,35 @@ function WeddingDashboard() {
       return s;
     });
 
-  const cycleRsvp = (idx) =>
+  const cycleRsvp = (idx) => {
+    const web = ticks.byGuest[(guests[idx] || {}).id];   // what a website reply says for this person, if any
     update((s) => {
-      const order = ["", "invited", "yes", "no"];
-      const cur = order.indexOf(s.guests[idx].rsvp || "");
-      s.guests[idx].rsvp = order[(cur + 1) % order.length];
+      const g = s.guests[idx];
+      if (web) {
+        // The website already answered for them. A tap overrides it by hand; the next tap goes back to the website's answer.
+        g.rsvp = g.rsvp === "yes" || g.rsvp === "no" ? "" : web.rsvp === "yes" ? "no" : "yes";
+      } else {
+        const order = ["", "invited", "yes", "no"];
+        g.rsvp = order[(order.indexOf(g.rsvp || "") + 1) % order.length];
+      }
+      return s;
+    });
+  };
+
+  // Put a guest-list name on a website reply by hand (a plus-one the reply didn't name), or take it off again.
+  const linkGuest = (rid, gid) =>
+    update((s) => {
+      s.rsvpLinks = s.rsvpLinks || {};
+      const cur = s.rsvpLinks[rid] || [];
+      if (!cur.includes(gid)) s.rsvpLinks[rid] = [...cur, gid];
+      return s;
+    });
+  const unlinkGuest = (rid, gid) =>
+    update((s) => {
+      const cur = (s.rsvpLinks && s.rsvpLinks[rid]) || [];
+      const next = cur.filter((x) => x !== gid);
+      if (next.length) s.rsvpLinks[rid] = next;
+      else if (s.rsvpLinks) delete s.rsvpLinks[rid];
       return s;
     });
 
@@ -626,17 +744,26 @@ function WeddingDashboard() {
   const sideLabel = (side) => (side === "A" ? initialA : side === "B" ? initialB : side === "Both" ? initialA + "&" + initialB : "+");
   const sideColor = (side) => (side === "A" ? "#E07CA3" : side === "B" ? "#5FA877" : side === "Both" ? "#A85C86" : "");
 
-  const named = guests.filter((g) => g.name.trim());
-  const rsvpYes = named.filter((g) => g.rsvp === "yes").length;
-  const rsvpNo = named.filter((g) => g.rsvp === "no").length;
-  const rsvpInvited = named.filter((g) => g.rsvp === "invited").length;
-  const rsvpPending = named.length - rsvpYes - rsvpNo;
   // Live website replies
   const alertDevices = (alertSt && alertSt.devices) || [];
   const liveList = live.list || [];
   const liveNo = liveList.filter((r) => !r.attending).length;
-  const liveHeads = liveList.filter((r) => r.attending).reduce((n, r) => n + (r.partySize || 1), 0);
+  const liveHeads = liveList.filter((r) => r.attending).reduce((n, r) => n + seatsOf(r), 0);
   const liveLeft = GUEST_CAP - liveHeads;
+
+  // Website replies tick names off the guest list. A mark made by hand (Yes or No) always wins; otherwise the row
+  // shows what the website reply says. The ticks are worked out fresh each time, never written into the saved list.
+  const ticks = tickFromReplies(liveList, guests, state.rsvpLinks || {});
+  const byHand = (g) => g.rsvp === "yes" || g.rsvp === "no";
+  const fromWeb = (g) => !byHand(g) && !!ticks.byGuest[g.id];
+  const effRsvp = (g) => (fromWeb(g) ? ticks.byGuest[g.id].rsvp : g.rsvp || "");
+
+  const named = guests.filter((g) => g.name.trim());
+  const rsvpYes = named.filter((g) => effRsvp(g) === "yes").length;
+  const rsvpNo = named.filter((g) => effRsvp(g) === "no").length;
+  const rsvpInvited = named.filter((g) => effRsvp(g) === "invited").length;
+  const rsvpPending = named.length - rsvpYes - rsvpNo;
+  const rsvpWeb = named.filter(fromWeb).length;
   const liveWhen = (iso) => {
     const d = new Date(iso);
     return isNaN(d) ? "" : d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
@@ -1526,6 +1653,33 @@ function WeddingDashboard() {
   background:rgba(255,255,255,.55); border:1px solid var(--line); border-radius:8px; padding:5px 4px; outline:none;}
 .wd-live-num:focus{border-color:var(--clay);}
 .wd-live-row .wd-inv-status{margin-top:3px;}
+/* which guest-list names a reply ticks off, and the plus-ones still to name */
+.wd-live-ticks{display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:9px;}
+.wd-live-tlabel{font-size:11.5px; font-weight:600; color:var(--ink-soft);}
+.wd-live-chip{display:inline-flex; align-items:center; gap:5px; font-family:'Inter',sans-serif; font-size:11.5px; font-weight:600;
+  line-height:1.2; padding:5px 10px; border-radius:999px; border:1px solid var(--line); color:var(--ink); background:rgba(255,255,255,.5);}
+.wd-live-chip.on{border-color:transparent; color:#fff; background:var(--sage);}
+.wd-live-chip.on.no{background:#B08096;}
+.wd-live-chip.on button{font:inherit; font-size:14px; line-height:1; color:inherit; background:none; border:none;
+  padding:0 0 0 3px; cursor:pointer; opacity:.85;}
+button.wd-live-chip.add{cursor:pointer; color:var(--ink-soft); border-style:dashed; transition:all .15s;}
+button.wd-live-chip.add:hover{border-color:var(--clay); color:var(--clay);}
+.wd-live-pick{font-family:'Inter',sans-serif; font-size:11.5px; font-weight:600; color:var(--ink-soft); max-width:160px;
+  background:rgba(255,255,255,.5); border:1px dashed var(--line); border-radius:999px; padding:5px 8px; outline:none; cursor:pointer;}
+.wd-live-pick:focus{border-color:var(--clay);}
+.wd-live-warn{font-size:12px; line-height:1.5; color:#8A5E14; margin-top:9px; padding:7px 10px; border-radius:8px;
+  background:#FBF1DE; border:1px solid #E8D2A8;}
+.wd-root.dark .wd-live-chip,.wd-root.dark .wd-live-pick{background:rgba(255,255,255,.045);}
+.wd-root.dark .wd-live-chip.on{background:var(--sage); color:#10201A;}
+.wd-root.dark .wd-live-chip.on.no{background:#B08096; color:#fff;}
+.wd-root.dark .wd-live-pick option{color:#16211D;}
+.wd-root.dark .wd-live-warn{color:#E8C98A; background:rgba(232,201,138,.08); border-color:rgba(232,201,138,.28);}
+/* a guest-list tick that came from a website reply carries a small globe */
+.wd-grsvp.web{display:inline-flex; align-items:center; justify-content:center; gap:4px;}
+/* Dark mode gave every pill grey text, including the filled ones (grey on green was 1.1:1, unreadable). Filled pills
+   get dark text there instead: 5:1 or better on the yes / no / sent colors. */
+.wd-root.dark .wd-grsvp.set,.wd-root.dark .wd-gside.set{color:#10201A;}
+.wd-gpill-web{display:inline-flex; align-items:center; gap:5px;}
 .wd-live-empty{font-size:13.5px; color:var(--ink-soft); margin:14px 2px;}
 .wd-alerts{margin-top:18px; padding:14px 16px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,.45);}
 .wd-alerts-head{display:flex; align-items:center; gap:9px; font-size:13.5px; color:var(--ink);}
@@ -1546,6 +1700,8 @@ function WeddingDashboard() {
   .wd-live-row{flex-wrap:wrap; row-gap:8px;}
   .wd-live-main{flex:1 1 100%;}
   .wd-live-at{margin-left:0; flex-basis:100%;}
+  .wd-live-chip{padding:10px 13px;}   /* 36px tall: easier to hit with a thumb */
+  .wd-live-pick{padding:10px 10px;}
 }
 @media (max-width:520px){
   .wd-addr{padding-left:0;}
@@ -1946,32 +2102,92 @@ function WeddingDashboard() {
                   <p className="wd-live-empty">No replies yet. They'll show up here the moment someone RSVPs on the site.</p>
                 ) : (
                   <div className="wd-live-list">
-                    {liveList.map((r) => (
+                    {liveList.map((r) => {
+                      const br = ticks.byReply[r.id] || { found: [], unnamed: 0, suggest: [], doubles: [] };
+                      const needsName = br.unnamed > 0 || br.found.length === 0;
+                      const others = needsName
+                        ? ticks.listed.filter((g) => !br.found.some((f) => f.id === g.id) && !br.suggest.some((s) => s.id === g.id))
+                        : [];
+                      const twice = br.doubles.map((d) => d.name);
+                      const twiceOn = [...new Set(br.doubles.flatMap((d) => d.others))];
+                      return (
                       <div className="wd-live-row" key={r.id}>
                         <div className="wd-live-main">
                           <div className="wd-live-name">{r.name}</div>
                           {r.guestNames ? <div className="wd-live-sub">with {r.guestNames}</div> : null}
                           {String(r.note || "").trim() ? <div className="wd-live-note">{r.note}</div> : null}
+
+                          {/* which guest-list names this reply ticks off */}
+                          <div className="wd-live-ticks">
+                            {br.found.length ? (
+                              <>
+                                <span className="wd-live-tlabel">{r.attending ? "Ticked on your list:" : "Marked not coming:"}</span>
+                                {br.found.map((f) => (
+                                  <span className={"wd-live-chip on" + (r.attending ? "" : " no")} key={f.id}>
+                                    {f.name}
+                                    {f.how === "linked" && (
+                                      <button onClick={() => unlinkGuest(r.id, f.id)} title="Take this name off the reply" aria-label={"Take " + f.name + " off this reply"}>×</button>
+                                    )}
+                                  </span>
+                                ))}
+                              </>
+                            ) : (
+                              <span className="wd-live-tlabel">No name on your guest list matches this reply.</span>
+                            )}
+                          </div>
+
+                          {needsName && (
+                            <div className="wd-live-ticks">
+                              <span className="wd-live-tlabel">
+                                {br.unnamed > 0 ? br.unnamed + (br.unnamed === 1 ? " seat has no name yet. Who is it?" : " seats have no name yet. Who are they?") : "Who is this on your list?"}
+                              </span>
+                              {br.suggest.map((s) => (
+                                <button className="wd-live-chip add" key={s.id} onClick={() => linkGuest(r.id, s.id)}>+ {s.name}</button>
+                              ))}
+                              {others.length > 0 && (
+                                <select
+                                  className="wd-live-pick"
+                                  value=""
+                                  aria-label="Add someone else from the guest list to this reply"
+                                  onChange={(e) => {
+                                    if (e.target.value) linkGuest(r.id, e.target.value);
+                                  }}
+                                >
+                                  <option value="">{br.suggest.length ? "someone else…" : "pick a name…"}</option>
+                                  {others.map((g) => (
+                                    <option key={g.id} value={g.id}>{g.name}</option>
+                                  ))}
+                                </select>
+                              )}
+                            </div>
+                          )}
+
+                          {twice.length > 0 && (
+                            <div className="wd-live-warn">
+                              {twice.join(", ")} {twice.length === 1 ? "is" : "are"} also on {twiceOn.join(" and ")}'s reply, so the seat total is probably counting {twice.length === 1 ? "that person" : "them"} twice. Lower one reply's seats (0 is fine) so everyone is counted once.
+                            </div>
+                          )}
                         </div>
                         <span className="wd-live-date">{liveWhen(r.ts)}</span>
-                        <label className="wd-live-party" title="Seats this reply takes. Change it if they added someone in their note, or if two replies cover the same people.">
+                        <label className="wd-live-party" title="Seats this reply takes. Change it if they added someone in their note. Set it to 0 if these people are already counted on another reply.">
                           <input
                             className="wd-live-num"
                             type="number"
-                            min="1"
+                            min="0"
                             max="12"
-                            key={r.id + ":" + (r.partySize || 1)}
-                            defaultValue={r.partySize || 1}
+                            key={r.id + ":" + seatsOf(r)}
+                            defaultValue={seatsOf(r)}
                             onBlur={(e) => saveParty(r, e.target.value)}
                             onKeyDown={(e) => {
                               if (e.key === "Enter") e.target.blur();
                             }}
                           />
-                          <span>{(r.partySize || 1) === 1 ? "seat" : "seats"}</span>
+                          <span>{seatsOf(r) === 1 ? "seat" : "seats"}</span>
                         </label>
                         <span className={"wd-inv-status" + (r.attending ? " mailed" : "")}>{r.attending ? "coming" : "can't come"}</span>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 )}
               </>
@@ -2084,6 +2300,11 @@ function WeddingDashboard() {
               <span className="wd-gpill" style={{ color: "#E07CA3" }}>{initialA}'s side <b>{sideA}</b></span>
               <span className="wd-gpill" style={{ color: "#5FA877" }}>{initialB}'s side <b>{sideB}</b></span>
               <span className="wd-gpill" style={{ color: "#A85C86" }}>both <b>{sideBoth}</b></span>
+              {rsvpWeb > 0 && (
+                <span className="wd-gpill wd-gpill-web" style={{ color: "#5FA877" }} title="Names ticked automatically from website replies">
+                  <GlobeIcon size={11} strokeWidth={2.4} /> ticked from the website <b>{rsvpWeb}</b>
+                </span>
+              )}
             </div>
 
             <div className="wd-glist">
@@ -2103,12 +2324,19 @@ function WeddingDashboard() {
                     onChange={(e) => setGuest(idx, "meal", e.target.value)}
                   />
                   <button
-                    className={"wd-grsvp" + (g.rsvp ? " set" : "")}
-                    style={g.rsvp ? { background: rsvpColor(g.rsvp) } : null}
+                    className={"wd-grsvp" + (effRsvp(g) ? " set" : "") + (fromWeb(g) ? " web" : "")}
+                    style={effRsvp(g) ? { background: rsvpColor(effRsvp(g)) } : null}
                     onClick={() => cycleRsvp(idx)}
-                    title="RSVP — tap to cycle: invite sent → yes → no"
+                    title={
+                      fromWeb(g)
+                        ? "From " + ticks.byGuest[g.id].by + "'s website reply. Tap to change it by hand."
+                        : ticks.byGuest[g.id]
+                        ? "Set by hand. Tap to go back to the website reply."
+                        : "RSVP — tap to cycle: invite sent → yes → no"
+                    }
                   >
-                    {rsvpLabel(g.rsvp)}
+                    {rsvpLabel(effRsvp(g))}
+                    {fromWeb(g) ? <GlobeIcon size={10} strokeWidth={2.6} /> : null}
                   </button>
                   <button
                     className={"wd-gside" + (g.side ? " set" : "")}

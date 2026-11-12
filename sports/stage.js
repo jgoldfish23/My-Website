@@ -31,7 +31,7 @@
   if (!HUB) return;
   const OFF = /^#\/(board|tv|gamenight|gameday)\b/;
   const MQ = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
-  const LD = 0.02, LL = 0.83;
+  const LD = 0.03, LL = 0.765;   /* 2026-11-12: was 0.02 / 0.83; richer team color in both themes, text still held at 4.7:1 by inkLift */
   const W3 = [255, 255, 255], K3 = [0, 0, 0];
 
   /* ---------- color math ---------- */
@@ -99,28 +99,30 @@
   function model(P, S, dark, k){
     if (dark) {
       const vP = vivid(P), vS = vivid(S);
-      const pG = toL(vP, 0.05 * k), sG = toL(vS, 0.036 * k), pM = toL(vP, 0.016), sM = toL(vS, 0.011), base = toL(mix(vP, vS, 0.5), 0.0032);
+      const pG = toL(vP, 0.06 * k), sG = toL(vS, 0.044 * k), pM = toL(vP, 0.02), sM = toL(vS, 0.014), base = toL(mix(vP, vS, 0.5), 0.0036);
       const line = mix(toL(S, 0.42), W3, 0.3);
       return { dark, k, line,
         field: [
-          { k: 'lin', ang: 158, st: [[pM, 1, 0], [base, 1, 42], [base, 1, 58], [sM, 1, 100]] },
+          { k: 'lin', ang: 158, st: [[pM, 1, 0], [base, 1, 46], [base, 1, 60], [sM, 1, 100]] },
+          { k: 'lin', ang: 180, st: [[pG, 0.5, 0], [pG, 0.2, 18], [pG, 0, 44]] },   /* a smooth wash of the team color down from the top (2026-11-12) */
           { k: 'rad', rx: 100, ry: 78, cx: 2, cy: -8, st: [[pG, 1, 0], [pG, 0.55, 30], [pG, 0.2, 56], [pG, 0, 80]] },
           { k: 'rad', rx: 88, ry: 66, cx: 100, cy: 106, st: [[sG, 1, 0], [sG, 0.5, 36], [sG, 0.14, 60], [sG, 0, 80]] },
           { k: 'lin', ang: 116, st: [[W3, 0, 24], [W3, 0.026 * k, 37], [W3, 0, 50]] },
           { k: 'rad', rx: 150, ry: 110, cx: 50, cy: 38, st: [[K3, 0, 55], [K3, 0.38, 100]] }],
-        grid: { c: line, a: 0.075 * k, size: 44 },
+        grid: { c: line, a: 0.045 * k, size: 44 },
         mask: { k: 'rad', rx: 120, ry: 92, cx: 50, cy: 46, st: [[K3, 0, 38], [K3, 0.45, 70], [K3, 1, 100]] } };
     }
     const q = 1 - k; /* light: pastels move toward white as k drops */
-    const pL = tint(P, 0.62 + 0.34 * q), sL = tint(S, 0.68 + 0.28 * q), base = [244, 246, 249], end = tint(S, 0.82 + 0.14 * q);
+    const pL = tint(P, 0.54 + 0.42 * q), sL = tint(S, 0.6 + 0.36 * q), base = mix(tint(P, 0.9 + 0.06 * q), [244, 246, 249], 0.3), end = tint(S, 0.78 + 0.18 * q);   /* 2026-11-12: the middle of the page keeps a faint team tint instead of neutral grey */
     const line = toL(P, 0.05);
     return { dark, k, line,
       field: [
-        { k: 'lin', ang: 158, st: [[tint(P, 0.86 + 0.1 * q), 1, 0], [base, 1, 44], [base, 1, 62], [end, 1, 100]] },
+        { k: 'lin', ang: 158, st: [[tint(P, 0.82 + 0.14 * q), 1, 0], [base, 1, 46], [base, 1, 62], [end, 1, 100]] },
+        { k: 'lin', ang: 180, st: [[pL, 0.5, 0], [pL, 0.18, 18], [pL, 0, 42]] },   /* the same wash from the top, as a pastel (2026-11-12) */
         { k: 'rad', rx: 92, ry: 72, cx: 4, cy: -6, st: [[pL, 0.9, 0], [pL, 0.46, 36], [pL, 0.14, 58], [pL, 0, 78]] },
         { k: 'rad', rx: 78, ry: 62, cx: 102, cy: 106, st: [[sL, 0.85, 0], [sL, 0.36, 40], [sL, 0, 74]] },
-        { k: 'lin', ang: 116, st: [[W3, 0, 24], [W3, 0.45, 37], [W3, 0, 50]] }],
-      grid: { c: line, a: 0.06 * k, size: 44 },
+        { k: 'lin', ang: 116, st: [[W3, 0, 24], [W3, 0.3, 37], [W3, 0, 50]] }],
+      grid: { c: line, a: 0.04 * k, size: 44 },
       mask: { k: 'rad', rx: 120, ry: 92, cx: 50, cy: 46, st: [[K3, 0, 38], [K3, 0.45, 70], [K3, 1, 100]] } };
   }
   function fieldCss(M){ return [grain(M.dark)].concat(M.field.slice().reverse().map(css1)).join(','); }

@@ -523,6 +523,8 @@ MIN||Tyrion Ingram-Dawkins|DE|Questionable|Ankle||2026-11-15|2026-11-10|Ingram-D
 MIN||Demond Claiborne|RB|Injured Reserve|Knee||2026-12-06|2026-11-10|ir
 MIN||Theo Jackson|S|Questionable||||2026-11-09|Jackson (quadriceps) is active for Monday's game against Buffalo, Craig Peters of the team's official site reports.
 MIN||Andrew Van Ginkel|LB|Active||||2026-11-07|Van Ginkel (chest) doesn't have a designation for Monday's matchup against the Bills, Craig Peters of the Vikings' official site reports.
+NE||TreVeyon Henderson|RB|Out|Illness||2026-11-29|2026-11-12|out
+NE||A.J. Brown|WR|Questionable|Knee||2026-11-15|2026-11-12|questionable
 NE||Christian Gonzalez|CB|Active||||2026-11-12|Gonzalez logged 10 tackles (nine solo) and one pass defense during the Patriots' 45-27 loss to the Packers in Week 9.
 NE||Charles Woods|CB|Questionable|Hamstring||2026-11-15|2026-11-12|questionable
 NE||Ben Brown|C|Out|Knee||2026-11-29|2026-11-12|out
@@ -532,8 +534,6 @@ NE||Kevin Byard|S|Questionable|Chest||2026-11-15|2026-11-12|Byard (chest) was a 
 NE||Morgan Moses|OT|Questionable|Foot||2026-11-15|2026-11-11|questionable
 NE||Walter Rouse|OL|Questionable|Concussion||2026-11-15|2026-11-11|questionable
 NE||Cameron Latu|TE|Questionable|Back||2026-11-15|2026-11-11|questionable
-NE||TreVeyon Henderson|RB|Out|Illness||2026-11-29|2026-11-11|out
-NE||A.J. Brown|WR|Questionable|Knee||2026-11-15|2026-11-11|questionable
 NE||Hunter Henry|TE|Questionable|Foot||2026-11-15|2026-11-11|Henry (foot) was limited in Wednesday's practice.
 NE||Reggie Gilliam|FB|Injured Reserve|Ankle||2026-11-15|2026-11-11|Gilliam (ankle) was designated for return from injured reserve Wednesday, Mike Reiss of ESPN.com reports.
 NE||Rhamondre Stevenson|RB|Doubtful|Knee||2026-11-15|2026-11-11|doubtful

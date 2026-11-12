@@ -46,6 +46,16 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .jsh-nav{min-width:0}
 .jsh-nav a{flex:none;line-height:1}
 @media print{.jsh{display:none}}
+/* the light/dark switch (2026-11-12): a sun while the page is dark, a moon while it is light */
+.jsh-th{flex:none;display:grid;place-items:center;width:34px;height:30px;margin-left:6px;padding:0;border:0;border-radius:999px;background:rgba(255,255,255,.08);color:#dfe6f3;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.jsh-th:hover{background:rgba(255,255,255,.16);color:#fff}
+.jsh-th:focus-visible{outline:2px solid #7cb6ff;outline-offset:2px}
+.jsh-th svg{width:17px;height:17px}
+.jsh-th .mn,.jsh-th.lt .sn{display:none}
+.jsh-th.lt .mn{display:block}
+@media (min-width:1100px){.jsh-th{margin-left:auto}.jsh .jsh-th~.jsh-sb{margin-left:6px}}
+@media (max-width:560px){.jsh-th{margin-left:2px}.jsh .jsh-th~.jsh-sb{margin-left:2px}.jsh .jsh-nav a:not(.on){padding:0 5px}}   /* room for the switch: the league icons sit a little closer */
+@media (max-width:380px){.jsh .jsh-brand{display:none}}   /* the smallest phones: Home is already in the row */
 /* Live Center tab (2026-10-27): a small red dot on the tab while any CFB, NFL or NBA game is live (set from the BottomLine feed) */
 .jsh-nav a[data-s="live"]{position:relative}
 .jsh-nav a .jsh-ld{position:absolute;top:4px;right:5px;width:7px;height:7px;border-radius:50%;background:#ff4d6a;box-shadow:0 0 0 2px rgba(255,77,106,.28);animation:jshLd 1.6s ease-in-out infinite}
@@ -108,6 +118,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
     <a href="/cbb/" data-s="cbb" style="--c:#d97706" title="College basketball"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-basketball.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">CBB</a>
     <a href="/sports/live/" data-s="live" style="--c:#e11d48" title="Live Center"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.48M7.76 16.24a6 6 0 0 1 0-8.48M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>Live<span class="jsh-ld" hidden></span></a>
   </nav>
+  <button type="button" class="jsh-th" title="Switch between light and dark" aria-label="Switch between light and dark"><svg class="sn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><svg class="mn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
 </div>
 <script>
 /* Jamo Sports Hub: light/dark and the time zone follow you between CFB, NFL and NBA (each keeps its own favourite team).
@@ -125,6 +136,21 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 } catch (e) {} })();
 </script>
 <script>
+/* the light/dark switch in the top bar (2026-11-12). On a hub it hands the new theme to the hub (a 'jsh-theme' event the hub
+   listens for) so the page changes in place; the home page, Live Center and alerts reload with it. Either way the choice
+   is saved in jsh-shared, which every page reads. */
+(function(){ var b = document.querySelector('.jsh-th'); if (!b) return; var R = document.documentElement;
+  var hub = (location.pathname.split('/')[1] || 'sports').toLowerCase(), isHub = /^(cfb|nfl|nba|cbb)$/.test(hub);
+  function light(){ if (isHub) { var t = R.dataset.theme; return t ? t === 'light' : matchMedia('(prefers-color-scheme: light)').matches; } return R.classList.contains('light'); }
+  function paint(){ var l = light(), s = l ? 'Switch to dark' : 'Switch to light'; b.classList.toggle('lt', l); b.title = s; b.setAttribute('aria-label', s); }
+  b.addEventListener('click', function(){ var t = light() ? 'dark' : 'light';
+    try { var sh = JSON.parse(localStorage.getItem('jsh-shared') || 'null') || {}; sh.theme = t; localStorage.setItem('jsh-shared', JSON.stringify(sh)); } catch (e) {}
+    if (!isHub) { location.reload(); return; }
+    window.__jshThemeAck = ''; try { window.dispatchEvent(new CustomEvent('jsh-theme', { detail: t })); } catch (e) {}
+    if (window.__jshThemeAck !== t) { try { var k = hub + '-settings', o = JSON.parse(localStorage.getItem(k) || '{}') || {}; o.theme = t; localStorage.setItem(k, JSON.stringify(o)); } catch (e) {} R.dataset.theme = t; }
+    paint(); });
+  paint(); addEventListener('load', paint); setTimeout(paint, 1200);
+})();
 /* phones (2026-10-21): tuck the hub's sticky header (sub-tabs + scores strip) away on scroll down, bring it back on scroll up */
 (function(){ var last = 0, h = null, mq = window.matchMedia('(max-width:760px), (max-height:560px)');
   function hdr(){ if (!h || !h.isConnected) h = document.querySelector('header.top'); return h; }
@@ -13318,6 +13344,9 @@ function renderSettings(){ setNav('settings'); const t=SETTINGS.fav&&T[SETTINGS.
   const tint=$('#tint'); if(tint) tint.onchange=()=>{ SETTINGS.tint=tint.checked; saveSettings(); applyTint(); applyPageTheme(); };
   const clr=$('#fav-clear'); if(clr) clr.onclick=()=>{ SETTINGS.fav=null; saveSettings(); applyTint(); applyPageTheme(); renderSettings(); }; }
 loadSettings(); applyTheme();
+/* the light/dark switch in the top bar (sports-hub/hubbar.html, 2026-11-12, Jamo: "Put light/dark theme switch toggle at
+   top of screen"): takes the new theme, saves it, and redraws the page in place so logos pick the right art */
+window.addEventListener('jsh-theme', e=>{ try{ SETTINGS.theme=e.detail==='light'?'light':'dark'; saveSettings(); applyTheme(); window.__jshThemeAck=SETTINGS.theme; const y=window.scrollY; route(); window.scrollTo(0,y); }catch(x){} });
 /* ---------- live scores (djgolding.com proxy of ESPN) ---------- */
 const LIVE_API = (/(^|\.)djgolding\.com$/.test(location.hostname)) ? '/api/cfb' : 'https://djgolding.com/api/cfb';
 const LIVE = { on: !(window.claude && window.claude.use) && typeof fetch === 'function', last: 0, timer: null, ids: {}, err: 0, busy: false, sum: {} };

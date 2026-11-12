@@ -7213,7 +7213,7 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
 }
 </script>
 <script type="application/json" id="d-injfeat">{
-  "_note" : "Hand-checked injury data for BYU and its next opponent (2026-11-09, Baylor week - no Big 12 report yet; BYU statuses are from Sitake's Monday briefing and the last report of Nov. 4, Baylor's from its final Iowa State report of Nov. 7). Every player line cites its source. Statuses come only from official availability reports or what the head coach/team said; anything else is marked unclear. Updated by the 'BYU injury report' scheduled task. Do not fill gaps from Covers - it was wrong about BYU when checked.",
+  "_note" : "Hand-checked injury data for BYU and its next opponent (2026-11-12, Baylor week - BYU statuses are from the initial Big 12 report of Nov. 11 as published by the Deseret News and KSL; Baylor's Nov. 11 list was not found in text, so its lines are from the Nov. 7 report plus BYU On SI). Every player line cites its source. Statuses come only from official availability reports or what the head coach/team said; anything else is marked unclear. Updated by the 'BYU injury report' scheduled task. Do not fill gaps from Covers - it was wrong about BYU when checked.",
   "teams" : {
     "BYU" : {
       "game" : {
@@ -7224,34 +7224,183 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
       "official" : {
         "how" : "Teams file an initial report before each game and update it through game day. Players are listed OUT, DOUBTFUL, QUESTIONABLE or PROBABLE; anyone not listed is expected to be available.",
         "name" : "Big 12 player availability report",
-        "next" : "BYU's initial report for Baylor is expected Wednesday evening, Nov. 11, with updates Thursday and Friday. The final report comes 90 minutes before Saturday's 1:30 PM MT kickoff (about noon).",
+        "next" : "BYU's initial report for Baylor came out Wednesday evening, Nov. 11. Updates can come Thursday and Friday, and the final report comes 90 minutes before Saturday's 1:30 PM MT kickoff (about noon).",
         "url" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
       },
       "players" : [
         {
-          "cls" : "doubt",
-          "history" : "Hurt at Utah (Nov. 7)",
+          "cls" : "out",
+          "history" : "Hurt at Utah (Nov. 7) covering a punt return",
           "name" : "Will Zundel",
-          "note" : "Sitake said Monday (Nov. 9) the reserve tight end is the only player hurt against Utah who will probably miss Saturday's game with Baylor. BYU hasn't named the injury. BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
-          "num" : "",
+          "note" : "OUT on BYU's initial report for Baylor (Nov. 11). The reserve tight end was hurt covering a punt return at Utah and came up holding his left arm (KSL); BYU hasn't named the injury. Sitake said Monday he would probably miss the game.",
+          "num" : "83",
           "pos" : "TE",
           "src" : [
+            {
+              "d" : "Nov. 11",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-baylor-availability-report/578920"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+            },
             {
               "d" : "Nov. 9",
               "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
               "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
             }
           ],
-          "status" : "Likely out (Sitake)"
+          "status" : "OUT"
+        },
+        {
+          "cls" : "doubt",
+          "history" : "DOUBTFUL vs. Baylor (initial report, Nov. 11); did not play at Utah (Nov. 7) - DOUBTFUL on that report too; OUT vs. Arizona State (Oct. 28)",
+          "name" : "Evan Johnson",
+          "note" : "DOUBTFUL on BYU's initial report for Baylor (Nov. 11). BYU's top cornerback has been out since he was hurt in double overtime at UCF (Oct. 24). Sitake said Monday (Nov. 9) he \"will be closer to playing this week.\" The final report comes out 90 minutes before Saturday's 1:30 PM MT kickoff.",
+          "num" : "0",
+          "pos" : "CB",
+          "src" : [
+            {
+              "d" : "Nov. 11",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-baylor-availability-report/578920"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+            },
+            {
+              "d" : "Nov. 9",
+              "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
+              "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
+            }
+          ],
+          "status" : "DOUBTFUL"
+        },
+        {
+          "cls" : "doubt",
+          "history" : "DOUBTFUL vs. Baylor (initial report, Nov. 11); did not play at Utah (Nov. 7); hurt vs. Arizona State (Oct. 31)",
+          "name" : "Roger Saleapaga II",
+          "note" : "DOUBTFUL on BYU's initial report for Baylor (Nov. 11). He missed the Utah game after getting hurt late against Arizona State. Sitake said Monday (Nov. 9) that BYU is \"hoping\" he can play. BYU hasn't named the injury. The final report comes out 90 minutes before Saturday's 1:30 PM MT kickoff.",
+          "num" : "2",
+          "pos" : "TE",
+          "src" : [
+            {
+              "d" : "Nov. 11",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-baylor-availability-report/578920"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+            },
+            {
+              "d" : "Nov. 9",
+              "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
+              "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
+            }
+          ],
+          "status" : "DOUBTFUL"
+        },
+        {
+          "cls" : "quest",
+          "history" : "QUESTIONABLE vs. Baylor (initial report, Nov. 11); shaken up on the first play at Utah (Nov. 7), then returned",
+          "name" : "Isaiah Glasker",
+          "note" : "QUESTIONABLE on BYU's initial report for Baylor (Nov. 11). Glasker was shaken up on the first play at Utah and came back into the game (KSL). Sitake had said Monday (Nov. 9) that he \"should be fine.\" BYU hasn't named the injury. The final report comes out 90 minutes before Saturday's 1:30 PM MT kickoff.",
+          "num" : "16",
+          "pos" : "LB",
+          "src" : [
+            {
+              "d" : "Nov. 11",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-baylor-availability-report/578920"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+            },
+            {
+              "d" : "Nov. 9",
+              "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
+              "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
+            }
+          ],
+          "status" : "QUESTIONABLE"
+        },
+        {
+          "cls" : "quest",
+          "history" : "QUESTIONABLE vs. Baylor (initial report, Nov. 11) - new to the report",
+          "name" : "Crew Clark",
+          "note" : "QUESTIONABLE on BYU's initial report for Baylor (Nov. 11). He wasn't on the Utah-week report. BYU hasn't named the injury. The final report comes out 90 minutes before Saturday's 1:30 PM MT kickoff.",
+          "num" : "28",
+          "pos" : "S",
+          "src" : [
+            {
+              "d" : "Nov. 11",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-baylor-availability-report/578920"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+            }
+          ],
+          "status" : "QUESTIONABLE"
         },
         {
           "cls" : "likely",
-          "history" : "Played at Utah (Nov. 7): 7 carries, 19 yards, 1 TD - DOUBTFUL on the initial report (Nov. 4), QUESTIONABLE by Friday (Nov. 6); OUT vs. Arizona State (Oct. 28); OUT vs. UCF (Oct. 21); ruled out by Sitake for Notre Dame (Oct. 12); OUT vs. Iowa State (Oct. 6)",
+          "history" : "PROBABLE vs. Baylor (initial report, Nov. 11); Played at Utah (Nov. 7): 7 carries, 19 yards, 1 TD - DOUBTFUL on the initial report (Nov. 4), QUESTIONABLE by Friday (Nov. 6); OUT vs. Arizona State (Oct. 28); OUT vs. UCF (Oct. 21); ruled out by Sitake for Notre Dame (Oct. 12); OUT vs. Iowa State (Oct. 6)",
           "name" : "LJ Martin",
-          "note" : "Back on the field. Martin played at Utah - his first game since TCU (Oct. 3) - but was limited to seven carries and was hobbling by the third quarter (KSL). Sitake after the game: \"He's not 100% ... Next week we'll get more.\" On Monday (Nov. 9) Sitake said Martin \"will be more available\" against Baylor. He missed four games with a lower-leg injury (the Deseret News now calls it a high ankle sprain). BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
+          "note" : "PROBABLE on BYU's initial report for Baylor (Nov. 11). Martin returned at Utah - his first game since TCU (Oct. 3) - but was limited to seven carries for 19 yards and a touchdown. Sitake said Monday (Nov. 9) he \"will be more available\" against Baylor; KSL expects a bigger role. He missed four games with a lower-leg injury (the Deseret News calls it a high ankle sprain). The final report comes out 90 minutes before Saturday's 1:30 PM MT kickoff.",
           "num" : "4",
           "pos" : "RB",
           "src" : [
+            {
+              "d" : "Nov. 11",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-baylor-availability-report/578920"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+            },
             {
               "d" : "Nov. 9",
               "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
@@ -7271,115 +7420,15 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
               "d" : "Nov. 6",
               "t" : "KSL Sports (Mitch Harper)",
               "u" : "https://sports.ksl.com/ncaa/byu-football/lj-martin-injury-latest/578814"
-            },
-            {
-              "d" : "Nov. 4",
-              "t" : "Big 12 availability report (official)",
-              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
             }
           ],
-          "status" : "Expected to play (Sitake)"
-        },
-        {
-          "cls" : "likely",
-          "history" : "Did not play at Utah (Nov. 7) though he was not on the report; PROBABLE vs. Arizona State (Oct. 28) - then did not play",
-          "name" : "Preston Rex",
-          "note" : "Sitake said Monday (Nov. 9) that Rex \"should be good to go\" for Baylor. He hasn't played in the last two games (a hip issue, per the Deseret News on Nov. 2); only LJ Martin and Sione Moa carried the ball at Utah. BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
-          "num" : "12",
-          "pos" : "RB",
-          "src" : [
-            {
-              "d" : "Nov. 9",
-              "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
-              "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
-            },
-            {
-              "d" : "Nov. 7",
-              "t" : "KSL Sports (Mitch Harper): takeaways from the Utah game",
-              "u" : "https://sports.ksl.com/ncaa/byu-football/takeaways-byu-utah-loss-2026/578831"
-            }
-          ],
-          "status" : "Should be good to go (Sitake)"
-        },
-        {
-          "cls" : "info",
-          "history" : "Did not play at Utah (Nov. 7); DOUBTFUL on the Utah initial report (Nov. 4); hurt vs. Arizona State (Oct. 31)",
-          "name" : "Roger Saleapaga II",
-          "note" : "Sitake said Monday (Nov. 9) that BYU is \"hoping\" Saleapaga can play against Baylor. He missed the Utah game after getting hurt late against Arizona State. BYU hasn't named the injury. BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
-          "num" : "2",
-          "pos" : "TE",
-          "src" : [
-            {
-              "d" : "Nov. 9",
-              "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
-              "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
-            },
-            {
-              "d" : "Nov. 4",
-              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
-              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
-            }
-          ],
-          "status" : "Unclear - BYU \"hoping\" he plays (Sitake)"
-        },
-        {
-          "cls" : "info",
-          "history" : "DOUBTFUL vs. Utah (initial report, Nov. 4); OUT vs. Arizona State (initial report, Oct. 28)",
-          "name" : "Evan Johnson",
-          "note" : "Sitake said Monday (Nov. 9) that BYU's top cornerback \"will be closer to playing this week, too.\" Johnson has been working back from a lower-body injury (reported as a left ankle sprain) from the last play at UCF (Oct. 24). BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
-          "num" : "0",
-          "pos" : "CB",
-          "src" : [
-            {
-              "d" : "Nov. 9",
-              "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
-              "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
-            },
-            {
-              "d" : "Nov. 4",
-              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
-              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
-            }
-          ],
-          "status" : "Unclear - \"closer to playing\" (Sitake)"
-        },
-        {
-          "cls" : "likely",
-          "history" : "Briefly left the Utah game (Nov. 7), then returned",
-          "name" : "Isaiah Glasker",
-          "note" : "Sitake said Monday (Nov. 9) that Glasker and cornerback Tre Alexander \"should be fine\" after each briefly left the Utah game.",
-          "num" : "16",
-          "pos" : "LB",
-          "src" : [
-            {
-              "d" : "Nov. 9",
-              "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
-              "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
-            }
-          ],
-          "status" : "Should be fine (Sitake)"
-        },
-        {
-          "cls" : "likely",
-          "history" : "Briefly left the Utah game (Nov. 7)",
-          "name" : "Tre Alexander",
-          "note" : "Sitake said Monday (Nov. 9) that Alexander and linebacker Isaiah Glasker \"should be fine\" after each briefly left the Utah game.",
-          "num" : "",
-          "pos" : "CB",
-          "src" : [
-            {
-              "d" : "Nov. 9",
-              "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
-              "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
-            }
-          ],
-          "status" : "Should be fine (Sitake)"
+          "status" : "PROBABLE"
         },
         {
           "cls" : "out",
-          "history" : "Not on the Utah report (Nov. 4); OUT vs. Arizona State (initial report, Oct. 28)",
+          "history" : "Not on the Baylor (Nov. 11) or Utah (Nov. 4) reports; OUT vs. Arizona State (initial report, Oct. 28)",
           "name" : "Trevin Ostler",
-          "note" : "Out for the season. Ostler announced on social media (Oct. 29) that he tore his ACL, MCL and meniscus on one play at UCF (Deseret News). He isn't on the Nov. 4 report; players already lost for the season can be left off (Utah's Kelvin Obot isn't on Utah's either).",
+          "note" : "Out for the season. Ostler announced on social media (Oct. 29) that he tore his ACL, MCL and meniscus on one play at UCF (Deseret News). He isn't on the Nov. 11 report; players already lost for the season can be left off (Utah's Kelvin Obot isn't on Utah's either).",
           "num" : "74",
           "pos" : "OL",
           "src" : [
@@ -7397,143 +7446,137 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
           "status" : "Out for season"
         },
         {
-          "cls" : "out",
-          "history" : "OUT vs. Utah (initial report, Nov. 4); last listed OUT vs. TCU (Sept. 30)",
-          "name" : "Jonathan Kabeya",
-          "note" : "OUT on BYU's last Big 12 report (Utah week, Nov. 4). KSL says he has been out for a while. Injury not disclosed. BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
-          "num" : "2",
+          "cls" : "likely",
+          "history" : "Did not play at Utah (Nov. 7) or vs. Arizona State (Oct. 31)",
+          "name" : "Preston Rex",
+          "note" : "Not on BYU's initial report for Baylor (Nov. 11), which means he is expected to be available. Sitake said Monday (Nov. 9) that Rex \"should be good to go.\" He hasn't played in the last two games (a hip issue, per the Deseret News on Nov. 2).",
+          "num" : "12",
+          "pos" : "RB",
+          "src" : [
+            {
+              "d" : "Nov. 11",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+            },
+            {
+              "d" : "Nov. 9",
+              "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
+              "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
+            }
+          ],
+          "status" : "Not on the Nov. 11 report - expected to play"
+        },
+        {
+          "cls" : "likely",
+          "history" : "Briefly left the Utah game (Nov. 7)",
+          "name" : "Tre Alexander",
+          "note" : "Not on BYU's initial report for Baylor (Nov. 11), which means he is expected to be available. Sitake said Monday (Nov. 9) that he \"should be fine\" after briefly leaving the Utah game.",
+          "num" : "",
           "pos" : "CB",
           "src" : [
             {
-              "d" : "Nov. 4",
+              "d" : "Nov. 11",
               "t" : "Big 12 availability report (official)",
               "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
             },
             {
-              "d" : "Nov. 4",
-              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
-              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
-            }
-          ],
-          "status" : "OUT on the last report (Nov. 4)"
-        },
-        {
-          "cls" : "out",
-          "history" : "OUT vs. Utah (initial report, Nov. 4)",
-          "name" : "Pierson Watson",
-          "note" : "OUT on BYU's last Big 12 report (Utah week, Nov. 4). KSL says he has been out for a while. Injury not disclosed. BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
-          "num" : "23",
-          "pos" : "LB",
-          "src" : [
-            {
-              "d" : "Nov. 4",
-              "t" : "Big 12 availability report (official)",
-              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+              "d" : "Nov. 11",
+              "t" : "BYU On SI (Casey Lundquist): initial reports for BYU-Baylor",
+              "u" : "https://www.si.com/college/byu/football/byu-provides-official-injury-updates-for-lj-martin-three-other-starters"
             },
             {
-              "d" : "Nov. 4",
-              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
-              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
+              "d" : "Nov. 9",
+              "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
+              "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
             }
           ],
-          "status" : "OUT on the last report (Nov. 4)"
+          "status" : "Not on the Nov. 11 report - expected to play"
         },
         {
-          "cls" : "out",
-          "history" : "OUT vs. Utah (initial report, Nov. 4)",
-          "name" : "Seth Shigg",
-          "note" : "OUT on BYU's last Big 12 report (Utah week, Nov. 4). KSL says he has been out for a while. Injury not disclosed. BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
-          "num" : "39",
-          "pos" : "CB",
-          "src" : [
-            {
-              "d" : "Nov. 4",
-              "t" : "Big 12 availability report (official)",
-              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
-            },
-            {
-              "d" : "Nov. 4",
-              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
-              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
-            }
-          ],
-          "status" : "OUT on the last report (Nov. 4)"
-        },
-        {
-          "cls" : "out",
-          "history" : "OUT vs. Utah (initial report, Nov. 4)",
-          "name" : "Vincent Tautua",
-          "note" : "OUT on BYU's last Big 12 report (Utah week, Nov. 4). Injury not disclosed. BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
-          "num" : "52",
-          "pos" : "DE",
-          "src" : [
-            {
-              "d" : "Nov. 4",
-              "t" : "Big 12 availability report (official)",
-              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
-            },
-            {
-              "d" : "Nov. 4",
-              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
-              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
-            }
-          ],
-          "status" : "OUT on the last report (Nov. 4)"
-        },
-        {
-          "cls" : "info",
+          "cls" : "likely",
           "history" : "QUESTIONABLE vs. Utah (initial report, Nov. 4)",
           "name" : "Joseph Douglas",
-          "note" : "QUESTIONABLE on BYU's initial report for Utah (Nov. 4); his final status for that game wasn't published in text. Injury not disclosed. BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
+          "note" : "Was QUESTIONABLE on the Utah-week report (Nov. 4) and is not on BYU's initial report for Baylor (Nov. 11), which means he is expected to be available.",
           "num" : "37",
           "pos" : "S",
           "src" : [
             {
-              "d" : "Nov. 4",
+              "d" : "Nov. 11",
               "t" : "Big 12 availability report (official)",
               "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
             },
             {
-              "d" : "Nov. 4",
-              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
-              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
             }
           ],
-          "status" : "Unclear - QUESTIONABLE on the last report (Nov. 4)"
+          "status" : "Not on the Nov. 11 report - expected to play"
         },
         {
-          "cls" : "info",
+          "cls" : "likely",
           "history" : "QUESTIONABLE vs. Utah (initial report, Nov. 4)",
           "name" : "Kendal Wall",
-          "note" : "QUESTIONABLE on BYU's initial report for Utah (Nov. 4); his final status for that game wasn't published in text. Injury not disclosed. BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
+          "note" : "Was QUESTIONABLE on the Utah-week report (Nov. 4) and is not on BYU's initial report for Baylor (Nov. 11), which means he is expected to be available.",
           "num" : "46",
           "pos" : "DE",
           "src" : [
             {
-              "d" : "Nov. 4",
+              "d" : "Nov. 11",
               "t" : "Big 12 availability report (official)",
               "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
             },
             {
-              "d" : "Nov. 4",
-              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
-              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
             }
           ],
-          "status" : "Unclear - QUESTIONABLE on the last report (Nov. 4)"
+          "status" : "Not on the Nov. 11 report - expected to play"
         },
         {
-          "cls" : "info",
+          "cls" : "likely",
           "history" : "QUESTIONABLE vs. Utah (initial report, Nov. 4)",
           "name" : "Siosefa Brown",
-          "note" : "QUESTIONABLE on BYU's initial report for Utah (Nov. 4); his final status for that game wasn't published in text. Injury not disclosed. BYU's first report for Baylor comes out Wednesday evening (Nov. 11).",
+          "note" : "Was QUESTIONABLE on the Utah-week report (Nov. 4) and is not on BYU's initial report for Baylor (Nov. 11), which means he is expected to be available.",
           "num" : "59",
           "pos" : "DE",
           "src" : [
             {
-              "d" : "Nov. 4",
+              "d" : "Nov. 11",
               "t" : "Big 12 availability report (official)",
               "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+            }
+          ],
+          "status" : "Not on the Nov. 11 report - expected to play"
+        },
+        {
+          "cls" : "info",
+          "history" : "Not on the Baylor report (Nov. 11); OUT vs. Utah (initial report, Nov. 4)",
+          "name" : "Jonathan Kabeya",
+          "note" : "Was OUT on the Utah-week report (Nov. 4) but is not on BYU's initial report for Baylor (Nov. 11). Not being listed normally means available, but the Big 12 report sometimes leaves off players with long-term injuries, and BYU hasn't said he is back. Injury not disclosed.",
+          "num" : "2",
+          "pos" : "CB",
+          "src" : [
+            {
+              "d" : "Nov. 11",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
             },
             {
               "d" : "Nov. 4",
@@ -7541,10 +7584,110 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
               "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
             }
           ],
-          "status" : "Unclear - QUESTIONABLE on the last report (Nov. 4)"
+          "status" : "Unclear - OUT on Nov. 4, not on the Nov. 11 report"
+        },
+        {
+          "cls" : "info",
+          "history" : "Not on the Baylor report (Nov. 11); OUT vs. Utah (initial report, Nov. 4)",
+          "name" : "Pierson Watson",
+          "note" : "Was OUT on the Utah-week report (Nov. 4) but is not on BYU's initial report for Baylor (Nov. 11). Not being listed normally means available, but the Big 12 report sometimes leaves off players with long-term injuries, and BYU hasn't said he is back. Injury not disclosed.",
+          "num" : "23",
+          "pos" : "LB",
+          "src" : [
+            {
+              "d" : "Nov. 11",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+            },
+            {
+              "d" : "Nov. 4",
+              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
+            }
+          ],
+          "status" : "Unclear - OUT on Nov. 4, not on the Nov. 11 report"
+        },
+        {
+          "cls" : "info",
+          "history" : "Not on the Baylor report (Nov. 11); OUT vs. Utah (initial report, Nov. 4)",
+          "name" : "Seth Shigg",
+          "note" : "Was OUT on the Utah-week report (Nov. 4) but is not on BYU's initial report for Baylor (Nov. 11). Not being listed normally means available, but the Big 12 report sometimes leaves off players with long-term injuries, and BYU hasn't said he is back. Injury not disclosed.",
+          "num" : "39",
+          "pos" : "CB",
+          "src" : [
+            {
+              "d" : "Nov. 11",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+            },
+            {
+              "d" : "Nov. 4",
+              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
+            }
+          ],
+          "status" : "Unclear - OUT on Nov. 4, not on the Nov. 11 report"
+        },
+        {
+          "cls" : "info",
+          "history" : "Not on the Baylor report (Nov. 11); OUT vs. Utah (initial report, Nov. 4)",
+          "name" : "Vincent Tautua",
+          "note" : "Was OUT on the Utah-week report (Nov. 4) but is not on BYU's initial report for Baylor (Nov. 11). Not being listed normally means available, but the Big 12 report sometimes leaves off players with long-term injuries, and BYU hasn't said he is back. Injury not disclosed.",
+          "num" : "52",
+          "pos" : "DE",
+          "src" : [
+            {
+              "d" : "Nov. 11",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "Deseret News (Jackson Payne): Big 12 availability report",
+              "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+            },
+            {
+              "d" : "Nov. 4",
+              "t" : "KSL Sports (Mitch Harper): Big 12 availability report",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-availability-report-utah-lj-martin/578772"
+            }
+          ],
+          "status" : "Unclear - OUT on Nov. 4, not on the Nov. 11 report"
         }
       ],
       "reports" : [
+        {
+          "doubtful" : [
+            "CB #0 Evan Johnson",
+            "TE #2 Roger Saleapaga II"
+          ],
+          "game" : "vs. Baylor (Sat., Nov. 14)",
+          "kind" : "Initial report, released Wed., Nov. 11",
+          "out" : [
+            "TE #83 Will Zundel"
+          ],
+          "probable" : [
+            "RB #4 LJ Martin"
+          ],
+          "questionable" : [
+            "LB #16 Isaiah Glasker",
+            "S #28 Crew Clark"
+          ],
+          "src" : {
+            "t" : "Big 12 (official report); also Deseret News and KSL Sports",
+            "u" : "https://www.deseret.com/sports/2026/11/11/byu-football-injury-report-baylor-2026/"
+          }
+        },
         {
           "doubtful" : [
             "CB #0 Evan Johnson",
@@ -7590,29 +7733,11 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
             "t" : "Deseret News",
             "u" : "https://www.deseret.com/sports/2026/10/28/byu-football-injury-report-arizona-state-2026/"
           }
-        },
-        {
-          "doubtful" : [],
-          "game" : "at UCF (Sat., Oct. 24)",
-          "kind" : "Initial report, released Wed., Oct. 21",
-          "out" : [
-            "RB #4 LJ Martin"
-          ],
-          "probable" : [
-            "S #22 Tommy Prassas"
-          ],
-          "questionable" : [
-            "OL #64 Kyle Sfarcioc"
-          ],
-          "src" : {
-            "t" : "Deseret News",
-            "u" : "https://www.deseret.com/sports/2026/10/21/byu-ucf-football-injury-report-2026/"
-          }
         }
       ],
-      "summary" : "No Big 12 report for Baylor yet (due Wed., Nov. 11). Sitake said Monday that reserve TE Will Zundel will probably miss the game, RB LJ Martin \"will be more available\" after a limited return at Utah, RB Preston Rex \"should be good to go,\" and BYU is \"hoping\" TE Roger Saleapaga II can play. CB Evan Johnson is \"closer to playing.\"",
+      "summary" : "BYU's first report for Baylor (Wed., Nov. 11): TE Will Zundel is OUT; CB Evan Johnson and TE Roger Saleapaga II are DOUBTFUL; LB Isaiah Glasker and S Crew Clark are QUESTIONABLE; RB LJ Martin is PROBABLE. RB Preston Rex is not listed, so he is expected to play.",
       "watch" : {
-        "note" : "BYU hasn't filed a report for Baylor yet. None of these players was on the last Big 12 report (Utah week, Nov. 4), but BYU hasn't said the longer-term ones are back. Esera, McKee and Thomason were last listed OUT on the TCU report (Sept. 30); Gentry hasn't been on a report since then either. Sitake said Monday (Nov. 9): \"I don't think there are many guys playing at 100% ... We'll probably have to tap into some depth to keep guys fresh.\"",
+        "note" : "None of these players is on BYU's initial report for Baylor (Nov. 11), but BYU hasn't said the longer-term ones are back. Esera, McKee and Thomason were last listed OUT on the TCU report (Sept. 30); Gentry hasn't been on a report since then either. Sitake said Monday (Nov. 9): \"I don't think there are many guys playing at 100% ... We'll probably have to tap into some depth to keep guys fresh.\"",
         "players" : [
           {
             "name" : "Andrew Gentry",
@@ -7665,6 +7790,11 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
         ],
         "src" : [
           {
+            "d" : "Nov. 11",
+            "t" : "Big 12 availability report (official)",
+            "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+          },
+          {
             "d" : "Nov. 9",
             "t" : "Deseret News (Jay Drew): Sitake Monday briefing",
             "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
@@ -7704,7 +7834,7 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
       }
     },
     "Baylor" : {
-      "more" : "From Baylor's last official Big 12 report (final report for Iowa State, Sat., Nov. 7). Baylor's report for the BYU game comes out Wednesday evening, Nov. 11. Interim coach Joe Klanderman's Monday press conference coverage (Nov. 9) didn't include injury news.",
+      "more" : "Baylor filed its initial Big 12 report for the BYU game on Wednesday, Nov. 11. It lists six players, but the full list hasn't been published in text yet. BYU On SI reports that starting DL Devonte Tezino is the only significant name and that the other five haven't played a snap this year. The other statuses here are from Baylor's last report in text (final report for Iowa State, Nov. 7).",
       "official" : {
         "name" : "Big 12 player availability report",
         "url" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
@@ -7713,7 +7843,7 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
         {
           "cls" : "out",
           "name" : "Jacob Redding",
-          "note" : "Senior safety; lost for the season to a knee injury before the opener (Sports Illustrated). OUT on Baylor's last report (Iowa State, Nov. 7).",
+          "note" : "Senior safety; lost for the season to a knee injury before the opener (Sports Illustrated). OUT on Baylor's last report published in text (Iowa State, Nov. 7).",
           "num" : "8",
           "pos" : "S",
           "src" : [
@@ -7733,14 +7863,14 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
         {
           "cls" : "out",
           "name" : "Devonte Tezino",
-          "note" : "Fifth-year defensive lineman; season-ending leg injury early in the year (SicEm365). OUT on Baylor's last report (Iowa State, Nov. 7).",
+          "note" : "Fifth-year defensive lineman; season-ending leg injury early in the year (SicEm365). He is on Baylor's initial report for the BYU game (Nov. 11), per BYU On SI.",
           "num" : "59",
           "pos" : "DL",
           "src" : [
             {
-              "d" : "Nov. 7",
-              "t" : "Sports Illustrated / Baylor On SI: Baylor availability report vs. Iowa State",
-              "u" : "https://www.si.com/college/baylor/baylor-cb-kyler-beaty-will-play-against-iowa-state"
+              "d" : "Nov. 11",
+              "t" : "BYU On SI (Casey Lundquist): initial reports for BYU-Baylor",
+              "u" : "https://www.si.com/college/byu/football/byu-provides-official-injury-updates-for-lj-martin-three-other-starters"
             },
             {
               "d" : "Sept.",
@@ -7751,9 +7881,9 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
           "status" : "Out for season"
         },
         {
-          "cls" : "out",
+          "cls" : "info",
           "name" : "Jamarion Richardson",
-          "note" : "OUT on Baylor's final report for Iowa State (Nov. 7). Baylor hasn't said what the injury is. Baylor's report for BYU comes out Wednesday evening (Nov. 11).",
+          "note" : "OUT on Baylor's final report for Iowa State (Nov. 7). Baylor's report for BYU (Nov. 11) lists six players, but the names haven't been published in text; five of the six haven't played a snap this year (BYU On SI). Baylor hasn't said what the injury is.",
           "num" : "38",
           "pos" : "CB",
           "src" : [
@@ -7761,14 +7891,19 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
               "d" : "Nov. 7",
               "t" : "Sports Illustrated / Baylor On SI: Baylor availability report vs. Iowa State",
               "u" : "https://www.si.com/college/baylor/baylor-cb-kyler-beaty-will-play-against-iowa-state"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "BYU On SI (Casey Lundquist): initial reports for BYU-Baylor",
+              "u" : "https://www.si.com/college/byu/football/byu-provides-official-injury-updates-for-lj-martin-three-other-starters"
             }
           ],
-          "status" : "OUT on the last report (Nov. 7)"
+          "status" : "Unclear - OUT on the last report in text (Nov. 7)"
         },
         {
-          "cls" : "out",
+          "cls" : "info",
           "name" : "Cayden Tone",
-          "note" : "OUT on Baylor's final report for Iowa State (Nov. 7). Baylor hasn't said what the injury is. Baylor's report for BYU comes out Wednesday evening (Nov. 11).",
+          "note" : "OUT on Baylor's final report for Iowa State (Nov. 7). Baylor's report for BYU (Nov. 11) lists six players, but the names haven't been published in text; five of the six haven't played a snap this year (BYU On SI). Baylor hasn't said what the injury is.",
           "num" : "61",
           "pos" : "OL",
           "src" : [
@@ -7776,14 +7911,19 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
               "d" : "Nov. 7",
               "t" : "Sports Illustrated / Baylor On SI: Baylor availability report vs. Iowa State",
               "u" : "https://www.si.com/college/baylor/baylor-cb-kyler-beaty-will-play-against-iowa-state"
+            },
+            {
+              "d" : "Nov. 11",
+              "t" : "BYU On SI (Casey Lundquist): initial reports for BYU-Baylor",
+              "u" : "https://www.si.com/college/byu/football/byu-provides-official-injury-updates-for-lj-martin-three-other-starters"
             }
           ],
-          "status" : "OUT on the last report (Nov. 7)"
+          "status" : "Unclear - OUT on the last report in text (Nov. 7)"
         },
         {
-          "cls" : "out",
+          "cls" : "info",
           "name" : "Ashton Jones",
-          "note" : "OUT on Baylor's final report for Iowa State (Nov. 7). Baylor hasn't said what the injury is. Baylor's report for BYU comes out Wednesday evening (Nov. 11).",
+          "note" : "OUT on Baylor's final report for Iowa State (Nov. 7). Baylor's report for BYU (Nov. 11) lists six players, but the names haven't been published in text; five of the six haven't played a snap this year (BYU On SI). Baylor hasn't said what the injury is.",
           "num" : "87",
           "pos" : "WR",
           "src" : [
@@ -7791,30 +7931,20 @@ BYU|Zak Yamauchi|8|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026
               "d" : "Nov. 7",
               "t" : "Sports Illustrated / Baylor On SI: Baylor availability report vs. Iowa State",
               "u" : "https://www.si.com/college/baylor/baylor-cb-kyler-beaty-will-play-against-iowa-state"
-            }
-          ],
-          "status" : "OUT on the last report (Nov. 7)"
-        },
-        {
-          "cls" : "likely",
-          "name" : "Kyler Beaty",
-          "note" : "PROBABLE early last week, then taken off Baylor's final report for Iowa State (Nov. 7) and cleared to play. Baylor's report for BYU comes out Wednesday evening (Nov. 11).",
-          "num" : "",
-          "pos" : "CB",
-          "src" : [
+            },
             {
-              "d" : "Nov. 7",
-              "t" : "Sports Illustrated / Baylor On SI: Baylor availability report vs. Iowa State",
-              "u" : "https://www.si.com/college/baylor/baylor-cb-kyler-beaty-will-play-against-iowa-state"
+              "d" : "Nov. 11",
+              "t" : "BYU On SI (Casey Lundquist): initial reports for BYU-Baylor",
+              "u" : "https://www.si.com/college/byu/football/byu-provides-official-injury-updates-for-lj-martin-three-other-starters"
             }
           ],
-          "status" : "Not listed - expected to play"
+          "status" : "Unclear - OUT on the last report in text (Nov. 7)"
         }
       ],
-      "summary" : "No report for the BYU game yet (due Wed., Nov. 11). On Baylor's last report (Nov. 7): S Jacob Redding and DL Devonte Tezino are out for the season; CB Jamarion Richardson, OL Cayden Tone and WR Ashton Jones were OUT."
+      "summary" : "Baylor's report for BYU (Nov. 11) lists six players; DL Devonte Tezino is the only significant name, and the other five haven't played this year (BYU On SI). The full list isn't in text yet, so the rest are carried from the Nov. 7 report and marked unclear."
     }
   },
-  "updated" : "Mon., Nov. 9, 2026 (Sitake's Monday briefing; Big 12 reports for Baylor week come out Wed., Nov. 11)"
+  "updated" : "Thu., Nov. 12, 2026 (BYU's initial Big 12 report for Baylor, released Wed., Nov. 11)"
 }
 </script>
 <script type="text/plain" id="d-injcfb">Air Force|S. Maiava-Alaimalo|WR|Questionable|Undisclosed|Oct 18

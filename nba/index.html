@@ -3411,6 +3411,24 @@ a.nl-t:hover{border-color:var(--accent)}
 .royh-go{margin-top:10px}
 .hb-roy{max-width:440px}
 @media (min-width:981px){.homeband.has-roy .hb-main{grid-row:span 2}.homeband.has-roy .hb-side,.homeband.has-roy .hb-roy{grid-column:2}}
+/* ---- analytics upgrade (2026-11-12): the rank card, the short version, biggest edges, exact player ranks ---- */
+.srk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 28px}
+.srk-h,.edg-h{margin:2px 0 4px;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.srk-r{display:grid;grid-template-columns:minmax(0,1fr) auto 52px;align-items:center;gap:10px;min-height:36px;padding:4px 0;border-bottom:1px solid var(--line-2);color:var(--ink);font-size:13.5px}
+.srk-r:hover{text-decoration:none;color:var(--ink)}
+.srk-r:hover .k{text-decoration:underline}
+.srk-r:last-child{border-bottom:0}
+.srk-r .k{min-width:0;color:var(--ink-2)}
+.srk-r .v{font-weight:700;font-variant-numeric:tabular-nums}
+.srk-r .r{justify-self:end;min-width:46px;padding:2px 7px;border-radius:999px;background:var(--surface-2);font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;text-align:center}
+.srk-r .r.top{background:var(--good-soft);color:var(--good)}
+.srk-r .r.low{background:var(--bad-soft);color:var(--bad)}
+.tread{border-style:solid;font-size:14.5px;line-height:1.65;color:var(--ink)}
+.edg-top{margin-bottom:12px}
+.edg-b{margin-bottom:6px;padding:8px 10px 8px 12px;border-left:3px solid var(--ec);border-radius:8px;background:var(--surface-2);font-size:14px;line-height:1.45}
+.pl-pr-rk{display:block;font-size:11px;font-weight:500;color:var(--ink-3);white-space:nowrap}
+.pl-solo .pl-pr-b{grid-template-columns:minmax(0,1fr) 84px}
+@media (max-width:900px){.srk-grid{grid-template-columns:1fr;gap:14px}}
 </style>
 
 <header class="top">
@@ -5999,7 +6017,7 @@ function advOf(x){ if(!x||!x.t||!x.o) return null; const t=x.t, o=x.o; const pac
 const TADV = {}; TEAMS.forEach(t=>{ TADV[t.ab]=advOf(TS_SRC.teams&&TS_SRC.teams[t.ab]); });
 const teamAdv = ab => TADV[ab] || null;
 /* league ranks for every metric (1 = best; ties share a rank). Lower is better for these: */
-const ADV_LOW = {drtg:1, tov:1, oefg:1, oftr:1, ots:1, otpp:1, pf:1};
+const ADV_LOW = {drtg:1, tov:1, oefg:1, oftr:1, ots:1, otpp:1, pf:1, oppg:1};
 const ADV_RANK = {};
 function advRank(ab, k){ if(!ADV_RANK[k]){ const vals=TEAMS.map(t=>TADV[t.ab]&&TADV[t.ab][k]).filter(v=>v!=null); const m={}; TEAMS.forEach(t=>{ const v=TADV[t.ab]&&TADV[t.ab][k]; if(v!=null) m[t.ab]=1+vals.filter(o=>ADV_LOW[k]?o<v:o>v).length; }); ADV_RANK[k]=m; } return ADV_RANK[k][ab]||null; }
 function advLeague(k){ const vals=TEAMS.map(t=>TADV[t.ab]&&TADV[t.ab][k]).filter(v=>v!=null); return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null; }
@@ -6277,7 +6295,7 @@ function renderTeam(ab){ setNav('teams'); ab=norm(ab||''); const t=T[ab]; if(!t)
   html+='<div class="subnav">'+[['s-over','Overview'],['s-sched','Schedule'],['s-analytics','Projections'],['s-odds','Odds'],['s-stats','Analytics'],['s-players','Player analytics'],['s-money','Salary'],['s-inj','Injuries'],['s-depth','Depth chart'],['s-roster','Roster'],['s-draft','Draft']].map(x=>'<a href="#/team/'+enc(ab)+'#'+x[0]+'" data-sec="'+x[0]+'">'+x[1]+'</a>').join('')+'<a href="#/root/'+enc(ab)+'">Rooting guide</a><a href="#/compare/'+enc(ab)+'">Compare</a></div>';
   html+='<div id="s-over" class="grid g6" style="margin-top:8px">'+tile('Record',recStr(ab), SEASON_ON?divRecStr(ab)+' division · '+confRecStr(ab)+' conference':'season starts '+fmtDate(OPENER,false))+tile('Against the spread',(s.ats.w+s.ats.l+s.ats.p)?s.ats.w+'-'+s.ats.l+(s.ats.p?'-'+s.ats.p:''):'—', (s.ats.w+s.ats.l)?'covering '+pct(s.ats.w/(s.ats.w+s.ats.l)):'no closing lines yet')+tile('Over / under',(s.ou.o+s.ou.u+s.ou.p)?s.ou.o+'-'+s.ou.u+(s.ou.p?'-'+s.ou.p:''):'—', (s.ou.o+s.ou.u)?'overs to unders':'no totals graded yet')+tile('Points',s.gp?num1(s.ppg)+' / '+num1(s.oppg):(t.ppg26?num1(t.ppg26)+' / '+num1(t.opp26):'—'),s.gp?'scored / allowed per game':PREV_LABEL+' scored / allowed')+tile('Power rating',sgn(t.rating), '#'+t.prank+' of 30')+tile('Projected finish',Math.round(s.projW)+'-'+Math.round(s.projL),'most likely '+mostLikelyWins(ab)+' wins')+'</div>';
   html+='<div class="grid g6" style="margin-top:10px">'+tile('Playoff odds',pct1(o.po), pct1(o.top6)+' top six · '+pct1(o.pin)+' play-in', o.po>=0.5?'gold':'')+tile('Title',pct1(o.title), pct1(o.cf)+' to reach the Finals')+tile('Schedule strength',s.sosAll!=null?sgn(s.sosAll):'—',(SOS_RANK[ab]?'#'+SOS_RANK[ab]+' hardest · ':'')+'avg opp rating')+tile('Back-to-backs',String((teamGames[ab]||[]).filter(g=>g.counts&&(g.home===ab?g.b2bH:g.b2bA)).length),SEASON_ON?(s.b2b.w+s.b2b.l?s.b2b.w+'-'+s.b2b.l+' on the second night':'none played yet'):'on the schedule')+tile('Home / road',s.hw+'-'+s.hl+' / '+s.aw+'-'+s.al,'home record / road record')+tile('Last 10',s.l10,s.streak!=='—'?'streak: '+s.streak:(o.lot>0.5?pct1(o.lot)+' to land in the lottery':''))+'</div>';
-  html+=markItDownHTML(ab, o);
+  html+=markItDownHTML(ab, o)+teamReadHTML(ab);
   if(!SEASON_ON) html+='<div class="note" style="margin-top:10px">'+esc(priorNote(t))+'</div>';
   if(ab===favAb()){ const rd=SEASON_ON?rootSlate(todayStr):rootFirstOwn(ab); if(rd) html+='<div style="margin-top:14px">'+rootBlockHTML(ab, rd, 'compact')+'</div>'; }
   const nxt=s.upcoming[0]; const preNext=G.filter(g=>g.pre&&!g.played&&(g.home===ab||g.away===ab)&&g.date>=todayStr).sort(byTip)[0];
@@ -6695,9 +6713,9 @@ function trendHTML(ab){ const list=TG_BY_TEAM[ab]||[]; if(list.length<3) return 
   const last10=tgSum(list.slice(-10),ab), all=tgSum(list,ab); const home=tgSum(list.filter(g=>g.home===ab),ab), road=tgSum(list.filter(g=>g.away===ab),ab);
   const cell=(x,k,fmt)=>x?fmt(x[k]):'—'; const row=(l,x)=>'<tr><td>'+esc(l)+'</td><td class="r">'+(x?x.gp:'')+'</td><td class="r">'+cell(x,'ortg',num1)+'</td><td class="r">'+cell(x,'drtg',num1)+'</td><td class="r"><b>'+cell(x,'net',sgn)+'</b></td><td class="r">'+cell(x,'pace',num1)+'</td><td class="r">'+cell(x,'efg',v=>fpct(v))+'</td><td class="r">'+cell(x,'oefg',v=>fpct(v))+'</td></tr>';
   return '<div class="card" style="margin-top:14px"><div class="hd"><h3>Game by game</h3><span class="mini">net rating each game (bars) and over the last ten (line)</span></div><div class="bd">'+s+'<div class="tblwrap" style="margin-top:10px"><table class="tbl"><thead><tr><th>Split</th><th class="r">G</th><th class="r">ORtg</th><th class="r">DRtg</th><th class="r">Net</th><th class="r">Pace</th><th class="r">eFG%</th><th class="r">Opp eFG%</th></tr></thead><tbody>'+row('Season',all)+row('Last 10',last10)+row('Home',home)+row('Road',road)+'</tbody></table></div></div></div>'; }
-function teamAnalyticsHTML(ab){ const a=teamAdv(ab); if(!a) return '<div class="note">Team stats are not loaded yet.</div>'; return '<div class="mini" style="margin:-4px 0 10px">'+(TS_CUR?'This season\'s numbers.':'The '+esc(SEASON_LABEL)+' season has not started, so these are '+esc(PREV_LABEL)+' numbers; rosters have changed since.')+' Ratings are per 100 possessions; ranks are out of 30.</div>'+efficiencyTiles(ab)+'<div style="margin-top:14px">'+fourFactorsHTML(ab)+'</div><div style="margin-top:14px">'+styleHTML(ab)+'</div>'+trendHTML(ab); }
+function teamAnalyticsHTML(ab){ const a=teamAdv(ab); if(!a) return '<div class="note">Team stats are not loaded yet.</div>'; return '<div class="mini" style="margin:-4px 0 10px">'+(TS_CUR?'This season\'s numbers.':'The '+esc(SEASON_LABEL)+' season has not started, so these are '+esc(PREV_LABEL)+' numbers; rosters have changed since.')+' Ratings are per 100 possessions; ranks are out of 30.</div>'+efficiencyTiles(ab)+teamRanksHTML(ab)+'<div style="margin-top:14px">'+fourFactorsHTML(ab)+'</div><div style="margin-top:14px">'+styleHTML(ab)+'</div>'+trendHTML(ab); }
 /* league table and the efficiency map */
-const LEAGUE_COLS=[['net','Net',sgn],['ortg','ORtg',num1],['drtg','DRtg',num1],['pace','Pace',num1],['efg','eFG%',v=>fpct(v)],['tov','TOV%',v=>fpct(v)],['orb','ORB%',v=>fpct(v)],['ftr','FT rate',v=>fratio(v)],['oefg','Opp eFG%',v=>fpct(v)],['otov','Opp TOV%',v=>fpct(v)],['drb','DRB%',v=>fpct(v)],['oftr','Opp FT rate',v=>fratio(v)],['tpar','3PA rate',v=>fpct(v)],['ts','TS%',v=>fpct(v)]];
+const LEAGUE_COLS=[['net','Net',sgn],['ortg','ORtg',num1],['drtg','DRtg',num1],['pace','Pace',num1],['efg','eFG%',v=>fpct(v)],['tov','TOV%',v=>fpct(v)],['orb','ORB%',v=>fpct(v)],['ftr','FT rate',v=>fratio(v)],['oefg','Opp eFG%',v=>fpct(v)],['otov','Opp TOV%',v=>fpct(v)],['drb','DRB%',v=>fpct(v)],['oftr','Opp FT rate',v=>fratio(v)],['tpar','3PA rate',v=>fpct(v)],['ts','TS%',v=>fpct(v)],['ppg','PPG',num1],['oppg','Opp PPG',num1],['tpp','3P%',v=>fpct(v)],['otpp','Opp 3P%',v=>fpct(v)],['astr','AST%',v=>fpct(v)],['stlr','STL/100',num1],['blkr','BLK%',v=>fpct(v)]];   /* 2026-11-12: seven more columns, so every row of the team rank card has a full list */
 function leagueAnalyticsHTML(sortK){ sortK=LEAGUE_COLS.some(c=>c[0]===sortK)?sortK:'net'; const list=TEAMS.filter(t=>TADV[t.ab]).sort((a,b)=>{ const va=TADV[a.ab][sortK], vb=TADV[b.ab][sortK]; return ADV_LOW[sortK]?va-vb:vb-va; }); const fav=favAb(); const lgO=advLeague('ortg');
   const pts=list.map(t=>({x:TADV[t.ab].ortg, y:TADV[t.ab].drtg, img:(logoOf(t)||{}).icon, tip:'<b>'+esc(t.full)+'</b><br>ORtg '+num1(TADV[t.ab].ortg)+' · DRtg '+num1(TADV[t.ab].drtg)+' · net '+sgn(TADV[t.ab].net), href:'#/team/'+enc(t.ab), hl:t.ab===fav}));
   let html='<div class="card"><div class="hd"><h3>Efficiency map</h3><span class="mini">'+esc(TSTAT_LABEL)+' · right is better offense, up is better defense</span></div><div class="bd">'+scatterSVG(pts,{W:820,H:500,xl:'Offensive rating (points per 100 possessions)', yl:'Defensive rating (allowed per 100)', xfmt:v=>num1(v), yfmt:v=>num1(v), invY:true, refX:lgO, refY:advLeague('drtg'), quad:[{t:'Good offense, good defense',r:true},{t:'Good defense only'},{t:'Good offense only',r:true,b:true},{t:'Struggling at both ends',b:true}], aria:'Offensive against defensive rating for every team'})+'</div></div>';
@@ -6735,11 +6753,48 @@ function rosterAnalyticsHTML(ab){ const cur=HAS_CUR_PS; const list=(ROST[ab]||[]
   html+='<div><div class="eyebrow" style="margin-bottom:6px">Who gets the minutes</div>'+list.slice(0,10).map(x=>{ const sh=x.o.min*x.o.gp/totalMin; return '<div class="bar-h" style="margin-top:5px"><span style="width:118px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" class="mini">'+esc(x.p.n)+'</span><div class="trk"><span style="width:'+Math.round(100*sh/maxSh)+'%"></span></div><b style="width:44px;text-align:right">'+Math.round(sh*100)+'%</b></div>'; }).join('')+'<div class="mini" style="margin-top:6px">Share of all minutes the players on today\'s roster logged'+(cur?'':' last season (for any team)')+'.</div></div></div></div></div>';
   return html; }
 
+/* ---------- one rank card, the short version, biggest edges (2026-11-12, analytics upgrade; Jamo picked stat ranks
+   everywhere, matchup edges, deeper player analytics and a plain-English read, one hub at a time: "Do NBA next") ----------
+   This hub already ranked its advanced numbers (advRank, the four factors, the Team analytics table) and had a matchup
+   card on game pages, so this fills the gaps, all from those same ranks (nothing is written by AI):
+   - teamRanksHTML: every key number with its rank of 30 in one card on the team's Analytics section (green top 10, red
+     bottom 10, the hub's own split); each row opens the league table sorted by that stat. Pace, threes per shot and
+     assisted baskets are style, not good or bad, so they stay gray.
+   - teamReadHTML: "The short version" on the team overview: where the offense and defense stand, what the team is
+     best and worst at, how it plays, its record in close games and whether it is trending up or down.
+   - nbaEdgesHTML: the up-to-three widest rank gaps, spelled out at the top of the game page's matchup card.
+   A row is [stat key in TADV, name, group, how to print it, 1 = style only]. */
+const NBA_RK_ROWS=[['ppg','Points per game','Offense',num1],['ortg','Points per 100 possessions','Offense',num1],['efg','Effective field goal %','Offense',v=>fpct(v)+'%'],['tpp','3-point %','Offense',v=>fpct(v)+'%'],
+  ['tpar','Threes per shot','Offense',v=>fpct(v)+'%',1],['ftr','Free throws per shot','Offense',fratio],['tov','Turnovers per possession','Offense',v=>fpct(v)+'%'],['orb','Offensive rebound %','Offense',v=>fpct(v)+'%'],['astr','Assisted baskets','Offense',v=>fpct(v)+'%',1],
+  ['oppg','Points allowed per game','Defense',num1],['drtg','Points allowed per 100','Defense',num1],['oefg','Opponent effective FG%','Defense',v=>fpct(v)+'%'],['otpp','Opponent 3-point %','Defense',v=>fpct(v)+'%'],
+  ['otov','Turnovers forced per possession','Defense',v=>fpct(v)+'%'],['drb','Defensive rebound %','Defense',v=>fpct(v)+'%'],['oftr','Opponent free throws per shot','Defense',fratio],['stlr','Steals per 100','Defense',num1],['blkr','Block rate','Defense',v=>fpct(v)+'%'],
+  ['net','Net rating','Overall',sgn],['pace','Pace','Overall',num1,1],['ts','True shooting %','Overall',v=>fpct(v)+'%']];
+const nbaPoss=n=>n+(/s$/i.test(n)?'’':'’s');
+function teamRanksHTML(ab){ const a=teamAdv(ab); if(!a) return '';
+  const grp=g=>'<div class="srk-g"><div class="srk-h">'+g+'</div>'+NBA_RK_ROWS.filter(d=>d[2]===g).map(d=>{ const v=a[d[0]], r=advRank(ab,d[0]); if(v==null||isNaN(v)||!r) return '';
+    return '<a class="srk-r" href="#/rankings/analytics/'+d[0]+'"><span class="k">'+esc(d[1])+'</span><span class="v">'+esc(d[3](v))+'</span><span class="r'+(d[4]?'':r<=10?' top':r>=21?' low':'')+'">'+ordinal(r)+'</span></a>'; }).join('')+'</div>';
+  return '<div class="card srk" id="s-ranks" style="margin-top:14px"><div class="hd"><h3>Where the '+esc(tshort(ab))+' rank in the NBA</h3><span class="mini">'+esc(TSTAT_LABEL)+' · out of 30 · green is top 10, red is bottom 10 · tap a stat for the full list</span></div><div class="bd"><div class="srk-grid">'+grp('Offense')+grp('Defense')+grp('Overall')+'</div></div></div>'; }
+function teamReadHTML(ab){ const a=teamAdv(ab); if(!a||!TS_CUR) return ''; const r=k=>advRank(ab,k);
+  const tier=x=>x<=4?'one of the best in the league':x<=10?'strong':x<=20?'about average':x<=26?'below average':'near the bottom';
+  const L=[['efg','shooting'],['tpp','three-point shooting'],['tov','taking care of the ball'],['orb','offensive rebounding'],['ftr','getting to the line'],['oefg','defending shots'],['otpp','defending the three'],['otov','forcing turnovers'],['drb','defensive rebounding'],['oftr','keeping teams off the line'],['blkr','protecting the rim'],['stlr','getting steals']];
+  const ranked=L.map(x=>({w:x[1], r:r(x[0])})).filter(x=>x.r); const best=ranked.slice().sort((x,y)=>x.r-y.r).filter(x=>x.r<=5).slice(0,3), worst=ranked.slice().sort((x,y)=>y.r-x.r).filter(x=>x.r>=26).slice(0,2);
+  let txt=''; if(r('ortg')) txt+='<b>Offense:</b> '+tier(r('ortg'))+' ('+ordinal(r('ortg'))+' in points per 100 possessions).'; if(r('drtg')) txt+=' <b>Defense:</b> '+tier(r('drtg'))+' ('+ordinal(r('drtg'))+' in points allowed per 100).';
+  if(best.length) txt+=' <b>Best at:</b> '+best.map(x=>x.w+' ('+ordinal(x.r)+')').join(', ')+'.'; if(worst.length) txt+=' <b>Soft spots:</b> '+worst.map(x=>x.w+' ('+ordinal(x.r)+')').join(', ')+'.';
+  if(r('pace')&&r('pace')<=5) txt+=' Plays fast ('+ordinal(r('pace'))+' in pace).'; else if(r('pace')>=26) txt+=' Plays slow ('+ordinal(r('pace'))+' in pace).';
+  if(r('tpar')&&r('tpar')<=5) txt+=' Lives at the three-point line ('+ordinal(r('tpar'))+' in threes per shot).'; else if(r('tpar')>=26) txt+=' Rarely shoots threes ('+ordinal(r('tpar'))+' in threes per shot).';
+  const close=(teamGames[ab]||[]).filter(g=>g.counts&&g.played&&Math.abs(g.hs-g.as)<=5), cw=close.filter(g=>(g.home===ab?g.hs-g.as:g.as-g.hs)>0).length; if(close.length>=2) txt+=' '+cw+'-'+(close.length-cw)+' in games decided by 5 or fewer.';
+  const list=TG_BY_TEAM[ab]||[]; if(list.length>=15){ const l10=tgSum(list.slice(-10),ab), all=tgSum(list,ab); if(l10&&all){ const d=l10.net-all.net; if(d>=4) txt+=' Playing better lately: '+sgn(l10.net)+' net rating over the last 10 games, '+sgn(all.net)+' on the season.'; else if(d<=-4) txt+=' Slipping lately: '+sgn(l10.net)+' net rating over the last 10 games, '+sgn(all.net)+' on the season.'; } }
+  return txt?'<div class="sec" id="s-read"><h2>The short version</h2><span class="muted">from this season’s numbers · ranks are out of 30</span></div><div class="note tread">'+txt+'</div>':''; }
+const NBA_EDGE=[['ortg','drtg','offense','defense'],['efg','oefg','shooting','shot defense'],['tpp','otpp','three-point shooting','three-point defense'],['tov','otov','ball security','knack for forcing turnovers'],['orb','drb','offensive rebounding','defensive rebounding'],['ftr','oftr','trips to the line','habit of keeping teams off the line']];
+function nbaEdgesHTML(A, H){ const rows=[]; [[A,H],[H,A]].forEach(([o,d])=>NBA_EDGE.forEach(p=>{ const ro=advRank(o,p[0]), rd=advRank(d,p[1]); if(ro&&rd) rows.push({o,d,p,ro,rd,gap:rd-ro}); }));
+  const top=rows.filter(x=>Math.abs(x.gap)>=10).sort((x,y)=>Math.abs(y.gap)-Math.abs(x.gap)).slice(0,3); if(!top.length) return '';
+  const say=x=>x.gap>0?'The <b>'+esc(nbaPoss(tshort(x.o)))+'</b> '+x.p[2]+' ('+ordinal(x.ro)+') against the '+esc(nbaPoss(tshort(x.d)))+' '+x.p[3]+' ('+ordinal(x.rd)+')':'The <b>'+esc(nbaPoss(tshort(x.d)))+'</b> '+x.p[3]+' ('+ordinal(x.rd)+') against the '+esc(nbaPoss(tshort(x.o)))+' '+x.p[2]+' ('+ordinal(x.ro)+')';
+  return '<div class="edg-top"><div class="edg-h">Biggest edges</div>'+top.map(x=>'<div class="edg-b" style="--ec:'+uiColor(team(x.gap>0?x.o:x.d))+'">'+say(x)+'</div>').join('')+'</div>'; }
 /* ---------- game page: how the two match up ---------- */
 function matchupHTML(g){ const A=team(g.away), H=team(g.home); const a=teamAdv(A.ab), h=teamAdv(H.ab); if(!a||!h||g.pre||g.other) return ''; const lgO=advLeague('ortg');
   const pace=(a.pace+h.pace)/2; const exA=(a.ortg+h.drtg-lgO), exH=(h.ortg+a.drtg-lgO); const ptsA=pace*exA/100, ptsH=pace*exH/100+HCA/2, adjA=ptsA-HCA/2;
   const side=(off,def,offAb,defAb)=>'<div class="bxwrap"><table class="tbl fx"><thead><tr><th></th><th class="r">'+esc(tshort(offAb))+' offense</th><th class="r">'+esc(tshort(defAb))+' defense</th><th class="r">Edge</th></tr></thead><tbody>'+[['efg','oefg','Effective FG%',false],['tov','otov','Turnover %',true],['orb','drb','Rebounding',null],['ftr','oftr','Free throw rate',false]].map(([ko,kd,l,inv])=>{ const vo=off[ko], vd=def[kd]; const ro=advRank(offAb,ko), rd=advRank(defAb,kd); let edge; if(ko==='orb'){ edge = (vo+(1-vd))/2 - (advLeague('orb')+(1-advLeague('drb')))/2; } else { const lg=advLeague(ko); edge = inv ? -((vo+vd)/2-lg) : ((vo+vd)/2-lg); } const who=edge>0.004?tshort(offAb):edge<-0.004?tshort(defAb):'even'; const f=ko==='ftr'?fratio:fpct; return '<tr><td>'+esc(l)+'</td><td class="r">'+f(vo)+' '+rankPill(ro)+'</td><td class="r">'+f(vd)+' '+rankPill(rd)+'</td><td class="r small">'+esc(who)+'</td></tr>'; }).join('')+'</tbody></table></div>';
-  return '<div class="card" style="margin-top:14px"><div class="hd"><h3>How they match up</h3><span class="mini">'+esc(TSTAT_LABEL)+' team stats · ranks of 30</span></div><div class="bd"><div class="grid g3" style="margin-bottom:10px">'+tile('Projected pace', num1(pace), 'possessions (avg of the two)')+tile('Efficiency says', tshort(A.ab)+' '+Math.round(adjA)+', '+tshort(H.ab)+' '+Math.round(ptsH), 'ratings × pace, home court split')+tile('Net ratings', sgn(a.net)+' / '+sgn(h.net), tshort(A.ab)+' / '+tshort(H.ab))+'</div><div class="eyebrow">When the '+esc(A.disp)+' have the ball</div>'+side(a,h,A.ab,H.ab)+'<div class="eyebrow" style="margin-top:10px">When the '+esc(H.disp)+' have the ball</div>'+side(h,a,H.ab,A.ab)+(TS_CUR?'':'<div class="mini" style="margin-top:6px">Last season\'s numbers until this season has a few weeks of games; rosters have changed since.</div>')+'</div></div>'; }
+  return '<div class="card" style="margin-top:14px"><div class="hd"><h3>How they match up</h3><span class="mini">'+esc(TSTAT_LABEL)+' team stats · ranks of 30</span></div><div class="bd"><div class="grid g3" style="margin-bottom:10px">'+tile('Projected pace', num1(pace), 'possessions (avg of the two)')+tile('Efficiency says', tshort(A.ab)+' '+Math.round(adjA)+', '+tshort(H.ab)+' '+Math.round(ptsH), 'ratings × pace, home court split')+tile('Net ratings', sgn(a.net)+' / '+sgn(h.net), tshort(A.ab)+' / '+tshort(H.ab))+'</div>'+nbaEdgesHTML(A.ab,H.ab)+'<div class="eyebrow">When the '+esc(A.disp)+' have the ball</div>'+side(a,h,A.ab,H.ab)+'<div class="eyebrow" style="margin-top:10px">When the '+esc(H.disp)+' have the ball</div>'+side(h,a,H.ab,A.ab)+(TS_CUR?'':'<div class="mini" style="margin-top:6px">Last season\'s numbers until this season has a few weeks of games; rosters have changed since.</div>')+'</div></div>'; }
 
 /* ---------- leaders: the advanced tables and the league usage map ---------- */
 const ADV_LEADERS=[['ts','True shooting %',v=>fpct(v)+'%',false,o=>o.fga>=8],['usg','Usage %',v=>fpct(v)+'%',false,null],['gmsc','Game Score',v=>num1(v),false,null],['astp','Assist %',v=>fpct(v)+'%',false,null],['rebp','Rebound %',v=>fpct(v)+'%',false,null],['stlp','Steal %',v=>fpct(v,1)+'%',false,null],['blkp','Block %',v=>fpct(v,1)+'%',false,null],['p36','Points per 36',v=>num1(v),false,o=>o.min>=20],['astto','Assists per turnover',v=>num1(v),false,o=>o.ast>=3]];
@@ -7622,12 +7677,12 @@ function plHeat(pc){ if(pc==null) return 'var(--line)'; const t=Math.max(0,Math.
 const PLD={};
 const PL_RN=(()=>{ const m={}; Object.keys(ROST).forEach(ab=>(ROST[ab]||[]).forEach(r=>{ m[String(r.id)]={ab, n:r.n, hs:r.hs, no:r.no, age:r.age}; })); return m; })();
 function plData(key){ if(PLD[key]) return PLD[key]; const season=key==='cur'?SEASON:SEASON-1, src=key==='cur'?PS_CUR:PS_PREV; const pool=new Set(playerPool(season).pool.map(o=>String(o.id)));
-  const list=Object.entries(src).map(([id,o])=>{ const r=PL_RN[id]||{}; return {id:String(id), n:o.n, t:o.team, ab:r.ab||o.team, pos:o.pos, g:plPos(o.pos), o, a:pAdv(o)||{}, x:PLX[key][id]||{}, q:pool.has(String(id)), no:r.no, age:r.age, hs:r.hs, m:{}, pc:{}}; });
+  const list=Object.entries(src).map(([id,o])=>{ const r=PL_RN[id]||{}; return {id:String(id), n:o.n, t:o.team, ab:r.ab||o.team, pos:o.pos, g:plPos(o.pos), o, a:pAdv(o)||{}, x:PLX[key][id]||{}, q:pool.has(String(id)), no:r.no, age:r.age, hs:r.hs, m:{}, pc:{}, rk:{}}; });
   const keys=Object.keys(PL_M);
   list.forEach(p=>keys.forEach(k=>{ const v=PL_M[k].f(p); p.m[k]=(v==null||!isFinite(v))?null:v; }));
   const qs=list.filter(p=>p.q);
   keys.forEach(k=>{ const m=PL_M[k], arr=qs.map(p=>p.m[k]).filter(v=>v!=null).sort((a,b)=>a-b);
-    list.forEach(p=>{ const v=p.m[k]; if(v==null||!arr.length){ p.pc[k]=null; return; } let lo=0, hi=arr.length; while(lo<hi){ const md=(lo+hi)>>1; if(arr[md]<v) lo=md+1; else hi=md; } let eq=0; while(lo+eq<arr.length&&arr[lo+eq]===v) eq++; const pr=(lo+eq/2)/arr.length*100; p.pc[k]=Math.round(m.lo?100-pr:pr); }); });
+    list.forEach(p=>{ const v=p.m[k]; if(v==null||!arr.length){ p.pc[k]=null; return; } let lo=0, hi=arr.length; while(lo<hi){ const md=(lo+hi)>>1; if(arr[md]<v) lo=md+1; else hi=md; } let eq=0; while(lo+eq<arr.length&&arr[lo+eq]===v) eq++; const pr=(lo+eq/2)/arr.length*100; p.pc[k]=Math.round(m.lo?100-pr:pr); if(p.q) p.rk[k]=[(m.lo?lo:arr.length-lo-eq)+1, arr.length]; /* exact place among rotation players, 1 = best (2026-11-12) */ }); });
   const byId={}; list.forEach(p=>{ byId[p.id]=p; });
   return PLD[key]={key, season, label:key==='cur'?SEASON_LABEL:PREV_LABEL, list, byId, n:qs.length, hasX:list.some(p=>p.x.per!=null)}; }
 const plCur=()=>plData(PLS.season);
@@ -7697,7 +7752,7 @@ function plCardHTML(p,i,lead,of){ const t=team(p.t);
 function plPctRows(sel, keys){ const solo=sel.length===1;
   return '<div class="pl-pr'+(solo?' pl-solo':'')+'">'+keys.filter(k=>sel.some(p=>p.m[k]!=null)).map(k=>{ const m=PL_M[k]; const best=plBest(sel,k);
     return '<div class="pl-pr-row"><div class="pl-pr-k"'+(m.tip?' title="'+esc(m.tip)+'"':'')+'>'+esc(m.l)+(m.tip?' <span class="pl-i">i</span>':'')+'</div><div class="pl-pr-bars">'+sel.map((p,i)=>{ const pc=p.pc[k]; const col=m.neu?'var(--ink-3)':plHeat(pc); const w=pc==null?0:pc;
-      return '<div class="pl-pr-b'+(best===p?' best':'')+'" style="--pc:'+PL_COLORS[i]+'"><span class="pl-dot"></span><div class="pl-track">'+(pc==null?'':'<i style="width:'+w+'%;background:'+col+'"></i><b style="left:'+w+'%;background:'+col+'">'+pc+'</b>')+'</div><span class="pl-pr-v">'+plFmt(p.m[k],m.fmt)+'</span></div>'; }).join('')+'</div></div>'; }).join('')+'</div>'; }
+      return '<div class="pl-pr-b'+(best===p?' best':'')+'" style="--pc:'+PL_COLORS[i]+'"><span class="pl-dot"></span><div class="pl-track">'+(pc==null?'':'<i style="width:'+w+'%;background:'+col+'"></i><b style="left:'+w+'%;background:'+col+'">'+pc+'</b>')+'</div><span class="pl-pr-v">'+plFmt(p.m[k],m.fmt)+(solo&&!m.neu&&p.rk&&p.rk[k]?'<small class="pl-pr-rk">'+ordinal(p.rk[k][0])+' of '+p.rk[k][1]+'</small>':'')+'</span></div>'; }).join('')+'</div></div>'; }).join('')+'</div>'; }
 function plRadar(sel, keys){ const N=keys.length, R=104, cx=180, cy=150; const pt=(i,r)=>{ const a=-Math.PI/2+i*2*Math.PI/N; return [cx+r*Math.cos(a), cy+r*Math.sin(a)]; }; const P2=a=>a.map(x=>x.toFixed(1)).join(',');
   let s='<svg class="pl-radar" viewBox="0 0 360 300" role="img" aria-label="Percentile profile">';
   [25,50,75,100].forEach(v=>{ s+='<polygon class="ring'+(v===50?' mid':'')+'" points="'+keys.map((k,i)=>P2(pt(i,R*v/100))).join(' ')+'"/>'; });

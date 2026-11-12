@@ -2053,6 +2053,15 @@
 2026-11-07|Wyoming|UNLV|Wyoming|passingYards|Tyler Hughes|QB|5/9, 107 YDS, 1 TD
 2026-11-07|Wyoming|UNLV|Wyoming|rushingYards|Samuel Harris|RB|17 CAR, 128 YDS, 2 TD
 2026-11-07|Wyoming|UNLV|Wyoming|receivingYards|Jake Wilson|TE|2 REC, 56 YDS, 1 TD
+2026-11-11|Buffalo|Ball State|Ball State|passingYards|Keldric Luster|QB|3/9, 24 YDS
+2026-11-11|Buffalo|Ball State|Ball State|rushingYards|TJ Horton|RB|6 CAR, 39 YDS
+2026-11-11|Buffalo|Ball State|Ball State|receivingYards|Donovan Hamilton|WR|2 REC, 22 YDS
+2026-11-11|Sacramento State|Central Michigan|Sacramento State|passingYards|Brian Salazar Jr.|QB|9/13, 87 YDS, 1 INT
+2026-11-11|Sacramento State|Central Michigan|Sacramento State|rushingYards|Isaiah Ene|RB|3 CAR, 56 YDS, 1 TD
+2026-11-11|Sacramento State|Central Michigan|Central Michigan|receivingYards|Nasir Williams|WR|1 REC, 52 YDS
+2026-11-11|Massachusetts|Toledo|Toledo|passingYards|John Alan Richter|QB|6/9, 82 YDS
+2026-11-11|Massachusetts|Toledo|Toledo|rushingYards|Connor Walendzak|RB|2 CAR, 75 YDS, 1 TD
+2026-11-11|Massachusetts|Toledo|Toledo|receivingYards|Adjatay Dabbs|WR|4 REC, 76 YDS
 2026-11-10|Western Michigan|Akron|Akron|passingYards|Cibastian Broughton|QB|12/18, 173 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Western Michigan|rushingYards|Jalen Buckley|RB|23 CAR, 121 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Akron|receivingYards|Marcel Williams|WR|5 REC, 85 YDS, 2 TD
@@ -2809,7 +2818,7 @@
 2026-09-26|SE Louisiana|Northwestern State|Northwestern State|passingYards|Zach Wilcke|QB|23/33, 254 YDS, 3 TD, 1 INT
 2026-09-26|SE Louisiana|Northwestern State|SE Louisiana|rushingYards|Deantre Jackson|RB|6 CAR, 104 YDS
 2026-09-26|SE Louisiana|Northwestern State|Northwestern State|receivingYards|Brendan Webb|WR|4 REC, 72 YDS, 1 TD
-2026-09-26|Prairie View A&M|Grambling|Prairie View A&M|passingYards|Tevin Carter|QB|18/22, 160 YDS, 2 TD
+2026-09-26|Prairie View A&M|Grambling|Prairie View A&M|passingYards|Tevin Carter|QB|19/23, 171 YDS, 2 TD
 2026-09-26|Prairie View A&M|Grambling|Prairie View A&M|rushingYards|Chase Bingmon|RB|11 CAR, 42 YDS
 2026-09-26|Prairie View A&M|Grambling|Prairie View A&M|receivingYards|Rodny Ojo|WR|5 REC, 64 YDS
 2026-09-26|Southern|Jackson State|Jackson State|passingYards|Jared Lockhart|QB|12/18, 165 YDS, 2 TD
@@ -3678,7 +3687,7 @@
 2026-11-07|Brown|Yale|Brown|receivingYards|Trevor Foley|WR|2 REC, 114 YDS, 1 TD
 2026-11-07|Dartmouth|Princeton|Dartmouth|passingYards|Grayson Saunier|QB|22/31, 262 YDS, 2 INT
 2026-11-07|Dartmouth|Princeton|Princeton|rushingYards|Kaio Agudinho De Oliveira|RB|15 CAR, 61 YDS
-2026-11-07|Dartmouth|Princeton|Princeton|receivingYards|Josh Robinson|WR|4 REC, 79 YDS, 1 TD
+2026-11-07|Dartmouth|Princeton|Princeton|receivingYards|Josh Robinson|WR|5 REC, 90 YDS, 1 TD
 2026-11-07|Long Island University|New Haven|New Haven|passingYards|AJ Duffy|QB|15/26, 227 YDS, 1 TD
 2026-11-07|Long Island University|New Haven|Long Island University|rushingYards|Ethan Greenwood|QB|27 CAR, 75 YDS
 2026-11-07|Long Island University|New Haven|New Haven|receivingYards|Nate Burleson II|WR|2 REC, 77 YDS, 1 TD
@@ -3710,7 +3719,7 @@
 2026-11-07|Stony Brook|Campbell|Stony Brook|rushingYards|Jameer Reeder|RB|13 CAR, 100 YDS, 1 TD
 2026-11-07|Stony Brook|Campbell|Stony Brook|receivingYards|Seth Sweitzer|WR|9 REC, 149 YDS, 3 TD
 2026-11-07|Rhode Island|New Hampshire|New Hampshire|passingYards|Tommy McLeish|QB|21/37, 271 YDS, 2 TD
-2026-11-07|Rhode Island|New Hampshire|Rhode Island|rushingYards|Brayden Richardson|RB|16 CAR, 129 YDS, 1 TD
+2026-11-07|Rhode Island|New Hampshire|Rhode Island|rushingYards|Brayden Richardson|RB|16 CAR, 138 YDS, 1 TD
 2026-11-07|Rhode Island|New Hampshire|New Hampshire|receivingYards|Logan Perez|WR|4 REC, 91 YDS, 1 TD
 2026-11-07|Columbia|Harvard|Harvard|passingYards|Charlie Smith|QB|12/20, 184 YDS, 2 TD, 1 INT
 2026-11-07|Columbia|Harvard|Harvard|rushingYards|DJ Gordon|QB|13 CAR, 147 YDS, 2 TD

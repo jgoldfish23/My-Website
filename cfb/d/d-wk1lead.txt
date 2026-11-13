@@ -2053,6 +2053,9 @@
 2026-11-07|Wyoming|UNLV|Wyoming|passingYards|Tyler Hughes|QB|5/9, 107 YDS, 1 TD
 2026-11-07|Wyoming|UNLV|Wyoming|rushingYards|Samuel Harris|RB|17 CAR, 128 YDS, 2 TD
 2026-11-07|Wyoming|UNLV|Wyoming|receivingYards|Jake Wilson|TE|2 REC, 56 YDS, 1 TD
+2026-11-12|Memphis|South Florida|Memphis|passingYards|Marcus Stokes|QB|5/7, 82 YDS, 1 TD
+2026-11-12|Memphis|South Florida|Memphis|rushingYards|Marcus Stokes|QB|3 CAR, 61 YDS, 1 TD
+2026-11-12|Memphis|South Florida|Memphis|receivingYards|Jemyri Davis|WR|2 REC, 41 YDS
 2026-11-10|Western Michigan|Akron|Akron|passingYards|Cibastian Broughton|QB|12/18, 173 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Western Michigan|rushingYards|Jalen Buckley|RB|23 CAR, 121 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Akron|receivingYards|Marcel Williams|WR|5 REC, 85 YDS, 2 TD

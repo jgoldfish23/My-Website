@@ -2053,6 +2053,9 @@
 2026-11-07|Wyoming|UNLV|Wyoming|passingYards|Tyler Hughes|QB|5/9, 107 YDS, 1 TD
 2026-11-07|Wyoming|UNLV|Wyoming|rushingYards|Samuel Harris|RB|17 CAR, 128 YDS, 2 TD
 2026-11-07|Wyoming|UNLV|Wyoming|receivingYards|Jake Wilson|TE|2 REC, 56 YDS, 1 TD
+2026-11-13|Florida State|Pittsburgh|Florida State|passingYards|Ashton Daniels|QB|10/14, 117 YDS
+2026-11-13|Florida State|Pittsburgh|Pittsburgh|rushingYards|Damon Ferguson Jr.|RB|4 CAR, 27 YDS
+2026-11-13|Florida State|Pittsburgh|Florida State|receivingYards|Jasen Lopez|WR|3 REC, 58 YDS
 2026-11-10|Western Michigan|Akron|Akron|passingYards|Cibastian Broughton|QB|12/18, 173 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Western Michigan|rushingYards|Jalen Buckley|RB|23 CAR, 121 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Akron|receivingYards|Marcel Williams|WR|5 REC, 85 YDS, 2 TD

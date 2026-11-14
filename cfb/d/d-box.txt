@@ -114133,3 +114133,78 @@ P|1302|H|interceptions|Isaac Redford||1;0;0
 P|1302|H|kickReturns|Zui Shelton||1;9;9.0;9;0
 P|1302|H|kicking|Joshua Hossmann Lees||0/0;0.0;0;3/3;3
 P|1302|H|punting|Emiliano Rodriguez||3;119;39.7;0;2;46
+G|1303|2026-11-13|Houston|Colorado
+T|1303|A|firstDowns=28;thirdDownEff=9-16;fourthDownEff=2-3;totalYards=477;netPassingYards=272;completionAttempts=26/42;yardsPerPass=6.5;rushingYards=205;rushingAttempts=34;yardsPerRushAttempt=6.0;totalPenaltiesYards=6-45;turnovers=2;fumblesLost=1;interceptions=1;possessionTime=29:58;defSacks=0;defTfl=6
+T|1303|H|firstDowns=20;thirdDownEff=10-14;fourthDownEff=0-1;totalYards=466;netPassingYards=217;completionAttempts=17/25;yardsPerPass=8.7;rushingYards=249;rushingAttempts=39;yardsPerRushAttempt=6.4;totalPenaltiesYards=6-61;turnovers=1;fumblesLost=0;interceptions=1;possessionTime=30:02;defSacks=1;defTfl=2
+P|1303|A|passing|Conner Weigman||26/42;272;6.5;3;1;63.2
+P|1303|A|rushing|Makhi Hughes||15;106;7.1;1;29
+P|1303|A|rushing|Re'Shaun Sanford II||13;70;5.4;0;40
+P|1303|A|rushing|Conner Weigman||6;29;4.8;0;15
+P|1303|A|receiving|Patrick Overmyer||9;116;12.9;1;24
+P|1303|A|receiving|Amare Thomas||6;66;11.0;1;23
+P|1303|A|receiving|Trent Walker||4;38;9.5;1;16
+P|1303|A|receiving|Makhi Hughes||2;23;11.5;0;19
+P|1303|A|receiving|Koby Young||3;17;5.7;0;12
+P|1303|A|receiving|Luke McGary||2;12;6.0;0;7
+P|1303|A|fumbles|Conner Weigman||1;1;0
+P|1303|A|defensive|Kentrell Webb||9;7;0;0;0;0;0
+P|1303|A|defensive|Myles Rowser||7;6;0;0;1;0;0
+P|1303|A|defensive|Jaden Yates||7;6;0;1;0;0;0
+P|1303|A|defensive|Javion White||6;3;0;1;0;0;0
+P|1303|A|defensive|Myles Parker||5;5;0;1;1;0;0
+P|1303|A|defensive|Sione Fotu||3;3;0;0;0;0;0
+P|1303|A|defensive|Jordan Allen||3;2;0;0;1;0;0
+P|1303|A|defensive|Will James||3;2;0;1;0;0;0
+P|1303|A|defensive|Jalen Mayo||3;2;0;1;0;0;0
+P|1303|A|defensive|Christian Brathwaite||3;1;0;1;0;0;0
+P|1303|A|defensive|Khalil Laufau||2;1;0;0;0;0;0
+P|1303|A|defensive|Ashton Porter||1;1;0;0;0;0;0
+P|1303|A|defensive|C.J. Douglas||1;1;0;0;0;0;0
+P|1303|A|defensive|JD Rhym||1;0;0;0;0;0;0
+P|1303|A|defensive|Johnsley Barbas||1;0;0;0;0;0;0
+P|1303|A|defensive|De'Marion Thomas||1;0;0;0;0;0;0
+P|1303|A|defensive|Latreveon McCutchin||1;0;0;0;0;0;0
+P|1303|A|defensive|Keany Parks||1;0;0;0;0;0;0
+P|1303|A|interceptions|Javion White||1;0;0
+P|1303|A|kickReturns|DJ Butler||2;38;19.0;22;0
+P|1303|A|kickReturns|Re'Shaun Sanford II||1;28;28.0;28;0
+P|1303|A|kicking|Jonathan Dimas||2/2;100.0;52;2/2;8
+P|1303|A|punting|Liam Dougherty||2;101;50.5;0;1;59
+P|1303|H|passing|Isaac Wilson||17/25;217;8.7;1;1;50.6
+P|1303|H|rushing|Richard Young||21;99;4.7;2;38
+P|1303|H|rushing|DeKalon Taylor||1;67;67.0;1;67
+P|1303|H|rushing|JaQuail Smith||6;44;7.3;1;32
+P|1303|H|rushing|Isaac Wilson||8;25;3.1;0;8
+P|1303|H|rushing|Kaneal Sweetwyne||1;14;14.0;1;14
+P|1303|H|rushing|Damian Henderson II||1;1;1.0;0;1
+P|1303|H|receiving|Joseph Williams||5;80;16.0;1;53
+P|1303|H|receiving|DeAndre Moore Jr.||5;53;10.6;0;26
+P|1303|H|receiving|Ernest Campbell||2;28;14.0;0;24
+P|1303|H|receiving|Charlie Williams||2;28;14.0;0;25
+P|1303|H|receiving|DeKalon Taylor||2;19;9.5;0;21
+P|1303|H|receiving|Quanell Farrakhan Jr.||1;9;9.0;0;9
+P|1303|H|fumbles|Isaac Wilson||1;0;0
+P|1303|H|fumbles|DeKalon Taylor||1;0;0
+P|1303|H|fumbles|Santana Hopper||0;0;1
+P|1303|H|defensive|Randon Fontenette||13;12;1;1;0;0;0
+P|1303|H|defensive|Gideon ESPN Lampron||11;5;0;0;0;0;0
+P|1303|H|defensive|Liona Lefau||8;5;0;0;0;0;0
+P|1303|H|defensive|Ben Finneseth||5;5;0;0;0;1;0
+P|1303|H|defensive|Boo Carter||5;3;0;0;0;0;0
+P|1303|H|defensive|Tyler Martinez||5;3;0;1;0;0;0
+P|1303|H|defensive|RJ Johnson||4;2;0;0;1;0;0
+P|1303|H|defensive|Makari Vickers||3;3;0;0;0;0;0
+P|1303|H|defensive|Toby Anene||2;2;0;0;0;1;0
+P|1303|H|defensive|Cree Thomas||2;2;0;0;0;0;0
+P|1303|H|defensive|Yamil Talib||2;2;0;0;0;1;0
+P|1303|H|defensive|Santana Hopper||2;1;0;0;0;1;0
+P|1303|H|defensive|Immanuel Ezeogu||2;0;0;0;0;0;0
+P|1303|H|defensive|Kylan Salter||1;1;0;0;0;0;0
+P|1303|H|defensive|Lamont Lester Jr.||1;1;0;0;0;0;0
+P|1303|H|defensive|Quency Wiggins||1;0;0;0;0;0;0
+P|1303|H|defensive|Dylan Manuel||0;0;0;0;1;0;0
+P|1303|H|interceptions|Boo Carter||1;3;0
+P|1303|H|kickReturns|DeKalon Taylor||1;1;1.0;1;0
+P|1303|H|puntReturns|DeAndre Moore Jr.||1;34;34.0;34;0
+P|1303|H|kicking|Daniel Gerlach||0/0;0.0;0;6/6;6
+P|1303|H|punting|Damon Greaves||3;164;54.7;1;1;75

@@ -2053,9 +2053,6 @@
 2026-11-07|Wyoming|UNLV|Wyoming|passingYards|Tyler Hughes|QB|5/9, 107 YDS, 1 TD
 2026-11-07|Wyoming|UNLV|Wyoming|rushingYards|Samuel Harris|RB|17 CAR, 128 YDS, 2 TD
 2026-11-07|Wyoming|UNLV|Wyoming|receivingYards|Jake Wilson|TE|2 REC, 56 YDS, 1 TD
-2026-11-13|Houston|Colorado|Houston|passingYards|Conner Weigman|QB|25/40, 268 YDS, 2 TD, 1 INT
-2026-11-13|Houston|Colorado|Houston|rushingYards|Makhi Hughes|RB|15 CAR, 106 YDS, 1 TD
-2026-11-13|Houston|Colorado|Houston|receivingYards|Patrick Overmyer|TE|9 REC, 116 YDS, 1 TD
 2026-11-10|Western Michigan|Akron|Akron|passingYards|Cibastian Broughton|QB|12/18, 173 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Western Michigan|rushingYards|Jalen Buckley|RB|23 CAR, 121 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Akron|receivingYards|Marcel Williams|WR|5 REC, 85 YDS, 2 TD
@@ -2083,6 +2080,9 @@
 2026-11-13|Illinois|UCLA|UCLA|passingYards|Ty Dieffenbach|QB|13/20, 232 YDS, 2 TD, 1 INT
 2026-11-13|Illinois|UCLA|UCLA|rushingYards|Wayne Knight|RB|18 CAR, 56 YDS
 2026-11-13|Illinois|UCLA|UCLA|receivingYards|Aidan Mizell|WR|6 REC, 176 YDS, 1 TD
+2026-11-13|Houston|Colorado|Houston|passingYards|Conner Weigman|QB|26/42, 272 YDS, 3 TD, 1 INT
+2026-11-13|Houston|Colorado|Houston|rushingYards|Makhi Hughes|RB|15 CAR, 106 YDS, 1 TD
+2026-11-13|Houston|Colorado|Houston|receivingYards|Patrick Overmyer|TE|9 REC, 116 YDS, 1 TD
 2026-11-13|Florida State|Pittsburgh|Florida State|passingYards|Ashton Daniels|QB|16/24, 163 YDS
 2026-11-13|Florida State|Pittsburgh|Pittsburgh|rushingYards|Corey Dailey|QB|9 CAR, 58 YDS
 2026-11-13|Florida State|Pittsburgh|Florida State|receivingYards|Jasen Lopez|WR|5 REC, 72 YDS

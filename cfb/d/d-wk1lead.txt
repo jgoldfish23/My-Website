@@ -2053,15 +2053,6 @@
 2026-11-07|Wyoming|UNLV|Wyoming|passingYards|Tyler Hughes|QB|5/9, 107 YDS, 1 TD
 2026-11-07|Wyoming|UNLV|Wyoming|rushingYards|Samuel Harris|RB|17 CAR, 128 YDS, 2 TD
 2026-11-07|Wyoming|UNLV|Wyoming|receivingYards|Jake Wilson|TE|2 REC, 56 YDS, 1 TD
-2026-11-14|Utah|Arizona|Arizona|passingYards|Noah Fifita|QB|23/35, 274 YDS, 2 TD, 1 INT
-2026-11-14|Utah|Arizona|Utah|rushingYards|Daniel Bray|RB|15 CAR, 155 YDS, 1 TD
-2026-11-14|Utah|Arizona|Arizona|receivingYards|Chris Hunter III|WR|6 REC, 119 YDS
-2026-11-14|Colorado State|Washington State|Colorado State|passingYards|Hauss Hejny|QB|14/24, 199 YDS, 1 INT
-2026-11-14|Colorado State|Washington State|Washington State|rushingYards|Kirby Vorhees|RB|12 CAR, 197 YDS, 4 TD
-2026-11-14|Colorado State|Washington State|Washington State|receivingYards|Branden Ganashamoorthy|WR|4 REC, 80 YDS, 1 TD
-2026-11-14|North Dakota State|Hawai'i|Hawai'i|passingYards|Micah Alejado|QB|21/31, 155 YDS, 1 INT
-2026-11-14|North Dakota State|Hawai'i|North Dakota State|rushingYards|DJ Scott|RB|12 CAR, 34 YDS
-2026-11-14|North Dakota State|Hawai'i|Hawai'i|receivingYards|Kainoa Carvalho|WR|5 REC, 50 YDS
 2026-11-10|Western Michigan|Akron|Akron|passingYards|Cibastian Broughton|QB|12/18, 173 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Western Michigan|rushingYards|Jalen Buckley|RB|23 CAR, 121 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Akron|receivingYards|Marcel Williams|WR|5 REC, 85 YDS, 2 TD
@@ -2098,6 +2089,9 @@
 2026-11-14|Missouri|Georgia|Georgia|passingYards|Gunner Stockton|QB|18/24, 252 YDS, 1 TD
 2026-11-14|Missouri|Georgia|Georgia|rushingYards|Nate Frazier|RB|14 CAR, 72 YDS, 3 TD
 2026-11-14|Missouri|Georgia|Georgia|receivingYards|Craig Dandridge|WR|6 REC, 85 YDS
+2026-11-14|Utah|Arizona|Arizona|passingYards|Noah Fifita|QB|27/43, 356 YDS, 3 TD, 1 INT
+2026-11-14|Utah|Arizona|Utah|rushingYards|Daniel Bray|RB|18 CAR, 197 YDS, 1 TD
+2026-11-14|Utah|Arizona|Arizona|receivingYards|Chris Hunter III|WR|6 REC, 119 YDS
 2026-11-14|Alabama|Vanderbilt|Vanderbilt|passingYards|Jared Curtis|QB|25/40, 223 YDS
 2026-11-14|Alabama|Vanderbilt|Alabama|rushingYards|Daniel Hill|RB|14 CAR, 89 YDS
 2026-11-14|Alabama|Vanderbilt|Vanderbilt|receivingYards|Junior Sherrill|WR|7 REC, 100 YDS
@@ -2251,6 +2245,12 @@
 2026-11-14|Wyoming|UTEP|Wyoming|passingYards|Landon Sims|QB|19/25, 289 YDS, 1 TD
 2026-11-14|Wyoming|UTEP|UTEP|rushingYards|Raymond Moore III|QB|20 CAR, 164 YDS, 1 TD
 2026-11-14|Wyoming|UTEP|Wyoming|receivingYards|Kyle Frendt|TE|4 REC, 113 YDS
+2026-11-14|Colorado State|Washington State|Colorado State|passingYards|Hauss Hejny|QB|14/24, 199 YDS, 1 INT
+2026-11-14|Colorado State|Washington State|Washington State|rushingYards|Kirby Vorhees|RB|12 CAR, 197 YDS, 4 TD
+2026-11-14|Colorado State|Washington State|Washington State|receivingYards|Branden Ganashamoorthy|WR|4 REC, 80 YDS, 1 TD
+2026-11-14|North Dakota State|Hawai'i|Hawai'i|passingYards|Micah Alejado|QB|31/47, 231 YDS, 2 INT
+2026-11-14|North Dakota State|Hawai'i|North Dakota State|rushingYards|DJ Scott|RB|13 CAR, 35 YDS, 1 TD
+2026-11-14|North Dakota State|Hawai'i|Hawai'i|receivingYards|Kainoa Carvalho|WR|7 REC, 63 YDS
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD
@@ -4036,9 +4036,6 @@
 2026-11-07|Incarnate Word|SE Louisiana|Incarnate Word|passingYards|Emmett Brown|QB|18/25, 294 YDS, 1 TD, 1 INT
 2026-11-07|Incarnate Word|SE Louisiana|Incarnate Word|rushingYards|Jayden Hibbler|RB|18 CAR, 134 YDS, 1 TD
 2026-11-07|Incarnate Word|SE Louisiana|Incarnate Word|receivingYards|Roy Alexander|WR|6 REC, 172 YDS, 1 TD
-2026-11-14|Idaho State|Montana|Idaho State|passingYards|Jordan Cooke|QB|26/48, 340 YDS, 3 TD, 1 INT
-2026-11-14|Idaho State|Montana|Idaho State|rushingYards|Jordan Cooke|QB|14 CAR, 53 YDS
-2026-11-14|Idaho State|Montana|Montana|receivingYards|Landon Ransom-Goelz|WR|9 REC, 159 YDS, 1 TD
 2026-11-13|Southern Utah|Portland State|Southern Utah|passingYards|Will Burns|QB|14/23, 166 YDS, 2 TD, 1 INT
 2026-11-13|Southern Utah|Portland State|Portland State|rushingYards|Delon Thompson|RB|26 CAR, 169 YDS, 1 TD
 2026-11-13|Southern Utah|Portland State|Southern Utah|receivingYards|David Spjut|WR|5 REC, 79 YDS, 1 TD
@@ -4225,3 +4222,6 @@
 2026-11-14|Eastern Washington|Utah Tech|Utah Tech|passingYards|CJ Tiller|QB|18/23, 344 YDS, 3 TD
 2026-11-14|Eastern Washington|Utah Tech|Utah Tech|rushingYards|Ace Chatman|RB|16 CAR, 98 YDS, 1 TD
 2026-11-14|Eastern Washington|Utah Tech|Utah Tech|receivingYards|Mike Williams|WR|5 REC, 143 YDS
+2026-11-14|Idaho State|Montana|Idaho State|passingYards|Jordan Cooke|QB|27/53, 356 YDS, 3 TD, 1 INT
+2026-11-14|Idaho State|Montana|Montana|rushingYards|Eli Gillman|RB|19 CAR, 58 YDS
+2026-11-14|Idaho State|Montana|Montana|receivingYards|Landon Ransom-Goelz|WR|9 REC, 159 YDS, 1 TD

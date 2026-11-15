@@ -657,6 +657,7 @@
 2026-11-13|Houston|Colorado|HEADLINE||Colorado beats No. 14 Houston 42-32 for 1st AP top-15 win since 2007 with Sanders on hot seat||
 2026-11-13|Florida State|Pittsburgh|HEADLINE||Florida State fends off Pitt 16-10 to improve to 2-0 under interim coach Rick Stockstill||
 2026-11-14|Missouri|Georgia|HEADLINE||Georgia marks return to No. 1 by routing Missouri 48-21 behind Frazier and Stockton||
+2026-11-14|Utah|Arizona|HEADLINE||Dampier accounts for 4 TDs, No. 2 Utah remains undefeated with 40-39 win over No. 22 Arizona||
 2026-11-14|Alabama|Vanderbilt|HEADLINE||No. 7 Alabama survives a sloppy 21-6 win over Vanderbilt behind Keelon Russell||
 2026-11-14|Boston College|Notre Dame|HEADLINE||No. 3 Notre Dame has no letdown after Miami win, routs Boston College 41-7||
 2026-11-14|Texas|LSU|HEADLINE||Arch Manning leads No. 8 Texas to a late score and a dramatic 22-21 win over No. 24 LSU||
@@ -700,10 +701,14 @@
 2026-11-14|Minnesota|Penn State|HEADLINE||Becht, Hansen combine to push Penn State past Minnesota 42-14||
 2026-11-14|San José State|Air Force|HEADLINE||Air Force rides Kemper Hodges, Evan Medders to 24-3 victory over San Jose State||
 2026-11-14|Troy|South Alabama|HEADLINE||Trae’von Dunbar has 153 yards rushing and 2 TDs, South Alabama beats Troy 27-14||
-2026-11-14|Florida Atlantic|Tulsa|HEADLINE||Haynes leads Tulsa in another offensive eruption, beating Florida Atlantic 38-21||
+2026-11-14|Florida Atlantic|Tulsa|HEADLINE||Hayes leads Tulsa in another offensive eruption, beating Florida Atlantic 38-21||
 2026-11-14|Stanford|Virginia Tech|HEADLINE||Ford, Stanford defense propel Cardinal to 40-22 victory over Virginia Tech||
 2026-11-14|UNLV|New Mexico|HEADLINE||Jackson Arnold rallies UNLV past No. 23 New Mexico, 21-17||
+2026-11-14|North Texas|UTSA|HEADLINE||Peterson's 4 TDs help UTSA beat North Texas 35-16 for share of American Conference lead||
+2026-11-14|Utah State|San Diego State|HEADLINE||Cooper DiLeva kicks 3 FGs, throws TD pass off trick play as San Diego State beats Utah State 30-13||
 2026-11-14|Wyoming|UTEP|HEADLINE||Samuel Harris scores 2 TDs, Wyoming beats UTEP 27-15 for 6th consecutive win||
+2026-11-14|Colorado State|Washington State|HEADLINE||Kirby Vorhees has 4 of 9 TD runs by Washington State in skid-busting 73-7 romp over Colorado State||
+2026-11-14|North Dakota State|Hawai'i|HEADLINE||DJ Scott, Ray James Jr. rally North Dakota State to 21-13 victory over Hawaii||
 2026-08-27|Mercyhurst|Youngstown State|HEADLINE||Beau Brungard accounts for 5 touchdowns in Youngstown State's season-opening win over Mercyhurst||
 2026-08-27|Gardner-Webb|Austin Peay|HEADLINE||Parson, Simmons lead Austin Peay in 35-17 win over Gardner-Webb||
 2026-08-27|Houston Christian|SE Louisiana|HEADLINE||Cutter Stewart returns from junior college ranks, leads Houston Christian past SE Louisiana 34-28||
@@ -917,3 +922,4 @@
 2026-11-14|Stephen F. Austin|UT Rio Grande Valley|HEADLINE||JT Kitna, Jaylen Jenkins help Stephen F. Austin thump UT Rio Grande Valley 48-0||
 2026-11-14|Montana State|Northern Colorado|HEADLINE||Lamson and White lead Montana State over Northern Colorado 31-21||
 2026-11-14|UC Davis|Idaho|HEADLINE||Cleeland throws 4 touchdown passes, 2 to Gbatu, as UC Davis snaps Idaho's 4-game win streak||
+2026-11-14|Idaho State|Montana|HEADLINE||Ah Yat throws 3 TD passes, 2 to Gillman, Montana beats Idaho State 38-30||

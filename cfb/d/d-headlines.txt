@@ -647,13 +647,36 @@
 2026-11-07|Hawai'i|UTEP|HEADLINE||Alejado-Lacaden combo helps send Hawaii past UTEP 17-14||
 2026-11-07|Texas State|Oregon State|HEADLINE||Texas State steamrolls Oregon State with 600 yards, 5 TDs on the ground in 42-21 win||
 2026-11-07|Wyoming|UNLV|HEADLINE||Harris, Holman rushing attack helps Wyoming fight off UNLV in 41-35 win||
+2026-11-14|Missouri|Georgia|HEADLINE||Georgia marks return to No. 1 by routing Missouri 48-21 behind Frazier and Stockton||
+2026-11-14|Alabama|Vanderbilt|HEADLINE||No. 7 Alabama survives a sloppy 21-6 win over Vanderbilt behind Keelon Russell||
+2026-11-14|Boston College|Notre Dame|HEADLINE||No. 3 Notre Dame has no letdown after Miami win, routs Boston College 41-7||
 2026-11-14|Duke|Miami|HEADLINE||Mensah, Mallory lead No. 5 Miami past Duke 36-25 as Hurricanes close in on ACC title game berth||
+2026-11-14|Tennessee|Texas A&M|HEADLINE||No. 9 Tennessee pulls away late to beat Texas A&M 22-7 behind 5 field goals from Cooper Ranvier||
+2026-11-14|USC|Indiana|HEADLINE||Grant Wilson throws 2 TD passes, No. 6 Indiana beats No. 15 USC 27-13||
 2026-11-14|Wake Forest|SMU|HEADLINE||Gio Lopez leads No. 11 Wake Forest to 49-7 rout of No. 25 SMU for 7th straight win||
+2026-11-14|Michigan|Oregon|HEADLINE||Dylan Raiola throws for 4 touchdowns and No. 18 Oregon downs Michigan 31-7||
 2026-11-14|Northwestern|Ohio State|HEADLINE||Fahey, Smith get No. 21 Ohio State back on track with 28-19 victory over Northwestern||
 2026-11-14|Cincinnati|Iowa State|HEADLINE||Aiden Flora runs for 216 yards and fuels fast start in Cyclones' 41-13 win over Cincinnati||
 2026-11-14|Syracuse|NC State|HEADLINE||Syracuse rallies past N.C. State 34-31 with late touchdown pass play||
+2026-11-14|Wisconsin|Maryland|HEADLINE||Cardell Williams throws for a TD with 2:11 left and Maryland adds late FG to beat Wisconsin 24-21||
 2026-11-14|James Madison|UConn|HEADLINE||Osborne, Bowers have 3 TDs, carry UConn past James Madison 46-22||
+2026-11-14|Georgia Tech|Clemson|HEADLINE||Haynes, Georgia Tech run for first win at Clemson since 2008 on Saturday 20-6||
 2026-11-14|Nebraska|Rutgers|HEADLINE||Anthony Colandrea passes for two TDs, runs for one in Nebraska's 31-0 romp over Rutgers||
+2026-11-14|East Carolina|Charlotte|HEADLINE||Ashton Gray scores twice as East Carolina outlasts Charlotte 17-16 to become bowl eligible again||
+2026-11-14|UAB|Temple|HEADLINE||Rod Robinson II romps for 202 yards, 3 TDs and UAB topples Temple 36-10||
+2026-11-14|Arkansas State|Coastal Carolina|HEADLINE||Deuce Bailey and Chanticleers' defense power Coastal Carolina over Arkansas St. 28-21||
+2026-11-14|Kansas State|TCU|HEADLINE||Horned Frogs get back on winning track with 20-10 win over Kansas State||
+2026-11-14|Kennesaw State|Sam Houston|HEADLINE||Cam Miller's 88-yard pick-6 highlights Kennesaw State's 26-7 win over Sam Houston||
+2026-11-14|New Mexico State|Missouri State|HEADLINE||Joel Boamah's pick-6 in OT lifts Missouri State over New Mexico State 27-21||
+2026-11-14|Florida International|Delaware|HEADLINE||Minicucci nears pocket perfection sending Delaware past Florida International 24-16||
+2026-11-14|Kansas|West Virginia|HEADLINE||QB Isaiah Marshall's career rushing day leads Kansas over West Virginia 37-14||
+2026-11-14|California|Virginia|HEADLINE||Virginia defense, special teams take out Cal in 36-7 win||
+2026-11-14|Nevada|Northern Illinois|HEADLINE||Turner scores twice and Nevada beats Nothern Illinois 28-7||
+2026-11-14|Georgia Southern|Georgia State|HEADLINE||Georgia Southern keeps Georgia State out of end zone in the 2nd half for 34-17 win||
+2026-11-14|Middle Tennessee|Liberty|HEADLINE||Davis rushes for 126 yards and TD, helps Liberty clinch spot in CUSA title game after 28-23 win||
+2026-11-14|Fresno State|Texas State|HEADLINE||Davian Jackson's late TD run lifts Texas State over Fresno State 37-35||
+2026-11-14|Auburn|Mississippi State|HEADLINE||Auburn causes havoc to beat Mississippi State and become bowl eligible for first time since 2023||
+2026-11-14|Tulane|Rice|HEADLINE||Richardson's TD grab makes Tulane's late arrival worth it in 20-17 win over Rice||
 2026-11-10|Western Michigan|Akron|HEADLINE||Buckley, Cabana power rushing attack for Western Michigan in 42-14 win over Akron||
 2026-11-10|Kent State|Bowling Green|HEADLINE||Novosad and Amachree help Bowling Green edge Kent State 33-28||
 2026-11-10|Ohio|Miami (OH)|HEADLINE||True freshman QB Drew Bellisari rallies Miami (Ohio) to 34-17 victory over Ohio in debut||
@@ -858,3 +881,15 @@
 2026-11-07|Northern Arizona|Cal Poly|HEADLINE||Gossett's 3 rushing TDs, 1 from Pennington send Northern Arizona to lopsided win over Cal Poly||
 2026-11-07|Montana State|Idaho State|HEADLINE||Receiver Steele and TE Schlepp connect for game winner in 3OT as Montana State beats Idaho State||
 2026-11-07|Abilene Christian|Tarleton State|HEADLINE||Tarleton State remains unbeaten with 40-27 victory over Abilene Christian||
+2026-11-14|Merrimack|Monmouth|HEADLINE||Hairston throws 4 TD passes, Jackson's INT sets up Ryan's game-winning FG in Merrimack's win||
+2026-11-14|Princeton|Yale|HEADLINE||Dante Reno's 3 TD passes, Abu Kamara's pick-6 lead Yale to 28-0 win over Princeton||
+2026-11-14|Harvard|Pennsylvania|HEADLINE||Charlie Smith throws 3 TD passes and Harvard wraps up fourth straight Ivy championship||
+2026-11-14|North Carolina Central|South Carolina State|HEADLINE||Watson throws 3 TD passes, SC State takes control of MEAC with38-24 win over NC Central||
+2026-11-14|Campbell|Elon|HEADLINE||Brady Stober leads Elon's rally in 28-24 victory over Campbell||
+2026-11-14|Northern Iowa|South Dakota|HEADLINE||Modrzewski has 5 TD passes in career game, South Dakota defeats Northern Iowa 41-30||
+2026-11-14|South Dakota State|Southern Illinois|HEADLINE||Chase Mason scores 5 TDs, and South Dakota State cruises past Southern Illinois 52-16||
+2026-11-14|Lehigh|Richmond|HEADLINE||Lehigh makes goal-line stand to secure a 21-14 victory over Richmond for 15th Patriot League title||
+2026-11-14|Abilene Christian|Austin Peay|HEADLINE||Tucker Parks helps Abilene Christian past Austin Peay 34-31||
+2026-11-14|Mercer|Tennessee Tech|HEADLINE||Palode-Gary's 60-yard TD run in the 4th quarter pushes Mercer past Tennessee Tech 38-31||
+2026-11-14|Tarleton State|West Florida|HEADLINE||Tarleton State beats West Florida 31-17, secures share of 2nd straight UAC championship||
+2026-11-14|Nicholls|Incarnate Word|HEADLINE||Brown throws 3 TD passes to lead Incarnate Word over Nicholls 42-24||

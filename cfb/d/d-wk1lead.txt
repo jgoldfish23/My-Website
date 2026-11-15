@@ -2053,72 +2053,81 @@
 2026-11-07|Wyoming|UNLV|Wyoming|passingYards|Tyler Hughes|QB|5/9, 107 YDS, 1 TD
 2026-11-07|Wyoming|UNLV|Wyoming|rushingYards|Samuel Harris|RB|17 CAR, 128 YDS, 2 TD
 2026-11-07|Wyoming|UNLV|Wyoming|receivingYards|Jake Wilson|TE|2 REC, 56 YDS, 1 TD
-2026-11-14|Georgia Tech|Clemson|Georgia Tech|passingYards|Alberto Mendoza|QB|8/14, 138 YDS, 1 INT
-2026-11-14|Georgia Tech|Clemson|Georgia Tech|rushingYards|Justice Haynes|RB|13 CAR, 116 YDS, 1 TD
-2026-11-14|Georgia Tech|Clemson|Georgia Tech|receivingYards|Jordan Allen|WR|2 REC, 61 YDS
+2026-11-14|Southern Miss|Louisiana Tech|Louisiana Tech|passingYards|Blake Baker|QB|21/28, 236 YDS, 3 TD
+2026-11-14|Southern Miss|Louisiana Tech|Southern Miss|rushingYards|Steven Robinson|RB|17 CAR, 94 YDS
+2026-11-14|Southern Miss|Louisiana Tech|Southern Miss|receivingYards|Mario Sanders|WR|8 REC, 119 YDS, 1 TD
+2026-11-14|Arizona State|UCF|Arizona State|passingYards|Jake Fette|QB|21/36, 196 YDS
+2026-11-14|Arizona State|UCF|Arizona State|rushingYards|Cardae Mack|RB|19 CAR, 91 YDS, 1 TD
+2026-11-14|Arizona State|UCF|UCF|receivingYards|Josh Derry|WR|4 REC, 86 YDS
+2026-11-14|Washington|Michigan State|Washington|passingYards|Demond Williams Jr.|QB|17/28, 204 YDS, 2 TD
+2026-11-14|Washington|Michigan State|Michigan State|rushingYards|Brandon Tullis|RB|21 CAR, 82 YDS
+2026-11-14|Washington|Michigan State|Washington|receivingYards|Chris Lawson|WR|2 REC, 75 YDS, 2 TD
+2026-11-14|Oregon State|Boise State|Oregon State|passingYards|Maalik Murphy|QB|20/27, 235 YDS, 1 TD, 1 INT
+2026-11-14|Oregon State|Boise State|Boise State|rushingYards|Sire Gaines|RB|8 CAR, 51 YDS, 1 TD
+2026-11-14|Oregon State|Boise State|Boise State|receivingYards|Rasean Jones|WR|7 REC, 146 YDS, 2 TD
+2026-11-14|App State|Marshall|App State|passingYards|Malachi Singleton|QB|12/21, 131 YDS, 1 INT
+2026-11-14|App State|Marshall|App State|rushingYards|Jaquari Lewis|RB|23 CAR, 137 YDS
+2026-11-14|App State|Marshall|App State|receivingYards|Sam Pickett III|WR|5 REC, 89 YDS
+2026-11-14|Florida|Kentucky|Kentucky|passingYards|Kenny Minchey|QB|13/17, 137 YDS, 1 TD
+2026-11-14|Florida|Kentucky|Florida|rushingYards|Jadan Baugh|RB|8 CAR, 35 YDS, 1 TD
+2026-11-14|Florida|Kentucky|Kentucky|receivingYards|DJ Miller|WR|3 REC, 51 YDS
+2026-11-14|Baylor|BYU|BYU|passingYards|Bear Bachmeier|QB|5/11, 51 YDS
+2026-11-14|Baylor|BYU|BYU|rushingYards|Bear Bachmeier|QB|10 CAR, 51 YDS, 3 TD
+2026-11-14|Baylor|BYU|BYU|receivingYards|Walker Lyons|TE|2 REC, 43 YDS
+2026-11-14|Louisville|North Carolina|Louisville|passingYards|Lincoln Kienholz|QB|19/24, 139 YDS, 1 TD
+2026-11-14|Louisville|North Carolina|Louisville|rushingYards|Isaac Brown|RB|6 CAR, 40 YDS
+2026-11-14|Louisville|North Carolina|Louisville|receivingYards|Lawayne McCoy|WR|4 REC, 53 YDS
+2026-11-14|Minnesota|Penn State|Penn State|passingYards|Rocco Becht|QB|5/9, 41 YDS, 2 TD
+2026-11-14|Minnesota|Penn State|Penn State|rushingYards|Carson Hansen|RB|12 CAR, 126 YDS, 1 TD
+2026-11-14|Minnesota|Penn State|Penn State|receivingYards|Benjamin Brahmer|TE|1 REC, 19 YDS, 1 TD
+2026-11-14|San José State|Air Force|San José State|passingYards|Daniel Rolovich|QB|2/4, 11 YDS
+2026-11-14|San José State|Air Force|Air Force|rushingYards|Evan Medders|QB|7 CAR, 131 YDS, 1 TD
+2026-11-14|San José State|Air Force|San José State|receivingYards|Jabari Bates|RB|1 REC, 7 YDS
+2026-11-14|Troy|South Alabama|Troy|passingYards|Goose Crowder|QB|8/10, 53 YDS
+2026-11-14|Troy|South Alabama|South Alabama|rushingYards|Trae'von Dunbar|RB|7 CAR, 125 YDS, 2 TD
+2026-11-14|Troy|South Alabama|South Alabama|receivingYards|PJ Martin|RB|1 REC, 13 YDS
+2026-11-14|Florida Atlantic|Tulsa|Florida Atlantic|passingYards|Caden Veltkamp|QB|11/19, 148 YDS, 1 TD
+2026-11-14|Florida Atlantic|Tulsa|Tulsa|rushingYards|Trequan Jones|RB|4 CAR, 76 YDS, 1 TD
+2026-11-14|Florida Atlantic|Tulsa|Tulsa|receivingYards|Javon Ross|WR|2 REC, 57 YDS
+2026-11-14|Texas|LSU|LSU|passingYards|Sam Leavitt|QB|7/10, 79 YDS, 1 TD, 1 INT
+2026-11-14|Texas|LSU|Texas|rushingYards|Arch Manning|QB|5 CAR, 34 YDS, 1 TD
+2026-11-14|Texas|LSU|LSU|receivingYards|Eugene Wilson III|WR|3 REC, 43 YDS
+2026-11-14|Purdue|Iowa|Purdue|passingYards|Ryan Browne|QB|3/4, 45 YDS
+2026-11-14|Purdue|Iowa|Iowa|rushingYards|L.J. Phillips Jr.|RB|11 CAR, 79 YDS
+2026-11-14|Purdue|Iowa|Purdue|receivingYards|Asaad Waseem|WR|2 REC, 39 YDS
+2026-11-14|Stanford|Virginia Tech|Stanford|passingYards|Davis Warren|QB|6/12, 78 YDS
+2026-11-14|Stanford|Virginia Tech|Virginia Tech|rushingYards|Jeffrey Overton Jr.|RB|6 CAR, 52 YDS
+2026-11-14|Stanford|Virginia Tech|Stanford|receivingYards|Benji Blackburn|TE|1 REC, 30 YDS
+2026-11-14|UNLV|New Mexico|New Mexico|passingYards|Bailen George|WR|1/1, 65 YDS
+2026-11-14|UNLV|New Mexico|New Mexico|rushingYards|Kiefer Sibley|RB|6 CAR, 65 YDS
+2026-11-14|UNLV|New Mexico|New Mexico|receivingYards|DJ Darling|WR|1 REC, 65 YDS
+2026-11-14|South Carolina|Arkansas|Arkansas|passingYards|KJ Jackson|QB|8/11, 86 YDS
+2026-11-14|South Carolina|Arkansas|Arkansas|rushingYards|Cam Settles|RB|3 CAR, 19 YDS
+2026-11-14|South Carolina|Arkansas|South Carolina|receivingYards|Mazeo Bennett Jr.|WR|2 REC, 48 YDS
+2026-11-14|Missouri|Georgia|Georgia|passingYards|Gunner Stockton|QB|18/24, 252 YDS, 1 TD
+2026-11-14|Missouri|Georgia|Georgia|rushingYards|Nate Frazier|RB|14 CAR, 72 YDS, 3 TD
+2026-11-14|Missouri|Georgia|Georgia|receivingYards|Craig Dandridge|WR|6 REC, 85 YDS
 2026-11-14|Alabama|Vanderbilt|Vanderbilt|passingYards|Jared Curtis|QB|25/40, 223 YDS
 2026-11-14|Alabama|Vanderbilt|Alabama|rushingYards|Daniel Hill|RB|14 CAR, 89 YDS
 2026-11-14|Alabama|Vanderbilt|Vanderbilt|receivingYards|Junior Sherrill|WR|7 REC, 100 YDS
-2026-11-14|East Carolina|Charlotte|Charlotte|passingYards|Conner Harrell|QB|14/26, 155 YDS, 1 TD, 1 INT
-2026-11-14|East Carolina|Charlotte|Charlotte|rushingYards|Henry Rutledge|RB|14 CAR, 64 YDS
-2026-11-14|East Carolina|Charlotte|Charlotte|receivingYards|Derrick Eley|WR|4 REC, 96 YDS
-2026-11-14|UAB|Temple|UAB|passingYards|Ryder Burton|QB|11/19, 133 YDS, 1 INT
-2026-11-14|UAB|Temple|UAB|rushingYards|Rod Robinson II|RB|22 CAR, 202 YDS, 3 TD
-2026-11-14|UAB|Temple|UAB|receivingYards|Scott Isacks|TE|3 REC, 80 YDS
-2026-11-14|Arkansas State|Coastal Carolina|Coastal Carolina|passingYards|Deuce Bailey|QB|21/24, 208 YDS, 1 TD
-2026-11-14|Arkansas State|Coastal Carolina|Coastal Carolina|rushingYards|Kente Edwards|RB|13 CAR, 34 YDS, 1 TD
-2026-11-14|Arkansas State|Coastal Carolina|Coastal Carolina|receivingYards|Colton Hinton|WR|6 REC, 81 YDS
-2026-11-14|Kansas State|TCU|TCU|passingYards|Jaden Craig|QB|14/23, 150 YDS, 1 TD
-2026-11-14|Kansas State|TCU|TCU|rushingYards|Jeremy Payne|RB|10 CAR, 49 YDS
-2026-11-14|Kansas State|TCU|Kansas State|receivingYards|Garrett Oakley|TE|5 REC, 49 YDS
-2026-11-14|Kennesaw State|Sam Houston|Kennesaw State|passingYards|Landon Varnes|QB|19/28, 163 YDS, 1 TD
-2026-11-14|Kennesaw State|Sam Houston|Kennesaw State|rushingYards|Boogie Woods III|RB|14 CAR, 96 YDS
-2026-11-14|Kennesaw State|Sam Houston|Kennesaw State|receivingYards|Davis Bryson|WR|6 REC, 56 YDS
-2026-11-14|Tennessee|Texas A&M|Tennessee|passingYards|George MacIntyre|QB|10/11, 94 YDS
-2026-11-14|Tennessee|Texas A&M|Tennessee|rushingYards|DeSean Bishop|RB|15 CAR, 43 YDS
-2026-11-14|Tennessee|Texas A&M|Tennessee|receivingYards|Mike Matthews|WR|2 REC, 42 YDS
-2026-11-14|New Mexico State|Missouri State|Missouri State|passingYards|Henry Belin IV|QB|8/11, 62 YDS
-2026-11-14|New Mexico State|Missouri State|New Mexico State|rushingYards|James Jones|RB|11 CAR, 67 YDS
-2026-11-14|New Mexico State|Missouri State|New Mexico State|receivingYards|AJ Williams III|WR|3 REC, 38 YDS
-2026-11-14|Florida International|Delaware|Florida International|passingYards|JJ Kohl|QB|12/18, 164 YDS, 1 INT
-2026-11-14|Florida International|Delaware|Florida International|rushingYards|JJ Kohl|QB|1 CAR, 18 YDS
-2026-11-14|Florida International|Delaware|Florida International|receivingYards|Maguire Anderson|WR|3 REC, 48 YDS
-2026-11-14|Missouri|Georgia|Georgia|passingYards|Gunner Stockton|QB|1/1, 33 YDS
-2026-11-14|Missouri|Georgia|Georgia|rushingYards|Nate Frazier|RB|4 CAR, 26 YDS, 1 TD
-2026-11-14|Missouri|Georgia|Georgia|receivingYards|Isiah Canion|WR|1 REC, 33 YDS
-2026-11-14|Boston College|Notre Dame|Notre Dame|passingYards|CJ Carr|QB|3/3, 37 YDS, 1 TD
-2026-11-14|Boston College|Notre Dame|Notre Dame|rushingYards|Nolan James Jr.|RB|5 CAR, 28 YDS
-2026-11-14|Boston College|Notre Dame|Notre Dame|receivingYards|Micah Gilbert|WR|1 REC, 26 YDS, 1 TD
-2026-11-14|USC|Indiana|USC|passingYards|Jayden Maiava|QB|7/9, 63 YDS
-2026-11-14|USC|Indiana|USC|rushingYards|King Miller|RB|5 CAR, 20 YDS
-2026-11-14|USC|Indiana|Indiana|receivingYards|Shazz Preston|WR|1 REC, 47 YDS
-2026-11-14|Michigan|Oregon|Oregon|passingYards|Dylan Raiola|QB|4/4, 107 YDS, 1 TD
-2026-11-14|Michigan|Oregon|Michigan|rushingYards|Jordan Marshall|RB|2 CAR, 14 YDS
-2026-11-14|Michigan|Oregon|Oregon|receivingYards|Jeremiah McClellan|WR|1 REC, 60 YDS, 1 TD
-2026-11-14|Kansas|West Virginia|Kansas|passingYards|Isaiah Marshall|QB|5/5, 67 YDS
-2026-11-14|Kansas|West Virginia|Kansas|rushingYards|Isaiah Marshall|QB|2 CAR, 15 YDS
-2026-11-14|Kansas|West Virginia|West Virginia|receivingYards|TaRon Francis|WR|1 REC, 38 YDS
-2026-11-14|California|Virginia|Virginia|passingYards|Beau Pribula|QB|7/10, 74 YDS, 1 TD
-2026-11-14|California|Virginia|Virginia|rushingYards|Xavier Brown|RB|5 CAR, 26 YDS
-2026-11-14|California|Virginia|Virginia|receivingYards|Da'Shawn Martin|WR|2 REC, 28 YDS, 1 TD
-2026-11-14|Nevada|Northern Illinois|Northern Illinois|passingYards|Taron Dickens|QB|5/7, 48 YDS, 1 INT
-2026-11-14|Nevada|Northern Illinois|Nevada|rushingYards|Herschel Turner|RB|3 CAR, 17 YDS, 1 TD
-2026-11-14|Nevada|Northern Illinois|Northern Illinois|receivingYards|La'Don Bryant|WR|1 REC, 16 YDS
-2026-11-14|Georgia Southern|Georgia State|Georgia Southern|passingYards|Weston Bryan|QB|1/1, 41 YDS
-2026-11-14|Georgia Southern|Georgia State|Georgia State|rushingYards|Lanear McCrary Jr.|RB|4 CAR, 16 YDS
-2026-11-14|Georgia Southern|Georgia State|Georgia Southern|receivingYards|Alex Taylor|WR|1 REC, 41 YDS
-2026-11-14|Jacksonville State|Western Kentucky|Western Kentucky|passingYards|Rodney Tisdale Jr.|QB|8/9, 59 YDS, 1 INT
-2026-11-14|Jacksonville State|Western Kentucky|Western Kentucky|rushingYards|Jonathan Stafford Jr.|WR|1 CAR, 6 YDS
-2026-11-14|Jacksonville State|Western Kentucky|Western Kentucky|receivingYards|Jyziah Rockwell|WR|1 REC, 28 YDS
-2026-11-14|Middle Tennessee|Liberty|Middle Tennessee|passingYards|Roman Gagliano|QB|3/5, 5 YDS
-2026-11-14|Middle Tennessee|Liberty|Liberty|rushingYards|Jaylon Coleman|RB|2 CAR, 52 YDS, 1 TD
-2026-11-14|Middle Tennessee|Liberty|Middle Tennessee|receivingYards|AJ Jones|WR|1 REC, 6 YDS
+2026-11-14|Boston College|Notre Dame|Notre Dame|passingYards|CJ Carr|QB|20/28, 217 YDS, 2 TD, 1 INT
+2026-11-14|Boston College|Notre Dame|Notre Dame|rushingYards|Jonaz Walton|RB|15 CAR, 141 YDS, 1 TD
+2026-11-14|Boston College|Notre Dame|Notre Dame|receivingYards|Micah Gilbert|WR|5 REC, 86 YDS, 1 TD
 2026-11-14|Duke|Miami|Miami|passingYards|Darian Mensah|QB|30/41, 382 YDS, 1 TD
 2026-11-14|Duke|Miami|Duke|rushingYards|Nate Sheppard|RB|16 CAR, 131 YDS, 2 TD
 2026-11-14|Duke|Miami|Miami|receivingYards|Cooper Barkate|WR|8 REC, 134 YDS
+2026-11-14|Tennessee|Texas A&M|Tennessee|passingYards|George MacIntyre|QB|13/17, 109 YDS
+2026-11-14|Tennessee|Texas A&M|Tennessee|rushingYards|DeSean Bishop|RB|34 CAR, 97 YDS
+2026-11-14|Tennessee|Texas A&M|Texas A&M|receivingYards|Mario Craver|WR|5 REC, 49 YDS
+2026-11-14|USC|Indiana|USC|passingYards|Jayden Maiava|QB|26/42, 311 YDS, 1 TD, 3 INT
+2026-11-14|USC|Indiana|Indiana|rushingYards|Khobie Martin|RB|12 CAR, 82 YDS, 1 TD
+2026-11-14|USC|Indiana|USC|receivingYards|Trent Mosley|WR|9 REC, 130 YDS
 2026-11-14|Wake Forest|SMU|SMU|passingYards|Kevin Jennings|QB|22/35, 209 YDS, 1 TD, 1 INT
 2026-11-14|Wake Forest|SMU|Wake Forest|rushingYards|Ty Clark III|RB|11 CAR, 77 YDS, 1 TD
 2026-11-14|Wake Forest|SMU|Wake Forest|receivingYards|Carlos Hernandez|WR|6 REC, 94 YDS, 1 TD
+2026-11-14|Michigan|Oregon|Oregon|passingYards|Dylan Raiola|QB|20/28, 341 YDS, 4 TD
+2026-11-14|Michigan|Oregon|Michigan|rushingYards|Savion Hiter|RB|13 CAR, 107 YDS, 1 TD
+2026-11-14|Michigan|Oregon|Oregon|receivingYards|Jeremiah McClellan|WR|4 REC, 105 YDS, 1 TD
 2026-11-14|Northwestern|Ohio State|Northwestern|passingYards|Nicco Marchiol|QB|18/31, 225 YDS, 1 TD
 2026-11-14|Northwestern|Ohio State|Ohio State|rushingYards|Bo Jackson|RB|20 CAR, 114 YDS, 1 TD
 2026-11-14|Northwestern|Ohio State|Ohio State|receivingYards|Jeremiah Smith|WR|11 REC, 117 YDS, 1 TD
@@ -2134,9 +2143,60 @@
 2026-11-14|James Madison|UConn|UConn|passingYards|Kalieb Osborne|QB|16/20, 274 YDS, 3 TD
 2026-11-14|James Madison|UConn|UConn|rushingYards|Cyncir Bowers|RB|25 CAR, 123 YDS, 2 TD
 2026-11-14|James Madison|UConn|UConn|receivingYards|Shamar Porter|WR|4 REC, 135 YDS, 1 TD
+2026-11-14|Georgia Tech|Clemson|Georgia Tech|passingYards|Alberto Mendoza|QB|8/14, 138 YDS, 1 INT
+2026-11-14|Georgia Tech|Clemson|Georgia Tech|rushingYards|Justice Haynes|RB|13 CAR, 116 YDS, 1 TD
+2026-11-14|Georgia Tech|Clemson|Georgia Tech|receivingYards|Jordan Allen|WR|2 REC, 61 YDS
 2026-11-14|Nebraska|Rutgers|Nebraska|passingYards|Anthony Colandrea|QB|15/22, 188 YDS, 2 TD
 2026-11-14|Nebraska|Rutgers|Nebraska|rushingYards|Jamal Rule|RB|22 CAR, 103 YDS
 2026-11-14|Nebraska|Rutgers|Nebraska|receivingYards|Carter Nelson|TE|2 REC, 53 YDS, 1 TD
+2026-11-14|East Carolina|Charlotte|Charlotte|passingYards|Conner Harrell|QB|15/29, 161 YDS, 1 TD, 2 INT
+2026-11-14|East Carolina|Charlotte|East Carolina|rushingYards|Ashton Gray|RB|24 CAR, 88 YDS, 2 TD
+2026-11-14|East Carolina|Charlotte|Charlotte|receivingYards|Derrick Eley|WR|4 REC, 96 YDS
+2026-11-14|UAB|Temple|UAB|passingYards|Ryder Burton|QB|11/19, 133 YDS, 1 INT
+2026-11-14|UAB|Temple|UAB|rushingYards|Rod Robinson II|RB|22 CAR, 202 YDS, 3 TD
+2026-11-14|UAB|Temple|UAB|receivingYards|Scott Isacks|TE|3 REC, 80 YDS
+2026-11-14|Arkansas State|Coastal Carolina|Arkansas State|passingYards|Trey Owens|QB|23/40, 217 YDS, 1 INT
+2026-11-14|Arkansas State|Coastal Carolina|Coastal Carolina|rushingYards|Kente Edwards|RB|15 CAR, 38 YDS, 1 TD
+2026-11-14|Arkansas State|Coastal Carolina|Coastal Carolina|receivingYards|Colton Hinton|WR|6 REC, 81 YDS
+2026-11-14|Kansas State|TCU|Kansas State|passingYards|Dillon Duff|QB|22/33, 244 YDS, 1 TD
+2026-11-14|Kansas State|TCU|TCU|rushingYards|Jeremy Payne|RB|15 CAR, 55 YDS
+2026-11-14|Kansas State|TCU|Kansas State|receivingYards|Jaron Tibbs|WR|8 REC, 115 YDS, 1 TD
+2026-11-14|Kennesaw State|Sam Houston|Kennesaw State|passingYards|Landon Varnes|QB|22/35, 181 YDS, 1 TD
+2026-11-14|Kennesaw State|Sam Houston|Kennesaw State|rushingYards|Boogie Woods III|RB|17 CAR, 101 YDS
+2026-11-14|Kennesaw State|Sam Houston|Kennesaw State|receivingYards|Davis Bryson|WR|6 REC, 56 YDS
+2026-11-14|New Mexico State|Missouri State|Missouri State|passingYards|Henry Belin IV|QB|20/37, 187 YDS, 1 TD, 1 INT
+2026-11-14|New Mexico State|Missouri State|New Mexico State|rushingYards|James Jones|RB|25 CAR, 150 YDS, 1 TD
+2026-11-14|New Mexico State|Missouri State|Missouri State|receivingYards|Isaiah Myers|WR|5 REC, 89 YDS
+2026-11-14|Florida International|Delaware|Florida International|passingYards|JJ Kohl|QB|26/37, 313 YDS, 1 TD, 2 INT
+2026-11-14|Florida International|Delaware|Delaware|rushingYards|Nick Minicucci|QB|6 CAR, 69 YDS, 1 TD
+2026-11-14|Florida International|Delaware|Florida International|receivingYards|Maguire Anderson|WR|9 REC, 122 YDS
+2026-11-14|Kansas|West Virginia|West Virginia|passingYards|Michael Hawkins Jr.|QB|19/34, 227 YDS, 1 TD, 1 INT
+2026-11-14|Kansas|West Virginia|Kansas|rushingYards|Isaiah Marshall|QB|19 CAR, 164 YDS, 1 TD
+2026-11-14|Kansas|West Virginia|West Virginia|receivingYards|DJ Epps|WR|5 REC, 51 YDS
+2026-11-14|California|Virginia|Virginia|passingYards|Beau Pribula|QB|16/24, 146 YDS, 1 TD
+2026-11-14|California|Virginia|Virginia|rushingYards|Beau Pribula|QB|7 CAR, 67 YDS
+2026-11-14|California|Virginia|California|receivingYards|Mark Hamper|WR|6 REC, 66 YDS
+2026-11-14|Nevada|Northern Illinois|Northern Illinois|passingYards|Taron Dickens|QB|21/35, 194 YDS, 1 TD, 1 INT
+2026-11-14|Nevada|Northern Illinois|Nevada|rushingYards|Herschel Turner|RB|13 CAR, 153 YDS, 2 TD
+2026-11-14|Nevada|Northern Illinois|Nevada|receivingYards|Trace Estes|TE|2 REC, 73 YDS, 2 TD
+2026-11-14|Georgia Southern|Georgia State|Georgia Southern|passingYards|Max Johnson|QB|16/22, 203 YDS, 2 TD, 1 INT
+2026-11-14|Georgia Southern|Georgia State|Georgia State|rushingYards|Lanear McCrary Jr.|RB|13 CAR, 86 YDS, 1 TD
+2026-11-14|Georgia Southern|Georgia State|Georgia Southern|receivingYards|Alex Taylor|WR|6 REC, 92 YDS
+2026-11-14|Jacksonville State|Western Kentucky|Jacksonville State|passingYards|Caden Creel|QB|17/25, 164 YDS, 2 TD, 1 INT
+2026-11-14|Jacksonville State|Western Kentucky|Western Kentucky|rushingYards|Brock Glenn|QB|13 CAR, 71 YDS, 2 TD
+2026-11-14|Jacksonville State|Western Kentucky|Jacksonville State|receivingYards|Deondre Johnson|WR|2 REC, 72 YDS
+2026-11-14|Middle Tennessee|Liberty|Middle Tennessee|passingYards|Roman Gagliano|QB|24/34, 202 YDS, 2 TD
+2026-11-14|Middle Tennessee|Liberty|Liberty|rushingYards|Kam Davis|RB|20 CAR, 126 YDS, 1 TD
+2026-11-14|Middle Tennessee|Liberty|Middle Tennessee|receivingYards|Cam'ron Lacy|WR|10 REC, 97 YDS
+2026-11-14|Fresno State|Texas State|Texas State|passingYards|Brad Jackson|QB|25/33, 355 YDS, 3 TD
+2026-11-14|Fresno State|Texas State|Texas State|rushingYards|Torrance Burgess Jr.|RB|21 CAR, 107 YDS
+2026-11-14|Fresno State|Texas State|Texas State|receivingYards|Beau Sparks|WR|9 REC, 115 YDS
+2026-11-14|Auburn|Mississippi State|Auburn|passingYards|Byrum Brown|QB|19/26, 232 YDS, 3 TD, 1 INT
+2026-11-14|Auburn|Mississippi State|Auburn|rushingYards|Jeremiah Cobb|RB|10 CAR, 50 YDS, 1 TD
+2026-11-14|Auburn|Mississippi State|Auburn|receivingYards|Keshaun Singleton|WR|7 REC, 103 YDS, 2 TD
+2026-11-14|Tulane|Rice|Tulane|passingYards|Trace Johnson|QB|19/38, 190 YDS, 1 TD, 2 INT
+2026-11-14|Tulane|Rice|Tulane|rushingYards|Maurice Turner|RB|15 CAR, 90 YDS
+2026-11-14|Tulane|Rice|Tulane|receivingYards|Destyn Hill|WR|5 REC, 44 YDS
 2026-11-10|Western Michigan|Akron|Akron|passingYards|Cibastian Broughton|QB|12/18, 173 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Western Michigan|rushingYards|Jalen Buckley|RB|23 CAR, 121 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Akron|receivingYards|Marcel Williams|WR|5 REC, 85 YDS, 2 TD
@@ -3955,102 +4015,18 @@
 2026-11-07|Incarnate Word|SE Louisiana|Incarnate Word|passingYards|Emmett Brown|QB|18/25, 294 YDS, 1 TD, 1 INT
 2026-11-07|Incarnate Word|SE Louisiana|Incarnate Word|rushingYards|Jayden Hibbler|RB|18 CAR, 134 YDS, 1 TD
 2026-11-07|Incarnate Word|SE Louisiana|Incarnate Word|receivingYards|Roy Alexander|WR|6 REC, 172 YDS, 1 TD
-2026-11-14|North Carolina A&T|Hampton|North Carolina A&T|passingYards|Kevin White|QB|10/16, 188 YDS, 1 TD, 1 INT
-2026-11-14|North Carolina A&T|Hampton|North Carolina A&T|rushingYards|Shimique Blizzard|RB|23 CAR, 82 YDS, 2 TD
-2026-11-14|North Carolina A&T|Hampton|North Carolina A&T|receivingYards|Elijah Kennedy|WR|5 REC, 156 YDS, 1 TD
-2026-11-14|Stony Brook|New Hampshire|New Hampshire|passingYards|Tommy McLeish|QB|24/37, 283 YDS
-2026-11-14|Stony Brook|New Hampshire|Stony Brook|rushingYards|Jameer Reeder|RB|19 CAR, 120 YDS, 1 TD
-2026-11-14|Stony Brook|New Hampshire|New Hampshire|receivingYards|Myles Thomason|RB|5 REC, 131 YDS
-2026-11-14|Harvard|Pennsylvania|Pennsylvania|passingYards|Karson Siqueiros-Lasky|QB|15/23, 210 YDS, 1 TD
-2026-11-14|Harvard|Pennsylvania|Harvard|rushingYards|Xaviah Bascon|RB|16 CAR, 88 YDS, 1 TD
-2026-11-14|Harvard|Pennsylvania|Harvard|receivingYards|Nate Bailey|WR|13 REC, 113 YDS, 2 TD
-2026-11-14|Murray State|Indiana State|Murray State|passingYards|Collin Shannon|QB|25/33, 355 YDS, 3 TD
-2026-11-14|Murray State|Indiana State|Indiana State|rushingYards|Zechariah Prince|RB|17 CAR, 109 YDS, 1 TD
-2026-11-14|Murray State|Indiana State|Murray State|receivingYards|Jaxon Potter|WR|11 REC, 228 YDS, 2 TD
-2026-11-14|Delaware State|Howard|Howard|passingYards|Isaiah Freeman|QB|13/21, 143 YDS, 2 INT
-2026-11-14|Delaware State|Howard|Howard|rushingYards|Billy Roberson II|RB|20 CAR, 132 YDS, 3 TD
-2026-11-14|Delaware State|Howard|Howard|receivingYards|Antonio Hunter|WR|2 REC, 60 YDS
-2026-11-14|Bucknell|William & Mary|Bucknell|passingYards|Emmett Dowling|QB|16/29, 229 YDS, 1 TD, 2 INT
-2026-11-14|Bucknell|William & Mary|William & Mary|rushingYards|Andrew King|RB|25 CAR, 152 YDS, 1 TD
-2026-11-14|Bucknell|William & Mary|Bucknell|receivingYards|Sam Milligan|WR|10 REC, 192 YDS, 1 TD
-2026-11-14|Chattanooga|Furman|Furman|passingYards|Trey Smith|QB|11/21, 79 YDS, 1 TD
-2026-11-14|Chattanooga|Furman|Chattanooga|rushingYards|Kevin Lalin|RB|16 CAR, 63 YDS
-2026-11-14|Chattanooga|Furman|Furman|receivingYards|John Holbrook|WR|2 REC, 44 YDS
-2026-11-14|Grambling|Bethune-Cookman|Grambling|passingYards|Jacobe Robinson|QB|11/22, 224 YDS, 4 TD
-2026-11-14|Grambling|Bethune-Cookman|Grambling|rushingYards|Jalen Guillard|DB|17 CAR, 73 YDS
-2026-11-14|Grambling|Bethune-Cookman|Grambling|receivingYards|Lantavious Murphy|WR|6 REC, 122 YDS, 3 TD
-2026-11-14|Virginia Lynchburg|Chicago State|Chicago State|passingYards|Jacob Tiberi|QB|21/33, 361 YDS, 3 TD, 1 INT
-2026-11-14|Virginia Lynchburg|Chicago State|Chicago State|rushingYards|Calvin Lee|RB|12 CAR, 62 YDS, 1 TD
-2026-11-14|Virginia Lynchburg|Chicago State|Chicago State|receivingYards|Kymari Gray|WR|6 REC, 169 YDS, 2 TD
-2026-11-14|North Carolina Central|South Carolina State|South Carolina State|passingYards|Keely Watson|QB|14/20, 152 YDS, 3 TD
-2026-11-14|North Carolina Central|South Carolina State|North Carolina Central|rushingYards|Gino Addison|RB|18 CAR, 112 YDS, 1 TD
-2026-11-14|North Carolina Central|South Carolina State|South Carolina State|receivingYards|Malaqhi Jones|WR|5 REC, 91 YDS, 2 TD
-2026-11-14|East Tennessee State|Wofford|East Tennessee State|passingYards|Mason Mims|QB|25/30, 216 YDS, 2 TD
-2026-11-14|East Tennessee State|Wofford|Wofford|rushingYards|Gerald Modest Jr.|RB|12 CAR, 46 YDS
-2026-11-14|East Tennessee State|Wofford|Wofford|receivingYards|Isaiah Scott|WR|4 REC, 55 YDS, 1 TD
-2026-11-14|Campbell|Elon|Campbell|passingYards|Kamden Sixkiller|QB|21/34, 253 YDS, 1 TD
-2026-11-14|Campbell|Elon|Elon|rushingYards|Kamerin McDowell-Moore|RB|10 CAR, 71 YDS, 1 TD
-2026-11-14|Campbell|Elon|Campbell|receivingYards|Jyron Waiters|WR|3 REC, 107 YDS, 1 TD
-2026-11-14|Northern Iowa|South Dakota|South Dakota|passingYards|Austyn Modrzewski|QB|18/24, 306 YDS, 4 TD, 1 INT
-2026-11-14|Northern Iowa|South Dakota|Northern Iowa|rushingYards|Xavier Terrell|RB|6 CAR, 43 YDS
-2026-11-14|Northern Iowa|South Dakota|South Dakota|receivingYards|Bryce Cohoon|WR|2 REC, 120 YDS, 1 TD
-2026-11-14|South Dakota State|Southern Illinois|South Dakota State|passingYards|Chase Mason|QB|14/23, 238 YDS, 2 TD
-2026-11-14|South Dakota State|Southern Illinois|South Dakota State|rushingYards|Josiah Johnson|RB|10 CAR, 39 YDS
-2026-11-14|South Dakota State|Southern Illinois|South Dakota State|receivingYards|Lofton O'Groske|WR|4 REC, 125 YDS, 1 TD
-2026-11-14|Lehigh|Richmond|Richmond|passingYards|Jack Callaghan|QB|13/16, 128 YDS, 1 TD
-2026-11-14|Lehigh|Richmond|Lehigh|rushingYards|Luke Yoder|RB|18 CAR, 110 YDS, 1 TD
-2026-11-14|Lehigh|Richmond|Richmond|receivingYards|Quanye Veney|WR|4 REC, 78 YDS
-2026-11-14|Abilene Christian|Austin Peay|Austin Peay|passingYards|Chris Parson|QB|14/16, 185 YDS, 2 TD
-2026-11-14|Abilene Christian|Austin Peay|Abilene Christian|rushingYards|Makenzie McGill|RB|8 CAR, 40 YDS
-2026-11-14|Abilene Christian|Austin Peay|Austin Peay|receivingYards|Denver Harper|WR|7 REC, 135 YDS, 1 TD
-2026-11-14|Central Arkansas|Eastern Kentucky|Eastern Kentucky|passingYards|Myles Burkett|QB|11/13, 159 YDS, 1 TD
-2026-11-14|Central Arkansas|Eastern Kentucky|Eastern Kentucky|rushingYards|Brady Hensley|RB|15 CAR, 100 YDS, 3 TD
-2026-11-14|Central Arkansas|Eastern Kentucky|Central Arkansas|receivingYards|Jalen Washington|RB|3 REC, 52 YDS, 1 TD
-2026-11-14|Southeast Missouri State|Charleston Southern|Southeast Missouri State|passingYards|Chance Wilson|QB|10/14, 150 YDS, 1 TD
-2026-11-14|Southeast Missouri State|Charleston Southern|Charleston Southern|rushingYards|Hakeem Watters|RB|8 CAR, 69 YDS, 1 TD
-2026-11-14|Southeast Missouri State|Charleston Southern|Southeast Missouri State|receivingYards|Khylen Harris-Norman|WR|2 REC, 82 YDS, 1 TD
-2026-11-14|Gardner-Webb|Western Illinois|Western Illinois|passingYards|Kennedy McGill|QB|9/14, 155 YDS, 2 TD
-2026-11-14|Gardner-Webb|Western Illinois|Western Illinois|rushingYards|Kennedy McGill|QB|17 CAR, 60 YDS
-2026-11-14|Gardner-Webb|Western Illinois|Western Illinois|receivingYards|Christian Anaya|WR|4 REC, 131 YDS, 1 TD
-2026-11-14|North Alabama|West Georgia|North Alabama|passingYards|Destin Wade|QB|12/15, 128 YDS, 1 INT
-2026-11-14|North Alabama|West Georgia|North Alabama|rushingYards|Jalen Fletcher|RB|7 CAR, 46 YDS
-2026-11-14|North Alabama|West Georgia|North Alabama|receivingYards|Snap Reed|WR|6 REC, 70 YDS
-2026-11-14|Drake|St. Thomas|St. Thomas|passingYards|Anthony Policare|QB|8/14, 232 YDS, 2 TD, 1 INT
-2026-11-14|Drake|St. Thomas|St. Thomas|rushingYards|Joseph Koch|RB|17 CAR, 139 YDS, 2 TD
-2026-11-14|Drake|St. Thomas|St. Thomas|receivingYards|Quentin Cobb-Butler|WR|2 REC, 83 YDS, 1 TD
-2026-11-14|Houston Christian|Northwestern State|Houston Christian|passingYards|Cutter Stewart|QB|22/32, 378 YDS, 3 TD
-2026-11-14|Houston Christian|Northwestern State|Northwestern State|rushingYards|Zay Davis|RB|12 CAR, 65 YDS, 1 TD
-2026-11-14|Houston Christian|Northwestern State|Houston Christian|receivingYards|Jamaal Hall II|WR|7 REC, 240 YDS, 1 TD
-2026-11-14|Mercer|Tennessee Tech|Tennessee Tech|passingYards|Jax Leatherwood|QB|17/28, 156 YDS, 1 TD
-2026-11-14|Mercer|Tennessee Tech|Mercer|rushingYards|Zahmari Palode-Gary|RB|7 CAR, 87 YDS
-2026-11-14|Mercer|Tennessee Tech|Tennessee Tech|receivingYards|Gabe Nunez|WR|5 REC, 67 YDS
-2026-11-14|Lindenwood|UT Martin|Lindenwood|passingYards|Pops Battle|QB|9/14, 142 YDS, 2 TD
-2026-11-14|Lindenwood|UT Martin|UT Martin|rushingYards|Jaydon Peete|RB|5 CAR, 51 YDS
-2026-11-14|Lindenwood|UT Martin|Lindenwood|receivingYards|Drew Krobath|WR|3 REC, 81 YDS
-2026-11-14|Tarleton State|West Florida|Tarleton State|passingYards|Kaden Anderson|QB|6/13, 114 YDS, 2 TD
-2026-11-14|Tarleton State|West Florida|West Florida|rushingYards|Ty'ray Davis|QB|8 CAR, 64 YDS, 1 TD
-2026-11-14|Tarleton State|West Florida|Tarleton State|receivingYards|Marquis Willis|WR|3 REC, 72 YDS, 1 TD
-2026-11-14|Texas Southern|Alabama A&M|Alabama A&M|passingYards|Cornelious Brown IV|QB|8/10, 103 YDS, 1 TD
-2026-11-14|Texas Southern|Alabama A&M|Alabama A&M|rushingYards|Kolton Nero|RB|6 CAR, 34 YDS, 1 TD
-2026-11-14|Texas Southern|Alabama A&M|Texas Southern|receivingYards|Roriyon Richardson|WR|2 REC, 46 YDS
-2026-11-14|Alcorn State|Southern|Alcorn State|passingYards|Jaylon Tolbert|QB|9/12, 93 YDS, 1 TD
-2026-11-14|Alcorn State|Southern|Southern|rushingYards|Trey Holly|RB|15 CAR, 109 YDS, 2 TD
-2026-11-14|Alcorn State|Southern|Alcorn State|receivingYards|Elijah Griffin|WR|2 REC, 39 YDS, 1 TD
-2026-11-14|Prairie View A&M|Arkansas-Pine Bluff|Prairie View A&M|passingYards|Tevin Carter|QB|16/17, 63 YDS
-2026-11-14|Prairie View A&M|Arkansas-Pine Bluff|Arkansas-Pine Bluff|rushingYards|Jalen Williams|RB|3 CAR, 23 YDS, 1 TD
-2026-11-14|Prairie View A&M|Arkansas-Pine Bluff|Arkansas-Pine Bluff|receivingYards|Jordan Jackson|WR|2 REC, 24 YDS
-2026-11-14|Mississippi Valley State|Florida A&M|Florida A&M|passingYards|James Hayes|QB|9/18, 73 YDS, 1 INT
-2026-11-14|Mississippi Valley State|Florida A&M|Mississippi Valley State|rushingYards|Dezmond Ray|RB|8 CAR, 40 YDS, 1 TD
-2026-11-14|Mississippi Valley State|Florida A&M|Florida A&M|receivingYards|Jamar Taylor|WR|2 REC, 25 YDS
-2026-11-14|Eastern Illinois|Tennessee State|Tennessee State|passingYards|Daylin Lee|QB|9/12, 76 YDS
-2026-11-14|Eastern Illinois|Tennessee State|Tennessee State|rushingYards|Jerimiah Treadaway|RB|4 CAR, 13 YDS
-2026-11-14|Eastern Illinois|Tennessee State|Tennessee State|receivingYards|Brock Montgomery|WR|2 REC, 26 YDS
-2026-11-14|Valparaiso|Stetson|Stetson|passingYards|Chris Stephenson|QB|4/5, 86 YDS, 1 TD
-2026-11-14|Valparaiso|Stetson|Valparaiso|rushingYards|Cedric Benning III|RB|4 CAR, 35 YDS
-2026-11-14|Valparaiso|Stetson|Stetson|receivingYards|Shawne Jones|WR|3 REC, 78 YDS, 1 TD
-2026-11-14|Western Carolina|Samford|Samford|passingYards|Will Shields|QB|3/6, 39 YDS
-2026-11-14|Western Carolina|Samford|Samford|rushingYards|Domonique Thomas|RB|2 CAR, 15 YDS
-2026-11-14|Western Carolina|Samford|Samford|receivingYards|Marquise Henderson|WR|1 REC, 15 YDS
+2026-11-14|Weber State|Northern Arizona|Northern Arizona|passingYards|Ty Pennington|QB|16/19, 252 YDS, 1 TD
+2026-11-14|Weber State|Northern Arizona|Weber State|rushingYards|Spencer Ferguson|RB|14 CAR, 104 YDS
+2026-11-14|Weber State|Northern Arizona|Weber State|receivingYards|Noah Kjar|WR|9 REC, 135 YDS, 1 TD
+2026-11-14|Stephen F. Austin|UT Rio Grande Valley|Stephen F. Austin|passingYards|JT Kitna|QB|19/26, 216 YDS, 3 TD, 1 INT
+2026-11-14|Stephen F. Austin|UT Rio Grande Valley|Stephen F. Austin|rushingYards|Jaylen Jenkins|RB|8 CAR, 94 YDS, 2 TD
+2026-11-14|Stephen F. Austin|UT Rio Grande Valley|Stephen F. Austin|receivingYards|Bugs Mortimer|WR|5 REC, 75 YDS, 1 TD
+2026-11-14|Montana State|Northern Colorado|Montana State|passingYards|Justin Lamson|QB|14/18, 166 YDS
+2026-11-14|Montana State|Northern Colorado|Northern Colorado|rushingYards|Justin Guin|RB|10 CAR, 47 YDS
+2026-11-14|Montana State|Northern Colorado|Northern Colorado|receivingYards|Trey Olsen|WR|2 REC, 66 YDS, 1 TD
+2026-11-14|UC Davis|Idaho|Idaho|passingYards|Joshua Wood|QB|6/10, 105 YDS, 1 TD
+2026-11-14|UC Davis|Idaho|UC Davis|rushingYards|Jordan Fisher|RB|7 CAR, 25 YDS
+2026-11-14|UC Davis|Idaho|Idaho|receivingYards|Ryan Jezioro|WR|1 REC, 63 YDS, 1 TD
 2026-11-14|Maine|UAlbany|UAlbany|passingYards|Kai Colon|QB|20/30, 264 YDS, 2 TD, 1 INT
 2026-11-14|Maine|UAlbany|Maine|rushingYards|Rashawn Marshall|RB|14 CAR, 74 YDS
 2026-11-14|Maine|UAlbany|UAlbany|receivingYards|Jordan Rae|WR|5 REC, 95 YDS
@@ -4102,13 +4078,117 @@
 2026-11-14|The Citadel|VMI|VMI|passingYards|JoJo Crump|QB|4/8, 97 YDS, 2 TD
 2026-11-14|The Citadel|VMI|VMI|rushingYards|Leo Boehling|RB|28 CAR, 107 YDS
 2026-11-14|The Citadel|VMI|VMI|receivingYards|Traveion Slaughter|WR|2 REC, 75 YDS, 1 TD
+2026-11-14|North Carolina A&T|Hampton|North Carolina A&T|passingYards|Kevin White|QB|10/16, 188 YDS, 1 TD, 1 INT
+2026-11-14|North Carolina A&T|Hampton|North Carolina A&T|rushingYards|Shimique Blizzard|RB|29 CAR, 131 YDS, 2 TD
+2026-11-14|North Carolina A&T|Hampton|North Carolina A&T|receivingYards|Elijah Kennedy|WR|5 REC, 156 YDS, 1 TD
+2026-11-14|Stony Brook|New Hampshire|New Hampshire|passingYards|Tommy McLeish|QB|24/37, 283 YDS
+2026-11-14|Stony Brook|New Hampshire|Stony Brook|rushingYards|Jameer Reeder|RB|19 CAR, 121 YDS, 1 TD
+2026-11-14|Stony Brook|New Hampshire|Stony Brook|receivingYards|Seth Sweitzer|WR|13 REC, 147 YDS
 2026-11-14|Dartmouth|Cornell|Dartmouth|passingYards|Grayson Saunier|QB|20/27, 234 YDS, 1 TD
 2026-11-14|Dartmouth|Cornell|Cornell|rushingYards|Michael McColgan|QB|13 CAR, 51 YDS
 2026-11-14|Dartmouth|Cornell|Dartmouth|receivingYards|Ky'Dric Fisher|WR|6 REC, 111 YDS, 1 TD
+2026-11-14|Harvard|Pennsylvania|Pennsylvania|passingYards|Karson Siqueiros-Lasky|QB|15/23, 210 YDS, 1 TD
+2026-11-14|Harvard|Pennsylvania|Harvard|rushingYards|Xaviah Bascon|RB|18 CAR, 104 YDS, 1 TD
+2026-11-14|Harvard|Pennsylvania|Harvard|receivingYards|Nate Bailey|WR|13 REC, 113 YDS, 2 TD
+2026-11-14|Murray State|Indiana State|Murray State|passingYards|Collin Shannon|QB|25/33, 355 YDS, 3 TD
+2026-11-14|Murray State|Indiana State|Indiana State|rushingYards|Zechariah Prince|RB|17 CAR, 109 YDS, 1 TD
+2026-11-14|Murray State|Indiana State|Murray State|receivingYards|Jaxon Potter|WR|11 REC, 228 YDS, 2 TD
+2026-11-14|Delaware State|Howard|Howard|passingYards|Isaiah Freeman|QB|14/23, 166 YDS, 2 INT
+2026-11-14|Delaware State|Howard|Howard|rushingYards|Billy Roberson II|RB|28 CAR, 160 YDS, 3 TD
+2026-11-14|Delaware State|Howard|Howard|receivingYards|Antonio Hunter|WR|2 REC, 60 YDS
+2026-11-14|Bucknell|William & Mary|Bucknell|passingYards|Emmett Dowling|QB|19/32, 247 YDS, 2 TD, 2 INT
+2026-11-14|Bucknell|William & Mary|William & Mary|rushingYards|Andrew King|RB|25 CAR, 152 YDS, 1 TD
+2026-11-14|Bucknell|William & Mary|Bucknell|receivingYards|Sam Milligan|WR|12 REC, 202 YDS, 2 TD
 2026-11-14|Lafayette|Colgate|Lafayette|passingYards|Eddie Jordan|QB|15/25, 156 YDS, 2 INT
 2026-11-14|Lafayette|Colgate|Colgate|rushingYards|Jackson Kilburg|QB|15 CAR, 57 YDS
 2026-11-14|Lafayette|Colgate|Colgate|receivingYards|Winston Moore|WR|5 REC, 85 YDS, 1 TD
-2026-11-14|East Texas A&M|Lamar|Lamar|passingYards|Aiden McCown|QB|1, 0 YDS
+2026-11-14|Chattanooga|Furman|Furman|passingYards|Trey Smith|QB|11/21, 79 YDS, 1 TD
+2026-11-14|Chattanooga|Furman|Chattanooga|rushingYards|Kevin Lalin|RB|16 CAR, 63 YDS
+2026-11-14|Chattanooga|Furman|Furman|receivingYards|John Holbrook|WR|3 REC, 55 YDS
+2026-11-14|Grambling|Bethune-Cookman|Grambling|passingYards|Jacobe Robinson|QB|11/23, 224 YDS, 4 TD, 1 INT
+2026-11-14|Grambling|Bethune-Cookman|Grambling|rushingYards|D'Shuan Ford|RB|21 CAR, 108 YDS
+2026-11-14|Grambling|Bethune-Cookman|Grambling|receivingYards|Lantavious Murphy|WR|6 REC, 122 YDS, 3 TD
+2026-11-14|Virginia Lynchburg|Chicago State|Chicago State|passingYards|Jacob Tiberi|QB|21/33, 361 YDS, 3 TD, 1 INT
+2026-11-14|Virginia Lynchburg|Chicago State|Chicago State|rushingYards|Calvin Lee|RB|12 CAR, 62 YDS, 1 TD
+2026-11-14|Virginia Lynchburg|Chicago State|Chicago State|receivingYards|Kymari Gray|WR|6 REC, 169 YDS, 2 TD
+2026-11-14|North Carolina Central|South Carolina State|South Carolina State|passingYards|Keely Watson|QB|15/25, 169 YDS, 3 TD
+2026-11-14|North Carolina Central|South Carolina State|North Carolina Central|rushingYards|Gino Addison|RB|22 CAR, 119 YDS, 1 TD
+2026-11-14|North Carolina Central|South Carolina State|South Carolina State|receivingYards|Malaqhi Jones|WR|5 REC, 91 YDS, 2 TD
+2026-11-14|East Tennessee State|Wofford|East Tennessee State|passingYards|Mason Mims|QB|27/33, 227 YDS, 2 TD
+2026-11-14|East Tennessee State|Wofford|East Tennessee State|rushingYards|TJ Peyton|RB|14 CAR, 62 YDS
+2026-11-14|East Tennessee State|Wofford|Wofford|receivingYards|Colby Alexander|WR|6 REC, 60 YDS
+2026-11-14|Campbell|Elon|Campbell|passingYards|Kamden Sixkiller|QB|37/60, 429 YDS, 2 TD
+2026-11-14|Campbell|Elon|Elon|rushingYards|Kamerin McDowell-Moore|RB|17 CAR, 117 YDS, 2 TD
+2026-11-14|Campbell|Elon|Campbell|receivingYards|Jyron Waiters|WR|7 REC, 176 YDS, 2 TD
+2026-11-14|Northern Iowa|South Dakota|South Dakota|passingYards|Austyn Modrzewski|QB|23/29, 356 YDS, 5 TD, 1 INT
+2026-11-14|Northern Iowa|South Dakota|Northern Iowa|rushingYards|Xavier Terrell|RB|8 CAR, 52 YDS
+2026-11-14|Northern Iowa|South Dakota|South Dakota|receivingYards|Bryce Cohoon|WR|2 REC, 120 YDS, 1 TD
+2026-11-14|South Dakota State|Southern Illinois|South Dakota State|passingYards|Chase Mason|QB|22/32, 320 YDS, 3 TD
+2026-11-14|South Dakota State|Southern Illinois|South Dakota State|rushingYards|Josiah Johnson|RB|16 CAR, 72 YDS
+2026-11-14|South Dakota State|Southern Illinois|South Dakota State|receivingYards|Lofton O'Groske|WR|4 REC, 125 YDS, 1 TD
+2026-11-14|Lehigh|Richmond|Richmond|passingYards|Jack Callaghan|QB|23/31, 207 YDS, 1 TD
+2026-11-14|Lehigh|Richmond|Lehigh|rushingYards|Luke Yoder|RB|28 CAR, 147 YDS, 1 TD
+2026-11-14|Lehigh|Richmond|Richmond|receivingYards|Quanye Veney|WR|6 REC, 94 YDS
+2026-11-14|Abilene Christian|Austin Peay|Austin Peay|passingYards|Chris Parson|QB|22/31, 355 YDS, 3 TD, 1 INT
+2026-11-14|Abilene Christian|Austin Peay|Abilene Christian|rushingYards|Makenzie McGill|RB|17 CAR, 76 YDS, 1 TD
+2026-11-14|Abilene Christian|Austin Peay|Austin Peay|receivingYards|Denver Harper|WR|8 REC, 140 YDS, 1 TD
+2026-11-14|Central Arkansas|Eastern Kentucky|Central Arkansas|passingYards|Donovyn Omolo|QB|15/20, 173 YDS, 4 TD, 1 INT
+2026-11-14|Central Arkansas|Eastern Kentucky|Central Arkansas|rushingYards|Jalen Washington|RB|30 CAR, 123 YDS
+2026-11-14|Central Arkansas|Eastern Kentucky|Central Arkansas|receivingYards|Dakarai Anderson|WR|6 REC, 53 YDS, 1 TD
+2026-11-14|Southeast Missouri State|Charleston Southern|Southeast Missouri State|passingYards|Chance Wilson|QB|12/19, 202 YDS, 2 TD
+2026-11-14|Southeast Missouri State|Charleston Southern|Charleston Southern|rushingYards|Hakeem Watters|RB|15 CAR, 77 YDS, 1 TD
+2026-11-14|Southeast Missouri State|Charleston Southern|Charleston Southern|receivingYards|TJ Smith|WR|5 REC, 90 YDS, 1 TD
+2026-11-14|Gardner-Webb|Western Illinois|Western Illinois|passingYards|Kennedy McGill|QB|12/17, 215 YDS, 4 TD
+2026-11-14|Gardner-Webb|Western Illinois|Western Illinois|rushingYards|Kennedy McGill|QB|21 CAR, 102 YDS
+2026-11-14|Gardner-Webb|Western Illinois|Western Illinois|receivingYards|Christian Anaya|WR|5 REC, 162 YDS, 1 TD
+2026-11-14|North Alabama|West Georgia|West Georgia|passingYards|Colton Fitzgerald|QB|14/27, 157 YDS, 1 TD
+2026-11-14|North Alabama|West Georgia|North Alabama|rushingYards|Chris McMillian|RB|12 CAR, 82 YDS, 1 TD
+2026-11-14|North Alabama|West Georgia|West Georgia|receivingYards|Brody Jones|WR|7 REC, 98 YDS, 1 TD
+2026-11-14|Drake|St. Thomas|Drake|passingYards|Riley Warzynski|QB|39/64, 434 YDS, 3 TD, 3 INT
+2026-11-14|Drake|St. Thomas|St. Thomas|rushingYards|Joseph Koch|RB|32 CAR, 233 YDS, 5 TD
+2026-11-14|Drake|St. Thomas|Drake|receivingYards|Willis Nofsinger|WR|8 REC, 87 YDS
+2026-11-14|Houston Christian|Northwestern State|Houston Christian|passingYards|Cutter Stewart|QB|25/44, 407 YDS, 3 TD
+2026-11-14|Houston Christian|Northwestern State|Northwestern State|rushingYards|Zay Davis|RB|14 CAR, 80 YDS, 1 TD
+2026-11-14|Houston Christian|Northwestern State|Houston Christian|receivingYards|Jamaal Hall II|WR|9 REC, 258 YDS, 1 TD
+2026-11-14|Mercer|Tennessee Tech|Tennessee Tech|passingYards|Jax Leatherwood|QB|31/49, 294 YDS, 2 TD, 1 INT
+2026-11-14|Mercer|Tennessee Tech|Mercer|rushingYards|Zahmari Palode-Gary|RB|15 CAR, 249 YDS, 1 TD
+2026-11-14|Mercer|Tennessee Tech|Tennessee Tech|receivingYards|Gabe Nunez|WR|9 REC, 108 YDS, 1 TD
+2026-11-14|Lindenwood|UT Martin|Lindenwood|passingYards|Pops Battle|QB|20/37, 288 YDS, 3 TD
+2026-11-14|Lindenwood|UT Martin|UT Martin|rushingYards|Jaydon Peete|RB|14 CAR, 104 YDS, 1 TD
+2026-11-14|Lindenwood|UT Martin|Lindenwood|receivingYards|Jalen Smith|WR|7 REC, 106 YDS, 3 TD
+2026-11-14|Tarleton State|West Florida|West Florida|passingYards|Ty'ray Davis|QB|20/42, 261 YDS, 1 TD, 2 INT
+2026-11-14|Tarleton State|West Florida|Tarleton State|rushingYards|Miequle Brock|RB|11 CAR, 113 YDS
+2026-11-14|Tarleton State|West Florida|Tarleton State|receivingYards|Marquis Willis|WR|7 REC, 110 YDS, 1 TD
+2026-11-14|Texas Southern|Alabama A&M|Alabama A&M|passingYards|Cornelious Brown IV|QB|18/24, 201 YDS, 2 TD
+2026-11-14|Texas Southern|Alabama A&M|Texas Southern|rushingYards|David Kency|RB|5 CAR, 105 YDS, 1 TD
+2026-11-14|Texas Southern|Alabama A&M|Alabama A&M|receivingYards|Jaylan Bean|WR|4 REC, 59 YDS
+2026-11-14|Alcorn State|Southern|Alcorn State|passingYards|Jaylon Tolbert|QB|15/21, 237 YDS, 3 TD, 1 INT
+2026-11-14|Alcorn State|Southern|Southern|rushingYards|Trey Holly|RB|33 CAR, 154 YDS, 3 TD
+2026-11-14|Alcorn State|Southern|Southern|receivingYards|Daejawn Smith|WR|6 REC, 105 YDS
+2026-11-14|Prairie View A&M|Arkansas-Pine Bluff|Prairie View A&M|passingYards|Tevin Carter|QB|29/38, 201 YDS
+2026-11-14|Prairie View A&M|Arkansas-Pine Bluff|Prairie View A&M|rushingYards|Tevin Carter|QB|12 CAR, 64 YDS, 1 TD
+2026-11-14|Prairie View A&M|Arkansas-Pine Bluff|Arkansas-Pine Bluff|receivingYards|Jordan Jackson|WR|2 REC, 78 YDS
+2026-11-14|Mississippi Valley State|Florida A&M|Florida A&M|passingYards|James Hayes|QB|14/27, 144 YDS, 1 TD, 2 INT
+2026-11-14|Mississippi Valley State|Florida A&M|Florida A&M|rushingYards|Chase Gillespie|RB|13 CAR, 111 YDS
+2026-11-14|Mississippi Valley State|Florida A&M|Florida A&M|receivingYards|Armand Burris|WR|3 REC, 57 YDS
+2026-11-14|Eastern Illinois|Tennessee State|Tennessee State|passingYards|Daylin Lee|QB|20/34, 211 YDS, 1 TD
+2026-11-14|Eastern Illinois|Tennessee State|Eastern Illinois|rushingYards|Cole LaCrue|QB|22 CAR, 59 YDS
+2026-11-14|Eastern Illinois|Tennessee State|Eastern Illinois|receivingYards|Jeremy Reeves|WR|2 REC, 65 YDS, 1 TD
+2026-11-14|Valparaiso|Stetson|Stetson|passingYards|Chris Stephenson|QB|17/24, 306 YDS, 3 TD
+2026-11-14|Valparaiso|Stetson|Valparaiso|rushingYards|Cedric Benning III|RB|18 CAR, 98 YDS, 1 TD
+2026-11-14|Valparaiso|Stetson|Stetson|receivingYards|Shawne Jones|WR|4 REC, 131 YDS, 1 TD
+2026-11-14|Western Carolina|Samford|Samford|passingYards|Will Shields|QB|20/33, 280 YDS, 1 INT
+2026-11-14|Western Carolina|Samford|Western Carolina|rushingYards|Josh Perry|RB|12 CAR, 44 YDS
+2026-11-14|Western Carolina|Samford|Samford|receivingYards|Marquise Henderson|WR|5 REC, 108 YDS
+2026-11-14|East Texas A&M|Lamar|East Texas A&M|passingYards|Reese Mooney|QB|21/44, 299 YDS, 1 TD
+2026-11-14|East Texas A&M|Lamar|Lamar|rushingYards|Aiden McCown|QB|9 CAR, 54 YDS
+2026-11-14|East Texas A&M|Lamar|Lamar|receivingYards|Blake Thomas|WR|4 REC, 100 YDS, 2 TD
+2026-11-14|Nicholls|Incarnate Word|Incarnate Word|passingYards|Emmett Brown|QB|15/24, 200 YDS, 3 TD, 1 INT
+2026-11-14|Nicholls|Incarnate Word|Incarnate Word|rushingYards|Jayden Hibbler|RB|20 CAR, 115 YDS, 1 TD
+2026-11-14|Nicholls|Incarnate Word|Incarnate Word|receivingYards|Roy Alexander|WR|6 REC, 79 YDS
+2026-11-14|Illinois State|Youngstown State|Youngstown State|passingYards|Beau Brungard|QB|15/27, 178 YDS, 1 TD, 1 INT
+2026-11-14|Illinois State|Youngstown State|Illinois State|rushingYards|Seth Glatz|RB|25 CAR, 176 YDS, 2 TD
+2026-11-14|Illinois State|Youngstown State|Youngstown State|receivingYards|Bryan Hunt|WR|1 REC, 59 YDS, 1 TD
 2026-11-13|Southern Utah|Portland State|Southern Utah|passingYards|Will Burns|QB|14/23, 166 YDS, 2 TD, 1 INT
 2026-11-13|Southern Utah|Portland State|Portland State|rushingYards|Delon Thompson|RB|26 CAR, 169 YDS, 1 TD
 2026-11-13|Southern Utah|Portland State|Southern Utah|receivingYards|David Spjut|WR|5 REC, 79 YDS, 1 TD

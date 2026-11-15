@@ -199,7 +199,7 @@ CLE||Jerry Jeudy|WR|Active||||2026-11-09|Jeudy caught two of four targets for 37
 CLE||Dylan Sampson|RB|Active||||2026-11-09|Sampson rushed eight times for 21 yards while catching three of six targets for 27 yards during Sunday's 23-22 overtime loss against the Saints.
 CLE||KC Concepcion|WR|Active||||2026-11-09|Concepcion caught four of six targets for 85 yards and a touchdown in Sunday's 23-22 overtime loss to the Saints. He added three yards on his only carry.
 DAL||Jonathan Bullard|DT|Questionable|Calf||2026-11-15|2026-11-14|The Cowboys activated Bullard (calf) from injured reserve Saturday.
-DAL||James Mitchell|TE|Active||||2026-11-14|The Cowboys elevated Mitchell from the practice squad to the active roster Saturday, Tommy Yarrish of the team's official site reports.
+DAL||James Mitchell|TE|Active||||2026-11-14|The Cowboys signed Mitchell from the practice squad to the active roster Saturday, Tommy Yarrish of the team's official site reports.
 DAL||Israel Abanikanda|RB|Active||||2026-11-14|The Cowboys elevated Abanikanda from the practice squad to the active roster Saturday, Tommy Yarrish of the team's official site reports.
 DAL||Tyler Goodson|RB|Injured Reserve|Knee - ACL + MCL|Sprain|2026-12-20|2026-11-14|The Cowboys placed Goodson (knee) on injured reserve Saturday, Tommy Yarrish of the team's official site reports.
 DAL||Donovan Ezeiruaku|LB|Out|Ankle||2026-11-22|2026-11-14|Ezeiruaku (ankle) has been ruled out for Sunday's game against the 49ers, Tommy Yarrish of the Cowboys' official site reports.
@@ -398,7 +398,7 @@ KC||Garrett Nussmeier|QB|Active||||2026-11-09|
 KC||Diego Pounds|OT|Active||||2026-11-09|
 KC||Rashee Rice|WR|Active||||2026-11-08|Rice secured five of seven targets for 49 yards in the Chiefs' 35-12 win over the Jets on Sunday.
 KC||Travis Kelce|TE|Active||||2026-11-08|Kelce brought in four of six targets for 72 yards in the Chiefs' 35-12 win over the Jets on Sunday. He also rushed once for one yard.
-LV||Carter Runyon|TE|Active||||2026-11-14|The Raiders elevated Runyon from their practice squad to their active roster Saturday.
+LV||Carter Runyon|TE|Active||||2026-11-14|The Raiders elevated Runyon from their practice squad to the active roster Saturday.
 LV||Thomas Booker IV|DT|Questionable|Ankle||2026-11-15|2026-11-14|Booker (ankle) is listed as questionable ahead of Sunday's game against the Seahawks, Ryan McFadden of ESPN.com reports.
 LV||Trey Zuhn III|C|Active||||2026-11-14|Zuhn (concussion) does not have any injury designation ahead of Sunday's game against the Seahawks, Ryan McFadden of ESPN.com reports.
 LV||Dont'e Thornton Jr.|WR|Questionable|Back||2026-11-15|2026-11-14|Thornton (back) is questionable to play against the Seahawks on Sunday, Ryan McFadden of ESPN.com reports.
@@ -423,6 +423,7 @@ LV||Brock Bowers|TE|Active||||2026-11-09|Bowers caught seven of eight targets fo
 LV||Darien Porter|CB|Active||||2026-11-08|Porter (groin) is active for Sunday's Week 9 battle against the 49ers.
 LV||Cody White|WR|Active||||2026-11-06|White was signed by the Raiders on Thursday, Ryan McFadden of ESPN.com reports.
 LV||Ian Thomas|TE|Active||||2026-11-05|
+LAC||Branson Taylor|G|Out|Ankle||2026-11-22|2026-11-15|Taylor (ankle) has been ruled out for Monday's clash against the Ravens.
 LAC||Trey Pipkins III|OT|Injured Reserve|Knee||2026-11-16|2026-11-15|Pipkins (knee), who is on injured reserve, has been deemed questionable for Monday's matchup against the Ravens.
 LAC||Kayode Awosika|G|Questionable|Lower Leg||2026-11-16|2026-11-15|Awosika (fibula) is questionable for Monday's matchup against the Ravens.
 LAC||Kendall Williamson|S|Out|Calf||2026-11-22|2026-11-15|Williamson (calf) has been ruled out for Monday's matchup against the Ravens.
@@ -434,7 +435,6 @@ LAC||Keaton Mitchell|RB|Active||||2026-11-14|Mitchell (hip) does not carry an in
 LAC||David Njoku|TE|Injured Reserve|Lower Leg||2026-11-16|2026-11-14|Njoku (fibula) is listed as questionable for Monday's game against the Ravens.
 LAC||Rodney Shelley|CB|Active||||2026-11-14|
 LAC||Ladd McConkey|WR|Questionable|Back|Spasms|2026-11-16|2026-11-14|McConkey (back) is listed as questionable for Monday night's game against the Ravens, Noah Furtado of The Athletic reports.
-LAC||Branson Taylor|G|Out|Ankle||2026-11-22|2026-11-14|out
 LAC||Brenen Thompson|WR|Doubtful|Hamstring||2026-11-16|2026-11-14|doubtful
 LAC||Cam Hart|CB|Active||||2026-11-14|Hart (ankle) practiced in full Friday.
 LAC||Tre' Harris|WR|Active||||2026-11-13|Harris (calf) was a full participant in Friday's practice.
@@ -614,7 +614,6 @@ NYJ||Isaiah Davis|RB|Active||||2026-11-10|Davis didn't play any offensive snaps 
 NYJ||Troy Reeder|LB|Active||||2026-11-10|The Jets signed Reeder to their active roster Monday, Amanda Vogt of the team's official site reports.
 NYJ||Blake Freeland|OL|Active||||2026-11-09|
 NYJ||Tim Patrick|WR|Active||||2026-11-09|
-NYJ||Kohl Levao|G|Active||||2026-11-09|
 NYJ||Will McDonald IV|DE|Active||||2026-11-09|McDonald put in a request for the Jets to trade him ahead of Tuesday's deadline, Ian Rapoport and Rich Cimini of ESPN report.
 NYJ||Jason Sanders|PK|Active||||2026-11-09|Sanders went 4-for-5 on field-goal tries during Sunday's 35-12 loss to the Chiefs.
 NYJ||Kenyon Sadiq|TE|Active||||2026-11-09|Sadiq caught all four of his targets for 49 yards in Sunday's 35-12 loss to the Chiefs.
@@ -623,6 +622,7 @@ NYJ||Braelon Allen|RB|Active||||2026-11-09|Allen rushed eight times for 33 yards
 NYJ||Breece Hall|RB|Active||||2026-11-08|Hall (quadriceps) rushed 15 times for 61 yards and caught three of four targets for 26 yards in Sunday's 35-12 loss to the Chiefs.
 NYJ||Dane Belton|S|Active||||2026-11-06|Belton recorded 12 total tackles (eight solo) and a pass defensed in Sunday's 38-33 loss to the Raiders.
 NYJ||Jamien Sherwood|LB|Active||||2026-11-06|Sherwood recorded 14 total tackles (five solo) during Sunday's 38-33 loss to the Raiders.
+NYJ||Max Mitchell|OT|Injured Reserve|Concussion|Concussion|2026-12-13|2026-11-04|The Jets placed Mitchell (concussion) on their injured reserve list Tuesday, Amanda Vogt of the team's official site reports.
 PHI||Jeremiah Trotter Jr.|LB|Active||||2026-11-12|Trotter recorded 11 tackles (five solo) and one forced fumble during the Eagles' 19-11 loss to the Giants in Week 9.
 PHI||Elijah Moore|WR|Active||||2026-11-11|Moore caught one of two targets for minus-3 yards during the Eagles' 19-11 loss to the Giants on Sunday.
 PHI||Darius Cooper|WR|Active||||2026-11-11|Cooper caught just two of eight targets for 25 yards in Sunday's 19-11 loss to the Giants.
@@ -675,7 +675,7 @@ PIT||T.J. Watt|LB|Active||||2026-10-23|Watt (calf) practiced fully Friday and do
 PIT||Sebastian Joseph-Day|DT|Injured Reserve|Triceps||2026-11-27|2026-10-23|Joseph-Day (triceps) was placed on injured reserve by the Steelers on Thursday, Teresa Varley of the team's official website reports.
 SF||C.J. West|DT|Injured Reserve|Knee||2026-11-22|2026-11-15|West (knee) won't be activated from IR ahead of Sunday's Week 10 clash against the Cowboys, David Lombardi of SFStandard.com reports.
 SF||Nate Hobbs|CB|Injured Reserve|Groin||2026-11-22|2026-11-15|The 49ers aren't activating Hobbs (adductor) ahead of Sunday's tilt against Dallas, David Lombardi of SFStandard.com reports.
-SF||Gracen Halton|DT|Injured Reserve|Ankle|Surgery|2027-02-15|2026-11-14|Halton underwent surgery to repair a broken leg and dislocated ankle that he suffered during the 49ers' Week 9 win over the Raiders, Adam Schefter of ESPN reports.
+SF||Gracen Halton|DT|Injured Reserve|Ankle|Surgery|2027-02-15|2026-11-14|Halton recently underwent surgery to repair a broken leg and dislocated ankle that he suffered during the 49ers' Week 9 win over the Raiders, Adam Schefter of ESPN reports.
 SF||Trent Williams|OT|Questionable|Shoulder||2026-11-15|2026-11-14|Williams (shoulder) is listed as questionable for Sunday's game against the Cowboys.
 SF||Renardo Green|CB|Questionable|Back||2026-11-15|2026-11-14|Green (back) is listed as questionable for Sunday's game against Dallas.
 SF||Deommodore Lenoir|CB|Questionable|Foot||2026-11-15|2026-11-14|Lenoir (foot) is questionable for Sunday's game against the Cowboys.

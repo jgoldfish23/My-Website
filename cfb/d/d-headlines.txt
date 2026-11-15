@@ -647,15 +647,31 @@
 2026-11-07|Hawai'i|UTEP|HEADLINE||Alejado-Lacaden combo helps send Hawaii past UTEP 17-14||
 2026-11-07|Texas State|Oregon State|HEADLINE||Texas State steamrolls Oregon State with 600 yards, 5 TDs on the ground in 42-21 win||
 2026-11-07|Wyoming|UNLV|HEADLINE||Harris, Holman rushing attack helps Wyoming fight off UNLV in 41-35 win||
+2026-11-10|Western Michigan|Akron|HEADLINE||Buckley, Cabana power rushing attack for Western Michigan in 42-14 win over Akron||
+2026-11-10|Kent State|Bowling Green|HEADLINE||Novosad and Amachree help Bowling Green edge Kent State 33-28||
+2026-11-10|Ohio|Miami (OH)|HEADLINE||True freshman QB Drew Bellisari rallies Miami (Ohio) to 34-17 victory over Ohio in debut||
+2026-11-11|Buffalo|Ball State|HEADLINE||Burch becomes 12th Buffalo player with 1,000 rushing yards in 28-7 win over Ball State||
+2026-11-11|Massachusetts|Toledo|HEADLINE||Long-distance touchdowns spark Toledo in 24-0 win over UMass||
+2026-11-12|Memphis|South Florida|HEADLINE||Stokes has 5 total TDs, Memphis blows 21-point lead before beating South Florida 52-41||
+2026-11-13|Illinois|UCLA|HEADLINE||Dieffenbach returns from injury scare, No. 4 UCLA remains unbeaten with 22-14 victory over Illinois||
+2026-11-13|Houston|Colorado|HEADLINE||Colorado beats No. 14 Houston 42-32 for 1st AP top-15 win since 2007 with Sanders on hot seat||
+2026-11-13|Florida State|Pittsburgh|HEADLINE||Florida State fends off Pitt 16-10 to improve to 2-0 under interim coach Rick Stockstill||
 2026-11-14|Missouri|Georgia|HEADLINE||Georgia marks return to No. 1 by routing Missouri 48-21 behind Frazier and Stockton||
 2026-11-14|Alabama|Vanderbilt|HEADLINE||No. 7 Alabama survives a sloppy 21-6 win over Vanderbilt behind Keelon Russell||
 2026-11-14|Boston College|Notre Dame|HEADLINE||No. 3 Notre Dame has no letdown after Miami win, routs Boston College 41-7||
+2026-11-14|Texas|LSU|HEADLINE||Arch Manning leads No. 8 Texas to a late score and a dramatic 22-21 win over No. 24 LSU||
 2026-11-14|Duke|Miami|HEADLINE||Mensah, Mallory lead No. 5 Miami past Duke 36-25 as Hurricanes close in on ACC title game berth||
 2026-11-14|Tennessee|Texas A&M|HEADLINE||No. 9 Tennessee pulls away late to beat Texas A&M 22-7 behind 5 field goals from Cooper Ranvier||
 2026-11-14|USC|Indiana|HEADLINE||Grant Wilson throws 2 TD passes, No. 6 Indiana beats No. 15 USC 27-13||
+2026-11-14|Baylor|BYU|HEADLINE||Bear Bachmeier runs for three TDs, throws for another to lead No. 12 BYU past Baylor, 28-7||
+2026-11-14|Florida|Kentucky|HEADLINE||Florida QB Philo returns to starting spot and leads Gators to 21-14 win over No. 13 Kentucky||
+2026-11-14|Texas Tech|Oklahoma State|HEADLINE||No. 10 Texas Tech routs Oklahoma State 52-27||
 2026-11-14|Wake Forest|SMU|HEADLINE||Gio Lopez leads No. 11 Wake Forest to 49-7 rout of No. 25 SMU for 7th straight win||
+2026-11-14|Purdue|Iowa|HEADLINE||Hank Brown, LJ Phillips lead No. 16 Iowa to 28-7 win over Purdue||
 2026-11-14|Michigan|Oregon|HEADLINE||Dylan Raiola throws for 4 touchdowns and No. 18 Oregon downs Michigan 31-7||
+2026-11-14|South Carolina|Arkansas|HEADLINE||Turnovers, red-zone struggles doom No. 20 South Carolina in 34-6 loss to Arkansas||
 2026-11-14|Northwestern|Ohio State|HEADLINE||Fahey, Smith get No. 21 Ohio State back on track with 28-19 victory over Northwestern||
+2026-11-14|Oregon State|Boise State|HEADLINE||No. 17 Boise State outlasts Oregon State 46-41 to wrap up host spot in Pac-12 title game||
 2026-11-14|Cincinnati|Iowa State|HEADLINE||Aiden Flora runs for 216 yards and fuels fast start in Cyclones' 41-13 win over Cincinnati||
 2026-11-14|Syracuse|NC State|HEADLINE||Syracuse rallies past N.C. State 34-31 with late touchdown pass play||
 2026-11-14|Wisconsin|Maryland|HEADLINE||Cardell Williams throws for a TD with 2:11 left and Maryland adds late FG to beat Wisconsin 24-21||
@@ -665,7 +681,7 @@
 2026-11-14|East Carolina|Charlotte|HEADLINE||Ashton Gray scores twice as East Carolina outlasts Charlotte 17-16 to become bowl eligible again||
 2026-11-14|UAB|Temple|HEADLINE||Rod Robinson II romps for 202 yards, 3 TDs and UAB topples Temple 36-10||
 2026-11-14|Arkansas State|Coastal Carolina|HEADLINE||Deuce Bailey and Chanticleers' defense power Coastal Carolina over Arkansas St. 28-21||
-2026-11-14|Kansas State|TCU|HEADLINE||Horned Frogs get back on winning track with 20-10 win over Kansas State||
+2026-11-14|Kansas State|TCU|HEADLINE||TCU beats Kansas State 20-10 after Wildcats' flight lands about 3 hours before kickoff||
 2026-11-14|Kennesaw State|Sam Houston|HEADLINE||Cam Miller's 88-yard pick-6 highlights Kennesaw State's 26-7 win over Sam Houston||
 2026-11-14|New Mexico State|Missouri State|HEADLINE||Joel Boamah's pick-6 in OT lifts Missouri State over New Mexico State 27-21||
 2026-11-14|Florida International|Delaware|HEADLINE||Minicucci nears pocket perfection sending Delaware past Florida International 24-16||
@@ -677,15 +693,17 @@
 2026-11-14|Fresno State|Texas State|HEADLINE||Davian Jackson's late TD run lifts Texas State over Fresno State 37-35||
 2026-11-14|Auburn|Mississippi State|HEADLINE||Auburn causes havoc to beat Mississippi State and become bowl eligible for first time since 2023||
 2026-11-14|Tulane|Rice|HEADLINE||Richardson's TD grab makes Tulane's late arrival worth it in 20-17 win over Rice||
-2026-11-10|Western Michigan|Akron|HEADLINE||Buckley, Cabana power rushing attack for Western Michigan in 42-14 win over Akron||
-2026-11-10|Kent State|Bowling Green|HEADLINE||Novosad and Amachree help Bowling Green edge Kent State 33-28||
-2026-11-10|Ohio|Miami (OH)|HEADLINE||True freshman QB Drew Bellisari rallies Miami (Ohio) to 34-17 victory over Ohio in debut||
-2026-11-11|Buffalo|Ball State|HEADLINE||Burch becomes 12th Buffalo player with 1,000 rushing yards in 28-7 win over Ball State||
-2026-11-11|Massachusetts|Toledo|HEADLINE||Long-distance touchdowns spark Toledo in 24-0 win over UMass||
-2026-11-12|Memphis|South Florida|HEADLINE||Stokes has 5 total TDs, Memphis blows 21-point lead before beating South Florida 52-41||
-2026-11-13|Illinois|UCLA|HEADLINE||Dieffenbach returns from injury scare, No. 4 UCLA remains unbeaten with 22-14 victory over Illinois||
-2026-11-13|Houston|Colorado|HEADLINE||Colorado beats No. 14 Houston 42-32 for 1st AP top-15 win since 2007 with Sanders on hot seat||
-2026-11-13|Florida State|Pittsburgh|HEADLINE||Florida State fends off Pitt 16-10 to improve to 2-0 under interim coach Rick Stockstill||
+2026-11-14|Southern Miss|Louisiana Tech|HEADLINE||Blake Baker, Jordan McRae, Jadon Mayfield spark Louisiana Tech to 63-31 romp over Southern Miss||
+2026-11-14|Washington|Michigan State|HEADLINE||Washington overcomes challenging night of travel to beat Michigan State 21-14 on TD with 2:24 left||
+2026-11-14|App State|Marshall|HEADLINE||Henry Hasselbeck has 2 rushing TDs, Appalachian State beats Marshall 20-16||
+2026-11-14|Louisville|North Carolina|HEADLINE||Mack's late INT helps Louisville hold off UNC 16-14 in game that ends with brawl||
+2026-11-14|Minnesota|Penn State|HEADLINE||Becht, Hansen combine to push Penn State past Minnesota 42-14||
+2026-11-14|San José State|Air Force|HEADLINE||Air Force rides Kemper Hodges, Evan Medders to 24-3 victory over San Jose State||
+2026-11-14|Troy|South Alabama|HEADLINE||Trae’von Dunbar has 153 yards rushing and 2 TDs, South Alabama beats Troy 27-14||
+2026-11-14|Florida Atlantic|Tulsa|HEADLINE||Haynes leads Tulsa in another offensive eruption, beating Florida Atlantic 38-21||
+2026-11-14|Stanford|Virginia Tech|HEADLINE||Ford, Stanford defense propel Cardinal to 40-22 victory over Virginia Tech||
+2026-11-14|UNLV|New Mexico|HEADLINE||Jackson Arnold rallies UNLV past No. 23 New Mexico, 21-17||
+2026-11-14|Wyoming|UTEP|HEADLINE||Samuel Harris scores 2 TDs, Wyoming beats UTEP 27-15 for 6th consecutive win||
 2026-08-27|Mercyhurst|Youngstown State|HEADLINE||Beau Brungard accounts for 5 touchdowns in Youngstown State's season-opening win over Mercyhurst||
 2026-08-27|Gardner-Webb|Austin Peay|HEADLINE||Parson, Simmons lead Austin Peay in 35-17 win over Gardner-Webb||
 2026-08-27|Houston Christian|SE Louisiana|HEADLINE||Cutter Stewart returns from junior college ranks, leads Houston Christian past SE Louisiana 34-28||
@@ -892,4 +910,10 @@
 2026-11-14|Abilene Christian|Austin Peay|HEADLINE||Tucker Parks helps Abilene Christian past Austin Peay 34-31||
 2026-11-14|Mercer|Tennessee Tech|HEADLINE||Palode-Gary's 60-yard TD run in the 4th quarter pushes Mercer past Tennessee Tech 38-31||
 2026-11-14|Tarleton State|West Florida|HEADLINE||Tarleton State beats West Florida 31-17, secures share of 2nd straight UAC championship||
+2026-11-14|East Texas A&M|Lamar|HEADLINE||Aiden McCown throws 4 TD passes for Lamar in 45-26 win over East Texas A&M||
 2026-11-14|Nicholls|Incarnate Word|HEADLINE||Brown throws 3 TD passes to lead Incarnate Word over Nicholls 42-24||
+2026-11-14|Illinois State|Youngstown State|HEADLINE||Pellant leads Illinois State from behind twice in final minutes to top Youngstown State 34-33||
+2026-11-14|Weber State|Northern Arizona|HEADLINE||Dahle leads Weber State past Northern Arizona to tighten the race atop the Big Sky||
+2026-11-14|Stephen F. Austin|UT Rio Grande Valley|HEADLINE||JT Kitna, Jaylen Jenkins help Stephen F. Austin thump UT Rio Grande Valley 48-0||
+2026-11-14|Montana State|Northern Colorado|HEADLINE||Lamson and White lead Montana State over Northern Colorado 31-21||
+2026-11-14|UC Davis|Idaho|HEADLINE||Cleeland throws 4 touchdown passes, 2 to Gbatu, as UC Davis snaps Idaho's 4-game win streak||

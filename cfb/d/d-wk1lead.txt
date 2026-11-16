@@ -2053,9 +2053,6 @@
 2026-11-07|Wyoming|UNLV|Wyoming|passingYards|Tyler Hughes|QB|5/9, 107 YDS, 1 TD
 2026-11-07|Wyoming|UNLV|Wyoming|rushingYards|Samuel Harris|RB|17 CAR, 128 YDS, 2 TD
 2026-11-07|Wyoming|UNLV|Wyoming|receivingYards|Jake Wilson|TE|2 REC, 56 YDS, 1 TD
-2026-11-15|Ole Miss|Oklahoma|Ole Miss|passingYards|Trinidad Chambliss|QB|14/27, 127 YDS, 1 TD
-2026-11-15|Ole Miss|Oklahoma|Ole Miss|rushingYards|Trinidad Chambliss|QB|11 CAR, 84 YDS
-2026-11-15|Ole Miss|Oklahoma|Ole Miss|receivingYards|Caleb Odom|TE|4 REC, 56 YDS, 1 TD
 2026-11-10|Western Michigan|Akron|Akron|passingYards|Cibastian Broughton|QB|12/18, 173 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Western Michigan|rushingYards|Jalen Buckley|RB|23 CAR, 121 YDS, 2 TD
 2026-11-10|Western Michigan|Akron|Akron|receivingYards|Marcel Williams|WR|5 REC, 85 YDS, 2 TD
@@ -2254,6 +2251,9 @@
 2026-11-14|North Dakota State|Hawai'i|Hawai'i|passingYards|Micah Alejado|QB|31/47, 231 YDS, 2 INT
 2026-11-14|North Dakota State|Hawai'i|North Dakota State|rushingYards|DJ Scott|RB|13 CAR, 35 YDS, 1 TD
 2026-11-14|North Dakota State|Hawai'i|Hawai'i|receivingYards|Kainoa Carvalho|WR|7 REC, 63 YDS
+2026-11-15|Ole Miss|Oklahoma|Ole Miss|passingYards|Trinidad Chambliss|QB|14/27, 127 YDS, 1 TD
+2026-11-15|Ole Miss|Oklahoma|Ole Miss|rushingYards|Trinidad Chambliss|QB|11 CAR, 84 YDS
+2026-11-15|Ole Miss|Oklahoma|Ole Miss|receivingYards|Caleb Odom|TE|4 REC, 56 YDS, 1 TD
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD

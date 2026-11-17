@@ -249,7 +249,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
 <script src="/sports/holo.js?v=20261110b" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
-<script src="/sports/stage.js?v=20261116a" defer></script>
+<script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
 <script src="/sports/glow.js?v=20261031a" defer></script>
 <!-- Vibe: arena lighting, glowing numbers and live games, and a declutter pass on every page (polish/vibe.js, published by build.sh as /sports/vibe.js) -->
@@ -2704,6 +2704,9 @@ body.themed .pk-card,.pk-card{background:var(--surface)!important}
 .uw-strip{grid-template-columns:repeat(auto-fill,minmax(168px,1fr))}
 .uw-tile .uw-tp .uw-ph.sm{width:72px;height:72px}
 @media (max-width:600px){.uw-card.uw-vs{flex-direction:column;align-items:flex-start}.uw-card.uw-vs .uw-pair{align-self:center}.uw-card.uw-vs .uw-pic{width:124px;height:124px}.uw-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.uw-tile .uw-tp .uw-ph.sm{width:66px;height:66px}}
+
+/* 2026-11-16 game-day polish: before BYU posts the uniform, Uni Watch is a slim one-line note, not a big empty panel */
+.uw-card.uw-wait{padding:10px 14px;gap:12px;background:var(--surface)}.uw-card.uw-wait .uw-pic.uw-q{width:38px;height:38px;border-radius:50%;font-size:18px;background:color-mix(in srgb,var(--ink,#fff) 8%,transparent)}.uw-card.uw-wait .uw-t{font-size:15px}.uw-card.uw-wait .mini{margin-top:2px}
 
 /* patch108: reference numbers on the prediction card */
 .pk-avg{display:block;margin-top:4px;font-size:11px;line-height:1.35;color:var(--ink-3);text-align:center;font-variant-numeric:tabular-nums}

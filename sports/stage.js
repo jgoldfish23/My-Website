@@ -30,7 +30,7 @@
   const D = document, H = D.documentElement;
   const HUB = (/^\/(cfb|nfl|nba|cbb)(\/|$)/.exec(location.pathname) || [])[1] || ((/^(CFB|NFL|NBA|CBB)\b/.exec(D.title) || [])[1] || '').toLowerCase();
   if (!HUB) return;
-  const OFF = /^#\/(board|tv|gamenight|gameday)\b/;
+  const OFF = /^#\/(board|tv)\b/;   /* 2026-11-16: game day / game night get the clean gradient too (no giant logo watermark) */
   const MQ = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
   const LD = 0.03, LL = 0.765;   /* 2026-11-12: was 0.02 / 0.83; richer team color in both themes, text still held at 4.7:1 by inkLift */
   const W3 = [255, 255, 255], K3 = [0, 0, 0];

@@ -346,6 +346,10 @@ a.gm:hover{background:var(--surface-2)}
   .teams.mini{grid-auto-columns:max-content}
   .teams.mini .tc{min-width:210px}
 }
+/* small phones (375px): "Your teams" + Alerts / Calendar / Minimize stay on one line instead of Minimize dropping alone */
+@media (max-width:389px){
+  .sec.top{gap:4px}.sec.top .cal-btn{padding:5px 7px}.sec.top h2{font-size:19px}
+}
 /* fd_simplify (2026-10-21): one-tap "show more" buttons; the greeting runs full width now that the Next up box is gone */
 .hero{grid-template-columns:1fr}
 .fd-more{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:10px 0 2px;padding:10px 14px;font:inherit;font-size:13.5px;font-weight:700;color:var(--ink);background:rgba(127,127,127,.08);border:1px solid var(--line);border-radius:12px;cursor:pointer}

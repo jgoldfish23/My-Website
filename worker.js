@@ -305,6 +305,63 @@ async function handleRsvpAlerts(request, env) {
   return json({ error: "bad action" }, 400);
 }
 
+// Well-wishes: notes left on the home page, mostly by people who can't be at the wedding.
+// Anyone can read and post (rate-limited, no links); only Jameson and Dawsyn can remove one (passcode, from /admin).
+// Each note is its own KV key "wish_<time>_<rand>" so two people posting at once never overwrite each other.
+const WISH_PER_IP = 3;        // per hour
+const WISH_SHOW = 150;        // newest notes shown
+
+async function listWishes(env) {
+  const list = await env.WEDDING_KV.list({ prefix: "wish_" });
+  const keys = list.keys.slice(-WISH_SHOW);
+  const items = (
+    await Promise.all(
+      keys.map((k) => env.WEDDING_KV.get(k.name).then((v) => (v ? { id: k.name, ...JSON.parse(v) } : null)))
+    )
+  ).filter(Boolean);
+  items.sort((a, b) => (a.ts < b.ts ? 1 : -1));
+  return items;
+}
+
+async function handleWishes(request, env, ctx) {
+  if (request.method === "GET") {
+    const items = await listWishes(env);
+    return json(items.map((w) => ({ id: w.id, name: w.name, from: w.from, msg: w.msg, ts: w.ts })));
+  }
+  if (request.method === "POST") {
+    if (!originOk(request)) return forbidden();
+    const body = await request.json().catch(() => null);
+    if (!body) return json({ error: "bad request" }, 400);
+    if (body.website) return json({ ok: true }); // honeypot: pretend success
+    const name = clean(body.name, 60);
+    const from = clean(body.from, 60);
+    const msg = clean(body.msg, 500);
+    if (!name || !msg) return json({ error: "missing", message: "Add your name and a note." }, 400);
+    if (/https?:|www\.|\.(com|net|org|io|ru|xyz)\b/i.test(name + " " + from + " " + msg)) {
+      return json({ error: "links", message: "Please leave out web links." }, 400);
+    }
+    const mine = await rateLimit(env, "wish", clientIp(request), WISH_PER_IP, 3600);
+    if (!mine.ok) return tooMany(mine.retryAfter, "Thank you! That's plenty of notes for now.");
+    const entry = { name, from, msg, ts: new Date().toISOString() };
+    const id = `wish_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
+    await env.WEDDING_KV.put(id, JSON.stringify(entry));
+    // same phones that get RSVP alerts get a buzz; the note itself is already public on the site
+    const short = msg.length > 120 ? msg.slice(0, 117) + "…" : msg;
+    const alert = pushAll(env, { title: `New note from ${name}`, body: short, url: "/#wishes" }).catch(() => {});
+    if (ctx && ctx.waitUntil) ctx.waitUntil(alert);
+    return json({ ok: true, entry: { id, ...entry } });
+  }
+  if (request.method === "DELETE") {
+    if (!authorized(request, env)) return json({ error: "unauthorized" }, 401);
+    const body = await request.json().catch(() => null);
+    const id = body && typeof body.id === "string" ? body.id : "";
+    if (!id.startsWith("wish_")) return json({ error: "bad id" }, 400);
+    await env.WEDDING_KV.delete(id);
+    return json({ ok: true });
+  }
+  return json({ error: "method not allowed" }, 405);
+}
+
 async function handleRecord(request, env) {
   if (request.method === "GET") {
     const raw = await env.WEDDING_KV.get(RECORD_KEY);
@@ -361,6 +418,7 @@ export default {
     if (pathname === "/api/rsvp") return handleRsvp(request, env, ctx);
     if (pathname === "/api/rsvp-alerts") return handleRsvpAlerts(request, env);
     if (pathname === "/api/record") return handleRecord(request, env);
+    if (pathname === "/api/wishes") return handleWishes(request, env, ctx);
 
     // Live college football scores for /cfb (read-only, edge-cached, same-site CORS)
     if (pathname.startsWith("/api/cfb/")) {

@@ -285,6 +285,38 @@
   .card .role{font-family:var(--util); font-size:10.5px; letter-spacing:.16em;
     text-transform:uppercase; color:var(--accent); margin-bottom:22px;}
   .card p{margin:0 0 24px; color:var(--fg-3); font-size:15.5px;}
+  /* the one quiet way in for invited guests */
+  .invited{margin:22px 0 0; font-size:14.5px; color:var(--fg-2);}
+
+  /* well-wishes: a note form beside the notes people have left */
+  .wish-grid{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:clamp(20px,3.4vw,40px); align-items:start;}
+  .wish-form label{display:block; font-family:var(--util); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--fg-2); margin:16px 0 6px;}
+  .wish-form label i{font-style:normal; text-transform:none; letter-spacing:.02em;}
+  .wish-form input, .wish-form textarea{width:100%; box-sizing:border-box; background:rgba(255,255,255,.04);
+    border:1px solid var(--line); border-radius:10px; color:var(--fg); font:inherit; font-size:16px; padding:11px 13px; outline:none;
+    transition:border-color .2s var(--ease);}
+  html[data-theme="light"] .wish-form input, html[data-theme="light"] .wish-form textarea{background:rgba(255,255,255,.7);}
+  .wish-form input:focus, .wish-form textarea:focus{border-color:var(--accent);}
+  .wish-form textarea{resize:vertical; min-height:110px;}
+  .wish-form .hp{position:absolute; left:-9999px; width:1px; height:1px; opacity:0;}
+  .wish-foot{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:18px;}
+  .wish-msg{font-size:14px; color:var(--fg-2);}
+  .wish-msg.err{color:#E07CA3;}
+  html[data-theme="light"] .wish-msg.err{color:#A3325E;}
+  @media (hover:hover){ .wish-form.card:hover{transform:none;} }
+  .wish-list{display:flex; flex-direction:column; gap:14px; max-height:640px; overflow-y:auto; padding-right:4px;}
+  .wish{border:1px solid var(--line-2); border-left:3px solid var(--accent); border-radius:12px; padding:16px 18px;
+    background:rgba(255,255,255,.025);}
+  html[data-theme="light"] .wish{background:rgba(255,255,255,.55);}
+  .wish p{margin:0 0 10px; color:var(--fg); font-size:15.5px; white-space:pre-line; overflow-wrap:anywhere;}
+  .wish .by{font-family:var(--util); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-2);}
+  .wish .by b{color:var(--accent); font-weight:500;}
+  .wish.new{animation:wishIn .6s var(--ease);}
+  @keyframes wishIn{from{opacity:0; transform:translateY(-8px);} to{opacity:1; transform:none;}}
+  .wish-empty{color:var(--fg-2); font-size:14.5px; margin:8px 0 0;}
+  @media (max-width:820px){ .wish-grid{grid-template-columns:1fr;} .wish-list{max-height:none;} }
+
   /* gifts: text beside a Venmo QR code */
   .give{display:grid; grid-template-columns:1fr auto; gap:clamp(22px,4vw,48px); align-items:center;}
   .give .give-txt p{max-width:52ch;}
@@ -557,9 +589,8 @@
       <a href="#two">Us</a>
       <a href="#record">Record</a>
       <a href="#day">The day</a>
-      <a href="/guests/">Guests</a>
-      <a href="/guests/#rsvp">RSVP</a>
-      <a href="/gifts/">Registry</a>
+      <a href="#gifts">Gifts</a>
+      <a href="#wishes">Notes</a>
     </nav>
     <button class="toggle" id="themeBtn" type="button" aria-label="Switch to light mode">
       <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M4.2 12H2M22 12h-2.2M5.6 5.6 7.2 7.2M16.8 16.8l1.6 1.6M18.4 5.6 16.8 7.2M7.2 16.8l-1.6 1.6"/></svg>
@@ -578,10 +609,11 @@
     <a href="#day">The day <span>03</span></a>
     <a href="#gifts">Gifts <span>04</span></a>
     <a href="#notes">Behind the Scenes <span>05</span></a>
+    <a href="#wishes">Well-wishes <span>06</span></a>
   </nav>
   <div class="btns">
-    <a class="btn primary" href="/guests/#rsvp">RSVP</a>
-    <a class="btn" href="/guests/">Guest info</a>
+    <a class="btn primary" href="#wishes">Leave a note</a>
+    <a class="btn" href="#gifts">Venmo</a>
     <a class="btn" href="/gifts/">Registry</a>
   </div>
 </div>
@@ -618,13 +650,13 @@
       </div>
 
       <div class="hero-photo-wrap invite">
-        <a class="hero-photo invite" href="/guests/" aria-label="Guest details">
+        <a class="hero-photo invite" href="#day" aria-label="The day">
           <img src="/img/invitation.jpg" width="1122" height="1402" alt="Wedding invitation: join us in celebration of the wedding of Dawsyn Jenkins and Jameson Golding, December 30, 2026. Ceremony at 2:00 PM at The Wedding Bowl, Cuvier Park, 590 Coast S Blvd, La Jolla. Dinner at 6:00 PM at Piazza 1909, 7731 Fay Ave, La Jolla. Attire: formal. RSVP, registry, and wedding details at djgolding.com." fetchpriority="high" id="heroImg">
         </a>
         <div class="btns pair hero-ctas">
-          <a class="btn primary" href="/guests/">Guest info</a>
+          <a class="btn primary" href="#wishes">Leave us a note</a>
           <a class="btn" href="/gifts/">Registry</a>
-          <a class="btn" href="https://venmo.com/u/Jameson-Golding" target="_blank" rel="noopener">Venmo</a>
+          <a class="btn" href="#gifts">Venmo</a>
         </div>
       </div>
     </div>
@@ -821,7 +853,7 @@
     <div class="entry mark rise">
       <time>December 30, 2026</time>
       <h4>The Wedding Bowl, La Jolla</h4>
-      <p>Two o'clock in the afternoon, on a bluff above the Pacific. Dinner to follow at six.</p>
+      <p>Two o'clock in the afternoon, on a bluff above the Pacific.</p>
     </div>
   </div>
 </section>
@@ -838,29 +870,16 @@
     <div class="day-grid">
       <div class="rise">
         <p class="day-h">Wednesday, the thirtieth of December, <em>two thousand twenty-six</em></p>
-        <p style="color:var(--fg-2); max-width:40ch; margin:0;">On the bluff at Cuvier Park, above the water. Travel, the hotel block, and everything else guests need is on the guest page.</p>
-        <div class="btns pair day-actions">
-          <a class="btn primary" href="/wedding.ics">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg>
-            Add to calendar
-          </a>
-          <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Jameson+%26+Dawsyn%27s+Wedding&amp;dates=20261230T220000Z/20261231T050000Z&amp;location=The+Wedding+Bowl+at+Cuvier+Park,+590+Coast+Blvd+S,+La+Jolla,+CA+92037&amp;details=Ceremony+at+2:00+PM+on+the+bluff+at+Cuvier+Park.+Dinner+party+from+6:00+to+9:00+PM+at+Piazza+1909,+7731+Fay+Ave,+La+Jolla.+Everything+for+guests:+https://djgolding.com/guests/" target="_blank" rel="noopener">Google Calendar</a>
-          <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Cuvier+Park+Wedding+Bowl,+590+Coast+Blvd+S,+La+Jolla,+CA+92037" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
-            Directions
-          </a>
-        </div>
+        <p style="color:var(--fg-2); max-width:44ch; margin:0;">On the bluff at Cuvier Park, above the water. The bowl only holds forty, so we're keeping it small, and we'll be thinking of everyone who's with us from afar.</p>
+        <p class="invited">Have an invitation? <a class="lnk" href="/guests/">Your RSVP, schedule and travel details are here →</a></p>
       </div>
 
       <ul class="details rise">
         <li><span>Ceremony</span><strong>2:00 in the afternoon</strong></li>
         <li><span>Venue</span><strong>The Wedding Bowl at Cuvier Park</strong></li>
         <li><span>City</span><strong>La Jolla, California</strong></li>
-        <li><span>Dinner Party</span><strong>6:00 to 9:00 in the evening</strong></li>
-        <li><span>Dinner venue</span><strong>Piazza 1909 · 7731 Fay Ave, La Jolla</strong></li>
-        <li><span>RSVP</span><strong><a class="lnk" href="/guests/#rsvp">Reply on the guest page →</a></strong></li>
-        <li><span>Everything else</span><strong><a class="lnk" href="/guests/">Full details for guests →</a></strong></li>
-        <li><span>Gifts</span><strong><a class="lnk" href="/gifts/">Registry &amp; Venmo →</a></strong></li>
+        <li><span>From afar</span><strong><a class="lnk" href="#wishes">Leave us a note →</a></strong></li>
+        <li><span>Gifts</span><strong><a class="lnk" href="#gifts">Registry &amp; Venmo →</a></strong></li>
       </ul>
     </div>
   </div>
@@ -907,6 +926,37 @@
   </div>
 </section>
 
+<!-- ============ WELL-WISHES ============ -->
+<section class="wrap" id="wishes">
+  <div class="sec-head rise">
+    <h2>Well-wishes</h2>
+    <span class="eyebrow">06 — From near &amp; far</span>
+    <span class="sec-num" aria-hidden="true">06</span>
+  </div>
+
+  <div class="wish-grid">
+    <form class="card wish-form rise" id="wishForm" novalidate>
+      <h3>Leave us a note</h3>
+      <p>Can't be on the bluff with us? Say hello, share some advice, or tell us a favorite memory. It'll show up here for us to read (and reread).</p>
+      <label for="wName">Your name</label>
+      <input id="wName" name="name" maxlength="60" autocomplete="name" required>
+      <label for="wFrom">Where you're writing from <i>(optional)</i></label>
+      <input id="wFrom" name="from" maxlength="60" placeholder="e.g. Layton, Utah">
+      <label for="wMsg">Your note</label>
+      <textarea id="wMsg" name="msg" maxlength="500" rows="4" required></textarea>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="wish-foot">
+        <button class="btn primary" type="submit" id="wSend">Send with love</button>
+        <span class="wish-msg" id="wMsgOut" role="status" aria-live="polite"></span>
+      </div>
+    </form>
+
+    <div class="wish-list rise" id="wishList" aria-live="polite">
+      <p class="wish-empty">Notes from family and friends will show up here.</p>
+    </div>
+  </div>
+</section>
+
 <div class="waves" aria-hidden="true">
   <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
     <path class="wA" d="M0,64 c120,-34 360,34 480,0 c120,-34 360,34 480,0 c120,-34 360,34 480,0 c120,-34 360,34 480,0 V120 H0 Z"/>
@@ -917,7 +967,7 @@
 
 <footer>
   <div class="wrap" style="text-align:center; margin-bottom:34px;">
-    <p style="font-family:var(--display); font-weight:200; font-size:clamp(20px,3.4vw,30px); letter-spacing:-.02em; margin:0; color:var(--fg-3);">See you on the bluff.</p>
+    <p style="font-family:var(--display); font-weight:200; font-size:clamp(20px,3.4vw,30px); letter-spacing:-.02em; margin:0; color:var(--fg-3);">Thanks for being part of the story.</p>
     <p class="eyebrow" style="margin:12px 0 0;">32°50&#8242;N 117°16&#8242;W · Cuvier Park, La Jolla</p>
   </div>
   <div class="wrap foot">
@@ -994,6 +1044,61 @@
       if (p < 1) requestAnimationFrame(run);
       else el.textContent = target.toLocaleString();
     })();
+  })();
+
+  /* ---- well-wishes: read the notes, and send a new one ---- */
+  (function(){
+    var list = document.getElementById('wishList');
+    var form = document.getElementById('wishForm');
+    if (!list || !form) return;
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    function card(w, fresh){
+      var d = document.createElement('article');
+      d.className = 'wish' + (fresh ? ' new' : '');
+      var p = document.createElement('p'); p.textContent = w.msg;
+      var by = document.createElement('div'); by.className = 'by';
+      var b = document.createElement('b'); b.textContent = w.name;
+      by.appendChild(b);
+      var bits = [];
+      if (w.from) bits.push(w.from);
+      var t = new Date(w.ts);
+      if (!isNaN(t)) bits.push(months[t.getMonth()] + ' ' + t.getDate());
+      if (bits.length) by.appendChild(document.createTextNode(' · ' + bits.join(' · ')));
+      d.appendChild(p); d.appendChild(by);
+      return d;
+    }
+    function show(items){
+      if (!items || !items.length) return;
+      list.innerHTML = '';
+      items.forEach(function(w){ list.appendChild(card(w)); });
+    }
+    fetch('/api/wishes').then(function(r){ return r.ok ? r.json() : []; }).then(show).catch(function(){});
+
+    var out = document.getElementById('wMsgOut');
+    var send = document.getElementById('wSend');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var data = {
+        name: document.getElementById('wName').value.trim(),
+        from: document.getElementById('wFrom').value.trim(),
+        msg: document.getElementById('wMsg').value.trim(),
+        website: form.querySelector('.hp').value
+      };
+      out.className = 'wish-msg';
+      if (!data.name || !data.msg){ out.className = 'wish-msg err'; out.textContent = 'Add your name and a note.'; return; }
+      send.disabled = true; out.textContent = 'Sending…';
+      fetch('/api/wishes', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(data) })
+        .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return { ok:r.ok, j:j }; }); })
+        .then(function(res){
+          send.disabled = false;
+          if (!res.ok){ out.className = 'wish-msg err'; out.textContent = res.j.message || 'That didn’t go through. Try again in a minute.'; return; }
+          var empty = list.querySelector('.wish-empty'); if (empty) empty.remove();
+          if (res.j.entry) list.insertBefore(card(res.j.entry, true), list.firstChild);
+          document.getElementById('wMsg').value = '';
+          out.textContent = 'Thank you! We’ll treasure it.';
+        })
+        .catch(function(){ send.disabled = false; out.className = 'wish-msg err'; out.textContent = 'That didn’t go through. Try again in a minute.'; });
+    });
   })();
 
   /* ---- live record entries (added via /admin) ---- */

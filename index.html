@@ -285,6 +285,18 @@
   .card .role{font-family:var(--util); font-size:10.5px; letter-spacing:.16em;
     text-transform:uppercase; color:var(--accent); margin-bottom:22px;}
   .card p{margin:0 0 24px; color:var(--fg-3); font-size:15.5px;}
+  /* gifts: text beside a Venmo QR code */
+  .give{display:grid; grid-template-columns:1fr auto; gap:clamp(22px,4vw,48px); align-items:center;}
+  .give .give-txt p{max-width:52ch;}
+  .give-handle{font-family:var(--util); font-size:13px; letter-spacing:.06em; color:var(--fg-2) !important; margin-bottom:18px !important;}
+  .give-handle b{color:var(--accent); font-weight:500;}
+  .give-qr{display:flex; flex-direction:column; align-items:center; gap:10px; text-decoration:none;}
+  .give-qr svg{width:clamp(150px,22vw,190px); height:auto; display:block; background:#fff;
+    padding:12px; border-radius:14px; box-shadow:0 18px 44px -24px rgba(0,0,0,.6);}
+  .give-qr span{font-family:var(--util); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--fg-2);}
+  @media (max-width:640px){
+    .give{grid-template-columns:1fr;}
+  }
   .facts{list-style:none; margin:0; padding:0; border-top:1px solid var(--line-2);}
   .facts li{display:flex; gap:16px; padding:10px 0; border-bottom:1px solid var(--line-2); font-size:14px;}
   .facts b{
@@ -564,7 +576,8 @@
     <a href="#two">The two of us <span>01</span></a>
     <a href="#record">The record <span>02</span></a>
     <a href="#day">The day <span>03</span></a>
-    <a href="#notes">Behind the Scenes <span>04</span></a>
+    <a href="#gifts">Gifts <span>04</span></a>
+    <a href="#notes">Behind the Scenes <span>05</span></a>
   </nav>
   <div class="btns">
     <a class="btn primary" href="/guests/#rsvp">RSVP</a>
@@ -853,12 +866,37 @@
   </div>
 </section>
 
+<!-- ============ GIFTS ============ -->
+<section class="wrap" id="gifts">
+  <div class="sec-head rise">
+    <h2>Gifts</h2>
+    <span class="eyebrow">04 — Give</span>
+    <span class="sec-num" aria-hidden="true">04</span>
+  </div>
+
+  <div class="card give rise">
+    <div class="give-txt">
+      <h3>Celebrating from near or far</h3>
+      <p>The bluff in La Jolla only holds forty, so we kept the day small, and plenty of people we love won't be there. Your love and well-wishes mean the most to us. Gifts are never expected, but if you'd like to send something, there's a small registry, or Venmo goes toward our honeymoon.</p>
+      <p class="give-handle">Venmo &nbsp;<b>@Jameson-Golding</b></p>
+      <div class="btns">
+        <a class="btn primary" href="https://venmo.com/u/Jameson-Golding" target="_blank" rel="noopener">Open Venmo</a>
+        <a class="btn" href="/gifts/">Registry</a>
+      </div>
+    </div>
+    <a class="give-qr" href="https://venmo.com/u/Jameson-Golding" target="_blank" rel="noopener" aria-label="Open Venmo for @Jameson-Golding">
+      <svg viewBox="0 0 29 29" shape-rendering="crispEdges" role="img" aria-label="QR code for Venmo @Jameson-Golding"><path fill="#0C2523" d="M0 0h7v1h-7zM8 0h2v1h-2zM11 0h1v1h-1zM13 0h3v1h-3zM18 0h1v1h-1zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM13 1h3v1h-3zM19 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h3v1h-3zM13 2h2v1h-2zM19 2h1v1h-1zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM14 3h4v1h-4zM20 3h1v1h-1zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h4v1h-4zM13 4h1v1h-1zM15 4h1v1h-1zM17 4h3v1h-3zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM12 5h3v1h-3zM17 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM9 7h3v1h-3zM14 7h3v1h-3zM20 7h1v1h-1zM0 8h1v1h-1zM3 8h6v1h-6zM11 8h1v1h-1zM13 8h5v1h-5zM21 8h1v1h-1zM24 8h1v1h-1zM26 8h3v1h-3zM0 9h6v1h-6zM7 9h1v1h-1zM9 9h1v1h-1zM14 9h2v1h-2zM23 9h2v1h-2zM26 9h2v1h-2zM2 10h1v1h-1zM4 10h1v1h-1zM6 10h1v1h-1zM8 10h1v1h-1zM11 10h2v1h-2zM14 10h2v1h-2zM18 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM1 11h2v1h-2zM4 11h1v1h-1zM9 11h2v1h-2zM14 11h2v1h-2zM17 11h1v1h-1zM19 11h3v1h-3zM25 11h1v1h-1zM28 11h1v1h-1zM0 12h2v1h-2zM3 12h2v1h-2zM6 12h2v1h-2zM11 12h1v1h-1zM13 12h2v1h-2zM16 12h1v1h-1zM20 12h4v1h-4zM28 12h1v1h-1zM1 13h3v1h-3zM9 13h3v1h-3zM15 13h4v1h-4zM20 13h1v1h-1zM22 13h7v1h-7zM1 14h2v1h-2zM4 14h1v1h-1zM6 14h6v1h-6zM14 14h2v1h-2zM17 14h1v1h-1zM19 14h2v1h-2zM26 14h1v1h-1zM28 14h1v1h-1zM3 15h1v1h-1zM7 15h1v1h-1zM11 15h4v1h-4zM16 15h1v1h-1zM23 15h1v1h-1zM26 15h1v1h-1zM28 15h1v1h-1zM0 16h2v1h-2zM3 16h4v1h-4zM8 16h1v1h-1zM10 16h2v1h-2zM23 16h1v1h-1zM25 16h1v1h-1zM0 17h2v1h-2zM3 17h1v1h-1zM5 17h1v1h-1zM7 17h1v1h-1zM9 17h2v1h-2zM15 17h1v1h-1zM18 17h3v1h-3zM24 17h1v1h-1zM26 17h2v1h-2zM0 18h2v1h-2zM3 18h1v1h-1zM5 18h3v1h-3zM9 18h2v1h-2zM13 18h4v1h-4zM19 18h1v1h-1zM21 18h2v1h-2zM24 18h2v1h-2zM28 18h1v1h-1zM0 19h2v1h-2zM5 19h1v1h-1zM9 19h1v1h-1zM11 19h3v1h-3zM16 19h1v1h-1zM18 19h1v1h-1zM21 19h6v1h-6zM0 20h3v1h-3zM6 20h2v1h-2zM10 20h1v1h-1zM13 20h1v1h-1zM15 20h4v1h-4zM20 20h8v1h-8zM8 21h4v1h-4zM13 21h1v1h-1zM15 21h1v1h-1zM17 21h2v1h-2zM20 21h1v1h-1zM24 21h2v1h-2zM0 22h7v1h-7zM8 22h1v1h-1zM11 22h3v1h-3zM15 22h1v1h-1zM17 22h1v1h-1zM19 22h2v1h-2zM22 22h1v1h-1zM24 22h2v1h-2zM0 23h1v1h-1zM6 23h1v1h-1zM8 23h3v1h-3zM13 23h1v1h-1zM17 23h1v1h-1zM20 23h1v1h-1zM24 23h1v1h-1zM27 23h1v1h-1zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM8 24h1v1h-1zM11 24h3v1h-3zM16 24h2v1h-2zM19 24h7v1h-7zM27 24h2v1h-2zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM8 25h3v1h-3zM12 25h5v1h-5zM18 25h1v1h-1zM20 25h2v1h-2zM28 25h1v1h-1zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM9 26h4v1h-4zM14 26h2v1h-2zM17 26h1v1h-1zM20 26h2v1h-2zM23 26h2v1h-2zM26 26h3v1h-3zM0 27h1v1h-1zM6 27h1v1h-1zM11 27h1v1h-1zM13 27h1v1h-1zM15 27h1v1h-1zM21 27h1v1h-1zM25 27h2v1h-2zM28 27h1v1h-1zM0 28h7v1h-7zM8 28h2v1h-2zM11 28h4v1h-4zM19 28h2v1h-2zM22 28h1v1h-1zM24 28h2v1h-2z"/></svg>
+      <span>Scan to Venmo</span>
+    </a>
+  </div>
+</section>
+
 <!-- ============ BEHIND THE SCENES ============ -->
 <section class="wrap" id="notes">
   <div class="sec-head rise">
     <h2>Behind the Scenes</h2>
-    <span class="eyebrow">04 — Proof</span>
-    <span class="sec-num" aria-hidden="true">04</span>
+    <span class="eyebrow">05 — Proof</span>
+    <span class="sec-num" aria-hidden="true">05</span>
   </div>
 
   <div class="frames rise">

@@ -2566,6 +2566,14 @@ body:has(.tvframe) header.top.top{top:0}
 .pl-solo .pl-pr-b{grid-template-columns:minmax(0,1fr) 78px}
 @media (max-width:900px){.srk-grid{grid-template-columns:1fr;gap:14px}.edg-grid{grid-template-columns:1fr}}
 @media (max-width:600px){.edg-r{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,1fr) 58px;gap:6px;font-size:13px}.edg-r small{display:block}}
+/* matchup edges, 2026-11-17 (Jamo sent a screenshot: the two halves overlapped in the game page's narrow side column):
+   the two sides always stack, ranks and team labels never overlap, long labels cut off cleanly */
+.edg-grid{grid-template-columns:1fr;gap:14px}
+.edg-r{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) auto}
+.edg-r>span{min-width:0}
+.edg-r .o,.edg-r .d{line-height:1.15}
+.edg-r small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.edg-r .e{max-width:96px}
 </style>
 
 <header class="top">

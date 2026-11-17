@@ -84,7 +84,10 @@
   var BOK = [[4,14,70,26,0,'va'],[93,22,54,31,6,'vb'],[8,46,40,24,11,'vb'],[90,58,64,28,3,'va'],[2,74,48,34,15,'va'],[96,86,58,25,9,'vb'],[50,6,90,38,18,'va']];
   rig.innerHTML = '<i class="vh"></i><i class="flo"></i><b class="b1"></b><b class="b2"></b><b class="b3"></b>'
     + BOK.map(function(k){ return '<s style="left:' + k[0] + '%;top:' + k[1] + '%;--z:' + k[2] + 'px;--t:' + k[3] + 's;--d:-' + k[4] + 's;--k:var(--' + k[5] + ')"></s>'; }).join('');
-  function mount(){ if (!rig.isConnected && D.body) D.body.insertBefore(rig, D.body.firstChild); }
+  /* 2026-11-16, Jamo: "Enhance the background design. Simpler but cleaner and fresh" - the rig (beams, haze, crowd lights)
+     is no longer put on the page; the backdrop is Stage's still gradient alone. To bring the rig back, restore the body
+     of mount(): if (!rig.isConnected && D.body) D.body.insertBefore(rig, D.body.firstChild); */
+  function mount(){ }
 
   /* team colors from Stage (the page's team), else the hub accent; dark colors are lifted so the light shows */
   function lum(c){ return c.map(function(v){ v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }).reduce(function(s, v, i){ return s + v * [.2126,.7152,.0722][i]; }, 0); }

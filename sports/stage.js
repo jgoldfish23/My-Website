@@ -8,9 +8,10 @@
    - a smooth, deep gradient in the page team's colors: the primary color as a soft bloom from the top left, the
      second color (the team's alternate, or a deeper partner shade when the alternate is white, grey or too close, e.g.
      BYU royal + navy) glowing up from the bottom right, over a near-black base tinted with both
-   - an electronic finish that stays out of the way: a very faint fine grid that shows only toward the edges and corners
-     and fades out over the middle where the information is, a gentle glass sheen, and a fine grain so the dark
-     gradient never bands
+   - (2026-11-16, Jamo: "Simpler but cleaner and fresh") now just three still layers: a near-black (light: near-white)
+     base with a breath of the team color at the top, one wide glow of the primary from the top center, and a faint
+     touch of the second color low on the right; plus a fine grain so the dark gradient never bands. The old faint
+     grid, glass sheen and corner vignette are gone, and Vibe's spotlight rig is no longer mounted.
    - no logo watermark (the team header already carries the logo); no court, field or photo
    Which team: the one the hub already themes the page with (applyPageTheme: the team page, the favorite when it is
    playing, else the home team, else the favorite when "Color the site in team colors" is on). CFB team pages always
@@ -101,28 +102,26 @@
       const vP = vivid(P), vS = vivid(S);
       const pG = toL(vP, 0.06 * k), sG = toL(vS, 0.044 * k), pM = toL(vP, 0.02), sM = toL(vS, 0.014), base = toL(mix(vP, vS, 0.5), 0.0036);
       const line = mix(toL(S, 0.42), W3, 0.3);
+      /* 2026-11-16 (Jamo: "Simpler but cleaner and fresh"): three calm layers - a near-black base with a breath of the
+         team color at the top, one wide glow of the primary from the top center, and a faint touch of the second color
+         low on the right. No sheen, no vignette, no grid. */
       return { dark, k, line,
         field: [
-          { k: 'lin', ang: 158, st: [[pM, 1, 0], [base, 1, 46], [base, 1, 60], [sM, 1, 100]] },
-          { k: 'lin', ang: 180, st: [[pG, 0.5, 0], [pG, 0.2, 18], [pG, 0, 44]] },   /* a smooth wash of the team color down from the top (2026-11-12) */
-          { k: 'rad', rx: 100, ry: 78, cx: 2, cy: -8, st: [[pG, 1, 0], [pG, 0.55, 30], [pG, 0.2, 56], [pG, 0, 80]] },
-          { k: 'rad', rx: 88, ry: 66, cx: 100, cy: 106, st: [[sG, 1, 0], [sG, 0.5, 36], [sG, 0.14, 60], [sG, 0, 80]] },
-          { k: 'lin', ang: 116, st: [[W3, 0, 24], [W3, 0.026 * k, 37], [W3, 0, 50]] },
-          { k: 'rad', rx: 150, ry: 110, cx: 50, cy: 38, st: [[K3, 0, 55], [K3, 0.38, 100]] }],
-        grid: { c: line, a: 0.045 * k, size: 44 },
+          { k: 'lin', ang: 180, st: [[pM, 1, 0], [base, 1, 52], [base, 1, 100]] },
+          { k: 'rad', rx: 115, ry: 62, cx: 50, cy: -10, st: [[pG, 1, 0], [pG, 0.5, 34], [pG, 0.16, 62], [pG, 0, 88]] },
+          { k: 'rad', rx: 80, ry: 52, cx: 96, cy: 108, st: [[sG, 0.7, 0], [sG, 0.26, 40], [sG, 0, 78]] }],
+        grid: { c: line, a: 0, size: 44 },
         mask: { k: 'rad', rx: 120, ry: 92, cx: 50, cy: 46, st: [[K3, 0, 38], [K3, 0.45, 70], [K3, 1, 100]] } };
     }
     const q = 1 - k; /* light: pastels move toward white as k drops */
     const pL = tint(P, 0.54 + 0.42 * q), sL = tint(S, 0.6 + 0.36 * q), base = mix(tint(P, 0.9 + 0.06 * q), [244, 246, 249], 0.3), end = tint(S, 0.78 + 0.18 * q);   /* 2026-11-12: the middle of the page keeps a faint team tint instead of neutral grey */
     const line = toL(P, 0.05);
     return { dark, k, line,
-      field: [
-        { k: 'lin', ang: 158, st: [[tint(P, 0.82 + 0.14 * q), 1, 0], [base, 1, 46], [base, 1, 62], [end, 1, 100]] },
-        { k: 'lin', ang: 180, st: [[pL, 0.5, 0], [pL, 0.18, 18], [pL, 0, 42]] },   /* the same wash from the top, as a pastel (2026-11-12) */
-        { k: 'rad', rx: 92, ry: 72, cx: 4, cy: -6, st: [[pL, 0.9, 0], [pL, 0.46, 36], [pL, 0.14, 58], [pL, 0, 78]] },
-        { k: 'rad', rx: 78, ry: 62, cx: 102, cy: 106, st: [[sL, 0.85, 0], [sL, 0.36, 40], [sL, 0, 74]] },
-        { k: 'lin', ang: 116, st: [[W3, 0, 24], [W3, 0.3, 37], [W3, 0, 50]] }],
-      grid: { c: line, a: 0.04 * k, size: 44 },
+      field: [   /* 2026-11-16: the same three calm layers as a pastel on a clean near-white */
+        { k: 'lin', ang: 180, st: [[tint(P, 0.84 + 0.12 * q), 1, 0], [base, 1, 50], [mix(base, end, 0.5), 1, 100]] },
+        { k: 'rad', rx: 115, ry: 62, cx: 50, cy: -10, st: [[pL, 0.85, 0], [pL, 0.4, 34], [pL, 0.12, 62], [pL, 0, 88]] },
+        { k: 'rad', rx: 80, ry: 52, cx: 96, cy: 108, st: [[sL, 0.6, 0], [sL, 0.22, 40], [sL, 0, 78]] }],
+      grid: { c: line, a: 0, size: 44 },
       mask: { k: 'rad', rx: 120, ry: 92, cx: 50, cy: 46, st: [[K3, 0, 38], [K3, 0.45, 70], [K3, 1, 100]] } };
   }
   function fieldCss(M){ return [grain(M.dark)].concat(M.field.slice().reverse().map(css1)).join(','); }
@@ -197,7 +196,7 @@
       k = lo; M = best[0]; m = best[1]; }
     const mk = css1(M.mask);
     return { M, S, k, m, ink: null, rules: r => r + ' body::before{' + LAYER + 'z-index:-2;background:' + fieldCss(M) + '}'
-      + r + ' body::after{' + LAYER + 'z-index:-1;background:' + gridCss(M) + ';-webkit-mask-image:' + mk + ';mask-image:' + mk + '}' }; }
+      + r + ' body::after{' + LAYER + 'z-index:-1;background:none}' }; }   /* 2026-11-16: no grid; this still covers any hub body::after */
   const themeCss = (t, c) => { const s = r => c.rules(r) + (c.ink ? r + ' body{' + c.ink + '}' : ''); return s(SEL[t][0]) + '@media ' + SEL[t][1] + '{' + s(SEL[t][2]) + '}'; };
 
   let last = ''; const CACHE = new Map();

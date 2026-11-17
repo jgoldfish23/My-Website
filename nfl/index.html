@@ -7134,7 +7134,8 @@ function uiSnap(){ const s={det:{},sx:[],anchor:null}; const seen={};
   view.querySelectorAll('details').forEach(d=>{ const c=d.closest('.card'); const k=(c?uiCardKey(c):'')+'|'+d.className; seen[k]=(seen[k]||0)+1; s.det[k+'#'+seen[k]]=d.open; });
   view.querySelectorAll('*').forEach(el=>{ if(el.scrollLeft>0&&typeof el.className==='string'&&el.className){ const c1=el.className.split(' ')[0]; const all=view.getElementsByClassName(c1); s.sx.push({c:c1,i:Array.prototype.indexOf.call(all,el),x:el.scrollLeft}); } });
   const pin=Math.min(140, window.innerHeight/4); const cs=view.querySelectorAll('.card'); const cnt={};
-  for(const c of cs){ const k=uiCardKey(c); cnt[k]=(cnt[k]||0)+1; const r=c.getBoundingClientRect(); if(r.bottom>pin){ s.anchor={k:k+'#'+cnt[k], top:r.top}; break; } }
+  /* at the top of the page a refresh keeps you at the top (anchoring there pushed phones ~260px down on the first live poll) */
+  if(window.scrollY>8) for(const c of cs){ const k=uiCardKey(c); cnt[k]=(cnt[k]||0)+1; const r=c.getBoundingClientRect(); if(r.bottom>pin){ s.anchor={k:k+'#'+cnt[k], top:r.top}; break; } }
   return s; }
 function uiRestore(s,y){ const seen={};
   view.querySelectorAll('details').forEach(d=>{ const c=d.closest('.card'); const k=(c?uiCardKey(c):'')+'|'+d.className; seen[k]=(seen[k]||0)+1; const v=s.det[k+'#'+seen[k]]; if(v!=null&&d.open!==v) d.open=v; });

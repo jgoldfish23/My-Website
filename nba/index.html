@@ -251,7 +251,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
 <script src="/sports/holo.js?v=20261110b" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
-<script src="/sports/stage.js?v=20261116a" defer></script>
+<script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
 <script src="/sports/glow.js?v=20261031a" defer></script>
 <!-- Vibe: arena lighting, glowing numbers and live games, and a declutter pass on every page (polish/vibe.js, published by build.sh as /sports/vibe.js) -->
@@ -8702,6 +8702,8 @@ async function nlFill(day, gs){ await Promise.all(gs.filter(g=>g.live||g.played)
 { const _rs=renderScores; renderScores=function(d, filter){ _rs(d, filter); const day=nearestDate(d); const gs=G.filter(g=>g.date===day); clearInterval(NL_TIMER); if(!gs.length) return;
     const at=view.querySelector('.homeband')||view.querySelector('.toolbar'); if(!at) return; at.insertAdjacentHTML('afterend', nlCardHTML(day, gs)); const el=document.getElementById('nl'); if(el) el.dataset.day=day;
     nlFill(day, gs); if(gs.some(g=>!g.played)) NL_TIMER=setInterval(()=>{ if(!document.getElementById('nl')){ clearInterval(NL_TIMER); return; } nlFill(day, G.filter(g=>g.date===day)); }, 60e3); }; }
+/* game-day word for the jumbotron: TONIGHT only on the day itself (2026-11-16) */
+function jtDay(g){ if(!g||!g.date||g.date===todayStr) return 'TONIGHT'; if(g.date===addDays(todayStr,1)) return 'TOMORROW'; const d=new Date(g.date+'T12:00:00'); return isNaN(d)?'UP NEXT':d.toLocaleDateString('en-US',{weekday:'long'}).toUpperCase(); }
 /* ---------- Jumbotron (2026-10-21, Jamo: "on the game-night scoreboard for the Jazz, make the score look like a jumbotron
    in an NBA arena"). The game-night screen's score block becomes a center-hung arena scoreboard: a dark metal housing on
    cables, an LED ribbon across the top, amber LED score digits (with the unlit segments ghosted behind them), the period
@@ -8740,12 +8742,12 @@ function jtHTML(g){ const a=team(g.away), h=team(g.home); const on=g.live||g.pla
     if(t1||t2) tabs='<div class="dc-tbs'+(t1&&t2?'':' one')+'">'+t1+t2+'</div>'; }
   else { const one=(lab,val)=>'<div class="dc-tr one"><em>'+esc(lab)+'</em><b>'+esc(val)+'</b></div>';
     const rows=[one('TIP-OFF',kick(g)+' '+tzInfo().lbl)]; if(g.tv) rows.push(one('TV',tvShort(g.tv).toUpperCase())); if(g.spread!=null) rows.push(one('LINE',spreadStr(g,{short:true}).toUpperCase())); if(g.total!=null) rows.push(one('O/U',String(g.total)));
-    tabs='<div class="dc-tbs one"><div class="dc-tb">'+head('TONIGHT')+rows.join('')+'</div></div>'; }
+    tabs='<div class="dc-tbs one"><div class="dc-tb">'+head(jtDay(g))+rows.join('')+'</div></div>'; }
   /* live: the ribbon runs the latest plays, newest first (2026-10-21, Jamo); otherwise the matchup */
   const P=(g.live&&S&&S.plays||[]).slice().reverse(); const qn=n=>n>4?'OT'+(n>5?n-4:''):'Q'+n;
   const playTxt=p=>qn(p.per)+' '+(p.clk||'')+' · '+String(p.text||'').replace(/\s+/g,' ').trim().toUpperCase()+(p.as!=null&&p.hs!=null?' · '+a.ab+' '+p.as+' '+h.ab+' '+p.hs:'');
   const last=P[0]?'<div class="jt-last" data-k="'+esc(P[0].per+'|'+P[0].clk+'|'+P[0].text)+'"><span class="jt-lab">LAST PLAY</span><span>'+esc(qn(P[0].per)+' '+(P[0].clk||''))+'</span><b>'+esc(String(P[0].text||'').replace(/\s+/g,' '))+'</b></div>':'';
-  const ribbon=P.length?['● LIVE PLAY-BY-PLAY'].concat(P.map(playTxt)).join('   ★   '):[g.live?'● LIVE':g.played?'FINAL':'TONIGHT', a.disp.toUpperCase()+' AT '+h.disp.toUpperCase(), (g.venue||'').toUpperCase(), g.tv?tvShort(g.tv).toUpperCase():'', g.spread!=null?spreadStr(g,{short:true}).toUpperCase():'', g.total!=null?'O/U '+g.total:''].filter(Boolean).join('   ★   ');
+  const ribbon=P.length?['● LIVE PLAY-BY-PLAY'].concat(P.map(playTxt)).join('   ★   '):[g.live?'● LIVE':g.played?'FINAL':jtDay(g), a.disp.toUpperCase()+' AT '+h.disp.toUpperCase(), (g.venue||'').toUpperCase(), g.tv?tvShort(g.tv).toUpperCase():'', g.spread!=null?spreadStr(g,{short:true}).toUpperCase():'', g.total!=null?'O/U '+g.total:''].filter(Boolean).join('   ★   ');
   /* the fascia names the arena; the schedule often leaves it blank, so the Jazz's home falls back to the Delta Center and others to the home team */
   const venue=(g.venue||(h.ab==='UTAH'?'Delta Center':'')||(h.other?'':h.full)||h.disp||'').toUpperCase();
   return '<section class="jt dcj'+(g.live?' is-live':'')+'" style="--br:'+uiColor(br)+';--ca:'+ca+';--ch:'+ch+'" aria-label="Scoreboard: '+esc(a.disp)+' '+(on?g.as:'')+', '+esc(h.disp)+' '+(on?g.hs:'')+(g.live&&C?', '+esc(C.per)+(C.clk?' '+esc(C.clk):''):g.played?', final':'')+'">'

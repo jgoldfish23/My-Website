@@ -14284,4 +14284,101 @@ P|149|H|puntReturns|Dohnte Meyers||4384852|2;0;0.0;0;0
 P|149|H|puntReturns|Tacario Davis||4726127|1;0;0.0;0;0
 P|149|H|kicking|Evan McPherson||4360234|1/2;50.0;24;5/5;7
 P|149|H|punting|Ryan Rehkow||4608820|2;85;42.5;1;1;46
+G|150|401873065|2026-11-16|LAC|BAL
+T|150|A|firstDowns=15;firstDownsPassing=5;firstDownsRushing=9;firstDownsPenalty=1;thirdDownEff=2-13;fourthDownEff=2-2;totalOffensivePlays=54;totalYards=287;yardsPerPlay=5.3;totalDrives=11;netPassingYards=127;completionAttempts=12/18;yardsPerPass=6.4;interceptions=0;sacksYardsLost=2-2;rushingYards=160;rushingAttempts=34;yardsPerRushAttempt=4.7;redZoneAttempts=1-3;totalPenaltiesYards=4-30;turnovers=0;fumblesLost=0;interceptions=0;defensiveTouchdowns=0;possessionTime=30:02;defSacks=2;defTfl=5
+T|150|H|firstDowns=22;firstDownsPassing=16;firstDownsRushing=5;firstDownsPenalty=1;thirdDownEff=5-12;fourthDownEff=1-1;totalOffensivePlays=66;totalYards=347;yardsPerPlay=5.3;totalDrives=12;netPassingYards=331;completionAttempts=33/49;yardsPerPass=6.5;interceptions=1;sacksYardsLost=2-9;rushingYards=16;rushingAttempts=15;yardsPerRushAttempt=1.1;redZoneAttempts=2-4;totalPenaltiesYards=6-45;turnovers=2;fumblesLost=1;interceptions=1;defensiveTouchdowns=0;possessionTime=29:58;defSacks=2;defTfl=7
+S|150|1|10:39|LAC|Justin Herbert 22 Yd Rush (Cameron Dicker Kick)|7|0
+S|150|1|2:03|LAC|Cameron Dicker 38 Yd Field Goal|10|0
+S|150|2|12:33|BAL|Derrick Henry 2 Yd Rush (Riley Patterson Kick)|10|7
+S|150|2|1:56|LAC|Omarion Hampton 1 Yd Rush (Cameron Dicker Kick)|17|7
+S|150|2|0:00|BAL|Riley Patterson 26 Yd Field Goal|17|10
+S|150|3|9:03|LAC|Cameron Dicker 34 Yd Field Goal|20|10
+S|150|3|3:36|BAL|Riley Patterson 36 Yd Field Goal|20|13
+S|150|4|14:56|LAC|Cameron Dicker 35 Yd Field Goal|23|13
+S|150|4|10:23|BAL|Derrick Henry 1 Yd Rush (Riley Patterson Kick)|23|20
+W|150|44;41;35;28;25;25;24;24;22;21;24;24;33;38;41;34;27;24;30;19;23;19;24;24;20;23;18;15;17;18;16;17;15;13;12;18;22;26;35;27;22;31;8;2;5;0;0
+P|150|A|passing|Justin Herbert||4038941|12/18;129;7.2;0;0;2-2;60.1;87.5
+P|150|A|rushing|Omarion Hampton||4685382|22;105;4.8;1;19
+P|150|A|rushing|Justin Herbert||4038941|7;51;7.3;1;22
+P|150|A|rushing|Keaton Mitchell||4596334|3;4;1.3;0;11
+P|150|A|rushing|Kimani Vidal||4430968|2;0;0.0;0;1
+P|150|A|receiving|Tre' Harris||4686612|5;86;17.2;0;31;5
+P|150|A|receiving|Charlie Kolar||4241263|2;16;8.0;0;11;3
+P|150|A|receiving|Kimani Vidal||4430968|2;14;7.0;0;15;2
+P|150|A|receiving|Oronde Gadsden||4595342|1;7;7.0;0;7;1
+P|150|A|receiving|Quentin Johnston||4429025|1;6;6.0;0;6;1
+P|150|A|receiving|Theo Wease Jr.||4426535|0;0;0.0;0;0;1
+P|150|A|receiving|Keaton Mitchell||4596334|0;0;0.0;0;0;1
+P|150|A|receiving|Omarion Hampton||4685382|1;0;0.0;0;0;2
+P|150|A|fumbles|Keaton Mitchell||4596334|1;0;0
+P|150|A|fumbles|Omarion Hampton||4685382|1;0;1
+P|150|A|fumbles|Charlie Kolar||4241263|0;0;1
+P|150|A|fumbles|Elijah Molden||4243328|0;0;1
+P|150|A|defensive|Daiyan Henley||4241597|11;5;0;1;1;0;0
+P|150|A|defensive|Del'Shawn Phillips||4240528|9;4;0;0;1;0;0
+P|150|A|defensive|Cam Hart||4427404|5;4;0;0;2;0;0
+P|150|A|defensive|Dalvin Tomlinson||2979860|5;3;2;2;0;3;0
+P|150|A|defensive|Tony Jefferson||16195|5;3;0;0;0;0;0
+P|150|A|defensive|Elijah Molden||4243328|5;3;0;0;1;0;0
+P|150|A|defensive|Tarheeb Still||4432571|4;3;0;0;1;0;0
+P|150|A|defensive|Denzel Perryman||2579621|3;1;0;0;0;0;0
+P|150|A|defensive|Caleb Murphy||4911489|3;0;0;0;0;0;0
+P|150|A|defensive|Genesis Smith||4950551|2;2;0;0;0;0;0
+P|150|A|defensive|Khalil Mack||16710|2;1;0;1;0;0;0
+P|150|A|defensive|Donte Jackson||3843769|2;1;0;0;1;0;0
+P|150|A|defensive|Teair Tart||4374269|2;1;0;1;1;1;0
+P|150|A|defensive|RJ Mickens||4429018|2;1;0;0;1;0;0
+P|150|A|defensive|Akheem Mesidor||4429190|2;1;0;0;0;1;0
+P|150|A|defensive|Nick Barrett||4682818|1;1;0;0;0;0;0
+P|150|A|defensive|Deane Leonard||4690171|1;1;0;0;0;0;0
+P|150|A|defensive|Rodney Shelley||4838693|1;1;0;0;1;0;0
+P|150|A|defensive|Jamaree Caldwell||5089178|1;1;0;0;0;0;0
+P|150|A|defensive|Kimani Vidal||4430968|1;0;0;0;0;0;0
+P|150|A|defensive|Tuli Tuipulotu||4431442|1;0;0;0;0;4;0
+P|150|A|defensive|Marlowe Wax||4431467|1;0;0;0;0;0;0
+P|150|A|interceptions|Del'Shawn Phillips||4240528|1;9;0
+P|150|A|kickReturns|Kimani Vidal||4430968|1;32;32.0;32;0
+P|150|A|kickReturns|Keaton Mitchell||4596334|2;30;15.0;21;0
+P|150|A|kickReturns|Derius Davis||4362477|1;28;28.0;28;0
+P|150|A|puntReturns|Derius Davis||4362477|3;47;15.7;24;0
+P|150|A|kicking|Cameron Dicker||4362081|3/3;100.0;38;2/2;11
+P|150|A|punting|JK Scott||3126368|6;259;43.2;1;2;57
+P|150|H|passing|Jacoby Brissett||2578570|33/49;340;6.9;0;1;2-9;51.2;78.6
+P|150|H|rushing|Derrick Henry||3043078|10;10;1.0;2;6
+P|150|H|rushing|Justice Hill||4038441|3;4;1.3;0;2
+P|150|H|rushing|Jacoby Brissett||2578570|2;2;1.0;0;2
+P|150|H|receiving|Mark Andrews||3116365|8;82;10.3;0;16;8
+P|150|H|receiving|Zay Flowers||4429615|6;74;12.3;0;17;7
+P|150|H|receiving|Ja'Kobi Lane||4870847|3;61;20.3;0;31;11
+P|150|H|receiving|Rashod Bateman||4360939|3;42;14.0;0;24;5
+P|150|H|receiving|Josh Cuevas||4876132|3;37;12.3;0;18;3
+P|150|H|receiving|Justice Hill||4038441|5;34;6.8;0;25;7
+P|150|H|receiving|Derrick Henry||3043078|5;10;2.0;0;5;5
+P|150|H|receiving|Chris Moore||2576581|0;0;0.0;0;0;1
+P|150|H|fumbles|Zay Flowers||4429615|1;1;0
+P|150|H|defensive|Kyle Hamilton||4575517|10;7;0;0;0;0;0
+P|150|H|defensive|Roquan Smith||3915189|8;6;0;1;0;0;0
+P|150|H|defensive|Marlon Humphrey||3126356|8;3;0;0;0;0;0
+P|150|H|defensive|Trenton Simpson||4430831|8;3;0;1;0;2;0
+P|150|H|defensive|Mike Green||4683188|6;4;2;2;0;3;0
+P|150|H|defensive|Keondre Jackson||4878287|4;4;0;0;0;0;0
+P|150|H|defensive|Malaki Starks||4685530|4;1;0;0;1;0;0
+P|150|H|defensive|Calais Campbell||11284|4;0;0;0;0;2;0
+P|150|H|defensive|Travis Jones||4362139|3;3;0;0;0;0;0
+P|150|H|defensive|Nate Wiggins||4601278|3;2;0;1;0;0;0
+P|150|H|defensive|John Jenkins||15846|1;1;0;1;0;0;0
+P|150|H|defensive|Nnamdi Madubuike||4035245|1;1;0;0;0;0;0
+P|150|H|defensive|John Simpson||4035479|1;1;0;0;0;0;0
+P|150|H|defensive|T.J. Tampa||4575483|1;1;0;0;0;0;0
+P|150|H|defensive|Keyon Martin||4694334|1;1;0;1;0;0;0
+P|150|H|defensive|Ethan Burke||4908867|1;1;0;0;0;0;0
+P|150|H|defensive|Ryan Eckley||5084956|1;1;0;0;0;0;0
+P|150|H|defensive|Trey Hendrickson||3052743|1;0;0;0;0;0;0
+P|150|H|defensive|Broderick Washington Jr.||3915837|1;0;0;0;0;0;0
+P|150|H|defensive|K'Von Wallace||4035463|1;0;0;0;0;0;0
+P|150|H|defensive|Jay Higgins IV||4565350|1;0;0;0;0;0;0
+P|150|H|kickReturns|Chris Moore||2576581|4;82;20.5;24;0
+P|150|H|puntReturns|LaJohntay Wester||4690143|1;20;20.0;20;0
+P|150|H|kicking|Riley Patterson||4243371|2/2;100.0;36;2/2;8
+P|150|H|punting|Ryan Eckley||5084956|5;247;49.4;1;0;58
 

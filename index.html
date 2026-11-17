@@ -285,6 +285,83 @@
   .card .role{font-family:var(--util); font-size:10.5px; letter-spacing:.16em;
     text-transform:uppercase; color:var(--accent); margin-bottom:22px;}
   .card p{margin:0 0 24px; color:var(--fg-3); font-size:15.5px;}
+  /* ============ round 2: livelier, easier ============ */
+  /* live clock beside the day count */
+  .count-side{display:flex; flex-direction:column; gap:12px; padding-bottom:6px;}
+  .count-side .count-label{padding-bottom:0;}
+  .clock{display:flex; gap:8px;}
+  .clock[hidden]{display:none;}
+  .clock span{display:flex; flex-direction:column; align-items:center; gap:3px; min-width:50px; padding:8px 6px 7px;
+    border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.035);}
+  html[data-theme="light"] .clock span{background:rgba(255,255,255,.6);}
+  .clock b{font-family:var(--body); font-weight:300; font-size:21px; line-height:1; color:var(--fg);
+    font-variant-numeric:tabular-nums; letter-spacing:-.01em;}
+  .clock i{font-style:normal; font-family:var(--util); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--fg-2);}
+
+  /* gold reading line under the top bar, and the section you're in lights up */
+  .progress{position:absolute; left:0; right:0; bottom:-1px; height:2px; pointer-events:none; overflow:hidden;}
+  .progress i{display:block; height:100%; width:100%; transform-origin:0 50%; transform:scaleX(0);
+    background:linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent));
+    box-shadow:0 0 10px var(--accent);}
+  .nav a{position:relative;}
+  .nav a.on{color:var(--fg);}
+  .nav a::after{content:""; position:absolute; left:0; right:0; bottom:-7px; height:1px; background:var(--accent);
+    transform:scaleX(0); transition:transform .35s var(--ease);}
+  .nav a.on::after{transform:scaleX(1);}
+
+  /* floating Share + back-to-top, after the first screen */
+  .fab{position:fixed; right:max(16px, env(safe-area-inset-right)); bottom:max(16px, env(safe-area-inset-bottom)); z-index:55;
+    display:flex; gap:8px; opacity:0; transform:translateY(14px); pointer-events:none;
+    transition:opacity .35s var(--ease), transform .35s var(--ease);}
+  .fab.on{opacity:1; transform:none; pointer-events:auto;}
+  .fab button{display:inline-flex; align-items:center; gap:8px; height:46px; min-width:46px; padding:0 14px; justify-content:center;
+    border-radius:999px; border:1px solid var(--line); cursor:pointer; color:var(--fg);
+    background:var(--shell-solid); box-shadow:0 14px 36px -16px rgba(0,0,0,.6);
+    font-family:var(--util); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    transition:border-color .2s var(--ease), color .2s var(--ease), transform .15s var(--ease);}
+  .fab button:hover{border-color:var(--accent); color:var(--accent);}
+  .fab button:active{transform:scale(.95);}
+  .fab #topBtn{padding:0;}
+  .fab svg{width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;}
+  .toast{position:fixed; left:50%; bottom:max(80px, calc(env(safe-area-inset-bottom) + 72px)); z-index:70;
+    transform:translate(-50%, 10px); opacity:0; pointer-events:none;
+    background:var(--accent); color:#0C2523; font-size:14px; font-weight:500; padding:10px 18px; border-radius:999px;
+    box-shadow:0 14px 36px -14px rgba(0,0,0,.6); transition:opacity .3s var(--ease), transform .3s var(--ease); max-width:calc(100vw - 32px);}
+  .toast.on{opacity:1; transform:translate(-50%, 0);}
+
+  /* hearts when a note is sent */
+  .heart{position:fixed; z-index:80; pointer-events:none; color:var(--accent); line-height:1;
+    transform:translate(-50%,-50%); animation:pop 1.2s cubic-bezier(.2,.7,.3,1) forwards; text-shadow:0 0 12px var(--accent-soft);}
+  .heart:nth-child(2n){color:#E79AB8;}
+  @keyframes pop{
+    0%{opacity:0; transform:translate(-50%,-50%) scale(.4);}
+    15%{opacity:1;}
+    100%{opacity:0; transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(1);}
+  }
+
+  /* Venmo gift option inside the note form */
+  .gift-opt{position:relative; margin-top:18px; padding:14px 16px; border:1px dashed var(--line); border-radius:12px;}
+  .check{display:flex !important; align-items:flex-start; gap:12px; margin:0 !important; cursor:pointer;
+    font-family:var(--body) !important; font-size:15px !important; letter-spacing:0 !important; text-transform:none !important; color:var(--fg) !important;}
+  .wish-form .check input{position:absolute; opacity:0; width:1px; height:1px; padding:0; border:0;}
+  .check .box{flex:0 0 22px; height:22px; border-radius:7px; border:1.5px solid var(--line); margin-top:1px; display:grid; place-items:center;
+    transition:background .2s var(--ease), border-color .2s var(--ease);}
+  .check .box::after{content:""; width:6px; height:11px; border:solid #0C2523; border-width:0 2px 2px 0; transform:rotate(45deg) translate(-1px,-1px) scale(0);
+    transition:transform .2s var(--ease);}
+  .check input:checked + .box{background:var(--accent); border-color:var(--accent);}
+  .check input:checked + .box::after{transform:rotate(45deg) translate(-1px,-1px) scale(1);}
+  .check input:focus-visible + .box{outline:2px solid var(--accent); outline-offset:2px;}
+  .check em{display:block; font-style:normal; font-size:13px; color:var(--fg-2); margin-top:2px;}
+  .gift-amts{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .gift-amts[hidden]{display:none;}
+  .gift-amts button{height:40px; padding:0 16px; border-radius:999px; border:1px solid var(--line); background:transparent;
+    color:var(--fg); font:inherit; font-size:15px; cursor:pointer; transition:all .2s var(--ease);}
+  .gift-amts button:hover{border-color:var(--accent);}
+  .gift-amts button.on{background:var(--accent); border-color:var(--accent); color:#0C2523;}
+  .amt-in{display:inline-flex; align-items:center; gap:4px; height:40px; padding:0 4px 0 14px; border:1px solid var(--line); border-radius:999px; color:var(--fg-2);}
+  .amt-in input{width:76px !important; border:0 !important; background:transparent !important; padding:0 6px !important; height:38px;}
+  .wish-msg .lnk{margin-left:4px; font-size:14px;}
+
   /* the one quiet way in for invited guests */
   .invited{margin:22px 0 0; font-size:14.5px; color:var(--fg-2);}
 
@@ -617,6 +694,7 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path class="l1" d="M4 8h16"/><path class="l2" d="M4 16h16"/></svg>
     </button>
   </div>
+  <div class="progress" aria-hidden="true"><i id="prog"></i></div>
 </div>
 
 <div class="menu" id="menu" hidden>
@@ -662,7 +740,14 @@
 
         <div class="count">
           <div class="count-n" id="days">—</div>
-          <div class="count-label">days until<br>December 30, 2026</div>
+          <div class="count-side">
+            <div class="count-label">days until<br>December 30, 2026</div>
+            <div class="clock" id="clock" aria-hidden="true">
+              <span><b id="cH">--</b><i>hrs</i></span>
+              <span><b id="cM">--</b><i>min</i></span>
+              <span><b id="cS">--</b><i>sec</i></span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -969,6 +1054,19 @@
       <label for="wMsg">Your note</label>
       <textarea id="wMsg" name="msg" maxlength="500" rows="4" required></textarea>
       <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="gift-opt">
+        <label class="check" for="wGift">
+          <input type="checkbox" id="wGift">
+          <span class="box" aria-hidden="true"></span>
+          <span>Send a gift on Venmo too <em>Venmo opens with your note already filled in</em></span>
+        </label>
+        <div class="gift-amts" id="wAmts" hidden>
+          <button type="button" data-amt="25">$25</button>
+          <button type="button" data-amt="50">$50</button>
+          <button type="button" data-amt="100">$100</button>
+          <span class="amt-in"><span aria-hidden="true">$</span><input id="wAmt" inputmode="decimal" maxlength="7" placeholder="Other" aria-label="Gift amount in dollars (optional)"></span>
+        </div>
+      </div>
       <div class="wish-foot">
         <button class="btn primary" type="submit" id="wSend">Send with love</button>
         <span class="wish-msg" id="wMsgOut" role="status" aria-live="polite"></span>
@@ -999,6 +1097,17 @@
     <div class="eyebrow" id="foot-count">—</div>
   </div>
 </footer>
+
+<div class="fab" id="fab">
+  <button type="button" id="shareBtn" aria-label="Share this site">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3.5M7.5 8 12 3.5 16.5 8"/><path d="M5 12.5V19a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19v-6.5"/></svg>
+    <span>Share</span>
+  </button>
+  <button type="button" id="topBtn" aria-label="Back to the top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+  </button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
   <span class="lb-count" id="lbCount" aria-live="polite"></span>
@@ -1039,17 +1148,26 @@
 
   /* ---- countdown: Dec 30 2026, 2:00 PM Pacific ---- */
   var TARGET = Date.UTC(2026, 11, 30, 22, 0, 0);
+  var lastDays = null;
+  var cH = document.getElementById('cH'), cM = document.getElementById('cM'), cS = document.getElementById('cS');
+  var clock = document.getElementById('clock');
+  function two(n){ return (n < 10 ? '0' : '') + n; }
   function tick(){
     var diff = TARGET - Date.now();
-    var days = Math.max(0, Math.ceil(diff / 86400000));
+    var days = Math.max(0, Math.floor(diff / 86400000));
+    var rest = Math.max(0, Math.floor(diff / 1000) - days * 86400);
+    if (cH){ cH.textContent = two(Math.floor(rest / 3600)); cM.textContent = two(Math.floor(rest % 3600 / 60)); cS.textContent = two(rest % 60); }
+    if (diff <= 0 && clock) clock.hidden = true;
+    if (days === lastDays) return;
+    lastDays = days;
     var d = document.getElementById('days');
     var f = document.getElementById('foot-count');
-    if (d) d.textContent = diff <= 0 ? 'Married' : days.toLocaleString();
+    if (d && !d.dataset.counting) d.textContent = diff <= 0 ? 'Married' : days.toLocaleString();
     if (f) f.textContent = diff <= 0
       ? 'Married in La Jolla · 12.30.2026'
       : days.toLocaleString() + ' days out · La Jolla, CA';
   }
-  tick(); setInterval(tick, 60000);
+  tick(); setInterval(tick, 1000);
 
   /* ---- the countdown counts itself up on arrival ---- */
   (function(){
@@ -1100,8 +1218,42 @@
 
     var out = document.getElementById('wMsgOut');
     var send = document.getElementById('wSend');
+
+    /* optional Venmo gift that rides along with the note */
+    var gift = document.getElementById('wGift'), amts = document.getElementById('wAmts'), amt = document.getElementById('wAmt');
+    function syncGift(){
+      amts.hidden = !gift.checked;
+      send.textContent = gift.checked ? 'Send note + open Venmo' : 'Send with love';
+    }
+    gift.addEventListener('change', syncGift);
+    amts.addEventListener('click', function(e){
+      var b = e.target.closest('button[data-amt]'); if (!b) return;
+      var on = !b.classList.contains('on');
+      amts.querySelectorAll('button').forEach(function(x){ x.classList.remove('on'); });
+      if (on){ b.classList.add('on'); amt.value = b.dataset.amt; } else amt.value = '';
+    });
+    amt.addEventListener('input', function(){
+      amt.value = amt.value.replace(/[^0-9.]/g, '');
+      amts.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x.dataset.amt === amt.value); });
+    });
+    function venmoUrl(name, msg){
+      var note = '💍 ' + msg + ' – ' + name;
+      if (note.length > 250) note = note.slice(0, 247) + '…';
+      var a = parseFloat(amt.value);
+      return 'https://venmo.com/?txn=pay&recipients=Jameson-Golding' +
+        (a > 0 ? '&amount=' + encodeURIComponent(a.toFixed(2).replace(/\.00$/, '')) : '') +
+        '&note=' + encodeURIComponent(note);
+    }
+
     form.addEventListener('submit', function(e){
       e.preventDefault();
+      var vUrl = null, vWin = null;
+      var nm = document.getElementById('wName').value.trim(), ms = document.getElementById('wMsg').value.trim();
+      if (gift.checked && nm && ms){
+        // open Venmo right away, inside the tap, so phones don't block it as a pop-up
+        vUrl = venmoUrl(nm, ms);
+        try { vWin = window.open(vUrl, '_blank', 'noopener'); } catch (err) { vWin = null; }
+      }
       var data = {
         name: document.getElementById('wName').value.trim(),
         from: document.getElementById('wFrom').value.trim(),
@@ -1119,7 +1271,15 @@
           var empty = list.querySelector('.wish-empty'); if (empty) empty.remove();
           if (res.j.entry) list.insertBefore(card(res.j.entry, true), list.firstChild);
           document.getElementById('wMsg').value = '';
-          out.textContent = 'Thank you! We’ll treasure it.';
+          out.textContent = vUrl ? 'Thank you! Finish your gift in Venmo. ' : 'Thank you! We’ll treasure it.';
+          if (vUrl){
+            var again = document.createElement('a');
+            again.href = vUrl; again.target = '_blank'; again.rel = 'noopener'; again.className = 'lnk';
+            again.textContent = 'Venmo didn’t open? Tap here';
+            out.appendChild(again);
+            gift.checked = false; amt.value = ''; amts.querySelectorAll('button').forEach(function(x){ x.classList.remove('on'); }); syncGift();
+          }
+          if (window.jdHearts) window.jdHearts(send);
         })
         .catch(function(){ send.disabled = false; out.className = 'wish-msg err'; out.textContent = 'That didn’t go through. Try again in a minute.'; });
     });
@@ -1155,9 +1315,15 @@
   var finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var parallax = heroImg && finePointer && !reduce;   // a subtle desktop nicety; skipped on phones
   var lastDot = null, ticking = false;
+  var prog = document.getElementById('prog'), fab = document.getElementById('fab'), fabOn = false;
+  var docMax = document.documentElement.scrollHeight;
+  function measure(){ docMax = document.documentElement.scrollHeight; }
+  if (typeof ResizeObserver !== 'undefined') new ResizeObserver(function(){ measure(); onScroll(); }).observe(document.body);
   function update(){
     ticking = false;
     var y = window.scrollY, vh = window.innerHeight || 800;
+    if (prog){ var max = docMax - vh; prog.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0).toFixed(4) + ')'; }
+    if (fab){ var showFab = y > vh * 0.9; if (showFab !== fabOn){ fabOn = showFab; fab.classList.toggle('on', showFab); } }
     if (parallax && y < vh * 1.5) heroImg.style.transform = 'translateY(' + (y * -0.05).toFixed(1) + 'px)';
     if (spine && record && !reduce){
       var r = record.getBoundingClientRect();
@@ -1171,11 +1337,91 @@
   }
   function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
   if (spine && reduce) spine.style.transform = 'scaleY(1)';
-  if (parallax || (spine && record && !reduce)){
+  {
     update();
     window.addEventListener('scroll', onScroll, { passive:true });
     window.addEventListener('resize', onScroll);
   }
+
+  /* ---- a little toast for quick confirmations ---- */
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(msg){
+    if (!toastEl) return;
+    toastEl.textContent = msg; toastEl.classList.add('on');
+    clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.classList.remove('on'); }, 2600);
+  }
+  window.jdToast = toast;
+
+  /* ---- share + back to top ---- */
+  (function(){
+    var share = document.getElementById('shareBtn'), top = document.getElementById('topBtn');
+    var URL_ = 'https://djgolding.com/';
+    if (top) top.addEventListener('click', function(){ window.scrollTo({ top:0, behavior: reduce ? 'auto' : 'smooth' }); });
+    if (share) share.addEventListener('click', function(){
+      var data = { title:'Jameson & Dawsyn', text:'Jameson & Dawsyn are getting married! 12.30.2026', url:URL_ };
+      if (navigator.share){ navigator.share(data).catch(function(){}); return; }
+      var done = function(){ toast('Link copied. Paste it anywhere!'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(URL_).then(done, function(){ toast(URL_); });
+      else toast(URL_);
+    });
+  })();
+
+  /* ---- light up the section you're reading in the top menu ---- */
+  (function(){
+    if (typeof IntersectionObserver === 'undefined') return;
+    var links = {}, current = null;
+    document.querySelectorAll('.nav a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+    var spy = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var a = links[e.target.id] || null;
+        if (a === current) return;
+        if (current) current.classList.remove('on');
+        current = a; if (a) a.classList.add('on');
+      });
+    }, { rootMargin:'-45% 0px -50% 0px' });
+    ['top','two','record','day','gifts','notes','wishes'].forEach(function(id){ var s = document.getElementById(id); if (s) spy.observe(s); });
+  })();
+
+  /* ---- the numbers count up the first time you see them ---- */
+  (function(){
+    var nums = document.querySelectorAll('.tg-n');
+    if (!nums.length || reduce || typeof IntersectionObserver === 'undefined') return;
+    nums.forEach(function(n){ n.dataset.to = n.textContent; n.textContent = '0'; });
+    var seen = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        seen.unobserve(e.target);
+        var el = e.target, to = parseInt(el.dataset.to, 10), began = null;
+        (function run(ts){
+          if (began === null) began = ts;
+          var p = Math.min(1, (ts - began) / 1300), eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(to * eased);
+          if (p < 1) requestAnimationFrame(run); else el.textContent = el.dataset.to;
+        })(performance.now());
+      });
+    }, { threshold:.6 });
+    nums.forEach(function(n){ seen.observe(n); });
+  })();
+
+  /* ---- a burst of hearts (used when a note is sent) ---- */
+  window.jdHearts = function(fromEl){
+    if (reduce || !fromEl) return;
+    var r = fromEl.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    for (var i = 0; i < 18; i++){
+      var h = document.createElement('span');
+      h.className = 'heart'; h.textContent = i % 3 ? '♥' : '✦';
+      var ang = -Math.PI / 2 + (Math.random() - .5) * 2.2, dist = 70 + Math.random() * 120;
+      h.style.left = cx + 'px'; h.style.top = cy + 'px';
+      h.style.setProperty('--dx', (Math.cos(ang) * dist).toFixed(0) + 'px');
+      h.style.setProperty('--dy', (Math.sin(ang) * dist).toFixed(0) + 'px');
+      h.style.setProperty('--rot', ((Math.random() - .5) * 90).toFixed(0) + 'deg');
+      h.style.animationDelay = (Math.random() * 120).toFixed(0) + 'ms';
+      h.style.fontSize = (12 + Math.random() * 14).toFixed(0) + 'px';
+      document.body.appendChild(h);
+      setTimeout(function(n){ n.remove(); }.bind(null, h), 1500);
+    }
+  };
 
   /* ---- looping animations rest while off screen ---- */
   if (typeof IntersectionObserver !== 'undefined'){

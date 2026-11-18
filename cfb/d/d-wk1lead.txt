@@ -2254,14 +2254,14 @@
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|passingYards|Trinidad Chambliss|QB|14/27, 127 YDS, 1 TD
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|rushingYards|Trinidad Chambliss|QB|11 CAR, 84 YDS
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|receivingYards|Caleb Odom|TE|4 REC, 56 YDS, 1 TD
-2026-11-17|Eastern Michigan|Western Michigan|Western Michigan|passingYards|Broc Lowry|QB|9/14, 86 YDS
-2026-11-17|Eastern Michigan|Western Michigan|Western Michigan|rushingYards|Jalen Buckley|RB|14 CAR, 126 YDS, 2 TD
-2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|receivingYards|Nick Devereaux|WR|3 REC, 39 YDS
-2026-11-17|Ball State|Ohio|Ball State|passingYards|Keldric Luster|QB|11/18, 208 YDS, 2 TD
-2026-11-17|Ball State|Ohio|Ball State|rushingYards|Keldric Luster|QB|8 CAR, 75 YDS
-2026-11-17|Ball State|Ohio|Ball State|receivingYards|Eli Hohlt|WR|2 REC, 93 YDS, 1 TD
-2026-11-17|Miami (OH)|Kent State|Miami (OH)|passingYards|Drew Bellisari|QB|6/11, 113 YDS
-2026-11-17|Miami (OH)|Kent State|Miami (OH)|rushingYards|D'Shawntae Jones|RB|13 CAR, 80 YDS, 2 TD
+2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|passingYards|Brogan McCaughey|QB|12/16, 135 YDS, 1 TD
+2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|rushingYards|Amareon Blue|RB|27 CAR, 160 YDS, 3 TD
+2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|receivingYards|Nick Devereaux|WR|4 REC, 62 YDS
+2026-11-17|Ball State|Ohio|Ball State|passingYards|Keldric Luster|QB|20/33, 257 YDS, 2 TD, 1 INT
+2026-11-17|Ball State|Ohio|Ball State|rushingYards|Keldric Luster|QB|16 CAR, 109 YDS
+2026-11-17|Ball State|Ohio|Ball State|receivingYards|Eli Hohlt|WR|4 REC, 112 YDS, 1 TD
+2026-11-17|Miami (OH)|Kent State|Miami (OH)|passingYards|Drew Bellisari|QB|7/12, 124 YDS
+2026-11-17|Miami (OH)|Kent State|Miami (OH)|rushingYards|D'Shawntae Jones|RB|29 CAR, 121 YDS, 2 TD
 2026-11-17|Miami (OH)|Kent State|Miami (OH)|receivingYards|Rodney Nelson|RB|1 REC, 47 YDS
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS

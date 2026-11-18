@@ -6,3 +6,46 @@
   Cache-Control: public, max-age=31536000, immutable
 /nba/d/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Shared hub layers (2026-11-18, speed): every page loads them with a version tag (?v=...), and a new version gets a new
+# tag, so a phone can keep each copy for a year instead of checking back on every page load.
+/sports/bl.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/holo.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/stage.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/glow.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/vibe.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/touch.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/app.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/explain.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/follow.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/fluid.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/finish.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/tabs.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/search.js
+  Cache-Control: public, max-age=31536000, immutable
+/sports/ask.js
+  Cache-Control: public, max-age=31536000, immutable
+# Team logos and icons: they rarely change; keep a copy for a week.
+/cfb/img/logos/*
+  Cache-Control: public, max-age=604800
+/nfl/img/logos/*
+  Cache-Control: public, max-age=604800
+/nba/img/logos/*
+  Cache-Control: public, max-age=604800
+/sports/icons/*
+  Cache-Control: public, max-age=604800
+# College football player cards: one roster file per team, refreshed now and then.
+/cfb/data/pl/*
+  Cache-Control: public, max-age=86400

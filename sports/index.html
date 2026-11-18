@@ -490,6 +490,24 @@ body::after{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(
 }
 .hx-lg{font-size:11px}
 .nw-tag,.sp-tag{font-size:11px}
+/* home polish (2026-11-18, Jamo picked "Home page polish": your teams at a glance, less scrolling): on phones every team
+   card shows at once in a two-column grid instead of a sideways swipe, trimmed to what matters - sport, team, the next
+   game and its countdown (or the live score), and the last result */
+@media (max-width:600px){
+  :root .yt:not(.mini) #teams{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-columns:auto;overflow:visible;gap:10px;scroll-snap-type:none;margin-right:0;padding-right:0}
+  :root .yt:not(.mini) #teams .tc{min-height:0;gap:7px;padding:11px 11px 10px;border-radius:18px}
+  :root .yt:not(.mini) #teams .tc-rank{font-size:11px;padding:2px 6px}
+  :root .yt:not(.mini) #teams .tc-id{gap:8px}
+  :root .yt:not(.mini) #teams .tc-id img,:root .yt:not(.mini) #teams .tc-id .tc-logo{width:34px;height:34px}
+  :root .yt:not(.mini) #teams .tc-name{font-size:17px;-webkit-line-clamp:1}
+  :root .yt:not(.mini) #teams .tc-meta{font-size:11px}
+  :root .yt:not(.mini) #teams .tc-next{padding:7px 8px;border-radius:11px}
+  :root .yt:not(.mini) #teams .tc-k{font-size:9.5px;letter-spacing:.08em;flex-wrap:wrap;gap:2px 6px}
+  :root .yt:not(.mini) #teams .tc-g{font-size:12px;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.3}
+  :root .yt:not(.mini) #teams .tc-cd{font-size:15px}
+  :root .yt:not(.mini) #teams .tc-sc{font-size:18px}
+  :root .yt:not(.mini) #teams .tc-last{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
 </style>
 </head>
 <body>

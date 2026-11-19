@@ -2254,6 +2254,12 @@
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|passingYards|Trinidad Chambliss|QB|14/27, 127 YDS, 1 TD
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|rushingYards|Trinidad Chambliss|QB|11 CAR, 84 YDS
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|receivingYards|Caleb Odom|TE|4 REC, 56 YDS, 1 TD
+2026-11-18|Akron|Massachusetts|Akron|passingYards|Cibastian Broughton|QB|5/11, 72 YDS, 1 TD, 2 INT
+2026-11-18|Akron|Massachusetts|Akron|rushingYards|Jordan Gant|RB|11 CAR, 123 YDS, 1 TD
+2026-11-18|Akron|Massachusetts|Akron|receivingYards|Miles Burris|WR|2 REC, 49 YDS, 1 TD
+2026-11-18|Central Michigan|Buffalo|Central Michigan|passingYards|Jadyn Glasser|QB|3/6, 49 YDS, 1 TD, 1 INT
+2026-11-18|Central Michigan|Buffalo|Buffalo|rushingYards|Messiah Burch|RB|13 CAR, 68 YDS, 1 TD
+2026-11-18|Central Michigan|Buffalo|Central Michigan|receivingYards|Braylen Naves|WR|1 REC, 32 YDS, 1 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|passingYards|Brogan McCaughey|QB|12/16, 135 YDS, 1 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|rushingYards|Amareon Blue|RB|27 CAR, 160 YDS, 3 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|receivingYards|Nick Devereaux|WR|4 REC, 62 YDS

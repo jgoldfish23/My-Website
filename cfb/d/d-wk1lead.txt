@@ -1711,7 +1711,7 @@
 2026-10-29|Florida Atlantic|North Texas|Florida Atlantic|passingYards|Caden Veltkamp|QB|37/56, 452 YDS, 5 TD, 1 INT
 2026-10-29|Florida Atlantic|North Texas|North Texas|rushingYards|Jahiem White|RB|26 CAR, 186 YDS, 2 TD
 2026-10-29|Florida Atlantic|North Texas|Florida Atlantic|receivingYards|Easton Messer|WR|16 REC, 189 YDS, 3 TD
-2026-10-29|Troy|James Madison|Troy|passingYards|Tucker Kilcrease|QB|15/31, 179 YDS
+2026-10-29|Troy|James Madison|Troy|passingYards|Tucker Kilcrease|QB|15/30, 179 YDS
 2026-10-29|Troy|James Madison|James Madison|rushingYards|Seth Cromwell|RB|23 CAR, 135 YDS, 1 TD
 2026-10-29|Troy|James Madison|James Madison|receivingYards|Michael Scott|WR|4 REC, 68 YDS
 2026-10-30|Tulane|Charlotte|Tulane|passingYards|Trace Johnson|QB|28/36, 284 YDS, 1 TD, 1 INT
@@ -2254,12 +2254,6 @@
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|passingYards|Trinidad Chambliss|QB|14/27, 127 YDS, 1 TD
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|rushingYards|Trinidad Chambliss|QB|11 CAR, 84 YDS
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|receivingYards|Caleb Odom|TE|4 REC, 56 YDS, 1 TD
-2026-11-18|Akron|Massachusetts|Akron|passingYards|Cibastian Broughton|QB|5/11, 72 YDS, 1 TD, 2 INT
-2026-11-18|Akron|Massachusetts|Akron|rushingYards|Jordan Gant|RB|11 CAR, 123 YDS, 1 TD
-2026-11-18|Akron|Massachusetts|Akron|receivingYards|Miles Burris|WR|2 REC, 49 YDS, 1 TD
-2026-11-18|Central Michigan|Buffalo|Central Michigan|passingYards|Jadyn Glasser|QB|3/6, 49 YDS, 1 TD, 1 INT
-2026-11-18|Central Michigan|Buffalo|Buffalo|rushingYards|Messiah Burch|RB|13 CAR, 68 YDS, 1 TD
-2026-11-18|Central Michigan|Buffalo|Central Michigan|receivingYards|Braylen Naves|WR|1 REC, 32 YDS, 1 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|passingYards|Brogan McCaughey|QB|12/16, 135 YDS, 1 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|rushingYards|Amareon Blue|RB|27 CAR, 160 YDS, 3 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|receivingYards|Nick Devereaux|WR|4 REC, 62 YDS
@@ -2269,6 +2263,12 @@
 2026-11-17|Miami (OH)|Kent State|Miami (OH)|passingYards|Drew Bellisari|QB|7/12, 124 YDS
 2026-11-17|Miami (OH)|Kent State|Miami (OH)|rushingYards|D'Shawntae Jones|RB|29 CAR, 121 YDS, 2 TD
 2026-11-17|Miami (OH)|Kent State|Miami (OH)|receivingYards|Rodney Nelson|RB|1 REC, 47 YDS
+2026-11-18|Akron|Massachusetts|Akron|passingYards|Cibastian Broughton|QB|10/17, 165 YDS, 1 TD, 2 INT
+2026-11-18|Akron|Massachusetts|Akron|rushingYards|Jordan Gant|RB|21 CAR, 151 YDS, 2 TD
+2026-11-18|Akron|Massachusetts|Akron|receivingYards|Miles Burris|WR|3 REC, 59 YDS, 1 TD
+2026-11-18|Central Michigan|Buffalo|Buffalo|passingYards|Jason Wright|QB|6/13, 152 YDS, 1 TD
+2026-11-18|Central Michigan|Buffalo|Buffalo|rushingYards|Messiah Burch|RB|24 CAR, 200 YDS, 2 TD
+2026-11-18|Central Michigan|Buffalo|Buffalo|receivingYards|Jaylen Andrews|WR|2 REC, 64 YDS
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD

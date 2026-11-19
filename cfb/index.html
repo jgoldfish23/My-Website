@@ -3256,6 +3256,32 @@ tr.my-open>td{border-bottom-color:transparent}
 .edg-r .o,.edg-r .d{line-height:1.15}
 .edg-r small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .edg-r .e{max-width:96px}
+/* bowl season (2026-11-19) */
+.bw-me{margin:0 0 4px;border-left:4px solid var(--tc,var(--accent))}
+.bw-me .bd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding-top:12px;font-size:14px;line-height:1.5}
+.bw-chips{display:flex;flex-wrap:wrap;gap:6px}
+.bw-chips a{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 6px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-size:13px}
+.bw-chips a:hover{text-decoration:none;border-color:var(--accent)}
+.bw-chips .chip{margin:0}
+.bw-list{display:flex;flex-direction:column;gap:8px}
+.bw-day{margin:14px 0 2px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.bw-day:first-child{margin-top:0}
+.bw{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.bw.cfp{border-color:color-mix(in srgb,var(--gold) 55%,var(--line));background:linear-gradient(100deg,var(--gold-soft),var(--surface) 55%)}
+.bw.mine{box-shadow:inset 0 0 0 2px var(--accent)}
+.bw-when{display:flex;flex-direction:column;gap:2px;font-size:12.5px;color:var(--ink-2)}
+.bw-when b{font-size:13.5px;color:var(--ink)}
+.bw-tv{align-self:flex-start;margin-top:2px;padding:1px 7px;border-radius:999px;background:var(--surface-2);font-size:11px;font-weight:700}
+.bw-name{font-weight:800;font-size:15px;line-height:1.25}
+.bw-site{font-size:12.5px;color:var(--ink-3)}
+.bw-teams{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px}
+.bw-t{display:inline-flex;align-items:center;gap:6px}
+.bw-t i{font-style:normal;font-size:11.5px;font-weight:700;color:var(--ink-3)}
+.bw-t b{font-variant-numeric:tabular-nums}
+.bw-t.w b{color:var(--good)}
+.bw-line{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:4px;font-size:12.5px;color:var(--ink-2)}
+.bw-tbd{margin-top:6px;font-size:12.5px;color:var(--ink-3)}
+@media (max-width:600px){.bw{grid-template-columns:1fr;gap:6px}.bw-when{flex-direction:row;flex-wrap:wrap;gap:4px 10px;align-items:center}}
 </style>
 
 <header class="top">
@@ -3273,6 +3299,7 @@ tr.my-open>td{border-bottom-color:transparent}
       <a href="#/rankings" data-r="rankings">Rankings</a>
       <a href="#/standings" data-r="standings">Standings</a>
       <a href="#/playoff" data-r="playoff">Playoffs</a>
+      <a href="#/bowls" data-r="bowls">Bowls</a>
       <a href="#/scenarios" data-r="scenarios" title="Your team's road to the conference title and the Playoff">What has to happen</a><a href="#/rooting" data-r="rooting" title="This week's games to root for, to help your team's Playoff chances">Rooting guide</a>
       <a href="#/players" data-r="players">Player stats</a>
       <a href="#/injuries" data-r="injuries">Injuries</a>
@@ -7544,6 +7571,55 @@ BYU|Vincent Tautua|3|0|2026-09-05,2026-09-19,2026-10-31
 BYU|Walker Lyons|10|9|2026-09-05,2026-09-12,2026-09-19,2026-10-03,2026-10-09,2026-10-17,2026-10-24,2026-10-31,2026-11-07,2026-11-14
 BYU|Will Zundell|9|0|2026-09-05,2026-09-12,2026-09-19,2026-10-03,2026-10-09,2026-10-17,2026-10-24,2026-10-31,2026-11-07
 BYU|Zak Yamauchi|9|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,2026-10-24,2026-10-31,2026-11-07,2026-11-14
+</script>
+<script type="text/plain" id="d-bowls">401874421|2026-12-12T17:00Z|Cricket Celebration Bowl|Mercedes-Benz Stadium|Atlanta|ABC|||||SCHEDULED||||
+401874403|2026-12-15T22:30Z|IS4S Salute to Veterans Bowl|Cramton Bowl|Montgomery|ESPN|||||SCHEDULED||||
+401874404|2026-12-16T02:00Z|Frisco Football Classic|Ford Center At The Star|Frisco|ESPN|||||SCHEDULED||||
+401932016|2026-12-16T05:00Z|TransPerfect San Juan Bowl|Hiram Bithorn Stadium|San Juan||||||SCHEDULED||||
+401874405|2026-12-18T16:00Z|Boca Raton Bowl|Flagler Credit Union Stadium|Boca Raton|ESPN|||||SCHEDULED||||
+401874406|2026-12-18T19:30Z|Union Home Mortgage Gasparilla Bowl|Raymond James Stadium|Tampa|ESPN|||||SCHEDULED||||
+401874295|2026-12-19T01:00Z|College Football Playoff First Round Game|||ESPN|||||SCHEDULED||||
+401874296|2026-12-19T17:00Z|College Football Playoff First Round Game|||ABC/ESPN|||||SCHEDULED||||
+401874297|2026-12-19T20:30Z|College Football Playoff First Round Game|||TNT/truTV|||||SCHEDULED||||
+401874298|2026-12-20T00:30Z|College Football Playoff First Round Game|||TNT/truTV|||||SCHEDULED||||
+401874407|2026-12-21T16:00Z|Myrtle Beach Bowl|Brooks Stadium (SC)|Conway|ESPN|||||SCHEDULED||||
+401874408|2026-12-21T19:30Z|Famous Idaho Potato Bowl|Albertsons Stadium|Boise|ESPN|||||SCHEDULED||||
+401874409|2026-12-22T18:30Z|Puerto Rico Bowl|Juan Ramón Loubriel Stadium|Bayamon|ESPN|||||SCHEDULED||||
+401874410|2026-12-22T22:00Z|StaffDNA Cure Bowl|Acrisure Bounce House|Orlando|ESPN|||||SCHEDULED||||
+401874411|2026-12-23T01:30Z|Radiance Technologies Independence Bowl|Independence Stadium|Shreveport|ESPN|||||SCHEDULED||||
+401874412|2026-12-23T19:00Z|New Orleans Bowl|Caesars Superdome|New Orleans|ESPN|||||SCHEDULED||||
+401874413|2026-12-23T22:30Z|Lockheed Martin Armed Forces Bowl|Amon G. Carter Stadium|Fort Worth|ESPN|||||SCHEDULED||||
+401915245|2026-12-24T00:30Z|San Diego County Credit Union Poinsettia Bowl|Snapdragon Stadium|San Diego|CW|||||SCHEDULED||||
+401874414|2026-12-24T02:00Z|Frisco Bowl|Ford Center At The Star|Frisco|ESPN|||||SCHEDULED||||
+401874415|2026-12-24T19:30Z|Isleta New Mexico Bowl|University Stadium (NM)|Albuquerque|ESPN|||||SCHEDULED||||
+401874416|2026-12-25T00:00Z|Sheraton Hawaiʻi Bowl|Clarence T.C. Ching Athletics Complex|Honolulu|ESPN|||||SCHEDULED||||
+401874417|2026-12-26T17:00Z|Bad Boy Mowers Pinstripe Bowl|Yankee Stadium|Bronx|ABC|||||SCHEDULED||||
+401874418|2026-12-26T19:00Z|Wasabi Fenway Bowl|Fenway Park|Boston|ESPN|||||SCHEDULED||||
+401874419|2026-12-26T20:30Z|Duke's Mayo Bowl|Bank of America Stadium|Charlotte|ABC|||||SCHEDULED||||
+401874420|2026-12-26T22:30Z|68 Ventures Bowl|Hancock Whitney Stadium|Mobile|ESPN|||||SCHEDULED||||
+401874422|2026-12-27T00:30Z|Cactus Bowl|Mountain America Stadium|Tempe|ABC|||||SCHEDULED||||
+401874423|2026-12-28T19:00Z|Freedom Mortgage Military Bowl|Navy-Marine Corps Memorial Stadium|Annapolis|ESPN|||||SCHEDULED||||
+401915453|2026-12-28T22:00Z|Holiday Bowl|Snapdragon Stadium|San Diego|CW|||||SCHEDULED||||
+401874424|2026-12-29T19:00Z|JLab Birmingham Bowl|Protective Stadium|Birmingham|ESPN|||||SCHEDULED||||
+401874425|2026-12-29T22:30Z|Pop-Tarts Bowl|Camping World Stadium|Orlando|ESPN|||||SCHEDULED||||
+401874426|2026-12-30T02:00Z|Valero Alamo Bowl|Alamodome|San Antonio|ESPN|||||SCHEDULED||||
+401874427|2026-12-30T16:30Z|TaxSlayer Gator Bowl|EverBank Stadium|Jacksonville|ESPN|||||SCHEDULED||||
+401874428|2026-12-30T20:00Z|Liberty Mutual Music City Bowl|Nissan Stadium|Nashville|ESPN|||||SCHEDULED||||
+401874299|2026-12-31T00:30Z|College Football Playoff Quarterfinal at the Vrbo Fiesta Bowl|State Farm Stadium|Glendale|TNT/truTV|||||SCHEDULED||||
+401874429|2026-12-31T17:00Z|ReliaQuest Bowl|Raymond James Stadium|Tampa|ESPN|||||SCHEDULED||||
+401874396|2026-12-31T19:00Z|Tony the Tiger Sun Bowl|Sun Bowl|El Paso|CBS|||||SCHEDULED||||
+401874430|2026-12-31T20:45Z|Las Vegas Bowl|Allegiant Stadium|Las Vegas|ESPN|||||SCHEDULED||||
+401874431|2027-01-01T00:30Z|Kinder's Texas Bowl|Reliant Stadium|Houston|ESPN|||||SCHEDULED||||
+401874320|2027-01-01T05:00Z|College Football Playoff Quarterfinal at the Goodyear Cotton Bowl Classic|AT&T Stadium|Arlington||||||SCHEDULED||||
+401874321|2027-01-01T05:00Z|College Football Playoff Quarterfinal at the Rose Bowl Presented by Prudential|Rose Bowl|Pasadena||||||SCHEDULED||||
+401874342|2027-01-01T05:00Z|College Football Playoff Quarterfinal at the Chick-fil-A Peach Bowl|Mercedes-Benz Stadium|Atlanta||||||SCHEDULED||||
+401874432|2027-01-02T17:00Z|Citrus Bowl|Camping World Stadium|Orlando|ABC|||||SCHEDULED||||
+401874433|2027-01-02T20:30Z|SERVPRO First Responder Bowl|Gerald J. Ford Stadium|Dallas|ABC|||||SCHEDULED||||
+401923399|2027-01-02T21:30Z|Snoop Dogg Arizona Bowl|Casino Del Sol Stadium|Tucson|CW|||||SCHEDULED||||
+401874395|2027-01-03T00:30Z|AutoZone Liberty Bowl|Simmons Bank Liberty Stadium|Memphis|ABC|||||SCHEDULED||||
+401874300|2027-01-15T00:30Z|College Football Playoff Semifinal at the Capital One Orange Bowl|Hard Rock Stadium|Miami Gardens|TNT/truTV|||||SCHEDULED||||
+401874301|2027-01-16T00:30Z|College Football Playoff Semifinal at the Allstate Sugar Bowl|Caesars Superdome|New Orleans|ABC/ESPN|||||SCHEDULED||||
+401874322|2027-01-26T00:30Z|College Football Playoff National Championship Presented by AT&T|Allegiant Stadium|Las Vegas|ABC|||||SCHEDULED||||
 </script>
 <script type="application/json" id="d-uniwatch">{
   "_note": "BYU Uni Watch (patch104). One entry per game once BYU posts the combo (usually early in game week). h = helmet, fm = facemask (blank when not reported), j = jersey, p = pants; colors are royal, navy or white. desc is the combo as reported. first = first time BYU has worn this exact combination. Updated by the 'BYU Uni Watch' scheduled task; photo = BYU Photo's shot from the byucougars.com game recap (images/uni, published at /cfb/img/uni/). Sources: BYU Football's posts as reported by KSL Sports (Mitch Harper) and the Deseret News. \"o\" (patch124) is what the opponent wore: h, fm, j, p in the team's own color words, c = those colors' hex from the school's brand guide, desc, src, photo = the opponent athletics site's game-recap photo (images/uni/<date>-opp.jpg). Only from the opponent's announcement, an outlet's write-up or its game photo; leave it out until known. \"art\" (Nov. 10) is BYU's own uniform announcement graphic (images/uni/<date>-threads.jpg): the card shows it in BYU's picture slot, uncropped, until \"photo\" exists; keep it when the photo is added (the photo simply wins).",
@@ -13286,6 +13362,56 @@ function h2hHistoryHTML(g){ const a=team(g.away), h=team(g.home); if(a.other||h.
 const FCS_AUTO=['Big Sky','CAA','MVFC','OVC','Patriot','Pioneer','Southern','Southland','UAC','NEC'];   // leagues with an automatic bid
 const FCS_OUT=['Ivy','SWAC','MEAC'];                                                                     // leagues that do not take part
 function playoffField(){ const elig=FCSD1.filter(t=>FCS_OUT.indexOf(t.conf)<0); const autos=[]; FCS_AUTO.forEach(c=>{ const best=elig.filter(t=>t.conf===c).sort((x,y)=>y.rating-x.rating)[0]; if(best) autos.push({t:best,how:'auto',conf:c}); }); const taken=new Set(autos.map(x=>x.t.name)); const at=elig.filter(t=>!taken.has(t.name)).sort((a,b)=>b.rating-a.rating).slice(0,24-autos.length).map(t=>({t,how:'at-large',conf:t.conf})); const field=autos.concat(at).sort((a,b)=>b.t.rating-a.t.rating); field.forEach((x,i)=>x.seed=i+1); const next=elig.filter(t=>!field.some(x=>x.t.name===t.name)).sort((a,b)=>b.rating-a.rating).slice(0,6); return {field, next, elig}; }
+/* ---------- bowl season (2026-11-19, Jamo picked "Bowl season") ----------
+   #/bowls: the bowl-eligibility race and every bowl and Playoff game.
+   - The bowl list is ESPN's postseason schedule (bowls.txt from fetch_espn.pl, refreshed with the rest of the data):
+     date, site, TV, and the two teams once they are announced (the weekend after the conference title games), then the
+     line and the hub's pick. Until then each bowl shows "teams announced Dec 6".
+   - Conference tie-ins for 2026 are not settled in public sources, so this page does not guess which bowl a team gets.
+   - The race uses the hub's own model: 6 wins makes a team bowl eligible; "chance" is the hub's chance of reaching 6
+     (stats().bowl, from every remaining game's win chance). 36 bowls = 72 places, plus the 12 Playoff teams.
+   - Your team first: an FBS favorite gets its bowl status and Playoff odds; an FCS favorite (Weber State) gets its FCS
+     playoff status, since FCS teams do not play in bowls. */
+const BOWLS = loadText('d-bowls').split('\n').map(l=>l.split('|')).filter(p=>p.length>=11&&p[0]).map(p=>({id:p[0], iso:p[1], name:p[2], venue:p[3], city:p[4], tv:p[5], away:p[6], home:p[7], as:p[8]===''?null:+p[8], hs:p[9]===''?null:+p[9], st:p[10], spread:p[11]===''||p[11]==null?null:+p[11], total:p[12]===''||p[12]==null?null:+p[12], ar:+p[13]||null, hr:+p[14]||null}));
+const BOWL_SLOTS = BOWLS.filter(b=>!/Playoff|Celebration/i.test(b.name)).length*2;
+/* the time in the zone picked in Settings: bowls are all in December and January, so Eastern is UTC-5 */
+function bowlWhen(iso){ const t=Date.parse(iso); if(isNaN(t)) return {d:'', tm:''}; const z=tzInfo(), d=new Date(t+(-5+z.off)*3600e3); const DW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let h=d.getUTCHours(), m=d.getUTCMinutes(); const ap=h>=12?'PM':'AM'; h=h%12||12; return {d:DW[d.getUTCDay()]+', '+MN[d.getUTCMonth()]+' '+d.getUTCDate(), tm:h+':'+String(m).padStart(2,'0')+' '+ap+' '+z.lbl, key:d.toISOString().slice(0,10)}; }
+const bowlShort = n => String(n).replace(/^College Football Playoff /,'CFP ').replace(/ Presented by .*$/,'').replace(/^(Cricket|IS4S|TransPerfect|Union Home Mortgage|StaffDNA|Radiance Technologies|Lockheed Martin|San Diego County Credit Union|Isleta|Sheraton|Bad Boy Mowers|Wasabi|Freedom Mortgage|JLab|Valero|TaxSlayer|Liberty Mutual|Tony the Tiger|Kinder's|SERVPRO|Snoop Dogg|AutoZone) /,'');
+function bowlPickHTML(b){ const A=b.away&&T[b.away], H=b.home&&T[b.home]; if(!A||!H) return ''; const p=cdf((H.rating-A.rating)/SD); const fav=p>=0.5?H:A, pp=Math.max(p,1-p);
+  return '<span class="bw-pick">Hub pick: <b>'+esc(tshort(fav.name))+'</b> '+Math.round(pp*100)+'%</span>'; }
+function bowlRowHTML(b){ const w=bowlWhen(b.iso), cfp=/Playoff/.test(b.name), set=b.away&&b.home, done=b.st==='FINAL';
+  const side=(n,r,s,won)=>'<span class="bw-t'+(won?' w':'')+'">'+(n?(r?'<i>'+r+'</i> ':'')+(T[n]?chip(n,{norank:true}):esc(n)):'<span class="dim">TBD</span>')+(s!=null?'<b>'+s+'</b>':'')+'</span>';
+  const fav=SETTINGS.fav||'BYU', mine=b.away===fav||b.home===fav;
+  return '<div class="bw'+(cfp?' cfp':'')+(mine?' mine':'')+'"><div class="bw-when"><b>'+esc(w.d)+'</b><span>'+esc(w.tm)+'</span>'+(b.tv?'<span class="bw-tv">'+esc(b.tv.split('/')[0])+'</span>':'')+'</div>'
+    +'<div class="bw-mid"><div class="bw-name">'+esc(bowlShort(b.name))+'</div><div class="bw-site">'+esc([b.venue,b.city].filter(Boolean).join(' · '))+'</div>'
+    +(set?'<div class="bw-teams">'+side(b.away,b.ar,done?b.as:null,done&&b.as>b.hs)+'<span class="dim">vs</span>'+side(b.home,b.hr,done?b.hs:null,done&&b.hs>b.as)+'</div>'
+      +'<div class="bw-line">'+(b.spread!=null?'<span>Line: '+esc(b.spread===0?'even':(b.spread<0?tshort(b.home)+' '+b.spread:tshort(b.away)+' -'+b.spread))+'</span>':'')+(b.total!=null?'<span>Total '+b.total+'</span>':'')+bowlPickHTML(b)+'</div>'
+      :'<div class="bw-tbd">'+(/Celebration/.test(b.name)?'FCS: the MEAC champion vs. the SWAC champion':cfp?'Playoff field set on selection day (expected Sunday, Dec 6) · <a href="#/playoff">see the projected bracket</a>':'Teams set on selection day (expected Sunday, Dec 6)')+'</div>')+'</div></div>'; }
+function renderBowls(){ setNav('bowls'); const fav=SETTINGS.fav&&T[SETTINGS.fav]||T['BYU'];
+  const rows=FBS.map(t=>{ const s=stats(t.name); return {t, s, need:Math.max(0,6-s.w), left:s.upcoming.length, p:s.w>=6?1:s.bowl}; });
+  const elig=rows.filter(x=>x.s.w>=6), bubble=rows.filter(x=>x.s.w<6&&x.need<=x.left).sort((a,b)=>b.p-a.p), out=rows.filter(x=>x.s.w<6&&x.need>x.left), proj=elig.length+bubble.reduce((a,x)=>a+x.p,0);
+  let html='<div class="page-head"><div><div class="eyebrow">College football postseason</div><h1>Bowl season</h1><div class="sub">Every bowl and Playoff game, and the race to six wins. Six wins makes a team bowl eligible; the chances are the hub’s own, from every game left on each schedule. The matchups fill in here the weekend the bowls announce them.</div></div></div>';
+  /* your team */
+  if(fav){ const s=stats(fav.name); let card='';
+    if(fav.level==='FCS'){ let line='FCS teams do not play in bowls: their postseason is the 24-team FCS playoff.'; try{ const D=fcsTodayField(); const x=D.F.find(y=>y.t.name===fav.name); line+=x?' If it started today, '+esc(tshort(fav.name))+' would be '+(x.seed?'the No. '+x.seed+' seed':'in the field, unseeded')+'.':' If it started today, '+esc(tshort(fav.name))+' would be out.'; }catch(e){}
+      card='<div class="card bw-me"><div class="bd"><b>'+esc(fav.disp)+' · '+recStr(fav.name)+'</b><div>'+line+' <a href="#/playoff/fcs">FCS bracket ›</a></div></div></div>'; }
+    else { let po=''; try{ if(cfpReady()){ const x=cfpSim().by[fav.name]; if(x) po=' The hub gives '+esc(tshort(fav.name))+' a '+pct(x.make)+' chance to make the Playoff.'; } }catch(e){}
+      const st=s.w>=6?'<b class="pos">Bowl eligible</b> at '+recStr(fav.name)+'.':(6-s.w>s.upcoming.length?'<b class="neg">Out of the bowl race</b> at '+recStr(fav.name)+'.':'Needs <b>'+(6-s.w)+'</b> more win'+(6-s.w===1?'':'s')+' with '+s.upcoming.length+' to play: '+pct(s.bowl)+' to get there.');
+      card='<div class="card bw-me" style="--tc:'+uiColor(fav)+'"><div class="bd">'+chip(fav.name)+' <span>'+st+po+'</span> <a href="#/playoff">Playoff picture ›</a></div></div>'; }
+    html+=card; }
+  html+='<div class="grid g4" style="margin:14px 0">'+tile('Bowl eligible', String(elig.length), 'FBS teams with 6+ wins')+tile('Still alive', String(bubble.length), 'can still reach 6 wins')+tile('Projected eligible', String(Math.round(proj)), 'the hub’s count at season’s end')+tile('Places', String(BOWL_SLOTS+12), BOWL_SLOTS+' in '+(BOWL_SLOTS/2)+' bowls + 12 in the Playoff')+'</div>';
+  if(proj<BOWL_SLOTS+12) html+='<div class="note" style="margin-bottom:12px">On the hub’s count there are not quite enough six-win teams for every place, so a few 5-7 teams would fill the last spots (picked by their academic progress scores).</div>';
+  /* the race */
+  html+='<div class="sec"><h2>The race to six wins</h2><span class="muted">teams that can still get there, most likely first</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Team</th><th class="num">Record</th><th class="num">Wins needed</th><th class="num">Games left</th><th class="num">Chance</th><th>Next</th></tr></thead><tbody>'
+    +bubble.map(x=>{ const nx=x.s.upcoming[0]; return '<tr class="click'+(x.t.name===(SETTINGS.fav||'BYU')?' hl':'')+'" data-href="#/team/'+enc(x.t.name)+'"><td>'+chip(x.t.name,{norank:true})+'</td><td class="num">'+recStr(x.t.name)+'</td><td class="num"><b>'+x.need+'</b></td><td class="num">'+x.left+'</td><td class="num"><b>'+pct(x.p)+'</b></td><td class="muted small">'+(nx?(nx.g.home===x.t.name?'vs ':'at ')+esc(tshort(nx.g.home===x.t.name?nx.g.away:nx.g.home))+' · '+pct(nx.pw)+' to win':'—')+'</td></tr>'; }).join('')+'</tbody></table></div>';
+  html+='<div class="sec"><h2>Bowl eligible</h2><span class="muted">'+elig.length+' teams with 6 or more wins</span></div><div class="bw-chips">'+elig.sort((a,b)=>b.s.w-a.s.w||b.t.rating-a.t.rating).map(x=>'<a href="#/team/'+enc(x.t.name)+'">'+chip(x.t.name,{nolink:true,norank:true})+'<span class="dim">'+recStr(x.t.name)+'</span></a>').join('')+'</div>';
+  if(out.length) html+='<div class="mini" style="margin-top:8px">Out of the race: '+out.length+' teams can no longer reach six wins.</div>';
+  /* the schedule */
+  html+='<div class="sec"><h2>Bowl and Playoff schedule</h2><span class="muted">'+BOWLS.length+' games · times '+esc(tzInfo().name)+' · from ESPN</span></div>';
+  if(!BOWLS.length) html+='<div class="note">The bowl schedule has not loaded yet.</div>';
+  else { let day=''; html+='<div class="bw-list">'+BOWLS.slice().sort((a,b)=>a.iso<b.iso?-1:1).map(b=>{ const w=bowlWhen(b.iso); const head=w.key!==day?(day=w.key,'<div class="bw-day">'+esc(w.d)+'</div>'):''; return head+bowlRowHTML(b); }).join('')+'</div>'; }
+  view.innerHTML=html; }
 /* ---------- FCS bracket if the playoff started today (2026-11-17, Jamo: "Include a playoff bracket for FCS again of what
    it would look like right now if it started today") ----------
    The field from where things stand now, not a season-end projection:
@@ -14286,7 +14412,7 @@ function renderDigest(wk){ setNav('digest'); const weeks=[...new Set(G.filter(g=
 /* ---------- command palette ---------- */
 let PAL_IDX=null, PAL_SEL=0;
 function palIndex(){ if(PAL_IDX) return PAL_IDX; const out=[];
-  [['Gameday','#/week','Scoreboard, scores'],['Schedule','#/schedule'],['TV guide','#/tv'],['Previews','#/previews'],['Rankings','#/rankings'],['Conference standings','#/standings'],['Strength of record','#/rankings/sor','who has the toughest record'],['Transfers','#/transfers'],['College Football Playoff','#/playoff/fbs'],['BYU: what has to happen','#/scenarios/BYU','Big 12 and Playoff scenarios'],['BYU game day','#/gameday','live score, drives, matchups, injuries'],['FCS playoff','#/playoff/fcs'],['NFL draft board','#/draft/board'],['Draft by game','#/draft'],['My rankings','#/my'],['Bet tracker','#/my/bets'],['Odds board','#/lines'],['Weekly digest','#/digest'],['Compare teams','#/compare'],['Player stats','#/players'],['Compare players','#/players/compare'],['Big board','#/board'],['Settings','#/settings']].forEach(p=>out.push({kind:'Page',label:p[0],href:p[1],sub:p[2]||'',score:0}));
+  [['Gameday','#/week','Scoreboard, scores'],['Schedule','#/schedule'],['TV guide','#/tv'],['Previews','#/previews'],['Rankings','#/rankings'],['Conference standings','#/standings'],['Strength of record','#/rankings/sor','who has the toughest record'],['Transfers','#/transfers'],['College Football Playoff','#/playoff/fbs'],['BYU: what has to happen','#/scenarios/BYU','Big 12 and Playoff scenarios'],['BYU game day','#/gameday','live score, drives, matchups, injuries'],['FCS playoff','#/playoff/fcs'],['NFL draft board','#/draft/board'],['Draft by game','#/draft'],['Bowl season','#/bowls','bowl schedule, the race to six wins'],['My rankings','#/my'],['Bet tracker','#/my/bets'],['Odds board','#/lines'],['Weekly digest','#/digest'],['Compare teams','#/compare'],['Player stats','#/players'],['Compare players','#/players/compare'],['Big board','#/board'],['Settings','#/settings']].forEach(p=>out.push({kind:'Page',label:p[0],href:p[1],sub:p[2]||'',score:0}));
   Object.values(T).forEach(t=>out.push({kind:t.level==='FCS'?'FCS team':'Team',label:t.disp,sub:t.conf+(t.mascot?' · '+t.mascot:''),href:'#/team/'+enc(t.name),name:t.name}));
   G.filter(g=>!g.fcsOnly||team(g.away).featured||team(g.home).featured).forEach(g=>{ const a=team(g.away), h=team(g.home); out.push({kind:'Game',label:tshort(a.name)+' at '+tshort(h.name),sub:'Week '+g.week+' · '+fmtDate(g.date,false)+(g.played?' · final '+g.as+'-'+g.hs:''),href:'#/game/'+g.id}); });
   const seen=new Set(); Object.keys(BOX_BY_TEAM).forEach(tn=>{ (BOX_BY_TEAM[tn]||[]).forEach(b=>{ const side=boxSide(b,tn); if(!side) return; Object.keys(b.players[side]||{}).forEach(cat=>{ (b.players[side][cat]||[]).forEach(p=>{ const k=tn+'|'+dkey(p.n); if(seen.has(k)) return; seen.add(k); out.push({kind:'Player',label:p.n,sub:tshort(tn),href:'#/player/'+enc(tn)+'/'+enc(p.n)}); }); }); }); });
@@ -15870,7 +15996,7 @@ function renderTV(key, scope){ setNav('tv'); document.body.classList.add('tvmode
   const jb=document.getElementById('tv-now'); if(jb) jb.onclick=()=>{ const m=tvNowMins(day); if(m!=null) tvScrollTo(m-40, true); }; }
 /* ---------- routing ---------- */
 function route(){ view.classList.remove('in'); void view.offsetWidth; try{ routeInner(); }catch(err){ console.error(err); view.innerHTML='<div class="note">Part of this page failed to load ('+esc(err&&err.message||String(err))+'). <a href="#/">Back to Gameday</a></div>'; } applyPageTheme(); renderTicker(); animateScores(view); initSubnav(); if(LIVE.on&&!LIVE.busy&&liveGameId()) liveGameRefresh(); setTimeout(()=>view.classList.add('in'),0); }
-function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('#')[0].split('/').map(dec); const r=parts[0]||''; if(!QUIET) window.scrollTo(0,0); if(r===''||r==='week'){ renderWeek(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='tv'){ renderTV(parts[1], parts[2]); } else if(r==='lines'){ renderLines(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='rankings'){ renderRankings(parts[1], parts[2]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='teams'){ renderTeams(parts[1]); } else if(r==='team'){ renderTeam(parts[1]||''); const anchor=h.split('#').slice(2)[0]; if(anchor&&!QUIET){ const el=document.getElementById(anchor); if(el) setTimeout(()=>{ gotoSection(el,true); initSubnav(); },0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='recruiting'){ renderRecruiting(parts[1]); } else if(r==='column'){ renderColumn(parts[1]); } else if(r==='injuries'){ renderInjuries(parts[1]); } else if(r==='transfers'){ renderTransfers(parts[1]); } else if(r==='previews'){ renderPreviews(+parts[1]||CUR_WEEK); } else if(r==='draft'){ renderDraft(parts[1], parts[2]); } else if(r==='settings'){ renderSettings(); } else if(r==='playoff'){ renderPlayoff(parts[1]); } else if(r==='scenarios'){ renderScenarios(parts[1]); } else if(r==='gameday'){ renderGameday(parts[1]); } else if(r==='board'){ renderBoard(); } else if(r==='player'){ renderPlayer(parts[1], parts[2]); } else if(r==='players'){ renderPlayers(parts[1], parts[2]); } else if(r==='compare'){ renderCompare(parts[1], parts[2]); } else if(r==='digest'){ renderDigest(parts[1]); } else if(r==='my'){ if(parts[1]==='bets') renderBets(); else renderMy(parts[1]); } else renderHome(); }
+function routeInner(){ const h=location.hash||'#/'; const parts=h.replace(/^#\/?/,'').split('#')[0].split('/').map(dec); const r=parts[0]||''; if(!QUIET) window.scrollTo(0,0); if(r===''||r==='week'){ renderWeek(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='schedule'){ renderSchedule(parts[1], parts[2]); } else if(r==='tv'){ renderTV(parts[1], parts[2]); } else if(r==='lines'){ renderLines(+parts[1]||CUR_WEEK, parts[2]); } else if(r==='rankings'){ renderRankings(parts[1], parts[2]); } else if(r==='standings'){ renderStandings(parts[1]); } else if(r==='teams'){ renderTeams(parts[1]); } else if(r==='team'){ renderTeam(parts[1]||''); const anchor=h.split('#').slice(2)[0]; if(anchor&&!QUIET){ const el=document.getElementById(anchor); if(el) setTimeout(()=>{ gotoSection(el,true); initSubnav(); },0); } } else if(r==='game'){ renderGame(parts[1]); } else if(r==='recruiting'){ renderRecruiting(parts[1]); } else if(r==='column'){ renderColumn(parts[1]); } else if(r==='injuries'){ renderInjuries(parts[1]); } else if(r==='transfers'){ renderTransfers(parts[1]); } else if(r==='previews'){ renderPreviews(+parts[1]||CUR_WEEK); } else if(r==='draft'){ renderDraft(parts[1], parts[2]); } else if(r==='settings'){ renderSettings(); } else if(r==='playoff'){ renderPlayoff(parts[1]); } else if(r==='bowls'){ renderBowls(); } else if(r==='scenarios'){ renderScenarios(parts[1]); } else if(r==='gameday'){ renderGameday(parts[1]); } else if(r==='board'){ renderBoard(); } else if(r==='player'){ renderPlayer(parts[1], parts[2]); } else if(r==='players'){ renderPlayers(parts[1], parts[2]); } else if(r==='compare'){ renderCompare(parts[1], parts[2]); } else if(r==='digest'){ renderDigest(parts[1]); } else if(r==='my'){ if(parts[1]==='bets') renderBets(); else renderMy(parts[1]); } else renderHome(); }
 window.addEventListener('hashchange', route);
 document.addEventListener('click', e=>{ const tr=e.target.closest('tr.click, .gm.click, .dgr.click'); if(tr && !e.target.closest('a') && !e.target.closest('button')){ location.hash=tr.dataset.href; } });
 document.addEventListener('keydown', e=>{ if(e.key!=='Enter') return; const el=e.target.closest && e.target.closest('.gm.click'); if(el){ location.hash=el.dataset.href; } });

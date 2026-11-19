@@ -512,6 +512,26 @@ body::after{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(
   :root #teams.mini .tc{min-width:0}
   :root #teams.mini .tc-cd,:root #teams.mini .tc-sc{font-size:12.5px}
 }
+/* morning recap (2026-11-19) */
+#recap{margin:0 0 18px}
+.rc-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.rc{position:relative;display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:18px;overflow:hidden;background:linear-gradient(110deg,color-mix(in srgb,var(--tc) 30%,var(--surface)) 0%,var(--surface) 62%);border:1px solid var(--line);color:var(--ink);text-decoration:none}
+.rc:hover{text-decoration:none;border-color:var(--tc)}
+.rc-res{flex:none;display:grid;place-items:center;width:34px;height:34px;margin-top:2px;border-radius:10px;font-family:var(--num);font-size:16px;font-weight:800;background:var(--surface-2);color:var(--ink-2)}
+.rc-res.w{background:color-mix(in srgb,#22c55e 22%,transparent);color:#4ade80}
+.rc-res.l{background:color-mix(in srgb,#ef4444 20%,transparent);color:#f87171}
+:root.light .rc-res.w{color:#15803d}:root.light .rc-res.l{color:#b91c1c}
+.rc-main{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.rc-k{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.rc-k svg{width:12px;height:12px}
+.rc-sc{font-size:16px;font-weight:800;line-height:1.25}
+.rc-sc i{font-style:normal;font-size:12px;color:var(--ink-3)}
+.rc-meta{font-size:12.5px;color:var(--ink-2)}
+.rc-pl{display:flex;flex-direction:column;gap:1px;margin-top:4px;font-size:12.5px;color:var(--ink)}
+.rc-pl span::before{content:"★ ";color:var(--gold,#f2b33d);font-size:10px}
+.rc-pl:empty{display:none}
+.rc-lg{flex:none;width:40px;height:40px;object-fit:contain;opacity:.95}
+@media (max-width:600px){.rc-list{grid-template-columns:1fr}.rc{padding:11px 12px}.rc-lg{width:34px;height:34px}}
 </style>
 </head>
 <body>
@@ -781,6 +801,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
   <div class="cal-panel" id="cal-panel" hidden></div>
   <section class="teams" id="teams" aria-label="Your teams"></section>
   </div>
+  <section id="recap" aria-label="Your latest results" hidden></section>
 
   <section class="hero" aria-labelledby="hero-h">
     <div class="hi-l">
@@ -5724,7 +5745,50 @@ function scoreHTML(){ missHTML(); latestHTML(); const S = SCORE, wrap = $('#scor
       + (pre ? '<div class="sc-sub">The preview’s pick</div><a class="sc-row" href="' + esc(pre.href) + '"><div class="sc-m">' + pre.w + '-' + pre.l + ', No. ' + pre.seed + ' seed</div><div class="sc-d">' + esc(pre.title) + ' · play-in, not the playoffs</div></a>' : '') + '</div>'; }
   if (!L && !R) return; wrap.hidden = false; $('#score').innerHTML = L + R;
   $('#score-n').textContent = T.n ? T.w + '-' + T.l + ' picking winners' : 'every article pick, graded'; }
-function render(){ staleHTML(); heroHTML(); boardHTML(); teamsHTML(); tuneHTML(); liveHTML(); tvHTML(); sportsHTML(); scoreHTML(); { const h = $('#tv-h'), n = $('#tv-note'), q = $('#tvq-n'); if (h && q) q.textContent = h.textContent.replace(/^On TV /, '').replace(/^Next on TV · /, 'Next: ') + (n && n.textContent ? ' · ' + n.textContent : ''); }
+/* ---------- morning recap (2026-11-19, Jamo picked "Morning recap": a "while you were asleep" card at the top) ----------
+   For each of your teams whose last game finished in the last 36 hours: the result, the record now, the top performers
+   from the box score (the hubs' own live feeds, /api/<lg>/game), and what's next. Before noon it is "While you were
+   asleep", after that "Your latest results". Nothing to show, no card. Performers are read straight from the box score:
+   basketball = the leading scorer (points, rebounds, assists); football = the passer plus the best runner or receiver. */
+const RECAP = {seen: {}, lines: {}};
+function recapGames(){ const now = Date.now(), out = [];
+  FAVS.forEach(f => { const gs = teamGames(f.sport, f.team), last = gs.filter(played).pop(); if (!last) return; const k = kickMs(last.date, last.time) || Date.parse(last.date + 'T19:00:00Z');
+    if (now - k > 36 * 3600e3) return; out.push({f, g: last, k, next: gs.find(g => !played(g) && !g.live && g.st !== 'CANCELED' && g.st !== 'POSTPONED')}); });
+  return out.sort((a, b) => b.k - a.k); }
+const rcNum = (s, labels, lab) => { const i = labels.indexOf(lab); return i < 0 ? '' : String(s[i] == null ? '' : s[i]); };
+function rcHoops(labels, rows){ const top = rows.slice().sort((a, b) => (+rcNum(b.s, labels, 'PTS') || 0) - (+rcNum(a.s, labels, 'PTS') || 0))[0]; if (!top) return [];
+  const p = +rcNum(top.s, labels, 'PTS') || 0, r = +rcNum(top.s, labels, 'REB') || 0, a = +rcNum(top.s, labels, 'AST') || 0;
+  return [top.n + ': ' + p + ' pts' + (r ? ', ' + r + ' reb' : '') + (a ? ', ' + a + ' ast' : '')]; }
+function rcFootball(cats){ const cat = n => (cats || []).find(c => c.name === n), lead = (c, lab) => c ? c.rows.slice().sort((x, y) => (parseFloat(rcNum(y.s, c.labels, lab)) || 0) - (parseFloat(rcNum(x.s, c.labels, lab)) || 0))[0] : null;
+  const out = [], P = cat('passing'), R = cat('rushing'), C = cat('receiving'), qb = lead(P, 'YDS'), rb = lead(R, 'YDS'), wr = lead(C, 'YDS');
+  if (qb) { const td = +rcNum(qb.s, P.labels, 'TD') || 0, it = +rcNum(qb.s, P.labels, 'INT') || 0; out.push(qb.n + ': ' + rcNum(qb.s, P.labels, 'C/ATT').replace('/', ' of ') + ', ' + rcNum(qb.s, P.labels, 'YDS') + ' yds' + (td ? ', ' + td + ' TD' : '') + (it ? ', ' + it + ' INT' : '')); }
+  const ry = rb ? +rcNum(rb.s, R.labels, 'YDS') || 0 : 0, wy = wr ? +rcNum(wr.s, C.labels, 'YDS') || 0 : 0;
+  if (rb && ry >= wy) { const td = +rcNum(rb.s, R.labels, 'TD') || 0; out.push(rb.n + ': ' + rcNum(rb.s, R.labels, 'CAR') + ' carries, ' + ry + ' yds' + (td ? ', ' + td + ' TD' : '')); }
+  else if (wr) { const td = +rcNum(wr.s, C.labels, 'TD') || 0; out.push(wr.n + ': ' + rcNum(wr.s, C.labels, 'REC') + ' catches, ' + wy + ' yds' + (td ? ', ' + td + ' TD' : '')); }
+  return out; }
+/* the ESPN event id: NFL, NBA and CBB games carry it; CFB games are found on that week's scoreboard by date and names */
+async function rcEventId(f, g){ if (f.sport !== 'cfb') return g.id; for (const grp of ['80', '81']) { const j = await getJ(API + '/cfb/scoreboard?week=' + g.week + '&groups=' + grp); const e = (j && j.games || []).find(x => x.date === g.date && x.away.n === g.away && x.home.n === g.home); if (e) return {id: e.id, side: g.home === f.team ? e.home.id : e.away.id}; } return null; }
+async function rcLoad(x){ const key = x.f.sport + '|' + (x.g.id || x.g.date + x.g.away + x.g.home); if (RECAP.seen[key]) return; RECAP.seen[key] = 1;
+  try { const f = x.f, g = x.g; let ev = await rcEventId(f, g), side = null; if (ev && typeof ev === 'object') { side = ev.side; ev = ev.id; } if (!ev) return;
+    const j = await getJ(API + '/' + f.sport + '/game?event=' + encodeURIComponent(ev)); if (!j) return; let lines = [];
+    if (f.sport === 'cbb') { const t = (j.teams || []).find(t => String(t.id) === String(f.team)); if (t) lines = rcHoops(t.labels || [], t.players || []); }
+    else { const tm = (j.teams || []).find(t => side ? String(t.id) === String(side) : t.ab === f.team || t.ha === (g.home === f.team ? 'home' : 'away')); const pid = tm ? String(tm.id) : null;
+      const pl = (j.players || []).find(p => String(p.id) === pid); if (pl) lines = f.sport === 'nba' ? rcHoops(pl.labels || [], pl.rows || []) : rcFootball(pl.cats); }
+    RECAP.lines[key] = lines; const el = document.querySelector('[data-rc="' + CSS.escape(key) + '"]'); if (el && lines.length) el.innerHTML = lines.map(s => '<span>' + esc(s) + '</span>').join('');
+  } catch (e) {} }
+function recapHTML(){ const box = $('#recap'); if (!box) return; const L = recapGames(); if (!L.length) { box.hidden = true; box.innerHTML = ''; return; }
+  const hr = +fmt({hour: 'numeric', hourCycle: 'h23'}), am = hr < 12;
+  box.innerHTML = '<div class="sec"><h2>' + (am ? 'While you were asleep' : 'Your latest results') + '</h2><span class="note">' + (am ? 'last night and yesterday' : 'the last day and a half') + ' · tap a game for the box score</span></div><div class="rc-list">'
+    + L.map(x => { const f = x.f, o = O[f.sport], t = f.team, g = x.g, mine = g.home === t ? g.hs : g.as, them = g.home === t ? g.as : g.hs, opp = g.home === t ? g.away : g.home, w = mine > them, key = f.sport + '|' + (g.id || g.date + g.away + g.home);
+      const gs = teamGames(f.sport, t), rk = o.rank ? o.rank(t, gs) : 0, nx = x.next, c1 = cardColor(o.color(t), o.alt(t));
+      return '<a class="rc" href="' + o.href(g) + '" style="--tc:' + c1 + '"><span class="rc-res ' + (w ? 'w' : mine < them ? 'l' : '') + '">' + (w ? 'W' : mine < them ? 'L' : 'T') + '</span>'
+        + '<span class="rc-main"><span class="rc-k">' + SPORT[f.sport].icon + esc(SPORT[f.sport].short) + ' · ' + esc(dayStr(g)) + '</span>'
+        + '<b class="rc-sc">' + (rk ? '<i>#' + rk + '</i> ' : '') + esc(f.sport === 'cfb' ? t : o.name(t)) + ' ' + mine + ', ' + esc(o.name(opp)) + ' ' + them + '</b>'
+        + '<span class="rc-meta">' + record(f.sport, t, gs) + (nx ? ' · next: ' + esc(dayStr(nx)) + ' ' + (nx.home === t ? 'vs ' : 'at ') + esc(o.name(nx.home === t ? nx.away : nx.home)) : '') + '</span>'
+        + '<span class="rc-pl" data-rc="' + esc(key) + '">' + (RECAP.lines[key] || []).map(s => '<span>' + esc(s) + '</span>').join('') + '</span></span>'
+        + (o.logo(t) ? '<img class="rc-lg" src="' + o.logo(t) + '" alt="" loading="lazy">' : '') + '</a>'; }).join('') + '</div>';
+  box.hidden = false; L.forEach(rcLoad); }
+function render(){ staleHTML(); heroHTML(); boardHTML(); teamsHTML(); recapHTML(); tuneHTML(); liveHTML(); tvHTML(); sportsHTML(); scoreHTML(); { const h = $('#tv-h'), n = $('#tv-note'), q = $('#tvq-n'); if (h && q) q.textContent = h.textContent.replace(/^On TV /, '').replace(/^Next on TV · /, 'Next: ') + (n && n.textContent ? ' · ' + n.textContent : ''); }
   const when = s => { const m = /^[A-Z][a-z]{2} ([A-Z][a-z]{2} \d+), \d{4} · (.*)$/.exec(s || ''); return m ? (m[1] === md(TODAY) ? '' : m[1] + ', ') + m[2] : (s || '?'); };
   $('#asof').textContent = 'Updated: CFB ' + when(META.cfb) + ' · NFL ' + when(META.nfl) + ' · NBA ' + when(META.nba) + (META.cbb ? ' · CBB ' + when(META.cbb) : '');
   $('#upd').textContent = LAST ? 'live scores ' + fmt({hour:'numeric', minute:'2-digit'}, new Date(LAST)) : ''; }

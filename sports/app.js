@@ -84,6 +84,19 @@
     }, {passive: true});
   }
 
+  /* ---------- home-screen polish (2026-11-19, Jamo picked "Home screen app icon polish") ----------
+     iPhone launch screens (sports-hub/icons/splash, drawn by splash/make_splash.sh) and full-screen mode. iOS reads these
+     tags when the page is added to the Home Screen; its launch screens only work with apple-mobile-web-app-capable.
+     The status bar keeps iOS's default style, which colors it from the page's theme-color: the hubs set it to their own
+     background, and tabs.js turns it to the team's color on a team page. */
+  (function(){ var hd = D.head; if (!hd || hd.querySelector('link[rel="apple-touch-startup-image"]')) return;
+    var add = function(tag, at){ var e = D.createElement(tag); for (var k in at) e.setAttribute(k, at[k]); hd.appendChild(e); };
+    if (!hd.querySelector('meta[name="apple-mobile-web-app-capable"]')) add('meta', {name: 'apple-mobile-web-app-capable', content: 'yes'});
+    if (!hd.querySelector('meta[name="mobile-web-app-capable"]')) add('meta', {name: 'mobile-web-app-capable', content: 'yes'});
+    [[440, 956, 3], [402, 874, 3], [430, 932, 3], [393, 852, 3], [428, 926, 3], [390, 844, 3], [375, 812, 3], [414, 896, 3], [414, 896, 2], [375, 667, 2]].forEach(function(s){
+      add('link', {rel: 'apple-touch-startup-image', href: '/sports/icons/splash/jsh-' + s[0] * s[2] + 'x' + s[1] * s[2] + '.png',
+        media: '(device-width: ' + s[0] + 'px) and (device-height: ' + s[1] + 'px) and (-webkit-device-pixel-ratio: ' + s[2] + ') and (orientation: portrait)'}); }); })();
+
   if (D.body) start(); else D.addEventListener('DOMContentLoaded', start);
 })();
 /* app:end */

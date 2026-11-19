@@ -46,13 +46,17 @@
   function mixC(a, b, t){ return a.map(function(v, i){ return Math.round(v + (b[i] - v) * t); }); }
   var hexC = function(c){ return '#' + c.map(function(v){ return ('0' + Math.max(0, Math.min(255, v)).toString(16)).slice(-2); }).join(''); };
   function teamColor(head){ var c = rgbOf(getComputedStyle(head).getPropertyValue('--team')); if (!c) { var b = head.querySelector('.bar'); if (b) c = rgbOf(getComputedStyle(b).backgroundColor); } return c; }
-  function theme(head){ var c = head && teamColor(head); if (!c) { view.style.removeProperty('--jt-c'); H.classList.remove('jt-tc'); return; }
+  /* the phone's status bar and browser bar take the team's color too (2026-11-19, "Home screen app polish"): the hub's
+     own theme-color is kept in data-jt-was and put back when you leave the team page */
+  function barTint(col){ D.querySelectorAll('meta[name="theme-color"]').forEach(function(m){ if (col) { if (m.getAttribute('data-jt-was') == null) m.setAttribute('data-jt-was', m.getAttribute('content') || ''); m.setAttribute('content', col); }
+    else if (m.getAttribute('data-jt-was') != null) { m.setAttribute('content', m.getAttribute('data-jt-was')); m.removeAttribute('data-jt-was'); } }); }
+  function theme(head){ var c = head && teamColor(head); if (!c) { view.style.removeProperty('--jt-c'); H.classList.remove('jt-tc'); barTint(''); return; }
     var fill = c.slice(), k = 0; if (Math.max(c[0], c[1], c[2]) < 24) fill = [58, 66, 80];   /* a black team: a steel fill */
     while (lumOf(fill) > 0.18 && k++ < 30) fill = mixC(fill, [0, 0, 0], 0.08);            /* white text on it holds 4.5:1 */
     var dark = (H.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark', glow = c.slice(); k = 0;
     if (dark) { if (Math.max(c[0], c[1], c[2]) < 24) glow = [150, 160, 176]; while (lumOf(glow) < 0.16 && k++ < 30) glow = mixC(glow, [255, 255, 255], 0.1); }
     else while (lumOf(glow) > 0.35 && k++ < 30) glow = mixC(glow, [0, 0, 0], 0.1);
-    view.style.setProperty('--jt-c', hexC(fill)); view.style.setProperty('--jt-g', hexC(glow)); view.style.setProperty('--jt-hi', hexC(mixC(glow, [255, 255, 255], 0.35))); H.classList.add('jt-tc'); }
+    view.style.setProperty('--jt-c', hexC(fill)); view.style.setProperty('--jt-g', hexC(glow)); view.style.setProperty('--jt-hi', hexC(mixC(glow, [255, 255, 255], 0.35))); H.classList.add('jt-tc'); barTint(hexC(mixC(fill, [0, 0, 0], 0.3))); }
   function baseKey(){ return (location.hash || '').split('#').slice(0, 2).join('#'); }   /* "#/team/BYU" without a #s-section */
   function css(){ if (D.getElementById('jsh-tabs-css')) return; var s = D.createElement('style'); s.id = 'jsh-tabs-css';
     s.textContent = 'html.jt-on #view .subnav{display:none!important}#view .jt-off{display:none!important}'
@@ -99,7 +103,7 @@
     if (scroll && bar) { var r = bar.getBoundingClientRect(); if (r.top < 0) window.scrollTo(0, Math.max(0, window.scrollY + r.top - 70)); }
     try { sessionStorage.setItem('jsh-tab:' + HUB + ':' + kind(), JSON.stringify(cur)); } catch (e) {} }
   function apply(){ if (busy) return; view = D.getElementById('view'); if (!view) return;
-    var K = kind(); if (K !== 'team') H.classList.remove('jt-tc'); if (!K) { H.classList.remove('jt-on'); return; }
+    var K = kind(); if (K !== 'team') { H.classList.remove('jt-tc'); barTint(''); } if (!K) { H.classList.remove('jt-on'); return; }
     busy = true;
     try {
       var head = view.querySelector(K === 'game' ? ':scope > .ghead' : ':scope > .thead'), first0 = K === 'game' ? 'game' : 'ov';

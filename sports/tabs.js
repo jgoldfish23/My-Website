@@ -36,6 +36,23 @@
     var h = c.querySelector(':scope > .hd h3, :scope > .hd > h3, :scope > summary'); return h ? h.textContent : ''; }
   function kind(){ var h = location.hash || ''; if (!view) return ''; if (/^#\/team\//.test(h) && view.querySelector(':scope > .thead')) return 'team'; if (/^#\/game\//.test(h) && view.querySelector(':scope > .ghead')) return 'game'; return ''; }
   function isTeam(){ return /^#\/team\//.test(location.hash || ''); }
+  /* team colors through a team page (2026-11-19, Jamo picked "Team-themed pages, all the way through"): the open tab,
+     the bar beside each heading and the top edge of the summary tiles take the team's color instead of the hub's. The
+     color is read from the team header and adjusted so white text on it and its glow on the page both stay readable:
+     a filled tab is darkened until white text holds 4.5:1; the glow is lifted in dark mode so a navy or black team
+     still shows. */
+  function rgbOf(s){ var m = /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)/.exec(s || ''); if (m) return [+m[1], +m[2], +m[3]]; m = /^#([0-9a-f]{6})$/i.exec((s || '').trim()); if (m) { var n = parseInt(m[1], 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; } return null; }
+  function lumOf(c){ var f = function(v){ v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }; return .2126 * f(c[0]) + .7152 * f(c[1]) + .0722 * f(c[2]); }
+  function mixC(a, b, t){ return a.map(function(v, i){ return Math.round(v + (b[i] - v) * t); }); }
+  var hexC = function(c){ return '#' + c.map(function(v){ return ('0' + Math.max(0, Math.min(255, v)).toString(16)).slice(-2); }).join(''); };
+  function teamColor(head){ var c = rgbOf(getComputedStyle(head).getPropertyValue('--team')); if (!c) { var b = head.querySelector('.bar'); if (b) c = rgbOf(getComputedStyle(b).backgroundColor); } return c; }
+  function theme(head){ var c = head && teamColor(head); if (!c) { view.style.removeProperty('--jt-c'); H.classList.remove('jt-tc'); return; }
+    var fill = c.slice(), k = 0; if (Math.max(c[0], c[1], c[2]) < 24) fill = [58, 66, 80];   /* a black team: a steel fill */
+    while (lumOf(fill) > 0.18 && k++ < 30) fill = mixC(fill, [0, 0, 0], 0.08);            /* white text on it holds 4.5:1 */
+    var dark = (H.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark', glow = c.slice(); k = 0;
+    if (dark) { if (Math.max(c[0], c[1], c[2]) < 24) glow = [150, 160, 176]; while (lumOf(glow) < 0.16 && k++ < 30) glow = mixC(glow, [255, 255, 255], 0.1); }
+    else while (lumOf(glow) > 0.35 && k++ < 30) glow = mixC(glow, [0, 0, 0], 0.1);
+    view.style.setProperty('--jt-c', hexC(fill)); view.style.setProperty('--jt-g', hexC(glow)); view.style.setProperty('--jt-hi', hexC(mixC(glow, [255, 255, 255], 0.35))); H.classList.add('jt-tc'); }
   function baseKey(){ return (location.hash || '').split('#').slice(0, 2).join('#'); }   /* "#/team/BYU" without a #s-section */
   function css(){ if (D.getElementById('jsh-tabs-css')) return; var s = D.createElement('style'); s.id = 'jsh-tabs-css';
     s.textContent = 'html.jt-on #view .subnav{display:none!important}#view .jt-off{display:none!important}'
@@ -46,7 +63,14 @@
       + '#view .jtab button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink,#fff)}'
       + '#view .jtab a{font-weight:500;color:var(--ink-3)}#view .jtab .jt-sep{flex:none;width:1px;margin:8px 2px;background:var(--line)}'
       + '#view .jtab-pane-top>.sec:first-child,#view .jt-first{margin-top:10px}'
-      + '@media (max-width:600px){#view .jtab{margin:12px -16px 4px;padding:2px 16px 6px}#view .jtab button,#view .jtab a{padding:0 14px}}';
+      + '@media (max-width:600px){#view .jtab{margin:12px -16px 4px;padding:2px 16px 6px}#view .jtab button,#view .jtab a{padding:0 14px}}'
+      /* team colors (only on team pages, html.jt-tc) */
+      + 'html.jt-tc #view .jtab button.on{background:var(--jt-c);border-color:var(--jt-c);color:#fff;box-shadow:0 8px 20px -10px var(--jt-g)}'
+      + 'html.jt-tc #view .jtab button:not(.on):hover{border-color:var(--jt-g)}'
+      + 'html.jt-tc #view .sec>h2::before{background:linear-gradient(var(--jt-hi),var(--jt-g))!important;box-shadow:0 0 10px var(--jt-g),0 0 22px -4px var(--jt-g)!important}'
+      + 'html.jt-tc #view .sec>h2[data-neo]::before{color:var(--jt-g)!important;border-color:color-mix(in srgb,var(--jt-g) 55%,transparent)!important}'
+      + 'html.jt-tc #view .tile{border-top-color:color-mix(in srgb,var(--jt-g) 55%,var(--line))}'
+      + 'html.jt-tc #view .srk-r .r.top{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--jt-g) 35%,transparent)}';
     D.head.appendChild(s); }
   /* the page's blocks in order: [element, tab]; an element holding sections of its own (CBB's analytics slot) goes as one */
   function blocks(){ if (kind() === 'game') return gblocks(); var out = [], tab = 'ov', start = false, kids = view.children;
@@ -75,7 +99,7 @@
     if (scroll && bar) { var r = bar.getBoundingClientRect(); if (r.top < 0) window.scrollTo(0, Math.max(0, window.scrollY + r.top - 70)); }
     try { sessionStorage.setItem('jsh-tab:' + HUB + ':' + kind(), JSON.stringify(cur)); } catch (e) {} }
   function apply(){ if (busy) return; view = D.getElementById('view'); if (!view) return;
-    var K = kind(); if (!K) { H.classList.remove('jt-on'); return; }
+    var K = kind(); if (K !== 'team') H.classList.remove('jt-tc'); if (!K) { H.classList.remove('jt-on'); return; }
     busy = true;
     try {
       var head = view.querySelector(K === 'game' ? ':scope > .ghead' : ':scope > .thead'), first0 = K === 'game' ? 'game' : 'ov';
@@ -93,7 +117,7 @@
         bar.innerHTML = tabs.map(function(t){ return '<button type="button" role="tab" data-t="' + t[0] + '">' + t[1] + '</button>'; }).join('')
           + (extra.length ? '<span class="jt-sep" aria-hidden="true"></span>' + extra.map(function(a){ return '<a href="' + a.getAttribute('href').replace(/"/g, '&quot;') + '">' + a.textContent.replace(/[<>&]/g, '') + '</a>'; }).join('') : '');
         view.insertBefore(bar, head.nextElementSibling); }
-      H.classList.add('jt-on');
+      H.classList.add('jt-on'); if (K === 'team') theme(head);
       var key = baseKey(); if (cur.key !== key) { cur.key = key; cur.tab = first0; try { var s = JSON.parse(sessionStorage.getItem('jsh-tab:' + HUB + ':' + K) || 'null'); if (s && s.key === key) cur.tab = s.tab; } catch (e) {} }
       /* a link straight to a section opens its tab */
       var sid = want || ((location.hash || '').split('#')[2] || ''); want = '';

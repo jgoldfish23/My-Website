@@ -221,10 +221,15 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
      own win chance. It sits just above the scores ticker at the bottom (at the top it would cover the hubs' pinned
      menus). A score flashes in the scoring team's color. Tap a game to open it; x stops following.
    - Scores come from the same live-score feeds the hubs use (/api/<lg>/game), every 20 seconds while the screen is on.
-   - A game drops off on its own 30 minutes after the final. Following is kept in this browser only (localStorage). */
+   - A game drops off on its own 30 minutes after the final. Following is kept in this browser only (localStorage).
+   - Live game mode (2026-11-19, Jamo picked "Live game mode"): your own teams' games join the bar by themselves, from
+     10 minutes before kickoff until the final, marked "Your team". The home page saves your teams' games for the next
+     8 days (localStorage jsh-favgames) each time it draws, so this works on every page once the home page has been
+     opened that week. x on one of these keeps that game off the bar. A score pulses the whole row in the scoring
+     team's color as well as the number. Up to three games show. */
 (function(){
   if (window.__jshFollow) return; window.__jshFollow = true;
-  var D = document, W = window, KEY = 'jsh-follow', SKEY = 'jsh-follow-state', MAX = 2, EVERY = 20000, KEEP = 30 * 60000;
+  var D = document, W = window, KEY = 'jsh-follow', SKEY = 'jsh-follow-state', MAX = 3, EVERY = 20000, KEEP = 30 * 60000;
   var get = function(k, d, s){ try { var v = JSON.parse((s || localStorage).getItem(k) || 'null'); return v == null ? d : v; } catch (x) { return d; } };
   var put = function(k, v, s){ try { (s || localStorage).setItem(k, JSON.stringify(v)); } catch (x) {} };
   var LIST = get(KEY, []).filter(function(f){ return f && f.lg && f.eid; }), ST = get(SKEY, {}, sessionStorage);
@@ -236,6 +241,9 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
     + '#jsh-fw[hidden]{display:none}'
     + '.fw-g{display:flex;align-items:center;gap:8px;min-height:44px;color:#eef2f8;text-decoration:none;font:600 14px/1.2 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums}'
     + '.fw-g+.fw-g{border-top:1px solid rgba(255,255,255,.08)}'
+    + '.fw-g.pulse{animation:fwp 1.6s ease-out}@keyframes fwp{0%{box-shadow:inset 0 0 0 999px color-mix(in srgb,var(--fc,#f2c14e) 38%,transparent)}100%{box-shadow:inset 0 0 0 999px transparent}}'
+    + '.fw-k.me{color:#7ee2a8;border-color:rgba(126,226,168,.5)}'
+    + '@media (max-width:420px){div.fw-g.me{box-shadow:inset 3px 0 0 #7ee2a8;padding-left:7px;margin-left:-8px}}'
     + '.fw-k{flex:none;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#f2c14e;padding:3px 6px;border:1px solid rgba(242,193,78,.45);border-radius:6px}'
     + '.fw-t{display:flex;align-items:center;gap:6px;min-width:0;flex:1 1 auto}'
     + '.fw-t img{width:22px;height:22px;object-fit:contain;flex:none}'
@@ -253,7 +261,7 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
     + '.fw-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;min-height:36px;padding:6px 14px;border-radius:999px;cursor:pointer;'
     + 'font:700 13px/1 Inter,system-ui,sans-serif;color:var(--ink,#e8eef8);background:transparent;border:1px solid color-mix(in srgb,var(--accent,#5b8cff) 50%,var(--line,#2a3448))}'
     + '.fw-btn.on{background:color-mix(in srgb,#f2c14e 20%,transparent);border-color:#f2c14e;color:var(--ink,#fff)}'
-    + '@media (prefers-reduced-motion:reduce){.fw-t b{transition:none}}';
+    + '@media (prefers-reduced-motion:reduce){.fw-t b{transition:none}.fw-g.pulse{animation:none}}';
 
   /* ---------- the button on game pages ---------- */
   function gameId(){ var m = /^#\/(game|gameday)\/([^\/?#]+)/.exec(location.hash); return m ? decodeURIComponent(m[2]) : null; }
@@ -275,7 +283,7 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
       else { info.added = Date.now(); LIST.push(info); while (LIST.length > MAX) LIST.shift(); }
       put(KEY, LIST); sync(); draw(); poll(true); return; }
     var x = e.target.closest && e.target.closest('.fw-x');
-    if (x) { e.preventDefault(); e.stopPropagation(); var kx = x.getAttribute('data-k'); LIST = LIST.filter(function(f){ return key(f) !== kx; }); put(KEY, LIST); sync(); draw(); }
+    if (x) { e.preventDefault(); e.stopPropagation(); var kx = x.getAttribute('data-k'); if (LIST.some(function(f){ return f.auto && key(f) === kx; })) { var off = get(OFF, {}); off[kx] = Date.now(); put(OFF, off); } LIST = LIST.filter(function(f){ return key(f) !== kx; }); put(KEY, LIST); sync(); draw(); }
   }, true);
 
   /* ---------- the scoreboard ---------- */
@@ -298,13 +306,14 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
     var p = null; if (W.JSHOdds) { if (live && s.pc) p = JSHOdds.prob(f.lg, (+s.hs || 0) - (+s.as || 0), JSHOdds.left(f.lg, s.pc[0], s.pc[1]), f.mu, f.sd); else if (!fin) p = JSHOdds.prob(f.lg, 0, 1, f.mu, f.sd); }
     var pTxt = p == null ? '' : '<span class="fw-p" title="Hub win chance">' + esc(p >= 0.5 ? f.h : f.a) + ' ' + JSHOdds.pc(Math.max(p, 1 - p)) + '</span>';
     var clk = fin ? 'Final' : live ? (s.det || 'Live') : (s.det || 'Not started');
-    return '<div class="fw-g" data-k="' + esc(key(f)) + '"><a class="fw-g" style="flex:1 1 auto;min-width:0" href="' + esc(f.href) + '"><span class="fw-k">Following</span><span class="fw-t' + (f.al && f.hl ? ' lg' : '') + '">' + logo(f.al, f.ac) + '<span class="ab">' + esc(f.a) + '</span>' + sc('a') + '<span style="opacity:.5">–</span>' + sc('h') + '<span class="ab">' + esc(f.h) + '</span>' + logo(f.hl, f.hc) + '</span><span class="fw-c">' + esc(clk) + '</span>' + pTxt + '</a><button type="button" class="fw-x" data-k="' + esc(key(f)) + '" aria-label="Stop following ' + esc(f.an) + ' at ' + esc(f.hn) + '">×</button></div>'; }
+    return '<div class="fw-g' + (f.auto ? ' me' : '') + '" data-k="' + esc(key(f)) + '"><a class="fw-g" style="flex:1 1 auto;min-width:0" href="' + esc(f.href) + '">' + (f.auto ? '<span class="fw-k me">Your team</span>' : '<span class="fw-k">Following</span>') + '<span class="fw-t' + (f.al && f.hl ? ' lg' : '') + '">' + logo(f.al, f.ac) + '<span class="ab">' + esc(f.a) + '</span>' + sc('a') + '<span style="opacity:.5">–</span>' + sc('h') + '<span class="ab">' + esc(f.h) + '</span>' + logo(f.hl, f.hc) + '</span><span class="fw-c">' + esc(clk) + '</span>' + pTxt + '</a><button type="button" class="fw-x" data-k="' + esc(key(f)) + '" aria-label="Stop following ' + esc(f.an) + ' at ' + esc(f.hn) + '">×</button></div>'; }
   function draw(flash){
     if (!bar) return;
-    var now = Date.now(); LIST = LIST.filter(function(f){ var s = ST[key(f)]; return !(s && s.fin && now - s.fin > KEEP); }); put(KEY, LIST);
+    var now = Date.now(), gone = get('jsh-follow-off', {}); LIST = LIST.filter(function(f){ var s = ST[key(f)], old = s && s.fin && now - s.fin > KEEP; if (old && f.auto) { gone[key(f)] = now; put('jsh-follow-off', gone); } return !old; }); put(KEY, LIST);
     if (!LIST.length) { bar.hidden = true; if (spacer) spacer.style.height = '0px'; return; }
     bar.hidden = false; bar.innerHTML = LIST.map(row).join('');
-    (flash || []).forEach(function(x){ var b = bar.querySelector('.fw-g[data-k="' + x.k + '"] b[data-s="' + x.side + '"]'); if (b) { b.classList.add('hit'); setTimeout(function(){ b.classList.remove('hit'); }, 2400); } });
+    (flash || []).forEach(function(x){ var b = bar.querySelector('.fw-g[data-k="' + x.k + '"] b[data-s="' + x.side + '"]'); if (b) { b.classList.add('hit'); setTimeout(function(){ b.classList.remove('hit'); }, 2400);
+      var r = b.closest('div.fw-g'); if (r) { r.style.setProperty('--fc', b.style.getPropertyValue('--fc')); r.classList.remove('pulse'); void r.offsetWidth; r.classList.add('pulse'); } } });
     lift(); }
 
   /* ---------- live scores ---------- */
@@ -317,6 +326,7 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
       var s = ST[key(f)] || {}; if (s.fin) return null;
       /* on the game's own hub, use the numbers the page itself shows (ESPN's game-detail feed can lag its scoreboard) */
       var hub = null; if (f.gid && location.pathname.indexOf('/' + f.lg + '/') === 0 && typeof W.JSH_GAME === 'function') { try { hub = W.JSH_GAME(f.gid); } catch (x) { hub = null; } }
+      if (hub && hub.mu != null && isFinite(hub.mu)) { f.mu = hub.mu; if (hub.sd) f.sd = hub.sd; }
       if (hub && hub.live && hub.as != null && hub.hs != null && W.JSHOdds) {
         var w = JSHOdds.fromDet(hub.det, hub.per, f.lg), m = {st: 'IN_PROGRESS', det: hub.det || 'Live', pc: [w.per, w.sec], as: +hub.as, hs: +hub.hs, t: Date.now()};
         var hh = []; if (s.as != null && m.as > s.as) hh.push({k: key(f), side: 'a'}); if (s.hs != null && m.hs > s.hs) hh.push({k: key(f), side: 'h'});
@@ -330,14 +340,33 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
     })).then(function(rs){ busy = false; put(SKEY, ST, sessionStorage); draw([].concat.apply([], rs.filter(Boolean))); timer = setTimeout(poll, EVERY); });
   }
 
+  /* ---------- live game mode: your teams join the bar by themselves ---------- */
+  var OFF = 'jsh-follow-off', LATE = {cfb: 5 * 3600e3, nfl: 4.5 * 3600e3, nba: 3.5 * 3600e3, cbb: 3.5 * 3600e3}, autoBusy = false;
+  function cfbEid(g){ /* the CFB schedule has no ESPN id: find the game on that week's live scoreboard */
+    var ids = get('jsh-cfb-eid', {}, sessionStorage), k = g.date + '|' + g.away + '|' + g.home; if (ids[k]) return Promise.resolve(ids[k]); if (!g.week) return Promise.resolve('');
+    return Promise.all(['80', '81'].map(function(gr){ return fetch('/api/cfb/scoreboard?week=' + g.week + '&groups=' + gr, {cache: 'no-store'}).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }); }))
+      .then(function(js){ js.forEach(function(j){ ((j && j.games) || []).forEach(function(e){ if (e && e.id && e.away && e.home) ids[e.date + '|' + e.away.n + '|' + e.home.n] = String(e.id); }); }); put('jsh-cfb-eid', ids, sessionStorage); return ids[k] || ''; }); }
+  function autoFollow(){
+    if (autoBusy) return; var fav = get('jsh-favgames', null); if (!fav || !fav.g || !fav.g.length) return;
+    var now = Date.now(), off = get(OFF, {}), have = {}; LIST.forEach(function(f){ have[f.lg + '|' + f.gid] = 1; });
+    Object.keys(off).forEach(function(k){ if (now - off[k] > 2 * 864e5) delete off[k]; }); put(OFF, off);
+    var due = fav.g.filter(function(g){ return g && g.k && now >= g.k - 10 * 60000 && now <= g.k + (LATE[g.lg] || 4 * 3600e3) && !have[g.lg + '|' + g.gid]; });
+    if (!due.length) return; autoBusy = true;
+    Promise.all(due.map(function(g){ return (g.eid ? Promise.resolve(g.eid) : g.lg === 'cfb' ? cfbEid(g) : Promise.resolve('')).then(function(eid){
+      if (!eid || off[g.lg + ':' + eid] || (ST[g.lg + ':' + eid] || {}).fin) return null; var f = {}; for (var p in g) f[p] = g[p]; f.eid = eid; f.auto = true; f.added = now;
+      if (location.pathname.indexOf('/' + g.lg + '/') === 0 && typeof W.JSH_GAME === 'function') { try { var hub = W.JSH_GAME(g.gid); if (hub && hub.mu != null) { f.mu = hub.mu; f.sd = hub.sd || f.sd; } } catch (x) {} }
+      return f; }); })).then(function(fs){ autoBusy = false; var add = fs.filter(Boolean).filter(function(f){ return !LIST.some(function(x){ return key(x) === key(f); }); });
+      if (!add.length) return; LIST = add.concat(LIST); while (LIST.length > MAX) { var drop = -1; for (var i = LIST.length - 1; i >= 0; i--) if (!LIST[i].auto) { drop = i; break; } LIST.splice(drop < 0 ? LIST.length - 1 : drop, 1); }   /* your teams win a place over a game you picked */
+      put(KEY, LIST); sync(); draw(); poll(true); }).catch(function(){ autoBusy = false; }); }
+
   function start(){
     var s = D.createElement('style'); s.id = 'jsh-follow'; s.textContent = css; (D.head || D.documentElement).appendChild(s);
     bar = D.createElement('div'); bar.id = 'jsh-fw'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Games you follow'); bar.hidden = true; D.body.appendChild(bar);
     spacer = D.createElement('div'); spacer.id = 'jsh-fw-sp'; spacer.setAttribute('aria-hidden', 'true'); D.body.appendChild(spacer);
-    draw(); poll(true);
+    draw(); poll(true); autoFollow(); setInterval(function(){ if (!D.hidden) autoFollow(); }, 60000);
     W.addEventListener('resize', lift); setInterval(lift, 4000);
-    D.addEventListener('visibilitychange', function(){ if (!D.hidden) poll(true); });
-    W.addEventListener('storage', function(e){ if (e.key === KEY) { LIST = get(KEY, []); sync(); draw(); poll(true); } });
+    D.addEventListener('visibilitychange', function(){ if (!D.hidden) { autoFollow(); poll(true); } });
+    W.addEventListener('storage', function(e){ if (e.key === KEY) { LIST = get(KEY, []); sync(); draw(); poll(true); } if (e.key === 'jsh-favgames') autoFollow(); });
     var v = D.getElementById('view');
     if (v) { var q = 0; new MutationObserver(function(){ if (!q) q = setTimeout(function(){ q = 0; button(); }, 120); }).observe(v, {childList: true, subtree: true}); button(); }
   }

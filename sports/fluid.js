@@ -110,11 +110,14 @@
   function swipe(){
     var x0 = 0, y0 = 0, dx = 0, on = 0, t0 = 0;   /* on: 0 idle, 1 watching, 2 dragging */
     var sideways = function(el){ for (; el && el !== V; el = el.parentElement) { if (el.scrollWidth > el.clientWidth + 6) { var o = getComputedStyle(el).overflowX; if (o === 'auto' || o === 'scroll') return true; } } return false; };
-    var target = function(d){ var cur = V.querySelector('.days a.on,.wk a.on') || V.querySelector('.seg a.on'); if (!cur) return null; var sib = [].slice.call(cur.parentElement.querySelectorAll('a')), i = sib.indexOf(cur) + d; return sib[i] && sib[i].getAttribute('href') ? sib[i] : null; };
+    /* a page in tabs (polish/tabs.js: team and game pages): the swipe moves to the next or previous tab instead */
+    var tabbed = function(){ return H.classList.contains('jt-on') && !!V.querySelector('.jtab button.on'); };
+    var target = function(d){ if (tabbed()) { var tc = V.querySelector('.jtab button.on'), tb = [].slice.call(tc.parentElement.querySelectorAll('button[data-t]')), ti = tb.indexOf(tc) + d; return tb[ti] || null; }
+      var cur = V.querySelector('.days a.on,.wk a.on') || V.querySelector('.seg a.on'); if (!cur) return null; var sib = [].slice.call(cur.parentElement.querySelectorAll('a')), i = sib.indexOf(cur) + d; return sib[i] && sib[i].getAttribute('href') ? sib[i] : null; };
     V.addEventListener('touchstart', function(e){
       on = 0; if (busy || e.touches.length !== 1) return; var t = e.touches[0];
       if (t.clientX < 26 || t.clientX > W.innerWidth - 26) return;               /* the phone's own edge swipes */
-      if (!V.querySelector('.days a.on,.wk a.on,.seg a.on')) return;
+      if (!tabbed() && !V.querySelector('.days a.on,.wk a.on,.seg a.on')) return;
       if (e.target.closest && e.target.closest('input,select,textarea,button,.cfpx-wrap,.tblwrap,table,svg,.jsh-noswipe')) return;
       if (sideways(e.target)) return;
       x0 = t.clientX; y0 = t.clientY; dx = 0; t0 = Date.now(); on = 1;
@@ -129,6 +132,9 @@
       if (on !== 2) { on = 0; return; } on = 0;
       var fast = Math.abs(dx) > 34 && Date.now() - t0 < 260, far = Math.abs(dx) > Math.min(110, W.innerWidth * 0.28), link = (fast || far) ? target(dx < 0 ? 1 : -1) : null;
       V.classList.remove('jsh-drag');
+      if (link && link.tagName === 'BUTTON') { link.click(); var from = dx < 0 ? 46 : -46; V.classList.remove('jsh-snap'); V.style.transform = 'translateX(' + from + 'px)'; V.style.opacity = '0.35'; void V.offsetWidth;
+        V.classList.add('jsh-snap'); V.style.transform = ''; V.style.opacity = ''; setTimeout(function(){ V.classList.remove('jsh-snap'); }, 300);
+        var jb = V.querySelector('.jtab'), ob = jb && jb.querySelector('button.on'); if (ob && jb.scrollTo) jb.scrollTo({left: Math.max(0, ob.offsetLeft - (jb.clientWidth - ob.offsetWidth) / 2), behavior: 'smooth'}); return; }   /* the new tab slides in from the side it came from; its button scrolls into view */
       if (link) { swipeDir = dx < 0 ? 'next' : 'prev'; location.hash = link.getAttribute('href'); setTimeout(function(){ if (!busy) { V.classList.add('jsh-snap'); V.style.transform = ''; V.style.opacity = ''; } }, 60); }
       else { V.classList.add('jsh-snap'); V.style.transform = ''; V.style.opacity = ''; setTimeout(function(){ V.classList.remove('jsh-snap'); }, 260); }
     };

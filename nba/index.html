@@ -22,6 +22,92 @@
      hub does and can hand it to /sports/fluid.js, which lets the hub draw the new page inside a view transition. Until that
      file has loaded (or when it declines), the page change goes straight through as before. -->
 <script>addEventListener('hashchange', function (e) { var f = window.__jshNav; if (!f || e.__jshPass) return; try { if (f(e) === true) e.stopImmediatePropagation(); } catch (x) {} }, true);</script>
+<!-- Glance mode and page-shaped placeholders (2026-11-19, Jamo picked "Compact glance mode" and "Smoother loading").
+     - Glance: the switch next to light/dark (.jsh-gl) tightens spacing, trims subtitles and shrinks big numbers so more fits
+       on a phone. Saved per browser (localStorage jsh-glance); the class is set here, before the page draws, so it never jumps.
+     - Placeholders: the hubs start with gray shapes in #view while their data loads. This swaps those shapes for ones in the
+       shape of the page being opened (a team page, a game, the scoreboard, a player) as soon as the parser reaches #view. -->
+<style>
+.jsh-gl{flex:none;display:grid;place-items:center;width:34px;height:30px;margin-left:6px;padding:0;border:0;border-radius:999px;background:rgba(255,255,255,.08);color:#dfe6f3;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.jsh-gl:hover{background:rgba(255,255,255,.16);color:#fff}
+.jsh-gl:focus-visible{outline:2px solid #7cb6ff;outline-offset:2px}
+.jsh-gl svg{width:17px;height:17px}
+html.jsh-glance .jsh-gl{background:#f2c14e;color:#1d1405}
+@media (min-width:1100px){.jsh .jsh-gl{margin-left:auto}.jsh .jsh-gl~.jsh-th{margin-left:6px}}
+@media (max-width:560px){.jsh .jsh-gl{margin-left:2px;width:30px}.jsh .jsh-gl~.jsh-th{margin-left:2px;width:30px}}
+/* glance: hubs */
+html.jsh-glance #view .sec{margin:14px 0 6px}
+html.jsh-glance #view .sec h2{font-size:17px}
+html.jsh-glance #view .sec .muted,html.jsh-glance #view .sec>.note{display:none}
+html.jsh-glance #view .grid{gap:8px}
+html.jsh-glance #view .card .hd{padding:8px 10px 4px}
+html.jsh-glance #view .card .bd{padding:0 10px 9px}
+html.jsh-glance #view .tile{padding:6px 9px 6px}
+html.jsh-glance #view .tile .val{font-size:21px;margin-top:1px}
+html.jsh-glance #view .tile .sub{display:none}
+html.jsh-glance #view .page-head{margin:2px 0 8px}
+html.jsh-glance #view .page-head h1{font-size:22px}
+html.jsh-glance #view .page-head .sub,html.jsh-glance #view .page-head .eyebrow{display:none}
+html.jsh-glance #view .tbl td{padding:5px 8px}
+html.jsh-glance #view .tbl th{padding:6px 8px}
+html.jsh-glance #view .note{padding:8px 10px;font-size:12.5px}
+html.jsh-glance #view .jtab{margin-top:6px;margin-bottom:2px}
+html.jsh-glance #view .jtab button,html.jsh-glance #view .jtab a{min-height:34px}
+html.jsh-glance #view p{margin-top:.4em;margin-bottom:.4em}
+/* glance: the big headers on team, game and player pages shrink to a band */
+html.jsh-glance #view .crumb{margin-bottom:4px}
+html.jsh-glance #view .thead .thead-wm,html.jsh-glance #view .thead .meta,html.jsh-glance #view .thead .eyebrow{display:none}
+html.jsh-glance #view .thead{min-height:0;padding-top:12px;padding-bottom:10px}
+html.jsh-glance #view .thead .mono.logo{width:44px;height:44px}
+html.jsh-glance #view .thead .mono.logo img{width:38px;height:38px}
+html.jsh-glance #view .thead h1{font-size:22px}
+html.jsh-glance #view .thead .ranks{margin-top:8px}
+html.jsh-glance #view .thead .rb{padding:5px 4px 6px}
+html.jsh-glance #view .thead .rb .v{font-size:19px}
+html.jsh-glance #view .ghead{padding-top:10px;padding-bottom:10px}
+html.jsh-glance #view .ghead .meta,html.jsh-glance #view .ghead .eyebrow,html.jsh-glance #view .ghead .rec{display:none}
+/* glance: small chart cards two across on a phone */
+@media (max-width:600px){html.jsh-glance #view .yct-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}html.jsh-glance #view .yct{padding:6px 8px}}
+/* glance: home page */
+html.jsh-glance :not(#view) > .sec{margin-top:8px;margin-bottom:4px;padding-bottom:2px}
+html.jsh-glance :not(#view) > .sec .note{display:none}
+html.jsh-glance .hero .hi-l{display:none}
+html.jsh-glance .hero{padding-top:10px;padding-bottom:10px}
+html.jsh-glance #yt,html.jsh-glance #recap{margin-bottom:8px}
+html.jsh-glance .tv-foot{display:none}
+html.jsh-glance .rc{padding-top:8px;padding-bottom:8px}
+html.jsh-glance .rc-pl{display:none}
+/* placeholders in the page's shape */
+#view .skel-wrap[data-k] .jsk-row{display:flex;gap:8px;margin:0 0 12px;overflow:hidden}
+#view .skel-wrap[data-k] .jsk-pill{flex:none;height:38px;width:88px;border-radius:999px}
+#view .skel-wrap[data-k] .jsk-hero{height:200px;margin:4px 0 14px}
+#view .skel-wrap[data-k] .jsk-h{height:22px;width:min(260px,55%);margin:20px 0 10px}
+#view .skel-wrap[data-k] .jsk-line{height:52px;margin:0 0 8px}
+#view .skel-wrap[data-k] .jsk-game{height:92px}
+#view .skel-wrap[data-k] .jsk-back{height:34px;width:84px;border-radius:999px;margin:8px 0 12px}
+#view .skel-wrap[data-k] .skel-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+</style>
+<script>
+(function(){ var R = document.documentElement;
+  try { if (localStorage.getItem('jsh-glance') === '1') R.classList.add('jsh-glance'); } catch (e) {}
+  document.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('.jsh-gl'); if (!b) return;
+    var on = !R.classList.contains('jsh-glance'); R.classList.toggle('jsh-glance', on); try { localStorage.setItem('jsh-glance', on ? '1' : '0'); } catch (x) {}
+    b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.title = on ? 'Glance mode is on: tap for the full view' : 'Glance mode: fit more on the screen';
+    try { window.dispatchEvent(new Event('resize')); } catch (x) {} });
+  /* the page-shaped placeholders: only on the four hubs, only while their own gray shapes are still showing */
+  if (!/^\/(cfb|nfl|nba|cbb)(\/|$)/.test(location.pathname)) return;
+  var h = location.hash || '', k = /^#\/team\//.test(h) ? 'team' : /^#\/(game|gameday)\//.test(h) ? 'game' : /^#\/player\//.test(h) ? 'player' : (!h || h === '#/' || /^#\/(scores|week|today|day)\b/.test(h)) ? 'scores' : 'list';
+  var S = function(c, st){ return '<div class="skel ' + c + '"' + (st ? ' style="' + st + '"' : '') + '></div>'; }, rep = function(n, s){ var o = ''; for (var i = 0; i < n; i++) o += s; return o; };
+  var tiles = '<div class="skel-grid">' + rep(4, S('skel-card')) + '</div>', lines = function(n){ return rep(n, S('jsk-line')); };
+  var M = { team: S('jsk-back') + S('jsk-hero', 'height:230px') + '<div class="jsk-row">' + rep(5, S('jsk-pill')) + '</div>' + tiles + S('jsk-h') + lines(4),
+    game: S('jsk-back') + S('jsk-hero', 'height:190px') + '<div class="jsk-row">' + rep(5, S('jsk-pill')) + '</div>' + S('jsk-hero', 'height:150px') + S('jsk-hero', 'height:220px'),
+    player: S('jsk-back') + S('jsk-hero', 'height:170px') + tiles + S('jsk-h') + lines(5),
+    scores: S('skel-title') + '<div class="jsk-row">' + rep(7, S('jsk-pill', 'width:62px')) + '</div><div class="skel-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">' + rep(6, S('jsk-game')) + '</div>',
+    list: S('skel-title') + S('skel-sub') + tiles + S('jsk-h') + lines(6) };
+  var put = function(){ var v = document.getElementById('view'); if (!v || !v.firstElementChild) return false; var w = v.querySelector(':scope > .skel-wrap'); if (w && !w.dataset.k) { w.dataset.k = k; w.innerHTML = M[k]; } return true; };   /* done once #view has anything in it */
+  if (!put() && window.MutationObserver) { var mo = new MutationObserver(function(){ if (put()) mo.disconnect(); }); mo.observe(R, {childList: true, subtree: true}); setTimeout(function(){ mo.disconnect(); }, 20000); }
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&display=swap">
 <style>
@@ -120,6 +206,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
     <a href="/cbb/" data-s="cbb" style="--c:#d97706" title="College basketball"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-basketball.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">CBB</a>
     <a href="/sports/live/" data-s="live" style="--c:#e11d48" title="Live Center"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.48M7.76 16.24a6 6 0 0 1 0-8.48M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>Live<span class="jsh-ld" hidden></span></a>
   </nav>
+  <button type="button" class="jsh-gl" title="Glance mode: fit more on the screen" aria-label="Glance mode: fit more on the screen" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg></button>
   <button type="button" class="jsh-th" title="Switch between light and dark" aria-label="Switch between light and dark"><svg class="sn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><svg class="mn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
 </div>
 <script>
@@ -259,7 +346,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Touch: the phone tune-up on every page - bigger tap areas, nothing under 11 px, names not cut off (polish/touch.js, published by build.sh as /sports/touch.js) -->
 <script src="/sports/touch.js?v=20261109a" defer></script>
 <!-- App: smooth page changes, saved copies for weak signal (registers /sw.js) and pull down to refresh in the home-screen app (polish/app.js, published by build.sh as /sports/app.js) -->
-<script src="/sports/app.js?v=20261110a" defer></script>
+<script src="/sports/app.js?v=20261119b" defer></script>
 <!-- Explain: tap a dotted stat name for what it means; press and hold a column name that sorts (polish/explain.js, published by build.sh as /sports/explain.js) -->
 <script src="/sports/explain.js?v=20261110b" defer></script>
 <!-- Follow: up to two followed games in a slim scoreboard on every page, with the hub's own win chance (polish/winodds.js + polish/follow.js, published by build.sh as /sports/follow.js) -->
@@ -269,7 +356,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
 <script src="/sports/finish.js?v=20261110a" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
-<script src="/sports/tabs.js?v=20261119a" defer></script>
+<script src="/sports/tabs.js?v=20261119b" defer></script>
+<!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
+<script src="/sports/moments.js?v=20261119b" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -9423,7 +9512,7 @@ function woNow(g){ if(!g.live||!window.JSHOdds) return null; const ph=JSHOdds.no
 function woTag(g){ const w=woNow(g); return w?'<span class="wo-tag" title="Hub win chance">'+esc(tshort(w.ab))+' '+JSHOdds.pc(w.p)+'</span>':''; }
 function woHTML(g){ if(!(g.played||g.live)||!window.JSHOdds) return ''; const a=team(g.away), h=team(g.home); return '<div class="wo" data-lg="nba" data-id="'+esc(g.id)+'" data-mu="'+proj(g).diff.toFixed(2)+'" data-sd="'+SD+'" data-a="'+esc(a.ab)+'" data-h="'+esc(h.ab)+'" data-an="'+esc(a.disp)+'" data-hn="'+esc(h.disp)+'" data-ac="'+esc(a.color)+'" data-hc="'+esc(h.color)+'"></div>'; }
 /* Follow a game (sports-hub/polish/follow.js, 2026-11-10): what the Follow button needs to know about a game */
-window.JSH_GAME=function(id){ const g=GI[id]; if(!g) return null; const a=team(g.away), h=team(g.home); return {lg:'nba', eid:String(g.id), gid:String(g.id), live:!!(g.live&&LIVE.last&&Date.now()-LIVE.last<90000), as:g.as, hs:g.hs, det:g.clk, per:g.per, a:a.ab, h:h.ab, an:a.disp, hn:h.disp, ac:a.color, hc:h.color, al:'/nba/img/logos/'+a.ab+'.png', hl:'/nba/img/logos/'+h.ab+'.png', mu:+proj(g).diff.toFixed(2), sd:SD, href:'/nba/#/game/'+g.id, done:!!g.played}; };
+window.JSH_GAME=function(id){ const g=GI[id]; if(!g) return null; const a=team(g.away), h=team(g.home); return {lg:'nba', eid:String(g.id), gid:String(g.id), live:!!(g.live&&LIVE.last&&Date.now()-LIVE.last<90000), as:g.as, hs:g.hs, det:g.clk, per:g.per, a:a.ab, h:h.ab, an:a.disp, hn:h.disp, ac:a.color, hc:h.color, al:'/nba/img/logos/'+a.ab+'.png', hl:'/nba/img/logos/'+h.ab+'.png', mu:+proj(g).diff.toFixed(2), sd:SD, href:'/nba/#/game/'+g.id, ln:(g.spread==null||isNaN(g.spread))?null:-g.spread, done:!!g.played}; };
 function liveCardHTML(g){ if(!g.live&&!(LIVE.sum[g.id])) return ''; const a=team(g.away), h=team(g.home); const j=LIVE.sum[g.id]; let html='<div class="card pv live"><div class="hd"><h3><span class="livedot"></span>'+(g.live?'Live':'Final')+'</h3><span class="mini">'+esc(g.clk||(j&&j.det)||'')+(LIVE.last?' · updated '+new Date(LIVE.last).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}):'')+'</span></div><div class="bd">'; if(g.live&&g.last) html+='<div class="mini" style="margin-bottom:8px">Last play: '+esc(g.last)+'</div>'; html+=linescoreHTML(g, j); if(g.live){ const w=woNow(g); if(w) html+='<div class="mini" style="margin:6px 0">Hub win chance: <b>'+esc(tshort(w.ab))+' '+JSHOdds.pc(w.p)+'</b></div>'; }; if(j&&j.plays&&j.plays.length&&g.live) html+='<div class="eyebrow" style="margin-top:10px">Latest plays</div><div class="ldr" style="margin-top:4px">'+j.plays.slice().reverse().map(p=>'<div><span class="k">'+(p.per?(p.per<=4?'Q'+p.per:'OT'+(p.per>5?p.per-4:'')):'')+'</span><span class="dim">'+esc(p.clk||'')+'</span> '+esc(p.text)+(p.as!=null?' <span class="dim">'+esc(String(p.as))+'-'+esc(String(p.hs))+'</span>':'')+'</div>').join('')+'</div>'; if(!j) html+='<div class="mini">Loading the live box score…</div>'; return html+'</div></div>'; }
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden&&LIVE.on){ livePoll(true); liveSchedule(); } });
 function liveTeamRow(g, side){ const t=team(side==='home'?g.home:g.away); const pts=side==='home'?g.hs:g.as, opp=side==='home'?g.as:g.hs; return '<div class="lrow'+(pts>opp?' w':'')+'">'+(logoOf(t)?'<img class="sw sw-logo" src="'+logoOf(t).icon+'" alt="">':'<span class="sw" style="background:'+uiColor(t)+'"></span>')+'<span class="nm">'+esc(t.disp)+'</span><span class="sc">'+scoreSpan(g,side==='home'?'h':'a',pts)+'</span></div>'; }

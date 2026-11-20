@@ -2254,6 +2254,9 @@
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|passingYards|Trinidad Chambliss|QB|14/27, 127 YDS, 1 TD
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|rushingYards|Trinidad Chambliss|QB|11 CAR, 84 YDS
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|receivingYards|Caleb Odom|TE|4 REC, 56 YDS, 1 TD
+2026-11-19|Rice|Temple|Temple|passingYards|Jaxon Smolik|QB|5/10, 58 YDS, 1 TD, 1 INT
+2026-11-19|Rice|Temple|Temple|rushingYards|Colin Chase|WR|3 CAR, 59 YDS
+2026-11-19|Rice|Temple|Temple|receivingYards|Colin Chase|WR|3 REC, 42 YDS, 1 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|passingYards|Brogan McCaughey|QB|12/16, 135 YDS, 1 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|rushingYards|Amareon Blue|RB|27 CAR, 160 YDS, 3 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|receivingYards|Nick Devereaux|WR|4 REC, 62 YDS
@@ -4243,3 +4246,9 @@
 2026-11-14|Idaho State|Montana|Idaho State|passingYards|Jordan Cooke|QB|27/53, 356 YDS, 3 TD, 1 INT
 2026-11-14|Idaho State|Montana|Montana|rushingYards|Eli Gillman|RB|19 CAR, 58 YDS
 2026-11-14|Idaho State|Montana|Montana|receivingYards|Landon Ransom-Goelz|WR|9 REC, 159 YDS, 1 TD
+2026-11-19|Northwestern State|Stephen F. Austin|Stephen F. Austin|passingYards|JT Kitna|QB|14/19, 253 YDS, 3 TD
+2026-11-19|Northwestern State|Stephen F. Austin|Stephen F. Austin|rushingYards|Jaylen Jenkins|RB|12 CAR, 75 YDS, 1 TD
+2026-11-19|Northwestern State|Stephen F. Austin|Stephen F. Austin|receivingYards|Bugs Mortimer|WR|3 REC, 113 YDS, 1 TD
+2026-11-19|SE Louisiana|Nicholls|SE Louisiana|passingYards|Kyle Lowe|QB|9/12, 110 YDS
+2026-11-19|SE Louisiana|Nicholls|SE Louisiana|rushingYards|Chad Elzy Jr.|RB|10 CAR, 98 YDS, 1 TD
+2026-11-19|SE Louisiana|Nicholls|SE Louisiana|receivingYards|Dkhai Joseph|WR|8 REC, 97 YDS

@@ -328,7 +328,7 @@ IND||Adetomiwa Adebawore|DT|Active||||2026-11-21|Adebawore finished Thursday's 2
 IND||A.J. Haulcy|S|Active||||2026-11-21|Haulcy logged nine tackles (four solo) and an interception during the Colts' 26-3 loss to the Texans on Thursday.
 IND||CJ Allen|LB|Active||||2026-11-21|Allen posted 16 tackles (seven solo) during the Colts' 26-3 loss to the Texans on Thursday.
 IND||Quez Watkins|WR|Active||||2026-11-21|Watkins caught one of his three targets for 26 yards during the Colts' 26-3 loss to the Texans on Thursday night.
-IND||Ashton Dulin|WR|Active||||2026-11-21|Dulin caught two of his four targets for 30 yards and assisted two tackles on kick coverage during the Colts' 26-3 loss to the Texans on Thursday night.
+IND||Ashton Dulin|WR|Active||||2026-11-21|Dulin caught two of his four targets for 30 yards and assisted on two tackles on kick coverage during the Colts' 26-3 loss to the Texans on Thursday night.
 IND||Deion Burks|WR|Active||||2026-11-21|Burks was targeted three times for zero catches, had one kick return for 10 yards and made one tackle on kick coverage during the Colts' 26-3 loss to the Texans on Thursday night.
 IND||Spencer Shrader|PK|Active||||2026-11-21|Shrader went 1-for-3 on field-goal attempts during the Colts' 26-3 loss to the Texans on Thursday.
 IND||Riley Leonard|QB|Out|Coach's Decision||2026-11-29|2026-11-20|The Colts announced Friday that Leonard will act as Anthony Richardson's backup at quarterback, Stephen Holder of ESPN.com reports.
@@ -402,8 +402,8 @@ LV||Folorunso Fatukasi|DT|Questionable|Toe||2026-11-22|2026-11-21|Fatukasi (toe)
 LV||Tonka Hemingway|DT|Out|Upper Body|Stinger|2026-11-29|2026-11-21|Hemingway (upper body) has been ruled out ahead of Sunday's game against the Broncos, Paul Gutierrez of the Raiders' official site reports.
 LV||Ian Thomas|TE|Active||||2026-11-20|
 LV||Trey Zuhn III|C|Active||||2026-11-20|
+LV||Brock Bowers|TE|Questionable|Ankle||2026-11-22|2026-11-20|Coach Klint Kubiak said Friday that Bowers (ankle) is slated to be listed as questionable for Sunday's game against the Broncos, Sam Warren of The Athletic reports.
 LV||Matt Gay|PK|Questionable|Hip||2026-11-22|2026-11-20|Gay (hip) was spotted at practice Friday, Sam Warren of The Athletic reports.
-LV||Brock Bowers|TE|Questionable|Ankle||2026-11-22|2026-11-20|Bowers (ankle) was present for Friday's practice, Sam Warren of The Athletic reports.
 LV||Thomas Booker IV|DT|Active||||2026-11-19|Booker (ankle) was a full participant in Wednesday's practice, Sam Warren of The Athletic reports.
 LV||Kwity Paye|DE|Active||||2026-11-19|Paye (neck) was not listed on the Raiders' injury report Wednesday, Sam Warren of The Athletic reports.
 LV||Dont'e Thornton Jr.|WR|Active||||2026-11-19|Thornton (back) was a full participant in Las Vegas' practice Wednesday, Sam Warren of The Athletic reports.
@@ -448,8 +448,8 @@ LAC||Justin Herbert|QB|Active||||2026-11-17|Herbert completed 12 of 18 passes fo
 LAC||Kayode Awosika|G|Active||||2026-11-17|Awosika (fibula) is active for Monday's game against the Ravens.
 LAC||Trey Pipkins III|OT|Injured Reserve|Knee||2026-11-22|2026-11-16|Pipkins (knee) won't be available for Monday's game against the Ravens after the Chargers didn't activate him from injured reserve.
 LAC||Branson Taylor|G|Injured Reserve|Ankle||2026-12-13|2026-11-16|Taylor (ankle) was placed on injured reserve Monday.
-LAR||Konata Mumpfield|WR|Active||||2026-11-20|The Rams are expected to lean more on Mumpfield and the rest of the team's wide receivers in the absence of Puka Nacua (knee), the latter of whom is expected to be sidelined for the remainder of the regular season, Nate 
-LAR||Davante Adams|WR|Injured Reserve|Hamstring|Surgery|2026-12-03|2026-11-20|With regard to the availability of Adams (hamstring) -- who remains on IR -- head coach Sean McVay said Friday "we'll take it a week at a time" with the wideout, while adding that he doesn't "think he's ready quite yet,"
+LAR||Konata Mumpfield|WR|Active||||2026-11-20|The Rams are expected to lean more on Mumpfield and the rest of the team's wide receivers in the absence of Puka Nacua (knee/toe), the latter of whom is expected to be sidelined for the remainder of the regular season, N
+LAR||Davante Adams|WR|Injured Reserve|Hamstring|Surgery|2026-12-03|2026-11-20|Coach Sean McVay noted Friday that Adams (hamstring) isn't expected to practice this weekend, Greg Beacham of the Associated Press reports.
 LAR||Terrance Ferguson|TE|Injured Reserve|Hamstring|Strain|2026-11-25|2026-11-20|Ferguson (hamstring/ankle) isn't ready to return to game action, but the Rams still plan to activate him from injured reserve before Week 12 and keep him on the active roster, Adam Grosbard of The Orange County Register 
 LAR||Puka Nacua|WR|Injured Reserve|Knee - MCL|Sprain|2027-01-10|2026-11-20|Coach Sean McVay revealed Friday that Nacua (knee) had surgery to repair his MCL on Tuesday and is on track to miss a couple of months, Sarah Barshop of ESPN.com reports.
 LAR||Myles Garrett|DE|Active||||2026-11-19|Garrett played 17 defensive snaps but did not show up on the box score otherwise during the Rams' 34-6 win over the Cardinals in Week 10.
@@ -726,7 +726,7 @@ SEA||Patrick O'Connell|LB|Active||||2026-11-13|
 TB||Josh Hayes|CB|Injured Reserve|Knee|Surgery|2026-11-30|2026-11-21|Hayes (knee) has been ruled out for Sunday's game against the Lions.
 TB||Yaya Diaby|LB|Questionable|Knee - MCL|Sprain|2026-11-22|2026-11-20|Diaby (knee) is questionable for Sunday's game against the Lions.
 TB||Antoine Winfield Jr.|S|Out|Ankle||2026-11-30|2026-11-20|Winfield (ankle) has been ruled out for Sunday's game against the Lions.
-TB||Jalon Daniels|QB|Active||||2026-11-20|Head coach Todd Bowles expressed optimism Friday that Baker Mayfield (foot/thumb) would start against the Lions on Sunday, which would leave Daniels as the Buccaneers' QB2, Scott Smith and Brianna Dix of the team's offic
+TB||Jalon Daniels|QB|Active||||2026-11-20|Head coach Todd Bowles expressed optimism Friday that Baker Mayfield (foot/thumb) will start against the Lions on Sunday, which would leave Daniels as the Buccaneers' QB2, Scott Smith and Brianna Dix of the team's offici
 TB||Baker Mayfield|QB|Questionable|Foot|Strain|2026-11-22|2026-11-20|Mayfield (foot) is trending in the right direction to start Sunday's game against the Lions after looking good in Friday's practice, Scott Smith of the Buccaneers' official site reports.
 TB||Easton Stick|QB|Active||||2026-11-16|The Buccaneers signed Stick off their practice squad Monday, Scott Smith of the team's official site reports.
 TB||Tykee Smith|S|Active||||2026-11-12|Smith recorded seven tackles (four solo) and an interception in Sunday night's 27-24 loss to the Bears.

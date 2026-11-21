@@ -2254,6 +2254,21 @@
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|passingYards|Trinidad Chambliss|QB|14/27, 127 YDS, 1 TD
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|rushingYards|Trinidad Chambliss|QB|11 CAR, 84 YDS
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|receivingYards|Caleb Odom|TE|4 REC, 56 YDS, 1 TD
+2026-11-20|Iowa State|UCF|UCF|passingYards|Alonza Barnett III|QB|12/21, 204 YDS, 3 TD
+2026-11-20|Iowa State|UCF|Iowa State|rushingYards|Aiden Flora|RB|18 CAR, 153 YDS, 2 TD
+2026-11-20|Iowa State|UCF|UCF|receivingYards|Josh Derry|WR|4 REC, 125 YDS, 3 TD
+2026-11-20|Clemson|Duke|Duke|passingYards|Walker Eget|QB|4/11, 15 YDS
+2026-11-20|Clemson|Duke|Clemson|rushingYards|Chris Denson|QB|8 CAR, 46 YDS
+2026-11-20|Clemson|Duke|Duke|receivingYards|Javen Nicholas|WR|1 REC, 14 YDS
+2026-11-20|Bowling Green|Toledo|Toledo|passingYards|John Alan Richter|QB|9/13, 94 YDS
+2026-11-20|Bowling Green|Toledo|Toledo|rushingYards|CJ Miller|RB|4 CAR, 18 YDS
+2026-11-20|Bowling Green|Toledo|Toledo|receivingYards|Daryl Barnett Jr.|WR|2 REC, 39 YDS
+2026-11-20|Oregon|Michigan State|Oregon|passingYards|Dylan Raiola|QB|4/6, 43 YDS
+2026-11-20|Oregon|Michigan State|Oregon|rushingYards|Da'Jaun Riggs|RB|4 CAR, 21 YDS
+2026-11-20|Oregon|Michigan State|Oregon|receivingYards|Jamari Johnson|TE|1 REC, 18 YDS
+2026-11-20|UTEP|Air Force|UTEP|passingYards|Raymond Moore III|QB|1/2, 11 YDS
+2026-11-20|UTEP|Air Force|Air Force|rushingYards|Keegan Sack|WR|1 CAR, 22 YDS
+2026-11-20|UTEP|Air Force|UTEP|receivingYards|Team|-|1 REC, 11 YDS
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|passingYards|Brogan McCaughey|QB|12/16, 135 YDS, 1 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|rushingYards|Amareon Blue|RB|27 CAR, 160 YDS, 3 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|receivingYards|Nick Devereaux|WR|4 REC, 62 YDS

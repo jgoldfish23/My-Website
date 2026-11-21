@@ -3371,6 +3371,83 @@ tr.my-open>td{border-bottom-color:transparent}
 .bw-line{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:4px;font-size:12.5px;color:var(--ink-2)}
 .bw-tbd{margin-top:6px;font-size:12.5px;color:var(--ink-3)}
 @media (max-width:600px){.bw{grid-template-columns:1fr;gap:6px}.bw-when{flex-direction:row;flex-wrap:wrap;gap:4px 10px;align-items:center}}
+/* ===== TV guide 2 (2026-11-21): what's-on list, Flip to, quick filters, a slimmer header on phones ===== */
+.tvfilt{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 0 12px;padding:1px}
+.tvfilt::-webkit-scrollbar{display:none}
+.tvfilt button{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(120,170,255,.24);background:rgba(11,16,30,.84);color:var(--ink-2);font:600 13.5px/1 var(--body);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tvfilt button:hover{color:#fff;border-color:rgba(34,227,255,.5)}
+.tvfilt button:focus-visible{outline:2px solid #22e3ff;outline-offset:2px}
+.tvfilt button.on{background:linear-gradient(120deg,rgba(34,227,255,.28),rgba(255,43,214,.22));border-color:rgba(34,227,255,.55);color:#fff;box-shadow:0 0 16px rgba(34,227,255,.22)}
+.tvfilt button .n{font-size:12px;font-weight:700;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.tvfilt button.on .n{color:#c9f6ff}
+.tvbar .tvmodeseg svg{width:15px;height:15px;margin-right:6px;flex:none}
+/* Flip to */
+.tvflip .tvflip-n{margin-left:auto;font-size:11px;letter-spacing:.08em;color:var(--ink-2)}
+.tvflip-g{position:relative;z-index:1;display:grid;grid-template-columns:66px minmax(0,1fr);gap:12px;align-items:center;margin-top:10px;padding:8px 10px;border-radius:12px;background:rgba(4,8,16,.6);border:1px solid rgba(93,255,138,.2);color:inherit}
+.tvflip-g:hover,.tvflip-g:focus-visible{text-decoration:none;border-color:rgba(93,255,138,.65);background:rgba(4,8,16,.8)}
+.tvflip-g.fav{border-color:rgba(255,197,61,.6)}
+.tvflip-t{display:block;font-size:15px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tvflip-t i{font-style:normal;font-size:12px;font-weight:700;color:var(--ink-3);margin-right:3px}
+.tvflip-t b{font:800 16px/1 var(--num,var(--disp));color:#fff;font-variant-numeric:tabular-nums}
+.tvflip-t u{text-decoration:none;color:var(--ink-3);margin:0 3px}
+.tvflip-w{display:block;margin-top:4px;font-size:12.5px;line-height:1.3;color:var(--ink-2)}
+.tvflip-w em{font-style:normal;font-weight:700;color:#8dffad}
+/* the list */
+.tvq-list{border:1px solid rgba(34,227,255,.24);border-radius:16px;background:rgba(7,11,22,.9);box-shadow:0 0 0 1px rgba(255,43,214,.06),0 24px 60px rgba(0,0,0,.45);overflow:hidden}
+.tvq-sec,.tvq-done>summary{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;padding:13px 14px 9px;border-top:1px solid rgba(120,170,255,.16)}
+.tvq-list>.tvq-sec:first-child{border-top:0}
+.tvq-sec h3,.tvq-done>summary h3{display:flex;align-items:center;gap:8px;margin:0;font:800 13px/1 "Orbitron",var(--disp);letter-spacing:.14em;text-transform:uppercase;color:#a6f5ff}
+.tvq-sec.live h3{color:#8dffad}
+.tvq-sec>span,.tvq-done>summary>span{font-size:12.5px;color:var(--ink-3)}
+.tvq-done>summary{cursor:pointer;list-style:none;min-height:44px;align-items:center}
+.tvq-done>summary::-webkit-details-marker{display:none}
+.tvq-done>summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);transform:rotate(45deg);transition:transform .15s ease}
+.tvq-done[open]>summary::after{transform:rotate(-135deg)}
+.tvq-h{display:flex;align-items:baseline;gap:9px;padding:9px 14px 7px;background:rgba(255,255,255,.035);border-top:1px solid rgba(120,170,255,.1)}
+.tvq-h b{font:700 15px/1 var(--num,var(--disp));color:#fff;letter-spacing:-.01em}
+.tvq-h span{font-size:12.5px;font-weight:600;color:#8fe6ff}
+.tvq-h i{margin-left:auto;font-style:normal;font-size:12px;color:var(--ink-3)}
+.tvq-rows{display:grid;grid-template-columns:1fr}
+.tvq{display:grid;grid-template-columns:66px minmax(0,1fr);gap:12px;align-items:center;min-height:58px;padding:8px 14px;border-top:1px solid rgba(120,170,255,.08);color:inherit}
+.tvq:hover,.tvq:focus-visible{text-decoration:none;background:rgba(255,255,255,.045)}
+.tvq.fav{box-shadow:inset 3px 0 0 #ffc53d}
+.tvq-n .nwt{height:36px;font-size:10.5px;border-radius:8px}
+.tvq-n .tvp{padding:6px 4px;font-size:11px}
+.tvq-m{display:grid;gap:3px;min-width:0}
+.tvq-tm{display:flex;align-items:center;gap:8px;min-width:0;font-size:15px;font-weight:600;line-height:1.25;color:var(--ink)}
+.tvq-tm.lose{color:var(--ink-3);font-weight:500}
+.tvq-nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tvq-nm i{margin-right:4px;font-style:normal;font-size:12px;font-weight:700;color:var(--ink-3)}
+.tvq-sc{font:700 17px/1 var(--num,var(--disp));font-variant-numeric:tabular-nums}
+.tvq-tm.lose .tvq-sc{font-weight:500}
+.tvq-lg{flex:none;width:22px;height:22px;padding:2px;object-fit:contain;background:#fff;border-radius:50%}
+.tvq-lg.wsw{width:8px;height:16px;margin:0 7px;padding:0;border-radius:2px}
+.tvq-ball{display:inline-block;width:7px;height:7px;margin-left:7px;border-radius:50%;background:#ffc53d;vertical-align:middle}
+.tvq-sub{display:flex;flex-wrap:wrap;align-items:center;gap:3px 9px;margin-top:1px;font-size:12.5px;line-height:1.3;color:var(--ink-2)}
+.tvq-sub b{display:inline-flex;align-items:center;font-weight:700;color:#5dff8a}
+.tvq-sub .off{color:var(--bad);font-weight:600}
+.tvq.done .tvq-sub{color:var(--ink-3)}
+.tvq-sub .why{font-weight:600;color:#8dffad}
+.tvflip-w .nw,.tvq-sub b{white-space:nowrap}
+@media (min-width:900px){.tvq-rows{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}.tvq{border-right:1px solid rgba(120,170,255,.08)}}
+/* the scoreboard's Live now band: the best six, the rest one tap away */
+.livegrid .livecard.more{display:none}
+.livemore{display:flex;align-items:center;justify-content:center;width:100%;min-height:44px;margin-top:12px}
+.gm .tm .row .rsc .wcar{font-size:11px}
+@media (max-width:720px){
+  body.tvmode .tvhero{gap:8px 12px;margin-bottom:10px;padding:10px 12px 12px}
+  body.tvmode .tvset{padding:3px;border-radius:10px}
+  body.tvmode .tvset img{width:68px;height:51px;border-radius:7px}
+  body.tvmode .tvset::after{inset:3px;border-radius:7px}
+  body.tvmode .tvset::before{display:none}
+  body.tvmode .tvhero .eyebrow{display:none}
+  body.tvmode .tvlogo{margin:0 0 5px;padding:4px 9px 3px;font-size:17px}
+  body.tvmode .tvhero .sub{font-size:12.5px;line-height:1.45}
+  .tvx-deck{margin-bottom:10px}
+  .tvx-deck .tvx-stats{display:none}
+  .tvflip.tvx-next{padding:12px 12px 12px}
+  .tvbar{margin-bottom:10px}
+}
 </style>
 
 <header class="top">
@@ -13577,7 +13654,7 @@ function storyline(g){ const a=team(g.away), h=team(g.home); const hand=PREVIEWS
   if(mar>=24) return fav.disp+' is a heavy favorite ('+modelStr(g,{short:true})+')'+(pw?'; '+pw.pos+' '+pw.n+' is the one to watch':'')+'.';
   return fav.disp+' by '+num1(mar)+' on the model'+(pw?', with '+pw.pos+' '+pw.n+' the name to watch':'')+'.'; }
 function pcard(g){ const a=team(g.away), h=team(g.home); const p=proj(g); const ps=projScore(g); const hand=PREVIEWS[g.id]; const k=previewKeys(g); const blurb = hand&&hand.angle ? hand.angle : storyline(g); const e=p.edge; return '<a class="card pcard" href="#/game/'+g.id+'" style="border-top-color:'+uiColor(h)+'"><div class="bd"><div class="wm wm2"><span class="wtm">'+tlogo(a)+(a.ap?'<span class="dim">#'+a.ap+' </span>':'')+esc(tshort(a.name))+'</span><span class="wtm"><span class="wat">'+(g.neutral?'vs':'at')+'</span>'+tlogo(h)+(h.ap?'<span class="dim">#'+h.ap+' </span>':'')+esc(tshort(h.name))+'</span></div><div class="wt">'+esc(fmtDate(g.date,true).slice(0,3))+' '+esc(kick(g))+(g.tv?' &middot; '+esc(tvShort(g.tv)):'')+(g.spread!=null?' &middot; '+esc(spreadStr(g,{short:true}))+(g.total!=null?' &middot; o/u '+g.total:''):' &middot; no line')+'</div><div class="pc-row"><span><span class="eyebrow">Model</span> '+(g.tbd?'waits for the matchup':esc(tshort(a.name))+' '+ps.a+', '+esc(tshort(h.name))+' '+ps.h)+'</span>'+(e!=null?(Math.abs(e)>=3?'<span class="pill gold">':Math.abs(e)>=1.5?'<span class="pill acc">':'<span class="pill line">')+(Math.abs(e)<1.5?'Priced right':'Lean '+esc(tshort(e>0?g.home:g.away))+' '+sgn(Math.abs(e)))+'</span>':'')+'</div><div class="wh">'+esc(blurb)+'</div>'+(function(){ const l=gameProspects(g).slice(0,3); return l.length?'<div class="wd">'+l.map(d=>roundPill(d,{title:false})+' '+esc(d.n)+' <span class="dim">'+esc(d.pos+' · '+tshort(d.team))+'</span>').join('<span class="dim"> · </span>')+'</div>':''; })()+'</div></a>'; }
-function renderPreviews(w){ setNav('previews'); w = WEEKS.includes(w)? w : CUR_WEEK; const gs=G.filter(g=>g.week===w&&(!g.fcsOnly||team(g.away).featured||team(g.home).featured)).map(g=>({g,s:interest(g)+(g.spread!=null?0.5:0)})).sort((x,y)=>y.s-x.s).map(x=>x.g); const upcoming=gs.filter(g=>!g.played); const done=gs.filter(g=>g.played); const lines=upcoming.filter(g=>g.spread!=null).length; let html='<div class="page-head"><div><div class="eyebrow">Previews</div><h1>Week '+w+' '+(upcoming.length?'previews':'recaps')+'</h1><div class="mini" style="margin-top:4px"><a href="#/digest">Read the Week '+digestWeek()+' digest &rsaquo;</a></div><div class="sub">'+(upcoming.length? upcoming.length+' games still to play, '+lines+' with a posted line. Ranked by how interesting they look: stakes, closeness, storylines and ratings. Each card opens the full preview with last week\'s film, keys to the game and the model\'s call.' : 'Every game is final. Headlines and stat leaders from each one.')+'</div></div>'+weekPills(w,'#/previews/')+'</div>';
+function renderPreviews(w){ setNav('previews'); w = WEEKS.includes(w)? w : CUR_WEEK; const gs=G.filter(g=>g.week===w&&(!g.fcsOnly||tvMine(g))).map(g=>({g,s:interest(g)+(g.spread!=null?0.5:0)})).sort((x,y)=>y.s-x.s).map(x=>x.g); const upcoming=gs.filter(g=>!g.played); const done=gs.filter(g=>g.played); const lines=upcoming.filter(g=>g.spread!=null).length; let html='<div class="page-head"><div><div class="eyebrow">Previews</div><h1>Week '+w+' '+(upcoming.length?'previews':'recaps')+'</h1><div class="mini" style="margin-top:4px"><a href="#/digest">Read the Week '+digestWeek()+' digest &rsaquo;</a></div><div class="sub">'+(upcoming.length? upcoming.length+' games still to play, '+lines+' with a posted line. Ranked by how interesting they look: stakes, closeness, storylines and ratings. Each card opens the full preview with last week\'s film, keys to the game and the model\'s call.' : 'Every game is final. Headlines and stat leaders from each one.')+'</div></div>'+weekPills(w,'#/previews/')+'</div>';
   if(upcoming.length){ const top=upcoming.slice(0,8); html+='<div class="sec"><h2>Marquee</h2><span class="muted">the eight to plan the weekend around</span></div><div class="grid g2">'+top.map(g=>pcard(g)).join('')+'</div>'; const rest=upcoming.slice(8); if(rest.length){ html+='<div class="sec"><h2>The rest of the board</h2><span class="muted">'+rest.length+' more, most interesting first</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Matchup</th><th>Kick</th><th>Line</th><th class="r">Model</th><th class="r">Edge</th><th>Projected</th><th>One thing</th></tr></thead><tbody>'+rest.map(g=>{ const ps=projScore(g); const k=previewKeys(g); const one=storyline(g); return '<tr class="click" data-href="#/game/'+g.id+'"><td>'+chip(g.away,{short:true})+' <span class="dim">'+(g.neutral?'vs':'at')+'</span> '+chip(g.home,{short:true})+'</td><td class="small nw">'+esc(fmtDate(g.date,true).slice(0,3))+' '+esc(kick(g))+(g.tv?' <span class="dim">'+esc(tvShort(g.tv))+'</span>':'')+'</td><td class="nw">'+esc(spreadStr(g,{short:true}))+(g.total!=null?' <span class="dim">o/u '+g.total+'</span>':'')+'</td><td class="r nw">'+esc(modelStr(g,{short:true}))+'</td><td class="r">'+edgeCell(g)+'</td><td class="small nw">'+(g.tbd?'—':esc(tshort(g.away))+' '+ps.a+', '+esc(tshort(g.home))+' '+ps.h)+'</td><td class="small one">'+esc(one)+'</td></tr>'; }).join('')+'</tbody></table></div>'; } }
   if(done.length){ html+='<div class="sec"><h2>'+(upcoming.length?'Already played this week':'Results')+'</h2><span class="muted">'+done.length+' final'+(done.length>1?'s':'')+'</span></div><div class="grid g2">'+done.map(g=>{ const hl=headlineFor(g); const c=covered(g,'home'); return '<a class="card pcard" href="#/game/'+g.id+'" style="border-top-color:'+esc(team(g.home).color)+'"><div class="bd"><div class="wm"><span class="'+(g.as>g.hs?'rw':'rl')+'">'+esc(tshort(g.away))+' '+g.as+'</span> <span class="dim">'+(g.neutral?'vs':'at')+'</span> <span class="'+(g.hs>g.as?'rw':'rl')+'">'+esc(tshort(g.home))+' '+g.hs+'</span></div><div class="wt">'+(g.as!==g.hs?'<b>'+esc(tshort(g.as>g.hs?g.away:g.home))+' wins by '+Math.abs(g.as-g.hs)+'</b> &middot; ':'')+(g.spread!=null?esc(spreadStr(g,{short:true}))+' &middot; '+(c==='P'?'push':(c==='W'?esc(tshort(g.home)):esc(tshort(g.away)))+' covered'):'no line')+'</div><div class="wh">'+esc(hl||unesc(hook(g)))+'</div></div></a>'; }).join('')+'</div>'; }
   view.innerHTML=html; }
@@ -14242,7 +14319,7 @@ LIVE.sumTeam=function(g, ha){ const j=LIVE.sum[g.id]; if(!j) return null; const 
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden&&LIVE.on){ livePoll(true); liveSchedule(); } });
 /* home page strip: every game in progress (any week), or the next kickoffs when nothing is on */
 function liveTeamRow(g, side){ const t=team(side==='home'?g.home:g.away); const pts=side==='home'?g.hs:g.as, opp=side==='home'?g.as:g.hs; return '<div class="lrow'+(pts>opp?' w':'')+'">'+(logoOf(t)?'<img class="sw sw-logo" src="'+logoOf(t).icon+'" alt="">':'<span class="sw" style="background:'+uiColor(t)+'"></span>')+'<span class="nm">'+(CFP_ON?rkTag(t)+' ':(t.ap?'<span class="dim">#'+t.ap+' </span>':''))+esc(tshort(t.name))+(g.pos===side?' <span class="ball" title="has the ball">&#9679;</span>':'')+'</span><span class="sc">'+scoreSpan(g,side==='home'?'h':'a',pts)+'</span></div>'; }
-function liveStripHTML(){ if(!LIVE.on) return ''; if(!LIVE.last&&!LIVE.err) return '<div class="sec" style="margin-top:4px"><h2><span class="livedot"></span> Live scores</h2><span class="muted">checking for games in progress…</span></div><div class="livewait"></div>'; const live=G.filter(g=>g.live&&(!g.fcsOnly||team(g.away).featured||team(g.home).featured)).sort((a,b)=>interest(b)-interest(a)); let html=''; if(live.length){ html+='<div class="sec" style="margin-top:4px"><h2><span class="livedot"></span> Live now</h2><span class="muted">'+live.length+' game'+(live.length>1?'s':'')+' in progress · updates every 30 seconds</span></div><div class="grid g4 livegrid">'+live.map(g=>'<a class="card wcard livecard" href="#/game/'+g.id+'">'+liveTeamRow(g,'away')+liveTeamRow(g,'home')+'<div class="lst"><b>'+esc(g.clk||'In progress')+'</b>'+woTag(g)+(g.dd?' · '+esc(g.dd):'')+(g.rz?' · <span class="pill loss">red zone</span>':'')+(g.spread!=null?' · <span class="dim">'+esc(spreadStr(g,{short:true}))+'</span>':'')+'</div>'+(g.last?'<div class="wh">'+esc(g.last)+'</div>':'')+'</a>').join('')+'</div>'; return html; } const now=Date.now(); const up=G.filter(g=>!g.played&&!g.live&&!g.fcsOnly).map(g=>({g,k:kickMs(g)})).filter(x=>x.k!=null&&x.k>now-20*60e3).sort((a,b)=>a.k-b.k).slice(0,4); if(!up.length) return ''; html+='<div class="sec" style="margin-top:4px"><h2>Next kickoffs</h2><span class="muted">nothing in progress right now · scores appear here live once games start</span></div><div class="grid g4 livegrid">'+up.map(({g,k})=>{ const mins=Math.round((k-now)/60e3); const when = mins<=0?'kicking off now':mins<60?'in '+mins+' min':(k-now<24*3600e3?'in '+plur(Math.round(mins/60),'hour'):'in '+plur(Math.round(mins/1440),'day')); return '<a class="card wcard" href="#/game/'+g.id+'"><div class="wm wm2"><span class="wtm">'+tlogo(team(g.away))+(team(g.away).ap?'<span class="dim">#'+team(g.away).ap+' </span>':'')+esc(tshort(g.away))+'</span><span class="wtm"><span class="wat">'+(g.neutral?'vs':'at')+'</span>'+tlogo(team(g.home))+(team(g.home).ap?'<span class="dim">#'+team(g.home).ap+' </span>':'')+esc(tshort(g.home))+'</span></div><div class="wt">'+esc(fmtDate(g.date,true).slice(0,3))+' '+esc(kick(g))+(g.tv?' · '+esc(tvShort(g.tv)):'')+'</div><div class="wh">'+esc(when)+(g.spread!=null?' · '+esc(spreadStr(g,{short:true})):'')+'</div></a>'; }).join('')+'</div>'; return html; }
+function liveStripHTML(){ if(!LIVE.on) return ''; if(!LIVE.last&&!LIVE.err) return '<div class="sec" style="margin-top:4px"><h2><span class="livedot"></span> Live scores</h2><span class="muted">checking for games in progress…</span></div><div class="livewait"></div>'; const live=G.filter(g=>g.live&&(!g.fcsOnly||tvMine(g))).sort((a,b)=>(tvHeat(b)+4*interest(b))-(tvHeat(a)+4*interest(a))); let html=''; const cap=live.length>8&&!LIVE_ALL; if(live.length){ html+='<div class="sec" style="margin-top:4px"><h2><span class="livedot"></span> Live now</h2><span class="muted">'+live.length+' game'+(live.length>1?'s':'')+' in progress · updates every 30 seconds</span></div><div class="grid g4 livegrid">'+live.map((g,i)=>'<a class="card wcard livecard'+(cap&&i>=6?' more':'')+'" href="#/game/'+g.id+'">'+liveTeamRow(g,'away')+liveTeamRow(g,'home')+'<div class="lst"><b>'+esc(g.clk||'In progress')+'</b>'+woTag(g)+(g.dd?' · '+esc(g.dd):'')+(g.rz?' · <span class="pill loss">red zone</span>':'')+(g.spread!=null?' · <span class="dim">'+esc(spreadStr(g,{short:true}))+'</span>':'')+'</div>'+(g.last?'<div class="wh">'+esc(g.last)+'</div>':'')+'</a>').join('')+'</div>'+(live.length>8?'<button class="btn livemore" type="button">'+(LIVE_ALL?'Show fewer live games':'Show all '+live.length+' live games')+'</button>':''); return html; } const now=Date.now(); const up=G.filter(g=>!g.played&&!g.live&&!g.fcsOnly).map(g=>({g,k:kickMs(g)})).filter(x=>x.k!=null&&x.k>now-20*60e3).sort((a,b)=>a.k-b.k).slice(0,4); if(!up.length) return ''; html+='<div class="sec" style="margin-top:4px"><h2>Next kickoffs</h2><span class="muted">nothing in progress right now · scores appear here live once games start</span></div><div class="grid g4 livegrid">'+up.map(({g,k})=>{ const mins=Math.round((k-now)/60e3); const when = mins<=0?'kicking off now':mins<60?'in '+mins+' min':(k-now<24*3600e3?'in '+plur(Math.round(mins/60),'hour'):'in '+plur(Math.round(mins/1440),'day')); return '<a class="card wcard" href="#/game/'+g.id+'"><div class="wm wm2"><span class="wtm">'+tlogo(team(g.away))+(team(g.away).ap?'<span class="dim">#'+team(g.away).ap+' </span>':'')+esc(tshort(g.away))+'</span><span class="wtm"><span class="wat">'+(g.neutral?'vs':'at')+'</span>'+tlogo(team(g.home))+(team(g.home).ap?'<span class="dim">#'+team(g.home).ap+' </span>':'')+esc(tshort(g.home))+'</span></div><div class="wt">'+esc(fmtDate(g.date,true).slice(0,3))+' '+esc(kick(g))+(g.tv?' · '+esc(tvShort(g.tv)):'')+'</div><div class="wh">'+esc(when)+(g.spread!=null?' · '+esc(spreadStr(g,{short:true})):'')+'</div></a>'; }).join('')+'</div>'; return html; }
 /* flash the rows and cards of games whose score or clock just changed */
 function liveFlash(ids){ if(!ids||!ids.length) return; ids.forEach(id=>{ document.querySelectorAll('[data-href="#/game/'+id+'"], a[href="#/game/'+id+'"]').forEach(el=>{ el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'), 2000); }); }); }
 /* home page: live strip and the favorite team side by side */
@@ -14291,7 +14368,7 @@ function renderBets(){ setNav('my'); const graded=BETS.filter(b=>gradeBet(b)!==n
   let html='<div class="page-head"><div><div class="eyebrow">My card</div><h1>Bet tracker</h1><div class="sub">Log a pick from any game page or the form below and this grades it from the final score. One unit per bet unless you say otherwise; prices are the ones showing when you logged it. Everything stays in this browser'+(dbNS?' and syncs to your account':'')+'.</div></div></div>';
   html+='<div class="toolbar"><div class="seg"><a href="#/my">Rankings</a><a href="#/my/bets" class="on">Bets</a></div></div>';
   html+='<div class="grid g4" style="margin-bottom:14px">'+tile('Record', t.w+'-'+t.l+(t.p?'-'+t.p:''), (t.w+t.l)?pct2+'% of graded bets':'nothing graded yet')+tile('Units', (t.units>0?'+':'')+num1(t.units), t.units>0?'up on the season':(t.units<0?'down on the season':'even'))+tile('Open', String(t.open), t.risk?num1(t.risk)+' units at risk':'nothing pending')+tile('Bets logged', String(BETS.length), 'all time')+'</div>';
-  const upcoming=G.filter(g=>!g.played&&!g.live&&(g.spread!=null||g.total!=null)&&(!g.fcsOnly||team(g.away).featured||team(g.home).featured)).sort((a,b)=>a.date<b.date?-1:1).slice(0,120);
+  const upcoming=G.filter(g=>!g.played&&!g.live&&(g.spread!=null||g.total!=null)&&(!g.fcsOnly||tvMine(g))).sort((a,b)=>a.date<b.date?-1:1).slice(0,120);
   html+='<div class="card"><div class="hd"><h3>Add a bet</h3><span class="mini">or use the buttons on any game page</span></div><div class="bd"><div class="toolbar" style="margin:0"><select id="bet-game" style="min-width:260px;padding:6px 8px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--ink)">'+upcoming.map(g=>'<option value="'+esc(g.id)+'">'+esc(tshort(g.away)+' at '+tshort(g.home))+' · '+esc(fmtDate(g.date,false))+'</option>').join('')+'</select><select id="bet-pick" style="min-width:200px;padding:6px 8px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--ink)"></select><input id="bet-units" type="number" min="0.5" step="0.5" value="1" style="width:80px;padding:6px 8px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--ink)"><button class="btn primary" id="bet-add">Log it</button></div></div></div>';
   const rowsFor=(list,graded)=>'<div class="tblwrap"><table class="tbl"><thead><tr><th>Pick</th><th>Game</th><th>Kick</th>'+(graded?'<th>Result</th><th class="r">Units</th>':'<th class="r">Units</th><th>Model</th>')+'<th></th></tr></thead><tbody>'+list.map(b=>{ const g=GI[b.game]; if(!g) return ''; const r=gradeBet(b); const p=proj(g); const res=r==='W'?'<span class="pill win">Win</span>':r==='L'?'<span class="pill loss">Loss</span>':r==='P'?'<span class="pill push">Push</span>':''; const u=betUnits(b);
     return '<tr><td><b>'+esc(betLabel(b))+'</b> <span class="dim">'+esc(BET_TYPES[b.type])+'</span></td><td>'+chip(g.away,{short:true,norank:true})+' <span class="dim">at</span> '+chip(g.home,{short:true,norank:true})+(g.played?' <span class="dim">'+g.as+'-'+g.hs+'</span>':'')+'</td><td class="small nw">'+esc(fmtDate(g.date,false))+(g.played?'':' · '+esc(kick(g)))+'</td>'+(graded?'<td>'+res+'</td><td class="r '+(u>0?'pos':u<0?'neg':'')+'">'+(u>0?'+':'')+num1(u)+'</td>':'<td class="r">'+num1(b.units)+'</td><td class="small">'+esc(modelStr(g,{short:true}))+(p.edge!=null?' <span class="dim">edge '+sgn(p.edge)+'</span>':'')+'</td>')+'<td><button class="btn sm danger" data-delbet="'+b.id+'">Remove</button></td></tr>'; }).join('')+'</tbody></table></div>';
@@ -15435,11 +15512,11 @@ let TVX_TIMER=null;
 function tvxNext(){ const now=Date.now(); let best=null; G.forEach(g=>{ if(g.played||g.live||g.tbd||!g.tv) return; if(g.status==='CANCELED'||g.status==='POSTPONED') return; if(g.fcsOnly&&!team(g.away).featured&&!team(g.home).featured) return; const k=kickMs(g); if(k==null||k<now) return; if(!best||k<best.k||(k===best.k&&interest(g)>interest(best.g))) best={g,k}; }); return best; }
 function tvxFmt(ms){ if(!(ms>0)) ms=0; const s=Math.floor(ms/1000); const d=Math.floor(s/86400), h=Math.floor(s%86400/3600), m=Math.floor(s%3600/60), x=s%60; const p=n=>String(n).padStart(2,'0'); return (d?'<span class="d">'+d+'<i>d</i></span>':'')+'<span>'+p(h)+'</span><i>:</i><span>'+p(m)+'</span><i>:</i><span>'+p(x)+'</span>'; }
 function tvxTick(){ const el=document.getElementById('tvx-count'); if(!el){ if(!(location.hash||'').startsWith('#/tv')){ clearInterval(TVX_TIMER); TVX_TIMER=null; } return; } const left=+el.dataset.t-Date.now(); el.innerHTML=tvxFmt(left); if(left<=0) el.closest('.tvx-next')?.classList.add('kicked'); }
-function tvDeckHTML(grid, stream, rows){ const liveN=G.filter(g=>g.live&&(!g.fcsOnly||team(g.away).featured||team(g.home).featured)).length; const nx=tvxNext();
+function tvDeckHTML(grid, stream, rows){ const liveN=G.filter(g=>g.live&&(!g.fcsOnly||tvMine(g))).length; const nx=tvxNext();
   const ranked=grid.concat(stream).filter(x=>x.g&&team(x.g.away).ap&&team(x.g.home).ap).length;
   const stat=(n,l)=>'<div class="tvx-stat"><b>'+n+'</b><span>'+l+'</span></div>';
   let next='';
-  if(liveN){ next='<div class="tvx-next live"><div class="tvx-lbl"><span class="livedot"></span>Live now</div><div class="tvx-count">'+liveN+'<small> game'+(liveN===1?'':'s')+'</small></div><div class="tvx-game">scores move on their own &middot; tap a game on the grid</div></div>'; }
+  if(liveN){ next=tvFlipHTML(G.filter(g=>g.live&&g.as!=null&&g.hs!=null&&(!g.fcsOnly||tvMine(g)))); }
   else if(nx){ const g=nx.g, a=team(g.away), h=team(g.home);
     next='<a class="tvx-next" href="#/game/'+g.id+'"><div class="tvx-lbl">Next kickoff</div><div class="tvx-count" id="tvx-count" data-t="'+nx.k+'">'+tvxFmt(nx.k-Date.now())+'</div><div class="tvx-game">'+tlogo(a,'tvx-lg')+(a.ap?'<span class="tvx-rk">#'+a.ap+'</span>':'')+'<b>'+esc(tshort(a.name))+'</b><span class="tvx-at">'+(g.neutral?'vs':'at')+'</span>'+tlogo(h,'tvx-lg')+(h.ap?'<span class="tvx-rk">#'+h.ap+'</span>':'')+'<b>'+esc(tshort(h.name))+'</b><span class="tvx-meta">'+esc(fmtDate(g.date,true).slice(0,3))+' '+esc(kick(g))+' &middot; '+esc(tvShort(g.tv))+'</span></div></a>'; }
   return '<div class="tvx-deck'+(next?'':' solo')+'">'+next+'<div class="tvx-stats">'+stat(grid.length,'on TV')+stat(stream.length,'streaming')+stat(ranked,'top-25 clashes')+stat(rows.length,'networks')+'</div></div>'; }
@@ -15915,7 +15992,7 @@ const tvIsSat = d => new Date(d+'T12:00:00Z').getUTCDay()===6;
 /* the TV night the clock is in right now (6 AM to 6 AM Eastern), which outlasts the calendar date on a late Saturday */
 function tvTonight(){ const d0=new Date(Date.now()-4*3600e3).toISOString().slice(0,10); for(const d of [tvAddDay(d0,-1), d0, tvAddDay(d0,1)]){ const m=tvNowMins(d); if(m!=null&&m>=360&&m<1800) return d; } return todayStr; }
 function tvGames(scope){ const out=[];
-  G.forEach(g=>{ if(scope!=='all' && g.fcsOnly && !team(g.away).featured && !team(g.home).featured && !isFav(g)) return; const s=tvSlot(g.date, g.kt||g.time); const net=tvNet(g.tv);
+  G.forEach(g=>{ if(scope!=='all' && g.fcsOnly && !tvMine(g)) return; const s=tvSlot(g.date, g.kt||g.time); const net=tvNet(g.tv);
     /* a TV window whose teams are not named yet ("TBA at TBA") is listed as a placeholder, not a game */
     if(/^TB[AD]$/i.test(g.away)&&/^TB[AD]$/i.test(g.home)){ out.push({champ:{week:g.week, date:g.date, time:g.kt||g.time, tv:g.tv, venue:'', label:(g.level==='FBS'?'Game':'FCS game')+', teams TBA', sub:'Matchup to be announced', href:'#/week/'+g.week+(g.fcsOnly?'/fcs':'')}, day:s.day, m:s.m, week:g.week, net}); return; }
     out.push({g, day:s.day, m:s.m, week:g.week, net}); });
@@ -15993,6 +16070,79 @@ setInterval(tvNowTick, 30000);
 /* keep the selected pill of a sideways-scrolling strip in view without moving the page */
 function tvCenter(sel){ const on=document.querySelector(sel); if(!on) return; const s=on.parentElement; if(s.scrollWidth<=s.clientWidth) return; s.scrollLeft += on.getBoundingClientRect().left - s.getBoundingClientRect().left - (s.clientWidth-on.offsetWidth)/2; }
 
+/* ---------- TV guide 2 (2026-11-21, Jamo: "Improve the TV guide and enhance that as well") ----------
+   - What's on: a list by state (on now, coming up by kickoff, finished), the default on phones; the grid stays one tap away.
+   - Flip to: the three live games most worth switching to, each with its channel and the reason.
+   - Quick filters: all, my teams, top 25, free TV (the over-the-air networks). */
+let TV_MODE=null;        // 'list' | 'grid'; phones start on the list, bigger screens on the grid, the choice is remembered
+let TV_FILT='all';
+let TV_DONE_OPEN=false;  // the Finished fold, kept open across live refreshes once opened
+const TV_FREE={ABC:1,CBS:1,FOX:1,NBC:1,CW:1};
+const TV_FILTS=[['all','All','Every game on this day'],['mine','My teams','Your favorite team and the featured teams'],['top','Top 25','Games with a ranked team'],['free','Free TV','ABC, CBS, FOX, NBC and The CW: free with an antenna']];
+function tvModeGet(){ if(TV_MODE) return TV_MODE; let m=null; try{ m=localStorage.getItem('cfb-tvmode'); }catch(e){} TV_MODE=(m==='list'||m==='grid') ? m : (window.innerWidth<760?'list':'grid'); return TV_MODE; }
+const TV_MINE=new Set(Object.values(FEATURED).map(f=>norm(f.name)));
+function tvMine(g){ return isFav(g)||TV_MINE.has(g.away)||TV_MINE.has(g.home); }
+function tvPass(x, f){ if(f==='all') return true; if(f==='free') return !!(x.net&&TV_FREE[x.net.key]); if(!x.g) return false; const a=team(x.g.away), h=team(x.g.home); if(f==='mine') return tvMine(x.g); if(f==='top') return !!(a.ap||h.ap); return true; }
+function tvLead(g){ return g.as>g.hs?'a':(g.hs>g.as?'h':null); }
+/* the leader was a 7-point underdog on the line, or (no line) is unranked against a ranked team */
+function tvUpset(g){ const L=tvLead(g); if(!L) return null; const lt=team(L==='a'?g.away:g.home), tt=team(L==='a'?g.home:g.away); const has=g.spread!=null&&!isNaN(g.spread); const dog=has ? (L==='a' ? g.spread<=-7 : g.spread>=7) : (!!tt.ap&&!lt.ap); return dog ? {lt, tt} : null; }
+/* how much a live game is worth flipping to: close and late first, then ranked teams and upsets; your team always leads */
+function tvHeat(g){ const a=team(g.away), h=team(g.home); const d=Math.abs((+g.as||0)-(+g.hs||0)), per=+g.per||0; const late=per>=5?2.4:per===4?2:per===3?1.3:per===2?0.8:0.5;
+  let s=(d<=3?40:d<=8?28:d<=14?12:d<=21?3:0)*late; if(a.ap&&h.ap) s+=22; else if(a.ap||h.ap) s+=8; if(per>=2&&tvUpset(g)) s+=18*late; if(!g.fbs) s-=10; if(tvMine(g)) s+=1000; return s; }
+function tvWhy(g, short){ const a=team(g.away), h=team(g.home); const d=Math.abs((+g.as||0)-(+g.hs||0)), per=+g.per||0; const up=tvUpset(g);
+  if(per>=5) return 'Overtime';
+  if(d===0&&per>=2) return 'Tied';
+  if(up&&per>=2) return short ? 'Upset watch' : 'Upset watch: '+tshort(up.lt.name)+' leads'+(up.tt.ap?' #'+up.tt.ap+' '+tshort(up.tt.name):'');
+  if(d<=8&&per>=3) return 'One-score game';
+  if(short) return '';
+  if(tvMine(g)) return 'Your team';
+  if(a.ap&&h.ap) return 'Top-25 matchup';
+  if(d===0) return 'Tied';
+  if(d<=8) return /half/i.test(g.clk||'') ? 'One-score game at the half' : 'Close early';
+  if(a.ap||h.ap){ const r=a.ap?a:h; return '#'+r.ap+' '+tshort(r.name); }
+  return ''; }
+function tvqNet(net){ if(!net) return '<span class="tvp none">TV TBA</span>'; if(net.grid){ const n=TV_NETS.find(z=>z[0]===net.key); if(n) return '<span class="nwt" title="'+esc(n[1])+'">'+n[2]+'</span>'; } return '<span class="tvp '+(TV_PILL[net.key]||'')+'">'+esc(net.key)+'</span>'; }
+function tvFlipHTML(live){ const top=live.slice().sort((p,q)=>tvHeat(q)-tvHeat(p)).slice(0,3); const nm=t=>(t.ap?'<i>#'+t.ap+'</i>':'')+esc(tshort(t.name));
+  return '<div class="tvx-next live tvflip"><div class="tvx-lbl"><span class="livedot"></span>Flip to<span class="tvflip-n">'+live.length+' game'+(live.length===1?'':'s')+' on now</span></div>'
+    +top.map(g=>{ const why=tvWhy(g); return '<a class="tvflip-g'+(isFav(g)?' fav':'')+'" href="#/game/'+g.id+'"><span class="tvq-n">'+tvqNet(tvNet(g.tv))+'</span><span class="tvflip-m"><span class="tvflip-t">'+nm(team(g.away))+' <b>'+g.as+'</b><u>-</u><b>'+g.hs+'</b> '+nm(team(g.home))+'</span><span class="tvflip-w">'+(why?'<em>'+esc(why)+'</em> · ':'')+'<span class="nw">'+esc(g.clk||'In progress')+'</span></span></span></a>'; }).join('')+'</div>'; }
+function tvqTeam(g, s){ const t=team(s==='a'?g.away:g.home); const done=(g.played||g.live)&&g.as!=null&&g.hs!=null; const L=done?tvLead(g):null;
+  return '<span class="tvq-tm'+(g.played&&L&&L!==s?' lose':'')+'">'+tlogo(t,'tvq-lg')+'<span class="tvq-nm">'+(t.ap?'<i>#'+t.ap+'</i>':'')+esc(tshort(t.name))+(g.live&&g.pos===(s==='a'?'away':'home')?'<span class="tvq-ball" title="has the ball"></span>':'')+'</span>'+(done?'<b class="tvq-sc">'+scoreSpan(g, s, s==='a'?g.as:g.hs)+'</b>':'')+'</span>'; }
+function tvqRow(x){
+  if(x.champ) return '<a class="tvq" href="'+(x.champ.href||'#/week/'+x.champ.week)+'"><span class="tvq-n">'+tvqNet(x.net)+'</span><span class="tvq-m"><span class="tvq-tm"><span class="tvq-nm">'+esc(x.champ.label)+'</span></span><span class="tvq-sub">'+esc(x.champ.venue?x.champ.venue.split(',')[0]:(x.champ.sub||'Matchup to be announced'))+'</span></span></a>';
+  const g=x.g; let sub='';
+  if(tvOff(x)) sub='<span class="off">'+(g.status==='POSTPONED'?'Postponed':'Canceled')+'</span>';
+  else if(g.live){ const why=tvWhy(g, true); sub='<b><span class="livedot"></span>'+esc(g.clk||'In progress')+'</b>'+(why?'<span class="why">'+esc(why)+'</span>':''); }
+  else if(g.played) sub='<span>Final</span>';
+  else if(g.time==='Delayed'||g.status==='DELAYED') sub='<span class="off">Delayed</span>';
+  return '<a class="tvq'+(g.live?' live':'')+(g.played?' done':'')+(isFav(g)?' fav':'')+'" href="#/game/'+g.id+'"><span class="tvq-n">'+tvqNet(x.net)+'</span><span class="tvq-m">'+tvqTeam(g,'a')+tvqTeam(g,'h')+(sub?'<span class="tvq-sub">'+sub+'</span>':'')+'</span></a>'; }
+function tvListHTML(items, day){
+  const off=items.filter(tvOff), ok=items.filter(x=>!tvOff(x));
+  const now=ok.filter(x=>x.g&&x.g.live).sort((p,q)=>tvHeat(q.g)-tvHeat(p.g));
+  const done=ok.filter(x=>x.g&&x.g.played&&!x.g.live);
+  const up=ok.filter(x=>!(x.g&&(x.g.live||x.g.played)));
+  const timed=up.filter(x=>x.m!=null), tba=up.filter(x=>x.m==null).concat(off);
+  const order=k=>{ const i=TV_NETS.findIndex(n=>n[0]===k); return i<0?99:i; };
+  const byPri=(p,q)=>tvPri(q)-tvPri(p) || order(p.net&&p.net.key)-order(q.net&&q.net.key);
+  const sec=(cls, title, note)=>'<div class="tvq-sec '+cls+'"><h3>'+title+'</h3><span>'+note+'</span></div>';
+  const rows=arr=>'<div class="tvq-rows">'+arr.map(tvqRow).join('')+'</div>';
+  if(!items.length) return '<div class="note">No games match on this day. Pick another day, week or filter above.</div>';
+  let html='<div class="tvq-list">';
+  if(now.length) html+=sec('live','<span class="livedot"></span>On now', plur(now.length,'game')+' · the best to watch first')+rows(now);
+  if(timed.length){ const nowM=tvNowMins(day); const groups=[]; timed.slice().sort((p,q)=>p.m-q.m||byPri(p,q)).forEach(x=>{ const gp=groups[groups.length-1]; if(gp&&gp.m===x.m) gp.a.push(x); else groups.push({m:x.m, a:[x]}); });
+    html+=sec('up','Coming up', plur(timed.length,'game'));
+    groups.forEach(gp=>{ const left=nowM==null?null:Math.round(gp.m-nowM); const rel=(left!=null&&left>0&&left<720) ? (left<60 ? 'in '+left+' min' : 'in '+Math.floor(left/60)+' hr'+(left%60?' '+(left%60)+' min':'')) : (left!=null&&left<=0&&left>-240 ? 'kicking off' : '');
+      html+='<div class="tvq-h"><b>'+esc(tvClock(gp.m))+'</b>'+(rel?'<span>'+rel+'</span>':'')+'<i>'+plur(gp.a.length,'game')+'</i></div>'+rows(gp.a); }); }
+  if(tba.length) html+=sec('tba','Not set yet', 'kickoff time to be announced'+(off.length?' · '+off.length+' postponed or canceled':''))+rows(tba.slice().sort(byPri));
+  if(done.length){ const open=TV_DONE_OPEN||(!now.length&&!timed.length); html+='<details class="tvq-done" id="tvq-done"'+(open?' open':'')+'><summary><h3>Finished</h3><span>'+plur(done.length,'game')+' · tap to '+(open?'hide':'show')+' the scores</span></summary>'+rows(done.slice().sort((p,q)=>(p.m==null?1e9:p.m)-(q.m==null?1e9:q.m)||byPri(p,q)))+'</details>'; }
+  return html+'</div>'; }
+function tvWire(){ view.querySelectorAll('[data-tvmode]').forEach(b=>{ b.onclick=()=>{ TV_MODE=b.dataset.tvmode; try{ localStorage.setItem('cfb-tvmode', TV_MODE); }catch(e){} rerenderQuiet(); }; });
+  view.querySelectorAll('[data-tvf]').forEach(b=>{ b.onclick=()=>{ TV_FILT=b.dataset.tvf; rerenderQuiet(); }; });
+  const dn=document.getElementById('tvq-done'); if(dn) dn.addEventListener('toggle', ()=>{ TV_DONE_OPEN=dn.open; const s=dn.querySelector('summary span'); if(s) s.textContent=s.textContent.replace(/tap to (show|hide)/, 'tap to '+(dn.open?'hide':'show')); }); }
+
+/* the scoreboard's Live now band shows the best six until asked for the rest (2026-11-21) */
+let LIVE_ALL=false;
+document.addEventListener('click', e=>{ const b=e.target.closest&&e.target.closest('.livemore'); if(!b) return; LIVE_ALL=!LIVE_ALL; rerenderQuiet(); });
+
 function renderTV(key, scope){ setNav('tv'); document.body.classList.add('tvmode');
   scope = (scope==='all'||scope==='fbs') ? scope : TV_SCOPE; TV_SCOPE=scope;
   const items=tvGames(scope); let day=null, w=null;
@@ -16001,7 +16151,7 @@ function renderTV(key, scope){ setNav('tv'); document.body.classList.add('tvmode
   if(!day && QUIET && TV_LAST.hash===location.hash && TV_LAST.day) day=TV_LAST.day;
   if(!day && w!=null) day=tvDefaultDay(items, w);
   if(!day) day=tvDefaultDay(items, null) || todayStr;
-  const onDay=items.filter(x=>x.day===day);
+  const dayAll=items.filter(x=>x.day===day); const fcount={}; TV_FILTS.forEach(f=>{ fcount[f[0]]=dayAll.filter(x=>tvPass(x,f[0])).length; }); if(!fcount[TV_FILT]) TV_FILT='all'; const onDay=dayAll.filter(x=>tvPass(x,TV_FILT)); const mode=tvModeGet();
   if(w==null){ const cnt={}; onDay.forEach(x=>cnt[x.week]=(cnt[x.week]||0)+1); const best=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0]; w = best!=null ? +best : CUR_WEEK; }
   const grid=onDay.filter(tvOnGrid);
   const stream=onDay.filter(x=>x.net&&!x.net.grid&&!tvOff(x));
@@ -16024,8 +16174,11 @@ function renderTV(key, scope){ setNav('tv'); document.body.classList.add('tvmode
   const days=tvDays(items, w);
   html+='<div class="toolbar tvbar">'+(days.length?'<div class="seg tvdays">'+days.map(d=>'<a href="#/tv/'+d.d+'" class="'+(d.d===day?'on':'')+'">'+esc(tvDayLabel(d.d))+'<span class="n">'+d.n+'</span></a>').join('')+'</div>':'')
     +'<div class="seg">'+[['fbs','FBS'],['all','FBS + FCS']].map(s=>'<a href="#/tv/'+day+'/'+s[0]+'" class="'+(scope===s[0]?'on':'')+'" title="'+(s[0]==='fbs'?'Games with an FBS team, plus featured FCS teams':'Every Division I game')+'">'+s[1]+'</a>').join('')+'</div>'
-    +(nowIn?'<button class="btn sm" id="tv-now" type="button"><span class="livedot"></span>Jump to now</button>':'')+'</div>';
+    +'<div class="seg tvmodeseg">'+[['list','List'],['grid','Grid']].map(s=>'<button type="button" data-tvmode="'+s[0]+'" class="'+(mode===s[0]?'on':'')+'" aria-pressed="'+(mode===s[0])+'">'+s[1]+'</button>').join('')+'</div>'
+    +((nowIn&&mode==='grid')?'<button class="btn sm" id="tv-now" type="button"><span class="livedot"></span>Jump to now</button>':'')+'</div>';
+  html+='<div class="tvfilt" role="group" aria-label="Show">'+TV_FILTS.filter(f=>f[0]==='all'||fcount[f[0]]).map(f=>'<button type="button" data-tvf="'+f[0]+'" class="'+(TV_FILT===f[0]?'on':'')+'" aria-pressed="'+(TV_FILT===f[0])+'" title="'+esc(f[2])+'">'+f[1]+'<span class="n">'+fcount[f[0]]+'</span></button>').join('')+'</div>';
 
+  if(mode==='list') html+=tvListHTML(onDay, day); else {
   if(grid.length){
     let axis='', lines='';
     for(let i=0;i<hours;i++){ const pc=(i/hours*100).toFixed(3); axis+='<span class="tvax" style="left:'+pc+'%">'+esc(tvClock(start+i*60).replace(':00 ',' '))+'</span>'; lines+=(i?'<i class="tvl" style="left:'+pc+'%"></i>':'')+'<i class="tvl half" style="left:'+((i+0.5)/hours*100).toFixed(3)+'%"></i>'; }
@@ -16040,11 +16193,11 @@ function renderTV(key, scope){ setNav('tv'); document.body.classList.add('tvmode
 
   const list=(title, sub, arr)=>'<div class="card tvcard"><div class="hd"><h3>'+title+'</h3><span class="mini">'+sub+'</span></div><div class="bd"><div class="tvsl">'+arr.slice().sort(byTime).map(tvRow).join('')+'</div></div></div>';
   if(stream.length){ const nets=[...new Set(stream.map(x=>x.net.key))].sort((a,b)=>(TV_PILL[a]?0:1)-(TV_PILL[b]?0:1)||a.localeCompare(b)); html+=list(nets.every(k=>TV_PILL[k])?'Streaming':'Streaming &amp; regional TV', nets.map(esc).join(' · '), stream); }
-  if(rest.length){ const offN=rest.filter(tvOff).length; html+=list('Not on the grid yet', 'network or kickoff time still to be announced'+(offN?' · '+offN+' postponed or canceled':''), rest); }
+  if(rest.length){ const offN=rest.filter(tvOff).length; html+=list('Not on the grid yet', 'network or kickoff time still to be announced'+(offN?' · '+offN+' postponed or canceled':''), rest); } }
 
   const vkey=day+'|'+scope; const prev=document.getElementById('tvwrap');
   if(prev&&TV_VIEW.key===vkey) TV_VIEW.left=prev.scrollLeft;
-  view.innerHTML=html; TV_LAST={hash:location.hash, day}; if(!TVX_TIMER) TVX_TIMER=setInterval(tvxTick,1000);
+  view.innerHTML=html; TV_LAST={hash:location.hash, day}; tvWire(); if(!TVX_TIMER) TVX_TIMER=setInterval(tvxTick,1000);
   tvCenter('.tvdays .on'); tvCenter('.tvhero .wk .on');
   const wrap=document.getElementById('tvwrap'), head=document.getElementById('tvhead');
   if(wrap&&head){

@@ -104,13 +104,30 @@ function slimSummary(j) {
       per: d.start && d.start.period && d.start.period.number, clk: (d.start && d.start.clock && d.start.clock.displayValue) || "",
       from: (d.start && d.start.text) || "", cur: !!(cur && d.id === cur.id),
     }));
+  // play-by-play (2026-11-21): the last 40 plays, oldest first: who had the ball, the down and spot it started from,
+  // how far from the end zone it started and ended, and what happened
+  const plays = [], seenPlay = new Set();
+  ((j.drives && j.drives.previous) || []).concat(cur ? [cur] : []).forEach((d) => {
+    ((d && d.plays) || []).forEach((p) => {
+      if (!p || seenPlay.has(p.id)) return;
+      seenPlay.add(p.id);
+      const s = p.start || {}, e = p.end || {};
+      plays.push({
+        id: p.id, per: p.period && p.period.number, clk: (p.clock && p.clock.displayValue) || "",
+        tm: (s.team && s.team.id) || (d.team && d.team.id) || "", ty: (p.type && p.type.text) || "",
+        tx: String(p.text || "").slice(0, 220), dd: s.downDistanceText || "",
+        ys: s.yardsToEndzone, ye: e.yardsToEndzone, et: (e.team && e.team.id) || "",
+        yd: p.statYardage, sc: !!p.scoringPlay, to: !!p.isTurnover, pen: !!p.isPenalty,
+      });
+    });
+  });
   return {
     t: Date.now(),
     tl: scoreLine(j.scoringPlays), pc: nowAt(st),
     st: ((st.type && st.type.name) || "").replace("STATUS_", ""),
     det: (st.type && st.type.shortDetail) || "",
     ls: (hdr.competitors || []).map((c) => ({ id: c.id, ha: c.homeAway, s: c.score, ls: (c.linescores || []).map((l) => l.displayValue) })),
-    teams, players, scoring, drive, drives,
+    teams, players, scoring, drive, drives, plays: plays.slice(-40),
     wp: slimWP(j, hdr),
   };
 }

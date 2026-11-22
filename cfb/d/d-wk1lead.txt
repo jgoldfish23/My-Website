@@ -2254,15 +2254,6 @@
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|passingYards|Trinidad Chambliss|QB|14/27, 127 YDS, 1 TD
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|rushingYards|Trinidad Chambliss|QB|11 CAR, 84 YDS
 2026-11-15|Ole Miss|Oklahoma|Ole Miss|receivingYards|Caleb Odom|TE|4 REC, 56 YDS, 1 TD
-2026-11-21|Oklahoma State|Arizona State|Oklahoma State|passingYards|Drew Mestemaker|QB|26/33, 247 YDS, 1 INT
-2026-11-21|Oklahoma State|Arizona State|Oklahoma State|rushingYards|Caleb Hawkins|RB|19 CAR, 87 YDS, 2 TD
-2026-11-21|Oklahoma State|Arizona State|Arizona State|receivingYards|Reed Harris|WR|11 REC, 172 YDS, 2 TD
-2026-11-21|Utah State|Oregon State|Utah State|passingYards|McCae Hillstead|QB|20/32, 277 YDS, 1 TD, 1 INT
-2026-11-21|Utah State|Oregon State|Oregon State|rushingYards|Kourdey Glass|RB|9 CAR, 44 YDS
-2026-11-21|Utah State|Oregon State|Utah State|receivingYards|Javon Robinson|WR|5 REC, 91 YDS
-2026-11-21|Hawai'i|Nevada|Nevada|passingYards|AJ Bianco|QB|8/18, 106 YDS
-2026-11-21|Hawai'i|Nevada|Nevada|rushingYards|Herschel Turner|RB|13 CAR, 73 YDS
-2026-11-21|Hawai'i|Nevada|Nevada|receivingYards|Marshaun Brown|WR|4 REC, 61 YDS
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|passingYards|Brogan McCaughey|QB|12/16, 135 YDS, 1 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|rushingYards|Amareon Blue|RB|27 CAR, 160 YDS, 3 TD
 2026-11-17|Eastern Michigan|Western Michigan|Eastern Michigan|receivingYards|Nick Devereaux|WR|4 REC, 62 YDS
@@ -2464,6 +2455,15 @@
 2026-11-21|UTSA|UAB|UAB|passingYards|Ryder Burton|QB|10/25, 118 YDS
 2026-11-21|UTSA|UAB|UTSA|rushingYards|Will Henderson III|RB|23 CAR, 93 YDS
 2026-11-21|UTSA|UAB|UTSA|receivingYards|Brandon Young Jr.|TE|4 REC, 56 YDS
+2026-11-21|Oklahoma State|Arizona State|Oklahoma State|passingYards|Drew Mestemaker|QB|30/40, 294 YDS, 1 INT
+2026-11-21|Oklahoma State|Arizona State|Oklahoma State|rushingYards|Caleb Hawkins|RB|22 CAR, 98 YDS, 2 TD
+2026-11-21|Oklahoma State|Arizona State|Arizona State|receivingYards|Reed Harris|WR|11 REC, 172 YDS, 2 TD
+2026-11-21|Utah State|Oregon State|Utah State|passingYards|McCae Hillstead|QB|20/33, 277 YDS, 1 TD, 1 INT
+2026-11-21|Utah State|Oregon State|Oregon State|rushingYards|Kourdey Glass|RB|13 CAR, 64 YDS
+2026-11-21|Utah State|Oregon State|Utah State|receivingYards|Javon Robinson|WR|5 REC, 91 YDS
+2026-11-21|Hawai'i|Nevada|Nevada|passingYards|AJ Bianco|QB|8/18, 106 YDS
+2026-11-21|Hawai'i|Nevada|Nevada|rushingYards|Herschel Turner|RB|13 CAR, 73 YDS
+2026-11-21|Hawai'i|Nevada|Nevada|receivingYards|Marshaun Brown|WR|4 REC, 61 YDS
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD

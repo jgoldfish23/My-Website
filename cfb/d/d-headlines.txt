@@ -736,6 +736,7 @@
 2026-11-21|Ohio State|Nebraska|HEADLINE||Nebraska ends 31-game losing streak against AP Top 25 opponents with 31-28 win over No. 16 Buckeyes||
 2026-11-21|Iowa|Illinois|HEADLINE||No. 13 Iowa shuts out Illinois in the second half, pulls away for 34-17 win to help playoff hopes||
 2026-11-21|Kentucky|Missouri|HEADLINE||Austin Simmons throws 4 TD passes, leading Missouri past No. 17 Kentucky 28-14||
+2026-11-21|San Diego State|Boise State|HEADLINE||Cooper DiLeva kicks a field goal as time expires, San Diego State shocks No. 15 Boise State 22-20||
 2026-11-21|Maryland|USC|HEADLINE||Trent Mosley, Waymond Jordan score 2 TDs apiece in No. 18 USC's 35-21 win over Maryland||
 2026-11-21|Arizona|Kansas State|HEADLINE||Noah Fifita rallies No. 19 Arizona through the rain to a 35-28 overtime win over Kansas State||
 2026-11-21|Houston|West Virginia|HEADLINE||Jonathan Dimas kicks 23-yard field goal to send No. 20 Houston past West Virginia 34-31||
@@ -775,6 +776,9 @@
 2026-11-21|Stanford|California|HEADLINE||Ford scores twice as Stanford controls Cal 44-26 to reach bowl eligibility||
 2026-11-21|Colorado State|Fresno State|HEADLINE||Fresno State holds off a late rally to beat Colorado State 49-42 and become bowl eligible||
 2026-11-21|UTSA|UAB|HEADLINE||UTSA holds off UAB 19-17 to maintain top spot in American Conference||
+2026-11-21|Oklahoma State|Arizona State|HEADLINE||Sam Keltner kicks 35-yard field goal in overtime, Oklahoma State rallies to beat Arizona State 30-27||
+2026-11-21|Utah State|Oregon State|HEADLINE||Jake Reichle runs for 3 TDs as Oregon State rallies past Utah State 31-24 to become bowl eligible||
+2026-11-21|Hawai'i|Nevada|HEADLINE||AJ Bianco, Jacob Fernandez lead Nevada to 16-8 victory over Hawaii||
 2026-08-27|Mercyhurst|Youngstown State|HEADLINE||Beau Brungard accounts for 5 touchdowns in Youngstown State's season-opening win over Mercyhurst||
 2026-08-27|Gardner-Webb|Austin Peay|HEADLINE||Parson, Simmons lead Austin Peay in 35-17 win over Gardner-Webb||
 2026-08-27|Houston Christian|SE Louisiana|HEADLINE||Cutter Stewart returns from junior college ranks, leads Houston Christian past SE Louisiana 34-28||

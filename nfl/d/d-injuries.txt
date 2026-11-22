@@ -223,7 +223,8 @@ DAL||Ryan Flournoy|WR|Active||||2026-11-16|Flournoy tallied six catches for 71 y
 DAL||Otito Ogbonnia|DT|Active||||2026-11-15|Ogbonnia (finger) has re-entered Sunday's matchup against San Francisco, Joe Hoyt of The Dallas Morning News reports.
 DAL||Jonathan Bullard|DT|Active||||2026-11-15|Bullard (calf) is active for Sunday's game against the 49ers, Todd Archer of ESPN.com reports.
 DAL||Joey Porter Jr.|CB|Active||||2026-11-15|Porter (ankle) is active for Sunday's game against the 49ers, Todd Archer of ESPN.com reports.
-DEN||Taylor Rapp|S|Active||||2026-11-22|The Broncos elevated Rapp from the practice squad to the active roster Saturday, Zac Stevens of TheDNVR.com reports.
+DEN||Cody Schrader|RB|Active||||2026-11-22|The Broncos elevated Schrader from their practice squad to their active roster Saturday, Susanna Weir of the team's official site reports.
+DEN||Taylor Rapp|S|Active||||2026-11-22|The Broncos signed Rapp from the practice squad to the active roster Saturday, Zac Stevens of TheDNVR.com reports.
 DEN||Talanoa Hufanga|S|Active||||2026-11-21|Hufanga (ankle) does not have any injury designation ahead of Sunday's game against the Raiders, Aric DiLalla of the Broncos' official site reports.
 DEN||Caleb Lohner|TE|Injured Reserve|Foot|Surgery|2026-11-27|2026-11-21|Lohner (foot) has been ruled out ahead of Sunday's game against the Raiders, Aric DiLalla of the Broncos' official site reports.
 DEN||Riley Moss|CB|Active||||2026-11-21|Moss (concussion) does not have any injury designation ahead of Sunday's game against the Raiders, Aric DiLalla of the Broncos' official site reports.
@@ -247,7 +248,6 @@ DEN||Courtland Sutton|WR|Active||||2026-11-08|Sutton caught five of nine targets
 DEN||Jonah Coleman|RB|Active||||2026-11-08|Coleman carried the ball 17 times for 57 yards and a touchdown and caught all four of his targets for 31 yards in Sunday's 26-21 win over the Panthers.
 DEN||Bo Nix|QB|Active||||2026-11-08|Nix completed 25 of 37 passes for 237 yards and two touchdowns with one interception in Sunday's 26-21 win over the Panthers. He added two rushing yards on five carries.
 DEN||Dondrea Tillman|LB|Active||||2026-11-08|Tillman is active for Sunday's game against the Panthers, Aric DiLalla of the team's official site reports.
-DEN||Eyioma Uwazurike|DE|Injured Reserve|Shoulder||2026-12-13|2026-11-08|The Broncos placed Uwazurike (shoulder) on injured reserve Saturday, Aric DiLalla of the team's official site reports.
 DET||Cade Mays|C|Injured Reserve|Ankle|Sprain|2026-12-20|2026-11-22|The Lions placed Mays (ankle) on injured reserve Saturday.
 DET||D.J. Reed|CB|Questionable|Hip||2026-11-22|2026-11-20|Reed (hip) is listed as questionable for Sunday's game against the Buccaneers.
 DET||Sione Vaki|RB|Questionable|Ankle||2026-11-22|2026-11-20|Vaki (ankle) is questionable for Sunday's game against the Buccaneers.
@@ -448,6 +448,7 @@ LAC||Tre' Harris|WR|Active||||2026-11-17|Harris secured all five targets for 86 
 LAC||Justin Herbert|QB|Active||||2026-11-17|Herbert completed 12 of 18 passes for 129 yards with no touchdowns or interceptions and rushed seven times for 51 yards and a touchdown in the Chargers' 23-20 win over the Ravens on Monday night.
 LAC||Kayode Awosika|G|Active||||2026-11-17|Awosika (fibula) is active for Monday's game against the Ravens.
 LAC||Branson Taylor|G|Injured Reserve|Ankle||2026-12-13|2026-11-16|Taylor (ankle) was placed on injured reserve Monday.
+LAR||Puka Nacua|WR|Injured Reserve|Knee - MCL|Sprain|2027-01-10|2026-11-22|Nacua (knee) is expected to be sidelined 4-to-5 months after undergoing MCL surgery, which means he likely won't be able to return to action even if the Rams advance to the Super Bowl, Adam Schefter of ESPN reports.
 LAR||Steve Avila|G|Out|Hamstring||2026-12-03|2026-11-22|Coach Sean McVay said Saturday that Avila (hamstring) will not play in Wednesday's game against the Packers, Adam Grosbard of The Orange County Register reports.
 LAR||Justin Dedich|G|Injured Reserve|Undisclosed||2026-11-25|2026-11-22|The Rams opened the 21-day practice window for Dedich (undisclosed) on Saturday.
 LAR||Kobie Turner|DE|Injured Reserve|Groin|Strain|2026-11-25|2026-11-22|The Rams designated Turner (groin) to return from injured reserve Saturday.
@@ -455,7 +456,6 @@ LAR||Kyren Williams|RB|Questionable|Toe|Soreness|2026-11-25|2026-11-21|Head coac
 LAR||Konata Mumpfield|WR|Active||||2026-11-20|The Rams are expected to lean more on Mumpfield and the rest of the team's wide receivers in the absence of Puka Nacua (knee/toe), the latter of whom is expected to be sidelined for the remainder of the regular season, N
 LAR||Davante Adams|WR|Injured Reserve|Hamstring|Surgery|2026-12-03|2026-11-20|Coach Sean McVay noted Friday that Adams (hamstring) isn't expected to practice this weekend, Greg Beacham of the Associated Press reports.
 LAR||Terrance Ferguson|TE|Injured Reserve|Hamstring|Strain|2026-11-25|2026-11-20|Ferguson (hamstring/ankle) isn't ready to return to game action, but the Rams still plan to activate him from injured reserve before Week 12 and keep him on the active roster, Adam Grosbard of The Orange County Register 
-LAR||Puka Nacua|WR|Injured Reserve|Knee - MCL|Sprain|2027-01-10|2026-11-20|Coach Sean McVay revealed Friday that Nacua (knee) had surgery to repair his MCL on Tuesday and is on track to miss a couple of months, Sarah Barshop of ESPN.com reports.
 LAR||Myles Garrett|DE|Active||||2026-11-19|Garrett played 17 defensive snaps but did not show up on the box score otherwise during the Rams' 34-6 win over the Cardinals in Week 10.
 LAR||Quentin Lake|S|Active||||2026-11-19|Lake posted two tackles (one solo) during the Rams' 34-6 win over the Cardinals in Week 10.
 LAR||Max Klare|TE|Active||||2026-11-18|Klare went without a target while playing four of the Rams' 76 offensive snaps in Sunday's 34-6 win over the Cardinals.
@@ -673,7 +673,7 @@ PIT||Aaron Rodgers|QB|Active||||2026-11-16|Rodgers completed 15 of 29 passes for
 PIT||Will Howard|QB|Active||||2026-11-16|Howard (coach's decision) is inactive and serving as Pittsburgh's emergency third quarterback Sunday night versus Cincinnati.
 PIT||Derrick Harmon|DT|Active||||2026-11-16|Harmon (foot) is active for Sunday's Week 10 clash against Cincinnati.
 PIT||Brandin Echols|CB|Active||||2026-11-12|Echols (hamstring) was a full participant at practice Wednesday, Teresa Varley of the Steelers' official site reports.
-SF||Nate Hobbs|CB|Injured Reserve|Groin||2026-11-29|2026-11-22|Hobbs (groin) has been downgraded to out for Sunday night' game against the Vikings.
+SF||Nate Hobbs|CB|Injured Reserve|Groin||2026-11-29|2026-11-22|Hobbs (groin) has been downgraded to out for Sunday night's game against the Vikings.
 SF||C.J. West|DT|Active||||2026-11-22|The 49ers activated West (knee) from injured reserve Saturday.
 SF||Ji'Ayir Brown|S|Active||||2026-11-21|Brown (ankle) does not carry an injury designation into Sunday's game against the Vikings in Mexico City.
 SF||Dre Greenlaw|LB|Questionable|Neck||2026-11-22|2026-11-21|Greenlaw (neck) is listed as questionable for Sunday's game against the Vikings in Mexico City.
@@ -748,7 +748,7 @@ TB||Jalen McMillan|WR|Injured Reserve|Knee - PCL|Sprain|2026-11-30|2026-11-09|He
 TB||Chris Godwin Jr.|WR|Active||||2026-11-09|Godwin caught two of three targets for 16 yards and added a 12-yard rush during Sunday night's 27-24 loss to the Bears.
 TB||Kenny Gainwell|RB|Active||||2026-11-09|Gainwell rushed five times for 16 yards and caught all three of his targets for 60 yards in Sunday's 27-24 loss to the Bears.
 TB||Emeka Egbuka|WR|Active||||2026-11-09|Egbuka (foot) caught three of five targets for 38 yards and added a one-yard run in Sunday's 27-24 loss to the Bears.
-TEN||Jaylen Harrell|LB|Injured Reserve|Knee - ACL||2027-02-15|2026-11-22|Harrell (knee) was taken to a hospital in Tampa following a serious car accident, Terry McCormick of TitanInsider.com reports.
+TEN||Jaylen Harrell|LB|Injured Reserve|Knee - ACL||2027-02-15|2026-11-22|Harrell (knee) was taken to a hospital in Tampa on Saturday following a serious car accident, Terry McCormick of TitanInsider.com reports.
 TEN||Tony Adams|S|Active||||2026-11-21|Adams has cleared the league's concussion protocol and no longer carries an injury designation into Sunday's game against the Cowboys, Jim Wyatt of the Titans' official site reports.
 TEN||Michael Carter|RB|Active||||2026-11-21|The Titans elevated Carter from the practice squad to the active roster Saturday, Jim Wyatt of the Titans' official site reports.
 TEN||Tyjae Spears|RB|Injured Reserve|Knee||2026-12-20|2026-11-21|The Titans placed Spears (knee) on injured reserve Saturday, Jim Wyatt of the Titans' official site reports.

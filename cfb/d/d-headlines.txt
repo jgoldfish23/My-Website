@@ -710,18 +710,37 @@
 2026-11-14|Colorado State|Washington State|HEADLINE||Kirby Vorhees has 4 of 9 TD runs by Washington State in skid-busting 73-7 romp over Colorado State||
 2026-11-14|North Dakota State|Hawai'i|HEADLINE||DJ Scott, Ray James Jr. rally North Dakota State to 21-13 victory over Hawaii||
 2026-11-15|Ole Miss|Oklahoma|HEADLINE||Mateer accounts for 181 yards of offense and Oklahoma holds on to beat No. 19 Mississippi 24-17||
+2026-11-17|Eastern Michigan|Western Michigan|HEADLINE||Western Michigan builds big lead early, holds off Eastern Michigan 34-27||
+2026-11-17|Ball State|Ohio|HEADLINE||Nick Poulos accounts for 3 TDs, including go-ahead score, to help Ohio edge Ball State 35-28||
+2026-11-17|Miami (OH)|Kent State|HEADLINE||Jones' 2TDs help lead Miami (Ohio) to dominant 20-3 win over Kent State||
+2026-11-18|Akron|Massachusetts|HEADLINE||Gant runs for 151 yards, Stire delivers winning kick as Akron edges UMass 34-33||
+2026-11-18|Central Michigan|Buffalo|HEADLINE||Burch hits 200 yards again and Buffalo wins 6th straight, 40-21 over Central Michigan||
+2026-11-19|Rice|Temple|HEADLINE||Patrick Crayton and Jacurri Brown connect in waning seconds to lift Rice over Temple 31-27||
+2026-11-20|Oregon|Michigan State|HEADLINE||Smith runs for 121 yards and 2 TDs, No. 14 Oregon routs Michigan St 45-7 holding onto playoff hopes||
+2026-11-20|Iowa State|UCF|HEADLINE||Barnett throws 3 of his 4 TD passes to Derry, UCF beats Iowa State to become bowl eligible||
+2026-11-20|Clemson|Duke|HEADLINE||Clemson's QB rotation of Pearman and Denson, defense help the Tigers beat Duke 20-10||
+2026-11-20|Bowling Green|Toledo|HEADLINE||Richter throws TD pass to Dabbs, Griffith kicks 4 FGs for Toledo in 19-0 win over BGSU||
+2026-11-20|UTEP|Air Force|HEADLINE||Air Force runs for 429 yards in 52-3 rout of UTEP||
+2026-11-21|Georgia|South Carolina|HEADLINE||Frazier's two TDs lift No. 1 Georgia into SEC title game with 34-6 win at South Carolina||
+2026-11-21|Utah|TCU|HEADLINE||Dampier throws 2 long TD passes as No. 2 Utah beats TCU 38-17 to clinch spot in Big 12 title game||
 2026-11-21|Chattanooga|Alabama|HEADLINE||Austin Mack throws 4 TD passes as No. 7 Alabama beats Chattanooga 47-0||
 2026-11-21|UCLA|Michigan|HEADLINE||Bryce Underwood lifts Michigan to an 18-16 win over No. 4 UCLA in 3 overtimes||
 2026-11-21|Arkansas|Texas|HEADLINE||Arch Manning accounts for 3 TDs, and No. 8 Texas beats Arkansas 45-3 for its 5th straight win||
-2026-11-21|Indiana|Washington|HEADLINE||Washington upsets No. 6 Indiana 27-24 in overtime on Tyler Robles' field goal||
-2026-11-21|LSU|Tennessee|HEADLINE||Faizon Brandon's 2 long TD runs in the fourth quarter lift No. 9 Tennessee past LSU, 27-13||
+2026-11-21|SMU|Notre Dame|HEADLINE||Defense powers No. 3 Notre Dame past SMU 24-3||
+2026-11-21|Virginia Tech|Miami|HEADLINE||Fletcher's 3 TD runs lift No. 5 Miami past Virginia Tech 28-20, 'Canes clinch spot in ACC title game||
+2026-11-21|Indiana|Washington|HEADLINE||No. 6 Indiana loses 27-24 in overtime at Washington and might fall out of playoff picture||
+2026-11-21|LSU|Tennessee|HEADLINE||Faizon Brandon runs for 2 fourth-quarter TDs, No. 9 Tennessee beats LSU 27-13 at Neyland Stadium||
 2026-11-21|BYU|Kansas|HEADLINE||No. 12 BYU beats Kansas 31-29 in 3 overtimes to stay alive in the College Football Playoff race||
 2026-11-21|Wake Forest|Georgia Tech|HEADLINE||Gio Lopez rushes for two scores and throws two more as Wake Forest beats Georgia Tech 50-29||
 2026-11-21|Texas Tech|Baylor|HEADLINE||No. 11 Texas Tech moves closer to another Big 12 title game with 20-10 win at Baylor||
 2026-11-21|Ohio State|Nebraska|HEADLINE||Nebraska ends 31-game losing streak against AP Top 25 opponents with 31-28 win over No. 16 Buckeyes||
 2026-11-21|Iowa|Illinois|HEADLINE||No. 13 Iowa shuts out Illinois in the second half, pulls away for 34-17 win to help playoff hopes||
+2026-11-21|Kentucky|Missouri|HEADLINE||Austin Simmons throws 4 TD passes, leading Missouri past No. 17 Kentucky 28-14||
+2026-11-21|Maryland|USC|HEADLINE||Trent Mosley, Waymond Jordan score 2 TDs apiece in No. 18 USC's 35-21 win over Maryland||
+2026-11-21|Arizona|Kansas State|HEADLINE||Noah Fifita rallies No. 19 Arizona through the rain to a 35-28 overtime win over Kansas State||
 2026-11-21|Houston|West Virginia|HEADLINE||Jonathan Dimas kicks 23-yard field goal to send No. 20 Houston past West Virginia 34-31||
 2026-11-21|Texas A&M|Oklahoma|HEADLINE||Mateer accounts for 4 touchdowns, Oklahoma smothers Texas A&M 28-7||
+2026-11-21|Pittsburgh|Louisville|HEADLINE||Lincoln Kienholz throws 5 TD passes and No. 21 Louisville forces 4 turnovers in 42-10 win over Pitt||
 2026-11-21|Vanderbilt|Florida|HEADLINE||No. 23 Florida takes advantage of a lucky bounce and beats Vanderbilt 34-27 in the Swamp||
 2026-11-21|Wofford|Ole Miss|HEADLINE||Trinidad Chambliss throws for 5 TDs and No. 25 Mississippi rolls past Wofford 59-17||
 2026-11-21|Colorado|Cincinnati|HEADLINE||Cincinnati snaps 3-game skid with 35-28 win over Colorado||
@@ -735,27 +754,27 @@
 2026-11-21|Tennessee Tech|Mississippi State|HEADLINE||Puckett throws 2 TD passes and Mississippi State beats Tennessee Tech, ends 6-game losing streak||
 2026-11-21|Western Kentucky|Liberty|HEADLINE||No. 22 Liberty beats Western Kentucky 45-14 for its 10th consecutive win||
 2026-11-21|Charlotte|Tulsa|HEADLINE||Hayes throws 4 TD passes, Singleton catches 3 of them, and Tulsa routs Charlotte 42-14||
+2026-11-21|Missouri State|Jacksonville State|HEADLINE||Creel has 3 total TDs in 4th quarter, Jacksonville States beats Missouri State 25-20||
 2026-11-21|Middle Tennessee|Sam Houston|HEADLINE||Brown's 75-yard rushing TD helps Middle Tennessee beat Sam Houston, become bowl eligible||
+2026-11-21|South Florida|Florida Atlantic|HEADLINE||Veltkamp throws 4 more TDs in Florida Atlantic's 35-14 win over South Florida||
 2026-11-21|UL Monroe|App State|HEADLINE||Aaron Clark blocks a PAT in overtime and Appalachian State edges UL Monroe 17-16||
 2026-11-21|Coastal Carolina|Louisiana|HEADLINE||Winfield has 3 TD passes, runs for another score in Ragin' Cajuns' 38-24 win over Coastal Carolina||
+2026-11-21|Delaware|New Mexico State|HEADLINE||Minicucci throws for 5 TDs, breaks Delaware's career passing TD record in win over New Mexico St.||
 2026-11-21|Florida International|Kennesaw State|HEADLINE||Varnes, Woods fuel Kennesaw State offense in 35-24 win over Florida International||
 2026-11-21|Samford|Auburn|HEADLINE||Tristan Ti'a accounts for 5 TDs as Auburn dominates Samford 59-17||
 2026-11-21|NC State|Florida State|HEADLINE||CJ Bailey, Davion Gause lead NC State to 28-10 win over Florida State||
+2026-11-21|Rutgers|Penn State|HEADLINE||Raymond's heads-up pitch helps Rutgers beat Penn State 25-24, ending 38-year losing streak in series||
 2026-11-21|Old Dominion|UConn|HEADLINE||Osborne throws and runs for scores, UConn bowl eligible with 29-21 win over Old Dominion||
 2026-11-21|Northern Illinois|North Dakota State|HEADLINE||Nathan Hayes tosses 4 TD passes and North Dakota State survives late rally by Northern Illinois||
 2026-11-21|Georgia Southern|Troy|HEADLINE||Max Johnson throws 3 TD passes in 1st half to help Georgia Southern thump Troy 45-7||
+2026-11-21|Georgia State|Marshall|HEADLINE||Del Rio-Wilson leads Marshall rally in 28-27 win over Georgia State to become bowl eligible||
 2026-11-21|South Alabama|Southern Miss|HEADLINE||PJ Martin scores two 4th-quarter TDs and South Alabama rallies for 40-35 win over Southern Miss||
-2026-11-17|Eastern Michigan|Western Michigan|HEADLINE||Western Michigan builds big lead early, holds off Eastern Michigan 34-27||
-2026-11-17|Ball State|Ohio|HEADLINE||Nick Poulos accounts for 3 TDs, including go-ahead score, to help Ohio edge Ball State 35-28||
-2026-11-17|Miami (OH)|Kent State|HEADLINE||Jones' 2TDs help lead Miami (Ohio) to dominant 20-3 win over Kent State||
-2026-11-18|Akron|Massachusetts|HEADLINE||Gant runs for 151 yards, Stire delivers winning kick as Akron edges UMass 34-33||
-2026-11-18|Central Michigan|Buffalo|HEADLINE||Burch hits 200 yards again and Buffalo wins 6th straight, 40-21 over Central Michigan||
-2026-11-19|Rice|Temple|HEADLINE||Patrick Crayton and Jacurri Brown connect in waning seconds to lift Rice over Temple 31-27||
-2026-11-20|Oregon|Michigan State|HEADLINE||Smith runs for 121 yards and 2 TDs, No. 14 Oregon routs Michigan St 45-7 holding onto playoff hopes||
-2026-11-20|Iowa State|UCF|HEADLINE||Barnett throws 3 of his 4 TD passes to Derry, UCF beats Iowa State to become bowl eligible||
-2026-11-20|Clemson|Duke|HEADLINE||Clemson's QB rotation of Pearman and Denson, defense help the Tigers beat Duke 20-10||
-2026-11-20|Bowling Green|Toledo|HEADLINE||Richter throws TD pass to Dabbs, Griffith kicks 4 FGs for Toledo in 19-0 win over BGSU||
-2026-11-20|UTEP|Air Force|HEADLINE||Air Force runs for 429 yards in 52-3 rout of UTEP||
+2026-11-21|Washington State|Texas State|HEADLINE||Brad Jackson has hand in 4 TDs to lead Texas State to 42-14 romp over Washington State||
+2026-11-21|UNLV|San José State|HEADLINE||Jackson Arnold has TD pass, TD run to help UNLV hold on for 24-22 victory over San Jose State||
+2026-11-21|Arkansas State|Louisiana Tech|HEADLINE||QB Baker accounts for 5 TDs in Louisiana Tech romp over Arkansas State 48-3||
+2026-11-21|Stanford|California|HEADLINE||Ford scores twice as Stanford controls Cal 44-26 to reach bowl eligibility||
+2026-11-21|Colorado State|Fresno State|HEADLINE||Fresno State holds off a late rally to beat Colorado State 49-42 and become bowl eligible||
+2026-11-21|UTSA|UAB|HEADLINE||UTSA holds off UAB 19-17 to maintain top spot in American Conference||
 2026-08-27|Mercyhurst|Youngstown State|HEADLINE||Beau Brungard accounts for 5 touchdowns in Youngstown State's season-opening win over Mercyhurst||
 2026-08-27|Gardner-Webb|Austin Peay|HEADLINE||Parson, Simmons lead Austin Peay in 35-17 win over Gardner-Webb||
 2026-08-27|Houston Christian|SE Louisiana|HEADLINE||Cutter Stewart returns from junior college ranks, leads Houston Christian past SE Louisiana 34-28||
@@ -970,6 +989,7 @@
 2026-11-14|Montana State|Northern Colorado|HEADLINE||Lamson and White lead Montana State over Northern Colorado 31-21||
 2026-11-14|UC Davis|Idaho|HEADLINE||Cleeland throws 4 touchdown passes, 2 to Gbatu, as UC Davis snaps Idaho's 4-game win streak||
 2026-11-14|Idaho State|Montana|HEADLINE||Ah Yat throws 3 TD passes, 2 to Gillman, Montana beats Idaho State 38-30||
+2026-11-19|Northwestern State|Stephen F. Austin|HEADLINE||Stephen F. Austin routs Northwestern State 66-0 to stay alive in Southland title chase||
 2026-11-21|Monmouth|Campbell|HEADLINE||Weaver throws 7 TDs including game-winner to Neal and Monmouth completes perfect CAA season||
 2026-11-21|Lehigh|Lafayette|HEADLINE||Coan has 5 total TDs, Poole kicks walk-off FG for Lehigh in 51-48 OT win over Lafayette||
 2026-11-21|South Dakota|Illinois State|HEADLINE||Two big plays give South Dakota 10-3 win over Illinois State to end regular season||
@@ -982,5 +1002,10 @@
 2026-11-21|Utah Tech|Weber State|HEADLINE||Dahle and Kjar combine for 2 touchdowns in Weber State's 31-24 win over Utah Tech||
 2026-11-21|East Tennessee State|Mercer|HEADLINE||Pickles scores 3 rushing TDs sending Mercer past ETSU in OT and Bears clinch outright SoCon title||
 2026-11-21|Yale|Harvard|HEADLINE||Yale beats playoff-bound Harvard 20-17 by forcing 4 turnovers||
+2026-11-21|Cal Poly|UC Davis|HEADLINE||Treynor Cleeland, Jordan Fisher rally UC Davis to 44-43 victory over Cal Poly to end regular season||
+2026-11-21|Northern Colorado|Northern Arizona|HEADLINE||Ty Pennington throws for 3 TDs, runs for another score as Northern Arizona beats Northern Colorado||
+2026-11-21|Tarleton State|North Alabama|HEADLINE||Undefeated Tarleton State wraps up UIC championship with 31-24 win over North Alabama||
+2026-11-21|Incarnate Word|East Texas A&M|HEADLINE||Brown to Alexander duo leads Incarnate Word's offensive eruption in 66-3 win over East Texas A&M||
 2026-11-21|Austin Peay|Central Arkansas|HEADLINE||Central Arkansas beats No. 14 Austin Peay 24-17 in coach Nathan Brown's final game with the program||
-2026-11-19|Northwestern State|Stephen F. Austin|HEADLINE||Stephen F. Austin routs Northwestern State 66-0 to stay alive in Southland title chase||
+2026-11-21|Idaho|Idaho State|HEADLINE||Davis Harsin leads Idaho State to 19-5 victory over Idaho, keeping postseason hopes alive||
+2026-11-21|Lamar|McNeese|HEADLINE||Lamar survives to beat McNeese 19-17  earns share of Southland title and automatic berth to playoffs||

@@ -245,13 +245,14 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
     + '.fw-k.me{color:#7ee2a8;border-color:rgba(126,226,168,.5)}'
     + '@media (max-width:420px){div.fw-g.me{box-shadow:inset 3px 0 0 #7ee2a8;padding-left:7px;margin-left:-8px}}'
     + '.fw-k{flex:none;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#f2c14e;padding:3px 6px;border:1px solid rgba(242,193,78,.45);border-radius:6px}'
-    + '.fw-t{display:flex;align-items:center;gap:6px;min-width:0;flex:1 1 auto}'
+    + '.fw-t{display:flex;align-items:center;gap:6px;min-width:0;flex:1 1 auto;overflow:hidden}'
+    + '.fw-at{flex:none;font-size:13px;font-weight:700;opacity:.6;padding:0 2px}'
     + '.fw-t img{width:22px;height:22px;object-fit:contain;flex:none}'
     + '.fw-t i{flex:none;width:9px;height:9px;border-radius:50%}'
     + '.fw-t b{font-weight:800;font-size:15.5px;min-width:1.4em;text-align:center;border-radius:6px;padding:1px 3px;transition:background .6s,color .6s}'
     + '.fw-t b.hit{background:var(--fc,#f2c14e);color:#fff}'
     + '.fw-t span{white-space:nowrap}'
-    + '.fw-c{flex:none;font-size:12.5px;color:#aab4c5;white-space:nowrap}'
+    + '.fw-c{flex:0 1 auto;min-width:0;max-width:40%;overflow:hidden;text-overflow:ellipsis;font-size:12.5px;color:#aab4c5;white-space:nowrap}'
     + '.fw-p{flex:none;font-size:12px;font-weight:800;padding:2px 7px;border-radius:999px;background:rgba(91,140,255,.18);border:1px solid rgba(91,140,255,.35);white-space:nowrap}'
     + '.fw-x{flex:none;width:36px;height:36px;margin-right:-6px;border:0;background:transparent;color:#aab4c5;font-size:20px;line-height:1;cursor:pointer;border-radius:10px}'
     + '.fw-x:hover{color:#fff;background:rgba(255,255,255,.08)}'
@@ -299,14 +300,22 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
     for (var moved = true; moved; ) { moved = false; rs.forEach(function(r){ if (r.bottom >= top - 18 && r.top < top - 1) { top = r.top; moved = true; } }); }
     bar.style.bottom = Math.max(0, Math.round(W.innerHeight - top)) + 'px';
     if (spacer) spacer.style.height = bar.offsetHeight + 'px'; }
+  /* "11/22 - 1:00 PM EST" (the feeds' pregame detail) or the saved kickoff -> "Sun 11:00 AM" in the viewer's own time zone */
+  function preKick(f, det){ var t = f.k ? +f.k : NaN;
+    if (!(t > 0)) { var m = /(\d{1,2})\/(\d{1,2})\s*-\s*(\d{1,2}):(\d{2})\s*(AM|PM)\s*(EDT|EST|ET)?/i.exec(det || ''); if (!m) return det || 'Not started';
+      var now = new Date(), y = now.getFullYear(), mo = +m[1]; if (mo < now.getMonth() + 1 - 6) y++; var hr = (+m[3]) % 12 + (/pm/i.test(m[5]) ? 12 : 0);
+      var off = /EDT/i.test(m[6] || '') ? 4 : 5; t = Date.UTC(y, mo - 1, +m[2], hr + off, +m[4]); }
+    var d = new Date(t), n = new Date(), tm = d.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'});
+    var same = d.toDateString() === n.toDateString(), tmr = new Date(n.getTime() + 864e5).toDateString() === d.toDateString();
+    return (same ? 'Today ' : tmr ? 'Tmrw ' : d.toLocaleDateString([], {weekday: 'short'}) + ' ') + tm; }
   function row(f){
     var s = ST[key(f)] || {}, live = /IN_PROGRESS|HALFTIME|END_PERIOD|DELAYED/.test(s.st || ''), fin = /FINAL/.test(s.st || '');
     var logo = function(src, c){ return src ? '<img src="' + esc(src) + '" alt="" loading="lazy">' : '<i style="background:' + esc(c || '#8a94a0') + '"></i>'; };
     var sc = function(side){ var v = side === 'a' ? s.as : s.hs; return '<b data-s="' + side + '" style="--fc:' + esc(side === 'a' ? f.ac : f.hc) + '">' + (v == null || (!live && !fin) ? '–' : v) + '</b>'; };
     var p = null; if (W.JSHOdds) { if (live && s.pc) p = JSHOdds.prob(f.lg, (+s.hs || 0) - (+s.as || 0), JSHOdds.left(f.lg, s.pc[0], s.pc[1]), f.mu, f.sd); else if (!fin) p = JSHOdds.prob(f.lg, 0, 1, f.mu, f.sd); }
     var pTxt = p == null ? '' : '<span class="fw-p" title="Hub win chance">' + esc(p >= 0.5 ? f.h : f.a) + ' ' + JSHOdds.pc(Math.max(p, 1 - p)) + '</span>';
-    var clk = fin ? 'Final' : live ? (s.det || 'Live') : (s.det || 'Not started');
-    return '<div class="fw-g' + (f.auto ? ' me' : '') + '" data-k="' + esc(key(f)) + '"><a class="fw-g" style="flex:1 1 auto;min-width:0" href="' + esc(f.href) + '">' + (f.auto ? '<span class="fw-k me">Your team</span>' : '<span class="fw-k">Following</span>') + '<span class="fw-t' + (f.al && f.hl ? ' lg' : '') + '">' + logo(f.al, f.ac) + '<span class="ab">' + esc(f.a) + '</span>' + sc('a') + '<span style="opacity:.5">–</span>' + sc('h') + '<span class="ab">' + esc(f.h) + '</span>' + logo(f.hl, f.hc) + '</span><span class="fw-c">' + esc(clk) + '</span>' + pTxt + '</a><button type="button" class="fw-x" data-k="' + esc(key(f)) + '" aria-label="Stop following ' + esc(f.an) + ' at ' + esc(f.hn) + '">×</button></div>'; }
+    var pre = !fin && !live; var clk = fin ? 'Final' : live ? (s.det || 'Live') : preKick(f, s.det);
+    return '<div class="fw-g' + (f.auto ? ' me' : '') + '" data-k="' + esc(key(f)) + '"><a class="fw-g" style="flex:1 1 auto;min-width:0" href="' + esc(f.href) + '">' + (f.auto ? '<span class="fw-k me">Your team</span>' : '<span class="fw-k">Following</span>') + '<span class="fw-t' + (f.al && f.hl ? ' lg' : '') + '">' + logo(f.al, f.ac) + '<span class="ab">' + esc(f.a) + '</span>' + (pre ? '<span class="fw-at">@</span>' : sc('a') + '<span style="opacity:.5">–</span>' + sc('h')) + '<span class="ab">' + esc(f.h) + '</span>' + logo(f.hl, f.hc) + '</span><span class="fw-c">' + esc(clk) + '</span>' + pTxt + '</a><button type="button" class="fw-x" data-k="' + esc(key(f)) + '" aria-label="Stop following ' + esc(f.an) + ' at ' + esc(f.hn) + '">×</button></div>'; }
   function draw(flash){
     if (!bar) return;
     var now = Date.now(), gone = get('jsh-follow-off', {}); LIST = LIST.filter(function(f){ var s = ST[key(f)], old = s && s.fin && now - s.fin > KEEP; if (old && f.auto) { gone[key(f)] = now; put('jsh-follow-off', gone); } return !old; }); put(KEY, LIST);

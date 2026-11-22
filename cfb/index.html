@@ -348,7 +348,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Explain: tap a dotted stat name for what it means; press and hold a column name that sorts (polish/explain.js, published by build.sh as /sports/explain.js) -->
 <script src="/sports/explain.js?v=20261110b" defer></script>
 <!-- Follow: up to two followed games in a slim scoreboard on every page, with the hub's own win chance (polish/winodds.js + polish/follow.js, published by build.sh as /sports/follow.js) -->
-<script src="/sports/follow.js?v=20261119a" defer></script>
+<script src="/sports/follow.js?v=20261122a" defer></script>
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
@@ -3515,6 +3515,10 @@ tr.my-open>td{border-bottom-color:transparent}
 /* TV grid: names stay inside the visible part of a block */
 .tvg .tvg-bar{border-left:var(--pl,0px) solid transparent;border-right:var(--pr,0px) solid transparent}
 .tvg .tvg-strip{border-left:var(--pl,0px) solid transparent;border-right:var(--pr,0px) solid transparent}
+/* What has to happen: where the team stands (2026-11-22) */
+.scn-stand .scn-lead{font-size:15px;line-height:1.45;color:var(--ink-2)}
+.scn-stand .scn-lead b{color:var(--ink)}
+.scn-stand .scn-left{margin-top:3px;font-size:12px;line-height:1.35;color:var(--ink-3);white-space:normal}
 </style>
 
 <header class="top">
@@ -14750,6 +14754,17 @@ function cfpSim(){
   /* how many games a playoff-level team (the 12th best rating) would expect to lose against each schedule */
   const B=teams[Math.min(11,n-1)].rating, EL=new Float64Array(n);
   for(let k=0;k<NG;k++){ const h=H[k], a=A[k], hfa=NEU[k]?0:HFA; if(h<n) EL[h]+=1-pw(B-base[a]+hfa); if(a<n) EL[a]+=1-pw(B-base[h]-hfa); }
+  /* 2026-11-22 (Jamo: BYU at 50% looked far too low for the committee's No. 10): once the committee ranks teams, each team's
+     resume score starts from its spot in the committee's latest rankings, and only the games played after that release
+     (and the simulated ones) move it. The ranked teams keep the spread of their own resume scores, handed out in the
+     committee's order; unranked teams sit below No. 25. Before the committee ranks anyone this is the old formula. */
+  const ANC=new Float64Array(n), ELP=new Float64Array(n), LP=new Float64Array(n); const cfpW=/Week\s*(\d+)/i.exec(POLLS.CFP.week||''), cfpN=Object.keys(POLLS.CFP.ranks).length;
+  const CUT=(cfpN>=12&&cfpW&&WEEKRANGE[+cfpW[1]])?WEEKRANGE[+cfpW[1]].min:null;
+  if(CUT){ for(let k=0;k<NG;k++){ if(!RES[k]||!(list[k].date<CUT)) continue; const h=H[k], a=A[k], hfa=NEU[k]?0:HFA; if(h<n){ ELP[h]+=1-pw(B-base[a]+hfa); if(RES[k]<0) LP[h]++; } if(a<n){ ELP[a]+=1-pw(B-base[h]-hfa); if(RES[k]>0) LP[a]++; } }
+    const cur=i=>ELP[i]-LP[i]+(base[i]-B)/9; const rk=[]; for(let i=0;i<n;i++){ ANC[i]=cur(i); if(POLLS.CFP.ranks[teams[i].name]) rk.push(i); }
+    const vals=rk.map(cur).sort((p,q)=>q-p); rk.sort((p,q)=>POLLS.CFP.ranks[teams[p].name]-POLLS.CFP.ranks[teams[q].name]).forEach((i,j)=>{ ANC[i]=vals[j]; });
+    const floor=vals.length?vals[vals.length-1]-0.15:0; for(let i=0;i<n;i++) if(!POLLS.CFP.ranks[teams[i].name]) ANC[i]=Math.min(ANC[i], floor); }
+  else for(let i=0;i<n;i++) ANC[i]=(base[i]-B)/9;
   const CONFS=CFP_P4.concat(CFP_G6), mem={}; CONFS.forEach(c=>mem[c]=[]); teams.forEach((t,i)=>{ if(mem[t.conf]) mem[t.conf].push(i); });
   const sbE=mem['Sun Belt'].filter(i=>teams[i].div==='East'), sbW=mem['Sun Belt'].filter(i=>teams[i].div==='West');
   const isG6=new Uint8Array(n); teams.forEach((t,i)=>{ if(CFP_G6.indexOf(t.conf)>=0) isG6[i]=1; });
@@ -14782,7 +14797,7 @@ function cfpSim(){
       const neu=CFP_P4.indexOf(c)>=0; const w1=rnd()<pw(r[p1]-r[p2]+(neu?0:HFA)); const wi=w1?p1:p2, lo=w1?p2:p1; W[wi]++; L[lo]++; tg[p1]++; tg[p2]++; champ[wi]++; chIdx[ci]=wi; isCh[wi]=1;
       elx[p1]+=1-pw(B-base[p2]+(neu?0:HFA)); elx[p2]+=1-pw(B-base[p1]-(neu?0:HFA)); }
     /* committee stand-in: record against the schedule, plus how good the team is */
-    for(let i=0;i<n;i++) sc[i]=(EL[i]+elx[i]-L[i])+(r[i]-B)/9;
+    for(let i=0;i<n;i++) sc[i]=ANC[i]+(EL[i]-ELP[i])+elx[i]-(L[i]-LP[i])+(r[i]-base[i])/9;
     /* only the top 18 need an order: that always covers the 12 spots once the automatic bids are placed */
     let cnt=0; for(let i=0;i<n;i++){ const v=sc[i]; if(cnt<K||v>sc[top[K-1]]){ let j=cnt<K?cnt++:K-1; while(j>0&&sc[top[j-1]]<v){ top[j]=top[j-1]; j--; } top[j]=i; } }
     inF.fill(0); fld.length=0;
@@ -15472,14 +15487,27 @@ document.addEventListener('click', e=>{ const w=document.getElementById('pst116'
   if(b.dataset.pst116){ PST116=b.dataset.pst116; PST116_ALL=false; } else PST116_ALL=!PST116_ALL; w.innerHTML=pst116Inner(w.dataset.team); });
 
 /* ---------- What has to happen (patch91) ---------- */
+function scnT(x){ if(x==null) return '—'; if(x>0&&x<0.005) return '<1%'; if(x<1&&x>0.995) return '>99%'; return Math.round(x*100)+'%'; }
 function scnPct(x){ if(x==null) return '<span class="dim">—</span>'; if(x>0&&x<0.005) return '&lt;1%'; if(x<1&&x>0.995) return '&gt;99%'; return Math.round(x*100)+'%'; }
+function scnLeft(name){ return G.filter(g=>!g.played&&!g.live&&(g.home===name||g.away===name)&&g.date<=CFP_SEL&&g.status!=='CANCELED'&&g.status!=='POSTPONED'&&!isTBD(g.home)&&!isTBD(g.away)).sort((a,b)=>a.date<b.date?-1:1); }
+function scnStandHTML(t, R){ const rk=t.cfp, P=POLLS.CFP, n=Object.keys(P.ranks).length; if(n<12) return '';
+  let today=null; try{ const D=cfpTodayField(); const i=((D&&D.F)||[]).findIndex(x=>(x.t||x).name===t.name); if(i>=0) today=i+1; }catch(e){}
+  const ranked=Object.keys(P.ranks).map(k=>({name:k, r:P.ranks[k]})).sort((a,b)=>a.r-b.r);
+  const lo=rk?Math.max(1,rk-3):Math.max(1,n-5), hi=rk?Math.min(n,rk+4):n; const show=ranked.filter(x=>x.r>=lo&&x.r<=hi); if(!rk) show.push({name:t.name, r:null});
+  const rowH=x=>{ const y=R.by[x.name]; if(!y) return ''; const left=scnLeft(x.name).map(g=>(g.home===x.name?(g.neutral?'vs ':'vs '):'at ')+tshort(g.home===x.name?g.away:g.home)).join(', ');
+    const me=x.name===t.name; return '<tr'+(me?' class="hl"':'')+'><td class="r">'+(x.r||'—')+'</td><td>'+chip(x.name,{short:true,norank:true})+' <span class="dim">'+recStr(x.name)+'</span><div class="scn-left">'+(left?'Left: '+esc(left):'Regular season done')+'</div></td><td class="r"><b>'+scnPct(y.make)+'</b></td></tr>'; };
+  const lead=rk ? '<b>No. '+rk+'</b> in the committee’s '+esc(P.week||'latest')+' rankings'+(today?' · the <b>No. '+today+' seed</b> if the season ended today':' · <b>outside</b> the field if the season ended today') : 'Not in the committee’s top 25 yet';
+  return '<div class="sec"><h2>Where '+esc(t.disp)+' stands</h2><span class="muted">the odds start from the committee’s own order</span></div><div class="card scn-stand"><div class="bd"><div class="scn-lead">'+lead+'</div>'
+    +'<div class="tblwrap" style="margin-top:8px"><table class="tbl"><thead><tr><th class="r">CFP</th><th>The teams around '+esc(tshort(t.name))+'</th><th class="r">Playoff</th></tr></thead><tbody>'+show.map(rowH).join('')+'</tbody></table></div>'
+    +'<div class="mini" style="margin-top:6px">The rankings came out before this weekend’s games, so the odds already count those results. Conference title games count in the odds even before the matchups are set.</div></div></div>'; }
 function renderScenarios(name){ setNav('scenarios'); const t=T[name||cfpFocus()]||T['BYU'];
   if(!t||t.level!=='FBS'){ view.innerHTML=backBar('#/playoff/fbs')+'<div class="note">This page covers FBS teams in the College Football Playoff race.</div>'; return; }
   CFP_FOCUS=t.name; const nm=esc(t.disp), confd=t.conf!=='Ind'&&(CFP_P4.indexOf(t.conf)>=0||CFP_G6.indexOf(t.conf)>=0), cn=esc(t.conf);
   const head=backBar('#/playoff/fbs','<a href="#/playoff/fbs">College Football Playoff</a>')+'<div class="page-head"><div><div class="eyebrow">'+chip(t.name,{norank:true})+' · '+recStr(t.name)+'</div><h1>What has to happen</h1><div class="sub">'+nm+'’s road to '+(confd?'the '+cn+' title game, the '+cn+' title and ':'')+'the College Football Playoff, week by week: what each result does to the odds, and the other games worth rooting for. From '+CFP_SIMS.toLocaleString()+' simulations of the rest of the season.</div></div></div>';
   if(!cfpReady()){ view.innerHTML=head+'<div class="note">Playing out the rest of the season '+CFP_SIMS.toLocaleString()+' times…</div><div class="skel-grid" style="margin-top:12px"><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div></div>'; const h=location.hash; setTimeout(()=>{ if(location.hash!==h) return; cfpSim(); renderScenarios(t.name); }, 30); return; }
   const R=cfpSim(), x=R.by[t.name], F=R.focus; if(!x||!F){ view.innerHTML=head+'<div class="note">No simulation for '+nm+' yet.</div>'; return; }
-  let html=head+'<div class="grid g4" style="margin-bottom:14px">'+(confd?tile(t.conf+' title game',scnPct(x.tg),'top two in the standings meet Dec 5')+tile(t.conf+' title',scnPct(x.champ),CFP_P4.indexOf(t.conf)>=0?'the champion is in the Playoff':'the best Group of 6 champion is in'):'')+tile('Makes the Playoff',scnPct(x.make),x.seed?'average seed '+num1(x.seed):'')+tile('First-round bye',scnPct(x.bye),'a top-4 seed')+'</div>';
+  let html=head+'<div class="grid g4" style="margin-bottom:14px">'+(confd?tile(t.conf+' title game',scnT(x.tg),'top two in the standings meet Dec 5')+tile(t.conf+' title',scnT(x.champ),CFP_P4.indexOf(t.conf)>=0?'the champion is in the Playoff':'the best Group of 6 champion is in'):'')+tile('Makes the Playoff',scnT(x.make),t.cfp?'No. '+t.cfp+' in the CFP rankings':(x.seed?'average seed '+num1(x.seed):''))+tile('First-round bye',scnT(x.bye),'a top-4 seed')+'</div>';
+  html+=scnStandHTML(t, R);
   /* run the table */
   const bk=F.buckets.filter(b=>b.p>=0.005);
   if(F.left){ html+='<div class="sec"><h2>The simple version</h2><span class="muted">'+F.left+' regular-season game'+(F.left===1?'':'s')+' left</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Finish the regular season</th><th class="r">How often</th>'+(confd?'<th class="r">Title game</th><th class="r">'+cn+' title</th>':'')+'<th class="r">Playoff</th><th class="r">Bye</th></tr></thead><tbody>'+bk.map(b=>'<tr'+(b.l===0?' class="hl"':'')+'><td>'+(b.l===0?'<b>Win out</b>':(b.l===4?'4 or more losses':b.l+' more loss'+(b.l===1?'':'es')))+'</td><td class="r">'+scnPct(b.p)+'</td>'+(confd?'<td class="r">'+scnPct(b.tg)+'</td><td class="r">'+scnPct(b.ch)+'</td>':'')+'<td class="r"><b>'+scnPct(b.mk)+'</b></td><td class="r">'+scnPct(b.by)+'</td></tr>').join('')+'</tbody></table></div><div class="mini" style="margin-top:6px">The title game and Playoff columns are the chances <i>given</i> that finish. Losses here are regular-season games only.</div>'; }
@@ -15503,7 +15531,7 @@ function renderScenarios(name){ setNav('scenarios'); const t=T[name||cfpFocus()]
   /* the league race */
   if(confd){ const l=R.rows.filter(r=>r.t.conf===t.conf).sort((a,b)=>b.tg-a.tg).slice(0,6);
     html+='<div class="sec"><h2>The '+cn+' race</h2><span class="muted">the other contenders</span></div><div class="grid g2">'+cfpRaceCard('Reaches the title game','top two in the standings',l,'tg')+cfpRaceCard('Wins the '+cn,'the title game included',l.slice().sort((a,b)=>b.champ-a.champ),'champ')+'</div>'; }
-  html+='<div class="note" style="margin-top:14px"><b>How to read this.</b> Every simulation plays out the whole season, so each line is “of the seasons where that happened, how often '+nm+' got there.” The “also root for” games are picked by how much they move '+nm+'’s odds; a swing of a point or two can be simulation noise. Conference tiebreakers are simplified (league record, head-to-head, overall record), and the committee is a stand-in, so treat these as a guide, not a guarantee. <a href="#/playoff/fbs">See the full projected bracket ›</a></div>';
+  html+='<div class="note" style="margin-top:14px"><b>How to read this.</b> Every simulation plays out the whole season, so each line is “of the seasons where that happened, how often '+nm+' got there.” The “also root for” games are picked by how much they move '+nm+'’s odds; a swing of a point or two can be simulation noise. The committee part starts from its latest rankings and moves each team by what happens after them: a loss costs about a spot or more depending on the opponent, a win over a good team helps a little, and a conference title helps. Conference tiebreakers are simplified (league record, head-to-head, overall record), so treat these as a guide, not a guarantee. <a href="#/playoff/fbs">See the full projected bracket ›</a></div>';
   view.innerHTML=html; }
 /* patch103: the bracket if the season ended today, from the committee's rankings once they exist, the AP poll until then */
 /* Playoff ranking tile on team pages (2026-11-10, Jamo: "Add playoff ranking to team pages in CFB"): the committee's
@@ -15529,7 +15557,7 @@ function cfpTodayHTML(){ const D=cfpTodayField(); if(D.F.length<12) return ''; c
     +'<div class="card"><div class="hd"><h3>First four out</h3><span class="mini">next in '+src+'</span></div><div class="bd">'+(D.out.length?D.out.map(y=>'<div class="cfp-out">'+chip(y.t.name,{norank:true})+' <span class="dim">No. '+y.r+' · '+recStr(y.t.name)+'</span></div>').join(''):'<div class="mini">Nobody else is ranked.</div>')
     +'<div class="mini" style="margin-top:10px">'+(D.cfp?'':'The committee’s own rankings start in early November and replace the AP poll here automatically. ')+'Until conference title games are played, the highest-ranked team in each power conference stands in for its champion.</div></div></div></div>'; }
 function renderCFP(){ setNav('playoff');
-  const head='<div class="page-head"><div><div class="eyebrow">College Football Playoff</div><h1>Playoff bracket</h1><div class="sub">The 2026 rules: the SEC, Big Ten, Big 12 and ACC champions are in automatically, so is the highest-ranked team from the other six leagues, and Notre Dame is in if it finishes in the top 12. The highest-ranked teams left fill out the 12, and seeds follow the ranking straight down. The bracket up top is today’s field from the current rankings; the projection below plays out the rest of the season '+CFP_SIMS.toLocaleString()+' times using this page’s power ratings.</div></div></div>'+playoffSeg('fbs');
+  const head='<div class="page-head"><div><div class="eyebrow">College Football Playoff</div><h1>Playoff bracket</h1><div class="sub">The 2026 rules: the SEC, Big Ten, Big 12 and ACC champions are in automatically, so is the highest-ranked team from the other six leagues, and Notre Dame is in if it finishes in the top 12. The highest-ranked teams left fill out the 12, and seeds follow the ranking straight down. The bracket up top is today’s field from the current rankings; the projection below plays out the rest of the season '+CFP_SIMS.toLocaleString()+' times using this page’s power ratings, starting from the committee’s latest rankings.</div></div></div>'+playoffSeg('fbs');
   if(!cfpReady()){ view.innerHTML=head+'<div class="note">Playing out the rest of the season '+CFP_SIMS.toLocaleString()+' times…</div><div class="skel-grid" style="margin-top:12px"><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div></div><div class="skel skel-row"></div><div class="skel skel-row"></div>'; const h=location.hash; setTimeout(()=>{ if(location.hash!==h) return; cfpSim(); renderCFP(); }, 30); return; }
   const R=cfpSim(), F=R.field; const fav=SETTINGS.fav&&T[SETTINGS.fav]; const me=(fav&&fav.level==='FBS')?fav:T['BYU'];
   const fave=R.rows.slice().sort((a,b)=>b.title-a.title)[0]; const g6=R.rows.slice().sort((a,b)=>b.g6-a.g6)[0]; const mx=me&&R.by[me.name];
@@ -16495,7 +16523,7 @@ function renderRooting(name, sort){ setNav('rooting'); const t=(name&&T[name]&&T
     if(QUIET&&view.querySelector('.rg-me,.rg-list')){ setTimeout(run, 30); return; }   // a live update: keep the old guide up while it reruns
     view.innerHTML=head+'<div class="note">Playing out the rest of the season '+N+' times…</div><div class="skel-grid" style="margin-top:12px"><div class="skel skel-card"></div><div class="skel skel-card"></div></div>'; setTimeout(run, 30); return; }
   const I=rg127(CFP_CACHE, t); if(!I){ view.innerHTML=head+'<div class="note">No games left to simulate for '+nm+'.</div>'; return; }
-  const x=I.x; let html=head+'<div class="grid g4" style="margin-bottom:14px">'+tile('Playoff now',scnPct(x.make),x.seed?'average seed '+num1(x.seed):'')+(I.confd?tile(t.conf+' title game',scnPct(x.tg),'the top two meet'):'')+tile('Games that matter',String(I.big.length),'week '+I.wk+(I.me?'':' · '+t.disp+' is off'))+'</div>';
+  const x=I.x; let html=head+'<div class="grid g4" style="margin-bottom:14px">'+tile('Playoff now',scnT(x.make),x.seed?'average seed '+num1(x.seed):'')+(I.confd?tile(t.conf+' title game',scnT(x.tg),'the top two meet'):'')+tile('Games that matter',String(I.big.length),'week '+I.wk+(I.me?'':' · '+t.disp+' is off'))+'</div>';
   if(I.me){ const g=I.me.g, home=team(g.home).name===t.name, opp=home?g.away:g.home, W=home?I.me.h:I.me.a, L=home?I.me.a:I.me.h, pw=home?I.me.ph:1-I.me.ph;
     html+='<div class="card rg-me"><div class="hd"><h3>Root for '+nm+' first</h3><span class="mini">'+day127(g.date)+' '+esc(tzTime(g.time))+(g.tv?' · '+esc(g.tv):'')+'</span></div><div class="bd"><div class="rg-ch">'+chip(t.name,{short:true})+'<span class="dim">'+(g.neutral?'vs':home?'vs':'at')+'</span>'+chip(opp,{short:true})+'<span class="mini">'+nm+' wins '+Math.round(pw*100)+'% of the simulations</span></div>'
       +'<div class="rg-wl"><div class="w"><span>With a win</span><b>'+scnPct(W.mk)+'</b><em>Playoff</em>'+(I.confd?'<b>'+scnPct(W.tg)+'</b><em>title game</em>':'')+'</div><div class="l"><span>With a loss</span><b>'+scnPct(L.mk)+'</b><em>Playoff</em>'+(I.confd?'<b>'+scnPct(L.tg)+'</b><em>title game</em>':'')+'</div></div><a class="mini" href="#/game/'+g.id+'">Game page ›</a></div></div>'; }

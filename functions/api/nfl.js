@@ -102,6 +102,22 @@ function slimSummary(j) {
   const st = hdr.status || {};
   const cur = j.drives && j.drives.current;
   const drive = cur ? { desc: cur.description || "", plays: (cur.plays || []).slice(-4).map((p) => String(p.text || "").slice(0, 180)) } : null;
+  // play-by-play (2026-11-22): the last 40 plays, oldest first (same shape as /api/cfb)
+  const plays = [], seenPlay = new Set();
+  ((j.drives && j.drives.previous) || []).concat(cur ? [cur] : []).forEach((d) => {
+    ((d && d.plays) || []).forEach((p) => {
+      if (!p || seenPlay.has(p.id)) return;
+      seenPlay.add(p.id);
+      const s = p.start || {}, e = p.end || {};
+      plays.push({
+        id: p.id, per: p.period && p.period.number, clk: (p.clock && p.clock.displayValue) || "",
+        tm: (s.team && s.team.id) || (d.team && d.team.id) || "", ty: (p.type && p.type.text) || "",
+        tx: String(p.text || "").slice(0, 220), dd: s.downDistanceText || "",
+        ys: s.yardsToEndzone, ye: e.yardsToEndzone, et: (e.team && e.team.id) || "",
+        yd: p.statYardage, sc: !!p.scoringPlay, to: !!p.isTurnover, pen: !!p.isPenalty,
+      });
+    });
+  });
   const wp = j.winprobability || [];
   return {
     t: Date.now(),
@@ -113,6 +129,7 @@ function slimSummary(j) {
     players,
     scoring,
     drive,
+    plays: plays.slice(-40),
     wp: wp.length ? Math.round((wp[wp.length - 1].homeWinPercentage || 0) * 100) : null,
   };
 }

@@ -3436,6 +3436,36 @@ a.nl-t:hover{border-color:var(--accent)}
 .bs-panel{background:#14161b}
 :root[data-theme="light"] .bs-panel{background:#fff}
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .bs-panel{background:#fff}}
+/* ===== basketball play-by-play (2026-11-23, sports-hub/polish/bbpbp.js) ===== */
+.gm .gmlive{grid-column:1/-1;display:grid;gap:6px;margin-top:4px;padding-top:9px;border-top:1px solid var(--line-2);cursor:pointer}
+.gm.dense .gmlive{grid-area:auto;grid-column:1/-1;margin-top:5px;padding-top:8px}
+.gml-bot{display:flex;align-items:center;gap:12px}
+.gml-bot .gml-last{flex:1;min-width:0}
+.gml-last,.pbp-last{font-size:12.5px;line-height:1.4;color:var(--ink-2);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.gml-last b,.pbp-last b{margin-right:6px;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+.gml-pbp{flex:none;display:inline-flex;align-items:center;min-height:32px;font-size:13px;font-weight:700;white-space:nowrap}
+.pbp-now{display:grid;gap:9px;margin-bottom:12px}
+.pbp-last{font-size:14px;-webkit-line-clamp:3;color:var(--ink)}
+.bb-run{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-2)}
+.bb-run b{color:var(--ink)}
+.pbp{margin-top:6px;scroll-margin-top:150px}
+.pbp-h{display:flex;align-items:baseline;flex-wrap:wrap;gap:3px 10px;margin-bottom:4px}
+.pbp-l{list-style:none;margin:0;padding:0}
+.pbp-p{display:flex;gap:10px;padding:9px 0;border-top:1px solid var(--line-2)}
+.pbp-p.sc{margin:0 -8px;padding-left:8px;padding-right:8px;border-radius:8px;background:color-mix(in srgb,var(--good,#3fb950) 10%,transparent)}
+.pbp-p.miss .pbp-t{color:var(--ink-2)}
+.pbp-lg,.pbp-lgw{flex:none;width:22px;height:22px;margin-top:1px;object-fit:contain;display:inline-flex;align-items:center;justify-content:center}
+.pbp-lgw img{width:22px!important;height:22px!important;object-fit:contain;margin:0!important}
+.pbp-lg.wsw{width:8px;height:16px;margin:3px 7px 0;border-radius:2px}
+.pbp-lg.none{visibility:hidden}
+.pbp-b{flex:1;min-width:0}
+.pbp-k{display:flex;align-items:center;flex-wrap:wrap;gap:3px 9px;font-size:12.5px;color:var(--ink-2)}
+.pbp-k b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+.bb-sc{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.pbp-yd{font-weight:800;color:var(--good,#3fb950)}
+.pbp-t{margin-top:2px;font-size:13.5px;line-height:1.42;color:var(--ink)}
+.pbp-p:first-child .pbp-t{font-weight:600}
+.pbp-more{margin-top:8px;min-height:36px}
 </style>
 
 <header class="top">
@@ -4203,7 +4233,7 @@ function gameCard(g){ const a = team(g.away), h = team(g.home); const ws = winne
   const ln = '<div class="ln">' + (g.played ? (both ? '<span class="dim">Model had</span> ' + esc(modelText(g)) : '') + (g.spread != null ? (both ? '<br>' : '') + '<span class="dim">Line</span> ' + esc(spreadText(g)) : '')
       : (g.spread != null ? '<span class="dim">Line</span> <span class="mk">' + esc(spreadText(g)) + '</span>' + (g.total != null ? ' · ' + g.total : '') + '<br>' : '') + (both ? '<span class="dim">Model</span> ' + esc(modelText(g)) + ' · ' + pct(Math.max(p, 1 - p)) : '<span class="dim">vs. a non-D-I opponent</span>'))
     + (g.note ? '<br><span class="dim">' + esc(g.note) + '</span>' : '') + dpTag(g) + '</div>';
-  return '<div class="gm click' + (g.live ? ' islive' : '') + (g.played ? ' final' : '') + (isFav(g) ? ' fav' : '') + '" style="--ca:' + uiColor(a) + ';--ch:' + uiColor(h) + '" data-href="#/game/' + g.id + '" role="link" tabindex="0"><div class="tm">' + side(a, 'a') + side(h, 'h') + '</div>' + st + ln + '<div class="arrow">›</div></div>'; }
+  return '<div class="gm click' + (g.live ? ' islive' : '') + (g.played ? ' final' : '') + (isFav(g) ? ' fav' : '') + '" style="--ca:' + uiColor(a) + ';--ch:' + uiColor(h) + '" data-href="#/game/' + g.id + '" role="link" tabindex="0"><div class="tm">' + side(a, 'a') + side(h, 'h') + '</div>' + st + ln + '<div class="arrow">›</div>' + bbRowLiveHTML(g) + '</div>'; }
 
 /* ---------- scoreboard ---------- */
 function nearestDate(d){ if (d && DATES.includes(d)) return d; const t = d || todayStr; return DATES.find(x => x >= t) || DATES[DATES.length - 1] || todayStr; }
@@ -4325,6 +4355,7 @@ function renderGame(id){ setNav('scores'); const g = GI[id]; if (!g) { view.inne
   html += '<div class="ghead" style="background:linear-gradient(100deg,color-mix(in srgb,' + uiColor(a) + ' 30%,var(--surface)) 0%,var(--surface) 40%,var(--surface) 60%,color-mix(in srgb,' + uiColor(h) + ' 30%,var(--surface)) 100%)">' + side(a, 'a')
     + '<div class="mid">' + (done ? '<div class="sc">' + scoreSpan(g, 'a', g.as, ws === 'a' ? 'w' : '') + ' <span class="dim">–</span> ' + scoreSpan(g, 'h', g.hs, ws === 'h' ? 'w' : '') + '</div><div class="when">' + (g.played ? 'Final' + (g.ot ? '/' + (g.ot > 1 ? g.ot : '') + 'OT' : '') : '<span class="livedot"></span>' + esc(g.clk || 'Live')) + '</div>' : '<div class="sc" style="font-size:26px">' + esc(kick(g)) + '</div><div class="when">' + esc(fmtDateLong(g.date)) + '</div>')
     + '<div class="dim" style="margin-top:6px">' + (g.neutral ? 'Neutral site' : esc(tname(g.away)) + ' at ' + esc(tname(g.home))) + (g.tv ? ' · ' + esc(g.tv) : '') + '</div>' + (g.note ? '<div class="dim">' + esc(g.note) + '</div>' : '') + '</div>' + side(h, 'h') + '</div>';
+  html += '<div id="gpbp"></div>';
   if (both) { const m = margin(g); const fav = m >= 0 ? g.home : g.away;
     html += '<div class="grid g3" style="margin-top:14px">' + tile('Model', esc(tname(fav)) + ' by ' + num1(Math.abs(m)), pct(m >= 0 ? p : 1 - p) + ' to win' + (g.neutral ? ' · neutral floor' : ' · home court ' + HCA)) + tile('Line', g.spread != null ? esc(spreadText(g)) : '—', g.total != null ? 'total ' + g.total : 'no line posted yet') + tile('Power', sgn1(a.r) + ' / ' + sgn1(h.r), esc(a.short) + ' #' + a.prank + ' · ' + esc(h.short) + ' #' + h.prank) + '</div>';
     if (g.spread != null && !g.played) { const edge = -g.spread - m; html += '<p class="mini" style="margin-top:8px">The model and the market ' + (Math.abs(edge) < 1.5 ? 'agree within a point and a half.' : 'differ by ' + num1(Math.abs(edge)) + ' points: the model likes ' + esc(tname(edge > 0 ? g.away : g.home)) + ' more than the line does.') + '</p>'; } }
@@ -4335,9 +4366,9 @@ function renderGame(id){ setNav('scores'); const g = GI[id]; if (!g) { view.inne
   html += '<div id="gbox"></div>';
   const form = id2 => { const gs = teamGamesOf(id2).filter(x => x.played).slice(-5); return gs.length ? gs.map(x => { const home = x.home === id2; const won = home ? x.hs > x.as : x.as > x.hs; return '<span class="pill ' + (won ? 'good' : 'bad') + '" title="' + esc(fmtDate(x.date) + ' ' + (home ? 'vs ' : 'at ') + tname(home ? x.away : x.home)) + '">' + (won ? 'W' : 'L') + '</span>'; }).join(' ') : '<span class="dim">no games yet</span>'; };
   if (both) html += '<div class="sec"><h2>Form</h2><span class="muted">last five</span></div><div class="grid g2"><div class="card"><div class="bd">' + logoImg(a) + ' <b>' + esc(a.short) + '</b> &nbsp;' + form(a.id) + '</div></div><div class="card"><div class="bd">' + logoImg(h) + ' <b>' + esc(h.short) + '</b> &nbsp;' + form(h.id) + '</div></div></div>';
-  view.innerHTML = html; if (done) loadBox(g); anGameFill(g); }
+  view.innerHTML = html; bbFill(g); if (done) loadBox(g); anGameFill(g); }
 /* the box score from the live relay (ESPN's summary, trimmed): team stats and every player's line */
-async function loadBox(g){ const el = $('#gbox'); if (!el || !LIVE.on) return; try { const r = await fetch(LIVE_API + '/game?event=' + enc(g.id), {cache: 'no-store'}); if (!r.ok) throw 0; const j = await r.json(); if (!document.body.contains(el)) return;
+async function loadBox(g){ const el = $('#gbox'); if (!el || !LIVE.on) return; try { const r = await fetch(LIVE_API + '/game?event=' + enc(g.id), {cache: 'no-store'}); if (!r.ok) throw 0; const j = await r.json(); BB_SUM[g.id] = j; bbFill(g); if (!document.body.contains(el)) return;
     const teams = j.teams || []; if (!teams.length) return;
     el.innerHTML = '<div class="sec"><h2>Box score</h2><span class="muted">from ESPN</span></div>' + teams.map(tb => { const t = team(tb.id); const cols = tb.labels || []; const show = ['MIN', 'PTS', 'REB', 'AST', 'FG', '3PT', 'FT', 'STL', 'BLK', 'TO']; const ix = show.map(s => cols.indexOf(s));
       return '<div class="card" style="margin-bottom:12px"><div class="hd"><h3>' + logoImg(t) + ' ' + esc(t.short || tb.name || '') + '</h3><span class="mini">' + esc(tb.line || '') + '</span></div><div class="tblwrap" style="border:0"><table class="tbl"><thead><tr><th>Player</th>' + show.map((s, i) => ix[i] >= 0 ? '<th class="r">' + s + '</th>' : '').join('') + '</tr></thead><tbody>'
@@ -5027,6 +5058,52 @@ function renderPlayer(pid){ setNav('teams'); pid = String(pid || ''); const h0 =
   if (PL_DATA) { draw(); const p = PL_BYID[pid]; if (p && !RO[p.tid] && LIVE.on) roLoad(p.tid).then(() => { if (location.hash === h0 && RO[p.tid]) draw(); }); return; }
   if (!PL_DATA) view.innerHTML = '<div class="note">Loading the player…</div>';
   plLoad().then(() => { const p = PL_BYID[pid]; return p ? roLoad(p.tid) : null; }).then(() => { if (location.hash === h0) { draw(); applyPageTheme(); } }); }
+/* ---------- basketball play-by-play (2026-11-23, Jamo: "Do the same play-by-play upgrade for the NBA and CBB") ----------
+   Shared by the NBA and CBB hubs: each build concatenates this file into its app (inside the app's closure) and passes
+   its own helpers as A = {name(g, 'a'|'h'), logo(g, 'a'|'h'), per(p)}. The feeds (/api/nba/game, /api/cbb/game) send
+   pbp = the last 40 plays, oldest first: {per, clk, ha:'a'|'h'|'', tx, as, hs, pt (points scored), mi (missed shot)}.
+   - bbRowLiveHTML(g): under a live scoreboard row, the last play and a "Play-by-play ›" link that lands on the list
+   - bbCardHTML(g, j, A): the Live card at the top of a live game page: last play, the current run, the latest plays
+   - bbListHTML(g, j, A): the plays, newest first; 8 shown, a button opens all 40 */
+const BB_ALL = {};
+let BB_JUMP = null;
+function bbClean(s){ return String(s || '').replace(/^\s*\(\d{1,2}:\d{2}\)\s*/, ''); }
+/* the run going on now: points by the side that scored last, since the other side last scored (7 or more to count) */
+function bbRun(ps){ let prev = null; const ev = [];
+  (ps || []).forEach(p => { if (p.as == null || p.hs == null) return; const a = +p.as, h = +p.hs; if (prev) { if (a > prev.a) ev.push(['a', a - prev.a]); if (h > prev.h) ev.push(['h', h - prev.h]); } prev = {a, h}; });
+  if (!ev.length) return null; const side = ev[ev.length - 1][0]; let pts = 0; for (let i = ev.length - 1; i >= 0 && ev[i][0] === side; i--) pts += ev[i][1];
+  return pts >= 7 ? {side, pts} : null; }
+const BB_DULL = /subbing (in|out)|enters the game|timeout|^end of|^start of/i;   // not worth a line on the scoreboard
+function bbRowLiveHTML(g){ if (!g || !g.live) return ''; const lp = BB_DULL.test(g.last || '') ? '' : g.last;
+  return '<div class="gmlive"><div class="gml-bot">' + (lp ? '<div class="gml-last"><b>Last play</b>' + esc(bbClean(lp)) + '</div>' : '<div class="gml-last"></div>') + '<a class="gml-pbp" href="#/game/' + g.id + '" data-bbpbp="' + g.id + '">Play-by-play &rsaquo;</a></div></div>'; }
+function bbListHTML(g, j, A){ const ps = (j && j.pbp) || []; if (!ps.length) return '';
+  const all = !!BB_ALL[g.id]; const list = ps.slice().reverse(); const show = all ? list : list.slice(0, 8);
+  const row = p => '<li class="pbp-p' + (p.pt ? ' sc' : '') + (p.mi ? ' miss' : '') + '">' + (p.ha ? A.logo(g, p.ha) : '<span class="pbp-lg none"></span>') + '<div class="pbp-b"><div class="pbp-k"><b>' + esc(A.per(p)) + ' ' + esc(p.clk || '') + '</b>'
+    + (p.as != null && p.hs != null ? '<span class="bb-sc">' + esc(String(p.as)) + '-' + esc(String(p.hs)) + '</span>' : '') + (p.pt ? '<span class="pbp-yd">+' + p.pt + '</span>' : '') + '</div><div class="pbp-t">' + esc(bbClean(p.tx)) + '</div></div></li>';
+  return '<div class="pbp" id="pbp"><div class="pbp-h"><div class="eyebrow">Play-by-play</div><span class="mini">newest first · score after each play</span></div><ol class="pbp-l">' + show.map(row).join('') + '</ol>'
+    + (list.length > 8 ? '<button class="btn sm pbp-more" type="button" data-bball="' + g.id + '">' + (all ? 'Show fewer plays' : 'Show the last ' + list.length + ' plays') + '</button>' : '') + '</div>'; }
+function bbCardHTML(g, j, A){ if (!g || !g.live) return ''; const ps = (j && j.pbp) || []; const last = ps.length ? ps[ps.length - 1] : null; const run = bbRun(ps);
+  const lastTx = last ? bbClean(last.tx) : bbClean(g.last);
+  const now = (lastTx ? '<div class="pbp-last"><b>Last play</b>' + (last && last.ha ? esc(A.name(g, last.ha)) + ': ' : '') + esc(lastTx) + '</div>' : '')
+    + (run ? '<div class="bb-run">' + A.logo(g, run.side) + '<span><b>' + esc(A.name(g, run.side)) + '</b> on a ' + run.pts + '-0 run</span></div>' : '');
+  return '<div class="card pv live pbpcard" style="margin-top:14px"><div class="hd"><h3><span class="livedot"></span>Live</h3><span class="mini">' + esc(g.clk || (j && j.det) || 'In progress') + '</span></div><div class="bd">'
+    + (now ? '<div class="pbp-now">' + now + '</div>' : '') + (j ? bbListHTML(g, j, A) || '<div class="mini">No plays yet.</div>' : '<div class="mini">Loading the plays…</div>') + '</div></div>'; }
+function bbJump(){ let n = 0; const tick = () => { if (!BB_JUMP) return; if ((location.hash || '').indexOf('#/game/' + BB_JUMP) !== 0) { if (++n > 8) BB_JUMP = null; else setTimeout(tick, 150); return; }
+    const el = document.querySelector('#pbp .pbp-l') || (n > 20 ? document.querySelector('.pbpcard') : null); if (el) { BB_JUMP = null; const box = el.closest('.pbpcard') || el.closest('.pbp') || el; try { box.scrollIntoView({block: 'start', behavior: 'auto'}); } catch (e) {} return; }
+    if (++n > 40) { BB_JUMP = null; return; } setTimeout(tick, 250); }; setTimeout(tick, 60); }
+document.addEventListener('click', e => { const t = e.target.closest && e.target.closest('[data-bbpbp],[data-bball]'); if (!t) return;
+  if (t.dataset.bball) { BB_ALL[t.dataset.bball] = !BB_ALL[t.dataset.bball]; bbRedraw(t.dataset.bball); return; }
+  e.stopPropagation(); BB_JUMP = t.dataset.bbpbp; bbJump(); }, true);
+/* CBB hooks for the shared basketball play-by-play (sports-hub/polish/bbpbp.js, 2026-11-23). The game page has no live
+   summary of its own: loadBox() fetches /api/cbb/game each time the page draws, keeps it in BB_SUM, and bbFill() draws the
+   Live card (or, after the final, the play list) into #gpbp right under the score. */
+const BBA = { name: (g, s) => tname(s === 'a' ? g.away : g.home),
+  logo: (g, s) => '<span class="pbp-lgw">' + logoImg(team(s === 'a' ? g.away : g.home)) + '</span>',
+  per: p => p.per === 1 ? '1st' : p.per === 2 ? '2nd' : 'OT' + (p.per > 3 ? p.per - 2 : '') };
+const BB_SUM = {};
+function bbFill(g){ const el = document.getElementById('gpbp'); if (!el || !g) return; const j = BB_SUM[g.id];
+  el.innerHTML = g.live ? bbCardHTML(g, j, BBA) : (j && j.pbp && j.pbp.length ? '<div class="card" style="margin-top:14px"><div class="bd">' + bbListHTML(g, j, BBA) + '</div></div>' : ''); }
+function bbRedraw(id){ bbFill(GI[id]); }
 /* ---------- live scores (the site's /api/cbb relay of ESPN, 30 s at the edge) ---------- */
 const LIVE_API = (/(^|\.)djgolding\.com$/.test(location.hostname)) ? '/api/cbb' : 'https://djgolding.com/api/cbb';
 const LIVE = {on: typeof fetch === 'function' && location.protocol !== 'file:', last: 0, timer: null, busy: false};
@@ -5034,7 +5111,7 @@ function liveDates(){ const ds = []; const y = addDays(todayStr, -1); if (G.some
 async function livePoll(){ if (!LIVE.on || LIVE.busy || document.hidden) return; todayStr = etToday(); const ds = liveDates(); if (!ds.length) return; LIVE.busy = true; let changed = false;
   for (const d of ds) { try { const r = await fetch(LIVE_API + '/scoreboard?date=' + d.replace(/-/g, ''), {cache: 'no-store'}); if (!r.ok) continue; const j = await r.json();
       (j.games || []).forEach(e => { const g = GI[e.id]; if (!g) return; const as = e.away.s === '' || e.away.s == null ? null : +e.away.s, hs = e.home.s === '' || e.home.s == null ? null : +e.home.s;
-        const fin = e.st === 'FINAL', lv = LIVE_ST.test(e.st);
+        const fin = e.st === 'FINAL', lv = LIVE_ST.test(e.st); if (lv) g.last = e.last || '';
         if (fin && (!g.played || g.as !== as || g.hs !== hs)) { g.as = as; g.hs = hs; g.played = true; g.live = false; g.st = 'FINAL'; g.ot = Math.max(0, (e.per || 2) - 2); g.clk = ''; changed = true; }
         else if (lv && (g.as !== as || g.hs !== hs || g.clk !== e.det || !g.live)) { g.as = as; g.hs = hs; g.live = true; g.clk = e.det; changed = true; } }); LIVE.last = Date.now(); } catch (e) {} }
   LIVE.busy = false; if (changed) { recalcRecords(); quiet(); } liveStamp(); liveSchedule(); }

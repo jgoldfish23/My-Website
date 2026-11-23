@@ -34,6 +34,7 @@ function slimEvent(e) {
     clk: st.displayClock || "",
     away: team(a),
     home: team(h),
+    last: cp.situation && cp.situation.lastPlay && cp.situation.lastPlay.text ? String(cp.situation.lastPlay.text).slice(0, 180) : "",
   };
 }
 /* the hub's own win chance (2026-11-10): every scoring change as [period, seconds left in the period, away, home], and
@@ -51,6 +52,16 @@ function scoreLine(list, isScore) {
 }
 function nowAt(st) { return [(st && st.period) || 0, clockSecs(st && st.displayClock)]; }
 
+
+// play-by-play for the game pages (2026-11-23): the last 40 plays, oldest first, without substitutions; ha = which side
+// made the play, pt = points it scored, mi = a missed shot
+function pbpOf(j, homeId) {
+  return (j.plays || []).filter((p) => p.text && !/subbing (in|out)|enters the game/i.test(p.text)).slice(-40).map((p) => {
+    const tid = p.team && p.team.id; return {
+      per: p.period && p.period.number || 0, clk: (p.clock && p.clock.displayValue) || "", ha: tid ? (tid === homeId ? "h" : "a") : "",
+      tx: String(p.text || "").slice(0, 200), as: p.awayScore, hs: p.homeScore,
+      pt: p.scoringPlay ? (p.scoreValue || 0) : 0, mi: p.shootingPlay && !p.scoringPlay ? 1 : 0 }; });
+}
 function slimSummary(j) {
   const bs = j.boxscore || {};
   const line = {};
@@ -75,7 +86,8 @@ function slimSummary(j) {
     .map((p) => ({ x: p.text, c: p.clock && p.clock.displayValue || "", p: p.period && p.period.number || 0, s: p.scoringPlay ? 1 : 0, tm: p.team && p.team.id || "", as: p.awayScore, hs: p.homeScore }));
   const v = j.gameInfo && j.gameInfo.venue || {};
   const venue = v.fullName ? { n: v.fullName, c: [v.address && v.address.city, v.address && v.address.state].filter(Boolean).join(", ") } : null;
-  return { t: Date.now(), tl: scoreLine(j.plays, (p) => p.scoringPlay), pc: nowAt(st), st: (st.type && st.type.name || "").replace("STATUS_", "").replace("FINAL_OT", "FINAL"), det: st.type && st.type.shortDetail || "", per: st.period || 0, clk: st.displayClock || "", teams, ls, ts, plays, venue };
+  return { t: Date.now(), tl: scoreLine(j.plays, (p) => p.scoringPlay), pc: nowAt(st), st: (st.type && st.type.name || "").replace("STATUS_", "").replace("FINAL_OT", "FINAL"), det: st.type && st.type.shortDetail || "", per: st.period || 0, clk: st.displayClock || "", teams, ls, ts, plays, venue,
+    pbp: pbpOf(j, ((hdr.competitors || []).find((x) => x.homeAway === "home") || {}).id) };
 }
 // one team's roster for the team page (jersey, position, height, class, hometown, injuries); rosters change rarely
 function slimRoster(j) {

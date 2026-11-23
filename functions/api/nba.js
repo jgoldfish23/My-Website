@@ -115,6 +115,16 @@ function scoreLine(list, isScore) {
 }
 function nowAt(st) { return [(st && st.period) || 0, clockSecs(st && st.displayClock)]; }
 
+
+// play-by-play for the game pages (2026-11-23): the last 40 plays, oldest first, without substitutions; ha = which side
+// made the play, pt = points it scored, mi = a missed shot
+function pbpOf(j, homeId) {
+  return (j.plays || []).filter((p) => p.text && !/subbing (in|out)|enters the game/i.test(p.text)).slice(-40).map((p) => {
+    const tid = p.team && p.team.id; return {
+      per: p.period && p.period.number || 0, clk: (p.clock && p.clock.displayValue) || "", ha: tid ? (tid === homeId ? "h" : "a") : "",
+      tx: String(p.text || "").slice(0, 200), as: p.awayScore, hs: p.homeScore,
+      pt: p.scoringPlay ? (p.scoreValue || 0) : 0, mi: p.shootingPlay && !p.scoringPlay ? 1 : 0 }; });
+}
 function slimSummary(j) {
   const bs = j.boxscore || {};
   const haOf = {};
@@ -155,7 +165,7 @@ function slimSummary(j) {
     ls: (hdr.competitors || []).map((c) => ({ id: c.id, ha: c.homeAway, s: c.score, ls: (c.linescores || []).map((l) => l.displayValue) })),
     teams,
     players,
-    plays,
+    plays, pbp: pbpOf(j, home && home.id),
     wp: wp.length ? Math.round((wp[wp.length - 1].homeWinPercentage || 0) * 100) : null,
     wpSeries: wp.length > 2 ? wp.filter((x, i) => i % step === 0 || i === wp.length - 1).map((x) => Math.round((x.homeWinPercentage || 0) * 100)) : null,
     shots: sf.shots,

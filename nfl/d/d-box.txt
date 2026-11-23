@@ -15420,4 +15420,102 @@ P|161|H|kickReturns|Jaydon Blue||4685279|1;23;23.0;23;0
 P|161|H|puntReturns|Britain Covey||3926231|4;55;13.8;17;0
 P|161|H|kicking|Jake Elliott||3050478|4/4;100.0;55;1/1;13
 P|161|H|punting|Braden Mann||4035239|4;237;59.3;0;2;70
+G|162|401873077|2026-11-22|MIN|SF
+T|162|A|firstDowns=19;firstDownsPassing=13;firstDownsRushing=5;firstDownsPenalty=1;thirdDownEff=7-14;fourthDownEff=1-3;totalOffensivePlays=65;totalYards=324;yardsPerPlay=5.0;totalDrives=10;netPassingYards=255;completionAttempts=29/43;yardsPerPass=5.8;interceptions=1;sacksYardsLost=1-9;rushingYards=69;rushingAttempts=21;yardsPerRushAttempt=3.3;redZoneAttempts=1-3;totalPenaltiesYards=3-23;turnovers=2;fumblesLost=1;interceptions=1;defensiveTouchdowns=0;possessionTime=32:23;defSacks=1;defTfl=4
+T|162|H|firstDowns=20;firstDownsPassing=15;firstDownsRushing=4;firstDownsPenalty=1;thirdDownEff=4-9;fourthDownEff=0-0;totalOffensivePlays=53;totalYards=343;yardsPerPlay=6.5;totalDrives=9;netPassingYards=253;completionAttempts=22/27;yardsPerPass=9.0;interceptions=0;sacksYardsLost=1-7;rushingYards=90;rushingAttempts=25;yardsPerRushAttempt=3.6;redZoneAttempts=4-4;totalPenaltiesYards=6-49;turnovers=0;fumblesLost=0;interceptions=0;defensiveTouchdowns=1;possessionTime=27:37;defSacks=1;defTfl=5
+S|162|1|11:16|SF|George Kittle 17 Yd pass from Brock Purdy (Eddy Pineiro Kick)|0|7
+S|162|1|1:13|MIN|Aaron Jones Sr. 11 Yd Rush (Will Reichard Kick)|7|7
+S|162|2|14:13|SF|George Kittle 8 Yd pass from Brock Purdy (Eddy Pineiro Kick)|7|14
+S|162|2|6:48|MIN|Will Reichard 48 Yd Field Goal|10|14
+S|162|2|2:09|SF|Mike Evans 4 Yd pass from Brock Purdy (Eddy Pineiro Kick)|10|21
+S|162|2|1:59|SF|Ji'Ayir Brown 18 Yd Interception Return (Eddy Pineiro Kick)|10|28
+S|162|4|13:26|SF|Christian McCaffrey 6 Yd Rush (Eddy Pineiro Kick)|10|35
+W|162|63;68;77;74;74;81;78;77;70;63;65;77;75;79;73;74;75;82;95;96;95;96;95;95;97;96;96;96;97;97;99;99;99;100;100;100;100;100;100;100;100;100;100
+P|162|A|passing|Kirk Cousins||14880|26/38;235;6.2;0;1;1-9;64.8;73.9
+P|162|A|passing|Carson Wentz||2573079|3/5;29;5.8;0;0;0-0;26.1;76.2
+P|162|A|rushing|Jordan Mason||4360569|11;38;3.5;0;16
+P|162|A|rushing|Aaron Jones Sr.||3042519|8;30;3.8;1;11
+P|162|A|rushing|Justin Jefferson||4262921|1;1;1.0;0;1
+P|162|A|rushing|Kirk Cousins||14880|1;0;0.0;0;0
+P|162|A|receiving|Justin Jefferson||4262921|7;86;12.3;0;29;9
+P|162|A|receiving|T.J. Hockenson||4036133|6;55;9.2;0;20;7
+P|162|A|receiving|Tai Felton||4565185|6;42;7.0;0;16;12
+P|162|A|receiving|Myles Price||4430656|2;26;13.0;0;22;2
+P|162|A|receiving|Jauan Jennings||3886598|3;20;6.7;0;9;6
+P|162|A|receiving|Aaron Jones Sr.||3042519|1;13;13.0;0;13;1
+P|162|A|receiving|DeeJay Dallas||4240631|1;10;10.0;0;10;1
+P|162|A|receiving|Jeshaun Jones||4360637|1;8;8.0;0;8;1
+P|162|A|receiving|Gavin Bartholomew||4708049|1;5;5.0;0;5;3
+P|162|A|receiving|Jordan Mason||4360569|1;-1;-1.0;0;-1;1
+P|162|A|fumbles|Justin Jefferson||4262921|1;1;0
+P|162|A|fumbles|Kirk Cousins||14880|1;0;1
+P|162|A|defensive|Blake Cashman||3728281|9;4;0;0;0;0;0
+P|162|A|defensive|James Pierre||4259252|9;3;0;0;0;0;0
+P|162|A|defensive|Joshua Metellus||4046537|5;0;0;0;0;0;0
+P|162|A|defensive|Jalen Redmond||4360277|4;3;0;2;0;2;0
+P|162|A|defensive|Ivan Pace Jr.||4430280|4;3;0;0;0;0;0
+P|162|A|defensive|Dallas Turner||4565190|4;1;0;0;0;0;0
+P|162|A|defensive|Byron Murphy Jr.||4038999|3;3;0;0;1;0;0
+P|162|A|defensive|Domonique Orange||4698728|3;2;0;0;0;0;0
+P|162|A|defensive|Jake Golday||4877652|3;1;0;0;0;0;0
+P|162|A|defensive|Harrison Smith||14945|2;1;0;0;0;0;0
+P|162|A|defensive|Andrew Van Ginkel||3133487|2;1;0;0;0;1;0
+P|162|A|defensive|Theo Jackson||4242436|2;1;0;0;0;0;0
+P|162|A|defensive|Elijah Williams||4696782|2;1;0;1;0;0;0
+P|162|A|defensive|Levi Drake Rodriguez||5093973|2;1;0;0;0;0;0
+P|162|A|defensive|Eric Wilson||3056916|1;1;1;1;0;1;0
+P|162|A|defensive|Jeshaun Jones||4360637|1;1;0;0;0;0;0
+P|162|A|defensive|Christian Darrisaw||4361985|1;1;0;0;0;0;0
+P|162|A|defensive|Tyrion Ingram-Dawkins||4629149|1;1;0;0;0;0;0
+P|162|A|defensive|Jakobe Thomas||4710865|1;1;0;0;0;0;0
+P|162|A|defensive|Kyle Van Noy||16772|1;0;0;0;1;0;0
+P|162|A|defensive|Chaz Chambliss||4431520|1;0;0;0;0;0;0
+P|162|A|kickReturns|Myles Price||4430656|4;94;23.5;27;0
+P|162|A|puntReturns|Myles Price||4430656|1;19;19.0;19;0
+P|162|A|kicking|Will Reichard||4567104|1/3;33.3;48;1/1;4
+P|162|A|punting|Brett Thorson||4799994|2;122;61.0;0;2;64
+P|162|H|passing|Brock Purdy||4361741|21/26;255;9.8;3;0;1-7;98.6;146.0
+P|162|H|passing|Mac Jones||4241464|1/1;5;5.0;0;0;0-0;1.1;87.5
+P|162|H|rushing|Christian McCaffrey||3117251|12;49;4.1;1;10
+P|162|H|rushing|Deebo Samuel Sr.||3126486|2;27;13.5;0;20
+P|162|H|rushing|Kaelon Black||4696044|6;8;1.3;0;5
+P|162|H|rushing|Jordan James||4685397|2;7;3.5;0;4
+P|162|H|rushing|Mac Jones||4241464|3;-1;-0.3;0;0
+P|162|H|receiving|Mike Evans||16737|6;109;18.2;1;34;7
+P|162|H|receiving|Keenan Allen||15818|3;38;12.7;0;17;4
+P|162|H|receiving|George Kittle||3040151|3;34;11.3;2;17;3
+P|162|H|receiving|Deebo Samuel Sr.||3126486|3;20;6.7;0;18;4
+P|162|H|receiving|Jordan Watkins||4431466|1;19;19.0;0;19;1
+P|162|H|receiving|Kyle Juszczyk||16002|2;13;6.5;0;7;2
+P|162|H|receiving|Christian McCaffrey||3117251|2;13;6.5;0;13;3
+P|162|H|receiving|Luke Farrell||4040612|1;7;7.0;0;7;1
+P|162|H|receiving|Kaelon Black||4696044|1;7;7.0;0;7;1
+P|162|H|fumbles|Deommodore Lenoir||4242488|0;0;1
+P|162|H|defensive|Renardo Green||4427325|9;9;0;0;0;0;0
+P|162|H|defensive|Fred Warner||3138826|8;4;0;1;1;0;0
+P|162|H|defensive|Jaden Dugger||5086161|6;3;0;0;0;0;0
+P|162|H|defensive|Garret Wallow||4241807|5;3;0;0;0;0;0
+P|162|H|defensive|Ji'Ayir Brown||4693644|4;3;0;0;1;0;1
+P|162|H|defensive|Malik Mustapha||4696211|4;3;0;1;0;0;0
+P|162|H|defensive|Deommodore Lenoir||4242488|3;3;0;0;2;0;0
+P|162|H|defensive|Ephesians Prysock||4685523|3;3;0;0;0;0;0
+P|162|H|defensive|DeForest Buckner||2971282|3;2;0.5;1;0;1;0
+P|162|H|defensive|Tatum Bethune||4426698|3;1;0;0;0;0;0
+P|162|H|defensive|James Thompson Jr.||4693371|3;0;0;0;0;0;0
+P|162|H|defensive|Upton Stout||4565200|2;2;0;0;0;0;0
+P|162|H|defensive|Osa Odighizuwa||4035840|2;1;0.5;0;0;2;0
+P|162|H|defensive|Mykel Williams||4685623|2;1;0;0;0;1;0
+P|162|H|defensive|Marques Sigle||4693337|2;1;0;0;1;0;0
+P|162|H|defensive|Romello Height||4432244|2;0;0;0;0;0;0
+P|162|H|defensive|Siran Neal||3057524|1;1;0;0;0;0;0
+P|162|H|defensive|Ashtyn Davis||3858271|1;1;0;0;0;0;0
+P|162|H|defensive|Keion White||4243493|1;1;0;1;0;0;0
+P|162|H|defensive|Brayden Willis||4360290|1;1;0;0;0;0;0
+P|162|H|defensive|C.J. West||4686308|1;1;0;1;0;1;0
+P|162|H|defensive|Nick Bosa||4040605|0;0;0;0;0;2;0
+P|162|H|interceptions|Ji'Ayir Brown||4693644|1;18;1
+P|162|H|kickReturns|Deebo Samuel Sr.||3126486|2;57;28.5;33;0
+P|162|H|puntReturns|Jacob Cowing||4575665|1;0;0.0;0;0
+P|162|H|kicking|Eddy Pineiro||4034949|0/0;0.0;0;5/5;5
+P|162|H|punting|Corliss Waitman||3125280|4;201;50.3;0;2;54
 

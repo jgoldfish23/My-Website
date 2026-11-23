@@ -48,6 +48,7 @@ ATL||C.J. Henderson|CB|Active||||2026-11-13|Henderson and the Falcons agreed to 
 ATL||Cameron Thomas|DE|Active||||2026-11-13|Thomas and the Falcons agreed to a three-year extension worth up to $33 million Friday, Adam Schefter of ESPN reports.
 ATL||Andrew Vorhees|G|Active||||2026-11-11|The Ravens traded Vorhees and a conditional 2028 sixth-round pick to the Falcons on Tuesday in exchange for Ryan Neuzil, Jamison Hensley of ESPN.com reports.
 ATL||Billy Bowman Jr.|CB|Active||||2026-11-09|
+BAL||Rashod Bateman|WR|Active||||2026-11-23|Bateman recorded two catches for 67 yards and a touchdown in Sunday's 35-33 loss to the Panthers.
 BAL||Mark Andrews|TE|Active||||2026-11-23|Andrews caught two of three targets for 14 yards in Sunday's 35-33 loss to Carolina.
 BAL||Justice Hill|RB|Active||||2026-11-23|Hill carried the ball six times for 69 yards and a touchdown and caught four of five targets for 27 yards in Sunday's 35-33 loss to the Panthers.
 BAL||Jacoby Brissett|QB|Active||||2026-11-23|Brissett completed 24 of 37 passes for 276 yards and a touchdown with an interception in Sunday's 35-33 loss to the Panthers. He added seven rushing yards on two carries.
@@ -72,7 +73,10 @@ BAL||Mike Green|LB|Active||||2026-11-18|Green racked up six tackles (four solo),
 BAL||Josh Cuevas|TE|Active||||2026-11-18|Cuevas caught all three of his targets for 37 yards during Monday night's 23-20 loss to the Chargers.
 BAL||Riley Patterson|PK|Active||||2026-11-18|Patterson went 2-for-2 on field-goal attempts and made both of his PATs during Monday night's 23-20 loss to the Chargers.
 BAL||Chandler Rivers|CB|Active||||2026-11-17|
-BAL||Aeneas Peebles|DT|Active||||2026-11-17|
+BUF||Tyler Bass|PK|Active||||2026-11-23|Bass went 4-for-5 on field-goal tries and made both of his PATs during Sunday's 26-9 win over the Dolphins.
+BUF||Keon Coleman|WR|Active||||2026-11-23|Coleman caught two of four targets for 17 yards during Sunday's 26-9 win over Miami.
+BUF||Ray Davis|RB|Active||||2026-11-23|Davis rushed one time for three yards and caught a six-yard pass on two targets in Sunday's 26-9 win over the Dolphins.
+BUF||Dawson Knox|TE|Active||||2026-11-23|Knox caught two of three targets for 31 yards in Sunday's 26-9 win over the Dolphins.
 BUF||Khalil Shakir|WR|Active||||2026-11-22|Shakir caught five of nine targets for 101 yards while rushing twice for two yards in Sunday's 26-9 win over the Dolphins.
 BUF||DJ Moore|WR|Active||||2026-11-22|Moore caught eight of 10 targets for 91 yards and a touchdown in Sunday's 26-9 win over the Dolphins.
 BUF||James Cook III|RB|Active||||2026-11-22|Cook rushed 22 times for 89 yards and a touchdown while catching two of three targets for three yards in Sunday's 26-9 win over the Dolphins.
@@ -89,15 +93,12 @@ BUF||Christian Benford|CB|Out|Groin||2026-11-26|2026-11-22|inactive
 BUF||Jude Bowry|OT|Out|Coach's Decision||2026-11-26|2026-11-22|inactive
 BUF||Dalton Kincaid|TE|Out|Thumb||2026-11-26|2026-11-22|Kincaid (thumb/ankle) is inactive for Sunday's game against the Dolphins, Cameron Wolfe of NFL Network reports.
 BUF||Dee Alford|CB|Active||||2026-11-21|Alford (concussion) does not have any injury designation ahead of Sunday's game against the Dolphins.
-BUF||Dawson Knox|TE|Active||||2026-11-20|Knox will likely be the Bills' top tight end against the Dolphins on Sunday, given that Dalton Kincaid (thumb/ankle) is listed as doubtful for that contest, Maddy Glab of the Bills' official site reports.
 BUF||Amani Hooker|S|Active||||2026-11-20|Hooker (knee) does not carry an injury designation into Sunday's game against the Dolphins.
-BUF||Ray Davis|RB|Active||||2026-11-20|Davis (hamstring) doesn't have an injury designation for Sunday's game against the Dolphins.
 BUF||Cole Bishop|S|Active||||2026-11-20|Bishop (knee) was a full participant in practice Thursday, Sal Capaccio of WGR Sports Radio 550 Buffalo reports.
 BUF||TJ Parker|LB|Active||||2026-11-19|Parker accumulated five tackles (three solo), including 2.0 sacks, in the Bills' 31-12 win over the Jets on Sunday.
 BUF||Ty Johnson|RB|Active||||2026-11-18|Johnson caught his only target for four yards in a 31-12 win over the Jets on Sunday.
 BUF||Ar'maj Reed-Adams|G|Injured Reserve|Back||2026-12-19|2026-11-18|The Bills placed Reed-Adams (back) on injured reserve Tuesday.
-BUF||Tyler Bass|PK|Active||||2026-11-17|Bass made his sole field-goal attempt and all four PATs in the Bills' 31-12 win over the Jets on Sunday.
-BUF||Keon Coleman|WR|Active||||2026-11-17|Coleman caught one of three targets for 11 yards during Sunday's 31-12 win over the Jets.
+CAR||Mitchell Evans|TE|Active||||2026-11-23|Evans caught all five of his targets for 44 yards and a touchdown during Sunday's 35-33 win over the Ravens.
 CAR||Darren Waller|TE|Active||||2026-11-23|Waller caught all three of his targets for 42 yards in Sunday's 35-33 win over the Ravens.
 CAR||Bryce Young|QB|Active||||2026-11-23|Young completed 22 of 30 passes for 254 yards and two touchdowns with one interception in Sunday's 35-33 win over Baltimore.
 CAR||Tetairoa McMillan|WR|Active||||2026-11-23|McMillan caught six of nine targets for 71 yards and a touchdown in Sunday's 35-33 win over the Ravens.
@@ -122,7 +123,6 @@ CAR||Xavier Legette|WR|Active||||2026-11-18|Legette didn't produce any output in
 CAR||John Metchie III|WR|Active||||2026-11-18|Metchie caught his only target for four yards Sunday in a 20-17 win against New Orleans.
 CAR||Trevor Etienne|RB|Active||||2026-11-18|Etienne took three carries for one yard and caught both of his two targets for nine yards during Sunday's 20-17 win at New Orleans. He also returned three punts for 43 yards.
 CAR||Ryan Fitzgerald|PK|Active||||2026-11-17|Fitzgerald made two of his three field-goal attempts and both PATs in the Panthers' 20-17 win over the Saints on Sunday.
-CAR||Jaelan Phillips|LB|Active||||2026-11-15|Phillips (hamstring) is active against the Saints on Sunday, Darin Gantt of the Panthers' official site reports.
 CHI||Colston Loveland|TE|Active||||2026-11-22|Loveland caught all three of his targets for 29 yards and a touchdown in Sunday's 21-13 win over the Saints.
 CHI||Rome Odunze|WR|Active||||2026-11-22|Odunze caught all four of his targets for 45 yards in Sunday's 21-13 win over the Saints.
 CHI||Luther Burden III|WR|Active||||2026-11-22|Burden caught two of three targets for 10 yards and added three yards on his only carry in Sunday's 21-13 win over New Orleans.
@@ -198,6 +198,9 @@ CLE||Quincy Williams|LB|Active||||2026-11-14|Williams (hamstring) does not have 
 CLE||Denzel Ward|CB|Active||||2026-11-13|Ward (quadriceps) does not have an injury designation for Sunday's game against the Texans.
 CLE||Elgton Jenkins|C|Active||||2026-11-13|
 CLE||Tytus Howard|OT|Active||||2026-11-13|
+DAL||Brandon Aubrey|PK|Active||||2026-11-23|Aubrey made his lone field-goal attempt and all six PATs in Sunday's 51-30 win over the Titans.
+DAL||Ryan Flournoy|WR|Active||||2026-11-23|Flournoy caught just one pass for 11 yards on one target in Sunday's 51-30 win over the Titans.
+DAL||KaVontae Turpin|WR|Active||||2026-11-23|Turpin failed to reel in his only target while rushing twice for 41 yards and a touchdown during Sunday's 51-30 win over the Titans. He added 121 yards as a kick returner and logged a 13-yard punt return.
 DAL||Javonte Williams|RB|Active||||2026-11-22|Williams rushed 18 times for 67 yards and a touchdown and brought in all three targets for 24 yards and another score in the Cowboys' 51-30 win over the Titans on Sunday.
 DAL||George Pickens|WR|Active||||2026-11-22|Pickens secured seven of 10 targets for 102 yards and a touchdown in the Cowboys' 51-30 win over the Titans on Sunday.
 DAL||CeeDee Lamb|WR|Active||||2026-11-22|Lamb brought 11 of 12 targets for 132 yards and a touchdown in the Cowboys' 51-30 win over the Titans on Sunday.
@@ -215,15 +218,18 @@ DAL||Jalen Thompson|S|Injured Reserve|Hamstring||2026-11-26|2026-11-22|Thompson 
 DAL||DaRon Bland|CB|Injured Reserve|Ankle|Sprain|2026-12-27|2026-11-22|The Cowboys placed Bland (ankle) on injured reserve Saturday, Tommy Yarrish of the team's official site reports.
 DAL||Donovan Ezeiruaku|LB|Active||||2026-11-20|Ezeiruaku (ankle) does not have an injury designation for Sunday's game against the Titans, Tommy Yarrish of the Cowboys' official site reports.
 DAL||Shavon Revel Jr.|CB|Active||||2026-11-20|
-DAL||KaVontae Turpin|WR|Active||||2026-11-20|Turpin is expected to resume return duties on both kickoffs and punts Sunday against the Titans, Calvin Watkins of The Dallas Morning News reports.
 DAL||Juanyeh Thomas|S|Active||||2026-11-19|
 DAL||Brevyn Spann-Ford|TE|Active||||2026-11-18|Spann-Ford caught one of three targets for 26 yards during the Cowboys' 46-40 loss to the 49ers on Sunday.
-DAL||Brandon Aubrey|PK|Active||||2026-11-17|Aubrey made both of his field-goal attempts and went 2-for-3 on extra-point tries during the Cowboys' 46-40 loss to the 49ers on Sunday.
 DAL||Israel Abanikanda|RB|Active||||2026-11-17|Abanikanda reverted to the Cowboys' practice squad Monday, per the NFL's transaction log.
 DAL||Derion Kendrick|CB|Active||||2026-11-16|
-DAL||Ryan Flournoy|WR|Active||||2026-11-16|Flournoy tallied six catches for 71 yards and one touchdown on seven targets during Sunday's loss to San Francisco. He also recovered a fumble.
 DAL||Otito Ogbonnia|DT|Active||||2026-11-15|Ogbonnia (finger) has re-entered Sunday's matchup against San Francisco, Joe Hoyt of The Dallas Morning News reports.
-DEN||Pat Bryant|WR|Active||||2026-11-22|Bryant returned to Sunday's game against the Raiders after making a brief visit to the sideline tent, Zac Stevens of TheDNVR.com reports.
+DEN||Pat Bryant|WR|Active||||2026-11-23|Bryant caught three passes for 32 yards on four targets in Sunday's 38-24 win over the Raiders.
+DEN||J.K. Dobbins|RB|Active||||2026-11-23|Dobbins rushed once for no gain during Sunday's 38-24 win over Las Vegas.
+DEN||Courtland Sutton|WR|Active||||2026-11-23|Sutton didn't corral either of his two targets during Sunday's 38-24 victory versus the Raiders.
+DEN||Evan Engram|TE|Active||||2026-11-23|Engram caught six of eight targets for 74 yards in Sunday's 38-24 win over the Raiders.
+DEN||Bo Nix|QB|Active||||2026-11-23|Nix completed 19 of 35 passes for 225 yards, one touchdown and one interception and notched six carries for five yards during Sunday's 38-24 victory against the Raiders.
+DEN||Jaylen Waddle|WR|Active||||2026-11-23|Waddle secured three of six targets for 61 yards during Sunday's 38-24 win versus the Raiders.
+DEN||Jonah Coleman|RB|Active||||2026-11-23|Coleman reeled off 111 yards and three touchdowns on 24 carries and hauled in four of five targets for 18 yards during Sunday's 38-24 win against the Raiders.
 DEN||Lil'Jordan Humphrey|WR|Out|Coach's Decision||2026-11-27|2026-11-22|Humphrey (coach's decision) is inactive for Sunday's game against Las Vegas.
 DEN||Brandon Jones|S|Out|Hamstring||2026-11-27|2026-11-22|Jones (hamstring) is inactive for Sunday's game against the Raiders.
 DEN||Sam Ehlinger|QB|Out|Coach's Decision||2026-11-27|2026-11-22|Ehlinger (coach's decision) is inactive but will serve as the Broncos' emergency third quarterback against the Raiders on Sunday.
@@ -236,18 +242,12 @@ DEN||Taylor Rapp|S|Active||||2026-11-22|The Broncos signed Rapp from the practic
 DEN||Talanoa Hufanga|S|Active||||2026-11-21|Hufanga (ankle) does not have any injury designation ahead of Sunday's game against the Raiders, Aric DiLalla of the Broncos' official site reports.
 DEN||Caleb Lohner|TE|Injured Reserve|Foot|Surgery|2026-11-27|2026-11-21|Lohner (foot) has been ruled out ahead of Sunday's game against the Raiders, Aric DiLalla of the Broncos' official site reports.
 DEN||Riley Moss|CB|Active||||2026-11-21|Moss (concussion) does not have any injury designation ahead of Sunday's game against the Raiders, Aric DiLalla of the Broncos' official site reports.
-DEN||Jaylen Waddle|WR|Active||||2026-11-20|Waddle (concussion) doesn't carry an injury designation for Sunday's game against the Raiders after practicing fully this week.
 DEN||Kris Abrams-Draine|CB|Active||||2026-11-20|Abrams-Draine (ankle) practiced in full Thursday.
 DEN||Adam Prentice|FB|Active||||2026-11-19|Prentice (concussion) was a full participant in Wednesday's practice.
 DEN||Alex Singleton|LB|Active||||2026-11-12|Singleton recorded six tackles (two solo) during the Broncos' 26-21 win over the Panthers in Week 9.
 DEN||Adam Trautman|TE|Active||||2026-11-11|Trautman caught two of three passes for 15 yards during the Broncos' 26-21 win over the Panthers on Sunday.
 DEN||Marvin Mims Jr.|WR|Active||||2026-11-11|Mims caught one of two targets for zero yards, added a five-yard carry and returned three punts for 22 yards during the Broncos' 26-21 win over the Panthers on Sunday.
 DEN||Troy Franklin|WR|Active||||2026-11-11|Franklin brought in three of four targets for 31 yards during the Broncos' 26-21 win over the Panthers on Sunday.
-DEN||Evan Engram|TE|Active||||2026-11-10|Engram caught four of five targets for 33 yards in Sunday's 26-21 win over the Panthers.
-DEN||Wil Lutz|PK|Active||||2026-11-10|Lutz went 2-for-2 on both his field-goal attempts and extra-point tries during Denver's win over Carolina on Sunday.
-DEN||J.K. Dobbins|RB|Active||||2026-11-09|Dobbins rushed four times for 18 yards and caught his only target for four yards during Sunday's 26-21 win over Carolina.
-DEN||Courtland Sutton|WR|Active||||2026-11-08|Sutton caught five of nine targets for 45 yards and a touchdown in Sunday's 26-21 win over the Panthers.
-DEN||Jonah Coleman|RB|Active||||2026-11-08|Coleman carried the ball 17 times for 57 yards and a touchdown and caught all four of his targets for 31 yards in Sunday's 26-21 win over the Panthers.
 DET||Sam LaPorta|TE|Active||||2026-11-23|LaPorta brought in three of six targets for 62 yards in the Lions' 31-21 win over the Buccaneers on Sunday.
 DET||Jameson Williams|WR|Active||||2026-11-22|Williams brought in all four targets for 93 yards and a touchdown in the Lions' 31-21 win over the Buccaneers on Sunday.
 DET||Jared Goff|QB|Active||||2026-11-22|Goff completed 20 of 28 passes for 279 yards with two touchdowns and no interceptions while adding five rushes for 12 yards in the Lions' 31-21 win over the Buccaneers on Sunday.
@@ -348,7 +348,15 @@ IND||Jalen Travis|OT|Out|Knee||2026-11-29|2026-11-19|inactive
 IND||Charvarius Ward|CB|Out|Knee||2026-11-29|2026-11-19|inactive
 IND||Will Mallory|TE|Out|Hamstring||2026-11-29|2026-11-19|inactive
 IND||Charlie Heck|OT|Active||||2026-11-19|
-JAX||Walker Little|OT|Questionable|Knee||2026-11-22|2026-11-23|Little is questionable to return to Sunday's game against the Giants due to a knee injury.
+JAX||Cam Little|PK|Active||||2026-11-23|Little went 4-for-4 on field-goal attempts during Sunday's 23-18 loss to the Giants.
+JAX||Brenton Strange|TE|Active||||2026-11-23|Strange caught all three of his targets for 16 yards during Sunday's 23-18 loss to the Giants.
+JAX||Chris Rodriguez Jr.|RB|Active||||2026-11-23|Rodriguez rushed four times for 28 yards in Sunday's 23-18 loss to the Giants. He added one catch for 13 yards on one target.
+JAX||Jakobi Meyers|WR|Active||||2026-11-23|Meyers brought in four of 10 targets for 85 yards in the Jaguars' 23-18 loss to the Giants on Sunday.
+JAX||Brian Thomas Jr.|WR|Active||||2026-11-23|Thomas caught one pass for an 18-yard touchdown on three targets in Sunday's 23-18 loss to the Giants.
+JAX||Trevor Lawrence|QB|Active||||2026-11-23|Lawrence completed 25 of 47 passes for 301 yards with one touchdown and two interceptions and rushed three times for seven yards in the Jaguars' 23-18 loss to the Giants on Sunday. He also fumbled twice but recovered.
+JAX||Bhayshul Tuten|RB|Active||||2026-11-23|Tuten rushed 10 times for 33 yards and brought in all three targets for 20 yards in the Jaguars' 23-18 loss to the Giants on Sunday.
+JAX||Parker Washington|WR|Active||||2026-11-23|Washington secured eight of 17 targets for 103 yards in the Jaguars' 23-18 loss to the Giants on Sunday.
+JAX||Walker Little|OT|Questionable|Knee||2026-11-29|2026-11-23|Little is questionable to return to Sunday's game against the Giants due to a knee injury.
 JAX||Jarrian Jones|CB|Questionable|Chest||2026-11-29|2026-11-22|Jones (chest) has been ruled out for the rest of Sunday's contest against the Giants.
 JAX||Matt Dickerson|DE|Out|Neck||2026-11-29|2026-11-22|Dickerson (neck) is inactive for Sunday's game against the Giants.
 JAX||CJ Williams|WR|Out|Coach's Decision||2026-11-29|2026-11-22|inactive
@@ -362,17 +370,11 @@ JAX||B.J. Green II|DE|Injured Reserve|Forearm||2026-11-29|2026-11-21|Green (fore
 JAX||Travon Walker|DE|Active||||2026-11-21|Walker (ribs) does not have an injury designation for Sunday's game against the Giants.
 JAX||Antonio Johnson|S|Active||||2026-11-20|Johnson (ankle) does not carry an injury designation into Sunday's game against the Giants.
 JAX||LeQuint Allen Jr.|RB|Active||||2026-11-20|Allen (hamstring) doesn't have an injury designation for Sunday's game against the Giants.
-JAX||Chris Rodriguez Jr.|RB|Active||||2026-11-20|Rodriguez (hand) doesn't have an injury designation for Sunday's game against the Giants.
 JAX||Jalen McLeod|LB|Active||||2026-11-20|
 JAX||Jonah Monheim|C|Active||||2026-11-20|
-JAX||Jakobi Meyers|WR|Active||||2026-11-20|Meyers (ankle) doesn't have an injury designation for Sunday's game against the Giants.
-JAX||Bhayshul Tuten|RB|Active||||2026-11-20|Tuten (ankle/foot) was present for the stretching portion of Friday's practice before moving to a side field, Ryan O'Halloran of The Florida Times-Union reports.
 JAX||Foyesade Oluokun|LB|Active||||2026-11-18|Oluokun finished Sunday's 40-23 win over the Titans with 10 tackles (nine solo).
-JAX||Cam Little|PK|Active||||2026-11-17|Little went 4-for-4 on field-goal attempts and made all four of his PATs during Sunday's 40-23 win over the Titans.
-JAX||Travis Hunter|WR|Active||||2026-11-17|Hunter caught both of his targets for 16 yards, recorded a three-yard carry and contributed five tackles (three solo) and an interception during the Jaguars' 40-23 win over the Titans on Sunday.
-JAX||Wesley Williams|DE|Active||||2026-11-16|
-JAX||Cam'Ron Silmon-Craig|S|Active||||2026-11-16|
-JAX||Josh Cameron|WR|Active||||2026-11-16|Cameron caught all three of his targets for 67 yards and a touchdown in Sunday's 40-23, Week 10 win over Tennessee. He also returned five kickoffs for 142 yards.
+KC||Harrison Butker|PK|Active||||2026-11-23|Butker made both of his field-goal attempts while going 4-for-4 on extra-point tries during Sunday's 34-7 win over the Cardinals.
+KC||Xavier Worthy|WR|Active||||2026-11-23|Worthy caught two of four targets for 38 yards and a touchdown during Sunday's 34-7 win over the Cardinals.
 KC||Josh Downs|WR|Active||||2026-11-22|Downs brought in four of five targets for 59 yards in the Chiefs' 34-7 win over the Cardinals on Sunday.
 KC||Rashee Rice|WR|Active||||2026-11-22|Rice secured all six targets for 53 yards in the Chiefs' 34-7 win over the Cardinals on Sunday.
 KC||Travis Kelce|TE|Active||||2026-11-22|Kelce brought in six of seven targets for 74 yards and two touchdowns in the Chiefs' 34-7 win over the Cardinals on Sunday.
@@ -394,16 +396,20 @@ KC||Jaydn Ott|RB|Active||||2026-11-19|Ott (hamstring) was a full participant in 
 KC||Drue Tranquill|LB|Active||||2026-11-18|Tranquill recorded nine total tackles (six solo) during Sunday's 35-13 victory over the Falcons.
 KC||Nohl Williams|CB|Active||||2026-11-18|Williams recorded five total tackles (two solo) and two passes defensed, including an interception, during Sunday's 35-13 win over the Falcons.
 KC||Jake Briningstool|TE|Active||||2026-11-18|Briningstool caught one of two targets for 20 yards in Sunday's 35-13 win against the Jets on Sunday.
-KC||Harrison Butker|PK|Active||||2026-11-17|Butker made all five PATs in the Chiefs' 35-13 win over the Falcons on Sunday.
 KC||Andrew Armstrong|WR|Active||||2026-11-16|Armstrong caught his only target for a 43-yard touchdown in Sunday's 35-13 win over the Falcons.
 KC||Cyrus Allen|WR|Active||||2026-11-16|Allen caught two of four targets for 44 yards and a touchdown in Sunday's 35-13 win over the Falcons.
-KC||Xavier Worthy|WR|Active||||2026-11-16|Worthy failed to catch any of his three targets in Sunday's 35-13 win over the Falcons.
+LV||Jalen Nailor|WR|Active||||2026-11-23|Nailor caught one of five targets for 16 yards during Sunday's 38-24 loss to the Broncos.
+LV||Tre Tucker|WR|Active||||2026-11-23|Tucker caught two of 10 targets for 50 yards during Sunday's 38-24 loss to the Broncos.
+LV||Mike Washington Jr.|RB|Active||||2026-11-23|Washington turned nine carries into 42 yards during Sunday's 38-24 defeat in Denver.
+LV||Michael Mayer|TE|Active||||2026-11-23|Mayer posted one catch (on four targets) for four yards during Sunday's 38-24 defeat at Denver.
+LV||Fernando Mendoza|QB|Active||||2026-11-23|Mendoza was 18-for-37 passing for 267 yards, three touchdowns and one interception and had four carries for 22 yards during Sunday's 38-24 loss in Denver.
+LV||Ashton Jeanty|RB|Active||||2026-11-23|Jeanty tallied 11 carries for 79 yards and gathered in five of eight targets for 90 yards and one touchdown during Sunday's 38-24 loss at Denver.
+LV||Jack Bech|WR|Active||||2026-11-23|Bech caught eight of nine targets for 88 yards and a touchdown during Sunday's 38-24 loss to the Broncos.
 LV||Brock Bowers|TE|Out|Ankle||2026-11-29|2026-11-23|Raiders coach Klink Kubiak said after Sunday's 38-24 loss to the Broncos that he's optimistic Bowers (ankle/quadriceps) will be available to face the Browns on Nov. 29, Ryan McFadden of ESPN.com reports.
-LV||JJ Pegues|DT|Questionable|Forearm||2026-11-22|2026-11-23|Pegues is questionable to return to Sunday's game against the Broncos due to a forearm injury.
-LV||Michael Mayer|TE|Active||||2026-11-23|Mayer returned to Sunday's game in Denver after making a brief exit due to a back injury, Sam Warren of The Athletic reports.
+LV||JJ Pegues|DT|Questionable|Forearm||2026-11-29|2026-11-23|Pegues is questionable to return to Sunday's game against the Broncos due to a forearm injury.
 LV||Tim Keenan III|DT|Questionable|Knee||2026-11-29|2026-11-22|Keenan (knee) has been ruled out for the rest of Sunday's contest against Denver.
-LV||Adam Butler|DT|Questionable|Concussion||2026-11-29|2026-11-22|Butler (concussion) has been ruled out for the remainder of Sunday's contest against the Broncos.
-LV||Dareke Young|WR|Questionable|Undisclosed||2026-11-22|2026-11-22|Young (stinger) is questionable to return to Sunday's contest against Denver.
+LV||Adam Butler|DT|Questionable|Concussion|Concussion|2026-11-29|2026-11-22|Butler (concussion) has been ruled out for the remainder of Sunday's contest against the Broncos.
+LV||Dareke Young|WR|Questionable|Neck|Stinger|2026-11-29|2026-11-22|Young (stinger) is questionable to return to Sunday's contest against Denver.
 LV||Dont'e Thornton Jr.|WR|Out|Coach's Decision||2026-11-29|2026-11-22|Thornton (coach's decision) is inactive for Sunday's Week 11 tilt against Denver.
 LV||Folorunso Fatukasi|DT|Active||||2026-11-22|Fatukasi (toe) is active against the Broncos on Sunday.
 LV||Matt Gay|PK|Active||||2026-11-22|Gay (hip) is active for Sunday's game at Denver.
@@ -417,12 +423,8 @@ LV||Ian Thomas|TE|Active||||2026-11-20|
 LV||Trey Zuhn III|C|Active||||2026-11-20|
 LV||Thomas Booker IV|DT|Active||||2026-11-19|Booker (ankle) was a full participant in Wednesday's practice, Sam Warren of The Athletic reports.
 LV||Kwity Paye|DE|Active||||2026-11-19|Paye (neck) was not listed on the Raiders' injury report Wednesday, Sam Warren of The Athletic reports.
-LV||Jeremy Chinn|S|Active||||2026-11-18|Chinn tallied seven tackles (three solo) in a loss to Seattle on Sunday.
-LV||Quay Walker|LB|Active||||2026-11-18|Walker posted eight tackles (four solo) and recovered a fumble against Seattle in Sunday's Week 10 loss.
-LV||Nakobe Dean|LB|Active||||2026-11-18|Dean registered eight tackles (five solo) and recovered a fumble Sunday in a Week 10 loss to the Seahawks.
-LV||Maxx Crosby|DE|Active||||2026-11-18|Crosby finished Sunday's loss to Seattle with eight tackles (seven solo), including 1.0 sacks.
-LV||Jack Bech|WR|Active||||2026-11-18|Bech caught two of seven targets for 10 yards during the Raiders' 21-13 loss to the Seahawks on Sunday.
-LV||Jalen Nailor|WR|Active||||2026-11-16|Nailor recorded one reception for minus-1 yard on four targets in Sunday's 21-13 loss to the Seahawks.
+LAC||Quentin Johnston|WR|Active||||2026-11-23|Johnston caught one of two targets for nine yards in Sunday's 27-24 loss to the Jets. He added one yard on one rushing attempt.
+LAC||Kimani Vidal|RB|Active||||2026-11-23|Vidal carried the ball seven times for 36 yards and caught both his targets for 18 yards in Sunday's 27-24 loss to the Jets.
 LAC||Tre' Harris|WR|Active||||2026-11-23|Harris caught both his targets for 28 yards in Sunday's 27-24 loss to the Jets.
 LAC||Ladd McConkey|WR|Active||||2026-11-23|McConkey caught five of eight targets for 37 yards and two touchdowns in Sunday's 27-24 loss to the Jets.
 LAC||Omarion Hampton|RB|Active||||2026-11-23|Hampton carried the ball 14 times for 89 yards and caught his only target for four yards in Sunday's 27-24 loss to the Jets.
@@ -446,8 +448,6 @@ LAC||Donte Jackson|CB|Active||||2026-11-20|
 LAC||Dalvin Tomlinson|DT|Active||||2026-11-19|Tomlinson recorded five tackles (three solo) including 2.0 sacks during Monday's 23-20 win at Baltimore.
 LAC||Del'Shawn Phillips|LB|Active||||2026-11-19|Phillips recorded nine tackles (four solo) and an interception during Monday's 23-20 win at Baltimore.
 LAC||Cameron Dicker|PK|Active||||2026-11-18|Dicker made all three of his field-goal tries and converted both of his extra-point attempts during Monday's 23-20 win at Baltimore.
-LAC||Oronde Gadsden|TE|Active||||2026-11-18|Gadsden hauled in his lone target for seven yards in Monday's 23-20 win over Baltimore.
-LAC||Kimani Vidal|RB|Active||||2026-11-18|Vidal turned two carries into zero yards, brought in both of his targets for 14 yards and returned one kickoff for 32 yards during the Chargers' 23-20 win over the Ravens on Monday.
 LAR||Joe Cardona|LS|Active||||2026-11-23|Cardona (ankle) practiced fully Sunday, Adam Caplan of SiriusXM NFL Radio reports.
 LAR||Kam Curl|S|Questionable|Toe||2026-11-25|2026-11-23|Curl (toe) did not practice Sunday, Adam Caplan of SiriusXM NFL Radio reports.
 LAR||Myles Garrett|DE|Questionable|Knee||2026-11-25|2026-11-23|Garrett (knee) was limited in practice Sunday, Adam Caplan of SiriusXM NFL Radio reports.
@@ -473,6 +473,10 @@ LAR||Dylan McMahon|C|Injured Reserve|Knee||2026-12-25|2026-11-17|The Rams placed
 LAR||Maximus Pulley|S|Active||||2026-11-16|
 LAR||Darryl Peterson III|LB|Active||||2026-11-16|
 LAR||Desjuan Johnson|DE|Active||||2026-11-16|
+MIA||Daniel Carlson|PK|Active||||2026-11-23|Carlson made all three of his field-goal attempts in Sunday's 26-9 loss to the Bills.
+MIA||Malik Washington|WR|Active||||2026-11-23|Washington caught three of six targets for 30 yards in Sunday's 26-9 loss to the Bills. He rushed two times for 11 yards.
+MIA||Greg Dulcich|TE|Active||||2026-11-23|Dulcich caught two of seven targets for 12 yards during Sunday's 26-9 loss to the Bills.
+MIA||Caleb Douglas|WR|Active||||2026-11-23|Douglas caught two of 10 targets for 30 yards in Sunday's 26-9 loss to the Bills.
 MIA||Kyle McCord|QB|Active||||2026-11-22|McCord completed 12 of 33 passes for 102 yards, no touchdowns and one interception in Sunday's 26-9 loss to the Bills. He also rushed twice for nine yards.
 MIA||Ollie Gordon II|RB|Active||||2026-11-22|Gordon rushed 11 times for 69 yards while catching two of three targets for minus-2 yards in Sunday's 26-9 loss to the Bills.
 MIA||JuJu Brents|CB|Questionable|Shoulder||2026-11-29|2026-11-22|Brents (shoulder) is questionable to return to Sunday's tilt against Buffalo.
@@ -488,16 +492,20 @@ MIA||Justin Joly|TE|Out|Coach's Decision||2026-11-29|2026-11-22|inactive
 MIA||Bradley Pinion|P|Out|Groin||2026-11-29|2026-11-22|inactive
 MIA||Christian Haynes|G|Out|Coach's Decision||2026-11-29|2026-11-22|inactive
 MIA||Marcellas Dial Jr.|CB|Active||||2026-11-22|
-MIA||Daniel Carlson|PK|Active||||2026-11-21|The Dolphins elevated Carlson from the practice squad to the active roster Saturday.
 MIA||Andrew Meyer|C|Active||||2026-11-21|Meyer (neck) does not carry an injury designation into Sunday's game against the Bills, David Furones of the South Florida Sun Sentinel reports.
 MIA||Tucker Addington|LS|Active||||2026-11-20|
-MIA||Caleb Douglas|WR|Active||||2026-11-20|Douglas (shoulder) will play Sunday against the Bills, David Furones of the South Florida Sun Sentinel reports.
 MIA||Jordan Phillips|DT|Injured Reserve|Biceps|Surgery|2027-02-15|2026-11-18|Phillips underwent surgery on his injured bicep Wednesday, David Furones of the South Florida Sun Sentinel reports.
 MIA||Jordyn Brooks|LB|Active||||2026-11-18|Brooks produced nine total tackles (six solo), a pass defensed and a forced fumble during Sunday's 24-22 loss to the Colts.
 MIA||Jacob Rodriguez|LB|Active||||2026-11-18|Rodriguez recorded one solo tackle during Sunday's 24-22 loss to the Colts.
 MIA||Michael Taaffe|S|Active||||2026-11-18|Taaffe recorded six total tackles (four solo) and an interception during Sunday's 24-22 loss to the Colts.
-MIA||Chris Johnson|CB|Active||||2026-11-18|Johnson recorded four total tackles (three solo) and a pick-six in Sunday's 24-22 loss to the Colts.
-MIA||Kevin Coleman Jr.|WR|Active||||2026-11-18|Coleman logged one catch for six yards on six targets in Sunday's Week 10 loss to Indianapolis.
+MIN||Tai Felton|WR|Active||||2026-11-23|Felton caught six of 12 targets for 42 yards during Sunday night's 35-10 loss to the 49ers.
+MIN||Jordan Mason|RB|Active||||2026-11-23|Mason rushed 11 times for 38 yards while catching his lone target for minus-1 yard in Sunday's 35-10 loss to the 49ers.
+MIN||Aaron Jones Sr.|RB|Active||||2026-11-23|Jones rushed eight times for 30 yards and a touchdown while catching his lone target for 13 yards in Sunday's 35-10 loss to the 49ers.
+MIN||T.J. Hockenson|TE|Active||||2026-11-23|Hockenson (wrist) caught six of seven targets for 55 yards in Sunday's 35-10 loss to the 49ers.
+MIN||Jauan Jennings|WR|Active||||2026-11-23|Jennings caught three of six targets for 20 yards during Sunday night's 35-10 loss to the 49ers.
+MIN||Kirk Cousins|QB|Active||||2026-11-23|Cousins completed 26 of 38 passes for 235 yards, no touchdowns and one interception in Sunday's 35-10 loss to the 49ers. He also rushed once for no gain.
+MIN||Justin Jefferson|WR|Active||||2026-11-23|Jefferson caught seven of nine targets for 86 yards and lost a fumble in Sunday's 35-10 loss to the 49ers.
+MIN||Christian Darrisaw|OT|Active||||2026-11-23|Darrisaw (shoulder) has returned to Sunday night's contest versus San Francisco, Alec Lewis of The Athletic reports.
 MIN||Jay Ward|S|Out|Knee||2026-11-29|2026-11-23|Ward (knee) is inactive for Sunday night's game against the 49ers.
 MIN||Isaiah Rodgers|CB|Out|Quadriceps||2026-11-29|2026-11-23|Rodgers (quadriceps) is inactive for Sunday night's matchup against the 49ers.
 MIN||Max Brosmer|QB|Out|Coach's Decision||2026-11-29|2026-11-23|Brosmer (coach's decision) is inactive but operating as the Vikings' emergency third QB on Sunday night versus the 49ers.
@@ -507,22 +515,14 @@ MIN||Gavin Bartholomew|TE|Active||||2026-11-21|Bartholomew should revert to a ba
 MIN||Jeshaun Jones|WR|Active||||2026-11-20|Jones (shoulder) does not have an injury designation for Sunday's game against the 49ers in Mexico City.
 MIN||Andrew Van Ginkel|LB|Active||||2026-11-20|Van Ginkel (quadriceps) does not carry an injury designation into Sunday's game against the 49ers in Mexico City.
 MIN||Blake Cashman|LB|Active||||2026-11-20|Cashman (concussion) does not carry an injury designation into Sunday's game against the 49ers in Mexico City.
-MIN||T.J. Hockenson|TE|Active||||2026-11-20|Hockenson (wrist) doesn't have an injury designation for Sunday night's game against the 49ers.
 MIN||Kyle Van Noy|LB|Active||||2026-11-19|
 MIN||Eric Wilson|LB|Active||||2026-11-19|Wilson recorded seven tackles (six solo), including 1.0 sacks, during the Vikings' 30-10 win over the Packers in Week 10.
 MIN||Bo Richter|LB|Injured Reserve|Foot||2026-12-20|2026-11-19|The Vikings placed Richter (foot) on injured reserve Wednesday.
-MIN||Jauan Jennings|WR|Active||||2026-11-18|Jennings (calf) practiced in full Wednesday.
 MIN||Tyrion Ingram-Dawkins|DE|Active||||2026-11-18|
 MIN||Will Reichard|PK|Active||||2026-11-17|Reichard made all three of his field-goal attempts and all three PATs in the Vikings' 30-10 win over the Packers on Sunday.
 MIN||Myles Price|WR|Active||||2026-11-17|Price is set for an increase in offensive workload with Jordan Addison (thumb) sidelined, Kevin Seifert of ESPN.com reports.
-MIN||Tai Felton|WR|Active||||2026-11-17|Felton is on track to operate in a more prominent role in Week 11 versus the 49ers, Kevin Seifert of ESPN.com reports.
-MIN||Aaron Jones Sr.|RB|Active||||2026-11-16|Jones carried the ball 11 times for 47 yards and a touchdown and caught his only target for eight yards in Sunday's 30-10 win over the Packers.
-MIN||Jordan Mason|RB|Active||||2026-11-16|Mason carried the ball 16 times for 59 yards and failed to catch his only target in Sunday's 30-10 win over the Packers.
-MIN||Kirk Cousins|QB|Active||||2026-11-16|Cousins completed 21 of 31 passes for 207 yards and two touchdowns with one interception in Sunday's 30-10 win over the Packers. He added 11 rushing yards on three carries.
-MIN||Justin Jefferson|WR|Active||||2026-11-16|Jefferson caught nine of 13 targets for 74 yards in Sunday's 30-10 win over the Packers.
 MIN||Joshua Metellus|S|Active||||2026-11-15|Metellus (shoulder) is active for Sunday's game against the Packers.
 MIN||Carson Wentz|QB|Active||||2026-11-13|Wentz (ankle) doesn't have an injury designation for Sunday's game at Green Bay, but Kirk Cousins will be Minnesota's starting quarterback.
-MIN||DeeJay Dallas|RB|Active||||2026-11-11|Dallas caught his only target for a two-yard gain in Monday's Week 9 loss to the Bills.
 NE||Drake Maye|QB|Out|Lower Leg|Fracture|2026-12-27|2026-11-22|Maye, who sustained a fractured right fibula in last Sunday's loss to the Lions, is on track to miss at least six weeks, Ian Rapoport of NFL Network reports.
 NE||Tommy DeVito|QB|Active||||2026-11-21|Head coach Mike Vrabel said Friday that DeVito will start in Week 12 against the Chargers on Nov. 29, Mike Reiss and Adam Schefter of ESPN.com report.
 NE||A.J. Brown|WR|Doubtful|Hamstring||2026-11-29|2026-11-20|Brown (hamstring) is expected to miss multiple weeks, Adam Schefter of ESPN reports.
@@ -548,6 +548,8 @@ NE||Dre'Mont Jones|DE|Questionable|Undisclosed|Cramps|2026-11-29|2026-11-15|Jone
 NE||Robert Spillane|LB|Questionable|Illness||2026-11-29|2026-11-15|Spillane (illness) is questionable to return to Sunday's game against the Lions in Munich.
 NE||Morgan Moses|OT|Active||||2026-11-15|Moses (knee) has returned to Sunday's game against the Lions in Munich, Mike Reiss of ESPN.com reports.
 NE||Greg Van Roten|G|Active||||2026-11-15|Van Roten (hamstring) is active for Sunday's game against the Lions in Munich.
+NO||Alvin Kamara|RB|Active||||2026-11-23|Kamara rushed one time for one yard and caught a one-yard touchdown on two targets in Sunday's 21-13 loss to the Bears.
+NO||Devaughn Vele|WR|Active||||2026-11-23|Vele caught seven passes for 76 yards on seven targets in Sunday's 21-13 loss to the Bears.
 NO||Jordyn Tyson|WR|Active||||2026-11-22|Tyson caught one of two targets for six yards and added four rushing yards on his only carry in Sunday's 21-13 loss to the Bears.
 NO||Travis Etienne Jr.|RB|Active||||2026-11-22|Etienne carried the ball 14 times for 76 yards and failed to catch his only target in Sunday's 21-13 loss to Chicago.
 NO||Tyler Shough|QB|Active||||2026-11-22|Shough completed 25 of 42 passes for 222 yards and one touchdown with one interception in Sunday's 21-13 loss to the Bears. He added 34 rushing yards on three carries.
@@ -566,13 +568,16 @@ NO||CJ Donaldson|RB|Active||||2026-11-19|Donaldson (shoulder) was a full partici
 NO||Kaden Elliss|LB|Active||||2026-11-18|Elliss recorded 15 tackles (six solo), including 1.0 sacks, and one pass defense during the Saints' 20-17 loss to the Panthers on Sunday.
 NO||Bryce Lance|WR|Active||||2026-11-18|Lance returned three kickoffs for 55 yards during the Saints' 20-17 loss to the Panthers on Sunday.
 NO||Noah Fant|TE|Active||||2026-11-17|Fant failed to haul in his lone target during the Saints' 20-17 loss to the Panthers on Sunday.
-NO||Devaughn Vele|WR|Active||||2026-11-17|Vele caught both of his targets for 14 yards during the Saints' 20-17 loss to the Panthers on Sunday.
 NO||Jaylan Ford|LB|Active||||2026-11-16|
 NO||Mike Reid|CB|Active||||2026-11-16|
-NO||Alvin Kamara|RB|Active||||2026-11-16|Kamra rushed two times for four yards and a touchdown in Sunday's 20-17 loss to the Panthers. He added three catches for 10 yards and an additional touchdown on four targets.
 NO||Christen Miller|DT|Injured Reserve|Knee||2026-12-13|2026-11-15|The Saints placed Miller (knee) on injured reserve Saturday.
 NO||David Edwards|G|Active||||2026-11-14|Edwards (knee) does not have an injury designation against the Panthers on Sunday, Ross Jackson of WWL-TV reports.
 NO||Kelvin Banks Jr.|OT|Active||||2026-11-14|Banks (ankle) does not have an injury designation for Sunday's game against the Panthers, Ross Jackson of WWL-TV reports.
+NYG||Dominic Zvada|PK|Active||||2026-11-23|Zvada made three of four field-goal attempts and both PATs in Sunday's 23-18 win over the Jaguars.
+NYG||J.J. McCarthy|QB|Active||||2026-11-23|McCarthy completed 18 of 38 passes for 173 yards with a touchdown and no interceptions and rushed seven times for 33 yards in the Giants' 23-18 win over the Jaguars on Sunday.
+NYG||Isaiah Likely|TE|Active||||2026-11-23|Likely brought in one of three targets for 35 yards in the Giants' 23-18 win over the Jaguars on Sunday.
+NYG||Cam Skattebo|RB|Active||||2026-11-23|Skattebo rushed 14 times for 34 yards and brought in three of seven targets for 14 yards in the Giants' 23-18 win over the Jaguars on Sunday. He also lost a fumble.
+NYG||Malik Nabers|WR|Active||||2026-11-23|Nabers brought in seven of 12 targets for 55 yards and a touchdown in the Giants' 23-18 win over the Jaguars on Sunday.
 NYG||Greg Newsome II|CB|Questionable|Ankle||2026-11-29|2026-11-22|Newsome (ankle) has been ruled out for the remainder of Sunday evening's matchup with the Jaguars, Patricia Traina of SI.com reports.
 NYG||Jason Pinnock|S|Out|Coach's Decision||2026-11-29|2026-11-22|inactive
 NYG||Josh Sills|G|Out|Coach's Decision||2026-11-29|2026-11-22|inactive
@@ -582,7 +587,6 @@ NYG||Greg Desrosiers Jr.|RB|Out|Coach's Decision||2026-11-29|2026-11-22|inactive
 NYG||Thomas Fidone II|TE|Out|Coach's Decision||2026-11-29|2026-11-22|inactive
 NYG||Darius Alexander|DT|Out|Coach's Decision||2026-11-29|2026-11-22|inactive
 NYG||Phil Mafah|RB|Active||||2026-11-22|The Giants elevated Mafah from the practice squad to the active roster Saturday, Dan Salomone of the team's official site reports.
-NYG||Isaiah Likely|TE|Active||||2026-11-20|Likely (undisclosed) wasn't spotted at Friday's practice, Dan Duggan of The Athletic reports.
 NYG||Malik Harrison|LB|Active||||2026-11-20|Harrison (groin) was a full participant at practice Thursday.
 NYG||Tyrone Tracy Jr.|RB|Injured Reserve|Hamstring|Strain|2026-12-06|2026-11-18|Tracy (hamstring) could be reinstated from injured reserve when first eligible ahead of the Giants' Week 13 game against the 49ers, Dan Duggan of The Athletic reports.
 NYG||Jameis Winston|QB|Active||||2026-11-18|Winston carried twice for one yard in Thursday's 24-21 loss to the Commanders.
@@ -594,10 +598,12 @@ NYG||Micah McFadden|LB|Active||||2026-11-14|McFadden made 10 tackles (five solo)
 NYG||Jevon Holland|S|Active||||2026-11-14|Holland logged three tackles (one solo) and one pass defensed for an interception in the Giants' 24-21 loss to the Commanders on Thursday.
 NYG||Ar'Darius Washington|S|Active||||2026-11-14|Washington accumulated seven tackles (five solo) and two passes defensed, including one interception, in the Giants' 24-21 loss to the Commanders on Thursday.
 NYG||Arvell Reese|LB|Active||||2026-11-14|Reese logged 13 tackles (four solo) in the Giants' 24-21 loss to the Commanders on Thursday.
-NYG||Dominic Zvada|PK|Active||||2026-11-14|Zvada missed his only field-goal try and made all three of his PATs on Thursday in a loss to Washington.
-NYG||Theo Johnson|TE|Active||||2026-11-14|Johnson logged one catch (on three targets) for eight yards Thursday in a loss to the Commanders.
-NYG||Darnell Mooney|WR|Active||||2026-11-14|Mooney caught two of five targets for eight yards Thursday in a loss to Washington.
-NYG||Devin Singletary|RB|Active||||2026-11-13|Singletary played just five snaps on offense and took one carry for three yards in Thursday's 24-21 loss to the Commanders.
+NYJ||Jason Sanders|PK|Active||||2026-11-23|Sanders made both of his field-goal attempts and all three PATs in Sunday's 27-24 win over the Chargers.
+NYJ||Mason Taylor|TE|Active||||2026-11-23|Taylor caught two passes for 25 yards on two targets in Sunday's 27-24 win over the Chargers.
+NYJ||Isaiah Davis|RB|Active||||2026-11-23|Davis didn't play an offensive snap in Sunday's 27-24 win over the Chargers.
+NYJ||Kenyon Sadiq|TE|Active||||2026-11-23|Sadiq caught all three of his targets for 30 yards during Sunday's 27-24 win over the Chargers.
+NYJ||Adonai Mitchell|WR|Active||||2026-11-23|Mitchell caught two passes for 30 yards on three targets in Sunday's 27-24 win over the Chargers.
+NYJ||Sterling Shepard|WR|Active||||2026-11-23|Shepard caught two passes for 24 yards and two touchdowns in Sunday's 27-24 win over the Chargers.
 NYJ||Braelon Allen|RB|Active||||2026-11-23|Allen rushed 16 times for 75 yards while catching his lone target for nine yards in Sunday's 27-24 win over the Chargers.
 NYJ||Geno Smith|QB|Active||||2026-11-23|Smith completed 17 of 21 passes for 176 yards and three touchdowns in Sunday's 27-24 win over the Chargers. He also rushed once for four yards.
 NYJ||Garrett Wilson|WR|Active||||2026-11-23|Wilson caught three of five targets for 39 yards in Sunday's 27-24 win over the Chargers.
@@ -611,18 +617,16 @@ NYJ||Nate Lynn|DE|Out|Coach's Decision||2026-11-29|2026-11-22|inactive
 NYJ||Omar Cooper Jr.|WR|Out|Ankle||2026-11-29|2026-11-22|inactive
 NYJ||Joseph Ossai|DE|Active||||2026-11-22|
 NYJ||Jarvis Brownlee Jr.|CB|Out|Coach's Decision||2026-11-29|2026-11-22|inactive
-NYJ||Sterling Shepard|WR|Active||||2026-11-21|The Jets elevated Shepard from the practice squad to the active roster Saturday, Zack Rosenblatt of The Athletic reports.
 NYJ||David Onyemata|DT|Injured Reserve|Abdomen|Surgery|2026-11-29|2026-11-21|Onyemata (abdomen) has been ruled out for Sunday's game against the Chargers, Brian Costello of the New York Post reports.
-NYJ||Mason Taylor|TE|Active||||2026-11-20|With Omar Cooper (ankle) ruled out, coach Aaron Glenn said Friday that Taylor could see more pass-catching opportunities Sunday against the Chargers.
-NYJ||Kenyon Sadiq|TE|Active||||2026-11-20|With Omar Cooper (ankle) ruled out, coach Aaron Glenn said Friday that Sadiq could see more pass-catching opportunities Sunday against the Chargers.
-NYJ||Adonai Mitchell|WR|Active||||2026-11-20|With Omar Cooper (ankle) ruled out, Mitchell is expected to play an elevated role on offense Sunday against the Chargers.
 NYJ||Dane Belton|S|Active||||2026-11-18|Belton finished Sunday's loss to the Bills with six tackles (one solo) and one defensed pass.
 NYJ||Demario Davis|LB|Active||||2026-11-18|Davis posted six tackles (three solo) Sunday in a loss to Buffalo.
 NYJ||Jamien Sherwood|LB|Active||||2026-11-18|Sherwood secured nine tackles (four solo) in Sunday's Week 10 loss to the Bills.
-NYJ||Jason Sanders|PK|Active||||2026-11-17|Sanders made all four of his field-goal attempts in the Jets' 31-12 loss to the Bills on Sunday.
-NYJ||Isaiah Davis|RB|Active||||2026-11-17|Davis didn't touch the ball on offense in Sunday's 31-12 loss to the Bills.
 NYJ||Tim Patrick|WR|Active||||2026-11-16|
 NYJ||Cade Klubnik|QB|Active||||2026-11-15|Klubnik completed 11 of 20 passes for 137 yards, no touchdowns and one interception in Sunday's 31-12 loss to the Bills. He added three rushing attempts for 26 yards.
+PHI||Jake Elliott|PK|Active||||2026-11-23|Elliott went 4-for-4 on field-goal attempts and made his lone PAT in Sunday's 19-16 win over the Steelers.
+PHI||Makai Lemon|WR|Active||||2026-11-23|Lemon caught one of three targets for three yards in Sunday's 19-16 win over the Steelers.
+PHI||Dallas Goedert|TE|Active||||2026-11-23|Goedert caught his only target for 38 yards in Sunday's 19-16 win over the Steelers.
+PHI||Joe Milton|QB|Active||||2026-11-23|Milton completed 11 of 21 passes for 141 yards while rushing five times for seven yards in Sunday's 19-16 win over the Steelers.
 PHI||Saquon Barkley|RB|Questionable|Arm||2026-11-26|2026-11-22|Barkley (left arm) said after Sunday's 19-16 win over the Steelers that he believes he'll play in Thursday's game at Dallas, Johnny McGonigal of PennLive.com reports.
 PHI||DeVonta Smith|WR|Active||||2026-11-22|Smith (hamstring) caught five of 12 targets for 41 yards in Sunday's 19-16 win over the Steelers.
 PHI||Jonathan Jones|CB|Questionable|Foot||2026-11-26|2026-11-22|Jones (foot) was spotted in a walking boot following Sunday's 19-16 win over the Steelers, Dave Zangaro of NBC Sports Philadelphia reports.
@@ -639,15 +643,15 @@ PHI||Dontayvion Wicks|WR|Injured Reserve|Ankle||2026-12-19|2026-11-21|The Eagles
 PHI||Michael Carter II|CB|Active||||2026-11-21|Carter (abdomen) does not carry an injury designation into Sunday's game against the Steelers.
 PHI||Nolan Smith Jr.|LB|Active||||2026-11-21|Smith (illness) does not carry an injury designation into Sunday's game against Pittsburgh.
 PHI||Britain Covey|WR|Active||||2026-11-21|Covey (knee) does not have an injury designation for Sunday's game against the Steelers.
-PHI||Makai Lemon|WR|Active||||2026-11-20|Lemon will operate as the Eagles' WR2 against the Steelers on Sunday due to the return of DeVonta Smith (hamstring).
 PHI||Jihaad Campbell|LB|Active||||2026-11-19|Campbell (hamstring/quadriceps) was a full participant in Wednesday's practice.
 PHI||Tanner McKee|QB|Active||||2026-11-18|McKee will remain in a backup role for Sunday's game against the Steelers after head coach Nick Sirianni announced Wednesday that Joe Milton will serve as the Eagles' starting quarterback for a second straight game, Jeff
-PHI||Joe Milton|QB|Active||||2026-11-18|Head coach Nick Sirianni confirmed that Milton will remain the Eagles' starting quarterback for Sunday's game against the Steelers, according to NFL reporter Andrew Siciliano.
 PHI||Jaydon Blue|RB|Active||||2026-11-18|The Eagles signed Blue from their practice squad to their active roster Tuesday.
 PHI||Zach Ertz|TE|Active||||2026-11-16|The Eagles signed Ertz from the practice squad to the active roster Monday.
 PHI||Jeremiah Trotter Jr.|LB|Active||||2026-11-12|Trotter recorded 11 tackles (five solo) and one forced fumble during the Eagles' 19-11 loss to the Giants in Week 9.
-PHI||Elijah Moore|WR|Active||||2026-11-11|Moore caught one of two targets for minus-3 yards during the Eagles' 19-11 loss to the Giants on Sunday.
-PHI||Darius Cooper|WR|Active||||2026-11-11|Cooper caught just two of eight targets for 25 yards in Sunday's 19-11 loss to the Giants.
+PIT||Chris Boswell|PK|Active||||2026-11-23|Boswell went 3-for-3 on field-goal attempts and made his lone PAT in Sunday's 19-16 loss to the Eagles.
+PIT||Darnell Washington|TE|Active||||2026-11-23|Washington caught all three targets for 22 yards in Sunday's 19-16 loss to the Eagles.
+PIT||Pat Freiermuth|TE|Active||||2026-11-23|Freiermuth caught all five of his targets for 39 yards during Sunday's 19-16 loss to the Eagles.
+PIT||Max Hurleman|WR|Active||||2026-11-23|Hurleman caught six of seven targets for 61 yards and a touchdown in Sunday's 19-16 loss to the Eagles. He also had two kickoff returns for 32 yards and three punt returns for 36 yards.
 PIT||Aaron Rodgers|QB|Active||||2026-11-22|Rodgers completed 30 of 44 passes for 227 yards and one touchdown while rushing five times for 29 yards in Sunday's 19-16 loss to the Eagles.
 PIT||Rico Dowdle|RB|Active||||2026-11-22|Dowdle rushed five times for 15 yards and caught four of five targets for 19 yards in Sunday's 19-16 loss to the Eagles.
 PIT||Jaylen Warren|RB|Active||||2026-11-22|Warren rushed nine times for 28 yards and caught two of three targets for one yard in Sunday's 19-16 loss to the Eagles.
@@ -662,17 +666,20 @@ PIT||Gabriel Rubio|DE|Out|Coach's Decision||2026-11-27|2026-11-22|inactive
 PIT||Sean Murphy-Bunting|CB|Out|Coach's Decision||2026-11-27|2026-11-22|inactive
 PIT||Eli Heidenreich|RB|Out|Coach's Decision||2026-11-27|2026-11-22|inactive
 PIT||Drew Allar|QB|Out|Coach's Decision||2026-11-27|2026-11-22|inactive
-PIT||Max Hurleman|WR|Active||||2026-11-22|The Steelers elevated Hurleman from the practice squad Saturday.
 PIT||Michael Pittman Jr.|WR|Injured Reserve|Foot|Plantar Fasciitis|2026-11-27|2026-11-21|Pittman (foot) is not expected to be activated from injured reserve for Sunday's game against the Eagles, Brooke Pryor of ESPN reports.
 PIT||Nick Herbig|LB|Out|Hip||2026-11-27|2026-11-21|Herbig (hip) has been downgraded from questionable to out for Sunday's game against the Eagles, Burt Lauten of the Steelers' official site reports.
 PIT||Gennings Dunker|G|Injured Reserve|Knee||2026-11-27|2026-11-19|The Steelers designated Dunker (knee) for return to practice from injured reserve Wednesday, Teresa Varley of the team's official site reports.
 PIT||Mason McCormick|G|Injured Reserve|Ankle|Dislocated|2027-01-03|2026-11-19|The Steelers placed McCormick (ankle) on injured reserve Wednesday, Teresa Varley of the team's official site reports.
 PIT||Jaquan Brisker|S|Active||||2026-11-18|Brisker notched 10 tackles (two solo) Sunday in a Week 10 loss to the Bengals.
 PIT||Payton Wilson|LB|Active||||2026-11-18|Wilson recorded 19 tackles (nine solo) in Sunday's 38-18 loss to the Bengals.
-PIT||Chris Boswell|PK|Active||||2026-11-17|Boswell made his sole field-goal attempt and sole PAT in the Steelers' 38-18 loss to the Bengals on Sunday.
 PIT||Germie Bernard|WR|Active||||2026-11-17|Bernard failed to reel in any of his three targets while notching a 10-yard rush during Sunday night's 38-18 loss to the Bengals.
-PIT||Darnell Washington|TE|Active||||2026-11-17|Washington caught one pass for five yards on two targets in Sunday night's loss to the Bengals.
-PIT||Mason Rudolph|QB|Active||||2026-11-16|Rudolph completed one of three pass attempts for two yards and rushed once for nine yards in Sunday's 38-18 loss to the Bengals.
+SF||Keenan Allen|WR|Active||||2026-11-23|Allen totaled three catches (on four targets) for 38 yards during Sunday's 35-10 victory against the Vikings in Mexico City.
+SF||Kaelon Black|RB|Active||||2026-11-23|Black notched six carries for eight yards and secured his only target for seven yards during Sunday's 35-10 win versus the Vikings in Mexico City.
+SF||Deebo Samuel Sr.|WR|Active||||2026-11-23|Samuel logged two carries for 27 yards, gathered in three of four targets for 20 yards and returned two kickoffs for 57 yards during Sunday's 35-10 win against the Vikings in Mexico City.
+SF||George Kittle|TE|Active||||2026-11-23|Kittle caught all three of his targets for 34 yards and two touchdowns in Sunday's 35-10 win over the Vikings.
+SF||Brock Purdy|QB|Active||||2026-11-23|Purdy completed 21 of 26 pass attempts for 255 yards and three touchdowns in Sunday's 35-10 win over the Vikings.
+SF||Christian McCaffrey|RB|Active||||2026-11-23|McCaffrey rushed 12 times for 49 yards and a touchdown while catching both of his targets for 13 yards in Sunday's 35-10 win over the Vikings.
+SF||Colton McKivitz|OT|Out|Lower Leg||2026-11-29|2026-11-23|McKivitz (lower leg) was carted off the field Sunday night against the Vikings, Eric Branch of the San Francisco Chronicle reports.
 SF||Dre Greenlaw|LB|Out|Neck||2026-11-29|2026-11-23|Greenlaw (neck) is inactive for Sunday night's contest against the Vikings in Mexico City, Brooke Evans of the 49ers' official website reports.
 SF||Jordan James|RB|Active||||2026-11-23|James (calf) is active for Sunday night's matchup with the Vikings, Brooke Evans of the 49ers' official website reports.
 SF||Khalid Kareem|DE|Out|Ankle||2026-11-29|2026-11-23|Kareem (ankle) is inactive for Sunday night's game against the Vikings.
@@ -691,13 +698,6 @@ SF||Isaac Guerendo|RB|Out|Pectoral|Surgery|2026-11-29|2026-11-20|Guerendo (pecto
 SF||Siran Neal|S|Active||||2026-11-19|
 SF||Christian Kirk|WR|Injured Reserve|Knee - Meniscus|Surgery|2026-12-06|2026-11-19|Kirk announced Wednesday via his personal Instagram account that he recently underwent meniscus surgery.
 SF||De'Zhaun Stribling|WR|Injured Reserve|Ankle|Surgery|2026-12-06|2026-11-18|Stribling (ankle) was doing some work on the side at Wednesday's practice, Nick Wagoner of ESPN.com reports.
-SF||Brandon Aiyuk|WR|Out|Personal||2026-11-29|2026-11-18|Aiyuk's agent, Drew Rosenhaus, said Tuesday that the receiver is "100 percent healthy" and fully recovered from his November 2024 right knee surgery and plans to work out for interested teams once he's released by the 49
-SF||Fred Warner|LB|Active||||2026-11-18|Warner tallied 11 tackles (two solo) during San Francisco's win over the Cowboys on Sunday.
-SF||Jacob Cowing|WR|Active||||2026-11-18|Cowing did not draw any targets during Sunday's 46-40 win at Dallas.
-SF||Jordan Watkins|WR|Active||||2026-11-17|Watkins caught two passes for 49 yards on three targets in Sunday's 46-40 win over the Cowboys.
-SF||Eddy Pineiro|PK|Active||||2026-11-17|Pineiro made his only field-goal attempt and went 5-for-5 on PATs during Sunday's 46-40 win over the Cowboys.
-SF||Tatum Bethune|LB|Active||||2026-11-16|
-SF||Keenan Allen|WR|Active||||2026-11-16|Allen brought in five of seven targets for 61 yards in the 49ers' 46-40 win over the Cowboys on Sunday.
 SEA||Devon Witherspoon|CB|Active||||2026-11-19|Witherspoon logged four solo tackles, including 2.0 sacks, in the Seahawks' 21-13 win over the Raiders on Sunday.
 SEA||Ernest Jones IV|LB|Active||||2026-11-19|Jones logged 10 tackles (five solo) in the Seahawks' 21-13 win over the Raiders on Sunday.
 SEA||Leonard Williams|DT|Out|Shoulder|Stinger|2026-11-29|2026-11-17|out
@@ -723,6 +723,10 @@ SEA||Brandon Pili|DT|Active||||2026-11-14|Pili (back) does not have an injury de
 SEA||Uchenna Nwosu|LB|Active||||2026-11-14|Nwosu (ankle) does not have an injury designation against the Raiders on Sunday, John Boyle of the Seahawks' official site reports.
 SEA||Derick Hall|LB|Active||||2026-11-14|Hall (back) does not have an injury designation for Sunday's game against the Raiders, John Boyle of the Seahawks' official site reports.
 SEA||Patrick O'Connell|LB|Active||||2026-11-13|
+TB||Sean Tucker|RB|Active||||2026-11-23|Tucker didn't record any stats during Sunday's 31-21 loss to the Lions.
+TB||Cade Otton|TE|Active||||2026-11-23|Otton caught one pass for eight yards on three targets in Sunday's 31-21 loss to the Lions.
+TB||Chris Godwin Jr.|WR|Active||||2026-11-23|Godwin caught three passes for 18 yards on three targets in Sunday's 31-21 loss to the Lions.
+TB||Ted Hurst III|WR|Active||||2026-11-23|Hurst caught five of seven targets for 56 yards and two touchdowns during Sunday's 31-21 loss to the Lions.
 TB||Kenny Gainwell|RB|Active||||2026-11-23|Gainwell rushed four times for 16 yards and brought in four of five targets for 43 yards in the Buccaneers 31-21 loss to the Lions on Sunday.
 TB||Emeka Egbuka|WR|Active||||2026-11-23|Egbuka brought in two of five targets for 18 yards in the Buccaneers' 31-21 loss to the Lions on Sunday.
 TB||Baker Mayfield|QB|Active||||2026-11-23|Mayfield completed 20 of 33 passes for 187 yards with two touchdowns and no interceptions and rushed six times for 36 yards in the Buccaneers' 31-21 loss to the Lions on Sunday. He also committed a fumble that stayed wit
@@ -743,11 +747,11 @@ TB||Zyon McCollum|CB|Active||||2026-11-12|McCollum recorded five tackles (four s
 TB||Alex Anzalone|LB|Active||||2026-11-12|Anzalone posted two solo tackles and an interception during the Buccaneers' 27-24 loss to the Bears in Week 9.
 TB||Josiah Trotter|LB|Active||||2026-11-12|Trotter recorded eight tackles (five solo) during the Buccaneers' 27-24 loss to the Bears in Week 9.
 TB||Kameron Johnson|WR|Active||||2026-11-11|Johnson played all 17 of his snaps on special teams and recorded one tackle in Sunday's 27-24 loss to the Bears.
-TB||Ted Hurst III|WR|Active||||2026-11-11|Hurst failed to haul in his lone target during the Buccaneers' 27-24 loss to the Bears on Sunday.
 TB||Tez Johnson|WR|Active||||2026-11-11|Johnson caught two passes for 76 yards on five targets in Sunday night's 27-24 loss to the Bears.
-TB||Sean Tucker|RB|Active||||2026-11-10|Tucker didn't log any offensive snaps in a loss to the Bears on Sunday. He returned four kickoffs for 92 yards.
-TB||Chase McLaughlin|PK|Active||||2026-11-10|McLaughlin converted all three of his field-goal attempts and both of his extra-point tries during Tampa Bay's loss to the Bears on Sunday.
-TB||Cade Otton|TE|Active||||2026-11-10|Otton caught four of eight targets for 25 yards in Sunday night's 27-24 loss to the Bears.
+TEN||Joey Slye|PK|Active||||2026-11-23|Slye made all three field-goal attempts and went 3-for-3 on PATs in Sunday's 51-30 loss to the Cowboys.
+TEN||Gunnar Helm|TE|Active||||2026-11-23|Helm caught two of three targets for 14 yards in Sunday's 51-30 loss to the Cowboys.
+TEN||Chimere Dike|WR|Active||||2026-11-23|Dike caught six of seven targets for 69 yards during Sunday's 51-30 loss to the Cowboys.
+TEN||Calvin Ridley|WR|Active||||2026-11-23|Ridley caught five of six targets for 68 yards and a touchdown during Sunday's 51-30 loss to the Cowboys.
 TEN||Cam Ward|QB|Active||||2026-11-22|Ward completed 21 of 30 passes for 248 yards with two touchdowns and no interceptions while rushing twice for three yards and another score in the Titans' 51-30 loss to the Cowboys on Sunday. He also lost a fumble.
 TEN||Carnell Tate|WR|Active||||2026-11-22|Tate brought in two of five targets for 58 yards and a touchdown in the Titans' 51-30 loss to the Cowboys on Sunday.
 TEN||Tony Pollard|RB|Active||||2026-11-22|Pollard rushed 21 times for 110 yards and failed to bring in his only target in the Titans' 51-30 loss to the Cowboys on Sunday.
@@ -769,10 +773,6 @@ TEN||Kevin Winston Jr.|S|Active||||2026-11-20|Winston (shoulder) does not have a
 TEN||Cody Barton|LB|Active||||2026-11-20|Barton (concussion) does not carry an injury designation into Sunday's game against Dallas.
 TEN||John Franklin-Myers|DE|Active||||2026-11-20|Franklin-Myers (back) was a full participant at practice Thursday.
 TEN||Cedric Gray|LB|Active||||2026-11-19|Gray posted nine tackles (eight solo) and two pass defenses (including an interception) during the Titans' 40-23 loss to the Jaguars in Week 10.
-TEN||Fernando Carmona|G|Injured Reserve|Ankle|Sprain|2026-11-29|2026-11-18|The Titans designated Carmona (ankle) for return from injured reserve Wednesday, Jim Wyatt of the team's official site reports.
-TEN||Wan'Dale Robinson|WR|Injured Reserve|Ankle||2027-02-15|2026-11-18|Coach Robert Saleh said Wednesday that Robinson (ankle) -- who was placed on IR on Tuesady -- is out for the rest of the season, Terry McCormick of TitanInsider.com reports.
-TEN||Julius Chestnut|RB|Active||||2026-11-18|Chestnut played all 25 of his snaps on special teams in Sunday's 40-23 win over the Jaguars.
-TEN||Xavier Restrepo|WR|Active||||2026-11-18|Restrepo, whom the Titans signed off their practice squad Tuesday, could be in store for more playing time out of the slot moving forward after Tennessee placed Wan'Dale Robinson (ankle) on injured reserve, Mark Mihalko 
 WSH||Lucas Patrick|G|Questionable|Concussion|Concussion|2026-11-23|2026-11-22|Patrick (concussion) is questionable for Monday's game against the Bengals.
 WSH||Quan Martin|S|Active||||2026-11-22|Martin (shoulder) does not carry an injury designation into Monday's game against the Bengals.
 WSH||Amik Robertson|CB|Questionable|Ankle||2026-11-23|2026-11-22|Robertson (ankle) is listed as questionable for Monday's game against the Bengals.

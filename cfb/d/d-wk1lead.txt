@@ -1291,7 +1291,7 @@
 2026-10-10|Charlotte|North Texas|North Texas|passingYards|Tayven Jackson|QB|24/31, 349 YDS, 5 TD
 2026-10-10|Charlotte|North Texas|North Texas|rushingYards|Jahiem White|RB|12 CAR, 105 YDS, 1 TD
 2026-10-10|Charlotte|North Texas|North Texas|receivingYards|Justin Stevenson|WR|9 REC, 122 YDS, 2 TD
-2026-10-10|Tulsa|Navy|Tulsa|passingYards|Baylor Hayes|QB|21/38, 268 YDS, 1 TD
+2026-10-10|Tulsa|Navy|Tulsa|passingYards|Baylor Hayes|QB|20/35, 268 YDS, 1 TD
 2026-10-10|Tulsa|Navy|Navy|rushingYards|Jackson Gutierrez|QB|41 CAR, 232 YDS, 3 TD
 2026-10-10|Tulsa|Navy|Tulsa|receivingYards|Javon Ross|WR|7 REC, 90 YDS
 2026-10-10|Eastern Michigan|Akron|Eastern Michigan|passingYards|Noah Kim|QB|26/46, 277 YDS, 1 TD, 1 INT

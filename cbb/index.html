@@ -4346,8 +4346,8 @@ function renderTeam(id){ setNav('teams'); id = String(id || ''); const t = T[id]
   html += '<div class="thead hero" style="--team:' + uiColor(t) + '"><div class="bar" style="background:' + uiColor(t) + '"></div>' + (logoOf(t) ? '<img class="thead-wm" src="' + logoOf(t).wm + '" alt="">' : '') + mono(t) + '<div class="ttl"><div class="eyebrow">' + esc(c ? c.name : 'Division I') + '</div><h1>' + esc(t.full) + '</h1><div class="meta"><span>' + R0.w + '-' + R0.l + ' overall</span><span>' + C0.w + '-' + C0.l + ' in conference</span><span>Finished last season rated ' + sgn1(t.pr / .55) + '</span></div></div>'
     + '<div class="ranks"><div class="rb"><div class="v">' + (apRank(id) || '—') + '</div><div class="k">AP</div></div><div class="rb"><div class="v">' + t.prank + '</div><div class="k">Power</div></div><div class="rb"><div class="v">' + Math.round(p.w) + '-' + Math.round(p.l) + '</div><div class="k">Projected</div></div></div></div>';
   html += '<div class="grid g4" style="margin-top:14px">' + tile('Record', R0.w + '-' + R0.l, C0.w + C0.l ? C0.w + '-' + C0.l + ' in the ' + esc(c ? c.short : 'conference') : 'conference play not started') + tile('Power rating', sgn1(t.r), '#' + t.prank + ' of ' + TEAMS.length) + tile('Projected finish', Math.round(p.w) + '-' + Math.round(p.l), Math.round(p.cw) + '-' + Math.round(p.cl) + ' in conference') + tile('Bracketology', bracketTag(id), '<a href="#/bracket">the projected field ›</a>') + '</div>';
-  html += anTeamSlot(id);
   html += teamSeasonHTML(id);
+  html += anTeamSlot(id);
   if (nx) html += '<div class="sec"><h2>Next up</h2></div><div class="games">' + gameCard(nx) + '</div>';
   html += teamDraftHTML(id);
   html += '<div class="sec"><h2>2026-27 schedule</h2><span class="muted">' + gs.length + ' games · times ' + tzName() + '</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Date</th><th>Opponent</th><th>Result</th><th class="r">Win chance</th><th>TV</th></tr></thead><tbody>'

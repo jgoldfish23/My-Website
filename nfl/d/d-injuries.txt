@@ -348,13 +348,13 @@ IND||Jalen Travis|OT|Out|Knee||2026-11-29|2026-11-19|inactive
 IND||Charvarius Ward|CB|Out|Knee||2026-11-29|2026-11-19|inactive
 IND||Will Mallory|TE|Out|Hamstring||2026-11-29|2026-11-19|inactive
 IND||Charlie Heck|OT|Active||||2026-11-19|
-JAX||Cam Little|PK|Active||||2026-11-23|Little went 4-for-4 on field-goal attempts during Sunday's 23-18 loss to the Giants.
+JAX||Bhayshul Tuten|RB|Questionable|Undisclosed||2026-11-29|2026-11-23|Tuten (undisclosed) exited Sunday's 23-18 loss to the Giants after an eight-yard gain with 3:40 left in the contest, Garry Smitsof the Florida Times-Union reports.
+JAX||Cam Little|PK|Questionable|Lower Body||2026-11-29|2026-11-23|Little went 4-for-4 on field-goal attempts during Sunday's 23-18 loss to the Giants.
 JAX||Brenton Strange|TE|Active||||2026-11-23|Strange caught all three of his targets for 16 yards during Sunday's 23-18 loss to the Giants.
 JAX||Chris Rodriguez Jr.|RB|Active||||2026-11-23|Rodriguez rushed four times for 28 yards in Sunday's 23-18 loss to the Giants. He added one catch for 13 yards on one target.
 JAX||Jakobi Meyers|WR|Active||||2026-11-23|Meyers brought in four of 10 targets for 85 yards in the Jaguars' 23-18 loss to the Giants on Sunday.
 JAX||Brian Thomas Jr.|WR|Active||||2026-11-23|Thomas caught one pass for an 18-yard touchdown on three targets in Sunday's 23-18 loss to the Giants.
 JAX||Trevor Lawrence|QB|Active||||2026-11-23|Lawrence completed 25 of 47 passes for 301 yards with one touchdown and two interceptions and rushed three times for seven yards in the Jaguars' 23-18 loss to the Giants on Sunday. He also fumbled twice but recovered.
-JAX||Bhayshul Tuten|RB|Active||||2026-11-23|Tuten rushed 10 times for 33 yards and brought in all three targets for 20 yards in the Jaguars' 23-18 loss to the Giants on Sunday.
 JAX||Parker Washington|WR|Active||||2026-11-23|Washington secured eight of 17 targets for 103 yards in the Jaguars' 23-18 loss to the Giants on Sunday.
 JAX||Walker Little|OT|Questionable|Knee||2026-11-29|2026-11-23|Little is questionable to return to Sunday's game against the Giants due to a knee injury.
 JAX||Jarrian Jones|CB|Questionable|Chest||2026-11-29|2026-11-22|Jones (chest) has been ruled out for the rest of Sunday's contest against the Giants.
@@ -678,6 +678,7 @@ SF||Kaelon Black|RB|Active||||2026-11-23|Black notched six carries for eight yar
 SF||Deebo Samuel Sr.|WR|Active||||2026-11-23|Samuel logged two carries for 27 yards, gathered in three of four targets for 20 yards and returned two kickoffs for 57 yards during Sunday's 35-10 win against the Vikings in Mexico City.
 SF||George Kittle|TE|Active||||2026-11-23|Kittle caught all three of his targets for 34 yards and two touchdowns in Sunday's 35-10 win over the Vikings.
 SF||Brock Purdy|QB|Active||||2026-11-23|Purdy completed 21 of 26 pass attempts for 255 yards and three touchdowns in Sunday's 35-10 win over the Vikings.
+SF||Mike Evans|WR|Active||||2026-11-23|Evans (Achilles) caught six of seven targets for 109 yards and a touchdown in Sunday's 35-10 win over the Vikings.
 SF||Christian McCaffrey|RB|Active||||2026-11-23|McCaffrey rushed 12 times for 49 yards and a touchdown while catching both of his targets for 13 yards in Sunday's 35-10 win over the Vikings.
 SF||Colton McKivitz|OT|Out|Lower Leg||2026-11-29|2026-11-23|McKivitz (lower leg) was carted off the field Sunday night against the Vikings, Eric Branch of the San Francisco Chronicle reports.
 SF||Dre Greenlaw|LB|Out|Neck||2026-11-29|2026-11-23|Greenlaw (neck) is inactive for Sunday night's contest against the Vikings in Mexico City, Brooke Evans of the 49ers' official website reports.
@@ -689,7 +690,6 @@ SF||Kurtis Rourke|QB|Out|Coach's Decision||2026-11-29|2026-11-23|inactive
 SF||Enrique Cruz Jr.|OT|Out|Coach's Decision||2026-11-29|2026-11-23|inactive
 SF||Luke Gifford|LB|Active||||2026-11-23|
 SF||Upton Stout|CB|Active||||2026-11-23|
-SF||Mike Evans|WR|Active||||2026-11-22|Evans (Achilles) is listed as active Sunday against the Vikings in Mexico City, Matt Barrows of The Athletic reports.
 SF||Nate Hobbs|CB|Injured Reserve|Groin||2026-11-29|2026-11-22|Hobbs (groin) has been downgraded to out for Sunday night's game against the Vikings.
 SF||C.J. West|DT|Active||||2026-11-22|The 49ers activated West (knee) from injured reserve Saturday.
 SF||Ji'Ayir Brown|S|Active||||2026-11-21|Brown (ankle) does not carry an injury designation into Sunday's game against the Vikings in Mexico City.

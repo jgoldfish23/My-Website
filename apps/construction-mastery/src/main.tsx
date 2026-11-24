@@ -9,16 +9,27 @@ createRoot(document.getElementById('root')!).render(
 );
 
 // Claim /construction-mastery/ with our own SW so this path is a separate
-// installable app from Jamo Sports Hub (root /sw.js, formerly scope "/").
+// installable app from Jamo Sports Hub (root /sw.js still registers at "/").
 if ('serviceWorker' in navigator && window.isSecureContext) {
   const register = () => {
     navigator.serviceWorker
-      .register('/construction-mastery/sw.js', {
+      .register('/construction-mastery/sw.js?v=20261124-scope', {
         scope: '/construction-mastery/',
         updateViaCache: 'none',
       })
+      .then((reg) => {
+        try {
+          reg.update();
+        } catch {
+          /* ignore */
+        }
+      })
       .catch(() => {});
   };
-  if (document.readyState === 'complete') setTimeout(register, 400);
-  else window.addEventListener('load', () => setTimeout(register, 400));
+  // Register ASAP so this path's SW outranks the root Sports Hub worker.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', register, { once: true });
+  } else {
+    register();
+  }
 }

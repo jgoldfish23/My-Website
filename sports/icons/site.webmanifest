@@ -2,10 +2,11 @@
   "id": "/sports/",
   "name": "Jamo Sports Hub",
   "short_name": "Jamo Sports",
-  "description": "College football, the NFL, the NBA and college basketball in one place.",
-  "start_url": "/sports/",
+  "description": "College football, the NFL, the NBA and college basketball in one place. Scope limited to /sports/ (not the whole djgolding.com origin).",
+  "start_url": "/sports/?source=pwa",
   "scope": "/sports/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#070a12",
   "theme_color": "#070a12",
   "icons": [

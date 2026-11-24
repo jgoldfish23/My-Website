@@ -1,2 +1,5 @@
 *.HEIC
 Jameson.Dawsyn Website Photos/
+node_modules/
+apps/construction-mastery/node_modules/
+*.log

@@ -1937,8 +1937,34 @@ function SkillEmblem(props: { id: SkillId | string; size?: number }) {
     </svg>
   );
 }
+type CampState = 'sealed' | 'ready' | 'awake' | 'cleared';
+function campStateOf(save: Save, ch: (typeof CHAPTERS)[number], open: boolean): CampState {
+  if (!open) return 'sealed';
+  if (save.campaignDone.indexOf(ch.id + '-boss') >= 0) return 'cleared';
+  if (save.campaignDone.indexOf(ch.id + '-trial') >= 0) return 'awake';
+  return 'ready';
+}
+function campStateLabel(state: CampState, boss: string): string {
+  if (state === 'sealed') return 'Sealed in fog';
+  if (state === 'cleared') return 'Boss fallen';
+  if (state === 'awake') return boss + ' · Awake';
+  return 'Trial open';
+}
+function campNextObjective(save: Save, chapterOpen: (i: number) => boolean): { index: number; ch: (typeof CHAPTERS)[number]; state: CampState; cta: string } {
+  for (let i = 0; i < CHAPTERS.length; i++) {
+    if (!chapterOpen(i)) continue;
+    const st = campStateOf(save, CHAPTERS[i], true);
+    if (st === 'ready') return { index: i, ch: CHAPTERS[i], state: st, cta: 'Begin trial · ' + CHAPTERS[i].name };
+    if (st === 'awake') return { index: i, ch: CHAPTERS[i], state: st, cta: 'Face ' + CHAPTERS[i].boss };
+  }
+  const last = CHAPTERS.length - 1;
+  return { index: last, ch: CHAPTERS[last], state: 'cleared', cta: 'All regions cleared · challenge again' };
+}
+const CAMP_ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+
 function CampaignMap(props: { save: Save; chapterOpen: (i: number) => boolean; onSelect: (ch: (typeof CHAPTERS)[number], boss?: boolean) => void }) {
-  const [sel, setSel] = useState<number | null>(null);
+  const next = campNextObjective(props.save, props.chapterOpen);
+  const [sel, setSel] = useState(next.index);
   const [zoom, setZoom] = useState(1);
   const regions: { d: string; x: number; y: number }[] = [
     { d: 'M18 250 L70 175 L175 185 L165 275 L35 290 Z', x: 100, y: 225 },
@@ -1948,74 +1974,183 @@ function CampaignMap(props: { save: Save; chapterOpen: (i: number) => boolean; o
     { d: 'M18 295 L175 275 L230 360 L30 385 Z', x: 115, y: 325 },
     { d: 'M545 185 L760 145 L775 300 L530 280 Z', x: 640, y: 215 },
   ];
-  const chosen = sel === null ? null : CHAPTERS[sel];
-  const chosenOpen = sel !== null && props.chapterOpen(sel);
-  const chosenBoss = chosen ? props.save.campaignDone.indexOf(chosen.id + '-boss') >= 0 : false;
-  const chosenTrial = chosen ? props.save.campaignDone.indexOf(chosen.id + '-trial') >= 0 : false;
+  const cleared = CHAPTERS.filter((ch) => props.save.campaignDone.indexOf(ch.id + '-boss') >= 0).length;
+  const chosen = CHAPTERS[sel];
+  const chosenOpen = props.chapterOpen(sel);
+  const chosenState = campStateOf(props.save, chosen, chosenOpen);
+  const skillNames = chosen.skills.slice(0, 4).map((id) => skillById(id).name);
+  const mapFrame: CSSProperties = {
+    border: '1px solid ' + C.goldDim,
+    boxShadow: 'inset 0 0 0 1px ' + C.gold + '55, inset 0 0 0 5px #1a1510, 0 12px 28px #00000066',
+    background: 'radial-gradient(ellipse at 48% 28%, #3a3226 0%, #1c1812 48%, #0e0c09 100%)',
+    touchAction: 'pan-x pan-y',
+    overflow: 'auto',
+    maxHeight: 520,
+  };
   return (
-    <div style={{ marginBottom: 16 }}>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginBottom: 8 }}>
-        <div style={{ color: C.inkMute, fontSize: 13, flex: '1 1 180px' }}>Tap a region for its lore. Scroll or pinch to pan. Paths kindle as bosses fall.</div>
-        <div style={{ display: 'flex', gap: 6 }}>
-          <Btn label="−" onClick={() => setZoom((z) => Math.max(1, Math.round((z - 0.25) * 100) / 100))} />
-          <Btn label={Math.round(zoom * 100) + '%'} onClick={() => setZoom(1)} />
-          <Btn label="+" onClick={() => setZoom((z) => Math.min(2, Math.round((z + 0.25) * 100) / 100))} />
+    <div style={{ marginBottom: 18 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', marginBottom: 10, justifyContent: 'space-between' }}>
+        <div style={{ flex: '1 1 220px', minWidth: 0 }}>
+          <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, color: C.goldSoft }}>Bidhall Reliquary Chart</div>
+          <div style={{ color: C.inkMute, fontSize: 13, marginTop: 4 }}>Choose a region below or on the chart. Paths kindle when a boss falls.</div>
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+          <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 12, color: C.gold, border: '1px solid ' + C.goldDim, padding: '6px 10px', background: '#14110c' }}>{cleared} / 6 cleared</div>
+          <div style={{ display: 'flex', gap: 6 }}>
+            <Btn label="−" onClick={() => setZoom((z) => Math.max(1, Math.round((z - 0.25) * 100) / 100))} />
+            <Btn label="Fit" onClick={() => setZoom(1)} />
+            <Btn label="+" onClick={() => setZoom((z) => Math.min(2, Math.round((z + 0.25) * 100) / 100))} />
+          </div>
         </div>
       </div>
-      <div style={{ overflow: 'auto', maxHeight: 440, border: '1px solid ' + C.goldDim, background: 'radial-gradient(ellipse at 50% 30%, #1a2740 0%, #070b14 72%)', touchAction: 'pan-x pan-y' }}>
-        <div style={{ width: zoom * 100 + '%', minWidth: 560 }}>
-          <svg viewBox="0 0 800 420" width="100%" height="auto" role="img" aria-label="Campaign map of the six regions" style={{ display: 'block' }}>
+      <div style={{ marginBottom: 12, padding: '12px 14px', background: 'linear-gradient(180deg, #2a241c, #14110c)', border: '1px solid ' + (next.state === 'awake' ? C.ember : C.gold), boxShadow: '0 0 18px ' + (next.state === 'awake' ? C.ember : C.gold) + '33' }}>
+        <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: 11, color: next.state === 'awake' ? C.emberSoft : C.goldSoft }}>Next objective</div>
+        <div style={{ color: C.inkDim, fontSize: 14, margin: '6px 0 10px' }}>{next.cta}</div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+          {next.state === 'ready' ? <Btn label={'Begin trial · Ch ' + CAMP_ROMAN[next.index]} kind="gold" onClick={() => { setSel(next.index); props.onSelect(next.ch, false); }} /> : null}
+          {next.state === 'awake' ? <Btn label={'Face ' + next.ch.boss} kind="danger" onClick={() => { setSel(next.index); props.onSelect(next.ch, true); }} /> : null}
+          {next.state === 'cleared' ? <Btn label={'Challenge ' + next.ch.boss + ' again'} kind="danger" onClick={() => { setSel(next.index); props.onSelect(next.ch, true); }} /> : null}
+          <Btn label="Show on chart" kind="quiet" onClick={() => setSel(next.index)} />
+        </div>
+      </div>
+      <div role="list" aria-label="Campaign regions" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
+        {CHAPTERS.map((ch, i) => {
+          const st = campStateOf(props.save, ch, props.chapterOpen(i));
+          const active = sel === i;
+          const tone = st === 'cleared' ? C.goldSoft : st === 'awake' ? C.emberSoft : st === 'ready' ? C.parch : C.inkMute;
+          return (
+            <button
+              key={ch.id + '-tab'}
+              type="button"
+              role="listitem"
+              aria-pressed={active}
+              aria-label={'Chapter ' + CAMP_ROMAN[i] + ' · ' + ch.name + ' · ' + campStateLabel(st, ch.boss)}
+              onClick={() => setSel(i)}
+              className="cm-btn"
+              style={{
+                cursor: 'pointer',
+                fontFamily: FONT_DISPLAY,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontSize: 11,
+                padding: '8px 10px',
+                minWidth: 52,
+                color: tone,
+                background: active ? '#241e16' : '#0e0c09',
+                border: '1px solid ' + (active ? C.gold : st === 'awake' ? C.ember : C.goldDim),
+                boxShadow: active ? '0 0 12px ' + C.gold + '44' : 'none',
+                opacity: st === 'sealed' ? 0.65 : 1,
+              }}
+            >
+              <div>{CAMP_ROMAN[i]}</div>
+              <div style={{ fontSize: 10, color: C.inkMute, marginTop: 2 }}>{st === 'sealed' ? 'Fog' : st === 'cleared' ? 'Done' : st === 'awake' ? 'Boss' : 'Open'}</div>
+            </button>
+          );
+        })}
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 8, color: C.inkMute, fontSize: 11, fontFamily: FONT_DISPLAY, letterSpacing: '0.08em', textTransform: 'uppercase' }} aria-hidden="true">
+        <span style={{ color: C.inkMute }}>● Sealed</span>
+        <span style={{ color: C.parch }}>● Trial open</span>
+        <span style={{ color: C.emberSoft }}>● Boss awake</span>
+        <span style={{ color: C.goldSoft }}>● Cleared</span>
+      </div>
+      <div style={mapFrame}>
+        <div style={{ width: zoom * 100 + '%', minWidth: '100%' }}>
+          <svg viewBox="0 0 800 420" width="100%" height="auto" aria-hidden="true" style={{ display: 'block' }}>
             <defs>
-              <linearGradient id="cm-grass" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#2a4a2a" /><stop offset="100%" stopColor="#163016" /></linearGradient>
-              <linearGradient id="cm-waste" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#4a3a22" /><stop offset="100%" stopColor="#2a1c10" /></linearGradient>
-              <linearGradient id="cm-keep" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#3a4658" /><stop offset="100%" stopColor="#1c2838" /></linearGradient>
-              <linearGradient id="cm-hall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#4a3a20" /><stop offset="100%" stopColor="#2a2210" /></linearGradient>
-              <linearGradient id="cm-forge" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stopColor="#3a1208" /><stop offset="100%" stopColor="#1a1210" /></linearGradient>
-              <linearGradient id="cm-cit" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#2a2038" /><stop offset="100%" stopColor="#120c18" /></linearGradient>
+              <linearGradient id="cm-parch-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#2e281f" /><stop offset="55%" stopColor="#1a1610" /><stop offset="100%" stopColor="#0c0a08" /></linearGradient>
+              <linearGradient id="cm-grass" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#3d4a32" /><stop offset="100%" stopColor="#24301c" /></linearGradient>
+              <linearGradient id="cm-waste" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#5a4630" /><stop offset="100%" stopColor="#322418" /></linearGradient>
+              <linearGradient id="cm-keep" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#3e4650" /><stop offset="100%" stopColor="#242c34" /></linearGradient>
+              <linearGradient id="cm-hall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#544628" /><stop offset="100%" stopColor="#2e2616" /></linearGradient>
+              <linearGradient id="cm-forge" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stopColor="#4a2418" /><stop offset="100%" stopColor="#241612" /></linearGradient>
+              <linearGradient id="cm-cit" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#4a3a28" /><stop offset="100%" stopColor="#241c14" /></linearGradient>
+              <radialGradient id="cm-fog" cx="50%" cy="45%" r="65%"><stop offset="0%" stopColor="#1a1610" stopOpacity="0.15" /><stop offset="100%" stopColor="#070605" stopOpacity="0.82" /></radialGradient>
               <filter id="cm-pathglow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.4" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
               {regions.map((r, i) => <clipPath key={CHAPTERS[i].id} id={'cm-clip-' + CHAPTERS[i].id}><path d={r.d} /></clipPath>)}
             </defs>
-            {Array.from({ length: 20 }).map((_, i) => <circle key={i} className="cm-twinkle" cx={(i * 89) % 790 + 6} cy={(i * 47) % 410 + 6} r={i % 5 === 0 ? 1.4 : 0.7} fill={C.star} opacity={0.35} style={{ animationDelay: (i * 0.17) + 's' }} />)}
+            <rect x="0" y="0" width="800" height="420" fill="url(#cm-parch-bg)" />
+            <rect x="10" y="10" width="780" height="400" fill="none" stroke={C.goldDim} strokeWidth="1.2" opacity="0.7" />
+            <rect x="16" y="16" width="768" height="388" fill="none" stroke={C.gold} strokeWidth="0.6" opacity="0.35" strokeDasharray="3 5" />
+            <g fill="none" stroke={C.goldDim} strokeWidth="1.1" opacity="0.85">
+              <path d="M22 36 V22 H36 M778 36 V22 H764 M22 384 V398 H36 M778 384 V398 H764" />
+            </g>
+            <text x="400" y="34" textAnchor="middle" fill={C.goldDim} fontSize="9" letterSpacing="3" fontFamily={FONT_DISPLAY}>THE SIX REGIONS OF THE BIDHALL</text>
+            {Array.from({ length: 14 }).map((_, i) => <circle key={i} className="cm-twinkle" cx={(i * 97) % 760 + 20} cy={(i * 53) % 380 + 24} r={i % 4 === 0 ? 1.2 : 0.6} fill={C.goldSoft} opacity={0.22} style={{ animationDelay: (i * 0.19) + 's' }} />)}
             {CHAPTERS.slice(1).map((ch, idx) => {
               const i = idx;
               const lit = props.save.campaignDone.indexOf(CHAPTERS[i].id + '-boss') >= 0;
-              return <line key={'path-' + ch.id} x1={regions[i].x} y1={regions[i].y} x2={regions[i + 1].x} y2={regions[i + 1].y} stroke={lit ? C.goldSoft : C.goldDim} strokeWidth={lit ? 3.2 : 1.2} strokeDasharray={lit ? '1 0' : '5 6'} opacity={lit ? 1 : 0.55} className={lit ? 'cm-draw' : undefined} filter={lit ? 'url(#cm-pathglow)' : undefined} />;
-            })}
-            {CHAPTERS.map((ch, i) => {
-              const open = props.chapterOpen(i);
-              const bossDone = props.save.campaignDone.indexOf(ch.id + '-boss') >= 0;
-              const fills = ['url(#cm-grass)', 'url(#cm-waste)', 'url(#cm-keep)', 'url(#cm-hall)', 'url(#cm-forge)', 'url(#cm-cit)'];
-              const stroke = !open ? C.ironHi : bossDone ? C.gold : sel === i ? C.goldSoft : C.frost;
-              const r = regions[i];
+              const nextOpen = props.chapterOpen(i + 1);
               return (
-                <g key={ch.id} style={{ cursor: 'pointer' }} onClick={() => setSel(i)} onMouseEnter={() => setSel(i)}>
-                  <path d={r.d} fill={open ? fills[i] : '#12100c'} stroke={stroke} strokeWidth={sel === i || bossDone ? 2.4 : 1.3} opacity={open ? 1 : 0.7} />
-                  <g clipPath={'url(#cm-clip-' + ch.id + ')'} opacity={open ? 1 : 0.35}>
-                    {i === 0 ? <g fill="none" stroke="#c9b896" strokeWidth="1.1"><path d="M40 250 L55 210 L70 250 M85 260 L100 220 L115 260" /><path d="M50 240 H130" /><circle cx="70" cy="200" r="6" /><path d="M70 194 V180 H78" stroke={C.gold} /></g> : null}
-                    {i === 1 ? <g fill="none" stroke="#8a6a40" strokeWidth="1.1"><path d="M200 200 L230 170 L250 200 L220 210 Z" /><path d="M260 150 L280 130 L300 155" /><path d="M190 210 Q230 230 270 200" /></g> : null}
-                    {i === 2 ? <g fill="none" stroke="#c5d0dc" strokeWidth="1.2"><path d="M380 150 L400 90 L420 150" /><path d="M430 140 L450 70 L470 140" /><path d="M490 130 L510 80 L530 130" /><path d="M400 150 H520" /><rect x="430" y="120" width="24" height="36" /><path d="M430 120 L442 108 L454 120" /></g> : null}
-                    {i === 3 ? <g fill="none" stroke={C.goldSoft} strokeWidth="1.1"><rect x="340" y="230" width="90" height="40" /><path d="M350 230 V215 H420 V230" /><path d="M360 250 V270 M380 250 V270 M400 250 V270" /></g> : null}
-                    {i === 4 ? <g fill="none" stroke={C.emberSoft} strokeWidth="1.2"><path d="M50 360 Q90 310 140 350 Q170 370 200 340" /><circle cx="110" cy="340" r="8" fill="#c45c20" opacity="0.45" /><path d="M70 350 L80 320 M150 355 L165 325" /></g> : null}
-                    {i === 5 ? <g fill="none" stroke={C.goldSoft} strokeWidth="1.2"><path d="M600 250 L630 170 L660 250 Z" /><rect x="618" y="200" width="24" height="50" /><path d="M610 200 H650 L642 188 H618 Z" /><path d="M700 230 L720 150 L740 230" /><path d="M680 160 Q700 130 740 150" stroke={bossDone ? C.emberSoft : C.frost} /></g> : null}
-                  </g>
-                  {!open ? <g opacity={0.82}><path d={r.d} fill="#0b0a08" opacity={0.55} /><circle cx={r.x} cy={r.y - 8} r="18" fill="#07080c" opacity={0.5} /><text x={r.x} y={r.y - 4} textAnchor="middle" fill={C.inkMute} fontSize={10} fontFamily={FONT_DISPLAY}>Fog</text></g> : null}
-                  <text x={r.x} y={r.y + (open ? 8 : 16)} textAnchor="middle" fill={open ? C.goldSoft : C.inkMute} fontSize={11} fontFamily={FONT_DISPLAY}>{ch.name}</text>
-                  <text x={r.x} y={r.y + (open ? 22 : 30)} textAnchor="middle" fill={open ? C.inkDim : C.inkMute} fontSize={9} fontFamily={FONT_DISPLAY}>{!open ? 'Sealed' : bossDone ? 'Cleared' : ch.boss}</text>
+                <g key={'path-' + ch.id}>
+                  <line x1={regions[i].x} y1={regions[i].y} x2={regions[i + 1].x} y2={regions[i + 1].y} stroke={lit ? C.goldSoft : nextOpen ? C.parchDeep : C.ironHi} strokeWidth={lit ? 3.4 : nextOpen ? 2 : 1.1} strokeDasharray={lit ? '1 0' : '5 6'} opacity={lit ? 1 : nextOpen ? 0.75 : 0.4} className={lit ? 'cm-draw' : undefined} filter={lit ? 'url(#cm-pathglow)' : undefined} />
+                  {lit ? <circle cx={(regions[i].x + regions[i + 1].x) / 2} cy={(regions[i].y + regions[i + 1].y) / 2} r="3.2" fill={C.gold} stroke={C.goldSoft} strokeWidth="0.8" /> : null}
                 </g>
               );
             })}
+            {CHAPTERS.map((ch, i) => {
+              const open = props.chapterOpen(i);
+              const state = campStateOf(props.save, ch, open);
+              const fills = ['url(#cm-grass)', 'url(#cm-waste)', 'url(#cm-keep)', 'url(#cm-hall)', 'url(#cm-forge)', 'url(#cm-cit)'];
+              const stroke = state === 'sealed' ? C.ironHi : state === 'cleared' ? C.gold : state === 'awake' ? C.emberSoft : sel === i ? C.goldSoft : C.parchDeep;
+              const r = regions[i];
+              const statusLine = state === 'sealed' ? 'Sealed' : state === 'cleared' ? 'Cleared' : state === 'awake' ? 'Boss awake' : 'Trial open';
+              return (
+                <g key={ch.id} style={{ cursor: 'pointer' }} onClick={() => setSel(i)}>
+                  <path d={r.d} fill={open ? fills[i] : '#14110c'} stroke={stroke} strokeWidth={sel === i || state === 'cleared' || state === 'awake' ? 2.6 : 1.4} opacity={open ? 1 : 0.78} />
+                  <g clipPath={'url(#cm-clip-' + ch.id + ')'} opacity={open ? 1 : 0.28}>
+                    {i === 0 ? <g fill="none" stroke="#c9b896" strokeWidth="1.1"><path d="M40 250 L55 210 L70 250 M85 260 L100 220 L115 260" /><path d="M50 240 H130" /><circle cx="70" cy="200" r="6" /><path d="M70 194 V180 H78" stroke={C.gold} /></g> : null}
+                    {i === 1 ? <g fill="none" stroke="#8a6a40" strokeWidth="1.1"><path d="M200 200 L230 170 L250 200 L220 210 Z" /><path d="M260 150 L280 130 L300 155" /><path d="M190 210 Q230 230 270 200" /></g> : null}
+                    {i === 2 ? <g fill="none" stroke="#b8c4c8" strokeWidth="1.2"><path d="M380 150 L400 90 L420 150" /><path d="M430 140 L450 70 L470 140" /><path d="M490 130 L510 80 L530 130" /><path d="M400 150 H520" /><rect x="430" y="120" width="24" height="36" /><path d="M430 120 L442 108 L454 120" /></g> : null}
+                    {i === 3 ? <g fill="none" stroke={C.goldSoft} strokeWidth="1.1"><rect x="340" y="230" width="90" height="40" /><path d="M350 230 V215 H420 V230" /><path d="M360 250 V270 M380 250 V270 M400 250 V270" /></g> : null}
+                    {i === 4 ? <g fill="none" stroke={C.emberSoft} strokeWidth="1.2"><path d="M50 360 Q90 310 140 350 Q170 370 200 340" /><circle cx="110" cy="340" r="8" fill="#c45c20" opacity="0.45" /><path d="M70 350 L80 320 M150 355 L165 325" /></g> : null}
+                    {i === 5 ? <g fill="none" stroke={C.goldSoft} strokeWidth="1.2"><path d="M600 250 L630 170 L660 250 Z" /><rect x="618" y="200" width="24" height="50" /><path d="M610 200 H650 L642 188 H618 Z" /><path d="M700 230 L720 150 L740 230" /><path d="M680 160 Q700 130 740 150" stroke={state === 'cleared' ? C.emberSoft : C.frost} /></g> : null}
+                  </g>
+                  {!open ? <g><path d={r.d} fill="url(#cm-fog)" /><circle cx={r.x} cy={r.y - 14} r="16" fill="#0c0a08" stroke={C.ironHi} strokeWidth="1.2" opacity="0.85" /><text x={r.x} y={r.y - 10} textAnchor="middle" fill={C.inkMute} fontSize={9} fontFamily={FONT_DISPLAY}>Fog</text></g> : null}
+                  <circle cx={r.x} cy={r.y - (open ? 28 : 36)} r="11" fill="#120e0a" stroke={stroke} strokeWidth="1.4" />
+                  <text x={r.x} y={r.y - (open ? 24 : 32)} textAnchor="middle" fill={state === 'cleared' ? C.goldSoft : open ? C.parch : C.inkMute} fontSize={9} fontFamily={FONT_DISPLAY}>{CAMP_ROMAN[i]}</text>
+                  <text x={r.x} y={r.y + (open ? 6 : 14)} textAnchor="middle" fill={open ? C.goldSoft : C.inkMute} fontSize={11} fontFamily={FONT_DISPLAY}>{ch.name.replace(/^The /, '')}</text>
+                  <text x={r.x} y={r.y + (open ? 20 : 28)} textAnchor="middle" fill={state === 'awake' ? C.emberSoft : open ? C.inkDim : C.inkMute} fontSize={9} fontFamily={FONT_DISPLAY}>{statusLine}</text>
+                </g>
+              );
+            })}
+            <g transform="translate(740, 360)" opacity="0.8">
+              <circle cx="0" cy="0" r="22" fill="#120e0a" stroke={C.goldDim} strokeWidth="1.2" />
+              <path d="M0 -16 L4 0 L0 16 L-4 0 Z" fill={C.gold} opacity="0.85" />
+              <path d="M-16 0 L0 -4 L16 0 L0 4 Z" fill={C.parchDeep} opacity="0.7" />
+              <text x="0" y="-26" textAnchor="middle" fill={C.goldSoft} fontSize="8" fontFamily={FONT_DISPLAY}>N</text>
+            </g>
           </svg>
         </div>
       </div>
-      {chosen ? (
-        <div style={{ ...{ background: 'linear-gradient(180deg, #241f18, #120e0a)', border: '1px solid ' + C.goldDim, padding: '12px 14px', marginTop: 0, borderTop: 'none' } }}>
-          <div style={{ color: C.gold, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: 11 }}>{chosen.region}</div>
-          <div style={{ color: C.goldSoft, fontFamily: FONT_DISPLAY, fontSize: 16, margin: '4px 0' }}>{chosen.name}</div>
-          <p style={{ margin: '0 0 8px', color: C.inkDim, fontSize: 14 }}>{chosen.blurb}</p>
-          <div style={{ color: C.inkMute, fontSize: 13, marginBottom: 10 }}>Boss  ·  {chosen.boss}{!chosenOpen ? '  ·  Sealed in fog' : chosenBoss ? '  ·  Fallen' : chosenTrial ? '  ·  Awake' : '  ·  Sleeping'}</div>
-          {chosenOpen ? <Btn label={!chosenTrial ? 'Begin the trial' : !chosenBoss ? 'Face ' + chosen.boss : 'Challenge ' + chosen.boss + ' again'} kind={chosenTrial ? 'danger' : 'gold'} onClick={() => props.onSelect(chosen, chosenTrial)} /> : <div style={{ color: C.inkMute, fontSize: 14 }}>Clear the previous region to lift this fog.</div>}
+      <div style={{ background: 'linear-gradient(180deg, #2a241c 0%, #14110c 100%)', border: '1px solid ' + C.goldDim, borderTop: 'none', padding: '14px 16px', boxShadow: 'inset 0 0 0 1px #00000066' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'baseline', justifyContent: 'space-between' }}>
+          <div>
+            <div style={{ color: C.gold, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, fontFamily: FONT_DISPLAY }}>Chapter {CAMP_ROMAN[sel]}  ·  {chosen.region}</div>
+            <div style={{ color: C.goldSoft, fontFamily: FONT_DECO, fontSize: 20, margin: '4px 0 2px' }}>{chosen.name}</div>
+          </div>
+          <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 11, color: chosenState === 'cleared' ? C.goldSoft : chosenState === 'awake' ? C.emberSoft : chosenState === 'ready' ? C.parch : C.inkMute, border: '1px solid ' + (chosenState === 'cleared' ? C.gold : chosenState === 'awake' ? C.ember : C.goldDim), padding: '5px 10px', background: '#0e0c09' }}>{campStateLabel(chosenState, chosen.boss)}</div>
         </div>
-      ) : null}
+        <p style={{ margin: '8px 0 10px', color: C.inkDim, fontSize: 14 }}>{chosen.blurb}</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
+          {skillNames.map((n) => (
+            <span key={n} style={{ fontSize: 11, fontFamily: FONT_DISPLAY, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.parch, border: '1px solid ' + C.goldDim, padding: '3px 8px', background: '#0e0c09' }}>{n}</span>
+          ))}
+        </div>
+        <div style={{ color: C.inkMute, fontSize: 13, marginBottom: 12 }}>Relic foe  ·  {chosen.boss}</div>
+        {chosenOpen ? (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            <Btn label={chosenState === 'ready' ? 'Begin the trial' : 'Revisit the trial'} kind={chosenState === 'ready' ? 'gold' : 'stone'} onClick={() => props.onSelect(chosen, false)} />
+            {chosenState === 'awake' ? <Btn label={'Face ' + chosen.boss} kind="danger" onClick={() => props.onSelect(chosen, true)} /> : null}
+            {chosenState === 'cleared' ? <Btn label={'Challenge ' + chosen.boss + ' again'} kind="danger" onClick={() => props.onSelect(chosen, true)} /> : null}
+          </div>
+        ) : (
+          <div className="cm-empty" style={{ textAlign: 'left', padding: '4px 0' }}>
+            <div style={{ color: C.inkMute, fontSize: 14 }}>This region stays under fog until the previous boss falls.</div>
+            {sel > 0 ? <div style={{ color: C.inkDim, fontSize: 13, marginTop: 6 }}>Clear <span style={{ color: C.goldSoft }}>{CHAPTERS[sel - 1].boss}</span> in {CHAPTERS[sel - 1].name} to open the path.</div> : null}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -2500,7 +2635,7 @@ export default function App() {
     if (session && !session.done && id !== 'quiz' && id !== 'bid') {
       setSave((s) => ({ ...s, activeTrial: { view: session.mode === 'bid' ? 'bid' : 'quiz', focus: session.skill === 'bid' ? focus : session.skill, session } }));
     }
-    if (id === 'campaign') discoverPlace('map', 'The Campaign Star Map');
+    if (id === 'campaign') discoverPlace('map', 'The Bidhall Reliquary Chart');
     if (id === 'skills') discoverPlace('stars', 'The Constellations');
     if (id === 'shop') discoverPlace('shop', 'The Seal Merchant');
     if (id === 'haunt') discoverPlace('haunt', 'The Haunted Ledger');
@@ -2801,7 +2936,7 @@ export default function App() {
   const encOpen = (save.sideDone || []).indexOf(encKey()) < 0;
   const encKind = todayEncounter();
   const phase = dayPhase();
-  const showAurora = (phase === 'night' || (save.cosmetics && save.cosmetics.theme === 'theme-aurora') || view === 'campaign');
+  const showAurora = (phase === 'night' || (save.cosmetics && save.cosmetics.theme === 'theme-aurora'));
   const mentorText = mentorMood || (view === 'hall' ? 'The hall is open, estimator. Walk a weak path, or spend a Relic Seal at the merchant if you have one to spare.' : view === 'quests' ? 'Daily work first. A traveling encounter may appear beside the standing challenges.' : view === 'shop' ? 'Relic Seals buy ceremony, not answers. Titles and themes are vanity — and vanity has its place.' : '');
   const flakeLeft = [8, 22, 36, 50, 64, 78, 88, 14];
   if (!ready) {
@@ -3199,28 +3334,38 @@ export default function App() {
         ) : null}
         {view === 'campaign' ? (
           <div>
-            <p style={{ color: C.inkDim, marginTop: 0 }}>The main quest. Clear a chapter trial (about 3 of 5) to wake the boss. Defeat the boss to unlock the next region. Sessions stay short. Tap a region on the map to enter.</p>
+            <div style={{ ...stoneBox, marginBottom: 16, background: 'linear-gradient(165deg, #322a20 0%, #16130d 55%, #1a1610 100%)' }}>
+              <div style={headingStyle(theme, 12, C.goldDim)}>Main quest  ·  Bidhall Reliquary</div>
+              <h2 style={{ ...headingStyle(theme, 22, C.goldSoft), margin: '8px 0 0', fontFamily: FONT_DECO, letterSpacing: '0.12em' }}>The Chart of Six Regions</h2>
+              <GoldRule />
+              <p style={{ color: C.inkDim, margin: 0 }}>Clear a chapter trial (about 3 of 5) to wake the boss. Defeat the boss to kindle the path into the next region. Use the Next objective CTA or the chapter tabs — the chart is the map, not a second quest log.</p>
+            </div>
             <CampaignMap save={save} chapterOpen={chapterOpen} onSelect={(ch, boss) => startChapter(ch, boss)} />
-            {CHAPTERS.map((chap, i) => {
-              const open = chapterOpen(i);
-              const trialDone = save.campaignDone.indexOf(chap.id + '-trial') >= 0;
-              const bossDone = save.campaignDone.indexOf(chap.id + '-boss') >= 0;
-              return (
-                <div key={chap.id} style={{ ...stoneBox, marginBottom: 12, opacity: open ? 1 : 0.55, borderColor: bossDone ? C.gold : C.goldDim }}>
-                  <div style={headingStyle(theme, 12, C.gold)}>{chap.region}</div>
-                  <h2 style={{ ...headingStyle(theme, 18, C.goldSoft), margin: '6px 0 0' }}>{chap.name}</h2>
-                  <p style={{ margin: '8px 0', color: C.inkDim }}>{chap.blurb}</p>
-                  <div style={{ color: C.inkMute, fontSize: 13, marginBottom: 10 }}>Boss  ·  {chap.boss}{bossDone ? '  ·  Fallen' : trialDone ? '  ·  Awake' : '  ·  Sleeping'}</div>
-                  {open ? (
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                      <Btn label={trialDone ? 'Revisit the trial' : 'Begin the trial'} kind="gold" onClick={() => startChapter(chap, false)} />
-                      {trialDone && !bossDone ? <Btn label={'Face ' + chap.boss} kind="danger" onClick={() => startChapter(chap, true)} /> : null}
-                      {bossDone ? <Btn label={'Challenge ' + chap.boss + ' again'} kind="danger" onClick={() => startChapter(chap, true)} /> : null}
+            <details style={{ marginTop: 8, ...stoneBox, padding: '12px 16px' }}>
+              <summary style={{ cursor: 'pointer', fontFamily: FONT_DISPLAY, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 12, color: C.goldSoft, listStyle: 'none' }}>Region ledger  ·  full list</summary>
+              <p style={{ color: C.inkMute, fontSize: 13, margin: '10px 0 12px' }}>Secondary reference. Prefer the chart CTA above for short sessions.</p>
+              {CHAPTERS.map((chap, i) => {
+                const open = chapterOpen(i);
+                const st = campStateOf(save, chap, open);
+                return (
+                  <div key={chap.id} style={{ borderTop: '1px solid ' + C.line, padding: '12px 0', opacity: open ? 1 : 0.58 }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'baseline', justifyContent: 'space-between' }}>
+                      <div style={headingStyle(theme, 12, C.gold)}>Ch {CAMP_ROMAN[i]}  ·  {chap.name}</div>
+                      <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 11, color: st === 'cleared' ? C.goldSoft : st === 'awake' ? C.emberSoft : C.inkMute }}>{campStateLabel(st, chap.boss)}</div>
                     </div>
-                  ) : <div style={{ color: C.inkMute, fontSize: 14 }}>Sealed until the previous boss falls.</div>}
-                </div>
-              );
-            })}
+                    <div style={{ color: C.inkMute, fontSize: 13, margin: '6px 0 8px' }}>{chap.region}  ·  {chap.boss}</div>
+                    {open ? (
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                        <Btn label={st === 'ready' ? 'Begin the trial' : 'Revisit the trial'} kind="quiet" onClick={() => startChapter(chap, false)} />
+                        {st === 'awake' || st === 'cleared' ? <Btn label={st === 'cleared' ? 'Challenge again' : 'Face boss'} kind="quiet" onClick={() => startChapter(chap, true)} /> : null}
+                      </div>
+                    ) : (
+                      <div style={{ color: C.inkMute, fontSize: 13 }}>{i > 0 ? 'Sealed until ' + CHAPTERS[i - 1].boss + ' falls.' : 'Sealed.'}</div>
+                    )}
+                  </div>
+                );
+              })}
+            </details>
           </div>
         ) : null}
         {view === 'trophies' ? (

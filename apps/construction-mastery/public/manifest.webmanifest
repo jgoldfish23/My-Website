@@ -1,0 +1,18 @@
+{
+  "name": "Construction Mastery: The Estimator's Quest",
+  "short_name": "Construction Mastery",
+  "description": "Skyrim-flavored construction estimating training with durable local saves.",
+  "start_url": "/construction-mastery/",
+  "scope": "/construction-mastery/",
+  "display": "standalone",
+  "background_color": "#0b0a08",
+  "theme_color": "#0b0a08",
+  "icons": [
+    {
+      "src": "/construction-mastery/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

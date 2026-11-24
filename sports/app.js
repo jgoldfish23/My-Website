@@ -37,6 +37,9 @@
     if (off) {
       navigator.serviceWorker.getRegistrations().then(function(rs){ rs.forEach(function(r){ var w = r.active || r.waiting || r.installing; if (w && /\/sw\.js(\?|$)/.test(w.scriptURL)) r.unregister(); }); }).catch(function(){});
     } else {
+      /* Register at scope "/". Construction Mastery registers its own SW under /construction-mastery/,
+         which wins for that path (longer scope). The Sports Hub *manifest* scope is /sports/ so Chrome
+         no longer offers "Open in app" (Jamo Sports Hub) on /construction-mastery/. */
       var reg = function(){ navigator.serviceWorker.register('/sw.js', {scope: '/', updateViaCache: 'none'}).catch(function(){}); };
       if (D.readyState === 'complete') setTimeout(reg, 1500); else W.addEventListener('load', function(){ setTimeout(reg, 1500); });
     }

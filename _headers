@@ -46,6 +46,14 @@
   Cache-Control: public, max-age=604800
 /sports/icons/*
   Cache-Control: public, max-age=604800
+# Web app manifests / service workers: keep fresh so PWA scope and install identity update quickly
+# (Sports Hub scope narrowed to /sports/ so /construction-mastery/ can install as its own app).
+/sports/icons/site.webmanifest
+  Cache-Control: public, max-age=300, must-revalidate
+/construction-mastery/manifest.webmanifest
+  Cache-Control: public, max-age=300, must-revalidate
+/construction-mastery/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
 # College football player cards: one roster file per team, refreshed now and then.
 /cfb/data/pl/*
   Cache-Control: public, max-age=86400

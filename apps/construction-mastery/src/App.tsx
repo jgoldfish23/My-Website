@@ -23,6 +23,26 @@ const BID_PERFECT_BONUS = 80;
 const BID_PERFECT_SOULS = 2;
 const LEGENDARY_LEVEL = 15;
 
+/** Display-layer Reliquary glossary. Save key `souls` and internal ids stay unchanged. */
+const L = {
+  soul: 'Relic Seal',
+  souls: 'Relic Seals',
+  soulLower: 'relic seal',
+  soulsLower: 'relic seals',
+  xp: 'Experience',
+  combo: 'Ledger Combo',
+  dawn: 'Dawn',
+  perk: 'Perk points',
+  hint: '50/50 Ward',
+  slow: 'Quill Slow',
+  confidence: 'Confidence',
+  sheetNav: 'Sheet',
+  merchant: 'Seal Merchant',
+  bossHp: 'Boss resolve',
+  topRank: 'Archon of Bids',
+  hauntDue: 'Haunts due',
+};
+
 const C = {
   void: '#0b0a08',
   stone: '#1b1813',
@@ -48,12 +68,23 @@ const C = {
   emberSoft: '#e08a4a',
   frost: '#7aa0b8',
   frostSoft: '#c5dce8',
-  health: '#8b2e2e',
-  magicka: '#3d5a8a',
+  /** Relic HUD instruments — warm ledger colors; frost only as subtle accent. */
+  health: '#8a3a2a',
+  magicka: '#8a7020',
   stamina: '#9a6b24',
+  xpBar: '#a84a32',
+  comboBar: '#b08d57',
+  sealBar: '#c4a35a',
+  confBar: '#7aa0b8',
   iron: '#3a362e',
   ironHi: '#5a5448',
 };
+function soulWord(n: number): string {
+  return n === 1 ? L.soul : L.souls;
+}
+function soulPhrase(n: number): string {
+  return n + ' ' + soulWord(n);
+}
 const FONT_DISPLAY = 'Cinzel, Palatino, "Palatino Linotype", "Book Antiqua", Times, serif';
 const FONT_DECO = '"Cinzel Decorative", Cinzel, Palatino, serif';
 const FONT_BODY = '"Source Serif 4", Palatino, "Palatino Linotype", Georgia, "Times New Roman", serif';
@@ -343,7 +374,7 @@ const RANKS: { min: number; title: string; rune: string; metal: string; blurb: s
   { min: 55, title: 'Guild Master', rune: 'ᚷ', metal: '#e8d48b', blurb: 'The City Creek hall would trust you with the close of any bid.' },
   { min: 70, title: 'Arch-Estimator', rune: 'ᛁ', metal: '#c9a227', blurb: 'Numbers, codes, and means obey your reading of the set.' },
   { min: 85, title: 'Thane of the Bid Hall', rune: 'ᛏ', metal: '#f0e6c8', blurb: 'Your name carries among the trades. Scope dragons fall quiet.' },
-  { min: 100, title: 'Dragonborn of Bids', rune: 'ᛞ', metal: '#f0d060', blurb: 'The cheap number flees your Shout. The complete number remains.' },
+  { min: 100, title: L.topRank, rune: 'ᛞ', metal: '#f0d060', blurb: 'The cheap number flees a complete takeoff. The ledger holds.' },
 ];
 
 function parseQ(rows: string[]): Question[] {
@@ -1314,8 +1345,8 @@ const TROPHIES: { id: string; name: string; detail: string; test: (s: Save) => b
   { id: 'est1', name: 'Ledger Initiate', detail: 'Raise any Estimating Mastery skill to level 5.', test: (s) => EST_IDS.some((id) => skillInfo(s.skills[id].xp).level >= 5), progress: (s) => ({ now: Math.min(Math.max(0, ...EST_IDS.map((id) => skillInfo(s.skills[id].xp).level)), 5), max: 5 }) },
   { id: 'bid', name: 'Bid Day Survivor', detail: 'Finish a Bid Day trial.', test: (s) => s.bidBest >= 1 || (s.history || []).some((h) => h.text.indexOf('Bid Day') === 0), progress: (s) => ({ now: Math.min(s.bidBest >= 1 || (s.history || []).some((h) => h.text.indexOf('Bid Day') === 0) ? 1 : 0, 1), max: 1 }) },
   { id: 'login3', name: 'Three Dawns', detail: 'Keep a 3-day login streak.', test: (s) => s.loginStreak >= 3, progress: (s) => ({ now: Math.min(s.loginStreak, 3), max: 3 }) },
-  { id: 'login7', name: 'Seven Dawns', detail: 'Keep a 7-day login streak. A Dragon Soul is granted at this dawn.', test: (s) => s.loginStreak >= 7, progress: (s) => ({ now: Math.min(s.loginStreak, 7), max: 7 }) },
-  { id: 'login14', name: 'Fortnight at the Ledger', detail: 'Keep a 14-day login streak. A Dragon Soul is granted at this dawn.', test: (s) => s.loginStreak >= 14, progress: (s) => ({ now: Math.min(s.loginStreak, 14), max: 14 }) },
+  { id: 'login7', name: 'Seven Dawns', detail: 'Keep a 7-day login streak. A Relic Seal is granted at this dawn.', test: (s) => s.loginStreak >= 7, progress: (s) => ({ now: Math.min(s.loginStreak, 7), max: 7 }) },
+  { id: 'login14', name: 'Fortnight at the Ledger', detail: 'Keep a 14-day login streak. A Relic Seal is granted at this dawn.', test: (s) => s.loginStreak >= 14, progress: (s) => ({ now: Math.min(s.loginStreak, 14), max: 14 }) },
   { id: 'daily', name: 'Quest Knight', detail: 'Complete all three daily quests in one day.', test: (s) => s.dailyDone.indexOf('all') >= 0 },
   { id: 'ch1', name: 'Liar’s Fall', detail: 'Defeat the Nominal Liar.', test: (s) => s.campaignDone.indexOf('ch1-boss') >= 0 },
   { id: 'ch2', name: 'Wastes Walker', detail: 'Defeat the Unsuitable Ground.', test: (s) => s.campaignDone.indexOf('ch2-boss') >= 0 },
@@ -1323,7 +1354,7 @@ const TROPHIES: { id: string; name: string; detail: string; test: (s: Save) => b
   { id: 'ch4', name: 'Halls Finisher', detail: 'Defeat the Rated Corridor.', test: (s) => s.campaignDone.indexOf('ch4-boss') >= 0 },
   { id: 'ch5', name: 'Underforge Walker', detail: 'Defeat the Silent Switch.', test: (s) => s.campaignDone.indexOf('ch5-boss') >= 0 },
   { id: 'ch6', name: 'Dragon of the Citadel', detail: 'Defeat the Dragon of Scope Gaps in the campaign.', test: (s) => s.campaignDone.indexOf('ch6-boss') >= 0, hidden: true },
-  { id: 'souls', name: 'Soul Collector', detail: 'Hold at least two Dragon Souls.', test: (s) => s.souls >= 2, progress: (s) => ({ now: Math.min(s.souls, 2), max: 2 }) },
+  { id: 'souls', name: 'Seal Keeper', detail: 'Hold at least two Relic Seals.', test: (s) => s.souls >= 2, progress: (s) => ({ now: Math.min(s.souls, 2), max: 2 }) },
   { id: 'codex10', name: 'Scribe of the Hall', detail: 'Inscribe 10 concepts in the Codex.', test: (s) => s.codex.length >= 10, progress: (s) => ({ now: Math.min(s.codex.length, 10), max: 10 }) },
   { id: 'codex25', name: 'Lorekeeper', detail: 'Inscribe 25 concepts in the Codex.', test: (s) => s.codex.length >= 25, progress: (s) => ({ now: Math.min(s.codex.length, 25), max: 25 }) },
   { id: 'codex50', name: 'Arch-Scribe', detail: 'Inscribe 50 concepts in the Codex.', test: (s) => s.codex.length >= 50, progress: (s) => ({ now: Math.min(s.codex.length, 50), max: 50 }) },
@@ -1544,11 +1575,11 @@ function scrollPrefix(code: string, n?: number): string {
 }
 
 const SHOP: { id: string; kind: 'title' | 'banner' | 'theme'; name: string; cost: number; detail: string }[] = [
-  { id: 'title-dragonborn', kind: 'title', name: 'Dragonborn of Bids', cost: 3, detail: 'A ceremonial title for the close of the ledger.' },
+  { id: 'title-dragonborn', kind: 'title', name: L.topRank, cost: 3, detail: 'A ceremonial title for the close of the ledger.' },
   { id: 'title-ironline', kind: 'title', name: 'Ironline Apprentice', cost: 1, detail: 'Named by the Master Builder himself.' },
   { id: 'title-archscribe', kind: 'title', name: 'Arch-Scribe of Takeoffs', cost: 2, detail: 'Worn by those who count twice and cut once.' },
   { id: 'banner-gold', kind: 'banner', name: 'Gilded Hall Banner', cost: 2, detail: 'Gold thread for the hall standard.' },
-  { id: 'banner-dragon', kind: 'banner', name: 'Dragon Standard', cost: 3, detail: 'A crimson field and a golden dragon.' },
+  { id: 'banner-dragon', kind: 'banner', name: 'Reliquary Standard', cost: 3, detail: 'A crimson field and a golden seal of the bidhall.' },
   { id: 'theme-aurora', kind: 'theme', name: 'Aurora of the North', cost: 3, detail: 'The night hall takes on a polar shimmer.' },
   { id: 'theme-hearth', kind: 'theme', name: 'Hearthfire', cost: 2, detail: 'Warm ember light across the stone.' },
   { id: 'theme-frost', kind: 'theme', name: 'Frostkeep', cost: 2, detail: 'A colder, paler hall of winter stone.' },
@@ -1569,7 +1600,7 @@ const CINEMA_BEATS: { kicker: string; line: string }[] = [
   { kicker: 'A northern hall, after hours', line: 'The takeoff tables are still warm. Outside, snow gathers on the ridge of the bid calendar.' },
   { kicker: 'The calling', line: 'You are Jameson Golding, estimator of City Creek Construction. Scope hides in the notes, and dirt lies under the paving.' },
   { kicker: 'The trial ahead', line: 'From the first 2x4 to Bid Day at two o’clock, the dragons of missing work and unsuitable ground are waiting.' },
-  { kicker: 'The naming', line: 'Rise through the trades. Close the ledger. Become the Dragonborn of Bids.' },
+  { kicker: 'The naming', line: 'Rise through the trades. Close the ledger. Become the Archon of Bids.' },
   { kicker: 'A guide at the door', line: 'Haldor Ironline, Master Builder, will walk with you. His advice is blunt. His facts are measured.' },
 ];
 const SKILL_WHISPERS: Partial<Record<SkillId | 'bid', string>> = {
@@ -1620,13 +1651,13 @@ function dayPhase(): 'day' | 'dusk' | 'night' {
 }
 function shellBackground(save: Save): string {
   const theme = save.cosmetics && save.cosmetics.theme;
-  if (theme === 'theme-aurora') return 'radial-gradient(ellipse at 50% 0%, #1c3348 0%, #10182a 42%, #070b14 78%)';
+  if (theme === 'theme-aurora') return 'radial-gradient(ellipse at 50% 0%, #243038 0%, #14181c 42%, #0b0a08 78%)';
   if (theme === 'theme-hearth') return 'radial-gradient(ellipse at 50% 0%, #3a2212 0%, #1a100a 42%, #0c0806 78%)';
   if (theme === 'theme-frost') return 'radial-gradient(ellipse at 50% 0%, #2a3340 0%, #141820 42%, #0a0c10 78%)';
   const phase = dayPhase();
   if (phase === 'day') return 'radial-gradient(ellipse at 50% 0%, #3a2a18 0%, #1a140e 44%, ' + C.void + ' 76%)';
   if (phase === 'dusk') return 'radial-gradient(ellipse at 50% 0%, #3a1c12 0%, #160e0a 44%, ' + C.void + ' 76%)';
-  return 'radial-gradient(ellipse at 50% 0%, #1a2740 0%, #120e0a 44%, ' + C.void + ' 78%)';
+  return 'radial-gradient(ellipse at 50% 0%, #2a2418 0%, #120e0a 44%, ' + C.void + ' 78%)';
 }
 function whisperFor(skill: SkillId | 'bid'): string {
   return SKILL_WHISPERS[skill] || 'Read the stem twice. The trick is usually a name, a unit, or a division.';
@@ -1707,15 +1738,83 @@ function GoldRule() {
     </div>
   );
 }
-function Meter(props: { value: number; max: number; color?: string; label?: string }) {
+function Meter(props: { value: number; max: number; color?: string; label?: string; compact?: boolean }) {
   const pct = Math.max(0, Math.min(100, props.max <= 0 ? 100 : (props.value / props.max) * 100));
+  const h = props.compact ? 10 : 13;
   return (
     <div style={{ width: '100%' }}>
-      <div style={{ height: 13, background: '#0a0907', border: '1px solid var(--cm-gold-dim, ' + C.goldDim + ')', boxShadow: 'inset 0 0 0 1px #000, inset 0 2px 3px #00000088', clipPath: 'polygon(6px 0, calc(100% - 6px) 0, 100% 50%, calc(100% - 6px) 100%, 6px 100%, 0 50%)', overflow: 'hidden' }}>
-        <div className="cm-bar" style={{ width: pct + '%', height: '100%', background: 'linear-gradient(180deg, #ffffff55 0%, ' + (props.color || C.gold) + ' 38%, ' + (props.color || C.gold) + ' 100%)', boxShadow: '0 0 10px ' + (props.color || C.gold) + '99' }} />
+      <div style={{ height: h, background: '#0a0907', border: '1px solid var(--cm-gold-dim, ' + C.goldDim + ')', boxShadow: 'inset 0 0 0 1px #000, inset 0 2px 3px #00000088', clipPath: 'polygon(5px 0, calc(100% - 5px) 0, 100% 50%, calc(100% - 5px) 100%, 5px 100%, 0 50%)', overflow: 'hidden' }}>
+        <div className="cm-bar" style={{ width: pct + '%', height: '100%', background: 'linear-gradient(180deg, #ffffff44 0%, ' + (props.color || C.gold) + ' 40%, ' + (props.color || C.gold) + ' 100%)', boxShadow: '0 0 8px ' + (props.color || C.gold) + '66' }} />
       </div>
-      {props.label ? <div style={{ marginTop: 5, color: C.inkMute, fontSize: 12, letterSpacing: '0.06em', fontFamily: FONT_DISPLAY, overflowWrap: 'break-word' }}>{props.label}</div> : null}
+      {props.label ? <div style={{ marginTop: 4, color: C.inkMute, fontSize: props.compact ? 11 : 12, letterSpacing: '0.07em', fontFamily: FONT_DISPLAY, overflowWrap: 'break-word' }}>{props.label}</div> : null}
     </div>
+  );
+}
+/** Derived only — not persisted. Accuracy, weak-path levels, haunt pressure. */
+function confidenceOf(save: Save): { score: number; blurb: string } {
+  const ids = Object.keys(save.answered || {});
+  let rights = 0;
+  for (const id of ids) if (save.answered[id]) rights += 1;
+  const accuracy = ids.length ? rights / ids.length : 0.55;
+  const due = hauntDueList(save).length;
+  const hauntDrag = Math.min(0.4, due * 0.06);
+  let weakSum = 0;
+  for (const id of WEAK) weakSum += skillInfo(save.skills[id].xp).level;
+  const weakLift = Math.min(1, (weakSum / WEAK.length) / 35);
+  const score = Math.max(8, Math.min(99, Math.round(100 * (0.5 * accuracy + 0.3 * weakLift + 0.2 * (1 - hauntDrag)))));
+  const blurb = due > 0
+    ? due + (due === 1 ? ' haunt is' : ' haunts are') + ' due — clear bounties to steady the hand'
+    : score >= 70
+      ? 'The ledger reads clean. Keep walking weak paths so the seal holds.'
+      : 'Train marked weak paths and seal misses to raise confidence.';
+  return { score, blurb };
+}
+function RelicHud(props: {
+  save: Save;
+  ch: LevelInfo;
+  rank: (typeof RANKS)[number];
+  upcoming?: (typeof RANKS)[number];
+  perkPts: number;
+  hauntDue: number;
+}) {
+  const conf = confidenceOf(props.save);
+  const s = props.save;
+  return (
+    <div style={{ flex: '1 1 280px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 10, padding: '10px 12px', background: 'linear-gradient(180deg, #1a1610 0%, #0e0c09 100%)', border: '1px solid ' + C.goldDim, boxShadow: 'inset 0 0 0 1px #00000088, inset 0 0 24px #00000066' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
+        <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, color: C.goldSoft }}>Relic HUD</div>
+        <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 11, color: C.frost }}>{L.confidence}  {conf.score}</div>
+      </div>
+      <Meter compact value={props.ch.into} max={Math.max(1, props.ch.need)} color={C.xpBar} label={L.xp + '  ·  Lv ' + props.ch.level + '  ·  ' + props.ch.into + ' / ' + (props.ch.level >= 100 ? 'max' : props.ch.need) + (props.upcoming ? '  ·  next ' + props.upcoming.title + ' @ ' + props.upcoming.min : '')} />
+      <Meter compact value={Math.min(s.streak, 12)} max={12} color={C.comboBar} label={L.combo + '  ·  ×' + s.streak + '  (best ' + s.bestStreak + ')'} />
+      <Meter compact value={Math.min(s.souls, 8)} max={8} color={C.sealBar} label={L.souls + '  ·  ' + s.souls + '  ·  ' + L.perk + ' ' + props.perkPts + '  ·  ' + L.dawn + ' ' + s.loginStreak} />
+      <Meter compact value={conf.score} max={100} color={C.confBar} label={L.confidence + '  ·  ' + conf.score + ' / 100' + (props.hauntDue > 0 ? '  ·  ' + L.hauntDue + ' ' + props.hauntDue : '')} />
+    </div>
+  );
+}
+function Portrait(props: { rank: (typeof RANKS)[number]; level: number; title: string }) {
+  return (
+    <svg viewBox="0 0 140 168" width="132" height="158" role="img" aria-label={'Portrait · ' + props.title} style={{ flexShrink: 0, filter: 'drop-shadow(0 8px 16px #00000088)' }}>
+      <defs>
+        <linearGradient id="cm-porch" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#3a3226" />
+          <stop offset="100%" stopColor="#16120c" />
+        </linearGradient>
+        <radialGradient id="cm-face" cx="50%" cy="40%" r="55%">
+          <stop offset="0%" stopColor="#4a4032" />
+          <stop offset="100%" stopColor="#2a2418" />
+        </radialGradient>
+      </defs>
+      <rect x="6" y="6" width="128" height="156" rx="4" fill="url(#cm-porch)" stroke={props.rank.metal} strokeWidth="2.2" />
+      <rect x="12" y="12" width="116" height="144" fill="none" stroke={C.goldDim} strokeWidth="1" />
+      <ellipse cx="70" cy="150" rx="42" ry="8" fill="#00000055" />
+      <path d="M38 118 Q70 96 102 118 L108 152 L32 152 Z" fill="#2a2418" stroke={props.rank.metal} strokeWidth="1.6" />
+      <circle cx="70" cy="72" r="28" fill="url(#cm-face)" stroke={props.rank.metal} strokeWidth="1.8" />
+      <path d="M36 70 Q70 28 104 70" fill="#1c1810" stroke={props.rank.metal} strokeWidth="1.5" />
+      <rect x="30" y="66" width="80" height="9" rx="2" fill={props.rank.metal} opacity="0.9" />
+      <text x="70" y="128" textAnchor="middle" fill={props.rank.metal} fontSize="14" fontFamily={FONT_DECO}>{props.rank.rune}</text>
+      <text x="70" y="146" textAnchor="middle" fill={C.goldSoft} fontSize="9" letterSpacing="1.4" fontFamily={FONT_DISPLAY}>LV {props.level}</text>
+    </svg>
   );
 }
 function Seal(props: { rank: (typeof RANKS)[number]; level: number }) {
@@ -1985,7 +2084,7 @@ export default function App() {
     const next = grantTrophies(rewarded);
     if (next.souls > logged.souls) {
       const tid = Date.now();
-      setToasts((cur) => cur.concat([{ id: tid, kind: 'soul', text: 'Dawn reward  ·  Dragon Soul absorbed' }]));
+      setToasts((cur) => cur.concat([{ id: tid, kind: 'soul', text: 'Dawn reward  ·  Relic Seal sealed' }]));
       window.setTimeout(() => setToasts((cur) => cur.filter((t) => t.id !== tid)), 2800);
     }
     if (next !== save) setSave(next);
@@ -2155,7 +2254,7 @@ export default function App() {
     setSession({ mode: 'boss', skill: ch.skills[0], chapter: ch.id, ids, index: 0, items: [], hint: false, show: false, done: false, order: orderFor(ids[0], Date.now()), numDraft: '', startSouls: save.souls, startCodex: save.codex.slice(), bonusXp: 0, shoutSlow: false });
     setView('quiz'); arrive();
     discoverPlace(ch.id + '-boss', ch.boss);
-    setMentorMood('A legendary foe. Spend souls only if the path is truly dark.');
+    setMentorMood('A legendary foe. Spend Relic Seals only if the path is truly dark.');
     openCurtain();
   }
   function answer(choice: number) {
@@ -2268,7 +2367,7 @@ export default function App() {
       if (session.skill === weakId) daily = markDaily('weak', { ...next, dailyDone: daily });
       if (perfect) {
         next = { ...next, souls: next.souls + 1 };
-        pushToast('soul', 'Dragon Soul absorbed');
+        pushToast('soul', 'Relic Seal sealed');
         const applied = applyXp(next, session.skill, PERFECT_BONUS);
         next = applied.next;
         if (applied.charUp > 0) setLevelModal(true);
@@ -2278,7 +2377,7 @@ export default function App() {
       next = { ...next, bidBest: Math.max(next.bidBest, correctN) };
       if (perfect) {
         next = { ...next, souls: next.souls + BID_PERFECT_SOULS, charXp: next.charXp + BID_PERFECT_BONUS };
-        pushToast('soul', BID_PERFECT_SOULS + ' Dragon Souls absorbed');
+        pushToast('soul', BID_PERFECT_SOULS + ' Relic Seals sealed');
         if (charInfo(next.charXp).level > charInfo(save.charXp).level) setLevelModal(true);
       }
     } else {
@@ -2288,7 +2387,7 @@ export default function App() {
         if (session.mode === 'boss') {
           if (perfect) {
             next = { ...next, souls: next.souls + 1 };
-            pushToast('soul', 'Boss fallen  ·  Dragon Soul absorbed');
+            pushToast('soul', 'Boss fallen  ·  Relic Seal sealed');
           } else pushToast('rank', 'Boss fallen');
         } else pushToast('xp', 'Chapter trial cleared  ·  the boss awakens');
       } else if ((session.mode === 'camp' || session.mode === 'boss') && !passed) {
@@ -2296,7 +2395,7 @@ export default function App() {
       }
       if (perfect && (session.mode === 'camp' || session.mode === 'haunt')) {
         next = { ...next, souls: next.souls + 1 };
-        pushToast('soul', 'Perfect  ·  Dragon Soul absorbed');
+        pushToast('soul', 'Perfect  ·  Relic Seal sealed');
       }
       if (perfect && session.skill !== 'bid' && next.skills[session.skill]) {
         const applied = applyXp(next, session.skill, PERFECT_BONUS);
@@ -2307,7 +2406,7 @@ export default function App() {
     if (daily.indexOf('weak') >= 0 && daily.indexOf('drill') >= 0 && daily.indexOf('tome') >= 0 && daily.indexOf('all') < 0) {
       daily = daily.concat(['all']);
       next = { ...next, souls: next.souls + 1 };
-      pushToast('soul', 'Daily quests complete  ·  Dragon Soul absorbed');
+      pushToast('soul', 'Daily quests complete  ·  Relic Seal sealed');
     }
     let bonus = 0;
     if (perfect && session.mode !== 'bid' && session.skill !== 'bid') bonus += PERFECT_BONUS;
@@ -2323,7 +2422,7 @@ export default function App() {
       const needed = Math.ceil(session.ids.length * 0.75);
       if (correctN >= needed) {
         stored = { ...stored, souls: stored.souls + 1 };
-        pushToast('soul', session.encounter === 'sub' ? 'The traveling sub pays a Dragon Soul' : 'The cursed RFI is lifted  ·  Dragon Soul absorbed');
+        pushToast('soul', session.encounter === 'sub' ? 'The traveling sub pays a Relic Seal' : 'The cursed RFI is lifted  ·  Relic Seal sealed');
         sfx('soul');
       } else setMentorMood(session.encounter === 'sub' ? 'The sub walks on. Come back with a tighter number tomorrow.' : 'The RFI still hangs over the close. Study the conflict and return.');
     }
@@ -2372,7 +2471,7 @@ export default function App() {
     if (!session || session.show || session.hint || save.souls < 1) return;
     setSave((s) => s.souls < 1 ? s : { ...s, souls: s.souls - 1 });
     setSession({ ...session, hint: true });
-    setMentorMood('50/50 Shout  ·  Two falsehoods fall away. The truth still has to be chosen.');
+    setMentorMood('50/50 Ward  ·  Two falsehoods fall away. The truth still has to be chosen.');
     sfx('shout');
   }
   function useSlow() {
@@ -2384,7 +2483,7 @@ export default function App() {
     const rec = save.skills[recSkill];
     const mastered = rec ? def.perks.filter((p) => rec.perks.indexOf(p.id) >= 0) : [];
     const perkLine = mastered.length ? ' Perk lore: ' + mastered[mastered.length - 1].concept : '';
-    setMentorMood('Time Slow  ·  ' + whisperFor(session.skill === 'bid' ? 'bid' : session.skill) + perkLine);
+    setMentorMood('Quill Slow  ·  ' + whisperFor(session.skill === 'bid' ? 'bid' : session.skill) + perkLine);
     sfx('shout');
   }
   function arrive() {
@@ -2403,7 +2502,7 @@ export default function App() {
     }
     if (id === 'campaign') discoverPlace('map', 'The Campaign Star Map');
     if (id === 'skills') discoverPlace('stars', 'The Constellations');
-    if (id === 'shop') discoverPlace('shop', 'The Soul Merchant');
+    if (id === 'shop') discoverPlace('shop', 'The Seal Merchant');
     if (id === 'haunt') discoverPlace('haunt', 'The Haunted Ledger');
     setView(id);
     arrive();
@@ -2439,7 +2538,7 @@ export default function App() {
     }
     if (save.souls < item.cost) return;
     setSave({ ...save, souls: save.souls - item.cost, cosmetics: { ...cosmetics, owned: owned.concat([id]), [item.kind]: id } });
-    pushToast('soul', 'The merchant takes ' + item.cost + (item.cost === 1 ? ' soul' : ' souls') + '  ·  ' + item.name);
+    pushToast('soul', 'The merchant takes ' + soulPhrase(item.cost) + '  ·  ' + item.name);
     sfx('soul');
   }
   function copyScroll() {
@@ -2539,7 +2638,7 @@ export default function App() {
     if (dailyDone.indexOf('weak') >= 0 && dailyDone.indexOf('drill') >= 0 && dailyDone.indexOf('tome') >= 0 && dailyDone.indexOf('all') < 0) {
       dailyDone = dailyDone.concat(['all']);
       souls += 1;
-      pushToast('soul', 'Daily quests complete  ·  Dragon Soul absorbed');
+      pushToast('soul', 'Daily quests complete  ·  Relic Seal sealed');
     }
     setSave(grantTrophies({ ...save, loreRead, dailyDone, souls }));
   }
@@ -2675,6 +2774,7 @@ export default function App() {
   }, [save.settings]);
   const best = nextBest();
   const hauntN = hauntList(save).length;
+  const conf = confidenceOf(save);
 
   const parch: CSSProperties = { background: 'linear-gradient(180deg, #eadcba 0%, #d7c49a 48%, #c4af7e 100%)', color: C.parchInk, border: '1px solid var(--cm-gold-dim, ' + C.goldDim + ')', boxShadow: 'inset 0 0 0 1px #7a6230, inset 0 0 0 5px #b89d68, inset 0 0 48px #00000018, 0 10px 28px #00000066', padding: '22px 20px 20px', borderRadius: 2, overflowWrap: 'break-word', position: 'relative' };
   const stoneBox: CSSProperties = { background: 'linear-gradient(180deg, #2c281f 0%, #16130d 100%)', color: C.ink, border: '1px solid var(--cm-gold-dim, ' + C.goldDim + ')', boxShadow: 'inset 0 0 0 1px var(--cm-gold, ' + C.gold + '), inset 0 0 0 4px #0a0907, inset 0 0 40px #00000088, 0 10px 24px #00000055', padding: 20, borderRadius: 2, overflowWrap: 'break-word', position: 'relative' };
@@ -2702,7 +2802,7 @@ export default function App() {
   const encKind = todayEncounter();
   const phase = dayPhase();
   const showAurora = (phase === 'night' || (save.cosmetics && save.cosmetics.theme === 'theme-aurora') || view === 'campaign');
-  const mentorText = mentorMood || (view === 'hall' ? 'The hall is open, estimator. Walk a weak path, or spend a soul at the merchant if you have one to spare.' : view === 'quests' ? 'Daily work first. A traveling encounter may appear beside the standing challenges.' : view === 'shop' ? 'Souls buy ceremony, not answers. Titles and themes are vanity — and vanity has its place.' : '');
+  const mentorText = mentorMood || (view === 'hall' ? 'The hall is open, estimator. Walk a weak path, or spend a Relic Seal at the merchant if you have one to spare.' : view === 'quests' ? 'Daily work first. A traveling encounter may appear beside the standing challenges.' : view === 'shop' ? 'Relic Seals buy ceremony, not answers. Titles and themes are vanity — and vanity has its place.' : '');
   const flakeLeft = [8, 22, 36, 50, 64, 78, 88, 14];
   if (!ready) {
     return (
@@ -2740,24 +2840,28 @@ export default function App() {
     );
   }
   if (view === 'title') {
+    const titleConf = confidenceOf(save);
     return (
       <div className={'cm-root' + (reduceMotion ? ' cm-reduce' : '')} style={{ ...shell, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, textAlign: 'center' }}>
         <style>{css}</style>
         <div className="cm-noise" aria-hidden="true" />
-        <div style={{ maxWidth: 520, width: '100%' }}>
+        <div aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', inset: 0, background: 'radial-gradient(ellipse at 50% 18%, #d4af3722 0%, transparent 42%), radial-gradient(ellipse at 50% 100%, #1b181388 0%, transparent 55%)', zIndex: 1 }} />
+        <div style={{ maxWidth: 560, width: '100%', position: 'relative', zIndex: 3 }}>
           <div style={{ color: C.goldDim, letterSpacing: '0.4em', fontSize: 11, fontFamily: FONT_DECO }}>ᚠ  ᚢ  ᚴ  ᚷ  ᛚ</div>
-          <h1 style={{ ...headingStyle(theme, 32, C.goldSoft), marginTop: 14, fontFamily: FONT_DECO, letterSpacing: '0.12em', textShadow: '0 0 24px ' + C.gold + '88' }}>Construction Mastery</h1>
-          <p style={{ margin: '8px 0 0', letterSpacing: '0.22em', textTransform: 'uppercase', color: C.inkDim, fontSize: 13 }}>The Estimator’s Quest</p>
+          <div style={{ margin: '10px auto 0', width: 72, height: 2, background: 'linear-gradient(90deg, transparent, ' + C.gold + ', transparent)' }} />
+          <h1 style={{ ...headingStyle(theme, 34, C.goldSoft), marginTop: 14, fontFamily: FONT_DECO, letterSpacing: '0.1em', textShadow: '0 2px 0 #00000088, 0 0 28px ' + C.gold + '55' }}>Construction Mastery</h1>
+          <p style={{ margin: '8px 0 0', letterSpacing: '0.26em', textTransform: 'uppercase', color: C.parchDeep, fontSize: 12, fontFamily: FONT_DISPLAY }}>Bidhall Reliquary</p>
+          <p style={{ margin: '6px 0 0', letterSpacing: '0.18em', textTransform: 'uppercase', color: C.inkDim, fontSize: 13 }}>The Estimator’s Quest</p>
           <GoldRule />
-          <div style={{ ...stoneBox, textAlign: 'left', marginTop: 8 }}>
+          <div style={{ ...stoneBox, textAlign: 'left', marginTop: 8, background: 'linear-gradient(165deg, #2e281f 0%, #14110c 55%, #1a1610 100%)' }}>
             <Corners />
             <div style={headingStyle(theme, 12, C.goldDim)}>Continue  ·  save slot I</div>
             <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginTop: 10, flexWrap: 'wrap' }}>
               <Seal rank={rank} level={ch.level} />
               <div style={{ flex: '1 1 200px' }}>
                 <div style={{ color: C.goldSoft, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Jameson Golding</div>
-                <div style={{ color: C.inkDim, fontSize: 14, margin: '4px 0 8px' }}>{wornTitle || rank.title}  ·  Level {ch.level}  ·  Dawn {save.loginStreak}</div>
-                <Meter value={ch.into} max={ch.need} label={ch.into + ' / ' + ch.need + ' to the next level'} />
+                <div style={{ color: C.inkDim, fontSize: 14, margin: '4px 0 8px' }}>{wornTitle || rank.title}  ·  Level {ch.level}  ·  {L.dawn} {save.loginStreak}  ·  {L.confidence} {titleConf.score}</div>
+                <Meter value={ch.into} max={ch.need} color={C.xpBar} label={L.xp + '  ·  ' + ch.into + ' / ' + ch.need + ' to the next level'} />
                 <div style={{ color: savedFlash ? C.goldSoft : (saveWarning ? C.emberSoft : C.inkMute), fontSize: 12, marginTop: 8 }}>{savedFlash ? 'Saved just now' : (lastSavedAt ? 'Last saved  ·  ' + formatLastSaved(lastSavedAt) : 'Not yet saved to a lasting ledger')}</div>
                 {savedFlash && lastSavedAt ? <div style={{ color: C.inkMute, fontSize: 11, marginTop: 4 }}>Last saved  ·  {formatLastSaved(lastSavedAt)}</div> : null}
                 {saveWarning ? <div style={{ color: C.emberSoft, fontSize: 12, marginTop: 6 }}>{saveWarning}</div> : null}
@@ -2781,7 +2885,7 @@ export default function App() {
       <style>{css}</style>
       <div className="cm-noise" aria-hidden="true" />
       {isWinterMonth() && !reduceMotion ? flakeLeft.map((left, i) => <span key={'snow-' + i} className="cm-snow" aria-hidden="true" style={{ left: left + '%', width: 3 + (i % 3), height: 3 + (i % 3), animationDuration: 8 + (i % 6) + 's', animationDelay: (i * 0.45) + 's' }} />) : null}
-      {showAurora ? <div className="cm-aurora" aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', left: 0, right: 0, top: 0, height: 180, zIndex: 2, background: 'linear-gradient(180deg, #5bd0c844 0%, #7a5cff22 42%, transparent 100%)', opacity: reduceMotion ? 0.28 : undefined }} /> : null}
+      {showAurora ? <div className="cm-aurora" aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', left: 0, right: 0, top: 0, height: 160, zIndex: 2, background: 'linear-gradient(180deg, #7aa0b833 0%, #d4af3718 45%, transparent 100%)', opacity: reduceMotion ? 0.22 : undefined }} /> : null}
       <div className={reduceMotion ? undefined : 'cm-flicker'} aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', left: 0, bottom: 0, width: 220, height: 180, zIndex: 2, background: 'radial-gradient(ellipse at 20% 90%, #d4893a66 0%, transparent 70%)', opacity: reduceMotion ? 0.35 : undefined }} />
       {session && session.shoutSlow && !session.show ? <div className="cm-slowveil" aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', inset: 0, zIndex: 4, background: 'radial-gradient(ellipse at 50% 40%, #9ad4ff22 0%, #00000033 100%)' }} /> : null}
       {discoverBanner ? <div role="status" className="cm-discover" style={{ position: 'fixed', left: 0, right: 0, top: '22%', zIndex: 45, textAlign: 'center', pointerEvents: 'none', color: C.goldSoft, fontFamily: FONT_DISPLAY, fontSize: 28, letterSpacing: '0.18em', textTransform: 'uppercase', textShadow: '0 0 22px ' + C.gold + '99, 0 2px 10px #000' }}>{discoverBanner}</div> : null}
@@ -2845,8 +2949,9 @@ export default function App() {
       <div style={{ maxWidth: 980, margin: '0 auto', padding: '28px 18px 80px' }}>
         <header style={{ textAlign: 'center', marginBottom: 18 }}>
           <div style={{ color: C.goldDim, letterSpacing: '0.4em', fontSize: 11 }}>ᚠ  ᚢ  ᚴ  ᚷ  ᛚ</div>
-          <h1 id="cm-main-heading" tabIndex={-1} className="cm-main-heading" style={{ ...headingStyle(theme, 24, C.goldSoft), marginTop: 8, fontFamily: FONT_DECO, textShadow: '0 0 18px var(--cm-glow, ' + C.gold + '66)' }}>Construction Mastery</h1>
-          <p style={{ margin: '6px 0 0', letterSpacing: '0.22em', textTransform: 'uppercase', color: C.inkDim, fontSize: 12 }}>The Estimator’s Quest</p>
+          <h1 id="cm-main-heading" tabIndex={-1} className="cm-main-heading" style={{ ...headingStyle(theme, 24, C.goldSoft), marginTop: 8, fontFamily: FONT_DECO, textShadow: '0 2px 0 #00000066, 0 0 18px var(--cm-glow, ' + C.gold + '55)' }}>Construction Mastery</h1>
+          <p style={{ margin: '4px 0 0', letterSpacing: '0.22em', textTransform: 'uppercase', color: C.parchDeep, fontSize: 11, fontFamily: FONT_DISPLAY }}>Bidhall Reliquary</p>
+          <p style={{ margin: '4px 0 0', letterSpacing: '0.18em', textTransform: 'uppercase', color: C.inkDim, fontSize: 12 }}>The Estimator’s Quest</p>
           <GoldRule />
           <p style={{ margin: 0, color: C.inkDim, fontSize: 14 }}>Jameson Golding · City Creek Construction · Bountiful, UT</p>
           {wornTitle ? <p style={{ margin: '6px 0 0', color: C.goldSoft, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 12 }}>{wornTitle}</p> : null}
@@ -2859,28 +2964,24 @@ export default function App() {
           {navBtn('hall', 'Hall')}
           {navBtn('campaign', 'Campaign')}
           {navBtn('skills', 'Constellations')}
-          {navBtn('sheet', 'Hero')}
+          {navBtn('sheet', L.sheetNav)}
           {navBtn('quests', 'Quest Log')}
           {navBtn('codex', 'Codex')}
           {navBtn('trophies', 'Trophies')}
           {hauntN > 0 ? navBtn('haunt', 'Haunted') : null}
-          {navBtn('shop', 'Merchant')}
+          {navBtn('shop', L.merchant)}
           {navBtn('settings', 'Settings')}
           <button type="button" onClick={() => { if (openTrialPending() && !(session && session.mode === 'bid')) { setMentorMood('A trial is already underway. Resume it, or abandon it before opening Bid Day.'); return; } goView('bid'); }} style={{ font: 'inherit', background: view === 'bid' ? '#5c1818' : 'transparent', color: C.goldSoft, border: '1px solid ' + C.danger, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: 12, padding: '10px 12px', minHeight: 44, cursor: 'pointer' }}>Bid Day</button>
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center', marginBottom: 22, ...stoneBox }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'stretch', marginBottom: 22, ...stoneBox, background: 'linear-gradient(165deg, #2c281f 0%, #14110c 100%)' }}>
+          <Corners />
           <Seal rank={rank} level={ch.level} />
-          <div style={{ flex: '1 1 220px', minWidth: 0 }}>
+          <div style={{ flex: '1 1 180px', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div style={{ ...headingStyle(theme, 13, C.gold), marginBottom: 4 }}>{rank.title}</div>
-            <div style={{ color: C.inkDim, fontSize: 13, marginBottom: 8 }}>{rank.blurb}</div>
+            <div style={{ color: C.inkDim, fontSize: 13, marginBottom: 6 }}>{rank.blurb}</div>
+            <div style={{ color: C.inkMute, fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: FONT_DISPLAY }}>{L.souls} {save.souls}  ·  {L.dawn} {save.loginStreak}</div>
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
-            <div style={{ flex: '1 1 220px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <Meter value={ch.into} max={Math.max(1, ch.need)} color={C.health} label={'Vitality  ·  Level ' + ch.level + '  ·  ' + ch.into + ' / ' + (ch.level >= 100 ? 'max' : ch.need) + (upcoming ? '  ·  next rank ' + upcoming.title + ' at ' + upcoming.min : '')} />
-              <Meter value={Math.min(save.streak, 12)} max={12} color={C.stamina} label={'Combo  ·  ×' + save.streak + '  (best ' + save.bestStreak + ')'} />
-              <Meter value={Math.min(save.souls, 8)} max={8} color={C.magicka} label={'Dragon Souls  ·  ' + save.souls + '  ·  Perk points ' + perkPts + '  ·  Dawn ' + save.loginStreak} />
-            </div>
-          </div>
+          <RelicHud save={save} ch={ch} rank={rank} upcoming={upcoming} perkPts={perkPts} hauntDue={hauntDueList(save).length} />
         </div>
         {saveWarning ? <div role="status" style={{ ...stoneBox, marginBottom: 16, borderColor: C.danger }}><div style={headingStyle(theme, 13, C.goldSoft)}>Saving warning</div><p style={{ margin: '8px 0 0', color: C.inkDim }}>{saveWarning}</p><div style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap', gap: 8 }}>{backupOffer ? <Btn label="Restore from backup" kind="gold" onClick={restoreFromBackup} /> : null}<Btn label="Open Settings for a Save Scroll" kind={backupOffer ? 'stone' : 'gold'} onClick={() => goView('settings')} /></div></div> : null}
         {savedFlash ? <div role="status" style={{ ...stoneBox, marginBottom: 16, borderColor: C.success }}><div style={headingStyle(theme, 13, C.goldSoft)}>Saved just now</div><p style={{ margin: '8px 0 0', color: C.inkDim }}>{lastSavedAt ? 'Last saved  ·  ' + formatLastSaved(lastSavedAt) : 'The ledger was written.'}</p></div> : null}
@@ -2910,7 +3011,7 @@ export default function App() {
             <div style={headingStyle(theme, 13, C.goldDim)}>Journal of prior trials</div>
             <GoldRule />
             <p style={{ margin: 0 }}>Your earlier studies have been inscribed in the ledger. General knowledge, 4 of 7: you knew the 28-day f’c test, Division 08 Openings, the 1:12 accessible ramp, and the 8x8x16 CMU. You missed the actual 2x4 size, EMT, and DWV, and you passed over Type X drywall.</p>
-            <p style={{ margin: '10px 0 0' }}>Fire Suppression: 4 of 4. Plumbing: 4 of 4, including DWV once it returned. Those victories granted experience and two Dragon Souls. Weak paths remain in Wood framing, Electrical, and Finishes — suggested quests in your log.</p>
+            <p style={{ margin: '10px 0 0' }}>Fire Suppression: 4 of 4. Plumbing: 4 of 4, including DWV once it returned. Those victories granted experience and two Relic Seals. Weak paths remain in Wood framing, Electrical, and Finishes — suggested quests in your log.</p>
             <div style={{ marginTop: 14 }}><Btn label="I have read the ledger" kind="gold" onClick={() => setSave((s) => ({ ...s, introSeen: true }))} /></div>
           </div>
         ) : null}
@@ -2939,7 +3040,7 @@ export default function App() {
               <div style={{ ...stoneBox, marginBottom: 18, borderColor: encKind === 'rfi' ? C.danger : C.goldDim }}>
                 <div style={headingStyle(theme, 13, encKind === 'rfi' ? C.goldSoft : C.gold)}>{encKind === 'sub' ? 'A traveling sub at the door' : 'A cursed RFI on the wind'}</div>
                 <GoldRule />
-                <p style={{ margin: '0 0 12px', color: C.inkDim }}>{encKind === 'sub' ? 'A subcontractor wants a number he can live with in ' + weakDef.name + '. Four short trials. Clear three and he pays a Dragon Soul.' : 'A drawing conflict is circling the deadline. Three RFI questions. Clear them and the curse lifts — a Dragon Soul is yours.'}</p>
+                <p style={{ margin: '0 0 12px', color: C.inkDim }}>{encKind === 'sub' ? 'A subcontractor wants a number he can live with in ' + weakDef.name + '. Four short trials. Clear three and he pays a Relic Seal.' : 'A drawing conflict is circling the deadline. Three RFI questions. Clear them and the curse lifts — a Relic Seal is yours.'}</p>
                 <Btn label={encKind === 'sub' ? 'Level the traveling bid' : 'Face the cursed RFI'} kind={encKind === 'rfi' ? 'danger' : 'gold'} onClick={() => startEncounter(encKind)} />
               </div>
             ) : null}
@@ -3051,29 +3152,27 @@ export default function App() {
         ) : null}
         {view === 'sheet' ? (
           <div>
-            <div style={{ ...stoneBox, display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'center' }}>
-              <svg viewBox="0 0 120 140" width="120" height="140" aria-hidden="true">
-                <ellipse cx="60" cy="128" rx="38" ry="8" fill="#00000055" />
-                <rect x="34" y="80" width="52" height="44" rx="8" fill="#2a2418" stroke={rank.metal} strokeWidth="2" />
-                <circle cx="60" cy="54" r="26" fill="#3a3226" stroke={rank.metal} strokeWidth="2" />
-                <path d="M28 52 Q60 16 92 52" fill="#1c1810" stroke={rank.metal} strokeWidth="2" />
-                <rect x="24" y="50" width="72" height="8" rx="2" fill={rank.metal} />
-                <text x="60" y="118" textAnchor="middle" fill={rank.metal} fontSize="9">{rank.rune}</text>
-              </svg>
+            <div style={{ ...stoneBox, display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'center', background: 'linear-gradient(165deg, #2e281f 0%, #14110c 100%)' }}>
+              <Corners />
+              <Portrait rank={rank} level={ch.level} title={wornTitle || rank.title} />
               <div style={{ flex: '1 1 240px' }}>
-                <div style={headingStyle(theme, 12, C.goldDim)}>Character sheet</div>
+                <div style={headingStyle(theme, 12, C.goldDim)}>Character sheet  ·  Bidhall Reliquary</div>
                 <h2 style={{ ...headingStyle(theme, 22, C.goldSoft), margin: '6px 0 0' }}>Jameson Golding</h2>
                 <p style={{ margin: '6px 0 0', color: C.inkDim }}>{wornTitle || rank.title}  ·  Level {ch.level}  ·  City Creek Construction</p>
                 <p style={{ margin: '6px 0 10px', color: C.inkMute, fontSize: 14 }}>{rank.blurb}</p>
-                <Meter value={ch.into} max={ch.need} label={'Experience  ·  ' + ch.into + ' / ' + ch.need} />
-                {upcoming ? <div style={{ color: C.inkMute, fontSize: 13, marginTop: 8 }}>Next rank  ·  {upcoming.title} at level {upcoming.min}  ({Math.max(0, upcoming.min - ch.level)} levels hence)</div> : <div style={{ color: C.goldSoft, fontSize: 13, marginTop: 8 }}>Highest rank  ·  Dragonborn of Bids</div>}
+                <Meter value={ch.into} max={ch.need} color={C.xpBar} label={L.xp + '  ·  ' + ch.into + ' / ' + ch.need} />
+                <div style={{ marginTop: 10 }}>
+                  <Meter value={conf.score} max={100} color={C.confBar} label={L.confidence + '  ·  ' + conf.score + ' / 100'} />
+                  <p style={{ margin: '6px 0 0', color: C.inkMute, fontSize: 13 }}>{conf.blurb}</p>
+                </div>
+                {upcoming ? <div style={{ color: C.inkMute, fontSize: 13, marginTop: 8 }}>Next rank  ·  {upcoming.title} at level {upcoming.min}  ({Math.max(0, upcoming.min - ch.level)} levels hence)</div> : <div style={{ color: C.goldSoft, fontSize: 13, marginTop: 8 }}>Highest rank  ·  {L.topRank}</div>}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginTop: 12, color: C.inkDim, fontSize: 14 }}>
-                  <span>Dawn streak  {save.loginStreak}</span>
+                  <span>{L.dawn} streak  {save.loginStreak}</span>
                   <span>Trophies  {save.achievements.length}/{TROPHIES.length}</span>
                   <span>Codex  {save.codex.length}</span>
-                  <span>Dragon Souls  {save.souls}</span>
+                  <span>{L.souls}  {save.souls}</span>
                 </div>
-                <p style={{ margin: '10px 0 0', color: C.inkMute, fontSize: 13 }}>Dawn rewards: a Dragon Soul at 3, 7, and 14-day streaks, each granted once.</p>
+                <p style={{ margin: '10px 0 0', color: C.inkMute, fontSize: 13 }}>Dawn rewards: a Relic Seal at 3, 7, and 14-day streaks, each granted once.</p>
               </div>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, marginTop: 14 }}>
@@ -3173,7 +3272,7 @@ export default function App() {
           <div style={parch}>
             <div style={headingStyle(theme, 13, C.goldDim)}>Quest log · {todayKey()}</div>
             <GoldRule />
-            <p style={{ marginTop: 0, color: C.parchMute }}>Daily quests reset at midnight on this device. Finish the three daily trials and a Dragon Soul is yours. Bid Day is a standing guild challenge, not a daily burden.</p>
+            <p style={{ marginTop: 0, color: C.parchMute }}>Daily quests reset at midnight on this device. Finish the three daily trials and a Relic Seal is yours. Bid Day is a standing guild challenge, not a daily burden.</p>
             {daily.map((q) => (
               <div key={q.id} style={{ marginBottom: 14, paddingBottom: 12, borderBottom: '1px solid ' + C.goldDim }}>
                 <div style={{ letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 13 }}>{q.done ? 'Complete' : 'Open'}  ·  {q.title}</div>
@@ -3184,10 +3283,10 @@ export default function App() {
               </div>
             ))}
             <div style={{ letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 13 }}>{save.dailyDone.indexOf('bid') >= 0 ? 'Faced today' : 'Standing challenge'}  ·  Bid Day, the Dragon of Scope Gaps</div>
-            <p style={{ margin: '6px 0 10px', color: C.parchMute }}>Five harder, mixed-trade questions. A perfect run yields two Dragon Souls. Best result: {save.bidBest}/5.</p>
+            <p style={{ margin: '6px 0 10px', color: C.parchMute }}>Five harder, mixed-trade questions. A perfect run yields two Relic Seals. Best result: {save.bidBest}/5.</p>
             <Btn label="Face Bid Day" kind="danger" onClick={startBid} />
             <div style={{ marginTop: 18, letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 13 }}>{encOpen ? 'Encounter today' : 'Encounter settled'}  ·  {encKind === 'sub' ? 'The traveling sub' : 'The cursed RFI'}</div>
-            <p style={{ margin: '6px 0 10px', color: C.parchMute }}>{encOpen ? (encKind === 'sub' ? 'A sub wants a clean number in ' + weakDef.name + '. Clear three of four trials for a Dragon Soul.' : 'Three RFI questions stand between you and a clean close. Clear them for a Dragon Soul.') : 'This dawn’s encounter has already been faced.'}</p>
+            <p style={{ margin: '6px 0 10px', color: C.parchMute }}>{encOpen ? (encKind === 'sub' ? 'A sub wants a clean number in ' + weakDef.name + '. Clear three of four trials for a Relic Seal.' : 'Three RFI questions stand between you and a clean close. Clear them for a Relic Seal.') : 'This dawn’s encounter has already been faced.'}</p>
             {encOpen ? <Btn label={encKind === 'sub' ? 'Level the traveling bid' : 'Face the cursed RFI'} kind={encKind === 'rfi' ? 'danger' : 'gold'} onClick={() => startEncounter(encKind)} /> : null}
           </div>
         ) : null}
@@ -3195,7 +3294,7 @@ export default function App() {
           <div style={parch}>
             <div style={headingStyle(theme, 13, C.goldDim)}>Codex  ·  Bestiary of concepts</div>
             <GoldRule />
-            <p style={{ marginTop: 0, color: C.parchMute }}>Rank climbs with character level: Apprentice through Dragonborn of Bids. A concept is inscribed here the first time you answer it right. In a trial, a Dragon Soul can fuel a 50/50 Shout or Time Slow. Progress stays on this device, and a Save Scroll can copy it.</p>
+            <p style={{ marginTop: 0, color: C.parchMute }}>Rank climbs with character level: Apprentice through Archon of Bids. A concept is inscribed here the first time you answer it right. In a trial, a Relic Seal can fuel a 50/50 Ward or Quill Slow. Progress stays on this device, and a Save Scroll can copy it.</p>
             <div style={{ marginBottom: 18 }}>
               <div style={{ letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 13, marginBottom: 8 }}>{save.codex.length} concepts inscribed</div>
               <input type="search" aria-label="Search the Codex" placeholder="Search inscribed concepts" value={codexQ} onChange={(e: ChangeEvent<HTMLInputElement>) => setCodexQ(e.target.value)} style={{ width: '100%', boxSizing: 'border-box', margin: '0 0 10px', padding: '10px 12px', background: '#efe6d2', color: C.parchInk, border: '1px solid ' + C.goldDim, font: 'inherit' }} />
@@ -3245,7 +3344,7 @@ export default function App() {
             <Btn label="Park this trial" kind="quiet" onClick={() => goView('hall')} />
             </div>
             <p style={{ margin: '8px 0 0', color: session.mode === 'bid' ? C.inkDim : C.parchMute, fontSize: 14 }}>Trial {session.index + 1} of {session.ids.length}{session.mode === 'bid' ? '  ·  Mixed trades, harder questions. The bid is due at two o’clock.' : '  ·  Keys 1–4 or A–D to answer, Enter to continue.'}</p>
-            {save.streak >= 2 && !session.show ? <div style={{ marginTop: 10, color: C.goldSoft, letterSpacing: '0.16em', textTransform: 'uppercase', fontSize: 13, textShadow: '0 0 12px ' + C.gold }}>Combo  ×{save.streak}</div> : null}
+            {save.streak >= 2 && !session.show ? <div style={{ marginTop: 10, color: C.goldSoft, letterSpacing: '0.16em', textTransform: 'uppercase', fontSize: 13, textShadow: '0 0 12px ' + C.gold }}>{L.combo}  ×{save.streak}</div> : null}
               {session.mode === 'boss' ? (() => {
                 const maxHP = session.ids.length;
                 const scored = session.items.filter((it) => it.correct).length;
@@ -3254,7 +3353,7 @@ export default function App() {
                 return (
                   <div style={{ margin: '10px 0 0' }}>
                     <div style={{ color: C.emberSoft, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: 12 }}>Phase {phase} of 2  ·  {phase === 1 ? 'The foe tests your footing' : 'The foe is enraged'}</div>
-                    <Meter value={hp} max={maxHP} color={C.health} label={'Boss vitality  ·  ' + hp + ' / ' + maxHP} />
+                    <Meter value={hp} max={maxHP} color={C.health} label={'Boss resolve  ·  ' + hp + ' / ' + maxHP} />
                   </div>
                 );
               })() : null}
@@ -3301,10 +3400,10 @@ export default function App() {
               </div>
             ) : (
               <div style={{ marginTop: 16 }}>
-                {quizQ.kind === 'num' ? <div><div style={{ color: session.mode === 'bid' ? C.inkMute : C.parchMute, fontSize: 13, marginBottom: 10 }}>Type the number, then seal it or press Enter. A close estimate within tolerance counts.</div><Btn label={session.shoutSlow ? 'Time Slow is active' : save.souls < 1 ? 'No souls for Time Slow' : 'Time Slow  ·  1 soul'} disabled={save.souls < 1 || !!session.shoutSlow} onClick={useSlow} /></div> : (
+                {quizQ.kind === 'num' ? <div><div style={{ color: session.mode === 'bid' ? C.inkMute : C.parchMute, fontSize: 13, marginBottom: 10 }}>Type the number, then seal it or press Enter. A close estimate within tolerance counts.</div><Btn label={session.shoutSlow ? 'Quill Slow is active' : save.souls < 1 ? 'No Relic Seals for Quill Slow' : 'Quill Slow  ·  1 Relic Seal'} disabled={save.souls < 1 || !!session.shoutSlow} onClick={useSlow} /></div> : (
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                    <Btn label={session.hint ? '50/50 Shout spent' : save.souls < 1 ? 'No souls for a 50/50 Shout' : '50/50 Shout  ·  1 soul'} disabled={save.souls < 1 || session.hint || quizQ.kind === 'tf'} onClick={useHint} />
-                    <Btn label={session.shoutSlow ? 'Time Slow is active' : save.souls < 1 ? 'No souls for Time Slow' : 'Time Slow  ·  1 soul'} disabled={save.souls < 1 || !!session.shoutSlow} onClick={useSlow} />
+                    <Btn label={session.hint ? '50/50 Ward spent' : save.souls < 1 ? 'No Relic Seals for a 50/50 Ward' : '50/50 Ward  ·  1 Relic Seal'} disabled={save.souls < 1 || session.hint || quizQ.kind === 'tf'} onClick={useHint} />
+                    <Btn label={session.shoutSlow ? 'Quill Slow is active' : save.souls < 1 ? 'No Relic Seals for Quill Slow' : 'Quill Slow  ·  1 Relic Seal'} disabled={save.souls < 1 || !!session.shoutSlow} onClick={useSlow} />
                   </div>
                 )}
               </div>
@@ -3318,10 +3417,10 @@ export default function App() {
             <h2 style={{ ...headingStyle(theme, 20, C.parchInk) }}>{session.items.filter((i) => i.correct).length} of {session.items.length} correct</h2>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, margin: '8px 0 12px', color: C.parchMute, fontSize: 14 }}>
               <span>XP gained  ·  {session.items.reduce((n, i) => n + (i.xp || 0), 0) + (session.bonusXp || 0)}</span>
-              <span>Dragon Souls  ·  {(save.souls - (session.startSouls || 0) >= 0 ? '+' : '') + (save.souls - (session.startSouls || 0))}</span>
+              <span>Relic Seals  ·  {(save.souls - (session.startSouls || 0) >= 0 ? '+' : '') + (save.souls - (session.startSouls || 0))}</span>
               <span>New Codex  ·  {Math.max(0, save.codex.length - (typeof session.startCodex === 'number' ? session.startCodex : (session.startCodex ? session.startCodex.length : 0)))}</span>
             </div>
-            <p style={{ color: C.parchMute }}>{session.items.filter((i) => i.correct).length === session.items.length ? (session.mode === 'bid' ? 'A perfect bid day. Two Dragon Souls are yours, and the hall remembers your Shout.' : 'A perfect trial. A Dragon Soul is yours, and a bonus of experience has been granted.') : 'Read the misses once more. Concepts learned and misses to review are listed below.'}</p>
+            <p style={{ color: C.parchMute }}>{session.items.filter((i) => i.correct).length === session.items.length ? (session.mode === 'bid' ? 'A perfect bid day. Two Relic Seals are yours, and the hall remembers your complete number.' : 'A perfect trial. A Relic Seal is yours, and a bonus of experience has been granted.') : 'Read the misses once more. Concepts learned and misses to review are listed below.'}</p>
             <div style={{ letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 12, color: C.goldDim, margin: '8px 0' }}>Concepts learned</div>
             {session.items.filter((i) => i.correct).map((item) => {
               const q = qById(item.id);
@@ -3353,17 +3452,17 @@ export default function App() {
         ) : null}
         {view === 'shop' ? (
           <div style={stoneBox}>
-            <div style={headingStyle(theme, 13, C.gold)}>The Soul Merchant</div>
+            <div style={headingStyle(theme, 13, C.gold)}>The Seal Merchant</div>
             <GoldRule />
-            <p style={{ color: C.inkDim, marginTop: 0 }}>Spend Dragon Souls on titles, banners, and hall themes. Cosmetics never change a question or an answer. You have {save.souls} {save.souls === 1 ? 'soul' : 'souls'}.</p>
+            <p style={{ color: C.inkDim, marginTop: 0 }}>Spend Relic Seals on titles, banners, and hall themes. Cosmetics never change a question or an answer. You have {soulPhrase(save.souls)}.</p>
             {SHOP.map((item) => {
               const owned = ((save.cosmetics && save.cosmetics.owned) || []).indexOf(item.id) >= 0;
               const equipped = save.cosmetics && save.cosmetics[item.kind] === item.id;
               return (
                 <div key={item.id} style={{ marginBottom: 14, paddingBottom: 12, borderBottom: '1px solid ' + C.goldDim }}>
-                  <div style={{ letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 13, color: C.goldSoft }}>{item.kind}  ·  {item.name}{equipped ? '  ·  equipped' : owned ? '  ·  owned' : '  ·  ' + item.cost + (item.cost === 1 ? ' soul' : ' souls')}</div>
+                  <div style={{ letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 13, color: C.goldSoft }}>{item.kind}  ·  {item.name}{equipped ? '  ·  equipped' : owned ? '  ·  owned' : '  ·  ' + soulPhrase(item.cost)}</div>
                   <p style={{ margin: '6px 0 10px', color: C.inkDim }}>{item.detail}</p>
-                  <Btn label={owned ? (equipped ? 'Unequip' : 'Equip') : save.souls < item.cost ? 'Not enough souls' : 'Buy for ' + item.cost} kind={owned || save.souls >= item.cost ? 'gold' : 'quiet'} disabled={!owned && save.souls < item.cost} onClick={() => buyCosmetic(item.id)} />
+                  <Btn label={owned ? (equipped ? 'Unequip' : 'Equip') : save.souls < item.cost ? 'Not enough Relic Seals' : 'Buy for ' + item.cost} kind={owned || save.souls >= item.cost ? 'gold' : 'quiet'} disabled={!owned && save.souls < item.cost} onClick={() => buyCosmetic(item.id)} />
                 </div>
               );
             })}
@@ -3430,7 +3529,7 @@ export default function App() {
             </div>
             {importNotice ? <p style={{ color: C.goldSoft, marginTop: 0 }}>{importNotice}</p> : null}
             <div style={{ color: C.goldSoft, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 12, marginBottom: 8 }}>Dawn rewards</div>
-            <p style={{ color: C.inkDim }}>A Dragon Soul is granted once at a 3-day, 7-day, and 14-day login streak.</p>
+            <p style={{ color: C.inkDim }}>A Relic Seal is granted once at a 3-day, 7-day, and 14-day login streak.</p>
             <div style={{ color: C.goldSoft, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 12, marginBottom: 8 }}>Reset</div>
             {!resetAsk ? <Btn label="Reset to the opening ledger" kind="danger" onClick={() => setResetAsk(true)} /> : (
               <div>
@@ -3447,7 +3546,7 @@ export default function App() {
           <div style={{ ...stoneBox, background: '#160c0c', borderColor: C.danger }}>
             <div style={headingStyle(theme, 13, C.goldSoft)}>Bid Day · The Dragon of Scope Gaps</div>
             <GoldRule />
-            <p style={{ color: C.inkDim }}>The proposal is due at two o’clock. Five mixed questions, harder than a morning trial, drawn from every trade. A perfect run grants two Dragon Souls and a bonus of experience. Your best: {save.bidBest} of 5.</p>
+            <p style={{ color: C.inkDim }}>The proposal is due at two o’clock. Five mixed questions, harder than a morning trial, drawn from every trade. A perfect run grants two Relic Seals and a bonus of experience. Your best: {save.bidBest} of 5.</p>
             <Btn label="Begin the bid" kind="danger" onClick={startBid} />
           </div>
         ) : null}

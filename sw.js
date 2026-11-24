@@ -1,7 +1,9 @@
 /* Jamo Sports Hub service worker (2026-11-10, Jamo picked "Opens like an app"). sports-hub/build.sh publishes it at
-   /sw.js; /sports/app.js registers it. It only touches the sports pages (/sports, /cfb, /nfl, /nba, /cbb) - the rest of
-   djgolding.com goes straight to the network as before - and it never touches the live-score feeds (/api/...), so live
-   scores always come from the network.
+   /sw.js; /sports/app.js registers it (scope "/"). Fetch handling only touches sports pages
+   (/sports, /cfb, /nfl, /nba, /cbb) - the rest of djgolding.com goes straight to the network - and it never touches
+   the live-score feeds (/api/...), so live scores always come from the network.
+   Construction Mastery owns /construction-mastery/ via its own SW + manifest (2026-11-24); the Sports Hub web
+   manifest scope is /sports/ so that path is not offered as "Open in app" for Jamo Sports Hub.
    - Pages: fresh from the network first. With no connection, or after 4 seconds with no answer, the last saved copy,
      marked with the time it was saved so the page can say "Showing the copy saved at 2:14 PM".
    - Files whose address carries a version (?v=...) and the hubs' data blocks (/cfb/d/...): the saved copy (they never

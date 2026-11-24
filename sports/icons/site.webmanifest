@@ -4,7 +4,7 @@
   "short_name": "Jamo Sports",
   "description": "College football, the NFL, the NBA and college basketball in one place.",
   "start_url": "/sports/",
-  "scope": "/",
+  "scope": "/sports/",
   "display": "standalone",
   "background_color": "#070a12",
   "theme_color": "#070a12",
@@ -14,9 +14,8 @@
     { "src": "/sports/icons/jsh.svg", "sizes": "any", "type": "image/svg+xml" }
   ],
   "shortcuts": [
-    { "name": "College Football", "short_name": "CFB", "url": "/cfb/" },
-    { "name": "NFL", "short_name": "NFL", "url": "/nfl/" },
-    { "name": "NBA", "short_name": "NBA", "url": "/nba/" },
-    { "name": "College Basketball", "short_name": "CBB", "url": "/cbb/" }
+    { "name": "Live Center", "short_name": "Live", "url": "/sports/live/" },
+    { "name": "Alerts", "short_name": "Alerts", "url": "/sports/alerts/" },
+    { "name": "Sports home", "short_name": "Home", "url": "/sports/" }
   ]
 }

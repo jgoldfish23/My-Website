@@ -1291,9 +1291,9 @@
 2026-10-10|Charlotte|North Texas|North Texas|passingYards|Tayven Jackson|QB|24/31, 349 YDS, 5 TD
 2026-10-10|Charlotte|North Texas|North Texas|rushingYards|Jahiem White|RB|12 CAR, 105 YDS, 1 TD
 2026-10-10|Charlotte|North Texas|North Texas|receivingYards|Justin Stevenson|WR|9 REC, 122 YDS, 2 TD
-2026-10-10|Tulsa|Navy|Tulsa|passingYards|Baylor Hayes|QB|21/38, 268 YDS, 1 TD
+2026-10-10|Tulsa|Navy|Tulsa|passingYards|Baylor Hayes|QB|21/35, 269 YDS, 1 TD
 2026-10-10|Tulsa|Navy|Navy|rushingYards|Jackson Gutierrez|QB|41 CAR, 232 YDS, 3 TD
-2026-10-10|Tulsa|Navy|Tulsa|receivingYards|Javon Ross|WR|7 REC, 90 YDS
+2026-10-10|Tulsa|Navy|Tulsa|receivingYards|Javon Ross|WR|7 REC, 93 YDS
 2026-10-10|Eastern Michigan|Akron|Eastern Michigan|passingYards|Noah Kim|QB|26/46, 277 YDS, 1 TD, 1 INT
 2026-10-10|Eastern Michigan|Akron|Akron|rushingYards|Jordan Gant|RB|22 CAR, 117 YDS
 2026-10-10|Eastern Michigan|Akron|Eastern Michigan|receivingYards|Joshua Long|TE|9 REC, 114 YDS
@@ -2129,7 +2129,7 @@
 2026-11-14|Michigan|Oregon|Michigan|rushingYards|Savion Hiter|RB|13 CAR, 107 YDS, 1 TD
 2026-11-14|Michigan|Oregon|Oregon|receivingYards|Jeremiah McClellan|WR|4 REC, 105 YDS, 1 TD
 2026-11-14|South Carolina|Arkansas|South Carolina|passingYards|Cutter Woods|QB|24/43, 271 YDS, 3 INT
-2026-11-14|South Carolina|Arkansas|South Carolina|rushingYards|Jabree Coleman|RB|16 CAR, 77 YDS, 1 TD
+2026-11-14|South Carolina|Arkansas|South Carolina|rushingYards|Jabree Coleman|RB|15 CAR, 74 YDS, 1 TD
 2026-11-14|South Carolina|Arkansas|Arkansas|receivingYards|Chris Marshall|WR|4 REC, 63 YDS, 1 TD
 2026-11-14|Northwestern|Ohio State|Northwestern|passingYards|Nicco Marchiol|QB|18/31, 225 YDS, 1 TD
 2026-11-14|Northwestern|Ohio State|Ohio State|rushingYards|Bo Jackson|RB|20 CAR, 114 YDS, 1 TD

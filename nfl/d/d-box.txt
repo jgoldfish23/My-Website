@@ -15518,4 +15518,96 @@ P|162|H|kickReturns|Deebo Samuel Sr.||3126486|2;57;28.5;33;0
 P|162|H|puntReturns|Jacob Cowing||4575665|1;0;0.0;0;0
 P|162|H|kicking|Eddy Pineiro||4034949|0/0;0.0;0;5/5;5
 P|162|H|punting|Corliss Waitman||3125280|4;201;50.3;0;2;54
+G|163|401873078|2026-11-23|CIN|WSH
+T|163|A|firstDowns=17;firstDownsPassing=15;firstDownsRushing=1;firstDownsPenalty=1;thirdDownEff=4-12;fourthDownEff=1-2;totalOffensivePlays=57;totalYards=312;yardsPerPlay=5.5;totalDrives=10;netPassingYards=281;completionAttempts=28/40;yardsPerPass=6.5;interceptions=0;sacksYardsLost=3-19;rushingYards=31;rushingAttempts=14;yardsPerRushAttempt=2.2;redZoneAttempts=1-1;totalPenaltiesYards=5-39;turnovers=0;fumblesLost=0;interceptions=0;defensiveTouchdowns=0;possessionTime=28:29;defSacks=3;defTfl=4
+T|163|H|firstDowns=23;firstDownsPassing=13;firstDownsRushing=8;firstDownsPenalty=2;thirdDownEff=2-10;fourthDownEff=0-0;totalOffensivePlays=64;totalYards=428;yardsPerPlay=6.7;totalDrives=10;netPassingYards=278;completionAttempts=23/35;yardsPerPass=7.3;interceptions=0;sacksYardsLost=3-11;rushingYards=150;rushingAttempts=26;yardsPerRushAttempt=5.8;redZoneAttempts=1-4;totalPenaltiesYards=5-40;turnovers=0;fumblesLost=0;interceptions=0;defensiveTouchdowns=0;possessionTime=31:31;defSacks=3;defTfl=2
+S|163|2|6:17|CIN|Evan McPherson 38 Yd Field Goal|3|0
+S|163|2|1:55|CIN|Tee Higgins 31 Yd pass from Joe Burrow (Evan McPherson Kick)|10|0
+S|163|2|0:12|WSH|Jacory Croskey-Merritt 1 Yd Rush (Drew Stevens Kick)|10|7
+S|163|3|11:47|WSH|Drew Stevens 36 Yd Field Goal|10|10
+S|163|3|7:04|CIN|Colbie Young 4 Yd pass from Joe Burrow (Evan McPherson Kick)|17|10
+S|163|3|2:36|WSH|Drew Stevens 40 Yd Field Goal|17|13
+S|163|4|10:32|WSH|Drew Stevens 25 Yd Field Goal|17|16
+S|163|4|2:26|WSH|Drew Stevens 41 Yd Field Goal|17|19
+S|163|4|0:46|CIN|Evan McPherson 56 Yd Field Goal|20|19
+S|163|4|0:00|WSH|Drew Stevens 26 Yd Field Goal|20|22
+W|163|25;28;23;25;28;29;30;26;27;32;29;28;24;22;24;23;25;18;13;14;20;24;27;34;30;31;27;16;18;20;20;23;21;30;38;29;29;35;39;44;53;48;35;67;40;100;100
+P|163|A|passing|Joe Burrow||3915511|28/40;300;7.5;2;0;3-19;56.9;108.3
+P|163|A|rushing|Samaje Perine||3116389|6;26;4.3;0;11
+P|163|A|rushing|Chase Brown||4362238|6;6;1.0;0;3
+P|163|A|rushing|Joe Burrow||3915511|2;-1;-0.5;0;0
+P|163|A|receiving|Mike Gesicki||3116164|5;77;15.4;0;32;6
+P|163|A|receiving|Samaje Perine||3116389|4;71;17.8;0;44;4
+P|163|A|receiving|Tee Higgins||4239993|2;43;21.5;1;31;3
+P|163|A|receiving|Jack Endries||5085189|4;33;8.3;0;12;5
+P|163|A|receiving|Ja'Marr Chase||4362628|5;31;6.2;0;10;9
+P|163|A|receiving|Chase Brown||4362238|5;30;6.0;0;9;8
+P|163|A|receiving|Drew Sample||3127310|1;9;9.0;0;9;1
+P|163|A|receiving|Colbie Young||5092508|1;4;4.0;1;4;2
+P|163|A|receiving|Dohnte Meyers||4384852|1;2;2.0;0;2;2
+P|163|A|fumbles|Samaje Perine||3116389|1;0;0
+P|163|A|defensive|Barrett Carter||4431519|10;3;0;0;0;0;0
+P|163|A|defensive|Demetrius Knight Jr.||4427729|7;3;0;0;0;0;0
+P|163|A|defensive|Myles Murphy||4428985|7;3;0;0;0;0;0
+P|163|A|defensive|Josh Newton||4365319|5;5;0;0;1;0;0
+P|163|A|defensive|Boye Mafe||4240754|5;4;3;3;0;3;0
+P|163|A|defensive|DJ Turner II||4572036|5;4;0;0;0;0;0
+P|163|A|defensive|Jonathan Allen||3054840|4;3;0;0;0;1;0
+P|163|A|defensive|Bryan Cook||4247726|4;2;0;0;0;0;0
+P|163|A|defensive|Jordan Battle||4567098|4;2;0;0;0;0;0
+P|163|A|defensive|Dax Hill||4426422|4;1;0;0;0;0;0
+P|163|A|defensive|Swayze Bozeman||4570546|4;0;0;0;0;0;0
+P|163|A|defensive|B.J. Hill||3116748|3;1;0;0;0;0;0
+P|163|A|defensive|T.J. Slaton Jr.||4240612|3;1;0;0;0;0;0
+P|163|A|defensive|Dexter Lawrence II||4035483|2;1;0;1;0;1;0
+P|163|A|defensive|PJ Jules||4429946|2;1;0;0;0;0;0
+P|163|A|defensive|Cedric Johnson||4430065|1;1;0;0;0;0;0
+P|163|A|defensive|Kris Jenkins Jr.||4432301|1;1;0;0;0;0;0
+P|163|A|defensive|Tacario Davis||4726127|1;1;0;0;0;0;0
+P|163|A|defensive|Samaje Perine||3116389|1;0;0;0;0;0;0
+P|163|A|defensive|Joe Giles-Harris||3917797|1;0;0;0;0;0;0
+P|163|A|defensive|Russ Yeast||4240071|1;0;0;0;0;0;0
+P|163|A|defensive|Jack Kiser||4427716|1;0;0;0;0;0;0
+P|163|A|defensive|Tahj Brooks||4429299|1;0;0;0;0;0;0
+P|163|A|kickReturns|Dohnte Meyers||4384852|6;150;25.0;31;0
+P|163|A|puntReturns|Dohnte Meyers||4384852|1;5;5.0;5;0
+P|163|A|kicking|Evan McPherson||4360234|2/2;100.0;56;2/2;8
+P|163|A|punting|Ryan Rehkow||4608820|4;214;53.5;1;2;58
+P|163|H|passing|Jayden Daniels||4426348|23/35;289;8.3;0;0;3-11;58.6;91.2
+P|163|H|rushing|Jayden Daniels||4426348|6;55;9.2;0;47
+P|163|H|rushing|Jacory Croskey-Merritt||4575131|13;54;4.2;1;9
+P|163|H|rushing|Austin Ekeler||3068267|7;41;5.9;0;17
+P|163|H|receiving|Antonio Williams||5081432|9;122;13.6;0;42;11
+P|163|H|receiving|Chig Okonkwo||4360635|4;66;16.5;0;32;5
+P|163|H|receiving|Stefon Diggs||2976212|4;45;11.3;0;29;6
+P|163|H|receiving|Treylon Burks||4567156|2;30;15.0;0;17;3
+P|163|H|receiving|Jacory Croskey-Merritt||4575131|2;23;11.5;0;18;3
+P|163|H|receiving|Austin Ekeler||3068267|2;3;1.5;0;2;3
+P|163|H|receiving|Van Jefferson||3930066|0;0;0.0;0;0;1
+P|163|H|defensive|Frankie Luvu||3127273|12;5;0;0;0;1;0
+P|163|H|defensive|Jeremy Reaves||3125248|7;5;0;1;1;0;0
+P|163|H|defensive|Trey Amos||4574689|6;3;0;0;0;0;0
+P|163|H|defensive|Rasul Douglas||3943270|5;4;0;0;2;0;0
+P|163|H|defensive|Sonny Styles||5081807|5;3;0;0;0;0;0
+P|163|H|defensive|Tim Settle||3929956|5;2;1.5;1;0;2;0
+P|163|H|defensive|Nick Cross||4426403|4;1;0.5;0;0;1;0
+P|163|H|defensive|Mike Sainristil||4428414|3;2;0;0;0;0;0
+P|163|H|defensive|Quan Martin||4360378|3;1;0;0;0;0;0
+P|163|H|defensive|K'Lavon Chaisson||4242205|2;1;0.5;0;0;2;0
+P|163|H|defensive|Shy Tuttle||3886601|2;0;0;0;0;0;0
+P|163|H|defensive|Dorance Armstrong||3928979|2;0;0;0;0;0;0
+P|163|H|defensive|Kain Medrano||4427984|2;0;0.5;0;0;1;0
+P|163|H|defensive|Jordan Magee||4568617|2;0;0;0;0;0;0
+P|163|H|defensive|Ale Kaho||4361090|1;1;0;0;0;0;0
+P|163|H|defensive|Luke McCaffrey||4426948|1;1;0;0;0;0;0
+P|163|H|defensive|Jer'Zhan Newton||4430560|1;1;0;0;0;0;0
+P|163|H|defensive|Tyler Owens||4572460|1;1;0;0;0;0;0
+P|163|H|defensive|Charles Omenihu||3929865|1;0;0;0;0;1;0
+P|163|H|defensive|Colson Yankoff||4361088|1;0;0;0;0;0;0
+P|163|H|defensive|Joshua Josephs||5081392|0;0;0;0;0;2;0
+P|163|H|kickReturns|Luke McCaffrey||4426948|3;65;21.7;23;0
+P|163|H|kickReturns|Rachaad White||4697815|2;48;24.0;25;0
+P|163|H|puntReturns|Luke McCaffrey||4426948|1;-1;-1.0;-1;0
+P|163|H|kicking|Drew Stevens||5081335|5/5;100.0;41;1/1;16
+P|163|H|punting|Tress Way||16166|4;167;41.8;0;2;49
 

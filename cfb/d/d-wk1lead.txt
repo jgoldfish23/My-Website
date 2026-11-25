@@ -2464,6 +2464,12 @@
 2026-11-21|Hawai'i|Nevada|Nevada|passingYards|AJ Bianco|QB|8/18, 106 YDS
 2026-11-21|Hawai'i|Nevada|Nevada|rushingYards|Herschel Turner|RB|13 CAR, 73 YDS
 2026-11-21|Hawai'i|Nevada|Nevada|receivingYards|Marshaun Brown|WR|4 REC, 61 YDS
+2026-11-24|Kent State|Eastern Michigan|Kent State|passingYards|Ethan Thanthanavong|QB|8/11, 104 YDS, 1 TD, 1 INT
+2026-11-24|Kent State|Eastern Michigan|Eastern Michigan|rushingYards|Amareon Blue|RB|8 CAR, 92 YDS, 1 TD
+2026-11-24|Kent State|Eastern Michigan|Eastern Michigan|receivingYards|Benson Prosper|WR|5 REC, 61 YDS
+2026-11-24|Miami (OH)|Western Michigan|Miami (OH)|passingYards|Drew Bellisari|QB|9/16, 153 YDS, 2 TD
+2026-11-24|Miami (OH)|Western Michigan|Western Michigan|rushingYards|Broc Lowry|QB|10 CAR, 51 YDS
+2026-11-24|Miami (OH)|Western Michigan|Miami (OH)|receivingYards|Scoop Smith|WR|2 REC, 46 YDS, 1 TD
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD

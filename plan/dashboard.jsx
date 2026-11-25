@@ -12,6 +12,7 @@ const MapPinIcon = LucideReact.MapPin || Blank;
 const RotateIcon = LucideReact.RotateCcw || Blank;
 const BellIcon = LucideReact.Bell || Blank;
 const GlobeIcon = LucideReact.Globe || Blank;
+const GiftIcon = LucideReact.Gift || Heart;
 
 const STORAGE_KEY = "wedding_dashboard_state";
 const uid = () => Math.random().toString(36).slice(2, 9);
@@ -60,6 +61,9 @@ const makeDefaultTimeline = () => ({
 
 // One printed invitation = one envelope = one row in the mailing list.
 const blankInvite = () => ({ id: uid(), name: "", street: "", city: "", region: "", zip: "", mailed: false, mailedOn: "", note: "" });
+// One gift that came in, for the thank-you list.
+const GIFT_WAYS = ["Venmo", "Target", "Amazon", "Card / check", "Cash", "In person", "Other"];
+const blankGift = () => ({ id: uid(), from: "", what: "", via: "", value: "", receivedOn: "", thanked: false, thankedOn: "", note: "" });
 
 const DEFAULT_STATE = {
   partnerA: "Jameson",
@@ -153,6 +157,7 @@ const DEFAULT_STATE = {
   guests: Array.from({ length: GUEST_CAP }, () => ({ id: uid(), name: "", side: "", rsvp: "", meal: "" })),
   invites: [blankInvite(), blankInvite(), blankInvite()],
   rsvpLinks: {},   // website reply id -> guest ids added to it by hand (the plus-ones a reply didn't name)
+  giftLog: [],     // gifts received, newest first, with a thank-you tick for each
   budget: {
     total: "",
     items: [
@@ -332,6 +337,7 @@ const migrateState = (raw) => {
   // Mailing list for the printed invitations; saved plans from before it existed start with three blank rows.
   if (!Array.isArray(s.invites)) s.invites = [blankInvite(), blankInvite(), blankInvite()];
   if (!s.rsvpLinks || typeof s.rsvpLinks !== "object" || Array.isArray(s.rsvpLinks)) s.rsvpLinks = {};
+  if (!Array.isArray(s.giftLog)) s.giftLog = [];
 
   // Give every task a due field, and seed suggested dates for the key milestones.
   const SEED_DUE = {
@@ -917,6 +923,50 @@ function WeddingDashboard() {
   const mailedCount = households.filter((v) => v.mailed).length;
   const readyToMail = households.filter((v) => hasAddress(v) && !v.mailed).length;
   const needAddress = households.filter((v) => !hasAddress(v)).length;
+
+  // ---- Gifts received (the thank-you list) ----
+  const giftLog = state.giftLog || [];
+  const setGift = (idx, key, val) =>
+    update((s) => {
+      s.giftLog[idx][key] = val;
+      return s;
+    });
+  // Ticking "thank-you sent" stamps today's date, like the invitation list.
+  const toggleThanked = (idx) =>
+    update((s) => {
+      const g = s.giftLog[idx];
+      g.thanked = !g.thanked;
+      g.thankedOn = g.thanked ? localDay() : "";
+      return s;
+    });
+  // New gifts go on top, dated today.
+  const addGift = (from) =>
+    update((s) => {
+      s.giftLog = s.giftLog || [];
+      s.giftLog.unshift({ ...blankGift(), from: from || "", receivedOn: localDay() });
+      return s;
+    });
+  const removeGift = (idx) =>
+    update((s) => {
+      s.giftLog.splice(idx, 1);
+      return s;
+    });
+  const giftsLogged = giftLog.filter((g) => String(g.from || "").trim() || String(g.what || "").trim());
+  const giftsThanked = giftsLogged.filter((g) => g.thanked).length;
+  const thanksOwed = giftsLogged.length - giftsThanked;
+  const giftMoney = giftsLogged.reduce((t, g) => t + num(g.value), 0);
+  const venmoMoney = giftsLogged.filter((g) => g.via === "Venmo").reduce((t, g) => t + num(g.value), 0);
+
+  // Notes people left on the home page. Anyone who also sent a gift can be added to the list with one tap.
+  const [siteNotes, setSiteNotes] = useState([]);
+  useEffect(() => {
+    fetch("/api/wishes", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : []))
+      .then((list) => setSiteNotes(Array.isArray(list) ? list.slice(0, 12) : []))
+      .catch(() => {});
+  }, []);
+  const loggedFrom = new Set(giftLog.map((g) => String(g.from || "").trim().toLowerCase()).filter(Boolean));
+  const notesToLog = siteNotes.filter((n) => n.name && !loggedFrom.has(String(n.name).trim().toLowerCase()));
   const shortDate = (iso) => {
     const d = new Date(iso + "T12:00:00");
     return isNaN(d) ? "" : d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
@@ -1673,6 +1723,20 @@ button.wd-live-chip.add:hover{border-color:var(--clay); color:var(--clay);}
 .wd-root.dark .wd-live-chip.on{background:var(--sage); color:#10201A;}
 .wd-root.dark .wd-live-chip.on.no{background:#B08096; color:#fff;}
 .wd-root.dark .wd-live-pick option{color:#16211D;}
+/* gifts received */
+.wd-gift-notes{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:2px 0 12px;}
+.wd-gift-notes-h{font-family:'Inter',sans-serif; font-size:12px; font-weight:600; color:var(--ink-soft);}
+.wd-gift-what{font-family:'Inter',sans-serif; font-size:14px; color:var(--ink); background:rgba(255,255,255,.5); border:1px solid var(--line);
+  border-radius:8px; padding:7px 9px; outline:none; flex:1 1 180px; min-width:0; transition:border-color .15s;}
+.wd-gift-what:focus{border-color:var(--clay);}
+.wd-gift-what::placeholder{color:#B6A2AC; font-style:italic;}
+.wd-gift-via{max-width:none; padding:7px 10px; font-size:12.5px;}
+.wd-gift .wd-mwrap input{width:78px;}
+.wd-gift-date{display:inline-flex; align-items:center; gap:5px; color:var(--ink-soft);}
+.wd-gift-date input{font-family:'Inter',sans-serif; font-size:13px; color:var(--ink); background:rgba(255,255,255,.5); border:1px solid var(--line);
+  border-radius:8px; padding:6px 8px; outline:none;}
+.wd-root.dark .wd-gift-what,.wd-root.dark .wd-gift-date input{background:rgba(255,255,255,.045); color:var(--ink);}
+.wd-root.dark .wd-gift-date input{color-scheme:dark;}
 .wd-root.dark .wd-live-warn{color:#E8C98A; background:rgba(232,201,138,.08); border-color:rgba(232,201,138,.28);}
 /* a guest-list tick that came from a website reply carries a small globe */
 .wd-grsvp.web{display:inline-flex; align-items:center; justify-content:center; gap:4px;}
@@ -2414,6 +2478,89 @@ button.wd-live-chip.add:hover{border-color:var(--clay); color:var(--clay);}
               <button className="wd-add" onClick={addInvite}><Plus size={15} strokeWidth={2.4} /> Add a household</button>
               <button className="wd-bbtn" onClick={exportLabels} disabled={!households.some(hasAddress)}>Download for labels</button>
             </div>
+          </section>
+        )}
+
+        {/* Gifts received + thank-you cards */}
+        {filter === "all" && (
+          <section className="wd-sec">
+            <div className="wd-sechead">
+              <span className="wd-secnum" style={{ color: "#E07CA3" }}>♡</span>
+              <span className="wd-secicon" style={{ color: "#E07CA3", background: "#E07CA316", borderColor: "#E07CA33A" }}>
+                <GiftIcon size={17} strokeWidth={1.8} />
+              </span>
+              <span className="wd-sectitle">Gifts Received</span>
+              <span className="wd-gcap">{giftsThanked}/{giftsLogged.length} thanked</span>
+            </div>
+
+            <div className="wd-gbar">
+              <div className="wd-gbar-fill" style={{ width: (giftsLogged.length ? (giftsThanked / giftsLogged.length) * 100 : 0) + "%" }} />
+            </div>
+
+            <div className="wd-gtally">
+              <span className="wd-gpill" style={{ color: "#E07CA3" }}>gifts <b>{giftsLogged.length}</b></span>
+              <span className="wd-gpill" style={{ color: "#B07A2E" }}>thank-yous to write <b>{thanksOwed}</b></span>
+              <span className="wd-gpill" style={{ color: "#5FA877" }}>thanked <b>{giftsThanked}</b></span>
+              {venmoMoney > 0 && <span className="wd-gpill" style={{ color: "#3D95CE" }}>Venmo <b>{fmt(venmoMoney)}</b></span>}
+              {giftMoney > 0 && <span className="wd-gpill">total <b>{fmt(giftMoney)}</b></span>}
+            </div>
+            <div className="wd-note-line">One row per gift. Tick the box when the thank-you card goes out.</div>
+
+            {notesToLog.length > 0 && (
+              <div className="wd-gift-notes">
+                <span className="wd-gift-notes-h">Left a note on the website:</span>
+                {notesToLog.map((n) => (
+                  <button className="wd-live-chip add" key={n.id} onClick={() => addGift(n.name)} title={n.msg}>
+                    + {n.name}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div className="wd-inv-actions" style={{ marginBottom: 12 }}>
+              <button className="wd-add" onClick={() => addGift("")}><Plus size={15} strokeWidth={2.4} /> Add a gift</button>
+            </div>
+
+            {giftLog.map((g, idx) => {
+              const started = String(g.from || "").trim() || String(g.what || "").trim();
+              return (
+                <div className={"wd-vend wd-inv wd-gift" + (g.thanked ? " mailed" : "")} key={g.id}>
+                  <div className="wd-vend-top">
+                    <div
+                      className={"wd-check" + (g.thanked ? " done" : "")}
+                      onClick={() => toggleThanked(idx)}
+                      role="checkbox"
+                      aria-checked={g.thanked}
+                      aria-label="Thank-you sent"
+                      title="Thank-you card sent?"
+                    >
+                      <Check size={15} strokeWidth={3} />
+                    </div>
+                    <input className="wd-vname" value={g.from} placeholder="Who it's from" onChange={(e) => setGift(idx, "from", e.target.value)} />
+                    {started && (
+                      <span className={"wd-inv-status " + (g.thanked ? "mailed" : "ready")}>
+                        {g.thanked ? "thanked" + (g.thankedOn ? " " + shortDate(g.thankedOn) : "") : "thank-you owed"}
+                      </span>
+                    )}
+                    <button className="wd-del" onClick={() => removeGift(idx)} aria-label="Delete"><Trash2 size={16} strokeWidth={1.8} /></button>
+                  </div>
+                  <div className="wd-vrow">
+                    <input className="wd-gift-what" value={g.what} placeholder="What they gave" onChange={(e) => setGift(idx, "what", e.target.value)} />
+                    <select className="wd-live-pick wd-gift-via" value={g.via} onChange={(e) => setGift(idx, "via", e.target.value)} aria-label="How it came">
+                      <option value="">How it came…</option>
+                      {GIFT_WAYS.map((w) => <option key={w} value={w}>{w}</option>)}
+                    </select>
+                    <span className="wd-mwrap">$<input value={g.value} placeholder="amount" inputMode="decimal" onChange={(e) => setGift(idx, "value", e.target.value)} /></span>
+                    <span className="wd-gift-date">
+                      <CalendarDays size={13} strokeWidth={1.9} />
+                      <input type="date" value={g.receivedOn} onChange={(e) => setGift(idx, "receivedOn", e.target.value)} aria-label="Date received" />
+                    </span>
+                  </div>
+                  <input className="wd-vnote" value={g.note} placeholder="notes — what to mention in the card, their address…" onChange={(e) => setGift(idx, "note", e.target.value)} />
+                </div>
+              );
+            })}
+            {!giftLog.length && <div className="wd-note-line" style={{ fontStyle: "italic" }}>No gifts logged yet. Tap "Add a gift" when one comes in.</div>}
           </section>
         )}
 

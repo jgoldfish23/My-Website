@@ -1,9 +1,7 @@
 /* Jamo Sports Hub service worker (2026-11-10, Jamo picked "Opens like an app"). sports-hub/build.sh publishes it at
-   /sw.js; /sports/app.js registers it (scope "/"). Fetch handling only touches sports pages
-   (/sports, /cfb, /nfl, /nba, /cbb) - the rest of djgolding.com goes straight to the network - and it never touches
-   the live-score feeds (/api/...), so live scores always come from the network.
-   Construction Mastery owns /construction-mastery/ via its own SW + manifest (2026-11-24); the Sports Hub web
-   manifest scope is /sports/ so that path is not offered as "Open in app" for Jamo Sports Hub.
+   /sw.js; /sports/app.js registers it. It only touches the sports pages (/sports, /cfb, /nfl, /nba, /cbb) - the rest of
+   djgolding.com goes straight to the network as before - and it never touches the live-score feeds (/api/...), so live
+   scores always come from the network.
    - Pages: fresh from the network first. With no connection, or after 4 seconds with no answer, the last saved copy,
      marked with the time it was saved so the page can say "Showing the copy saved at 2:14 PM".
    - Files whose address carries a version (?v=...) and the hubs' data blocks (/cfb/d/...): the saved copy (they never
@@ -13,8 +11,7 @@
    To switch it off for everyone: set OFF = true below and publish. It then deletes its saved copies, removes itself and
    reloads any open sports page. (One phone only: localStorage "jsh-sw" = "off", which app.js honors.) */
 const OFF = false;
-/* Cache namespace bump 2026-11-24: force clients to drop stale copies after PWA scope harden. */
-const V = 'jsh-2';
+const V = 'jsh-1';
 const PAGES = V + '-pages', FILES = V + '-files';
 const HUB = /^\/(sports|cfb|nfl|nba|cbb)(\/|$)/;
 const WAIT_MS = 4000;

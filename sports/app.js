@@ -37,11 +37,7 @@
     if (off) {
       navigator.serviceWorker.getRegistrations().then(function(rs){ rs.forEach(function(r){ var w = r.active || r.waiting || r.installing; if (w && /\/sw\.js(\?|$)/.test(w.scriptURL)) r.unregister(); }); }).catch(function(){});
     } else {
-      /* Register at scope "/". Fetch handler only caches sports hubs; Construction Mastery owns
-         /construction-mastery/ via its own SW + manifest. Sports Hub *manifest* scope is /sports/
-         (id /sports/). Installed Chrome apps keep the OLD scope until the user opens Sports Hub
-         once (or uninstalls/reinstalls) — server alone cannot shrink an already-installed app. */
-      var reg = function(){ navigator.serviceWorker.register('/sw.js?v=20261124-scope', {scope: '/', updateViaCache: 'none'}).catch(function(){}); };
+      var reg = function(){ navigator.serviceWorker.register('/sw.js', {scope: '/', updateViaCache: 'none'}).catch(function(){}); };
       if (D.readyState === 'complete') setTimeout(reg, 1500); else W.addEventListener('load', function(){ setTimeout(reg, 1500); });
     }
   }

@@ -133,6 +133,15 @@
   }
 
   /* chat */
+  .faq{max-width:680px; border-top:1px solid var(--line-2);}
+  .faq details{border-bottom:1px solid var(--line-2);}
+  .faq summary{cursor:pointer; list-style:none; padding:16px 34px 16px 0; position:relative; font-size:16px; color:var(--fg);}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+"; position:absolute; right:4px; top:50%; transform:translateY(-50%); font-size:22px; font-weight:300; color:var(--accent); transition:transform .25s;}
+  .faq details[open] summary::after{transform:translateY(-50%) rotate(45deg);}
+  .faq summary:hover{color:var(--accent);}
+  .faq details p{margin:0 0 18px; color:var(--fg-2); font-size:15px; max-width:60ch;}
+  .chat[hidden], .note[hidden]{display:none;}
   .chat{border:1px solid var(--line); border-radius:16px; background:var(--bg-3); overflow:hidden; max-width:640px;}
   .chat-log{max-height:320px; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px;}
   .msg{max-width:85%; padding:10px 14px; border-radius:14px; font-size:14.5px; line-height:1.55; white-space:pre-wrap;}
@@ -187,7 +196,8 @@
   <div class="sec-head"><h2>The day</h2><span class="eyebrow">Schedule</span></div>
   <ul class="details">
     <li><span>Ceremony · 2:00 PM</span><strong>The Wedding Bowl at Cuvier Park — on the bluff above the Pacific</strong></li>
-    <li><span>Between</span><strong>Photos on the bluff, then time to explore La Jolla</strong></li>
+    <li><span>Between</span><strong>Photos on the bluff, then time to explore La Jolla. Sunset is around 4:50, and the coast is the place to be for it.</strong></li>
+    <li><span>Attire</span><strong>Formal. The ceremony is outdoors on the grass, so you may want shoes that won't sink.</strong></li>
     <li><span>Dinner Party · 6:00–9:00 PM</span><strong>Piazza 1909 — 7731 Fay Ave, La Jolla, California 92037</strong><br><a class="lnk" href="https://www.google.com/maps/search/?api=1&amp;query=Piazza+1909,+7731+Fay+Ave,+La+Jolla,+CA+92037" target="_blank" rel="noopener">Open in Google Maps</a></li>
   </ul>
   <p class="note" style="margin-top:18px;">It's an outdoor ceremony on the coast in December — bring a layer for the ocean breeze.</p>
@@ -229,9 +239,8 @@
     </div>
     <div class="card">
       <h3>How to book</h3>
-      <p>Call <a class="lnk" href="tel:1-800-526-4545">1-800-526-4545</a> and ask for the <em style="font-style:normal; color:var(--accent);">Golding and Jenkins Wedding</em> rate — or
-      <a class="lnk" href="https://reservations.travelclick.com/114947?groupID=5347670" target="_blank" rel="noopener">book online in our room block</a> (the link works until mid-November; after that, call).<br><br>
-      No deposit, and you can cancel up to 24 hours before arrival. The hotel expects to sell out that weekend — book early.</p>
+      <p>Call <a class="lnk" href="tel:1-800-526-4545">1-800-526-4545</a> and ask for the <em style="font-style:normal; color:var(--accent);">Golding and Jenkins Wedding</em> rate. The online booking link has closed, so calling is the way to go now, and the wedding rate depends on what rooms are left.<br><br>
+      No deposit, and you can cancel up to 24 hours before arrival. The hotel expects to sell out that weekend, so call soon.</p>
     </div>
   </div>
   <p class="note" style="margin-top:18px;">Inn by the Sea · 7830 Fay Avenue, La Jolla, CA 92037 · <a class="lnk" href="https://www.innbytheseaatlajolla.com" target="_blank" rel="noopener">innbytheseaatlajolla.com</a></p>
@@ -274,9 +283,35 @@
 </section>
 
 <section class="wrap" id="ask">
-  <div class="sec-head"><h2>Questions?</h2><span class="eyebrow">Ask away</span></div>
-  <p class="note" style="margin-bottom:18px;">Ask about the schedule, travel, or the two of us — this little assistant knows the plan.</p>
-  <div class="chat">
+  <div class="sec-head"><h2>Questions?</h2><span class="eyebrow">Good to know</span></div>
+  <div class="faq">
+    <details>
+      <summary>What time should I get there?</summary>
+      <p>The ceremony starts at 2:00 PM. Parking near the park is street parking, so plan to arrive 15 to 20 minutes early to find a spot and walk over.</p>
+    </details>
+    <details>
+      <summary>What should I wear?</summary>
+      <p>Formal. The ceremony is outdoors on the grass above the ocean in December, so bring a layer for the breeze and think about shoes that won't sink.</p>
+    </details>
+    <details>
+      <summary>What happens between the ceremony and dinner?</summary>
+      <p>Photos on the bluff, then a few hours to explore La Jolla. Sunset is around 4:50. Dinner runs 6:00 to 9:00 PM at Piazza 1909, 7731 Fay Ave, a short walk from the hotel.</p>
+    </details>
+    <details>
+      <summary>Is it too late to get the hotel rate?</summary>
+      <p>The online link has closed, but you can still call Inn by the Sea at <a class="lnk" href="tel:1-800-526-4545">1-800-526-4545</a> and ask for the Golding and Jenkins Wedding rate while rooms last.</p>
+    </details>
+    <details>
+      <summary>How do I get around?</summary>
+      <p>San Diego airport is about 20 minutes away. Uber and Lyft are everywhere, and the Village is easy to walk. For bigger groups, see the shuttle numbers under Around the Village.</p>
+    </details>
+    <details>
+      <summary>Something else?</summary>
+      <p>Email us at <a class="lnk" href="mailto:dawsynjameson@gmail.com">dawsynjameson@gmail.com</a> or reach out to Jameson or Dawsyn directly. We're happy to help.</p>
+    </details>
+  </div>
+  <p class="note" id="chatIntro" style="margin:26px 0 18px;" hidden>Or ask our little assistant. It knows the plan.</p>
+  <div class="chat" id="chatBox" hidden>
     <div class="chat-log" id="chatLog">
       <div class="msg bot">Hi! I'm the site's helper. Ask me anything about the wedding day — schedule, getting there, where to stay.</div>
     </div>
@@ -415,6 +450,10 @@
   });
 
   /* chat */
+  /* the chat box only shows once the assistant is switched on */
+  fetch('/api/chat').then(function(r){ return r.ok ? r.json() : {}; }).then(function(j){
+    if (j && j.ready){ document.getElementById('chatBox').hidden = false; document.getElementById('chatIntro').hidden = false; }
+  }).catch(function(){});
   var chatForm = document.getElementById('chatForm');
   var chatInput = document.getElementById('chatInput');
   var log = document.getElementById('chatLog');

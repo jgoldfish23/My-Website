@@ -770,6 +770,27 @@ function WeddingDashboard() {
   const rsvpInvited = named.filter((g) => effRsvp(g) === "invited").length;
   const rsvpPending = named.length - rsvpYes - rsvpNo;
   const rsvpWeb = named.filter(fromWeb).length;
+
+  // Guest List names with no answer yet (no website reply, no Yes/No by hand). The two of you don't count.
+  const waitingOn = named.filter(
+    (g) => !byHand(g) && !ticks.byGuest[g.id] && !/^(jameson golding|dawsyn jenkins)$/i.test(g.name.trim())
+  );
+  const [copiedReminder, setCopiedReminder] = useState(false);
+  const REMINDER_TEXT =
+    "Hi! Just a friendly reminder to RSVP for our wedding on December 30 in La Jolla. " +
+    "We're finalizing the count for the Wedding Bowl and dinner, so it would mean a lot to hear from you soon. " +
+    "You can reply here: djgolding.com/guests/#rsvp\n\nThank you! Jameson & Dawsyn";
+  const copyReminder = () => {
+    const done = () => {
+      setCopiedReminder(true);
+      setTimeout(() => setCopiedReminder(false), 2500);
+    };
+    try {
+      navigator.clipboard.writeText(REMINDER_TEXT).then(done, () => window.prompt("Copy this reminder:", REMINDER_TEXT));
+    } catch (e) {
+      window.prompt("Copy this reminder:", REMINDER_TEXT);
+    }
+  };
   const liveWhen = (iso) => {
     const d = new Date(iso);
     return isNaN(d) ? "" : d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
@@ -1356,10 +1377,11 @@ function WeddingDashboard() {
   .wd-stats{grid-template-columns:1fr 1fr !important;}
   .wd-vtype{width:auto !important; flex:1;}
   .wd-cc{grid-template-columns:1fr 1fr !important;}
+  .wd-cc-tile.gifts{grid-column:span 2;}
 }
 
 /* Command center */
-.wd-cc{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:14px;}
+.wd-cc{display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:14px;}
 .wd-cc-tile{background:linear-gradient(135deg, rgba(255,255,255,.5), rgba(214,238,220,.5));
   backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
   border:1px solid rgba(255,255,255,.6); border-radius:14px; padding:15px 16px;
@@ -1723,6 +1745,19 @@ button.wd-live-chip.add:hover{border-color:var(--clay); color:var(--clay);}
 .wd-root.dark .wd-live-chip.on{background:var(--sage); color:#10201A;}
 .wd-root.dark .wd-live-chip.on.no{background:#B08096; color:#fff;}
 .wd-root.dark .wd-live-pick option{color:#16211D;}
+/* who hasn't replied yet */
+.wd-wait{margin:16px 0 6px; padding:14px 15px; border:1px dashed #E8D2A8; border-radius:14px; background:#FBF1DE66;}
+.wd-wait-head{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin-bottom:10px;}
+.wd-wait-head b{font-family:'Inter',sans-serif; font-size:14.5px; font-weight:700; color:#B07A2E;}
+.wd-wait-head span{font-family:'Inter',sans-serif; font-size:12.5px; color:var(--ink-soft);}
+.wd-wait-names{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;}
+.wd-wait-name{font-family:'Inter',sans-serif; font-size:12.5px; font-weight:500; color:var(--ink); padding:4px 10px; border-radius:999px;
+  border:1px solid var(--line); background:rgba(255,255,255,.6);}
+.wd-wait-actions{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.wd-wait-tip{font-family:'Inter',sans-serif; font-size:12px; color:var(--ink-soft); flex:1 1 220px;}
+.wd-root.dark .wd-wait{border-color:rgba(232,210,168,.3); background:rgba(232,210,168,.05);}
+.wd-root.dark .wd-wait-head b{color:#E8C88A;}
+.wd-root.dark .wd-wait-name{background:rgba(255,255,255,.045);}
 /* gifts received */
 .wd-gift-notes{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:2px 0 12px;}
 .wd-gift-notes-h{font-family:'Inter',sans-serif; font-size:12px; font-weight:600; color:var(--ink-soft);}
@@ -1997,6 +2032,13 @@ button.wd-live-chip.add:hover{border-color:var(--clay); color:var(--clay);}
             <div className="v">{vendorsBooked}<small> / {vendors.length}</small></div>
             <div className="s">{fmt(Math.max(vendCost - vendPaid, 0))} balance due</div>
           </div>
+          <div className="wd-cc-tile gifts">
+            <div className="k">Gifts</div>
+            <div className="v pink">{giftsLogged.length}<small> {giftsLogged.length === 1 ? "gift" : "gifts"}</small></div>
+            <div className={"s" + (giftsLogged.length && !thanksOwed ? " good" : "")}>
+              {!giftsLogged.length ? "log them in Gifts Received" : thanksOwed ? thanksOwed + " thank-you" + (thanksOwed === 1 ? "" : "s") + " to write" : "all thanked ♥"}
+            </div>
+          </div>
         </div>
         <div className="wd-next">
           {overdueCount > 0 ? (
@@ -2261,6 +2303,22 @@ button.wd-live-chip.add:hover{border-color:var(--clay); color:var(--clay);}
               <p className="wd-live-empty">
                 Couldn't reach the RSVP list. <button className="wd-live-refresh" onClick={loadLive}>Try again</button>
               </p>
+            )}
+
+            {live.list && waitingOn.length > 0 && (
+              <div className="wd-wait">
+                <div className="wd-wait-head">
+                  <b>Still waiting to hear from {waitingOn.length}</b>
+                  <span>on your Guest List with no reply yet</span>
+                </div>
+                <div className="wd-wait-names">
+                  {waitingOn.map((g) => <span className="wd-wait-name" key={g.id}>{g.name}</span>)}
+                </div>
+                <div className="wd-wait-actions">
+                  <button className="wd-bbtn" onClick={copyReminder}>{copiedReminder ? "Copied ✓" : "Copy reminder text"}</button>
+                  <span className="wd-wait-tip">Paste it into a text or group chat. Mark anyone who answers by phone Yes or No on the Guest List.</span>
+                </div>
+              </div>
             )}
 
             <div className={"wd-alerts" + (alertDevices.length ? " on" : "")}>

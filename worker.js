@@ -400,6 +400,8 @@ export default {
     const { pathname } = new URL(request.url);
 
     if (pathname === "/api/chat") {
+      // The guest page asks first, and only shows the chat box once the assistant is actually switched on.
+      if (request.method === "GET") return json({ ready: Boolean(env.ANTHROPIC_API_KEY) });
       if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
       if (!originOk(request)) return forbidden();
       const day = await rateLimit(env, "chat_day", "all", CHAT_PER_DAY, 86400);

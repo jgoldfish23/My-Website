@@ -5,6 +5,7 @@ import {
   type CSSProperties,
   type KeyboardEvent,
   type ChangeEvent,
+  type ReactNode,
 } from 'react';
 
 /** Stand-in for canvas host theme; font weight only. */
@@ -90,6 +91,34 @@ const FONT_DECO = '"Cinzel Decorative", Cinzel, Palatino, serif';
 const FONT_BODY = '"Source Serif 4", Palatino, "Palatino Linotype", Georgia, "Times New Roman", serif';
 
 const HALL_CSS = '@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"); .cm-root { font-family: ' + FONT_BODY + '; overflow-x: hidden; overflow-wrap: break-word; } .cm-root button { font-family: ' + FONT_DISPLAY + '; } .cm-noise { pointer-events: none; position: fixed; inset: 0; opacity: 0.07; z-index: 2; background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27180%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27180%27 height=%27180%27 filter=%27url(%23n)%27 opacity=%270.9%27/%3E%3C/svg%3E"); } @media (max-width: 560px) { .cm-root { font-size: 15px; } .cm-nav button { letter-spacing: 0.06em !important; font-size: 11px !important; padding: 10px 8px !important; } } .cm-root button:focus-visible { outline: 2px solid ' + C.gold + '; outline-offset: 2px; } @keyframes cm-skillup { 0% { opacity: 0; transform: translateY(10px); } 18% { opacity: 1; transform: none; } 75% { opacity: 1; } 100% { opacity: 0; } } @keyframes cm-pulse { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.28; } } @keyframes cm-shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-7px); } 40% { transform: translateX(7px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(3px); } } @keyframes cm-pop { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -70px) scale(0.3); } } @keyframes cm-glowpulse { 0%,100% { box-shadow: none; } 40% { box-shadow: inset 0 0 80px #d4b46a44, 0 0 40px #d4b46a55; } } .cm-skillup { animation: cm-skillup 2.6s ease forwards; } .cm-pulse { animation: cm-pulse 2.2s ease-in-out infinite; } .cm-bar { transition: width 0.55s ease; } .cm-shake { animation: cm-shake 0.4s ease; } .cm-glow { animation: cm-glowpulse 0.5s ease; } .cm-bit { position: absolute; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: #e8d5a3; pointer-events: none; animation: cm-pop 0.8s ease forwards; z-index: 30; } @keyframes cm-twinkle { 0%,100% { opacity: 0.18; } 50% { opacity: 0.9; } } @keyframes cm-draw { from { stroke-dashoffset: 90; } to { stroke-dashoffset: 0; } } .cm-twinkle { animation: cm-twinkle 3.1s ease-in-out infinite; } .cm-draw { stroke-dasharray: 90; animation: cm-draw 0.95s ease-out forwards; } @media (prefers-reduced-motion: reduce) { .cm-skillup, .cm-pulse, .cm-shake, .cm-bit, .cm-glow, .cm-twinkle, .cm-draw { animation: none !important; } .cm-bar { transition: none !important; } } .cm-reduce .cm-skillup, .cm-reduce .cm-pulse, .cm-reduce .cm-shake, .cm-reduce .cm-bit, .cm-reduce .cm-glow, .cm-reduce .cm-twinkle, .cm-reduce .cm-draw { animation: none !important; } .cm-reduce .cm-bar { transition: none !important; } @keyframes cm-snow { 0% { transform: translateY(-12px); opacity: 0; } 12% { opacity: 0.7; } 100% { transform: translateY(110vh); opacity: 0; } } @keyframes cm-flicker { 0%,100% { opacity: 0.4; } 40% { opacity: 0.82; } 72% { opacity: 0.32; } } @keyframes cm-aurora { 0%,100% { opacity: 0.2; transform: translateX(0); } 50% { opacity: 0.46; transform: translateX(10px); } } @keyframes cm-discover { 0% { opacity: 0; letter-spacing: 0.42em; } 14% { opacity: 1; letter-spacing: 0.18em; } 78% { opacity: 1; } 100% { opacity: 0; } } @keyframes cm-cinema { from { opacity: 0; } to { opacity: 1; } } @keyframes cm-slowveil { 0%,100% { opacity: 0.08; } 50% { opacity: 0.18; } } .cm-snow { position: fixed; top: -8px; border-radius: 50%; background: #e8f0ff; pointer-events: none; z-index: 3; animation: cm-snow linear infinite; } .cm-flicker { animation: cm-flicker 2.8s ease-in-out infinite; } .cm-aurora { animation: cm-aurora 7s ease-in-out infinite; } .cm-discover { animation: cm-discover 4.1s ease forwards; } .cm-cinema-line { animation: cm-cinema 0.9s ease both; } .cm-slowveil { animation: cm-slowveil 2.4s ease-in-out infinite; } @media (prefers-reduced-motion: reduce) { .cm-snow, .cm-flicker, .cm-aurora, .cm-discover, .cm-cinema-line, .cm-slowveil { animation: none !important; } } .cm-reduce .cm-snow, .cm-reduce .cm-flicker, .cm-reduce .cm-aurora, .cm-reduce .cm-discover, .cm-reduce .cm-cinema-line, .cm-reduce .cm-slowveil { animation: none !important; } .cm-btn { transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease, background-color 0.12s ease; will-change: transform; } .cm-btn:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.08); } .cm-btn:active:not(:disabled) { transform: translateY(1px); filter: brightness(0.95); } .cm-btn-gold:hover:not(:disabled) { box-shadow: inset 0 1px 0 #ffffff44, 0 0 16px var(--cm-glow, #d4af3766), 0 1px 0 #00000066; } .cm-btn-wide { width: 100%; max-width: 420px; } .cm-opt { transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease; will-change: transform; } .cm-opt:hover:not(:disabled) { transform: translateX(3px); box-shadow: 0 0 0 1px var(--cm-gold, #d4af37); } .cm-opt:active:not(:disabled) { transform: translateX(1px); } @keyframes cm-view-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } } .cm-view { animation: cm-view-in 0.32s ease both; } @keyframes cm-ok-flash { 0%,100% { box-shadow: inset 0 0 0 0 transparent; } 40% { box-shadow: inset 0 0 70px #3f6b3a55, 0 0 28px #3f6b3a44; } } @keyframes cm-miss-flash { 0%,100% { box-shadow: inset 0 0 0 0 transparent; } 40% { box-shadow: inset 0 0 70px #7a2b2b55, 0 0 28px #7a2b2b44; } } .cm-q-ok { animation: cm-ok-flash 0.6s ease; } .cm-q-miss { animation: cm-miss-flash 0.6s ease; } @keyframes cm-level-in { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: none; } } .cm-level-in { animation: cm-level-in 0.45s ease both; } @keyframes cm-load-pulse { 0%,100% { opacity: 0.55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } } .cm-load-seal { animation: cm-load-pulse 1.8s ease-in-out infinite; transform-origin: center; } .cm-nav { position: relative; } .cm-nav:before, .cm-nav:after { content: ""; position: absolute; top: 4px; bottom: 4px; width: 10px; pointer-events: none; border-top: 1px solid var(--cm-gold, #d4af37); border-bottom: 1px solid var(--cm-gold, #d4af37); opacity: 0.7; } .cm-nav:before { left: 4px; border-left: 1px solid var(--cm-gold, #d4af37); } .cm-nav:after { right: 4px; border-right: 1px solid var(--cm-gold, #d4af37); } .cm-empty { text-align: center; padding: 8px 8px 2px; } .cm-pip { transition: transform 0.2s ease, background-color 0.2s ease; } .cm-main-heading:focus { outline: none; } .cm-view-panel:focus { outline: none; } @media (prefers-reduced-motion: reduce) { .cm-view, .cm-btn, .cm-opt, .cm-q-ok, .cm-q-miss, .cm-level-in, .cm-load-seal, .cm-pip { animation: none !important; transition: none !important; } } .cm-reduce .cm-view, .cm-reduce .cm-btn, .cm-reduce .cm-opt, .cm-reduce .cm-q-ok, .cm-reduce .cm-q-miss, .cm-reduce .cm-level-in, .cm-reduce .cm-load-seal, .cm-reduce .cm-pip { animation: none !important; transition: none !important; }';
+
+/** Presentational Bidhall atmosphere. Motion dies under .cm-reduce and prefers-reduced-motion. */
+const SPECTACLE_CSS = [
+  '.cm-atmosphere{pointer-events:none;position:fixed;z-index:0}',
+  '.cm-stage{position:relative;z-index:1}',
+  '.cm-vignette{inset:0;background:radial-gradient(ellipse at 50% -8%,rgba(243,230,192,.20),transparent 46%),radial-gradient(ellipse at 50% 115%,rgba(0,0,0,.40),transparent 52%),radial-gradient(ellipse at 50% 42%,transparent 52%,rgba(0,0,0,.40) 100%)}',
+  '.cm-lightshaft{left:50%;top:-14%;width:min(48vw,540px);height:68vh;transform:translateX(-50%);background:linear-gradient(180deg,rgba(255,244,214,.22),rgba(212,175,55,.06) 42%,transparent 74%);filter:blur(8px);animation:cm-shaft 9s ease-in-out infinite}',
+  '@keyframes cm-shaft{0%,100%{opacity:.45}50%{opacity:.85}}',
+  '.cm-foil-wrap{position:relative;padding:1px;background:linear-gradient(135deg,#fff6d4 0%,#a6842e 22%,#f3e6c0 46%,#d4af37 62%,#6a5416 100%);box-shadow:0 0 22px rgba(212,175,55,.14),0 14px 28px rgba(0,0,0,.35)}',
+  '.cm-foil-wrap::before{content:"";pointer-events:none;position:absolute;inset:1px;z-index:2;opacity:.16;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27220%27 height=%27220%27%3E%3Cfilter id=%27f%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.75%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27220%27 height=%27220%27 filter=%27url(%23f)%27/%3E%3C/svg%3E")}',
+  '.cm-sheen-light{pointer-events:none;position:absolute;inset:0;z-index:3;background:linear-gradient(105deg,transparent 36%,rgba(255,244,210,.20) 50%,transparent 64%);transform:translateX(-120%);animation:cm-foil-sweep 8.5s ease-in-out infinite}',
+  '@keyframes cm-foil-sweep{0%,58%{transform:translateX(-120%)}100%{transform:translateX(120%)}}',
+  '.cm-hero-title{background-image:linear-gradient(185deg,#fff8df 0%,#f0dd9a 34%,#d4af37 62%,#9a7424 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 rgba(0,0,0,.72)) drop-shadow(0 0 16px rgba(212,175,55,.28))}',
+  '@media(max-width:560px){.cm-title-screen .cm-hero-title{font-size:27px !important;letter-spacing:.045em !important;line-height:1.2 !important}}',
+  '.cm-crest{animation:cm-crest 5.5s ease-in-out infinite;transform-origin:center}',
+  '@keyframes cm-crest{0%,100%{filter:drop-shadow(0 0 6px rgba(212,175,55,.35))}50%{filter:drop-shadow(0 0 14px rgba(243,230,192,.75))}}',
+  '.cm-foil-ring{animation:cm-foil-ring 2.8s ease-in-out infinite}',
+  '@keyframes cm-foil-ring{0%,100%{opacity:.5}50%{opacity:1}}',
+  '.cm-portrait-mat{position:relative;padding:8px;background:linear-gradient(165deg,#f4e7c6,#c9b07a);box-shadow:inset 0 0 0 1px #fff6d4,inset 0 0 0 4px #8a7020,0 12px 24px rgba(0,0,0,.45)}',
+  '.cm-wax{position:absolute;right:-8px;bottom:12px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,#c45a4a,#6a201c 72%);color:#f6e7c8;font-family:' + FONT_DISPLAY + ';font-size:11px;letter-spacing:.04em;box-shadow:0 4px 8px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.35)}',
+  '.cm-hud-inst{position:relative;padding-top:7px}',
+  '.cm-hud-inst::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;opacity:.5;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 6px,#7aa0b8 6px 7px)}',
+  '.cm-stat{background-image:linear-gradient(90deg,transparent,#f3e6c0,#d4af37,#f3e6c0,transparent),linear-gradient(180deg,#2c281f 0%,#16130d 100%) !important;background-size:100% 2px,100% 100% !important;background-repeat:no-repeat !important;background-position:top,0 0 !important}',
+  '@media(prefers-reduced-motion:reduce){.cm-sheen-light,.cm-lightshaft,.cm-foil-ring,.cm-crest{animation:none !important}.cm-sheen-light{opacity:0 !important}.cm-lightshaft{opacity:.5 !important}}',
+  '.cm-reduce .cm-sheen-light,.cm-reduce .cm-lightshaft,.cm-reduce .cm-foil-ring,.cm-reduce .cm-crest{animation:none !important}',
+  '.cm-reduce .cm-sheen-light{opacity:0 !important}',
+  '.cm-reduce .cm-lightshaft{opacity:.5 !important}',
+].join('');
 
 type SkillId =
   | 'conc'
@@ -1780,16 +1809,20 @@ function RelicHud(props: {
   const conf = confidenceOf(props.save);
   const s = props.save;
   return (
-    <div style={{ flex: '1 1 280px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 10, padding: '10px 12px', background: 'linear-gradient(180deg, #1a1610 0%, #0e0c09 100%)', border: '1px solid ' + C.goldDim, boxShadow: 'inset 0 0 0 1px #00000088, inset 0 0 24px #00000066' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
-        <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, color: C.goldSoft }}>Relic HUD</div>
-        <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 11, color: C.frost }}>{L.confidence}  {conf.score}</div>
+    <Foil style={{ flex: '1 1 280px', minWidth: 0, display: 'flex' }}>
+      <div className="cm-hud" style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 10, padding: '10px 12px', background: 'linear-gradient(180deg, #1e1a14 0%, #0e0c09 100%)', border: '1px solid ' + C.goldDim, boxShadow: 'inset 0 1px 0 #fff6d433, inset 0 0 24px #00000066' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
+          <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, color: C.goldSoft }}>Relic HUD</div>
+          <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 11, color: C.frost }}>{L.confidence}  {conf.score}</div>
+        </div>
+        <Meter compact value={props.ch.into} max={Math.max(1, props.ch.need)} color={C.xpBar} label={L.xp + '  ·  Lv ' + props.ch.level + '  ·  ' + props.ch.into + ' / ' + (props.ch.level >= 100 ? 'max' : props.ch.need) + (props.upcoming ? '  ·  next ' + props.upcoming.title + ' @ ' + props.upcoming.min : '')} />
+        <Meter compact value={Math.min(s.streak, 12)} max={12} color={C.comboBar} label={L.combo + '  ·  ×' + s.streak + '  (best ' + s.bestStreak + ')'} />
+        <Meter compact value={Math.min(s.souls, 8)} max={8} color={C.sealBar} label={L.souls + '  ·  ' + s.souls + '  ·  ' + L.perk + ' ' + props.perkPts + '  ·  ' + L.dawn + ' ' + s.loginStreak} />
+        <div className="cm-hud-inst">
+          <Meter compact value={conf.score} max={100} color={C.confBar} label={L.confidence + '  ·  ' + conf.score + ' / 100' + (props.hauntDue > 0 ? '  ·  ' + L.hauntDue + ' ' + props.hauntDue : '')} />
+        </div>
       </div>
-      <Meter compact value={props.ch.into} max={Math.max(1, props.ch.need)} color={C.xpBar} label={L.xp + '  ·  Lv ' + props.ch.level + '  ·  ' + props.ch.into + ' / ' + (props.ch.level >= 100 ? 'max' : props.ch.need) + (props.upcoming ? '  ·  next ' + props.upcoming.title + ' @ ' + props.upcoming.min : '')} />
-      <Meter compact value={Math.min(s.streak, 12)} max={12} color={C.comboBar} label={L.combo + '  ·  ×' + s.streak + '  (best ' + s.bestStreak + ')'} />
-      <Meter compact value={Math.min(s.souls, 8)} max={8} color={C.sealBar} label={L.souls + '  ·  ' + s.souls + '  ·  ' + L.perk + ' ' + props.perkPts + '  ·  ' + L.dawn + ' ' + s.loginStreak} />
-      <Meter compact value={conf.score} max={100} color={C.confBar} label={L.confidence + '  ·  ' + conf.score + ' / 100' + (props.hauntDue > 0 ? '  ·  ' + L.hauntDue + ' ' + props.hauntDue : '')} />
-    </div>
+    </Foil>
   );
 }
 function Portrait(props: { rank: (typeof RANKS)[number]; level: number; title: string }) {
@@ -1826,6 +1859,35 @@ function Seal(props: { rank: (typeof RANKS)[number]; level: number }) {
       <path d="M46 8 L49 16 L46 14 L43 16 Z M84 46 L76 49 L78 46 L76 43 Z M46 84 L43 76 L46 78 L49 76 Z M8 46 L16 43 L14 46 L16 49 Z" fill={C.gold} />
       <text x="46" y="44" textAnchor="middle" fill={props.rank.metal} fontSize="26" fontFamily={FONT_DECO}>{props.rank.rune}</text>
       <text x="46" y="66" textAnchor="middle" fill={C.goldSoft} fontSize="10" letterSpacing="1.2" fontFamily={FONT_DISPLAY}>LV {props.level}</text>
+    </svg>
+  );
+}
+function Foil(props: { children: ReactNode; sheen?: boolean; style?: CSSProperties }) {
+  return (
+    <div className="cm-foil-wrap" style={props.style}>
+      {props.children}
+      {props.sheen ? <span className="cm-sheen-light" aria-hidden="true" /> : null}
+    </div>
+  );
+}
+function HallCrest() {
+  return (
+    <svg className="cm-crest" width="92" height="92" viewBox="0 0 120 120" aria-hidden="true">
+      <defs>
+        <radialGradient id="cm-crest-wax" cx="42%" cy="36%" r="62%">
+          <stop offset="0%" stopColor="#fff6d4" />
+          <stop offset="42%" stopColor="#e0c36a" />
+          <stop offset="100%" stopColor="#6a5414" />
+        </radialGradient>
+      </defs>
+      <circle cx="60" cy="60" r="56" fill="#120e0a" stroke="#f3e6c0" strokeWidth="2" />
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#8a7020" strokeWidth="1" strokeDasharray="2 3" />
+      <circle cx="60" cy="60" r="43" fill="url(#cm-crest-wax)" stroke="#2a2118" strokeWidth="1" />
+      <path d="M60 28 L86 50 V84 H34 V50 Z" fill="#1a140c" />
+      <path d="M60 34 L78 50 V78 H42 V50 Z" fill="none" stroke="#f6edd4" strokeWidth="1.3" />
+      <path d="M52 78 V60 H68 V78" fill="none" stroke="#f6edd4" strokeWidth="1.2" />
+      <circle cx="60" cy="54" r="2.4" fill="#7aa0b8" />
+      <text x="60" y="100" textAnchor="middle" fill="#2a2118" fontSize="8" letterSpacing="1.6" fontFamily={FONT_DISPLAY}>BIDHALL</text>
     </svg>
   );
 }
@@ -1980,12 +2042,10 @@ function CampaignMap(props: { save: Save; chapterOpen: (i: number) => boolean; o
   const chosenState = campStateOf(props.save, chosen, chosenOpen);
   const skillNames = chosen.skills.slice(0, 4).map((id) => skillById(id).name);
   const mapFrame: CSSProperties = {
-    border: '1px solid ' + C.goldDim,
-    boxShadow: 'inset 0 0 0 1px ' + C.gold + '55, inset 0 0 0 5px #1a1510, 0 12px 28px #00000066',
-    background: 'radial-gradient(ellipse at 48% 28%, #3a3226 0%, #1c1812 48%, #0e0c09 100%)',
+    background: '#e7d4a8',
     touchAction: 'pan-x pan-y',
     overflow: 'auto',
-    maxHeight: 520,
+    maxHeight: 540,
   };
   return (
     <div style={{ marginBottom: 18 }}>
@@ -2003,16 +2063,18 @@ function CampaignMap(props: { save: Save; chapterOpen: (i: number) => boolean; o
           </div>
         </div>
       </div>
-      <div style={{ marginBottom: 12, padding: '12px 14px', background: 'linear-gradient(180deg, #2a241c, #14110c)', border: '1px solid ' + (next.state === 'awake' ? C.ember : C.gold), boxShadow: '0 0 18px ' + (next.state === 'awake' ? C.ember : C.gold) + '33' }}>
-        <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: 11, color: next.state === 'awake' ? C.emberSoft : C.goldSoft }}>Next objective</div>
-        <div style={{ color: C.inkDim, fontSize: 14, margin: '6px 0 10px' }}>{next.cta}</div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-          {next.state === 'ready' ? <Btn label={'Begin trial · Ch ' + CAMP_ROMAN[next.index]} kind="gold" onClick={() => { setSel(next.index); props.onSelect(next.ch, false); }} /> : null}
-          {next.state === 'awake' ? <Btn label={'Face ' + next.ch.boss} kind="danger" onClick={() => { setSel(next.index); props.onSelect(next.ch, true); }} /> : null}
-          {next.state === 'cleared' ? <Btn label={'Challenge ' + next.ch.boss + ' again'} kind="danger" onClick={() => { setSel(next.index); props.onSelect(next.ch, true); }} /> : null}
-          <Btn label="Show on chart" kind="quiet" onClick={() => setSel(next.index)} />
+      <Foil style={{ marginBottom: 12 }}>
+        <div style={{ padding: '12px 14px', background: 'linear-gradient(180deg, #2a241c, #14110c)', border: '1px solid ' + (next.state === 'awake' ? C.ember : C.gold), boxShadow: '0 0 18px ' + (next.state === 'awake' ? C.ember : C.gold) + '33' }}>
+          <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: 11, color: next.state === 'awake' ? C.emberSoft : C.goldSoft }}>Next objective</div>
+          <div style={{ color: C.inkDim, fontSize: 14, margin: '6px 0 10px' }}>{next.cta}</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {next.state === 'ready' ? <Btn label={'Begin trial · Ch ' + CAMP_ROMAN[next.index]} kind="gold" onClick={() => { setSel(next.index); props.onSelect(next.ch, false); }} /> : null}
+            {next.state === 'awake' ? <Btn label={'Face ' + next.ch.boss} kind="danger" onClick={() => { setSel(next.index); props.onSelect(next.ch, true); }} /> : null}
+            {next.state === 'cleared' ? <Btn label={'Challenge ' + next.ch.boss + ' again'} kind="danger" onClick={() => { setSel(next.index); props.onSelect(next.ch, true); }} /> : null}
+            <Btn label="Show on chart" kind="quiet" onClick={() => setSel(next.index)} />
+          </div>
         </div>
-      </div>
+      </Foil>
       <div role="list" aria-label="Campaign regions" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
         {CHAPTERS.map((ch, i) => {
           const st = campStateOf(props.save, ch, props.chapterOpen(i));
@@ -2054,37 +2116,49 @@ function CampaignMap(props: { save: Save; chapterOpen: (i: number) => boolean; o
         <span style={{ color: C.emberSoft }}>● Boss awake</span>
         <span style={{ color: C.goldSoft }}>● Cleared</span>
       </div>
+      <Foil>
       <div style={mapFrame}>
         <div style={{ width: zoom * 100 + '%', minWidth: '100%' }}>
-          <svg viewBox="0 0 800 420" width="100%" height="auto" aria-hidden="true" style={{ display: 'block' }}>
+          <svg viewBox="0 0 800 420" width="100%" aria-hidden="true" style={{ display: 'block', height: 'auto' }}>
             <defs>
-              <linearGradient id="cm-parch-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#2e281f" /><stop offset="55%" stopColor="#1a1610" /><stop offset="100%" stopColor="#0c0a08" /></linearGradient>
-              <linearGradient id="cm-grass" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#3d4a32" /><stop offset="100%" stopColor="#24301c" /></linearGradient>
-              <linearGradient id="cm-waste" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#5a4630" /><stop offset="100%" stopColor="#322418" /></linearGradient>
-              <linearGradient id="cm-keep" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#3e4650" /><stop offset="100%" stopColor="#242c34" /></linearGradient>
-              <linearGradient id="cm-hall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#544628" /><stop offset="100%" stopColor="#2e2616" /></linearGradient>
-              <linearGradient id="cm-forge" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stopColor="#4a2418" /><stop offset="100%" stopColor="#241612" /></linearGradient>
-              <linearGradient id="cm-cit" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#4a3a28" /><stop offset="100%" stopColor="#241c14" /></linearGradient>
-              <radialGradient id="cm-fog" cx="50%" cy="45%" r="65%"><stop offset="0%" stopColor="#1a1610" stopOpacity="0.15" /><stop offset="100%" stopColor="#070605" stopOpacity="0.82" /></radialGradient>
-              <filter id="cm-pathglow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.4" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+              <linearGradient id="cm-parch-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#f6edd4" /><stop offset="48%" stopColor="#e7d3a4" /><stop offset="100%" stopColor="#d2b888" /></linearGradient>
+              <radialGradient id="cm-parch-light" cx="50%" cy="12%" r="68%"><stop offset="0%" stopColor="#fff8e4" stopOpacity="0.7" /><stop offset="100%" stopColor="#fff8e4" stopOpacity="0" /></radialGradient>
+              <linearGradient id="cm-grass" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#9aaf72" /><stop offset="100%" stopColor="#5f7344" /></linearGradient>
+              <linearGradient id="cm-waste" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#e0b56e" /><stop offset="100%" stopColor="#b18448" /></linearGradient>
+              <linearGradient id="cm-keep" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#e4ebf0" /><stop offset="42%" stopColor="#93a2ae" /><stop offset="100%" stopColor="#5d6c78" /></linearGradient>
+              <linearGradient id="cm-hall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#f3dc8e" /><stop offset="100%" stopColor="#c9a44c" /></linearGradient>
+              <linearGradient id="cm-forge" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stopColor="#8d4030" /><stop offset="100%" stopColor="#d07a48" /></linearGradient>
+              <linearGradient id="cm-cit" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#f0ddb0" /><stop offset="100%" stopColor="#b08e58" /></linearGradient>
+              <radialGradient id="cm-fog" cx="40%" cy="40%" r="75%"><stop offset="0%" stopColor="#efe2c4" stopOpacity="0.05" /><stop offset="100%" stopColor="#6d5e46" stopOpacity="0.72" /></radialGradient>
+              <filter id="cm-fiber" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="n" /><feColorMatrix in="n" type="matrix" values="0 0 0 0 0.42  0 0 0 0 0.32  0 0 0 0 0.18  0 0 0 0.34 0" result="g" /><feBlend in="SourceGraphic" in2="g" mode="multiply" /></filter>
+              <filter id="cm-pathglow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1.6" floodColor="#6a4e10" floodOpacity="0.85" /></filter>
+              <filter id="cm-gilt" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="0" stdDeviation="2.8" floodColor="#f3e2a4" floodOpacity="0.95" /></filter>
               {regions.map((r, i) => <clipPath key={CHAPTERS[i].id} id={'cm-clip-' + CHAPTERS[i].id}><path d={r.d} /></clipPath>)}
             </defs>
-            <rect x="0" y="0" width="800" height="420" fill="url(#cm-parch-bg)" />
-            <rect x="10" y="10" width="780" height="400" fill="none" stroke={C.goldDim} strokeWidth="1.2" opacity="0.7" />
-            <rect x="16" y="16" width="768" height="388" fill="none" stroke={C.gold} strokeWidth="0.6" opacity="0.35" strokeDasharray="3 5" />
-            <g fill="none" stroke={C.goldDim} strokeWidth="1.1" opacity="0.85">
-              <path d="M22 36 V22 H36 M778 36 V22 H764 M22 384 V398 H36 M778 384 V398 H764" />
+            <rect x="0" y="0" width="800" height="420" fill="url(#cm-parch-bg)" filter="url(#cm-fiber)" />
+            <rect x="0" y="0" width="800" height="420" fill="url(#cm-parch-light)" pointerEvents="none" />
+            <rect x="12" y="12" width="776" height="396" fill="none" stroke="#8a6414" strokeWidth="1.4" />
+            <rect x="18" y="18" width="764" height="384" fill="none" stroke="#c4a35a" strokeWidth="0.7" strokeDasharray="2 4" />
+            <g fill="none" stroke="#6a4e10" strokeWidth="1.15">
+              <path d="M28 48 C46 48 52 54 52 72 M34 54 C46 54 48 60 48 74" />
+              <path d="M772 48 C754 48 748 54 748 72 M766 54 C754 54 752 60 752 74" />
+              <path d="M28 372 C46 372 52 366 52 348 M34 366 C46 366 48 360 48 346" />
+              <path d="M772 372 C754 372 748 366 748 348 M766 366 C754 366 752 360 752 346" />
             </g>
-            <text x="400" y="34" textAnchor="middle" fill={C.goldDim} fontSize="9" letterSpacing="3" fontFamily={FONT_DISPLAY}>THE SIX REGIONS OF THE BIDHALL</text>
-            {Array.from({ length: 14 }).map((_, i) => <circle key={i} className="cm-twinkle" cx={(i * 97) % 760 + 20} cy={(i * 53) % 380 + 24} r={i % 4 === 0 ? 1.2 : 0.6} fill={C.goldSoft} opacity={0.22} style={{ animationDelay: (i * 0.19) + 's' }} />)}
+            <rect x="214" y="18" width="372" height="16" fill="#f8f0da" stroke="#8a6414" strokeWidth="0.7" />
+            <text x="400" y="30" textAnchor="middle" fill="#3a2c14" fontSize="9" letterSpacing="2.4" fontFamily={FONT_DISPLAY}>THE SIX REGIONS OF THE BIDHALL</text>
+            <path d="M28 318 C110 300, 168 268, 236 248 S360 214, 448 230 S590 258, 700 214 S770 196, 792 184" fill="none" stroke="#4e6574" strokeWidth="3.2" opacity="0.5" />
+            <path d="M28 318 C110 300, 168 268, 236 248 S360 214, 448 230 S590 258, 700 214 S770 196, 792 184" fill="none" stroke="#d7e7f0" strokeWidth="1" opacity="0.8" />
+            <text x="468" y="214" fill="#3d5564" fontSize="8" letterSpacing="1.5" fontFamily={FONT_DISPLAY}>CITY CREEK</text>
             {CHAPTERS.slice(1).map((ch, idx) => {
               const i = idx;
               const lit = props.save.campaignDone.indexOf(CHAPTERS[i].id + '-boss') >= 0;
               const nextOpen = props.chapterOpen(i + 1);
               return (
                 <g key={'path-' + ch.id}>
-                  <line x1={regions[i].x} y1={regions[i].y} x2={regions[i + 1].x} y2={regions[i + 1].y} stroke={lit ? C.goldSoft : nextOpen ? C.parchDeep : C.ironHi} strokeWidth={lit ? 3.4 : nextOpen ? 2 : 1.1} strokeDasharray={lit ? '1 0' : '5 6'} opacity={lit ? 1 : nextOpen ? 0.75 : 0.4} className={lit ? 'cm-draw' : undefined} filter={lit ? 'url(#cm-pathglow)' : undefined} />
-                  {lit ? <circle cx={(regions[i].x + regions[i + 1].x) / 2} cy={(regions[i].y + regions[i + 1].y) / 2} r="3.2" fill={C.gold} stroke={C.goldSoft} strokeWidth="0.8" /> : null}
+                  <line x1={regions[i].x} y1={regions[i].y} x2={regions[i + 1].x} y2={regions[i + 1].y} stroke={lit ? '#6a4e10' : nextOpen ? '#7a6240' : '#b4a48c'} strokeWidth={lit ? 4 : nextOpen ? 2.2 : 1.2} strokeDasharray={lit ? '1 0' : '5 6'} opacity={lit ? 1 : nextOpen ? 0.9 : 0.7} className={lit ? 'cm-draw' : undefined} filter={lit ? 'url(#cm-pathglow)' : undefined} />
+                  {lit ? <line x1={regions[i].x} y1={regions[i].y} x2={regions[i + 1].x} y2={regions[i + 1].y} stroke="#f6e7b2" strokeWidth="1.3" /> : null}
+                  {lit ? <circle cx={(regions[i].x + regions[i + 1].x) / 2} cy={(regions[i].y + regions[i + 1].y) / 2} r="3.4" fill="#f3e2a4" stroke="#6a4e10" strokeWidth="0.8" /> : null}
                 </g>
               );
             })}
@@ -2092,37 +2166,46 @@ function CampaignMap(props: { save: Save; chapterOpen: (i: number) => boolean; o
               const open = props.chapterOpen(i);
               const state = campStateOf(props.save, ch, open);
               const fills = ['url(#cm-grass)', 'url(#cm-waste)', 'url(#cm-keep)', 'url(#cm-hall)', 'url(#cm-forge)', 'url(#cm-cit)'];
-              const stroke = state === 'sealed' ? C.ironHi : state === 'cleared' ? C.gold : state === 'awake' ? C.emberSoft : sel === i ? C.goldSoft : C.parchDeep;
+              const stroke = state === 'sealed' ? '#7a6a52' : state === 'cleared' ? '#6a4e10' : state === 'awake' ? '#a85a28' : sel === i ? '#f6e7b2' : '#8a6414';
               const r = regions[i];
               const statusLine = state === 'sealed' ? 'Sealed' : state === 'cleared' ? 'Cleared' : state === 'awake' ? 'Boss awake' : 'Trial open';
+              const label = ch.name.replace(/^The /, '');
+              const plaqueW = Math.min(156, Math.max(112, label.length * 7.2));
+              const focusRing = sel === i || next.index === i;
               return (
                 <g key={ch.id} style={{ cursor: 'pointer' }} onClick={() => setSel(i)}>
-                  <path d={r.d} fill={open ? fills[i] : '#14110c'} stroke={stroke} strokeWidth={sel === i || state === 'cleared' || state === 'awake' ? 2.6 : 1.4} opacity={open ? 1 : 0.78} />
-                  <g clipPath={'url(#cm-clip-' + ch.id + ')'} opacity={open ? 1 : 0.28}>
-                    {i === 0 ? <g fill="none" stroke="#c9b896" strokeWidth="1.1"><path d="M40 250 L55 210 L70 250 M85 260 L100 220 L115 260" /><path d="M50 240 H130" /><circle cx="70" cy="200" r="6" /><path d="M70 194 V180 H78" stroke={C.gold} /></g> : null}
-                    {i === 1 ? <g fill="none" stroke="#8a6a40" strokeWidth="1.1"><path d="M200 200 L230 170 L250 200 L220 210 Z" /><path d="M260 150 L280 130 L300 155" /><path d="M190 210 Q230 230 270 200" /></g> : null}
-                    {i === 2 ? <g fill="none" stroke="#b8c4c8" strokeWidth="1.2"><path d="M380 150 L400 90 L420 150" /><path d="M430 140 L450 70 L470 140" /><path d="M490 130 L510 80 L530 130" /><path d="M400 150 H520" /><rect x="430" y="120" width="24" height="36" /><path d="M430 120 L442 108 L454 120" /></g> : null}
-                    {i === 3 ? <g fill="none" stroke={C.goldSoft} strokeWidth="1.1"><rect x="340" y="230" width="90" height="40" /><path d="M350 230 V215 H420 V230" /><path d="M360 250 V270 M380 250 V270 M400 250 V270" /></g> : null}
-                    {i === 4 ? <g fill="none" stroke={C.emberSoft} strokeWidth="1.2"><path d="M50 360 Q90 310 140 350 Q170 370 200 340" /><circle cx="110" cy="340" r="8" fill="#c45c20" opacity="0.45" /><path d="M70 350 L80 320 M150 355 L165 325" /></g> : null}
-                    {i === 5 ? <g fill="none" stroke={C.goldSoft} strokeWidth="1.2"><path d="M600 250 L630 170 L660 250 Z" /><rect x="618" y="200" width="24" height="50" /><path d="M610 200 H650 L642 188 H618 Z" /><path d="M700 230 L720 150 L740 230" /><path d="M680 160 Q700 130 740 150" stroke={state === 'cleared' ? C.emberSoft : C.frost} /></g> : null}
+                  <path d={r.d} fill={open ? fills[i] : '#d7c49a'} stroke={stroke} strokeWidth={focusRing || state === 'cleared' || state === 'awake' ? 2.8 : 1.5} opacity={open ? 1 : 0.88} filter={focusRing ? 'url(#cm-gilt)' : undefined} />
+                  <g clipPath={'url(#cm-clip-' + ch.id + ')'} opacity={open ? 0.95 : 0.4}>
+                    {i === 0 ? <g fill="none" stroke="#31401e" strokeWidth="1.25"><path d="M40 250 L55 210 L70 250 M85 260 L100 220 L115 260" /><path d="M50 240 H130" /><circle cx="70" cy="200" r="6" /><path d="M70 194 V180 H78" stroke="#6a4e10" /></g> : null}
+                    {i === 1 ? <g fill="none" stroke="#5c3e1c" strokeWidth="1.25"><path d="M200 200 L230 170 L250 200 L220 210 Z" /><path d="M260 150 L280 130 L300 155" /><path d="M190 210 Q230 230 270 200" /></g> : null}
+                    {i === 2 ? <g fill="none" stroke="#3c4a56" strokeWidth="1.3"><path d="M380 150 L400 90 L420 150" fill="#f4f7f8" /><path d="M430 140 L450 70 L470 140" fill="#f4f7f8" /><path d="M490 130 L510 80 L530 130" fill="#f4f7f8" /><path d="M400 150 H520" /><rect x="430" y="120" width="24" height="36" /><path d="M430 120 L442 108 L454 120" /></g> : null}
+                    {i === 3 ? <g fill="none" stroke="#6a4e10" strokeWidth="1.25"><rect x="340" y="230" width="90" height="40" fill="#f6edd4" /><path d="M350 230 V215 H420 V230" /><path d="M360 250 V270 M380 250 V270 M400 250 V270" /></g> : null}
+                    {i === 4 ? <g fill="none" stroke="#6a2818" strokeWidth="1.3"><path d="M50 360 Q90 310 140 350 Q170 370 200 340" /><circle cx="110" cy="340" r="8" fill="#c45c20" opacity="0.7" /><path d="M70 350 L80 320 M150 355 L165 325" /></g> : null}
+                    {i === 5 ? <g fill="none" stroke="#6a4e10" strokeWidth="1.35"><path d="M600 250 L630 170 L660 250 Z" fill="#f6edd4" /><rect x="618" y="200" width="24" height="50" /><path d="M610 200 H650 L642 188 H618 Z" /><path d="M700 230 L720 150 L740 230" /><path d="M680 160 Q700 130 740 150" stroke={state === 'cleared' ? '#a85a28' : '#8a6414'} /></g> : null}
                   </g>
-                  {!open ? <g><path d={r.d} fill="url(#cm-fog)" /><circle cx={r.x} cy={r.y - 14} r="16" fill="#0c0a08" stroke={C.ironHi} strokeWidth="1.2" opacity="0.85" /><text x={r.x} y={r.y - 10} textAnchor="middle" fill={C.inkMute} fontSize={9} fontFamily={FONT_DISPLAY}>Fog</text></g> : null}
-                  <circle cx={r.x} cy={r.y - (open ? 28 : 36)} r="11" fill="#120e0a" stroke={stroke} strokeWidth="1.4" />
-                  <text x={r.x} y={r.y - (open ? 24 : 32)} textAnchor="middle" fill={state === 'cleared' ? C.goldSoft : open ? C.parch : C.inkMute} fontSize={9} fontFamily={FONT_DISPLAY}>{CAMP_ROMAN[i]}</text>
-                  <text x={r.x} y={r.y + (open ? 6 : 14)} textAnchor="middle" fill={open ? C.goldSoft : C.inkMute} fontSize={11} fontFamily={FONT_DISPLAY}>{ch.name.replace(/^The /, '')}</text>
-                  <text x={r.x} y={r.y + (open ? 20 : 28)} textAnchor="middle" fill={state === 'awake' ? C.emberSoft : open ? C.inkDim : C.inkMute} fontSize={9} fontFamily={FONT_DISPLAY}>{statusLine}</text>
+                  {focusRing ? <path d={r.d} fill="none" stroke="#fff6d4" strokeWidth={sel === i ? 2.4 : 1.5} className={next.index === i ? 'cm-foil-ring' : undefined} /> : null}
+                  {!open ? <path d={r.d} fill="url(#cm-fog)" /> : null}
+                  <circle cx={r.x} cy={r.y - 34} r="12" fill="#7a2420" stroke="#f6e7b2" strokeWidth="1.4" />
+                  <circle cx={r.x} cy={r.y - 34} r="9" fill="none" stroke="#f8f0da" strokeWidth="0.6" opacity="0.75" />
+                  <text x={r.x} y={r.y - 30} textAnchor="middle" fill="#f8f0da" fontSize={9} fontFamily={FONT_DISPLAY}>{CAMP_ROMAN[i]}</text>
+                  <rect x={r.x - plaqueW / 2} y={r.y - 6} width={plaqueW} height="32" fill="#f8f0da" stroke="#8a6414" strokeWidth="0.8" />
+                  <text x={r.x} y={r.y + 8} textAnchor="middle" fill="#2a2118" fontSize={10} fontFamily={FONT_DISPLAY}>{label}</text>
+                  <text x={r.x} y={r.y + 20} textAnchor="middle" fill={state === 'awake' ? '#8a3014' : state === 'cleared' ? '#6a4e10' : '#5c4e3a'} fontSize={8} fontFamily={FONT_DISPLAY}>{statusLine}</text>
                 </g>
               );
             })}
-            <g transform="translate(740, 360)" opacity="0.8">
-              <circle cx="0" cy="0" r="22" fill="#120e0a" stroke={C.goldDim} strokeWidth="1.2" />
-              <path d="M0 -16 L4 0 L0 16 L-4 0 Z" fill={C.gold} opacity="0.85" />
-              <path d="M-16 0 L0 -4 L16 0 L0 4 Z" fill={C.parchDeep} opacity="0.7" />
-              <text x="0" y="-26" textAnchor="middle" fill={C.goldSoft} fontSize="8" fontFamily={FONT_DISPLAY}>N</text>
+            <g transform="translate(736, 364)">
+              <circle cx="0" cy="0" r="26" fill="#f8f0da" stroke="#6a4e10" strokeWidth="1.3" />
+              <circle cx="0" cy="0" r="19" fill="none" stroke="#8a6414" strokeWidth="0.7" />
+              <path d="M0 -16 L5 -1 L0 16 L-5 -1 Z" fill="#7a2420" />
+              <path d="M0 -16 L5 -1 L0 0 Z" fill="#f3e2a4" />
+              <path d="M-15 0 L0 -3.2 L15 0 L0 3.2 Z" fill="#4e6574" opacity="0.9" />
+              <text x="0" y="-30" textAnchor="middle" fill="#3a2c14" fontSize="9" fontFamily={FONT_DISPLAY}>N</text>
             </g>
           </svg>
         </div>
       </div>
+      </Foil>
       <div style={{ background: 'linear-gradient(180deg, #2a241c 0%, #14110c 100%)', border: '1px solid ' + C.goldDim, borderTop: 'none', padding: '14px 16px', boxShadow: 'inset 0 0 0 1px #00000066' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'baseline', justifyContent: 'space-between' }}>
           <div>
@@ -2952,7 +3035,7 @@ export default function App() {
   const last = session && session.items.length ? session.items[session.items.length - 1] : undefined;
 
   const retiredCss = '@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"); .cm-root { font-family: ' + FONT_BODY + '; overflow-x: hidden; overflow-wrap: break-word; } .cm-root button { font-family: ' + FONT_DISPLAY + '; } .cm-noise { pointer-events: none; position: fixed; inset: 0; opacity: 0.07; z-index: 2; background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27180%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27180%27 height=%27180%27 filter=%27url(%23n)%27 opacity=%270.9%27/%3E%3C/svg%3E"); } @media (max-width: 560px) { .cm-root { font-size: 15px; } .cm-nav button { letter-spacing: 0.06em !important; font-size: 11px !important; padding: 10px 8px !important; } } .cm-root button:focus-visible { outline: 2px solid ' + C.gold + '; outline-offset: 2px; } @keyframes cm-skillup { 0% { opacity: 0; transform: translateY(10px); } 18% { opacity: 1; transform: none; } 75% { opacity: 1; } 100% { opacity: 0; } } @keyframes cm-pulse { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.28; } } @keyframes cm-shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-7px); } 40% { transform: translateX(7px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(3px); } } @keyframes cm-pop { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -70px) scale(0.3); } } @keyframes cm-glowpulse { 0%,100% { box-shadow: none; } 40% { box-shadow: inset 0 0 80px #d4b46a44, 0 0 40px #d4b46a55; } } .cm-skillup { animation: cm-skillup 2.6s ease forwards; } .cm-pulse { animation: cm-pulse 2.2s ease-in-out infinite; } .cm-bar { transition: width 0.55s ease; } .cm-shake { animation: cm-shake 0.4s ease; } .cm-glow { animation: cm-glowpulse 0.5s ease; } .cm-bit { position: absolute; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: #e8d5a3; pointer-events: none; animation: cm-pop 0.8s ease forwards; z-index: 30; } @keyframes cm-twinkle { 0%,100% { opacity: 0.18; } 50% { opacity: 0.9; } } @keyframes cm-draw { from { stroke-dashoffset: 90; } to { stroke-dashoffset: 0; } } .cm-twinkle { animation: cm-twinkle 3.1s ease-in-out infinite; } .cm-draw { stroke-dasharray: 90; animation: cm-draw 0.95s ease-out forwards; } @media (prefers-reduced-motion: reduce) { .cm-skillup, .cm-pulse, .cm-shake, .cm-bit, .cm-glow, .cm-twinkle, .cm-draw { animation: none !important; } .cm-bar { transition: none !important; } } .cm-reduce .cm-skillup, .cm-reduce .cm-pulse, .cm-reduce .cm-shake, .cm-reduce .cm-bit, .cm-reduce .cm-glow, .cm-reduce .cm-twinkle, .cm-reduce .cm-draw { animation: none !important; } .cm-reduce .cm-bar { transition: none !important; } @keyframes cm-snow { 0% { transform: translateY(-12px); opacity: 0; } 12% { opacity: 0.7; } 100% { transform: translateY(110vh); opacity: 0; } } @keyframes cm-flicker { 0%,100% { opacity: 0.4; } 40% { opacity: 0.82; } 72% { opacity: 0.32; } } @keyframes cm-aurora { 0%,100% { opacity: 0.2; transform: translateX(0); } 50% { opacity: 0.46; transform: translateX(10px); } } @keyframes cm-discover { 0% { opacity: 0; letter-spacing: 0.42em; } 14% { opacity: 1; letter-spacing: 0.18em; } 78% { opacity: 1; } 100% { opacity: 0; } } @keyframes cm-cinema { from { opacity: 0; } to { opacity: 1; } } @keyframes cm-slowveil { 0%,100% { opacity: 0.08; } 50% { opacity: 0.18; } } .cm-snow { position: fixed; top: -8px; border-radius: 50%; background: #e8f0ff; pointer-events: none; z-index: 3; animation: cm-snow linear infinite; } .cm-flicker { animation: cm-flicker 2.8s ease-in-out infinite; } .cm-aurora { animation: cm-aurora 7s ease-in-out infinite; } .cm-discover { animation: cm-discover 4.1s ease forwards; } .cm-cinema-line { animation: cm-cinema 0.9s ease both; } .cm-slowveil { animation: cm-slowveil 2.4s ease-in-out infinite; } @media (prefers-reduced-motion: reduce) { .cm-snow, .cm-flicker, .cm-aurora, .cm-discover, .cm-cinema-line, .cm-slowveil { animation: none !important; } } .cm-reduce .cm-snow, .cm-reduce .cm-flicker, .cm-reduce .cm-aurora, .cm-reduce .cm-discover, .cm-reduce .cm-cinema-line, .cm-reduce .cm-slowveil { animation: none !important; }';
-  const css = HALL_CSS || retiredCss;
+  const css = (HALL_CSS || retiredCss) + SPECTACLE_CSS;
     const preferReduce = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const reduceMotion = !!(save.settings && (save.settings.motion === 'reduce' || (save.settings.motion !== 'full' && preferReduce)));
   const textPx = save.settings && save.settings.text === 'sm' ? 15 : save.settings && save.settings.text === 'lg' ? 19 : 17;
@@ -3003,18 +3086,21 @@ export default function App() {
   if (view === 'title') {
     const titleConf = confidenceOf(save);
     return (
-      <div className={'cm-root' + (reduceMotion ? ' cm-reduce' : '')} style={{ ...shell, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, textAlign: 'center' }}>
+      <div className={'cm-root cm-title-screen' + (reduceMotion ? ' cm-reduce' : '')} style={{ ...shell, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, textAlign: 'center' }}>
         <style>{css}</style>
         <div className="cm-noise" aria-hidden="true" />
-        <div aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', inset: 0, background: 'radial-gradient(ellipse at 50% 18%, #d4af3722 0%, transparent 42%), radial-gradient(ellipse at 50% 100%, #1b181388 0%, transparent 55%)', zIndex: 1 }} />
+        <div className="cm-atmosphere cm-vignette" aria-hidden="true" />
+        <div className="cm-atmosphere cm-lightshaft" aria-hidden="true" />
         <div style={{ maxWidth: 560, width: '100%', position: 'relative', zIndex: 3 }}>
-          <div style={{ color: C.goldDim, letterSpacing: '0.4em', fontSize: 11, fontFamily: FONT_DECO }}>ᚠ  ᚢ  ᚴ  ᚷ  ᛚ</div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}><HallCrest /></div>
+          <div style={{ color: C.goldDim, letterSpacing: '0.4em', fontSize: 11, fontFamily: FONT_DECO, marginTop: 8 }}>ᚠ  ᚢ  ᚴ  ᚷ  ᛚ</div>
           <div style={{ margin: '10px auto 0', width: 72, height: 2, background: 'linear-gradient(90deg, transparent, ' + C.gold + ', transparent)' }} />
-          <h1 style={{ ...headingStyle(theme, 34, C.goldSoft), marginTop: 14, fontFamily: FONT_DECO, letterSpacing: '0.1em', textShadow: '0 2px 0 #00000088, 0 0 28px ' + C.gold + '55' }}>Construction Mastery</h1>
+          <h1 className="cm-hero-title" style={{ ...headingStyle(theme, 34, 'transparent'), marginTop: 14, fontFamily: FONT_DECO, letterSpacing: '0.08em' }}>Construction Mastery</h1>
           <p style={{ margin: '8px 0 0', letterSpacing: '0.26em', textTransform: 'uppercase', color: C.parchDeep, fontSize: 12, fontFamily: FONT_DISPLAY }}>Bidhall Reliquary</p>
           <p style={{ margin: '6px 0 0', letterSpacing: '0.18em', textTransform: 'uppercase', color: C.inkDim, fontSize: 13 }}>The Estimator’s Quest</p>
           <GoldRule />
-          <div style={{ ...stoneBox, textAlign: 'left', marginTop: 8, background: 'linear-gradient(165deg, #2e281f 0%, #14110c 55%, #1a1610 100%)' }}>
+          <Foil sheen>
+          <div style={{ ...stoneBox, textAlign: 'left', marginTop: 0, background: 'linear-gradient(165deg, #2e281f 0%, #14110c 55%, #1a1610 100%)' }}>
             <Corners />
             <div style={headingStyle(theme, 12, C.goldDim)}>Continue  ·  save slot I</div>
             <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginTop: 10, flexWrap: 'wrap' }}>
@@ -3030,6 +3116,7 @@ export default function App() {
               </div>
             </div>
           </div>
+          </Foil>
           <div style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center' }}>
             <Btn label={openTrialPending() ? 'Resume trial' : 'Continue  ·  ' + best.label} kind="gold" wide onClick={runContinue} />
             {!openTrialPending() ? <Btn label="Quick 3" kind="gold" wide onClick={runQuick3} /> : null}
@@ -3045,8 +3132,10 @@ export default function App() {
     <div className={'cm-root' + (shake ? ' cm-shake' : '') + (glow ? ' cm-glow' : '') + (reduceMotion ? ' cm-reduce' : '')} style={shell}>
       <style>{css}</style>
       <div className="cm-noise" aria-hidden="true" />
+      <div className="cm-atmosphere cm-vignette" aria-hidden="true" />
+      <div className="cm-atmosphere cm-lightshaft" aria-hidden="true" />
       {isWinterMonth() && !reduceMotion ? flakeLeft.map((left, i) => <span key={'snow-' + i} className="cm-snow" aria-hidden="true" style={{ left: left + '%', width: 3 + (i % 3), height: 3 + (i % 3), animationDuration: 8 + (i % 6) + 's', animationDelay: (i * 0.45) + 's' }} />) : null}
-      {showAurora ? <div className="cm-aurora" aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', left: 0, right: 0, top: 0, height: 160, zIndex: 2, background: 'linear-gradient(180deg, #7aa0b833 0%, #d4af3718 45%, transparent 100%)', opacity: reduceMotion ? 0.22 : undefined }} /> : null}
+      {showAurora ? <div className="cm-aurora" aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', left: 0, right: 0, top: 0, height: 140, zIndex: 2, background: 'linear-gradient(180deg, #d4af3728 0%, #7aa0b812 46%, transparent 100%)', opacity: reduceMotion ? 0.22 : undefined }} /> : null}
       <div className={reduceMotion ? undefined : 'cm-flicker'} aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', left: 0, bottom: 0, width: 220, height: 180, zIndex: 2, background: 'radial-gradient(ellipse at 20% 90%, #d4893a66 0%, transparent 70%)', opacity: reduceMotion ? 0.35 : undefined }} />
       {session && session.shoutSlow && !session.show ? <div className="cm-slowveil" aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', inset: 0, zIndex: 4, background: 'radial-gradient(ellipse at 50% 40%, #9ad4ff22 0%, #00000033 100%)' }} /> : null}
       {discoverBanner ? <div role="status" className="cm-discover" style={{ position: 'fixed', left: 0, right: 0, top: '22%', zIndex: 45, textAlign: 'center', pointerEvents: 'none', color: C.goldSoft, fontFamily: FONT_DISPLAY, fontSize: 28, letterSpacing: '0.18em', textTransform: 'uppercase', textShadow: '0 0 22px ' + C.gold + '99, 0 2px 10px #000' }}>{discoverBanner}</div> : null}
@@ -3107,10 +3196,10 @@ export default function App() {
           </div>
         </div>
       ) : null}
-      <div style={{ maxWidth: 980, margin: '0 auto', padding: '28px 18px 80px' }}>
+      <div className="cm-stage" style={{ maxWidth: 980, margin: '0 auto', padding: '28px 18px 80px' }}>
         <header style={{ textAlign: 'center', marginBottom: 18 }}>
           <div style={{ color: C.goldDim, letterSpacing: '0.4em', fontSize: 11 }}>ᚠ  ᚢ  ᚴ  ᚷ  ᛚ</div>
-          <h1 id="cm-main-heading" tabIndex={-1} className="cm-main-heading" style={{ ...headingStyle(theme, 24, C.goldSoft), marginTop: 8, fontFamily: FONT_DECO, textShadow: '0 2px 0 #00000066, 0 0 18px var(--cm-glow, ' + C.gold + '55)' }}>Construction Mastery</h1>
+          <h1 id="cm-main-heading" tabIndex={-1} className="cm-main-heading cm-hero-title" style={{ ...headingStyle(theme, 24, 'transparent'), marginTop: 8, fontFamily: FONT_DECO }}>Construction Mastery</h1>
           <p style={{ margin: '4px 0 0', letterSpacing: '0.22em', textTransform: 'uppercase', color: C.parchDeep, fontSize: 11, fontFamily: FONT_DISPLAY }}>Bidhall Reliquary</p>
           <p style={{ margin: '4px 0 0', letterSpacing: '0.18em', textTransform: 'uppercase', color: C.inkDim, fontSize: 12 }}>The Estimator’s Quest</p>
           <GoldRule />
@@ -3179,7 +3268,8 @@ export default function App() {
         <div key={view} id="cm-view-panel" tabIndex={-1} className={'cm-view-panel' + (reduceMotion ? '' : ' cm-view')}>
         {view === 'hall' ? (
           <div>
-            <div style={{ ...stoneBox, marginBottom: 18, boxShadow: '0 0 22px var(--cm-glow, ' + C.gold + '33)' }}>
+            <Foil style={{ marginBottom: 18 }}>
+            <div style={{ ...stoneBox, marginBottom: 0, boxShadow: '0 0 22px var(--cm-glow, ' + C.gold + '33)' }}>
               <Corners />
               <div style={headingStyle(theme, 13, C.gold)}>Continue</div>
               <GoldRule />
@@ -3197,6 +3287,7 @@ export default function App() {
                 </div>
               ) : null}
             </div>
+            </Foil>
             {encOpen ? (
               <div style={{ ...stoneBox, marginBottom: 18, borderColor: encKind === 'rfi' ? C.danger : C.goldDim }}>
                 <div style={headingStyle(theme, 13, encKind === 'rfi' ? C.goldSoft : C.gold)}>{encKind === 'sub' ? 'A traveling sub at the door' : 'A cursed RFI on the wind'}</div>
@@ -3313,9 +3404,13 @@ export default function App() {
         ) : null}
         {view === 'sheet' ? (
           <div>
+            <Foil sheen>
             <div style={{ ...stoneBox, display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'center', background: 'linear-gradient(165deg, #2e281f 0%, #14110c 100%)' }}>
               <Corners />
-              <Portrait rank={rank} level={ch.level} title={wornTitle || rank.title} />
+              <div className="cm-portrait-mat">
+                <Portrait rank={rank} level={ch.level} title={wornTitle || rank.title} />
+                <div className="cm-wax" aria-hidden="true">CM</div>
+              </div>
               <div style={{ flex: '1 1 240px' }}>
                 <div style={headingStyle(theme, 12, C.goldDim)}>Character sheet  ·  Bidhall Reliquary</div>
                 <h2 style={{ ...headingStyle(theme, 22, C.goldSoft), margin: '6px 0 0' }}>Jameson Golding</h2>
@@ -3336,11 +3431,12 @@ export default function App() {
                 <p style={{ margin: '10px 0 0', color: C.inkMute, fontSize: 13 }}>Dawn rewards: a Relic Seal at 3, 7, and 14-day streaks, each granted once.</p>
               </div>
             </div>
+            </Foil>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, marginTop: 14 }}>
               {STATS.map((st) => {
                 const val = statValue(save, st.skills);
                 return (
-                  <div key={st.id} style={stoneBox}>
+                  <div key={st.id} className="cm-stat" style={stoneBox}>
                     <div style={{ color: C.goldSoft, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 13 }}>{st.name}</div>
                     <div style={{ color: C.inkMute, fontSize: 13, margin: '6px 0 8px' }}>{st.detail}</div>
                     <Meter value={val} max={40} label={'Rating  ' + val + ' of 40'} />

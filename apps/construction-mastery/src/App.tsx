@@ -41,7 +41,9 @@ const L = {
   merchant: 'Seal Merchant',
   bossHp: 'Boss resolve',
   topRank: 'Archon of Bids',
-  hauntDue: 'Haunts due',
+  hauntDue: 'Contracts due',
+  guildStars: 'Guild Stars',
+  scopeFoe: 'The Unclaimed Scope',
 };
 
 const C = {
@@ -118,6 +120,7 @@ const SPECTACLE_CSS = [
   '.cm-reduce .cm-sheen-light,.cm-reduce .cm-lightshaft,.cm-reduce .cm-foil-ring,.cm-reduce .cm-crest{animation:none !important}',
   '.cm-reduce .cm-sheen-light{opacity:0 !important}',
   '.cm-reduce .cm-lightshaft{opacity:.5 !important}',
+  '.cm-fold>summary{cursor:pointer}',
 ].join('');
 
 type SkillId =
@@ -236,7 +239,7 @@ const SKILLS: SkillDef[] = [
     { id: 'mas-mod', name: 'Modular Reckoning', level: 20, concept: 'A standard CMU is nominally 8x8x16; the actual unit is 3/8 inch less to allow a mortar joint on an 8-inch module.' },
     { id: 'mas-bond', name: 'Bond-Beam Vision', level: 40, concept: 'Bond beams, lintels, and grouted cells with rebar are the structural backbone of the wall — easy to miss in a takeoff.' },
     { id: 'mas-mort', name: 'Mortar of Four Types', level: 60, concept: 'ASTM C270 Types M, S, N, and O: Type S and N are common commercially; Type M for heavier or below-grade work; Type O for interior non-loadbearing.' },
-    { id: 'mas-weep', name: 'Flashing & Weep', level: 80, concept: 'Through-wall flashing and weeps drain the cavity; missing them is a leak and a punch-list dragon.' },
+    { id: 'mas-weep', name: 'Flashing & Weep', level: 80, concept: 'Through-wall flashing and weeps drain the cavity; missing them is a leak and a punch-list miss.' },
     { id: 'mas-scaff', name: 'Scaffold Reckoner', level: 100, concept: 'Masonry production follows scaffold, hoisting, and weather; winter protection moves both cost and schedule.' },
   ]},
   { id: 'met', name: 'Metals', csi: '05', rune: 'ᛏ', lore: 'Steel remembers the shop that birthed it. Measure twice in the detailing room, for the field will not forgive a missed connection or an anchor rod that never made the pour.', perks: [
@@ -316,7 +319,7 @@ const SKILLS: SkillDef[] = [
     { id: 'site-pave', name: 'Paving-Section Reckoner', level: 80, concept: 'Asphalt and concrete paving follow section thickness, base, and subgrade prep, not square footage alone.' },
     { id: 'site-unit', name: 'Unit-Price Eye', level: 100, concept: 'Use unit prices or allowances for hidden conditions such as rock, buried debris, and uncertain import or over-ex quantities.' },
   ]},
-  { id: 'est', name: 'General Conditions & Estimating', csi: '00–01', rune: 'ᛗ', lore: 'The clean number beats the cheap number. Scope gaps are the dragons; general conditions are the camp, the watch, and the winter stores. Bid day is won in the takeoff you already checked.', perks: [
+  { id: 'est', name: 'General Conditions & Estimating', csi: '00–01', rune: 'ᛗ', lore: 'The clean number beats the cheap number. Scope gaps are unclaimed work; general conditions are the camp, the watch, and the winter stores. Bid day is won in the takeoff you already checked.', perks: [
     { id: 'est-gap', name: 'Scope-Gap Hunter', level: 20, concept: 'Level sub bids on inclusions, exclusions, and alternates. The complete number beats the cheap one.' },
     { id: 'est-csi', name: 'CSI Compass', level: 40, concept: 'MasterFormat divisions are the map of the bid; knowing what lives in 03 through 33 keeps work from falling through.' },
     { id: 'est-gc', name: 'General-Conditions Steward', level: 60, concept: 'Staffing, trailers, temp utilities, toilets, and dumpsters scale with duration, not only with building area.' },
@@ -356,7 +359,7 @@ const EST_SKILLS: SkillDef[] = [
   ]},
   { id: 'gaps', name: 'Scope Gaps', csi: 'EST', rune: 'ᛜ', lore: 'The work that nobody claimed will still get built, and you will pay for it. Assign every split item to exactly one sub or a GC line.', perks: [
     { id: 'gaps-assign', name: 'One Owner Each', level: 20, concept: 'Assign each split-scope item to exactly one subcontractor or a general-conditions line.' },
-    { id: 'gaps-classic', name: 'The Usual Dragons', level: 40, concept: 'Classic gaps include firestopping, in-wall blocking, slab patch after saw-cutting, roof curbs, TAB, gas piping, and sprinkler-switch monitoring.' },
+    { id: 'gaps-classic', name: 'The Usual Gaps', level: 40, concept: 'Classic gaps include firestopping, in-wall blocking, slab patch after saw-cutting, roof curbs, TAB, gas piping, and sprinkler-switch monitoring.' },
     { id: 'gaps-28', name: 'The Quiet Tie-In', level: 60, concept: 'Flow and tamper switches are furnished with sprinklers, but monitoring them is typically Division 28.' },
     { id: 'gaps-read', name: 'Exclusion Reader', level: 80, concept: 'Read every quote’s exclusions against the documents. The cheapest number often hid a sentence.' },
     { id: 'gaps-level', name: 'Three-Bid Sight', level: 100, concept: 'When leveling several bids, look for the one that is silent on a known gap such as patch, firestopping, or design fees.' },
@@ -402,7 +405,7 @@ const RANKS: { min: number; title: string; rune: string; metal: string; blurb: s
   { min: 42, title: 'Master Builder', rune: 'ᛖ', metal: '#d4af37', blurb: 'The building is a whole in your mind, from footing to flashing.' },
   { min: 55, title: 'Guild Master', rune: 'ᚷ', metal: '#e8d48b', blurb: 'The City Creek hall would trust you with the close of any bid.' },
   { min: 70, title: 'Arch-Estimator', rune: 'ᛁ', metal: '#c9a227', blurb: 'Numbers, codes, and means obey your reading of the set.' },
-  { min: 85, title: 'Thane of the Bid Hall', rune: 'ᛏ', metal: '#f0e6c8', blurb: 'Your name carries among the trades. Scope dragons fall quiet.' },
+  { min: 85, title: 'Warden of the Bid Hall', rune: 'ᛏ', metal: '#f0e6c8', blurb: 'Your name carries among the trades. Unclaimed scope falls quiet.' },
   { min: 100, title: L.topRank, rune: 'ᛞ', metal: '#f0d060', blurb: 'The cheap number flees a complete takeoff. The ledger holds.' },
 ];
 
@@ -1023,7 +1026,7 @@ const CHAPTERS: { id: string; name: string; region: string; blurb: string; skill
   { id: 'ch3', name: 'The Envelope Keep', region: 'Skin of the Building', blurb: 'Flashings, openings, masonry, and steel that must make the pour. Water is a patient enemy.', skills: ['therm', 'open', 'mas', 'met'], boss: 'The Patient Leak', bossQ: ['camp-leak', 'therm-leak', 'therm-flash', 'open-ada', 'met-embed'] },
   { id: 'ch4', name: 'The Finishing Halls', region: 'What the Owner Touches', blurb: 'Type X in the fire, millwork grades, and the blocking that was never installed.', skills: ['fin', 'wood'], boss: 'The Rated Corridor', bossQ: ['camp-x', 'fin-x', 'wood-block', 'wood-awi', 'fin-l4'] },
   { id: 'ch5', name: 'The MEP Underforge', region: 'Fire, Water, Air, and Power', blurb: 'Sprinklers, DWV, loads, EMT, and the alarm that must speak to the switches.', skills: ['fire', 'plumb', 'hvac', 'elec', 'fa'], boss: 'The Silent Switch', bossQ: ['camp-sw', 'fire-28', 'elec-emt', 'plumb-dwv', 'hvac-load'] },
-  { id: 'ch6', name: 'The Bid Day Citadel', region: 'The Estimator’s Crown', blurb: 'Level, close, and carry the markups. The cheap number flees a complete one.', skills: ['level', 'gaps', 'markup', 'strategy', 'gc', 'contract', 'risk', 'est'], boss: 'The Dragon of Scope Gaps', bossQ: ['camp-gap', 'bid-patch', 'markup-7', 'level-first', 'str-form'] },
+  { id: 'ch6', name: 'The Bid Day Citadel', region: 'The Estimator’s Crown', blurb: 'Level, close, and carry the markups. The cheap number flees a complete one.', skills: ['level', 'gaps', 'markup', 'strategy', 'gc', 'contract', 'risk', 'est'], boss: L.scopeFoe, bossQ: ['camp-gap', 'bid-patch', 'markup-7', 'level-first', 'str-form'] },
 ];
 
 const TOMES: { id: string; skill: SkillId; title: string; text: string }[] = [
@@ -1343,6 +1346,29 @@ function hauntOpen(h: Save['haunted'], id: string): boolean {
 function hauntList(save: Save): string[] {
   return Object.keys(save.haunted).filter((id) => hauntOpen(save.haunted, id) && qById(id));
 }
+function hauntBanishedList(save: Save): string[] {
+  return Object.keys(save.haunted).filter((id) => {
+    const rec = save.haunted[id];
+    return !!rec && rec.rights >= 2 && !!qById(id);
+  });
+}
+function hauntJournalOrder(save: Save): string[] {
+  return hauntList(save).slice().sort((a, b) => {
+    const ad = hauntDue(save, a) ? 0 : 1;
+    const bd = hauntDue(save, b) ? 0 : 1;
+    if (ad !== bd) return ad - bd;
+    return a < b ? -1 : a > b ? 1 : 0;
+  });
+}
+function formatLedgerDay(iso?: string): string {
+  if (!iso) return 'the next dawn';
+  const p = iso.split('-');
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const m = Number(p[1]);
+  const d = Number(p[2]);
+  if (!m || !d || m < 1 || m > 12) return iso;
+  return months[m - 1] + ' ' + d;
+}
 function pickHaunted(save: Save, seed: number, n?: number): string[] {
   return shuffle(hauntDueList(save), seed).slice(0, n || SESSION_Q);
 }
@@ -1382,7 +1408,7 @@ const TROPHIES: { id: string; name: string; detail: string; test: (s: Save) => b
   { id: 'ch3', name: 'Envelope Warden', detail: 'Defeat the Patient Leak.', test: (s) => s.campaignDone.indexOf('ch3-boss') >= 0 },
   { id: 'ch4', name: 'Halls Finisher', detail: 'Defeat the Rated Corridor.', test: (s) => s.campaignDone.indexOf('ch4-boss') >= 0 },
   { id: 'ch5', name: 'Underforge Walker', detail: 'Defeat the Silent Switch.', test: (s) => s.campaignDone.indexOf('ch5-boss') >= 0 },
-  { id: 'ch6', name: 'Dragon of the Citadel', detail: 'Defeat the Dragon of Scope Gaps in the campaign.', test: (s) => s.campaignDone.indexOf('ch6-boss') >= 0, hidden: true },
+  { id: 'ch6', name: 'Crown of the Citadel', detail: 'Defeat ' + L.scopeFoe + ' in the campaign.', test: (s) => s.campaignDone.indexOf('ch6-boss') >= 0, hidden: true },
   { id: 'souls', name: 'Seal Keeper', detail: 'Hold at least two Relic Seals.', test: (s) => s.souls >= 2, progress: (s) => ({ now: Math.min(s.souls, 2), max: 2 }) },
   { id: 'codex10', name: 'Scribe of the Hall', detail: 'Inscribe 10 concepts in the Codex.', test: (s) => s.codex.length >= 10, progress: (s) => ({ now: Math.min(s.codex.length, 10), max: 10 }) },
   { id: 'codex25', name: 'Lorekeeper', detail: 'Inscribe 25 concepts in the Codex.', test: (s) => s.codex.length >= 25, progress: (s) => ({ now: Math.min(s.codex.length, 25), max: 25 }) },
@@ -1390,7 +1416,7 @@ const TROPHIES: { id: string; name: string; detail: string; test: (s: Save) => b
   { id: 'map3', name: 'Cartographer', detail: 'Fell three regional bosses on the campaign map.', test: (s) => ['ch1-boss', 'ch2-boss', 'ch3-boss', 'ch4-boss', 'ch5-boss', 'ch6-boss'].filter((k) => s.campaignDone.indexOf(k) >= 0).length >= 3, progress: (s) => ({ now: Math.min(['ch1-boss', 'ch2-boss', 'ch3-boss', 'ch4-boss', 'ch5-boss', 'ch6-boss'].filter((k) => s.campaignDone.indexOf(k) >= 0).length, 3), max: 3 }) },
   { id: 'math5', name: 'Reckoner', detail: 'Inscribe five numeric takeoffs in the Codex.', test: (s) => s.codex.filter((id) => id.indexOf('num-') === 0).length >= 5, progress: (s) => ({ now: Math.min(s.codex.filter((id) => id.indexOf('num-') === 0).length, 5), max: 5 }) },
   { id: 'math15', name: 'Master Reckoner', detail: 'Inscribe fifteen numeric takeoffs in the Codex.', test: (s) => s.codex.filter((id) => id.indexOf('num-') === 0).length >= 15, progress: (s) => ({ now: Math.min(s.codex.filter((id) => id.indexOf('num-') === 0).length, 15), max: 15 }), hidden: true },
-  { id: 'combo12', name: 'Blood of the Dragon', detail: 'Reach a combo of 12.', test: (s) => s.bestStreak >= 12, progress: (s) => ({ now: Math.min(s.bestStreak, 12), max: 12 }), hidden: true },
+  { id: 'combo12', name: 'Ink of the Long Streak', detail: 'Reach a combo of 12.', test: (s) => s.bestStreak >= 12, progress: (s) => ({ now: Math.min(s.bestStreak, 12), max: 12 }), hidden: true },
 ];
 function earnedTrophies(s: Save): string[] {
   return TROPHIES.filter((t) => t.test(s)).map((t) => t.id);
@@ -1628,7 +1654,7 @@ const LORE_TIPS = [
 const CINEMA_BEATS: { kicker: string; line: string }[] = [
   { kicker: 'A northern hall, after hours', line: 'The takeoff tables are still warm. Outside, snow gathers on the ridge of the bid calendar.' },
   { kicker: 'The calling', line: 'You are Jameson Golding, estimator of City Creek Construction. Scope hides in the notes, and dirt lies under the paving.' },
-  { kicker: 'The trial ahead', line: 'From the first 2x4 to Bid Day at two o’clock, the dragons of missing work and unsuitable ground are waiting.' },
+  { kicker: 'The trial ahead', line: 'From the first 2x4 to Bid Day at two o’clock, missing work and unsuitable ground are waiting in the ledger.' },
   { kicker: 'The naming', line: 'Rise through the trades. Close the ledger. Become the Archon of Bids.' },
   { kicker: 'A guide at the door', line: 'Haldor Ironline, Master Builder, will walk with you. His advice is blunt. His facts are measured.' },
 ];
@@ -1792,7 +1818,7 @@ function confidenceOf(save: Save): { score: number; blurb: string } {
   const weakLift = Math.min(1, (weakSum / WEAK.length) / 35);
   const score = Math.max(8, Math.min(99, Math.round(100 * (0.5 * accuracy + 0.3 * weakLift + 0.2 * (1 - hauntDrag)))));
   const blurb = due > 0
-    ? due + (due === 1 ? ' haunt is' : ' haunts are') + ' due — clear bounties to steady the hand'
+    ? due + (due === 1 ? ' contract is' : ' contracts are') + ' due — settle them to steady the hand'
     : score >= 70
       ? 'The ledger reads clean. Keep walking weak paths so the seal holds.'
       : 'Train marked weak paths and seal misses to raise confidence.';
@@ -1929,7 +1955,7 @@ function Constellation(props: { def: SkillDef; rec: SkillSave; save: Save; onPer
   const lv = skillInfo(props.rec.xp).level;
   return (
     <div style={{ overflow: 'auto', maxWidth: '100%', border: props.compact ? undefined : '1px solid ' + C.goldDim, background: '#070b14' }}>
-    <svg viewBox="0 0 400 320" width="100%" height={props.compact ? 150 : 300} role="img" aria-label={props.def.name + ' constellation'} style={{ display: 'block', minWidth: props.compact ? undefined : 320 }}>
+    <svg viewBox="0 0 400 320" width="100%" height={props.compact ? 150 : 300} role="img" aria-label={props.def.name + ' guild star'} style={{ display: 'block', minWidth: props.compact ? undefined : 320 }}>
       <defs>
         <radialGradient id={'sky-' + props.def.id} cx="50%" cy="38%" r="70%">
           <stop offset="0%" stopColor="#1c2a48" />
@@ -2441,16 +2467,22 @@ export default function App() {
     setMentorMood(whisperFor('bid'));
     openCurtain();
   }
-  function startHaunted(n?: number) {
+  function beginHaunt(ids: string[]) {
     if (blockIfOpen()) return;
     trialLockRef.current = false;
-    const ids = pickHaunted(save, Date.now() % 100000, n || 3);
-    if (ids.length === 0) return;
-    setSession({ mode: 'haunt', skill: 'est', ids, index: 0, items: [], hint: false, show: false, done: false, order: orderFor(ids[0], Date.now()), numDraft: '', startSouls: save.souls, startCodex: save.codex.slice(), bonusXp: 0, shoutSlow: false });
+    const clean = ids.filter((id) => !!qById(id) && hauntDue(save, id));
+    if (clean.length === 0) return;
+    setSession({ mode: 'haunt', skill: 'est', ids: clean, index: 0, items: [], hint: false, show: false, done: false, order: orderFor(clean[0], Date.now()), numDraft: '', startSouls: save.souls, startCodex: save.codex.slice(), bonusXp: 0, shoutSlow: false });
     setView('quiz'); arrive();
-    discoverPlace('haunt', 'The Haunted Ledger');
-    setMentorMood('These questions still haunt the ledger. Two later rights will banish one.');
+    discoverPlace('haunt', 'The Contract Ledger');
+    setMentorMood('A contract is open. Two later rights banish it.');
     openCurtain();
+  }
+  function startHaunted(n?: number) {
+    beginHaunt(pickHaunted(save, Date.now() % 100000, n || 3));
+  }
+  function startHauntContract(id: string) {
+    beginHaunt([id]);
   }
   function startChapter(ch: (typeof CHAPTERS)[number], boss?: boolean) {
     if (boss) { if (blockIfOpen()) return; trialLockRef.current = false; setBossIntro(ch); setView('campaign'); arrive(); return; }
@@ -2745,9 +2777,9 @@ export default function App() {
       setSave((s) => ({ ...s, activeTrial: { view: session.mode === 'bid' ? 'bid' : 'quiz', focus: session.skill === 'bid' ? focus : session.skill, session } }));
     }
     if (id === 'campaign') discoverPlace('map', 'The Bidhall Reliquary Chart');
-    if (id === 'skills') discoverPlace('stars', 'The Constellations');
+    if (id === 'skills') discoverPlace('stars', 'The Guild Stars');
     if (id === 'shop') discoverPlace('shop', 'The Seal Merchant');
-    if (id === 'haunt') discoverPlace('haunt', 'The Haunted Ledger');
+    if (id === 'haunt') discoverPlace('haunt', 'The Contract Ledger');
     setView(id);
     arrive();
   }
@@ -2904,9 +2936,9 @@ export default function App() {
     if (due.length > 0) {
       const n = Math.min(3, due.length);
       return {
-        label: 'Hunt ' + n + ' due haunt' + (n === 1 ? '' : 's'),
+        label: 'Hunt ' + n + ' due contract' + (n === 1 ? '' : 's'),
         go: () => startHaunted(n),
-        detail: due.length + (due.length === 1 ? ' haunted question is' : ' haunted questions are') + ' due today  ·  a short haunt hunt first',
+        detail: due.length + (due.length === 1 ? ' contract is' : ' contracts are') + ' due today  ·  a short contract first',
       };
     }
     const weak = weakestSkillId();
@@ -2938,7 +2970,7 @@ export default function App() {
     }
     if (lowLv < 20) return { label: 'Study ' + skillById(low).name, go: () => { setSkillTab('est'); startSkillQuiz(low, 3); }, detail: 'Estimating mastery  ·  a quick trial' };
     if (save.dailyDone.indexOf('tome') < 0) return { label: 'Inscribe today’s leaf', go: () => { readTome(); }, detail: tome.title };
-    return { label: 'Walk the constellations', go: () => goView('skills'), detail: 'Choose any path and keep climbing' };
+    return { label: 'Walk the guild stars', go: () => goView('skills'), detail: 'Choose any path and keep climbing' };
   }
   function runContinue() {
     if (openTrialPending()) { resumeTrial(); return; }
@@ -3018,6 +3050,8 @@ export default function App() {
   }, [save.settings]);
   const best = nextBest();
   const hauntN = hauntList(save).length;
+  const hauntBanishedN = hauntBanishedList(save).length;
+  const hauntDueN = hauntDueList(save).length;
   const conf = confidenceOf(save);
 
   const parch: CSSProperties = { background: 'linear-gradient(180deg, #eadcba 0%, #d7c49a 48%, #c4af7e 100%)', color: C.parchInk, border: '1px solid var(--cm-gold-dim, ' + C.goldDim + ')', boxShadow: 'inset 0 0 0 1px #7a6230, inset 0 0 0 5px #b89d68, inset 0 0 48px #00000018, 0 10px 28px #00000066', padding: '22px 20px 20px', borderRadius: 2, overflowWrap: 'break-word', position: 'relative' };
@@ -3166,7 +3200,7 @@ export default function App() {
             <GoldRule />
             <h2 style={{ ...headingStyle(theme, 32, C.parchInk), letterSpacing: '0.14em', fontFamily: FONT_DECO, textAlign: 'center', textShadow: '0 0 18px ' + C.gold + '55' }}>Level Up</h2>
             <p style={{ ...headingStyle(theme, 13, C.goldDim), textAlign: 'center', marginTop: 6 }}>Choose a Perk</p>
-            <p style={{ margin: '8px 0 0', color: C.parchMute }}>You are now Level {ch.level}, {rank.title}. You have {perkPts} perk {perkPts === 1 ? 'point' : 'points'}. {anyPerkAvailable(save) ? 'A star in a constellation is ready. Choose a perk, or later from any skill tree.' : 'Your perk points await. Raise a skill to 20 to open its first star.'}</p>
+            <p style={{ margin: '8px 0 0', color: C.parchMute }}>You are now Level {ch.level}, {rank.title}. You have {perkPts} perk {perkPts === 1 ? 'point' : 'points'}. {anyPerkAvailable(save) ? 'A guild star is ready. Choose a perk, or later from any skill tree.' : 'Your perk points await. Raise a skill to 20 to open its first star.'}</p>
             {anyPerkAvailable(save) ? (
               <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {ALL_SKILLS.map((def) => def.perks.map((perk, i) => perkAvailable(def, save, i) ? (
@@ -3213,28 +3247,45 @@ export default function App() {
         <div className="cm-nav" style={{ display: 'flex', flexWrap: 'wrap', gap: 4, justifyContent: 'center', marginBottom: 20, padding: 6, background: 'linear-gradient(180deg, #241f18, #120e0a)', border: '1px solid ' + C.goldDim, boxShadow: 'inset 0 0 0 3px #0a0907' }}>
           {navBtn('hall', 'Hall')}
           {navBtn('campaign', 'Campaign')}
-          {navBtn('skills', 'Constellations')}
+          {navBtn('skills', L.guildStars)}
           {navBtn('sheet', L.sheetNav)}
           {navBtn('quests', 'Quest Log')}
           {navBtn('codex', 'Codex')}
           {navBtn('trophies', 'Trophies')}
-          {hauntN > 0 ? navBtn('haunt', 'Haunted') : null}
+          {hauntN > 0 || hauntBanishedN > 0 ? navBtn('haunt', 'Contracts') : null}
           {navBtn('shop', L.merchant)}
           {navBtn('settings', 'Settings')}
           <button type="button" onClick={() => { if (openTrialPending() && !(session && session.mode === 'bid')) { setMentorMood('A trial is already underway. Resume it, or abandon it before opening Bid Day.'); return; } goView('bid'); }} style={{ font: 'inherit', background: view === 'bid' ? '#5c1818' : 'transparent', color: C.goldSoft, border: '1px solid ' + C.danger, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: 12, padding: '10px 12px', minHeight: 44, cursor: 'pointer' }}>Bid Day</button>
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'stretch', marginBottom: 22, ...stoneBox, background: 'linear-gradient(165deg, #2c281f 0%, #14110c 100%)' }}>
-          <Corners />
-          <Seal rank={rank} level={ch.level} />
-          <div style={{ flex: '1 1 180px', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ ...headingStyle(theme, 13, C.gold), marginBottom: 4 }}>{rank.title}</div>
-            <div style={{ color: C.inkDim, fontSize: 13, marginBottom: 6 }}>{rank.blurb}</div>
-            <div style={{ color: C.inkMute, fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: FONT_DISPLAY }}>{L.souls} {save.souls}  ·  {L.dawn} {save.loginStreak}</div>
+        {view === 'hall' ? (
+          <details className="cm-fold" style={{ ...stoneBox, marginBottom: 12, padding: '10px 14px' }}>
+            <summary style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 12, color: C.goldSoft }}>
+              {rank.title}  ·  Lv {ch.level}  ·  <span style={{ color: C.frost }}>{L.confidence} {conf.score}</span>
+              {hauntDueN > 0 ? '  ·  ' + L.hauntDue + ' ' + hauntDueN : ''}
+            </summary>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'stretch', marginTop: 12 }}>
+              <Seal rank={rank} level={ch.level} />
+              <div style={{ flex: '1 1 180px', minWidth: 0 }}>
+                <div style={{ color: C.inkDim, fontSize: 13, marginBottom: 6 }}>{rank.blurb}</div>
+                <div style={{ color: C.inkMute, fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: FONT_DISPLAY }}>{L.souls} {save.souls}  ·  {L.dawn} {save.loginStreak}</div>
+              </div>
+              <RelicHud save={save} ch={ch} rank={rank} upcoming={upcoming} perkPts={perkPts} hauntDue={hauntDueN} />
+            </div>
+          </details>
+        ) : (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'stretch', marginBottom: 22, ...stoneBox, background: 'linear-gradient(165deg, #2c281f 0%, #14110c 100%)' }}>
+            <Corners />
+            <Seal rank={rank} level={ch.level} />
+            <div style={{ flex: '1 1 180px', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ ...headingStyle(theme, 13, C.gold), marginBottom: 4 }}>{rank.title}</div>
+              <div style={{ color: C.inkDim, fontSize: 13, marginBottom: 6 }}>{rank.blurb}</div>
+              <div style={{ color: C.inkMute, fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: FONT_DISPLAY }}>{L.souls} {save.souls}  ·  {L.dawn} {save.loginStreak}</div>
+            </div>
+            <RelicHud save={save} ch={ch} rank={rank} upcoming={upcoming} perkPts={perkPts} hauntDue={hauntDueN} />
           </div>
-          <RelicHud save={save} ch={ch} rank={rank} upcoming={upcoming} perkPts={perkPts} hauntDue={hauntDueList(save).length} />
-        </div>
+        )}
         {saveWarning ? <div role="status" style={{ ...stoneBox, marginBottom: 16, borderColor: C.danger }}><div style={headingStyle(theme, 13, C.goldSoft)}>Saving warning</div><p style={{ margin: '8px 0 0', color: C.inkDim }}>{saveWarning}</p><div style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap', gap: 8 }}>{backupOffer ? <Btn label="Restore from backup" kind="gold" onClick={restoreFromBackup} /> : null}<Btn label="Open Settings for a Save Scroll" kind={backupOffer ? 'stone' : 'gold'} onClick={() => goView('settings')} /></div></div> : null}
-        {savedFlash ? <div role="status" style={{ ...stoneBox, marginBottom: 16, borderColor: C.success }}><div style={headingStyle(theme, 13, C.goldSoft)}>Saved just now</div><p style={{ margin: '8px 0 0', color: C.inkDim }}>{lastSavedAt ? 'Last saved  ·  ' + formatLastSaved(lastSavedAt) : 'The ledger was written.'}</p></div> : null}
+        {savedFlash && view !== 'hall' ? <div role="status" style={{ ...stoneBox, marginBottom: 16, borderColor: C.success }}><div style={headingStyle(theme, 13, C.goldSoft)}>Saved just now</div><p style={{ margin: '8px 0 0', color: C.inkDim }}>{lastSavedAt ? 'Last saved  ·  ' + formatLastSaved(lastSavedAt) : 'The ledger was written.'}</p></div> : null}
         {ledgerNotice && ledgerNotice !== saveWarning ? <div role="status" style={{ ...stoneBox, marginBottom: 16, borderColor: C.gold }}><div style={headingStyle(theme, 13, C.goldSoft)}>Ledger notice</div><p style={{ margin: '8px 0 0', color: C.inkDim }}>{ledgerNotice}</p></div> : null}
         {openTrialPending() && view !== 'quiz' && view !== 'bid' && view !== 'hall' ? (
           <div style={{ ...stoneBox, marginBottom: 16, borderColor: C.gold, boxShadow: '0 0 18px ' + C.gold + '33' }}>
@@ -3247,7 +3298,7 @@ export default function App() {
             </div>
           </div>
         ) : null}
-        {mentorText ? (
+        {mentorText && view !== 'hall' ? (
           <div style={{ ...parch, marginBottom: 18, display: 'flex', gap: 14, alignItems: 'flex-start' }}>
             <div aria-hidden="true" style={{ width: 52, height: 52, flexShrink: 0, borderRadius: '50%', background: 'radial-gradient(circle at 35% 30%, #6a5a3a, #2a2216)', border: '2px solid ' + C.goldDim, display: 'flex', alignItems: 'center', justifyContent: 'center', color: C.goldSoft, fontFamily: FONT_DECO, fontSize: 22 }}>H</div>
             <div style={{ minWidth: 0, flex: 1 }}>
@@ -3256,7 +3307,13 @@ export default function App() {
             </div>
           </div>
         ) : null}
-        {!save.introSeen ? (
+        {mentorText && view === 'hall' ? (
+          <p style={{ margin: '0 0 12px', color: C.ink, fontSize: 15 }}>
+            <span style={{ color: C.goldSoft, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: 12, fontFamily: FONT_DISPLAY }}>Haldor  ·  </span>
+            {mentorText}
+          </p>
+        ) : null}
+        {!save.introSeen && view !== 'hall' ? (
           <div style={{ ...parch, marginBottom: 22 }}>
             <div style={headingStyle(theme, 13, C.goldDim)}>Journal of prior trials</div>
             <GoldRule />
@@ -3264,6 +3321,14 @@ export default function App() {
             <p style={{ margin: '10px 0 0' }}>Fire Suppression: 4 of 4. Plumbing: 4 of 4, including DWV once it returned. Those victories granted experience and two Relic Seals. Weak paths remain in Wood framing, Electrical, and Finishes — suggested quests in your log.</p>
             <div style={{ marginTop: 14 }}><Btn label="I have read the ledger" kind="gold" onClick={() => setSave((s) => ({ ...s, introSeen: true }))} /></div>
           </div>
+        ) : null}
+        {!save.introSeen && view === 'hall' ? (
+          <details className="cm-fold" style={{ ...parch, marginBottom: 12, padding: '12px 14px' }}>
+            <summary style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: 12, color: C.goldDim }}>Journal of prior trials</summary>
+            <p style={{ margin: '12px 0 0' }}>Your earlier studies have been inscribed in the ledger. General knowledge, 4 of 7: you knew the 28-day f’c test, Division 08 Openings, the 1:12 accessible ramp, and the 8x8x16 CMU. You missed the actual 2x4 size, EMT, and DWV, and you passed over Type X drywall.</p>
+            <p style={{ margin: '10px 0 0' }}>Fire Suppression: 4 of 4. Plumbing: 4 of 4, including DWV once it returned. Those victories granted experience and two Relic Seals. Weak paths remain in Wood framing, Electrical, and Finishes — suggested quests in your log.</p>
+            <div style={{ marginTop: 14 }}><Btn label="I have read the ledger" kind="gold" onClick={() => setSave((s) => ({ ...s, introSeen: true }))} /></div>
+          </details>
         ) : null}
         <div key={view} id="cm-view-panel" tabIndex={-1} className={'cm-view-panel' + (reduceMotion ? '' : ' cm-view')}>
         {view === 'hall' ? (
@@ -3281,62 +3346,49 @@ export default function App() {
               </div>
               {!openTrialPending() ? (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 10 }}>
-                  {hauntN > 0 ? <Btn label={'Haunted ledger  ·  ' + hauntN} onClick={() => goView('haunt')} /> : null}
-                  <Btn label="Open the campaign" onClick={() => goView('campaign')} />
+                  {hauntN > 0 ? <Btn label={'Contract ledger  ·  ' + hauntN} kind="quiet" onClick={() => goView('haunt')} /> : null}
+                  <Btn label="Open the campaign" kind="quiet" onClick={() => goView('campaign')} />
                   <Btn label="Full 5-question trial" kind="quiet" onClick={() => startSkillQuiz(weakestSkillId())} />
                 </div>
               ) : null}
             </div>
             </Foil>
             {encOpen ? (
-              <div style={{ ...stoneBox, marginBottom: 18, borderColor: encKind === 'rfi' ? C.danger : C.goldDim }}>
-                <div style={headingStyle(theme, 13, encKind === 'rfi' ? C.goldSoft : C.gold)}>{encKind === 'sub' ? 'A traveling sub at the door' : 'A cursed RFI on the wind'}</div>
-                <GoldRule />
-                <p style={{ margin: '0 0 12px', color: C.inkDim }}>{encKind === 'sub' ? 'A subcontractor wants a number he can live with in ' + weakDef.name + '. Four short trials. Clear three and he pays a Relic Seal.' : 'A drawing conflict is circling the deadline. Three RFI questions. Clear them and the curse lifts — a Relic Seal is yours.'}</p>
-                <Btn label={encKind === 'sub' ? 'Level the traveling bid' : 'Face the cursed RFI'} kind={encKind === 'rfi' ? 'danger' : 'gold'} onClick={() => startEncounter(encKind)} />
+              <div style={{ ...stoneBox, marginBottom: 12, padding: '12px 14px', borderColor: encKind === 'rfi' ? C.danger : C.goldDim }}>
+                <div style={headingStyle(theme, 12, encKind === 'rfi' ? C.goldSoft : C.gold)}>{encKind === 'sub' ? 'A traveling sub at the door' : 'A cursed RFI on the wind'}</div>
+                <p style={{ margin: '8px 0 10px', color: C.inkDim }}>{encKind === 'sub' ? 'A subcontractor wants a number he can live with in ' + weakDef.name + '. Four short trials. Clear three and he pays a Relic Seal.' : 'A drawing conflict is circling the deadline. Three RFI questions. Clear them and the curse lifts — a Relic Seal is yours.'}</p>
+                <Btn label={encKind === 'sub' ? 'Level the traveling bid' : 'Face the cursed RFI'} kind={encKind === 'rfi' ? 'danger' : 'stone'} onClick={() => startEncounter(encKind)} />
               </div>
             ) : null}
-            <div style={{ ...parch, marginBottom: 18 }}>
-              <div style={headingStyle(theme, 13, C.goldDim)}>Today’s leaf of the tome</div>
-              <GoldRule />
-              <h2 style={{ ...headingStyle(theme, 16, C.parchInk), marginBottom: 8 }}>{tome.title}</h2>
-              <p style={{ margin: 0 }}>{tome.text}</p>
-              <div style={{ marginTop: 14, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                <Btn label={save.dailyDone.indexOf('tome') >= 0 ? 'Leaf already read' : 'Inscribe this leaf'} kind="gold" disabled={save.dailyDone.indexOf('tome') >= 0} onClick={readTome} />
-                <Btn label={'Trial of ' + skillById(tome.skill).name} onClick={() => startSkillQuiz(tome.skill)} />
+            <details className="cm-fold" style={{ ...parch, marginBottom: 12, padding: '12px 14px' }}>
+              <summary style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: 12, color: C.goldDim }}>Today’s leaf  ·  {tome.title}{save.dailyDone.indexOf('tome') >= 0 ? '  ·  read' : ''}</summary>
+              <p style={{ margin: '12px 0 0' }}>{tome.text}</p>
+              <div style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                <Btn label={save.dailyDone.indexOf('tome') >= 0 ? 'Leaf already read' : 'Inscribe this leaf'} kind="stone" disabled={save.dailyDone.indexOf('tome') >= 0} onClick={readTome} />
+                <Btn label={'Trial of ' + skillById(tome.skill).name} kind="quiet" onClick={() => startSkillQuiz(tome.skill)} />
               </div>
-            </div>
-            <div style={{ ...stoneBox, marginBottom: 18 }}>
-              <div style={headingStyle(theme, 13, C.gold)}>Suggested quests · weak spots</div>
-              <GoldRule />
+            </details>
+            <div style={{ ...stoneBox, marginBottom: 0, padding: '12px 14px' }}>
+              <div style={headingStyle(theme, 12, C.goldDim)}>Weak paths</div>
               {WEAK.map((id) => {
                 const d = skillById(id);
                 const lv = skillInfo(save.skills[id].xp);
                 return (
-                  <div key={id} style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', marginBottom: 12 }}>
-                    <div style={{ flex: '1 1 200px' }}>
-                      <div style={{ color: C.goldSoft }}>{d.name} · {d.csi}</div>
-                      <div style={{ color: C.inkMute, fontSize: 13 }}>{id === 'wood' ? 'A 2x4 is 1-1/2 x 3-1/2, not 2 x 4. Start here.' : id === 'elec' ? 'EMT is Electrical Metallic Tubing, not a transformer.' : 'Type X is fire-rated gypsum — the board that stands in the fire.'}</div>
-                      <Meter value={lv.into} max={lv.need} label={'Level ' + lv.level} />
+                  <div key={id} style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginTop: 10 }}>
+                    <div style={{ flex: '1 1 180px' }}>
+                      <div style={{ color: C.goldSoft, fontSize: 14 }}>{d.name}  ·  CSI {d.csi}  ·  Lv {lv.level}</div>
+                      <div style={{ color: C.inkMute, fontSize: 13 }}>{id === 'wood' ? 'A 2x4 is 1-1/2 × 3-1/2, not 2 × 4.' : id === 'elec' ? 'EMT is Electrical Metallic Tubing, not a transformer.' : 'Type X is the fire-rated board.'}</div>
                     </div>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                      <Btn label="Quick 3" kind="gold" onClick={() => startSkillQuiz(id, 3)} />
-                      <Btn label="Begin 5 trials" onClick={() => startSkillQuiz(id)} />
-                    </div>
+                    <Btn label="3 trials" kind="quiet" onClick={() => startSkillQuiz(id, 3)} />
                   </div>
                 );
               })}
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              <Btn label="Open the constellations" onClick={() => goView('skills')} />
-              <Btn label="Quest log" onClick={() => goView('quests')} />
-              <Btn label="Face Bid Day" kind="danger" onClick={startBid} />
             </div>
           </div>
         ) : null}
         {view === 'skills' ? (
           <div>
-            <p style={{ color: C.inkDim, marginTop: 0 }}>Fourteen trade constellations and nine of Estimating Mastery. Skills rise from 1 to 100. Character level rises as skills increase. A perk star opens at skill 20, 40, 60, 80, and 100, and costs a perk point earned from character levels.</p>
+            <p style={{ color: C.inkDim, marginTop: 0 }}>Fourteen trade guild stars and nine of Estimating Mastery. Skills rise from 1 to 100. Character level rises as skills increase. A perk star opens at skill 20, 40, 60, 80, and 100, and costs a perk point earned from character levels.</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 14 }}>
               <Btn label="Trades" kind={skillTab === 'trade' ? 'gold' : 'quiet'} onClick={() => setSkillTab('trade')} />
               <Btn label="Estimating Mastery" kind={skillTab === 'est' ? 'gold' : 'quiet'} onClick={() => setSkillTab('est')} />
@@ -3359,7 +3411,7 @@ export default function App() {
         ) : null}
         {view === 'skill' ? (
           <div>
-            <Btn label="Back to the sky" kind="quiet" onClick={() => goView('skills')} />
+            <Btn label="Back to guild stars" kind="quiet" onClick={() => goView('skills')} />
             <div style={{ ...stoneBox, marginTop: 12, background: C.sky }}>
               <div style={headingStyle(theme, 12, C.gold)}>{focusDef.rune}  {focusDef.name}  ·  Division {focusDef.csi}</div>
               <Constellation def={focusDef} rec={focusRec} save={save} onPerk={(id) => spendPerk(focus, id)} />
@@ -3386,7 +3438,7 @@ export default function App() {
               })}
               {focusLv.level >= 100 ? (
                 <div>
-                  <p style={{ color: C.inkDim }}>This constellation is complete. Making it legendary returns its perk points, sets the skill to 15, and lets you climb again. Your character level stays.</p>
+                  <p style={{ color: C.inkDim }}>This guild star is complete. Making it legendary returns its perk points, sets the skill to 15, and lets you climb again. Your character level stays.</p>
                   {legendConfirm ? (
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                       <Btn label="Confirm legendary reset" kind="danger" onClick={makeLegendary} />
@@ -3440,7 +3492,7 @@ export default function App() {
                     <div style={{ color: C.goldSoft, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 13 }}>{st.name}</div>
                     <div style={{ color: C.inkMute, fontSize: 13, margin: '6px 0 8px' }}>{st.detail}</div>
                     <Meter value={val} max={40} label={'Rating  ' + val + ' of 40'} />
-                    <div style={{ color: C.inkMute, fontSize: 12, marginTop: 8 }}>Drawn from {st.skills.map((id) => skillById(id).name).join(', ')}. Train those constellations to raise this rating.</div>
+                    <div style={{ color: C.inkMute, fontSize: 12, marginTop: 8 }}>Drawn from {st.skills.map((id) => skillById(id).name).join(', ')}. Train those guild stars to raise this rating.</div>
                   </div>
                 );
               })}
@@ -3516,23 +3568,53 @@ export default function App() {
         ) : null}
         {view === 'haunt' ? (
           <div style={parch}>
-            <div style={headingStyle(theme, 13, C.goldDim)}>Haunted Questions  ·  Bounties</div>
+            <div style={headingStyle(theme, 13, C.goldDim)}>Contract Ledger</div>
             <GoldRule />
-            <p style={{ marginTop: 0, color: C.parchMute }}>A miss is due today. A later right rests it until tomorrow. Two later rights banish it. Only due bounties are hunted, so the spacing can do its work.</p>
-            {hauntN === 0 ? <div className="cm-empty"><p style={{ color: C.parchMute, marginTop: 0 }}>The haunt is quiet. Misses will gather here.</p><Btn label="Return to the hall" kind="quiet" onClick={() => goView('hall')} /></div> : null}
-            {hauntList(save).map((id) => {
+            <p style={{ marginTop: 0, color: C.parchMute }}>A miss becomes a contract. It is due today. A later right rests it until the next dawn. Two later rights banish it. Only due contracts are hunted, so the spacing can do its work.</p>
+            {hauntDueN > 0 ? (
+              <div style={{ marginBottom: 16 }}>
+                <Btn label={'Hunt ' + Math.min(3, hauntDueN) + ' due contract' + (Math.min(3, hauntDueN) === 1 ? '' : 's')} kind="gold" onClick={() => startHaunted(Math.min(3, hauntDueN))} />
+              </div>
+            ) : hauntN > 0 ? <p style={{ color: C.parchMute }}>No contract is due today. Return at the next dawn.</p> : null}
+            {hauntN === 0 ? <div className="cm-empty"><p style={{ color: C.parchMute, marginTop: 0 }}>The ledger is quiet. Misses will gather here as contracts.</p><Btn label="Return to the hall" kind="quiet" onClick={() => goView('hall')} /></div> : null}
+            {hauntJournalOrder(save).map((id) => {
               const q = qById(id);
               const rec = save.haunted[id];
-              if (!q) return null;
+              if (!q || !rec) return null;
               const due = hauntDue(save, id);
+              const skill = skillById(q.skill === 'bid' ? 'est' : q.skill);
               return (
-                <div key={id} style={{ marginBottom: 12, paddingBottom: 10, borderBottom: '1px solid ' + C.goldDim }}>
-                  <div style={{ fontSize: 15 }}>{q.q}</div>
-                  <div style={{ color: C.parchMute, fontSize: 13, marginTop: 4 }}>{due ? 'Due today' : 'Resting until ' + (rec.due || 'tomorrow')}  ·  Misses {rec.misses}  ·  later rights {rec.rights}/2  ·  {skillById(q.skill === 'bid' ? 'est' : q.skill).name}</div>
-                </div>
+                <article key={id} style={{ marginBottom: 14, padding: '12px 14px 14px', background: 'linear-gradient(180deg, #f4e7c8 0%, #e4d2a6 100%)', border: '1px solid ' + C.goldDim, boxShadow: 'inset 3px 0 0 ' + (due ? C.gold : C.frost) }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap', alignItems: 'baseline' }}>
+                    <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, color: C.goldDim }}>Contract</div>
+                    <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 11, color: due ? C.parchInk : C.frost }}>{due ? 'Due today' : 'Resting until ' + formatLedgerDay(rec.due)}</div>
+                  </div>
+                  <div style={{ marginTop: 6, fontFamily: FONT_DISPLAY, letterSpacing: '0.06em', textTransform: 'uppercase', fontSize: 12, color: C.parchMute }}>{skill.name}  ·  CSI {skill.csi}</div>
+                  <div style={{ fontSize: 16, marginTop: 6, color: C.parchInk }}>{q.q}</div>
+                  <div style={{ marginTop: 8, fontFamily: FONT_DISPLAY, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 11, color: C.goldDim }}>Why it matters</div>
+                  <p style={{ margin: '4px 0 0', color: C.parchMute, fontSize: 14 }}>{q.x}</p>
+                  <div style={{ marginTop: 8, color: C.parchMute, fontSize: 13 }}>Misses {rec.misses}  ·  later rights {rec.rights}/2</div>
+                  <div style={{ marginTop: 10 }}>
+                    {due ? <Btn label="Take this contract" kind="gold" onClick={() => startHauntContract(id)} /> : <Btn label={'Study ' + skill.name} onClick={() => { setFocus(skill.id); goView('skill'); }} />}
+                  </div>
+                </article>
               );
             })}
-            {hauntDueList(save).length > 0 ? <div style={{ marginTop: 12 }}><Btn label={'Hunt ' + Math.min(3, hauntDueList(save).length) + ' due bounties'} kind="gold" onClick={() => startHaunted(Math.min(3, hauntDueList(save).length))} /></div> : hauntN > 0 ? <p style={{ color: C.parchMute }}>No bounty is due today. Return at the next dawn.</p> : null}
+            <details className="cm-fold" style={{ marginTop: 4, paddingTop: 8, borderTop: '1px solid ' + C.goldDim }}>
+              <summary style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: 12, color: C.goldDim }}>Banished archive  ·  {hauntBanishedN}</summary>
+              {hauntBanishedN === 0 ? <p style={{ color: C.parchMute, fontSize: 14 }}>No contract has been banished yet. Two later rights clear one.</p> : hauntBanishedList(save).map((id) => {
+                const q = qById(id);
+                const rec = save.haunted[id];
+                if (!q || !rec) return null;
+                const skill = skillById(q.skill === 'bid' ? 'est' : q.skill);
+                return (
+                  <div key={id} style={{ marginTop: 10, paddingTop: 8, borderTop: '1px solid ' + C.goldDim }}>
+                    <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 11, color: C.parchMute }}>Banished  ·  {skill.name}  ·  CSI {skill.csi}</div>
+                    <div style={{ fontSize: 14, marginTop: 4 }}>{q.q}</div>
+                  </div>
+                );
+              })}
+            </details>
           </div>
         ) : null}
         {view === 'quests' ? (
@@ -3545,11 +3627,11 @@ export default function App() {
                 <div style={{ letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 13 }}>{q.done ? 'Complete' : 'Open'}  ·  {q.title}</div>
                 <p style={{ margin: '6px 0 10px', color: C.parchMute }}>{q.detail}</p>
                 {!q.done && q.id === 'weak' ? <Btn label={'Begin ' + weakDef.name} kind="gold" onClick={() => startSkillQuiz(weakId)} /> : null}
-                {!q.done && q.id === 'drill' ? <Btn label="Choose a constellation" kind="gold" onClick={() => goView('skills')} /> : null}
+                {!q.done && q.id === 'drill' ? <Btn label="Choose a guild star" kind="gold" onClick={() => goView('skills')} /> : null}
                 {!q.done && q.id === 'tome' ? <Btn label="Inscribe this leaf" kind="gold" onClick={() => { readTome(); goView('hall'); }} /> : null}
               </div>
             ))}
-            <div style={{ letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 13 }}>{save.dailyDone.indexOf('bid') >= 0 ? 'Faced today' : 'Standing challenge'}  ·  Bid Day, the Dragon of Scope Gaps</div>
+            <div style={{ letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 13 }}>{save.dailyDone.indexOf('bid') >= 0 ? 'Faced today' : 'Standing challenge'}  ·  Bid Day, {L.scopeFoe}</div>
             <p style={{ margin: '6px 0 10px', color: C.parchMute }}>Five harder, mixed-trade questions. A perfect run yields two Relic Seals. Best result: {save.bidBest}/5.</p>
             <Btn label="Face Bid Day" kind="danger" onClick={startBid} />
             <div style={{ marginTop: 18, letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: 13 }}>{encOpen ? 'Encounter today' : 'Encounter settled'}  ·  {encKind === 'sub' ? 'The traveling sub' : 'The cursed RFI'}</div>
@@ -3607,7 +3689,7 @@ export default function App() {
           <div className={session.show && last ? (last.correct ? 'cm-q-ok' : 'cm-q-miss') : undefined} style={session.mode === 'bid' ? { ...stoneBox, background: '#160c0c', borderColor: C.danger } : parch}>
             <Corners color={session.mode === 'bid' || session.mode === 'boss' ? C.emberSoft : undefined} />
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap', alignItems: 'flex-start' }}>
-            <div style={headingStyle(theme, 12, session.mode === 'bid' || session.mode === 'boss' ? C.goldSoft : C.goldDim)}>{session.mode === 'bid' ? 'Bid Day  ·  The Dragon of Scope Gaps' : session.mode === 'haunt' ? 'Haunted Questions  ·  Bounties' : session.mode === 'boss' ? 'Boss  ·  ' + ((CHAPTERS.find((c) => c.id === session.chapter) || { boss: 'The Guardian' }).boss) : session.mode === 'camp' ? ((CHAPTERS.find((c) => c.id === session.chapter) || { name: 'Campaign' }).name) + '  ·  Chapter trial' : skillById(session.skill === 'bid' ? focus : session.skill).name + '  ·  ' + session.ids.length + ' trials'}</div>
+            <div style={headingStyle(theme, 12, session.mode === 'bid' || session.mode === 'boss' ? C.goldSoft : C.goldDim)}>{session.mode === 'bid' ? 'Bid Day  ·  ' + L.scopeFoe : session.mode === 'haunt' ? 'Contract Ledger' : session.mode === 'boss' ? 'Boss  ·  ' + ((CHAPTERS.find((c) => c.id === session.chapter) || { boss: 'The Guardian' }).boss) : session.mode === 'camp' ? ((CHAPTERS.find((c) => c.id === session.chapter) || { name: 'Campaign' }).name) + '  ·  Chapter trial' : skillById(session.skill === 'bid' ? focus : session.skill).name + '  ·  ' + session.ids.length + ' trials'}</div>
             <Btn label="Park this trial" kind="quiet" onClick={() => goView('hall')} />
             </div>
             <p style={{ margin: '8px 0 0', color: session.mode === 'bid' ? C.inkDim : C.parchMute, fontSize: 14 }}>Trial {session.index + 1} of {session.ids.length}{session.mode === 'bid' ? '  ·  Mixed trades, harder questions. The bid is due at two o’clock.' : '  ·  Keys 1–4 or A–D to answer, Enter to continue.'}</p>
@@ -3708,12 +3790,12 @@ export default function App() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 14 }}>
               {session.mode === 'skill' && session.skill !== 'bid' ? <Btn label="Five more trials" kind="gold" onClick={() => startSkillQuiz(session.skill as SkillId)} /> : null}
               {session.mode === 'skill' && session.skill !== 'bid' ? <Btn label="Quick 3" onClick={() => startSkillQuiz(session.skill as SkillId, 3)} /> : null}
-              {session.mode === 'bid' ? <Btn label="Face the dragon again" kind="danger" onClick={startBid} /> : null}
-              {session.mode === 'haunt' && hauntDueList(save).length > 0 ? <Btn label="Hunt due bounties" kind="gold" onClick={() => startHaunted(Math.min(3, hauntDueList(save).length))} /> : null}
+              {session.mode === 'bid' ? <Btn label="Face Bid Day again" kind="danger" onClick={startBid} /> : null}
+              {session.mode === 'haunt' && hauntDueN > 0 ? <Btn label="Hunt due contracts" kind="gold" onClick={() => startHaunted(Math.min(3, hauntDueN))} /> : null}
               {session.mode === 'camp' && session.chapter && save.campaignDone.indexOf(session.chapter + '-trial') >= 0 ? <Btn label="Face the boss" kind="danger" onClick={() => { const chap = CHAPTERS.find((c) => c.id === session.chapter); if (chap) startChapter(chap, true); }} /> : null}
               {session.mode === 'boss' ? <Btn label="Return to the campaign" kind="gold" onClick={() => { setSession(null); goView('campaign'); }} /> : null}
               <Btn label="Return to the hall" onClick={() => { setSession(null); goView('hall'); }} />
-              <Btn label="Constellations" onClick={() => { setSession(null); goView('skills'); }} />
+              <Btn label={L.guildStars} onClick={() => { setSession(null); goView('skills'); }} />
             </div>
           </div>
         ) : null}
@@ -3811,7 +3893,7 @@ export default function App() {
         ) : null}
         {view === 'bid' && !session ? (
           <div style={{ ...stoneBox, background: '#160c0c', borderColor: C.danger }}>
-            <div style={headingStyle(theme, 13, C.goldSoft)}>Bid Day · The Dragon of Scope Gaps</div>
+            <div style={headingStyle(theme, 13, C.goldSoft)}>Bid Day · {L.scopeFoe}</div>
             <GoldRule />
             <p style={{ color: C.inkDim }}>The proposal is due at two o’clock. Five mixed questions, harder than a morning trial, drawn from every trade. A perfect run grants two Relic Seals and a bonus of experience. Your best: {save.bidBest} of 5.</p>
             <Btn label="Begin the bid" kind="danger" onClick={startBid} />

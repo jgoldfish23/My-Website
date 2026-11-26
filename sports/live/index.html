@@ -46,7 +46,7 @@ body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family
    (4.9:1 and 5.2:1 against the average of the wash), and the light theme's blue eyebrow (--hud) is 4.9:1 on the page.
    The layers are sized to the large viewport (plus a margin) so the iPhone toolbar sliding in and out never shows an edge. */
 :root{--ink-3:#9aa4b5}
-:root.light{--ink-3:#525c6f;--hud:#1850b8}
+:root.light{--ink-3:#525c6f;--hud:#1850b8;--gold:#a16207}
 body::before{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(100lvh + 48px);z-index:-2;pointer-events:none;transform:none;animation:none;background:
   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='2 0 0 0 -.5 2 0 0 0 -.5 2 0 0 0 -.5 0 0 0 0 .032'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/160px 160px repeat,
   radial-gradient(120% 75% at 0% 0%,rgba(52,108,255,.16) 0%,rgba(52,108,255,.06) 45%,rgba(52,108,255,0) 75%),
@@ -944,7 +944,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
 <script src="/sports/bl.js?v=20261101a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
-<script src="/sports/holo.js?v=20261126x" defer></script>
+<script src="/sports/holo.js?v=20261126y" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
@@ -970,9 +970,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
 <script src="/sports/night.js?v=20261126p" defer></script>
 <!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
-<script src="/sports/gameday.js?v=20261126p" defer></script>
+<script src="/sports/gameday.js?v=20261126y" defer></script>
 <!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
-<script src="/sports/shell.js?v=20261126x" defer></script>
+<script src="/sports/shell.js?v=20261126y" defer></script>
 <!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
 <script src="/sports/holiday.js?v=20261126x" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
@@ -2855,7 +2855,7 @@ function plan(){ clearTimeout(TIMER); if (document.hidden) return; TIMER = setTi
 document.addEventListener('visibilitychange', () => { if (document.hidden) { clearTimeout(TIMER); wake(); } else cycle(); });
 
 /* ---------- countdowns and the TV clock ---------- */
-function tick(){ document.querySelectorAll('[data-cd]').forEach(el => { const k = +el.dataset.cd; if (!k) return; if (el.dataset.cdk === 'b') el.innerHTML = k - Date.now() <= 0 ? 'Starting' : cdHTML(k); else el.textContent = cdShort(k); });
+function tick(){ document.querySelectorAll('[data-cd]').forEach(el => { const k = +el.dataset.cd; if (!k) return; if (el.dataset.cdk === 'b') { const h = k - Date.now() <= 0 ? 'Starting' : cdHTML(k); if (el._cd !== h) { el._cd = h; el.innerHTML = h; } } else { const t = cdShort(k); if (el.textContent !== t) el.textContent = t; } });
   const c = $('#tv-clock'); if (c && TVM) c.textContent = fmt({hour:'numeric', minute:'2-digit'}); }
 
 /* ---------- TV mode: big screen layout, no site chrome, screen kept awake while games are live ---------- */

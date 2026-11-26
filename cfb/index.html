@@ -392,7 +392,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
 <script src="/sports/bl.js?v=20261101a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
-<script src="/sports/holo.js?v=20261126x" defer></script>
+<script src="/sports/holo.js?v=20261126y" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
@@ -418,9 +418,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
 <script src="/sports/night.js?v=20261126p" defer></script>
 <!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
-<script src="/sports/gameday.js?v=20261126p" defer></script>
+<script src="/sports/gameday.js?v=20261126y" defer></script>
 <!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
-<script src="/sports/shell.js?v=20261126x" defer></script>
+<script src="/sports/shell.js?v=20261126y" defer></script>
 <!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
 <script src="/sports/holiday.js?v=20261126x" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
@@ -17029,12 +17029,12 @@ if(!document.getElementById('pbk-css')){ const st=document.createElement('style'
 { const _pbGame=renderGame; renderGame=function(id){ _pbGame(id); if(view.querySelector('.pbk-vs')) return; const g=GI[id]; const html=g?gamePlaybooksHTML(g):''; const h=view.querySelector('.ghead'); if(h&&html) h.insertAdjacentHTML('afterend', html); }; }
 /* BYU football depth (2026-11-25): a stacked deck under the team header, and a second "floor" under the Game day board */
 if(!document.getElementById('byu-depth-css')){ const st=document.createElement('style'); st.id='byu-depth-css'; st.textContent=''
-  +'.thead.byu-deep{overflow:visible;background:linear-gradient(165deg,#003da5 0%,#002e5d 42%,#04101f 100%);color:#fff;border-color:rgba(255,255,255,.16);'
+  +'html body .thead.byu-deep{overflow:visible;background:linear-gradient(165deg,#003da5 0%,#002e5d 42%,#04101f 100%);color:#fff;border-color:rgba(255,255,255,.16);'
   +'box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 14px 0 -6px rgba(0,30,70,.55),0 28px 0 -12px rgba(0,16,40,.4),0 46px 44px -28px rgba(0,0,0,.75)}'
-  +'.thead.byu-deep .ttl h1,.thead.byu-deep .eyebrow,.thead.byu-deep .meta{color:#fff}'
-  +'.thead.byu-deep .meta,.thead.byu-deep .eyebrow{color:#c9d7ee}'
-  +'.thead.byu-deep .ranks .rb{background:rgba(0,0,0,.28);border-color:rgba(255,255,255,.16);color:#fff}'
-  +'.thead.byu-deep .ranks .rb .k{color:#b7c6e0}'
+  +'html body .thead.byu-deep .ttl h1,html body .thead.byu-deep .eyebrow,html body .thead.byu-deep .meta{color:#fff}'
+  +'html body .thead.byu-deep .meta,html body .thead.byu-deep .eyebrow{color:#c9d7ee}'
+  +'html body .thead.byu-deep .ranks .rb{background:rgba(0,0,0,.28);border-color:rgba(255,255,255,.16);color:#fff}'
+  +'html body .thead.byu-deep .ranks .rb .k{color:#b7c6e0}'
   +'.byu-depth{position:relative;margin:22px 0 6px}'
   +'.byu-stack{position:absolute;left:18px;right:18px;top:12px;bottom:-12px;border-radius:20px;background:#001833;box-shadow:0 16px 0 -8px rgba(0,24,56,.5)}'
   +'.byu-face{position:relative;padding:16px 16px 14px;border-radius:20px;color:#fff;background:linear-gradient(180deg,rgba(10,28,58,.96),rgba(5,12,24,.96));border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 22px 40px -24px rgba(0,0,0,.8)}'
@@ -17048,7 +17048,7 @@ if(!document.getElementById('byu-depth-css')){ const st=document.createElement('
   +'.byu-next .k{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fcd56b}'
   +'.byu-next b{font-size:16px}'
   +'.byu-next span:last-child{color:#c5d2e8;font-size:13px}'
-  +'.ghead.byu-deep{overflow:visible;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 16px 0 -8px rgba(0,30,70,.45),0 34px 0 -14px rgba(0,12,32,.35),0 48px 40px -26px rgba(0,0,0,.65)}'
+  +'html body .ghead.byu-deep{overflow:visible;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 16px 0 -8px rgba(0,30,70,.45),0 34px 0 -14px rgba(0,12,32,.35),0 48px 40px -26px rgba(0,0,0,.65)}'
   +'.jt.byu-floor{box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 18px 0 -8px rgba(0,30,70,.5),0 36px 0 -16px rgba(0,12,32,.38),0 52px 44px -28px rgba(0,0,0,.7)}'
   +'@media (max-width:720px){.byu-plates{grid-template-columns:1fr 1fr}.byu-p b{font-size:22px}}';
   document.head.appendChild(st); }

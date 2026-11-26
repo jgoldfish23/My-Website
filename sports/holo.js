@@ -190,7 +190,7 @@
   function markLive(root){ root.querySelectorAll('.wcard:not(.livecard)').forEach(c => { const w = c.querySelector('.wt'); const lv = !!w && /^live\b/i.test(w.textContent.trim()); if (lv !== c.classList.contains('holo-live')) c.classList.toggle('holo-live', lv); }); }
 
   /* ---------- 4 score changes: compare each score with the last render of the same page ---------- */
-  const SC = '.sc-num,.sb-cd,.tc-sc,.tv-st.live b,.tl .sc';
+  const SC = '.sc-num,.sb-cd:not([data-sbcd]),.tc-sc,.tv-st.live b,.tl .sc'; /* 11-26: countdowns (data-sbcd) are not scores */
   const kind = el => [].slice.call(el.classList).filter(c => !/^(holo-|on$|cur$|show$|click$|is-?live$|live$|final$|tick$|w$|l$|dense$|hot$)/.test(c)).slice(0, 2).join('.');
   function scores(root){ const m = new Map(), n = {};
     root.querySelectorAll(SC).forEach(el => { const host = el.closest('a[href],[data-href]'); const k0 = host && root.contains(host) ? (host.getAttribute('href') || host.getAttribute('data-href')) + '|' + kind(host) : '~';

@@ -37,14 +37,14 @@
     + '@media (prefers-reduced-motion:no-preference){.jsh-splash{animation:jshSplash .9s ease both}'
     +   '@keyframes jshSplash{0%{opacity:1}70%{opacity:1}100%{opacity:0;visibility:hidden}}}'
     /* game pages: night hero + bigger score */
-    + 'html.jsh-game:not(.light) body::before{background:'
+    + 'html.jsh-game.jsh-dk body::before{background:'
     +   'radial-gradient(120% 70% at 0% 0%,rgba(52,108,255,.16) 0%,transparent 55%),'
     +   'radial-gradient(100% 60% at 100% 0%,rgba(225,29,72,.1) 0%,transparent 50%),'
     +   'linear-gradient(180deg,#060814,#03050a)!important}'
     + 'html.jsh-game #view>.ghead{position:relative;border-radius:22px;overflow:hidden}'
-    + 'html.jsh-game:not(.light) #view>.ghead{color:#fff;border-color:rgba(255,255,255,.14);'
+    + 'html.jsh-game.jsh-dk #view>.ghead{color:#fff;border-color:rgba(255,255,255,.14);'
     +   'box-shadow:0 28px 60px -32px rgba(0,0,0,.9)}'
-    + 'html.jsh-game:not(.light) #view>.ghead .rec,html.jsh-game:not(.light) #view>.ghead .when,html.jsh-game:not(.light) #view>.ghead .mid{color:#d5def0}'
+    + 'html.jsh-game.jsh-dk #view>.ghead .rec,html.jsh-game.jsh-dk #view>.ghead .when,html.jsh-game.jsh-dk #view>.ghead .mid{color:#d5def0}'
     + 'html.jsh-game #view>.ghead .mid .sc,html.jsh-game #view>.ghead .sc{font-size:clamp(42px,9vw,72px)!important;font-weight:800;letter-spacing:-.03em;line-height:1}'
     + 'html.jsh-game #view>.ghead.jsh-framed::after{content:"";position:absolute;inset:14px;pointer-events:none;z-index:3;'
     +   'background:linear-gradient(#fff,#fff) top left/18px 2px no-repeat,linear-gradient(#fff,#fff) top left/2px 18px no-repeat,'
@@ -54,6 +54,21 @@
     + '';
 
   var st = D.createElement('style'); st.id = 'jsh-shell-css'; st.textContent = css; (D.head || H).appendChild(st);
+
+  /* the theme the page is really in (11-26): html gets jsh-lt or jsh-dk. The hubs mark light with data-theme="light", the
+     home page and Live Center with the .light class, and "auto" marks neither and follows the phone - rules that only
+     checked .light painted the night look (white text) on light hub pages. Same test as the theme button in hubbar.html. */
+  var hubPage = /^\/(cfb|nfl|nba|cbb)(\/|$)/i.test(location.pathname || '');
+  var mqLight = W.matchMedia ? W.matchMedia('(prefers-color-scheme: light)') : { matches: false };
+  function themeMark() {
+    var t = H.getAttribute('data-theme'), lt = hubPage ? (t ? t === 'light' : !!mqLight.matches) : (H.classList.contains('light') || t === 'light');
+    if (H.classList.contains('jsh-lt') !== lt) H.classList.toggle('jsh-lt', lt);
+    if (H.classList.contains('jsh-dk') !== !lt) H.classList.toggle('jsh-dk', !lt);
+  }
+  themeMark();
+  if (W.MutationObserver) new MutationObserver(themeMark).observe(H, { attributes: true, attributeFilter: ['class', 'data-theme'] });
+  if (mqLight.addEventListener) mqLight.addEventListener('change', themeMark);
+  W.JSH_THEME = { mark: themeMark };
 
   function favOf(key) {
     try { var o = JSON.parse(localStorage.getItem(key) || 'null'); return o && o.fav ? String(o.fav) : ''; } catch (e) { return ''; }

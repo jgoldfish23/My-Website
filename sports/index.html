@@ -354,6 +354,7 @@ a.gm:hover{background:var(--surface-2)}
 .fd-more[aria-expanded="true"]::after{transform:translateY(1px) rotate(-135deg)}
 .tv .fd-more{width:auto;margin:10px 14px 4px}
 .sp .ql{border-bottom:0}
+@media (min-width:900px) and (hover:hover){.sp .ql{flex-wrap:wrap;overflow-x:visible}} /* 11-26: all five links show on a computer */
 /* team intel strip (2026-11-24): TV · hub win % · BYU injury · poll */
 .tc-sig{display:flex;flex-wrap:wrap;gap:5px 8px;margin-top:2px;font-size:11px;font-weight:700;letter-spacing:.02em;color:rgba(255,255,255,.78);line-height:1.25}
 .tc-sig span{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:999px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.12);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
@@ -390,7 +391,7 @@ a.gm:hover{background:var(--surface-2)}
    (4.9:1 and 5.2:1 against the average of the wash), and the light theme's blue eyebrow (--hud) is 4.9:1 on the page.
    The layers are sized to the large viewport (plus a margin) so the iPhone toolbar sliding in and out never shows an edge. */
 :root{--ink-3:#9aa4b5}
-:root.light{--ink-3:#525c6f;--hud:#1850b8}
+:root.light{--ink-3:#525c6f;--hud:#1850b8;--gold:#a16207}
 body::before{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(100lvh + 48px);z-index:-2;pointer-events:none;transform:none;animation:none;background:
   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='2 0 0 0 -.5 2 0 0 0 -.5 2 0 0 0 -.5 0 0 0 0 .032'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/160px 160px repeat,
   radial-gradient(120% 75% at 0% 0%,rgba(52,108,255,.16) 0%,rgba(52,108,255,.06) 45%,rgba(52,108,255,0) 75%),
@@ -962,7 +963,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
 <script src="/sports/bl.js?v=20261101a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
-<script src="/sports/holo.js?v=20261126x" defer></script>
+<script src="/sports/holo.js?v=20261126y" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
@@ -988,9 +989,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
 <script src="/sports/night.js?v=20261126p" defer></script>
 <!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
-<script src="/sports/gameday.js?v=20261126p" defer></script>
+<script src="/sports/gameday.js?v=20261126y" defer></script>
 <!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
-<script src="/sports/shell.js?v=20261126x" defer></script>
+<script src="/sports/shell.js?v=20261126y" defer></script>
 <!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
 <script src="/sports/holiday.js?v=20261126x" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->

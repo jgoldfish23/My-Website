@@ -2,7 +2,8 @@
    Thanksgiving is the fourth Thursday of November. The next morning through December 26 is Christmas.
    After that the hub looks normal again. The date is the hub's own time zone (America/Denver when none is saved).
    ?hol=thanks, ?hol=xmas or ?hol=off overrides the date, for a look at the other theme.
-   No beams, grids, or photos. The banner uses the hub's own gold line and white stroke.
+   No beams, grids, or photos. The Thanksgiving phrase floats on the field. A soft color glow
+   moves through the letters. Line marks stay off until the custom art is in.
    Reduced-motion users get the same still layer. */
 (function () {
   if (window.__jshHoliday) return; window.__jshHoliday = true;
@@ -73,18 +74,19 @@
     + 'html.jsh-xmas:not(.light):not([data-theme="light"]) .jsh-hol-wash{background:' + fieldX + '}'
     + 'html.jsh-xmas.light .jsh-hol-wash,html.jsh-xmas[data-theme="light"] .jsh-hol-wash{background:' + fieldXl + '}'
     + '.jsh-hol-frame{position:fixed;inset:0;z-index:45;pointer-events:none}'
-    + 'html.jsh-thanks .jsh-hol-frame{box-shadow:inset 0 0 0 4px rgba(240,186,96,.7),inset 0 0 80px rgba(160,60,12,.28)}'
+    + 'html.jsh-thanks .jsh-hol-frame{box-shadow:inset 0 0 120px rgba(180,80,16,.18)}'
     + 'html.jsh-xmas .jsh-hol-frame{box-shadow:inset 4px 0 0 rgba(46,170,96,.8),inset -4px 0 0 rgba(196,40,56,.75),inset 0 0 80px rgba(20,80,48,.22)}'
     + 'html.jsh-thanks .jsh,html.jsh-xmas .jsh{position:sticky;top:0;z-index:80}'
     + 'html.jsh-thanks .jsh{background:#2a160c!important;background-image:linear-gradient(90deg,#8a3e10,#2a160c 42%,#2a160c 62%,#6a3010)!important;border-bottom-color:rgba(240,186,96,.45)!important}'
     + 'html.jsh-thanks .jsh-brand b{background:linear-gradient(90deg,#ffe08a,#f0a040);-webkit-background-clip:text;background-clip:text;color:transparent}'
     + 'html.jsh-xmas .jsh{background:#071a12!important;background-image:linear-gradient(90deg,#0e6a40,#071a12 40%,#071a12 62%,#6e1824)!important;border-bottom-color:rgba(240,196,96,.4)!important}'
     + 'html.jsh-xmas .jsh-brand b{background:linear-gradient(90deg,#8cf0b4,#f0d060);-webkit-background-clip:text;background-clip:text;color:transparent}'
-    + '.jsh-hol{position:sticky;top:44px;z-index:79;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:0;padding:8px 14px 9px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;line-height:1.2;text-align:center}'
-    + 'html.jsh-thanks .jsh-hol{color:#fff6e4;background:linear-gradient(90deg,#6a3410,#c47820 50%,#6a3410);border-bottom:1px solid #fbbf24}'
+    + '.jsh-hol{position:sticky;top:44px;z-index:79;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:0;padding:16px 22px 18px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;line-height:1.2;text-align:center}'
+    + 'html.jsh-thanks .jsh-hol{color:#fff6e4;background:radial-gradient(62% 160% at 50% -20%,rgba(255,176,64,.42),rgba(90,36,10,0) 74%);border-bottom:0}'
+    + 'html.jsh-thanks.light .jsh-hol,html.jsh-thanks[data-theme="light"] .jsh-hol{color:#3a2412;background:radial-gradient(62% 160% at 50% -20%,rgba(214,140,46,.34),rgba(248,230,200,0) 74%)}'
     + 'html.jsh-xmas .jsh-hol{color:#f4fff8;background:linear-gradient(90deg,#0c5a38,#8e1c2a 78%);border-bottom:1px solid #fbbf24}'
-    + 'html.jsh-thanks .jsh-hol-k{background-image:linear-gradient(100deg,#fff6e4 0%,#fff6e4 34%,#67e8f9 42%,#fff 47%,#818cf8 52%,#e879f9 57%,#fbbf24 63%,#fff6e4 71%,#fff6e4 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:jsh-hol-shoot 2.2s linear infinite}'
-    + 'html.jsh-thanks.light .jsh-hol-k,html.jsh-thanks[data-theme="light"] .jsh-hol-k{background-image:linear-gradient(100deg,#3a2412 0%,#3a2412 34%,#0891b2 42%,#2563eb 47%,#7c3aed 52%,#db2777 57%,#b45309 63%,#3a2412 71%,#3a2412 100%)}'
+    + 'html.jsh-thanks .jsh-hol-k{background-image:linear-gradient(102deg,#fff4e0 0%,#fff4e0 12%,#8eebff 32%,#f7fbff 46%,#c4b5fd 62%,#ffe08a 82%,#fff4e0 100%);background-size:320% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:jsh-hol-shoot 5.2s ease-in-out infinite alternate}'
+    + 'html.jsh-thanks.light .jsh-hol-k,html.jsh-thanks[data-theme="light"] .jsh-hol-k{background-image:linear-gradient(102deg,#3a2412 0%,#3a2412 12%,#0e7490 32%,#1d4ed8 46%,#6d28d9 62%,#b45309 82%,#3a2412 100%)}'
     + '@keyframes jsh-hol-shoot{from{background-position:100% 0}to{background-position:0% 0}}'
     + '@media (prefers-reduced-motion:reduce){html.jsh-thanks .jsh-hol-k{animation:none;background:none;-webkit-text-fill-color:currentColor;color:inherit}}'
     + '.jsh-hol-marks{display:flex;align-items:center;gap:16px}'
@@ -104,7 +106,7 @@
     + 'html.jsh-thanks.light :is(.jsh-dock,.btab,.jbl),html.jsh-thanks[data-theme="light"] :is(.jsh-dock,.btab,.jbl){background:#f8e8cc!important;color:#3a2412;border-color:rgba(140,70,20,.35)!important}'
     + 'html.jsh-xmas.light :is(.jsh-dock,.btab,.jbl),html.jsh-xmas[data-theme="light"] :is(.jsh-dock,.btab,.jbl){background:#e7f6ee!important;color:#0c3a28;border-color:rgba(140,32,48,.35)!important}'
     + 'body.boardmode .jsh-hol,body.boardmode .jsh-hol-frame{display:none}'
-    + '@media (max-width:760px){.jsh-hol{top:44px;font-size:11px;letter-spacing:.14em;padding:8px 12px 9px}.jsh-hol-marks{gap:14px}.jsh-hol .mark{width:20px;height:20px}}'
+    + '@media (max-width:760px){.jsh-hol{top:44px;font-size:12px;letter-spacing:.16em;padding:14px 18px 16px}.jsh-hol-marks{gap:14px}.jsh-hol .mark{width:20px;height:20px}}'
     + '@media print{.jsh-hol,.jsh-hol-wash,.jsh-hol-frame{display:none}}';
 
   var st = D.createElement('style'); st.id = 'jsh-holiday-css'; st.textContent = css; (D.head || H).appendChild(st);
@@ -124,16 +126,12 @@
     var strip = D.createElement('div');
     strip.className = 'jsh-hol';
     strip.setAttribute('role', 'status');
-    var turkey = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="g" d="M4 20c2-8 7-12 10-12" stroke-width="1.7"/><path class="g" d="M6.5 23.5c2.4-9 8.2-13 12-13" stroke-width="1.7"/><path class="w" d="M9 26c2.6-8 9-12 13.2-11" stroke-width="1.7"/><circle class="w" cx="23" cy="16.5" r="3.2" stroke-width="1.7"/><path class="g" d="M25.8 16.8H29" stroke-width="1.7"/><circle class="gd" cx="27.4" cy="19.6" r="1.15"/></svg>';
-    var pumpkin = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><circle class="w" cx="16" cy="18" r="7.2" stroke-width="1.7"/><path class="g" d="M12.6 12.2v11.6M19.4 12.2v11.6" stroke-width="1.4"/><path class="g" d="M16 11c1.1-3 3.2-4.2 4.2-4.2" stroke-width="1.6"/></svg>';
-    var pie = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><circle class="w" cx="16" cy="17" r="8" stroke-width="1.7"/><path class="g" d="M16 9.2V17l6.2 3.6M16 17 9.8 20.6" stroke-width="1.4"/><path class="g" d="M9 12.5a8 8 0 0 1 14 0" stroke-width="1.5"/></svg>';
-    var corn = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect class="w" x="11.5" y="6" width="9" height="20" rx="4.5" stroke-width="1.7"/><circle class="gd" cx="16" cy="11.5" r="1.05"/><circle class="gd" cx="16" cy="16" r="1.05"/><circle class="gd" cx="16" cy="20.5" r="1.05"/></svg>';
     var tree = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="w" d="M10 13.5c2-4.2 10-4.2 12 0" stroke-width="1.6"/><path class="w" d="M7.5 20c2.8-5.6 14.2-5.6 17 0" stroke-width="1.6"/><path class="g" d="M5.5 26.5c3.4-6.4 17.6-6.4 21 0" stroke-width="1.6"/><circle class="gd" cx="16" cy="8.2" r="1.15"/></svg>';
     var star = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="g" d="M16 4.5 18.2 13.2 27 16l-8.8 2.8L16 27.5l-2.2-8.7L5 16l8.8-2.8Z" stroke-width="1.5"/></svg>';
     var bulb = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="g" d="M13 7.5h6" stroke-width="1.7"/><circle class="w" cx="16" cy="18" r="7" stroke-width="1.7"/><path class="g" d="M12.2 15.2a6 6 0 0 1 4.2-2.6" stroke-width="1.4"/></svg>';
     function marks(list) { return '<span class="jsh-hol-marks" aria-hidden="true">' + list.join('') + '</span>'; }
     if (kind === 'thanks') {
-      strip.innerHTML = '<span class="jsh-hol-k">Happy Thanksgiving</span>' + marks([turkey, pumpkin, pie, corn]);
+      strip.innerHTML = '<span class="jsh-hol-k">Happy Thanksgiving</span>';
     } else {
       strip.innerHTML = 'Merry Christmas' + marks([star, tree, bulb]);
     }

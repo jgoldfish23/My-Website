@@ -17,7 +17,7 @@
   var D = document, H = D.documentElement, view = null, busy = false, cur = { key: '', tab: 'ov' }, want = '';
   var TABS = [['ov', 'Overview'], ['sch', 'Schedule'], ['st', 'Stats'], ['pl', 'Players'], ['more', 'More']];
   /* section id or heading words -> tab (players first, so "Player stats" is not Stats) */
-  var BY_ID = { 's-read': 'ov', 's-over': 'ov', 's-lad': 'ov', 's-conf': 'ov', 'conf-race': 'ov', 's-sched': 'sch',
+  var BY_ID = { 's-read': 'ov', 's-over': 'ov', 's-wi': 'ov', 's-lad': 'ov', 's-conf': 'ov', 'conf-race': 'ov', 's-sched': 'sch',
     's-analytics': 'st', 's-odds': 'st', 's-stats': 'st', 's-ranks': 'st', 's-ypp': 'st',
     's-cards': 'pl', 's-pstats': 'pl', 's-trends': 'pl', 's-players': 'pl', 's-pm': 'pl', 's-money': 'pl', 's-inj': 'pl', 's-depth': 'pl', 's-roster': 'pl', 's-draft': 'pl', 's-young': 'pl',
     'uw': 'more', 's-scrap': 'more', 'pk-season': 'more' };

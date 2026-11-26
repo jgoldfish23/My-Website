@@ -2,8 +2,8 @@
    Thanksgiving is the fourth Thursday of November. The next morning through December 26 is Christmas.
    After that the hub looks normal again. The date is the hub's own time zone (America/Denver when none is saved).
    ?hol=thanks, ?hol=xmas or ?hol=off overrides the date, for a look at the other theme.
-   No beams, grids, or photos. A short row of flat marks (turkeys, the table, then trees)
-   sits under the banner. Reduced-motion users get the same marks without the bob. */
+   No beams, grids, or photos. The banner uses the hub's own gold line and white stroke.
+   Reduced-motion users get the same still layer. */
 (function () {
   if (window.__jshHoliday) return; window.__jshHoliday = true;
   var D = document, H = D.documentElement;
@@ -80,23 +80,21 @@
     + 'html.jsh-thanks .jsh-brand b{background:linear-gradient(90deg,#ffe08a,#f0a040);-webkit-background-clip:text;background-clip:text;color:transparent}'
     + 'html.jsh-xmas .jsh{background:#071a12!important;background-image:linear-gradient(90deg,#0e6a40,#071a12 40%,#071a12 62%,#6e1824)!important;border-bottom-color:rgba(240,196,96,.4)!important}'
     + 'html.jsh-xmas .jsh-brand b{background:linear-gradient(90deg,#8cf0b4,#f0d060);-webkit-background-clip:text;background-clip:text;color:transparent}'
-    + '.jsh-hol{position:sticky;top:44px;z-index:79;display:flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:8px 14px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1.2;text-align:center}'
-    + 'html.jsh-thanks .jsh-hol{color:#fff6e4;background:linear-gradient(90deg,#6a3410,#c47820 50%,#6a3410);border-bottom:2px solid #f0c36a}'
-    + 'html.jsh-xmas .jsh-hol{color:#f4fff8;background:linear-gradient(90deg,#0c5a38,#8e1c2a 78%);border-bottom:2px solid #f0d060}'
-    + '.jsh-hol{letter-spacing:.02em;text-transform:none;font-size:16px;gap:10px}'
-    + '.jsh-hol .mark{width:30px;height:30px;flex:none;display:block}'
-    + '.jsh-hol-row{display:flex;align-items:flex-end;justify-content:center;gap:14px;padding:8px 12px 10px;pointer-events:none}'
-    + 'html.jsh-thanks .jsh-hol-row{background:linear-gradient(180deg,rgba(196,112,36,.28),rgba(196,112,36,0))}'
-    + 'html.jsh-xmas .jsh-hol-row{background:linear-gradient(180deg,rgba(14,90,56,.35),rgba(14,90,56,0))}'
-    + 'html.jsh-thanks.light .jsh-hol-row,html.jsh-thanks[data-theme="light"] .jsh-hol-row{background:linear-gradient(180deg,rgba(214,150,70,.2),transparent)}'
-    + 'html.jsh-xmas.light .jsh-hol-row,html.jsh-xmas[data-theme="light"] .jsh-hol-row{background:linear-gradient(180deg,rgba(22,130,78,.12),transparent)}'
-    + '.jsh-hol-row i{display:grid;place-items:center;width:40px;height:40px;border-radius:14px;background:#fff6e4;box-shadow:0 8px 16px -10px rgba(0,0,0,.4),inset 0 1px 0 #fff}'
-    + '.jsh-hol-row i.hero{width:48px;height:48px;border-radius:16px}'
-    + '.jsh-hol-row svg{width:26px;height:26px;display:block}'
-    + '.jsh-hol-row i.hero svg{width:32px;height:32px}'
-    + 'html.jsh-thanks.light .jsh-hol-row i,html.jsh-thanks[data-theme="light"] .jsh-hol-row i,html.jsh-xmas.light .jsh-hol-row i,html.jsh-xmas[data-theme="light"] .jsh-hol-row i{background:#fffaf2;box-shadow:0 8px 16px -10px rgba(60,30,10,.45),inset 0 1px 0 #fff}'
-    + '@media (prefers-reduced-motion:no-preference){.jsh-hol-row i.hero{animation:jsh-hol-bob 4.6s ease-in-out infinite}}'
-    + '@keyframes jsh-hol-bob{50%{transform:translateY(-3px)}}'
+    + '.jsh-hol{position:sticky;top:44px;z-index:79;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:0;padding:8px 14px 9px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;line-height:1.2;text-align:center}'
+    + 'html.jsh-thanks .jsh-hol{color:#fff6e4;background:linear-gradient(90deg,#6a3410,#c47820 50%,#6a3410);border-bottom:1px solid #fbbf24}'
+    + 'html.jsh-xmas .jsh-hol{color:#f4fff8;background:linear-gradient(90deg,#0c5a38,#8e1c2a 78%);border-bottom:1px solid #fbbf24}'
+    + 'html.jsh-thanks .jsh-hol-k{background-image:linear-gradient(100deg,#fff6e4 0%,#fff6e4 34%,#67e8f9 42%,#fff 47%,#818cf8 52%,#e879f9 57%,#fbbf24 63%,#fff6e4 71%,#fff6e4 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:jsh-hol-shoot 2.2s linear infinite}'
+    + 'html.jsh-thanks.light .jsh-hol-k,html.jsh-thanks[data-theme="light"] .jsh-hol-k{background-image:linear-gradient(100deg,#3a2412 0%,#3a2412 34%,#0891b2 42%,#2563eb 47%,#7c3aed 52%,#db2777 57%,#b45309 63%,#3a2412 71%,#3a2412 100%)}'
+    + '@keyframes jsh-hol-shoot{from{background-position:100% 0}to{background-position:0% 0}}'
+    + '@media (prefers-reduced-motion:reduce){html.jsh-thanks .jsh-hol-k{animation:none;background:none;-webkit-text-fill-color:currentColor;color:inherit}}'
+    + '.jsh-hol-marks{display:flex;align-items:center;gap:16px}'
+    + '.jsh-hol .mark{width:22px;height:22px;display:block}'
+    + '.jsh-hol .g{stroke:#ffe7a8;fill:none;stroke-linecap:round;stroke-linejoin:round}'
+    + '.jsh-hol .gd{fill:#ffe7a8;stroke:none}'
+    + '.jsh-hol .w{stroke:#fff;fill:none;stroke-linecap:round;stroke-linejoin:round}'
+    + 'html.jsh-thanks.light .jsh-hol .g,html.jsh-thanks[data-theme="light"] .jsh-hol .g,html.jsh-xmas.light .jsh-hol .g,html.jsh-xmas[data-theme="light"] .jsh-hol .g{stroke:#7a3e0c}'
+    + 'html.jsh-thanks.light .jsh-hol .gd,html.jsh-thanks[data-theme="light"] .jsh-hol .gd,html.jsh-xmas.light .jsh-hol .gd,html.jsh-xmas[data-theme="light"] .jsh-hol .gd{fill:#7a3e0c}'
+    + 'html.jsh-thanks.light .jsh-hol .w,html.jsh-thanks[data-theme="light"] .jsh-hol .w,html.jsh-xmas.light .jsh-hol .w,html.jsh-xmas[data-theme="light"] .jsh-hol .w{stroke:#3a2412}'
     + 'html.jsh-thanks:not(.light):not([data-theme="light"]) :is(header.top,.top){background:#3a2212!important;color:#f8e7c4;border-bottom-color:rgba(240,186,96,.45)!important}'
     + 'html.jsh-xmas:not(.light):not([data-theme="light"]) :is(header.top,.top){background:#0c2e22!important;color:#e7f6ee;border-bottom-color:rgba(240,196,96,.35)!important}'
     + 'html.jsh-thanks.light :is(header.top,.top),html.jsh-thanks[data-theme="light"] :is(header.top,.top){background:#f6e0bc!important;color:#3a2412;border-bottom-color:rgba(140,70,20,.35)!important}'
@@ -105,9 +103,9 @@
     + 'html.jsh-xmas :is(.jsh-dock,.btab,.jbl){background:#0c2418!important;border-color:rgba(220,64,78,.5)!important;color:#e7f6ee}'
     + 'html.jsh-thanks.light :is(.jsh-dock,.btab,.jbl),html.jsh-thanks[data-theme="light"] :is(.jsh-dock,.btab,.jbl){background:#f8e8cc!important;color:#3a2412;border-color:rgba(140,70,20,.35)!important}'
     + 'html.jsh-xmas.light :is(.jsh-dock,.btab,.jbl),html.jsh-xmas[data-theme="light"] :is(.jsh-dock,.btab,.jbl){background:#e7f6ee!important;color:#0c3a28;border-color:rgba(140,32,48,.35)!important}'
-    + 'body.boardmode .jsh-hol,body.boardmode .jsh-hol-row,body.boardmode .jsh-hol-frame{display:none}'
-    + '@media (max-width:760px){.jsh-hol{top:44px;min-height:46px;font-size:16px;padding:10px 12px}.jsh-hol-row{gap:10px;padding:8px 8px 6px}.jsh-hol-row i{width:36px;height:36px}.jsh-hol-row i.hero{width:44px;height:44px}}'
-    + '@media print{.jsh-hol,.jsh-hol-row,.jsh-hol-wash,.jsh-hol-frame{display:none}}';
+    + 'body.boardmode .jsh-hol,body.boardmode .jsh-hol-frame{display:none}'
+    + '@media (max-width:760px){.jsh-hol{top:44px;font-size:11px;letter-spacing:.14em;padding:8px 12px 9px}.jsh-hol-marks{gap:14px}.jsh-hol .mark{width:20px;height:20px}}'
+    + '@media print{.jsh-hol,.jsh-hol-wash,.jsh-hol-frame{display:none}}';
 
   var st = D.createElement('style'); st.id = 'jsh-holiday-css'; st.textContent = css; (D.head || H).appendChild(st);
 
@@ -126,32 +124,20 @@
     var strip = D.createElement('div');
     strip.className = 'jsh-hol';
     strip.setAttribute('role', 'status');
-    var turkey = '<svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="20" cy="26" rx="15" ry="13" fill="#c4482a"/><ellipse cx="20" cy="26" rx="11" ry="10" fill="#e39a3a"/><ellipse cx="20" cy="26" rx="7" ry="7" fill="#f6e2b8"/><ellipse cx="30" cy="31" rx="8" ry="6.2" fill="#5c3317"/><circle cx="36" cy="24" r="4" fill="#5c3317"/><path d="M39.4 23.4 44 24.4 39.5 26Z" fill="#f2b33a"/><ellipse cx="36.4" cy="26.6" rx="1.1" ry="1.7" fill="#d23b32"/><circle cx="37.3" cy="23" r=".7" fill="#fff8ee"/></svg>';
-    var pumpkin = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 7c1.2-3 3.4-4 4.4-4" fill="none" stroke="#3d6b34" stroke-width="1.8" stroke-linecap="round"/><ellipse cx="16" cy="19" rx="5.5" ry="8" fill="#e07a2f"/><ellipse cx="11.2" cy="19" rx="3.6" ry="7" fill="#d2651c"/><ellipse cx="20.8" cy="19" rx="3.6" ry="7" fill="#f0943e"/></svg>';
-    var pie = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 14h22l-2 10a10 10 0 0 1-18 0Z" fill="#e7c48a"/><path d="M5 14c2.2-5 6.2-8 11-8s8.8 3 11 8" fill="#f3d7a6"/><path d="M16 6v18M9.5 13 7.2 24M22.5 13 24.8 24" fill="none" stroke="#b87a3a" stroke-width="1.1"/></svg>';
-    var corn = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5c4 4.5 6.2 10 6.2 16.5-4 2.2-8.4 2.2-12.4 0C9.8 15 12 9.5 16 5Z" fill="#f0d15a"/><path d="M10 14c-4 2-6.2 6-6.2 8.4 4 .8 8-1.2 10.2-4.4M22 14c4 2 6.2 6 6.2 8.4-4 .8-8-1.2-10.2-4.4" fill="#6ea84a"/></svg>';
-    var tree = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 24 14h-4l7 10H5l7-10H8Z" fill="#1f8a4c"/><rect x="13.5" y="24" width="5" height="5" rx="1" fill="#8a5a2b"/><circle cx="16" cy="12" r="1.3" fill="#f2d56b"/><circle cx="12" cy="18" r="1.3" fill="#e24b4b"/><circle cx="20" cy="17" r="1.2" fill="#f4f7fb"/></svg>';
-    var star = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5 19.2 12h8.8l-7.1 5.2 2.7 8.3L16 20.2 8.4 25.5l2.7-8.3L4 12h8.8Z" fill="#f2d56b"/></svg>';
-    var bulb = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="13.5" y="3" width="5" height="4" rx="1" fill="#e7d7a4"/><circle cx="16" cy="18" r="8" fill="#c4382a"/><path d="M12 14c2 2 2 6 0 8" fill="none" stroke="#f6e2b8" stroke-width="1.4" stroke-linecap="round"/></svg>';
-    function plate(svg, hero) { return '<i' + (hero ? ' class="hero"' : '') + ' aria-hidden="true">' + svg + '</i>'; }
+    var turkey = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="g" d="M4 20c2-8 7-12 10-12" stroke-width="1.7"/><path class="g" d="M6.5 23.5c2.4-9 8.2-13 12-13" stroke-width="1.7"/><path class="w" d="M9 26c2.6-8 9-12 13.2-11" stroke-width="1.7"/><circle class="w" cx="23" cy="16.5" r="3.2" stroke-width="1.7"/><path class="g" d="M25.8 16.8H29" stroke-width="1.7"/><circle class="gd" cx="27.4" cy="19.6" r="1.15"/></svg>';
+    var pumpkin = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><circle class="w" cx="16" cy="18" r="7.2" stroke-width="1.7"/><path class="g" d="M12.6 12.2v11.6M19.4 12.2v11.6" stroke-width="1.4"/><path class="g" d="M16 11c1.1-3 3.2-4.2 4.2-4.2" stroke-width="1.6"/></svg>';
+    var pie = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><circle class="w" cx="16" cy="17" r="8" stroke-width="1.7"/><path class="g" d="M16 9.2V17l6.2 3.6M16 17 9.8 20.6" stroke-width="1.4"/><path class="g" d="M9 12.5a8 8 0 0 1 14 0" stroke-width="1.5"/></svg>';
+    var corn = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect class="w" x="11.5" y="6" width="9" height="20" rx="4.5" stroke-width="1.7"/><circle class="gd" cx="16" cy="11.5" r="1.05"/><circle class="gd" cx="16" cy="16" r="1.05"/><circle class="gd" cx="16" cy="20.5" r="1.05"/></svg>';
+    var tree = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="w" d="M10 13.5c2-4.2 10-4.2 12 0" stroke-width="1.6"/><path class="w" d="M7.5 20c2.8-5.6 14.2-5.6 17 0" stroke-width="1.6"/><path class="g" d="M5.5 26.5c3.4-6.4 17.6-6.4 21 0" stroke-width="1.6"/><circle class="gd" cx="16" cy="8.2" r="1.15"/></svg>';
+    var star = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="g" d="M16 4.5 18.2 13.2 27 16l-8.8 2.8L16 27.5l-2.2-8.7L5 16l8.8-2.8Z" stroke-width="1.5"/></svg>';
+    var bulb = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="g" d="M13 7.5h6" stroke-width="1.7"/><circle class="w" cx="16" cy="18" r="7" stroke-width="1.7"/><path class="g" d="M12.2 15.2a6 6 0 0 1 4.2-2.6" stroke-width="1.4"/></svg>';
+    function marks(list) { return '<span class="jsh-hol-marks" aria-hidden="true">' + list.join('') + '</span>'; }
     if (kind === 'thanks') {
-      strip.innerHTML = turkey + ' Happy Thanksgiving ' + pumpkin;
-      var row = D.createElement('div');
-      row.className = 'jsh-hol-row';
-      row.setAttribute('aria-hidden', 'true');
-      row.innerHTML = plate(turkey, true) + plate(pumpkin) + plate(pie) + plate(corn);
-      bar.insertAdjacentElement('afterend', strip);
-      strip.insertAdjacentElement('afterend', row);
+      strip.innerHTML = '<span class="jsh-hol-k">Happy Thanksgiving</span>' + marks([turkey, pumpkin, pie, corn]);
     } else {
-      strip.innerHTML = star + ' Merry Christmas ' + tree;
-      var rowX = D.createElement('div');
-      rowX.className = 'jsh-hol-row';
-      rowX.setAttribute('aria-hidden', 'true');
-      rowX.innerHTML = plate(bulb) + plate(tree) + plate(star, true) + plate(tree) + plate(bulb);
-      bar.insertAdjacentElement('afterend', strip);
-      strip.insertAdjacentElement('afterend', rowX);
+      strip.innerHTML = 'Merry Christmas' + marks([star, tree, bulb]);
     }
-    return;
+    bar.insertAdjacentElement('afterend', strip);
   }
   if (D.body) mount();
   else D.addEventListener('DOMContentLoaded', mount);

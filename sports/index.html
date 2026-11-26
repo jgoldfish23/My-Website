@@ -574,9 +574,26 @@ button.tc{width:100%;margin:0;font:inherit;text-align:left;cursor:pointer}
 .pk-clear{margin-top:8px;width:100%;padding:8px;border-radius:12px;border:1px dashed var(--line);background:transparent;color:var(--ink-2);font-weight:700}
 .tc-schemes{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px;position:relative;z-index:1}
 .tc-swatch{display:inline-flex;align-items:center;gap:4px;padding:3px 7px 3px 5px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(0,0,0,.28);color:#fff;font:inherit;font-size:10px;font-weight:800;letter-spacing:.02em;cursor:pointer}
-.tc-swatch i{width:8px;height:8px;border-radius:50%;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}
+.tc-swatch i{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--sw) 50%,var(--sw2,var(--sw)) 50%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}
 .tc-swatch.on{background:rgba(255,255,255,.22);border-color:#fff}
 a.tc.has-rail{box-shadow:inset 6px 0 0 var(--rail),inset 0 1px 0 rgba(255,255,255,.22),var(--sh)}
+/* BYU White (11-26): a light card, so every piece that assumed white type on a dark card gets a navy version */
+a.tc.tc-white{color:#002e5d;border-color:rgba(0,46,93,.18)}
+a.tc.tc-white::before{background:radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.7),transparent 55%),linear-gradient(180deg,transparent 45%,rgba(0,46,93,.07))}
+a.tc.tc-white .wm{filter:grayscale(1) brightness(.35);opacity:.07}
+a.tc.tc-white :is(.tc-name,.tc-meta b,.tc-cd,.tc-sc,.tc-g){color:#002e5d;text-shadow:none}
+a.tc.tc-white :is(.tc-meta,.tc-last,.tc-sig){color:#3b4f6b}
+a.tc.tc-white :is(.tc-k,.tc-g .dim,.tc-sc .dim){color:#5a6b82}
+a.tc.tc-white :is(.tc-next,.tc-ar){background:rgba(0,46,93,.06);border-color:rgba(0,46,93,.14);color:#002e5d}
+a.tc.tc-white .tc-sig span{background:rgba(0,46,93,.06);border-color:rgba(0,46,93,.2)}
+a.tc.tc-white .tc-sig .wo,a.tc.tc-white .tc-last .w{color:#15803d}
+a.tc.tc-white .tc-sig .rk{color:#0062b8;border-color:rgba(0,98,184,.35)}
+a.tc.tc-white .tc-sig .inj,a.tc.tc-white .tc-ar-k{color:#b45309}
+a.tc.tc-white .tc-last .l{color:#b91c1c}
+a.tc.tc-white :is(.tc-sport,.tc-rank){background:#0062b8;color:#fff;border-color:transparent}
+a.tc.tc-white .tc-swatch{background:rgba(0,46,93,.06);border-color:rgba(0,46,93,.22);color:#002e5d}
+a.tc.tc-white .tc-swatch.on{background:rgba(0,98,184,.14);border-color:#0062b8}
+a.tc.tc-white .tc-swatch i{box-shadow:inset 0 0 0 1px rgba(0,46,93,.35)}
 a.tc.has-rail:hover{box-shadow:inset 6px 0 0 var(--rail),0 26px 50px -24px rgba(0,0,0,.9)}
 a.tc.phi-kelly:hover{box-shadow:inset 6px 0 0 #d5dde3,0 26px 50px -24px rgba(0,0,0,.9)}
 .teams.mini .tc-schemes{display:none}
@@ -5773,7 +5790,10 @@ function sigHTML(f, g, rk){ const bits = []; if (g && net(g)) bits.push('<span t
   return bits.length ? '<div class="tc-sig">' + bits.join('') + '</div>' : ''; }
 const BYU_LOOKS = [
   {id:'royal', name:'Royal', c1:'#0062b8', c2:'#00356e'},
-  {id:'navy', name:'Navy', c1:'#002e5d', c2:'#001226', cls:'byu-deep'}
+  {id:'navy', name:'Navy', c1:'#002e5d', c2:'#001226', cls:'byu-deep'},
+  /* 11-26 (Jamo): the white look - a white card, navy type, a royal rail - and black with a royal rail */
+  {id:'white', name:'White', c1:'#ffffff', c2:'#dde5ef', rail:'#0062b8', cls:'tc-white', sw:'#ffffff'},
+  {id:'blackroyal', name:'Black/Royal', c1:'#1a1a1a', c2:'#000000', rail:'#0062b8', sw:'#000000', sw2:'#0062b8'}
 ];
 const SCHEMES = {
   'cfb:BYU': BYU_LOOKS,
@@ -5813,7 +5833,7 @@ function activeScheme(sport, id){ const list = schemesFor(sport, id), want = sch
 function schemeHTML(sport, id){
   const list = schemesFor(sport, id); if (list.length < 2) return '';
   const on = activeScheme(sport, id).id;
-  return '<div class="tc-schemes">' + list.map(s => '<span role="button" tabindex="0" class="tc-swatch' + (s.id === on ? ' on' : '') + '" data-sport="' + esc(sport) + '" data-team="' + esc(id) + '" data-scheme="' + s.id + '" style="--sw:' + (s.rail || s.c1) + '"><i></i>' + esc(s.name) + '</span>').join('') + '</div>';
+  return '<div class="tc-schemes">' + list.map(s => '<span role="button" tabindex="0" class="tc-swatch' + (s.id === on ? ' on' : '') + '" data-sport="' + esc(sport) + '" data-team="' + esc(id) + '" data-scheme="' + s.id + '" style="--sw:' + (s.sw || s.rail || s.c1) + (s.sw2 ? ';--sw2:' + s.sw2 : '') + '"><i></i>' + esc(s.name) + '</span>').join('') + '</div>';
 }
 function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(f.sport, t); if (!gs.length) return '';
   const live = gs.find(g => g.live), last = gs.filter(played).pop(), next = gs.find(g => !played(g) && !g.live && g.st !== 'CANCELED' && g.st !== 'POSTPONED');

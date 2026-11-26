@@ -69,15 +69,16 @@ button{font:inherit;color:inherit}
 .lv-title{min-width:0}
 .eyebrow{font-family:var(--num);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--hud)}
 .lv-head h1{margin:6px 0 6px;font-family:var(--disp);font-size:clamp(32px,4.6vw,52px);font-weight:800;letter-spacing:-.045em;line-height:1}
-.lv-head h1 b{background:linear-gradient(90deg,#ff8da0,#cdb2ff 45%,#7ef0ff 75%,#ff8da0);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:nxShine 10s linear infinite}
-@keyframes nxShine{to{background-position:220% 0}}
+.lv-head h1 b{background:linear-gradient(90deg,#ff8da0,#cdb2ff 42%,#7ef0ff 68%,#ffe08a 88%,#ff8da0);background-size:280% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:nxShine 8.5s ease-in-out infinite alternate}
+@keyframes nxShine{from{background-position:0% 0}to{background-position:100% 0}}
 .lead{margin:0;color:var(--ink-2);font-size:14.5px;max-width:660px}
 .lead b{color:var(--ink)}
 .lv-tools{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;white-space:nowrap;transition:border-color .15s,box-shadow .15s}
-.btn:hover{border-color:var(--edge-hi);box-shadow:var(--glow)}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;white-space:nowrap;transition:border-color .22s ease,box-shadow .22s ease,transform .18s ease,background .22s ease}
+.btn:hover{border-color:var(--edge-hi);box-shadow:var(--glow);transform:translateY(-1px)}
 .btn svg{width:16px;height:16px;flex:none}
-.btn.pri{color:#fff;border-color:transparent;background:linear-gradient(90deg,#e11d48,#7c3aed);box-shadow:0 10px 26px -12px rgba(225,29,72,.8)}
+.btn.pri{color:#fff;border-color:transparent;background:linear-gradient(105deg,#e11d48,#7c3aed 55%,#2563eb);background-size:160% 100%;box-shadow:0 12px 28px -12px rgba(225,29,72,.75);animation:lvPri 6s ease-in-out infinite alternate}
+@keyframes lvPri{from{background-position:0% 0}to{background-position:100% 0}}
 .btn:focus-visible,.mc-spot:focus-visible,a:focus-visible{outline:2px solid var(--hud);outline-offset:2px}
 .upd{display:inline-flex;align-items:center;gap:6px;padding:6px 4px;border:0;background:none;font-size:12.5px;font-weight:600;color:var(--ink-3);cursor:pointer;white-space:nowrap}
 .upd i{width:7px;height:7px;border-radius:50%;background:#22c55e;flex:none}
@@ -110,8 +111,10 @@ button{font:inherit;color:inherit}
 .fbi{display:inline-block;width:14px;height:14px;vertical-align:-2px;color:#c98a45;flex:none}
 .fbi svg{display:block;width:100%;height:100%}
 /* ---------- spotlight ---------- */
-.spot{position:relative;display:block;padding:18px 20px 18px;border-radius:26px;color:#fff;background-color:#05070f;background-image:radial-gradient(760px 380px at 0% 0%,color-mix(in srgb,var(--ca) 58%,transparent),transparent 62%),radial-gradient(760px 380px at 100% 0%,color-mix(in srgb,var(--ch) 58%,transparent),transparent 62%),radial-gradient(640px 260px at 50% 130%,rgba(255,77,106,.20),transparent 66%);border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 44px 100px -56px rgba(0,0,0,.95);overflow:hidden;isolation:isolate}
-.spot::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(120% 90% at 50% 0%,#000 25%,transparent 75%);mask-image:radial-gradient(120% 90% at 50% 0%,#000 25%,transparent 75%)}
+.spot{position:relative;display:block;padding:18px 20px 18px;border-radius:26px;color:#fff;background-color:#05070f;background-image:radial-gradient(760px 380px at 0% 0%,color-mix(in srgb,var(--ca) 58%,transparent),transparent 62%),radial-gradient(760px 380px at 100% 0%,color-mix(in srgb,var(--ch) 58%,transparent),transparent 62%),radial-gradient(640px 260px at 50% 130%,rgba(255,77,106,.20),transparent 66%);border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 44px 100px -56px rgba(0,0,0,.95),0 0 0 1px rgba(120,160,255,.08);overflow:hidden;isolation:isolate;transition:box-shadow .45s ease,filter .45s ease}
+/* spotlight grid removed 2026-11-24 (plain still backdrop house rule) */
+.spot::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background:linear-gradient(135deg,rgba(255,255,255,.07),transparent 42%,rgba(255,255,255,.03));opacity:.85}
+.spot>*{position:relative;z-index:1}
 .spot-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#d5def0}
 .spot-top .lg-tag{--c:#fff;background:rgba(255,255,255,.14)}
 .spot-top .heat{margin-left:auto;font-size:12px;letter-spacing:.04em;text-transform:none}
@@ -163,9 +166,10 @@ button{font:inherit;color:inherit}
 @keyframes bump{0%{transform:scale(1)}25%{transform:scale(1.22);color:#ffe08a;text-shadow:0 0 22px rgba(255,214,120,.8)}100%{transform:scale(1)}}
 /* ---------- cards (your teams and the live grid) ---------- */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:12px}
-.mc{position:relative;border-radius:18px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--sh);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s;min-width:0}
-.mc::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--c),transparent);opacity:.9}
-.mc:hover{border-color:var(--edge-hi);box-shadow:var(--glow);transform:translateY(-2px)}
+.mc{position:relative;border-radius:18px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--sh);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);overflow:hidden;transition:border-color .28s ease,box-shadow .28s ease,transform .28s cubic-bezier(.2,.8,.2,1);min-width:0}
+.mc::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--c),transparent);opacity:.9;transition:opacity .28s ease}
+.mc:hover{border-color:var(--edge-hi);box-shadow:var(--glow);transform:translateY(-3px)}
+.mc:hover::before{opacity:1}
 .mc.fav{border-color:color-mix(in srgb,var(--gold) 55%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 25%,transparent),var(--sh)}
 .mc.hot{box-shadow:inset 0 0 0 1.5px rgba(255,92,92,.5),0 8px 26px -12px rgba(255,70,70,.6)}
 .mc-a{display:block;padding:11px 13px 11px;color:inherit}
@@ -322,11 +326,12 @@ body.livetv .sec{margin-top:20px}
 /* lc2:start - filters, heat meters, score flashes and the TV dashboard (2026-10-31; see patch_lc2.pl) */
 .lvf{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin:0 0 14px;padding:2px 2px 4px}
 .lvf::-webkit-scrollbar{display:none}
-.lvf button{flex:none;display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);color:var(--ink-2);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:color .15s,border-color .15s,box-shadow .15s,background .15s;-webkit-tap-highlight-color:transparent}
-.lvf button i{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c)}
-.lvf button span{min-width:20px;padding:1px 7px;border-radius:999px;background:rgba(255,255,255,.1);font-size:11.5px;font-weight:800;text-align:center}
-.lvf button:hover{color:var(--ink);border-color:var(--edge-hi)}
-.lvf button.on{color:#fff;border-color:transparent;background:linear-gradient(90deg,#ff3d63,#ff7a45);box-shadow:0 8px 24px -10px rgba(255,70,90,.9)}
+.lvf button{flex:none;display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);color:var(--ink-2);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:color .22s ease,border-color .22s ease,box-shadow .22s ease,background .22s ease,transform .18s ease;-webkit-tap-highlight-color:transparent}
+.lvf button i{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);transition:background .22s ease,box-shadow .22s ease}
+.lvf button span{min-width:20px;padding:1px 7px;border-radius:999px;background:rgba(255,255,255,.1);font-size:11.5px;font-weight:800;text-align:center;transition:background .22s ease}
+.lvf button:hover{color:var(--ink);border-color:var(--edge-hi);transform:translateY(-1px)}
+.lvf button.on{color:#fff;border-color:transparent;background:linear-gradient(105deg,#ff3d63,#ff7a45 55%,#fbbf24);background-size:160% 100%;box-shadow:0 10px 28px -10px rgba(255,70,90,.85);animation:lvChip 5.5s ease-in-out infinite alternate}
+@keyframes lvChip{from{background-position:0% 0}to{background-position:100% 0}}
 .lvf button.on i{background:#fff;box-shadow:0 0 8px #fff}.lvf button.on span{background:rgba(255,255,255,.25)}
 :root.light .lvf button span{background:rgba(0,0,0,.07)}
 .mc-heat{position:absolute;left:0;bottom:0;height:3px;width:var(--hv);border-radius:0 3px 0 0;background:linear-gradient(90deg,transparent,var(--hc));box-shadow:0 0 12px var(--hc);transition:width .8s ease;pointer-events:none}
@@ -340,17 +345,28 @@ body.livetv .sec{margin-top:20px}
 .tvd{display:none}
 body.livetv #spot,body.livetv #mine-wrap,body.livetv #cols,body.livetv .lvf,body.livetv .toasts{display:none!important}
 body.livetv .tvd:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr);gap:16px;position:relative}
-.tvd-amb{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.9;transition:opacity .6s;background:radial-gradient(55vw 70vh at 8% 40%,color-mix(in srgb,var(--ca,#1d4ed8) 55%,transparent),transparent 70%),radial-gradient(55vw 70vh at 92% 40%,color-mix(in srgb,var(--ch,#7c3aed) 55%,transparent),transparent 70%)}
-:root.light .tvd-amb{opacity:.35}
+.tvd-amb{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.95;transition:opacity .8s ease,background .9s ease;background:
+  radial-gradient(58vw 72vh at 10% 38%,color-mix(in srgb,var(--ca,#1d4ed8) 58%,transparent),transparent 72%),
+  radial-gradient(58vw 72vh at 90% 42%,color-mix(in srgb,var(--ch,#7c3aed) 58%,transparent),transparent 72%),
+  radial-gradient(80vw 50vh at 50% 108%,rgba(255,77,106,.14),transparent 68%),
+  linear-gradient(180deg,#05070f 0%,#03050a 100%)}
+:root.light .tvd-amb{opacity:.38}
+@media (prefers-reduced-motion:no-preference){
+  body.livetv .tvd-amb{animation:tvAmb 9s ease-in-out infinite alternate}
+  @keyframes tvAmb{from{filter:saturate(1) brightness(1)}to{filter:saturate(1.12) brightness(1.05)}}
+}
 .tvd-main{display:flex;flex-direction:column;min-height:0;min-width:0}
 .tvd-spot{min-height:0}
-.tvd-rot{display:flex;align-items:center;gap:12px;margin-top:10px;font-size:13px;color:var(--ink-3)}
+.tvd-spot .spot{transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1),filter .45s ease}
+.tvd-spot.swap .spot{animation:tvSwap .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes tvSwap{from{opacity:0;transform:translateY(14px) scale(.985);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+.tvd-rot{display:flex;align-items:center;gap:12px;margin-top:12px;padding:8px 12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:13px;color:var(--ink-3)}
 .tvd-rot[hidden]{display:none}
-.tvd-dots{display:flex;gap:7px}
-.tvd-dots button{width:11px;height:11px;padding:0;border-radius:50%;border:0;background:rgba(255,255,255,.22);cursor:pointer;transition:transform .2s,background .2s}
-.tvd-dots button.on{background:var(--c);box-shadow:0 0 12px var(--c);transform:scale(1.25)}
-.tvd-prog{flex:1;max-width:260px;height:3px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
-.tvd-prog i{display:block;height:100%;background:linear-gradient(90deg,var(--live),#ffb547);transform-origin:left;animation:tvProg var(--rot) linear forwards}
+.tvd-dots{display:flex;gap:8px}
+.tvd-dots button{width:11px;height:11px;padding:0;border-radius:50%;border:0;background:rgba(255,255,255,.22);cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.2,1),background .25s ease,box-shadow .25s ease}
+.tvd-dots button.on{background:var(--c);box-shadow:0 0 14px var(--c);transform:scale(1.28)}
+.tvd-prog{flex:1;max-width:280px;height:4px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden}
+.tvd-prog i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--live),#ffb547 55%,#ffe08a);box-shadow:0 0 12px rgba(255,77,106,.45);transform-origin:left;animation:tvProg var(--rot) linear forwards}
 .tvd-prog.paused i{animation-play-state:paused}
 @keyframes tvProg{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .tvd-hint{font-weight:600}
@@ -358,8 +374,9 @@ body.livetv .tvd:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr);
 .tvd-side{display:flex;flex-direction:column;min-height:0;min-width:0}
 .tvd-sh{display:flex;align-items:baseline;gap:10px;margin:2px 2px 10px}.tvd-sh b{font-family:var(--disp);font-size:20px;font-weight:800;letter-spacing:-.02em}.tvd-sh span{font-size:13px;font-weight:600;color:var(--ink-3)}
 .tvd-grid.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;align-content:start}
+.tvd-grid .mc{transition:border-color .28s ease,box-shadow .28s ease,transform .28s ease,opacity .4s ease}
 .tvd-grid .mc-spot{display:none}
-.tvd-tick{position:relative;overflow:hidden;height:46px;display:flex;align-items:center;border-top:1px solid var(--edge);-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
+.tvd-tick{position:relative;overflow:hidden;height:50px;display:flex;align-items:center;border-radius:14px 14px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:0;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
 .tvd-tick[hidden]{display:none}
 .tk-track{display:inline-flex;align-items:center;gap:38px;white-space:nowrap;padding-left:20px;animation:tkRun var(--dur) linear infinite}
 .tvd-tick:hover .tk-track{animation-play-state:paused}
@@ -367,10 +384,13 @@ body.livetv .tvd:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr);
 .tk-i{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--ink)}
 .tk-i b{font-size:10.5px;font-weight:800;letter-spacing:.12em;padding:3px 7px;border-radius:5px;color:#fff;background:var(--c)}
 .tk-i em{font-style:normal;font-family:var(--num);font-size:12.5px;font-weight:800;color:#ffd27a}
-.tvd-count{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--ink-2)}
+.tvd-count{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;border:1px solid rgba(255,77,106,.35);background:rgba(255,77,106,.12);font-size:13px;font-weight:800;letter-spacing:.04em;color:#ffd0d8}
 .tvd-count i{width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 10px var(--live)}
 @media (prefers-reduced-motion:no-preference){.tvd-count i{animation:tvPing 1.6s ease-in-out infinite}}
 @keyframes tvPing{50%{opacity:.35}}
+.tvbar{padding:10px 14px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 18px 40px -28px rgba(0,0,0,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.tvbar .t{background:linear-gradient(90deg,#fff,#ffb3c0 45%,#cdb2ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tvbar .t b{background:none;-webkit-text-fill-color:var(--live);color:var(--live)}
 .tvbar #tv-fs{margin-left:auto}.tvbar #tv-exit{margin-left:0}
 .tvd-moment{position:fixed;left:50%;top:16%;z-index:95;width:min(820px,92vw);padding:24px 34px 26px;border-radius:26px;text-align:center;color:#fff;overflow:hidden;transform:translateX(-50%);
   background:linear-gradient(125deg,color-mix(in srgb,var(--tc) 80%,#000),#090d1a 75%);box-shadow:0 0 0 2px color-mix(in srgb,var(--tc) 55%,#fff),0 40px 100px -24px rgba(0,0,0,.85),0 0 90px -10px var(--tc)}
@@ -419,7 +439,7 @@ body.livetv .tvd:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr);
 }
 @media print{.tvd,.tvd-moment{display:none!important}}
 /* lc2:end */
-@media (prefers-reduced-motion:reduce){body::before,.lv-head h1 b,.pill-live::before,.bump,.toast,.feed li.new a{animation:none!important}.mc:hover{transform:none}}
+@media (prefers-reduced-motion:reduce){body::before,.lv-head h1 b,.pill-live::before,.bump,.toast,.feed li.new a,.btn.pri,.lvf button.on,.tvd-amb,.tvd-spot.swap .spot{animation:none!important}.mc:hover,.btn:hover,.lvf button:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -471,6 +491,7 @@ body.livetv .tvd:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr);
 })();
 </script>
 <style id="jsh-holiday-boot">
+/* Painted with the page, not only after holiday.js. A phone should see the field, the bar, and the bottom chrome. */
 html.jsh-thanks,html.jsh-thanks body,html.jsh-thanks body::before{background:radial-gradient(90% 46% at 50% -10%,rgba(240,170,60,.55),transparent 58%),linear-gradient(180deg,#4a2a12,#24160c 46%,#140e09)!important;background-color:#140e09!important}
 html.jsh-thanks.light,html.jsh-thanks.light body,html.jsh-thanks.light body::before,html.jsh-thanks[data-theme="light"],html.jsh-thanks[data-theme="light"] body,html.jsh-thanks[data-theme="light"] body::before{background:linear-gradient(180deg,#f8e6c8,#f3d7ae 50%,#edd0b0)!important;background-color:#f6e4c4!important}
 html.jsh-xmas,html.jsh-xmas body,html.jsh-xmas body::before{background:radial-gradient(70% 42% at 0% -8%,rgba(36,150,90,.55),transparent 60%),radial-gradient(60% 40% at 100% 0%,rgba(176,28,48,.5),transparent 62%),linear-gradient(180deg,#0d3d2a,#07140f 50%,#1a0c10)!important;background-color:#071410!important}
@@ -803,9 +824,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
-<script src="/sports/glow.js?v=20261031a" defer></script>
-<!-- Vibe: arena lighting, glowing numbers and live games, and a declutter pass on every page (polish/vibe.js, published by build.sh as /sports/vibe.js) -->
-<script src="/sports/vibe.js?v=20261116a" defer></script>
+<script src="/sports/glow.js?v=20261124a" defer></script>
+<!-- Vibe: glowing numbers, live breathe and a declutter pass (arena beams removed 2026-11-24; polish/vibe.js) -->
+<script src="/sports/vibe.js?v=20261124a" defer></script>
 <!-- Touch: the phone tune-up on every page - bigger tap areas, nothing under 11 px, names not cut off (polish/touch.js, published by build.sh as /sports/touch.js) -->
 <script src="/sports/touch.js?v=20261109a" defer></script>
 <!-- App: smooth page changes, saved copies for weak signal (registers /sw.js) and pull down to refresh in the home-screen app (polish/app.js, published by build.sh as /sports/app.js) -->
@@ -817,11 +838,18 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
-<script src="/sports/finish.js?v=20261110a" defer></script>
+<script src="/sports/finish.js?v=20261126p" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
 <script src="/sports/tabs.js?v=20261119b" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
 <script src="/sports/moments.js?v=20261119b" defer></script>
+<!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
+<script src="/sports/night.js?v=20261126p" defer></script>
+<!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
+<script src="/sports/gameday.js?v=20261126p" defer></script>
+<!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
+<script src="/sports/shell.js?v=20261126d" defer></script>
+<!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
 <script src="/sports/holiday.js?v=20261126o" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
@@ -861,7 +889,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
   <section id="mine-wrap" hidden><div class="sec"><h2>Your teams</h2><span class="note" id="mine-n"></span></div><div class="grid" id="mine"></div></section>
 
   <div class="cols" id="cols">
-    <section id="grid-wrap" hidden><div class="sec"><h2>Live now</h2><span class="note" id="grid-n"></span></div><p class="why-note">Hottest first: the 🔥 number (0 to 100) grows the closer a game is for its sport (ESPN’s live win chance when it has one), the less time is left, in overtime and when an underdog leads late, and your teams get a bump up the list.</p><div class="grid" id="grid"></div><button type="button" class="fd-more grid-more" id="grid-more" hidden></button></section>
+    <section id="grid-wrap" hidden><div class="sec"><h2>Live now</h2><span class="note" id="grid-n"></span></div><p class="why-note">Hottest first: the 🔥 number (0 to 100) grows the closer a game is on the hub’s own win chance, the less time is left, in overtime and when an underdog leads late, and your teams get a bump up the list.</p><div class="grid" id="grid"></div><button type="button" class="fd-more grid-more" id="grid-more" hidden></button></section>
     <section id="feed-wrap" hidden><div class="sec"><h2>Scoring feed</h2><span class="note" id="feed-n">newest first</span></div><ol class="feed" id="feed"></ol></section>
     <section id="up-wrap" hidden><div class="sec"><h2 id="up-h">Coming up</h2><span class="note" id="up-n"></span></div><div class="up" id="up"></div></section>
     <section id="fin-wrap" hidden><div class="sec"><h2>Finals today</h2><span class="note" id="fin-n"></span></div><div class="fins" id="fin"></div></section>
@@ -2212,7 +2240,7 @@ UConn|#000E2F|#FFFFFF|Huskies|Ind
 Weber State|#18005a|#ebebeb|Wildcats|Big Sky
 Western Illinois|#4e1e8a|#ffc90a|Leathernecks|OVC
 </script>
-<script type="application/json" id="d-lvx">{"fbs":["Air Force","Akron","Alabama","App State","Arizona","Arizona State","Arkansas","Arkansas State","Army","Auburn","BYU","Ball State","Baylor","Boise State","Boston College","Bowling Green","Buffalo","California","Central Michigan","Charlotte","Cincinnati","Clemson","Coastal Carolina","Colorado","Colorado State","Delaware","Duke","East Carolina","Eastern Michigan","FIU","Florida","Florida Atlantic","Florida State","Fresno State","Georgia","Georgia Southern","Georgia State","Georgia Tech","Hawai'i","Houston","Illinois","Indiana","Iowa","Iowa State","Jacksonville State","James Madison","Kansas","Kansas State","Kennesaw State","Kent State","Kentucky","LSU","Liberty","Louisiana","Louisiana Tech","Louisville","Marshall","Maryland","Memphis","Miami","Miami (OH)","Michigan","Michigan State","Middle Tennessee","Minnesota","Mississippi State","Missouri","Missouri State","NC State","Navy","Nebraska","Nevada","New Mexico","New Mexico State","North Carolina","North Dakota State","North Texas","Northern Illinois","Northwestern","Notre Dame","Ohio","Ohio State","Oklahoma","Oklahoma State","Old Dominion","Ole Miss","Oregon","Oregon State","Penn State","Pittsburgh","Purdue","Rice","Rutgers","SMU","Sacramento State","Sam Houston","San Diego State","San José State","South Alabama","South Carolina","South Florida","Southern Miss","Stanford","Syracuse","TCU","Temple","Tennessee","Texas","Texas A&M","Texas State","Texas Tech","Toledo","Troy","Tulane","Tulsa","UAB","UCF","UCLA","UConn","UL Monroe","UMass","UNLV","USC","UTEP","UTSA","Utah","Utah State","Vanderbilt","Virginia","Virginia Tech","Wake Forest","Washington","Washington State","West Virginia","Western Kentucky","Western Michigan","Wisconsin","Wyoming"],"nbal":{"401909314":[-3.5,";"],"401909315":[10.5,";"],"401909316":[-8.5,";KFAA-TV/MavsTV"],"401909317":[-1.5,";"],"401909318":[-4.5,";"],"401909319":[-4.5,";DAZN CLE"],"401909320":[-2.5,";"],"401909321":[-7.5,";ClipperVision"],"401909322":[-1.5,"MyMi/Bucks App;DAZN (YES)"],"401909323":[-9.5,";Suns Live/Arizona's Family 3TV"],"401909324":[-7.5,";"],"401909325":[3.5,"KUNP 16/BlazerVision;"],"401909326":[-3.5,";"],"401909327":[null,";MyMi/Bucks App"],"401909328":[4.5,";"],"401909329":[null,";DAZN (YES)"],"401909330":[-9.5,";"],"401909331":[null,"DAZN MIN;DAZN MEM"],"401909332":[null,"Suns Live/Arizona's Family 3TV;KFAA-TV/MavsTV"],"401909333":[-6.5,";"],"401909334":[9.5,"KJZZ-TV/Jazz+;"],"401909335":[null,"ClipperVision;GCSEN/Pelicans.com"],"401909336":[null,"KUNP 16/BlazerVision;"],"401910036":[2.5,";DAZN MEM"],"401910037":[1.5,";BlazerVision"],"401910038":[4.5,"DAZN IND;KSBI/Thunder App"],"401910039":[-10.5,";MyMi/Bucks App"],"401910040":[-10.5,"DAZN MIN;"],"401910041":[8.5,";DAZN CLE"],"401910042":[3.5,"GCSEN/Pelicans.com;Suns Live/Arizona's Family 3TV"],"401910043":[-12.5,";ClipperVision"],"401910044":[-13.5,"Spectrum Sports Net/Spectrum Sports Net +;KJZZ-TV/Jazz+"],"401910045":[12.5,";DAZN SAS"],"401910046":[null,"MNMT2;"],"401910047":[null,";DAZN (YES)"],"401910048":[null,";DAZN IND"],"401910049":[null,"MyMi/Bucks App;Thunder App"],"401910051":[null,"DAZN MEM;Spectrum Sports Net/Spectrum Sports Net +"],"401910052":[null,"DAZN SAS;"],"401910053":[null,"KJZZ-TV/Jazz+;Suns Live/Arizona's Family 3TV"],"401910054":[null,"DAZN CLE;"],"401910058":[null,"BlazerVision;GCSEN/Pelicans.com"],"401910059":[null,";ClipperVision"],"401910060":[null,";DAZN MIN"],"401910061":[null,";MNMT"],"401910063":[null,"DAZN (YES);KSBI/Thunder App"],"401910065":[null,"KFAA-TV/MavsTV;"],"401910066":[null,"MyMi/Bucks App;DAZN SAS"],"401910067":[null,";GCSEN/Pelicans.com"],"401910068":[null,"DAZN CLE;DAZN IND"],"401910069":[null,";DAZN MEM"],"401910073":[null,"Suns Live/Arizona's Family 3TV;ClipperVision"],"401910074":[null,"KUNP 16/BlazerVision;DAZN MIN"],"401910075":[null,"KJZZ-TV/Jazz+;"],"401910076":[null,";DAZN MEM"],"401910079":[null,"KFAA-TV/MavsTV;"],"401910080":[null,"MyMi/Bucks App;"],"401910081":[null,"GCSEN/Pelicans.com;Spectrum Sports Net/Spectrum Sports Net +"],"401910082":[null,"KSBI/Thunder App;DAZN (YES)"],"401910083":[null,"Arizona's Family 3TV/Suns Live;"],"401910084":[null,"ClipperVision;DAZN MIN"],"401910086":[null,";MNMT"],"401910087":[null,";DAZN CLE"],"401910089":[null,"KUNP 16/BlazerVision;KJZZ-TV/Jazz+"],"401910090":[null,";MyMi/Bucks App"],"401910091":[null,"MNMT;"],"401910095":[null,"Suns Live/Arizona's Family 3TV;DAZN MIN"],"401910096":[null,"KJZZ-TV/Jazz+;"],"401910097":[null,"KUNP 16/BlazerVision;"],"401910098":[null,"DAZN (YES);"],"401910099":[null,"KSBI/Thunder App;"],"401910100":[null,"DAZN IND;"],"401910102":[null,"DAZN SAS;ClipperVision"],"401910103":[null,";GCSEN/Pelicans.com"],"401910105":[null,";DAZN (YES)"],"401910107":[null,";MNMT"],"401910109":[null,"KFAA-TV/MavsTV;MyMi/Bucks App"],"401910110":[null,"DAZN MEM;"],"401910112":[null,"Suns Live/Arizona's Family 3TV;"],"401910113":[null,"KJZZ-TV/Jazz+;DAZN MIN"],"401910114":[null,"Spectrum Sports Net/Spectrum Sports Net +;GCSEN/Pelicans.com"],"401910117":[null,";MNMT"],"401910118":[null,";ClipperVision"],"401910119":[null,";Suns Live/Arizona's Family 3TV"],"401910120":[null,"DAZN IND;"],"401910121":[null,";DAZN CLE"],"401910122":[null,"DAZN (YES);KFAA-TV/MavsTV"],"401910123":[null,";DAZN SAS"],"401910124":[null,";KJZZ-TV/Jazz+"],"401910126":[null,"GCSEN/Pelicans.com;"],"401910127":[null,"KSBI/Thunder App;"],"401910128":[null,";MyMi/Bucks App"],"401910129":[null,"DAZN MIN;Spectrum Sports Net/Spectrum Sports Net +"],"401910130":[null,";BlazerVision"],"401910131":[null,";KFAA-TV/MavsTV"]}}</script>
+<script type="application/json" id="d-lvx">{"fbs":["Air Force","Akron","Alabama","App State","Arizona","Arizona State","Arkansas","Arkansas State","Army","Auburn","BYU","Ball State","Baylor","Boise State","Boston College","Bowling Green","Buffalo","California","Central Michigan","Charlotte","Cincinnati","Clemson","Coastal Carolina","Colorado","Colorado State","Delaware","Duke","East Carolina","Eastern Michigan","FIU","Florida","Florida Atlantic","Florida State","Fresno State","Georgia","Georgia Southern","Georgia State","Georgia Tech","Hawai'i","Houston","Illinois","Indiana","Iowa","Iowa State","Jacksonville State","James Madison","Kansas","Kansas State","Kennesaw State","Kent State","Kentucky","LSU","Liberty","Louisiana","Louisiana Tech","Louisville","Marshall","Maryland","Memphis","Miami","Miami (OH)","Michigan","Michigan State","Middle Tennessee","Minnesota","Mississippi State","Missouri","Missouri State","NC State","Navy","Nebraska","Nevada","New Mexico","New Mexico State","North Carolina","North Dakota State","North Texas","Northern Illinois","Northwestern","Notre Dame","Ohio","Ohio State","Oklahoma","Oklahoma State","Old Dominion","Ole Miss","Oregon","Oregon State","Penn State","Pittsburgh","Purdue","Rice","Rutgers","SMU","Sacramento State","Sam Houston","San Diego State","San José State","South Alabama","South Carolina","South Florida","Southern Miss","Stanford","Syracuse","TCU","Temple","Tennessee","Texas","Texas A&M","Texas State","Texas Tech","Toledo","Troy","Tulane","Tulsa","UAB","UCF","UCLA","UConn","UL Monroe","UMass","UNLV","USC","UTEP","UTSA","Utah","Utah State","Vanderbilt","Virginia","Virginia Tech","Wake Forest","Washington","Washington State","West Virginia","Western Kentucky","Western Michigan","Wisconsin","Wyoming"],"nbal":{"401909314":[2.5,";"],"401909315":[10.5,";"],"401909316":[-7.5,";KFAA-TV/MavsTV"],"401909317":[-3.5,";"],"401909319":[-5.5,";DAZN CLE"],"401909320":[-3.5,";"],"401909321":[null,";ClipperVision"],"401909322":[null,"MyMi/Bucks App;DAZN (YES)"],"401909323":[-10.5,";Suns Live/Arizona's Family 3TV"],"401909325":[null,"KUNP 16/BlazerVision;"],"401909327":[null,";MyMi/Bucks App"],"401909329":[null,";DAZN (YES)"],"401909331":[null,"DAZN MIN;DAZN MEM"],"401909332":[null,"Suns Live/Arizona's Family 3TV;KFAA-TV/MavsTV"],"401909334":[null,"KJZZ-TV/Jazz+;"],"401909335":[null,"ClipperVision;GCSEN/Pelicans.com"],"401909336":[null,"KUNP 16/BlazerVision;"],"401910036":[2.5,";DAZN MEM"],"401910037":[1.5,";BlazerVision"],"401910038":[4.5,"DAZN IND;KSBI/Thunder App"],"401910039":[-10.5,";MyMi/Bucks App"],"401910040":[-10.5,"DAZN MIN;"],"401910041":[8.5,";DAZN CLE"],"401910042":[3.5,"GCSEN/Pelicans.com;Suns Live/Arizona's Family 3TV"],"401910043":[-12.5,";ClipperVision"],"401910044":[-13.5,"Spectrum Sports Net/Spectrum Sports Net +;KJZZ-TV/Jazz+"],"401910045":[12.5,";DAZN SAS"],"401910046":[null,"MNMT;"],"401910047":[null,";DAZN (YES)"],"401910048":[null,";DAZN IND"],"401910049":[null,"MyMi/Bucks App;Thunder App"],"401910051":[null,"DAZN MEM;Spectrum Sports Net/Spectrum Sports Net +"],"401910052":[null,"DAZN SAS;"],"401910053":[null,"KJZZ-TV/Jazz+;Suns Live/Arizona's Family 3TV"],"401910054":[null,"DAZN CLE;"],"401910058":[null,"BlazerVision;GCSEN/Pelicans.com"],"401910059":[null,";ClipperVision"],"401910060":[null,";DAZN MIN"],"401910061":[null,";MNMT"],"401910063":[null,"DAZN (YES);KSBI/Thunder App"],"401910065":[null,"KFAA-TV/MavsTV;"],"401910066":[null,"MyMi/Bucks App;DAZN SAS"],"401910067":[null,";GCSEN/Pelicans.com"],"401910068":[null,"DAZN CLE;DAZN IND"],"401910069":[null,";DAZN MEM"],"401910073":[null,"Suns Live/Arizona's Family 3TV;ClipperVision"],"401910074":[null,"KUNP 16/BlazerVision;DAZN MIN"],"401910075":[null,"KJZZ-TV/Jazz+;"],"401910076":[null,";DAZN MEM"],"401910079":[null,"KFAA-TV/MavsTV;"],"401910080":[null,"MyMi/Bucks App;"],"401910081":[null,"GCSEN/Pelicans.com;Spectrum Sports Net/Spectrum Sports Net +"],"401910082":[null,"KSBI/Thunder App;DAZN (YES)"],"401910083":[null,"Arizona's Family 3TV/Suns Live;"],"401910084":[null,"ClipperVision;DAZN MIN"],"401910086":[null,";MNMT"],"401910087":[null,";DAZN CLE"],"401910089":[null,"KUNP 16/BlazerVision;KJZZ-TV/Jazz+"],"401910090":[null,";MyMi/Bucks App"],"401910091":[null,"MNMT;"],"401910095":[null,"Suns Live/Arizona's Family 3TV;DAZN MIN"],"401910096":[null,"KJZZ-TV/Jazz+;"],"401910097":[null,"KUNP 16/BlazerVision;"],"401910098":[null,"DAZN (YES);"],"401910099":[null,"KSBI/Thunder App;"],"401910100":[null,"DAZN IND;"],"401910102":[null,"DAZN SAS;ClipperVision"],"401910103":[null,";GCSEN/Pelicans.com"],"401910105":[null,";DAZN (YES)"],"401910107":[null,";MNMT"],"401910109":[null,"KFAA-TV/MavsTV;MyMi/Bucks App"],"401910110":[null,"DAZN MEM;"],"401910112":[null,"Suns Live/Arizona's Family 3TV;"],"401910113":[null,"KJZZ-TV/Jazz+;DAZN MIN"],"401910114":[null,"Spectrum Sports Net/Spectrum Sports Net +;GCSEN/Pelicans.com"],"401910117":[null,";MNMT"],"401910118":[null,";ClipperVision"],"401910119":[null,";Suns Live/Arizona's Family 3TV"],"401910120":[null,"DAZN IND;"],"401910121":[null,";DAZN CLE"],"401910122":[null,"DAZN (YES);KFAA-TV/MavsTV"],"401910123":[null,";DAZN SAS"],"401910124":[null,";KJZZ-TV/Jazz+"],"401910126":[null,"GCSEN/Pelicans.com;"],"401910127":[null,"KSBI/Thunder App;"],"401910128":[null,";MyMi/Bucks App"],"401910129":[null,"DAZN MIN;Spectrum Sports Net/Spectrum Sports Net +"],"401910130":[null,";BlazerVision"],"401910131":[null,";KFAA-TV/MavsTV"]}}</script>
 
 <script>
 (function(){
@@ -2419,10 +2447,10 @@ function closeLate(G){ if (G.st !== 'in') return false; const p = G.P || prog(G)
   if (G.lg === 'nba') { const left = clkSecs(G.clk); return G.per === 4 && left != null && left <= 360 && m <= 6; }
   if (G.lg === 'cbb') { const left = clkSecs(G.clk); return G.per === 2 && left != null && left <= 300 && m <= 6; }
   return G.per === 4 && m <= 8; }
-/* excitement, 0-100: how much the result is still in doubt (ESPN's live win chance when a summary has it, otherwise the
-   margin against how much a game like this swings in the time left), weighted toward the end of the game, plus overtime,
-   a close-and-late bump (the home page's "Worth tuning in" rules), an underdog leading late, and +20 for your teams
-   (the +20 orders the page but is left out of the number shown) */
+/* excitement, 0-100: how much the result is still in doubt (the hub's own live win chance when a summary has it,
+   otherwise the margin against how much a game like this swings in the time left), weighted toward the end of the game,
+   plus overtime, a close-and-late bump (the home page's "Worth tuning in" rules), an underdog leading late, and +20 for
+   your teams (the +20 orders the page but is left out of the number shown) */
 function heat(G){ const p = G.P = prog(G), m = margin(G), U = LG[G.lg]; let close;
   if (G.wp != null) close = 1 - Math.abs(2 * G.wp / 100 - 1);
   else close = 2 * (1 - PHI(Math.max(0, m - U.h) / (U.sd * Math.sqrt(Math.max(p.rem, U.rf)))));
@@ -2541,11 +2569,12 @@ function teamRow(G, s){ const o = O[G.lg], other = s === 'a' ? 'h' : 'a', on = G
 function wpBar(G, cls){ if (G.wp == null) return ''; const ca = colorOf(G, 'a'); let ch = colorOf(G, 'h'); if (near(ca, ch)) ch = uiColor(O[G.lg].alt(G.h.t) || '#cbd5e1'); if (near(ca, ch)) ch = '#cbd5e1'; const h = Math.round(G.wp), a = 100 - h;
   return '<div class="' + cls + '" title="Hub win chance: ' + esc(abOf(G, 'a')) + ' ' + a + '%, ' + esc(abOf(G, 'h')) + ' ' + h + '%"><i style="width:' + a + '%;background:' + ca + '"></i><i style="flex:1;background:' + ch + '"></i></div>'; }
 function cardHTML(G, i){ const H = G.H || {show: 0}; const hot = G.live && (closeLate(G) || (G.P && G.P.ot));
-  const foot = G.live ? '<span class="why">' + esc(whyText(G)) + '</span><span class="heat" style="--hc:' + heatColor(H.show) + '" title="Excitement score, 0 to 100">\u{1F525} ' + H.show + '</span>'
+  const hc = heatColor(H.show); const must = G.live && (H.show >= 70 || hot);
+  const foot = G.live ? '<span class="why">' + esc(whyText(G)) + '</span><span class="heat' + (must ? ' must' : '') + '" style="--hc:' + hc + '" title="Excitement score, 0 to 100">\u{1F525} ' + H.show + '</span>'
     : '<span class="why">' + esc(dayWord(G.kick) + ' ' + kickStr(G.kick) + (tvOf(G) ? ' · ' + tvOf(G) : '')) + '</span><span class="cd" data-cd="' + G.kick + '" data-cdk="s">' + cdShort(G.kick) + '</span>';
-  return '<article class="mc' + (G.fav ? ' fav' : '') + (hot ? ' hot' : '') + '" style="--c:' + LG[G.lg].c + '"><a class="mc-a" href="' + esc(G.href) + '"><div class="mc-h"><span class="lg">' + LG[G.lg].n + '</span>' + (G.live ? '<span class="clk">' + esc(clockStr(G)) + '</span>' : '<span class="when">' + (G.kick && G.kick <= Date.now() ? 'Starting now' : 'Up next') + '</span>') + (G.fav ? '<span class="me">Your team</span>' : '') + '</div>'
+  return '<article class="mc' + (G.fav ? ' fav' : '') + (hot ? ' hot' : '') + (must ? ' must' : '') + '" style="--c:' + LG[G.lg].c + (must ? ';--hc:' + hc : '') + '"><a class="mc-a" href="' + esc(G.href) + '"><div class="mc-h"><span class="lg">' + LG[G.lg].n + '</span>' + (G.live ? '<span class="clk">' + esc(clockStr(G)) + '</span>' : '<span class="when">' + (G.kick && G.kick <= Date.now() ? 'Starting now' : 'Up next') + '</span>') + (G.fav ? '<span class="me">Your team</span>' : '') + '</div>'
     + teamRow(G, 'a') + teamRow(G, 'h') + (G.live ? wpBar(G, 'mwp') : '') + '<div class="mc-f">' + foot + '</div></a>'
-    + (G.live ? '<i class="mc-heat" style="--hv:' + Math.max(4, H.show) + '%;--hc:' + heatColor(H.show) + '" aria-hidden="true"></i>' : '')
+    + (G.live ? '<i class="mc-heat" style="--hv:' + Math.max(4, H.show) + '%;--hc:' + hc + '" aria-hidden="true"></i>' : '')
     + (G.live ? '<button type="button" class="mc-spot" data-spot="' + esc(G.key) + '" aria-label="Show this game in the spotlight" title="Show in the spotlight">' + ICON.spot + '</button>' : '') + '</article>'; }
 /* the situation line: who has the ball, down and distance and the red zone in football; then the score by quarter and the
    pregame line, when the relays and the schedule have them */
@@ -2568,8 +2597,8 @@ function spotHTML(G, picked){ const o = O[G.lg], H = G.H || {show: 0}; const ca 
   /* the last scoring play, and the latest play under it when that is something else (football: the play that just happened) */
   const ls = G.lastScore, lp = G.sit.last && G.sit.last !== ls && !(G.lg === 'nba' && ls) ? G.sit.last : '';
   const last = ls || lp ? '<div class="spot-last">' + (ls ? '<span class="k">Last score</span>' + esc(ls) : '') + (lp ? '<span class="k' + (ls ? ' k2' : '') + '">Last play</span>' + esc(lp) : '') + '</div>' : '';
-  const tv = tvOf(G);
-  return '<article class="spot" style="--ca:' + ca + ';--ch:' + ch + '"><div class="spot-top"><span class="pill-live">LIVE</span><span>Spotlight</span><span class="lg-tag">' + LG[G.lg].n + '</span><span class="heat" style="--hc:' + heatColor(H.show) + '" title="Excitement score, 0 to 100">\u{1F525} ' + H.show + ' · ' + esc(heatWord(H.show, G)) + '</span></div>'
+  const tv = tvOf(G); const must = H.show >= 70 || closeLate(G) || (G.P && G.P.ot);
+  return '<article class="spot jsh-framed' + (must ? ' must' : '') + '" style="--ca:' + ca + ';--ch:' + ch + '"><div class="spot-top"><span class="pill-live">LIVE</span><span>Spotlight</span><span class="lg-tag">' + LG[G.lg].n + '</span><span class="heat' + (must ? ' must' : '') + '" style="--hc:' + heatColor(H.show) + '" title="Excitement score, 0 to 100">\u{1F525} ' + H.show + ' · ' + esc(heatWord(H.show, G)) + '</span></div>'
     + '<a class="spot-board" href="' + esc(G.href) + '">' + side('a') + '<div class="spot-mid"><span class="clk">' + esc(clockStr(G)) + '</span><span class="sub">' + (G.neutral ? 'neutral site' : esc(abOf(G, 'a')) + ' at ' + esc(abOf(G, 'h'))) + '</span></div>' + side('h') + '</a>'
     + '<div class="spot-why">' + chips.join('') + '</div>' + sitHTML(G) + wp + last
     + '<div class="spot-act"><a class="go" href="' + esc(G.href) + '">Open the game page ›</a>' + (tv ? '<span class="tvn">On ' + esc(tv) + '</span>' : '') + (picked ? '<button type="button" class="back" data-spot="">Back to the hottest game</button>' : '') + '</div></article>'; }
@@ -2742,9 +2771,14 @@ function tvRender(sw){ const box = $('#tvd'); if (!box) return; box.hidden = !TV
   const pool = tvPool(); if (TVROT >= pool.length) TVROT = 0; const G = pool[TVROT] || null; const key = G ? G.key : '';
   const switched = !!sw || key !== TVKEY; TVKEY = key; const live = VIEW.live;
   const lv = $('#tv-live'); if (lv) lv.innerHTML = live.length ? '<i></i>' + live.length + ' live' : 'Nothing live';
-  if (G) { const o = O[G.lg]; box.style.setProperty('--ca', deep(o.color(G.a.t), o.alt(G.a.t))); box.style.setProperty('--ch', deep(o.color(G.h.t), o.alt(G.h.t))); $('#tvd-spot').innerHTML = spotHTML(G, false); }
+  const spotBox = $('#tvd-spot');
+  if (G) { const o = O[G.lg]; box.style.setProperty('--ca', deep(o.color(G.a.t), o.alt(G.a.t))); box.style.setProperty('--ch', deep(o.color(G.h.t), o.alt(G.h.t))); spotBox.innerHTML = spotHTML(G, false); }
   else { box.style.removeProperty('--ca'); box.style.removeProperty('--ch'); const nx = (VIEW.pre || []).find(x => x.st === 'pre' && x.kick > Date.now());
-    $('#tvd-spot').innerHTML = nx ? nextHTML(nx, 'Nothing live right now · next up') : '<div class="empty">No games on the schedule for the next week.</div>'; }
+    spotBox.innerHTML = nx ? nextHTML(nx, 'Nothing live right now · next up') : '<div class="empty">No games on the schedule for the next week.</div>'; }
+  if (switched && matchMedia('(prefers-reduced-motion: reduce)').matches === false) {
+    spotBox.classList.remove('swap'); void spotBox.offsetWidth; spotBox.classList.add('swap');
+    clearTimeout(spotBox._sw); spotBox._sw = setTimeout(() => spotBox.classList.remove('swap'), 600);
+  }
   /* turns: dots for each game, a timer bar, and the keys */
   const rot = $('#tvd-rot');
   if (pool.length > 1) { rot.hidden = false;

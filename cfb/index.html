@@ -15069,12 +15069,17 @@ function cfpSim(){
   const list=G.filter(g=>g.level==='FBS'&&g.status!=='CANCELED'&&g.status!=='POSTPONED'&&g.date<=CFP_SEL);
   const NG=list.length, H=new Int32Array(NG), A=new Int32Array(NG), NEU=new Uint8Array(NG), CONF=new Uint8Array(NG), RES=new Int8Array(NG);
   const pair=new Map();
+  /* patch131: each league's title game - a week-14 row whose named team(s) share an FBS league (one side may still be TBD) */
+  const CCG={}, ISCCG=new Uint8Array(list.length);
+  list.forEach((g,k)=>{ if(g.week!==14) return; const ta=g.tbd==='away'?null:team(g.away), th=g.tbd==='home'?null:team(g.home);
+    if((ta&&ta.level!=='FBS')||(th&&th.level!=='FBS')) return; const c=(ta&&th)?(ta.conf===th.conf?ta.conf:''):((ta||th)?(ta||th).conf:'');
+    if(!c||(CFP_P4.indexOf(c)<0&&CFP_G6.indexOf(c)<0)||CCG[c]!=null) return; CCG[c]=k; ISCCG[k]=1; });
   const slotG=(g,side)=>{ if(g.tbd!==side) return slot(side==='home'?g.home:g.away); const i=n+ext.length; ext.push({name:'TBD',rating:g.tbdR}); return i; };
-  list.forEach((g,k)=>{ H[k]=slotG(g,'home'); A[k]=slotG(g,'away'); NEU[k]=g.neutral?1:0; CONF[k]=g.conf?1:0; RES[k]=g.played?(g.hs>g.as?1:-1):0; if(g.conf){ pair.set(H[k]*4096+A[k],k); pair.set(A[k]*4096+H[k],k); } });
+  list.forEach((g,k)=>{ H[k]=slotG(g,'home'); A[k]=slotG(g,'away'); NEU[k]=g.neutral?1:0; CONF[k]=g.conf&&!ISCCG[k]?1:0; RES[k]=g.played?(g.hs>g.as?1:-1):0; if(g.conf&&!ISCCG[k]){ pair.set(H[k]*4096+A[k],k); pair.set(A[k]*4096+H[k],k); } });
   const m=n+ext.length, base=new Float64Array(m); teams.forEach((t,i)=>base[i]=t.rating); ext.forEach((t,j)=>base[n+j]=t.rating);
   /* how many games a playoff-level team (the 12th best rating) would expect to lose against each schedule */
   const B=teams[Math.min(11,n-1)].rating, EL=new Float64Array(n);
-  for(let k=0;k<NG;k++){ const h=H[k], a=A[k], hfa=NEU[k]?0:HFA; if(h<n) EL[h]+=1-pw(B-base[a]+hfa); if(a<n) EL[a]+=1-pw(B-base[h]-hfa); }
+  for(let k=0;k<NG;k++){ if(ISCCG[k]) continue; const h=H[k], a=A[k], hfa=NEU[k]?0:HFA; if(h<n) EL[h]+=1-pw(B-base[a]+hfa); if(a<n) EL[a]+=1-pw(B-base[h]-hfa); }
   /* 2026-11-22 (Jamo: BYU at 50% looked far too low for the committee's No. 10): once the committee ranks teams, each team's
      resume score starts from its spot in the committee's latest rankings, and only the games played after that release
      (and the simulated ones) move it. The ranked teams keep the spread of their own resume scores, handed out in the
@@ -15112,10 +15117,14 @@ function cfpSim(){
   for(let s=0;s<CFP_SIMS;s++){
     for(let i=0;i<m;i++) r[i]=base[i]+SIG*NT[(rnd()*8192)|0];
     W.fill(0); L.fill(0); CW.fill(0); CL.fill(0); elx.fill(0); isCh.fill(0); chIdx.fill(-1);
-    for(let k=0;k<NG;k++){ const h=H[k], a=A[k]; const hw = RES[k] ? RES[k]>0 : rnd()<pw(r[h]-r[a]+(NEU[k]?0:HFA)); win[k]=hw?1:-1; const wi=hw?h:a, lo=hw?a:h; if(wi<n){ W[wi]++; if(CONF[k]) CW[wi]++; } if(lo<n){ L[lo]++; if(CONF[k]) CL[lo]++; } }
+    for(let k=0;k<NG;k++){ if(ISCCG[k]){ win[k]=0; continue; } const h=H[k], a=A[k]; const hw = RES[k] ? RES[k]>0 : rnd()<pw(r[h]-r[a]+(NEU[k]?0:HFA)); win[k]=hw?1:-1; const wi=hw?h:a, lo=hw?a:h; if(wi<n){ W[wi]++; if(CONF[k]) CW[wi]++; } if(lo<n){ L[lo]++; if(CONF[k]) CL[lo]++; } }
     const tg0=FO>=0?tg[FO]:0;
-    for(let ci=0;ci<CONFS.length;ci++){ const c=CONFS[ci]; let p1,p2; if(c==='Sun Belt'&&sbE.length&&sbW.length){ p1=top2(sbE)[0]; p2=top2(sbW)[0]; if(better(p2,p1)<0){ const t=p1; p1=p2; p2=t; } } else { [p1,p2]=top2(mem[c]); } if(p1<0||p2<0) continue;
-      const neu=CFP_P4.indexOf(c)>=0; const w1=rnd()<pw(r[p1]-r[p2]+(neu?0:HFA)); const wi=w1?p1:p2, lo=w1?p2:p1; W[wi]++; L[lo]++; tg[p1]++; tg[p2]++; champ[wi]++; chIdx[ci]=wi; isCh[wi]=1;
+    for(let ci=0;ci<CONFS.length;ci++){ const c=CONFS[ci]; let p1,p2; if(c==='Sun Belt'&&sbE.length&&sbW.length){ p1=top2(sbE)[0]; p2=top2(sbW)[0]; if(better(p2,p1)<0){ const t=p1; p1=p2; p2=t; } } else { [p1,p2]=top2(mem[c]); } const kc=CCG[c]; let real=0;
+      if(kc!=null){ const g=list[kc], hk=H[kc], ak=A[kc];
+        if(!g.tbd){ if(hk<n&&ak<n){ p1=hk; p2=ak; if(RES[kc]) real=RES[kc]; } }
+        else { const kn=g.tbd==='away'?hk:ak; if(kn<n){ const o=top2(mem[c].filter(i=>i!==kn))[0]; if(o>=0){ if(g.tbd==='away'){ p1=kn; p2=o; } else { p1=o; p2=kn; } } } } }
+      if(p1<0||p2<0) continue;
+      const neu=kc!=null?!!NEU[kc]:CFP_P4.indexOf(c)>=0; const w1=real?real>0:rnd()<pw(r[p1]-r[p2]+(neu?0:HFA)); if(kc!=null) win[kc]=w1?1:-1; const wi=w1?p1:p2, lo=w1?p2:p1; W[wi]++; L[lo]++; tg[p1]++; tg[p2]++; champ[wi]++; chIdx[ci]=wi; isCh[wi]=1;
       elx[p1]+=1-pw(B-base[p2]+(neu?0:HFA)); elx[p2]+=1-pw(B-base[p1]-(neu?0:HFA)); }
     /* committee stand-in: record against the schedule, plus how good the team is */
     for(let i=0;i<n;i++) sc[i]=ANC[i]+(EL[i]-ELP[i])+elx[i]-(L[i]-LP[i])+(r[i]-base[i])/9;
@@ -15866,12 +15875,18 @@ function cfpTodayField(){ const useCFP=Object.keys(POLLS.CFP.ranks).length>=12; 
   const ranked=Object.entries(P.ranks).map(([n,r])=>({t:T[n],r:+r})).filter(x=>x.t&&x.t.level==='FBS').sort((a,b)=>a.r-b.r); const pick=new Map(), why={};
   CFP_P4.forEach(c=>{ const x=ranked.find(y=>y.t.conf===c); if(x){ pick.set(x.t.name,x); why[x.t.name]='highest-ranked '+c+' team'; } });
   const g=ranked.find(y=>CFP_G6.indexOf(y.t.conf)>=0&&!pick.has(y.t.name)); if(g){ pick.set(g.t.name,g); why[g.t.name]='highest-ranked Group of 6 team'; }
+  else { /* patch132: nobody from the Group of 6 in this ranking - the bid still goes to one; it takes the 12 seed */
+    const g6=Object.values(T).filter(t=>t.level==='FBS'&&CFP_G6.indexOf(t.conf)>=0);
+    const ap=useCFP?Object.entries(POLLS.AP.ranks).map(([n,r])=>({t:T[n],r:+r})).filter(x=>x.t&&x.t.level==='FBS'&&CFP_G6.indexOf(x.t.conf)>=0).sort((a,b)=>a.r-b.r)[0]:null;
+    const wl=t=>{ let w=0,l=0; G.forEach(x=>{ if(!x.played||x.level!=='FBS'&&!x.fbs) return; if(x.home!==t.name&&x.away!==t.name) return; const won=(x.home===t.name)===(x.hs>x.as); if(won) w++; else l++; }); return w-l; };
+    const best=ap?ap.t:g6.slice().sort((a,b)=>(wl(b)-wl(a))||((b.rating||0)-(a.rating||0)))[0];
+    if(best&&!pick.has(best.name)){ pick.set(best.name,{t:best,r:99}); why[best.name]='Group of 6 bid'+(ap?' (not in the CFP top 25; AP No. '+ap.r+')':' (unranked; best record)'); } }
   const nd=ranked.find(y=>y.t.name==='Notre Dame'); if(nd&&nd.r<=12&&!pick.has(nd.t.name)){ pick.set(nd.t.name,nd); why[nd.t.name]='Notre Dame, in the top 12'; }
   for(const y of ranked){ if(pick.size>=12) break; if(!pick.has(y.t.name)){ pick.set(y.t.name,y); why[y.t.name]='at-large'; } }
-  const F=[...pick.values()].sort((a,b)=>a.r-b.r).map((x,i)=>({t:x.t, seed:i+1, rk:x.r, why:why[x.t.name]}));
+  const F=[...pick.values()].sort((a,b)=>a.r-b.r).map((x,i)=>({t:x.t, seed:i+1, rk:x.r>=99?null:x.r, why:why[x.t.name]}));
   return {F, cfp:useCFP, week:P.week, out:ranked.filter(y=>!pick.has(y.t.name)).slice(0,4)}; }
 function cfpTodayHTML(){ const D=cfpTodayField(); if(D.F.length<12) return ''; const src=D.cfp?'the College Football Playoff rankings':'the AP poll';
-  const rows=D.F.map(x=>'<tr class="click'+(SETTINGS.fav===x.t.name||(!SETTINGS.fav&&x.t.name==='BYU')?' hl':'')+'" data-href="#/team/'+enc(x.t.name)+'"><td class="rk num">'+x.seed+'</td><td>'+chip(x.t.name,{norank:true})+'</td><td class="num">'+recStr(x.t.name)+'</td><td class="num">No. '+x.rk+'</td><td class="muted">'+esc(x.why)+(x.seed<=4?' · first-round bye':'')+'</td></tr>').join('');
+  const rows=D.F.map(x=>'<tr class="click'+(SETTINGS.fav===x.t.name||(!SETTINGS.fav&&x.t.name==='BYU')?' hl':'')+'" data-href="#/team/'+enc(x.t.name)+'"><td class="rk num">'+x.seed+'</td><td>'+chip(x.t.name,{norank:true})+'</td><td class="num">'+recStr(x.t.name)+'</td><td class="num">'+(x.rk?'No. '+x.rk:'NR')+'</td><td class="muted">'+esc(x.why)+(x.seed<=4?' · first-round bye':'')+'</td></tr>').join('');
   return '<div class="sec"><h2>If the season ended today</h2><span class="muted">seeded by '+src+(D.week?' ('+esc(D.week)+')':'')+(D.cfp?'':' until the committee releases its first rankings')+'</span></div>'
     +cfpBracketHTML(D.F)
     +'<div class="grid g2" style="margin-top:14px"><div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">Seed</th><th>Team</th><th class="num">Record</th><th class="num">'+(D.cfp?'CFP':'AP')+'</th><th>How it gets in</th></tr></thead><tbody>'+rows+'</tbody></table></div>'

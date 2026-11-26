@@ -438,30 +438,30 @@ body.livetv .tvd:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr);
   body.livetv .tvd .st-n small{display:none}
 }
 @media print{.tvd,.tvd-moment{display:none!important}}
-/* Mobile / Safari full screen: CSS fill when the Fullscreen API is missing or blocked (must beat body.livetv grid rules) */
-body.livetv.livetv-fs{position:fixed;inset:0;width:100%;height:100%;height:100dvh;overflow:hidden;z-index:200;background:var(--bg,#03050a);padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);overscroll-behavior:none}
-body.livetv.livetv-fs .lv{height:100%;height:100dvh;max-width:none;margin:0;padding:8px 12px 0;display:flex;flex-direction:column;box-sizing:border-box}
-body.livetv.livetv-fs .tvbar{flex:none;flex-wrap:wrap;gap:8px 10px;margin:0 0 8px;padding:8px 10px}
+/* Mobile / Safari full screen: CSS fill when the Fullscreen API is missing or blocked.
+   Scroll the .lv pane (not body) — fixed body.scrollTop is unreliable on phones. */
+html.livetv-fs,html.livetv-fs body{height:100%;overflow:hidden}
+body.livetv.livetv-fs{position:fixed;inset:0;width:100%;height:100%;height:100dvh;overflow:hidden;z-index:200;background:var(--bg,#03050a);padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) 0 env(safe-area-inset-left,0);overscroll-behavior:none}
+body.livetv.livetv-fs .lv{height:100%;height:100dvh;max-width:none;margin:0;padding:8px 12px calc(18px + env(safe-area-inset-bottom,0));display:block;box-sizing:border-box;overflow:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+body.livetv.livetv-fs .tvbar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:8px 10px;margin:0 0 8px;padding:8px 10px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 body.livetv.livetv-fs .tvbar .t{font-size:17px}
 body.livetv.livetv-fs .tvbar .clock{font-size:16px}
 body.livetv.livetv-fs .tvbar .wake{display:none}
 body.livetv.livetv-fs .tvbar .btn{padding:7px 11px;font-size:12.5px}
-body.livetv.livetv-fs .demo{flex:none;margin:0 0 8px;font-size:12.5px;padding:8px 10px}
-body.livetv.livetv-fs .tvd:not([hidden]){flex:1 1 auto;min-height:0;display:flex!important;flex-direction:column;grid-template-columns:none;grid-template-rows:none;gap:10px;overflow:hidden;position:relative}
-body.livetv.livetv-fs .tvd-main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;overflow:auto;-webkit-overflow-scrolling:touch}
-body.livetv.livetv-fs .tvd-spot{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
-body.livetv.livetv-fs .tvd-spot .spot{flex:1 1 auto}
-body.livetv.livetv-fs .tvd-side{flex:0 1 38%;min-height:120px;max-height:42%;overflow:auto;-webkit-overflow-scrolling:touch}
-body.livetv.livetv-fs .tvd-tick{flex:none;height:42px;margin-top:auto}
-body.livetv.livetv-fs .tvd-amb{position:absolute;inset:0;z-index:0;pointer-events:none}
+body.livetv.livetv-fs .demo{margin:0 0 8px;font-size:12.5px;padding:8px 10px}
+body.livetv.livetv-fs .tvd:not([hidden]){display:flex!important;flex-direction:column;grid-template-columns:none;grid-template-rows:none;gap:12px;overflow:visible;position:relative;min-height:0}
+body.livetv.livetv-fs .tvd-main,body.livetv.livetv-fs .tvd-spot,body.livetv.livetv-fs .tvd-side{overflow:visible;max-height:none;min-height:0}
+body.livetv.livetv-fs .tvd-grid{overflow:visible!important;max-height:none}
+body.livetv.livetv-fs .tvd-tick{height:42px;margin-top:4px}
+body.livetv.livetv-fs .tvd-amb{position:fixed;inset:0;z-index:0;pointer-events:none}
 body.livetv.livetv-fs .tvd-main,body.livetv.livetv-fs .tvd-side,body.livetv.livetv-fs .tvd-tick,body.livetv.livetv-fs .tvbar,body.livetv.livetv-fs .demo{position:relative;z-index:1}
 body.livetv.livetv-fs .tvd-moment{position:fixed;top:12%}
 body.livetv.livetv-fs .st-s{font-size:clamp(40px,11vw,72px)}
 body.livetv.livetv-fs .spot{padding:14px 14px 12px}
 @media (orientation:landscape) and (max-height:520px){
-  body.livetv.livetv-fs .tvd:not([hidden]){flex-direction:row;flex-wrap:wrap;align-content:stretch}
-  body.livetv.livetv-fs .tvd-main{flex:1 1 58%;max-height:100%;overflow:hidden}
-  body.livetv.livetv-fs .tvd-side{flex:1 1 36%;max-height:100%;min-height:0}
+  body.livetv.livetv-fs .tvd:not([hidden]){flex-direction:row;flex-wrap:wrap;align-content:flex-start}
+  body.livetv.livetv-fs .tvd-main{flex:1 1 58%}
+  body.livetv.livetv-fs .tvd-side{flex:1 1 36%}
   body.livetv.livetv-fs .tvd-tick{flex:1 1 100%}
   body.livetv.livetv-fs .st-s{font-size:clamp(32px,14vh,64px)}
 }
@@ -877,7 +877,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
 <script src="/sports/shell.js?v=20261126d" defer></script>
 <!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
-<script src="/sports/holiday.js?v=20261126q" defer></script>
+<script src="/sports/holiday.js?v=20261126r" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -2844,15 +2844,16 @@ function tvFsNative(enter){ const root = document.documentElement;
   if (!ex || !tvFsEl()) return Promise.resolve(true);
   try { return Promise.resolve(ex.call(document)).then(() => true).catch(() => true); } catch (e) { return Promise.resolve(true); }
 }
-function tvFsOff(){ document.body.classList.remove('livetv-fs'); tvFsNative(false); tvFsLabel(); }
+function tvFsOff(){ document.documentElement.classList.remove('livetv-fs'); document.body.classList.remove('livetv-fs'); tvFsNative(false); tvFsLabel(); }
 function tvFull(){
   if (!TVM) return;
   if (tvFsOn()) { tvFsOff(); return; }
   tvFsNative(true).then(ok => {
-    if (ok) { document.body.classList.remove('livetv-fs'); tvFsLabel(); return; }
+    if (ok) { document.documentElement.classList.remove('livetv-fs'); document.body.classList.remove('livetv-fs'); tvFsLabel(); return; }
     /* Phone / blocked API: fill the viewport ourselves so Full screen still works */
+    document.documentElement.classList.add('livetv-fs');
     document.body.classList.add('livetv-fs');
-    try { window.scrollTo(0, 0); } catch (e) {}
+    try { const lv = document.getElementById('lv'); if (lv) lv.scrollTop = 0; window.scrollTo(0, 0); } catch (e) {}
     tvFsLabel();
   });
 }
@@ -2867,7 +2868,7 @@ document.addEventListener('click', e => { const t = e.target.closest ? e.target 
   const d = t.closest('[data-tvi]'); if (d) { TVROT = +d.dataset.tvi; tvRender(true); return; }
   const fl = t.closest('[data-flt]'); if (fl) { FILTER = fl.dataset.flt; lsSet('jsh-live-filter', FILTER); render(); } });
 const tvFsBtn = $('#tv-fs'); if (tvFsBtn) tvFsBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); tvFull(); });
-function onFsChange(){ if (!tvFsEl()) document.body.classList.remove('livetv-fs'); tvFsLabel(); }
+function onFsChange(){ if (!tvFsEl()) { document.documentElement.classList.remove('livetv-fs'); document.body.classList.remove('livetv-fs'); } tvFsLabel(); }
 document.addEventListener('fullscreenchange', onFsChange);
 document.addEventListener('webkitfullscreenchange', onFsChange);
 /* lc2:end */

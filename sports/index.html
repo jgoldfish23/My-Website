@@ -314,9 +314,11 @@ a.gm:hover{background:var(--surface-2)}
 .sec.top h2{white-space:nowrap}
 .sec .t-min{margin-left:0}
 /* Your teams actions live in one More menu (2026-11-26) */
-.yt-more{position:relative;margin-left:auto}
-.yt-more-btn{appearance:none;border:1px solid var(--line,rgba(255,255,255,.18));background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;font-size:13px;font-weight:700;color:var(--ink-2);line-height:1}
-.yt-more-btn:hover,.yt-more-btn[aria-expanded="true"]{background:rgba(127,127,127,.14);color:var(--ink)}
+.yt-more{position:relative;margin-left:auto;display:flex;align-items:center;gap:6px}
+.yt-more-btn,.yt-expand{appearance:none;border:1px solid var(--line,rgba(255,255,255,.18));background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;font-size:13px;font-weight:700;color:var(--ink-2);line-height:1}
+.yt-more-btn:hover,.yt-more-btn[aria-expanded="true"],.yt-expand:hover{background:rgba(127,127,127,.14);color:var(--ink)}
+.yt-expand{color:var(--ink)}
+.yt-expand[hidden]{display:none!important}
 .yt-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:60;min-width:188px;padding:6px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(10,12,20,.97);box-shadow:0 18px 40px -18px rgba(0,0,0,.9);display:flex;flex-direction:column;gap:2px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 :root.light .yt-menu{background:rgba(255,255,255,.98);border-color:rgba(15,23,42,.12);box-shadow:0 14px 30px -16px rgba(15,23,42,.35)}
 .yt-menu[hidden]{display:none!important}
@@ -988,7 +990,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <script src="/sports/moments.js?v=20261119b" defer></script>
 <!-- Night: Live night feel -->
 <script src="/sports/night.js?v=20261126p" defer></script>
-<script src="/sports/holiday.js?v=20261126q" defer></script>
+<script src="/sports/holiday.js?v=20261126r" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -998,7 +1000,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
   <div class="stale" id="stale" role="status" hidden></div>
   <div class="miss" id="miss" role="status" hidden></div>
   <div class="yt" id="yt">
-  <div class="sec top"><h2>Your teams</h2><span class="note" id="t-note"></span><div class="yt-more"><button type="button" class="yt-more-btn" id="yt-more" aria-expanded="false" aria-haspopup="menu" aria-controls="yt-menu" title="More team options">More</button><div class="yt-menu" id="yt-menu" role="menu" hidden><a role="menuitem" class="cal-btn" id="alerts-btn" href="/sports/alerts/" title="Phone alerts for your teams">Alerts</a><button role="menuitem" class="cal-btn" id="cal-btn" type="button" aria-expanded="false" aria-controls="cal-panel">Add to calendar</button><button role="menuitem" class="cal-btn t-min" id="t-min" type="button" aria-pressed="false" aria-controls="teams">Minimize</button></div></div></div>
+  <div class="sec top"><h2>Your teams</h2><span class="note" id="t-note"></span><div class="yt-more"><button type="button" class="yt-expand" id="yt-expand" hidden>Expand</button><button type="button" class="yt-more-btn" id="yt-more" aria-expanded="false" aria-haspopup="menu" aria-controls="yt-menu" title="More team options">More</button><div class="yt-menu" id="yt-menu" role="menu" hidden><a role="menuitem" class="cal-btn" id="alerts-btn" href="/sports/alerts/" title="Phone alerts for your teams">Alerts</a><button role="menuitem" class="cal-btn" id="cal-btn" type="button" aria-expanded="false" aria-controls="cal-panel">Add to calendar</button><button role="menuitem" class="cal-btn t-min" id="t-min" type="button" aria-pressed="false" aria-controls="teams">Minimize</button></div></div></div>
   <div class="cal-panel" id="cal-panel" hidden></div>
   <p class="yt-lead" id="yt-lead" hidden>Pick a team in each league. They stay on this phone.</p>
   <button type="button" class="yt-change" id="yt-change">Change teams</button>
@@ -5889,17 +5891,38 @@ if (pkSheet) pkSheet.addEventListener('click', e => {
   if (e.target.id === 'pk-clear') { saveFav(pickSport, ''); paintPick(); }
 });
 const pkQ = document.getElementById('pk-q'); if (pkQ) pkQ.addEventListener('input', paintPick);
-/* minimize "Your teams" to a slim strip; remembered on this device */
-(function(){ const b = document.getElementById('t-min'), s = document.getElementById('teams'); if (!b || !s) return;
-  const set = on => { s.classList.toggle('mini', on); b.textContent = on ? 'Expand' : 'Minimize'; b.setAttribute('aria-pressed', on ? 'true' : 'false'); };
+/* minimize "Your teams" to a slim strip; remembered on this device.
+   Expand stays visible on the row while minimized so it is not trapped in the More menu tap. */
+(function(){ const b = document.getElementById('t-min'), s = document.getElementById('teams'), exp = document.getElementById('yt-expand'); if (!b || !s) return;
+  const set = on => {
+    s.classList.toggle('mini', !!on);
+    b.textContent = on ? 'Expand' : 'Minimize';
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if (exp) { exp.hidden = !on; exp.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+    try { localStorage.setItem('jsh-teams-mini', on ? '1' : '0'); } catch (e) {}
+  };
+  const toggle = () => set(!s.classList.contains('mini'));
+  window.__jshTeamsMini = { set, toggle };
   let on = false; try { on = localStorage.getItem('jsh-teams-mini') === '1'; } catch (e) {} set(on);
-  b.addEventListener('click', () => { on = !s.classList.contains('mini'); set(on); try { localStorage.setItem('jsh-teams-mini', on ? '1' : '0'); } catch (e) {} }); })();
+  b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); toggle(); });
+  if (exp) exp.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); set(false); });
+})();
 /* Your teams More menu: Alerts, Calendar, Minimize */
 (function(){ const wrap = document.querySelector('.yt-more'), btn = document.getElementById('yt-more'), menu = document.getElementById('yt-menu'); if (!wrap || !btn || !menu) return;
   const close = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
   const open = () => { menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); };
   btn.addEventListener('click', e => { e.stopPropagation(); if (menu.hidden) open(); else close(); });
-  menu.addEventListener('click', e => { if (e.target.closest('#cal-btn')) return; close(); });
+  menu.addEventListener('click', e => {
+    const item = e.target.closest('[role="menuitem"]'); if (!item) return;
+    if (item.id === 'cal-btn') return;
+    if (item.id === 't-min') {
+      e.preventDefault(); e.stopPropagation();
+      if (window.__jshTeamsMini) window.__jshTeamsMini.toggle();
+      setTimeout(close, 0);
+      return;
+    }
+    close();
+  });
   document.addEventListener('click', e => { if (!wrap.contains(e.target)) close(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 })();

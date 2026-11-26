@@ -1,6 +1,6 @@
 /* shell:start - App shell (2026-11-24, Jamo: "let's do all of it").
    Phone dock (Home, Live, your college team, your NBA team), a short night splash when opened from the home-screen icon,
-   and a night hero + "now" strip on every #/game page. Still gradients only. Reduced motion: no splash motion. */
+   and a framed night hero on every #/game page (the "now" strip was dropped 11-26: it only repeated the score). Still gradients only. Reduced motion: no splash motion. */
 (function () {
   if (window.__jshShell) return; window.__jshShell = true;
   var D = document, H = D.documentElement, W = window;
@@ -51,14 +51,7 @@
     +   'linear-gradient(#fff,#fff) top right/18px 2px no-repeat,linear-gradient(#fff,#fff) top right/2px 18px no-repeat,'
     +   'linear-gradient(#fff,#fff) bottom left/18px 2px no-repeat,linear-gradient(#fff,#fff) bottom left/2px 18px no-repeat,'
     +   'linear-gradient(#fff,#fff) bottom right/18px 2px no-repeat,linear-gradient(#fff,#fff) bottom right/2px 18px no-repeat;opacity:.55}'
-    + '.jsh-gnow{margin:10px 0 14px;padding:12px 14px;border-radius:16px;background:rgba(8,12,22,.72);border:1px solid rgba(255,255,255,.14);'
-    +   'display:flex;flex-wrap:wrap;gap:8px;align-items:center}'
-    + 'html.light .jsh-gnow{background:rgba(255,255,255,.9);border-color:rgba(15,23,42,.12)}'
-    + '.jsh-gnow .chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;font-size:13px;font-weight:700;'
-    +   'background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:#eef3ff}'
-    + 'html.light .jsh-gnow .chip{background:rgba(15,23,42,.05);border-color:rgba(15,23,42,.12);color:#0f172a}'
-    + '.jsh-gnow .chip.live{background:rgba(255,77,106,.22);border-color:rgba(255,120,140,.5);color:#ffb3c0}'
-    + '.jsh-gnow .chip.win{background:rgba(52,108,255,.18);border-color:rgba(120,160,255,.4)}';
+    + '';
 
   var st = D.createElement('style'); st.id = 'jsh-shell-css'; st.textContent = css; (D.head || H).appendChild(st);
 
@@ -114,7 +107,6 @@
     var h = location.hash || '';
     return /^#\/game\//.test(h) && !/^#\/(gameday|gamenight)\//.test(h);
   }
-  function text(el) { return el ? String(el.textContent || '').replace(/\s+/g, ' ').trim() : ''; }
   function gameNow() {
     var on = isGame();
     H.classList.toggle('jsh-game', on);
@@ -122,25 +114,9 @@
     var head = D.querySelector('#view > .ghead');
     if (!head) return;
     head.classList.add('jsh-framed');
-    var sc = text(head.querySelector('.sc'));
-    var when = text(head.querySelector('.when')) || text(head.querySelector('.mid'));
-    var live = /live|q[1-4]|ot|half/i.test(when) && !/final/i.test(when);
-    var wp = D.querySelector('#view .wpb');
-    var win = '';
-    if (wp) {
-      var names = wp.querySelectorAll('.wpb-n'), pcts = wp.querySelectorAll('.wpb-t b');
-      if (names.length >= 2 && pcts.length >= 2) win = text(names[0]) + ' ' + text(pcts[0]) + ' · ' + text(names[1]) + ' ' + text(pcts[1]);
-    }
-    var chips = [];
-    if (live) chips.push('<span class="chip live">LIVE</span>');
-    if (sc) chips.push('<span class="chip">' + sc.replace(/</g, '') + '</span>');
-    if (when && when !== sc) chips.push('<span class="chip">' + when.replace(/</g, '').slice(0, 72) + '</span>');
-    if (win) chips.push('<span class="chip win">' + win.replace(/</g, '').slice(0, 64) + '</span>');
-    if (!chips.length) chips.push('<span class="chip">Game</span>');
-    var html = '<div class="jsh-gnow" role="status">' + chips.join('') + '</div>';
-    var cur = D.querySelector('.jsh-gnow');
-    if (cur) cur.outerHTML = html;
-    else head.insertAdjacentHTML('afterend', html);
+    /* 11-26 (Jamo: "fix the layout here"): the "now" strip only repeated the score and clock that the framed hero
+       already shows, and rewriting it on every page change re-fired this observer about 8 times a second. It stays off. */
+    var stale = D.querySelector('.jsh-gnow'); if (stale) stale.remove();
   }
 
   function splash() {

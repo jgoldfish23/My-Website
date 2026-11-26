@@ -276,7 +276,7 @@ var JSHOdds = window.JSHOdds || (window.JSHOdds = (function(){
     host.appendChild(b); sync();
   }
   function sync(){ D.querySelectorAll('.fw-btn').forEach(function(b){ var on = LIST.some(function(f){ return key(f) === b.getAttribute('data-k'); });
-    b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.textContent = on ? '★ Following' : '☆ Follow this game'; }); }
+    b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); var tx = on ? '★ Following' : '☆ Follow this game'; if (b.textContent !== tx) b.textContent = tx; }); } /* only when it changes: rewriting it re-fired the page observers in a loop (11-26) */
   D.addEventListener('click', function(e){
     var b = e.target.closest && e.target.closest('.fw-btn');
     if (b) { e.preventDefault(); e.stopPropagation(); var info = b._info; if (!info) return; var k = key(info);

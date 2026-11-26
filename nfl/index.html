@@ -414,7 +414,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
 <script src="/sports/finish.js?v=20261126w" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
-<script src="/sports/tabs.js?v=20261119b" defer></script>
+<script src="/sports/tabs.js?v=20261126w" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
 <script src="/sports/moments.js?v=20261119b" defer></script>
 <!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
@@ -5971,7 +5971,7 @@ function stats(ab){ if(statCache[ab]) return statCache[ab]; const gs=(teamGames[
   s.streak = streakType ? streakType+streakN : '—'; const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null; s.sosPlayed=avg(sPl); s.sosAll=avg(sAll); s.sosRemain=avg(sRem); s.gp=s.w+s.l+s.t; s.pct=s.gp?(s.w+0.5*s.t)/s.gp:0; s.margin = s.gp ? (s.pf-s.pa)/s.gp : null;
   let dist=[1]; s.upcoming.forEach(u=>{ const nd=new Array(dist.length+1).fill(0); dist.forEach((v,k)=>{ nd[k]+=v*(1-u.pw); nd[k+1]+=v*u.pw; }); dist=nd; }); s.dist=dist.map((p,k)=>({wins:s.w+k,p}));
   s.projW = s.w+s.expWins; s.projL = s.l + (s.upcoming.length - s.expWins); s.projDW = s.dw+s.expDivWins; s.projDL = s.dl+(s.divRemain-s.expDivWins); statCache[ab]=s; return s; }
-function clearStats(){ Object.keys(statCache).forEach(k=>delete statCache[k]); SIM=null; RATING_HIST_CLEAR(); }
+function clearStats(){ Object.keys(statCache).forEach(k=>delete statCache[k]); SIM=null; SIM_BASE=null; RATING_HIST_CLEAR(); }
 const SOS_RANK = {}; { const arr=TEAMS.map(t=>({n:t.ab,v:stats(t.ab).sosAll??-99})).sort((a,b)=>b.v-a.v); arr.forEach((x,i)=>SOS_RANK[x.n]=i+1); }
 const SOS_REMAIN_RANK = {}; { const arr=TEAMS.map(t=>({n:t.ab,v:stats(t.ab).sosRemain??-99})).sort((a,b)=>b.v-a.v); arr.forEach((x,i)=>SOS_REMAIN_RANK[x.n]=i+1); }
 
@@ -6013,23 +6013,57 @@ const CLINCH_LBL = {x:'clinched playoff berth', y:'clinched wild card', z:'clinc
 /* ---------- simulation: the rest of the season, many times ---------- */
 let SIM=null;
 function randn(){ let u=0,v=0; while(u===0) u=Math.random(); while(v===0) v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
-function sim(){ if(SIM) return SIM; const n=SIMS; const real=G.filter(g=>g.played&&!g.po).map(g=>({away:g.away,home:g.home,as:g.as,hs:g.hs})); const todo=G.filter(g=>!g.played&&!g.po&&g.time!=='Canceled').map(g=>{ const p=proj(g); return {away:g.away,home:g.home,diff:p.diff,tot:g.total!=null?g.total:44}; });
+/* 11-26 (Jamo: "Dallas is at 12% and I think it's higher"). Three changes to the season simulation:
+   1) Each simulated season shifts every team's strength by a random amount (RATING_SD points, the same shift for all its
+      games that season). Before, every remaining game was an independent coin flip at today's ratings, so the seasons
+      bunched around the average: teams that need a run (Dallas at 5-6) were shortchanged and leaders were flattered.
+   2) The draws are seeded from the results (not the picks), so the same data gives the same odds on every load
+      instead of wobbling a point or two.
+   3) What-ifs: WHATIF[gameId] = 'home' | 'away' forces that game's winner (the playoff page's picker); and for every
+      remaining game the sim keeps each team's playoff and division odds when the home team wins and when it loses
+      (whatIf(ab, id)), which the team pages use for "if they win / if they lose" and "root for".
+   A picked result weights each simulated season by how likely that result was in it (instead of just handing it over), so
+   a pick means "the seasons where this happened" - the same thing whatIf measures - and both show the same odds. */
+const RATING_SD = 2.5;
+let WHATIF = {}, SIM_BASE = null;
+function simRng(seed){ let a = seed | 0; return function(){ a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function sim(){ if(SIM) return SIM; const n=SIMS; const real=G.filter(g=>g.played&&!g.po).map(g=>({away:g.away,home:g.home,as:g.as,hs:g.hs})); const todo=G.filter(g=>!g.played&&!g.po&&g.time!=='Canceled').map(g=>{ const p=proj(g); return {id:g.id,away:g.away,home:g.home,diff:p.diff,tot:g.total!=null?g.total:44}; });
+  let seed=20261126; real.forEach(r=>{ seed=(Math.imul(seed,31)+r.as*7+r.hs*13+r.home.charCodeAt(0))|0; }); /* picks do not change the seed: the same draws with and without them, so a pick's effect is not mixed with luck */
+  const rnd=simRng(seed); const rn=()=>{ let u=0,v=0; while(u===0) u=rnd(); while(v===0) v=rnd(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); };
+  const NT=TEAMS.length, IX={}; TEAMS.forEach((t,i)=>IX[t.ab]=i); const KC=todo.length;
+  const cHW=new Float64Array(KC), cPoH=new Float64Array(KC*NT), cPoA=new Float64Array(KC*NT), cDvH=new Float64Array(KC*NT), cDvA=new Float64Array(KC*NT);
   const acc={}; TEAMS.forEach(t=>acc[t.ab]={po:0,div:0,bye:0,seeds:[0,0,0,0,0,0,0,0],conf:0,sb:0,wins:new Array(19).fill(0),pick:0,pk3:0,pk5:0,pk10:0,wcl:0,dvl:0,cfl:0,sbl:0});
-  const game=(hi,lo,neutral)=>{ const d=team(hi).rating-team(lo).rating+(neutral?0:HFA); return Math.random()<cdf(d/SD)?hi:lo; };
+  const SH={}; TEAMS.forEach(t=>SH[t.ab]=0);
+  const game=(hi,lo,neutral)=>{ const d=team(hi).rating+SH[hi]-team(lo).rating-SH[lo]+(neutral?0:HFA); return rnd()<cdf(d/SD)?hi:lo; };
   const bySeed=(s)=>(a,b)=>s.indexOf(a)-s.indexOf(b);
-  for(let i=0;i<n;i++){ const res=real.slice(); for(const g of todo){ let m=Math.round(g.diff+SD*randn()); if(m===0) m=Math.random()<0.5?1:-1; const hs=Math.max(0,Math.round((g.tot+m)/2)), as=Math.max(0,hs-m); res.push({away:g.away,home:g.home,as,hs}); }
-    const R=buildRecords(res); TEAMS.forEach(t=>{ acc[t.ab].wins[Math.min(18,R[t.ab].w)]++; });
-    const exitR={}; const champs={};
-    for(const c of CONFS){ const s=seedConference(c,R).seeds; s.forEach((ab,k)=>{ acc[ab].po++; acc[ab].seeds[k+1]++; if(k<4) acc[ab].div++; if(k===0) acc[ab].bye++; exitR[ab]=k===0?2:1; });
+  const hw=new Uint8Array(KC), poL=[], dvL=[]; let W=0;
+  for(let i=0;i<n;i++){ TEAMS.forEach(t=>{ SH[t.ab]=RATING_SD*rn(); }); const res=real.slice(); let wt=1;
+    for(let k=0;k<KC;k++){ const g=todo[k], f=WHATIF[g.id]; let m;
+      if(f){ const ph=cdf((g.diff+SH[g.home]-SH[g.away])/SD); wt*=f==='home'?ph:1-ph; m=Math.max(1,Math.round(Math.abs(g.diff+SH[g.home]-SH[g.away]+SD*rn()))); if(f==='away') m=-m; }
+      else { m=Math.round(g.diff+SH[g.home]-SH[g.away]+SD*rn()); if(m===0) m=rnd()<0.5?1:-1; }
+      hw[k]=m>0?1:0; const hs=Math.max(0,Math.round((g.tot+m)/2)), as=Math.max(0,hs-m); res.push({away:g.away,home:g.home,as,hs}); }
+    W+=wt; const R=buildRecords(res); TEAMS.forEach(t=>{ acc[t.ab].wins[Math.min(18,R[t.ab].w)]+=wt; });
+    const exitR={}; const champs={}; poL.length=0; dvL.length=0;
+    for(const c of CONFS){ const s=seedConference(c,R).seeds; s.forEach((ab,k)=>{ acc[ab].po+=wt; acc[ab].seeds[k+1]+=wt; poL.push(IX[ab]); if(k<4){ acc[ab].div+=wt; dvL.push(IX[ab]); } if(k===0) acc[ab].bye+=wt; exitR[ab]=k===0?2:1; });
       const w7=game(s[1],s[6]), w6=game(s[2],s[5]), w5=game(s[3],s[4]); [w7,w6,w5].forEach(ab=>{ exitR[ab]=2; });
       const rem=[w7,w6,w5].sort(bySeed(s)); const d1=game(s[0],rem[2],false), d2=game(rem[0],rem[1],false); [d1,d2].forEach(ab=>{ exitR[ab]=3; });
-      const fin=[d1,d2].sort(bySeed(s)); const cw=game(fin[0],fin[1],false); exitR[cw]=4; acc[cw].conf++; champs[c]=cw; }
-    const sbw=game(champs.AFC,champs.NFC,true); exitR[sbw]=5; acc[sbw].sb++;
-    TEAMS.forEach(t=>{ const e=exitR[t.ab]||0; if(e===1) acc[t.ab].wcl++; else if(e===2) acc[t.ab].dvl++; else if(e===3) acc[t.ab].cfl++; else if(e===4) acc[t.ab].sbl++; });
-    const order=TEAMS.map(t=>t.ab).sort((a,b)=>{ const ea=exitR[a]||0, eb=exitR[b]||0; if(ea!==eb) return ea-eb; if(R[a].pct!==R[b].pct) return R[a].pct-R[b].pct; if(R[a].sos!==R[b].sos) return R[a].sos-R[b].sos; return Math.random()-0.5; });
-    order.forEach((ab,k)=>{ const q=acc[ab]; q.pick+=k+1; if(k<10){ q.pk10++; if(k<5){ q.pk5++; if(k<3) q.pk3++; } } }); } /* 11-26: real top-3/5/10 odds, not a guess from the average */
-  const out={}; TEAMS.forEach(t=>{ const a=acc[t.ab]; out[t.ab]={po:a.po/n, div:a.div/n, bye:a.bye/n, seeds:a.seeds.map(x=>x/n), conf:a.conf/n, sb:a.sb/n, wins:a.wins.map(x=>x/n), pick:a.pick/n, pk3:a.pk3/n, pk5:a.pk5/n, pk10:a.pk10/n, wcl:a.wcl/n, dvl:a.dvl/n, cfl:a.cfl/n, sbl:a.sbl/n}; });
-  return SIM={n, t:out, at:Date.now()}; }
+      const fin=[d1,d2].sort(bySeed(s)); const cw=game(fin[0],fin[1],false); exitR[cw]=4; acc[cw].conf+=wt; champs[c]=cw; }
+    const sbw=game(champs.AFC,champs.NFC,true); exitR[sbw]=5; acc[sbw].sb+=wt;
+    for(let k=0;k<KC;k++){ const o=k*NT; if(hw[k]){ cHW[k]+=wt; for(const x of poL) cPoH[o+x]+=wt; for(const x of dvL) cDvH[o+x]+=wt; } else { for(const x of poL) cPoA[o+x]+=wt; for(const x of dvL) cDvA[o+x]+=wt; } }
+    TEAMS.forEach(t=>{ const e=exitR[t.ab]||0; if(e===1) acc[t.ab].wcl+=wt; else if(e===2) acc[t.ab].dvl+=wt; else if(e===3) acc[t.ab].cfl+=wt; else if(e===4) acc[t.ab].sbl+=wt; });
+    const order=TEAMS.map(t=>t.ab).sort((a,b)=>{ const ea=exitR[a]||0, eb=exitR[b]||0; if(ea!==eb) return ea-eb; if(R[a].pct!==R[b].pct) return R[a].pct-R[b].pct; if(R[a].sos!==R[b].sos) return R[a].sos-R[b].sos; return rnd()-0.5; });
+    order.forEach((ab,k)=>{ const q=acc[ab]; q.pick+=wt*(k+1); if(k<10){ q.pk10+=wt; if(k<5){ q.pk5+=wt; if(k<3) q.pk3+=wt; } } }); } /* 11-26: real top-3/5/10 odds, not a guess from the average */
+  const out={}, N=W||1; TEAMS.forEach(t=>{ const a=acc[t.ab]; out[t.ab]={po:a.po/N, div:a.div/N, bye:a.bye/N, seeds:a.seeds.map(x=>x/N), conf:a.conf/N, sb:a.sb/N, wins:a.wins.map(x=>x/N), pick:a.pick/N, pk3:a.pk3/N, pk5:a.pk5/N, pk10:a.pk10/N, wcl:a.wcl/N, dvl:a.dvl/N, cfl:a.cfl/N, sbl:a.sbl/N}; });
+  const cond={games:todo.map(g=>({id:g.id,away:g.away,home:g.home})), hw:cHW, poH:cPoH, poA:cPoA, dvH:cDvH, dvA:cDvA, NT, IX};
+  return SIM={n, W:N, t:out, at:Date.now(), cond}; }
+/* team ab's playoff and division odds if the home team of game id wins ({home}) or loses ({away}); null when not simulated */
+function whatIf(ab, id){ const s=sim(), c=s.cond; if(!c) return null; const k=c.games.findIndex(g=>g.id===id); if(k<0||c.IX[ab]==null) return null; const i=c.IX[ab], o=k*c.NT, T0=s.W||s.n, nh=c.hw[k], na=T0-nh;
+  return {pHome:nh/T0, home:nh?{po:c.poH[o+i]/nh, div:c.dvH[o+i]/nh}:null, away:na?{po:c.poA[o+i]/na, div:c.dvA[o+i]/na}:null}; }
+/* the playoff page's picker: force (or clear) a game's winner and re-run; the odds before any pick are kept for the deltas */
+function setWhatIf(id, side){ if(!SIM_BASE){ const w=WHATIF; WHATIF={}; SIM=null; SIM_BASE=sim(); WHATIF=w; }
+  if(!side||WHATIF[id]===side) delete WHATIF[id]; else WHATIF[id]=side; SIM=null; if(!Object.keys(WHATIF).length) SIM_BASE=null; }
+
+
 const simOf = ab => sim().t[ab];
 
 /* ---------- rating history: re-run the model week by week ---------- */
@@ -6210,12 +6244,12 @@ function bracketHTML(conf){ const st=standingsNow(); const s=st.conf[conf].seeds
 function renderPlayoffs(conf){ setNav('playoffs'); const st=standingsNow(); const sm=sim(); const fav=SETTINGS.fav&&T[SETTINGS.fav]; conf=CONFS.includes(conf)?conf:(fav?fav.conf:'AFC'); const po=G.filter(g=>g.po).sort(byKick);
   let html='<div class="page-head"><div><div class="eyebrow">Playoff picture</div><h1>'+(REG_DONE?'The bracket':'The race for 14 spots')+'</h1><div class="sub">Seven teams per conference: four division winners and three wild cards, with the top seed skipping the first round. '+(REG_DONE?'Seeds are final.':'Seeds are where things stand today; the odds come from playing out the remaining schedule '+SIMS.toLocaleString()+' times with this page\'s ratings and the league\'s tiebreakers.')+'</div></div><div class="seg"><a href="#/playoffs/AFC" class="'+(conf==='AFC'?'on':'')+'">AFC</a><a href="#/playoffs/NFC" class="'+(conf==='NFC'?'on':'')+'">NFC</a></div></div>';
   const top=TEAMS.slice().sort((a,b)=>sm.t[b.ab].sb-sm.t[a.ab].sb)[0]; const lock=TEAMS.filter(t=>sm.t[t.ab].po>=0.99).length; const bubble=TEAMS.filter(t=>sm.t[t.ab].po>=0.3&&sm.t[t.ab].po<=0.7).length;
-  html+='<div class="grid g4" style="margin-bottom:14px">'+tile('Title favorite', top.disp, pct1(sm.t[top.ab].sb)+' to win the Super Bowl')+tile('Locks', String(lock), '99%+ to make the playoffs')+tile('On the bubble', String(bubble), 'between 30% and 70%')+(fav?tile(fav.disp, pct1(sm.t[fav.ab].po), 'playoff odds · '+pct1(sm.t[fav.ab].div)+' division'):tile('Games left', String(G.filter(g=>!g.po&&!g.played).length), 'in the regular season'))+'</div>';
+  html+='<div class="grid g4" style="margin-bottom:14px">'+tile('Title favorite', top.disp, pct1(sm.t[top.ab].sb)+' to win the Super Bowl')+tile('Locks', String(lock), '99%+ to make the playoffs')+tile('On the bubble', String(bubble), 'between 30% and 70%')+(fav?tile(fav.disp, pct1(sm.t[fav.ab].po), 'playoff odds · '+pct1(sm.t[fav.ab].div)+' division'):tile('Games left', String(G.filter(g=>!g.po&&!g.played).length), 'in the regular season'))+'</div>'+whatIfPickerHTML(conf);
   if(po.length){ const byW={}; po.forEach(g=>(byW[g.week]=byW[g.week]||[]).push(g)); html+='<div class="sec"><h2>Playoff games</h2><span class="muted">as scheduled</span></div>'; Object.keys(byW).map(Number).sort((a,b)=>a-b).forEach(w=>{ html+='<div class="daygrp"><h3>'+esc(PO_LABEL[w])+'</h3><div class="gmlist">'+byW[w].map(gameRowAny).join('')+'</div></div>'; }); }
   const c=st.conf[conf]; const order=c.order;
   html+='<div class="sec"><h2>'+esc(CONF_LONG[conf])+'</h2><span class="muted">'+(REG_DONE?'final seeding':'if the season ended today')+'</span></div>';
   html+='<div class="tblwrap"><table class="tbl"><thead><tr><th class="rk">Seed</th><th>Team</th><th>Division</th><th>Record</th><th class="c">Div</th><th class="c">Conf</th><th class="r">Rating</th><th class="r pct">Playoffs</th><th class="r pct">Division</th><th class="r pct">1 seed</th><th class="r pct">Super Bowl</th><th class="r pct">Title</th><th class="r">Proj.</th><th>Next</th></tr></thead><tbody>';
-  order.forEach((ab,i)=>{ const t=T[ab], s=stats(ab), o=sm.t[ab]; const cl=clinchOf(ab); const nxt=s.upcoming[0]; const inpo=i<7; html+='<tr class="click'+(inpo?' inpo':'')+(i===6?' line6':'')+(SETTINGS.fav===ab?' hl':'')+'" data-href="#/team/'+enc(ab)+'"><td class="rk"><span class="seedpill'+(i===0?' bye':inpo?'':' out')+'">'+(i+1)+'</span></td><td>'+chip(ab,{norank:true})+(cl?'<span class="clinch" title="'+esc(CLINCH_LBL[cl]||cl)+'">'+esc(cl)+'</span>':'')+(i<4?' <span class="tag">'+(REG_DONE?'champ':'leader')+'</span>':inpo?' <span class="tag">WC</span>':'')+'</td><td class="muted">'+esc(t.div)+'</td><td>'+recStr(ab)+'</td><td class="c muted">'+divRecStr(ab)+'</td><td class="c muted">'+confRecStr(ab)+'</td><td class="r">'+num1(t.rating)+'</td><td class="r pct">'+heat(o.po)+'</td><td class="r pct">'+heat(o.div)+'</td><td class="r pct">'+heat(o.bye)+'</td><td class="r pct">'+heat(o.conf)+'</td><td class="r pct">'+heat(o.sb)+'</td><td class="r">'+num1(s.projW)+'-'+num1(s.projL)+'</td><td class="muted small">'+(nxt?(nxt.g.home===ab?'vs ':'at ')+esc(tshort(nxt.g.home===ab?nxt.g.away:nxt.g.home)):'—')+'</td></tr>'; });
+  order.forEach((ab,i)=>{ const t=T[ab], s=stats(ab), o=sm.t[ab]; const cl=clinchOf(ab); const nxt=s.upcoming[0]; const inpo=i<7; html+='<tr class="click'+(inpo?' inpo':'')+(i===6?' line6':'')+(SETTINGS.fav===ab?' hl':'')+'" data-href="#/team/'+enc(ab)+'"><td class="rk"><span class="seedpill'+(i===0?' bye':inpo?'':' out')+'">'+(i+1)+'</span></td><td>'+chip(ab,{norank:true})+(cl?'<span class="clinch" title="'+esc(CLINCH_LBL[cl]||cl)+'">'+esc(cl)+'</span>':'')+(i<4?' <span class="tag">'+(REG_DONE?'champ':'leader')+'</span>':inpo?' <span class="tag">WC</span>':'')+'</td><td class="muted">'+esc(t.div)+'</td><td>'+recStr(ab)+'</td><td class="c muted">'+divRecStr(ab)+'</td><td class="c muted">'+confRecStr(ab)+'</td><td class="r">'+num1(t.rating)+'</td><td class="r pct">'+heat(o.po)+wiDelta(ab,'po')+'</td><td class="r pct">'+heat(o.div)+wiDelta(ab,'div')+'</td><td class="r pct">'+heat(o.bye)+'</td><td class="r pct">'+heat(o.conf)+'</td><td class="r pct">'+heat(o.sb)+'</td><td class="r">'+num1(s.projW)+'-'+num1(s.projL)+'</td><td class="muted small">'+(nxt?(nxt.g.home===ab?'vs ':'at ')+esc(tshort(nxt.g.home===ab?nxt.g.away:nxt.g.home)):'—')+'</td></tr>'; });
   html+='</tbody></table></div>';
   if(!po.length){ html+='<div class="sec"><h2>Projected bracket</h2><span class="muted">today\'s seeds, with the model\'s chance in each first-round game</span></div>'+bracketHTML(conf); }
   html+='<div class="sec"><h2>Seed odds</h2><span class="muted">chance of landing each seed</span></div><div class="tblwrap"><table class="tbl"><thead><tr><th>Team</th>'+[1,2,3,4,5,6,7].map(n=>'<th class="r">'+n+'</th>').join('')+'<th class="r">Out</th></tr></thead><tbody>'+confTeams(conf).sort((a,b)=>sm.t[b.ab].po-sm.t[a.ab].po).map(t=>{ const o=sm.t[t.ab]; return '<tr class="click" data-href="#/team/'+enc(t.ab)+'"><td>'+chip(t.ab,{norank:true})+'</td>'+[1,2,3,4,5,6,7].map(n=>'<td class="r">'+(o.seeds[n]>=0.005?heat(o.seeds[n]):'<span class="dim">—</span>')+'</td>').join('')+'<td class="r">'+heat(1-o.po)+'</td></tr>'; }).join('')+'</tbody></table></div>';
@@ -6252,7 +6286,7 @@ function renderTeam(ab){ setNav('teams'); ab=norm(ab||''); const t=T[ab]; if(!t)
   html+='<div id="s-over" class="grid g6" style="margin-top:8px">'+tile('Record',recStr(ab), divRecStr(ab)+' in the division · '+confRecStr(ab)+' in the '+t.conf)+tile('Against the spread',(s.ats.w+s.ats.l+s.ats.p)?s.ats.w+'-'+s.ats.l+(s.ats.p?'-'+s.ats.p:''):'—', (s.ats.w+s.ats.l)?'covering '+pct(s.ats.w/(s.ats.w+s.ats.l)):'no closing lines yet')+tile('Over / under',(s.ou.o+s.ou.u+s.ou.p)?s.ou.o+'-'+s.ou.u+(s.ou.p?'-'+s.ou.p:''):'—', (s.ou.o+s.ou.u)?'overs to unders':'no totals graded yet')+tile('Points',s.gp?num1(s.pf/s.gp)+' / '+num1(s.pa/s.gp):'—','scored / allowed per game')+tile('Power rating',num1(t.rating), '#'+t.prank+' of 32')+tile('Projected finish',num1(s.projW)+'-'+num1(s.projL),'most likely '+(s.dist?s.dist.slice().sort((a,b)=>b.p-a.p)[0].wins:'—')+' wins')+'</div>';
   html+='<div class="grid g6" style="margin-top:10px">'+tile('Playoff odds',pct1(o.po), pct1(o.div)+' to win the division', o.po>=0.5?'gold':'')+tile('Super Bowl',pct1(o.conf), pct1(o.sb)+' to win it')+tile('Schedule strength',s.sosAll!=null?num1(s.sosAll):'—',(SOS_RANK[ab]?'#'+SOS_RANK[ab]+' hardest · ':'')+'avg opp rating')+tile('Remaining',s.upcoming.length+' games',s.sosRemain!=null?'avg opp '+num1(s.sosRemain)+' · #'+SOS_REMAIN_RANK[ab]+' hardest':'')+tile('Home / road',s.hw+'-'+s.hl+' / '+s.aw+'-'+s.al,'home record / road record')+tile('Streak',s.streak,s.last?('last: '+(s.last.home===ab?'vs ':'at ')+tshort(s.last.home===ab?s.last.away:s.last.home)):'')+'</div>';
   const nxt=s.upcoming[0]; if(nxt){ html+='<div class="sec"><h2>Next up</h2><span class="muted">'+esc(weekLabel(nxt.g.week))+'</span></div><div class="gmlist">'+gameRow(nxt.g)+'</div>'; } else if(s.po.length){ html+='<div class="sec"><h2>Playoffs</h2></div><div class="gmlist">'+s.po.map(gameRow).join('')+'</div>'; }
-  html+='<div id="s-sched" class="sec"><h2>2026 schedule</h2><span class="muted">Click a game for the full breakdown.</span></div>'+teamSchedule(ab,false);
+  html+=whatIfHTML(ab); html+='<div id="s-sched" class="sec"><h2>2026 schedule</h2><span class="muted">Click a game for the full breakdown.</span></div>'+teamSchedule(ab,false);
   html+='<div id="s-analytics" class="sec"><h2>Analytics</h2><span class="muted">Projections use this page\'s power ratings, not the sportsbook.</span></div>';
   html+='<div class="grid g2"><div class="card"><div class="hd"><h3>Where the season lands</h3><span class="mini">chance of each final win total</span></div><div class="bd">'+winDistChart(s)+'<div class="mini" style="margin-top:6px">Expected wins: <b>'+num1(s.projW)+'</b>. Most likely finish is highlighted in gold.</div></div></div><div class="card"><div class="hd"><h3>Scoring margin by game</h3><span class="mini">green = win, red = loss</span></div><div class="bd">'+marginChart(ab)+'</div></div></div>';
   html+='<div class="grid g2" style="margin-top:14px"><div class="card"><div class="hd"><h3>Rating vs. the '+esc(t.conf)+'</h3><span class="mini">blue dots are the '+esc(divKey(t))+'</span></div><div class="bd">'+divStrip(t)+'</div></div><div class="card"><div class="hd"><h3>Schedule difficulty</h3><span class="mini">bar height = opponent rating · hover for detail</span></div><div class="bd">'+remainStrip(ab)+'<div class="legend" style="margin-top:8px"><span><i style="background:var(--good)"></i>Win</span><span><i style="background:var(--bad)"></i>Loss</span><span><i style="background:var(--s1);opacity:.55"></i>Upcoming</span></div></div></div></div>';
@@ -7555,6 +7589,59 @@ if(!document.getElementById('nfl-day-css')){ const st=document.createElement('st
 { const _dayTeam=renderTeam; renderTeam=function(ab){ _dayTeam(ab); ab=norm(ab||''); if(ab==='PHI'){ const head=view.querySelector('.thead'); if(head) head.classList.add('phi-deep'); } if(!view.querySelector('.nfl-deck')){ const head=view.querySelector('.thead'); if(head) head.insertAdjacentHTML('afterend', nflDeckHTML(ab)); } if(!view.querySelector('.np-grid')){ const slot=view.querySelector('#s-analytics'); const html=nflPlaybooksHTML(ab); if(slot&&html) slot.insertAdjacentHTML('afterend', html); } }; }
 { const _dayGame=renderGame; renderGame=function(id){ _dayGame(id); const g=GI[id]; const h=view.querySelector('.ghead'); if(h&&g&&(g.home==='PHI'||g.away==='PHI')) h.classList.add('phi-deep'); if(view.querySelector('.np-vs')) return; const html=g?nflGamePlayHTML(g):''; if(h&&html) h.insertAdjacentHTML('afterend', html); }; }
   if(!document.getElementById('nfl-kelly-g')){ const s=document.createElement('style'); s.id='nfl-kelly-g'; s.textContent='body.themed .ghead.phi-deep,.ghead.phi-deep{box-shadow:inset 0 5px 0 #14944A,inset 0 8px 0 #d5dde3}'; document.head.appendChild(s); }
+/* What if (2026-11-26, Jamo: "Update NFL odds and what ifs"). Built on sim()'s per-game splits (whatIf) and its forced
+   results (WHATIF / setWhatIf), both in p2a.js.
+   - Team pages: "If they win / if they lose" for the team's next game (playoff and division odds each way), and "Also
+     root for": the other games that week, between teams in the same conference race, that move this team's playoff odds
+     by 2+ points. The splits come from the same simulated seasons, so small swings are noise: under 2 points is not shown.
+   - Playoff page: pick the winner of any game this week or next and the whole season re-runs with those results; each
+     team's Playoffs and Division odds show the change from before the picks. Leaving the playoff page clears the picks. */
+const WI_MIN = 0.02;
+function wiNext(ab){ return G.filter(g=>!g.played&&!g.po&&g.time!=='Canceled'&&(g.home===ab||g.away===ab)).sort(byKick)[0]||null; }
+function whatIfHTML(ab){ if(typeof REG_DONE!=='undefined'&&REG_DONE) return ''; const ng=wiNext(ab); if(!ng) return ''; const w=whatIf(ab, ng.id); if(!w||!w.home||!w.away) return '';
+  const home=ng.home===ab, opp=home?ng.away:ng.home, win=home?w.home:w.away, lose=home?w.away:w.home, pw=home?w.pHome:1-w.pHome; const o=simOf(ab), t=T[ab];
+  const row=(k,lbl,x,cls)=>'<div class="wi-r '+cls+'"><span class="wi-k">'+k+'</span><span class="wi-l">'+lbl+'</span><span class="wi-v"><b>'+pct1(x.po)+'</b><small>playoffs</small></span><span class="wi-v"><b>'+pct1(x.div)+'</b><small>division</small></span></div>';
+  const vs=(home?'vs ':'at ')+esc(tshort(opp));
+  /* also root for: same week, a team in this conference on either side, a swing of 2+ points */
+  const conf=t.conf, wk=ng.week;
+  const root=G.filter(g=>!g.played&&!g.po&&g.week===wk&&g.id!==ng.id&&(T[g.home].conf===conf||T[g.away].conf===conf)).map(g=>{ const x=whatIf(ab,g.id); if(!x||!x.home||!x.away) return null; const d=x.home.po-x.away.po; return {g, d, pick:d>=0?g.home:g.away, over:d>=0?g.away:g.home, hi:Math.max(x.home.po,x.away.po), lo:Math.min(x.home.po,x.away.po)}; })
+    .filter(x=>x&&Math.abs(x.d)>=WI_MIN).sort((a,b)=>Math.abs(b.d)-Math.abs(a.d)).slice(0,5);
+  let html='<div id="s-wi" class="sec"><h2>What if</h2><span class="muted">the next game, and who to root for</span></div><div class="card wi"><div class="hd"><h3>'+vs+'</h3><span class="mini">'+esc(fmtDate(ng.date,true))+' '+vs+' · win chance '+pct1(pw)+'</span></div><div class="bd">'
+    +row('If they win', 'beat '+esc(tshort(opp)), win, 'up')+row('If they lose', 'lose to '+esc(tshort(opp)), lose, 'dn')
+    +'<div class="mini" style="margin-top:6px">Today: '+pct1(o.po)+' playoffs · '+pct1(o.div)+' division. From '+SIMS.toLocaleString()+' simulated seasons, so these can differ from a pick on the playoff page by a point or two.</div>';
+  if(root.length) html+='<div class="wi-sub">Also root for</div>'+root.map(x=>'<a class="wi-rf" href="#/game/'+x.g.id+'">'+chip(x.pick,{norank:true,nolink:true})+'<span class="wi-o">over '+esc(tshort(x.over))+'</span><span class="wi-d">'+pct1(x.hi)+' <small>vs '+pct1(x.lo)+'</small></span></a>').join('');
+  else html+='<div class="mini dim" style="margin-top:10px">No other game this week moves the needle by 2 points or more.</div>';
+  return html+'</div></div>'; }
+/* the playoff page's picker: this week's and next week's games left to play (chips without links: no link inside a button or link) */
+function whatIfPickerHTML(conf){ if(typeof REG_DONE!=='undefined'&&REG_DONE) return ''; const left=G.filter(g=>!g.played&&!g.po&&g.time!=='Canceled');
+  const weeks=[...new Set(left.map(g=>g.week))].sort((a,b)=>a-b).slice(0,2); if(!weeks.length) return '';
+  const n=Object.keys(WHATIF).length;
+  const btn=(g,side)=>{ const ab=g[side], on=WHATIF[g.id]===side, off=WHATIF[g.id]&&!on; return '<button type="button" class="wi-b'+(on?' on':'')+(off?' off':'')+'" data-wi="'+esc(g.id)+'|'+side+'" data-conf="'+conf+'" aria-pressed="'+on+'">'+chip(ab,{short:true,norank:true,nolink:true})+'</button>'; };
+  let html='<div class="sec"><h2>What if</h2><span class="muted">'+(n?n+' pick'+(n>1?'s':'')+' · the odds below include them · <button type="button" class="wi-reset" data-wi="reset" data-conf="'+conf+'">Clear picks</button>':'tap a winner and the season re-runs with it')+'</span></div><div class="wi-picker">';
+  weeks.forEach(w=>{ const gs=left.filter(g=>g.week===w).sort(byKick); html+='<div class="wi-wk"><div class="wi-wh">Week '+w+'</div>'+gs.map(g=>'<div class="wi-g'+(T[g.home].conf===conf||T[g.away].conf===conf?'':' other')+'">'+btn(g,'away')+'<span class="at">at</span>'+btn(g,'home')+'</div>').join('')+'</div>'; });
+  return html+'</div>'; }
+/* the change from before the picks, next to a playoff-page percentage */
+function wiDelta(ab, k){ if(!SIM_BASE||!Object.keys(WHATIF).length) return ''; const d=simOf(ab)[k]-SIM_BASE.t[ab][k]; if(Math.abs(d)<0.015) return ''; /* smaller moves are within the simulation's noise */ return '<small class="wi-dl '+(d>0?'up':'dn')+'">'+(d>0?'+':'−')+Math.round(Math.abs(d)*100)+'</small>'; }
+document.addEventListener('click', e=>{ const b=e.target.closest&&e.target.closest('[data-wi]'); if(!b) return; e.preventDefault(); e.stopPropagation();
+  if(b.dataset.wi==='reset'){ WHATIF={}; SIM=null; SIM_BASE=null; } else { const p=b.dataset.wi.split('|'); setWhatIf(p[0], p[1]); }
+  const y=window.scrollY; renderPlayoffs(b.dataset.conf); window.scrollTo(0,y); }, true);
+/* picks belong to the playoff page: leaving it puts the real odds back everywhere else */
+window.addEventListener('hashchange', ()=>{ if(!/^#\/playoffs/.test(location.hash)&&Object.keys(WHATIF).length){ WHATIF={}; SIM=null; SIM_BASE=null; } });
+if(!document.getElementById('nfl-wi-css')){ const st=document.createElement('style'); st.id='nfl-wi-css'; st.textContent=''
+  +'.card.wi{margin-bottom:14px}.wi-r{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:4px 14px;align-items:center;padding:10px 12px;border-radius:12px;margin-top:6px;border:1px solid var(--line)}'
+  +'.wi-r.up{background:color-mix(in srgb,#22c55e 10%,transparent)}.wi-r.dn{background:color-mix(in srgb,#ef4444 9%,transparent)}'
+  +'.wi-k{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}.wi-l{font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}'
+  +'.wi-v{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}.wi-v b{font-size:20px;font-variant-numeric:tabular-nums}.wi-v small{font-size:11px;color:var(--ink-3)}'
+  +'.wi-sub{margin:14px 0 6px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}'
+  +'.card.wi a.wi-rf{display:flex!important;align-items:center;gap:8px;padding:7px 4px;border-top:1px solid var(--line);color:inherit}.wi-o{color:var(--ink-2);font-size:13px}.wi-d{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}.wi-d small{font-weight:600;color:var(--ink-3)}'
+  +'.wi-picker{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px;margin-bottom:14px}.wi-wh{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 2px 6px}'
+  +'.wi-g{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:6px;margin-bottom:6px}.wi-g.other{opacity:.62}.wi-g .at{font-size:11px;color:var(--ink-3)}'
+  +'.wi-b{appearance:none;display:flex;align-items:center;justify-content:center;min-height:38px;padding:4px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:inherit;font:inherit;cursor:pointer;min-width:0}'
+  +'.wi-b.on{border-color:#22c55e;box-shadow:inset 0 0 0 1px #22c55e;background:color-mix(in srgb,#22c55e 14%,var(--surface))}.wi-b.off{opacity:.45}'
+  +'.wi-reset{appearance:none;border:0;background:none;color:var(--accent,#5b8cff);font:inherit;font-weight:700;cursor:pointer;padding:0}'
+  +'.wi-dl{margin-left:4px;font-size:11px;font-weight:800}.wi-dl.up{color:#16a34a}.wi-dl.dn{color:#dc2626}'
+  +'@media (max-width:560px){.wi-r{grid-template-columns:minmax(0,1fr) auto auto}.wi-k{grid-column:1/-1}}';
+  document.head.appendChild(st); }
 
 /* ---------- logos & team themes ---------- */
 const LOGO_BASE = (/(^|\.)djgolding\.com$/.test(location.hostname) || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) ? '/nfl/img/logos' : 'https://djgolding.com/nfl/img/logos';

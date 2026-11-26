@@ -274,8 +274,8 @@ button{font:inherit;color:inherit}
 .toast-x{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:8px;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:16px;line-height:1;cursor:pointer}
 /* ---------- TV mode: big type, no site chrome, the screen stays on while games are live ---------- */
 .tvbar{display:none}
-body.livetv .jsh,body.livetv .jbl,body.livetv .jbl-pill{display:none!important}
-body.livetv.jbl-on{padding-bottom:0!important}
+body.livetv .jsh,body.livetv .jbl,body.livetv .jbl-pill,body.livetv .jsh-dock,body.livetv .btab,body.livetv #btab{display:none!important}
+body.livetv.jbl-on,body.livetv.has-btab{padding-bottom:0!important}
 body.livetv .lv{max-width:none;padding:14px 22px 24px}
 body.livetv .lv-head,body.livetv .opt,body.livetv .why-note,body.livetv #fin-wrap,body.livetv .foot{display:none!important}
 body.livetv .tvbar{display:flex;align-items:center;gap:14px;margin:0 2px 14px}
@@ -438,6 +438,33 @@ body.livetv .tvd:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr);
   body.livetv .tvd .st-n small{display:none}
 }
 @media print{.tvd,.tvd-moment{display:none!important}}
+/* Mobile / Safari full screen: CSS fill when the Fullscreen API is missing or blocked (must beat body.livetv grid rules) */
+body.livetv.livetv-fs{position:fixed;inset:0;width:100%;height:100%;height:100dvh;overflow:hidden;z-index:200;background:var(--bg,#03050a);padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);overscroll-behavior:none}
+body.livetv.livetv-fs .lv{height:100%;height:100dvh;max-width:none;margin:0;padding:8px 12px 0;display:flex;flex-direction:column;box-sizing:border-box}
+body.livetv.livetv-fs .tvbar{flex:none;flex-wrap:wrap;gap:8px 10px;margin:0 0 8px;padding:8px 10px}
+body.livetv.livetv-fs .tvbar .t{font-size:17px}
+body.livetv.livetv-fs .tvbar .clock{font-size:16px}
+body.livetv.livetv-fs .tvbar .wake{display:none}
+body.livetv.livetv-fs .tvbar .btn{padding:7px 11px;font-size:12.5px}
+body.livetv.livetv-fs .demo{flex:none;margin:0 0 8px;font-size:12.5px;padding:8px 10px}
+body.livetv.livetv-fs .tvd:not([hidden]){flex:1 1 auto;min-height:0;display:flex!important;flex-direction:column;grid-template-columns:none;grid-template-rows:none;gap:10px;overflow:hidden;position:relative}
+body.livetv.livetv-fs .tvd-main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;overflow:auto;-webkit-overflow-scrolling:touch}
+body.livetv.livetv-fs .tvd-spot{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+body.livetv.livetv-fs .tvd-spot .spot{flex:1 1 auto}
+body.livetv.livetv-fs .tvd-side{flex:0 1 38%;min-height:120px;max-height:42%;overflow:auto;-webkit-overflow-scrolling:touch}
+body.livetv.livetv-fs .tvd-tick{flex:none;height:42px;margin-top:auto}
+body.livetv.livetv-fs .tvd-amb{position:absolute;inset:0;z-index:0;pointer-events:none}
+body.livetv.livetv-fs .tvd-main,body.livetv.livetv-fs .tvd-side,body.livetv.livetv-fs .tvd-tick,body.livetv.livetv-fs .tvbar,body.livetv.livetv-fs .demo{position:relative;z-index:1}
+body.livetv.livetv-fs .tvd-moment{position:fixed;top:12%}
+body.livetv.livetv-fs .st-s{font-size:clamp(40px,11vw,72px)}
+body.livetv.livetv-fs .spot{padding:14px 14px 12px}
+@media (orientation:landscape) and (max-height:520px){
+  body.livetv.livetv-fs .tvd:not([hidden]){flex-direction:row;flex-wrap:wrap;align-content:stretch}
+  body.livetv.livetv-fs .tvd-main{flex:1 1 58%;max-height:100%;overflow:hidden}
+  body.livetv.livetv-fs .tvd-side{flex:1 1 36%;max-height:100%;min-height:0}
+  body.livetv.livetv-fs .tvd-tick{flex:1 1 100%}
+  body.livetv.livetv-fs .st-s{font-size:clamp(32px,14vh,64px)}
+}
 /* lc2:end */
 @media (prefers-reduced-motion:reduce){body::before,.lv-head h1 b,.pill-live::before,.bump,.toast,.feed li.new a,.btn.pri,.lvf button.on,.tvd-amb,.tvd-spot.swap .spot{animation:none!important}.mc:hover,.btn:hover,.lvf button:hover{transform:none}}
 </style>
@@ -2742,10 +2769,9 @@ async function wake(){ const want = TVM && !document.hidden && VIEW && VIEW.live
   if (w) w.textContent = !TVM ? '' : !('wakeLock' in navigator) ? '' : WL ? 'Screen stays on while games are live' : (VIEW && VIEW.live.length ? '' : 'Screen can sleep: nothing live'); }
 function setTV(on, user){ TVM = on; document.body.classList.toggle('livetv', on);
   if (user) { try { history.replaceState(null, '', location.pathname + location.search + (on ? '#tv' : '')); } catch (e) {} }
-  if (user && on && document.documentElement.requestFullscreen && matchMedia('(min-width:900px)').matches) { document.documentElement.requestFullscreen().catch(() => {}); }
-  if (user && !on && document.fullscreenElement && document.exitFullscreen) { document.exitFullscreen().catch(() => {}); }
-  if (!on) { clearTimeout(TVT); TVT = null; const m = $('#tvd-moment'); if (m) m.hidden = true; }
-  if (VIEW) render(); tick(); wake(); }
+  if (!on) { clearTimeout(TVT); TVT = null; const m = $('#tvd-moment'); if (m) m.hidden = true; tvFsOff(); }
+  else if (user && matchMedia('(min-width:900px)').matches) { tvFsNative(true); }
+  if (VIEW) render(); tick(); wake(); tvFsLabel(); }
 $('#tv-btn').addEventListener('click', () => setTV(true, true));
 $('#tv-exit').addEventListener('click', () => setTV(false, true));
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && TVM) setTV(false, true); });
@@ -2803,7 +2829,33 @@ function tvRender(sw){ const box = $('#tvd'); if (!box) return; box.hidden = !TV
 function tvMoment(G, kicker, title, body, col){ const m = $('#tvd-moment'); if (!m || !TVM) return; m.style.setProperty('--tc', col);
   m.innerHTML = '<span class="mo-k">' + esc(LG[G.lg].n + ' · ' + kicker) + '</span><b>' + esc(title) + '</b><span class="mo-b">' + esc(body) + '</span>';
   m.hidden = false; m.classList.remove('go'); void m.offsetWidth; m.classList.add('go'); clearTimeout(m._t); m._t = setTimeout(() => { m.hidden = true; }, 7000); }
-function tvFull(){ if (document.fullscreenElement) { if (document.exitFullscreen) document.exitFullscreen().catch(() => {}); } else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {}); }
+/* Full screen: native API where it works, CSS fill on phones (iOS Safari / Home Screen often block requestFullscreen) */
+function tvFsEl(){ return document.fullscreenElement || document.webkitFullscreenElement || null; }
+function tvFsOn(){ return !!(tvFsEl() || document.body.classList.contains('livetv-fs')); }
+function tvFsLabel(){ const b = $('#tv-fs'); if (b) { b.textContent = tvFsOn() ? 'Leave full screen' : 'Full screen'; b.setAttribute('aria-pressed', tvFsOn() ? 'true' : 'false'); } }
+function tvFsNative(enter){ const root = document.documentElement;
+  if (enter) {
+    const req = root.requestFullscreen || root.webkitRequestFullscreen || root.webkitRequestFullScreen;
+    if (!req) return Promise.resolve(false);
+    try { const p = req.call(root, { navigationUI: 'hide' }); return Promise.resolve(p).then(() => !!tvFsEl()).catch(() => false); }
+    catch (e) { return Promise.resolve(false); }
+  }
+  const ex = document.exitFullscreen || document.webkitExitFullscreen || document.webkitCancelFullScreen;
+  if (!ex || !tvFsEl()) return Promise.resolve(true);
+  try { return Promise.resolve(ex.call(document)).then(() => true).catch(() => true); } catch (e) { return Promise.resolve(true); }
+}
+function tvFsOff(){ document.body.classList.remove('livetv-fs'); tvFsNative(false); tvFsLabel(); }
+function tvFull(){
+  if (!TVM) return;
+  if (tvFsOn()) { tvFsOff(); return; }
+  tvFsNative(true).then(ok => {
+    if (ok) { document.body.classList.remove('livetv-fs'); tvFsLabel(); return; }
+    /* Phone / blocked API: fill the viewport ourselves so Full screen still works */
+    document.body.classList.add('livetv-fs');
+    try { window.scrollTo(0, 0); } catch (e) {}
+    tvFsLabel();
+  });
+}
 /* the side tiles page through on their own when there are more than fit (a mouse over them holds them still) */
 setInterval(() => { if (!TVM || document.hidden) return; const g = $('#tvd-grid'); if (!g || g.matches(':hover')) return; const max = g.scrollHeight - g.clientHeight; if (max < 12) return;
   const step = (g.firstElementChild ? g.firstElementChild.offsetHeight : 150) + 12; g.scrollTo({top: g.scrollTop + 4 >= max ? 0 : Math.min(max, g.scrollTop + step), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}); }, 6500);
@@ -2813,9 +2865,11 @@ document.addEventListener('keydown', e => { if (!TVM) return; const tg = (e.targ
   else if (e.key === 'f' || e.key === 'F') tvFull(); });
 document.addEventListener('click', e => { const t = e.target.closest ? e.target : null; if (!t) return;
   const d = t.closest('[data-tvi]'); if (d) { TVROT = +d.dataset.tvi; tvRender(true); return; }
-  if (t.closest('#tv-fs')) { tvFull(); return; }
   const fl = t.closest('[data-flt]'); if (fl) { FILTER = fl.dataset.flt; lsSet('jsh-live-filter', FILTER); render(); } });
-document.addEventListener('fullscreenchange', () => { const b = $('#tv-fs'); if (b) b.textContent = document.fullscreenElement ? 'Leave full screen' : 'Full screen'; });
+const tvFsBtn = $('#tv-fs'); if (tvFsBtn) tvFsBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); tvFull(); });
+function onFsChange(){ if (!tvFsEl()) document.body.classList.remove('livetv-fs'); tvFsLabel(); }
+document.addEventListener('fullscreenchange', onFsChange);
+document.addEventListener('webkitfullscreenchange', onFsChange);
 /* lc2:end */
 
 /* ---------- buttons ---------- */

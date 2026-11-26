@@ -313,6 +313,16 @@ a.gm:hover{background:var(--surface-2)}
 .sec.top{margin-top:2px;align-items:center}
 .sec.top h2{white-space:nowrap}
 .sec .t-min{margin-left:0}
+/* Your teams actions live in one More menu (2026-11-26) */
+.yt-more{position:relative;margin-left:auto}
+.yt-more-btn{appearance:none;border:1px solid var(--line,rgba(255,255,255,.18));background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;font-size:13px;font-weight:700;color:var(--ink-2);line-height:1}
+.yt-more-btn:hover,.yt-more-btn[aria-expanded="true"]{background:rgba(127,127,127,.14);color:var(--ink)}
+.yt-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:60;min-width:188px;padding:6px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(10,12,20,.97);box-shadow:0 18px 40px -18px rgba(0,0,0,.9);display:flex;flex-direction:column;gap:2px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+:root.light .yt-menu{background:rgba(255,255,255,.98);border-color:rgba(15,23,42,.12);box-shadow:0 14px 30px -16px rgba(15,23,42,.35)}
+.yt-menu[hidden]{display:none!important}
+.yt-menu a,.yt-menu button{appearance:none;display:flex;align-items:center;gap:8px;width:100%;margin:0;padding:10px 12px;border:0;border-radius:10px;background:transparent;color:var(--ink);font:inherit;font-size:13.5px;font-weight:700;text-align:left;cursor:pointer;text-decoration:none}
+.yt-menu a:hover,.yt-menu button:hover{background:rgba(127,127,127,.12)}
+.yt-menu .cal-btn{border:0;border-radius:10px;padding:10px 12px;background:transparent;color:var(--ink)}
 .teams{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
 .tc-ar + .tc-ar{display:none}
 .tc{min-height:0;gap:8px;padding:12px 13px 11px}
@@ -346,14 +356,14 @@ a.gm:hover{background:var(--surface-2)}
 .teams.mini .tc.pick .big{font-size:14px;margin:0}
 @media (max-width:720px){
   .teams .tc{min-height:0}
-  .sec.top{gap:6px}.sec.top .cal-btn{padding:5px 9px;font-size:12px}
+  .sec.top{gap:6px}
+  .yt-more-btn{padding:5px 11px;font-size:12px}
   .teams{grid-template-columns:none;grid-auto-columns:74%}
   .teams.mini{grid-auto-columns:max-content}
   .teams.mini .tc{min-width:210px}
 }
-/* small phones (375px): "Your teams" + Alerts / Calendar / Minimize stay on one line instead of Minimize dropping alone */
 @media (max-width:389px){
-  .sec.top{gap:4px}.sec.top .cal-btn{padding:5px 7px}.sec.top h2{font-size:19px}
+  .sec.top{gap:4px}.sec.top h2{font-size:19px}
 }
 /* fd_simplify (2026-10-21): one-tap "show more" buttons; the greeting runs full width now that the Next up box is gone */
 .hero{grid-template-columns:1fr}
@@ -978,7 +988,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <script src="/sports/moments.js?v=20261119b" defer></script>
 <!-- Night: Live night feel -->
 <script src="/sports/night.js?v=20261126p" defer></script>
-<script src="/sports/holiday.js?v=20261126o" defer></script>
+<script src="/sports/holiday.js?v=20261126q" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -988,7 +998,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
   <div class="stale" id="stale" role="status" hidden></div>
   <div class="miss" id="miss" role="status" hidden></div>
   <div class="yt" id="yt">
-  <div class="sec top"><h2>Your teams</h2><span class="note" id="t-note"></span><a class="more cal-btn" id="alerts-btn" href="/sports/alerts/" title="Phone alerts for your teams">🔔 Alerts</a><button class="more cal-btn" id="cal-btn" type="button" aria-expanded="false" aria-controls="cal-panel">📅 Add to calendar</button><button class="more cal-btn t-min" id="t-min" type="button" aria-pressed="false" aria-controls="teams">Minimize</button></div>
+  <div class="sec top"><h2>Your teams</h2><span class="note" id="t-note"></span><div class="yt-more"><button type="button" class="yt-more-btn" id="yt-more" aria-expanded="false" aria-haspopup="menu" aria-controls="yt-menu" title="More team options">More</button><div class="yt-menu" id="yt-menu" role="menu" hidden><a role="menuitem" class="cal-btn" id="alerts-btn" href="/sports/alerts/" title="Phone alerts for your teams">Alerts</a><button role="menuitem" class="cal-btn" id="cal-btn" type="button" aria-expanded="false" aria-controls="cal-panel">Add to calendar</button><button role="menuitem" class="cal-btn t-min" id="t-min" type="button" aria-pressed="false" aria-controls="teams">Minimize</button></div></div></div>
   <div class="cal-panel" id="cal-panel" hidden></div>
   <p class="yt-lead" id="yt-lead" hidden>Pick a team in each league. They stay on this phone.</p>
   <button type="button" class="yt-change" id="yt-change">Change teams</button>
@@ -5884,6 +5894,15 @@ const pkQ = document.getElementById('pk-q'); if (pkQ) pkQ.addEventListener('inpu
   const set = on => { s.classList.toggle('mini', on); b.textContent = on ? 'Expand' : 'Minimize'; b.setAttribute('aria-pressed', on ? 'true' : 'false'); };
   let on = false; try { on = localStorage.getItem('jsh-teams-mini') === '1'; } catch (e) {} set(on);
   b.addEventListener('click', () => { on = !s.classList.contains('mini'); set(on); try { localStorage.setItem('jsh-teams-mini', on ? '1' : '0'); } catch (e) {} }); })();
+/* Your teams More menu: Alerts, Calendar, Minimize */
+(function(){ const wrap = document.querySelector('.yt-more'), btn = document.getElementById('yt-more'), menu = document.getElementById('yt-menu'); if (!wrap || !btn || !menu) return;
+  const close = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+  const open = () => { menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); };
+  btn.addEventListener('click', e => { e.stopPropagation(); if (menu.hidden) open(); else close(); });
+  menu.addEventListener('click', e => { if (e.target.closest('#cal-btn')) return; close(); });
+  document.addEventListener('click', e => { if (!wrap.contains(e.target)) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
 
 /* ---------- live now ---------- */
 function liveAll(){ const out = []; [CFB.filter(g => g.week === CFB_WEEK), NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype), NBA.filter(g => g.date === TODAY || g.date === addDay(TODAY, -1)), CBB.filter(g => (g.date === TODAY || g.date === addDay(TODAY, -1)) && cbbNotable(g))].forEach(list => list.map(applyLive).filter(g => g.live).forEach(g => out.push(g))); return out; }

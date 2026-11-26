@@ -115,11 +115,36 @@ const SPECTACLE_CSS = [
   '.cm-wax{position:absolute;right:-8px;bottom:12px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,#c45a4a,#6a201c 72%);color:#f6e7c8;font-family:' + FONT_DISPLAY + ';font-size:11px;letter-spacing:.04em;box-shadow:0 4px 8px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.35)}',
   '.cm-hud-inst{position:relative;padding-top:7px}',
   '.cm-hud-inst::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;opacity:.5;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 6px,#7aa0b8 6px 7px)}',
-  '.cm-stat{background-image:linear-gradient(90deg,transparent,#f3e6c0,#d4af37,#f3e6c0,transparent),linear-gradient(180deg,#2c281f 0%,#16130d 100%) !important;background-size:100% 2px,100% 100% !important;background-repeat:no-repeat !important;background-position:top,0 0 !important}',
-  '@media(prefers-reduced-motion:reduce){.cm-sheen-light,.cm-lightshaft,.cm-foil-ring,.cm-crest{animation:none !important}.cm-sheen-light{opacity:0 !important}.cm-lightshaft{opacity:.5 !important}}',
-  '.cm-reduce .cm-sheen-light,.cm-reduce .cm-lightshaft,.cm-reduce .cm-foil-ring,.cm-reduce .cm-crest{animation:none !important}',
+  '.cm-stat{position:relative;background-image:linear-gradient(90deg,transparent,#f3e6c0,#d4af37,#f3e6c0,transparent),linear-gradient(180deg,#2c281f 0%,#16130d 100%) !important;background-size:100% 2px,100% 100% !important;background-repeat:no-repeat !important;background-position:top,0 0 !important}',
+  '.cm-stat::after{content:"";pointer-events:none;position:absolute;right:0;bottom:0;width:46%;height:46%;background:radial-gradient(ellipse at 100% 100%,rgba(224,138,74,.14),transparent 72%)}',
+  '.cm-lamp-hearth{left:-48px;bottom:-36px;width:300px;height:240px;background:radial-gradient(ellipse at 28% 78%,rgba(255,186,110,.40),rgba(196,92,38,.15) 38%,transparent 72%);animation:cm-flicker 3.4s ease-in-out infinite}',
+  '.cm-lamp-sconce{right:-24px;top:58px;width:190px;height:160px;background:radial-gradient(ellipse at 72% 28%,rgba(255,220,160,.28),rgba(212,175,55,.08) 42%,transparent 74%);animation:cm-flicker 4.8s ease-in-out infinite;animation-delay:-1.6s}',
+  '.cm-guild-sky{top:0;left:0;right:0;height:188px;opacity:.7}',
+  '.cm-guild-arc{position:absolute;inset:0;width:100%;height:100%;animation:cm-arc-breathe 8s ease-in-out infinite}',
+  '@keyframes cm-arc-breathe{0%,100%{opacity:.32}50%{opacity:.62}}',
+  '.cm-gilt-star{position:absolute;border-radius:50%;background:#f6edd4;box-shadow:0 0 6px rgba(243,230,192,.8)}',
+  '.cm-rune-row{animation:cm-rune-breathe 7s ease-in-out infinite}',
+  '@keyframes cm-rune-breathe{0%,100%{text-shadow:0 0 8px rgba(212,175,55,.28)}50%{text-shadow:0 0 14px rgba(243,230,192,.85),0 0 24px rgba(212,175,55,.32)}}',
+  '.cm-medallion{position:relative;display:inline-flex;flex-shrink:0}',
+  '.cm-medallion::after{content:"";pointer-events:none;position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(243,230,192,.4);box-shadow:0 0 0 4px rgba(138,112,32,.22),0 0 14px rgba(212,175,55,.30);animation:cm-seal-breathe 5.8s ease-in-out infinite}',
+  '@keyframes cm-seal-breathe{0%,100%{opacity:.42}50%{opacity:1}}',
+  '.cm-hearth-corner{pointer-events:none;position:absolute;left:0;bottom:0;width:48%;height:58%;background:radial-gradient(ellipse at 0% 100%,rgba(224,138,74,.20),transparent 72%)}',
+  '.cm-sheet-lamp{pointer-events:none;position:absolute;inset:0;background:radial-gradient(ellipse at 16% 88%,rgba(224,138,74,.20),transparent 46%),radial-gradient(ellipse at 86% 8%,rgba(243,230,192,.12),transparent 42%)}',
+  '.cm-wax{box-shadow:0 4px 8px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.35),0 0 14px rgba(196,90,74,.42)}',
+  '.cm-contract{position:relative;margin-bottom:14px;padding:14px 64px 16px 16px;background:radial-gradient(ellipse at 0% 0%,rgba(255,210,150,.34),transparent 46%),linear-gradient(180deg,#f7edd4 0%,#e6d3a6 100%);border:1px solid #8a7020;box-shadow:inset 0 0 0 1px rgba(255,246,212,.35),inset 0 0 28px rgba(196,148,64,.12),0 8px 16px rgba(0,0,0,.16)}',
+  '.cm-contract-due{box-shadow:inset 4px 0 0 #c45c26,inset 0 0 0 1px rgba(255,246,212,.35),inset 0 0 26px rgba(196,92,38,.14),0 8px 16px rgba(0,0,0,.16)}',
+  '.cm-contract-rest{box-shadow:inset 4px 0 0 #7aa0b8,inset 0 0 0 1px rgba(255,246,212,.28),0 8px 16px rgba(0,0,0,.12)}',
+  '.cm-contract-seal{position:absolute;right:12px;top:12px;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,#d26a52,#6a201c 72%);color:#f6e7c8;font-family:' + FONT_DECO + ';font-size:16px;border:1px dashed rgba(246,231,200,.5);box-shadow:0 3px 6px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35)}',
+  '.cm-contract-due .cm-contract-seal{animation:cm-seal-ember 3.6s ease-in-out infinite}',
+  '@keyframes cm-seal-ember{0%,100%{box-shadow:0 3px 6px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35)}50%{box-shadow:0 0 14px 2px rgba(224,138,74,.55),0 3px 6px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35)}}',
+  '.cm-contract-seal-inline{position:static;flex-shrink:0;animation:cm-seal-ember 3.6s ease-in-out infinite}',
+  '@media(prefers-reduced-motion:reduce){.cm-sheen-light,.cm-lightshaft,.cm-foil-ring,.cm-crest,.cm-lamp-hearth,.cm-lamp-sconce,.cm-guild-arc,.cm-rune-row,.cm-medallion::after,.cm-contract-due .cm-contract-seal,.cm-contract-seal-inline{animation:none !important}.cm-sheen-light{opacity:0 !important}.cm-lightshaft{opacity:.5 !important}.cm-lamp-hearth,.cm-lamp-sconce{opacity:.55 !important}.cm-medallion::after{opacity:.6 !important}.cm-guild-arc{opacity:.45 !important}}',
+  '.cm-reduce .cm-sheen-light,.cm-reduce .cm-lightshaft,.cm-reduce .cm-foil-ring,.cm-reduce .cm-crest,.cm-reduce .cm-lamp-hearth,.cm-reduce .cm-lamp-sconce,.cm-reduce .cm-guild-arc,.cm-reduce .cm-rune-row,.cm-reduce .cm-medallion::after,.cm-reduce .cm-contract-due .cm-contract-seal,.cm-reduce .cm-contract-seal-inline{animation:none !important}',
   '.cm-reduce .cm-sheen-light{opacity:0 !important}',
   '.cm-reduce .cm-lightshaft{opacity:.5 !important}',
+  '.cm-reduce .cm-lamp-hearth,.cm-reduce .cm-lamp-sconce{opacity:.55 !important}',
+  '.cm-reduce .cm-medallion::after{opacity:.6 !important}',
+  '.cm-reduce .cm-guild-arc{opacity:.45 !important}',
   '.cm-fold>summary{cursor:pointer}',
 ].join('');
 
@@ -1710,9 +1735,9 @@ function shellBackground(save: Save): string {
   if (theme === 'theme-hearth') return 'radial-gradient(ellipse at 50% 0%, #3a2212 0%, #1a100a 42%, #0c0806 78%)';
   if (theme === 'theme-frost') return 'radial-gradient(ellipse at 50% 0%, #2a3340 0%, #141820 42%, #0a0c10 78%)';
   const phase = dayPhase();
-  if (phase === 'day') return 'radial-gradient(ellipse at 50% 0%, #3a2a18 0%, #1a140e 44%, ' + C.void + ' 76%)';
-  if (phase === 'dusk') return 'radial-gradient(ellipse at 50% 0%, #3a1c12 0%, #160e0a 44%, ' + C.void + ' 76%)';
-  return 'radial-gradient(ellipse at 50% 0%, #2a2418 0%, #120e0a 44%, ' + C.void + ' 78%)';
+  if (phase === 'day') return 'radial-gradient(ellipse at 50% -12%, #5a3a1c 0%, #2a1c12 30%, #1a140e 54%, ' + C.void + ' 80%)';
+  if (phase === 'dusk') return 'radial-gradient(ellipse at 50% -8%, #5a2814 0%, #2a140e 36%, #140e0a 58%, ' + C.void + ' 82%)';
+  return 'radial-gradient(ellipse at 16% 108%, #3a2214 0%, transparent 42%), radial-gradient(ellipse at 50% 0%, #3a2c18 0%, #140f0a 48%, ' + C.void + ' 80%)';
 }
 function whisperFor(skill: SkillId | 'bid'): string {
   return SKILL_WHISPERS[skill] || 'Read the stem twice. The trick is usually a name, a unit, or a division.';
@@ -1868,6 +1893,7 @@ function Portrait(props: { rank: (typeof RANKS)[number]; level: number; title: s
       <rect x="12" y="12" width="116" height="144" fill="none" stroke={C.goldDim} strokeWidth="1" />
       <ellipse cx="70" cy="150" rx="42" ry="8" fill="#00000055" />
       <path d="M38 118 Q70 96 102 118 L108 152 L32 152 Z" fill="#2a2418" stroke={props.rank.metal} strokeWidth="1.6" />
+      <circle cx="70" cy="72" r="36" fill="#d4af37" opacity="0.1" />
       <circle cx="70" cy="72" r="28" fill="url(#cm-face)" stroke={props.rank.metal} strokeWidth="1.8" />
       <path d="M36 70 Q70 28 104 70" fill="#1c1810" stroke={props.rank.metal} strokeWidth="1.5" />
       <rect x="30" y="66" width="80" height="9" rx="2" fill={props.rank.metal} opacity="0.9" />
@@ -1878,14 +1904,16 @@ function Portrait(props: { rank: (typeof RANKS)[number]; level: number; title: s
 }
 function Seal(props: { rank: (typeof RANKS)[number]; level: number }) {
   return (
-    <svg width="96" height="96" viewBox="0 0 92 92" aria-hidden="true" style={{ flexShrink: 0, filter: 'drop-shadow(0 0 8px ' + props.rank.metal + '55)' }}>
-      <circle cx="46" cy="46" r="44" fill="#0c0a07" stroke={props.rank.metal} strokeWidth="2.4" />
-      <circle cx="46" cy="46" r="39" fill="none" stroke={C.goldDim} strokeWidth="1" strokeDasharray="2 3" />
-      <circle cx="46" cy="46" r="34" fill={C.stone} stroke={C.gold} strokeWidth="1.2" />
-      <path d="M46 8 L49 16 L46 14 L43 16 Z M84 46 L76 49 L78 46 L76 43 Z M46 84 L43 76 L46 78 L49 76 Z M8 46 L16 43 L14 46 L16 49 Z" fill={C.gold} />
-      <text x="46" y="44" textAnchor="middle" fill={props.rank.metal} fontSize="26" fontFamily={FONT_DECO}>{props.rank.rune}</text>
-      <text x="46" y="66" textAnchor="middle" fill={C.goldSoft} fontSize="10" letterSpacing="1.2" fontFamily={FONT_DISPLAY}>LV {props.level}</text>
-    </svg>
+    <span className="cm-medallion">
+      <svg width="96" height="96" viewBox="0 0 92 92" aria-hidden="true" style={{ display: 'block', filter: 'drop-shadow(0 0 8px ' + props.rank.metal + '55)' }}>
+        <circle cx="46" cy="46" r="44" fill="#0c0a07" stroke={props.rank.metal} strokeWidth="2.4" />
+        <circle cx="46" cy="46" r="39" fill="none" stroke={C.goldDim} strokeWidth="1" strokeDasharray="2 3" />
+        <circle cx="46" cy="46" r="34" fill={C.stone} stroke={C.gold} strokeWidth="1.2" />
+        <path d="M46 8 L49 16 L46 14 L43 16 Z M84 46 L76 49 L78 46 L76 43 Z M46 84 L43 76 L46 78 L49 76 Z M8 46 L16 43 L14 46 L16 49 Z" fill={C.gold} />
+        <text x="46" y="44" textAnchor="middle" fill={props.rank.metal} fontSize="26" fontFamily={FONT_DECO}>{props.rank.rune}</text>
+        <text x="46" y="66" textAnchor="middle" fill={C.goldSoft} fontSize="10" letterSpacing="1.2" fontFamily={FONT_DISPLAY}>LV {props.level}</text>
+      </svg>
+    </span>
   );
 }
 function Foil(props: { children: ReactNode; sheen?: boolean; style?: CSSProperties }) {
@@ -1894,6 +1922,33 @@ function Foil(props: { children: ReactNode; sheen?: boolean; style?: CSSProperti
       {props.children}
       {props.sheen ? <span className="cm-sheen-light" aria-hidden="true" /> : null}
     </div>
+  );
+}
+function Atmosphere() {
+  const stars = [
+    { x: '11%', y: '22%', d: '0s', n: 2 },
+    { x: '20%', y: '9%', d: '0.7s', n: 3 },
+    { x: '31%', y: '26%', d: '1.2s', n: 2 },
+    { x: '44%', y: '8%', d: '0.4s', n: 2 },
+    { x: '56%', y: '18%', d: '1.5s', n: 3 },
+    { x: '69%', y: '7%', d: '0.9s', n: 2 },
+    { x: '82%', y: '20%', d: '1.8s', n: 2 },
+  ];
+  return (
+    <>
+      <div className="cm-atmosphere cm-vignette" aria-hidden="true" />
+      <div className="cm-atmosphere cm-lightshaft" aria-hidden="true" />
+      <div className="cm-atmosphere cm-lamp cm-lamp-hearth" aria-hidden="true" />
+      <div className="cm-atmosphere cm-lamp cm-lamp-sconce" aria-hidden="true" />
+      <div className="cm-atmosphere cm-guild-sky" aria-hidden="true">
+        <svg className="cm-guild-arc" viewBox="0 0 800 160" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M88 52 L168 26 L248 54 L352 20 L456 48 L568 18 L672 46" fill="none" stroke="#e8d48b" strokeWidth="0.8" />
+        </svg>
+        {stars.map((s) => (
+          <span key={s.x} className="cm-twinkle cm-gilt-star" style={{ left: s.x, top: s.y, width: s.n, height: s.n, animationDelay: s.d }} />
+        ))}
+      </div>
+    </>
   );
 }
 function HallCrest() {
@@ -1906,6 +1961,15 @@ function HallCrest() {
           <stop offset="100%" stopColor="#6a5414" />
         </radialGradient>
       </defs>
+      <circle cx="60" cy="60" r="58" fill="none" stroke="#f3e6c0" strokeWidth="0.7" opacity="0.55" />
+      <circle cx="60" cy="4.5" r="1.5" fill="#f6edd4" />
+      <circle cx="99.2" cy="20.8" r="1.4" fill="#f6edd4" />
+      <circle cx="115.5" cy="60" r="1.5" fill="#f6edd4" />
+      <circle cx="99.2" cy="99.2" r="1.4" fill="#f6edd4" />
+      <circle cx="60" cy="115.5" r="1.5" fill="#f6edd4" />
+      <circle cx="20.8" cy="99.2" r="1.4" fill="#f6edd4" />
+      <circle cx="4.5" cy="60" r="1.5" fill="#f6edd4" />
+      <circle cx="20.8" cy="20.8" r="1.4" fill="#f6edd4" />
       <circle cx="60" cy="60" r="56" fill="#120e0a" stroke="#f3e6c0" strokeWidth="2" />
       <circle cx="60" cy="60" r="50" fill="none" stroke="#8a7020" strokeWidth="1" strokeDasharray="2 3" />
       <circle cx="60" cy="60" r="43" fill="url(#cm-crest-wax)" stroke="#2a2118" strokeWidth="1" />
@@ -1954,13 +2018,13 @@ function themeAccent(save: Save): { gold: string; goldSoft: string; goldDim: str
 function Constellation(props: { def: SkillDef; rec: SkillSave; save: Save; onPerk: (perkId: string) => void; compact?: boolean }) {
   const lv = skillInfo(props.rec.xp).level;
   return (
-    <div style={{ overflow: 'auto', maxWidth: '100%', border: props.compact ? undefined : '1px solid ' + C.goldDim, background: '#070b14' }}>
+    <div style={{ overflow: 'auto', maxWidth: '100%', border: props.compact ? undefined : '1px solid ' + C.goldDim, background: '#100e0c' }}>
     <svg viewBox="0 0 400 320" width="100%" height={props.compact ? 150 : 300} role="img" aria-label={props.def.name + ' guild star'} style={{ display: 'block', minWidth: props.compact ? undefined : 320 }}>
       <defs>
-        <radialGradient id={'sky-' + props.def.id} cx="50%" cy="38%" r="70%">
-          <stop offset="0%" stopColor="#1c2a48" />
-          <stop offset="55%" stopColor="#0d1424" />
-          <stop offset="100%" stopColor="#070b14" />
+        <radialGradient id={'sky-' + props.def.id} cx="50%" cy="28%" r="78%">
+          <stop offset="0%" stopColor="#3a2c1c" />
+          <stop offset="42%" stopColor="#16121c" />
+          <stop offset="100%" stopColor="#0c0a08" />
         </radialGradient>
         <filter id={'glow-' + props.def.id} x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
       </defs>
@@ -2149,6 +2213,7 @@ function CampaignMap(props: { save: Save; chapterOpen: (i: number) => boolean; o
             <defs>
               <linearGradient id="cm-parch-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#f6edd4" /><stop offset="48%" stopColor="#e7d3a4" /><stop offset="100%" stopColor="#d2b888" /></linearGradient>
               <radialGradient id="cm-parch-light" cx="50%" cy="12%" r="68%"><stop offset="0%" stopColor="#fff8e4" stopOpacity="0.7" /><stop offset="100%" stopColor="#fff8e4" stopOpacity="0" /></radialGradient>
+              <radialGradient id="cm-lamp-wash" cx="8%" cy="92%" r="48%"><stop offset="0%" stopColor="#e08a4a" stopOpacity="0.2" /><stop offset="100%" stopColor="#e08a4a" stopOpacity="0" /></radialGradient>
               <linearGradient id="cm-grass" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#9aaf72" /><stop offset="100%" stopColor="#5f7344" /></linearGradient>
               <linearGradient id="cm-waste" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#e0b56e" /><stop offset="100%" stopColor="#b18448" /></linearGradient>
               <linearGradient id="cm-keep" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#e4ebf0" /><stop offset="42%" stopColor="#93a2ae" /><stop offset="100%" stopColor="#5d6c78" /></linearGradient>
@@ -2163,6 +2228,7 @@ function CampaignMap(props: { save: Save; chapterOpen: (i: number) => boolean; o
             </defs>
             <rect x="0" y="0" width="800" height="420" fill="url(#cm-parch-bg)" filter="url(#cm-fiber)" />
             <rect x="0" y="0" width="800" height="420" fill="url(#cm-parch-light)" pointerEvents="none" />
+            <rect x="0" y="0" width="800" height="420" fill="url(#cm-lamp-wash)" pointerEvents="none" />
             <rect x="12" y="12" width="776" height="396" fill="none" stroke="#8a6414" strokeWidth="1.4" />
             <rect x="18" y="18" width="764" height="384" fill="none" stroke="#c4a35a" strokeWidth="0.7" strokeDasharray="2 4" />
             <g fill="none" stroke="#6a4e10" strokeWidth="1.15">
@@ -2173,6 +2239,14 @@ function CampaignMap(props: { save: Save; chapterOpen: (i: number) => boolean; o
             </g>
             <rect x="214" y="18" width="372" height="16" fill="#f8f0da" stroke="#8a6414" strokeWidth="0.7" />
             <text x="400" y="30" textAnchor="middle" fill="#3a2c14" fontSize="9" letterSpacing="2.4" fontFamily={FONT_DISPLAY}>THE SIX REGIONS OF THE BIDHALL</text>
+            <g opacity="0.85">
+              <path d="M58 62 L86 40 L114 66 L146 36 L174 58" fill="none" stroke="#8a6414" strokeWidth="0.7" />
+              <circle className="cm-twinkle" cx="58" cy="62" r="1.7" fill="#f3e2a4" />
+              <circle className="cm-twinkle" cx="86" cy="40" r="1.3" fill="#f6edd4" style={{ animationDelay: '0.6s' }} />
+              <circle className="cm-twinkle" cx="114" cy="66" r="1.5" fill="#f3e2a4" style={{ animationDelay: '1.1s' }} />
+              <circle className="cm-twinkle" cx="146" cy="36" r="1.2" fill="#f6edd4" style={{ animationDelay: '0.3s' }} />
+              <circle className="cm-twinkle" cx="174" cy="58" r="1.6" fill="#f3e2a4" style={{ animationDelay: '1.6s' }} />
+            </g>
             <path d="M28 318 C110 300, 168 268, 236 248 S360 214, 448 230 S590 258, 700 214 S770 196, 792 184" fill="none" stroke="#4e6574" strokeWidth="3.2" opacity="0.5" />
             <path d="M28 318 C110 300, 168 268, 236 248 S360 214, 448 230 S590 258, 700 214 S770 196, 792 184" fill="none" stroke="#d7e7f0" strokeWidth="1" opacity="0.8" />
             <text x="468" y="214" fill="#3d5564" fontSize="8" letterSpacing="1.5" fontFamily={FONT_DISPLAY}>CITY CREEK</text>
@@ -3054,7 +3128,7 @@ export default function App() {
   const hauntDueN = hauntDueList(save).length;
   const conf = confidenceOf(save);
 
-  const parch: CSSProperties = { background: 'linear-gradient(180deg, #eadcba 0%, #d7c49a 48%, #c4af7e 100%)', color: C.parchInk, border: '1px solid var(--cm-gold-dim, ' + C.goldDim + ')', boxShadow: 'inset 0 0 0 1px #7a6230, inset 0 0 0 5px #b89d68, inset 0 0 48px #00000018, 0 10px 28px #00000066', padding: '22px 20px 20px', borderRadius: 2, overflowWrap: 'break-word', position: 'relative' };
+  const parch: CSSProperties = { background: 'radial-gradient(ellipse at 8% 0%, rgba(255,214,150,.42), transparent 42%), radial-gradient(ellipse at 100% 100%, rgba(196,120,48,.12), transparent 46%), linear-gradient(180deg, #f3e6c4 0%, #dcc8a0 52%, #c9b488 100%)', color: C.parchInk, border: '1px solid var(--cm-gold-dim, ' + C.goldDim + ')', boxShadow: 'inset 0 0 0 1px #7a6230, inset 0 0 0 5px #b89d68, inset 0 0 36px rgba(212,175,55,.12), 0 10px 28px #00000066', padding: '22px 20px 20px', borderRadius: 2, overflowWrap: 'break-word', position: 'relative' };
   const stoneBox: CSSProperties = { background: 'linear-gradient(180deg, #2c281f 0%, #16130d 100%)', color: C.ink, border: '1px solid var(--cm-gold-dim, ' + C.goldDim + ')', boxShadow: 'inset 0 0 0 1px var(--cm-gold, ' + C.gold + '), inset 0 0 0 4px #0a0907, inset 0 0 40px #00000088, 0 10px 24px #00000055', padding: 20, borderRadius: 2, overflowWrap: 'break-word', position: 'relative' };
   const navBtn = (id: View, label: string) => (
     <button type="button" onClick={() => goView(id)} style={{ fontFamily: FONT_DISPLAY, background: view === id ? 'linear-gradient(180deg, #3a3224, #1b1813)' : 'transparent', color: view === id ? C.goldSoft : C.inkDim, border: '1px solid ' + (view === id ? C.gold : 'transparent'), borderBottom: '2px solid ' + (view === id ? C.gold : 'transparent'), letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 12, padding: '10px 12px', minHeight: 44, cursor: 'pointer', boxShadow: view === id ? 'inset 0 1px 0 #ffffff22' : undefined }}>{label}</button>
@@ -3123,11 +3197,10 @@ export default function App() {
       <div className={'cm-root cm-title-screen' + (reduceMotion ? ' cm-reduce' : '')} style={{ ...shell, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, textAlign: 'center' }}>
         <style>{css}</style>
         <div className="cm-noise" aria-hidden="true" />
-        <div className="cm-atmosphere cm-vignette" aria-hidden="true" />
-        <div className="cm-atmosphere cm-lightshaft" aria-hidden="true" />
+        <Atmosphere />
         <div style={{ maxWidth: 560, width: '100%', position: 'relative', zIndex: 3 }}>
           <div style={{ display: 'flex', justifyContent: 'center' }}><HallCrest /></div>
-          <div style={{ color: C.goldDim, letterSpacing: '0.4em', fontSize: 11, fontFamily: FONT_DECO, marginTop: 8 }}>ᚠ  ᚢ  ᚴ  ᚷ  ᛚ</div>
+          <div className="cm-rune-row" style={{ color: C.goldSoft, letterSpacing: '0.4em', fontSize: 11, fontFamily: FONT_DECO, marginTop: 8 }}>ᚠ  ᚢ  ᚴ  ᚷ  ᛚ</div>
           <div style={{ margin: '10px auto 0', width: 72, height: 2, background: 'linear-gradient(90deg, transparent, ' + C.gold + ', transparent)' }} />
           <h1 className="cm-hero-title" style={{ ...headingStyle(theme, 34, 'transparent'), marginTop: 14, fontFamily: FONT_DECO, letterSpacing: '0.08em' }}>Construction Mastery</h1>
           <p style={{ margin: '8px 0 0', letterSpacing: '0.26em', textTransform: 'uppercase', color: C.parchDeep, fontSize: 12, fontFamily: FONT_DISPLAY }}>Bidhall Reliquary</p>
@@ -3136,6 +3209,7 @@ export default function App() {
           <Foil sheen>
           <div style={{ ...stoneBox, textAlign: 'left', marginTop: 0, background: 'linear-gradient(165deg, #2e281f 0%, #14110c 55%, #1a1610 100%)' }}>
             <Corners />
+            <span className="cm-hearth-corner" aria-hidden="true" />
             <div style={headingStyle(theme, 12, C.goldDim)}>Continue  ·  save slot I</div>
             <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginTop: 10, flexWrap: 'wrap' }}>
               <Seal rank={rank} level={ch.level} />
@@ -3166,11 +3240,9 @@ export default function App() {
     <div className={'cm-root' + (shake ? ' cm-shake' : '') + (glow ? ' cm-glow' : '') + (reduceMotion ? ' cm-reduce' : '')} style={shell}>
       <style>{css}</style>
       <div className="cm-noise" aria-hidden="true" />
-      <div className="cm-atmosphere cm-vignette" aria-hidden="true" />
-      <div className="cm-atmosphere cm-lightshaft" aria-hidden="true" />
+      <Atmosphere />
       {isWinterMonth() && !reduceMotion ? flakeLeft.map((left, i) => <span key={'snow-' + i} className="cm-snow" aria-hidden="true" style={{ left: left + '%', width: 3 + (i % 3), height: 3 + (i % 3), animationDuration: 8 + (i % 6) + 's', animationDelay: (i * 0.45) + 's' }} />) : null}
       {showAurora ? <div className="cm-aurora" aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', left: 0, right: 0, top: 0, height: 140, zIndex: 2, background: 'linear-gradient(180deg, #d4af3728 0%, #7aa0b812 46%, transparent 100%)', opacity: reduceMotion ? 0.22 : undefined }} /> : null}
-      <div className={reduceMotion ? undefined : 'cm-flicker'} aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', left: 0, bottom: 0, width: 220, height: 180, zIndex: 2, background: 'radial-gradient(ellipse at 20% 90%, #d4893a66 0%, transparent 70%)', opacity: reduceMotion ? 0.35 : undefined }} />
       {session && session.shoutSlow && !session.show ? <div className="cm-slowveil" aria-hidden="true" style={{ pointerEvents: 'none', position: 'fixed', inset: 0, zIndex: 4, background: 'radial-gradient(ellipse at 50% 40%, #9ad4ff22 0%, #00000033 100%)' }} /> : null}
       {discoverBanner ? <div role="status" className="cm-discover" style={{ position: 'fixed', left: 0, right: 0, top: '22%', zIndex: 45, textAlign: 'center', pointerEvents: 'none', color: C.goldSoft, fontFamily: FONT_DISPLAY, fontSize: 28, letterSpacing: '0.18em', textTransform: 'uppercase', textShadow: '0 0 22px ' + C.gold + '99, 0 2px 10px #000' }}>{discoverBanner}</div> : null}
       {trialCurtain ? (
@@ -3232,7 +3304,7 @@ export default function App() {
       ) : null}
       <div className="cm-stage" style={{ maxWidth: 980, margin: '0 auto', padding: '28px 18px 80px' }}>
         <header style={{ textAlign: 'center', marginBottom: 18 }}>
-          <div style={{ color: C.goldDim, letterSpacing: '0.4em', fontSize: 11 }}>ᚠ  ᚢ  ᚴ  ᚷ  ᛚ</div>
+          <div className="cm-rune-row" style={{ color: C.goldSoft, letterSpacing: '0.4em', fontSize: 11 }}>ᚠ  ᚢ  ᚴ  ᚷ  ᛚ</div>
           <h1 id="cm-main-heading" tabIndex={-1} className="cm-main-heading cm-hero-title" style={{ ...headingStyle(theme, 24, 'transparent'), marginTop: 8, fontFamily: FONT_DECO }}>Construction Mastery</h1>
           <p style={{ margin: '4px 0 0', letterSpacing: '0.22em', textTransform: 'uppercase', color: C.parchDeep, fontSize: 11, fontFamily: FONT_DISPLAY }}>Bidhall Reliquary</p>
           <p style={{ margin: '4px 0 0', letterSpacing: '0.18em', textTransform: 'uppercase', color: C.inkDim, fontSize: 12 }}>The Estimator’s Quest</p>
@@ -3336,6 +3408,7 @@ export default function App() {
             <Foil style={{ marginBottom: 18 }}>
             <div style={{ ...stoneBox, marginBottom: 0, boxShadow: '0 0 22px var(--cm-glow, ' + C.gold + '33)' }}>
               <Corners />
+              <span className="cm-hearth-corner" aria-hidden="true" />
               <div style={headingStyle(theme, 13, C.gold)}>Continue</div>
               <GoldRule />
               <p style={{ margin: '0 0 12px', color: C.inkDim }}>{openTrialPending() ? 'An unfinished trial is waiting — pick up the ledger where you left it.' : best.detail}</p>
@@ -3459,6 +3532,7 @@ export default function App() {
             <Foil sheen>
             <div style={{ ...stoneBox, display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'center', background: 'linear-gradient(165deg, #2e281f 0%, #14110c 100%)' }}>
               <Corners />
+              <span className="cm-sheet-lamp" aria-hidden="true" />
               <div className="cm-portrait-mat">
                 <Portrait rank={rank} level={ch.level} title={wornTitle || rank.title} />
                 <div className="cm-wax" aria-hidden="true">CM</div>
@@ -3584,7 +3658,8 @@ export default function App() {
               const due = hauntDue(save, id);
               const skill = skillById(q.skill === 'bid' ? 'est' : q.skill);
               return (
-                <article key={id} style={{ marginBottom: 14, padding: '12px 14px 14px', background: 'linear-gradient(180deg, #f4e7c8 0%, #e4d2a6 100%)', border: '1px solid ' + C.goldDim, boxShadow: 'inset 3px 0 0 ' + (due ? C.gold : C.frost) }}>
+                <article key={id} className={'cm-contract' + (due ? ' cm-contract-due' : ' cm-contract-rest')}>
+                  <div className="cm-contract-seal" aria-hidden="true">{skill.rune}</div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap', alignItems: 'baseline' }}>
                     <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11, color: C.goldDim }}>Contract</div>
                     <div style={{ fontFamily: FONT_DISPLAY, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 11, color: due ? C.parchInk : C.frost }}>{due ? 'Due today' : 'Resting until ' + formatLedgerDay(rec.due)}</div>
@@ -3689,7 +3764,10 @@ export default function App() {
           <div className={session.show && last ? (last.correct ? 'cm-q-ok' : 'cm-q-miss') : undefined} style={session.mode === 'bid' ? { ...stoneBox, background: '#160c0c', borderColor: C.danger } : parch}>
             <Corners color={session.mode === 'bid' || session.mode === 'boss' ? C.emberSoft : undefined} />
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center', minWidth: 0 }}>
+            {session.mode === 'haunt' ? <div className="cm-contract-seal cm-contract-seal-inline" aria-hidden="true">{skillById(quizQ.skill === 'bid' ? 'est' : quizQ.skill).rune}</div> : null}
             <div style={headingStyle(theme, 12, session.mode === 'bid' || session.mode === 'boss' ? C.goldSoft : C.goldDim)}>{session.mode === 'bid' ? 'Bid Day  ·  ' + L.scopeFoe : session.mode === 'haunt' ? 'Contract Ledger' : session.mode === 'boss' ? 'Boss  ·  ' + ((CHAPTERS.find((c) => c.id === session.chapter) || { boss: 'The Guardian' }).boss) : session.mode === 'camp' ? ((CHAPTERS.find((c) => c.id === session.chapter) || { name: 'Campaign' }).name) + '  ·  Chapter trial' : skillById(session.skill === 'bid' ? focus : session.skill).name + '  ·  ' + session.ids.length + ' trials'}</div>
+            </div>
             <Btn label="Park this trial" kind="quiet" onClick={() => goView('hall')} />
             </div>
             <p style={{ margin: '8px 0 0', color: session.mode === 'bid' ? C.inkDim : C.parchMute, fontSize: 14 }}>Trial {session.index + 1} of {session.ids.length}{session.mode === 'bid' ? '  ·  Mixed trades, harder questions. The bid is due at two o’clock.' : '  ·  Keys 1–4 or A–D to answer, Enter to continue.'}</p>

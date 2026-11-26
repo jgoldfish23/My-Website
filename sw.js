@@ -11,7 +11,7 @@
    To switch it off for everyone: set OFF = true below and publish. It then deletes its saved copies, removes itself and
    reloads any open sports page. (One phone only: localStorage "jsh-sw" = "off", which app.js honors.) */
 const OFF = false;
-const V = 'jsh-2';
+const V = 'jsh-1';
 const PAGES = V + '-pages', FILES = V + '-files';
 const HUB = /^\/(sports|cfb|nfl|nba|cbb)(\/|$)/;
 const WAIT_MS = 4000;

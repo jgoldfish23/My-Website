@@ -4624,3 +4624,6 @@
 2026-11-21|Stetson|San Diego|San Diego|passingYards|Dom Nankil|QB|19/26, 237 YDS, 3 TD
 2026-11-21|Stetson|San Diego|San Diego|rushingYards|Adam Criter|RB|23 CAR, 194 YDS, 3 TD
 2026-11-21|Stetson|San Diego|San Diego|receivingYards|Cole Monach|WR|9 REC, 127 YDS, 3 TD
+2026-11-26|Tuskegee|Alabama State|Alabama State|passingYards|Aaron Frye|QB|5/8, 95 YDS, 1 TD
+2026-11-26|Tuskegee|Alabama State|Alabama State|rushingYards|Aaron Frye|QB|3 CAR, 33 YDS, 1 TD
+2026-11-26|Tuskegee|Alabama State|Alabama State|receivingYards|Israel Tate|WR|1 REC, 56 YDS, 1 TD

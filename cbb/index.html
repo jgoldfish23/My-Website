@@ -9,10 +9,10 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#EFF1F4">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
 <meta name="apple-mobile-web-app-title" content="Jamo CBB">
-<link rel="icon" type="image/svg+xml" href="/sports/icons/jsh-n.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/sports/icons/jsh-n-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/sports/icons/jsh-n-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-n-180.png">
+<link rel="icon" type="image/svg+xml" href="/sports/icons/jsh.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/sports/icons/jsh-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/sports/icons/jsh-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-180.png">
 <link rel="manifest" href="/sports/icons/site.webmanifest">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
@@ -65,6 +65,7 @@
 })();
 </script>
 <style id="jsh-holiday-boot">
+/* Painted with the page, not only after holiday.js. A phone should see the field, the bar, and the bottom chrome. */
 html.jsh-thanks,html.jsh-thanks body,html.jsh-thanks body::before{background:radial-gradient(90% 46% at 50% -10%,rgba(240,170,60,.55),transparent 58%),linear-gradient(180deg,#4a2a12,#24160c 46%,#140e09)!important;background-color:#140e09!important}
 html.jsh-thanks.light,html.jsh-thanks.light body,html.jsh-thanks.light body::before,html.jsh-thanks[data-theme="light"],html.jsh-thanks[data-theme="light"] body,html.jsh-thanks[data-theme="light"] body::before{background:linear-gradient(180deg,#f8e6c8,#f3d7ae 50%,#edd0b0)!important;background-color:#f6e4c4!important}
 html.jsh-xmas,html.jsh-xmas body,html.jsh-xmas body::before{background:radial-gradient(70% 42% at 0% -8%,rgba(36,150,90,.55),transparent 60%),radial-gradient(60% 40% at 100% 0%,rgba(176,28,48,.5),transparent 62%),linear-gradient(180deg,#0d3d2a,#07140f 50%,#1a0c10)!important;background-color:#071410!important}
@@ -397,9 +398,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
-<script src="/sports/glow.js?v=20261031a" defer></script>
-<!-- Vibe: arena lighting, glowing numbers and live games, and a declutter pass on every page (polish/vibe.js, published by build.sh as /sports/vibe.js) -->
-<script src="/sports/vibe.js?v=20261116a" defer></script>
+<script src="/sports/glow.js?v=20261124a" defer></script>
+<!-- Vibe: glowing numbers, live breathe and a declutter pass (arena beams removed 2026-11-24; polish/vibe.js) -->
+<script src="/sports/vibe.js?v=20261124a" defer></script>
 <!-- Touch: the phone tune-up on every page - bigger tap areas, nothing under 11 px, names not cut off (polish/touch.js, published by build.sh as /sports/touch.js) -->
 <script src="/sports/touch.js?v=20261109a" defer></script>
 <!-- App: smooth page changes, saved copies for weak signal (registers /sw.js) and pull down to refresh in the home-screen app (polish/app.js, published by build.sh as /sports/app.js) -->
@@ -411,18 +412,19 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
-<script src="/sports/finish.js?v=20261126p" defer></script>
+<script src="/sports/finish.js?v=20261126w" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
 <script src="/sports/tabs.js?v=20261119b" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
 <script src="/sports/moments.js?v=20261119b" defer></script>
-<!-- Night: Live night feel -->
+<!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
 <script src="/sports/night.js?v=20261126p" defer></script>
-<!-- Gameday (polish/gameday.js): BYU Game day + Jazz Game night -->
+<!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
 <script src="/sports/gameday.js?v=20261126p" defer></script>
-<!-- Shell (polish/shell.js): phone dock, home-screen splash, night game pages -->
+<!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
 <script src="/sports/shell.js?v=20261126t" defer></script>
-<script src="/sports/holiday.js?v=20261126s" defer></script>
+<!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
+<script src="/sports/holiday.js?v=20261126w" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -5617,26 +5619,15 @@ if (LIVE.on) setTimeout(livePoll, 50);
 <script type="text/x-jsh-app">
 /* neo:start - the home page's "Neo" look for the league hubs (2026-10-26, Jamo: "bring the new look to all the hubs").
    Shared by the CFB, NFL and NBA hubs (inlined last by each build.sh), so it only refines what's there and every
-   hub keeps its own accent color and wallpaper (BYU field, Jazz court):
-   - a deep-space backdrop (slow aurora + fine dot grid) behind pages that have no wallpaper
-   - glass panels: a soft top highlight and hairline edges on cards and stat tiles; tappable ones light up in the
-     hub's accent color
-   - numbered HUD markers on section headings with a light rule underneath
-   - a bigger page title, Orbitron eyebrows, glowing selected pills, a light line under the pinned header
-   Works in light and dark; motion stops for reduced-motion users. */
+   hub keeps its own accent color.
+   2026-11-24 doper pass: the aurora + dot-grid backdrop (#neo-bg) is gone so Stage's plain still gradient owns the
+   page (house rule: simpler, cleaner, fresh — no grids). Glass panels, numbered section markers, and pill glow stay. */
 (function(){ if (document.getElementById('neo-css')) return;
   if (!document.querySelector('link[href*="family=Orbitron"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap'; document.head.appendChild(l); }
   const A = 'var(--accent,var(--blue,#5b8cff))';
   const css =
-  /* backdrop: an aurora and a dot grid, under any wallpaper the hub draws */
-    '#neo-bg{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}'
-  + '#neo-bg::before{content:"";position:absolute;inset:-12%;background:radial-gradient(760px 520px at 10% 2%,rgba(59,123,255,.20),transparent 62%),radial-gradient(720px 520px at 94% 0%,rgba(164,91,255,.18),transparent 64%),radial-gradient(900px 600px at 50% 108%,rgba(56,189,248,.10),transparent 66%);animation:neoAur 42s ease-in-out infinite alternate}'
-  + '#neo-bg::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 72%);mask-image:linear-gradient(180deg,#000,transparent 72%)}'
-  + '@keyframes neoAur{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}100%{transform:translate3d(2.5%,-1.5%,0) scale(1.03)}}'
-  + ':root[data-theme="light"] #neo-bg::before{opacity:.45}:root[data-theme="light"] #neo-bg::after{background-image:radial-gradient(rgba(15,23,42,.06) 1px,transparent 1.3px)}'
-  + '@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #neo-bg::before{opacity:.45}:root:not([data-theme="dark"]) #neo-bg::after{background-image:radial-gradient(rgba(15,23,42,.06) 1px,transparent 1.3px)}}'
   /* the pinned header: a thin light line in the accent color */
-  + 'header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,' + A + ' 30%,color-mix(in srgb,' + A + ' 40%,#c4a6ff) 70%,transparent);opacity:.65}'
+    'header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,' + A + ' 30%,color-mix(in srgb,' + A + ' 40%,#c4a6ff) 70%,transparent);opacity:.65}'
   /* glass panels */
   + '#view .card,#view .tile{background-image:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 58%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 22px 50px -34px rgba(0,0,0,.85);transition:border-color .2s,box-shadow .2s,transform .2s}'
   + ':root[data-theme="light"] #view .card,:root[data-theme="light"] #view .tile{background-image:none;box-shadow:0 1px 2px rgba(15,23,42,.05),0 14px 32px -24px rgba(15,23,42,.28)}'
@@ -5652,10 +5643,9 @@ if (LIVE.on) setTimeout(livePoll, 50);
   + '#view .page-head .eyebrow,#view>.eyebrow{font-family:"Orbitron",var(--disp,inherit);font-size:10.5px;font-weight:600;letter-spacing:.22em}'
   /* selected pills glow in the accent color */
   + '.ng-sub a.on,#view .seg .on,#view .seg a.on,#view .seg button.on{background:linear-gradient(90deg,' + A + ',color-mix(in srgb,' + A + ' 60%,#8a4dff))!important;color:#fff!important;border-color:transparent!important;box-shadow:0 8px 22px -10px ' + A + '}'
-  + '@media (prefers-reduced-motion:reduce){#neo-bg::before{animation:none}#view a.card:hover,#view a.tile:hover,#view .tile-link:hover,#view a.gm:hover,#view .wcard:hover{transform:none}}'
+  + '@media (prefers-reduced-motion:reduce){#view a.card:hover,#view a.tile:hover,#view .tile-link:hover,#view a.gm:hover,#view .wcard:hover{transform:none}}'
   + '@media (max-width:600px){#view .sec>h2[data-neo]::before{margin-right:8px;font-size:9.5px}}';
   const st = document.createElement('style'); st.id = 'neo-css'; st.textContent = css; document.head.appendChild(st);
-  const bg = document.createElement('div'); bg.id = 'neo-bg'; bg.setAttribute('aria-hidden', 'true'); document.body.prepend(bg);
   /* number the section markers in the order they appear on screen (phone layouts move columns around, so the page's
      own order isn't the reading order); renumbers after each re-render and on resize */
   let raf = 0;

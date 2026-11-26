@@ -145,12 +145,17 @@ a.tc:hover{transform:translateY(-3px);box-shadow:0 26px 50px -24px rgba(0,0,0,.9
 .tc-ar{display:block;margin-top:8px;padding:8px 10px;border-radius:11px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.14);font-size:12.5px;font-weight:600;line-height:1.35;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
 .tc-ar:hover,.tc-ar:focus-visible{background:rgba(255,255,255,.2);outline:none}
 .tc-ar-k{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffd77a;margin-right:4px}
-.tc.pick{align-items:center;justify-content:center;text-align:center;background:var(--surface);border:1.5px dashed var(--line);color:var(--ink);box-shadow:none}
-.tc.pick::before{display:none}
-.tc.pick b{color:var(--nfl)}
-.tc.pick .tc-sport{background:var(--surface-2);color:var(--ink-2)}
-.tc.pick .big{font-family:var(--disp);font-size:20px;font-weight:800;letter-spacing:-.02em;margin:12px 0 4px}
-.tc.pick .small{font-size:13px;color:var(--ink-2);max-width:220px;margin:0 auto}
+.tc.pick{align-items:stretch;justify-content:flex-start;text-align:left;color:#fff;border:1px solid rgba(255,255,255,.2);background:linear-gradient(155deg,var(--pk,#2457c5),var(--pk2,#102454) 72%);box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.22)}
+.tc.pick-cfb{--pk:#2f6fe0;--pk2:#0c245c}
+.tc.pick-nfl{--pk:#d0123a;--pk2:#4a0618}
+.tc.pick-nba{--pk:#7c3aed;--pk2:#2e1065}
+.tc.pick-cbb{--pk:#c2410c;--pk2:#431407}
+.tc.pick .tc-sport{background:rgba(0,0,0,.28);color:#fff}
+.tc.pick .pk-go{padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.tc.pick .pk-mark{display:grid;place-items:center;width:62px;height:62px;margin:10px 0 12px;border-radius:18px;background:rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 12px 24px -16px rgba(0,0,0,.7)}
+.tc.pick .pk-mark svg{width:32px;height:32px}
+.tc.pick .big{font-family:var(--disp);font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0 0 4px;color:#fff}
+.tc.pick .small{font-size:13px;line-height:1.35;color:rgba(255,255,255,.84);max-width:16em;margin:0}
 .pill-live{display:inline-flex;align-items:center;gap:5px;padding:2px 7px;border-radius:5px;background:var(--live);color:#fff;font-size:10px;font-weight:800;letter-spacing:.1em}
 .pill-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:blink 1.2s infinite}
 @keyframes blink{50%{opacity:.25}}
@@ -327,7 +332,7 @@ a.gm:hover{background:var(--surface-2)}
 .tc-last{font-size:12px}
 .tc-ar{margin-top:4px;padding:6px 9px;font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .teams.mini .tc{flex-direction:row;align-items:center;gap:8px;padding:8px 10px}
-.teams.mini .tc-top,.teams.mini .tc-meta,.teams.mini .tc-last,.teams.mini .tc-ar,.teams.mini .tc-g,.teams.mini .wm,.teams.mini .tc.pick .small{display:none}
+.teams.mini .tc-top,.teams.mini .tc-meta,.teams.mini .tc-last,.teams.mini .tc-ar,.teams.mini .tc-g,.teams.mini .wm,.teams.mini .tc.pick .small,.teams.mini .tc.pick .pk-mark,.teams.mini .tc.pick .pk-go{display:none}
 .teams.mini .tc-id{flex:1;min-width:0;gap:9px}
 .teams.mini .plate{width:30px;height:30px;border-radius:9px;box-shadow:none}
 .teams.mini .plate img{width:23px;height:23px}
@@ -337,7 +342,7 @@ a.gm:hover{background:var(--surface-2)}
 .teams.mini .tc-next:has(.tc-cd,.tc-sc) .tc-k{display:none}
 .teams.mini .tc-cd,.teams.mini .tc-sc{margin:0;font-size:13px;letter-spacing:0}
 .teams.mini .tc-cd .u{margin:0 4px 0 1px}
-.teams.mini .tc.pick{padding:8px 12px}
+.teams.mini .tc.pick{padding:8px 12px;min-height:0;align-items:center}
 .teams.mini .tc.pick .big{font-size:14px;margin:0}
 @media (max-width:720px){
   .teams .tc{min-height:0}
@@ -499,7 +504,7 @@ body::after{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(
   :root #teams:not(.mini) .tc-rank{font-size:11px;padding:2px 6px}
   :root #teams:not(.mini) .tc-id{gap:8px}
   :root #teams:not(.mini) .tc-id img,:root #teams:not(.mini) .tc-id .tc-logo{width:34px;height:34px}
-  :root #teams:not(.mini) .tc-name{font-size:17px;-webkit-line-clamp:1}
+  :root #teams:not(.mini) .tc-name{font-size:17px;-webkit-line-clamp:2}
   :root #teams:not(.mini) .tc-meta{font-size:11px}
   :root #teams:not(.mini) .tc-next{padding:7px 8px;border-radius:11px}
   :root #teams:not(.mini) .tc-k{font-size:9.5px;letter-spacing:.08em;flex-wrap:wrap;gap:2px 6px}
@@ -532,6 +537,43 @@ body::after{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(
 .rc-pl:empty{display:none}
 .rc-lg{flex:none;width:40px;height:40px;object-fit:contain;opacity:.95}
 @media (max-width:600px){.rc-list{grid-template-columns:1fr}.rc{padding:11px 12px}.rc-lg{width:34px;height:34px}}
+/* posters (2026-11-26): team cards and the empty pick cards share one shape */
+.plate{background:linear-gradient(180deg,#fff,#e7eef8);box-shadow:0 10px 20px rgba(0,0,0,.32),inset 0 0 0 1px rgba(255,255,255,.9)}
+.tc-next{background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.4));border-color:rgba(255,255,255,.16)}
+.tc-rank{background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,.12));border:1px solid rgba(255,255,255,.3)}
+.yt-lead{margin:0 0 10px;font-size:13.5px;font-weight:650;line-height:1.35;color:var(--ink-2)}
+.sp{border-color:color-mix(in srgb,var(--c) 32%,var(--line))}
+.sp-h{background:linear-gradient(135deg,color-mix(in srgb,var(--c) 26%,transparent),transparent 68%)}
+.sp-ic{box-shadow:0 10px 20px -10px var(--c),inset 0 1px 0 rgba(255,255,255,.4)}
+.tc.pick{min-height:188px}
+a.tc.byu-deep{box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 10px 0 -4px rgba(0,20,50,.45),0 22px 0 -10px rgba(0,8,24,.35),var(--sh)}
+a.tc.phi-kelly{box-shadow:inset 6px 0 0 #d5dde3,inset 0 1px 0 rgba(255,255,255,.28),0 14px 0 -8px rgba(6,60,28,.5),var(--sh)}
+button.tc{width:100%;margin:0;font:inherit;text-align:left;cursor:pointer}
+.yt-change{display:flex;align-items:center;justify-content:center;width:100%;margin:0 0 10px;padding:11px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
+.pk-sheet{margin:0 0 12px;padding:12px;border-radius:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh)}
+.pk-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.pk-hd b{font-family:var(--disp);font-size:16px}
+.pk-hd button,.pk-tabs button,.pk-hit,.pk-clear{font:inherit;cursor:pointer}
+.pk-hd button{border:0;background:transparent;color:var(--ink-2);font-weight:800}
+.pk-tabs{display:flex;gap:6px;margin-bottom:8px}
+.pk-tabs button{flex:1;padding:7px 4px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink-2);font-size:12px;font-weight:800}
+.pk-tabs button.on{background:var(--c,#3b7bff);border-color:transparent;color:#fff}
+.pk-find input{width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);font:inherit}
+.pk-hits{display:flex;flex-direction:column;gap:2px;max-height:280px;overflow:auto;margin-top:8px}
+.pk-hit{display:flex;align-items:center;gap:8px;width:100%;padding:8px;border:0;border-radius:12px;background:transparent;color:inherit;text-align:left}
+.pk-hit.on{background:color-mix(in srgb,var(--c,#3b7bff) 16%,transparent)}
+.pk-hit img,.pk-hit .sw{width:26px;height:26px;object-fit:contain;flex:none}
+.pk-hit b{display:block;font-size:14px}
+.pk-hit small{color:var(--ink-3);font-size:12px}
+.pk-clear{margin-top:8px;width:100%;padding:8px;border-radius:12px;border:1px dashed var(--line);background:transparent;color:var(--ink-2);font-weight:700}
+.tc-schemes{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px;position:relative;z-index:1}
+.tc-swatch{display:inline-flex;align-items:center;gap:4px;padding:3px 7px 3px 5px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(0,0,0,.28);color:#fff;font:inherit;font-size:10px;font-weight:800;letter-spacing:.02em;cursor:pointer}
+.tc-swatch i{width:8px;height:8px;border-radius:50%;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}
+.tc-swatch.on{background:rgba(255,255,255,.22);border-color:#fff}
+a.tc.has-rail{box-shadow:inset 6px 0 0 var(--rail),inset 0 1px 0 rgba(255,255,255,.22),var(--sh)}
+a.tc.has-rail:hover{box-shadow:inset 6px 0 0 var(--rail),0 26px 50px -24px rgba(0,0,0,.9)}
+a.tc.phi-kelly:hover{box-shadow:inset 6px 0 0 #d5dde3,0 26px 50px -24px rgba(0,0,0,.9)}
+.teams.mini .tc-schemes{display:none}
 </style>
 </head>
 <body>
@@ -540,6 +582,58 @@ body::after{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(
      hub does and can hand it to /sports/fluid.js, which lets the hub draw the new page inside a view transition. Until that
      file has loaded (or when it declines), the page change goes straight through as before. -->
 <script>addEventListener('hashchange', function (e) { var f = window.__jshNav; if (!f || e.__jshPass) return; try { if (f(e) === true) e.stopImmediatePropagation(); } catch (x) {} }, true);</script>
+<script>
+/* Favorites are per phone. A browser that already used the hub keeps the teams it was showing
+   (BYU football, Eagles, Jazz, BYU hoops) the first time this runs. A new browser starts with none,
+   and this flag stops a later visit from filling those teams in. */
+(function () {
+  try {
+    if (localStorage.getItem('jsh-favs-ready') === '1') return;
+    function read(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+    var seen = read('jsh-shared') || read('cfb-settings') || read('nfl-settings') || read('nba-settings') || read('cbb-settings') || localStorage.getItem('jsh-live') || localStorage.getItem('jsh-glance') || localStorage.getItem('jsh-teams-mini');
+    if (seen) {
+      [['cfb-settings', 'BYU'], ['nfl-settings', 'PHI'], ['nba-settings', 'UTAH'], ['cbb-settings', '252']].forEach(function (pair) {
+        var o = read(pair[0]) || {};
+        if (o.fav == null || o.fav === '') { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
+      });
+    }
+    localStorage.setItem('jsh-favs-ready', '1');
+  } catch (e) {}
+})();
+</script>
+<script>
+/* Holiday class before the page paints, so a phone sees Thanksgiving or Christmas even while holiday.js is still loading. */
+(function () {
+  var q = ''; try { q = (new URLSearchParams(location.search).get('hol') || '').toLowerCase(); } catch (e) {}
+  if (q === 'off' || q === 'none') return;
+  var tz = 'MT'; try { tz = (JSON.parse(localStorage.getItem('jsh-shared') || '{}') || {}).tz || 'MT'; } catch (e) {}
+  var zone = { ET: 'America/New_York', CT: 'America/Chicago', MT: 'America/Denver', PT: 'America/Los_Angeles' }[tz] || 'America/Denver';
+  var y, m, d;
+  try {
+    new Intl.DateTimeFormat('en-US', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date()).forEach(function (p) {
+      if (p.type === 'year') y = +p.value; if (p.type === 'month') m = +p.value; if (p.type === 'day') d = +p.value;
+    });
+  } catch (e) { var n = new Date(); y = n.getFullYear(); m = n.getMonth() + 1; d = n.getDate(); }
+  var dow = new Date(y, 10, 1).getDay(), first = dow <= 4 ? 1 + (4 - dow) : 1 + (11 - dow), tg = first + 21, kind = '';
+  if (q === 'thanks' || q === 'thanksgiving') kind = 'thanks';
+  else if (q === 'xmas' || q === 'christmas') kind = 'xmas';
+  else if (m === 11 && d === tg) kind = 'thanks';
+  else if ((m === 11 && d > tg) || (m === 12 && d <= 26)) kind = 'xmas';
+  if (!kind) return;
+  document.documentElement.classList.add(kind === 'thanks' ? 'jsh-thanks' : 'jsh-xmas');
+  document.documentElement.dataset.jshHol = kind;
+})();
+</script>
+<style id="jsh-holiday-boot">
+html.jsh-thanks,html.jsh-thanks body,html.jsh-thanks body::before{background:radial-gradient(90% 46% at 50% -10%,rgba(240,170,60,.55),transparent 58%),linear-gradient(180deg,#4a2a12,#24160c 46%,#140e09)!important;background-color:#140e09!important}
+html.jsh-thanks.light,html.jsh-thanks.light body,html.jsh-thanks.light body::before,html.jsh-thanks[data-theme="light"],html.jsh-thanks[data-theme="light"] body,html.jsh-thanks[data-theme="light"] body::before{background:linear-gradient(180deg,#f8e6c8,#f3d7ae 50%,#edd0b0)!important;background-color:#f6e4c4!important}
+html.jsh-xmas,html.jsh-xmas body,html.jsh-xmas body::before{background:radial-gradient(70% 42% at 0% -8%,rgba(36,150,90,.55),transparent 60%),radial-gradient(60% 40% at 100% 0%,rgba(176,28,48,.5),transparent 62%),linear-gradient(180deg,#0d3d2a,#07140f 50%,#1a0c10)!important;background-color:#071410!important}
+html.jsh-xmas.light,html.jsh-xmas.light body,html.jsh-xmas.light body::before,html.jsh-xmas[data-theme="light"],html.jsh-xmas[data-theme="light"] body,html.jsh-xmas[data-theme="light"] body::before{background:linear-gradient(180deg,#e5f6ee,#f7e8ea 55%,#e7f3ec)!important;background-color:#e7f3ec!important}
+html.jsh-thanks .jsh{background:#2a160c!important}
+html.jsh-xmas .jsh{background:#071a12!important}
+html.jsh-thanks :is(.jsh-dock,.btab,.jbl){background:#2a160c!important;border-color:rgba(240,186,96,.55)!important;color:#f6e2b8}
+html.jsh-xmas :is(.jsh-dock,.btab,.jbl){background:#0c2418!important;border-color:rgba(220,64,78,.5)!important;color:#e7f6ee}
+</style>
 <!-- Glance mode and page-shaped placeholders (2026-11-19, Jamo picked "Compact glance mode" and "Smoother loading").
      - Glance: the switch next to light/dark (.jsh-gl) tightens spacing, trims subtitles and shrinks big numbers so more fits
        on a phone. Saved per browser (localStorage jsh-glance); the class is set here, before the page draws, so it never jumps.
@@ -893,6 +987,15 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
   <div class="yt" id="yt">
   <div class="sec top"><h2>Your teams</h2><span class="note" id="t-note"></span><a class="more cal-btn" id="alerts-btn" href="/sports/alerts/" title="Phone alerts for your teams">🔔 Alerts</a><button class="more cal-btn" id="cal-btn" type="button" aria-expanded="false" aria-controls="cal-panel">📅 Add to calendar</button><button class="more cal-btn t-min" id="t-min" type="button" aria-pressed="false" aria-controls="teams">Minimize</button></div>
   <div class="cal-panel" id="cal-panel" hidden></div>
+  <p class="yt-lead" id="yt-lead" hidden>Pick a team in each league. They stay on this phone.</p>
+  <button type="button" class="yt-change" id="yt-change">Change teams</button>
+  <div class="pk-sheet" id="pk-sheet" hidden>
+    <div class="pk-hd"><b>Change a team</b><button type="button" id="pk-x">Done</button></div>
+    <div class="pk-tabs" id="pk-tabs"></div>
+    <label class="pk-find"><input id="pk-q" type="search" placeholder="Search for a team" autocomplete="off" enterkeyhint="search"></label>
+    <div class="pk-hits" id="pk-hits"></div>
+    <button type="button" class="pk-clear" id="pk-clear">Remove this team</button>
+  </div>
   <section class="teams" id="teams" aria-label="Your teams"></section>
   </div>
   <section id="recap" aria-label="Your latest results" hidden></section>
@@ -5564,10 +5667,10 @@ const liveClock = g => { const L = LIVE[g.sport][g.id]; if (!L) return 'In progr
 const ARTS = (() => { try { return JSON.parse(document.getElementById('d-articles').textContent) || {}; } catch (e) { return {}; } })();
 /* the article links sit inside the team card's link: a tap on one opens that game page instead of the team page */
 document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('.tc-ar[data-go]'); if (!a) return; e.preventDefault(); e.stopPropagation(); location.href = a.dataset.go; }, true);
-document.addEventListener('keydown', e => { if (e.key !== 'Enter') return; const a = e.target.closest && e.target.closest('.tc-ar[data-go]'); if (a) { e.preventDefault(); location.href = a.dataset.go; } }, true);
-const cfbSet = ls('cfb-settings') || {}, nflSet = ls('nfl-settings') || {}, nbaSet = ls('nba-settings') || {};
-const FAVS = [cfbSet.fav || 'BYU'].map(n => ({sport:'cfb', team:n})).concat((('fav' in nflSet) ? nflSet.fav : 'PHI') ? [{sport:'nfl', team:('fav' in nflSet) ? nflSet.fav : 'PHI'}] : [], [{sport:'nba', team:nbaSet.fav || 'UTAH'}]);
-{ const cbbSet = ls('cbb-settings') || {}; FAVS.push({sport:'cbb', team:String(cbbSet.fav || '252')}); }   /* front_cbb: BYU hoops by default */
+document.addEventListener('keydown', e => { if (e.key !== 'Enter' && e.key !== ' ') return; const sw = e.target.closest && e.target.closest('.tc-swatch'); if (sw) { e.preventDefault(); sw.click(); return; } if (e.key !== 'Enter') return; const a = e.target.closest && e.target.closest('.tc-ar[data-go]'); if (a) { e.preventDefault(); location.href = a.dataset.go; } }, true);
+function savedFav(key) { const o = ls(key); if (!o || o.fav == null || o.fav === '') return ''; return String(o.fav); }
+const FAVS = [];
+[['cfb', 'cfb-settings'], ['nfl', 'nfl-settings'], ['nba', 'nba-settings'], ['cbb', 'cbb-settings']].forEach(pair => { const id = savedFav(pair[1]); if (id) FAVS.push({ sport: pair[0], team: id }); });
 const isFavTeam = (sport, t) => FAVS.some(f => f.sport === sport && f.team === t);
 const favGame = g => isFavTeam(g.sport, g.away) || isFavTeam(g.sport, g.home);
 
@@ -5633,9 +5736,54 @@ function heroHTML(){
 }
 
 /* ---------- your teams: a card per favorite, in its colors ---------- */
+const BYU_LOOKS = [
+  {id:'royal', name:'Royal', c1:'#0062b8', c2:'#00356e'},
+  {id:'navy', name:'Navy', c1:'#002e5d', c2:'#001226', cls:'byu-deep'}
+];
+const SCHEMES = {
+  'cfb:BYU': BYU_LOOKS,
+  'cbb:252': BYU_LOOKS,
+  'nfl:PHI': [
+    {id:'kelly', name:'Kelly Green', c1:'#1b9e4a', c2:'#064e28', rail:'#d5dde3', cls:'phi-kelly'},
+    {id:'midnight', name:'Midnight', c1:'#06424d', c2:'#012e36', rail:'#a8b0b4'}
+  ],
+  'nba:UTAH': [
+    {id:'purple', name:'Purple', c1:'#4e008e', c2:'#2a0050', rail:'#f9a01b'},
+    {id:'black', name:'Black', c1:'#161616', c2:'#000000', rail:'#f9a01b'},
+    {id:'green', name:'Green', c1:'#0c6b45', c2:'#043528', rail:'#f9a01b'},
+    {id:'yellow', name:'Yellow', c1:'#8a5a10', c2:'#3a2204', rail:'#f9a01b'},
+    {id:'navy', name:'Navy', c1:'#002b5c', c2:'#001433', rail:'#f9a01b'}
+  ]
+};
+const hexNorm = h => { const m = /^#?([0-9a-f]{6})$/i.exec(h || ''); return m ? '#' + m[1].toLowerCase() : ''; };
+const contrastW = h => { const c = hexRgb(h); return c ? 1.05 / (lum(c) + .05) : 0; };
+const satOf = h => { const c = hexRgb(h); if (!c) return 0; const r = c.map(v => v / 255), mx = Math.max.apply(null, r), mn = Math.min.apply(null, r); return mx - mn; };
+function inkSafe(h){ let x = hexNorm(h) || '#334155', n = 0; while (contrastW(x) < 4.5 && n < 12) { x = mixHex(x, '#000000', .12); n++; } return x; }
+const schemeKey = (sport, id) => sport + ':' + id;
+const schemeSaved = () => ls('jsh-schemes') || {};
+function schemesFor(sport, id){
+  if (SCHEMES[schemeKey(sport, id)]) return SCHEMES[schemeKey(sport, id)];
+  const o = O[sport], main = hexNorm(o.color(id)) || '#334155', alt = hexNorm(o.alt(id));
+  const base = inkSafe(main);
+  const list = [{id:'main', name:'Main', c1:base, c2:mixHex(base, '#000000', .4)}];
+  if (alt && alt !== main) {
+    const safe = inkSafe(alt);
+    if (satOf(safe) >= .18) list.push({id:'alt', name:'Alt', c1:safe, c2:mixHex(safe, '#000000', .4)});
+    else if (lum(hexRgb(alt)) > .7) list.push({id:'white', name:'White', c1:base, c2:mixHex(base, '#000000', .22), rail:'#f4f7fb'});
+    else list.push({id:'black', name:'Black', c1:'#161616', c2:'#000000', rail:base});
+  }
+  return list;
+}
+function activeScheme(sport, id){ const list = schemesFor(sport, id), want = schemeSaved()[schemeKey(sport, id)]; return list.find(s => s.id === want) || list[0]; }
+function schemeHTML(sport, id){
+  const list = schemesFor(sport, id); if (list.length < 2) return '';
+  const on = activeScheme(sport, id).id;
+  return '<div class="tc-schemes">' + list.map(s => '<span role="button" tabindex="0" class="tc-swatch' + (s.id === on ? ' on' : '') + '" data-sport="' + esc(sport) + '" data-team="' + esc(id) + '" data-scheme="' + s.id + '" style="--sw:' + (s.rail || s.c1) + '"><i></i>' + esc(s.name) + '</span>').join('') + '</div>';
+}
 function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(f.sport, t); if (!gs.length) return '';
   const live = gs.find(g => g.live), last = gs.filter(played).pop(), next = gs.find(g => !played(g) && !g.live && g.st !== 'CANCELED' && g.st !== 'POSTPONED');
-  const c1 = cardColor(o.color(t), o.alt(t)); const c2 = mixHex(c1, '#000000', .55);
+  const sch = activeScheme(f.sport, t);
+  const c1 = sch.c1, c2 = sch.c2;
   const rk = o.rank ? o.rank(t, gs) : 0; const counted = gs.filter(g => played(g) && (!o.recOnly || o.recOnly(g)));
   /* front_nba_switch: preseason until a regular-season game is final, whatever the date says */
   const nbaReg = f.sport === 'nba' && NBA.some(x => x.stype === 2 && played(x));
@@ -5652,16 +5800,82 @@ function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(
   lastLine += arLine(live || next, 'p', 'preview') + arLine(last, 'r', 'recap');
   /* 10-27: the card logo (44 px plate, 150 px watermark) uses the 320 px file - the 96 px one was soft on an iPhone screen */
   const logo0 = o.logo(t), logo = logo0 && /^\/(cfb|nfl|nba)\/img\/logos\/[^/]+\.png$/.test(logo0) && !/-lg\.png$/.test(logo0) ? logo0.replace(/\.png$/, '-lg.png') : logo0;
-  return '<a class="tc rise" style="--i:' + i + ';--tc:' + c1 + ';--tc2:' + c2 + '" href="' + o.teamHref(t) + '" aria-label="' + esc(o.full(t)) + ' team page">' + (logo ? '<img class="wm" src="' + logo + '" alt="">' : '')
+  const deep = (sch.cls ? ' ' + sch.cls : '') + (sch.rail ? ' has-rail' : '');
+  return '<a class="tc rise' + deep + '" style="--i:' + i + ';--tc:' + c1 + ';--tc2:' + c2 + (sch.rail ? ';--rail:' + sch.rail : '') + '" href="' + o.teamHref(t) + '" aria-label="' + esc(o.full(t)) + ' team page">' + (logo ? '<img class="wm" src="' + logo + '" alt="">' : '')
     + '<div class="tc-top"><span class="tc-sport">' + SPORT[f.sport].icon + esc(SPORT[f.sport].short) + '</span>' + (rk ? '<span class="tc-rank">#' + rk + '</span>' : '') + '</div>'
     + '<div class="tc-id">' + plate(logo) + '<div style="min-width:0"><div class="tc-name" data-mini="' + esc(f.sport === 'cfb' ? t : o.name(t)) + '">' + esc(f.sport === 'cfb' ? t : f.sport === 'cbb' ? o.name(t) : o.full(t)) + '</div><div class="tc-meta">' + meta + '</div></div></div>'
-    + nx + lastLine + '</a>'; }
+    + nx + lastLine + schemeHTML(f.sport, t) + '</a>'; }
 /* front_soonest: soonest game first - a live game, then the next kickoff; no game left goes last */
 function favSoonKey(f){ const gs = teamGames(f.sport, f.team); if (gs.some(g => g.live)) return -1; const n = gs.find(g => !played(g) && !g.live && g.st !== 'CANCELED' && g.st !== 'POSTPONED'); if (!n) return Infinity; const k = kickMs(n.date, n.time); return k != null ? k : Date.parse(n.date + 'T12:00:00Z'); }
+const PICKS = [
+  ['cfb', '/cfb/#/settings', 'College football', 'Choose the team you follow'],
+  ['nfl', '/nfl/#/settings', 'Pro football', 'Choose the team you follow'],
+  ['nba', '/nba/#/settings', 'Pro basketball', 'Choose the team you follow'],
+  ['cbb', '/cbb/#/settings', 'College hoops', 'Choose the team you follow']
+];
+function pickCard(p, i){ const s = SPORT[p[0]]; return '<button type="button" class="tc pick pick-' + p[0] + ' rise" style="--i:' + i + '" data-sport="' + p[0] + '"><div class="tc-top"><span class="tc-sport">' + s.icon + esc(s.short) + '</span><span class="pk-go">Choose</span></div><div class="pk-mark" aria-hidden="true">' + s.icon + '</div><div class="pk-copy"><div class="big">' + p[2] + '</div><div class="small">Search on this page</div></div></button>'; }
 function teamsHTML(){ const cards = FAVS.slice().sort((a, b) => { const x = favSoonKey(a), y = favSoonKey(b); return x === y ? 0 : x < y ? -1 : 1; }).map((f, i) => teamCard(f, i)).filter(Boolean);
-  if (!FAVS.some(f => f.sport === 'nfl')) cards.splice(Math.min(2, cards.length), 0, '<a class="tc pick rise" style="--i:2" href="/nfl/#/settings"><div><span class="tc-sport">' + ICON.fb + 'NFL</span><div class="big">Pick your NFL team</div><div class="small">Choose one in <b>NFL settings</b> and its next game shows up here with a countdown.</div></div></a>');
+  let n = cards.length;
+  PICKS.forEach(p => { if (FAVS.some(f => f.sport === p[0])) return; cards.push(pickCard(p, n++)); });
   $('#teams').innerHTML = cards.join('');
-  $('#t-note').textContent = 'tap a card for the team page'; }
+  const open = cards.length > FAVS.length;
+  const lead = document.getElementById('yt-lead'); if (lead) lead.hidden = !open;
+  $('#t-note').textContent = open ? '' : 'tap a card for the team page'; }
+const FAV_KEYS = [['cfb','cfb-settings'],['nfl','nfl-settings'],['nba','nba-settings'],['cbb','cbb-settings']];
+function readFavs(){ FAVS.length = 0; FAV_KEYS.forEach(pair => { const id = savedFav(pair[1]); if (id) FAVS.push({sport:pair[0], team:id}); }); }
+function saveFav(sport, id){
+  const key = FAV_KEYS.find(p => p[0] === sport)[1], o = ls(key) || {};
+  o.fav = id || null;
+  try { localStorage.setItem(key, JSON.stringify(o)); localStorage.setItem('jsh-favs-ready', '1'); } catch (e) {}
+  readFavs(); teamsHTML();
+}
+let pickSport = 'nfl';
+function roster(sport){
+  const o = O[sport];
+  const rows = sport === 'nfl' ? Object.keys(NFLT) : sport === 'nba' ? Object.keys(NBAT) : sport === 'cfb' ? Object.keys(CFBT) : Object.keys(CBBT);
+  return rows.map(id => ({id, name: sport === 'cfb' ? id : (o.full(id) || o.name(id)), sub: sport === 'cfb' ? ((CFBT[id].mascot || '') + (CFBT[id].conf ? ' · ' + CFBT[id].conf : '')) : (o.group(id) || ''), logo: o.logo(id)})).sort((a, b) => a.name.localeCompare(b.name));
+}
+function paintPick(){
+  const tabs = document.getElementById('pk-tabs'), q = document.getElementById('pk-q'), hits = document.getElementById('pk-hits');
+  if (!tabs || !q || !hits) return;
+  const cur = savedFav(FAV_KEYS.find(p => p[0] === pickSport)[1]);
+  tabs.innerHTML = PICKS.map(p => '<button type="button" data-lg="' + p[0] + '" class="' + (p[0] === pickSport ? 'on' : '') + '" style="--c:' + SPORT[p[0]].c + '">' + esc(SPORT[p[0]].short) + '</button>').join('');
+  const v = q.value.trim().toLowerCase();
+  let list = roster(pickSport);
+  if (v) list = list.filter(t => (t.name + ' ' + t.sub + ' ' + t.id).toLowerCase().includes(v));
+  else if (pickSport === 'cfb' || pickSport === 'cbb') list = cur ? list.filter(t => t.id === cur) : [];
+  const cap = (!v && (pickSport === 'nfl' || pickSport === 'nba')) ? list.length : 24;
+  const empty = v ? 'No teams match' : 'Type a school name';
+  hits.innerHTML = list.slice(0, cap).map(t => '<button type="button" class="pk-hit' + (t.id === cur ? ' on' : '') + '" data-id="' + esc(t.id) + '">' + (t.logo ? '<img src="' + esc(t.logo) + '" alt="">' : '<span class="sw"></span>') + '<span><b>' + esc(t.name) + '</b><small>' + esc(t.sub) + '</small></span></button>').join('') || '<div class="small" style="padding:8px;color:var(--ink-3)">' + empty + '</div>';
+}
+function openPick(sport){
+  pickSport = sport || pickSport;
+  const sheet = document.getElementById('pk-sheet'); if (!sheet) return;
+  sheet.hidden = false;
+  const q = document.getElementById('pk-q'); if (q) { q.value = ''; q.focus(); }
+  paintPick();
+  sheet.scrollIntoView({block:'nearest'});
+}
+document.addEventListener('click', e => {
+  const sw = e.target.closest && e.target.closest('.tc-swatch');
+  if (sw) {
+    e.preventDefault(); e.stopPropagation();
+    const all = schemeSaved(); all[schemeKey(sw.dataset.sport, sw.dataset.team)] = sw.dataset.scheme;
+    try { localStorage.setItem('jsh-schemes', JSON.stringify(all)); } catch (err) {}
+    teamsHTML(); return;
+  }
+  const pick = e.target.closest && e.target.closest('.tc.pick');
+  if (pick) { e.preventDefault(); openPick(pick.dataset.sport); }
+}, true);
+const ytChange = document.getElementById('yt-change'), pkSheet = document.getElementById('pk-sheet');
+if (ytChange) ytChange.addEventListener('click', () => openPick(FAVS[0] ? FAVS[0].sport : 'nfl'));
+if (pkSheet) pkSheet.addEventListener('click', e => {
+  const tab = e.target.closest('[data-lg]'); if (tab) { pickSport = tab.dataset.lg; paintPick(); return; }
+  const hit = e.target.closest('.pk-hit'); if (hit) { saveFav(pickSport, hit.dataset.id); paintPick(); return; }
+  if (e.target.id === 'pk-x') pkSheet.hidden = true;
+  if (e.target.id === 'pk-clear') { saveFav(pickSport, ''); paintPick(); }
+});
+const pkQ = document.getElementById('pk-q'); if (pkQ) pkQ.addEventListener('input', paintPick);
 /* minimize "Your teams" to a slim strip; remembered on this device */
 (function(){ const b = document.getElementById('t-min'), s = document.getElementById('teams'); if (!b || !s) return;
   const set = on => { s.classList.toggle('mini', on); b.textContent = on ? 'Expand' : 'Minimize'; b.setAttribute('aria-pressed', on ? 'true' : 'false'); };
@@ -5838,7 +6052,7 @@ function recapHTML(){ const box = $('#recap'); if (!box) return; const L = recap
   const hr = +fmt({hour: 'numeric', hourCycle: 'h23'}), am = hr < 12;
   box.innerHTML = '<div class="sec"><h2>' + (am ? 'While you were asleep' : 'Your latest results') + '</h2><span class="note">' + (am ? 'last night and yesterday' : 'the last day and a half') + ' · tap a game for the box score</span></div><div class="rc-list">'
     + L.map(x => { const f = x.f, o = O[f.sport], t = f.team, g = x.g, mine = g.home === t ? g.hs : g.as, them = g.home === t ? g.as : g.hs, opp = g.home === t ? g.away : g.home, w = mine > them, key = f.sport + '|' + (g.id || g.date + g.away + g.home);
-      const gs = teamGames(f.sport, t), rk = o.rank ? o.rank(t, gs) : 0, nx = x.next, c1 = cardColor(o.color(t), o.alt(t));
+      const gs = teamGames(f.sport, t), rk = o.rank ? o.rank(t, gs) : 0, nx = x.next, c1 = activeScheme(f.sport, t).c1;
       /* big moments (2026-11-19): a win celebrates once (polish/moments.js); an upset win gets a ribbon - the team was the
          underdog by 7+ points in college football or 6+ elsewhere on the betting line, or beat a team ranked above it */
       const myRk = g.home === t ? g.hr : g.ar, opRk = g.home === t ? g.ar : g.hr, myExp = g.spread == null || isNaN(g.spread) ? null : (g.home === t ? -g.spread : g.spread);

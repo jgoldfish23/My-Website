@@ -392,6 +392,15 @@ body.livetv .tvd:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr);
 .tvbar .t{background:linear-gradient(90deg,#fff,#ffb3c0 45%,#cdb2ff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .tvbar .t b{background:none;-webkit-text-fill-color:var(--live);color:var(--live)}
 .tvbar #tv-fs{margin-left:auto}.tvbar #tv-exit{margin-left:0}
+@media (max-width:760px){
+  body.livetv .tvbar{display:grid;grid-template-columns:auto auto minmax(0,1fr);grid-template-areas:"title clock count" "fs fs exit";align-items:center;gap:8px 10px;padding:10px 12px}
+  body.livetv .tvbar .t{grid-area:title;white-space:nowrap}
+  body.livetv .tvbar .clock{grid-area:clock;white-space:nowrap}
+  body.livetv .tvbar .tvd-count{grid-area:count;justify-self:end}
+  body.livetv .tvbar .wake{display:none}
+  body.livetv .tvbar #tv-fs{grid-area:fs;margin:0;justify-self:start}
+  body.livetv .tvbar #tv-exit{grid-area:exit;margin:0;justify-self:end}
+}
 .tvd-moment{position:fixed;left:50%;top:16%;z-index:95;width:min(820px,92vw);padding:24px 34px 26px;border-radius:26px;text-align:center;color:#fff;overflow:hidden;transform:translateX(-50%);
   background:linear-gradient(125deg,color-mix(in srgb,var(--tc) 80%,#000),#090d1a 75%);box-shadow:0 0 0 2px color-mix(in srgb,var(--tc) 55%,#fff),0 40px 100px -24px rgba(0,0,0,.85),0 0 90px -10px var(--tc)}
 .tvd-moment[hidden]{display:none}
@@ -875,9 +884,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
 <script src="/sports/gameday.js?v=20261126p" defer></script>
 <!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
-<script src="/sports/shell.js?v=20261126d" defer></script>
+<script src="/sports/shell.js?v=20261126s" defer></script>
 <!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
-<script src="/sports/holiday.js?v=20261126r" defer></script>
+<script src="/sports/holiday.js?v=20261126s" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").

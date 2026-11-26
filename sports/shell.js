@@ -11,22 +11,18 @@
   var css = ''
     + '.jsh-dock{display:none}'
     + '@media (max-width:760px){'
+    +   '.jsh-dock{display:none!important}'
     +   '.jsh-nav{display:none!important}'
-    +   '.jsh-dock{position:fixed;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:90;'
-    +     'display:grid;grid-template-columns:repeat(4,1fr);gap:2px;height:58px;padding:4px;'
-    +     'border-radius:22px;background:rgba(8,12,22,.88);border:1px solid rgba(255,255,255,.14);'
-    +     'box-shadow:0 16px 40px -18px rgba(0,0,0,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}'
-    +   'html.light .jsh-dock{background:rgba(255,255,255,.92);border-color:rgba(15,23,42,.12);box-shadow:0 12px 28px -16px rgba(15,23,42,.35)}'
-    +   '.jsh-dock a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;'
-    +     'border-radius:16px;color:#c5d0e4;font:800 11px/1.1 Inter,system-ui,sans-serif;text-decoration:none}'
-    +   'html.light .jsh-dock a{color:#334155}'
-    +   '.jsh-dock a.on{color:#fff;background:rgba(255,255,255,.1)}'
-    +   'html.light .jsh-dock a.on{color:#0f172a;background:rgba(15,23,42,.06)}'
-    +   '.jsh-dock a i{width:7px;height:7px;border-radius:50%;background:var(--c,#7cb6ff)}'
-    +   '.jsh-dock a.pulse i{box-shadow:0 0 0 0 rgba(255,77,106,.7);background:#ff4d6a}'
-    +   'body{padding-bottom:calc(122px + env(safe-area-inset-bottom))!important}'
-    +   'body .jbl{bottom:calc(74px + env(safe-area-inset-bottom))!important}'
-    +   'body.has-btab .jsh-dock{display:none!important}'
+    +   'html.jsh-nav-open .jsh{z-index:80}'
+    +   'html.jsh-nav-open .jsh-nav{display:flex!important;position:absolute;left:0;right:0;top:100%;z-index:80;'
+    +     'flex-wrap:wrap;gap:6px;margin:0;padding:8px 10px 10px;overflow:visible;'
+    +     'background:#120e0a;border-bottom:1px solid rgba(255,255,255,.14)}'
+    +   'html.jsh-nav-open .jsh-nav a,html.jsh-nav-open .jsh-nav a:not(.on){font-size:13px!important;gap:6px!important;padding:0 12px!important;height:34px}'
+    +   'html.jsh-thanks.light.jsh-nav-open .jsh-nav,html.jsh-thanks[data-theme="light"].jsh-nav-open .jsh-nav{background:#f6e0bc;border-bottom-color:rgba(140,70,20,.28)}'
+    +   'html.jsh-thanks.light.jsh-nav-open .jsh-nav a,html.jsh-thanks[data-theme="light"].jsh-nav-open .jsh-nav a{color:#3a2412!important}'
+    +   'html.jsh-glance .jsh-gl{background:rgba(255,255,255,.1);color:#dfe6f3}'
+    +   'html.jsh-nav-open .jsh-gl{background:#f2c14e;color:#1d1405}'
+    +   'body:not(.has-btab) .jbl{bottom:0!important;left:0!important;right:0!important;border-radius:0!important}'
     + '}'
     + '@media (max-width:760px) and (prefers-reduced-motion:no-preference){'
     +   '.jsh-dock a.pulse i{animation:jshDock 1.6s ease-out infinite}'
@@ -164,6 +160,28 @@
 
   function boot() {
     dock();
+    D.addEventListener('click', function (e) {
+      if (!(W.matchMedia && W.matchMedia('(max-width:760px)').matches)) return;
+      var btn = e.target.closest && e.target.closest('.jsh-gl');
+      if (btn) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+        var open = !H.classList.contains('jsh-nav-open');
+        H.classList.toggle('jsh-nav-open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'Close the leagues' : 'Open the leagues');
+        return;
+      }
+      if (!H.classList.contains('jsh-nav-open')) return;
+      if (e.target.closest && e.target.closest('.jsh-nav')) {
+        H.classList.remove('jsh-nav-open');
+        return;
+      }
+      H.classList.remove('jsh-nav-open');
+      var g = D.querySelector('.jsh-gl');
+      if (g) { g.setAttribute('aria-expanded', 'false'); g.setAttribute('aria-label', 'Open the leagues'); }
+    }, true);
     gameNow();
     splash();
     if (!standalone) {

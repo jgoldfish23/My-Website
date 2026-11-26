@@ -8,10 +8,10 @@
 <meta name="description" content="Phone alerts for BYU, Eagles and Jazz games: starting soon, scores, close finishes, overtime and finals.">
 <meta name="theme-color" content="#03050a">
 <meta name="apple-mobile-web-app-title" content="Jamo Alerts">
-<link rel="icon" type="image/svg+xml" href="/sports/icons/jsh.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/sports/icons/jsh-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/sports/icons/jsh-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-180.png">
+<link rel="icon" type="image/svg+xml" href="/sports/icons/jsh-n.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/sports/icons/jsh-n-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/sports/icons/jsh-n-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-n-180.png">
 <link rel="manifest" href="/sports/icons/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&family=Orbitron:wght@600;800&display=swap">
@@ -178,6 +178,59 @@ body.jbl-on .toast{bottom:calc(52px + env(safe-area-inset-bottom,0px))}
      hub does and can hand it to /sports/fluid.js, which lets the hub draw the new page inside a view transition. Until that
      file has loaded (or when it declines), the page change goes straight through as before. -->
 <script>addEventListener('hashchange', function (e) { var f = window.__jshNav; if (!f || e.__jshPass) return; try { if (f(e) === true) e.stopImmediatePropagation(); } catch (x) {} }, true);</script>
+<script>
+/* Favorites are per phone. A browser that already used the hub keeps the teams it was showing
+   (BYU football, Eagles, Jazz, BYU hoops) the first time this runs. A new browser starts with none,
+   and this flag stops a later visit from filling those teams in. */
+(function () {
+  try {
+    if (localStorage.getItem('jsh-favs-ready') === '1') return;
+    function read(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+    var seen = read('jsh-shared') || read('cfb-settings') || read('nfl-settings') || read('nba-settings') || read('cbb-settings') || localStorage.getItem('jsh-live') || localStorage.getItem('jsh-glance') || localStorage.getItem('jsh-teams-mini');
+    if (seen) {
+      [['cfb-settings', 'BYU'], ['nfl-settings', 'PHI'], ['nba-settings', 'UTAH'], ['cbb-settings', '252']].forEach(function (pair) {
+        var o = read(pair[0]) || {};
+        if (o.fav == null || o.fav === '') { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
+      });
+    }
+    localStorage.setItem('jsh-favs-ready', '1');
+  } catch (e) {}
+})();
+</script>
+<script>
+/* Holiday class before the page paints, so a phone sees Thanksgiving or Christmas even while holiday.js is still loading. */
+(function () {
+  var q = ''; try { q = (new URLSearchParams(location.search).get('hol') || '').toLowerCase(); } catch (e) {}
+  if (q === 'off' || q === 'none') return;
+  var tz = 'MT'; try { tz = (JSON.parse(localStorage.getItem('jsh-shared') || '{}') || {}).tz || 'MT'; } catch (e) {}
+  var zone = { ET: 'America/New_York', CT: 'America/Chicago', MT: 'America/Denver', PT: 'America/Los_Angeles' }[tz] || 'America/Denver';
+  var y, m, d;
+  try {
+    new Intl.DateTimeFormat('en-US', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date()).forEach(function (p) {
+      if (p.type === 'year') y = +p.value; if (p.type === 'month') m = +p.value; if (p.type === 'day') d = +p.value;
+    });
+  } catch (e) { var n = new Date(); y = n.getFullYear(); m = n.getMonth() + 1; d = n.getDate(); }
+  var dow = new Date(y, 10, 1).getDay(), first = dow <= 4 ? 1 + (4 - dow) : 1 + (11 - dow), tg = first + 21, kind = '';
+  if (q === 'thanks' || q === 'thanksgiving') kind = 'thanks';
+  else if (q === 'xmas' || q === 'christmas') kind = 'xmas';
+  else if (m === 11 && d === tg) kind = 'thanks';
+  else if ((m === 11 && d > tg) || (m === 12 && d <= 26)) kind = 'xmas';
+  if (!kind) return;
+  document.documentElement.classList.add(kind === 'thanks' ? 'jsh-thanks' : 'jsh-xmas');
+  document.documentElement.dataset.jshHol = kind;
+})();
+</script>
+<style id="jsh-holiday-boot">
+/* Painted with the page, not only after holiday.js. A phone should see the field, the bar, and the bottom chrome. */
+html.jsh-thanks,html.jsh-thanks body,html.jsh-thanks body::before{background:radial-gradient(90% 46% at 50% -10%,rgba(240,170,60,.55),transparent 58%),linear-gradient(180deg,#4a2a12,#24160c 46%,#140e09)!important;background-color:#140e09!important}
+html.jsh-thanks.light,html.jsh-thanks.light body,html.jsh-thanks.light body::before,html.jsh-thanks[data-theme="light"],html.jsh-thanks[data-theme="light"] body,html.jsh-thanks[data-theme="light"] body::before{background:linear-gradient(180deg,#f8e6c8,#f3d7ae 50%,#edd0b0)!important;background-color:#f6e4c4!important}
+html.jsh-xmas,html.jsh-xmas body,html.jsh-xmas body::before{background:radial-gradient(70% 42% at 0% -8%,rgba(36,150,90,.55),transparent 60%),radial-gradient(60% 40% at 100% 0%,rgba(176,28,48,.5),transparent 62%),linear-gradient(180deg,#0d3d2a,#07140f 50%,#1a0c10)!important;background-color:#071410!important}
+html.jsh-xmas.light,html.jsh-xmas.light body,html.jsh-xmas.light body::before,html.jsh-xmas[data-theme="light"],html.jsh-xmas[data-theme="light"] body,html.jsh-xmas[data-theme="light"] body::before{background:linear-gradient(180deg,#e5f6ee,#f7e8ea 55%,#e7f3ec)!important;background-color:#e7f3ec!important}
+html.jsh-thanks .jsh{background:#2a160c!important}
+html.jsh-xmas .jsh{background:#071a12!important}
+html.jsh-thanks :is(.jsh-dock,.btab,.jbl){background:#2a160c!important;border-color:rgba(240,186,96,.55)!important;color:#f6e2b8}
+html.jsh-xmas :is(.jsh-dock,.btab,.jbl){background:#0c2418!important;border-color:rgba(220,64,78,.5)!important;color:#e7f6ee}
+</style>
 <!-- Glance mode and page-shaped placeholders (2026-11-19, Jamo picked "Compact glance mode" and "Smoother loading").
      - Glance: the switch next to light/dark (.jsh-gl) tightens spacing, trims subtitles and shrinks big numbers so more fits
        on a phone. Saved per browser (localStorage jsh-glance); the class is set here, before the page draws, so it never jumps.
@@ -358,7 +411,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 }
 </style>
 <div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
-  <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
+  <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh-n.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
   <nav class="jsh-nav">
     <a href="/sports/" data-s="sports" style="--c:#475569"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg>Home</a>
     <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">CFB</a>
@@ -501,13 +554,13 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
-<script src="/sports/glow.js?v=20261031a" defer></script>
-<!-- Vibe: arena lighting, glowing numbers and live games, and a declutter pass on every page (polish/vibe.js, published by build.sh as /sports/vibe.js) -->
-<script src="/sports/vibe.js?v=20261116a" defer></script>
+<script src="/sports/glow.js?v=20261124a" defer></script>
+<!-- Vibe: glowing numbers, live breathe and a declutter pass (arena beams removed 2026-11-24; polish/vibe.js) -->
+<script src="/sports/vibe.js?v=20261124a" defer></script>
 <!-- Touch: the phone tune-up on every page - bigger tap areas, nothing under 11 px, names not cut off (polish/touch.js, published by build.sh as /sports/touch.js) -->
 <script src="/sports/touch.js?v=20261109a" defer></script>
 <!-- App: smooth page changes, saved copies for weak signal (registers /sw.js) and pull down to refresh in the home-screen app (polish/app.js, published by build.sh as /sports/app.js) -->
-<script src="/sports/app.js?v=20261119b" defer></script>
+<script src="/sports/app.js?v=20261126n" defer></script>
 <!-- Explain: tap a dotted stat name for what it means; press and hold a column name that sorts (polish/explain.js, published by build.sh as /sports/explain.js) -->
 <script src="/sports/explain.js?v=20261110b" defer></script>
 <!-- Follow: up to two followed games in a slim scoreboard on every page, with the hub's own win chance (polish/winodds.js + polish/follow.js, published by build.sh as /sports/follow.js) -->
@@ -515,11 +568,19 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
-<script src="/sports/finish.js?v=20261110a" defer></script>
+<script src="/sports/finish.js?v=20261126w" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
 <script src="/sports/tabs.js?v=20261119b" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
 <script src="/sports/moments.js?v=20261119b" defer></script>
+<!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
+<script src="/sports/night.js?v=20261126p" defer></script>
+<!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
+<script src="/sports/gameday.js?v=20261126p" defer></script>
+<!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
+<script src="/sports/shell.js?v=20261126t" defer></script>
+<!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
+<script src="/sports/holiday.js?v=20261126w" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").

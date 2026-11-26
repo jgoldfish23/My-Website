@@ -9,8 +9,7 @@
      page opens, and again when you hover one.
    - Live glow: live game cards on the home page breathe in their league color while the game is on.
    - Top bar: the page you're on glows in its league color.
-   - Win burst: the first time the home page shows a new win for one of Jamo's teams ("Last: W ..."), confetti in that
-     team's colors pops out of its card. Each win celebrates once per device.
+   - Win burst: removed 2026-11-24 — Moments (polish/moments.js) owns win celebrations so we do not fire two confetti systems.
    Everything is off for people who ask their device to reduce motion, except the still spotlight colors. */
 (function(){
   if (window.__jshGlow) return; window.__jshGlow = true;
@@ -42,9 +41,7 @@
     + '.jsh-nav a.on{box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 4px 18px -3px var(--c),0 0 26px -8px var(--c)!important}'
     + '@media (prefers-reduced-motion:no-preference){.jsh-nav a.on{animation:jgNav 3.2s ease-in-out infinite}}'
     + '@keyframes jgNav{50%{box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 4px 22px -2px var(--c),0 0 34px -6px var(--c)}}'
-    /* win burst */
-    + '.jg-conf{position:fixed;z-index:2147482002;pointer-events:none;width:8px;height:12px;border-radius:2px;will-change:transform,opacity}'
-    + '@media print{.jg-spot,.jg-ring,.jg-sweep,.jg-conf{display:none!important}}';
+    + '@media print{.jg-spot,.jg-ring,.jg-sweep{display:none!important}}';
   D.head.appendChild(css);
 
   /* ---------- color of a card: its team color, else its league color, else the page accent ---------- */
@@ -81,22 +78,8 @@
   /* ---------- live glow (home page live cards) ---------- */
   function markLive(){ D.querySelectorAll('#live .lc,#tune .lc').forEach(function (c) { c.classList.add('jg-live'); }); }
 
-  /* ---------- win burst ---------- */
-  function seen(){ try { return JSON.parse(localStorage.getItem('jsh-glow-wins') || '{}') || {}; } catch (e) { return {}; } }
-  function burst(card){ if (calm) return; var r = card.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return; var cs = getComputedStyle(card);
-    var cols = [cs.getPropertyValue('--tc').trim() || '#4f8cff', cs.getPropertyValue('--tc2').trim() || '#ffffff', '#ffd54a', '#ffffff'];
-    for (var i = 0; i < 46; i++) (function (i) { var p = D.createElement('div'); p.className = 'jg-conf'; p.style.background = cols[i % cols.length];
-      var x = r.left + r.width / 2, y = r.top + r.height * .35; p.style.left = x + 'px'; p.style.top = y + 'px'; D.body.appendChild(p);
-      var ang = (Math.random() * 1.6 - .8) - Math.PI / 2, v = 260 + Math.random() * 320, dx = Math.cos(ang) * v, dy = Math.sin(ang) * v, rot = (Math.random() * 720 - 360);
-      var a = p.animate([{ transform:'translate(0,0) rotate(0)', opacity:1 }, { transform:'translate(' + dx * .6 + 'px,' + dy * .6 + 'px) rotate(' + rot / 2 + 'deg)', opacity:1, offset:.45 }, { transform:'translate(' + dx + 'px,' + (dy + 420) + 'px) rotate(' + rot + 'deg)', opacity:0 }], { duration:1400 + Math.random() * 700, easing:'cubic-bezier(.2,.7,.4,1)' });
-      a.onfinish = function () { p.remove(); }; })(i); }
-  function wins(){ var cards = D.querySelectorAll('#teams .tc'); if (!cards.length) return; var s = seen(), changed = false;
-    cards.forEach(function (c) { var m = /Last:\s*W\s+([0-9]+-[0-9]+[^|\n]*)/.exec(c.innerText || ''); if (!m) return; var key = (c.getAttribute('href') || '') + '|' + m[1].trim();
-      if (s[key]) return; s[key] = Date.now(); changed = true; setTimeout(function () { burst(c); }, 700); });
-    if (changed) { var keys = Object.keys(s).sort(function (a, b) { return s[b] - s[a]; }).slice(0, 40), o = {}; keys.forEach(function (k) { o[k] = s[k]; }); try { localStorage.setItem('jsh-glow-wins', JSON.stringify(o)); } catch (e) {} } }
-
   /* run now, and whenever a page re-draws (the hubs swap pages on #/ links; the home page re-renders live cards) */
-  var pend = 0; function run(){ pend = 0; sweepAll(); markLive(); wins(); }
+  var pend = 0; function run(){ pend = 0; sweepAll(); markLive(); }
   var mo = new MutationObserver(function () { if (!pend) pend = setTimeout(run, 120); });
   function start(){ run(); mo.observe(D.body, { childList:true, subtree:true }); }
   if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', start); else start();

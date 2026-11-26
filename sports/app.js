@@ -94,7 +94,7 @@
     if (!hd.querySelector('meta[name="apple-mobile-web-app-capable"]')) add('meta', {name: 'apple-mobile-web-app-capable', content: 'yes'});
     if (!hd.querySelector('meta[name="mobile-web-app-capable"]')) add('meta', {name: 'mobile-web-app-capable', content: 'yes'});
     [[440, 956, 3], [402, 874, 3], [430, 932, 3], [393, 852, 3], [428, 926, 3], [390, 844, 3], [375, 812, 3], [414, 896, 3], [414, 896, 2], [375, 667, 2]].forEach(function(s){
-      add('link', {rel: 'apple-touch-startup-image', href: '/sports/icons/splash/jsh-' + s[0] * s[2] + 'x' + s[1] * s[2] + '.png',
+      add('link', {rel: 'apple-touch-startup-image', href: '/sports/icons/splash-n/jsh-' + s[0] * s[2] + 'x' + s[1] * s[2] + '.png',
         media: '(device-width: ' + s[0] + 'px) and (device-height: ' + s[1] + 'px) and (-webkit-device-pixel-ratio: ' + s[2] + ') and (orientation: portrait)'}); }); })();
 
   if (D.body) start(); else D.addEventListener('DOMContentLoaded', start);

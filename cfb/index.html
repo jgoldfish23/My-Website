@@ -20,6 +20,59 @@
      hub does and can hand it to /sports/fluid.js, which lets the hub draw the new page inside a view transition. Until that
      file has loaded (or when it declines), the page change goes straight through as before. -->
 <script>addEventListener('hashchange', function (e) { var f = window.__jshNav; if (!f || e.__jshPass) return; try { if (f(e) === true) e.stopImmediatePropagation(); } catch (x) {} }, true);</script>
+<script>
+/* Favorites are per phone. A browser that already used the hub keeps the teams it was showing
+   (BYU football, Eagles, Jazz, BYU hoops) the first time this runs. A new browser starts with none,
+   and this flag stops a later visit from filling those teams in. */
+(function () {
+  try {
+    if (localStorage.getItem('jsh-favs-ready') === '1') return;
+    function read(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+    var seen = read('jsh-shared') || read('cfb-settings') || read('nfl-settings') || read('nba-settings') || read('cbb-settings') || localStorage.getItem('jsh-live') || localStorage.getItem('jsh-glance') || localStorage.getItem('jsh-teams-mini');
+    if (seen) {
+      [['cfb-settings', 'BYU'], ['nfl-settings', 'PHI'], ['nba-settings', 'UTAH'], ['cbb-settings', '252']].forEach(function (pair) {
+        var o = read(pair[0]) || {};
+        if (o.fav == null || o.fav === '') { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
+      });
+    }
+    localStorage.setItem('jsh-favs-ready', '1');
+  } catch (e) {}
+})();
+</script>
+<script>
+/* Holiday class before the page paints, so a phone sees Thanksgiving or Christmas even while holiday.js is still loading. */
+(function () {
+  var q = ''; try { q = (new URLSearchParams(location.search).get('hol') || '').toLowerCase(); } catch (e) {}
+  if (q === 'off' || q === 'none') return;
+  var tz = 'MT'; try { tz = (JSON.parse(localStorage.getItem('jsh-shared') || '{}') || {}).tz || 'MT'; } catch (e) {}
+  var zone = { ET: 'America/New_York', CT: 'America/Chicago', MT: 'America/Denver', PT: 'America/Los_Angeles' }[tz] || 'America/Denver';
+  var y, m, d;
+  try {
+    new Intl.DateTimeFormat('en-US', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date()).forEach(function (p) {
+      if (p.type === 'year') y = +p.value; if (p.type === 'month') m = +p.value; if (p.type === 'day') d = +p.value;
+    });
+  } catch (e) { var n = new Date(); y = n.getFullYear(); m = n.getMonth() + 1; d = n.getDate(); }
+  var dow = new Date(y, 10, 1).getDay(), first = dow <= 4 ? 1 + (4 - dow) : 1 + (11 - dow), tg = first + 21, kind = '';
+  if (q === 'thanks' || q === 'thanksgiving') kind = 'thanks';
+  else if (q === 'xmas' || q === 'christmas') kind = 'xmas';
+  else if (m === 11 && d === tg) kind = 'thanks';
+  else if ((m === 11 && d > tg) || (m === 12 && d <= 26)) kind = 'xmas';
+  if (!kind) return;
+  document.documentElement.classList.add(kind === 'thanks' ? 'jsh-thanks' : 'jsh-xmas');
+  document.documentElement.dataset.jshHol = kind;
+})();
+</script>
+<style id="jsh-holiday-boot">
+/* Painted with the page, not only after holiday.js. A phone should see the field, the bar, and the bottom chrome. */
+html.jsh-thanks,html.jsh-thanks body,html.jsh-thanks body::before{background:radial-gradient(90% 46% at 50% -10%,rgba(240,170,60,.55),transparent 58%),linear-gradient(180deg,#4a2a12,#24160c 46%,#140e09)!important;background-color:#140e09!important}
+html.jsh-thanks.light,html.jsh-thanks.light body,html.jsh-thanks.light body::before,html.jsh-thanks[data-theme="light"],html.jsh-thanks[data-theme="light"] body,html.jsh-thanks[data-theme="light"] body::before{background:linear-gradient(180deg,#f8e6c8,#f3d7ae 50%,#edd0b0)!important;background-color:#f6e4c4!important}
+html.jsh-xmas,html.jsh-xmas body,html.jsh-xmas body::before{background:radial-gradient(70% 42% at 0% -8%,rgba(36,150,90,.55),transparent 60%),radial-gradient(60% 40% at 100% 0%,rgba(176,28,48,.5),transparent 62%),linear-gradient(180deg,#0d3d2a,#07140f 50%,#1a0c10)!important;background-color:#071410!important}
+html.jsh-xmas.light,html.jsh-xmas.light body,html.jsh-xmas.light body::before,html.jsh-xmas[data-theme="light"],html.jsh-xmas[data-theme="light"] body,html.jsh-xmas[data-theme="light"] body::before{background:linear-gradient(180deg,#e5f6ee,#f7e8ea 55%,#e7f3ec)!important;background-color:#e7f3ec!important}
+html.jsh-thanks .jsh{background:#2a160c!important}
+html.jsh-xmas .jsh{background:#071a12!important}
+html.jsh-thanks :is(.jsh-dock,.btab,.jbl){background:#2a160c!important;border-color:rgba(240,186,96,.55)!important;color:#f6e2b8}
+html.jsh-xmas :is(.jsh-dock,.btab,.jbl){background:#0c2418!important;border-color:rgba(220,64,78,.5)!important;color:#e7f6ee}
+</style>
 <!-- Glance mode and page-shaped placeholders (2026-11-19, Jamo picked "Compact glance mode" and "Smoother loading").
      - Glance: the switch next to light/dark (.jsh-gl) tightens spacing, trims subtitles and shrinks big numbers so more fits
        on a phone. Saved per browser (localStorage jsh-glance); the class is set here, before the page draws, so it never jumps.
@@ -200,7 +253,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 }
 </style>
 <div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
-  <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
+  <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh-n.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
   <nav class="jsh-nav">
     <a href="/sports/" data-s="sports" style="--c:#475569"><svg class="jsh-lg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg>Home</a>
     <a href="/cfb/" data-s="cfb" style="--c:#1d5fd8"><img class="jsh-lg" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-football-college.png&amp;w=48&amp;h=48" alt="" width="18" height="18" decoding="async">CFB</a>
@@ -343,13 +396,13 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
-<script src="/sports/glow.js?v=20261031a" defer></script>
-<!-- Vibe: arena lighting, glowing numbers and live games, and a declutter pass on every page (polish/vibe.js, published by build.sh as /sports/vibe.js) -->
-<script src="/sports/vibe.js?v=20261116a" defer></script>
+<script src="/sports/glow.js?v=20261124a" defer></script>
+<!-- Vibe: glowing numbers, live breathe and a declutter pass (arena beams removed 2026-11-24; polish/vibe.js) -->
+<script src="/sports/vibe.js?v=20261124a" defer></script>
 <!-- Touch: the phone tune-up on every page - bigger tap areas, nothing under 11 px, names not cut off (polish/touch.js, published by build.sh as /sports/touch.js) -->
 <script src="/sports/touch.js?v=20261109a" defer></script>
 <!-- App: smooth page changes, saved copies for weak signal (registers /sw.js) and pull down to refresh in the home-screen app (polish/app.js, published by build.sh as /sports/app.js) -->
-<script src="/sports/app.js?v=20261119b" defer></script>
+<script src="/sports/app.js?v=20261126n" defer></script>
 <!-- Explain: tap a dotted stat name for what it means; press and hold a column name that sorts (polish/explain.js, published by build.sh as /sports/explain.js) -->
 <script src="/sports/explain.js?v=20261110b" defer></script>
 <!-- Follow: up to two followed games in a slim scoreboard on every page, with the hub's own win chance (polish/winodds.js + polish/follow.js, published by build.sh as /sports/follow.js) -->
@@ -357,11 +410,19 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
-<script src="/sports/finish.js?v=20261110a" defer></script>
+<script src="/sports/finish.js?v=20261126w" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
 <script src="/sports/tabs.js?v=20261119b" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
 <script src="/sports/moments.js?v=20261119b" defer></script>
+<!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
+<script src="/sports/night.js?v=20261126p" defer></script>
+<!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
+<script src="/sports/gameday.js?v=20261126p" defer></script>
+<!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
+<script src="/sports/shell.js?v=20261126t" defer></script>
+<!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
+<script src="/sports/holiday.js?v=20261126w" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -16856,6 +16917,130 @@ function yp128PageHTML(sort){ sort=['net','off','def'].indexOf(sort)>=0?sort:'ne
       +cell(r.s.off,r.s.offR,num1,sort==='off')+cell(r.s.def,r.s.defR,num1,sort==='def')+cell(r.s.net,r.s.netR,sgn,sort==='net')+'<td class="r muted">'+Math.round(r.s.ppg)+'</td></tr>').join('')+'</tbody></table></div>'
     +'<div class="mini" style="margin-top:8px">'+rows.length+' FBS teams. Small gray numbers are each team’s rank in that column. Net is yards gained per play minus yards allowed per play. Every game counts, FCS opponents included (Rankings › P4 games only has the Power 4 version). From ESPN box scores of finished games.</div>';
   return h; }
+/* Game day “now” strip (2026-11-24): situation · last play · hub win % under the jumbotron; TV mode cycles focus panels */
+function gdNowHTML(g){ if(!g) return ''; const a=team(g.away), h=team(g.home);
+  const us=[g.home,g.away].indexOf('BYU')>=0?'BYU':(SETTINGS.fav&&[g.home,g.away].indexOf(SETTINGS.fav)>=0?SETTINGS.fav:g.home);
+  const p=projAt(g); const pUs=us===g.home?p.pHome:p.pAway; const winPct=Math.round(pUs*100);
+  const C=typeof jfClock==='function'?jfClock(g):{per:g.clk||'', clk:''};
+  const sit=g.live?(esc(C.per)+(C.clk?' '+esc(C.clk):'')+(g.dd?' · '+esc(g.dd):'')+(g.pos?' · '+(g.pos==='home'?esc(tshort(h.name)):esc(tshort(a.name)))+' ball':''))
+    :(g.played?'Final':esc(fmtDate(g.date,true))+' · '+esc(kick(g)));
+  const last=g.live&&g.last?g.last:(LIVE.sum[g.id]&&LIVE.sum[g.id].drive&&(LIVE.sum[g.id].drive.plays||[]).slice(-1)[0])||'';
+  const chips=[];
+  if(g.live) chips.push('<span class="chip live"><span class="pill-live">LIVE</span> '+esc(C.per)+(C.clk?' '+esc(C.clk):'')+'</span>');
+  else if(g.played) chips.push('<span class="chip">Final</span>');
+  else chips.push('<span class="chip">'+esc(fmtDate(g.date,true))+' · '+esc(kick(g))+'</span>');
+  if(g.live&&g.dd) chips.push('<span class="chip">'+esc(g.dd)+(g.pos?' · '+(g.pos==='home'?esc(tshort(h.name)):esc(tshort(a.name)))+' ball':'')+'</span>');
+  if(g.live&&g.rz) chips.push('<span class="chip rz">Red zone</span>');
+  if(g.played){ const won=(us===g.home?g.hs:g.as)>(us===g.home?g.as:g.hs); chips.push('<span class="chip win">'+esc(tshort(us))+' '+(won?'won':'lost')+'</span>'); }
+  else chips.push('<span class="chip win">Hub: '+esc(tshort(us))+' '+winPct+'%</span>');
+  if(last) chips.push('<span class="chip">'+esc(String(last).slice(0,72))+'</span>');
+  const playTxt=last?String(last).slice(0,90):(g.live?'Waiting on the next play…':g.played?'Final':'Kickoff still ahead');
+  const winTxt=g.played?((us===g.home?g.hs:g.as)>(us===g.home?g.as:g.hs)?esc(tshort(us))+' won':esc(tshort(us))+' lost'):(esc(tshort(us))+' '+winPct+'% to win');
+  const panels=[
+    '<div class="gd-now-panel on" data-k="sit"><span>'+sit+'</span><small>Situation</small></div>',
+    '<div class="gd-now-panel" data-k="play"><span>'+esc(playTxt)+'</span><small>Last play</small></div>',
+    '<div class="gd-now-panel" data-k="win"><span>'+winTxt+'</span><small>'+(g.played?'Final':('Hub win chance'+(g.live?' · pregame model':'')))+'</small></div>'
+  ];
+  return '<div class="gd-now" role="status"><div class="gd-now-focus">'+panels.join('')+'</div><div class="gd-now-chips">'+chips.join('')+'</div></div>'; }
+{ const _gdNow=renderGameday; renderGameday=function(id){ _gdNow(id); const m=(location.hash||'').match(/^#\/gameday\/([^\/#?]+)/); let g=(id&&GI[id])||(m&&GI[dec(m[1])]); if(!g) return; const jt=view.querySelector('.jt'); if(jt&&(g.home==='BYU'||g.away==='BYU')) jt.classList.add('byu-floor'); if(view.querySelector('.gd-now')) return; if(jt) jt.insertAdjacentHTML('afterend', gdNowHTML(g)); else { const hero=view.querySelector('.gd-hero'); if(hero) hero.insertAdjacentHTML('afterend', gdNowHTML(g)); } }; }
+/* Playbooks (2026-11-25): offense and defense from the box scores, plus how the season has actually gone.
+   A sack counts as a rush play in the college box score, same as the yards-per-play card. Nothing here is a called play. */
+function playPack(name, p4){ const o={g:0,rushY:0,passY:0,rushA:0,passA:0,comp:0,td3:0,td3a:0,fd4:0,fd4a:0,aRushY:0,aPassY:0,aRushA:0,aPassA:0,opp3:0,opp3a:0,opp4:0,opp4a:0,sacks:0,tfl:0,ints:0,to:0,take:0,yds:0,aYds:0,games:[]};
+  (BOX_BY_TEAM[name]||[]).forEach(b=>{ const side=boxSide(b,name); if(!side) return; const oppN=side==='H'?b.away:b.home; if(p4&&!isP4T(oppN)) return; const opp=side==='H'?'A':'H'; const ts=b.team[side]||{}, os=b.team[opp]||{}; if(!ts.totalYards&&!os.totalYards) return;
+    const att=bfrac(ts.completionAttempts), oatt=bfrac(os.completionAttempts); o.g++; o.rushY+=bnum(ts.rushingYards); o.passY+=bnum(ts.netPassingYards); o.rushA+=bnum(ts.rushingAttempts); o.passA+=att[1]; o.comp+=att[0]; o.yds+=bnum(ts.totalYards); o.aYds+=bnum(os.totalYards);
+    o.aRushY+=bnum(os.rushingYards); o.aPassY+=bnum(os.netPassingYards); o.aRushA+=bnum(os.rushingAttempts); o.aPassA+=oatt[1]; const t3=bfrac(ts.thirdDownEff), f4=bfrac(ts.fourthDownEff), ot3=bfrac(os.thirdDownEff), of4=bfrac(os.fourthDownEff);
+    o.td3+=t3[0]; o.td3a+=t3[1]; o.fd4+=f4[0]; o.fd4a+=f4[1]; o.opp3+=ot3[0]; o.opp3a+=ot3[1]; o.opp4+=of4[0]; o.opp4a+=of4[1]; o.to+=bnum(ts.turnovers); o.take+=bnum(os.turnovers); const d=sideDef(b,side); o.sacks+=d.sacks; o.tfl+=d.tfl; o.ints+=d.ints;
+    const gm=GAME_BY_KEY[b.key]; o.games.push({opp:oppN, home:side==='H', id:gm&&gm.id, yds:bnum(ts.totalYards), ay:bnum(os.totalYards), pf:gm&&gm.played?(side==='H'?gm.hs:gm.as):null, pa:gm&&gm.played?(side==='H'?gm.as:gm.hs):null}); });
+  return o; }
+function pbVal(e, lab){ const i=(BOXL[e.cat]||[]).indexOf(lab); return i<0?0:e.s[i]; }
+function pbPct(n, d){ return d?Math.round(100*n/d):null; }
+function pbNum(n){ const x=Math.round(n*10)/10; return Math.abs(x-Math.round(x))<0.001?String(Math.round(x)):x.toFixed(1); }
+function pbSacks(n){ return n?(', '+pbNum(n)+' sack'+(n===1?'':'s')):''; }
+function pbChip(k, v){ return '<span><b>'+esc(String(v))+'</b> '+esc(k)+'</span>'; }
+function pbRows(name, list){ return list.filter(Boolean).map(x=>'<div class="pb-row"><div><b>'+playerLink(name, x.n)+'</b><div class="mini">'+esc(x.line)+'</div>'+(x.pct==null?'':'<div class="pb-bar"><b style="width:'+Math.max(6, Math.min(100, x.pct))+'%"></b></div>')+'</div><span class="pb-pct">'+(x.pct==null?'':x.pct+'%')+'</span></div>').join(''); }
+function playbooksHTML(name){ const t=T[name]; if(!t||t.other) return ''; const p4=!!(STATS_P4&&t.level==='FBS'); const pk=playPack(name, p4); if(!pk.g) return ''; const sb=seasonBox(name, p4); const calls=pk.rushA+pk.passA; const rushP=pbPct(pk.rushA, calls); const passP=calls?100-rushP:null; const col=uiColor(t);
+  const rk=k=>{ const e=t.level==='FBS'?statRkOf(name,k,p4):null; return e?myOrd(e.r):''; };
+  const ident=rushP==null?'':(rushP>=58?'They run it more than they throw it.':rushP<=40?'They throw it more than they run it.':'The call sheet is close to even, run and pass.');
+  const rushers=Object.values(sb.players).filter(e=>e.cat==='rushing'&&pbVal(e,'YDS')>0).sort((a,b)=>pbVal(b,'YDS')-pbVal(a,'YDS'));
+  const recs=Object.values(sb.players).filter(e=>e.cat==='receiving'&&pbVal(e,'YDS')>0).sort((a,b)=>pbVal(b,'YDS')-pbVal(a,'YDS'));
+  const qbs=Object.values(sb.players).filter(e=>e.cat==='passing'&&pbVal(e,'YDS')>0).sort((a,b)=>pbVal(b,'YDS')-pbVal(a,'YDS'));
+  const rushSum=rushers.reduce((n,e)=>n+pbVal(e,'YDS'),0), recSum=recs.reduce((n,e)=>n+pbVal(e,'YDS'),0);
+  const offRows=pbRows(name, qbs.slice(0,1).map(e=>{ const att=(BOXL.passing||[]).indexOf('C/ATT'); const comp=att<0?0:e.s[att], tries=att<0?0:e.den[att]; return {n:e.n, pct:null, line:comp+'/'+tries+', '+Math.round(pbVal(e,'YDS'))+' yds, '+pbVal(e,'TD')+' TD, '+pbVal(e,'INT')+' INT'}; }).concat(rushers.slice(0,3).map(e=>({n:e.n, pct:pbPct(pbVal(e,'YDS'), rushSum), line:pbVal(e,'CAR')+' car, '+Math.round(pbVal(e,'YDS'))+' yds, '+pbVal(e,'TD')+' TD'}))).concat(recs.slice(0,3).map(e=>({n:e.n, pct:pbPct(pbVal(e,'YDS'), recSum), line:pbVal(e,'REC')+' rec, '+Math.round(pbVal(e,'YDS'))+' yds, '+pbVal(e,'TD')+' TD'}))));
+  const tacklers=Object.values(sb.players).filter(e=>e.cat==='defensive'&&pbVal(e,'TOT')>0).sort((a,b)=>pbVal(b,'TOT')-pbVal(a,'TOT'));
+  const tkSum=tacklers.reduce((n,e)=>n+pbVal(e,'TOT'),0);
+  const ints=Object.values(sb.players).filter(e=>e.cat==='interceptions'&&pbVal(e,'INT')>0).sort((a,b)=>pbVal(b,'INT')-pbVal(a,'INT'));
+  const defRows=pbRows(name, tacklers.slice(0,4).map(e=>({n:e.n, pct:pbPct(pbVal(e,'TOT'), tkSum), line:pbNum(pbVal(e,'TOT'))+' tackles'+pbSacks(pbVal(e,'SACKS'))+(pbVal(e,'TFL')?', '+pbNum(pbVal(e,'TFL'))+' TFL':'')})).concat(ints.slice(0,2).map(e=>({n:e.n, pct:null, line:pbNum(pbVal(e,'INT'))+' INT'+(pbVal(e,'TD')?', '+pbNum(pbVal(e,'TD'))+' TD':'')}))));
+  const rRun=rk('aRush'), rPass=rk('aPass'); let did=''; if(rRun&&rPass){ const er=statRkOf(name,'aRush',p4).r, ep=statRkOf(name,'aPass',p4).r; did=er+20<ep?'Stronger against the run than the pass.':ep+20<er?'Stronger against the pass than the run.':'About even against the run and the pass.'; }
+  const aCalls=pk.aRushA+pk.aPassA; const aRushP=pbPct(pk.aRushA, aCalls);
+  const off='<div class="pbk" style="--pb:'+col+'"><div class="hd"><h3>Offense playbook</h3><span class="mini">'+(p4?'vs Power 4 · ':'')+pk.g+' game'+(pk.g>1?'s':'')+'</span></div><div class="bd"><p class="pb-id">'+esc(ident)+(rushP!=null?' '+rushP+'% of plays are runs, '+passP+'% are passes.':'')+'</p>'+(rushP!=null?'<div class="pb-split" aria-hidden="true"><i class="run" style="width:'+rushP+'%"></i><i class="pass" style="width:'+passP+'%"></i></div><div class="pb-leg"><span>Run '+rushP+'%</span><span>Pass '+passP+'%</span></div>':'')+offRows+'<div class="pb-chips">'+[pk.td3a?pbChip('3rd down', pk.td3+'/'+pk.td3a):'', pk.fd4a?pbChip('4th down', pk.fd4+'/'+pk.fd4a):'', rk('ypp')?pbChip('yards per play', rk('ypp')):'', rk('ppg')?pbChip('scoring', rk('ppg')):''].filter(Boolean).join('')+'</div><div class="mini dim" style="margin-top:8px">Shares are of the rushing or receiving yards in the box score. A sack counts as a rush play.</div></div></div>';
+  const def='<div class="pbk pbk-def"><div class="hd"><h3>Defense playbook</h3><span class="mini">'+pbNum(pk.sacks)+' sacks · '+pbNum(pk.tfl)+' TFL</span></div><div class="bd"><p class="pb-id">'+esc(did||'Built from what opponents have been able to do.')+(aRushP!=null?' Opponents have run it on '+aRushP+'% of their plays.':'')+'</p>'+(aRushP!=null?'<div class="pb-split" aria-hidden="true"><i class="run" style="width:'+aRushP+'%"></i><i class="pass" style="width:'+(100-aRushP)+'%"></i></div><div class="pb-leg"><span>Run '+aRushP+'%</span><span>Pass '+(100-aRushP)+'%</span></div>':'')+defRows+'<div class="pb-chips">'+[pk.opp3a?pbChip('opp. 3rd down', pk.opp3+'/'+pk.opp3a):'', pk.take?pbChip('takeaways', pk.take):'', rk('papg')?pbChip('points allowed', rk('papg')):'', rk('aYpp')?pbChip('yards per play allowed', rk('aYpp')):''].filter(Boolean).join('')+'</div></div></div>';
+  const played=(stats(name).played||[]).filter(g=>!p4||isP4T(g.home===name?g.away:g.home));
+  const bag=(pred)=>{ let w=0,l=0,pf=0,pa=0,n=0; played.forEach(g=>{ if(pred&&!pred(g)) return; const home=g.home===name; const a=home?g.hs:g.as, b=home?g.as:g.hs; n++; pf+=a; pa+=b; if(a>b) w++; else l++; }); return {n,w,l,pf,pa}; };
+  const home=bag(g=>g.home===name&&!g.neutral), road=bag(g=>g.away===name&&!g.neutral), close=bag(g=>Math.abs(g.hs-g.as)<=8), boom=bag(g=>{ const home=g.home===name; return (home?g.hs:g.as)>=30; });
+  const big=pk.games.filter(g=>g.pf!=null&&g.yds>=450), stingy=pk.games.filter(g=>g.pf!=null&&g.ay<=275);
+  const shape='<div class="pb-shape"><div class="hd"><h3>How the games have gone</h3><span class="mini">'+(p4?'Power 4 games only':'from the results')+'</span></div><div class="bd"><div class="grid g4">'+tile('Home', home.n?home.w+'-'+home.l:'—', home.n?num1(home.pf/home.n)+' scored, '+num1(home.pa/home.n)+' allowed':'')+tile('Road', road.n?road.w+'-'+road.l:'—', road.n?num1(road.pf/road.n)+' scored, '+num1(road.pa/road.n)+' allowed':'')+tile('One-score', close.n?close.w+'-'+close.l:'—', 'decided by 8 or fewer')+tile('When they score 30+', boom.n?boom.w+'-'+boom.l:'—', boom.n?boom.n+' game'+(boom.n>1?'s':''):'none yet')+'</div><div class="pb-chips" style="margin-top:12px">'+pbChip('450-yard days', big.length?(big.filter(g=>g.pf>g.pa).length+'-'+(big.length-big.filter(g=>g.pf>g.pa).length)):'0')+pbChip('held under 275 yards', stingy.length?stingy.filter(g=>g.pf>g.pa).length+'-'+(stingy.length-stingy.filter(g=>g.pf>g.pa).length):'0')+'</div><div class="mini dim" style="margin-top:8px">450-yard days and the yards they allowed come from the box scores. The records next to them are wins and losses in those games.</div></div></div>';
+  return '<div class="pbk-grid">'+off+def+'</div>'+shape; }
+function gamePlaybooksHTML(g){ if(!g) return ''; const a=team(g.away), h=team(g.home); if(!a||!h||a.other||h.other||a.tbd||h.tbd) return '';
+  const bit=n=>{ const pk=playPack(n, false); const calls=pk.rushA+pk.passA; if(!pk.g||!calls) return ''; const rp=pbPct(pk.rushA, calls); return '<a class="pbk-mini" href="#/team/'+enc(n)+'#s-analytics"><b>'+esc(tshort(n))+'</b><span>'+rp+'% run · '+(100-rp)+'% pass</span><span class="dim">'+pk.g+' games · open the playbook</span></a>'; };
+  const A=bit(a.name), H=bit(h.name); if(!A&&!H) return ''; return '<div class="pbk-vs"><span class="pbk-k">Playbooks</span>'+A+H+'</div>'; }
+if(!document.getElementById('pbk-css')){ const st=document.createElement('style'); st.id='pbk-css'; st.textContent=''
+  +'.pbk-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}'
+  +'.pbk,.pb-shape{border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 18px 36px -26px rgba(0,0,0,.75)}'
+  +'.pbk .hd,.pb-shape .hd{display:flex;justify-content:space-between;gap:8px;align-items:baseline;padding:14px 14px 0}'
+  +'.pbk .hd h3,.pb-shape .hd h3{margin:0;font-size:16px}'
+  +'.pbk .bd,.pb-shape .bd{padding:10px 14px 14px}'
+  +'.pb-id{margin:0 0 10px;font-size:14.5px;line-height:1.45}'
+  +'.pb-split{display:flex;height:12px;border-radius:99px;overflow:hidden;background:var(--surface-3)}'
+  +'.pb-split i.run{background:var(--pb,#1f6feb)}.pbk-def .pb-split i.run{background:#c24545}'
+  +'.pb-split i.pass{background:color-mix(in srgb,var(--pb,#1f6feb) 42%,#9ec0ff)}.pbk-def .pb-split i.pass{background:#6d8cae}'
+  +'.pb-leg{display:flex;justify-content:space-between;margin-top:4px;font-size:12px;color:var(--ink-2)}'
+  +'.pb-row{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center;margin-top:10px}'
+  +'.pb-bar{height:6px;border-radius:99px;background:var(--surface-3);overflow:hidden;margin-top:4px}'
+  +'.pb-bar b{display:block;height:100%;border-radius:99px;background:var(--pb,#1f6feb)}.pbk-def .pb-bar b{background:#c24545}'
+  +'.pb-pct{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}'
+  +'.pb-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}'
+  +'.pb-chips span{font-size:12px;padding:4px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line)}'
+  +'.pbk-vs{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:12px 0}'
+  +'.pbk-k{align-self:center;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}'
+  +'.pbk-mini{display:flex;flex-direction:column;gap:2px;min-width:160px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:inherit}'
+  +'.pbk-mini b{font-size:15px}.pbk-mini span{font-size:13px;color:var(--ink-2)}'
+  +'@media (max-width:760px){.pbk-grid{grid-template-columns:1fr}}';
+  document.head.appendChild(st); }
+{ const _pbTeam=renderTeam; renderTeam=function(name){ _pbTeam(name); if(view.querySelector('.pbk-grid')) return; const slot=view.querySelector('#s-analytics'); const html=playbooksHTML(norm(name)); if(slot&&html) slot.insertAdjacentHTML('afterend', html); }; }
+{ const _pbGame=renderGame; renderGame=function(id){ _pbGame(id); if(view.querySelector('.pbk-vs')) return; const g=GI[id]; const html=g?gamePlaybooksHTML(g):''; const h=view.querySelector('.ghead'); if(h&&html) h.insertAdjacentHTML('afterend', html); }; }
+/* BYU football depth (2026-11-25): a stacked deck under the team header, and a second "floor" under the Game day board */
+if(!document.getElementById('byu-depth-css')){ const st=document.createElement('style'); st.id='byu-depth-css'; st.textContent=''
+  +'.thead.byu-deep{overflow:visible;background:linear-gradient(165deg,#003da5 0%,#002e5d 42%,#04101f 100%);color:#fff;border-color:rgba(255,255,255,.16);'
+  +'box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 14px 0 -6px rgba(0,30,70,.55),0 28px 0 -12px rgba(0,16,40,.4),0 46px 44px -28px rgba(0,0,0,.75)}'
+  +'.thead.byu-deep .ttl h1,.thead.byu-deep .eyebrow,.thead.byu-deep .meta{color:#fff}'
+  +'.thead.byu-deep .meta,.thead.byu-deep .eyebrow{color:#c9d7ee}'
+  +'.thead.byu-deep .ranks .rb{background:rgba(0,0,0,.28);border-color:rgba(255,255,255,.16);color:#fff}'
+  +'.thead.byu-deep .ranks .rb .k{color:#b7c6e0}'
+  +'.byu-depth{position:relative;margin:22px 0 6px}'
+  +'.byu-stack{position:absolute;left:18px;right:18px;top:12px;bottom:-12px;border-radius:20px;background:#001833;box-shadow:0 16px 0 -8px rgba(0,24,56,.5)}'
+  +'.byu-face{position:relative;padding:16px 16px 14px;border-radius:20px;color:#fff;background:linear-gradient(180deg,rgba(10,28,58,.96),rgba(5,12,24,.96));border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 22px 40px -24px rgba(0,0,0,.8)}'
+  +'.byu-k{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#9eb6de}'
+  +'.byu-plates{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}'
+  +'.byu-p{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}'
+  +'.byu-p span{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#9eb6de}'
+  +'.byu-p b{display:block;margin-top:2px;font-family:var(--disp);font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1.05}'
+  +'.byu-p small{display:block;margin-top:3px;font-size:12px;color:#c5d2e8}'
+  +'.byu-next{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-top:12px;padding:10px 12px;border-radius:14px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.1);color:#fff}'
+  +'.byu-next .k{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fcd56b}'
+  +'.byu-next b{font-size:16px}'
+  +'.byu-next span:last-child{color:#c5d2e8;font-size:13px}'
+  +'.ghead.byu-deep{overflow:visible;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 16px 0 -8px rgba(0,30,70,.45),0 34px 0 -14px rgba(0,12,32,.35),0 48px 40px -26px rgba(0,0,0,.65)}'
+  +'.jt.byu-floor{box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 18px 0 -8px rgba(0,30,70,.5),0 36px 0 -16px rgba(0,12,32,.38),0 52px 44px -28px rgba(0,0,0,.7)}'
+  +'@media (max-width:720px){.byu-plates{grid-template-columns:1fr 1fr}.byu-p b{font-size:22px}}';
+  document.head.appendChild(st); }
+function byuDepthHTML(){ const name='BYU'; const t=T[name]; if(!t) return ''; const s=stats(name);
+  const nxt=s.upcoming&&s.upcoming[0]; const g=nxt&&nxt.g; const opp=g&&team(g.home===name?g.away:g.home); const home=g&&g.home===name; const p=g&&typeof proj==='function'?proj(g):null; const pw=p?(home?p.pHome:p.pAway):null;
+  const close=(s.played||[]).filter(x=>Math.abs((x.hs||0)-(x.as||0))<=8); const cw=close.filter(x=>(x.home===name?x.hs-x.as:x.as-x.hs)>0).length;
+  const plates=[['Record',s.w+'-'+s.l,s.cw+'-'+s.cl+' in the Big 12'],['AP',t.apPoll||'NR','CFP '+(t.cfp||'NR')],['Points',s.gp?num1(s.pf/s.gp):'—',s.gp?'allow '+num1(s.pa/s.gp)+' a game':''],['One-score',close.length?cw+'-'+(close.length-cw):'—','decided by 8 or fewer']];
+  const next=g&&opp?'<a class="byu-next" href="#/gameday/'+enc(g.id)+'"><span class="k">'+(g.live?'Live now':'Next')+'</span><b>'+(g.neutral?'vs ':home?'vs ':'at ')+esc(tshort(opp.name))+'</b><span>'+esc(fmtDate(g.date,true))+' · '+esc(kick(g))+(g.tv?' · '+esc(tvShort(g.tv)):'')+(g.spread!=null?' · '+esc(spreadStr(g,{short:true})):'')+(pw!=null?' · hub '+Math.round(pw*100)+'%':'')+'</span></a>':'';
+  return '<section class="byu-depth" aria-label="BYU at a glance"><div class="byu-stack" aria-hidden="true"></div><div class="byu-face"><div class="byu-k">Cougar football</div><div class="byu-plates">'+plates.map(x=>'<div class="byu-p"><span>'+x[0]+'</span><b>'+esc(String(x[1]))+'</b><small>'+esc(x[2])+'</small></div>').join('')+'</div>'+next+'</div></section>'; }
+{ const _byuTeam=renderTeam; renderTeam=function(name){ _byuTeam(name); if(norm(name)!=='BYU') return; const head=view.querySelector('.thead'); if(!head||view.querySelector('.byu-depth')) return; head.classList.add('byu-deep'); head.insertAdjacentHTML('afterend', byuDepthHTML()); }; }
+{ const _byuGame=renderGame; renderGame=function(id){ _byuGame(id); const g=GI[id]; if(!g||(g.home!=='BYU'&&g.away!=='BYU')) return; const h=view.querySelector('.ghead'); if(h) h.classList.add('byu-deep'); }; }
 /* as-of + about */
 function asofBar(){ const el=$('#asof'); const played=G.filter(g=>g.played).length; const ageDays=Math.max(0,Math.round((new Date(todayStr)-new Date(AS_OF_DATE))/86400000)); el.innerHTML='<span><i class="dot '+(ageDays<=1?'ok':'warn')+'" title="'+(ageDays===0?'built today':ageDays===1?'built yesterday':'built '+ageDays+' days ago')+' · '+played+' finals · '+G.filter(g=>g.spread!=null).length+' games with lines"></i>Updated <b>'+esc(asOfDisp())+'</b> · times in '+tzInfo().name+' <a href="#/settings">change</a><span class="asof-x"> · '+played+' finals · '+G.filter(g=>g.spread!=null).length+' games with lines · '+Object.keys(DEPTH).filter(k=>DEPTH[k].depth&&DEPTH[k].depth.length).length+' depth charts</span>'+(ageDays>=2?' · <b class="stale">'+ageDays+' days old</b>':'')+'</span><button id="about">How the numbers work</button> <span id="livestamp"></span>'; $('#about').onclick=()=>{ const d=$('#dlg'); d.innerHTML=aboutHTML(); d.showModal(); $('#dlg-close').onclick=()=>d.close(); }; } asofBar();
 route();
@@ -17184,26 +17369,15 @@ connectDb();
 <script type="text/x-jsh-app">
 /* neo:start - the home page's "Neo" look for the league hubs (2026-10-26, Jamo: "bring the new look to all the hubs").
    Shared by the CFB, NFL and NBA hubs (inlined last by each build.sh), so it only refines what's there and every
-   hub keeps its own accent color and wallpaper (BYU field, Jazz court):
-   - a deep-space backdrop (slow aurora + fine dot grid) behind pages that have no wallpaper
-   - glass panels: a soft top highlight and hairline edges on cards and stat tiles; tappable ones light up in the
-     hub's accent color
-   - numbered HUD markers on section headings with a light rule underneath
-   - a bigger page title, Orbitron eyebrows, glowing selected pills, a light line under the pinned header
-   Works in light and dark; motion stops for reduced-motion users. */
+   hub keeps its own accent color.
+   2026-11-24 doper pass: the aurora + dot-grid backdrop (#neo-bg) is gone so Stage's plain still gradient owns the
+   page (house rule: simpler, cleaner, fresh — no grids). Glass panels, numbered section markers, and pill glow stay. */
 (function(){ if (document.getElementById('neo-css')) return;
   if (!document.querySelector('link[href*="family=Orbitron"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap'; document.head.appendChild(l); }
   const A = 'var(--accent,var(--blue,#5b8cff))';
   const css =
-  /* backdrop: an aurora and a dot grid, under any wallpaper the hub draws */
-    '#neo-bg{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}'
-  + '#neo-bg::before{content:"";position:absolute;inset:-12%;background:radial-gradient(760px 520px at 10% 2%,rgba(59,123,255,.20),transparent 62%),radial-gradient(720px 520px at 94% 0%,rgba(164,91,255,.18),transparent 64%),radial-gradient(900px 600px at 50% 108%,rgba(56,189,248,.10),transparent 66%);animation:neoAur 42s ease-in-out infinite alternate}'
-  + '#neo-bg::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 72%);mask-image:linear-gradient(180deg,#000,transparent 72%)}'
-  + '@keyframes neoAur{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}100%{transform:translate3d(2.5%,-1.5%,0) scale(1.03)}}'
-  + ':root[data-theme="light"] #neo-bg::before{opacity:.45}:root[data-theme="light"] #neo-bg::after{background-image:radial-gradient(rgba(15,23,42,.06) 1px,transparent 1.3px)}'
-  + '@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #neo-bg::before{opacity:.45}:root:not([data-theme="dark"]) #neo-bg::after{background-image:radial-gradient(rgba(15,23,42,.06) 1px,transparent 1.3px)}}'
   /* the pinned header: a thin light line in the accent color */
-  + 'header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,' + A + ' 30%,color-mix(in srgb,' + A + ' 40%,#c4a6ff) 70%,transparent);opacity:.65}'
+    'header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,' + A + ' 30%,color-mix(in srgb,' + A + ' 40%,#c4a6ff) 70%,transparent);opacity:.65}'
   /* glass panels */
   + '#view .card,#view .tile{background-image:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 58%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 22px 50px -34px rgba(0,0,0,.85);transition:border-color .2s,box-shadow .2s,transform .2s}'
   + ':root[data-theme="light"] #view .card,:root[data-theme="light"] #view .tile{background-image:none;box-shadow:0 1px 2px rgba(15,23,42,.05),0 14px 32px -24px rgba(15,23,42,.28)}'
@@ -17219,10 +17393,9 @@ connectDb();
   + '#view .page-head .eyebrow,#view>.eyebrow{font-family:"Orbitron",var(--disp,inherit);font-size:10.5px;font-weight:600;letter-spacing:.22em}'
   /* selected pills glow in the accent color */
   + '.ng-sub a.on,#view .seg .on,#view .seg a.on,#view .seg button.on{background:linear-gradient(90deg,' + A + ',color-mix(in srgb,' + A + ' 60%,#8a4dff))!important;color:#fff!important;border-color:transparent!important;box-shadow:0 8px 22px -10px ' + A + '}'
-  + '@media (prefers-reduced-motion:reduce){#neo-bg::before{animation:none}#view a.card:hover,#view a.tile:hover,#view .tile-link:hover,#view a.gm:hover,#view .wcard:hover{transform:none}}'
+  + '@media (prefers-reduced-motion:reduce){#view a.card:hover,#view a.tile:hover,#view .tile-link:hover,#view a.gm:hover,#view .wcard:hover{transform:none}}'
   + '@media (max-width:600px){#view .sec>h2[data-neo]::before{margin-right:8px;font-size:9.5px}}';
   const st = document.createElement('style'); st.id = 'neo-css'; st.textContent = css; document.head.appendChild(st);
-  const bg = document.createElement('div'); bg.id = 'neo-bg'; bg.setAttribute('aria-hidden', 'true'); document.body.prepend(bg);
   /* number the section markers in the order they appear on screen (phone layouts move columns around, so the page's
      own order isn't the reading order); renumbers after each re-render and on resize */
   let raf = 0;

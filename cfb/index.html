@@ -20,58 +20,6 @@
      hub does and can hand it to /sports/fluid.js, which lets the hub draw the new page inside a view transition. Until that
      file has loaded (or when it declines), the page change goes straight through as before. -->
 <script>addEventListener('hashchange', function (e) { var f = window.__jshNav; if (!f || e.__jshPass) return; try { if (f(e) === true) e.stopImmediatePropagation(); } catch (x) {} }, true);</script>
-<script>
-/* Favorites are per phone. A browser that already used the hub keeps the teams it was showing
-   (BYU football, Eagles, Jazz, BYU hoops) the first time this runs. A new browser starts with none,
-   and this flag stops a later visit from filling those teams in. */
-(function () {
-  try {
-    if (localStorage.getItem('jsh-favs-ready') === '1') return;
-    function read(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
-    var seen = read('jsh-shared') || read('cfb-settings') || read('nfl-settings') || read('nba-settings') || read('cbb-settings') || localStorage.getItem('jsh-live') || localStorage.getItem('jsh-glance') || localStorage.getItem('jsh-teams-mini');
-    if (seen) {
-      [['cfb-settings', 'BYU'], ['nfl-settings', 'PHI'], ['nba-settings', 'UTAH'], ['cbb-settings', '252']].forEach(function (pair) {
-        var o = read(pair[0]) || {};
-        if (o.fav == null || o.fav === '') { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
-      });
-    }
-    localStorage.setItem('jsh-favs-ready', '1');
-  } catch (e) {}
-})();
-</script>
-<script>
-/* Holiday class before the page paints, so a phone sees Thanksgiving or Christmas even while holiday.js is still loading. */
-(function () {
-  var q = ''; try { q = (new URLSearchParams(location.search).get('hol') || '').toLowerCase(); } catch (e) {}
-  if (q === 'off' || q === 'none') return;
-  var tz = 'MT'; try { tz = (JSON.parse(localStorage.getItem('jsh-shared') || '{}') || {}).tz || 'MT'; } catch (e) {}
-  var zone = { ET: 'America/New_York', CT: 'America/Chicago', MT: 'America/Denver', PT: 'America/Los_Angeles' }[tz] || 'America/Denver';
-  var y, m, d;
-  try {
-    new Intl.DateTimeFormat('en-US', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date()).forEach(function (p) {
-      if (p.type === 'year') y = +p.value; if (p.type === 'month') m = +p.value; if (p.type === 'day') d = +p.value;
-    });
-  } catch (e) { var n = new Date(); y = n.getFullYear(); m = n.getMonth() + 1; d = n.getDate(); }
-  var dow = new Date(y, 10, 1).getDay(), first = dow <= 4 ? 1 + (4 - dow) : 1 + (11 - dow), tg = first + 21, kind = '';
-  if (q === 'thanks' || q === 'thanksgiving') kind = 'thanks';
-  else if (q === 'xmas' || q === 'christmas') kind = 'xmas';
-  else if (m === 11 && d === tg) kind = 'thanks';
-  else if ((m === 11 && d > tg) || (m === 12 && d <= 26)) kind = 'xmas';
-  if (!kind) return;
-  document.documentElement.classList.add(kind === 'thanks' ? 'jsh-thanks' : 'jsh-xmas');
-  document.documentElement.dataset.jshHol = kind;
-})();
-</script>
-<style id="jsh-holiday-boot">
-html.jsh-thanks,html.jsh-thanks body,html.jsh-thanks body::before{background:radial-gradient(90% 46% at 50% -10%,rgba(240,170,60,.55),transparent 58%),linear-gradient(180deg,#4a2a12,#24160c 46%,#140e09)!important;background-color:#140e09!important}
-html.jsh-thanks.light,html.jsh-thanks.light body,html.jsh-thanks.light body::before,html.jsh-thanks[data-theme="light"],html.jsh-thanks[data-theme="light"] body,html.jsh-thanks[data-theme="light"] body::before{background:linear-gradient(180deg,#f8e6c8,#f3d7ae 50%,#edd0b0)!important;background-color:#f6e4c4!important}
-html.jsh-xmas,html.jsh-xmas body,html.jsh-xmas body::before{background:radial-gradient(70% 42% at 0% -8%,rgba(36,150,90,.55),transparent 60%),radial-gradient(60% 40% at 100% 0%,rgba(176,28,48,.5),transparent 62%),linear-gradient(180deg,#0d3d2a,#07140f 50%,#1a0c10)!important;background-color:#071410!important}
-html.jsh-xmas.light,html.jsh-xmas.light body,html.jsh-xmas.light body::before,html.jsh-xmas[data-theme="light"],html.jsh-xmas[data-theme="light"] body,html.jsh-xmas[data-theme="light"] body::before{background:linear-gradient(180deg,#e5f6ee,#f7e8ea 55%,#e7f3ec)!important;background-color:#e7f3ec!important}
-html.jsh-thanks .jsh{background:#2a160c!important}
-html.jsh-xmas .jsh{background:#071a12!important}
-html.jsh-thanks :is(.jsh-dock,.btab,.jbl){background:#2a160c!important;border-color:rgba(240,186,96,.55)!important;color:#f6e2b8}
-html.jsh-xmas :is(.jsh-dock,.btab,.jbl){background:#0c2418!important;border-color:rgba(220,64,78,.5)!important;color:#e7f6ee}
-</style>
 <!-- Glance mode and page-shaped placeholders (2026-11-19, Jamo picked "Compact glance mode" and "Smoother loading").
      - Glance: the switch next to light/dark (.jsh-gl) tightens spacing, trims subtitles and shrinks big numbers so more fits
        on a phone. Saved per browser (localStorage jsh-glance); the class is set here, before the page draws, so it never jumps.
@@ -7951,7 +7899,7 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
 }
 </script>
 <script type="application/json" id="d-injfeat">{
-  "_note" : "Hand-checked injury data for BYU and its next opponent (2026-11-24, Cincinnati week - BYU's lines are from its game-day report at Kansas (Nov. 21, BYU Cougars Wire) and Sitake's Monday comments (Nov. 23); Cincinnati's from its Thursday update for Colorado (Nov. 19) and the Cincinnati Enquirer, because neither team's report for this game is out yet). Every player line cites its source. Statuses come only from official availability reports or what the head coach/team said; anything else is marked unclear. Updated by the 'BYU injury report' scheduled task. Do not fill gaps from Covers - it was wrong about BYU when checked.",
+  "_note" : "Hand-checked injury data for BYU and its next opponent (2026-11-26, Cincinnati week - BYU's lines are from its initial report for Cincinnati (Nov. 25, KSL Sports); Cincinnati's from Scott Satterfield's Nov. 24 press conference and RotoWire's notes on the Nov. 25 report, because Cincinnati's full report wasn't found in text). Every player line cites its source. Statuses come only from official availability reports or what the head coach/team said; anything else is marked unclear. Updated by the 'BYU injury report' scheduled task. Do not fill gaps from Covers - it was wrong about BYU when checked.",
   "teams" : {
     "BYU" : {
       "game" : {
@@ -7962,18 +7910,33 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
       "official" : {
         "how" : "Teams file an initial report before each game and update it through game day. Players are listed OUT, DOUBTFUL, QUESTIONABLE or PROBABLE; anyone not listed is expected to be available.",
         "name" : "Big 12 player availability report",
-        "next" : "BYU's first report for Cincinnati is due Wednesday evening (Nov. 25). Updates can come Thursday and Friday (Nov. 26-27). The final report comes 90 minutes before Saturday's 1:30 PM MT kickoff (about noon MT).",
+        "next" : "Updates can come Thursday and Friday (Nov. 26-27). The final report comes 90 minutes before Saturday's 1:30 PM MT kickoff (about noon MT).",
         "url" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
       },
       "players" : [
         {
-          "cls" : "out",
-          "history" : "OUT vs. Kansas (initial Nov. 18 and game-day Nov. 21 reports); OUT vs. Baylor (Friday update, Nov. 13); shaken up on the first play at Utah (Nov. 7)",
+          "cls" : "doubt",
+          "history" : "DOUBTFUL vs. Cincinnati (initial report, Nov. 25); OUT vs. Kansas (initial Nov. 18 and game-day Nov. 21 reports); OUT vs. Baylor (Friday update, Nov. 13); shaken up on the first play at Utah (Nov. 7)",
           "name" : "Isaiah Glasker",
-          "note" : "Missed his second straight game at Kansas; Jake Clifton started again (5 tackles, Daily Herald). Sitake said Nov. 16 Glasker had \"been playing with a lot of pain\" and was shut down \"to get him back to full health\" (Deseret News). BYU hasn't named the injury or said whether he'll be back for Cincinnati. BYU's first report for Cincinnati comes out Wednesday evening (Nov. 25).",
+          "note" : "DOUBTFUL on BYU's first report for Cincinnati - up from OUT the last two games. He hasn't played since the Nov. 7 game at Utah (KSL). Sitake said Nov. 16 Glasker had \"been playing with a lot of pain\" and was shut down \"to get him back to full health\" (Deseret News). BYU hasn't named the injury. He's on Saturday's Senior Day list.",
           "num" : "16",
           "pos" : "LB",
           "src" : [
+            {
+              "d" : "Nov. 25",
+              "t" : "KSL Sports (Mitch Harper): BYU availability report for Cincinnati",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-cincinnati-availability-report/579199"
+            },
+            {
+              "d" : "Nov. 25",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 23",
+              "t" : "Deseret News (Jay Drew): Senior Day list and Sitake Monday briefing",
+              "u" : "https://www.deseret.com/sports/2026/11/23/byu-football-seniors-honored-list-day-cincinnati-final-sitake-bachmeier-uluave-glasker"
+            },
             {
               "d" : "Nov. 21",
               "t" : "BYU Cougars Wire: Tanuvasa out vs. Kansas; game-day report",
@@ -8030,16 +7993,31 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
               "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
             }
           ],
-          "status" : "OUT vs. Kansas - Cincinnati report due Wed."
+          "status" : "DOUBTFUL vs. Cincinnati (Nov. 25 report)"
         },
         {
           "cls" : "out",
-          "history" : "OUT vs. Kansas (initial Nov. 18 and game-day Nov. 21 reports); left vs. Baylor (Nov. 14), third quarter, left knee; MCL/PCL injury in Week 1",
+          "history" : "OUT vs. Cincinnati (initial report, Nov. 25); OUT vs. Kansas (initial Nov. 18 and game-day Nov. 21 reports); left vs. Baylor (Nov. 14), third quarter, left knee; MCL/PCL injury in Week 1",
           "name" : "Sione Moa",
-          "note" : "OUT for Kansas. He was helped off against Baylor with a left knee injury. Sitake said on his coaches show that Moa would likely \"have an announcement\" about his status (KSL); no announcement found yet. BYU hasn't described the injury.",
+          "note" : "OUT for Cincinnati, his second straight missed game. He was helped off against Baylor (Nov. 14) with a left knee injury, and BYU took him off its depth chart this week (KSL, Nov. 24). Sitake said on his coaches show Moa would likely \"have an announcement\" about his status (KSL); none found yet.",
           "num" : "30",
           "pos" : "RB",
           "src" : [
+            {
+              "d" : "Nov. 25",
+              "t" : "KSL Sports (Mitch Harper): BYU availability report for Cincinnati",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-cincinnati-availability-report/579199"
+            },
+            {
+              "d" : "Nov. 25",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 24",
+              "t" : "KSL Sports (Mitch Harper): BYU depth chart for Cincinnati",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-football-depth-chart-cincinnati/579171"
+            },
             {
               "d" : "Nov. 21",
               "t" : "BYU Cougars Wire: Tanuvasa out vs. Kansas; game-day report",
@@ -8086,16 +8064,26 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
               "u" : "https://www.heraldextra.com/sports/2026/nov/15/a-mixed-bag-byus-run-game-revived-but-other-question-marks-persist-in-28-7-win-over-baylor"
             }
           ],
-          "status" : "OUT vs. Kansas - Cincinnati report due Wed."
+          "status" : "OUT vs. Cincinnati (Nov. 25 report)"
         },
         {
           "cls" : "out",
-          "history" : "OUT vs. Kansas (Nov. 18 and Nov. 21 reports); OUT vs. Baylor (Nov. 13); hurt at Utah (Nov. 7) covering a punt return",
+          "history" : "OUT vs. Cincinnati (initial report, Nov. 25); OUT vs. Kansas (Nov. 18 and Nov. 21 reports); OUT vs. Baylor (Nov. 13); hurt at Utah (Nov. 7) covering a punt return",
           "name" : "Will Zundel",
-          "note" : "OUT for a second straight game at Kansas. He was hurt covering a punt return at Utah and came up holding his left arm (KSL); BYU hasn't named the injury.",
+          "note" : "OUT for a third straight game. He was hurt covering a punt return at Utah and came up holding his left arm (KSL); BYU hasn't named the injury.",
           "num" : "83",
           "pos" : "TE",
           "src" : [
+            {
+              "d" : "Nov. 25",
+              "t" : "KSL Sports (Mitch Harper): BYU availability report for Cincinnati",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-cincinnati-availability-report/579199"
+            },
+            {
+              "d" : "Nov. 25",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
             {
               "d" : "Nov. 21",
               "t" : "BYU Cougars Wire: Tanuvasa out vs. Kansas; game-day report",
@@ -8147,16 +8135,26 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
               "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
             }
           ],
-          "status" : "OUT vs. Kansas - Cincinnati report due Wed."
+          "status" : "OUT vs. Cincinnati (Nov. 25 report)"
         },
         {
-          "cls" : "info",
-          "history" : "OUT on the game-day report at Kansas (Nov. 21; DOUBTFUL on the Nov. 18 initial report); OUT vs. Baylor (Nov. 13); did not play at Utah (Nov. 7); OUT vs. Arizona State (Oct. 28)",
+          "cls" : "likely",
+          "history" : "PROBABLE vs. Cincinnati (initial report, Nov. 25); OUT on the game-day report at Kansas (Nov. 21; DOUBTFUL on the Nov. 18 initial report); OUT vs. Baylor (Nov. 13); did not play at Utah (Nov. 7); OUT vs. Arizona State (Oct. 28)",
           "name" : "Evan Johnson",
-          "note" : "Ruled out on the game-day report at Kansas (BYU Cougars Wire). He hasn't played since he was hurt on the final play at UCF (Oct. 24; ankle, per the Deseret News). After the Kansas game Sitake said Johnson, Saleapaga and Gentry are close to returning, and on Monday (Nov. 23): \"Hopefully we get some bodies back, but if not, then we'll be ready to roll with the guys that we have\" (Daily Herald). Assistant coach Kelly Poppinga said Nov. 20 he's \"really close\" (Deseret News). Not cleared yet; watch Wednesday's report.",
+          "note" : "PROBABLE on BYU's first report for Cincinnati - the first time since he was hurt that he's been listed better than doubtful. He has missed four straight games since an ankle injury at UCF (Oct. 24; KSL). Under Big 12 rules, PROBABLE means about a 75% chance he plays.",
           "num" : "0",
           "pos" : "CB",
           "src" : [
+            {
+              "d" : "Nov. 25",
+              "t" : "KSL Sports (Mitch Harper): BYU availability report for Cincinnati",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-cincinnati-availability-report/579199"
+            },
+            {
+              "d" : "Nov. 25",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
             {
               "d" : "Nov. 23",
               "t" : "Daily Herald: Sitake Monday (hopes to get Gentry, Johnson, Saleapaga back)",
@@ -8223,16 +8221,26 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
               "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
             }
           ],
-          "status" : "Unclear - OUT vs. Kansas; Sitake hopes to have him back"
+          "status" : "PROBABLE vs. Cincinnati (Nov. 25 report)"
         },
         {
-          "cls" : "info",
-          "history" : "OUT on the game-day report at Kansas (Nov. 21; DOUBTFUL on the Nov. 18 initial report); OUT vs. Baylor (Nov. 13 update); did not play at Utah (Nov. 7); hurt vs. Arizona State (Oct. 31)",
+          "cls" : "doubt",
+          "history" : "DOUBTFUL vs. Cincinnati (initial report, Nov. 25); OUT on the game-day report at Kansas (Nov. 21; DOUBTFUL on the Nov. 18 initial report); OUT vs. Baylor (Nov. 13 update); did not play at Utah (Nov. 7); hurt vs. Arizona State (Oct. 31)",
           "name" : "Roger Saleapaga II",
-          "note" : "Ruled out on the game-day report at Kansas (BYU Cougars Wire), his third straight missed game. Sitake said after the Kansas game that Saleapaga is close to returning (Deseret News) and on Monday (Nov. 23) that he hopes to \"get some bodies back\" (Daily Herald). BYU hasn't named the injury. Not cleared yet; watch Wednesday's report.",
+          "note" : "DOUBTFUL on BYU's first report for Cincinnati. He has been out since the end of the Arizona State game (Oct. 31; KSL), three straight missed games. Sitake said after Kansas he was close to returning. BYU hasn't named the injury.",
           "num" : "2",
           "pos" : "TE",
           "src" : [
+            {
+              "d" : "Nov. 25",
+              "t" : "KSL Sports (Mitch Harper): BYU availability report for Cincinnati",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-cincinnati-availability-report/579199"
+            },
+            {
+              "d" : "Nov. 25",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
             {
               "d" : "Nov. 23",
               "t" : "Daily Herald: Sitake Monday (hopes to get Gentry, Johnson, Saleapaga back)",
@@ -8289,16 +8297,31 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
               "u" : "https://www.deseret.com/sports/2026/11/09/byu-football-scores-kalani-sitake-post-utah-mistakes-baylor-look-ahead-perspective/"
             }
           ],
-          "status" : "Unclear - OUT vs. Kansas; Sitake hopes to have him back"
+          "status" : "DOUBTFUL vs. Cincinnati (Nov. 25 report)"
         },
         {
-          "cls" : "info",
-          "history" : "OUT on the game-day report at Kansas (Nov. 21), a late addition; not injured",
+          "cls" : "likely",
+          "history" : "Not on the Cincinnati report (Nov. 25); OUT on the game-day report at Kansas (Nov. 21), a late addition; not injured",
           "name" : "Keanu Tanuvasa",
-          "note" : "Not an injury: the starting defensive tackle stayed in Provo after his wife gave birth to a son. Sitake: \"His role as a husband and father is much more important than his role as a football player\" (Deseret News, via Provo.com). Anisi Purcell started in his place. BYU hasn't said yet whether he'll be back for Cincinnati.",
+          "note" : "Not on BYU's first report for Cincinnati, so he's expected to play. He missed Kansas to be with his wife for the birth of their son - not an injury (Deseret News). He's on Saturday's Senior Day list.",
           "num" : "57",
           "pos" : "DT",
           "src" : [
+            {
+              "d" : "Nov. 25",
+              "t" : "KSL Sports (Mitch Harper): BYU availability report for Cincinnati",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-cincinnati-availability-report/579199"
+            },
+            {
+              "d" : "Nov. 25",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
+            {
+              "d" : "Nov. 23",
+              "t" : "Deseret News (Jay Drew): Senior Day list and Sitake Monday briefing",
+              "u" : "https://www.deseret.com/sports/2026/11/23/byu-football-seniors-honored-list-day-cincinnati-final-sitake-bachmeier-uluave-glasker"
+            },
             {
               "d" : "Nov. 21",
               "t" : "BYU Cougars Wire: Tanuvasa out vs. Kansas; game-day report",
@@ -8315,16 +8338,26 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
               "u" : "https://www.heraldextra.com/sports/2026/nov/22/cougar-curve-grades-are-in-for-byus-tough-31-29-triple-overtime-win-over-kansas"
             }
           ],
-          "status" : "Unclear - missed Kansas for the birth of his son"
+          "status" : "Not on the Nov. 25 report - expected to play"
         },
         {
-          "cls" : "info",
-          "history" : "Out since ankle surgery the week of Sept. 28; not on any report since the TCU game (Sept. 30)",
+          "cls" : "likely",
+          "history" : "PROBABLE vs. Cincinnati (initial report, Nov. 25); Out since ankle surgery the week of Sept. 28; not on any report since the TCU game (Sept. 30)",
           "name" : "Andrew Gentry",
-          "note" : "Starting right tackle. After the Kansas game Sitake said Gentry is close to returning (Deseret News), and he named Gentry Monday (Nov. 23) among the players he hopes to get back (Daily Herald). He hasn't played since early in the season and isn't cleared yet. He's on BYU's Senior Day list for Saturday.",
+          "note" : "PROBABLE on BYU's first report for Cincinnati. The starting right tackle ruptured the deltoid ligament in his ankle at Colorado State in Week 3 and began practicing last week (KSL). Gentry told KSL: \"I would love to be out there... see how it feels come Saturday, and then we'll see what happens.\" Bott Mulitalo has started in his place.",
           "num" : "75",
           "pos" : "OT",
           "src" : [
+            {
+              "d" : "Nov. 25",
+              "t" : "KSL Sports (Mitch Harper): BYU availability report for Cincinnati",
+              "u" : "https://sports.ksl.com/ncaa/byu-football/byu-cincinnati-availability-report/579199"
+            },
+            {
+              "d" : "Nov. 25",
+              "t" : "Big 12 availability report (official)",
+              "u" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
+            },
             {
               "d" : "Nov. 23",
               "t" : "Daily Herald: Sitake Monday (hopes to get Gentry, Johnson, Saleapaga back)",
@@ -8341,7 +8374,7 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
               "u" : "https://www.deseret.com/sports/2026/11/16/byu-football-big-12-kalani-sitake-race-cfp-playoffs-commitee-kansas/"
             }
           ],
-          "status" : "Unclear - Sitake hopes to have him back"
+          "status" : "PROBABLE vs. Cincinnati (Nov. 25 report)"
         },
         {
           "cls" : "out",
@@ -8366,6 +8399,27 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
         }
       ],
       "reports" : [
+        {
+          "doubtful" : [
+            "TE #2 Roger Saleapaga II",
+            "LB #16 Isaiah Glasker"
+          ],
+          "game" : "vs. Cincinnati (Sat., Nov. 28)",
+          "kind" : "Initial report, released Wed., Nov. 25 (Tanuvasa off the report; Johnson and Gentry PROBABLE; Glasker and Saleapaga DOUBTFUL)",
+          "out" : [
+            "RB #30 Sione Moa",
+            "TE #83 Will Zundel"
+          ],
+          "probable" : [
+            "CB #0 Evan Johnson",
+            "OL #75 Andrew Gentry"
+          ],
+          "questionable" : [],
+          "src" : {
+            "t" : "Big 12 (official report); also KSL Sports",
+            "u" : "https://sports.ksl.com/ncaa/byu-football/byu-cincinnati-availability-report/579199"
+          }
+        },
         {
           "doubtful" : [],
           "game" : "at Kansas (Sat., Nov. 21)",
@@ -8403,33 +8457,15 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
             "t" : "Big 12 (official report); also Deseret News",
             "u" : "https://www.deseret.com/sports/2026/11/18/byu-cougars-kansas-jayhawks-injury-report-2026/"
           }
-        },
-        {
-          "doubtful" : [],
-          "game" : "vs. Baylor (Sat., Nov. 14)",
-          "kind" : "Friday update, released Fri., Nov. 13 (LJ Martin and Crew Clark were not ruled out; Glasker, Johnson and Saleapaga moved to OUT)",
-          "out" : [
-            "LB #16 Isaiah Glasker",
-            "CB #0 Evan Johnson",
-            "TE #2 Roger Saleapaga II",
-            "TE #83 Will Zundel",
-            "WR Kila Keone"
-          ],
-          "probable" : [],
-          "questionable" : [],
-          "src" : {
-            "t" : "Big 12 (official report); also KSL Sports",
-            "u" : "https://sports.ksl.com/ncaa/byu-football/byu-baylor-availability-isaiah-glasker/578961"
-          }
         }
       ],
-      "summary" : "BYU beat Kansas 31-29 in triple overtime without LB Isaiah Glasker, RB Sione Moa, TE Will Zundel, CB Evan Johnson, TE Roger Saleapaga II and DT Keanu Tanuvasa (birth of his son); LJ Martin played the whole game (25 carries, 127 yards). Sitake said Monday he hopes to get Johnson, Saleapaga and RT Andrew Gentry back for Cincinnati; BYU's first report for that game comes out Wednesday evening.",
+      "summary" : "BYU's first report for Cincinnati has CB Evan Johnson and RT Andrew Gentry PROBABLE, LB Isaiah Glasker and TE Roger Saleapaga II DOUBTFUL, and RB Sione Moa and TE Will Zundel OUT. DT Keanu Tanuvasa, who missed Kansas for the birth of his son, is off the report and expected to play.",
       "watch" : {
         "note" : "BYU hasn't said these players are back, and none is on a recent report (players with long-term injuries are sometimes left off). Esera, McKee and Thomason were last listed OUT on the TCU report (Sept. 30).",
         "players" : [
           {
             "name" : "Siale Esera",
-            "note" : "Hurt in the first quarter against Arizona (Sept. 12).",
+            "note" : "Hurt in the first quarter against Arizona (Sept. 12). Listed as a backup ROVER linebacker on BYU's depth chart for Cincinnati (KSL, Nov. 24); BYU hasn't said he's back.",
             "num" : "54",
             "pos" : "LB"
           },
@@ -8465,6 +8501,16 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
           }
         ],
         "src" : [
+          {
+            "d" : "Nov. 25",
+            "t" : "KSL Sports (Mitch Harper): BYU availability report for Cincinnati",
+            "u" : "https://sports.ksl.com/ncaa/byu-football/byu-cincinnati-availability-report/579199"
+          },
+          {
+            "d" : "Nov. 24",
+            "t" : "KSL Sports (Mitch Harper): BYU depth chart for Cincinnati",
+            "u" : "https://sports.ksl.com/ncaa/byu-football/byu-football-depth-chart-cincinnati/579171"
+          },
           {
             "d" : "Nov. 23",
             "t" : "Daily Herald: Sitake Monday (hopes to get Gentry, Johnson, Saleapaga back)",
@@ -8530,20 +8576,30 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
       }
     },
     "Cincinnati" : {
-      "more" : "Cincinnati (6-5) beat Colorado 35-28 on Nov. 21 to become bowl eligible. Its first report for BYU is due Wednesday (Nov. 25). Until then these lines come from Cincinnati's Thursday update for Colorado (Nov. 19) and the Cincinnati Enquirer's game coverage, and are marked unclear. Cincinnati's Friday and game-day reports for Colorado weren't found in text.",
+      "more" : "Cincinnati (6-5) beat Colorado 35-28 on Nov. 21. Its first report for BYU came out Wednesday (Nov. 25), but the full list wasn't found in text - only RotoWire's notes on Payne and Henry. The other lines come from coach Scott Satterfield's Nov. 24 press conference and Cincinnati's reports for Colorado.",
       "official" : {
         "name" : "Big 12 player availability report",
         "url" : "https://big12sports.com/sports/2025/8/14/FBreporting.aspx"
       },
       "players" : [
         {
-          "cls" : "info",
-          "history" : "QUESTIONABLE on the Thursday update for Colorado (Nov. 19); did not play vs. Colorado (Nov. 21)",
+          "cls" : "out",
+          "history" : "OUT vs. BYU (initial report, Nov. 25, as relayed by RotoWire); QUESTIONABLE on the Thursday update for Colorado (Nov. 19); did not play vs. Colorado (Nov. 21)",
           "name" : "Gi'Bran Payne",
-          "note" : "Cincinnati's No. 2 running back. QUESTIONABLE on Thursday's update, then sat out the Colorado game; the Enquirer said Zion Johnson filled in \"for an injured Gi'Bran Payne.\" Cincinnati hasn't named the injury this time (he missed a game with an ankle injury in October).",
+          "note" : "Ruled out for BYU on Cincinnati's first report, per RotoWire (the full Cincinnati report wasn't found in text). He also missed the Colorado game. Satterfield said Nov. 24 he still didn't know if Payne would be available. Cincinnati hasn't named the injury.",
           "num" : "6",
           "pos" : "RB",
           "src" : [
+            {
+              "d" : "Nov. 25",
+              "t" : "RotoWire: Payne not playing vs. BYU, per the Big 12 availability report",
+              "u" : "https://www.rotowire.com/cfootball/headlines/gibran-payne-injury-not-playing-versus-byu-241590"
+            },
+            {
+              "d" : "Nov. 24",
+              "t" : "Cincinnati Athletics: Scott Satterfield's BYU week press conference (injury updates)",
+              "u" : "https://gobearcats.com/news/2026/11/24/watch-head-coach-scott-satterfield-players-preview-byu-game-1"
+            },
             {
               "d" : "Nov. 21",
               "t" : "Cincinnati Enquirer (Scott Springer, James Weber): Cincinnati 35, Colorado 28",
@@ -8565,16 +8621,26 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
               "u" : "https://sports.yahoo.com/articles/colorado-buffaloes-projected-inactive-list-210002867.html"
             }
           ],
-          "status" : "Unclear - missed the Colorado game"
+          "status" : "OUT vs. BYU (Nov. 25 report)"
         },
         {
-          "cls" : "info",
-          "history" : "Not on the Thursday update for Colorado (Nov. 19), but did not dress for the game (Nov. 21)",
+          "cls" : "out",
+          "history" : "Out for the season after knee surgery (Satterfield, Nov. 24); Not on the Thursday update for Colorado (Nov. 19), but did not dress for the game (Nov. 21)",
           "name" : "Malachi Henry",
-          "note" : "Wasn't on Cincinnati's Thursday update, but didn't dress for Colorado, the Cincinnati Enquirer's Scott Springer reported (via RotoWire). No reason given.",
+          "note" : "Satterfield on Nov. 24: \"Malachi, he's done. He had surgery on his knee, so he's done unfortunately.\" RotoWire wrote that Henry is \"good to go\" because he's not on the Nov. 25 report, but players lost for the season are often left off the Big 12 report, so we're going with the coach's word.",
           "num" : "9",
           "pos" : "WR",
           "src" : [
+            {
+              "d" : "Nov. 24",
+              "t" : "Cincinnati Athletics: Scott Satterfield's BYU week press conference (injury updates)",
+              "u" : "https://gobearcats.com/news/2026/11/24/watch-head-coach-scott-satterfield-players-preview-byu-game-1"
+            },
+            {
+              "d" : "Nov. 25",
+              "t" : "RotoWire: Henry listed as good to go vs. BYU, per the Big 12 availability report",
+              "u" : "https://www.rotowire.com/cfootball/headlines/malachi-henry-news-active-saturday-241593"
+            },
             {
               "d" : "Nov. 21",
               "t" : "RotoWire, citing Scott Springer (Cincinnati Enquirer): Henry not dressed",
@@ -8586,13 +8652,71 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
               "u" : "https://x.com/Knickoson42/status/2123621075099758670"
             }
           ],
-          "status" : "Unclear - did not dress vs. Colorado"
+          "status" : "Out for season - knee surgery (Satterfield)"
+        },
+        {
+          "cls" : "doubt",
+          "history" : "Satterfield: \"probably not going to be available\" for BYU (Nov. 24); QUESTIONABLE on the Thursday update for Colorado (Nov. 19)",
+          "name" : "Jacob Finley",
+          "note" : "Senior cornerback. Satterfield said Nov. 24 Finley is \"probably not going to be available\" for BYU. His status on Cincinnati's Nov. 25 report wasn't found in text.",
+          "num" : "0",
+          "pos" : "CB",
+          "src" : [
+            {
+              "d" : "Nov. 24",
+              "t" : "Cincinnati Athletics: Scott Satterfield's BYU week press conference (injury updates)",
+              "u" : "https://gobearcats.com/news/2026/11/24/watch-head-coach-scott-satterfield-players-preview-byu-game-1"
+            },
+            {
+              "d" : "Nov. 19",
+              "t" : "Keegan Nickoson (Bearcat Journal) on X: Big 12 availability report, Thursday update, Cincinnati vs. Colorado",
+              "u" : "https://x.com/Knickoson42/status/2123621075099758670"
+            },
+            {
+              "d" : "Nov. 20",
+              "t" : "Colorado Buffaloes On SI, via Yahoo Sports: Cincinnati availability report",
+              "u" : "https://sports.yahoo.com/articles/colorado-buffaloes-projected-inactive-list-210002867.html"
+            }
+          ],
+          "status" : "Probably out - Satterfield (Nov. 24)"
+        },
+        {
+          "cls" : "info",
+          "history" : "Left the Colorado game and didn't return (Nov. 21)",
+          "name" : "Jasper Beeler",
+          "note" : "Satterfield on Nov. 24: Beeler \"went out of the game, didn't come back in, so we have to wait and see on him.\" Not named on any report found in text.",
+          "num" : "",
+          "pos" : "DB",
+          "src" : [
+            {
+              "d" : "Nov. 24",
+              "t" : "Cincinnati Athletics: Scott Satterfield's BYU week press conference (injury updates)",
+              "u" : "https://gobearcats.com/news/2026/11/24/watch-head-coach-scott-satterfield-players-preview-byu-game-1"
+            }
+          ],
+          "status" : "Unclear - left the Colorado game"
+        },
+        {
+          "cls" : "info",
+          "history" : "Left the Colorado game, then returned (Nov. 21)",
+          "name" : "MJ Cannon",
+          "note" : "Satterfield said Cannon \"went out, and then he came back,\" adding \"we're dinged up in the secondary\" (Nov. 24). Not named on any report found in text.",
+          "num" : "",
+          "pos" : "DB",
+          "src" : [
+            {
+              "d" : "Nov. 24",
+              "t" : "Cincinnati Athletics: Scott Satterfield's BYU week press conference (injury updates)",
+              "u" : "https://gobearcats.com/news/2026/11/24/watch-head-coach-scott-satterfield-players-preview-byu-game-1"
+            }
+          ],
+          "status" : "Unclear - banged up vs. Colorado"
         },
         {
           "cls" : "info",
           "history" : "OUT on the Thursday update for Colorado (Nov. 19)",
           "name" : "Filip Maciorowski",
-          "note" : "OUT on Cincinnati's Thursday update for Colorado. Cincinnati hasn't named the injury.",
+          "note" : "OUT on Cincinnati's Thursday update for Colorado. Cincinnati hasn't named the injury. His status on Cincinnati's Nov. 25 report for BYU wasn't found in text.",
           "num" : "12",
           "pos" : "ILB",
           "src" : [
@@ -8612,29 +8736,8 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
         {
           "cls" : "info",
           "history" : "QUESTIONABLE on the Thursday update for Colorado (Nov. 19)",
-          "name" : "Jacob Finley",
-          "note" : "Senior cornerback. QUESTIONABLE on Cincinnati's Thursday update for Colorado; whether he played wasn't confirmed in the game coverage found.",
-          "num" : "0",
-          "pos" : "CB",
-          "src" : [
-            {
-              "d" : "Nov. 19",
-              "t" : "Keegan Nickoson (Bearcat Journal) on X: Big 12 availability report, Thursday update, Cincinnati vs. Colorado",
-              "u" : "https://x.com/Knickoson42/status/2123621075099758670"
-            },
-            {
-              "d" : "Nov. 20",
-              "t" : "Colorado Buffaloes On SI, via Yahoo Sports: Cincinnati availability report",
-              "u" : "https://sports.yahoo.com/articles/colorado-buffaloes-projected-inactive-list-210002867.html"
-            }
-          ],
-          "status" : "Unclear - QUESTIONABLE vs. Colorado"
-        },
-        {
-          "cls" : "info",
-          "history" : "QUESTIONABLE on the Thursday update for Colorado (Nov. 19)",
           "name" : "Chidera Otutu",
-          "note" : "QUESTIONABLE on Cincinnati's Thursday update for Colorado.",
+          "note" : "QUESTIONABLE on Cincinnati's Thursday update for Colorado. His status on Cincinnati's Nov. 25 report for BYU wasn't found in text.",
           "num" : "11",
           "pos" : "DL",
           "src" : [
@@ -8650,33 +8753,12 @@ BYU|Zak Yamauchi|10|0|2026-09-05,2026-09-12,2026-09-19,2026-10-09,2026-10-17,202
             }
           ],
           "status" : "Unclear - QUESTIONABLE vs. Colorado"
-        },
-        {
-          "cls" : "likely",
-          "history" : "QUESTIONABLE on the Thursday update for Colorado (Nov. 19), then played",
-          "name" : "Cole Tabb",
-          "note" : "Lead running back. Listed QUESTIONABLE Thursday but played and scored four touchdowns against Colorado (120 rushing, 110 receiving yards; Cincinnati Enquirer).",
-          "num" : "3",
-          "pos" : "RB",
-          "src" : [
-            {
-              "d" : "Nov. 21",
-              "t" : "Cincinnati Enquirer (Scott Springer, James Weber): Cincinnati 35, Colorado 28",
-              "u" : "https://www.cincinnati.com/story/sports/college/university-of-cincinnati/2026/11/21/cincinnati-bearcats-colorado-buffaloes-live-updates--live/92845846007/"
-            },
-            {
-              "d" : "Nov. 19",
-              "t" : "Keegan Nickoson (Bearcat Journal) on X: Big 12 availability report, Thursday update, Cincinnati vs. Colorado",
-              "u" : "https://x.com/Knickoson42/status/2123621075099758670"
-            }
-          ],
-          "status" : "Played vs. Colorado"
         }
       ],
-      "summary" : "Cincinnati's report for BYU isn't out yet (due Wed., Nov. 25). RB Gi'Bran Payne missed the Colorado game hurt and WR Malachi Henry didn't dress (Cincinnati Enquirer); ILB Filip Maciorowski was OUT and CB Jacob Finley and DL Chidera Otutu QUESTIONABLE on Thursday's update. RB Cole Tabb was questionable but scored four TDs."
+      "summary" : "RB Gi'Bran Payne is OUT for BYU (Nov. 25 report, via RotoWire), and WR Malachi Henry is done for the season after knee surgery, Scott Satterfield said. Satterfield said CB Jacob Finley is \"probably not going to be available,\" and DB Jasper Beeler is wait-and-see."
     }
   },
-  "updated" : "Tue., Nov. 24, 2026 (after BYU's Kansas game; Cincinnati reports due Wed.)"
+  "updated" : "Thu., Nov. 26, 2026 (after both teams' first reports for Saturday's game)"
 }
 </script>
 <script type="text/plain" id="d-injcfb">Air Force|S. Maiava-Alaimalo|WR|Questionable|Undisclosed|Oct 18

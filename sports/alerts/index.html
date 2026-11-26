@@ -178,58 +178,6 @@ body.jbl-on .toast{bottom:calc(52px + env(safe-area-inset-bottom,0px))}
      hub does and can hand it to /sports/fluid.js, which lets the hub draw the new page inside a view transition. Until that
      file has loaded (or when it declines), the page change goes straight through as before. -->
 <script>addEventListener('hashchange', function (e) { var f = window.__jshNav; if (!f || e.__jshPass) return; try { if (f(e) === true) e.stopImmediatePropagation(); } catch (x) {} }, true);</script>
-<script>
-/* Favorites are per phone. A browser that already used the hub keeps the teams it was showing
-   (BYU football, Eagles, Jazz, BYU hoops) the first time this runs. A new browser starts with none,
-   and this flag stops a later visit from filling those teams in. */
-(function () {
-  try {
-    if (localStorage.getItem('jsh-favs-ready') === '1') return;
-    function read(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
-    var seen = read('jsh-shared') || read('cfb-settings') || read('nfl-settings') || read('nba-settings') || read('cbb-settings') || localStorage.getItem('jsh-live') || localStorage.getItem('jsh-glance') || localStorage.getItem('jsh-teams-mini');
-    if (seen) {
-      [['cfb-settings', 'BYU'], ['nfl-settings', 'PHI'], ['nba-settings', 'UTAH'], ['cbb-settings', '252']].forEach(function (pair) {
-        var o = read(pair[0]) || {};
-        if (o.fav == null || o.fav === '') { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
-      });
-    }
-    localStorage.setItem('jsh-favs-ready', '1');
-  } catch (e) {}
-})();
-</script>
-<script>
-/* Holiday class before the page paints, so a phone sees Thanksgiving or Christmas even while holiday.js is still loading. */
-(function () {
-  var q = ''; try { q = (new URLSearchParams(location.search).get('hol') || '').toLowerCase(); } catch (e) {}
-  if (q === 'off' || q === 'none') return;
-  var tz = 'MT'; try { tz = (JSON.parse(localStorage.getItem('jsh-shared') || '{}') || {}).tz || 'MT'; } catch (e) {}
-  var zone = { ET: 'America/New_York', CT: 'America/Chicago', MT: 'America/Denver', PT: 'America/Los_Angeles' }[tz] || 'America/Denver';
-  var y, m, d;
-  try {
-    new Intl.DateTimeFormat('en-US', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date()).forEach(function (p) {
-      if (p.type === 'year') y = +p.value; if (p.type === 'month') m = +p.value; if (p.type === 'day') d = +p.value;
-    });
-  } catch (e) { var n = new Date(); y = n.getFullYear(); m = n.getMonth() + 1; d = n.getDate(); }
-  var dow = new Date(y, 10, 1).getDay(), first = dow <= 4 ? 1 + (4 - dow) : 1 + (11 - dow), tg = first + 21, kind = '';
-  if (q === 'thanks' || q === 'thanksgiving') kind = 'thanks';
-  else if (q === 'xmas' || q === 'christmas') kind = 'xmas';
-  else if (m === 11 && d === tg) kind = 'thanks';
-  else if ((m === 11 && d > tg) || (m === 12 && d <= 26)) kind = 'xmas';
-  if (!kind) return;
-  document.documentElement.classList.add(kind === 'thanks' ? 'jsh-thanks' : 'jsh-xmas');
-  document.documentElement.dataset.jshHol = kind;
-})();
-</script>
-<style id="jsh-holiday-boot">
-html.jsh-thanks,html.jsh-thanks body,html.jsh-thanks body::before{background:radial-gradient(90% 46% at 50% -10%,rgba(240,170,60,.55),transparent 58%),linear-gradient(180deg,#4a2a12,#24160c 46%,#140e09)!important;background-color:#140e09!important}
-html.jsh-thanks.light,html.jsh-thanks.light body,html.jsh-thanks.light body::before,html.jsh-thanks[data-theme="light"],html.jsh-thanks[data-theme="light"] body,html.jsh-thanks[data-theme="light"] body::before{background:linear-gradient(180deg,#f8e6c8,#f3d7ae 50%,#edd0b0)!important;background-color:#f6e4c4!important}
-html.jsh-xmas,html.jsh-xmas body,html.jsh-xmas body::before{background:radial-gradient(70% 42% at 0% -8%,rgba(36,150,90,.55),transparent 60%),radial-gradient(60% 40% at 100% 0%,rgba(176,28,48,.5),transparent 62%),linear-gradient(180deg,#0d3d2a,#07140f 50%,#1a0c10)!important;background-color:#071410!important}
-html.jsh-xmas.light,html.jsh-xmas.light body,html.jsh-xmas.light body::before,html.jsh-xmas[data-theme="light"],html.jsh-xmas[data-theme="light"] body,html.jsh-xmas[data-theme="light"] body::before{background:linear-gradient(180deg,#e5f6ee,#f7e8ea 55%,#e7f3ec)!important;background-color:#e7f3ec!important}
-html.jsh-thanks .jsh{background:#2a160c!important}
-html.jsh-xmas .jsh{background:#071a12!important}
-html.jsh-thanks :is(.jsh-dock,.btab,.jbl){background:#2a160c!important;border-color:rgba(240,186,96,.55)!important;color:#f6e2b8}
-html.jsh-xmas :is(.jsh-dock,.btab,.jbl){background:#0c2418!important;border-color:rgba(220,64,78,.5)!important;color:#e7f6ee}
-</style>
 <!-- Glance mode and page-shaped placeholders (2026-11-19, Jamo picked "Compact glance mode" and "Smoother loading").
      - Glance: the switch next to light/dark (.jsh-gl) tightens spacing, trims subtitles and shrinks big numbers so more fits
        on a phone. Saved per browser (localStorage jsh-glance); the class is set here, before the page draws, so it never jumps.

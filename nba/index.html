@@ -408,7 +408,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Explain: tap a dotted stat name for what it means; press and hold a column name that sorts (polish/explain.js, published by build.sh as /sports/explain.js) -->
 <script src="/sports/explain.js?v=20261110b" defer></script>
 <!-- Follow: up to two followed games in a slim scoreboard on every page, with the hub's own win chance (polish/winodds.js + polish/follow.js, published by build.sh as /sports/follow.js) -->
-<script src="/sports/follow.js?v=20261122a" defer></script>
+<script src="/sports/follow.js?v=20261126x" defer></script>
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
@@ -422,7 +422,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
 <script src="/sports/gameday.js?v=20261126p" defer></script>
 <!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
-<script src="/sports/shell.js?v=20261126t" defer></script>
+<script src="/sports/shell.js?v=20261126x" defer></script>
 <!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
 <script src="/sports/holiday.js?v=20261126x" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
@@ -9997,7 +9997,7 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
   const title=el=>(el&&el.firstChild&&el.firstChild.nodeType===3?el.firstChild.textContent:el?el.textContent:'').trim();
   /* a .sec heading folds the siblings after it, up to the next heading */
   function group(sec){ const out=[]; let n=sec.nextElementSibling; while(n&&!n.classList.contains('sec')&&!n.classList.contains('gbot')&&!n.matches('[data-fold-stop]')){ out.push(n); n=n.nextElementSibling; } return out; }
-  function paint(el){ const on=el.dataset.foldOpen==='1'; el.classList.toggle('fold-closed',!on); const b=el.querySelector(':scope > .fold-btn'); if(b){ b.setAttribute('aria-expanded',on?'true':'false'); b.textContent=on?'Hide':'Show'; }
+  function paint(el){ const on=el.dataset.foldOpen==='1'; el.classList.toggle('fold-closed',!on); const b=el.querySelector(':scope > .fold-btn, :scope > .hd > .fold-btn'); /* a card's button sits in its .hd (11-26: it never flipped to Hide) */ if(b){ b.setAttribute('aria-expanded',on?'true':'false'); const tx=on?'Hide':'Show'; if(b.textContent!==tx) b.textContent=tx; /* only when it changes (11-26): rewriting re-fired the observer in a loop */ }
     if(el.classList.contains('sec')) group(el).forEach(x=>x.classList.toggle('fold-hide',!on)); }
   function tiles(){ if(V.querySelector('.fold-keep, .fold-more')) return; const kids=[...V.children]; const firstSec=kids.findIndex(e=>e.classList.contains('sec')); const grids=kids.slice(0, firstSec<0?kids.length:firstSec).filter(e=>e.classList.contains('grid')&&e.querySelector(':scope > .tile'));
     if(!grids.length) return; const all=grids.flatMap(g=>[...g.querySelectorAll(':scope > .tile')]); const pick=[]; CFG.keep.forEach(k=>{ const t=all.find(x=>{ const l=x.querySelector('.lbl'); return l&&l.textContent.trim().toLowerCase()===k.toLowerCase(); }); if(t&&pick.indexOf(t)<0) pick.push(t); }); pick.length=Math.min(pick.length,4); /* the first four found: on CFB team pages the playoff ranking once the committee ranks teams, else points (2026-11-10) */

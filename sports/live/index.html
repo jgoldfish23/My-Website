@@ -475,6 +475,90 @@ body.livetv.livetv-fs .spot{padding:14px 14px 12px}
   body.livetv.livetv-fs .st-s{font-size:clamp(32px,14vh,64px)}
 }
 /* lc2:end */
+/* tv3:start - TV mode and full screen, cleaner (2026-11-26, Jamo: "improve the TV mode and Live screen, and full screen").
+   Only the games on screen: no holiday band or seasonal wash, the team-color ambient behind everything. */
+body.livetv .jsh-hol,body.livetv .jsh-hol-frame,body.livetv .jsh-hol-wash{display:none!important}
+/* the repeated :root outweighs the holiday field's html.jsh-thanks(.light) body rules; each theme gets its own plain field */
+html:root:root:not(.light):has(body.livetv),html:root:root:not(.light) body.livetv{background:#03050a!important}
+html:root:root.light:has(body.livetv),html:root:root.light body.livetv{background:#eef1f5!important}
+html:root:root body.livetv::before{display:none!important}
+/* light theme: the title, live count, ticker scores and rotation dots were white or pale yellow on a light field */
+:root.light body.livetv .tvbar .t{background:linear-gradient(90deg,#0f172a,#be123c 55%,#6d28d9);-webkit-background-clip:text;background-clip:text;color:transparent}
+:root.light body.livetv .tvbar .t b{-webkit-text-fill-color:#be123c;color:#be123c}
+:root.light body.livetv .tvbar .clock{color:#334155}
+:root.light .tvd-count{color:#9f1239;background:rgba(225,29,72,.08);border-color:rgba(225,29,72,.35)}
+:root.light .tvd-tick{background:rgba(255,255,255,.75);border-color:rgba(15,23,42,.12)}
+:root.light .tk-i em{color:#9a3412}
+:root.light .tvd-rot{background:rgba(255,255,255,.7);border-color:rgba(15,23,42,.1);color:#475569}
+:root.light .tvd-dots button{background:rgba(15,23,42,.22)}
+:root.light .tvd-prog{background:rgba(15,23,42,.1)}
+/* hands off: after 4 seconds with no mouse, touch or key, the buttons and the cursor fade; the title, clock and live count stay */
+body.livetv .tvbar .btn,body.livetv .tvd-rot .tvd-hint{transition:opacity .5s ease}
+body.livetv .tvbar{transition:background .5s ease,border-color .5s ease,box-shadow .5s ease}
+body.livetv.tv-idle .tvbar .btn,body.livetv.tv-idle .tvd-rot .tvd-hint{opacity:0;pointer-events:none}
+body.livetv.tv-idle .tvbar{background:transparent;border-color:transparent;box-shadow:none}
+body.livetv.tv-idle,body.livetv.tv-idle *{cursor:none!important}
+/* a TV or laptop: the spotlight uses its whole panel (it was ~40% empty under the game link). Sizes follow the panel itself
+   (cqw/cqh = 1% of its width/height), so a 720p laptop and a 4K TV both fit. The scoreboard row takes the spare height and
+   the game link sits on the bottom edge. */
+@media (min-width:1000px) and (min-height:560px){
+  body.livetv .tvd-spot{container:tvspot/size}
+  body.livetv .tvd-spot .spot{display:flex;flex-direction:column}
+  body.livetv .tvd-spot .spot-board{flex:1 0 auto;margin:10px 0;align-items:center}
+  body.livetv .tvd .spot-act{margin-top:auto;padding-top:12px}
+  /* one row (logo, name, score | clock | score, name, logo) - sized so the names keep their room */
+  body.livetv .tvd .st .plate{width:clamp(52px,8cqw,110px);height:clamp(52px,8cqw,110px);border-radius:clamp(14px,2.2cqw,28px)}
+  body.livetv .tvd .st .plate img{width:76%;height:76%}
+  body.livetv .tvd .st-s{font-size:clamp(42px,min(6.8cqw,14cqh),110px)}
+  body.livetv .tvd .st-n b{font-size:clamp(17px,min(3cqw,5cqh),40px)}
+  body.livetv .tvd .st-n small{display:block;font-size:clamp(12px,1.5cqw,18px)}
+  body.livetv .tvd .spot-mid .clk{font-size:clamp(16px,2.6cqw,34px)}
+  body.livetv .tvd .spot-mid .sub{font-size:clamp(12px,1.5cqw,18px)}
+  body.livetv .tvd .spot-sit,body.livetv .tvd .spot-last{font-size:clamp(14px,1.6cqw,22px)}
+  body.livetv .tvd .wp-sp{height:56px}
+  body.livetv .lv{padding-bottom:10px}
+}
+/* a tall panel (a TV): each team stands in a column - logo, name, then a huge score under it - like a broadcast scorebug */
+@container tvspot (min-height:760px){
+  body.livetv .tvd .st,body.livetv .tvd .st.h{flex-direction:column;align-items:center;text-align:center;gap:clamp(8px,1.6cqh,18px)}
+  body.livetv .tvd .st-n{align-items:center;max-width:100%}
+  body.livetv .tvd .st-s,body.livetv .tvd .st.h .st-s{margin:clamp(2px,1cqh,12px) 0 0}
+  body.livetv .tvd .st .plate{width:min(11cqw,14cqh);height:min(11cqw,14cqh);border-radius:min(2.6cqw,3.4cqh)}
+  body.livetv .tvd .st-s{font-size:min(15cqw,17cqh)}
+  body.livetv .tvd .st-n b{font-size:min(4.4cqw,5.6cqh)}
+  body.livetv .tvd .st-n small{font-size:min(1.9cqw,2.6cqh)}
+  body.livetv .tvd .spot-mid .clk{font-size:min(3.4cqw,4.8cqh)}
+  body.livetv .tvd .spot-mid .sub{font-size:min(1.9cqw,2.6cqh)}
+  body.livetv .tvd .spot-sit,body.livetv .tvd .spot-last{font-size:min(1.9cqw,2.6cqh)}
+  body.livetv .tvd .wp-sp{height:clamp(56px,9cqh,130px)}
+}
+/* a phone on its side: one tight screen - slim bar and note, the spotlight full width with the scoreboard, clock and win
+   chance in view (the extras are a tap away on the game page), then the other games below */
+@media (orientation:landscape) and (max-height:520px){
+  body.livetv .lv,body.livetv.livetv-fs .lv{padding:max(6px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) 10px max(14px,env(safe-area-inset-left))}
+  body.livetv .tvbar,body.livetv.livetv-fs .tvbar{display:flex;flex-wrap:nowrap;gap:10px;padding:5px 10px;margin:0 0 6px;border-radius:12px}
+  body.livetv .tvbar .t,body.livetv.livetv-fs .tvbar .t{font-size:15px}
+  body.livetv .tvbar .clock,body.livetv.livetv-fs .tvbar .clock{font-size:14px}
+  body.livetv .tvbar .tvd-count{padding:3px 8px;font-size:11.5px}
+  body.livetv .tvbar .wake{display:none}
+  body.livetv .tvbar .btn,body.livetv.livetv-fs .tvbar .btn{padding:5px 10px;font-size:12px}
+  body.livetv .demo,body.livetv.livetv-fs .demo{padding:4px 10px;font-size:11px;margin:0 0 6px}
+  body.livetv.livetv-fs .tvd:not([hidden]){flex-direction:column}
+  body.livetv .tvd-main,body.livetv .tvd-side,body.livetv.livetv-fs .tvd-main,body.livetv.livetv-fs .tvd-side{flex:1 1 auto;width:100%}
+  body.livetv .tvd-spot .spot,body.livetv.livetv-fs .spot{padding:10px 16px}
+  body.livetv .tvd .spot-board{margin:6px 0 4px;gap:10px}
+  body.livetv .tvd .st .plate{width:50px;height:50px;border-radius:14px}
+  body.livetv .tvd .st .plate img{width:38px;height:38px}
+  body.livetv .tvd .st-n b{font-size:19px}
+  body.livetv .tvd .st-n small{font-size:11.5px}
+  body.livetv .tvd .st-s,body.livetv.livetv-fs .st-s{font-size:clamp(36px,14vh,60px)}
+  body.livetv .tvd .spot-why,body.livetv .tvd .spot-sit,body.livetv .tvd .spot-act{display:none}
+  body.livetv .tvd .wp{margin-top:4px}
+  body.livetv .tvd .wp-sp{height:26px;margin-top:4px}
+  body.livetv .tvd .spot-last{margin-top:6px;padding:6px 10px;font-size:13px}
+  body.livetv .tvd-rot{margin-top:6px;padding:5px 10px}
+}
+/* tv3:end */
 @media (prefers-reduced-motion:reduce){body::before,.lv-head h1 b,.pill-live::before,.bump,.toast,.feed li.new a,.btn.pri,.lvf button.on,.tvd-amb,.tvd-spot.swap .spot{animation:none!important}.mc:hover,.btn:hover,.lvf button:hover{transform:none}}
 </style>
 </head>
@@ -856,7 +940,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
 <script src="/sports/bl.js?v=20261101a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
-<script src="/sports/holo.js?v=20261110b" defer></script>
+<script src="/sports/holo.js?v=20261126x" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
@@ -2780,7 +2864,19 @@ function setTV(on, user){ TVM = on; document.body.classList.toggle('livetv', on)
   if (user) { try { history.replaceState(null, '', location.pathname + location.search + (on ? '#tv' : '')); } catch (e) {} }
   if (!on) { clearTimeout(TVT); TVT = null; const m = $('#tvd-moment'); if (m) m.hidden = true; tvFsOff(); }
   else if (user && matchMedia('(min-width:900px)').matches) { tvFsNative(true); }
-  if (VIEW) render(); tick(); wake(); tvFsLabel(); }
+  if (VIEW) render(); tick(); wake(); tvFsLabel(); tvStir(); }
+/* hands off (11-26): in TV mode the buttons and cursor fade after 4 seconds without a mouse, touch or key; any of those brings them back */
+let TVIDLE = null;
+function tvStir(){ document.body.classList.remove('tv-idle'); clearTimeout(TVIDLE); TVIDLE = null;
+  if (TVM) TVIDLE = setTimeout(() => { if (TVM) document.body.classList.add('tv-idle'); }, 4000); }
+['pointermove', 'pointerdown', 'keydown', 'touchstart', 'wheel'].forEach(ev => addEventListener(ev, () => { if (TVM) tvStir(); }, {passive: true}));
+/* phones (11-26): no arrow keys, so a sideways swipe on the spotlight switches games and the hint says so */
+const TVTOUCH = !!(window.matchMedia && matchMedia('(pointer: coarse)').matches);
+{ let sx = null, sy = 0; const sp = document.getElementById('tvd-spot');
+  if (sp) { sp.addEventListener('touchstart', e => { if (!TVM || e.touches.length !== 1) { sx = null; return; } sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive: true});
+    sp.addEventListener('touchend', e => { if (sx == null || !TVM) return; const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; sx = null;
+      const k = tvPool().length; if (k < 2 || Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+      TVROT = (TVROT + (dx < 0 ? 1 : k - 1)) % k; tvRender(true); }, {passive: true}); } }
 $('#tv-btn').addEventListener('click', () => setTV(true, true));
 $('#tv-exit').addEventListener('click', () => setTV(false, true));
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && TVM) setTV(false, true); });
@@ -2818,7 +2914,7 @@ function tvRender(sw){ const box = $('#tvd'); if (!box) return; box.hidden = !TV
   const rot = $('#tvd-rot');
   if (pool.length > 1) { rot.hidden = false;
     if (switched || !rot.querySelector('.tvd-prog')) rot.innerHTML = '<span class="tvd-dots">' + pool.map((x, i) => '<button type="button" data-tvi="' + i + '" class="' + (i === TVROT ? 'on' : '') + '" style="--c:' + LG[x.lg].c + '" aria-label="Show ' + esc(nameOf(x, 'a') + ' at ' + nameOf(x, 'h')) + '"></button>').join('') + '</span>'
-      + '<span class="tvd-prog' + (TVPAUSE ? ' paused' : '') + '" style="--rot:' + ROT_MS + 'ms"><i></i></span><span class="tvd-hint">' + (TVPAUSE ? 'Paused · Space to resume' : 'The hottest games take turns · ← → switch · Space pauses') + '</span>';
+      + '<span class="tvd-prog' + (TVPAUSE ? ' paused' : '') + '" style="--rot:' + ROT_MS + 'ms"><i></i></span><span class="tvd-hint">' + (TVTOUCH ? (TVPAUSE ? 'Paused · tap the dots to switch' : 'The hottest games take turns · swipe to switch') : (TVPAUSE ? 'Paused · Space to resume' : 'The hottest games take turns · ← → switch · Space pauses')) + '</span>';
     if (switched) tvSchedule(); }
   else { clearTimeout(TVT); TVT = null; rot.hidden = !SPOT; rot.innerHTML = SPOT ? '<span class="tvd-hint">You picked this game. <button type="button" class="tvd-un" data-spot="">Go back to taking turns</button></span>' : ''; }
   /* the side: every other live game; with nothing else live, what's coming up, then today's finals */

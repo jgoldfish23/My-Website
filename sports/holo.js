@@ -179,6 +179,7 @@
       if (cs.borderTopLeftRadius === '0px') { flat.add(el); return; } /* list rows stay plain */
       const s = el.style; s.setProperty('--hbg', cs.backgroundImage); s.setProperty('--hbs', cs.backgroundSize); s.setProperty('--hbp', cs.backgroundPosition); s.setProperty('--hbr', cs.backgroundRepeat);
       el.classList.add('holo-lit'); lit = el; }
+    if (!lit) return; /* 11-26: the pointer over bare page (nothing lit) threw on every mouse move */
     const r = lit.getBoundingClientRect(); lit.style.setProperty('--hx', Math.round(x - r.left) + 'px'); lit.style.setProperty('--hy', Math.round(y - r.top) + 'px'); }
   D.addEventListener('pointermove', e => { if (e.pointerType !== 'mouse') return; pmE = e; if (pmQ) return; pmQ = true;
     raf(() => { pmQ = false; const ev = pmE; if (!on || !FINE.matches || RM.matches) { unlight(); return; }

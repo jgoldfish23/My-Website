@@ -23,6 +23,25 @@
      file has loaded (or when it declines), the page change goes straight through as before. -->
 <script>addEventListener('hashchange', function (e) { var f = window.__jshNav; if (!f || e.__jshPass) return; try { if (f(e) === true) e.stopImmediatePropagation(); } catch (x) {} }, true);</script>
 <script>
+/* Favorites are per phone. A browser that already used the hub keeps the teams it was showing
+   (BYU football, Eagles, Jazz, BYU hoops) the first time this runs. A new browser starts with none,
+   and this flag stops a later visit from filling those teams in. */
+(function () {
+  try {
+    if (localStorage.getItem('jsh-favs-ready') === '1') return;
+    function read(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+    var seen = read('jsh-shared') || read('cfb-settings') || read('nfl-settings') || read('nba-settings') || read('cbb-settings') || localStorage.getItem('jsh-live') || localStorage.getItem('jsh-glance') || localStorage.getItem('jsh-teams-mini');
+    if (seen) {
+      [['cfb-settings', 'BYU'], ['nfl-settings', 'PHI'], ['nba-settings', 'UTAH'], ['cbb-settings', '252']].forEach(function (pair) {
+        var o = read(pair[0]) || {};
+        if (o.fav == null || o.fav === '') { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
+      });
+    }
+    localStorage.setItem('jsh-favs-ready', '1');
+  } catch (e) {}
+})();
+</script>
+<script>
 /* Holiday class before the page paints, so a phone sees Thanksgiving or Christmas even while holiday.js is still loading. */
 (function () {
   var q = ''; try { q = (new URLSearchParams(location.search).get('hol') || '').toLowerCase(); } catch (e) {}
@@ -4154,7 +4173,7 @@ const sgn1 = x => x == null || isNaN(x) ? '—' : (x > 0 ? '+' : x < 0 ? '−' :
 const ordinal = n => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] || 'th');
 
 /* ---------- settings (shared light/dark and time zone with the other hubs through the top bar: key cbb-settings) ---------- */
-const SETTINGS = Object.assign({theme: 'auto', fav: '252', tint: true, tz: 'MT', ticker: 'on'}, lsGet('cbb-settings', {}));
+const SETTINGS = Object.assign({theme: 'auto', fav: null, tint: true, tz: 'MT', ticker: 'on'}, lsGet('cbb-settings', {}));
 function saveSettings(){ lsSet('cbb-settings', SETTINGS); }
 function isDarkMode(){ if (SETTINGS.theme === 'dark') return true; if (SETTINGS.theme === 'light') return false; return !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches); }
 function applyTheme(){ const r = document.documentElement; if (SETTINGS.theme === 'auto') r.removeAttribute('data-theme'); else r.dataset.theme = SETTINGS.theme; }
@@ -4432,13 +4451,13 @@ function renderSettings(){ setNav('settings'); const segs = (k, opts) => '<div c
   let html = pageHead('CBB Hardwood', 'Settings', 'Saved on this device. Light or dark and the time zone carry over to the college football, NFL and NBA pages too.');
   html += '<div class="card"><div class="bd" style="display:grid;gap:16px">'
     + '<div><div class="lbl" style="margin-bottom:6px">Theme</div>' + segs('theme', [['auto', 'Match my device'], ['light', 'Light'], ['dark', 'Dark']]) + '</div>'
-    + '<div><div class="lbl" style="margin-bottom:6px">Your team</div><select id="set-fav">' + TEAMS.slice().sort((a, b) => a.short.localeCompare(b.short)).map(t => '<option value="' + t.id + '"' + (t.id === favId() ? ' selected' : '') + '>' + esc(t.full) + '</option>').join('') + '</select><p class="mini">Weber State always counts as one of your teams too.</p></div>'
+    + '<div><div class="lbl" style="margin-bottom:6px">Your team</div><select id="set-fav">' + (SETTINGS.fav ? '' : '<option value="" selected>Choose a team</option>') + TEAMS.slice().sort((a, b) => a.short.localeCompare(b.short)).map(t => '<option value="' + t.id + '"' + (SETTINGS.fav && t.id === SETTINGS.fav ? ' selected' : '') + '>' + esc(t.full) + '</option>').join('') + '</select><p class="mini">Weber State always counts as one of your teams too.</p></div>'
     + '<div><div class="lbl" style="margin-bottom:6px">Time zone</div>' + segs('tz', [['ET', 'Eastern'], ['CT', 'Central'], ['MT', 'Mountain'], ['PT', 'Pacific']]) + '</div>'
     + '<div><div class="lbl" style="margin-bottom:6px">Score strip under the header</div>' + segs('ticker', [['on', 'On'], ['off', 'Off']]) + '</div>'
     + '<div><div class="lbl" style="margin-bottom:6px">Color pages in your team’s colors</div>' + segs('tint', [['true', 'Yes'], ['false', 'No']]) + '</div></div></div>';
   view.innerHTML = html; }
 document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-set] [data-v]'); if (!b) return; const k = b.closest('[data-set]').dataset.set; let v = b.dataset.v; if (v === 'true') v = true; else if (v === 'false') v = false; SETTINGS[k] = v; saveSettings(); applyTheme(); route(); });
-document.addEventListener('change', e => { if (e.target.id === 'set-fav') { SETTINGS.fav = e.target.value; saveSettings(); recalcProj(); route(); toast('Your team: ' + team(SETTINGS.fav).full); } });
+document.addEventListener('change', e => { if (e.target.id === 'set-fav') { if (!e.target.value) return; SETTINGS.fav = e.target.value; saveSettings(); recalcProj(); route(); toast('Your team: ' + team(SETTINGS.fav).full); } });
 /* ---------- Jamo's Bracketology (2026-11-01, Jamo: "include a fun March Madness Bracket Predictor. Jamo's Bracketology") ----------
    #/bracket        the projected field of 68 if the season ended today: seed lines, the bubble, bids by conference
    #/bracket/mine   Jamo's bracket: pick every game (tap a team), or fill it with the favorites or a simulation

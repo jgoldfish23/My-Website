@@ -23,6 +23,25 @@
      file has loaded (or when it declines), the page change goes straight through as before. -->
 <script>addEventListener('hashchange', function (e) { var f = window.__jshNav; if (!f || e.__jshPass) return; try { if (f(e) === true) e.stopImmediatePropagation(); } catch (x) {} }, true);</script>
 <script>
+/* Favorites are per phone. A browser that already used the hub keeps the teams it was showing
+   (BYU football, Eagles, Jazz, BYU hoops) the first time this runs. A new browser starts with none,
+   and this flag stops a later visit from filling those teams in. */
+(function () {
+  try {
+    if (localStorage.getItem('jsh-favs-ready') === '1') return;
+    function read(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+    var seen = read('jsh-shared') || read('cfb-settings') || read('nfl-settings') || read('nba-settings') || read('cbb-settings') || localStorage.getItem('jsh-live') || localStorage.getItem('jsh-glance') || localStorage.getItem('jsh-teams-mini');
+    if (seen) {
+      [['cfb-settings', 'BYU'], ['nfl-settings', 'PHI'], ['nba-settings', 'UTAH'], ['cbb-settings', '252']].forEach(function (pair) {
+        var o = read(pair[0]) || {};
+        if (o.fav == null || o.fav === '') { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
+      });
+    }
+    localStorage.setItem('jsh-favs-ready', '1');
+  } catch (e) {}
+})();
+</script>
+<script>
 /* Holiday class before the page paints, so a phone sees Thanksgiving or Christmas even while holiday.js is still loading. */
 (function () {
   var q = ''; try { q = (new URLSearchParams(location.search).get('hol') || '').toLowerCase(); } catch (e) {}
@@ -6633,7 +6652,7 @@ function renderBets(){ setNav('my'); const graded=BETS.filter(b=>gradeBet(b)!==n
   const sel=$('#bet-game'), pick=$('#bet-pick'); const fill=()=>{ const g=GI[sel.value]; if(!g){ pick.innerHTML=''; return; } const a=team(g.away), h=team(g.home); const o=[]; if(g.spread!=null){ o.push(['spread|away', tshort(a.ab)+' '+(g.spread>0?'-'+num1(g.spread):'+'+num1(-g.spread))]); o.push(['spread|home', tshort(h.ab)+' '+(g.spread<0?'-'+num1(-g.spread):'+'+num1(g.spread))]); } if(g.total!=null){ o.push(['total|over','Over '+num1(g.total)]); o.push(['total|under','Under '+num1(g.total)]); } if(g.mlA!=null&&g.mlH!=null){ o.push(['ml|away', tshort(a.ab)+' '+mlStr(g.mlA)]); o.push(['ml|home', tshort(h.ab)+' '+mlStr(g.mlH)]); } pick.innerHTML=o.map(x=>'<option value="'+x[0]+'">'+esc(x[1])+'</option>').join(''); }; if(sel){ sel.onchange=fill; fill(); } const add=$('#bet-add'); if(add) add.onclick=()=>{ const [type,side]=(pick.value||'').split('|'); if(!type) return; addBet(sel.value, type, side, {units:$('#bet-units').value}); renderBets(); }; document.querySelectorAll('[data-delbet]').forEach(b=>b.onclick=()=>{ removeBet(b.dataset.delbet); renderBets(); }); }
 
 /* ---------- settings: theme, time zone, favorite team ---------- */
-const SETTINGS={theme:'auto', fav:'PHI', tint:true, tz:'MT', ticker:'on', dense:'auto'};
+const SETTINGS={theme:'auto', fav:null, tint:true, tz:'MT', ticker:'on', dense:'auto'};
 const TZS={ET:{off:0,lbl:'ET',name:'Eastern'},CT:{off:-1,lbl:'CT',name:'Central'},MT:{off:-2,lbl:'MT',name:'Mountain'},PT:{off:-3,lbl:'PT',name:'Pacific'}};
 function tzInfo(){ return TZS[SETTINGS.tz]||TZS.MT; }
 function tzTime(t){ if(!t) return 'TBD'; const m=String(t).match(/^(\d{1,2}):(\d{2}) (AM|PM)$/); if(!m) return t; let mins=((+m[1])%12+(m[3]==='PM'?12:0))*60+(+m[2])+tzInfo().off*60; mins=((mins%1440)+1440)%1440; const hh=Math.floor(mins/60), mm=mins%60; return ((hh%12)||12)+':'+String(mm).padStart(2,'0')+' '+(hh>=12?'PM':'AM'); }

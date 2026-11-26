@@ -429,6 +429,25 @@ body.livetv .tvd:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr);
      file has loaded (or when it declines), the page change goes straight through as before. -->
 <script>addEventListener('hashchange', function (e) { var f = window.__jshNav; if (!f || e.__jshPass) return; try { if (f(e) === true) e.stopImmediatePropagation(); } catch (x) {} }, true);</script>
 <script>
+/* Favorites are per phone. A browser that already used the hub keeps the teams it was showing
+   (BYU football, Eagles, Jazz, BYU hoops) the first time this runs. A new browser starts with none,
+   and this flag stops a later visit from filling those teams in. */
+(function () {
+  try {
+    if (localStorage.getItem('jsh-favs-ready') === '1') return;
+    function read(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+    var seen = read('jsh-shared') || read('cfb-settings') || read('nfl-settings') || read('nba-settings') || read('cbb-settings') || localStorage.getItem('jsh-live') || localStorage.getItem('jsh-glance') || localStorage.getItem('jsh-teams-mini');
+    if (seen) {
+      [['cfb-settings', 'BYU'], ['nfl-settings', 'PHI'], ['nba-settings', 'UTAH'], ['cbb-settings', '252']].forEach(function (pair) {
+        var o = read(pair[0]) || {};
+        if (o.fav == null || o.fav === '') { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
+      });
+    }
+    localStorage.setItem('jsh-favs-ready', '1');
+  } catch (e) {}
+})();
+</script>
+<script>
 /* Holiday class before the page paints, so a phone sees Thanksgiving or Christmas even while holiday.js is still loading. */
 (function () {
   var q = ''; try { q = (new URLSearchParams(location.search).get('hol') || '').toLowerCase(); } catch (e) {}
@@ -2261,12 +2280,15 @@ const WEBER = 'Weber State';
 
 /* ---------- your teams: the same favorites as the home page (each hub's own setting) ---------- */
 const played = g => /^FINAL/.test(g.st || '') && g.as != null && g.hs != null;
-const cfbSet = ls('cfb-settings') || {}, nflSet = ls('nfl-settings') || {}, nbaSet = ls('nba-settings') || {};
-const CFB_HUBFAV = cfbSet.fav || 'BYU';
-function favList(){ const nflFav = ('fav' in nflSet) ? nflSet.fav : 'PHI'; const out = [{sport:'cfb', team:CFB_HUBFAV}];
-  if (nflFav) out.push({sport:'nfl', team:nflFav}); out.push({sport:'nba', team:nbaSet.fav || 'UTAH'});
+function savedFav(key) { const o = ls(key); if (!o || o.fav == null || o.fav === '') return ''; return String(o.fav); }
+const CFB_HUBFAV = savedFav('cfb-settings');
+function favList(){ const out = [];
+  if (CFB_HUBFAV) out.push({sport:'cfb', team:CFB_HUBFAV});
+  const nflFav = savedFav('nfl-settings'); if (nflFav) out.push({sport:'nfl', team:nflFav});
+  const nbaFav = savedFav('nba-settings'); if (nbaFav) out.push({sport:'nba', team:nbaFav});
   if (OPT.weber && CFB_HUBFAV !== WEBER) out.push({sport:'cfb', team:WEBER});
-  const cbbSet = ls('cbb-settings') || {}; out.push({sport:'cbb', team:String(cbbSet.fav || '252')}); if (OPT.weber && String(cbbSet.fav) !== '2692') out.push({sport:'cbb', team:'2692'});
+  const cbbFav = savedFav('cbb-settings'); if (cbbFav) out.push({sport:'cbb', team:cbbFav});
+  if (OPT.weber && cbbFav !== '2692') out.push({sport:'cbb', team:'2692'});
   return out; }
 let FAVS = favList();
 const isFav = (lg, t) => FAVS.some(f => f.sport === lg && f.team === t);

@@ -9,10 +9,10 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#EFF1F4">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
 <meta name="apple-mobile-web-app-title" content="Jamo NFL">
-<link rel="icon" type="image/svg+xml" href="/sports/icons/jsh-n.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/sports/icons/jsh-n-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/sports/icons/jsh-n-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-n-180.png">
+<link rel="icon" type="image/svg+xml" href="/sports/icons/jsh.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/sports/icons/jsh-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/sports/icons/jsh-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/sports/icons/jsh-180.png">
 <link rel="manifest" href="/sports/icons/site.webmanifest">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
@@ -65,6 +65,7 @@
 })();
 </script>
 <style id="jsh-holiday-boot">
+/* Painted with the page, not only after holiday.js. A phone should see the field, the bar, and the bottom chrome. */
 html.jsh-thanks,html.jsh-thanks body,html.jsh-thanks body::before{background:radial-gradient(90% 46% at 50% -10%,rgba(240,170,60,.55),transparent 58%),linear-gradient(180deg,#4a2a12,#24160c 46%,#140e09)!important;background-color:#140e09!important}
 html.jsh-thanks.light,html.jsh-thanks.light body,html.jsh-thanks.light body::before,html.jsh-thanks[data-theme="light"],html.jsh-thanks[data-theme="light"] body,html.jsh-thanks[data-theme="light"] body::before{background:linear-gradient(180deg,#f8e6c8,#f3d7ae 50%,#edd0b0)!important;background-color:#f6e4c4!important}
 html.jsh-xmas,html.jsh-xmas body,html.jsh-xmas body::before{background:radial-gradient(70% 42% at 0% -8%,rgba(36,150,90,.55),transparent 60%),radial-gradient(60% 40% at 100% 0%,rgba(176,28,48,.5),transparent 62%),linear-gradient(180deg,#0d3d2a,#07140f 50%,#1a0c10)!important;background-color:#071410!important}
@@ -397,9 +398,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
-<script src="/sports/glow.js?v=20261031a" defer></script>
-<!-- Vibe: arena lighting, glowing numbers and live games, and a declutter pass on every page (polish/vibe.js, published by build.sh as /sports/vibe.js) -->
-<script src="/sports/vibe.js?v=20261116a" defer></script>
+<script src="/sports/glow.js?v=20261124a" defer></script>
+<!-- Vibe: glowing numbers, live breathe and a declutter pass (arena beams removed 2026-11-24; polish/vibe.js) -->
+<script src="/sports/vibe.js?v=20261124a" defer></script>
 <!-- Touch: the phone tune-up on every page - bigger tap areas, nothing under 11 px, names not cut off (polish/touch.js, published by build.sh as /sports/touch.js) -->
 <script src="/sports/touch.js?v=20261109a" defer></script>
 <!-- App: smooth page changes, saved copies for weak signal (registers /sw.js) and pull down to refresh in the home-screen app (polish/app.js, published by build.sh as /sports/app.js) -->
@@ -411,18 +412,19 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
-<script src="/sports/finish.js?v=20261126p" defer></script>
+<script src="/sports/finish.js?v=20261126w" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
 <script src="/sports/tabs.js?v=20261119b" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
 <script src="/sports/moments.js?v=20261119b" defer></script>
-<!-- Night: Live night feel -->
+<!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
 <script src="/sports/night.js?v=20261126p" defer></script>
-<!-- Gameday (polish/gameday.js): BYU Game day + Jazz Game night -->
+<!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
 <script src="/sports/gameday.js?v=20261126p" defer></script>
-<!-- Shell (polish/shell.js): phone dock, home-screen splash, night game pages -->
+<!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
 <script src="/sports/shell.js?v=20261126t" defer></script>
-<script src="/sports/holiday.js?v=20261126s" defer></script>
+<!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
+<script src="/sports/holiday.js?v=20261126w" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -7437,6 +7439,118 @@ function pbpJump(){ let n=0; const tick=()=>{ if(!PBP_JUMP) return; if((location
 document.addEventListener('click', e=>{ const t=e.target.closest&&e.target.closest('[data-pbp],[data-pbpall]'); if(!t) return;
   if(t.dataset.pbpall){ PBP_ALL[t.dataset.pbpall]=!PBP_ALL[t.dataset.pbpall]; rerenderQuiet(); return; }
   e.stopPropagation(); PBP_JUMP=t.dataset.pbp; pbpJump(); }, true);
+/* Today on the NFL hub, and a depth deck plus playbooks on team pages (2026-11-26).
+   Thanksgiving is the fourth Thursday in November. Playbooks come from the box scores:
+   rush and pass attempts, red zone, third down, and who has the ball and the tackles.
+   A sack is listed on its own in the NFL box, so it is not counted as a run. */
+function nflThanksgiving(d){ const p=String(d||'').split('-').map(Number); if(p[1]!==11||!p[2]) return false; const dt=new Date(p[0],10,p[2]); return dt.getDay()===4 && p[2]>=22 && p[2]<=28; }
+function nflTodayGames(w){ return G.filter(g=>g.week===w && g.date===todayStr && !g.po).sort((a,b)=>(timeMins(a)-timeMins(b))||interest(b)-interest(a)); }
+function tgCard(g){ const a=team(g.away), h=team(g.home), p=proj(g); const mine=SETTINGS.fav&&(g.home===SETTINGS.fav||g.away===SETTINGS.fav); const lg=t=>{ const L=logoOf(t); return L?'<img src="'+L.icon+'" alt="">':''; };
+  const when=g.live?(g.clk||'Live'):g.played?'Final':esc(kick(g));
+  const score=g.played||g.live?'<b class="tg-sc">'+g.as+'–'+g.hs+'</b>':'';
+  const line=[g.spread!=null?esc(spreadStr(g,{short:true})):'', g.total!=null?'O/U '+g.total:'', g.div?'Division':''].filter(Boolean).join(' · ');
+  const k=kickMs(g); const clock=(!g.played&&!g.live&&k!=null&&k>Date.now())?'<span class="tg-cd" data-sbcd="'+k+'">'+sbCd(k)+'</span>':'';
+  return '<a class="tg-c'+(mine?' mine':'')+'" href="#/game/'+g.id+'"><div class="tg-top"><span>'+when+'</span><span>'+esc(tvShort(g.tv)||'')+'</span></div><div class="tg-side">'+lg(a)+'<span><b>'+esc(a.disp)+'</b><small>'+recStr(a.ab)+'</small></span></div><div class="tg-at">at</div><div class="tg-side">'+lg(h)+'<span><b>'+esc(h.disp)+'</b><small>'+recStr(h.ab)+'</small></span></div>'+score+'<div class="tg-sub">'+line+'</div><div class="tg-mod"><span>Model '+pct(p.pAway)+' '+esc(tshort(a.ab))+'</span><span>'+pct(p.pHome)+' '+esc(tshort(h.ab))+'</span></div>'+clock+'</a>'; }
+function todayBoardHTML(w){ const gs=nflTodayGames(w); if(!gs.length||w!==CUR_WEEK) return ''; const thanks=nflThanksgiving(todayStr); const eagles=gs.some(g=>g.away==='PHI'||g.home==='PHI');
+  const sub=thanks?(eagles?'Thursday slate. The Eagles play in the late window.':'Thursday slate.'):gs.length+' game'+(gs.length===1?'':'s')+' on the board today.';
+  return '<section class="tg'+(thanks?' thanks':'')+'" aria-label="'+(thanks?'Thanksgiving':'Today')+'"><div class="tg-h"><div class="tg-k">'+(thanks?'Thanksgiving':'Today')+'</div><h2>'+esc(fmtDateLong(todayStr))+'</h2><p>'+esc(sub)+'</p></div><div class="tg-grid">'+gs.map(tgCard).join('')+'</div></section>'; }
+function nflPack(ab){ const o={g:0,rushY:0,passY:0,rushA:0,passA:0,comp:0,td3:0,td3a:0,fd4:0,fd4a:0,rz:0,rza:0,aRushY:0,aPassY:0,aRushA:0,aPassA:0,opp3:0,opp3a:0,sacks:0,tfl:0,ints:0,take:0,to:0,games:[]};
+  (BOX_BY_TEAM[ab]||[]).forEach(b=>{ const side=boxSide(b,ab); if(!side) return; const opp=side==='H'?'A':'H'; const ts=b.team[side]||{}, os=b.team[opp]||{}; if(!ts.totalYards&&!os.totalYards) return; const att=bfrac(ts.completionAttempts), oatt=bfrac(os.completionAttempts); const rz=bfrac(ts.redZoneAttempts), t3=bfrac(ts.thirdDownEff), f4=bfrac(ts.fourthDownEff), ot3=bfrac(os.thirdDownEff);
+    o.g++; o.rushY+=bnum(ts.rushingYards); o.passY+=bnum(ts.netPassingYards); o.rushA+=bnum(ts.rushingAttempts); o.passA+=att[1]; o.comp+=att[0]; o.td3+=t3[0]; o.td3a+=t3[1]; o.fd4+=f4[0]; o.fd4a+=f4[1]; o.rz+=rz[0]; o.rza+=rz[1];
+    o.aRushY+=bnum(os.rushingYards); o.aPassY+=bnum(os.netPassingYards); o.aRushA+=bnum(os.rushingAttempts); o.aPassA+=oatt[1]; o.opp3+=ot3[0]; o.opp3a+=ot3[1]; o.to+=bnum(ts.turnovers); o.take+=bnum(os.turnovers); const d=sideDef(b,side); o.sacks+=d.sacks; o.tfl+=d.tfl; o.ints+=d.ints;
+    const gm=GI[b.eid]; o.games.push({yds:bnum(ts.totalYards), ay:bnum(os.totalYards), pf:gm&&gm.played?(side==='H'?gm.hs:gm.as):null, pa:gm&&gm.played?(side==='H'?gm.as:gm.hs):null}); });
+  return o; }
+function nflPv(e, lab){ const i=(BOXL[e.cat]||[]).indexOf(lab); return i<0?0:e.s[i]; }
+function nflPn(n){ const x=Math.round(n*10)/10; return Math.abs(x-Math.round(x))<0.001?String(Math.round(x)):x.toFixed(1); }
+function nflSk(n){ return n?(', '+nflPn(n)+' sack'+(n===1?'':'s')):''; }
+function nflPct(n,d){ return d?Math.round(100*n/d):null; }
+function nflChip(k,v){ return '<span><b>'+esc(String(v))+'</b> '+esc(k)+'</span>'; }
+function nflRows(ab, list){ return list.filter(Boolean).map(x=>'<div class="np-row"><div><b>'+playerLink(ab, x.n)+'</b><div class="mini">'+esc(x.line)+'</div>'+(x.pct==null?'':'<div class="np-bar"><b style="width:'+Math.max(6,Math.min(100,x.pct))+'%"></b></div>')+'</div><span class="np-pct">'+(x.pct==null?'':x.pct+'%')+'</span></div>').join(''); }
+function nflPlaybooksHTML(ab){ const t=T[ab]; if(!t) return ''; const pk=nflPack(ab); if(!pk.g) return ''; const sb=seasonBox(ab); const calls=pk.rushA+pk.passA; const rushP=nflPct(pk.rushA, calls); const passP=calls?100-rushP:null; const col=ab==='PHI'?'#14944A':uiColor(t);
+  const rk=k=>{ const e=statRkOf(ab,k); return e?stOrd(e.r):''; };
+  const ident=rushP==null?'':(rushP>=48?'They run it more than they throw it.':rushP<=38?'They throw it more than they run it.':'The call sheet is close to even, run and pass.');
+  const rushers=Object.values(sb.players).filter(e=>e.cat==='rushing'&&nflPv(e,'YDS')>0).sort((a,b)=>nflPv(b,'YDS')-nflPv(a,'YDS'));
+  const recs=Object.values(sb.players).filter(e=>e.cat==='receiving'&&nflPv(e,'YDS')>0).sort((a,b)=>nflPv(b,'YDS')-nflPv(a,'YDS'));
+  const qbs=Object.values(sb.players).filter(e=>e.cat==='passing'&&nflPv(e,'YDS')>0).sort((a,b)=>nflPv(b,'YDS')-nflPv(a,'YDS'));
+  const rushSum=rushers.reduce((n,e)=>n+nflPv(e,'YDS'),0), recSum=recs.reduce((n,e)=>n+nflPv(e,'YDS'),0);
+  const offRows=nflRows(ab, qbs.slice(0,1).map(e=>{ const i=(BOXL.passing||[]).indexOf('C/ATT'); return {n:e.n, pct:null, line:(i<0?0:e.s[i])+'/'+(i<0?0:e.den[i])+', '+Math.round(nflPv(e,'YDS'))+' yds, '+nflPn(nflPv(e,'TD'))+' TD, '+nflPn(nflPv(e,'INT'))+' INT'}; }).concat(rushers.slice(0,3).map(e=>({n:e.n, pct:nflPct(nflPv(e,'YDS'), rushSum), line:nflPn(nflPv(e,'CAR'))+' car, '+Math.round(nflPv(e,'YDS'))+' yds, '+nflPn(nflPv(e,'TD'))+' TD'}))).concat(recs.slice(0,3).map(e=>{ const tg=nflPv(e,'TGTS'); return {n:e.n, pct:nflPct(nflPv(e,'YDS'), recSum), line:nflPn(nflPv(e,'REC'))+' rec'+(tg?', '+nflPn(tg)+' tgt':'')+', '+Math.round(nflPv(e,'YDS'))+' yds, '+nflPn(nflPv(e,'TD'))+' TD'}; })));
+  const tacklers=Object.values(sb.players).filter(e=>e.cat==='defensive'&&nflPv(e,'TOT')>0).sort((a,b)=>nflPv(b,'TOT')-nflPv(a,'TOT'));
+  const tkSum=tacklers.reduce((n,e)=>n+nflPv(e,'TOT'),0);
+  const ints=Object.values(sb.players).filter(e=>e.cat==='interceptions'&&nflPv(e,'INT')>0).sort((a,b)=>nflPv(b,'INT')-nflPv(a,'INT'));
+  const defRows=nflRows(ab, tacklers.slice(0,4).map(e=>({n:e.n, pct:nflPct(nflPv(e,'TOT'), tkSum), line:nflPn(nflPv(e,'TOT'))+' tackles'+nflSk(nflPv(e,'SACKS'))+(nflPv(e,'TFL')?', '+nflPn(nflPv(e,'TFL'))+' TFL':'')})).concat(ints.slice(0,2).map(e=>({n:e.n, pct:null, line:nflPn(nflPv(e,'INT'))+' INT'}))));
+  const rRun=statRkOf(ab,'aRush'), rPass=statRkOf(ab,'aPass'); let did=''; if(rRun&&rPass) did=rRun.r+6<rPass.r?'Stronger against the run than the pass.':rPass.r+6<rRun.r?'Stronger against the pass than the run.':'About even against the run and the pass.';
+  const aCalls=pk.aRushA+pk.aPassA, aRushP=nflPct(pk.aRushA, aCalls);
+  const off='<div class="npk" style="--pb:'+col+'"><div class="hd"><h3>Offense playbook</h3><span class="mini">'+pk.g+' game'+(pk.g>1?'s':'')+'</span></div><div class="bd"><p class="np-id">'+esc(ident)+(rushP!=null?' '+rushP+'% of plays are runs, '+passP+'% are passes.':'')+'</p>'+(rushP!=null?'<div class="np-split"><i class="run" style="width:'+rushP+'%"></i><i class="pass" style="width:'+passP+'%"></i></div><div class="np-leg"><span>Run '+rushP+'%</span><span>Pass '+passP+'%</span></div>':'')+offRows+'<div class="np-chips">'+[pk.td3a?nflChip('3rd down', pk.td3+'/'+pk.td3a):'', pk.rza?nflChip('red zone', pk.rz+'/'+pk.rza):'', rk('ypp')?nflChip('yards per play', rk('ypp')):'', t.epaO!=null?nflChip('off EPA', sgn2(t.epaO)):'', rk('ppg')?nflChip('scoring', rk('ppg')):''].filter(Boolean).join('')+'</div></div></div>';
+  const def='<div class="npk npk-def"><div class="hd"><h3>Defense playbook</h3><span class="mini">'+nflPn(pk.sacks)+' sacks · '+nflPn(pk.tfl)+' TFL</span></div><div class="bd"><p class="np-id">'+esc(did||'Built from what opponents have done.')+(aRushP!=null?' Opponents have run it on '+aRushP+'% of their plays.':'')+'</p>'+(aRushP!=null?'<div class="np-split"><i class="run" style="width:'+aRushP+'%"></i><i class="pass" style="width:'+(100-aRushP)+'%"></i></div><div class="np-leg"><span>Run '+aRushP+'%</span><span>Pass '+(100-aRushP)+'%</span></div>':'')+defRows+'<div class="np-chips">'+[pk.opp3a?nflChip('opp. 3rd down', pk.opp3+'/'+pk.opp3a):'', pk.take?nflChip('takeaways', pk.take):'', rk('papg')?nflChip('points allowed', rk('papg')):'', t.epaD!=null?nflChip('def EPA', sgn2(t.epaD)):'', rk('aYpp')?nflChip('yards per play allowed', rk('aYpp')):''].filter(Boolean).join('')+'</div></div></div>';
+  const s=stats(ab); const big=pk.games.filter(g=>g.pf!=null&&g.yds>=400), stingy=pk.games.filter(g=>g.pf!=null&&g.ay<=275);
+  const wl=list=>{ const w=list.filter(g=>g.pf>g.pa).length; return list.length?w+'-'+(list.length-w):'0'; };
+  const shape='<div class="np-shape"><div class="hd"><h3>How the games have gone</h3><span class="mini">regular season</span></div><div class="bd"><div class="grid g4">'+tile('Home', s.hw+'-'+s.hl+(s.ht?'-'+s.ht:''), 'at '+esc(t.stadium||'home'))+tile('Road', s.aw+'-'+s.al+(s.at?'-'+s.at:''), 'away from home')+tile('One-score', s.close.w+'-'+s.close.l, 'decided by 8 or fewer')+tile('Division', divRecStr(ab), esc(divKey(t)))+'</div><div class="np-chips">'+nflChip('400-yard days', wl(big))+nflChip('held under 275', wl(stingy))+(s.prime.w+s.prime.l?nflChip('prime time', s.prime.w+'-'+s.prime.l):'')+'</div></div></div>';
+  return '<div class="np-grid">'+off+def+'</div>'+shape; }
+function nflDeckHTML(ab){ const t=T[ab]; if(!t) return ''; const s=stats(ab); const o=simOf(ab)||{}; const st=standingsNow(); const dr=st.divRank[ab]; const seed=st.seedOf[ab]; const nxt=(s.upcoming||[])[0];
+  const plates=[['Record', recStr(ab), divRecStr(ab)+' in the division'],[seed&&seed<=7?'Seed':'Division', seed&&seed<=7?String(seed):(dr?ordinal(dr):'—'), seed&&seed<=7?'playoff seed':esc(divKey(t))],['Points', s.gp?nflPn(s.pf/s.gp)+' / '+nflPn(s.pa/s.gp):'—', 'scored / allowed'],['Playoffs', o.po!=null?pct1(o.po):'—', o.div!=null?pct1(o.div)+' to win the division':'']];
+  let next='';
+  if(nxt&&nxt.g){ const g=nxt.g; const home=g.home===ab; const opp=team(home?g.away:g.home); const p=proj(g); const pw=home?p.pHome:p.pAway; const thanks=g.date===todayStr&&nflThanksgiving(g.date);
+    next='<a class="nd-next" href="#/game/'+g.id+'"><span class="k">'+(g.live?'Live':thanks?'Thanksgiving':g.date===todayStr?'Today':'Next')+'</span><b>'+(g.neutral?'vs ':home?'vs ':'at ')+esc(opp.disp)+'</b><span>'+esc(fmtDate(g.date,true))+' · '+esc(kick(g))+(g.tv?' · '+esc(tvShort(g.tv)):'')+(g.spread!=null?' · '+esc(spreadStr(g,{short:true})):'')+' · model '+pct(pw)+'</span></a>'; }
+  const phi=ab==='PHI';
+  return '<section class="nfl-deck'+(phi?' phi':'')+'" aria-label="'+esc(t.disp)+' at a glance">'+(phi?'<div class="nd-stack" aria-hidden="true"></div>':'')+'<div class="nd-face"><div class="nd-k">'+(phi?'Eagles football':esc(t.conf+' '+t.div))+'</div><div class="nd-plates">'+plates.map(x=>'<div class="nd-p"><span>'+esc(x[0])+'</span><b>'+esc(String(x[1]))+'</b><small>'+esc(x[2])+'</small></div>').join('')+'</div>'+next+'</div></section>'; }
+function nflGamePlayHTML(g){ if(!g) return ''; const bit=ab=>{ if(!T[ab]) return ''; const pk=nflPack(ab); const calls=pk.rushA+pk.passA; if(!pk.g||!calls) return ''; const rp=nflPct(pk.rushA, calls); return '<a class="np-mini" href="#/team/'+enc(ab)+'#s-analytics"><b>'+esc(tshort(ab))+'</b><span>'+rp+'% run · '+(100-rp)+'% pass</span><span class="dim">'+pk.g+' games · open the playbook</span></a>'; };
+  const A=bit(g.away), H=bit(g.home); if(!A&&!H) return ''; return '<div class="np-vs"><span class="np-k">Playbooks</span>'+A+H+'</div>'; }
+if(!document.getElementById('nfl-day-css')){ const st=document.createElement('style'); st.id='nfl-day-css'; st.textContent=''
+  +'.tg{margin:16px 0 8px;padding:16px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(165deg,#1a1208,#12151c 55%);color:#fff}'
+  +'.tg-k{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#f0c36a}'
+  +'.tg h2{margin:4px 0 0;font-size:26px;letter-spacing:-.03em}'
+  +'.tg-h p{margin:4px 0 12px;color:#d7deea}'
+  +'.tg-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}'
+  +'.tg-c{display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff}'
+  +'.tg-c.mine{border-color:#d5dde3;box-shadow:inset 0 0 0 2px #14944A,0 0 0 1px rgba(213,221,227,.7),0 16px 30px -20px rgba(0,0,0,.8)}'
+  +'.tg-top,.tg-mod{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#c5d0e0}'
+  +'.tg-side{display:flex;align-items:center;gap:8px}.tg-side img{width:28px;height:28px;object-fit:contain}'
+  +'.tg-side b{display:block;font-size:16px}.tg-side small{color:#c5d0e0}'
+  +'.tg-at{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#f0c36a}'
+  +'.tg-sc{font-size:22px}.tg-sub{font-size:13px;color:#d7deea}.tg-cd{font-variant-numeric:tabular-nums;font-weight:800}'
+  +'body.themed .thead.phi-deep,.thead.phi-deep{overflow:visible;background:linear-gradient(165deg,#1b9e4a,#0b6e34 52%,#064e28);color:#fff;border-color:rgba(213,221,227,.55);box-shadow:inset 7px 0 0 #d5dde3,inset 0 1px 0 rgba(255,255,255,.28),0 16px 0 -8px rgba(6,60,28,.55)}'
+  +'.thead.phi-deep .bar{background:#d5dde3!important;width:8px}'
+  +'.thead.phi-deep .ttl h1{color:#fff}.thead.phi-deep .eyebrow,.thead.phi-deep .meta{color:#f3fff6}'
+  +'.thead.phi-deep .ranks .rb{background:rgba(0,0,0,.28);border-color:rgba(213,221,227,.4);color:#fff}'
+  +'.nfl-deck{position:relative;margin:16px 0 8px}'
+  +'.nfl-deck.phi .nd-stack{position:absolute;left:16px;right:16px;top:12px;bottom:-12px;border-radius:20px;background:#064e28;box-shadow:0 16px 0 -8px rgba(6,60,28,.55)}'
+  +'.nd-face{position:relative;padding:14px;border-radius:18px;border:1px solid var(--line);background:var(--surface)}'
+  +'.nfl-deck.phi .nd-face{color:#fff;background:linear-gradient(165deg,#1b9e4a,#0b6e34 55%,#064e28);border-color:rgba(213,221,227,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 22px 40px -24px rgba(0,0,0,.75)}'
+  +'.nd-k{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}'
+  +'.nfl-deck.phi .nd-k,.nfl-deck.phi .nd-p span,.nfl-deck.phi .nd-p small,.nfl-deck.phi .nd-next span:last-child{color:#c9eadc}'
+  +'.nd-plates{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}'
+  +'.nd-p{padding:10px 12px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)}'
+  +'.nfl-deck.phi .nd-p,.nfl-deck.phi .nd-next{background:rgba(0,0,0,.28);border-color:rgba(255,255,255,.12);color:#fff}'
+  +'.nd-p span{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}'
+  +'.nd-p b{display:block;margin-top:2px;font-size:24px;letter-spacing:-.03em}'
+  +'.nd-p small{display:block;margin-top:2px;color:var(--ink-2)}'
+  +'.nd-next{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;margin-top:12px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);color:inherit}'
+  +'.nd-next .k{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#d4a017}'
+  +'.np-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}'
+  +'.npk,.np-shape{border:1px solid var(--line);border-radius:18px;background:var(--surface)}'
+  +'.npk .hd,.np-shape .hd{display:flex;justify-content:space-between;gap:8px;align-items:baseline;padding:14px 14px 0}'
+  +'.npk .hd h3,.np-shape .hd h3{margin:0;font-size:16px}.npk .bd,.np-shape .bd{padding:10px 14px 14px}'
+  +'.np-id{margin:0 0 10px;font-size:14.5px;line-height:1.45}'
+  +'.np-split{display:flex;height:12px;border-radius:99px;overflow:hidden;background:var(--surface-3)}'
+  +'.np-split i.run{background:var(--pb,#1f6feb)}.npk-def .np-split i.run{background:#c24545}'
+  +'.np-split i.pass{background:color-mix(in srgb,var(--pb,#1f6feb) 42%,#9ec0ff)}.npk-def .np-split i.pass{background:#6d8cae}'
+  +'.np-leg{display:flex;justify-content:space-between;margin-top:4px;font-size:12px;color:var(--ink-2)}'
+  +'.np-row{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center;margin-top:10px}'
+  +'.np-bar{height:6px;border-radius:99px;background:var(--surface-3);overflow:hidden;margin-top:4px}'
+  +'.np-bar b{display:block;height:100%;border-radius:99px;background:var(--pb,#1f6feb)}.npk-def .np-bar b{background:#c24545}'
+  +'.np-pct{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}'
+  +'.np-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}'
+  +'.np-chips span{font-size:12px;padding:4px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line)}'
+  +'.np-vs{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:12px 0}'
+  +'.np-k{align-self:center;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}'
+  +'.np-mini{display:flex;flex-direction:column;gap:2px;min-width:150px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:inherit}'
+  +'@media (max-width:900px){.tg-grid{grid-template-columns:1fr}.np-grid,.nd-plates{grid-template-columns:1fr 1fr}}'
+  +'@media (max-width:560px){.nd-plates{grid-template-columns:1fr 1fr}.np-grid{grid-template-columns:1fr}}';
+  document.head.appendChild(st); }
+{ const _dayWeek=renderWeek; renderWeek=function(w, filter){ _dayWeek(w, filter); if(filter&&filter!=='all') return; if(view.querySelector('.tg')) return; const html=todayBoardHTML(w); const hero=view.querySelector('.sbh'); if(hero&&html){ hero.insertAdjacentHTML('afterend', html); setTimeout(sbStart, 0); } }; }
+{ const _dayTeam=renderTeam; renderTeam=function(ab){ _dayTeam(ab); ab=norm(ab||''); if(ab==='PHI'){ const head=view.querySelector('.thead'); if(head) head.classList.add('phi-deep'); } if(!view.querySelector('.nfl-deck')){ const head=view.querySelector('.thead'); if(head) head.insertAdjacentHTML('afterend', nflDeckHTML(ab)); } if(!view.querySelector('.np-grid')){ const slot=view.querySelector('#s-analytics'); const html=nflPlaybooksHTML(ab); if(slot&&html) slot.insertAdjacentHTML('afterend', html); } }; }
+{ const _dayGame=renderGame; renderGame=function(id){ _dayGame(id); const g=GI[id]; const h=view.querySelector('.ghead'); if(h&&g&&(g.home==='PHI'||g.away==='PHI')) h.classList.add('phi-deep'); if(view.querySelector('.np-vs')) return; const html=g?nflGamePlayHTML(g):''; if(h&&html) h.insertAdjacentHTML('afterend', html); }; }
+  if(!document.getElementById('nfl-kelly-g')){ const s=document.createElement('style'); s.id='nfl-kelly-g'; s.textContent='body.themed .ghead.phi-deep,.ghead.phi-deep{box-shadow:inset 0 5px 0 #14944A,inset 0 8px 0 #d5dde3}'; document.head.appendChild(s); }
 
 /* ---------- logos & team themes ---------- */
 const LOGO_BASE = (/(^|\.)djgolding\.com$/.test(location.hostname) || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) ? '/nfl/img/logos' : 'https://djgolding.com/nfl/img/logos';
@@ -7910,26 +8024,15 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
 <script type="text/x-jsh-app">
 /* neo:start - the home page's "Neo" look for the league hubs (2026-10-26, Jamo: "bring the new look to all the hubs").
    Shared by the CFB, NFL and NBA hubs (inlined last by each build.sh), so it only refines what's there and every
-   hub keeps its own accent color and wallpaper (BYU field, Jazz court):
-   - a deep-space backdrop (slow aurora + fine dot grid) behind pages that have no wallpaper
-   - glass panels: a soft top highlight and hairline edges on cards and stat tiles; tappable ones light up in the
-     hub's accent color
-   - numbered HUD markers on section headings with a light rule underneath
-   - a bigger page title, Orbitron eyebrows, glowing selected pills, a light line under the pinned header
-   Works in light and dark; motion stops for reduced-motion users. */
+   hub keeps its own accent color.
+   2026-11-24 doper pass: the aurora + dot-grid backdrop (#neo-bg) is gone so Stage's plain still gradient owns the
+   page (house rule: simpler, cleaner, fresh — no grids). Glass panels, numbered section markers, and pill glow stay. */
 (function(){ if (document.getElementById('neo-css')) return;
   if (!document.querySelector('link[href*="family=Orbitron"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap'; document.head.appendChild(l); }
   const A = 'var(--accent,var(--blue,#5b8cff))';
   const css =
-  /* backdrop: an aurora and a dot grid, under any wallpaper the hub draws */
-    '#neo-bg{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}'
-  + '#neo-bg::before{content:"";position:absolute;inset:-12%;background:radial-gradient(760px 520px at 10% 2%,rgba(59,123,255,.20),transparent 62%),radial-gradient(720px 520px at 94% 0%,rgba(164,91,255,.18),transparent 64%),radial-gradient(900px 600px at 50% 108%,rgba(56,189,248,.10),transparent 66%);animation:neoAur 42s ease-in-out infinite alternate}'
-  + '#neo-bg::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 72%);mask-image:linear-gradient(180deg,#000,transparent 72%)}'
-  + '@keyframes neoAur{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}100%{transform:translate3d(2.5%,-1.5%,0) scale(1.03)}}'
-  + ':root[data-theme="light"] #neo-bg::before{opacity:.45}:root[data-theme="light"] #neo-bg::after{background-image:radial-gradient(rgba(15,23,42,.06) 1px,transparent 1.3px)}'
-  + '@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #neo-bg::before{opacity:.45}:root:not([data-theme="dark"]) #neo-bg::after{background-image:radial-gradient(rgba(15,23,42,.06) 1px,transparent 1.3px)}}'
   /* the pinned header: a thin light line in the accent color */
-  + 'header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,' + A + ' 30%,color-mix(in srgb,' + A + ' 40%,#c4a6ff) 70%,transparent);opacity:.65}'
+    'header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,' + A + ' 30%,color-mix(in srgb,' + A + ' 40%,#c4a6ff) 70%,transparent);opacity:.65}'
   /* glass panels */
   + '#view .card,#view .tile{background-image:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 58%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 22px 50px -34px rgba(0,0,0,.85);transition:border-color .2s,box-shadow .2s,transform .2s}'
   + ':root[data-theme="light"] #view .card,:root[data-theme="light"] #view .tile{background-image:none;box-shadow:0 1px 2px rgba(15,23,42,.05),0 14px 32px -24px rgba(15,23,42,.28)}'
@@ -7945,10 +8048,9 @@ if(LIVE.on){ setTimeout(()=>{ livePoll(true).then(liveSchedule); }, 30); }
   + '#view .page-head .eyebrow,#view>.eyebrow{font-family:"Orbitron",var(--disp,inherit);font-size:10.5px;font-weight:600;letter-spacing:.22em}'
   /* selected pills glow in the accent color */
   + '.ng-sub a.on,#view .seg .on,#view .seg a.on,#view .seg button.on{background:linear-gradient(90deg,' + A + ',color-mix(in srgb,' + A + ' 60%,#8a4dff))!important;color:#fff!important;border-color:transparent!important;box-shadow:0 8px 22px -10px ' + A + '}'
-  + '@media (prefers-reduced-motion:reduce){#neo-bg::before{animation:none}#view a.card:hover,#view a.tile:hover,#view .tile-link:hover,#view a.gm:hover,#view .wcard:hover{transform:none}}'
+  + '@media (prefers-reduced-motion:reduce){#view a.card:hover,#view a.tile:hover,#view .tile-link:hover,#view a.gm:hover,#view .wcard:hover{transform:none}}'
   + '@media (max-width:600px){#view .sec>h2[data-neo]::before{margin-right:8px;font-size:9.5px}}';
   const st = document.createElement('style'); st.id = 'neo-css'; st.textContent = css; document.head.appendChild(st);
-  const bg = document.createElement('div'); bg.id = 'neo-bg'; bg.setAttribute('aria-hidden', 'true'); document.body.prepend(bg);
   /* number the section markers in the order they appear on screen (phone layouts move columns around, so the page's
      own order isn't the reading order); renumbers after each re-render and on resize */
   let raf = 0;

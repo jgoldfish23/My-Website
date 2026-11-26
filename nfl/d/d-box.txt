@@ -15610,4 +15610,102 @@ P|163|H|kickReturns|Rachaad White||4697815|2;48;24.0;25;0
 P|163|H|puntReturns|Luke McCaffrey||4426948|1;-1;-1.0;-1;0
 P|163|H|kicking|Drew Stevens||5081335|5/5;100.0;41;1/1;16
 P|163|H|punting|Tress Way||16166|4;167;41.8;0;2;49
+G|164|401873079|2026-11-25|GB|LAR
+T|164|A|firstDowns=11;firstDownsPassing=7;firstDownsRushing=3;firstDownsPenalty=1;thirdDownEff=2-8;fourthDownEff=1-1;totalOffensivePlays=44;totalYards=244;yardsPerPlay=5.5;totalDrives=10;netPassingYards=189;completionAttempts=17/29;yardsPerPass=6.3;interceptions=2;sacksYardsLost=1-9;rushingYards=55;rushingAttempts=14;yardsPerRushAttempt=3.9;redZoneAttempts=1-1;totalPenaltiesYards=8-78;turnovers=3;fumblesLost=1;interceptions=2;defensiveTouchdowns=0;possessionTime=19:20;defSacks=1;defTfl=5
+T|164|H|firstDowns=23;firstDownsPassing=7;firstDownsRushing=12;firstDownsPenalty=4;thirdDownEff=8-15;fourthDownEff=0-0;totalOffensivePlays=71;totalYards=373;yardsPerPlay=5.3;totalDrives=10;netPassingYards=132;completionAttempts=16/23;yardsPerPass=5.5;interceptions=1;sacksYardsLost=1-8;rushingYards=241;rushingAttempts=47;yardsPerRushAttempt=5.1;redZoneAttempts=2-3;totalPenaltiesYards=5-35;turnovers=1;fumblesLost=0;interceptions=1;defensiveTouchdowns=0;possessionTime=40:40;defSacks=1;defTfl=4
+S|164|1|9:55|LAR|Brandon McManus 43 Yd Field Goal|0|3
+S|164|1|3:12|LAR|Brandon McManus 41 Yd Field Goal|0|6
+S|164|1|1:28|GB|Trey Smack 54 Yd Field Goal|3|6
+S|164|2|11:29|LAR|Kyren Williams 7 Yd Rush (Brandon McManus Kick)|3|13
+S|164|2|8:06|GB|Christian Watson 6 Yd pass from Jordan Love (Trey Smack Kick)|10|13
+S|164|2|1:50|GB|Trey Smack 48 Yd Field Goal|13|13
+S|164|3|6:58|LAR|Blake Corum 1 Yd Rush (Brandon McManus Kick)|13|20
+S|164|4|6:13|LAR|Brandon McManus 40 Yd Field Goal|13|23
+S|164|4|0:27|LAR|Brandon McManus 30 Yd Field Goal|13|26
+W|164|67;70;69;70;74;69;79;76;77;75;74;75;82;85;78;73;71;70;66;66;68;60;62;64;69;76;77;81;86;76;82;88;88;88;87;88;95;96;95;99;99;100;100;100;100;100
+P|164|A|passing|Jordan Love||4036378|17/29;198;6.8;1;2;1-9;39.7;62.1
+P|164|A|rushing|Savion Williams||4431487|2;18;9.0;0;13
+P|164|A|rushing|Kaleb Johnson||4819231|8;13;1.6;0;6
+P|164|A|rushing|MarShawn Lloyd||4429023|1;10;10.0;0;10
+P|164|A|rushing|Jordan Love||4036378|1;7;7.0;0;7
+P|164|A|rushing|Chris Brooks||3149687|1;4;4.0;0;4
+P|164|A|rushing|Bo Melton||4259305|1;3;3.0;0;3
+P|164|A|receiving|Christian Watson||4248528|4;65;16.3;1;32;4
+P|164|A|receiving|Matthew Golden||4701936|1;39;39.0;0;39;5
+P|164|A|receiving|Tucker Kraft||4572680|3;24;8.0;0;10;5
+P|164|A|receiving|Chris Brooks||3149687|4;22;5.5;0;11;5
+P|164|A|receiving|Bo Melton||4259305|2;20;10.0;0;12;3
+P|164|A|receiving|Kaleb Johnson||4819231|1;19;19.0;0;19;2
+P|164|A|receiving|MarShawn Lloyd||4429023|1;6;6.0;0;6;1
+P|164|A|receiving|Savion Williams||4431487|1;3;3.0;0;3;3
+P|164|A|receiving|J. Michael Sturdivant||4635009|0;0;0.0;0;0;1
+P|164|A|fumbles|Tucker Kraft||4572680|1;1;0
+P|164|A|defensive|Keisean Nixon||4259493|9;8;0;1;0;0;0
+P|164|A|defensive|Evan Williams||4428863|9;8;0;0;0;0;0
+P|164|A|defensive|Isaiah McDuffie||4239947|9;4;0;1;0;1;0
+P|164|A|defensive|Ty'Ron Hopper||4567406|9;4;0;0;1;0;0
+P|164|A|defensive|Chris McClellan||4820574|8;4;0;1;0;0;0
+P|164|A|defensive|Xavier McKinney||4241470|6;5;0;0;0;0;0
+P|164|A|defensive|Devonte Wyatt||4361791|5;2;0;0;0;0;0
+P|164|A|defensive|Jordon Riley||4240677|4;2;0;0;0;0;0
+P|164|A|defensive|Barryn Sorrell||4683643|4;2;0;0;0;0;0
+P|164|A|defensive|Karl Brooks||4373423|3;1;0;0;0;0;0
+P|164|A|defensive|Anthony Campbell||4887255|3;1;0;0;0;0;0
+P|164|A|defensive|Lukas Van Ness||4686906|3;0;0;0;0;0;0
+P|164|A|defensive|Dani Dennis-Sutton||4685315|2;2;0;0;0;0;0
+P|164|A|defensive|Bo Melton||4259305|2;1;0;0;0;0;0
+P|164|A|defensive|Brandon Cisse||5076652|2;1;0;0;0;0;0
+P|164|A|defensive|Javon Bullard||4688930|2;0;0;0;0;0;0
+P|164|A|defensive|Micah Parsons||4361423|1;1;1;1;0;2;0
+P|164|A|defensive|Chris Brooks||3149687|1;1;0;0;0;0;0
+P|164|A|defensive|Nick Niemann||4036141|1;1;0;0;0;0;0
+P|164|A|defensive|Benjamin St-Juste||4258206|1;1;0;0;0;0;0
+P|164|A|defensive|Brenton Cox Jr.||4361776|1;1;0;1;0;0;0
+P|164|A|defensive|Tucker Kraft||4572680|1;0;0;0;0;0;0
+P|164|A|interceptions|Ty'Ron Hopper||4567406|1;21;0
+P|164|A|kickReturns|Skyy Moore||4430191|3;48;16.0;18;0
+P|164|A|kickReturns|Bo Melton||4259305|2;31;15.5;19;0
+P|164|A|puntReturns|Skyy Moore||4430191|1;11;11.0;11;0
+P|164|A|kicking|Trey Smack||4869461|2/2;100.0;54;1/1;7
+P|164|A|punting|Daniel Whelan||4248789|3;155;51.7;0;1;53
+P|164|H|passing|Matthew Stafford||12483|16/23;140;6.1;0;1;1-8;54.3;67.3
+P|164|H|rushing|Blake Corum||4429096|32;184;5.8;1;35
+P|164|H|rushing|Kyren Williams||4430737|12;46;3.8;1;10
+P|164|H|rushing|Xavier Smith||4386544|2;11;5.5;0;6
+P|164|H|rushing|Matthew Stafford||12483|1;0;0.0;0;0
+P|164|H|receiving|Konata Mumpfield||4710855|4;69;17.3;0;24;5
+P|164|H|receiving|Blake Corum||4429096|2;21;10.5;0;14;3
+P|164|H|receiving|Kyren Williams||4430737|4;19;4.8;0;9;5
+P|164|H|receiving|Tyler Higbee||2573401|1;14;14.0;0;14;3
+P|164|H|receiving|Davis Allen||4426553|2;14;7.0;0;8;2
+P|164|H|receiving|Xavier Smith||4386544|1;4;4.0;0;4;1
+P|164|H|receiving|Colby Parkinson||4242557|2;-1;-0.5;0;1;2
+P|164|H|fumbles|Matthew Stafford||12483|1;0;0
+P|164|H|fumbles|Blake Corum||4429096|0;0;1
+P|164|H|fumbles|Quentin Lake||4249128|0;0;1
+P|164|H|defensive|Omar Speights||4428550|5;4;0;0;0;0;0
+P|164|H|defensive|Nate Landman||4243181|5;2;0;0;0;0;0
+P|164|H|defensive|Quentin Lake||4249128|4;1;0;0;2;0;0
+P|164|H|defensive|Myles Garrett||3122132|3;3;0;1;0;2;0
+P|164|H|defensive|Byron Young||4875196|3;2;1;2;0;1;0
+P|164|H|defensive|Emmanuel Forbes Jr.||4429767|3;2;0;0;1;0;0
+P|164|H|defensive|Josaiah Stewart||4682983|3;2;0;0;0;0;0
+P|164|H|defensive|Kobie Turner||4250621|3;1;0;0;0;0;0
+P|164|H|defensive|Grant Stuard||4240255|2;2;0;0;0;0;0
+P|164|H|defensive|Kam Curl||4242154|2;2;0;0;0;0;0
+P|164|H|defensive|Trent McDuffie||4426405|2;2;0;0;1;0;0
+P|164|H|defensive|Josh Wallace||4572371|2;2;0;0;0;0;0
+P|164|H|defensive|Aaron Donald||16716|2;1;0;1;1;0;0
+P|164|H|defensive|Tyler Davis||4568217|2;1;0;0;0;0;0
+P|164|H|defensive|Warren McClendon Jr.||4426512|1;1;0;0;0;0;0
+P|164|H|defensive|Jaylen McCollough||4427120|1;1;0;0;1;0;0
+P|164|H|defensive|Braden Fiske||4362245|1;0;0;0;0;0;0
+P|164|H|defensive|Xavier Smith||4386544|1;0;0;0;0;0;0
+P|164|H|defensive|Kamren Kinchens||4596363|1;0;0;0;2;0;0
+P|164|H|interceptions|Jaylen McCollough||4427120|1;14;0
+P|164|H|interceptions|Emmanuel Forbes Jr.||4429767|1;0;0
+P|164|H|kickReturns|Ronnie Rivers||4243003|4;102;25.5;31;0
+P|164|H|puntReturns|Xavier Smith||4386544|1;15;15.0;15;0
+P|164|H|kicking|Brandon McManus||16339|4/4;100.0;43;2/2;14
+P|164|H|punting|Ethan Evans||5125875|2;83;41.5;0;1;54
 

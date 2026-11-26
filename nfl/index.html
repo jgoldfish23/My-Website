@@ -394,7 +394,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
 <script src="/sports/bl.js?v=20261101a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
-<script src="/sports/holo.js?v=20261126x" defer></script>
+<script src="/sports/holo.js?v=20261126y" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
 <script src="/sports/stage.js?v=20261116b" defer></script>
 <!-- Glow: spotlight, tap light, header sweeps, live glow and win confetti on every page (polish/glow.js, published by build.sh as /sports/glow.js) -->
@@ -420,9 +420,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
 <script src="/sports/night.js?v=20261126p" defer></script>
 <!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
-<script src="/sports/gameday.js?v=20261126p" defer></script>
+<script src="/sports/gameday.js?v=20261126y" defer></script>
 <!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
-<script src="/sports/shell.js?v=20261126x" defer></script>
+<script src="/sports/shell.js?v=20261126y" defer></script>
 <!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
 <script src="/sports/holiday.js?v=20261126x" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
@@ -7512,6 +7512,7 @@ if(!document.getElementById('nfl-day-css')){ const st=document.createElement('st
   +'.thead.phi-deep .bar{background:#d5dde3!important;width:8px}'
   +'.thead.phi-deep .ttl h1{color:#fff}.thead.phi-deep .eyebrow,.thead.phi-deep .meta{color:#f3fff6}'
   +'.thead.phi-deep .ranks .rb{background:rgba(0,0,0,.28);border-color:rgba(213,221,227,.4);color:#fff}'
+  +'.thead.phi-deep .meta span{color:inherit}.thead.phi-deep .ranks .rb .k{color:#c9eadc}' /* 11-26: readable on the green */
   +'.nfl-deck{position:relative;margin:16px 0 8px}'
   +'.nfl-deck.phi .nd-stack{position:absolute;left:16px;right:16px;top:12px;bottom:-12px;border-radius:20px;background:#064e28;box-shadow:0 16px 0 -8px rgba(6,60,28,.55)}'
   +'.nd-face{position:relative;padding:14px;border-radius:18px;border:1px solid var(--line);background:var(--surface)}'

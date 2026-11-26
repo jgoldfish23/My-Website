@@ -2,7 +2,7 @@
    Thanksgiving is the fourth Thursday of November. The next morning through December 26 is Christmas.
    After that the hub looks normal again. The date is the hub's own time zone (America/Denver when none is saved).
    ?hol=thanks, ?hol=xmas or ?hol=off overrides the date, for a look at the other theme.
-   No beams, grids, or photos. Thanksgiving keeps the animated phrase, with the art in the same glow.
+   No beams, grids, or photos. Thanksgiving keeps the animated phrase. The art fades into the field.
    Reduced-motion users get the same still layer. */
 (function () {
   if (window.__jshHoliday) return; window.__jshHoliday = true;
@@ -76,13 +76,13 @@
     + 'html.jsh-thanks .jsh-hol-frame{box-shadow:inset 0 0 120px rgba(180,80,16,.18)}'
     + 'html.jsh-xmas .jsh-hol-frame{box-shadow:inset 4px 0 0 rgba(46,170,96,.8),inset -4px 0 0 rgba(196,40,56,.75),inset 0 0 80px rgba(20,80,48,.22)}'
     + 'html.jsh-thanks .jsh,html.jsh-xmas .jsh{position:sticky;top:0;z-index:80}'
-    + 'html.jsh-thanks .jsh{background:#2a160c!important;background-image:linear-gradient(90deg,#8a3e10,#2a160c 42%,#2a160c 62%,#6a3010)!important;border-bottom-color:transparent!important;box-shadow:0 16px 28px rgba(20,8,2,.22)!important}'
+    + 'html.jsh-thanks .jsh{background:#2a160c!important;background-image:linear-gradient(180deg,#8a3e10,#2a160c 72%,rgba(74,42,18,0))!important;border-bottom-color:transparent!important;box-shadow:none!important}'
     + 'html.jsh-thanks .jsh-brand b{background:linear-gradient(90deg,#ffe08a,#f0a040);-webkit-background-clip:text;background-clip:text;color:transparent}'
     + 'html.jsh-xmas .jsh{background:#071a12!important;background-image:linear-gradient(90deg,#0e6a40,#071a12 40%,#071a12 62%,#6e1824)!important;border-bottom-color:rgba(240,196,96,.4)!important}'
     + 'html.jsh-xmas .jsh-brand b{background:linear-gradient(90deg,#8cf0b4,#f0d060);-webkit-background-clip:text;background-clip:text;color:transparent}'
     + '.jsh-hol{position:sticky;top:44px;z-index:79;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:0;padding:16px 22px 18px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;line-height:1.2;text-align:center}'
-    + 'html.jsh-thanks .jsh-hol{position:relative;top:auto;color:#fff6e4;background:none;border-bottom:0;padding:10px 12px 0;gap:0}'
-    + 'html.jsh-thanks .jsh-hol::before{content:"";position:absolute;left:50%;top:58%;width:min(380px,96vw);height:210px;transform:translate(-50%,-46%);background:radial-gradient(closest-side,rgba(255,186,80,.4),rgba(196,92,24,.16) 52%,transparent 74%);pointer-events:none;z-index:0}'
+    + 'html.jsh-thanks .jsh-hol{position:relative;top:auto;color:#fff6e4;background:none;border-bottom:0;padding:2px 8px 0;gap:0}'
+    + 'html.jsh-thanks .jsh-hol::before{content:"";position:absolute;left:50%;top:72%;width:min(420px,100vw);height:260px;transform:translate(-50%,-42%);background:radial-gradient(closest-side,rgba(255,186,80,.32),rgba(160,72,18,.1) 48%,transparent 76%);pointer-events:none;z-index:0}'
     + 'html.jsh-thanks.light .jsh-hol,html.jsh-thanks[data-theme="light"] .jsh-hol{color:#3a2412}'
     + 'html.jsh-thanks.light .jsh-hol::before,html.jsh-thanks[data-theme="light"] .jsh-hol::before{background:radial-gradient(closest-side,rgba(214,140,46,.34),rgba(248,210,150,.08) 60%,transparent 76%)}'
     + 'html.jsh-xmas .jsh-hol{color:#f4fff8;background:linear-gradient(90deg,#0c5a38,#8e1c2a 78%);border-bottom:1px solid #fbbf24}'
@@ -90,8 +90,8 @@
     + 'html.jsh-thanks.light .jsh-hol-k,html.jsh-thanks[data-theme="light"] .jsh-hol-k{background-image:linear-gradient(102deg,#3a2412 0%,#3a2412 14%,#0e7490 34%,#1d4ed8 48%,#6d28d9 62%,#b45309 80%,#3a2412 100%)}'
     + '@keyframes jsh-hol-shoot{from{background-position:100% 0}to{background-position:0% 0}}'
     + '@media (prefers-reduced-motion:reduce){html.jsh-thanks .jsh-hol-k{animation:none;background:none;-webkit-text-fill-color:currentColor;color:inherit}}'
-    + '.jsh-hol-art{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:center;margin-top:-8px}'
-    + '.jsh-hol-art img{display:block;height:84px;width:auto;margin:0 -14px;filter:drop-shadow(0 8px 10px rgba(28,10,2,.28))}'
+    + '.jsh-hol-art{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:center;margin-top:-2px}'
+    + '.jsh-hol-art img{display:block;height:84px;width:auto;margin:0 -16px;filter:drop-shadow(0 14px 18px rgba(40,16,4,.18))}'
     + '.jsh-hol-art img:nth-child(1){height:98px;margin-bottom:-2px}'
     + '.jsh-hol-art img:nth-child(2){height:76px;margin-bottom:6px}'
     + '.jsh-hol-marks{display:flex;align-items:center;gap:16px}'
@@ -106,12 +106,17 @@
     + 'html.jsh-xmas:not(.light):not([data-theme="light"]) :is(header.top,.top){background:#0c2e22!important;color:#e7f6ee;border-bottom-color:rgba(240,196,96,.35)!important}'
     + 'html.jsh-thanks.light :is(header.top,.top),html.jsh-thanks[data-theme="light"] :is(header.top,.top){background:#f6e0bc!important;color:#3a2412;border-bottom-color:rgba(140,70,20,.35)!important}'
     + 'html.jsh-xmas.light :is(header.top,.top),html.jsh-xmas[data-theme="light"] :is(header.top,.top){background:#e5f4ec!important;color:#0c3a28;border-bottom-color:rgba(140,32,48,.3)!important}'
+    + 'html.jsh-thanks .yt{position:relative;margin-top:2px}'
+    + 'html.jsh-thanks .yt::before{content:"";position:absolute;left:0;right:0;top:-90px;height:200px;background:radial-gradient(78% 100% at 50% 0%,rgba(255,176,64,.26),transparent 74%);pointer-events:none;z-index:0}'
+    + 'html.jsh-thanks .yt>*{position:relative;z-index:1}'
+    + 'html.jsh-thanks .sec.top{margin-top:0;background:transparent}'
+    + 'html.jsh-thanks .sec.top .cal-btn{background:rgba(255,246,228,.06);border-color:rgba(255,214,150,.28);color:#fff6e4}'
     + 'html.jsh-thanks :is(.jsh-dock,.btab,.jbl){background:#2a160c!important;border-color:rgba(240,186,96,.55)!important;color:#f6e2b8}'
     + 'html.jsh-xmas :is(.jsh-dock,.btab,.jbl){background:#0c2418!important;border-color:rgba(220,64,78,.5)!important;color:#e7f6ee}'
     + 'html.jsh-thanks.light :is(.jsh-dock,.btab,.jbl),html.jsh-thanks[data-theme="light"] :is(.jsh-dock,.btab,.jbl){background:#f8e8cc!important;color:#3a2412;border-color:rgba(140,70,20,.35)!important}'
     + 'html.jsh-xmas.light :is(.jsh-dock,.btab,.jbl),html.jsh-xmas[data-theme="light"] :is(.jsh-dock,.btab,.jbl){background:#e7f6ee!important;color:#0c3a28;border-color:rgba(140,32,48,.35)!important}'
     + 'body.boardmode .jsh-hol,body.boardmode .jsh-hol-frame{display:none}'
-    + '@media (max-width:760px){.jsh-hol{top:44px;font-size:12px;letter-spacing:.16em;padding:14px 18px 16px}html.jsh-thanks .jsh-hol{padding:8px 8px 0}html.jsh-thanks .jsh-hol-k{font-size:14px;letter-spacing:.14em}.jsh-hol-art img{height:76px}.jsh-hol-art img:nth-child(1){height:90px}.jsh-hol-art img:nth-child(2){height:70px}.jsh-hol-marks{gap:14px}.jsh-hol .mark{width:20px;height:20px}}'
+    + '@media (max-width:760px){.jsh-hol{top:44px;font-size:12px;letter-spacing:.16em;padding:14px 18px 16px}html.jsh-thanks .jsh-hol{padding:2px 6px 0}html.jsh-thanks .jsh-hol-k{font-size:14px;letter-spacing:.14em}.jsh-hol-art img{height:76px}.jsh-hol-art img:nth-child(1){height:90px}.jsh-hol-art img:nth-child(2){height:70px}.jsh-hol-marks{gap:14px}.jsh-hol .mark{width:20px;height:20px}}'
     + '@media print{.jsh-hol,.jsh-hol-wash,.jsh-hol-frame{display:none}}';
 
   var st = D.createElement('style'); st.id = 'jsh-holiday-css'; st.textContent = css; (D.head || H).appendChild(st);

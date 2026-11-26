@@ -558,6 +558,10 @@ body.livetv.tv-idle,body.livetv.tv-idle *{cursor:none!important}
   body.livetv .tvd .spot-last{margin-top:6px;padding:6px 10px;font-size:13px}
   body.livetv .tvd-rot{margin-top:6px;padding:5px 10px}
 }
+/* between games: the side panel's three short lists (your teams next, coming up, finals today) */
+.tvd-sub{margin:16px 2px 8px;font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.tvd-grid>.tvd-sub:first-child{margin-top:2px}
+:root.light .tvd-sub{color:#475569}
 /* tv3:end */
 @media (prefers-reduced-motion:reduce){body::before,.lv-head h1 b,.pill-live::before,.bump,.toast,.feed li.new a,.btn.pri,.lvf button.on,.tvd-amb,.tvd-spot.swap .spot{animation:none!important}.mc:hover,.btn:hover,.lvf button:hover{transform:none}}
 </style>
@@ -2904,8 +2908,10 @@ function tvRender(sw){ const box = $('#tvd'); if (!box) return; box.hidden = !TV
   const lv = $('#tv-live'); if (lv) lv.innerHTML = live.length ? '<i></i>' + live.length + ' live' : 'Nothing live';
   const spotBox = $('#tvd-spot');
   if (G) { const o = O[G.lg]; box.style.setProperty('--ca', deep(o.color(G.a.t), o.alt(G.a.t))); box.style.setProperty('--ch', deep(o.color(G.h.t), o.alt(G.h.t))); spotBox.innerHTML = spotHTML(G, false); }
-  else { box.style.removeProperty('--ca'); box.style.removeProperty('--ch'); const nx = (VIEW.pre || []).find(x => x.st === 'pre' && x.kick > Date.now());
-    spotBox.innerHTML = nx ? nextHTML(nx, 'Nothing live right now · next up') : '<div class="empty">No games on the schedule for the next week.</div>'; }
+  else { box.style.removeProperty('--ca'); box.style.removeProperty('--ch');
+    /* between games (11-26): your team's game takes the big countdown when it starts within 36 hours, else the next game */
+    const nxs = (VIEW.pre || []).filter(x => x.st === 'pre' && x.kick > Date.now()), nxf = nxs.find(x => x.fav && x.kick - Date.now() < 36 * 3600e3), nx = nxf || nxs[0];
+    spotBox.innerHTML = nx ? nextHTML(nx, nxf ? 'Nothing live right now · your team is next' : 'Nothing live right now · next up') : '<div class="empty">No games on the schedule for the next week.</div>'; }
   if (switched && matchMedia('(prefers-reduced-motion: reduce)').matches === false) {
     spotBox.classList.remove('swap'); void spotBox.offsetWidth; spotBox.classList.add('swap');
     clearTimeout(spotBox._sw); spotBox._sw = setTimeout(() => spotBox.classList.remove('swap'), 600);
@@ -2921,8 +2927,18 @@ function tvRender(sw){ const box = $('#tvd'); if (!box) return; box.hidden = !TV
   const others = live.filter(x => x !== G).sort((a, b) => (b.fav ? 1 : 0) - (a.fav ? 1 : 0) || b.H.s - a.H.s);
   let sh = '', side = '', sn = '';
   if (others.length) { sh = 'Also live'; sn = others.length + ' game' + (others.length === 1 ? '' : 's'); side = others.map(cardHTML).join(''); }
-  else { const up = (VIEW.up || []).filter(x => x !== G).slice(0, 8), fins = (VIEW.fins || []).slice(0, 8);
-    if (up.length) { sh = 'Coming up'; side = '<div class="up">' + up.map(upRow).join('') + '</div>'; } else if (fins.length) { sh = 'Finals today'; side = '<div class="fins">' + fins.map(finHTML).join('') + '</div>'; } else side = '<div class="empty">That’s everything for now.</div>'; }
+  else { /* between games (11-26): your teams' next games, what's coming up and today's finals, all at once (it was one or the other) */
+    const nowT = Date.now(), dayOf = t => localDay(t) === localDay(nowT) ? 'Today' : fmt({weekday:'short'}, new Date(t));
+    const favNext = []; FAVS.forEach(f => { const g = (VIEW.UA || []).filter(x => x.lg === f.sport && (x.a.t === f.team || x.h.t === f.team) && x.st === 'pre' && x.kick > nowT).sort((a, b) => a.kick - b.kick)[0]; if (g && favNext.indexOf(g) < 0) favNext.push(g); });
+    favNext.sort((a, b) => a.kick - b.kick);
+    const up = (VIEW.up || []).filter(x => x !== G && favNext.indexOf(x) < 0).slice(0, 8), fins = (VIEW.fins || []).slice(0, 8);
+    const favRow = g => upRow(g).replace('<span class="up-t"><b>', '<span class="up-t"><b>' + esc(dayOf(g.kick)) + ' ');
+    const parts = [];
+    if (favNext.length) parts.push('<div class="tvd-sub">Your teams next</div><div class="up">' + favNext.map(favRow).join('') + '</div>');
+    if (up.length) parts.push('<div class="tvd-sub">Coming up</div><div class="up">' + up.map(upRow).join('') + '</div>');
+    if (fins.length) parts.push('<div class="tvd-sub">Finals today</div><div class="fins">' + fins.map(finHTML).join('') + '</div>');
+    sh = 'Between games'; sn = up.length ? up.length + ' still to come' : '';
+    side = parts.length ? parts.join('') : '<div class="empty">That’s everything for now.</div>'; }
   $('#tvd-sh').textContent = sh; $('#tvd-sn').textContent = sn; $('#tvd-grid').innerHTML = side; $('#tvd-grid').classList.toggle('cards', !!others.length);
   /* the ticker: the latest scoring plays, or today's finals when there are none */
   const feed = (VIEW.feed || []).slice(0, 12), fins = VIEW.fins || []; let items = '';

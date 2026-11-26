@@ -362,18 +362,14 @@ a.gm:hover{background:var(--surface-2)}
 .tc-sig .inj{color:#ffd77a;border-color:rgba(255,215,122,.4)}
 .tc-sig .rk{color:#9cc6ff;border-color:rgba(156,198,255,.35);font-family:var(--num);letter-spacing:.04em}
 .teams.mini .tc-sig{display:none}
-/* phones (2026-11-24): teams + live/tune before the hero greeting */
-@media (max-width:720px){
-  .fd{display:flex;flex-direction:column}
-  .fd > #stale{order:0}.fd > #miss{order:0}
-  .fd > #yt{order:1}.fd > #recap{order:2}
-  .fd > #live-wrap{order:3}.fd > #tune-wrap{order:4}
-  .fd > .hero{order:5}
-  .fd > .sec:has(#tv-h),.fd > #tv{order:6}
-  .fd > #news-wrap{order:7}
-  .fd > .sec:not(.top):not(:has(#tv-h)){order:8}
-  .fd > #sports{order:9}.fd > .foot{order:10}
-}
+/* home 11-26: the greeting is a slim line at the top; the big card is "Today across the leagues" */
+.hello{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin:6px 2px 12px}
+.hello .eyebrow{margin:0}
+.hello h1{margin:0;font-family:var(--disp);font-size:clamp(20px,3.2vw,28px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.hello h1 b{background:linear-gradient(90deg,#9cc6ff,#cdb2ff 55%,#fcd56b);-webkit-background-clip:text;background-clip:text;color:transparent}
+:root.light .hello h1 b{background:linear-gradient(90deg,#1d4ed8,#6d28d9 55%,#b45309);-webkit-background-clip:text;background-clip:text}
+.hero .hi-t{margin:2px 0 6px;font-family:var(--disp);font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+/* (the phone-only section order of 2026-11-24 is gone: since 11-26 the markup itself is in the right order everywhere) */
 
 /* ===== Neo layer (2026-10-26, Jamo: "enhance the design, UI and layout - more futuristic and epic and clean"). Appended last
    so it only refines: a deep-space backdrop (since 10-27 the static clean gradient below, no aurora), glass panels with hairline edges that
@@ -558,6 +554,7 @@ body::after{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(
 .tc.pick{min-height:188px}
 button.tc{width:100%;margin:0;font:inherit;text-align:left;cursor:pointer}
 .yt-change{display:flex;align-items:center;justify-content:center;width:100%;margin:0 0 10px;padding:11px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
+.yt-change[hidden]{display:none}
 .yt-change:hover{border-color:color-mix(in srgb,var(--ink) 35%,var(--line))}
 .pk-sheet{margin:0 0 12px;padding:12px;border-radius:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh)}
 .pk-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
@@ -991,7 +988,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Gameday (polish/gameday.js, 2026-11-24): BYU Game day + Jazz Game night — night wash, HUD, TV mode, now-strip focus -->
 <script src="/sports/gameday.js?v=20261126y" defer></script>
 <!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
-<script src="/sports/shell.js?v=20261126y" defer></script>
+<script src="/sports/shell.js?v=20261126h" defer></script>
 <!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
 <script src="/sports/holiday.js?v=20261126x" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
@@ -1002,8 +999,13 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <main class="fd anim" id="fd">
   <div class="stale" id="stale" role="status" hidden></div>
   <div class="miss" id="miss" role="status" hidden></div>
+  <!-- home order (2026-11-26, Jamo: "the live games box should be above my teams"): what is on right now, then your teams
+       and how they did, then the day at a glance, the TV guide, headlines and the leagues. Same order on every screen size. -->
+  <header class="hello"><span class="eyebrow" id="h-date">Jamo Sports Hub</span><h1 id="hero-h"><span id="h-greet">Welcome back</span>, <b>Jamo</b></h1></header>
+  <div id="live-wrap" hidden><div class="sec"><h2>Live now</h2><span class="note" id="live-n"></span><a class="more" href="/sports/live/">Live Center ›</a></div><div class="lrow" id="live"></div></div>
+  <div id="tune-wrap" hidden><div class="sec"><h2>Worth tuning in</h2><span class="note" id="tune-n"></span></div><div class="lrow" id="tune"></div></div>
   <div class="yt" id="yt">
-  <div class="sec top"><h2>Your teams</h2><span class="note" id="t-note"></span><div class="yt-more"><button type="button" class="yt-expand" id="yt-expand" hidden>Expand</button><button type="button" class="yt-more-btn" id="yt-more" aria-expanded="false" aria-haspopup="menu" aria-controls="yt-menu" title="More team options">More</button><div class="yt-menu" id="yt-menu" role="menu" hidden><a role="menuitem" class="cal-btn" id="alerts-btn" href="/sports/alerts/" title="Phone alerts for your teams">Alerts</a><button role="menuitem" class="cal-btn" id="cal-btn" type="button" aria-expanded="false" aria-controls="cal-panel">Add to calendar</button><button role="menuitem" class="cal-btn t-min" id="t-min" type="button" aria-pressed="false" aria-controls="teams">Minimize</button></div></div></div>
+  <div class="sec top"><h2>Your teams</h2><span class="note" id="t-note"></span><div class="yt-more"><button type="button" class="yt-expand" id="yt-expand" hidden>Expand</button><button type="button" class="yt-more-btn" id="yt-more" aria-expanded="false" aria-haspopup="menu" aria-controls="yt-menu" title="More team options">More</button><div class="yt-menu" id="yt-menu" role="menu" hidden><button role="menuitem" class="cal-btn" id="yt-change-m" type="button">Change teams</button><a role="menuitem" class="cal-btn" id="alerts-btn" href="/sports/alerts/" title="Phone alerts for your teams">Alerts</a><button role="menuitem" class="cal-btn" id="cal-btn" type="button" aria-expanded="false" aria-controls="cal-panel">Add to calendar</button><button role="menuitem" class="cal-btn t-min" id="t-min" type="button" aria-pressed="false" aria-controls="teams">Minimize</button></div></div></div>
   <div class="cal-panel" id="cal-panel" hidden></div>
   <p class="yt-lead" id="yt-lead" hidden>Pick a team in each league. They stay on this phone.</p>
   <button type="button" class="yt-change" id="yt-change">Change teams</button>
@@ -1018,10 +1020,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
   </div>
   <section id="recap" aria-label="Your latest results" hidden></section>
 
-  <section class="hero" aria-labelledby="hero-h">
+  <section class="hero" aria-labelledby="today-h">
     <div class="hi-l">
-      <div class="eyebrow" id="h-date">Jamo Sports Hub</div>
-      <h1 id="hero-h"><span id="h-greet">Welcome back</span>, <b>Jamo</b></h1>
+      <h2 class="hi-t" id="today-h">Today across the leagues</h2>
       <p class="lead" id="h-lead">College football, the NFL, the NBA and college hoops in one place.</p>
       <div class="pulse" id="h-pulse"></div>
       <div class="tvq" id="tvq"><a class="tvq-main tvq-lc" href="/sports/live/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.48M7.76 16.24a6 6 0 0 1 0-8.48M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg><span><b>Live Center</b><span id="tvq-lc">Every live game, one screen</span></span></a><a class="tvq-main" href="#tv-h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="m8 3 4 4 4-4"/></svg><span><b>TV guide</b><span id="tvq-n">What’s on today</span></span></a><nav class="tvq-l" aria-label="Full TV guides"><a href="/cfb/#/tv">CFB</a><a href="/nfl/#/tv">NFL</a><a href="/nba/#/tv">NBA</a><a href="/cbb/#/tv">CBB</a></nav></div>
@@ -1029,10 +1030,6 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
     <div id="h-next"></div>
     <div class="hx" id="h-board" hidden></div>
   </section>
-
-  <div id="tune-wrap" hidden><div class="sec"><h2>Worth tuning in</h2><span class="note" id="tune-n"></span></div><div class="lrow" id="tune"></div></div>
-
-  <div id="live-wrap" hidden><div class="sec"><h2>Live now</h2><span class="note" id="live-n"></span><a class="more" href="/sports/live/">Live Center ›</a></div><div class="lrow" id="live"></div></div>
 
   <div class="sec"><h2 id="tv-h">On TV today</h2><span class="note" id="tv-note"></span><span class="more" id="upd"></span></div>
   <section class="tv" id="tv" aria-labelledby="tv-h"></section>
@@ -5735,7 +5732,7 @@ function heroHTML(){
   $('#h-greet').textContent = h < 5 ? 'Up late' : h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
   $('#h-date').textContent = fmt({weekday:'long', month:'long', day:'numeric'}, now);
   const lv = liveAll().length;
-  $('#h-lead').textContent = lv ? lv + ' game' + (lv === 1 ? ' is' : 's are') + ' live right now. Your teams come first, then everything on TV today.' : 'College football, the NFL, the NBA and college hoops in one place: your teams first, then everything on TV today.';
+  $('#h-lead').textContent = lv ? lv + ' game' + (lv === 1 ? ' is' : 's are') + ' live right now, with the close ones flagged up top.' : 'College football, the NFL, the NBA and college hoops: what each league has going today, then everything on TV.';
   const chips = [];
   if (lv) chips.push('<a class="chip live" href="#live-wrap"><i></i>' + lv + ' live now</a>');
   chips.push('<a class="chip" style="--c:var(--cfb)" href="/cfb/#/week/' + CFB_WEEK + '"><i></i>CFB · Week ' + CFB_WEEK + '</a>', '<a class="chip" style="--c:var(--nfl)" href="/nfl/#/week/' + nflWeek.week + '"><i></i>NFL · ' + esc(nflWeek.label) + '</a>', '<a class="chip" style="--c:var(--nba)" href="/nba/#/scores"><i></i>NBA · ' + (nbaPre ? 'preseason' : 'regular season') + '</a>', '<a class="chip" style="--c:var(--cbb)" href="/cbb/#/scores"><i></i>CBB · ' + (CBB.some(g => g.date === TODAY) ? CBB.filter(g => g.date === TODAY).length + ' games today' : 'regular season') + '</a>');
@@ -5859,6 +5856,8 @@ function teamsHTML(){ const cards = FAVS.slice().sort((a, b) => { const x = favS
   $('#teams').innerHTML = cards.join('');
   const open = cards.length > FAVS.length;
   const lead = document.getElementById('yt-lead'); if (lead) lead.hidden = !open;
+  /* 11-26: the full-width Change teams button only while a league still needs a team; otherwise it lives in More */
+  const chg = document.getElementById('yt-change'); if (chg) chg.hidden = !open;
   $('#t-note').textContent = open ? '' : 'tap a card for the team page'; }
 const FAV_KEYS = [['cfb','cfb-settings'],['nfl','nfl-settings'],['nba','nba-settings'],['cbb','cbb-settings']];
 function readFavs(){ FAVS.length = 0; FAV_KEYS.forEach(pair => { const id = savedFav(pair[1]); if (id) FAVS.push({sport:pair[0], team:id}); }); }
@@ -5908,6 +5907,7 @@ document.addEventListener('click', e => {
 }, true);
 const ytChange = document.getElementById('yt-change'), pkSheet = document.getElementById('pk-sheet');
 if (ytChange) ytChange.addEventListener('click', () => openPick(FAVS[0] ? FAVS[0].sport : 'nfl'));
+{ const m = document.getElementById('yt-change-m'); if (m) m.addEventListener('click', () => { const menu = document.getElementById('yt-menu'), btn = document.getElementById('yt-more'); if (menu) menu.hidden = true; if (btn) btn.setAttribute('aria-expanded', 'false'); openPick(FAVS[0] ? FAVS[0].sport : 'nfl'); }); }
 if (pkSheet) pkSheet.addEventListener('click', e => {
   const tab = e.target.closest('[data-lg]'); if (tab) { pickSport = tab.dataset.lg; paintPick(); return; }
   const hit = e.target.closest('.pk-hit'); if (hit) { saveFav(pickSport, hit.dataset.id); paintPick(); return; }
@@ -5954,8 +5954,11 @@ const pkQ = document.getElementById('pk-q'); if (pkQ) pkQ.addEventListener('inpu
 /* ---------- live now ---------- */
 function liveAll(){ const out = []; [CFB.filter(g => g.week === CFB_WEEK), NFL.filter(g => g.week === nflWeek.week && g.stype === nflWeek.stype), NBA.filter(g => g.date === TODAY || g.date === addDay(TODAY, -1)), CBB.filter(g => (g.date === TODAY || g.date === addDay(TODAY, -1)) && cbbNotable(g))].forEach(list => list.map(applyLive).filter(g => g.live).forEach(g => out.push(g))); return out; }
 function liveHTML(){ const lv = liveAll(); { const q = document.getElementById('tvq-lc'); if (q) q.textContent = lv.length ? lv.length + ' game' + (lv.length === 1 ? '' : 's') + ' live now' : 'Every live game, one screen'; } $('#live-wrap').hidden = !lv.length; if (!lv.length) return; $('#live-n').textContent = lv.length + ' game' + (lv.length === 1 ? '' : 's');
-  lv.sort((a, b) => (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0));
-  $('#live').innerHTML = lv.map(g => { const o = O[g.sport]; return '<a class="lc" style="--c:' + SPORT[g.sport].c + '" href="' + o.href(g) + '"><div class="lc-h"><span>' + SPORT[g.sport].short + '</span><span>' + esc(liveClock(g)) + '</span></div>' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + '</a>'; }).join(''); }
+  /* 11-26: one row - your teams first, then the close, late or upset-y games (with the reason), then the rest */
+  const why = new Map(); lv.forEach(g => { const w = (g.sport === 'cfb' && g.fcs && !favGame(g)) ? null : tuneWhy(g); if (w) why.set(g, w); });
+  lv.sort((a, b) => ((favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0)) || ((why.get(b) || {s: -1}).s - (why.get(a) || {s: -1}).s));
+  if (why.size) $('#live-n').textContent += ' · ' + why.size + ' worth tuning in';
+  $('#live').innerHTML = lv.map(g => { const o = O[g.sport], w = why.get(g); return '<a class="lc' + (w ? ' hot' : '') + '" style="--c:' + SPORT[g.sport].c + '" href="' + o.href(g) + '"><div class="lc-h"><span>' + SPORT[g.sport].short + '</span><span>' + esc(liveClock(g)) + '</span></div>' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + (w ? '<div class="lc-why">\u{1F525} ' + esc(w.t) + '</div>' : '') + '</a>'; }).join(''); }
 
 /* ---------- worth tuning in: live games in overtime, close late, or an upset in the making ---------- */
 const clkSecs = c => { const m = /^(\d+):(\d\d)/.exec(c || ''); return m ? +m[1] * 60 + +m[2] : null; };
@@ -5968,7 +5971,8 @@ function tuneWhy(g){ const L = LIVE[g.sport][g.id] || {}; const per = +L.per || 
     if (lead > 0) return {s: 100 + mine + Math.abs(g.spread), t: 'Upset watch · ' + O[g.sport].name(dogHome ? g.home : g.away) + ' (+' + Math.abs(g.spread) + ') leads by ' + lead}; }
   return null; }
 /* no FCS games here (2026-10-31, Jamo: "On the worth tuning in, don't include FCS scores") - Weber State's still count, since it's his team */
-function tuneHTML(){ const hot = liveAll().filter(g => !(g.sport === 'cfb' && g.fcs && !favGame(g))).map(g => ({g, w: tuneWhy(g)})).filter(x => x.w).sort((a, b) => b.w.s - a.w.s).slice(0, 6);
+/* 11-26: "Worth tuning in" is folded into Live now (it only ever repeated live games); the row stays hidden */
+function tuneHTML(){ $('#tune-wrap').hidden = true; return; const hot = liveAll().filter(g => !(g.sport === 'cfb' && g.fcs && !favGame(g))).map(g => ({g, w: tuneWhy(g)})).filter(x => x.w).sort((a, b) => b.w.s - a.w.s).slice(0, 6);
   $('#tune-wrap').hidden = !hot.length; if (!hot.length) return;
   $('#tune-n').textContent = hot.length === 1 ? 'close, late or an upset brewing' : hot.length + ' games close, late or upset-y';
   $('#tune').innerHTML = hot.map(({g, w}) => { const o = O[g.sport]; return '<a class="lc hot" style="--c:' + SPORT[g.sport].c + '" href="' + o.href(g) + '"><div class="lc-h"><span>' + SPORT[g.sport].short + '</span><span>' + esc(liveClock(g)) + '</span></div>' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + '<div class="lc-why">\u{1F525} ' + esc(w.t) + '</div></a>'; }).join(''); }

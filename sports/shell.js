@@ -145,8 +145,9 @@
   function land() {
     var p = location.pathname || '';
     if (!/\/sports\/?$/.test(p) && !/\/sports\/index\.html$/.test(p)) return;
-    var yt = D.getElementById('yt');
-    if (yt) yt.scrollIntoView({ block: 'start', behavior: RM.matches ? 'auto' : 'smooth' });
+    /* 11-26: land at the top of the page's content (past the holiday band) - live games come first now, then your teams */
+    var top = D.getElementById('fd') || D.getElementById('yt');
+    if (top) top.scrollIntoView({ block: 'start', behavior: RM.matches ? 'auto' : 'smooth' });
   }
 
   function boot() {

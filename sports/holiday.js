@@ -109,6 +109,8 @@
     + 'html.jsh-thanks .yt{position:relative;margin-top:2px}'
     + 'html.jsh-thanks .yt::before{content:"";position:absolute;left:0;right:0;top:-90px;height:200px;background:radial-gradient(closest-side,rgba(255,176,64,.2),transparent);pointer-events:none;z-index:0}'
     + 'html.jsh-thanks .yt>*{position:relative;z-index:1}'
+    /* the heading row holds the More menu (Alerts, Calendar, Minimize): keep it above Change teams and the cards (11-26 fix) */
+    + 'html.jsh-thanks .yt>.sec.top{z-index:5}'
     + 'html.jsh-thanks .sec.top,html.jsh-xmas .sec.top{margin-top:0;background:transparent}'
     + 'html.jsh-thanks .yt-more-btn,html.jsh-thanks .yt-expand{background:rgba(255,246,228,.06);border-color:rgba(255,214,150,.28);color:#fff6e4}'
     + 'html.jsh-thanks .yt-menu{background:rgba(42,22,12,.97)!important;border-color:rgba(255,214,150,.28)!important}'

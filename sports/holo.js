@@ -170,6 +170,7 @@
   /* ---------- 8 desktop: light under the mouse on tappable cards ---------- */
   const GLASS = ['#view a.card', '#view a.tile', '#view .tile-link', '#view a.wcard', '#view .gm.click', '#view a.gm', '#view a.sb-nu', '#view a.gotw',
     '.fd a.lc', '.fd a.nw-item', '.fd a.lt', '.teams a.tc', 'main.wrap a.ar'].join(',');
+  window.JSH_HOLO_GLASS = GLASS; /* 11-26: Glow (glow.js) leaves these cards to Holo, so a card is never lit twice */
   const PROPS = ['--hx', '--hy', '--hbg', '--hbs', '--hbp', '--hbr'];
   const flat = new WeakSet();
   let lit = null, pmE = null, pmQ = false;

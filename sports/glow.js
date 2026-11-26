@@ -49,7 +49,9 @@
     ['--tc', '--team', '--c', '--pc', '--accent'].some(function (k) { v = cs.getPropertyValue(k).trim(); return !!v && !/^var\(/.test(v); });
     if (!v) v = getComputedStyle(root).getPropertyValue('--accent').trim() || '#4f8cff';
     return v; }
-  function cardAt(t){ var c = t && t.closest && t.closest(CARDS); if (!c) return null; var r = c.getBoundingClientRect(); return (r.width < 40 || r.height < 24) ? null : c; }
+  function cardAt(t){ var c = t && t.closest && t.closest(CARDS); if (!c) return null;
+    /* 11-26: a card Holo lights (holo.js GLASS) gets one light, not two layered spotlights */
+    var hg = W.JSH_HOLO_GLASS; if (hg && root.classList.contains('holo-on')) { try { if (c.matches(hg)) return null; } catch (e) {} } var r = c.getBoundingClientRect(); return (r.width < 40 || r.height < 24) ? null : c; }
 
   /* ---------- spotlight (mouse) ---------- */
   if (fine) { var spot = D.createElement('div'); spot.className = 'jg-spot'; D.body.appendChild(spot); var cur = null, raf = 0, mx = 0, my = 0;

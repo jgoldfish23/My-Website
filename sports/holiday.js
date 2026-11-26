@@ -2,7 +2,7 @@
    Thanksgiving is the fourth Thursday of November. The next morning through December 26 is Christmas.
    After that the hub looks normal again. The date is the hub's own time zone (America/Denver when none is saved).
    ?hol=thanks, ?hol=xmas or ?hol=off overrides the date, for a look at the other theme.
-   No beams, grids, or photos. Thanksgiving uses the custom art, sitting on the field with no frame.
+   No beams, grids, or photos. Thanksgiving keeps the animated phrase, with the art in the same glow.
    Reduced-motion users get the same still layer. */
 (function () {
   if (window.__jshHoliday) return; window.__jshHoliday = true;
@@ -76,19 +76,24 @@
     + 'html.jsh-thanks .jsh-hol-frame{box-shadow:inset 0 0 120px rgba(180,80,16,.18)}'
     + 'html.jsh-xmas .jsh-hol-frame{box-shadow:inset 4px 0 0 rgba(46,170,96,.8),inset -4px 0 0 rgba(196,40,56,.75),inset 0 0 80px rgba(20,80,48,.22)}'
     + 'html.jsh-thanks .jsh,html.jsh-xmas .jsh{position:sticky;top:0;z-index:80}'
-    + 'html.jsh-thanks .jsh{background:#2a160c!important;background-image:linear-gradient(90deg,#8a3e10,#2a160c 42%,#2a160c 62%,#6a3010)!important;border-bottom-color:rgba(240,186,96,.45)!important}'
+    + 'html.jsh-thanks .jsh{background:#2a160c!important;background-image:linear-gradient(90deg,#8a3e10,#2a160c 42%,#2a160c 62%,#6a3010)!important;border-bottom-color:transparent!important;box-shadow:0 16px 28px rgba(20,8,2,.22)!important}'
     + 'html.jsh-thanks .jsh-brand b{background:linear-gradient(90deg,#ffe08a,#f0a040);-webkit-background-clip:text;background-clip:text;color:transparent}'
     + 'html.jsh-xmas .jsh{background:#071a12!important;background-image:linear-gradient(90deg,#0e6a40,#071a12 40%,#071a12 62%,#6e1824)!important;border-bottom-color:rgba(240,196,96,.4)!important}'
     + 'html.jsh-xmas .jsh-brand b{background:linear-gradient(90deg,#8cf0b4,#f0d060);-webkit-background-clip:text;background-clip:text;color:transparent}'
     + '.jsh-hol{position:sticky;top:44px;z-index:79;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:0;padding:16px 22px 18px;font-family:"Inter Tight","Inter",system-ui,sans-serif;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;line-height:1.2;text-align:center}'
-    + 'html.jsh-thanks .jsh-hol{position:relative;top:auto;color:#fff6e4;background:radial-gradient(70% 80% at 50% 18%,rgba(255,176,64,.28),rgba(90,36,10,0) 72%);border-bottom:0;padding:6px 8px 2px}'
-    + 'html.jsh-thanks.light .jsh-hol,html.jsh-thanks[data-theme="light"] .jsh-hol{color:#3a2412;background:radial-gradient(70% 80% at 50% 18%,rgba(214,140,46,.22),rgba(248,230,200,0) 72%)}'
+    + 'html.jsh-thanks .jsh-hol{position:relative;top:auto;color:#fff6e4;background:none;border-bottom:0;padding:10px 12px 0;gap:0}'
+    + 'html.jsh-thanks .jsh-hol::before{content:"";position:absolute;left:50%;top:58%;width:min(380px,96vw);height:210px;transform:translate(-50%,-46%);background:radial-gradient(closest-side,rgba(255,186,80,.4),rgba(196,92,24,.16) 52%,transparent 74%);pointer-events:none;z-index:0}'
+    + 'html.jsh-thanks.light .jsh-hol,html.jsh-thanks[data-theme="light"] .jsh-hol{color:#3a2412}'
+    + 'html.jsh-thanks.light .jsh-hol::before,html.jsh-thanks[data-theme="light"] .jsh-hol::before{background:radial-gradient(closest-side,rgba(214,140,46,.34),rgba(248,210,150,.08) 60%,transparent 76%)}'
     + 'html.jsh-xmas .jsh-hol{color:#f4fff8;background:linear-gradient(90deg,#0c5a38,#8e1c2a 78%);border-bottom:1px solid #fbbf24}'
-    + '.jsh-hol-badge{display:block;width:min(228px,64vw);height:auto;margin:0 auto}'
-    + '.jsh-hol-art{display:flex;align-items:flex-end;justify-content:center;margin-top:-8px}'
-    + '.jsh-hol-art img{display:block;height:86px;width:auto;margin:0 -8px}'
-    + '.jsh-hol-art img:nth-child(1){height:96px}'
-    + '.jsh-hol-art img:nth-child(2){height:78px;margin-bottom:4px}'
+    + 'html.jsh-thanks .jsh-hol-k{position:relative;z-index:2;font-size:15px;font-weight:700;letter-spacing:.18em;background-image:linear-gradient(102deg,#fff4e0 0%,#fff4e0 14%,#8eebff 34%,#fff 48%,#c4b5fd 62%,#ffe08a 80%,#fff4e0 100%);background-size:320% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:jsh-hol-shoot 3.8s ease-in-out infinite alternate}'
+    + 'html.jsh-thanks.light .jsh-hol-k,html.jsh-thanks[data-theme="light"] .jsh-hol-k{background-image:linear-gradient(102deg,#3a2412 0%,#3a2412 14%,#0e7490 34%,#1d4ed8 48%,#6d28d9 62%,#b45309 80%,#3a2412 100%)}'
+    + '@keyframes jsh-hol-shoot{from{background-position:100% 0}to{background-position:0% 0}}'
+    + '@media (prefers-reduced-motion:reduce){html.jsh-thanks .jsh-hol-k{animation:none;background:none;-webkit-text-fill-color:currentColor;color:inherit}}'
+    + '.jsh-hol-art{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:center;margin-top:-8px}'
+    + '.jsh-hol-art img{display:block;height:84px;width:auto;margin:0 -14px;filter:drop-shadow(0 8px 10px rgba(28,10,2,.28))}'
+    + '.jsh-hol-art img:nth-child(1){height:98px;margin-bottom:-2px}'
+    + '.jsh-hol-art img:nth-child(2){height:76px;margin-bottom:6px}'
     + '.jsh-hol-marks{display:flex;align-items:center;gap:16px}'
     + '.jsh-hol .mark{width:22px;height:22px;display:block}'
     + '.jsh-hol .g{stroke:#ffe7a8;fill:none;stroke-linecap:round;stroke-linejoin:round}'
@@ -106,7 +111,7 @@
     + 'html.jsh-thanks.light :is(.jsh-dock,.btab,.jbl),html.jsh-thanks[data-theme="light"] :is(.jsh-dock,.btab,.jbl){background:#f8e8cc!important;color:#3a2412;border-color:rgba(140,70,20,.35)!important}'
     + 'html.jsh-xmas.light :is(.jsh-dock,.btab,.jbl),html.jsh-xmas[data-theme="light"] :is(.jsh-dock,.btab,.jbl){background:#e7f6ee!important;color:#0c3a28;border-color:rgba(140,32,48,.35)!important}'
     + 'body.boardmode .jsh-hol,body.boardmode .jsh-hol-frame{display:none}'
-    + '@media (max-width:760px){.jsh-hol{top:44px;font-size:12px;letter-spacing:.16em;padding:14px 18px 16px}html.jsh-thanks .jsh-hol{padding:4px 6px 0}.jsh-hol-art img{height:78px}.jsh-hol-art img:nth-child(1){height:88px}.jsh-hol-art img:nth-child(2){height:72px}.jsh-hol-marks{gap:14px}.jsh-hol .mark{width:20px;height:20px}}'
+    + '@media (max-width:760px){.jsh-hol{top:44px;font-size:12px;letter-spacing:.16em;padding:14px 18px 16px}html.jsh-thanks .jsh-hol{padding:8px 8px 0}html.jsh-thanks .jsh-hol-k{font-size:14px;letter-spacing:.14em}.jsh-hol-art img{height:76px}.jsh-hol-art img:nth-child(1){height:90px}.jsh-hol-art img:nth-child(2){height:70px}.jsh-hol-marks{gap:14px}.jsh-hol .mark{width:20px;height:20px}}'
     + '@media print{.jsh-hol,.jsh-hol-wash,.jsh-hol-frame{display:none}}';
 
   var st = D.createElement('style'); st.id = 'jsh-holiday-css'; st.textContent = css; (D.head || H).appendChild(st);
@@ -131,7 +136,7 @@
     var bulb = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="g" d="M13 7.5h6" stroke-width="1.7"/><circle class="w" cx="16" cy="18" r="7" stroke-width="1.7"/><path class="g" d="M12.2 15.2a6 6 0 0 1 4.2-2.6" stroke-width="1.4"/></svg>';
     function marks(list) { return '<span class="jsh-hol-marks" aria-hidden="true">' + list.join('') + '</span>'; }
     if (kind === 'thanks') {
-      strip.innerHTML = '<img class="jsh-hol-badge" src="/sports/holiday/thanks-badge.png?v=20261126l" alt="Happy Thanksgiving"><span class="jsh-hol-art" aria-hidden="true"><img src="/sports/holiday/thanks-turkey.png?v=20261126l" alt=""><img src="/sports/holiday/thanks-football.png?v=20261126l" alt=""><img src="/sports/holiday/thanks-pie.png?v=20261126l" alt=""></span>';
+      strip.innerHTML = '<span class="jsh-hol-k">Happy Thanksgiving</span><span class="jsh-hol-art" aria-hidden="true"><img src="/sports/holiday/thanks-turkey.png?v=20261126l" alt=""><img src="/sports/holiday/thanks-football.png?v=20261126l" alt=""><img src="/sports/holiday/thanks-pie.png?v=20261126l" alt=""></span>';
     } else {
       strip.innerHTML = 'Merry Christmas' + marks([star, tree, bulb]);
     }

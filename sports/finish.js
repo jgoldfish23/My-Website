@@ -54,6 +54,14 @@
     + ':root #view :is(table.tbl td,table.tbl th,.sc,.val,.rb .v,.gm .sp,.pw,.sd){font-variant-numeric:tabular-nums}'
     + ':root #view .page-head .eyebrow{letter-spacing:.16em}'
     /* ---------- scrolling: blocks ease up into place (zero-specificity, so anything with its own animation keeps it) ---------- */
+    /* ---------- bottom tabs (11-26): the page you're on is the brightest thing in the bar. The league accent alone read as
+       dimmed - darker than the other tabs over the holiday field - so the current page looked switched off. ---------- */
+    + ':root body .btab .bt-i{color:rgba(238,242,248,.64)}'
+    + ':root body .btab .bt-i.on{color:#fff!important;font-weight:800}'
+    + ':root body .btab .bt-i.on :is(svg,img){opacity:1!important;filter:none!important}'
+    + '@media (max-width:760px){:root body .btab .bt-i.on::before{background:color-mix(in srgb,var(--accent,#5b8cff) 40%,rgba(255,255,255,.06))!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent,#5b8cff) 65%,#fff)!important}}'
+    + 'html.jsh-lt body .btab .bt-i{color:rgba(15,23,42,.6)}html.jsh-lt body .btab .bt-i.on{color:#0f172a!important}'
+    + '@media (max-width:760px){html.jsh-lt body .btab .bt-i.on::before{background:color-mix(in srgb,var(--accent,#5b8cff) 22%,#fff)!important}}'
     + '@supports (animation-timeline:view()){@media (prefers-reduced-motion:no-preference){'
     +   ':where(#view) :where(.card,.tile,.gmlist>.gm,.tblwrap,.daygrp>h3){animation:jshRise linear backwards;animation-timeline:view();animation-range:entry 0px entry 110px}'
     +   ':where(.fd,.lv) :where(.mc,.spot,.up,.feed){animation:jshRise linear backwards;animation-timeline:view();animation-range:entry 0px entry 110px}'
@@ -65,5 +73,24 @@
     D.addEventListener('touchstart', function(){}, {passive: true});
   }
   if (D.body) start(); else D.addEventListener('DOMContentLoaded', start);
+
+  /* sideways rows (11-26): tab bars, week and day pickers, filter chips and card rows scroll sideways on a phone with nothing
+     to say so ("Previe..." just stopped at the edge). The edge that has more fades out; at either end the fade goes away.
+     Every page (home's Live now row too). Only classes change, so the observers on the page are not re-fired. */
+  var XS = '.ng-sub,.subnav,.seg,.wk,.days,.lvf,.jsh-xs,.jtab,.lrow,.tvq-l';
+  var xsCss = D.createElement('style'); xsCss.id = 'jsh-xs-fade'; xsCss.textContent = ''
+    + '.xs-r:not(.xs-l){-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent)}'
+    + '.xs-l:not(.xs-r){-webkit-mask-image:linear-gradient(90deg,transparent,#000 30px);mask-image:linear-gradient(90deg,transparent,#000 30px)}'
+    + '.xs-l.xs-r{-webkit-mask-image:linear-gradient(90deg,transparent,#000 30px,#000 calc(100% - 30px),transparent);mask-image:linear-gradient(90deg,transparent,#000 30px,#000 calc(100% - 30px),transparent)}';
+  (D.head || H).appendChild(xsCss);
+  function xsMark(el){ var room = el.scrollWidth - el.clientWidth, more = room > 4 && getComputedStyle(el).overflowX !== 'visible';
+    var r = more && el.scrollLeft < room - 4, l = more && el.scrollLeft > 4;
+    if (el.classList.contains('xs-r') !== r) el.classList.toggle('xs-r', r);
+    if (el.classList.contains('xs-l') !== l) el.classList.toggle('xs-l', l); }
+  var xsQ = 0; function xsAll(){ if (xsQ) return; xsQ = requestAnimationFrame(function(){ xsQ = 0; D.querySelectorAll(XS).forEach(xsMark); }); }
+  D.addEventListener('scroll', function(e){ var t = e.target; if (t && t.nodeType === 1 && t.matches(XS)) xsMark(t); }, true);
+  window.addEventListener('resize', xsAll);
+  function xsGo(){ xsAll(); if (window.MutationObserver) new MutationObserver(xsAll).observe(D.body, { childList: true, subtree: true }); }
+  if (D.body) xsGo(); else D.addEventListener('DOMContentLoaded', xsGo);
 })();
 /* finish:end */

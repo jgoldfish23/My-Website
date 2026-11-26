@@ -410,7 +410,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
-<script src="/sports/finish.js?v=20261126w" defer></script>
+<script src="/sports/finish.js?v=20261126d" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
 <script src="/sports/tabs.js?v=20261126w" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
@@ -17029,7 +17029,7 @@ if(!document.getElementById('pbk-css')){ const st=document.createElement('style'
 { const _pbGame=renderGame; renderGame=function(id){ _pbGame(id); if(view.querySelector('.pbk-vs')) return; const g=GI[id]; const html=g?gamePlaybooksHTML(g):''; const h=view.querySelector('.ghead'); if(h&&html) h.insertAdjacentHTML('afterend', html); }; }
 /* BYU football depth (2026-11-25): a stacked deck under the team header, and a second "floor" under the Game day board */
 if(!document.getElementById('byu-depth-css')){ const st=document.createElement('style'); st.id='byu-depth-css'; st.textContent=''
-  +'html body .thead.byu-deep{overflow:visible;background:linear-gradient(165deg,#003da5 0%,#002e5d 42%,#04101f 100%);color:#fff;border-color:rgba(255,255,255,.16);'
+  +'html body .thead.byu-deep{overflow:hidden;background:linear-gradient(165deg,#003da5 0%,#002e5d 42%,#04101f 100%);color:#fff;border-color:rgba(255,255,255,.16);'
   +'box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 14px 0 -6px rgba(0,30,70,.55),0 28px 0 -12px rgba(0,16,40,.4),0 46px 44px -28px rgba(0,0,0,.75)}'
   +'html body .thead.byu-deep .ttl h1,html body .thead.byu-deep .eyebrow,html body .thead.byu-deep .meta{color:#fff}'
   +'html body .thead.byu-deep .meta,html body .thead.byu-deep .eyebrow{color:#c9d7ee}'

@@ -34,7 +34,8 @@
     if (seen) {
       [['cfb-settings', 'BYU'], ['nfl-settings', 'PHI'], ['nba-settings', 'UTAH'], ['cbb-settings', '252']].forEach(function (pair) {
         var o = read(pair[0]) || {};
-        if (o.fav == null || o.fav === '') { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
+        /* 11-27 fix: only when this phone never chose (no fav key). fav: null is "Clear favorite" and must stay cleared */
+        if (!('fav' in o)) { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
       });
     }
     localStorage.setItem('jsh-favs-ready', '1');
@@ -6039,8 +6040,11 @@ function sim(){ if(SIM) return SIM; const n=SIMS; const real=G.filter(g=>g.playe
   const hw=new Uint8Array(KC), poL=[], dvL=[]; let W=0;
   for(let i=0;i<n;i++){ TEAMS.forEach(t=>{ SH[t.ab]=RATING_SD*rn(); }); const res=real.slice(); let wt=1;
     for(let k=0;k<KC;k++){ const g=todo[k], f=WHATIF[g.id]; let m;
-      if(f){ const ph=cdf((g.diff+SH[g.home]-SH[g.away])/SD); wt*=f==='home'?ph:1-ph; m=Math.max(1,Math.round(Math.abs(g.diff+SH[g.home]-SH[g.away]+SD*rn()))); if(f==='away') m=-m; }
-      else { m=Math.round(g.diff+SH[g.home]-SH[g.away]+SD*rn()); if(m===0) m=rnd()<0.5?1:-1; }
+      /* 11-27: both branches take the same draws (the margin and a tie-break number, every game), so a pick changes only
+         its own game - before, the unforced branch's occasional tie-break draw shifted every later number in that season */
+      const mu=g.diff+SH[g.home]-SH[g.away], x=mu+SD*rn(), tie=rnd();
+      if(f){ const ph=cdf(mu/SD); wt*=f==='home'?ph:1-ph; m=Math.max(1,Math.round(Math.abs(x))); if(f==='away') m=-m; }
+      else { m=Math.round(x); if(m===0) m=tie<0.5?1:-1; }
       hw[k]=m>0?1:0; const hs=Math.max(0,Math.round((g.tot+m)/2)), as=Math.max(0,hs-m); res.push({away:g.away,home:g.home,as,hs}); }
     W+=wt; const R=buildRecords(res); TEAMS.forEach(t=>{ acc[t.ab].wins[Math.min(18,R[t.ab].w)]+=wt; });
     const exitR={}; const champs={}; poL.length=0; dvL.length=0;
@@ -7485,8 +7489,9 @@ function tgCard(g){ const a=team(g.away), h=team(g.home), p=proj(g); const mine=
   const line=[g.spread!=null?esc(spreadStr(g,{short:true})):'', g.total!=null?'O/U '+g.total:'', g.div?'Division':''].filter(Boolean).join(' · ');
   const k=kickMs(g); const clock=(!g.played&&!g.live&&k!=null&&k>Date.now())?'<span class="tg-cd" data-sbcd="'+k+'">'+sbCd(k)+'</span>':'';
   return '<a class="tg-c'+(mine?' mine':'')+'" href="#/game/'+g.id+'"><div class="tg-top"><span>'+when+'</span><span>'+esc(tvShort(g.tv)||'')+'</span></div><div class="tg-side">'+lg(a)+'<span><b>'+esc(a.disp)+'</b><small>'+recStr(a.ab)+'</small></span></div><div class="tg-at">at</div><div class="tg-side">'+lg(h)+'<span><b>'+esc(h.disp)+'</b><small>'+recStr(h.ab)+'</small></span></div>'+score+'<div class="tg-sub">'+line+'</div><div class="tg-mod"><span>Model '+pct(p.pAway)+' '+esc(tshort(a.ab))+'</span><span>'+pct(p.pHome)+' '+esc(tshort(h.ab))+'</span></div>'+clock+'</a>'; }
-function todayBoardHTML(w){ const gs=nflTodayGames(w); if(!gs.length||w!==CUR_WEEK) return ''; const thanks=nflThanksgiving(todayStr); const eagles=gs.some(g=>g.away==='PHI'||g.home==='PHI');
-  const sub=thanks?(eagles?'Thursday slate. The Eagles play in the late window.':'Thursday slate.'):gs.length+' game'+(gs.length===1?'':'s')+' on the board today.';
+function todayBoardHTML(w){ const gs=nflTodayGames(w); if(!gs.length||w!==CUR_WEEK) return ''; const thanks=nflThanksgiving(todayStr); /* 11-27 fix: say which game the Eagles actually play (it always said "late window") */
+  const eg=gs.find(g=>g.away==='PHI'||g.home==='PHI'), ei=eg?gs.indexOf(eg):-1, slot=ei<0?'':gs.length<2?'':ei===0?'the early game':ei===gs.length-1?'the late game':'the middle game';
+  const sub=thanks?(eg?'Thursday slate. The Eagles play '+(slot?slot+', ':'')+esc(kick(eg))+'.':'Thursday slate.'):gs.length+' game'+(gs.length===1?'':'s')+' on the board today.';
   return '<section class="tg'+(thanks?' thanks':'')+'" aria-label="'+(thanks?'Thanksgiving':'Today')+'"><div class="tg-h"><div class="tg-k">'+(thanks?'Thanksgiving':'Today')+'</div><h2>'+esc(fmtDateLong(todayStr))+'</h2><p>'+esc(sub)+'</p></div><div class="tg-grid">'+gs.map(tgCard).join('')+'</div></section>'; }
 function nflPack(ab){ const o={g:0,rushY:0,passY:0,rushA:0,passA:0,comp:0,td3:0,td3a:0,fd4:0,fd4a:0,rz:0,rza:0,aRushY:0,aPassY:0,aRushA:0,aPassA:0,opp3:0,opp3a:0,sacks:0,tfl:0,ints:0,take:0,to:0,games:[]};
   (BOX_BY_TEAM[ab]||[]).forEach(b=>{ const side=boxSide(b,ab); if(!side) return; const opp=side==='H'?'A':'H'; const ts=b.team[side]||{}, os=b.team[opp]||{}; if(!ts.totalYards&&!os.totalYards) return; const att=bfrac(ts.completionAttempts), oatt=bfrac(os.completionAttempts); const rz=bfrac(ts.redZoneAttempts), t3=bfrac(ts.thirdDownEff), f4=bfrac(ts.fourthDownEff), ot3=bfrac(os.thirdDownEff);

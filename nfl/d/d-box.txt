@@ -15901,4 +15901,94 @@ P|166|H|kickReturns|KaVontae Turpin||3676833|3;62;20.7;24;0
 P|166|H|puntReturns|KaVontae Turpin||3676833|2;57;28.5;33;0
 P|166|H|kicking|Brandon Aubrey||3953687|1/2;50.0;59;5/5;8
 P|166|H|punting|Bryan Anger||14950|3;155;51.7;0;1;57
+G|167|401873082|2026-11-26|KC|BUF
+T|167|A|firstDowns=13;firstDownsPassing=8;firstDownsRushing=5;firstDownsPenalty=0;thirdDownEff=2-11;fourthDownEff=1-1;totalOffensivePlays=50;totalYards=241;yardsPerPlay=4.8;totalDrives=10;netPassingYards=167;completionAttempts=16/29;yardsPerPass=5.6;interceptions=0;sacksYardsLost=1-7;rushingYards=74;rushingAttempts=20;yardsPerRushAttempt=3.7;redZoneAttempts=1-3;totalPenaltiesYards=8-68;turnovers=0;fumblesLost=0;interceptions=0;defensiveTouchdowns=0;possessionTime=23:05;defSacks=2;defTfl=2
+T|167|H|firstDowns=17;firstDownsPassing=3;firstDownsRushing=14;firstDownsPenalty=0;thirdDownEff=9-16;fourthDownEff=1-1;totalOffensivePlays=66;totalYards=230;yardsPerPlay=3.5;totalDrives=11;netPassingYards=64;completionAttempts=10/21;yardsPerPass=2.8;interceptions=2;sacksYardsLost=2-17;rushingYards=166;rushingAttempts=43;yardsPerRushAttempt=3.9;redZoneAttempts=1-3;totalPenaltiesYards=3-24;turnovers=2;fumblesLost=0;interceptions=2;defensiveTouchdowns=0;possessionTime=36:55;defSacks=1;defTfl=2
+S|167|2|14:32|BUF|James Cook III 5 Yd Rush (Tyler Bass Kick)|0|7
+S|167|2|0:02|KC|Harrison Butker 26 Yd Field Goal|3|7
+S|167|3|11:28|KC|Emmett Johnson 1 Yd Rush (Harrison Butker Kick)|10|7
+S|167|4|11:58|BUF|Tyler Bass 54 Yd Field Goal|10|10
+S|167|4|0:00|BUF|Tyler Bass 57 Yd Field Goal|10|13
+W|167|53;57;56;51;55;53;57;60;64;67;70;71;77;82;71;72;74;74;74;63;67;65;58;48;45;47;53;39;49;46;47;47;50;43;39;40;55;62;51;74;64;48;66;100;100
+P|167|A|passing|Patrick Mahomes||3139477|16/29;174;6.0;0;0;1-7;53.0;73.1
+P|167|A|rushing|Emmett Johnson||4832955|17;72;4.2;1;13
+P|167|A|rushing|Patrick Mahomes||3139477|3;2;0.7;0;2
+P|167|A|receiving|Travis Kelce||15847|4;71;17.8;0;24;7
+P|167|A|receiving|Emmett Johnson||4832955|4;24;6.0;0;12;4
+P|167|A|receiving|Noah Gray||4240472|3;23;7.7;0;19;3
+P|167|A|receiving|Cyrus Allen||4912218|1;19;19.0;0;19;1
+P|167|A|receiving|Rashee Rice||4428331|2;19;9.5;0;10;5
+P|167|A|receiving|Josh Downs||4688813|1;13;13.0;0;13;4
+P|167|A|receiving|Jalen Royals||5082630|1;5;5.0;0;5;1
+P|167|A|receiving|Xavier Worthy||4683062|0;0;0.0;0;0;3
+P|167|A|fumbles|Patrick Mahomes||3139477|2;0;2
+P|167|A|fumbles|Matt Araiza||4361496|1;0;1
+P|167|A|defensive|Nick Bolton||4362759|14;8;1;2;0;1;0
+P|167|A|defensive|Drue Tranquill||3129310|8;7;0;0;0;0;0
+P|167|A|defensive|Alohi Gilman||4039413|6;4;0;0;1;0;0
+P|167|A|defensive|Khyiris Tonga||4256074|6;2;0;0;0;0;0
+P|167|A|defensive|Ashton Gillotte||4684432|6;2;0;0;0;0;0
+P|167|A|defensive|Chamarri Conner||4361964|5;2;0;0;0;0;0
+P|167|A|defensive|Felix Anudike-Uzomah||4612387|5;2;0;0;0;0;0
+P|167|A|defensive|Chris Roland-Wallace||4428383|4;2;0;0;0;0;0
+P|167|A|defensive|Mansoor Delane||4880124|4;2;0.5;0;0;1;0
+P|167|A|defensive|Xavier Nwankpa||4685491|4;1;0.5;0;0;1;0
+P|167|A|defensive|George Karlaftis||4426659|3;0;0;0;1;0;0
+P|167|A|defensive|Jaden Hicks||4685232|2;1;0;0;0;0;0
+P|167|A|defensive|Jadon Canady||4710706|2;1;0;0;0;0;0
+P|167|A|defensive|Kristian Fulton||4035433|2;0;0;0;0;0;0
+P|167|A|defensive|Jack Cochrane||4249766|2;0;0;0;0;0;0
+P|167|A|defensive|Nohl Williams||4610705|2;0;0;0;1;0;0
+P|167|A|defensive|Peter Woods||4871063|2;0;0;0;0;0;0
+P|167|A|defensive|Chris Jones||3044859|1;1;0;0;0;0;0
+P|167|A|defensive|Bryson Eason||4431561|1;1;0;0;0;0;0
+P|167|A|defensive|Jake Briningstool||4431196|1;0;0;0;0;0;0
+P|167|A|defensive|Cooper McDonald||4567826|1;0;0;0;0;0;0
+P|167|A|defensive|Jaydn Ott||4685489|1;0;0;0;0;0;0
+P|167|A|defensive|R Mason Thomas||5081927|1;0;0;0;0;0;0
+P|167|A|defensive|Andrew Armstrong||5093923|1;0;0;0;0;0;0
+P|167|A|interceptions|Nohl Williams||4610705|1;7;0
+P|167|A|interceptions|Alohi Gilman||4039413|1;0;0
+P|167|A|kickReturns|Jalen Royals||5082630|1;37;37.0;37;0
+P|167|A|kickReturns|Nate Carter||4605841|2;36;18.0;27;0
+P|167|A|puntReturns|Josh Downs||4688813|2;11;5.5;7;0
+P|167|A|kicking|Harrison Butker||3055899|1/2;50.0;26;1/1;4
+P|167|A|punting|Matt Araiza||4361496|7;291;41.6;0;0;60
+P|167|H|passing|Josh Allen||3918298|10/21;81;3.9;0;2;2-17;36.3;18.3
+P|167|H|rushing|James Cook III||4379399|32;117;3.7;1;10
+P|167|H|rushing|Josh Allen||3918298|7;43;6.1;0;17
+P|167|H|rushing|Ray Davis||4429501|4;6;1.5;0;4
+P|167|H|receiving|Khalil Shakir||4373678|3;33;11.0;0;17;6
+P|167|H|receiving|DJ Moore||3915416|2;15;7.5;0;11;6
+P|167|H|receiving|Dalton Kincaid||4385690|2;13;6.5;0;7;2
+P|167|H|receiving|Ty Johnson||3915411|2;12;6.0;0;7;2
+P|167|H|receiving|James Cook III||4379399|1;8;8.0;0;8;1
+P|167|H|receiving|Dawson Knox||3930086|0;0;0.0;0;0;1
+P|167|H|receiving|Ray Davis||4429501|0;0;0.0;0;0;1
+P|167|H|receiving|Keon Coleman||4635008|0;0;0.0;0;0;1
+P|167|H|defensive|Terrel Bernard||4259166|6;4;0;0;0;0;0
+P|167|H|defensive|Cole Bishop||4676004|5;5;0;0;0;0;0
+P|167|H|defensive|Davison Igbinosun||4832035|4;3;0;0;1;1;0
+P|167|H|defensive|Dorian Williams||4568624|4;2;0;0;0;0;0
+P|167|H|defensive|Greg Rousseau||4362506|4;1;1;1;0;3;0
+P|167|H|defensive|Bradley Chubb||3116733|3;1;0;1;0;1;0
+P|167|H|defensive|Deone Walker||4831989|3;1;0;0;1;0;0
+P|167|H|defensive|Landon Jackson||4432715|3;0;0;0;0;0;0
+P|167|H|defensive|Sam Franklin Jr.||4044133|2;2;0;0;0;0;0
+P|167|H|defensive|Kaleb Elarms-Orr||4594321|2;2;0;0;0;0;0
+P|167|H|defensive|Jordan Hancock||4596480|2;2;0;0;0;0;0
+P|167|H|defensive|Maxwell Hairston||4688931|2;1;0;0;0;0;0
+P|167|H|defensive|Michael Hoecht||4033234|1;1;0;0;0;0;0
+P|167|H|defensive|Damar Hamlin||4036060|1;1;0;0;0;0;0
+P|167|H|defensive|Amani Hooker||4036134|1;1;0;0;1;0;0
+P|167|H|defensive|Ed Oliver||4039303|1;1;0;0;0;0;0
+P|167|H|defensive|Tyrell Shavers||4241476|1;1;0;0;0;0;0
+P|167|H|defensive|Dalton Kincaid||4385690|1;1;0;0;0;0;0
+P|167|H|defensive|Dee Alford||4401823|1;1;0;0;0;0;0
+P|167|H|defensive|DeWayne Carter||4426883|1;0;0;0;0;1;0
+P|167|H|defensive|TJ Parker||4870886|1;0;0;0;0;0;0
+P|167|H|kickReturns|Ray Davis||4429501|3;71;23.7;29;0
+P|167|H|puntReturns|Greg Dortch||4037235|3;34;11.3;17;0
+P|167|H|kicking|Tyler Bass||3917232|2/2;100.0;57;1/1;7
+P|167|H|punting|Tommy Doman Jr.||4682758|5;229;45.8;1;3;61
 

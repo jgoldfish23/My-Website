@@ -73,9 +73,13 @@ BAL||Mark Andrews|TE|Active||||2026-11-23|Andrews caught two of three targets fo
 BAL||Justice Hill|RB|Active||||2026-11-23|Hill carried the ball six times for 69 yards and a touchdown and caught four of five targets for 27 yards in Sunday's 35-33 loss to the Panthers.
 BAL||Jacoby Brissett|QB|Active||||2026-11-23|Brissett completed 24 of 37 passes for 276 yards and a touchdown with an interception in Sunday's 35-33 loss to the Panthers. He added seven rushing yards on two carries.
 BAL||Roger Rosengarten|OT|Active||||2026-11-22|
+BUF||Khalil Shakir|WR|Active||||2026-11-27|Shakir brought in three of six targets for 33 yards in the Bills' 13-10 in over the Chiefs on Thursday.
+BUF||DJ Moore|WR|Active||||2026-11-27|Moore hauled in two of six targets for 15 yards in the Bills' 13-10 win over the Chiefs on Thursday.
+BUF||Dalton Kincaid|TE|Active||||2026-11-27|Kincaid brought in both targets for 13 yards in the Bills' 13-10 loss to the Chiefs on Thursday.
+BUF||Josh Allen|QB|Active||||2026-11-27|Allen completed 10 of 21 passes for 81 yards with no touchdowns and two interceptions and added seven carries for 43 yards in the Bills' 13-10 win over the Chiefs on Thursday.
+BUF||James Cook III|RB|Active||||2026-11-27|Cook rushed 32 times for 117 yards and a touchdown and brought in his only target for eight yards in the Bills' 13-10 win over the Chiefs on Thursday.
 BUF||T.J. Sanders|DT|Active||||2026-11-26|Sanders (shoulder) is active for Thursday's game against Kansas City.
 BUF||Dorian Williams|LB|Active||||2026-11-26|Williams (calf) is active for Thursday's game against the Chiefs.
-BUF||Dalton Kincaid|TE|Active||||2026-11-26|Kincaid (thumb/ankle) is listed as active for Thursday night's game against the Chiefs.
 BUF||Christian Benford|CB|Out|Groin||2026-12-06|2026-11-26|Benford (groin) is inactive for Thursday's game against the Chiefs.
 BUF||Jalon Kilgore|S|Out|Coach's Decision||2026-12-06|2026-11-26|inactive
 BUF||Jude Bowry|OT|Out|Coach's Decision||2026-12-06|2026-11-26|inactive
@@ -94,10 +98,6 @@ BUF||Keleki Latu|TE|Active||||2026-11-23|Latu recorded a 30-yard reception on fo
 BUF||Tyler Bass|PK|Active||||2026-11-23|Bass went 4-for-5 on field-goal tries and made both of his PATs during Sunday's 26-9 win over the Dolphins.
 BUF||Keon Coleman|WR|Active||||2026-11-23|Coleman caught two of four targets for 17 yards during Sunday's 26-9 win over Miami.
 BUF||Ray Davis|RB|Active||||2026-11-23|Davis rushed one time for three yards and caught a six-yard pass on two targets in Sunday's 26-9 win over the Dolphins.
-BUF||Dawson Knox|TE|Active||||2026-11-23|Knox caught two of three targets for 31 yards in Sunday's 26-9 win over the Dolphins.
-BUF||Khalil Shakir|WR|Active||||2026-11-22|Shakir caught five of nine targets for 101 yards while rushing twice for two yards in Sunday's 26-9 win over the Dolphins.
-BUF||DJ Moore|WR|Active||||2026-11-22|Moore caught eight of 10 targets for 91 yards and a touchdown in Sunday's 26-9 win over the Dolphins.
-BUF||James Cook III|RB|Active||||2026-11-22|Cook rushed 22 times for 89 yards and a touchdown while catching two of three targets for three yards in Sunday's 26-9 win over the Dolphins.
 CAR||Bobby Okereke|LB|Questionable|Foot||2026-11-30|2026-11-27|Okereke (foot) was listed as a non-participant in Carolina's practice estimate Thursday, Mike Kaye of ESPN.com reports.
 CAR||Mitchell Evans|TE|Questionable|Achilles||2026-11-30|2026-11-26|Evans (Achilles) was listed as a DNP on Thursday's estimated practice report, Mike Kaye of ESPN.com reports.
 CAR||Tommy Tremble|TE|Questionable|Knee||2026-11-30|2026-11-26|Tremble (knee) was listed as a limited participant on Thursday's estimated practice report, Mike Kaye of ESPN.com reports.
@@ -373,7 +373,14 @@ JAX||Cam Little|PK|Active||||2026-11-23|
 JAX||Brenton Strange|TE|Active||||2026-11-23|Strange caught all three of his targets for 16 yards during Sunday's 23-18 loss to the Giants.
 JAX||Chris Rodriguez Jr.|RB|Active||||2026-11-23|Rodriguez rushed four times for 28 yards in Sunday's 23-18 loss to the Giants. He added one catch for 13 yards on one target.
 JAX||Brian Thomas Jr.|WR|Active||||2026-11-23|Thomas caught one pass for an 18-yard touchdown on three targets in Sunday's 23-18 loss to the Giants.
-KC||Jalen Royals|WR|Questionable|Ankle||2026-12-03|2026-11-27|Royals (ankle) has been ruled out for the rest of Thursday's game against the Bills.
+KC||Josh Downs|WR|Active||||2026-11-27|Downs secured one of four targets for 13 yards in the Chiefs' 13-10 loss to the Bills on Thursday.
+KC||Xavier Worthy|WR|Active||||2026-11-27|Worthy didn't corral any of his three targets during Thursday's 13-10 loss at Buffalo.
+KC||Rashee Rice|WR|Active||||2026-11-27|Rice brought in two of five targets for 19 yards in the Chiefs' 13-10 loss to the Bills on Thursday.
+KC||Trey Smith|G|Questionable|Ankle|Sprain|2026-12-03|2026-11-27|Head coach Andy Reid said Smith sustained an ankle sprain during Thursday's 13-10 loss in Buffalo, Charles Goldman of AtoZSports.com reports.
+KC||Patrick Mahomes|QB|Active||||2026-11-27|Mahomes completed 16 of 29 passes for 174 yards with no touchdowns or interceptions and rushed three times for two yards in the Chiefs' 13-10 loss to the Bills on Thursday. He also fumbled twice but recovered on each occ
+KC||Jalen Royals|WR|Questionable|Ankle|Sprain|2026-12-03|2026-11-27|Head coach Andy Reid said Royals suffered a sprained ankle during Thursday's 13-10 loss in Buffalo, Charles Goldman of AtoZSports.com reports.
+KC||Travis Kelce|TE|Active||||2026-11-27|Kelce brought in four of seven targets for 71 yards in the Chiefs' 13-10 loss to the Bills on Thursday.
+KC||Emmett Johnson|RB|Active||||2026-11-27|Johnson rushed 17 times for 72 yards and a touchdown and brought in all four targets for 24 yards in the Chiefs' 13-10 loss to the Bills on Thursday.
 KC||Garrett Nussmeier|QB|Out|Coach's Decision||2026-12-03|2026-11-27|Nussmeier (coach's decision) is inactive but will serve as the Chiefs' emergency third quarterback against the Bills on Thursday.
 KC||Peter Woods|DT|Active||||2026-11-27|Woods (neck) is active for Thursday's game against the Bills.
 KC||Noah Gray|TE|Active||||2026-11-27|Gray (ribs) is active for Thursday's game against the Bills.
@@ -383,21 +390,14 @@ KC||Kenneth Walker III|RB|Out|Groin|Soreness|2026-12-03|2026-11-27|inactive
 KC||Marcus Harris|DT|Out|Coach's Decision||2026-12-03|2026-11-27|inactive
 KC||John FitzPatrick|TE|Active||||2026-11-26|The Chiefs elevated FitzPatrick from the practice squad to the active roster ahead of Thursday's game against the Bills, Aaron Wilson of KPRC 2 Houston reports.
 KC||Nate Carter|RB|Active||||2026-11-26|The Chiefs elevated Carter from the practice squad to the active roster ahead of Thursday's game against the Bills, Aaron Wilson of KPRC 2 Houston reports.
-KC||Trey Smith|G|Active||||2026-11-26|Smith (concussion) does not have any injury designation ahead of Thursday night's game against the Bills.
 KC||Omarr Norman-Lott|DT|Out|Knee||2026-12-03|2026-11-26|Norman-Lott (knee) has been ruled out ahead of Thursday night's game against the Bills.
 KC||Jaylon Moore|OT|Out|Ankle||2026-12-03|2026-11-26|Moore (ankle) has been ruled out ahead of Thursday night's game against the Bills.
-KC||Emmett Johnson|RB|Active||||2026-11-25|With Kenneth Walker (groin) ruled out for Thursday night's game against the Bills, Johnson is once again set to lead the Chiefs' backfield.
 KC||Ben VanSumeren|FB|Injured Reserve|Knee|Sprain|2026-12-27|2026-11-24|The Chiefs placed VanSumeren (knee) on the reserve/injured list Tuesday.
 KC||Drue Tranquill|LB|Active||||2026-11-24|Tranquill recorded eight total tackles (three solo) during Sunday's 34-7 win against the Cardinals.
 KC||Nick Bolton|LB|Active||||2026-11-24|Bolton recorded five total tackles (two solo) and a pass defensed during Sunday's 34-7 win over Arizona.
 KC||George Karlaftis|DE|Active||||2026-11-24|Karlaftis recorded four total tackles (three solo), including 2.5 sacks, and a forced fumble during Sunday's 34-7 win over the Cardinals.
 KC||Cyrus Allen|WR|Active||||2026-11-24|Allen caught two of four targets for 41 yards during Sunday's 34-7 win over the Cardinals.
 KC||Jaydn Ott|RB|Active||||2026-11-24|Ott logged five rushing attempts for 12 yards and logged one tackle on kick coverage in the Chiefs' 34-7 win over the Cardinals on Sunday.
-KC||Harrison Butker|PK|Active||||2026-11-23|Butker made both of his field-goal attempts while going 4-for-4 on extra-point tries during Sunday's 34-7 win over the Cardinals.
-KC||Xavier Worthy|WR|Active||||2026-11-23|Worthy caught two of four targets for 38 yards and a touchdown during Sunday's 34-7 win over the Cardinals.
-KC||Josh Downs|WR|Active||||2026-11-22|Downs brought in four of five targets for 59 yards in the Chiefs' 34-7 win over the Cardinals on Sunday.
-KC||Rashee Rice|WR|Active||||2026-11-22|Rice secured all six targets for 53 yards in the Chiefs' 34-7 win over the Cardinals on Sunday.
-KC||Travis Kelce|TE|Active||||2026-11-22|Kelce brought in six of seven targets for 74 yards and two touchdowns in the Chiefs' 34-7 win over the Cardinals on Sunday.
 LV||Tonka Hemingway|DT|Questionable|Upper Body|Stinger|2026-11-29|2026-11-27|Hemingway (upper body) was listed as a non-participant in Las Vegas' practice estimate Thursday, Sam Warren of The Athletic reports.
 LV||Brock Bowers|TE|Questionable|Ankle||2026-11-29|2026-11-26|Bowers (ankle) remained a limited participant in Thursday's practice, Sam Warren of The Athletic reports.
 LV||Adam Butler|DT|Questionable|Concussion|Concussion|2026-11-29|2026-11-26|Butler (concussion) did not participate in Wednesday's practice, Ryan McFadden of ESPN.com reports.
@@ -630,8 +630,8 @@ PHI||Dallas Goedert|TE|Questionable|Shoulder||2026-12-06|2026-11-27|Goedert (sho
 PHI||Makai Lemon|WR|Active||||2026-11-27|Lemon caught five of six targets for 51 yards and a touchdown in Thursday's 39-38 win over the Cowboys.
 PHI||Will Shipley|RB|Active||||2026-11-27|Shipley carried the ball 10 times for 46 yards and failed to catch his only target in Thursday's 39-38 win over the Cowboys.
 PHI||Joe Milton|QB|Active||||2026-11-27|Milton completed 21 of 31 passes for 331 yards and three touchdowns with one interception in Thursday's 39-38 win over the Cowboys. He added 15 yards and a TD on three carries.
-PHI||Gabe Hall|DT|Questionable|Wrist||2026-11-26|2026-11-27|Hall (shoulder) is questionable to return to the Eagles' matchup against the Cowboys on Sunday.
-PHI||Marcus Epps|S|Out|Foot||2026-12-06|2026-11-27|Epps (foot) has been ruled out for the remainder of Philadelphia's matchup versus the Cowboys on Thursday, Mike Kaye of ESPN.com reports.
+PHI||Gabe Hall|DT|Questionable|Wrist||2026-12-06|2026-11-27|Hall (shoulder) is questionable to return to the Eagles' matchup against the Cowboys on Sunday.
+PHI||Marcus Epps|S|Questionable|Foot||2026-12-06|2026-11-27|Epps (foot) has been ruled out for the remainder of Philadelphia's matchup versus the Cowboys on Thursday, Mike Kaye of ESPN.com reports.
 PHI||Saquon Barkley|RB|Questionable|Neck|Stinger|2026-12-06|2026-11-26|Barkley suffered a stinger during Thursday's game in Dallas.
 PHI||Cooper DeJean|CB|Questionable|Concussion|Concussion|2026-12-06|2026-11-26|DeJean has entered the league's concussion protocol and has been ruled out for the rest of Thursday's game against the Cowboys.
 PHI||Cole Payton|QB|Out|Coach's Decision||2026-12-06|2026-11-26|Payton (coach's decision) is inactive for Thursday's game at Dallas but is available as the Eagles' emergency third quarterback.

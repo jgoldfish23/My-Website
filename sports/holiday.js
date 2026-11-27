@@ -15,17 +15,18 @@
     return ZONES[tz] || ZONES.MT;
   }
   function today() {
-    var y, m, d;
+    var y, m, d, h = 0;
     try {
-      new Intl.DateTimeFormat('en-US', { timeZone: zone(), year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date()).forEach(function (p) {
+      new Intl.DateTimeFormat('en-US', { timeZone: zone(), year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hourCycle: 'h23' }).formatToParts(new Date()).forEach(function (p) {
+        if (p.type === 'hour') h = +p.value % 24;
         if (p.type === 'year') y = +p.value;
         if (p.type === 'month') m = +p.value;
         if (p.type === 'day') d = +p.value;
       });
     } catch (e) {
-      var n = new Date(); y = n.getFullYear(); m = n.getMonth() + 1; d = n.getDate();
+      var n = new Date(); y = n.getFullYear(); m = n.getMonth() + 1; d = n.getDate(); h = n.getHours();
     }
-    return { y: y, m: m, d: d };
+    return { y: y, m: m, d: d, h: h };
   }
   /* Fourth Thursday of November, as a day-of-month. */
   function thanksgivingDay(y) {
@@ -40,7 +41,8 @@
     if (q === 'thanks' || q === 'thanksgiving') return 'thanks';
     if (q === 'xmas' || q === 'christmas') return 'xmas';
     if (!t || !t.y) return '';
-    if (t.m === 11 && t.d === thanksgivingDay(t.y)) return 'thanks';
+    /* 11-26 (Jamo, "Christmas theme now!!"): Thanksgiving runs until 5 PM on the day, then Christmas takes over */
+    if (t.m === 11 && t.d === thanksgivingDay(t.y)) return t.h >= 17 ? 'xmas' : 'thanks';
     if (t.m === 11 && t.d > thanksgivingDay(t.y)) return 'xmas';
     if (t.m === 12 && t.d <= 26) return 'xmas';
     return '';

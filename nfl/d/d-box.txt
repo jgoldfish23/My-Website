@@ -15708,4 +15708,104 @@ P|164|H|kickReturns|Ronnie Rivers||4243003|4;102;25.5;31;0
 P|164|H|puntReturns|Xavier Smith||4386544|1;15;15.0;15;0
 P|164|H|kicking|Brandon McManus||16339|4/4;100.0;43;2/2;14
 P|164|H|punting|Ethan Evans||5125875|2;83;41.5;0;1;54
+G|165|401873081|2026-11-26|CHI|DET
+T|165|A|firstDowns=27;firstDownsPassing=18;firstDownsRushing=7;firstDownsPenalty=2;thirdDownEff=7-14;fourthDownEff=2-3;totalOffensivePlays=72;totalYards=458;yardsPerPlay=6.4;totalDrives=12;netPassingYards=312;completionAttempts=30/44;yardsPerPass=6.5;interceptions=0;sacksYardsLost=4-33;rushingYards=146;rushingAttempts=24;yardsPerRushAttempt=6.1;redZoneAttempts=3-4;totalPenaltiesYards=4-25;turnovers=1;fumblesLost=1;interceptions=0;defensiveTouchdowns=0;possessionTime=29:27;defSacks=0;defTfl=5
+T|165|H|firstDowns=27;firstDownsPassing=14;firstDownsRushing=11;firstDownsPenalty=2;thirdDownEff=4-12;fourthDownEff=1-2;totalOffensivePlays=68;totalYards=549;yardsPerPlay=8.1;totalDrives=12;netPassingYards=303;completionAttempts=25/36;yardsPerPass=8.2;interceptions=1;sacksYardsLost=1-10;rushingYards=246;rushingAttempts=31;yardsPerRushAttempt=7.9;redZoneAttempts=3-4;totalPenaltiesYards=9-70;turnovers=1;fumblesLost=0;interceptions=1;defensiveTouchdowns=0;possessionTime=30:33;defSacks=4;defTfl=6
+S|165|1|11:28|DET|Jake Bates 24 Yd Field Goal|0|3
+S|165|2|12:51|DET|Jahmyr Gibbs 1 Yd Rush (Jake Bates Kick)|0|10
+S|165|2|10:52|CHI|Cairo Santos 40 Yd Field Goal|3|10
+S|165|2|4:07|CHI|Kyle Monangai 1 Yd Rush (Cairo Santos Kick)|10|10
+S|165|2|1:13|DET|Team Safety|10|12
+S|165|2|0:06|DET|Sam LaPorta 11 Yd pass from Jared Goff (Jake Bates Kick)|10|19
+S|165|3|10:40|CHI|Kyle Monangai 2 Yd Rush (Cairo Santos Kick)|17|19
+S|165|3|5:45|DET|Jahmyr Gibbs 1 Yd Rush (Jake Bates Kick)|17|26
+S|165|3|3:09|CHI|D'Andre Swift 30 Yd Rush (Cairo Santos Kick)|24|26
+S|165|4|14:57|DET|Jake Bates 40 Yd Field Goal|24|29
+S|165|4|8:20|DET|Jahmyr Gibbs 70 Yd Rush (Jake Bates PAT Failed)|24|35
+S|165|4|7:20|CHI|Rome Odunze 41 Yd pass from Caleb Williams (Caleb Williams Run for Two-Point Conversion)|32|35
+S|165|4|0:03|CHI|Rome Odunze 6 Yd pass from Caleb Williams (Cairo Santos Kick)|39|35
+W|165|56;62;61;58;64;60;63;67;74;77;71;75;73;73;59;60;55;63;59;69;80;77;73;62;71;79;78;65;68;74;77;80;90;82;69;89;81;78;53;39;0;0
+P|165|A|passing|Caleb Williams||4431611|30/44;345;7.8;2;0;4-33;81.2;106.7
+P|165|A|rushing|D'Andre Swift||4259545|9;65;7.2;1;30
+P|165|A|rushing|Salvon Ahmed||4243315|3;50;16.7;0;46
+P|165|A|rushing|Kyle Monangai||4608686|8;15;1.9;2;8
+P|165|A|rushing|Caleb Williams||4431611|3;15;5.0;0;8
+P|165|A|rushing|Luther Burden III||4685278|1;1;1.0;0;1
+P|165|A|receiving|D'Andre Swift||4259545|7;97;13.9;0;33;8
+P|165|A|receiving|Rome Odunze||4431299|6;87;14.5;2;41;9
+P|165|A|receiving|Luther Burden III||4685278|3;44;14.7;0;25;7
+P|165|A|receiving|Sam Roush||4685504|5;31;6.2;0;11;5
+P|165|A|receiving|Stephen Carlson||3948283|2;30;15.0;0;18;4
+P|165|A|receiving|Kalif Raymond||2973405|3;20;6.7;0;12;5
+P|165|A|receiving|Salvon Ahmed||4243315|2;17;8.5;0;9;2
+P|165|A|receiving|Kyle Monangai||4608686|1;14;14.0;0;14;2
+P|165|A|receiving|Colston Loveland||4723086|1;5;5.0;0;5;1
+P|165|A|receiving|Jahdae Walker||5160110|0;0;0.0;0;0;1
+P|165|A|fumbles|Colston Loveland||4723086|1;1;0
+P|165|A|fumbles|Caleb Williams||4431611|1;0;0
+P|165|A|defensive|Cam Lewis||3916577|10;8;0;0;0;0;0
+P|165|A|defensive|Dillon Thieneman||4954445|7;5;0;0;1;0;0
+P|165|A|defensive|T.J. Edwards||3121544|6;3;0;0;1;0;0
+P|165|A|defensive|Jaylon Johnson||4243253|5;4;0;0;0;0;0
+P|165|A|defensive|James Lynch||4259181|5;4;0;2;0;0;0
+P|165|A|defensive|Malik Muhammad II||4870953|5;3;0;0;0;0;0
+P|165|A|defensive|Clark Phillips III||4429067|4;4;0;1;1;1;0
+P|165|A|defensive|Grady Jarrett||2576492|4;3;0;1;0;1;0
+P|165|A|defensive|Devin Bush||4036261|4;1;0;0;0;0;0
+P|165|A|defensive|Jeffery Simmons||4035369|3;2;0;1;0;0;0
+P|165|A|defensive|Daniel Hardy||4365629|3;1;0;0;0;0;0
+P|165|A|defensive|Montez Sweat||3134690|2;2;0;0;0;0;0
+P|165|A|defensive|Austin Booker||4683553|2;2;0;0;0;1;0
+P|165|A|defensive|D'Marco Jackson||4241007|2;1;0;0;0;0;0
+P|165|A|defensive|Noah Sewell||4430822|2;0;0;0;0;0;0
+P|165|A|defensive|Jack Sanborn||4372576|1;0;0;0;0;0;0
+P|165|A|defensive|Skyler Thomas||4879561|1;0;0;0;0;0;0
+P|165|A|defensive|Keyshaun Elliott||4911952|1;0;0;0;0;0;0
+P|165|A|interceptions|Dillon Thieneman||4954445|1;18;0
+P|165|A|kickReturns|Zavion Thomas||4869748|5;125;25.0;30;0
+P|165|A|kicking|Cairo Santos||17427|1/1;100.0;40;4/4;6
+P|165|A|punting|Tory Taylor||4686889|2;90;45.0;0;2;46
+P|165|H|passing|Jared Goff||3046779|25/36;313;8.7;1;1;1-10;76.6;93.9
+P|165|H|rushing|Jahmyr Gibbs||4429795|21;205;9.8;3;70
+P|165|H|rushing|Sione Vaki||4912274|6;19;3.2;0;6
+P|165|H|rushing|Jameson Williams||4426388|1;12;12.0;0;12
+P|165|H|rushing|Jared Goff||3046779|3;10;3.3;0;5
+P|165|H|receiving|Amon-Ra St. Brown||4374302|7;146;20.9;0;28;10
+P|165|H|receiving|Jameson Williams||4426388|6;68;11.3;0;39;9
+P|165|H|receiving|Jahmyr Gibbs||4429795|5;47;9.4;0;14;5
+P|165|H|receiving|Sam LaPorta||4430027|4;44;11.0;1;17;5
+P|165|H|receiving|Tyler Conklin||3915486|1;9;9.0;0;9;1
+P|165|H|receiving|Jared Goff||3046779|0;3;0.0;0;3;0
+P|165|H|receiving|Larry Borom||4241217|0;0;0.0;0;0;1
+P|165|H|receiving|Brock Wright||4242392|0;0;0.0;0;0;1
+P|165|H|receiving|Isaac TeSlaa||5123663|0;0;0.0;0;0;1
+P|165|H|receiving|Sione Vaki||4912274|2;-4;-2.0;0;1;3
+P|165|H|fumbles|Jared Goff||3046779|1;0;1
+P|165|H|fumbles|Malcolm Rodriguez||4241411|0;0;1
+P|165|H|defensive|Malcolm Rodriguez||4241411|7;5;1;1;0;2;0
+P|165|H|defensive|Kerby Joseph||4360383|7;5;0;0;1;0;0
+P|165|H|defensive|Roger McCreary||4371973|6;5;0;0;3;0;0
+P|165|H|defensive|Brian Branch||4692025|6;5;0;2;0;0;0
+P|165|H|defensive|D.J. Reed||3139387|5;3;0;0;0;0;0
+P|165|H|defensive|Tyleik Williams||4431615|5;2;0;0;0;0;0
+P|165|H|defensive|Andre Cisco||4361939|4;4;0;0;0;0;0
+P|165|H|defensive|Derrick Moore||4685461|4;2;2;1;0;2;0
+P|165|H|defensive|Trevor Nowaske||5144894|4;2;0;0;0;0;0
+P|165|H|defensive|Christian Izien||4372459|4;1;0;0;0;0;0
+P|165|H|defensive|Derrick Barnes||4260409|3;3;0;0;1;0;0
+P|165|H|defensive|K.J. Britt||4242521|3;1;0;1;0;0;0
+P|165|H|defensive|Rock Ya-Sin||3910229|2;2;0;0;0;0;0
+P|165|H|defensive|Alim McNeill||4361662|2;1;1;1;0;1;0
+P|165|H|defensive|Anthony Lucas||4685442|2;0;0;0;0;1;0
+P|165|H|defensive|Tyler Conklin||3915486|1;1;0;0;0;0;0
+P|165|H|defensive|Sione Vaki||4912274|1;1;0;0;0;0;0
+P|165|H|defensive|Joe Bachie||4036507|1;0;0;0;0;0;0
+P|165|H|defensive|Tay Martin||4245144|1;0;0;0;0;0;0
+P|165|H|defensive|Tyler Lacy||4361861|1;0;0;0;0;0;0
+P|165|H|defensive|Mekhi Wingo||4586333|1;0;0;0;0;0;0
+P|165|H|defensive|Nick Whiteside||5143915|1;0;0;0;0;0;0
+P|165|H|kickReturns|Jacob Saylors||4383429|4;108;27.0;32;0
+P|165|H|kickReturns|DeAndre Carter||2580216|1;23;23.0;23;0
+P|165|H|kicking|Jake Bates||4689936|2/2;100.0;40;3/4;9
+P|165|H|punting|Jack Fox||3916370|3;150;50.0;1;1;61
 

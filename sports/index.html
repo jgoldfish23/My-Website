@@ -378,6 +378,18 @@ a.tc.tc-white .tc-gx{color:color-mix(in srgb,var(--wi,#002e5d) 74%,#fff)}
 :root.light .hello h1 b{background:linear-gradient(90deg,#1d4ed8,#6d28d9 55%,#b45309);-webkit-background-clip:text;background-clip:text}
 .hero{grid-template-columns:1fr!important}
 .hero :is(.pulse,.tvq-l,#h-board,#h-next){display:none!important}
+/* 11-27 league cards tidy (Jamo: format + alignment): the quick links are an even grid - every link shows, no cut-off
+   pills running off the edge; the team-color wash covers the whole card (no seam under the header); "Open" sits level
+   with the league name; the hover color only on a real mouse (a tap left NBA's "Open" stuck purple) */
+#sports .sp{background:linear-gradient(150deg,color-mix(in srgb,var(--c) 22%,transparent),transparent 62%),var(--surface)}
+#sports .sp-h{background:none;align-items:flex-start;padding:16px 16px 10px}
+#sports .sp-ic{margin-top:2px}
+#sports .sp-go{align-self:flex-start;margin-top:4px;color:var(--ink-2)!important}
+@media (hover:hover){#sports a.sp-h:hover .sp-go{color:var(--c)!important}}
+#sports .sp .ql{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:4px 16px 16px;overflow:visible;flex-wrap:initial}
+#sports .sp .ql a{display:flex;align-items:center;justify-content:center;min-height:40px;padding:6px 8px;border-radius:12px;font-size:13px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sports .sp .roy-mini{margin:0 16px 16px}
+@media (min-width:900px){#sports .sp .ql{grid-template-columns:repeat(auto-fill,minmax(108px,1fr))}#sports .sp .ql a{font-size:12.5px;padding:6px}}
 .sp-today{margin-top:3px;font-size:12.5px;font-weight:650;color:var(--ink-2)}.sp-today .lv{color:var(--live,#ff4d6a);font-weight:800}
 #sports{margin-top:14px}
 .lc.mine{box-shadow:inset 3px 0 0 var(--gold,#fbbf24),var(--sh,0 1px 2px rgba(0,0,0,.2))}.lc-me{color:var(--gold,#fbbf24);font-weight:800}
@@ -6168,10 +6180,10 @@ function sportsHTML(){
   const nbaTop = NBA.filter(g => g.date === nd).map(applyLive).sort((a, b) => (b.live ? 1 : 0) - (a.live ? 1 : 0) || (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0) || kickMs(a.date, a.time) - kickMs(b.date, b.time)).slice(0, 4);
   $('#sports').innerHTML =
     sportPanel('cfb', 0, 'Week ' + CFB_WEEK + (ww ? ' · ' + range(ww.lo, ww.hi) : ''), [['Scoreboard', '#/week'], ['TV guide', '#/tv'], ['Rankings', '#/rankings'], ['Playoffs', '#/playoff'], ['Big board', '#/board']], 'Week ' + CFB_WEEK + ' marquee', cfbTop)
-    + sportPanel('nfl', 1, esc(nflWeek.label) + ' · ' + range(nflWeek.start, nflWeek.end), [['Scoreboard', '#/week'], ['TV guide', '#/tv'], ['Standings', '#/standings'], ['Playoffs', '#/playoffs'], ['Big board', '#/board']], esc(nflWeek.label) + (nflTop.some(g => g.live) ? ' · live first' : ' · next up'), nflTop)
-    + sportPanel('nba', 2, nbaPre ? 'Preseason · tips off ' + (nbaOpener ? md(nbaOpener) : '') : 'Regular season', [['Scoreboard', '#/scores'], ['TV guide', '#/tv'], ['Standings', '#/standings'], ['Predictor', '#/predict'], ['Trade Machine', '#/trade'], ['Mock draft', '#/draft/mock']], (nd === TODAY ? 'Today' : md(nd)) + ' · ' + NBA.filter(g => g.date === nd).length + ' games', nbaTop)
+    + sportPanel('nfl', 1, esc(nflWeek.label) + ' · ' + range(nflWeek.start, nflWeek.end), [['Scoreboard', '#/week'], ['TV guide', '#/tv'], ['Standings', '#/standings'], ['Playoffs', '#/playoffs'], ['Big board', '#/board'], ['Mock draft', '#/draft']], esc(nflWeek.label) + (nflTop.some(g => g.live) ? ' · live first' : ' · next up'), nflTop)
+    + sportPanel('nba', 2, nbaPre ? 'Preseason · tips off ' + (nbaOpener ? md(nbaOpener) : '') : 'Regular season', [['Scoreboard', '#/scores'], ['TV guide', '#/tv'], ['Standings', '#/standings'], ['Predictor', '#/predict'], ['Trades', '#/trade'], ['Mock draft', '#/draft/mock']], (nd === TODAY ? 'Today' : md(nd)) + ' · ' + NBA.filter(g => g.date === nd).length + ' games', nbaTop)
     + (() => { const cd = [...new Set(CBB.map(g => g.date))].sort(); const cn = cd.find(d => d >= TODAY) || cd[cd.length - 1]; const cnt = CBB.filter(g => g.date === cn).length;
-      return sportPanel('cbb', 3, cn ? (cn === TODAY ? 'Today' : md(cn)) + ' · ' + cnt + ' game' + (cnt === 1 ? '' : 's') : 'College basketball', [['Scoreboard', '#/scores'], ['TV guide', '#/tv'], ['Rankings', '#/rankings'], ['Bracketology', '#/bracket'], ['NBA Draft', '#/draft']], '', []); })();
+      return sportPanel('cbb', 3, cn && cn !== TODAY ? md(cn) + ' · ' + cnt + ' game' + (cnt === 1 ? '' : 's') : 'College basketball', /* 11-27: no second "Today" - the Today line has the count */ [['Scoreboard', '#/scores'], ['TV guide', '#/tv'], ['Rankings', '#/rankings'], ['Bracketology', '#/bracket'], ['NBA Draft', '#/draft']], '', []); })();
   royMini();
 }
 /* Rookie of the Year race on the NBA card (2026-11-10, Jamo picked "Rookie race on home"): the top 3 from the NBA hub's

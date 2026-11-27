@@ -188,12 +188,22 @@
     return out; }
   /* the strongest glow that keeps the limit: brightness only grows with k (dark) and only shrinks with it (light), so a
      short halving search finds it (about 8 samplings of the backdrop, a few milliseconds per theme on a phone) */
+  /* 2026-11-27 (Jamo: "faster first load"): the search below samples the backdrop up to 8 times (about a quarter second
+     of a mid-range phone's start-up); its answer depends only on the colors, the theme and this code, so the phone keeps it
+     (localStorage jsh-stage-k, the newest 40 colorways) and later pages rebuild the same backdrop without searching */
+  const KH = (() => { const s = String(model) + String(measure) + String(partner) + LD + '/' + LL; let h = 0; for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619); return (h >>> 0).toString(36); })();
+  const kGet = id => { try { const o = JSON.parse(localStorage.getItem('jsh-stage-k') || '{}'); return o[id] || null; } catch (e) { return null; } };
+  const kPut = (id, v) => { try { const o = JSON.parse(localStorage.getItem('jsh-stage-k') || '{}'); delete o[id]; o[id] = v; const ks = Object.keys(o); ks.slice(0, Math.max(0, ks.length - 40)).forEach(x => delete o[x]); localStorage.setItem('jsh-stage-k', JSON.stringify(o)); } catch (e) {} };
   function build(P, A, dark){ const S = partner(P, A), ok = v => dark ? v <= LD : v >= LL;
-    let k = 1, M = model(P, S, dark, 1), m = measure(M, dark);
-    if (!ok(m)) { let lo = 0, hi = 1, best = null;
+    const id = R(P).join(',') + '/' + (A ? R(A).join(',') : '') + '/' + (dark ? 'd' : 'l') + '/' + KH, hit = kGet(id);
+    let k = 1, M, m;
+    if (hit && typeof hit[0] === 'number' && typeof hit[1] === 'number') { k = hit[0]; M = model(P, S, dark, k); m = hit[1]; }
+    else { M = model(P, S, dark, 1); m = measure(M, dark); }
+    if (!hit && !ok(m)) { let lo = 0, hi = 1, best = null;
       for (let i = 0; i < 7; i++) { const q = (lo + hi) / 2, Mq = model(P, S, dark, q), mq = measure(Mq, dark); if (ok(mq)) { lo = q; best = [Mq, mq]; } else hi = q; }
       if (!best) { const M0 = model(P, S, dark, 0); best = [M0, measure(M0, dark)]; }
       k = lo; M = best[0]; m = best[1]; }
+    if (!hit) kPut(id, [k, m]);
     const mk = css1(M.mask);
     return { M, S, k, m, ink: null, rules: r => r + ' body::before{' + LAYER + 'z-index:-2;background:' + fieldCss(M) + '}'
       + r + ' body::after{' + LAYER + 'z-index:-1;background:none}' }; }   /* 2026-11-16: no grid; this still covers any hub body::after */

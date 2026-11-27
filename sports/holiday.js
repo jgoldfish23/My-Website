@@ -152,6 +152,17 @@
     + '.jsh-snow{position:fixed;inset:0;z-index:-1;pointer-events:none}'
     + 'html.jsh-xmas.light .jsh-hol,html.jsh-xmas[data-theme="light"] .jsh-hol{color:#fff}'
     + '@media (prefers-reduced-motion:reduce){.jsh-xmas-k,.jsh-xmas-l i,.jsh-xmas-o{animation:none}.jsh-xmas-k{background:none;-webkit-text-fill-color:currentColor;color:#ffe08a}.jsh-snow{display:none}}'
+    /* ---------- 11-27 round 2 (Jamo: "enhance the Christmas theme some more"): snow caps on the cards, a snowy treeline at
+       the foot of home, light snowfall on the league pages, Christmas-colored win confetti (moments.js) ---------- */
+    + '.jsh-cap{position:absolute;left:0;right:0;top:0;height:11px;z-index:4;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2756%27 height=%2711%27 viewBox=%270 0 56 11%27%3E%3Cpath fill=%27%23fff%27 d=%27M0 0H56V4.6C52 4.6 51 7 47.5 7S43 5.2 40 5.2 37 9.6 34.2 9.6 32 6 28 6 22.6 8 18.4 8 13 5.4 9.4 5.4 4 6.6 0 4.6Z%27/%3E%3Cpath fill=%27%23dbeaf5%27 d=%27M0 3.2C4 5 8.6 4 12 4.2s7 2.4 12 2.2 7-1.6 11-1.4 6 .8 9 .6 6-1.6 12-1.4V4.6C52 4.6 51 7 47.5 7S43 5.2 40 5.2 37 9.6 34.2 9.6 32 6 28 6 22.6 8 18.4 8 13 5.4 9.4 5.4 4 6.6 0 4.6Z%27 opacity=%27.7%27/%3E%3C/svg%3E") 0 0/56px 11px repeat-x;filter:drop-shadow(0 1.5px 1.2px rgba(0,24,48,.28))}'
+    + '#teams.mini .jsh-cap{height:8px;background-size:41px 8px}'
+    + '.jsh-xmas-trees{position:relative;height:96px;margin:34px -16px -6px;pointer-events:none;overflow:hidden}'
+    + '.jsh-xmas-trees{display:flex;justify-content:center;align-items:flex-end;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}.jsh-xmas-trees svg{flex:none;height:96px;width:600px}.jsh-xmas-trees svg.m{transform:scaleX(-1)}'
+    + '.jsh-xmas-trees .tw{animation:jsh-xtw 2.6s ease-in-out infinite;animation-delay:var(--d,0s)}@keyframes jsh-xtw{0%,100%{opacity:1}50%{opacity:.35}}'
+    + 'html.jsh-xmas.light .jsh-xmas-trees .tr,html.jsh-xmas[data-theme="light"] .jsh-xmas-trees .tr{fill:#1f6b46}html.jsh-xmas.light .jsh-xmas-trees .tr2,html.jsh-xmas[data-theme="light"] .jsh-xmas-trees .tr2{fill:#2f8a5c}'
+    + 'html.jsh-xmas.light .jsh-xmas-trees .gr,html.jsh-xmas[data-theme="light"] .jsh-xmas-trees .gr{fill:#fff}'
+    + '@media (prefers-reduced-motion:reduce){.jsh-xmas-trees .tw{animation:none}}'
+    + 'body:is(.boardmode,.tvmode,.livetv) .jsh-cap{display:none}'
     + 'body.boardmode :is(.jsh-snow,.jsh-hat),body.livetv .jsh-snow{display:none}'
     + '@media print{.jsh-hol,.jsh-hol-wash,.jsh-hol-frame,.jsh-snow,.jsh-hat{display:none}}';
 
@@ -185,12 +196,13 @@
     function ornaments() { return orn('#c8102e', '#ffd166', '3%', 6, '-1s') + orn('#0b8a4e', '#ffe9b0', '11%', 16, '-2.2s') + orn('#d4a73a', '#fff', 'calc(89% - 22px)', 12, '-.4s') + orn('#1f5fbf', '#ffd166', 'calc(97% - 22px)', 4, '-3s'); }
     function hat() { var b = D.querySelector('.jsh-brand'); if (!b || b.querySelector('.jsh-hat')) return;
       b.insertAdjacentHTML('afterbegin', '<svg class="jsh-hat" viewBox="0 0 30 24" aria-hidden="true"><path d="M4 18C6 8 13 2 21 4c3 .8 5 3 5.5 6l-2.5 1c-.6-2-1.8-3.2-3.6-3.4C15 7.300 12 12 11 18Z" fill="#d42335"/><path d="M8.6 9.400C12 5 17 3.600 21 4" stroke="#ff6b7a" stroke-width="1.2" fill="none" opacity=".7"/><rect x="2" y="16.5" width="12" height="5" rx="2.5" fill="#fff"/><circle cx="26.3" cy="11.6" r="3" fill="#fff"/></svg>'); }
-    function snow() { try { if (W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {}
+    function snow(lite) { try { if (W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {}
       if (D.querySelector('.jsh-snow')) return; var cv = D.createElement('canvas'); cv.className = 'jsh-snow'; cv.setAttribute('aria-hidden', 'true'); D.body.appendChild(cv);
       var x = cv.getContext('2d'), dpr = Math.min(2, W.devicePixelRatio || 1), w = 0, h = 0, flakes = [], last = 0, on = true;
       function size() { w = W.innerWidth; h = W.innerHeight; cv.width = w * dpr; cv.height = h * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0); }
       size(); W.addEventListener('resize', size);
-      var N = w < 700 ? 26 : 46; for (var i = 0; i < N; i++) flakes.push({ x: Math.random() * w, y: Math.random() * h, r: .8 + Math.random() * 2.2, s: .25 + Math.random() * .55, d: Math.random() * 6.28 });
+      /* home: a proper flurry; the league pages (11-27 round 2): a light one, smaller and slower, behind the content */
+      var N = lite ? (w < 700 ? 12 : 22) : (w < 700 ? 26 : 46); for (var i = 0; i < N; i++) flakes.push({ x: Math.random() * w, y: Math.random() * h, r: lite ? .7 + Math.random() * 1.6 : .8 + Math.random() * 2.2, s: lite ? .18 + Math.random() * .35 : .25 + Math.random() * .55, d: Math.random() * 6.28 });
       var lt = function () { return /light/.test(H.className) || H.getAttribute('data-theme') === 'light'; };
       D.addEventListener('visibilitychange', function () { on = !D.hidden; if (on) requestAnimationFrame(step); });
       function step(t) { if (!on) return; if (t - last < 33) { requestAnimationFrame(step); return; } last = t; x.clearRect(0, 0, w, h);
@@ -198,12 +210,37 @@
         for (var i = 0; i < flakes.length; i++) { var f = flakes[i]; f.y += f.s; f.d += .012; f.x += Math.sin(f.d) * .35; if (f.y > h + 4) { f.y = -4; f.x = Math.random() * w; } x.globalAlpha = .35 + f.r / 5; x.beginPath(); x.arc(f.x, f.y, f.r, 0, 6.283); x.fill(); }
         requestAnimationFrame(step); }
       requestAnimationFrame(step); }
+    /* snow caps: a soft drift along the top edge of the home team cards and each league page's headline card */
+    function caps() { var sel = '#teams a.tc, #view > .sbh, #view > .thead, #view > .ghead', due = 0;
+      function run() { due = 0; D.querySelectorAll(sel).forEach(function (el) { if (el.querySelector(':scope > .jsh-cap')) return; var cs = getComputedStyle(el); if (cs.position === 'static') el.style.position = 'relative';
+        var c = D.createElement('i'); c.className = 'jsh-cap'; c.setAttribute('aria-hidden', 'true'); c.style.borderRadius = cs.borderTopLeftRadius + ' ' + cs.borderTopRightRadius + ' 0 0'; el.appendChild(c); }); }
+      run(); try { new MutationObserver(function () { if (!due) due = setTimeout(run, 120); }).observe(D.body, { childList: true, subtree: true }); } catch (e) {} }
+    /* a snowy treeline at the foot of the home page, a few lights twinkling on the big tree */
+    function treeline() { var fd = D.getElementById('fd'); if (!fd || fd.querySelector('.jsh-xmas-trees')) return;
+      var s = '', P = [[18, 46, 'tr2'], [52, 70, 'tr'], [92, 38, 'tr2'], [128, 58, 'tr'], [170, 30, 'tr2'], [212, 84, 'tr'], [262, 44, 'tr2'], [300, 62, 'tr'], [342, 34, 'tr2'], [384, 52, 'tr'], [430, 74, 'tr'], [474, 40, 'tr2'], [512, 60, 'tr'], [556, 36, 'tr2'], [590, 50, 'tr']];
+      P.forEach(function (p) { var x = p[0], h = p[1], b = 88, w = h * .42, tiers = 3, out = '', snowy = '';
+        for (var k = 0; k < tiers; k++) { var top = b - h + k * h * .27, bot = b - h * (.42 - k * .2) + (k === tiers - 1 ? h * .42 - 6 : 0), hw = w * (.55 + k * .25);
+          out += 'M' + x + ' ' + top.toFixed(1) + 'L' + (x + hw).toFixed(1) + ' ' + bot.toFixed(1) + 'H' + (x - hw).toFixed(1) + 'Z';
+          snowy += 'M' + x + ' ' + top.toFixed(1) + 'l' + (hw * .32).toFixed(1) + ' ' + (h * .1).toFixed(1) + 'q' + (-hw * .16).toFixed(1) + ' ' + (h * .03).toFixed(1) + ' ' + (-hw * .32).toFixed(1) + ' 0q' + (-hw * .16).toFixed(1) + ' ' + (-h * .03).toFixed(1) + ' ' + (-hw * .32).toFixed(1) + ' 0Z'; }
+        s += '<path class="' + p[2] + '" fill="' + (p[2] === 'tr' ? '#0f4a30' : '#17603f') + '" d="' + out + '"/><rect x="' + (x - 2) + '" y="' + (b - 7) + '" width="4" height="7" fill="#3b2a1e"/><path fill="#f4faff" d="' + snowy + '"/>'; });
+      var L = [[202, 30, '#ff4d5e'], [221, 36, '#ffd166'], [206, 47, '#3ddc84'], [224, 56, '#5ab8ff'], [199, 63, '#ff8a3d'], [216, 70, '#ffd166']], lt = '';
+      L.forEach(function (q, i) { lt += '<circle class="tw" style="--d:-' + (i * .43).toFixed(2) + 's" cx="' + q[0] + '" cy="' + q[1] + '" r="2.1" fill="' + q[2] + '"/>'; });
+      var star = '<path class="tw" fill="#ffd166" d="M212 0.8l1.9 4.3 4.6.5-3.5 3.1 1 4.6-4-2.4-4 2.4 1-4.6-3.5-3.1 4.6-.5Z"/>';
+      var ground = '<path class="gr" fill="#eaf4fb" d="M0 86C60 80 120 84 190 82S320 78 400 83 520 80 600 84V96H0Z" opacity=".95"/>';
+      var box = D.createElement('div'); box.className = 'jsh-xmas-trees'; box.setAttribute('aria-hidden', 'true');
+      /* one 600 px scene in the middle, mirrored copies either side so a wide screen gets a whole forest (the ground meets at the seams) */
+      var one = s + lt + star + ground, plain = s + ground, sv = function (m, body) { return '<svg' + (m ? ' class="m"' : '') + ' viewBox="0 0 600 96">' + body + '</svg>'; };
+      box.innerHTML = sv(0, plain) + sv(1, plain) + sv(0, one) + sv(1, plain) + sv(0, plain);
+      var ft = fd.querySelector('footer.foot'); if (ft) fd.insertBefore(box, ft); else fd.appendChild(box); }
     function marks(list) { return '<span class="jsh-hol-marks" aria-hidden="true">' + list.join('') + '</span>'; }
     if (kind === 'thanks') {
       strip.innerHTML = '<span class="jsh-hol-k">Happy Thanksgiving</span><span class="jsh-hol-art" aria-hidden="true"><img src="/sports/holiday/thanks-turkey.png?v=20261126l" alt=""><img src="/sports/holiday/thanks-football.png?v=20261126l" alt=""><img src="/sports/holiday/thanks-pie.png?v=20261126l" alt=""></span>';
     } else {
       strip.innerHTML = '<span class="jsh-xmas-k">Merry Christmas</span><span class="jsh-xmas-c">' + xmasCount(/jsh-hol-slim/.test(strip.className)) + '</span>' + lights() + (/jsh-hol-slim/.test(strip.className) ? '' : ornaments());
-      hat(); if (!/jsh-hol-slim/.test(strip.className)) snow();
+      hat(); var slim = /jsh-hol-slim/.test(strip.className);
+      if (!slim) { snow(); treeline(); }
+      else if (!/^\/sports\/live/.test(location.pathname)) setTimeout(function () { snow(true); }, 1200);   /* after the page has drawn */
+      caps();
     }
     bar.insertAdjacentElement('afterend', strip);
   }

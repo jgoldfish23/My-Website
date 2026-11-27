@@ -29,6 +29,7 @@
     + '@keyframes jshShine{to{transform:translateX(120%)}}'
     + '.jsh-conf{position:absolute;left:var(--cx,50%);top:var(--cy,50%);width:0;height:0;pointer-events:none;z-index:2}'
     + '.jsh-conf i{position:absolute;left:0;top:0;width:7px;height:11px;border-radius:2px;background:var(--k);opacity:0;animation:jshPop 1.05s cubic-bezier(.2,.7,.3,1) forwards;animation-delay:var(--d)}'
+    + '.jsh-conf i.s{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 6px 1px rgba(255,255,255,.8)}'
     + '@keyframes jshPop{0%{opacity:1;transform:translate(0,0) rotate(0) scale(.6)}70%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1)}}'
     /* 2. upset ribbon */
     + '.jsh-ups{position:absolute;top:6px;right:6px;z-index:3;pointer-events:none;font:800 10.5px/1 Inter,system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#1d1405;background:linear-gradient(90deg,#fbbf24,#f59e0b);padding:4px 7px 3px;border-radius:6px;box-shadow:0 4px 14px -4px rgba(245,158,11,.7)}'
@@ -61,10 +62,11 @@
       var r = el.getBoundingClientRect(); if (r.width < 40 || r.bottom < 0 || r.top > W.innerHeight) { el.removeAttribute('data-jsh-celdone'); return; }   /* wait until it is on screen */
       seen.push(k); while (seen.length > 60) seen.shift(); put('jsh-cel', seen);
       el.classList.add('jsh-cel');
-      var c = getComputedStyle(el).getPropertyValue('--tc').trim() || '#f2c14e', cols = [c, '#fbbf24', '#ffffff', c], box = D.createElement('span'); box.className = 'jsh-conf'; box.setAttribute('aria-hidden', 'true');
+      /* 11-27 (Jamo: more Christmas): in the Christmas season the burst is red, green and gold, with snowflakes mixed in */
+      var X = H.classList.contains('jsh-xmas'), c = getComputedStyle(el).getPropertyValue('--tc').trim() || '#f2c14e', cols = X ? ['#e63946', '#2fbf71', '#f6c453', '#ffffff'] : [c, '#fbbf24', '#ffffff', c], box = D.createElement('span'); box.className = 'jsh-conf'; box.setAttribute('aria-hidden', 'true');
       box.style.setProperty('--cx', '14%'); box.style.setProperty('--cy', '50%');
       var h = ''; for (var i = 0; i < 18; i++) { var a = (i / 18) * Math.PI * 2 + (i % 3) * .21, d = 46 + (i * 37 % 60);
-        h += '<i style="--k:' + cols[i % 4] + ';--x:' + Math.round(Math.cos(a) * d * 1.8) + 'px;--y:' + Math.round(Math.sin(a) * d - 18) + 'px;--r:' + (i * 47 % 360) + 'deg;--d:' + (i % 4) * 30 + 'ms"></i>'; }
+        h += '<i' + (X && i % 3 === 0 ? ' class="s"' : '') + ' style="--k:' + cols[i % 4] + ';--x:' + Math.round(Math.cos(a) * d * 1.8) + 'px;--y:' + Math.round(Math.sin(a) * d - 18) + 'px;--r:' + (i * 47 % 360) + 'deg;--d:' + (i % 4) * 30 + 'ms"></i>'; }
       box.innerHTML = h; el.appendChild(box);
       setTimeout(function(){ box.remove(); el.classList.remove('jsh-cel'); }, 1600); });
   }

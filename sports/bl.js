@@ -122,7 +122,13 @@ body.jbl-on{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
     if (!h) h = '<span class="jbl-i">No games on the board right now.</span>';
     tr.innerHTML = h + '<span class="jbl-gap" style="display:inline-block;width:60px"></span>' + h; segs = [...tr.querySelectorAll('.jbl-sec')].slice(0, tr.querySelectorAll('.jbl-sec').length / 2 || 1); label(); }
   function label(){ const vl = vp.getBoundingClientRect().left; let cur = null; tr.querySelectorAll('.jbl-sec').forEach(s => { if (s.getBoundingClientRect().left <= vl + 40) cur = s; }); cur = cur || tr.querySelector('.jbl-sec'); if (!cur) return; lab.textContent = cur.dataset.l; tag.style.setProperty('--jblc', cur.style.getPropertyValue('--c')); const live = (DATA && DATA.games || []).filter(g => g.st === 'in' && LG[g.lg]).length; sub.textContent = live ? live + ' live' : ''; }
-  function tick(t){ requestAnimationFrame(tick); if (bar.hidden || reduced) return; const dt = last ? Math.min(64, t - last) : 16; last = t; if (paused || hover || document.hidden) return; const half = tr.scrollWidth / 2; if (half <= vp.clientWidth / 2) return; x -= dt * 0.055; if (-x >= half) x += half; tr.style.transform = 'translateX(' + x.toFixed(1) + 'px)'; if (t - lastLab > 250) { lastLab = t; label(); } }
+  /* 11-27 audit: the loop read the strip's width every frame (a forced layout) and kept running where the ticker is hidden
+     (phone hub pages) - ~400 ms of a mid phone's CPU every few seconds. Sizes are measured when they change; hidden = idle. */
+  let mHalf = 0, mVp = 0, mVis = true;
+  function measure(){ mVis = !bar.hidden && bar.getClientRects().length > 0 && getComputedStyle(bar).display !== 'none'; mHalf = mVis ? tr.scrollWidth / 2 : 0; mVp = mVis ? vp.clientWidth : 0; }
+  try { new ResizeObserver(measure).observe(bar); new ResizeObserver(measure).observe(tr); } catch (e) { setInterval(measure, 2000); }
+  addEventListener('resize', measure);
+  function tick(t){ requestAnimationFrame(tick); if (bar.hidden || reduced || !mVis) { last = 0; return; } const dt = last ? Math.min(64, t - last) : 16; last = t; if (paused || hover || document.hidden) return; const half = mHalf; if (half <= mVp / 2) return; x -= dt * 0.055; if (-x >= half) x += half; tr.style.transform = 'translateX(' + x.toFixed(1) + 'px)'; if (t - lastLab > 250) { lastLab = t; label(); } }
   async function load(){ try { const r = await fetch(API, {cache:'no-store'}); if (r.ok) { const j = await r.json(); if (j && j.games) DATA = j; } } catch (e) {}
     if (!LAT.length) { try { const r = await fetch(LATEST); if (r.ok) LAT = await r.json(); } catch (e) {} }
     try { document.dispatchEvent(new CustomEvent('jsh:bl', {detail: DATA})); } catch (e) {} /* the top bar's Live dot listens (2026-10-27) */

@@ -98,7 +98,10 @@
   function xsMark(el){ var room = el.scrollWidth - el.clientWidth, more = room > 4 && getComputedStyle(el).overflowX !== 'visible';
     var r = more && el.scrollLeft < room - 4, l = more && el.scrollLeft > 4;
     if (el.classList.contains('xs-r') !== r) el.classList.toggle('xs-r', r);
-    if (el.classList.contains('xs-l') !== l) el.classList.toggle('xs-l', l); }
+    if (el.classList.contains('xs-l') !== l) el.classList.toggle('xs-l', l);
+    /* 11-27 audit: a sideways row with nothing focusable in it (a wide table, the score chips) gets a tab stop, so a
+       keyboard can scroll it too */
+    if (more && !el.hasAttribute('tabindex') && !el.querySelector('a[href],button,input,select,[tabindex]')) el.setAttribute('tabindex', '0'); }
   /* 11-27 (accessibility): the bottom tab for this page carries aria-current, like the top league switcher */
   function btCur(){ D.querySelectorAll('.btab .bt-i').forEach(function(e){ var on = e.classList.contains('on'); if (on && e.getAttribute('aria-current') !== 'page') e.setAttribute('aria-current', 'page'); else if (!on && e.hasAttribute('aria-current')) e.removeAttribute('aria-current'); }); }
   var xsQ = 0; function xsAll(){ if (xsQ) return; xsQ = requestAnimationFrame(function(){ xsQ = 0; D.querySelectorAll(XS).forEach(xsMark); btCur(); }); }

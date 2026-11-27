@@ -2464,9 +2464,9 @@
 2026-11-21|Hawai'i|Nevada|Nevada|passingYards|AJ Bianco|QB|8/18, 106 YDS
 2026-11-21|Hawai'i|Nevada|Nevada|rushingYards|Herschel Turner|RB|13 CAR, 73 YDS
 2026-11-21|Hawai'i|Nevada|Nevada|receivingYards|Marshaun Brown|WR|4 REC, 61 YDS
-2026-11-26|TCU|Texas Tech|TCU|passingYards|Adam Schobel|QB|4/8, 41 YDS
-2026-11-26|TCU|Texas Tech|TCU|rushingYards|Jeremy Payne|RB|5 CAR, 18 YDS
-2026-11-26|TCU|Texas Tech|TCU|receivingYards|Ed Small|WR|2 REC, 21 YDS
+2026-11-26|TCU|Texas Tech|Texas Tech|passingYards|Thomas Castellanos|QB|20/25, 374 YDS, 3 TD
+2026-11-26|TCU|Texas Tech|TCU|rushingYards|Adam Schobel|QB|16 CAR, 47 YDS
+2026-11-26|TCU|Texas Tech|Texas Tech|receivingYards|Malcolm Simmons|WR|4 REC, 110 YDS, 1 TD
 2026-11-24|Kent State|Eastern Michigan|Kent State|passingYards|Ethan Thanthanavong|QB|16/27, 234 YDS, 1 TD, 2 INT
 2026-11-24|Kent State|Eastern Michigan|Eastern Michigan|rushingYards|Amareon Blue|RB|20 CAR, 137 YDS, 1 TD
 2026-11-24|Kent State|Eastern Michigan|Kent State|receivingYards|Wayne Harris|WR|5 REC, 125 YDS

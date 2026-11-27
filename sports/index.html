@@ -620,6 +620,22 @@ a.tc.tc-white .tc-sig .wo,a.tc.tc-white .tc-last .w{color:#15803d}
 a.tc.tc-white .tc-sig .rk{color:#0062b8;border-color:rgba(0,98,184,.35)}
 a.tc.tc-white .tc-sig .inj,a.tc.tc-white .tc-ar-k{color:#b45309}
 a.tc.tc-white .tc-last .l{color:#b91c1c}
+/* Jazz Sky Blue: a light card, so black type (8:1 or better on the blue) */
+a.tc.tc-sky{color:#0b0b0f;border-color:rgba(0,0,0,.16)}
+a.tc.tc-sky::before{background:radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.35),transparent 55%),linear-gradient(180deg,transparent 45%,rgba(0,0,0,.08))}
+a.tc.tc-sky .wm{filter:grayscale(1) brightness(0);opacity:.08}
+a.tc.tc-sky :is(.tc-name,.tc-meta b,.tc-cd,.tc-sc,.tc-g){color:#0b0b0f;text-shadow:none}
+a.tc.tc-sky :is(.tc-meta,.tc-last,.tc-sig,.tc-gx){color:#14263a}
+a.tc.tc-sky :is(.tc-k,.tc-g .dim,.tc-sc .dim){color:#1c3048}
+a.tc.tc-sky :is(.tc-next,.tc-ar){background:rgba(255,255,255,.26);border-color:rgba(0,0,0,.14);color:#0b0b0f}
+a.tc.tc-sky .tc-sig span{background:rgba(255,255,255,.3);border-color:rgba(0,0,0,.2)}
+a.tc.tc-sky .tc-sig .wo,a.tc.tc-sky .tc-last .w{color:#0c5a29}
+a.tc.tc-sky .tc-sig .inj,a.tc.tc-sky .tc-ar-k{color:#6b3300}
+a.tc.tc-sky .tc-last .l{color:#8a1212}
+a.tc.tc-sky :is(.tc-sport,.tc-rank){background:#0b0b0f;color:#fff;border-color:transparent}
+.tc-cell:has(>a.tc-sky) .tc-swatch i{box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.35)}
+.tc-cell:has(>a.tc-sky) .tc-swatch.on i{box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.35),0 0 0 2px #fff,0 0 0 4px #0b0b0f}
+.tc-cell:has(>a.tc-sky) .tc-swatch:focus-visible{outline-color:#0b0b0f}
 a.tc.tc-white :is(.tc-sport,.tc-rank){background:#0062b8;color:#fff;border-color:transparent}
 a.tc.tc-white .tc-swatch{background:rgba(0,46,93,.06);border-color:rgba(0,46,93,.22);color:#002e5d}
 a.tc.tc-white .tc-swatch.on{background:rgba(0,98,184,.14);border-color:#0062b8}
@@ -5884,7 +5900,10 @@ const SCHEMES = {
   ],
   'nba:UTAH': [
     {id:'purple', name:'Purple', c1:'#4e008e', c2:'#2a0050', rail:'#f9a01b'},
-    {id:'black', name:'Black', c1:'#161616', c2:'#000000', rail:'#f9a01b'},
+    /* 11-27 (Jamo): black gets the sky blue edge from the current jerseys (Mountain Purple / Midnight Black / Sky Blue;
+       the team phased yellow out), and Sky Blue is its own look - a light card with black type */
+    {id:'black', name:'Black', c1:'#161616', c2:'#000000', rail:'#6caedf'},
+    {id:'sky', name:'Sky Blue', c1:'#6caedf', c2:'#4b93cc', rail:'#161616', cls:'tc-sky'},
     {id:'green', name:'Green', c1:'#0c6b45', c2:'#043528', rail:'#f9a01b'},
     {id:'yellow', name:'Yellow', c1:'#8a5a10', c2:'#3a2204', rail:'#f9a01b'},
     {id:'navy', name:'Navy', c1:'#002b5c', c2:'#001433', rail:'#f9a01b'}
@@ -5916,7 +5935,7 @@ function activeScheme(sport, id){ const list = schemesFor(sport, id), want = sch
 function schemeHTML(sport, id){
   const list = schemesFor(sport, id); if (list.length < 2) return '';
   const on = activeScheme(sport, id), nm = O[sport] && O[sport].name ? O[sport].name(id) : id;
-  return '<div class="tc-schemes" role="group" aria-label="Card colors for ' + esc(nm) + '">' + list.map(x => '<button type="button" class="tc-swatch' + (x.id === on.id ? ' on' : '') + '" aria-pressed="' + (x.id === on.id) + '" aria-label="' + esc(x.name) + '" title="' + esc(x.name) + '" data-sport="' + esc(sport) + '" data-team="' + esc(id) + '" data-scheme="' + x.id + '" style="--sw:' + (x.sw || x.rail || x.c1) + (x.sw2 ? ';--sw2:' + x.sw2 : '') + '"><i></i></button>').join('') + '</div>';
+  return '<div class="tc-schemes" role="group" aria-label="Card colors for ' + esc(nm) + '">' + list.map(x => '<button type="button" class="tc-swatch' + (x.id === on.id ? ' on' : '') + '" aria-pressed="' + (x.id === on.id) + '" aria-label="' + esc(x.name) + '" title="' + esc(x.name) + '" data-sport="' + esc(sport) + '" data-team="' + esc(id) + '" data-scheme="' + x.id + '" style="--sw:' + (x.sw || x.c1) + ((x.sw2 || x.rail) ? ';--sw2:' + (x.sw2 || x.rail) : '') + '"><i></i></button>').join('') + '</div>';
 }
 function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(f.sport, t); if (!gs.length) return '';
   const live = gs.find(g => g.live), last = gs.filter(played).pop(), next = gs.find(g => !played(g) && !g.live && g.st !== 'CANCELED' && g.st !== 'POSTPONED');

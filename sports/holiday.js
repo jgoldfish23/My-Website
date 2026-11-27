@@ -6,7 +6,7 @@
    Reduced-motion users get the same still layer. */
 (function () {
   if (window.__jshHoliday) return; window.__jshHoliday = true;
-  var D = document, H = D.documentElement;
+  var D = document, H = D.documentElement, W = window;
   var ZONES = { ET: 'America/New_York', CT: 'America/Chicago', MT: 'America/Denver', PT: 'America/Los_Angeles' };
 
   function zone() {
@@ -128,7 +128,32 @@
     + 'html.jsh-xmas.light :is(.jsh-dock,.btab,.jbl),html.jsh-xmas[data-theme="light"] :is(.jsh-dock,.btab,.jbl){background:#e7f6ee!important;color:#0c3a28;border-color:rgba(140,32,48,.35)!important}'
     + 'body.boardmode .jsh-hol,body.boardmode .jsh-hol-frame{display:none}'
     + '@media (max-width:760px){.jsh-hol{font-size:11.5px;letter-spacing:.16em;padding:6px 14px 7px}.jsh-hol-slim .jsh-hol-art img{height:50px}.jsh-hol-slim .jsh-hol-art img:nth-child(1){height:58px}.jsh-hol-slim .jsh-hol-art img:nth-child(2){height:46px}.jsh-hol-slim .jsh-hol-k{font-size:12.5px}html.jsh-thanks .jsh-hol{padding:2px 6px 0}html.jsh-thanks .jsh-hol-k{font-size:14px;letter-spacing:.14em}.jsh-hol-art img{height:76px}.jsh-hol-art img:nth-child(1){height:90px}.jsh-hol-art img:nth-child(2){height:70px}.jsh-hol-marks{gap:14px}.jsh-hol .mark{width:16px;height:16px}}'
-    + '@media print{.jsh-hol,.jsh-hol-wash,.jsh-hol-frame{display:none}}';
+    /* ---------- 11-27 (Jamo: "enhance the Christmas theme"): gold title, countdown, string lights, ornaments on home,
+       a Santa hat on the J, a soft red/green glow behind Your teams, light snow on home. Motion stops for reduce-motion. ---------- */
+    + 'html.jsh-xmas .jsh-hol{flex-direction:column;gap:2px;padding:9px 16px 16px;max-width:100%;box-sizing:border-box;background:linear-gradient(90deg,#0b5233,#0e3d2a 38%,#5e1420 70%,#8e1c2a);border-bottom:0;overflow:visible}'
+    + 'html.jsh-xmas .jsh-hol.jsh-hol-slim{flex-direction:row;gap:10px;padding:7px 14px 13px}'
+    + '.jsh-xmas-k{position:relative;z-index:2;font-size:15px;font-weight:800;letter-spacing:.2em;background-image:linear-gradient(100deg,#fff6d6 0%,#ffe08a 22%,#fff 40%,#f6c453 58%,#fff6d6 80%,#ffe08a 100%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#ffe08a;animation:jsh-hol-shoot 7s linear infinite}'
+    + '.jsh-hol-slim .jsh-xmas-k{font-size:12px;letter-spacing:.16em}.jsh-hol-slim :is(.jsh-xmas-k,.jsh-xmas-c){white-space:nowrap}'
+    + '.jsh-xmas-c{position:relative;z-index:2;font-size:11px;font-weight:700;letter-spacing:.14em;color:#d9f5e6;opacity:.92}'
+    + '.jsh-hol-slim .jsh-xmas-c{font-size:10.5px}.jsh-hol-slim .jsh-xmas-c::before{content:"·";margin-right:10px;opacity:.6}'
+    + '.jsh-xmas-l{position:absolute;left:0;right:0;bottom:-7px;height:18px;display:flex;justify-content:space-around;align-items:flex-start;pointer-events:none;z-index:3}'
+    + '.jsh-xmas-l::before{content:"";position:absolute;left:0;right:0;top:-4px;height:12px;border-bottom:1.5px solid rgba(20,30,24,.85);border-radius:0 0 50% 50%/0 0 100% 100%}'
+    + '.jsh-xmas-l i{position:relative;width:7px;height:11px;margin-top:3px;border-radius:50% 50% 50% 50%/40% 40% 60% 60%;background:var(--b);box-shadow:0 0 6px 1px var(--b),0 0 14px 2px color-mix(in srgb,var(--b) 50%,transparent);animation:jsh-xtw 2.6s ease-in-out infinite;animation-delay:var(--d)}'
+    + '.jsh-xmas-l i::before{content:"";position:absolute;left:1.5px;top:-3px;width:4px;height:4px;border-radius:1px;background:#2b3a30}'
+    + '@keyframes jsh-xtw{0%,100%{opacity:1;filter:none}50%{opacity:.45;filter:saturate(.6) brightness(.8)}}'
+    + '.jsh-xmas-o{position:absolute;top:0;z-index:1;pointer-events:none;transform-origin:50% 0;animation:jsh-xsw 4.5s ease-in-out infinite}'
+    + '.jsh-xmas-o svg{display:block;width:22px;height:auto;filter:drop-shadow(0 6px 8px rgba(0,0,0,.35))}'
+    + '@keyframes jsh-xsw{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}'
+    + '.jsh-hol-slim .jsh-xmas-o{display:none}'
+    + '.jsh-brand{position:relative}.jsh-hat{position:absolute;left:-7px;top:-11px;width:30px;height:24px;transform:rotate(-22deg);pointer-events:none;z-index:3;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))}'
+    + 'html.jsh-xmas .yt{position:relative}'
+    + 'html.jsh-xmas .yt::before{content:"";position:absolute;left:0;right:0;top:-80px;height:220px;background:radial-gradient(40% 60% at 25% 50%,rgba(34,160,96,.16),transparent 70%),radial-gradient(40% 60% at 75% 50%,rgba(200,40,60,.14),transparent 70%);pointer-events:none;z-index:0}'
+    + 'html.jsh-xmas .yt>*{position:relative;z-index:1}html.jsh-xmas .yt>.sec.top{z-index:5}'
+    + '.jsh-snow{position:fixed;inset:0;z-index:-1;pointer-events:none}'
+    + 'html.jsh-xmas.light .jsh-hol,html.jsh-xmas[data-theme="light"] .jsh-hol{color:#fff}'
+    + '@media (prefers-reduced-motion:reduce){.jsh-xmas-k,.jsh-xmas-l i,.jsh-xmas-o{animation:none}.jsh-xmas-k{background:none;-webkit-text-fill-color:currentColor;color:#ffe08a}.jsh-snow{display:none}}'
+    + 'body.boardmode :is(.jsh-snow,.jsh-hat),body.livetv .jsh-snow{display:none}'
+    + '@media print{.jsh-hol,.jsh-hol-wash,.jsh-hol-frame,.jsh-snow,.jsh-hat{display:none}}';
 
   var st = D.createElement('style'); st.id = 'jsh-holiday-css'; st.textContent = css; (D.head || H).appendChild(st);
 
@@ -150,11 +175,35 @@
     var tree = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="w" d="M10 13.5c2-4.2 10-4.2 12 0" stroke-width="1.6"/><path class="w" d="M7.5 20c2.8-5.6 14.2-5.6 17 0" stroke-width="1.6"/><path class="g" d="M5.5 26.5c3.4-6.4 17.6-6.4 21 0" stroke-width="1.6"/><circle class="gd" cx="16" cy="8.2" r="1.15"/></svg>';
     var star = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="g" d="M16 4.5 18.2 13.2 27 16l-8.8 2.8L16 27.5l-2.2-8.7L5 16l8.8-2.8Z" stroke-width="1.5"/></svg>';
     var bulb = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="g" d="M13 7.5h6" stroke-width="1.7"/><circle class="w" cx="16" cy="18" r="7" stroke-width="1.7"/><path class="g" d="M12.2 15.2a6 6 0 0 1 4.2-2.6" stroke-width="1.4"/></svg>';
+    /* Christmas extras (11-27) */
+    function xmasCount(short) { var t = today(); if (t.m === 12 && t.d === 25) return 'Merry Christmas!'; if (t.m === 12 && t.d === 24) return 'Christmas Eve'; if (t.m === 12 && t.d === 26) return 'Happy holidays';
+      var n = Math.round((Date.UTC(t.y, 11, 25) - Date.UTC(t.y, t.m - 1, t.d)) / 864e5); return n + (n === 1 ? ' day' : ' days') + (short ? ' to go' : ' until Christmas'); }
+    function lights() { var C = ['#ff4d5e', '#ffd166', '#3ddc84', '#5ab8ff', '#ff8a3d', '#f472b6'], n = Math.max(12, Math.min(30, Math.round((W.innerWidth || 390) / 30))), h = '';
+      for (var i = 0; i < n; i++) h += '<i style="--b:' + C[i % C.length] + ';--d:-' + ((i * 0.37) % 2.6).toFixed(2) + 's"></i>';
+      return '<span class="jsh-xmas-l" aria-hidden="true">' + h + '</span>'; }
+    function orn(c1, c2, left, len, delay) { return '<span class="jsh-xmas-o" aria-hidden="true" style="left:' + left + ';animation-delay:' + delay + '"><svg viewBox="0 0 26 ' + (len + 30) + '"><path d="M13 0V' + len + '" stroke="#e8d9a8" stroke-width="1"/><rect x="10" y="' + len + '" width="6" height="4" rx="1" fill="#d4b25a"/><circle cx="13" cy="' + (len + 15) + '" r="10" fill="' + c1 + '"/><path d="M4 ' + (len + 15) + 'h18" stroke="' + c2 + '" stroke-width="2.2" stroke-linecap="round"/><circle cx="9.5" cy="' + (len + 10.5) + '" r="2.6" fill="#fff" opacity=".55"/></svg></span>'; }
+    function ornaments() { return orn('#c8102e', '#ffd166', '3%', 6, '-1s') + orn('#0b8a4e', '#ffe9b0', '11%', 16, '-2.2s') + orn('#d4a73a', '#fff', 'calc(89% - 22px)', 12, '-.4s') + orn('#1f5fbf', '#ffd166', 'calc(97% - 22px)', 4, '-3s'); }
+    function hat() { var b = D.querySelector('.jsh-brand'); if (!b || b.querySelector('.jsh-hat')) return;
+      b.insertAdjacentHTML('afterbegin', '<svg class="jsh-hat" viewBox="0 0 30 24" aria-hidden="true"><path d="M4 18C6 8 13 2 21 4c3 .8 5 3 5.5 6l-2.5 1c-.6-2-1.8-3.2-3.6-3.4C15 7.300 12 12 11 18Z" fill="#d42335"/><path d="M8.6 9.400C12 5 17 3.600 21 4" stroke="#ff6b7a" stroke-width="1.2" fill="none" opacity=".7"/><rect x="2" y="16.5" width="12" height="5" rx="2.5" fill="#fff"/><circle cx="26.3" cy="11.6" r="3" fill="#fff"/></svg>'); }
+    function snow() { try { if (W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {}
+      if (D.querySelector('.jsh-snow')) return; var cv = D.createElement('canvas'); cv.className = 'jsh-snow'; cv.setAttribute('aria-hidden', 'true'); D.body.appendChild(cv);
+      var x = cv.getContext('2d'), dpr = Math.min(2, W.devicePixelRatio || 1), w = 0, h = 0, flakes = [], last = 0, on = true;
+      function size() { w = W.innerWidth; h = W.innerHeight; cv.width = w * dpr; cv.height = h * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0); }
+      size(); W.addEventListener('resize', size);
+      var N = w < 700 ? 26 : 46; for (var i = 0; i < N; i++) flakes.push({ x: Math.random() * w, y: Math.random() * h, r: .8 + Math.random() * 2.2, s: .25 + Math.random() * .55, d: Math.random() * 6.28 });
+      var lt = function () { return /light/.test(H.className) || H.getAttribute('data-theme') === 'light'; };
+      D.addEventListener('visibilitychange', function () { on = !D.hidden; if (on) requestAnimationFrame(step); });
+      function step(t) { if (!on) return; if (t - last < 33) { requestAnimationFrame(step); return; } last = t; x.clearRect(0, 0, w, h);
+        x.fillStyle = lt() ? 'rgba(120,160,190,.55)' : 'rgba(255,255,255,.7)';
+        for (var i = 0; i < flakes.length; i++) { var f = flakes[i]; f.y += f.s; f.d += .012; f.x += Math.sin(f.d) * .35; if (f.y > h + 4) { f.y = -4; f.x = Math.random() * w; } x.globalAlpha = .35 + f.r / 5; x.beginPath(); x.arc(f.x, f.y, f.r, 0, 6.283); x.fill(); }
+        requestAnimationFrame(step); }
+      requestAnimationFrame(step); }
     function marks(list) { return '<span class="jsh-hol-marks" aria-hidden="true">' + list.join('') + '</span>'; }
     if (kind === 'thanks') {
       strip.innerHTML = '<span class="jsh-hol-k">Happy Thanksgiving</span><span class="jsh-hol-art" aria-hidden="true"><img src="/sports/holiday/thanks-turkey.png?v=20261126l" alt=""><img src="/sports/holiday/thanks-football.png?v=20261126l" alt=""><img src="/sports/holiday/thanks-pie.png?v=20261126l" alt=""></span>';
     } else {
-      strip.innerHTML = 'Merry Christmas' + marks([star, tree, bulb]);
+      strip.innerHTML = '<span class="jsh-xmas-k">Merry Christmas</span><span class="jsh-xmas-c">' + xmasCount(/jsh-hol-slim/.test(strip.className)) + '</span>' + lights() + (/jsh-hol-slim/.test(strip.className) ? '' : ornaments());
+      hat(); if (!/jsh-hol-slim/.test(strip.className)) snow();
     }
     bar.insertAdjacentElement('afterend', strip);
   }

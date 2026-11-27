@@ -399,7 +399,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 })();
 </script>
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
-<script src="/sports/bl.js?v=20261101a" defer></script>
+<script src="/sports/bl.js?v=20261127a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
 <script src="/sports/holo.js?v=20261126z" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
@@ -419,7 +419,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
-<script src="/sports/finish.js?v=20261127c" defer></script>
+<script src="/sports/finish.js?v=20261127d" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
 <script src="/sports/tabs.js?v=20261127a" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
@@ -3675,7 +3675,7 @@ a.ts-ld:hover{text-decoration:none;background:var(--surface-3)}
 .dp-gt{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-weight:700}
 .dp-chips{display:flex;flex-wrap:wrap;gap:6px}
 .dp-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 4px;border-radius:999px;font-size:12.5px;font-weight:600;background:var(--surface-2);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 45%,var(--line))}
-.dp-chip b{display:grid;place-items:center;min-width:22px;height:22px;padding:0 4px;border-radius:999px;font-size:11.5px;background:var(--c);color:#fff}
+.dp-chip b{display:grid;place-items:center;min-width:22px;height:22px;padding:0 4px;border-radius:999px;font-size:11.5px;background:var(--c);color:var(--ct,#fff)}
 .dp-chip.lot b{background:var(--gold,#E8A317);color:#1b1405}
 .dp-chip .dim{font-size:11px}
 @media (max-width:600px){.dp-row{grid-template-columns:30px minmax(0,1fr)}.dp-mock{grid-column:2}.dp-games{grid-template-columns:1fr}}
@@ -4801,6 +4801,8 @@ const lastName = n => String(n).replace(/\s+(Jr\.?|Sr\.?|II|III|IV)$/i, '').spli
 const gameDraft = g => prospectsOf(g.away).concat(prospectsOf(g.home)).sort((x, y) => x.rk - y.rk);
 const gameDraftScore = g => gameDraft(g).reduce((s, b) => s + Math.max(0, 80 - b.rk), 0) * (prospectsOf(g.away).length && prospectsOf(g.home).length ? 2 : 1);
 /* the small line on a scoreboard card */
+/* 11-27 audit: white numbers on a light team color (Carolina blue, maize, orange) read at 1.5-3:1; light colors get dark numbers */
+const chipInk = c => { const rgb = hexRgb(c); return rgb && lum(rgb) > .2 ? '#111827' : '#fff'; };
 function dpTag(g){ const ps = gameDraft(g); if (!ps.length) return ''; const b = ps[0];
   return '<br><span class="dp-tag" title="' + esc('NBA draft prospects: ' + ps.map(x => '#' + x.rk + ' ' + x.n).join(', ')) + '"><i></i>No. ' + b.rk + ' ' + esc(lastName(b.n)) + (ps.length > 1 ? ' + ' + (ps.length - 1) + ' more' : '') + '</span>'; }
 const nbaLogo = ab => '<img class="dp-nba" src="/nba/img/logos/' + esc(ab) + '.png" alt="" loading="lazy" onerror="this.remove()">';
@@ -4835,7 +4837,7 @@ function renderDraft(mode){ setNav('draft'); mode = mode === 'board' ? 'board' :
       html += '<div class="card dp-card dp-fav" style="--dpc:' + uiColor(fav) + '"><div class="hd"><h3>' + logoImg(fav) + ' ' + esc(fav.short) + '’s prospects</h3><span class="mini">' + (nx ? 'next: ' + esc(fmtDate(nx.date)) + ' ' + (nx.home === fav.id ? 'vs ' : 'at ') + esc(tname(nx.home === fav.id ? nx.away : nx.home)) : '') + '</span></div><div class="bd">' + fp.map(dpRow).join('') + '</div></div>'; }
     html += games.length ? '<div class="dp-games">' + games.map(g => { const a = team(g.away), h = team(g.home); const ps = gameDraft(g);
         return '<a class="card dp-game click" href="#/game/' + g.id + '" style="--ca:' + uiColor(a) + ';--ch:' + uiColor(h) + '"><div class="dp-gh"><span class="dp-gt">' + logoImg(a) + rk(a.id) + esc(a.short) + ' <span class="dim">' + (g.neutral ? 'vs' : 'at') + '</span> ' + logoImg(h) + rk(h.id) + esc(h.short) + '</span><span class="mini">' + esc(fmtDate(g.date)) + ' · ' + esc(kick(g)) + (g.tv ? ' · ' + esc(g.tv.split(',')[0]) : '') + '</span></div>'
-          + '<div class="dp-chips">' + ps.map(b => '<span class="dp-chip' + (b.rk <= 14 ? ' lot' : '') + '" style="--c:' + uiColor(team(b.tid)) + '"><b>' + b.rk + '</b>' + esc(b.n) + '<span class="dim">' + esc(b.pos) + '</span></span>').join('') + '</div></a>'; }).join('') + '</div>'
+          + '<div class="dp-chips">' + ps.map(b => '<span class="dp-chip' + (b.rk <= 14 ? ' lot' : '') + '" style="--c:' + uiColor(team(b.tid)) + ';--ct:' + chipInk(uiColor(team(b.tid))) + '"><b>' + b.rk + '</b>' + esc(b.n) + '<span class="dim">' + esc(b.pos) + '</span></span>').join('') + '</div></a>'; }).join('') + '</div>'
       : '<div class="note">No games with players on the big board in the next week.</div>';
     html += '<p class="mini">' + dpSource() + ' <a href="#/draft/board">See the whole board ›</a></p>';
   }

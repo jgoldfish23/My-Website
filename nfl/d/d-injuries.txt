@@ -125,7 +125,7 @@ CAR||AJ Dillon|RB|Active||||2026-11-23|
 CAR||Bryce Young|QB|Active||||2026-11-23|Young completed 22 of 30 passes for 254 yards and two touchdowns with one interception in Sunday's 35-33 win over Baltimore.
 CHI||Stephen Carlson|TE|Active||||2026-11-27|Carlson caught two of his four targets for 30 yards during Chicago's win over the Lions on Thursday.
 CHI||Kalif Raymond|WR|Active||||2026-11-27|Raymond caught three of his five targets for 20 yards during Chicago's win over the Lions on Thursday.
-CHI||Cairo Santos|PK|Active||||2026-11-27|Santos converted his only field-goal attempt and all four of his extra-point tries during Chicago's win over the Detroit on Thursday.
+CHI||Cairo Santos|PK|Active||||2026-11-27|Santos converted his only field-goal attempt and all four of his extra-point tries during Chicago's 39-35 win over the Detroit on Thursday.
 CHI||Sam Roush|TE|Active||||2026-11-26|Roush caught all five of his targets for 31 yards in Thursday's 39-35 win over the Lions.
 CHI||Rome Odunze|WR|Active||||2026-11-26|Odunze caught six of nine targets for 87 yards and two touchdowns in Thursday's 39-35 win over the Lions.
 CHI||Luther Burden III|WR|Active||||2026-11-26|Burden caught three of seven targets for 44 yards in Thursday's 39-35 win over the Lions.
@@ -200,7 +200,7 @@ CLE||KC Concepcion|WR|Active||||2026-11-16|Concepcion caught three of eight targ
 CLE||Deshaun Watson|QB|Active||||2026-11-16|Watson completed 25 of 40 passes for 312 yards with no touchdowns and one interception while adding eight rushes for 49 yards and a score in the Browns' 27-24 win over the Texans on Sunday. He also committed a fumble tha
 DAL||Quinnen Williams|DT|Questionable|Back|Spasms|2026-12-07|2026-11-27|Williams injured his back during the fourth quarter of Thursday's 39-38 loss to the Eagles, but the veteran defensive lineman will have extra time to rest before the Cowboys' Week 13 tilt against the Seahawks on Monday, 
 DAL||Brevyn Spann-Ford|TE|Active||||2026-11-27|Spann-Ford caught his lone target for 15 yards during Dallas' loss to the Eagles on Thursday.
-DAL||Brandon Aubrey|PK|Active||||2026-11-27|Aubrey converted one of his two field-goal attempts and all five of his extra-point tries during Dallas' loss to the Eagles on Thursday.
+DAL||Brandon Aubrey|PK|Active||||2026-11-27|Aubrey converted one of his two field-goal attempts and all five of his extra-point tries during Dallas' 39-38 loss to the Eagles on Thursday.
 DAL||George Pickens|WR|Active||||2026-11-27|Pickens caught five of nine targets for 67 yards in Thursday's 39-38 loss to the Eagles.
 DAL||CeeDee Lamb|WR|Active||||2026-11-27|Lamb caught seven of 11 targets for 134 yards in Thursday's 39-38 loss to the Eagles.
 DAL||Javonte Williams|RB|Active||||2026-11-27|Williams carried the ball 29 times for 101 yards and two touchdowns while catching all three of his targets for 22 yards and a third TD in Thursday's 39-38 loss to the Eagles.
@@ -249,7 +249,7 @@ DEN||Bo Nix|QB|Active||||2026-11-23|Nix completed 19 of 35 passes for 225 yards,
 DEN||Jaylen Waddle|WR|Active||||2026-11-23|Waddle secured three of six targets for 61 yards during Sunday's 38-24 win versus the Raiders.
 DEN||Jonah Coleman|RB|Active||||2026-11-23|Coleman reeled off 111 yards and three touchdowns on 24 carries and hauled in four of five targets for 18 yards during Sunday's 38-24 win against the Raiders.
 DET||Sione Vaki|RB|Active||||2026-11-27|Vaki carried the ball six times for 19 yards and hauled in two of his three targets for a loss of four yards during Detroit's loss to Chicago on Thursday.
-DET||Jake Bates|PK|Active||||2026-11-27|Bates made both of his field-goal attempts and three of his four extra-point tries during Detroit's loss to the Bears on Thursday.
+DET||Jake Bates|PK|Active||||2026-11-27|Bates made both of his field-goal attempts and three of his four extra-point tries during Detroit's 39-35 loss to the Bears on Thursday.
 DET||Sam LaPorta|TE|Active||||2026-11-26|LaPorta caught four of five targets for 44 yards and a touchdown in Thursday's 39-35 loss to the Bears.
 DET||Jameson Williams|WR|Active||||2026-11-26|Williams caught six of nine targets for 68 yards in Thursday's 39-35 loss to the Bears. He added 12 yards on his lone carry.
 DET||Jared Goff|QB|Active||||2026-11-26|Goff completed 25 of 36 passes for 313 yards and one touchdown with one interception in Thursday's 39-35 loss to the Bears. He added 10 rushing yards on three carries.
@@ -625,12 +625,12 @@ NYJ||Braelon Allen|RB|Active||||2026-11-23|Allen rushed 16 times for 75 yards wh
 NYJ||Geno Smith|QB|Active||||2026-11-23|Smith completed 17 of 21 passes for 176 yards and three touchdowns in Sunday's 27-24 win over the Chargers. He also rushed once for four yards.
 PHI||Darius Cooper|WR|Active||||2026-11-27|Cooper caught one of his two targets for 14 yards during the Eagles' win over the Cowboys on Thursday.
 PHI||DeVonta Smith|WR|Questionable|Back||2026-12-06|2026-11-27|Smith (back) was seen limping badly in the locker room after Thursday's 39-38 win over the Cowboys, Martin Frank of the Delaware News Journal reports.
-PHI||Jake Elliott|PK|Active||||2026-11-27|Elliott converted both of his field-goal attempts and all three of his extra-point attempts during the Eagles' win over the Cowboys on Thursday.
+PHI||Jake Elliott|PK|Active||||2026-11-27|Elliott converted both of his field-goal attempts and all three of his extra-point attempts during the Eagles' 39-38 win over the Cowboys on Thursday.
 PHI||Dallas Goedert|TE|Questionable|Shoulder||2026-12-06|2026-11-27|Goedert (shoulder) had his right arm in a sling following Thursday's 39-38 victory over the Cowboys, Jimmy Kempski of PhillyVoice.com reports.
 PHI||Makai Lemon|WR|Active||||2026-11-27|Lemon caught five of six targets for 51 yards and a touchdown in Thursday's 39-38 win over the Cowboys.
 PHI||Will Shipley|RB|Active||||2026-11-27|Shipley carried the ball 10 times for 46 yards and failed to catch his only target in Thursday's 39-38 win over the Cowboys.
 PHI||Joe Milton|QB|Active||||2026-11-27|Milton completed 21 of 31 passes for 331 yards and three touchdowns with one interception in Thursday's 39-38 win over the Cowboys. He added 15 yards and a TD on three carries.
-PHI||Gabe Hall|DT|Questionable|Wrist||2026-12-06|2026-11-27|Hall (shoulder) is questionable to return to the Eagles' matchup against the Cowboys on Sunday.
+PHI||Gabe Hall|DT|Questionable|Wrist||2026-12-06|2026-11-27|Hall (wrist) is questionable to return to the Eagles' matchup against the Cowboys on Sunday.
 PHI||Marcus Epps|S|Questionable|Foot||2026-12-06|2026-11-27|Epps (foot) has been ruled out for the remainder of Philadelphia's matchup versus the Cowboys on Thursday, Mike Kaye of ESPN.com reports.
 PHI||Saquon Barkley|RB|Questionable|Neck|Stinger|2026-12-06|2026-11-26|Barkley suffered a stinger during Thursday's game in Dallas.
 PHI||Cooper DeJean|CB|Questionable|Concussion|Concussion|2026-12-06|2026-11-26|DeJean has entered the league's concussion protocol and has been ruled out for the rest of Thursday's game against the Cowboys.

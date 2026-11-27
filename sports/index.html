@@ -620,22 +620,22 @@ a.tc.tc-white .tc-sig .wo,a.tc.tc-white .tc-last .w{color:#15803d}
 a.tc.tc-white .tc-sig .rk{color:#0062b8;border-color:rgba(0,98,184,.35)}
 a.tc.tc-white .tc-sig .inj,a.tc.tc-white .tc-ar-k{color:#b45309}
 a.tc.tc-white .tc-last .l{color:#b91c1c}
-/* Jazz Sky Blue: a light card, so black type (8:1 or better on the blue) */
-a.tc.tc-sky{color:#0b0b0f;border-color:rgba(0,0,0,.16)}
-a.tc.tc-sky::before{background:radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.35),transparent 55%),linear-gradient(180deg,transparent 45%,rgba(0,0,0,.08))}
-a.tc.tc-sky .wm{filter:grayscale(1) brightness(0);opacity:.08}
-a.tc.tc-sky :is(.tc-name,.tc-meta b,.tc-cd,.tc-sc,.tc-g){color:#0b0b0f;text-shadow:none}
-a.tc.tc-sky :is(.tc-meta,.tc-last,.tc-sig,.tc-gx){color:#14263a}
-a.tc.tc-sky :is(.tc-k,.tc-g .dim,.tc-sc .dim){color:#1c3048}
-a.tc.tc-sky :is(.tc-next,.tc-ar){background:rgba(255,255,255,.26);border-color:rgba(0,0,0,.14);color:#0b0b0f}
-a.tc.tc-sky .tc-sig span{background:rgba(255,255,255,.3);border-color:rgba(0,0,0,.2)}
-a.tc.tc-sky .tc-sig .wo,a.tc.tc-sky .tc-last .w{color:#0c5a29}
-a.tc.tc-sky .tc-sig .inj,a.tc.tc-sky .tc-ar-k{color:#6b3300}
-a.tc.tc-sky .tc-last .l{color:#8a1212}
-a.tc.tc-sky :is(.tc-sport,.tc-rank){background:#0b0b0f;color:#fff;border-color:transparent}
-.tc-cell:has(>a.tc-sky) .tc-swatch i{box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.35)}
-.tc-cell:has(>a.tc-sky) .tc-swatch.on i{box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.35),0 0 0 2px #fff,0 0 0 4px #0b0b0f}
-.tc-cell:has(>a.tc-sky) .tc-swatch:focus-visible{outline-color:#0b0b0f}
+/* light cards (Jazz Sky Blue, gold alternates): black type, 8:1 or better */
+a.tc.tc-light{color:#0b0b0f;border-color:rgba(0,0,0,.16)}
+a.tc.tc-light::before{background:radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.35),transparent 55%),linear-gradient(180deg,transparent 45%,rgba(0,0,0,.08))}
+a.tc.tc-light .wm{filter:grayscale(1) brightness(0);opacity:.08}
+a.tc.tc-light :is(.tc-name,.tc-meta b,.tc-cd,.tc-sc,.tc-g){color:#0b0b0f;text-shadow:none}
+a.tc.tc-light :is(.tc-meta,.tc-last,.tc-sig,.tc-gx){color:#14263a}
+a.tc.tc-light :is(.tc-k,.tc-g .dim,.tc-sc .dim){color:#1c3048}
+a.tc.tc-light :is(.tc-next,.tc-ar){background:rgba(255,255,255,.26);border-color:rgba(0,0,0,.14);color:#0b0b0f}
+a.tc.tc-light .tc-sig span{background:rgba(255,255,255,.3);border-color:rgba(0,0,0,.2)}
+a.tc.tc-light .tc-sig .wo,a.tc.tc-light .tc-last .w{color:#0c5a29}
+a.tc.tc-light .tc-sig .inj,a.tc.tc-light .tc-ar-k{color:#6b3300}
+a.tc.tc-light .tc-last .l{color:#8a1212}
+a.tc.tc-light :is(.tc-sport,.tc-rank){background:#0b0b0f;color:#fff;border-color:transparent}
+.tc-cell:has(>a.tc-light) .tc-swatch i{box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.35)}
+.tc-cell:has(>a.tc-light) .tc-swatch.on i{box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.35),0 0 0 2px #fff,0 0 0 4px #0b0b0f}
+.tc-cell:has(>a.tc-light) .tc-swatch:focus-visible{outline-color:#0b0b0f}
 a.tc.tc-white :is(.tc-sport,.tc-rank){background:#0062b8;color:#fff;border-color:transparent}
 a.tc.tc-white .tc-swatch{background:rgba(0,46,93,.06);border-color:rgba(0,46,93,.22);color:#002e5d}
 a.tc.tc-white .tc-swatch.on{background:rgba(0,98,184,.14);border-color:#0062b8}
@@ -5903,7 +5903,7 @@ const SCHEMES = {
     /* 11-27 (Jamo): black gets the sky blue edge from the current jerseys (Mountain Purple / Midnight Black / Sky Blue;
        the team phased yellow out), and Sky Blue is its own look - a light card with black type */
     {id:'black', name:'Black', c1:'#161616', c2:'#000000', rail:'#6caedf'},
-    {id:'sky', name:'Sky Blue', c1:'#6caedf', c2:'#4b93cc', rail:'#161616', cls:'tc-sky'},
+    {id:'sky', name:'Sky Blue', c1:'#6caedf', c2:'#4b93cc', rail:'#161616', cls:'tc-light'},
     {id:'green', name:'Green', c1:'#0c6b45', c2:'#043528', rail:'#f9a01b'},
     {id:'yellow', name:'Yellow', c1:'#8a5a10', c2:'#3a2204', rail:'#f9a01b'},
     {id:'navy', name:'Navy', c1:'#002b5c', c2:'#001433', rail:'#f9a01b'}
@@ -5919,10 +5919,13 @@ function schemesFor(sport, id){
   if (SCHEMES[schemeKey(sport, id)]) return SCHEMES[schemeKey(sport, id)];
   const o = O[sport], main = hexNorm(o.color(id)) || '#334155', alt = hexNorm(o.alt(id));
   const base = inkSafe(main);
-  const list = [{id:'main', name:'Main', c1:base, c2:mixHex(base, '#000000', .4)}];
+  /* 11-27 (Jamo): the dots show the team's real colors (sw), even where the card has to darken one for white type */
+  const list = [{id:'main', name:'Main', c1:base, c2:mixHex(base, '#000000', .4), sw:main}];
   if (alt && alt !== main) {
     const safe = inkSafe(alt);
-    if (satOf(safe) >= .18) list.push({id:'alt', name:'Alt', c1:safe, c2:mixHex(safe, '#000000', .4)});
+    /* a light, bright second color (Lakers / Packers gold) gets a light card with dark type instead of a muddy darkened one */
+    if (satOf(alt) >= .18 && lum(hexRgb(alt)) > .4) list.push({id:'alt', name:'Alt', c1:alt, c2:mixHex(alt, '#000000', .18), cls:'tc-light', sw:alt});
+    else if (satOf(safe) >= .18) list.push({id:'alt', name:'Alt', c1:safe, c2:mixHex(safe, '#000000', .4), sw:alt});
     else if (lum(hexRgb(alt)) > .7) list.push({id:'white', name:'White', c1:base, c2:mixHex(base, '#000000', .22), rail:'#f4f7fb'});
     else list.push({id:'black', name:'Black', c1:'#161616', c2:'#000000', rail:base});
   }

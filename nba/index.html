@@ -399,7 +399,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 })();
 </script>
 <!-- BottomLine: the ESPN-style scores and headlines ticker (bottomline/bl.js, published by build.sh as /sports/bl.js) -->
-<script src="/sports/bl.js?v=20261101a" defer></script>
+<script src="/sports/bl.js?v=20261127a" defer></script>
 <!-- Holo: the UX-first futuristic layer on every page (polish/holo.js, published by build.sh as /sports/holo.js) -->
 <script src="/sports/holo.js?v=20261126z" defer></script>
 <!-- Stage: the clean team-color gradient behind every CFB, NFL and NBA page (polish/stage.js, published by build.sh as /sports/stage.js) -->
@@ -419,7 +419,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
-<script src="/sports/finish.js?v=20261127c" defer></script>
+<script src="/sports/finish.js?v=20261127d" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
 <script src="/sports/tabs.js?v=20261127a" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
@@ -1512,7 +1512,7 @@ svg.courtsvg .ms path{stroke:var(--ink-3);stroke-width:2;stroke-linecap:round}
 .bracket button.tm:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .bracket .tm .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bracket .mt .tm.w{background:var(--accent-soft);color:var(--accent-text);font-weight:700}
-.bracket .mt .tm.l{opacity:.45}
+.bracket .mt .tm.l{opacity:1}.bracket .mt .tm.l .nm{color:var(--ink-2)}.bracket .mt .tm.l img{opacity:.5} /* 11-27 audit: the eliminated team was 45% opacity - its name read at 3:1 */
 .bracket .mt .tm.tbd{color:var(--ink-3);font-style:italic;font-size:13px}
 .bracket .mt.done{border-color:var(--accent)}
 .finalsbox{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:14px;align-items:center}
@@ -8275,7 +8275,11 @@ function lotBans(order){ const idx=ab=>order.findIndex(i=>TEAMS[i]&&TEAMS[i].ab=
 /* generic odds by lottery slot (no team-specific bans): 16 slots, 2,2,2 / 3 x7 / 2 x4 / 1 x2 balls. The practice drawings use
    fixed dice (mulberry32, p2b10.js) so the odds, and the mock draft built on them, read the same on every visit. */
 let LOT_ODDS=null;
-function lotteryOdds(){ if(LOT_ODDS) return LOT_ODDS; const n=16, R=60000, rnd=mulberry32(2027); const m=Array.from({length:n},()=>new Float64Array(n)); const fakeW=Array.from({length:n},(_, i)=>i); const tier=new Map(); for(let i=0;i<n;i++) tier.set(i, i<10?3:i<14?2:1);
+/* 11-27 audit: 60,000 seeded lottery draws, no live data - the same table every time, and ~0.5 s on a mid phone every
+   team-page load. It is worked out once and kept on the phone (bump the key if the lottery rules change). */
+function lotteryOdds(){ if(LOT_ODDS) return LOT_ODDS; try{ const c=JSON.parse(localStorage.getItem('nba-lot-odds-v1')||'null'); if(Array.isArray(c)&&c.length===16&&c.every(r=>Array.isArray(r)&&r.length===16)) return LOT_ODDS=c; }catch(e){}
+  const res=lotteryOdds0(); try{ localStorage.setItem('nba-lot-odds-v1', JSON.stringify(res.map(r=>r.map(x=>Math.round(x*1e5)/1e5)))); }catch(e){} return res; }
+function lotteryOdds0(){ const n=16, R=60000, rnd=mulberry32(2027); const m=Array.from({length:n},()=>new Float64Array(n)); const fakeW=Array.from({length:n},(_, i)=>i); const tier=new Map(); for(let i=0;i<n;i++) tier.set(i, i<10?3:i<14?2:1);
   const ids=[...Array(n).keys()]; for(let r=0;r<R;r++){ const non=ids.filter(i=>i<10); const balls=new Map(); non.forEach(i=>balls.set(i,i<3?2:3)); ids.forEach(i=>{ if(i>=10) balls.set(i,tier.get(i)); });
     let pool=ids.slice(), order=[]; while(pool.length){ let tot=0; pool.forEach(i=>tot+=balls.get(i)); let x=rnd()*tot, pk=pool[pool.length-1]; for(const i of pool){ x-=balls.get(i); if(x<=0){ pk=i; break; } } order.push(pk); pool=pool.filter(i=>i!==pk); }
     const late=order.filter((i,k)=>i<3&&k>11); if(late.length){ order=order.filter(i=>!late.includes(i)); order.splice(12-late.length,0,...late); }

@@ -15808,4 +15808,97 @@ P|165|H|kickReturns|Jacob Saylors||4383429|4;108;27.0;32;0
 P|165|H|kickReturns|DeAndre Carter||2580216|1;23;23.0;23;0
 P|165|H|kicking|Jake Bates||4689936|2/2;100.0;40;3/4;9
 P|165|H|punting|Jack Fox||3916370|3;150;50.0;1;1;61
+G|166|401873080|2026-11-26|PHI|DAL
+T|166|A|firstDowns=18;firstDownsPassing=13;firstDownsRushing=2;firstDownsPenalty=3;thirdDownEff=3-10;fourthDownEff=0-1;totalOffensivePlays=54;totalYards=369;yardsPerPlay=6.8;totalDrives=12;netPassingYards=301;completionAttempts=21/31;yardsPerPass=8.4;interceptions=1;sacksYardsLost=5-30;rushingYards=68;rushingAttempts=18;yardsPerRushAttempt=3.8;redZoneAttempts=1-1;totalPenaltiesYards=8-86;turnovers=1;fumblesLost=0;interceptions=1;defensiveTouchdowns=1;possessionTime=24:59;defSacks=3;defTfl=6
+T|166|H|firstDowns=24;firstDownsPassing=14;firstDownsRushing=6;firstDownsPenalty=4;thirdDownEff=7-14;fourthDownEff=0-1;totalOffensivePlays=68;totalYards=416;yardsPerPlay=6.1;totalDrives=13;netPassingYards=265;completionAttempts=19/28;yardsPerPass=8.5;interceptions=1;sacksYardsLost=3-26;rushingYards=151;rushingAttempts=37;yardsPerRushAttempt=4.1;redZoneAttempts=4-4;totalPenaltiesYards=11-86;turnovers=1;fumblesLost=0;interceptions=1;defensiveTouchdowns=0;possessionTime=35:01;defSacks=5;defTfl=6
+S|166|1|8:50|DAL|Javonte Williams 1 Yd Rush (Brandon Aubrey Kick)|0|7
+S|166|1|0:36|DAL|KaVontae Turpin 31 Yd pass from Dak Prescott (Brandon Aubrey Kick)|0|14
+S|166|2|8:09|PHI|Jake Elliott 48 Yd Field Goal|3|14
+S|166|2|5:09|DAL|Javonte Williams 12 Yd Rush (Brandon Aubrey Kick)|3|21
+S|166|2|4:06|PHI|DeVonta Smith 50 Yd pass from Joe Milton (Jake Elliott Kick)|10|21
+S|166|2|0:04|DAL|Javonte Williams 12 Yd pass from Dak Prescott (Brandon Aubrey Kick)|10|28
+S|166|3|3:35|DAL|Brandon Aubrey 59 Yd Field Goal|10|31
+S|166|3|0:15|PHI|DeVonta Smith 45 Yd pass from Joe Milton (Jake Elliott Kick)|17|31
+S|166|4|13:46|PHI|Kenny Moore II 3 Yd return of blocked punt. (Jake Elliott Kick)|24|31
+S|166|4|10:11|DAL|Dak Prescott 14 Yd Rush (Brandon Aubrey Kick)|24|38
+S|166|4|9:09|PHI|Joe Milton 15 Yd Rush (Two-Point Pass Conversion Failed)|30|38
+S|166|4|2:10|PHI|Makai Lemon 24 Yd pass from Joe Milton (Two-Point Pass Conversion Failed)|36|38
+S|166|4|0:02|PHI|Jake Elliott 59 Yd Field Goal|39|38
+W|166|82;84;87;88;90;90;89;88;90;92;95;96;96;94;93;93;95;97;96;94;95;97;96;98;98;98;98;98;99;99;99;99;98;98;90;94;98;97;93;88;96;98;88;84;93;98;70;65;1;0
+P|166|A|passing|Joe Milton||4360698|21/31;331;10.7;3;1;5-30;79.6;121.8
+P|166|A|rushing|Will Shipley||4431545|10;46;4.6;0;6
+P|166|A|rushing|Joe Milton||4360698|3;15;5.0;1;15
+P|166|A|rushing|Saquon Barkley||3929630|5;7;1.4;0;4
+P|166|A|receiving|DeVonta Smith||4241478|11;200;18.2;2;50;14
+P|166|A|receiving|Elijah Moore||4372414|3;57;19.0;0;25;5
+P|166|A|receiving|Makai Lemon||4870795|5;51;10.2;1;24;6
+P|166|A|receiving|Darius Cooper||4715355|1;14;14.0;0;14;2
+P|166|A|receiving|Dallas Goedert||3121023|1;9;9.0;0;9;2
+P|166|A|receiving|Will Shipley||4431545|0;0;0.0;0;0;1
+P|166|A|fumbles|Makai Lemon||4870795|1;0;0
+P|166|A|defensive|Jeremiah Trotter Jr.||4432777|12;7;1;2;0;1;0
+P|166|A|defensive|Byron Young||4567123|9;5;0;0;0;1;0
+P|166|A|defensive|Jihaad Campbell||4685287|8;3;0;0;1;0;0
+P|166|A|defensive|Jonathan Greenard||3916409|5;4;0;1;0;1;0
+P|166|A|defensive|Riq Woolen||4245185|5;3;0;0;0;0;0
+P|166|A|defensive|Marcus Epps||3139368|5;1;0;0;0;1;0
+P|166|A|defensive|Ty Robinson||4569586|4;2;1;2;0;1;0
+P|166|A|defensive|Jalen Carter||4685759|3;3;1;1;0;1;0
+P|166|A|defensive|Quinyon Mitchell||4686273|3;3;0;0;0;0;0
+P|166|A|defensive|Michael Carter II||4240456|3;2;0;0;0;0;0
+P|166|A|defensive|Andrew Mukuba||4602197|3;2;0;0;1;0;0
+P|166|A|defensive|Jalyx Hunt||4571162|3;1;0;0;0;1;0
+P|166|A|defensive|Cole Wisniewski||4693345|2;2;0;0;0;0;0
+P|166|A|defensive|Kenny Moore II||4218312|2;1;0;0;0;0;1
+P|166|A|defensive|Moro Ojomo||4362116|2;0;0;0;0;0;0
+P|166|A|defensive|Kelee Ringo||4428992|1;1;0;0;0;0;0
+P|166|A|defensive|Cooper DeJean||4682618|1;1;0;0;0;0;0
+P|166|A|defensive|Rocco Underwood||4686566|1;1;0;0;0;0;0
+P|166|A|defensive|Darius Cooper||4715355|1;1;0;0;0;0;0
+P|166|A|defensive|Makai Lemon||4870795|1;1;0;0;0;0;0
+P|166|A|defensive|Mason Reiger||4691903|1;0;0;0;0;0;0
+P|166|A|defensive|Nolan Smith Jr.||4426331|0;0;0;0;0;1;0
+P|166|A|interceptions|Andrew Mukuba||4602197|1;0;0
+P|166|A|kickReturns|Britain Covey||3926231|6;152;25.3;55;0
+P|166|A|puntReturns|Britain Covey||3926231|3;37;12.3;23;0
+P|166|A|kicking|Jake Elliott||3050478|2/2;100.0;59;3/3;9
+P|166|A|punting|Braden Mann||4035239|3;188;62.7;0;0;68
+P|166|H|passing|Dak Prescott||2577417|19/28;291;10.4;2;1;3-26;88.3;110.9
+P|166|H|rushing|Javonte Williams||4361579|29;101;3.5;2;12
+P|166|H|rushing|Jashaun Corbin||4372519|5;21;4.2;0;8
+P|166|H|rushing|Dak Prescott||2577417|2;19;9.5;1;14
+P|166|H|rushing|KaVontae Turpin||3676833|1;10;10.0;0;10
+P|166|H|receiving|CeeDee Lamb||4241389|7;134;19.1;0;39;10
+P|166|H|receiving|George Pickens||4426354|5;67;13.4;0;36;9
+P|166|H|receiving|KaVontae Turpin||3676833|1;31;31.0;1;31;3
+P|166|H|receiving|Javonte Williams||4361579|3;22;7.3;1;12;3
+P|166|H|receiving|Camden Brown||4808759|1;19;19.0;0;19;1
+P|166|H|receiving|Brevyn Spann-Ford||4360967|1;15;15.0;0;15;1
+P|166|H|receiving|Hunter Luepke||4383396|1;3;3.0;0;3;1
+P|166|H|defensive|Jalen Thompson||4043089|6;3;0;1;0;0;0
+P|166|H|defensive|Cobie Durant||4384549|5;5;0;0;1;0;0
+P|166|H|defensive|Joey Porter Jr.||4426506|5;5;0;0;0;0;0
+P|166|H|defensive|Quinnen Williams||4040982|4;3;1;1;0;0;0
+P|166|H|defensive|Shemar James||4685400|4;2;1;1;0;1;0
+P|166|H|defensive|Dee Winters||4428914|4;2;0;0;0;0;0
+P|166|H|defensive|Caleb Downs||4870706|4;2;0;0;1;0;0
+P|166|H|defensive|LT Overton||4870960|4;0;0;0;0;0;0
+P|166|H|defensive|DeMarvion Overshown||4362088|3;2;1;1;0;1;0
+P|166|H|defensive|Ameer Speed||4259546|3;2;0;0;0;0;0
+P|166|H|defensive|Markquese Bell||4241921|3;1;0;0;0;0;0
+P|166|H|defensive|Rashan Gary||4046523|2;2;1;1;0;1;0
+P|166|H|defensive|Justin Barron||4429249|2;2;0;0;0;0;0
+P|166|H|defensive|Donovan Ezeiruaku||4683848|2;1;1;1;0;1;0
+P|166|H|defensive|Kenny Clark||3122752|2;1;0;0;0;0;0
+P|166|H|defensive|Alijah Clark||4595352|2;1;0;0;0;0;0
+P|166|H|defensive|Shavon Revel Jr.||5095865|2;1;0;0;0;0;0
+P|166|H|defensive|Otito Ogbonnia||4367210|1;1;0;0;0;0;0
+P|166|H|defensive|Brandon Aubrey||3953687|1;0;0;0;0;0;0
+P|166|H|defensive|Juanyeh Thomas||4360590|1;0;0;0;0;0;0
+P|166|H|defensive|Malik Hooker||3121415|0;0;0;0;1;0;0
+P|166|H|interceptions|Cobie Durant||4384549|1;14;0
+P|166|H|kickReturns|KaVontae Turpin||3676833|3;62;20.7;24;0
+P|166|H|puntReturns|KaVontae Turpin||3676833|2;57;28.5;33;0
+P|166|H|kicking|Brandon Aubrey||3953687|1/2;50.0;59;5/5;8
+P|166|H|punting|Bryan Anger||14950|3;155;51.7;0;1;57
 

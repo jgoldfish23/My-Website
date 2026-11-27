@@ -135550,3 +135550,100 @@ P|1554|H|kicking|Stewart McCall II||1/1;100.0;31;2/2;5
 P|1554|H|kicking|Andrew Abu-Akel||0/0;0.0;0;4/4;4
 P|1554|H|punting|Trevor Bywater||3;107;35.7;0;1;46
 P|1554|H|punting|Paxton Genola||1;37;37.0;0;0;37
+G|1555|2026-11-26|TCU|Texas Tech
+T|1555|A|firstDowns=22;thirdDownEff=9-18;fourthDownEff=1-2;totalYards=463;netPassingYards=218;completionAttempts=24/37;yardsPerPass=5.9;rushingYards=245;rushingAttempts=49;yardsPerRushAttempt=5.0;totalPenaltiesYards=6-65;turnovers=2;fumblesLost=2;interceptions=0;possessionTime=37:31;defSacks=2;defTfl=4
+T|1555|H|firstDowns=22;thirdDownEff=3-8;fourthDownEff=0-0;totalYards=459;netPassingYards=372;completionAttempts=22/28;yardsPerPass=13.3;rushingYards=87;rushingAttempts=24;yardsPerRushAttempt=3.6;totalPenaltiesYards=5-45;turnovers=1;fumblesLost=1;interceptions=0;possessionTime=22:29;defSacks=2;defTfl=5
+P|1555|A|passing|Adam Schobel||24/37;218;5.9;3;0;58.5
+P|1555|A|rushing|Major Everhart||14;138;9.9;0;49
+P|1555|A|rushing|Adam Schobel||18;58;3.2;0;10
+P|1555|A|rushing|Jeremy Payne||10;28;2.8;0;8
+P|1555|A|rushing|Landon Walker||4;12;3.0;0;5
+P|1555|A|rushing|Amante Martin||2;6;3.0;0;5
+P|1555|A|rushing|Jack Daulton||1;3;3.0;0;3
+P|1555|A|receiving|Jacobe Hayes||4;54;13.5;1;18
+P|1555|A|receiving|Ed Small||9;45;5.0;2;15
+P|1555|A|receiving|Landon Walker||1;42;42.0;0;42
+P|1555|A|receiving|Mason Peterson||3;29;9.7;0;11
+P|1555|A|receiving|Jordan Dwyer||2;22;11.0;0;12
+P|1555|A|receiving|Jeremy Payne||1;8;8.0;0;8
+P|1555|A|receiving|Major Everhart||1;5;5.0;0;5
+P|1555|A|receiving|James Scott||1;5;5.0;0;5
+P|1555|A|receiving|Jeremy Scott||1;4;4.0;0;4
+P|1555|A|receiving|Amante Martin||1;4;4.0;0;4
+P|1555|A|fumbles|Jeremy Payne||1;1;0
+P|1555|A|fumbles|Adam Schobel||1;1;0
+P|1555|A|fumbles|Sam Haley||0;0;1
+P|1555|A|defensive|Kylin Jackson||7;6;1;1;0;0;0
+P|1555|A|defensive|Kaden McFadden||6;3;0;0;0;0;0
+P|1555|A|defensive|Julius Simms||5;5;0;1;1;0;0
+P|1555|A|defensive|Max Carroll||4;2;0;0;0;1;0
+P|1555|A|defensive|Jamel Johnson||4;1;0;0;0;0;0
+P|1555|A|defensive|Gil Jackson Jr.||4;1;0;0;0;0;0
+P|1555|A|defensive|Koron Hayward||3;3;1;2;0;1;0
+P|1555|A|defensive|Vernon Glover Jr.||3;0;0;0;1;0;0
+P|1555|A|defensive|Paul Oyewale||2;2;0;0;0;0;0
+P|1555|A|defensive|Hudson Hooper||2;2;0;0;0;1;0
+P|1555|A|defensive|Zach Chapman||2;1;0;0;0;0;0
+P|1555|A|defensive|Jordan Lester||2;1;0;0;0;0;0
+P|1555|A|defensive|John Schobel||1;1;0;0;0;0;0
+P|1555|A|defensive|Kalen Carroll||1;0;0;0;0;0;0
+P|1555|A|defensive|Markis Deal||1;0;0;0;0;0;0
+P|1555|A|defensive|Floyd Guidry||1;0;0;0;0;0;0
+P|1555|A|kickReturns|Jacobe Hayes||1;15;15.0;15;0
+P|1555|A|puntReturns|Ed Small||1;0;0.0;0;0
+P|1555|A|kicking|Kyle Lemmermann||2/2;100.0;33;3/3;9
+P|1555|A|punting|John Hoyet Chance||5;237;47.4;1;1;52
+P|1555|H|passing|Thomas Castellanos||20/25;374;15.0;3;0;96.7
+P|1555|H|passing|Will Hammond||1/1;4;4.0;0;0;--
+P|1555|H|passing|J'Koby Williams||1/1;-6;-6.0;0;0;--
+P|1555|H|rushing|Cameron Dickey||4;41;10.3;1;20
+P|1555|H|rushing|Ashton Rowden||4;17;4.3;0;6
+P|1555|H|rushing|J'Koby Williams||5;12;2.4;0;10
+P|1555|H|rushing|Thomas Castellanos||7;9;1.3;0;11
+P|1555|H|rushing|Loic Tshibangu||2;4;2.0;0;3
+P|1555|H|rushing|Terrance Carter Jr.||1;3;3.0;1;3
+P|1555|H|rushing|Malcolm Simmons||1;1;1.0;0;1
+P|1555|H|receiving|Malcolm Simmons||4;110;27.5;1;40
+P|1555|H|receiving|J'Koby Williams||4;100;25.0;1;57
+P|1555|H|receiving|Kenny Johnson||4;62;15.5;1;24
+P|1555|H|receiving|Micah Hudson||2;47;23.5;0;41
+P|1555|H|receiving|Terrance Carter Jr.||3;33;11.0;0;21
+P|1555|H|receiving|Coy Eakin||1;11;11.0;0;11
+P|1555|H|receiving|Cameron Dickey||1;6;6.0;0;6
+P|1555|H|receiving|Jett Carpenter||1;5;5.0;0;5
+P|1555|H|receiving|Ashton Rowden||1;4;4.0;0;4
+P|1555|H|receiving|Thomas Castellanos||1;-6;-6.0;0;0
+P|1555|H|fumbles|Kenny Johnson||1;1;0
+P|1555|H|fumbles|Adam Trick||0;0;1
+P|1555|H|fumbles|Peyton Morgan||0;0;1
+P|1555|H|defensive|Ben Roberts||13;6;0;0;0;0;0
+P|1555|H|defensive|Austin Romaine||12;7;0;0;0;0;0
+P|1555|H|defensive|Brenden Jordan||9;3;0;0;1;0;0
+P|1555|H|defensive|John Curry||7;5;0;1;0;1;0
+P|1555|H|defensive|Julien Laventure||7;3;1;1;0;0;0
+P|1555|H|defensive|Mateen Ibirogba||5;4;1;1;0;0;0
+P|1555|H|defensive|Corey Platt Jr.||3;3;0;0;0;0;0
+P|1555|H|defensive|Amier Boyd||3;3;0;0;1;0;0
+P|1555|H|defensive|Davin Martin||3;2;0;1;1;0;0
+P|1555|H|defensive|Donovan Webb||3;2;0;0;0;0;0
+P|1555|H|defensive|Jayden Cofield||3;1;0;0;0;0;0
+P|1555|H|defensive|Peyton Morgan||3;1;0;0;1;0;0
+P|1555|H|defensive|Trey White||2;1;0;1;0;0;0
+P|1555|H|defensive|Brice Pollock||2;1;0;0;0;0;0
+P|1555|H|defensive|Keyshawn Williams||2;1;0;0;0;0;0
+P|1555|H|defensive|A.J. Holmes Jr.||2;0;0;0;0;1;0
+P|1555|H|defensive|Bryce Butler||2;0;0;0;0;0;0
+P|1555|H|defensive|Wesley Smith||1;1;0;0;0;0;0
+P|1555|H|defensive|Tarrion Grant||1;1;0;0;1;0;0
+P|1555|H|defensive|Malik Esquerra||1;1;0;0;0;0;0
+P|1555|H|defensive|Jojo Johnson||1;1;0;0;0;0;0
+P|1555|H|defensive|Brock Golwas||1;1;0;0;0;0;0
+P|1555|H|defensive|Krush Johnson||1;1;0;0;0;0;0
+P|1555|H|defensive|S'Vioarean Martin||1;1;0;0;0;0;0
+P|1555|H|defensive|Adam Trick||0;0;0;0;0;1;0
+P|1555|H|defensive|Malcolm Simmons||0;0;0;0;0;0;1
+P|1555|H|defensive|Charles Anderson Jr.||0;0;0;0;0;1;0
+P|1555|H|puntReturns|Malcolm Simmons||1;79;79.0;79;1
+P|1555|H|puntReturns|Kenny Johnson||1;2;2.0;2;0
+P|1555|H|kicking|Stone Harrington||2/2;100.0;54;6/6;12
+P|1555|H|punting|Will Karoll||3;132;44.0;0;2;47

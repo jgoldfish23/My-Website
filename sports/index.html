@@ -555,6 +555,23 @@ body::after{content:"";position:fixed;inset:0 0 auto 0;height:100vh;height:calc(
 button.tc{width:100%;margin:0;font:inherit;text-align:left;cursor:pointer}
 .yt-change{display:flex;align-items:center;justify-content:center;width:100%;margin:0 0 10px;padding:11px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
 .yt-change[hidden]{display:none}
+/* team cards with the color dots (11-27) */
+.tc-cell{position:relative;display:grid;min-width:0}
+.tc-cell>a.tc{height:100%;min-width:0}
+.teams .tc-cell>a.tc.has-sw{padding-bottom:46px!important}
+.tc-cell .tc-schemes{position:absolute;left:10px;right:10px;bottom:8px;z-index:2;display:flex;flex-wrap:nowrap;align-items:center;gap:0;margin:0}
+.tc-cell .tc-swatch{flex:none;appearance:none;display:inline-grid;place-items:center;width:30px;height:30px;padding:0;margin:0;border:0;border-radius:50%;background:transparent;font-size:0;cursor:pointer}
+.tc-cell .tc-swatch i{width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,var(--sw) 50%,var(--sw2,var(--sw)) 50%);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)}
+.tc-cell .tc-swatch.on i{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55),0 0 0 2px rgba(0,0,0,.45),0 0 0 4px #fff}
+.tc-cell .tc-swatch:hover i{transform:scale(1.12)}
+.tc-cell .tc-swatch:focus-visible{outline:2px solid #fff;outline-offset:0}
+.tc-sw-flash{position:absolute;left:4px;bottom:34px;padding:4px 9px;border-radius:999px;background:rgba(0,0,0,.78);color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;pointer-events:none;animation:swFlash 1.6s ease forwards}
+@keyframes swFlash{0%{opacity:0;transform:translateY(4px)}12%,75%{opacity:1;transform:none}100%{opacity:0}}
+.tc-cell:has(>a.tc-white) .tc-swatch i{box-shadow:inset 0 0 0 1.5px rgba(0,46,93,.4)}
+.tc-cell:has(>a.tc-white) .tc-swatch.on i{box-shadow:inset 0 0 0 1.5px rgba(0,46,93,.4),0 0 0 2px #fff,0 0 0 4px #0062b8}
+.tc-cell:has(>a.tc-white) .tc-swatch:focus-visible{outline-color:#0062b8}
+.teams.mini .tc-cell>a.tc.has-sw{padding-bottom:8px!important}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .yt-change:hover{border-color:color-mix(in srgb,var(--ink) 35%,var(--line))}
 .pk-sheet{margin:0 0 12px;padding:12px;border-radius:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh)}
 .pk-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
@@ -838,6 +855,12 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
   body .cal-btn,body nav.ql a{min-height:36px;display:inline-flex;align-items:center}
 }
 </style>
+<!-- 11-27 (accessibility): the first Tab stop skips the top bar and lands on the page's own content -->
+<a class="jsh-skip" href="#content">Skip to content</a>
+<style>.jsh-skip{position:absolute;left:12px;top:-60px;z-index:2147483600;padding:10px 16px;border-radius:12px;background:#fff;color:#0f172a;font:700 15px/1.2 Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 10px 30px -10px rgba(0,0,0,.6)}.jsh-skip:focus{top:10px;outline:3px solid #5b8cff;outline-offset:2px}</style>
+<script>(function(){ var a = document.currentScript && document.currentScript.previousElementSibling && document.currentScript.previousElementSibling.previousElementSibling; if (!a || !a.classList.contains('jsh-skip')) return;
+  a.addEventListener('click', function(e){ var t = document.getElementById('view') || document.getElementById('fd') || document.querySelector('.lv, main'); if (!t) return; e.preventDefault();
+    if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); t.scrollIntoView({ block: 'start' }); }); })();</script>
 <div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
   <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh-n.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
   <nav class="jsh-nav">
@@ -996,9 +1019,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
-<script src="/sports/finish.js?v=20261126d" defer></script>
+<script src="/sports/finish.js?v=20261127a" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
-<script src="/sports/tabs.js?v=20261126w" defer></script>
+<script src="/sports/tabs.js?v=20261127a" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
 <script src="/sports/moments.js?v=20261119b" defer></script>
 <!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
@@ -1008,7 +1031,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
 <script src="/sports/shell.js?v=20261126h" defer></script>
 <!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
-<script src="/sports/holiday.js?v=20261126x" defer></script>
+<script src="/sports/holiday.js?v=20261127a" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -1035,6 +1058,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
     <button type="button" class="pk-clear" id="pk-clear">Remove this team</button>
   </div>
   <section class="teams" id="teams" aria-label="Your teams"></section>
+  <div class="sr-only" id="sr-live" aria-live="polite" aria-atomic="true"></div>
   </div>
   <section id="recap" aria-label="Your latest results" hidden></section>
 
@@ -5871,10 +5895,13 @@ function schemesFor(sport, id){
   return list;
 }
 function activeScheme(sport, id){ const list = schemesFor(sport, id), want = schemeSaved()[schemeKey(sport, id)]; return list.find(s => s.id === want) || list[0]; }
+/* 11-27 (design + accessibility): one row of color dots - real buttons, 30px to tap, each says whether it is the one in use -
+   with the current look's name beside them. They sit beside the card link, not inside it (a button inside a link confuses
+   screen readers and taps), and are laid over the bottom of the card. */
 function schemeHTML(sport, id){
   const list = schemesFor(sport, id); if (list.length < 2) return '';
-  const on = activeScheme(sport, id).id;
-  return '<div class="tc-schemes">' + list.map(s => '<span role="button" tabindex="0" class="tc-swatch' + (s.id === on ? ' on' : '') + '" data-sport="' + esc(sport) + '" data-team="' + esc(id) + '" data-scheme="' + s.id + '" style="--sw:' + (s.sw || s.rail || s.c1) + (s.sw2 ? ';--sw2:' + s.sw2 : '') + '"><i></i>' + esc(s.name) + '</span>').join('') + '</div>';
+  const on = activeScheme(sport, id), nm = O[sport] && O[sport].name ? O[sport].name(id) : id;
+  return '<div class="tc-schemes" role="group" aria-label="Card colors for ' + esc(nm) + '">' + list.map(x => '<button type="button" class="tc-swatch' + (x.id === on.id ? ' on' : '') + '" aria-pressed="' + (x.id === on.id) + '" aria-label="' + esc(x.name) + '" title="' + esc(x.name) + '" data-sport="' + esc(sport) + '" data-team="' + esc(id) + '" data-scheme="' + x.id + '" style="--sw:' + (x.sw || x.rail || x.c1) + (x.sw2 ? ';--sw2:' + x.sw2 : '') + '"><i></i></button>').join('') + '</div>';
 }
 function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(f.sport, t); if (!gs.length) return '';
   const live = gs.find(g => g.live), last = gs.filter(played).pop(), next = gs.find(g => !played(g) && !g.live && g.st !== 'CANCELED' && g.st !== 'POSTPONED');
@@ -5898,10 +5925,11 @@ function teamCard(f, i){ const o = O[f.sport], t = f.team; const gs = teamGames(
   /* 10-27: the card logo (44 px plate, 150 px watermark) uses the 320 px file - the 96 px one was soft on an iPhone screen */
   const logo0 = o.logo(t), logo = logo0 && /^\/(cfb|nfl|nba)\/img\/logos\/[^/]+\.png$/.test(logo0) && !/-lg\.png$/.test(logo0) ? logo0.replace(/\.png$/, '-lg.png') : logo0;
   const deep = (sch.cls ? ' ' + sch.cls : '') + (sch.rail ? ' has-rail' : '');
-  return '<a class="tc rise' + deep + '" style="--i:' + i + ';--tc:' + c1 + ';--tc2:' + c2 + (sch.rail ? ';--rail:' + sch.rail : '') + '" href="' + o.teamHref(t) + '" aria-label="' + esc(o.full(t)) + ' team page">' + (logo ? '<img class="wm" src="' + logo + '" alt="">' : '')
+  const sw = schemeHTML(f.sport, t);
+  return '<div class="tc-cell"><a class="tc rise' + deep + (sw ? ' has-sw' : '') + '" style="--i:' + i + ';--tc:' + c1 + ';--tc2:' + c2 + (sch.rail ? ';--rail:' + sch.rail : '') + '" href="' + o.teamHref(t) + '" aria-label="' + esc(o.full(t)) + ' team page">' + (logo ? '<img class="wm" src="' + logo + '" alt="">' : '')
     + '<div class="tc-top"><span class="tc-sport">' + SPORT[f.sport].icon + esc(SPORT[f.sport].short) + '</span>' + (rk ? '<span class="tc-rank">#' + rk + '</span>' : '') + '</div>'
     + '<div class="tc-id">' + plate(logo) + '<div style="min-width:0"><div class="tc-name" data-mini="' + esc(f.sport === 'cfb' ? t : o.name(t)) + '">' + esc(f.sport === 'cfb' ? t : f.sport === 'cbb' ? o.name(t) : o.full(t)) + '</div><div class="tc-meta">' + meta + '</div></div></div>'
-    + nx + sig + lastLine + schemeHTML(f.sport, t) + '</a>'; }
+    + nx + sig + lastLine + '</a>' + sw + '</div>'; }
 /* front_soonest: soonest game first - a live game, then the next kickoff; no game left goes last */
 function favSoonKey(f){ const gs = teamGames(f.sport, f.team); if (gs.some(g => g.live)) return -1; const n = gs.find(g => !played(g) && !g.live && g.st !== 'CANCELED' && g.st !== 'POSTPONED'); if (!n) return Infinity; const k = kickMs(n.date, n.time); return k != null ? k : Date.parse(n.date + 'T12:00:00Z'); }
 const PICKS = [
@@ -5919,7 +5947,13 @@ function teamsHTML(){ const cards = FAVS.slice().sort((a, b) => { const x = favS
   const lead = document.getElementById('yt-lead'); if (lead) lead.hidden = !open;
   /* 11-26: the full-width Change teams button only while a league still needs a team; otherwise it lives in More */
   const chg = document.getElementById('yt-change'); if (chg) chg.hidden = !open;
-  $('#t-note').textContent = open ? '' : 'tap a card for the team page'; }
+  $('#t-note').textContent = open ? '' : 'tap a card for the team page'; srScores(); }
+/* 11-27 (accessibility): a screen reader hears your teams' live score changes (only yours - not every game on the board) */
+let SR_PREV = null;
+function srScores(){ const box = document.getElementById('sr-live'); if (!box) return; const now = {}, msgs = [];
+  FAVS.forEach(f => { const g = teamGames(f.sport, f.team).find(x => x.live); if (!g) return; const o = O[f.sport], k = f.sport + ':' + f.team, v = g.as + '-' + g.hs; now[k] = v;
+    if (SR_PREV && SR_PREV[k] != null && SR_PREV[k] !== v) msgs.push(o.name(g.away) + ' ' + g.as + ', ' + o.name(g.home) + ' ' + g.hs + ', ' + liveClock(g)); });
+  SR_PREV = now; if (msgs.length) box.textContent = msgs.join('. '); }
 const FAV_KEYS = [['cfb','cfb-settings'],['nfl','nfl-settings'],['nba','nba-settings'],['cbb','cbb-settings']];
 function readFavs(){ FAVS.length = 0; FAV_KEYS.forEach(pair => { const id = savedFav(pair[1]); if (id) FAVS.push({sport:pair[0], team:id}); }); }
 function saveFav(sport, id){
@@ -5961,7 +5995,8 @@ document.addEventListener('click', e => {
     e.preventDefault(); e.stopPropagation();
     const all = schemeSaved(); all[schemeKey(sw.dataset.sport, sw.dataset.team)] = sw.dataset.scheme;
     try { localStorage.setItem('jsh-schemes', JSON.stringify(all)); } catch (err) {}
-    teamsHTML(); return;
+    const kb = document.activeElement === sw, q = '.tc-swatch[data-sport="' + CSS.escape(sw.dataset.sport) + '"][data-team="' + CSS.escape(sw.dataset.team) + '"][data-scheme="' + CSS.escape(sw.dataset.scheme) + '"]';
+    teamsHTML(); const nb = document.querySelector(q); if (nb) { if (kb) nb.focus(); const fl = document.createElement('span'); fl.className = 'tc-sw-flash'; fl.setAttribute('aria-hidden', 'true'); fl.textContent = nb.getAttribute('aria-label'); nb.parentNode.appendChild(fl); setTimeout(() => fl.remove(), 1700); } return; /* the look's name pops up for a moment */
   }
   const pick = e.target.closest && e.target.closest('.tc.pick');
   if (pick) { e.preventDefault(); openPick(pick.dataset.sport); }

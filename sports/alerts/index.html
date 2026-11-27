@@ -411,6 +411,12 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
   body .cal-btn,body nav.ql a{min-height:36px;display:inline-flex;align-items:center}
 }
 </style>
+<!-- 11-27 (accessibility): the first Tab stop skips the top bar and lands on the page's own content -->
+<a class="jsh-skip" href="#content">Skip to content</a>
+<style>.jsh-skip{position:absolute;left:12px;top:-60px;z-index:2147483600;padding:10px 16px;border-radius:12px;background:#fff;color:#0f172a;font:700 15px/1.2 Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 10px 30px -10px rgba(0,0,0,.6)}.jsh-skip:focus{top:10px;outline:3px solid #5b8cff;outline-offset:2px}</style>
+<script>(function(){ var a = document.currentScript && document.currentScript.previousElementSibling && document.currentScript.previousElementSibling.previousElementSibling; if (!a || !a.classList.contains('jsh-skip')) return;
+  a.addEventListener('click', function(e){ var t = document.getElementById('view') || document.getElementById('fd') || document.querySelector('.lv, main'); if (!t) return; e.preventDefault();
+    if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); t.scrollIntoView({ block: 'start' }); }); })();</script>
 <div class="jsh" role="navigation" aria-label="Jamo Sports Hub">
   <a class="jsh-brand" href="/sports/" title="Jamo Sports Hub home"><img src="/sports/icons/jsh-n.svg" alt="" width="26" height="26"><span>Jamo <b>Sports Hub</b></span></a>
   <nav class="jsh-nav">
@@ -569,9 +575,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
-<script src="/sports/finish.js?v=20261126d" defer></script>
+<script src="/sports/finish.js?v=20261127a" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
-<script src="/sports/tabs.js?v=20261126w" defer></script>
+<script src="/sports/tabs.js?v=20261127a" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
 <script src="/sports/moments.js?v=20261119b" defer></script>
 <!-- Night (polish/night.js, 2026-11-24): Live night feel + heat motion on Live Center and home; still backdrop, no beams/grids -->
@@ -581,7 +587,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
 <script src="/sports/shell.js?v=20261126h" defer></script>
 <!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
-<script src="/sports/holiday.js?v=20261126x" defer></script>
+<script src="/sports/holiday.js?v=20261127a" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").

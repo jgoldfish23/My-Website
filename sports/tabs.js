@@ -75,7 +75,7 @@
       + 'html.jt-tc #view .sec>h2[data-neo]::before{color:var(--jt-g)!important;border-color:color-mix(in srgb,var(--jt-g) 55%,transparent)!important}'
       + 'html.jt-tc #view .tile{border-top-color:color-mix(in srgb,var(--jt-g) 55%,var(--line))}'
       + 'html.jt-tc #view .srk-r .r.top{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--jt-g) 35%,transparent)}';
-    D.head.appendChild(s); }
+    s.textContent += '.jtab .jt-tl{display:contents}'; D.head.appendChild(s); }
   /* the page's blocks in order: [element, tab]; an element holding sections of its own (CBB's analytics slot) goes as one */
   function blocks(){ if (kind() === 'game') return gblocks(); var out = [], tab = 'ov', start = false, kids = view.children;
     for (var i = 0; i < kids.length; i++) { var e = kids[i];
@@ -116,9 +116,9 @@
       var tabs = (K === 'game' ? GTABS : TABS).filter(function(t){ return have[t[0]]; }); if (tabs.length < 2) { H.classList.remove('jt-on'); return; }
       var bar = view.querySelector(':scope > .jtab'), sig = tabs.map(function(t){ return t[0]; }).join(',');
       if (bar && bar.dataset.sig !== sig) { bar.remove(); bar = null; }   /* a section that arrived late (a box score) adds a tab */
-      if (!bar) { bar = D.createElement('div'); bar.className = 'jtab'; bar.dataset.sig = sig; bar.setAttribute('role', 'tablist'); bar.setAttribute('aria-label', 'Sections of this ' + K + ' page');
+      if (!bar) { bar = D.createElement('div'); bar.className = 'jtab'; bar.dataset.sig = sig;   /* 11-27 (accessibility): the tab list holds only the tabs; links like Compare sit beside it, not inside it */
         var sub = view.querySelector(':scope > .subnav'), extra = sub ? [].filter.call(sub.querySelectorAll('a[href]'), function(a){ return !/#s-|#pk-|#uw/.test(a.getAttribute('href')); }) : [];
-        bar.innerHTML = tabs.map(function(t){ return '<button type="button" role="tab" data-t="' + t[0] + '">' + t[1] + '</button>'; }).join('')
+        bar.innerHTML = '<span class="jt-tl" role="tablist" aria-label="Sections of this ' + K + ' page">' + tabs.map(function(t){ return '<button type="button" role="tab" data-t="' + t[0] + '">' + t[1] + '</button>'; }).join('') + '</span>'
           + (extra.length ? '<span class="jt-sep" aria-hidden="true"></span>' + extra.map(function(a){ return '<a href="' + a.getAttribute('href').replace(/"/g, '&quot;') + '">' + a.textContent.replace(/[<>&]/g, '') + '</a>'; }).join('') : '');
         view.insertBefore(bar, head.nextElementSibling); }
       H.classList.add('jt-on'); if (K === 'team') theme(head);

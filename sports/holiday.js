@@ -86,6 +86,7 @@
     + 'html.jsh-thanks.light .jsh-hol,html.jsh-thanks[data-theme="light"] .jsh-hol{color:#3a2412}'
     + 'html.jsh-thanks.light .jsh-hol::before,html.jsh-thanks[data-theme="light"] .jsh-hol::before{background:radial-gradient(closest-side,rgba(214,140,46,.34),rgba(248,210,150,.08) 60%,transparent 76%)}'
     + 'html.jsh-xmas .jsh-hol{color:#f4fff8;background:linear-gradient(90deg,#0c5a38,#8e1c2a 78%);border-bottom:1px solid #fbbf24}'
+    + 'html.jsh-dk:is(.jsh-thanks,.jsh-xmas) .wordmark b{color:color-mix(in srgb,var(--accent-text,var(--accent,#7cb6ff)) 58%,#fff)}' /* 11-27: readable on the holiday header */
     + 'html.jsh-thanks .jsh-hol-k{position:relative;z-index:2;font-size:15px;font-weight:700;letter-spacing:.18em;background-image:linear-gradient(102deg,#fff4e0 0%,#fff4e0 14%,#8eebff 34%,#fff 48%,#c4b5fd 62%,#ffe08a 80%,#fff4e0 100%);background-size:320% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:jsh-hol-shoot 3.8s ease-in-out infinite alternate}'
     + 'html.jsh-thanks.light .jsh-hol-k,html.jsh-thanks[data-theme="light"] .jsh-hol-k{background-image:linear-gradient(102deg,#3a2412 0%,#3a2412 14%,#0e7490 34%,#1d4ed8 48%,#6d28d9 62%,#b45309 80%,#3a2412 100%)}'
     + '@keyframes jsh-hol-shoot{from{background-position:100% 0}to{background-position:0% 0}}'

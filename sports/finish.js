@@ -60,7 +60,7 @@
     + ':root body .btab .bt-i.on{color:#fff!important;font-weight:800}'
     + ':root body .btab .bt-i.on :is(svg,img){opacity:1!important;filter:none!important}'
     + '@media (max-width:760px){:root body .btab .bt-i.on::before{background:color-mix(in srgb,var(--accent,#5b8cff) 40%,rgba(255,255,255,.06))!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent,#5b8cff) 65%,#fff)!important}}'
-    + 'html.jsh-lt body .btab .bt-i{color:rgba(15,23,42,.6)}html.jsh-lt body .btab .bt-i.on{color:#0f172a!important}'
+    + 'html.jsh-lt body .btab .bt-i{color:rgba(15,23,42,.74)}html.jsh-lt body .btab .bt-i.on{color:#0f172a!important}'
     + '@media (max-width:760px){html.jsh-lt body .btab .bt-i.on::before{background:color-mix(in srgb,var(--accent,#5b8cff) 22%,#fff)!important}}'
     + '@supports (animation-timeline:view()){@media (prefers-reduced-motion:no-preference){'
     +   ':where(#view) :where(.card,.tile,.gmlist>.gm,.tblwrap,.daygrp>h3){animation:jshRise linear backwards;animation-timeline:view();animation-range:entry 0px entry 110px}'
@@ -87,7 +87,10 @@
     var r = more && el.scrollLeft < room - 4, l = more && el.scrollLeft > 4;
     if (el.classList.contains('xs-r') !== r) el.classList.toggle('xs-r', r);
     if (el.classList.contains('xs-l') !== l) el.classList.toggle('xs-l', l); }
-  var xsQ = 0; function xsAll(){ if (xsQ) return; xsQ = requestAnimationFrame(function(){ xsQ = 0; D.querySelectorAll(XS).forEach(xsMark); }); }
+  /* 11-27 (accessibility): the bottom tab for this page carries aria-current, like the top league switcher */
+  function btCur(){ D.querySelectorAll('.btab .bt-i').forEach(function(e){ var on = e.classList.contains('on'); if (on && e.getAttribute('aria-current') !== 'page') e.setAttribute('aria-current', 'page'); else if (!on && e.hasAttribute('aria-current')) e.removeAttribute('aria-current'); }); }
+  var xsQ = 0; function xsAll(){ if (xsQ) return; xsQ = requestAnimationFrame(function(){ xsQ = 0; D.querySelectorAll(XS).forEach(xsMark); btCur(); }); }
+  window.addEventListener('hashchange', function(){ setTimeout(xsAll, 60); });
   D.addEventListener('scroll', function(e){ var t = e.target; if (t && t.nodeType === 1 && t.matches(XS)) xsMark(t); }, true);
   window.addEventListener('resize', xsAll);
   function xsGo(){ xsAll(); if (window.MutationObserver) new MutationObserver(xsAll).observe(D.body, { childList: true, subtree: true }); }

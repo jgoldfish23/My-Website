@@ -34,7 +34,8 @@
     if (seen) {
       [['cfb-settings', 'BYU'], ['nfl-settings', 'PHI'], ['nba-settings', 'UTAH'], ['cbb-settings', '252']].forEach(function (pair) {
         var o = read(pair[0]) || {};
-        if (o.fav == null || o.fav === '') { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
+        /* 11-27 fix: only when this phone never chose (no fav key). fav: null is "Clear favorite" and must stay cleared */
+        if (!('fav' in o)) { o.fav = pair[1]; localStorage.setItem(pair[0], JSON.stringify(o)); }
       });
     }
     localStorage.setItem('jsh-favs-ready', '1');

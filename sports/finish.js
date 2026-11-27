@@ -62,6 +62,18 @@
     + '@media (max-width:760px){:root body .btab .bt-i.on::before{background:color-mix(in srgb,var(--accent,#5b8cff) 40%,rgba(255,255,255,.06))!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent,#5b8cff) 65%,#fff)!important}}'
     + 'html.jsh-lt body .btab .bt-i{color:rgba(15,23,42,.74)}html.jsh-lt body .btab .bt-i.on{color:#0f172a!important}'
     + '@media (max-width:760px){html.jsh-lt body .btab .bt-i.on::before{background:color-mix(in srgb,var(--accent,#5b8cff) 22%,#fff)!important}}'
+    /* ---------- one selected style (11-27): hub tabs, filters, week and day pickers and team tabs all show the choice the
+       same way - a filled pill in the hub's color (the darker --accent-text, so white type stays readable) with a light rim
+       that keeps a very dark color (Eagles navy) visible on the dark page. Four different looks before. ---------- */
+    + ':root body :is(header.top .ng-sub a.on,#view .seg a.on,#view .wk a.on,#view .days a.on,#view .jtab button[aria-selected="true"]){'
+    +   'background:var(--accent-text,var(--accent))!important;background-image:linear-gradient(180deg,color-mix(in srgb,var(--accent-text,var(--accent)) 86%,#fff),var(--accent-text,var(--accent)))!important;'
+    +   'color:#fff!important;border-color:transparent!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent-text,var(--accent)) 40%,#fff),0 6px 16px -8px color-mix(in srgb,var(--accent-text,var(--accent)) 80%,transparent)!important}'
+    + ':root body :is(header.top .ng-sub a.on,#view .seg a.on,#view .wk a.on,#view .days a.on,#view .jtab button[aria-selected="true"]) *{color:inherit}'
+    /* dark pages: --accent-text is the LIGHT shade there (text on dark), so white type on it fails - use a deep pill in the
+       team color with a bright rim instead */
+    + 'html.jsh-dk body :is(header.top .ng-sub a.on,#view .seg a.on,#view .wk a.on,#view .days a.on,#view .jtab button[aria-selected="true"]){'
+    +   'background:color-mix(in srgb,var(--accent-text,var(--accent)) 30%,#0a0f1c)!important;background-image:none!important;'
+    +   'box-shadow:inset 0 0 0 1.5px var(--accent-text,var(--accent)),0 6px 16px -8px color-mix(in srgb,var(--accent-text,var(--accent)) 70%,transparent)!important}'
     + '@supports (animation-timeline:view()){@media (prefers-reduced-motion:no-preference){'
     +   ':where(#view) :where(.card,.tile,.gmlist>.gm,.tblwrap,.daygrp>h3){animation:jshRise linear backwards;animation-timeline:view();animation-range:entry 0px entry 110px}'
     +   ':where(.fd,.lv) :where(.mc,.spot,.up,.feed){animation:jshRise linear backwards;animation-timeline:view();animation-range:entry 0px entry 110px}'

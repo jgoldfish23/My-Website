@@ -368,6 +368,11 @@ a.gm:hover{background:var(--surface-2)}
 .hello h1{margin:0;font-family:var(--disp);font-size:clamp(20px,3.2vw,28px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
 .hello h1 b{background:linear-gradient(90deg,#9cc6ff,#cdb2ff 55%,#fcd56b);-webkit-background-clip:text;background-clip:text;color:transparent}
 :root.light .hello h1 b{background:linear-gradient(90deg,#1d4ed8,#6d28d9 55%,#b45309);-webkit-background-clip:text;background-clip:text}
+.hero{grid-template-columns:1fr!important}
+.hero :is(.pulse,.tvq-l,#h-board,#h-next){display:none!important}
+.sp-today{margin-top:3px;font-size:12.5px;font-weight:650;color:var(--ink-2)}.sp-today .lv{color:var(--live,#ff4d6a);font-weight:800}
+#sports{margin-top:14px}
+.lc.mine{box-shadow:inset 3px 0 0 var(--gold,#fbbf24),var(--sh,0 1px 2px rgba(0,0,0,.2))}.lc-me{color:var(--gold,#fbbf24);font-weight:800}
 .hero .hi-t{margin:2px 0 6px;font-family:var(--disp);font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
 /* (the phone-only section order of 2026-11-24 is gone: since 11-26 the markup itself is in the right order everywhere) */
 
@@ -1019,7 +1024,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Fluid: page changes inside view transitions (rows grow into headers, highlights slide, days and weeks slide sideways), swiping between days and weeks, rolling scores (polish/fluid.js, published by build.sh as /sports/fluid.js) -->
 <script src="/sports/fluid.js?v=20261119a" defer></script>
 <!-- Finish: the refined look - floating bottom menu, press feedback, card depth, steadier type, blocks that ease in as you scroll (polish/finish.js, published by build.sh as /sports/finish.js) -->
-<script src="/sports/finish.js?v=20261127a" defer></script>
+<script src="/sports/finish.js?v=20261127c" defer></script>
 <!-- Team pages in tabs: Overview, Schedule, Stats, Players, More (polish/tabs.js, published by build.sh as /sports/tabs.js, 2026-11-18) -->
 <script src="/sports/tabs.js?v=20261127a" defer></script>
 <!-- Moments (polish/moments.js, 2026-11-19): win celebrations, upset ribbons, league-best glow, loading bars, chart draw-in and tap tips -->
@@ -1031,7 +1036,7 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 <!-- Shell (polish/shell.js, 2026-11-24): phone dock, home-screen splash, night game pages -->
 <script src="/sports/shell.js?v=20261126h" defer></script>
 <!-- Holiday (polish/holiday.js, 2026-11-26): Thanksgiving for the day, then Christmas through December 26 -->
-<script src="/sports/holiday.js?v=20261127a" defer></script>
+<script src="/sports/holiday.js?v=20261127b" defer></script>
 <!-- Search: one search box for every team, player and page across the three hubs (search/search.js, published by build.sh as /sports/search.js) -->
 <script src="/sports/search.js?v=20261028a" defer></script>
 <!-- Ask the Hub (the AI analyst, ask/ask.js published as /sports/ask.js) is switched OFF at Jamo's request (2026-10-27, "Hide the AI assistant for now").
@@ -1072,6 +1077,9 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
     <div id="h-next"></div>
     <div class="hx" id="h-board" hidden></div>
   </section>
+  <!-- 11-27: the league cards sit right under "Today across the leagues" and carry each league's "Today" line (the card's
+       old glance tiles, week chips and league pills repeated them; the bottom "Around the leagues" section is gone) -->
+  <section class="sports" id="sports" aria-label="The leagues today"></section>
 
   <div class="sec"><h2 id="tv-h">On TV today</h2><span class="note" id="tv-note"></span><span class="more" id="upd"></span></div>
   <section class="tv" id="tv" aria-labelledby="tv-h"></section>
@@ -1083,8 +1091,6 @@ body .jsh-xs.jsh-xl.jsh-xr{-webkit-mask-image:linear-gradient(90deg,transparent,
 
   <!-- scorecard / Mark it down removed for good 2026-11-24 (Jamo: does not use the prediction card) -->
 
-  <div class="sec"><h2>Around the leagues</h2></div>
-  <section class="sports" id="sports"></section>
 
   <footer class="foot"><span id="asof"></span><span>A <i>Kramerica Industries</i> production</span></footer>
 </main>
@@ -6060,7 +6066,7 @@ function liveHTML(){ const lv = liveAll(); { const q = document.getElementById('
   const why = new Map(); lv.forEach(g => { const w = (g.sport === 'cfb' && g.fcs && !favGame(g)) ? null : tuneWhy(g); if (w) why.set(g, w); });
   lv.sort((a, b) => ((favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0)) || ((why.get(b) || {s: -1}).s - (why.get(a) || {s: -1}).s));
   if (why.size) $('#live-n').textContent += ' · ' + why.size + ' worth tuning in';
-  $('#live').innerHTML = lv.map(g => { const o = O[g.sport], w = why.get(g); return '<a class="lc' + (w ? ' hot' : '') + '" style="--c:' + SPORT[g.sport].c + '" href="' + o.href(g) + '"><div class="lc-h"><span>' + SPORT[g.sport].short + '</span><span>' + esc(liveClock(g)) + '</span></div>' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + (w ? '<div class="lc-why">\u{1F525} ' + esc(w.t) + '</div>' : '') + '</a>'; }).join(''); }
+  $('#live').innerHTML = lv.map(g => { const o = O[g.sport], w = why.get(g), me = favGame(g); return '<a class="lc' + (w ? ' hot' : '') + (me ? ' mine' : '') + '" style="--c:' + SPORT[g.sport].c + '" href="' + o.href(g) + '"><div class="lc-h"><span>' + SPORT[g.sport].short + (me ? ' · <b class="lc-me">Your team</b>' : '') + '</span><span>' + esc(liveClock(g)) + '</span></div>' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + (w ? '<div class="lc-why">\u{1F525} ' + esc(w.t) + '</div>' : '') + '</a>'; }).join(''); }
 
 /* ---------- worth tuning in: live games in overtime, close late, or an upset in the making ---------- */
 const clkSecs = c => { const m = /^(\d+):(\d\d)/.exec(c || ''); return m ? +m[1] * 60 + +m[2] : null; };
@@ -6088,7 +6094,8 @@ function tvItems(day){
   const nba = NBA.filter(g => g.date === day).map(applyLive).sort((a, b) => (favGame(b) ? 2 : b.tv ? 1 : 0) - (favGame(a) ? 2 : a.tv ? 1 : 0)).slice(0, 8);
   const cbbAll = CBB.filter(g => g.date === day && cbbNotable(g)); const cbb = cbbAll.map(applyLive).map(g => ({g, s:(favGame(g) ? 1000 : 0) + (g.ar && g.hr ? 200 - g.ar - g.hr : (g.ar || g.hr) ? 80 - (g.ar || g.hr) : 0) + (NAT.test(net(g)) ? 10 : 0)})).sort((a, b) => b.s - a.s).slice(0, 10).map(x => x.g);
   const total = CFB.filter(g => g.date === day && g.tv).length + NFL.filter(g => g.date === day).length + NBA.filter(g => g.date === day).length + cbbAll.length;
-  return {all: cfb.concat(nfl, nba, cbb).sort((a, b) => (kickMs(a.date, a.time) || 0) - (kickMs(b.date, b.time) || 0) || (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0)), total}; }
+  /* 11-27: your team's game drops out of the TV list while it's live - it's already first in Live now and on its card */
+  return {all: cfb.concat(nfl, nba, cbb).filter(g => !(g.live && favGame(g))).sort((a, b) => (kickMs(a.date, a.time) || 0) - (kickMs(b.date, b.time) || 0) || (favGame(b) ? 1 : 0) - (favGame(a) ? 1 : 0)), total}; }
 /* fd_simplify (2026-10-21): your teams' games first; everything else is one tap away (with no favorite on, the first five) */
 let TV_ALL = false;
 document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('.tv-all'); if (!b) return; TV_ALL = !TV_ALL; tvHTML(); if (!TV_ALL) { const h = document.getElementById('tv-h'); if (h) h.scrollIntoView({block: 'start'}); } });
@@ -6107,7 +6114,14 @@ function tvHTML(){ const day = tvDay(); const {all: every, total} = tvItems(day)
 
 /* ---------- around the leagues ---------- */
 function gameRow(g, o){ return '<a class="gm" href="' + o.href(g) + '">' + teamRow(g, 'a', o) + teamRow(g, 'h', o) + '<div class="gm-st">' + statusStr(g, o) + '</div></a>'; }
-function sportPanel(k, i, ctx, links, label, games){ const s = SPORT[k]; return '<article class="sp ' + k + ' rise" style="--c:' + s.c + ';--i:' + i + '"><a class="sp-h" href="' + s.url + '"><span class="sp-ic">' + s.icon + '</span><div style="min-width:0"><div class="sp-n">' + s.name + '</div><div class="sp-x">' + ctx + '</div></div><span class="sp-go">Open &rsaquo;</span></a><nav class="ql" aria-label="' + s.name + ' pages">' + links.map(l => '<a href="' + s.url + l[1] + '">' + l[0] + '</a>').join('') + '</nav></article>'; } /* fd_simplify: just the way in and the quick links; the games are already in On TV and the tickers */
+/* 11-27: what each league has going today (the same count the old glance tiles showed) */
+function daySum(s){ const LIST = {cfb: CFB, nfl: NFL, nba: NBA, cbb: CBB}; const gs = (LIST[s] || []).filter(g => g.date === TODAY).map(applyLive);
+  const live = gs.filter(g => g.live).length, fin = gs.filter(played).length, later = gs.length - live - fin, now = Date.now();
+  const next = gs.filter(g => !g.live && !played(g) && timed(g)).map(g => kickMs(g.date, g.time)).filter(k => k > now).sort((a, b) => a - b)[0];
+  if (!gs.length) { const nd = (LIST[s] || []).map(g => g.date).filter(d => d > TODAY).sort()[0]; return 'No games today' + (nd ? ' · next ' + new Date(nd + 'T12:00:00').toLocaleDateString('en-US', {weekday: 'long'}) : ''); }
+  const bits = []; if (live) bits.push('<b class="lv">' + live + ' live now</b>'); if (later) bits.push(later + (later === 1 ? ' game' : ' games') + ' later' + (!live && next ? ' · first at ' + fmt({hour: 'numeric', minute: '2-digit'}, new Date(next)) : ''));
+  if (fin) bits.push(fin + ' final'); return 'Today: ' + bits.join(' · '); }
+function sportPanel(k, i, ctx, links, label, games){ const s = SPORT[k]; return '<article class="sp ' + k + ' rise" style="--c:' + s.c + ';--i:' + i + '"><a class="sp-h" href="' + s.url + '"><span class="sp-ic">' + s.icon + '</span><div style="min-width:0"><div class="sp-n">' + s.name + '</div><div class="sp-x">' + ctx + '</div><div class="sp-today">' + daySum(k) + '</div></div><span class="sp-go">Open &rsaquo;</span></a><nav class="ql" aria-label="' + s.name + ' pages">' + links.map(l => '<a href="' + s.url + l[1] + '">' + l[0] + '</a>').join('') + '</nav></article>'; } /* fd_simplify: just the way in and the quick links; the games are already in On TV and the tickers */
 function sportsHTML(){
   const ww = cfbWeeks[CFB_WEEK]; const cfbWk = CFB.filter(g => g.week === CFB_WEEK).map(applyLive);
   const sc = g => (g.live ? 1000 : 0) + (favGame(g) ? 500 : 0) + (g.ar && g.hr ? 200 - g.ar - g.hr : (g.ar || g.hr ? 60 - (g.ar || g.hr) : 0));

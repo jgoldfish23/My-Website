@@ -15991,4 +15991,99 @@ P|167|H|kickReturns|Ray Davis||4429501|3;71;23.7;29;0
 P|167|H|puntReturns|Greg Dortch||4037235|3;34;11.3;17;0
 P|167|H|kicking|Tyler Bass||3917232|2/2;100.0;57;1/1;7
 P|167|H|punting|Tommy Doman Jr.||4682758|5;229;45.8;1;3;61
+G|168|401873083|2026-11-27|DEN|PIT
+T|168|A|firstDowns=17;firstDownsPassing=8;firstDownsRushing=7;firstDownsPenalty=2;thirdDownEff=4-15;fourthDownEff=0-1;totalOffensivePlays=69;totalYards=205;yardsPerPlay=3.0;totalDrives=13;netPassingYards=132;completionAttempts=22/40;yardsPerPass=3.1;interceptions=2;sacksYardsLost=3-37;rushingYards=73;rushingAttempts=26;yardsPerRushAttempt=2.8;redZoneAttempts=0-1;totalPenaltiesYards=6-45;turnovers=3;fumblesLost=1;interceptions=2;defensiveTouchdowns=0;possessionTime=33:52;defSacks=1;defTfl=3
+T|168|H|firstDowns=12;firstDownsPassing=4;firstDownsRushing=6;firstDownsPenalty=2;thirdDownEff=6-13;fourthDownEff=0-0;totalOffensivePlays=47;totalYards=247;yardsPerPlay=5.3;totalDrives=10;netPassingYards=130;completionAttempts=9/15;yardsPerPass=8.1;interceptions=0;sacksYardsLost=1-12;rushingYards=117;rushingAttempts=31;yardsPerRushAttempt=3.8;redZoneAttempts=0-1;totalPenaltiesYards=2-20;turnovers=1;fumblesLost=1;interceptions=0;defensiveTouchdowns=2;possessionTime=26:08;defSacks=2;defTfl=6
+S|168|1|6:03|PIT|T.J. Watt Fumble Recovery in End Zone (Chris Boswell Kick)|0|7
+S|168|1|1:40|PIT|DK Metcalf 22 Yd pass from Mason Rudolph (Chris Boswell Kick)|0|14
+S|168|2|11:10|DEN|Alex Singleton Safety|2|14
+S|168|2|5:06|DEN|Wil Lutz 44 Yd Field Goal|5|14
+S|168|2|1:51|PIT|Chris Boswell 47 Yd Field Goal|5|17
+S|168|2|1:33|PIT|Jalen Ramsey 36 Yd Interception Return (Chris Boswell Kick)|5|24
+S|168|4|11:16|PIT|Chris Boswell 33 Yd Field Goal|5|27
+W|168|51;54;54;54;58;49;67;67;77;83;81;80;84;80;77;77;78;79;82;82;93;95;95;95;95;96;96;95;96;97;98;95;98;99;100;100;99;100;100;100;100;100;100;100
+P|168|A|passing|Bo Nix||4426338|22/40;169;4.2;0;2;3-37;24.7;44.7
+P|168|A|rushing|Cody Schrader||4391845|7;27;3.9;0;9
+P|168|A|rushing|Jonah Coleman||4702555|15;26;1.7;0;9
+P|168|A|rushing|Tyler Badie||4362748|1;11;11.0;0;11
+P|168|A|rushing|Bo Nix||4426338|1;7;7.0;0;7
+P|168|A|rushing|Adam Prentice||3929914|1;4;4.0;0;4
+P|168|A|rushing|Marvin Mims Jr.||4686472|1;-2;-2.0;0;-2
+P|168|A|receiving|Jaylen Waddle||4372016|5;53;10.6;0;22;8
+P|168|A|receiving|Jonah Coleman||4702555|8;46;5.8;0;17;10
+P|168|A|receiving|Pat Bryant||4600981|4;42;10.5;0;17;7
+P|168|A|receiving|Adam Trautman||3911853|2;17;8.5;0;14;2
+P|168|A|receiving|Nate Adkins||4383440|1;6;6.0;0;6;2
+P|168|A|receiving|Courtland Sutton||3128429|1;4;4.0;0;4;8
+P|168|A|receiving|Troy Franklin||4431280|1;1;1.0;0;1;1
+P|168|A|receiving|Evan Engram||3051876|0;0;0.0;0;0;2
+P|168|A|fumbles|Bo Nix||4426338|1;1;0
+P|168|A|fumbles|Riley Moss||4382401|0;0;1
+P|168|A|defensive|Alex Singleton||2612151|13;3;0;1;0;0;0
+P|168|A|defensive|Talanoa Hufanga||4360853|8;1;0;0;0;0;0
+P|168|A|defensive|Zach Allen||3915282|7;2;0;0;0;0;0
+P|168|A|defensive|Brandon Jones||4039059|4;2;0;0;1;0;0
+P|168|A|defensive|Riley Moss||4382401|4;2;0;0;1;0;0
+P|168|A|defensive|Tyler Onyedim||4683535|4;1;0;0;0;0;0
+P|168|A|defensive|Que Robinson||4692048|4;1;0;0;0;1;0
+P|168|A|defensive|Nik Bonitto||4360259|3;3;1;2;0;1;0
+P|168|A|defensive|D.J. Jones||3894915|3;0;0;0;0;0;0
+P|168|A|defensive|Jonathon Cooper||4040608|3;0;0;0;0;0;0
+P|168|A|defensive|Dondrea Tillman||5216101|3;0;0;0;0;0;0
+P|168|A|defensive|Jordan Jackson||4261090|2;1;0;0;0;0;0
+P|168|A|defensive|Pat Surtain II||4372012|2;1;0;0;0;0;0
+P|168|A|defensive|JL Skinner||4428503|2;1;0;0;0;0;0
+P|168|A|defensive|Malcolm Roach||4039064|2;0;0;0;0;0;0
+P|168|A|defensive|Jordan Turner||4693373|2;0;0;0;0;0;0
+P|168|A|defensive|Karene Reid||4875336|2;0;0;0;0;0;0
+P|168|A|defensive|Justin Strnad||3919548|1;1;0;0;0;0;0
+P|168|A|defensive|Jaylen Waddle||4372016|1;1;0;0;0;0;0
+P|168|A|defensive|Ja'Quan McMillian||4567462|1;1;0;0;0;0;0
+P|168|A|defensive|Devon Key||4037559|1;0;0;0;0;0;0
+P|168|A|defensive|Kris Abrams-Draine||4429193|1;0;0;0;0;0;0
+P|168|A|kickReturns|Tyler Badie||4362748|4;94;23.5;38;0
+P|168|A|kickReturns|Marvin Mims Jr.||4686472|2;47;23.5;27;0
+P|168|A|kicking|Wil Lutz||2985659|1/2;50.0;44;0/0;3
+P|168|A|punting|Jeremy Crawshaw||4589212|6;271;45.2;0;3;52
+P|168|H|passing|Mason Rudolph||3116407|9/15;142;9.5;1;0;1-12;81.5;113.8
+P|168|H|rushing|Rico Dowdle||4038815|11;71;6.5;0;27
+P|168|H|rushing|Jaylen Warren||4569987|20;46;2.3;0;6
+P|168|H|receiving|Germie Bernard||4685261|1;58;58.0;0;58;2
+P|168|H|receiving|Roman Wilson||4431492|1;37;37.0;0;37;1
+P|168|H|receiving|DK Metcalf||4047650|3;36;12.0;1;22;4
+P|168|H|receiving|Michael Pittman Jr.||4035687|1;7;7.0;0;7;2
+P|168|H|receiving|Rico Dowdle||4038815|1;3;3.0;0;3;1
+P|168|H|receiving|Pat Freiermuth||4361411|1;1;1.0;0;1;1
+P|168|H|receiving|Jaylen Warren||4569987|1;0;0.0;0;0;2
+P|168|H|fumbles|Rico Dowdle||4038815|1;1;0
+P|168|H|fumbles|T.J. Watt||3045282|0;0;1
+P|168|H|defensive|Payton Wilson||4361652|8;5;0;1;0;1;0
+P|168|H|defensive|Jaquan Brisker||4570044|6;4;0;0;0;0;0
+P|168|H|defensive|Robert Spears-Jennings||4820584|6;3;0;1;0;0;0
+P|168|H|defensive|Nick Herbig||4429164|5;5;1;1;0;1;0
+P|168|H|defensive|Jamel Dean||3873935|5;5;0;0;1;0;0
+P|168|H|defensive|Patrick Queen||4242207|5;4;0;1;0;0;0
+P|168|H|defensive|T.J. Watt||3045282|5;2;0;1;0;0;1
+P|168|H|defensive|Daylen Everette||4685327|4;3;0;0;3;0;0
+P|168|H|defensive|Yahya Black||4430947|4;1;0;0;0;1;0
+P|168|H|defensive|Cameron Heyward||13977|3;2;1;1;0;1;0
+P|168|H|defensive|KJ Henry||4360308|3;1;0;0;0;0;0
+P|168|H|defensive|Derrick Harmon||4682980|3;1;0;0;0;0;0
+P|168|H|defensive|Kevin Jobity Jr.||5084849|3;1;0;0;0;0;0
+P|168|H|defensive|Jacoby Windmon||4428909|2;1;0;0;0;0;0
+P|168|H|defensive|Carson Bruener||4429490|2;1;0;0;0;0;0
+P|168|H|defensive|Keeanu Benton||4426694|2;0;0;0;1;1;0
+P|168|H|defensive|Asante Samuel Jr.||4363034|1;1;0;0;0;0;0
+P|168|H|defensive|Riley Nowakowski||4693370|1;1;0;0;0;0;0
+P|168|H|defensive|Jack Sawyer||4431590|1;0;0;0;0;0;0
+P|168|H|defensive|Brandin Echols||4567979|1;0;0;0;0;0;0
+P|168|H|defensive|Doneiko Slaughter||4692628|1;0;0;0;0;0;0
+P|168|H|defensive|Jalen Ramsey||3045373|0;0;0;0;2;0;1
+P|168|H|interceptions|Jalen Ramsey||3045373|1;36;1
+P|168|H|interceptions|Daylen Everette||4685327|1;20;0
+P|168|H|kickReturns|Lew Nichols||4428119|1;22;22.0;22;0
+P|168|H|kickReturns|Max Hurleman||4694237|1;22;22.0;22;0
+P|168|H|puntReturns|Max Hurleman||4694237|4;30;7.5;15;0
+P|168|H|kicking|Chris Boswell||17372|2/2;100.0;47;3/3;9
+P|168|H|punting|Cameron Johnston||3051397|5;206;41.2;1;2;54
 

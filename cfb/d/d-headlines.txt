@@ -779,6 +779,11 @@
 2026-11-21|Oklahoma State|Arizona State|HEADLINE||Sam Keltner kicks 35-yard field goal in overtime, Oklahoma State rallies to beat Arizona State 30-27||
 2026-11-21|Utah State|Oregon State|HEADLINE||Jake Reichle runs for 3 TDs as Oregon State rallies past Utah State 31-24 to become bowl eligible||
 2026-11-21|Hawai'i|Nevada|HEADLINE||AJ Bianco, Jacob Fernandez lead Nevada to 16-8 victory over Hawaii||
+2026-11-24|Kent State|Eastern Michigan|HEADLINE||Blue on offense, Llewellyn on defense help carry Eastern Michigan to 17-12 win over Kent State||
+2026-11-24|Miami (OH)|Western Michigan|HEADLINE||Bellisari accounts for 4 TDs and Knighten's late INT helps Miami (Ohio) beat Western Michigan 28-24||
+2026-11-26|TCU|Texas Tech|HEADLINE||No. 9 Texas Tech beats TCU 48-27 to secure spot against No. 2 Utah in Big 12 title game||
+2026-11-27|West Virginia|Utah|HEADLINE||Dampier throws for 5 TDs, 393 yards as No. 2 Utah routs West Virginia to reach 12-0||
+2026-11-27|Texas|Texas A&M|HEADLINE||Arch Manning and No. 5 Texas grind past Texas A&M 16-6 to secure SEC title game spot||
 2026-11-27|Nebraska|Iowa|HEADLINE||Hank Brown rushes for three touchdowns, throws for another in No. 13 Iowa's 31-7 win over Nebraska||
 2026-11-27|Florida|Florida State|HEADLINE||Jadan Baugh helps No. 20 Florida beat Florida State for third straight time, 26-10||
 2026-11-27|Mississippi State|Ole Miss|HEADLINE||Trinidad Chambliss accounts for three touchdowns as No. 23 Ole Miss beats Mississippi State 41-17||
@@ -789,9 +794,7 @@
 2026-11-27|Temple|Memphis|HEADLINE||Temple rallies from 17 down in 4th quarter to stun Memphis 35-31 in regular-season finale||
 2026-11-27|North Dakota State|San José State|HEADLINE||QB Preston Brown makes first start and leads North Dakota State to 10th win in first FBS season||
 2026-11-27|Air Force|New Mexico|HEADLINE||Sibley runs for 2 TDs as New Mexico beats Air Force to clinch home field in MWC title game||
-2026-11-24|Kent State|Eastern Michigan|HEADLINE||Blue on offense, Llewellyn on defense help carry Eastern Michigan to 17-12 win over Kent State||
-2026-11-24|Miami (OH)|Western Michigan|HEADLINE||Bellisari accounts for 4 TDs and Knighten's late INT helps Miami (Ohio) beat Western Michigan 28-24||
-2026-11-26|TCU|Texas Tech|HEADLINE||No. 9 Texas Tech beats TCU 48-27 to secure spot against No. 2 Utah in Big 12 title game||
+2026-11-27|Minnesota|Wisconsin|HEADLINE||Wisconsin trounces Minnesota 28-5 to regain possession of Paul Bunyan's Axe||
 2026-08-27|Mercyhurst|Youngstown State|HEADLINE||Beau Brungard accounts for 5 touchdowns in Youngstown State's season-opening win over Mercyhurst||
 2026-08-27|Gardner-Webb|Austin Peay|HEADLINE||Parson, Simmons lead Austin Peay in 35-17 win over Gardner-Webb||
 2026-08-27|Houston Christian|SE Louisiana|HEADLINE||Cutter Stewart returns from junior college ranks, leads Houston Christian past SE Louisiana 34-28||

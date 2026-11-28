@@ -2464,12 +2464,21 @@
 2026-11-21|Hawai'i|Nevada|Nevada|passingYards|AJ Bianco|QB|8/18, 106 YDS
 2026-11-21|Hawai'i|Nevada|Nevada|rushingYards|Herschel Turner|RB|13 CAR, 73 YDS
 2026-11-21|Hawai'i|Nevada|Nevada|receivingYards|Marshaun Brown|WR|4 REC, 61 YDS
-2026-11-27|Texas|Texas A&M|Texas|passingYards|Arch Manning|QB|7/11, 62 YDS, 1 TD
-2026-11-27|Texas|Texas A&M|Texas|rushingYards|Michael Terry III|RB|3 CAR, 20 YDS
-2026-11-27|Texas|Texas A&M|Texas A&M|receivingYards|Mario Craver|WR|3 REC, 17 YDS
-2026-11-27|Minnesota|Wisconsin|Wisconsin|passingYards|Colton Joseph|QB|5/8, 82 YDS, 1 TD, 1 INT
-2026-11-27|Minnesota|Wisconsin|Wisconsin|rushingYards|Colton Joseph|QB|6 CAR, 33 YDS
-2026-11-27|Minnesota|Wisconsin|Wisconsin|receivingYards|Jaylon Domingeaux|WR|2 REC, 29 YDS
+2026-11-24|Kent State|Eastern Michigan|Kent State|passingYards|Ethan Thanthanavong|QB|16/27, 234 YDS, 1 TD, 2 INT
+2026-11-24|Kent State|Eastern Michigan|Eastern Michigan|rushingYards|Amareon Blue|RB|20 CAR, 137 YDS, 1 TD
+2026-11-24|Kent State|Eastern Michigan|Kent State|receivingYards|Wayne Harris|WR|5 REC, 125 YDS
+2026-11-24|Miami (OH)|Western Michigan|Miami (OH)|passingYards|Drew Bellisari|QB|13/26, 214 YDS, 2 TD
+2026-11-24|Miami (OH)|Western Michigan|Western Michigan|rushingYards|Jalen Buckley|RB|19 CAR, 126 YDS, 2 TD
+2026-11-24|Miami (OH)|Western Michigan|Miami (OH)|receivingYards|Maleek Huggins|WR|4 REC, 77 YDS
+2026-11-26|TCU|Texas Tech|Texas Tech|passingYards|Thomas Castellanos|QB|20/25, 374 YDS, 3 TD
+2026-11-26|TCU|Texas Tech|TCU|rushingYards|Major Everhart|WR|14 CAR, 138 YDS
+2026-11-26|TCU|Texas Tech|Texas Tech|receivingYards|Malcolm Simmons|WR|4 REC, 110 YDS, 1 TD
+2026-11-27|West Virginia|Utah|Utah|passingYards|Devon Dampier|QB|17/21, 393 YDS, 5 TD
+2026-11-27|West Virginia|Utah|West Virginia|rushingYards|Cam Cook|RB|13 CAR, 43 YDS
+2026-11-27|West Virginia|Utah|Utah|receivingYards|Braden Pegan|WR|5 REC, 134 YDS, 2 TD
+2026-11-27|Texas|Texas A&M|Texas A&M|passingYards|Brady Hart|QB|22/35, 201 YDS
+2026-11-27|Texas|Texas A&M|Texas|rushingYards|Michael Terry III|RB|12 CAR, 50 YDS
+2026-11-27|Texas|Texas A&M|Texas A&M|receivingYards|Aaron Gregory|WR|7 REC, 120 YDS
 2026-11-27|Nebraska|Iowa|Iowa|passingYards|Hank Brown|QB|13/18, 173 YDS, 1 TD
 2026-11-27|Nebraska|Iowa|Nebraska|rushingYards|Jamal Rule|RB|18 CAR, 106 YDS, 1 TD
 2026-11-27|Nebraska|Iowa|Nebraska|receivingYards|Luke Lindenmeyer|TE|6 REC, 63 YDS
@@ -2500,15 +2509,9 @@
 2026-11-27|Air Force|New Mexico|New Mexico|passingYards|Luke Moga|QB|19/26, 248 YDS, 3 TD, 1 INT
 2026-11-27|Air Force|New Mexico|New Mexico|rushingYards|Kiefer Sibley|RB|16 CAR, 115 YDS, 2 TD
 2026-11-27|Air Force|New Mexico|New Mexico|receivingYards|Bailen George|WR|6 REC, 100 YDS, 2 TD
-2026-11-24|Kent State|Eastern Michigan|Kent State|passingYards|Ethan Thanthanavong|QB|16/27, 234 YDS, 1 TD, 2 INT
-2026-11-24|Kent State|Eastern Michigan|Eastern Michigan|rushingYards|Amareon Blue|RB|20 CAR, 137 YDS, 1 TD
-2026-11-24|Kent State|Eastern Michigan|Kent State|receivingYards|Wayne Harris|WR|5 REC, 125 YDS
-2026-11-24|Miami (OH)|Western Michigan|Miami (OH)|passingYards|Drew Bellisari|QB|13/26, 214 YDS, 2 TD
-2026-11-24|Miami (OH)|Western Michigan|Western Michigan|rushingYards|Jalen Buckley|RB|19 CAR, 126 YDS, 2 TD
-2026-11-24|Miami (OH)|Western Michigan|Miami (OH)|receivingYards|Maleek Huggins|WR|4 REC, 77 YDS
-2026-11-26|TCU|Texas Tech|Texas Tech|passingYards|Thomas Castellanos|QB|20/25, 374 YDS, 3 TD
-2026-11-26|TCU|Texas Tech|TCU|rushingYards|Major Everhart|WR|14 CAR, 138 YDS
-2026-11-26|TCU|Texas Tech|Texas Tech|receivingYards|Malcolm Simmons|WR|4 REC, 110 YDS, 1 TD
+2026-11-27|Minnesota|Wisconsin|Wisconsin|passingYards|Colton Joseph|QB|12/18, 217 YDS, 1 TD, 2 INT
+2026-11-27|Minnesota|Wisconsin|Wisconsin|rushingYards|Colton Joseph|QB|20 CAR, 101 YDS, 2 TD
+2026-11-27|Minnesota|Wisconsin|Wisconsin|receivingYards|Eugene Hilton Jr.|WR|2 REC, 59 YDS
 2026-08-27|Maine|Towson|Towson|passingYards|Andrew Indorf|QB|15/21, 267 YDS, 2 TD, 1 INT
 2026-08-27|Maine|Towson|Towson|rushingYards|Kemarrion Battles|RB|18 CAR, 89 YDS
 2026-08-27|Maine|Towson|Towson|receivingYards|Cleveland Charlton|WR|4 REC, 136 YDS, 1 TD

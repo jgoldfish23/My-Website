@@ -2464,21 +2464,18 @@
 2026-11-21|Hawai'i|Nevada|Nevada|passingYards|AJ Bianco|QB|8/18, 106 YDS
 2026-11-21|Hawai'i|Nevada|Nevada|rushingYards|Herschel Turner|RB|13 CAR, 73 YDS
 2026-11-21|Hawai'i|Nevada|Nevada|receivingYards|Marshaun Brown|WR|4 REC, 61 YDS
-2026-11-27|App State|South Alabama|South Alabama|passingYards|Bishop Davenport|QB|7/10, 116 YDS, 1 TD, 1 INT
-2026-11-27|App State|South Alabama|App State|rushingYards|Jaquari Lewis|RB|10 CAR, 34 YDS, 1 TD
-2026-11-27|App State|South Alabama|South Alabama|receivingYards|Everett Hunter|TE|2 REC, 51 YDS, 1 TD
-2026-11-27|Florida|Florida State|Florida|passingYards|Aaron Philo|QB|3/4, 70 YDS
-2026-11-27|Florida|Florida State|Florida State|rushingYards|Zay Parks|RB|3 CAR, 31 YDS
-2026-11-27|Florida|Florida State|Florida|receivingYards|Eric Singleton Jr.|WR|1 REC, 65 YDS
-2026-11-27|Temple|Memphis|Memphis|passingYards|Marcus Stokes|QB|2/3, 83 YDS, 1 TD
-2026-11-27|Temple|Memphis|Temple|rushingYards|De'Carlos Young|RB|7 CAR, 60 YDS
-2026-11-27|Temple|Memphis|Memphis|receivingYards|Stonka Burnside|WR|2 REC, 83 YDS, 1 TD
-2026-11-27|North Dakota State|San José State|San José State|passingYards|Luke Weaver|QB|5/8, 68 YDS, 1 TD
-2026-11-27|North Dakota State|San José State|North Dakota State|rushingYards|Nyeoti Punni|RB|1 CAR, 10 YDS
-2026-11-27|North Dakota State|San José State|North Dakota State|receivingYards|Jackson Williams|WR|3 REC, 56 YDS, 1 TD
+2026-11-27|Texas|Texas A&M|Texas|passingYards|Arch Manning|QB|7/11, 62 YDS, 1 TD
+2026-11-27|Texas|Texas A&M|Texas|rushingYards|Michael Terry III|RB|3 CAR, 20 YDS
+2026-11-27|Texas|Texas A&M|Texas A&M|receivingYards|Mario Craver|WR|3 REC, 17 YDS
+2026-11-27|Minnesota|Wisconsin|Wisconsin|passingYards|Colton Joseph|QB|5/8, 82 YDS, 1 TD, 1 INT
+2026-11-27|Minnesota|Wisconsin|Wisconsin|rushingYards|Colton Joseph|QB|6 CAR, 33 YDS
+2026-11-27|Minnesota|Wisconsin|Wisconsin|receivingYards|Jaylon Domingeaux|WR|2 REC, 29 YDS
 2026-11-27|Nebraska|Iowa|Iowa|passingYards|Hank Brown|QB|13/18, 173 YDS, 1 TD
 2026-11-27|Nebraska|Iowa|Nebraska|rushingYards|Jamal Rule|RB|18 CAR, 106 YDS, 1 TD
 2026-11-27|Nebraska|Iowa|Nebraska|receivingYards|Luke Lindenmeyer|TE|6 REC, 63 YDS
+2026-11-27|Florida|Florida State|Florida State|passingYards|Ashton Daniels|QB|18/32, 183 YDS, 2 INT
+2026-11-27|Florida|Florida State|Florida|rushingYards|Jadan Baugh|RB|19 CAR, 77 YDS, 1 TD
+2026-11-27|Florida|Florida State|Florida State|receivingYards|Micahi Danzy|WR|2 REC, 75 YDS
 2026-11-27|Mississippi State|Ole Miss|Ole Miss|passingYards|Trinidad Chambliss|QB|23/36, 237 YDS, 2 TD
 2026-11-27|Mississippi State|Ole Miss|Mississippi State|rushingYards|Fluff Bothwell|RB|18 CAR, 129 YDS, 1 TD
 2026-11-27|Mississippi State|Ole Miss|Mississippi State|receivingYards|Marquis Johnson|WR|5 REC, 96 YDS
@@ -2491,6 +2488,18 @@
 2026-11-27|Toledo|Ohio|Ohio|passingYards|Levi Davis|QB|17/28, 288 YDS, 1 TD, 1 INT
 2026-11-27|Toledo|Ohio|Toledo|rushingYards|CJ Miller|RB|15 CAR, 109 YDS, 2 TD
 2026-11-27|Toledo|Ohio|Ohio|receivingYards|Preston Bowman|WR|8 REC, 150 YDS
+2026-11-27|App State|South Alabama|App State|passingYards|Malachi Singleton|QB|22/28, 240 YDS, 2 INT
+2026-11-27|App State|South Alabama|App State|rushingYards|Jaquari Lewis|RB|25 CAR, 93 YDS, 1 TD
+2026-11-27|App State|South Alabama|App State|receivingYards|Darrin Fugitt|TE|5 REC, 79 YDS
+2026-11-27|Temple|Memphis|Memphis|passingYards|Marcus Stokes|QB|13/19, 260 YDS, 2 TD, 2 INT
+2026-11-27|Temple|Memphis|Memphis|rushingYards|Jaylin Carter|RB|21 CAR, 103 YDS, 2 TD
+2026-11-27|Temple|Memphis|Memphis|receivingYards|Stonka Burnside|WR|5 REC, 117 YDS, 1 TD
+2026-11-27|North Dakota State|San José State|San José State|passingYards|Luke Weaver|QB|26/50, 306 YDS, 2 TD, 3 INT
+2026-11-27|North Dakota State|San José State|North Dakota State|rushingYards|DJ Scott|RB|17 CAR, 86 YDS, 2 TD
+2026-11-27|North Dakota State|San José State|San José State|receivingYards|Carson Clark|WR|13 REC, 137 YDS, 2 TD
+2026-11-27|Air Force|New Mexico|New Mexico|passingYards|Luke Moga|QB|19/26, 248 YDS, 3 TD, 1 INT
+2026-11-27|Air Force|New Mexico|New Mexico|rushingYards|Kiefer Sibley|RB|16 CAR, 115 YDS, 2 TD
+2026-11-27|Air Force|New Mexico|New Mexico|receivingYards|Bailen George|WR|6 REC, 100 YDS, 2 TD
 2026-11-24|Kent State|Eastern Michigan|Kent State|passingYards|Ethan Thanthanavong|QB|16/27, 234 YDS, 1 TD, 2 INT
 2026-11-24|Kent State|Eastern Michigan|Eastern Michigan|rushingYards|Amareon Blue|RB|20 CAR, 137 YDS, 1 TD
 2026-11-24|Kent State|Eastern Michigan|Kent State|receivingYards|Wayne Harris|WR|5 REC, 125 YDS
